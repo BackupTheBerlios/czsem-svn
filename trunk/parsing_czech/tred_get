@@ -1,0 +1,9 @@
+#!/bin/bash
+
+wget http://ufal.mff.cuni.cz/~pajas/tred/tred-1.3036.tar.gz
+
+gunzip tred-1.3036.tar.gz
+
+tar xvf tred-1.3036.tar
+
+export PATH=$PATH:/tmp/czsem/parsing_czech/tred
