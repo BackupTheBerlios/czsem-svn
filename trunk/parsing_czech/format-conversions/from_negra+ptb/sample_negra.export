@@ -1,0 +1,706 @@
+%% The NEGRA corpus version 2.0
+%% (c) 1996 - 2001 Universitaet des Saarlandes, Computerlinguistik
+%%
+%% A sample of 3 sentences for the purposes of conversion to PDT format.
+%%
+#FORMAT 3
+#BOT ORIGIN
+0	--
+1	RC.F.J.001	%% Referenzkorpus: Frankfurter Rundschau
+2	RC.F.J.010	%% Referenzkorpus: Frankfurter Rundschau
+3	RC.F.C.004	%% Referenzkorpus: Frankfurter Rundschau
+4	RC.F.J.002	%% Referenzkorpus: Frankfurter Rundschau
+5	RC.F.C.005	%% Referenzkorpus: Frankfurter Rundschau
+6	RC.F.C.001	%% Referenzkorpus: Frankfurter Rundschau
+7	RC.F.C.002	%% Referenzkorpus: Frankfurter Rundschau
+8	RC.F.J.003	%% Referenzkorpus: Frankfurter Rundschau
+9	RC.F.J.011	%% Referenzkorpus: Frankfurter Rundschau
+10	RC.F.C.006	%% Referenzkorpus: Frankfurter Rundschau
+11	RC.F.C.007	%% Referenzkorpus: Frankfurter Rundschau
+12	RC.L.J.005	%% Referenzkorpus: Frankfurter Rundschau
+13	RC.L.J.001	%% Referenzkorpus: Frankfurter Rundschau
+14	RC.L.J.002	%% Referenzkorpus: Frankfurter Rundschau
+15	RC.L.A.003	%% Referenzkorpus: Frankfurter Rundschau
+16	RC.L.J.006	%% Referenzkorpus: Frankfurter Rundschau
+17	RC.P.A.004	%% Referenzkorpus: Frankfurter Rundschau
+18	RC.P.A.002	%% Referenzkorpus: Frankfurter Rundschau
+19	RC.P.J.007	%% Referenzkorpus: Frankfurter Rundschau
+20	RC.P.C.009	%% Referenzkorpus: Frankfurter Rundschau
+21	RC.P.C.010	%% Referenzkorpus: Frankfurter Rundschau
+22	RC.P.J.001	%% Referenzkorpus: Frankfurter Rundschau
+23	RC.P.A.003	%% Referenzkorpus: Frankfurter Rundschau
+24	RC.S.C.005	%% Referenzkorpus: Frankfurter Rundschau
+25	RC.S.A.001	%% Referenzkorpus: Frankfurter Rundschau
+26	RC.S.A.002	%% Referenzkorpus: Frankfurter Rundschau
+27	RC.S.J.009	%% Referenzkorpus: Frankfurter Rundschau
+28	RC.W.A.002	%% Referenzkorpus: Frankfurter Rundschau
+29	RC.W.J.009	%% Referenzkorpus: Frankfurter Rundschau
+30	RC.W.J.001	%% Referenzkorpus: Frankfurter Rundschau
+31	RC.W.J.002	%% Referenzkorpus: Frankfurter Rundschau
+32	RC.W.J.003	%% Referenzkorpus: Frankfurter Rundschau
+33	RC.W.C.006	%% Referenzkorpus: Frankfurter Rundschau
+34	RC.W.C.007	%% Referenzkorpus: Frankfurter Rundschau
+35	RC.W.C.008	%% Referenzkorpus: Frankfurter Rundschau
+36	RC.W.J.010	%% Referenzkorpus: Frankfurter Rundschau
+37	RC.W.J.011	%% Referenzkorpus: Frankfurter Rundschau
+38	RC.F.J.009	%% Referenzkorpus: Frankfurter Rundschau
+39	RC.L.A.002	%% Referenzkorpus: Frankfurter Rundschau
+40	RC.P.A.001	%% Referenzkorpus: Frankfurter Rundschau
+41	RC.P.J.008	%% Referenzkorpus: Frankfurter Rundschau
+42	RC.P.C.011	%% Referenzkorpus: Frankfurter Rundschau
+43	RC.S.J.001	%% Referenzkorpus: Frankfurter Rundschau
+44	RC.W.A.001	%% Referenzkorpus: Frankfurter Rundschau
+45	ger03a01.eci	%% Frankfurter Rundschau 29.06. - 05.07.1992
+46	RC.F.C.003	%% Referenzkorpus: Frankfurter Rundschau
+47	RC.F.C.008	%% Referenzkorpus: Frankfurter Rundschau
+48	RC.F.C.009	%% Referenzkorpus: Frankfurter Rundschau
+49	RC.F.C.021	%% Referenzkorpus: Frankfurter Rundschau
+50	RC.F.C.022	%% Referenzkorpus: Frankfurter Rundschau
+51	RC.F.C.023	%% Referenzkorpus: Frankfurter Rundschau
+52	RC.F.C.024	%% Referenzkorpus: Frankfurter Rundschau
+53	RC.F.J.005	%% Referenzkorpus: Frankfurter Rundschau
+54	RC.F.J.006	%% Referenzkorpus: Frankfurter Rundschau
+55	RC.F.J.007	%% Referenzkorpus: Frankfurter Rundschau
+56	RC.F.J.008	%% Referenzkorpus: Frankfurter Rundschau
+57	RC.F.J.012	%% Referenzkorpus: Frankfurter Rundschau
+58	RC.L.A.001	%% Referenzkorpus: Frankfurter Rundschau
+59	RC.L.C.013	%% Referenzkorpus: Frankfurter Rundschau
+60	RC.L.C.014	%% Referenzkorpus: Frankfurter Rundschau
+61	RC.L.J.003	%% Referenzkorpus: Frankfurter Rundschau
+62	RC.L.J.004	%% Referenzkorpus: Frankfurter Rundschau
+63	RC.L.J.007	%% Referenzkorpus: Frankfurter Rundschau
+64	RC.L.J.009	%% Referenzkorpus: Frankfurter Rundschau
+65	RC.L.J.010	%% Referenzkorpus: Frankfurter Rundschau
+66	RC.P.A.005	%% Referenzkorpus: Frankfurter Rundschau
+67	RC.P.C.006	%% Referenzkorpus: Frankfurter Rundschau
+68	RC.P.C.007	%% Referenzkorpus: Frankfurter Rundschau
+69	RC.P.J.002	%% Referenzkorpus: Frankfurter Rundschau
+70	RC.P.J.003	%% Referenzkorpus: Frankfurter Rundschau
+71	RC.P.J.004	%% Referenzkorpus: Frankfurter Rundschau
+72	RC.P.J.006	%% Referenzkorpus: Frankfurter Rundschau
+73	RC.S.A.003	%% Referenzkorpus: Frankfurter Rundschau
+74	RC.S.C.004	%% Referenzkorpus: Frankfurter Rundschau
+75	RC.S.C.015	%% Referenzkorpus: Frankfurter Rundschau
+76	RC.S.C.016	%% Referenzkorpus: Frankfurter Rundschau
+77	RC.S.C.017	%% Referenzkorpus: Frankfurter Rundschau
+78	RC.S.C.018	%% Referenzkorpus: Frankfurter Rundschau
+79	RC.S.C.019	%% Referenzkorpus: Frankfurter Rundschau
+80	RC.S.C.020	%% Referenzkorpus: Frankfurter Rundschau
+81	RC.S.J.002	%% Referenzkorpus: Frankfurter Rundschau
+82	RC.S.J.003	%% Referenzkorpus: Frankfurter Rundschau
+83	RC.S.J.004	%% Referenzkorpus: Frankfurter Rundschau
+84	RC.S.J.005	%% Referenzkorpus: Frankfurter Rundschau
+85	RC.S.J.006	%% Referenzkorpus: Frankfurter Rundschau
+86	RC.S.J.007	%% Referenzkorpus: Frankfurter Rundschau
+87	RC.S.J.008	%% Referenzkorpus: Frankfurter Rundschau
+88	RC.W.A.003	%% Referenzkorpus: Frankfurter Rundschau
+89	RC.W.A.004	%% Referenzkorpus: Frankfurter Rundschau
+90	RC.W.C.012	%% Referenzkorpus: Frankfurter Rundschau
+91	RC.W.C.025	%% Referenzkorpus: Frankfurter Rundschau
+92	RC.W.C.027	%% Referenzkorpus: Frankfurter Rundschau
+93	RC.W.C.030	%% Referenzkorpus: Frankfurter Rundschau
+94	RC.W.C.031	%% Referenzkorpus: Frankfurter Rundschau
+95	RC.W.C.032	%% Referenzkorpus: Frankfurter Rundschau
+96	RC.W.C.033	%% Referenzkorpus: Frankfurter Rundschau
+97	RC.W.C.034	%% Referenzkorpus: Frankfurter Rundschau
+98	RC.W.C.035	%% Referenzkorpus: Frankfurter Rundschau
+99	RC.W.J.004	%% Referenzkorpus: Frankfurter Rundschau
+100	RC.W.J.005	%% Referenzkorpus: Frankfurter Rundschau
+101	RC.W.J.006	%% Referenzkorpus: Frankfurter Rundschau
+102	RC.W.J.007	%% Referenzkorpus: Frankfurter Rundschau
+103	RC.W.J.013	%% Referenzkorpus: Frankfurter Rundschau
+104	RC.W.J.014	%% Referenzkorpus: Frankfurter Rundschau
+105	RC.W.J.015	%% Referenzkorpus: Frankfurter Rundschau
+#EOT ORIGIN
+#BOT EDITOR
+-1	__-1		<Automatisch>
+0	__0		<Nicht_zugeordnet>
+1	plaehn		Oliver
+2	thorsten	Thorsten
+3	skut		Wojciech
+5	bps		Bernd
+6	thomas		Thomas
+8	roland		Roland
+9	kekl		Kerstin
+12	meike		Meike
+14	cordula		Cordula
+15	kramp		Sabine
+17	olaf		Olaf
+22	mapu		Marcus
+24	anne		Anne
+31	cnkortha	Christian
+61	tina		Christine
+#EOT EDITOR
+#BOT WORDTAG
+-1	UNKNOWN	N	Unbekanntes Tag aus Einlesen aus Korpusdatei
+0	--	N	<Nicht zugeordnet>
+1	ADJA	Y	Attributives Adjektiv
+2	ADJD	Y	Adverbiales oder prädikatives Adjektiv
+3	ADV	Y	Adverb
+4	APPR	Y	Präposition; Zirkumposition links
+5	APPRART	Y	Präposition mit Artikel
+6	APPO	Y	Postposition
+7	APZR	Y	Zirkumposition rechts
+8	ART	Y	Bestimmter oder unbestimmter Artikel
+9	CARD	Y	Kardinalzahl
+10	FM	Y	Fremdsprachliches Material
+11	ITJ	Y	Interjektion
+12	KOUI	Y	Unterordnende Konjunktion mit zu und Infinitiv
+13	KOUS	Y	Unterordnende Konjunktion mit Satz
+14	KON	Y	Nebenordnende Konjunktion
+15	KOKOM	Y	Vergleichspartikel, ohne Satz
+16	NN	Y	Normales Nomen
+17	NE	Y	Eigennamen
+18	PDS	Y	Substituierendes Demonstrativpronomen
+19	PDAT	Y	Attribuierendes Demonstrativpronomen
+20	PIS	Y	Substituierendes Indefinitpronomen
+21	PIAT	Y	Attribuierendes Indefinitpronomen
+22	PIDAT	Y	Attribuierendes Indefinitpronomen mit Determiner
+23	PPER	Y	Irreflexives Personalpronomen
+24	PPOSS	Y	Substituierendes Possessivpronomen
+25	PPOSAT	Y	Attribuierendes Possessivpronomen
+26	PRELS	Y	Substituierendes Relativpronomen
+27	PRELAT	Y	Attribuierendes Relativpronomen
+28	PRF	Y	Reflexives Personalpronomen
+29	PWS	Y	Substituierendes Interrogativpronomen
+30	PWAT	Y	Attribuierendes Interrogativpronomen
+31	PWAV	Y	Adverbiales Interrogativ- oder Relativpronomen
+32	PROAV	Y	Pronominaladverb
+33	PTKZU	Y	zu vor Infinitiv
+34	PTKNEG	Y	Negationspartikel
+35	PTKVZ	Y	Abgetrennter Verbzusatz
+36	PTKANT	Y	Antwortpartikel
+37	PTKA	Y	Partikel bei Adjektiv oder Adverb
+38	TRUNC	Y	Kompositions-Erstglied
+39	VVFIN	Y	Finites Verb, voll
+40	VVIMP	Y	Imperativ, voll
+41	VVINF	Y	Infinitiv, voll
+42	VVIZU	Y	Infinitiv mit zu, voll
+43	VVPP	Y	Partizip Perfekt, voll
+44	VAFIN	Y	Finites Verb, aux
+45	VAIMP	Y	Imperativ, aux
+46	VAINF	Y	Infinitiv, aux
+47	VAPP	Y	Partizip Perfekt, aux
+48	VMFIN	Y	Finites Verb, modal
+49	VMINF	Y	Infinitiv, modal
+50	VMPP	Y	Partizip Perfekt, modal
+51	XY	Y	Nichtwort, Sonderzeichen
+52	$,	N	Komma
+53	$.	N	Satzbeendende Interpunktion
+54	$(	N	Sonstige Satzzeichen; satzintern
+55	NNE	Y	Verbindung aus Eigennamen und normalen Nomen
+#EOT WORDTAG
+#BOT MORPHTAG
+-1	UNKNOWN	unknown tag
+0	--	not bound
+1	*	-
+2	*.*.*	-
+3	*.*.*.*.*	-
+4	*.*.Akk.Pl.St	-
+5	*.*.Akk.Pl.Sw	-
+6	*.*.Dat.Pl.St	-
+7	*.*.Dat.Pl.Sw	-
+8	*.*.Gen.Pl.St	-
+9	*.*.Gen.Pl.Sw	-
+10	*.*.Nom.Pl.St	-
+11	*.*.Nom.Pl.Sw	-
+12	*.Akk.Pl	-
+13	*.Akk.Pl.*	-
+14	*.Akk.Pl.St	-
+15	*.Akk.Pl.Sw	-
+16	*.Akk.Sg	-
+17	*.Akk.Sg.St	-
+18	*.Dat.Pl	-
+19	*.Dat.Pl.*	-
+20	*.Dat.Pl.St	-
+21	*.Dat.Pl.Sw	-
+22	*.Dat.Sg	-
+23	*.Fem.Akk.Sg.Mix	-
+24	*.Fem.Akk.Sg.St	-
+25	*.Fem.Akk.Sg.Sw	-
+26	*.Fem.Dat.Sg.Mix	-
+27	*.Fem.Dat.Sg.St	-
+28	*.Fem.Dat.Sg.Sw	-
+29	*.Fem.Gen.Sg.Sw	-
+30	*.Fem.Nom.Sg.St	-
+31	*.Fem.Nom.Sg.Sw	-
+32	*.Gen.Pl	-
+33	*.Gen.Pl.*	-
+34	*.Gen.Pl.St	-
+35	*.Gen.Pl.Sw	-
+36	*.Gen.Sg	-
+37	*.Masc.Akk.Sg.Mix	-
+38	*.Masc.Akk.Sg.Sw	-
+39	*.Masc.Dat.Sg.Mix	-
+40	*.Masc.Dat.Sg.Sw	-
+41	*.Masc.Gen.Sg.Mix	-
+42	*.Masc.Gen.Sg.Sw	-
+43	*.Masc.Nom.Sg.Mix	-
+44	*.Masc.Nom.Sg.St	-
+45	*.Masc.Nom.Sg.Sw	-
+46	*.Neut.Akk.Sg.Sw	-
+47	*.Neut.Dat.Sg.Mix	-
+48	*.Neut.Dat.Sg.Sw	-
+49	*.Neut.Gen.Sg.Sw	-
+50	*.Neut.Nom.Sg.Mix	-
+51	*.Neut.Nom.Sg.St	-
+52	*.Neut.Nom.Sg.Sw	-
+53	*.Nom.Pl	-
+54	*.Nom.Pl.*	-
+55	*.Nom.Pl.Mix	-
+56	*.Nom.Pl.St	-
+57	*.Nom.Pl.Sw	-
+58	*.Nom.Sg	-
+59	1.Akk.Pl	-
+60	1.Akk.Sg	-
+61	1.Dat.Pl	-
+62	1.Dat.Sg	-
+63	1.Pl.*.Akk	-
+64	1.Pl.*.Dat	-
+65	1.Pl.*.Nom	-
+66	1.Pl.Past.Ind	-
+67	1.Pl.Past.Konj	-
+68	1.Pl.Pres.Ind	-
+69	1.Sg.*.Akk	-
+70	1.Sg.*.Dat	-
+71	1.Sg.*.Nom	-
+72	1.Sg.Past.Ind	-
+73	1.Sg.Past.Konj	-
+74	1.Sg.Pres.Ind	-
+75	1.Sg.Pres.Konj	-
+76	2.Akk.Sg	-
+77	2.Dat.Sg	-
+78	2.Pl.*.Nom	-
+79	2.Pl.Pres.Ind	-
+80	2.Sg.*.Akk	-
+81	2.Sg.*.Dat	-
+82	2.Sg.*.Nom	-
+83	2.Sg.Past.Ind	-
+84	2.Sg.Pres.Ind	-
+85	2.Sg.Pres.Konj	-
+86	3.Akk.Pl	-
+87	3.Akk.Sg	-
+88	3.Dat.Pl	-
+89	3.Dat.Sg	-
+90	3.Pl.*.Akk	-
+91	3.Pl.*.Dat	-
+92	3.Pl.*.Nom	-
+93	3.Pl.Past.Ind	-
+94	3.Pl.Past.Konj	-
+95	3.Pl.Pres.Ind	-
+96	3.Pl.Pres.Konj	-
+97	3.Sg.Fem.Akk	-
+98	3.Sg.Fem.Dat	-
+99	3.Sg.Fem.Nom	-
+100	3.Sg.Masc.Akk	-
+101	3.Sg.Masc.Dat	-
+102	3.Sg.Masc.Nom	-
+103	3.Sg.Neut.Akk	-
+104	3.Sg.Neut.Nom	-
+105	3.Sg.Past.Ind	-
+106	3.Sg.Past.Konj	-
+107	3.Sg.Pres.Ind	-
+108	3.Sg.Pres.Konj	-
+109	Akk	-
+110	Akk.Neut	-
+111	Comp	-
+112	Comp.*.Akk.Pl.Mix	-
+113	Comp.*.Akk.Pl.St	-
+114	Comp.*.Dat.Pl.St	-
+115	Comp.*.Dat.Pl.Sw	-
+116	Comp.*.Gen.Pl.St	-
+117	Comp.*.Nom.Pl.St	-
+118	Comp.*.Nom.Pl.Sw	-
+119	Comp.Fem.Akk.Sg.Mix	-
+120	Comp.Fem.Akk.Sg.St	-
+121	Comp.Fem.Akk.Sg.Sw	-
+122	Comp.Fem.Dat.Sg.Mix	-
+123	Comp.Fem.Dat.Sg.St	-
+124	Comp.Fem.Dat.Sg.Sw	-
+125	Comp.Fem.Gen.Sg.Mix	-
+126	Comp.Fem.Gen.Sg.Sw	-
+127	Comp.Fem.Nom.Sg.Mix	-
+128	Comp.Fem.Nom.Sg.Sw	-
+129	Comp.Masc.Akk.Sg.Mix	-
+130	Comp.Masc.Akk.Sg.St	-
+131	Comp.Masc.Akk.Sg.Sw	-
+132	Comp.Masc.Dat.Sg.Mix	-
+133	Comp.Masc.Dat.Sg.St	-
+134	Comp.Masc.Dat.Sg.Sw	-
+135	Comp.Masc.Nom.Sg.Mix	-
+136	Comp.Masc.Nom.Sg.St	-
+137	Comp.Masc.Nom.Sg.Sw	-
+138	Comp.Neut.Akk.Sg.Mix	-
+139	Comp.Neut.Akk.Sg.St	-
+140	Comp.Neut.Akk.Sg.Sw	-
+141	Comp.Neut.Dat.Sg.Mix	-
+142	Comp.Neut.Dat.Sg.St	-
+143	Comp.Neut.Nom.Sg.Mix	-
+144	Comp.Neut.Nom.Sg.Sw	-
+145	Dat	-
+146	Dat.Fem	-
+147	Dat.Masc	-
+148	Dat.Neut	-
+149	Def.*.Akk.Pl	-
+150	Def.*.Dat.Pl	-
+151	Def.*.Gen.Pl	-
+152	Def.*.Nom.Pl	-
+153	Def.Fem.Akk.Sg	-
+154	Def.Fem.Dat.Sg	-
+155	Def.Fem.Gen.Sg	-
+156	Def.Fem.Nom.Sg	-
+157	Def.Masc.Akk.Sg	-
+158	Def.Masc.Dat.Sg	-
+159	Def.Masc.Gen.Sg	-
+160	Def.Masc.Nom.Sg	-
+161	Def.Neut.Akk.Sg	-
+162	Def.Neut.Dat.Sg	-
+163	Def.Neut.Gen.Sg	-
+164	Def.Neut.Nom.Sg	-
+165	Fem.Akk.Pl.*	-
+166	Fem.Akk.Sg	-
+167	Fem.Akk.Sg.*	-
+168	Fem.Akk.Sg.St	-
+169	Fem.Dat.Pl	-
+170	Fem.Dat.Pl.*	-
+171	Fem.Dat.Sg	-
+172	Fem.Dat.Sg.*	-
+173	Fem.Dat.Sg.Mix	-
+174	Fem.Dat.Sg.Sw	-
+175	Fem.Gen.Pl.*	-
+176	Fem.Gen.Sg	-
+177	Fem.Gen.Sg.*	-
+178	Fem.Gen.Sg.Mix	-
+179	Fem.Nom.Pl.*	-
+180	Fem.Nom.Sg	-
+181	Fem.Nom.Sg.*	-
+182	Fem.Nom.Sg.St	-
+183	Fem.Nom.Sg.Sw	-
+184	Gen	-
+185	Indef.Fem.Akk.Sg	-
+186	Indef.Fem.Dat.Sg	-
+187	Indef.Fem.Gen.Sg	-
+188	Indef.Fem.Nom.Sg	-
+189	Indef.Masc.Akk.Sg	-
+190	Indef.Masc.Dat.Sg	-
+191	Indef.Masc.Gen.Sg	-
+192	Indef.Masc.Nom.Sg	-
+193	Indef.Neut.Akk.Sg	-
+194	Indef.Neut.Dat.Sg	-
+195	Indef.Neut.Gen.Sg	-
+196	Indef.Neut.Nom.Sg	-
+197	Masc.Akk.Pl	-
+198	Masc.Akk.Pl.*	-
+199	Masc.Akk.Pl.St	-
+200	Masc.Akk.Sg	-
+201	Masc.Akk.Sg.*	-
+202	Masc.Akk.Sg.Mix	-
+203	Masc.Akk.Sg.Sw	-
+204	Masc.Dat.Pl	-
+205	Masc.Dat.Pl.*	-
+206	Masc.Dat.Pl.St	-
+207	Masc.Dat.Sg	-
+208	Masc.Dat.Sg.*	-
+209	Masc.Dat.Sg.Sw	-
+210	Masc.Gen.Pl	-
+211	Masc.Gen.Pl.*	-
+212	Masc.Gen.Sg	-
+213	Masc.Gen.Sg.*	-
+214	Masc.Gen.Sg.Mix	-
+215	Masc.Gen.Sg.Sw	-
+216	Masc.Nom.Pl.*	-
+217	Masc.Nom.Sg	-
+218	Masc.Nom.Sg.*	-
+219	Masc.Nom.Sg.Mix	-
+220	Masc.Nom.Sg.St	-
+221	Masc.Nom.Sg.Sw	-
+222	Neut.Akk.Pl.*	-
+223	Neut.Akk.Sg	-
+224	Neut.Akk.Sg.*	-
+225	Neut.Akk.Sg.St	-
+226	Neut.Akk.Sg.Sw	-
+227	Neut.Dat.Pl.*	-
+228	Neut.Dat.Sg	-
+229	Neut.Dat.Sg.*	-
+230	Neut.Dat.Sg.St	-
+231	Neut.Dat.Sg.Sw	-
+232	Neut.Gen.Pl.*	-
+233	Neut.Gen.Sg	-
+234	Neut.Gen.Sg.*	-
+235	Neut.Gen.Sg.Mix	-
+236	Neut.Gen.Sg.Sw	-
+237	Neut.Nom.Pl.*	-
+238	Neut.Nom.Sg	-
+239	Neut.Nom.Sg.*	-
+240	Neut.Nom.Sg.St	-
+241	Neut.Nom.Sg.Sw	-
+242	Pl	-
+243	Pos	-
+244	Pos.*.*.*.*	-
+245	Pos.*.Akk.Pl.Mix	-
+246	Pos.*.Akk.Pl.St	-
+247	Pos.*.Akk.Pl.Sw	-
+248	Pos.*.Dat.Pl.Mix	-
+249	Pos.*.Dat.Pl.St	-
+250	Pos.*.Dat.Pl.Sw	-
+251	Pos.*.Gen.Pl.Mix	-
+252	Pos.*.Gen.Pl.St	-
+253	Pos.*.Gen.Pl.Sw	-
+254	Pos.*.Nom.Pl.Mix	-
+255	Pos.*.Nom.Pl.St	-
+256	Pos.*.Nom.Pl.Sw	-
+257	Pos.Fem.Akk.Sg.Mix	-
+258	Pos.Fem.Akk.Sg.St	-
+259	Pos.Fem.Akk.Sg.Sw	-
+260	Pos.Fem.Dat.Sg.Mix	-
+261	Pos.Fem.Dat.Sg.St	-
+262	Pos.Fem.Dat.Sg.Sw	-
+263	Pos.Fem.Gen.Sg.Mix	-
+264	Pos.Fem.Gen.Sg.St	-
+265	Pos.Fem.Gen.Sg.Sw	-
+266	Pos.Fem.Nom.Sg.Mix	-
+267	Pos.Fem.Nom.Sg.St	-
+268	Pos.Fem.Nom.Sg.Sw	-
+269	Pos.Masc.Akk.Sg.Mix	-
+270	Pos.Masc.Akk.Sg.St	-
+271	Pos.Masc.Akk.Sg.Sw	-
+272	Pos.Masc.Dat.Sg.Mix	-
+273	Pos.Masc.Dat.Sg.St	-
+274	Pos.Masc.Dat.Sg.Sw	-
+275	Pos.Masc.Gen.Sg.Mix	-
+276	Pos.Masc.Gen.Sg.St	-
+277	Pos.Masc.Gen.Sg.Sw	-
+278	Pos.Masc.Nom.Sg.Mix	-
+279	Pos.Masc.Nom.Sg.St	-
+280	Pos.Masc.Nom.Sg.Sw	-
+281	Pos.Neut.Akk.Sg.Mix	-
+282	Pos.Neut.Akk.Sg.St	-
+283	Pos.Neut.Akk.Sg.Sw	-
+284	Pos.Neut.Dat.Sg.Mix	-
+285	Pos.Neut.Dat.Sg.St	-
+286	Pos.Neut.Dat.Sg.Sw	-
+287	Pos.Neut.Gen.Sg.Mix	-
+288	Pos.Neut.Gen.Sg.St	-
+289	Pos.Neut.Gen.Sg.Sw	-
+290	Pos.Neut.Nom.Sg.Mix	-
+291	Pos.Neut.Nom.Sg.St	-
+292	Pos.Neut.Nom.Sg.Sw	-
+293	Sg	-
+294	Sup	-
+295	Sup.*.Akk.Pl.St	-
+296	Sup.*.Akk.Pl.Sw	-
+297	Sup.*.Dat.Pl.St	-
+298	Sup.*.Dat.Pl.Sw	-
+299	Sup.*.Gen.Pl.Sw	-
+300	Sup.*.Nom.Pl.Mix	-
+301	Sup.*.Nom.Pl.Sw	-
+302	Sup.Fem.Akk.Sg.St	-
+303	Sup.Fem.Akk.Sg.Sw	-
+304	Sup.Fem.Dat.Sg.Mix	-
+305	Sup.Fem.Dat.Sg.St	-
+306	Sup.Fem.Dat.Sg.Sw	-
+307	Sup.Fem.Gen.Sg.St	-
+308	Sup.Fem.Gen.Sg.Sw	-
+309	Sup.Fem.Nom.Sg.Mix	-
+310	Sup.Fem.Nom.Sg.St	-
+311	Sup.Fem.Nom.Sg.Sw	-
+312	Sup.Masc.Akk.Sg.St	-
+313	Sup.Masc.Akk.Sg.Sw	-
+314	Sup.Masc.Dat.Sg.Mix	-
+315	Sup.Masc.Dat.Sg.Sw	-
+316	Sup.Masc.Gen.Sg.Sw	-
+317	Sup.Masc.Nom.Sg.Mix	-
+318	Sup.Masc.Nom.Sg.St	-
+319	Sup.Masc.Nom.Sg.Sw	-
+320	Sup.Neut.Akk.Sg.Mix	-
+321	Sup.Neut.Akk.Sg.Sw	-
+322	Sup.Neut.Dat.Sg.Sw	-
+323	Sup.Neut.Gen.Sg.St	-
+324	Sup.Neut.Nom.Sg.St	-
+325	Sup.Neut.Nom.Sg.Sw	-
+326	Nom-Akk	Akkusativ oder Nominativ
+327	Dat-Akk	Dativ order Akkusativ
+328	Nom-Dat-Akk	Dativ oder Akkusativ oder Nominativ
+329	Gen-Dat	Dativ oder Genitiv
+330	Nom	Nominativ
+#EOT MORPHTAG
+#BOT NODETAG
+0	--	<not bound>
+1	NP	noun phrase
+2	AP	adjektive phrase
+3	PP	adpositional phrase
+4	S	sentence
+5	VP	verb phrase (non-finite)
+6	VZ	zu-marked infinitive
+7	CO	coordination
+8	AVP	adverbial phrase
+9	AA	superlative phrase with "am"
+10	CNP	coordinated noun phrase
+11	CAP	coordinated adjektive phrase
+12	CPP	coordinated adpositional phrase
+13	CS	coordinated sentence
+14	CVP	coordinated verb phrase (non-finite)
+15	CVZ	coordinated zu-marked infinitive
+16	CAVP	coordinated adverbial phrase
+17	MPN	multi-word proper noun
+18	NM	multi-token number
+19	CAC	coordinated adposition
+20	CH	chunk
+21	MTA	multi-token adjective
+22	CCP	coordinated complementiser
+23	DL	discourse level constituent
+24	ISU	idiosyncratis unit
+25	QL	quasi-languag
+#EOT NODETAG
+#BOT EDGETAG
+0	--	<not bound>
+1	HD	head
+2	CJ	conjunct
+3	NK	noun kernel modifier
+4	MNR	postnominal modifier
+5	GL	prenominal genitive
+6	GR	postnominal genitive
+7	CM	comparative concjunction
+8	PG	pseudo-genitive
+9	RC	relative clause
+10	--	not bound
+11	VO	vocative
+12	AMS	measure argument of adj
+13	CC	comparative complement
+14	MR	rhetorical modifier
+15	SB	subject
+16	PD	predicate
+17	SP	subject or predicate
+18	OC	clausal object
+19	OA	accusative object
+20	OA2	second accusative object
+21	DA	dative
+22	OG	genitive object
+23	UC	(idiosyncratic) unit component
+24	APP	apposition
+25	PM	morphological particle
+26	CP	complementizer
+27	NMC	numerical component
+28	DM	discourse marker
+29	ML	locative
+30	MI	instrumental
+31	MC	comitative
+32	MO	modifier
+33	AC	adpositional case marker
+34	CD	coordinating conjunction
+35	SVP	separable verb prefix
+36	NG	negation
+37	RE	repeated element
+38	SBP	passivised subject (PP)
+39	PH	placeholder
+40	PNC	proper noun component
+41	AVC	adverbial phrase component
+42	ADC	adjective component
+43	MW	way (directional modifier)
+44	DH	discourse-level head
+45	RS	reported speech
+46	--	--
+47	--	--
+48	JU	junctor
+#EOT EDGETAG
+#BOT SECEDGETAG
+0	--	<not bound>
+#EOT SECEDGETAG
+%% word			tag	morph		edge	parent	secedge comment
+#BOS 1 1 985275570 1
+Mögen			VMFIN	3.Pl.Pres.Konj	HD	508
+Puristen		NN	Masc.Nom.Pl.*	NK	505
+aller			PIDAT	*.Gen.Pl	NK	500
+Musikbereiche		NN	Masc.Gen.Pl.*	NK	500
+auch			ADV	--		MO	508
+die			ART	Def.Fem.Akk.Sg	NK	501
+Nase			NN	Fem.Akk.Sg.*	NK	501
+rümpfen			VVINF	--		HD	506
+,			$,	--		--	0
+die			ART	Def.Fem.Nom.Sg	NK	507
+Zukunft			NN	Fem.Nom.Sg.*	NK	507
+der			ART	Def.Fem.Gen.Sg	NK	502
+Musik			NN	Fem.Gen.Sg.*	NK	502
+liegt			VVFIN	3.Sg.Pres.Ind	HD	509
+für			APPR	Akk		AC	503
+viele			PIDAT	*.Akk.Pl	NK	503
+junge			ADJA	Pos.*.Akk.Pl.St	NK	503
+Komponisten		NN	Masc.Akk.Pl.*	NK	503
+im			APPRART	Dat.Masc	AC	504
+Crossover-Stil		NN	Masc.Dat.Sg.*	NK	504
+.			$.	--		--	0
+#500			NP	--		GR	505
+#501			NP	--		OA	506
+#502			NP	--		GR	507
+#503			PP	--		MO	509
+#504			PP	--		MO	509
+#505			NP	--		SB	508
+#506			VP	--		OC	508
+#507			NP	--		SB	509
+#508			S	--		MO	509
+#509			S	--		--	0
+#EOS 1
+#BOS 2 2 899973978 1
+Sie			PPER	3.Pl.*.Nom	SB	504
+gehen			VVFIN	3.Pl.Pres.Ind	HD	504
+gewagte			ADJA	Pos.*.Akk.Pl.St	NK	500
+Verbindungen		NN	Fem.Akk.Pl.*	NK	500
+und			KON	--		CD	502
+Risiken			NN	Neut.Akk.Pl.*	CJ	502
+ein			PTKVZ	--		SVP	504
+,			$,	--		--	0
+versuchen		VVFIN	3.Pl.Pres.Ind	HD	505
+ihre			PPOSAT	*.Akk.Pl	NK	501
+Möglichkeiten		NN	Fem.Akk.Pl.*	NK	501
+auszureizen		VVIZU	--		HD	503
+.			$.	--		--	0
+#500			NP	--		CJ	502
+#501			NP	--		OA	503
+#502			CNP	--		OA	504
+#503			VP	--		OC	505
+#504			S	--		CJ	506
+#505			S	--		CJ	506
+#506			CS	--		--	0
+#EOS 2
+#BOS 3 2 916759524 1
+Folklore		NN	Fem.Akk.Sg.*	CJ	500
+,			$,	--		--	0
+Rock			NN	Masc.Akk.Sg.*	CJ	500
+,			$,	--		--	0
+Klassik			NN	Fem.Akk.Sg.*	CJ	500
+und			KON	--		CD	500
+Jazz			NN	Masc.Akk.Sg.*	CJ	500
+zu			PTKZU	--		PM	501
+vermischen		VVINF	--		HD	501
+reicht			VVFIN	3.Sg.Pres.Ind	HD	507
+ihnen			PPER	3.Pl.*.Dat	DA	507
+nicht			PTKNEG	--		NG	507
+,			$,	--		--	0
+sie			PPER	3.Pl.*.Nom	SB	505
+nutzen			VVFIN	3.Pl.Pres.Ind	HD	505
+die			ART	Def.Fem.Akk.Sg	NK	502
+Elektronik		NN	Fem.Akk.Sg.*	NK	502
+und			KON	--		CD	511
+sind			VAFIN	3.Pl.Pres.Ind	HD	510
+sogar			ADV	--		MO	509
+dazu			PROAV	--		PH	508
+übergegangen		VVPP	--		HD	509
+,			$,	--		--	0
+Instrumente		NN	Neut.Akk.Pl.*	OA	506
+selbst			ADV	--		MO	506
+zu			PTKZU	--		PM	503
+bauen			VVINF	--		HD	503
+.			$.	--		--	0
+#500			CNP	--		OA	504
+#501			VZ	--		HD	504
+#502			NP	--		OA	505
+#503			VZ	--		HD	506
+#504			VP	--		SB	507
+#505			S	--		CJ	511
+#506			VP	--		RE	508
+#507			S	--		CJ	511
+#508			PP	--		MO	509
+#509			VP	--		OC	510
+#510			S	--		CJ	511
+#511			CS	--		--	0
+#EOS 3

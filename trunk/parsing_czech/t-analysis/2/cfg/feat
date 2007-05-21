@@ -1,0 +1,2 @@
+lemma tag afun func plemma ptag pafun pfunc rlemma rtag rafun rfunc llemma ltag lafun lfunc clemma ctag cafun cfunc trans => ttrans
+

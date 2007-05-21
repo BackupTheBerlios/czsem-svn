@@ -1,0 +1,28 @@
+#! /bin/bash
+
+if [ -z $1 ] ; then
+	echo "Usage: $0 dirname" >&2
+	exit
+fi
+
+if ls $1/*.a.gz >/dev/null 2>&1; then
+	for f in $1/*.a.gz ; do
+		LIST="$LIST $f"
+	done
+fi
+
+if ls $1/*.a >/dev/null 2>&1 ; then
+	for f in $1/*.a ; do
+		LIST="$LIST $f"
+	done
+fi
+
+rm -f $1/*.pls.gz~
+
+echo -e "\nConverting a-layer into PLS (*.a.pls.gz)..." >&2
+btred -qWm /tmp/czsem/parsing_czech/format-conversions/pdt_formats/pml2pls.btred $LIST
+
+echo -e "\nCreating t-layer (*.t0.pls.gz) from a-layer..." >&2
+$A2T/1/macros/conv $1/*.a.pls.gz
+rename .t.pls.gz .t0.pls.gz $1/*.t.pls.gz
+

@@ -1,0 +1,30 @@
+Nastroj pro tektogramatickou analyzu cestiny
+--------------------------------------------
+Autor: Vaclav Klimes
+
+Spusteni:
+	run <nazev adresare>
+
+Nastroj ke vsem souborum v PML anotovanym na a-rovine, ktere se nachazeji v zadanem adresari, vytvori automatickou anotaci na t-rovine. Vstupni soubory mohou byt zagzipovane. Prislusne t-soubory (zagzipovane; jelikoz je to nejvyssi rovina, lze je rozgzipovat) jsou vytvoreny tamtez. Nastroj lze spustit z jakehokoli adresare. Vytvorene soubory maji nastavena prava rw-rw-r--.
+
+Vytvorene soubory jsou korektni t-soubory. Nastroj je zameren na co nejlepsi urceni struktury a vyplneni atributu nodetype, functor, t_lemma, gram/sempos, val_frame.rf a subfunctor; je tez vyplneno id a rozumne nastaveny atributy a/lex.rf, a/aux.rf, is_member a is_generated; spise provizorne je nastaven deepord.
+
+Nastroj vypisuje na standardni vystup a chybovy vystup velke mnozstvi hlasek, doporucuje se proto presmerovat je do souboru -- ne do /dev/null, protoze v pripade problemu mohu podle logu urcit problem. Pokud mi budete hlasit problemy, poslete mi tedy krome popisu toho, co se stalo, i log.
+
+Analyzator je natrenovan na PDT 2.0, tedy na ceskych datech anotovanych na vsech rovinach rucne; zda se ovsem, ze je rozumne pouzitelny i pro analytickou rovinu ziskanou nekterym lepsim parserem.
+
+Analyzator je experimentalni a jeho pouziti je na vlastni nebezpeci. Zejmena nezarucuju, ze bude produkovat stejne, nebo dokonce lepsi vysledky nez pri drivejsim spusteni. Na vsechny ostatni problemy (napr. nejde spustit, pada, produkuje nekorektni t-soubory) me, prosim, upozornete.
+
+
+Nastroj pro porovnani dvou t-anotaci
+------------------------------------
+Spusteni:
+	compare <nazev adresare> <pripona "spravnych" t-souboru> <pripona testovacich t-souboru>
+
+Porovnavane anotace musi byt ve stejnem adresari. Na vystup se vypisou precision, recall a F-measure v porovnavanych atributech.
+
+
+Stejne jako cely analyzator se i toto readme muze menit, je proto dobre si ho cas od casu precist znovu.
+
+Tak at vam slouzi!
+

@@ -1,0 +1,287 @@
+#!btred -t PML -e pml2netgraph()
+# -*- cperl -*-
+
+=head1 pml2netgraph.btred
+
+Converts tdata or adata to FS format for NetGraph.
+
+=head1 SYNOPSIS
+
+  btred -m pml2netgraph.btred files ...
+or
+  ntred -i files ...
+  ntred -m pml2netgraph.btred
+
+=head1 OUTPUT
+
+The output files are named as the originals with possible C<.pls> or
+C<.pls.gz> extensions stripped and C<.fs> appended. The original
+filenames may be adjusted using C<btred>'s renaming options.
+
+=head1 DESCRIPTION
+
+This script transforms an adata or a tdata PML instance to
+a corresponding FS file suitable for use with the NetGraph Server. In
+case of adata, only minor changes to the naming of attributes are done
+(mdata and wdata are naturally embedded).
+
+In case of tdata the conversion is more complex: for every a-node
+referred in the element C<a> of a t-node a phantom copy is created and
+planted as a hidden child-node of the referring t-node. This copy also
+embeds complete m-layer and w-layer information of the original
+a-node. Node attributes of the a-layer start with the prefix C<a/>.
+
+The following btred/ntred flags can be useful:
+
+C<-a|-r|-s|-p> - affect filenames of the output files
+
+=head1 AUTHOR
+
+Petr Pajas <pajas@matfyz.cz>
+
+Copyright 2005 Petr Pajas, All rights reserved.
+
+=cut
+
+#ifndef NTRED
+#include <tred.mac>
+#endif
+
+package PML;
+
+sub pml2netgraph {
+  if (SchemaName() eq 'adata') {
+    PML_A::adata2netgraph();
+  } elsif (SchemaName() eq 'tdata') {
+    PML_T::tdata2netgraph();
+  } else {
+    die "Can't operate on non-tdata,non-adata file\n";
+  }
+}
+
+package PML_T;
+
+#binding-context PML_T
+#bind tdata2netgraph to G
+
+sub tdata2netgraph {
+  die "Can't operate on non tdata file\n" unless SchemaName() eq 'tdata';
+  my $filename = FileName();
+  $filename=~/\.pls(\.gz)?$/;
+  $filename.='.fs';
+  my $defs = FS()->defs;
+  my $new_defs = {};
+  my $type_defs = {};
+  my %attrs_cache;
+  my $schema = Schema();
+  foreach my $tree (GetTrees()) {
+    my ($a_tree) = GetANodes($tree);
+    $tree->{sentence} = PML_A::GetSentenceString($a_tree);
+    foreach my $node ($tree,$tree->descendants) {
+
+      # hang AID nodes to this one:
+      my $i=1;
+      unless ($node == $tree) {
+	my @a_same_tree = sort { $a->{ord} <=> $b->{ord} } grep { $_->root == $a_tree } GetANodes($node);
+	my @a_other_trees = sort { $a->{ord} <=> $b->{ord} } grep { $_->root != $a_tree } GetANodes($node);
+	for my $anode (@a_other_trees,@a_same_tree) {
+	  my $new = FSNode->new();
+	  $new->{'a/ref_type'} = ($anode->parent ? 'tree' : 
+				    ($node->{a}{'lex.rf'} eq $anode->{AID} ? 'lex' : 'aux'));
+	  $new->{'id'} = ($anode->{ID1}.$anode->{AID});
+	  $new->{'a/ord'} = ($anode->root == $a_tree ? $anode->{ord} : '');
+	  $new->{'a/afun'} = $anode->{afun};
+	  $new->{'a/is_member'} = $anode->{is_member};
+	  $new->{'hide'} = 'hide';
+	  $new->{'m/tag'} = $anode->{'m'}{tag};
+	  $new->{'m/lemma'} = $anode->{'m'}{lemma};
+	  $new->{'m/form'} = $anode->{'m'}{form};
+	  $new->{'w/token'} = join '|',map { $_->{token} } ListV($anode->{'m'}{'w'});
+	  $new->{'w/no_space_after'} = join '|',map { $_->{no_space_after} } ListV($anode->{'m'}{'w'});
+	  $new->{'deepord'} = $node->{deepord}.".".$i;
+	  $new->{'a/parent_id'} = $anode->parent->{id} if $anode->parent;
+	  $i++;
+	  PasteNode($new,$node);
+	}
+      }
+
+      my $new_node = {};
+      my $type = join ":",$node->type;
+      $attrs_cache{$type} = [grep {$_ !~ m{^a\/} }  $node->type->attributes()] 
+	unless exists $attrs_cache{$type};
+      $member_cache{$type} = [grep {$_ ne 'a'} $node->type->members()] 
+	unless exists $members_cache{$type};
+      foreach my $attr (@{ $attrs_cache{$type} }) {
+	$attrs_cache{$type.":".$attr} = $node->type->find($attr) unless exists $attrs_cache{$type.":".$attr};
+	my $fs_attr = $attr;
+	#$fs_attr=~s{/}{_}g;
+
+	# declare if not yet declared
+	if (!exists $new_defs->{$fs_attr}) {
+	  my $attr_type = $node->type->find($attr);
+	  if (ref($attr_type) and exists($attr_type->{list}) or exists($attr_type->{alt})){
+	    $attr_type = $schema->resolve_type($attr_type->{list} || $attr_type->{alt});
+	  }
+	  $new_defs->{$fs_attr} = ' P';
+	  if (ref($attr_type) and $attr_type->{choice}) {
+	    $new_defs->{$fs_attr} .= ' L='.join("|",sort @{$attr_type->{choice}});
+	  }
+	  if (ref($attr_type) and $attr_type->{constant}) {
+	    $new_defs->{$fs_attr} .= ' L='.$attr_type->{constant};
+	  }
+	  $type_defs->{ $node->type->type_decl->{name}.">".$fs_attr } = 1;
+	} elsif (!exists($type_defs->{ $node->type->type_decl->{name}.">".$fs_attr })) {
+	  my $attr_type = $node->type->find($attr);
+	  $attr_type = $node->type->schema->resolve_type($attr_type);
+	  if (ref($attr_type) and exists($attr_type->{list}) or exists($attr_type->{alt})){
+	    $attr_type = $schema->resolve_type($attr_type->{list} || $attr_type->{alt});
+	  }
+	  if (ref($attr_type) and $attr_type->{choice}) {
+	    foreach (sort @{$attr_type->{choice}}) {
+	      $new_defs->{$fs_attr} .= "|".$_ unless $new_defs->{$fs_attr}=~/\|\Q$_\E($|\|)/;
+	    }
+	  } elsif (ref($attr_type) and $attr_type->{constant}) {
+	    my $val = $attr_type->{constant};
+	    $new_defs->{$fs_attr} .= "|".$val unless $new_defs->{$fs_attr}=~/\|\Q$val\E($|\|)/;
+	  }
+	  $type_defs->{ $node->type->type_decl->{name}.">".$fs_attr } = 1;
+	}
+	my $value = $node->attr($attr);
+	if (IsList($value) or IsAlt($value)) {
+	  $new_node->{$attr} = join "|",ListV($value);
+	} else {
+	  $new_node->{$attr} = $value;
+	}
+      }
+
+      delete $node->{$_} for @{$members_cache{$type}};
+      $node->set_type(undef);
+      $node->{$_}=$new_node->{$_} for keys %$new_node;
+    }
+  }
+
+  my $afile = AFile();
+  if ($afile) {
+    writeln("deleting fs-part-of from afile\n");
+    my $part_of = $afile->appData('fs-part-of');
+    @$part_of = grep { $_ != $fsfile } @{$part_of} if ref($part_of);
+  } else {
+    writeln("no AFile\n");
+  }
+
+  my $fsfile = $grp->{FSFile};
+
+  for (keys %$new_defs) {
+    $defs->{$_} = $new_defs->{$_} unless exists $defs->{$_};
+  }
+  @{FS()->list} = ((sort keys(%$new_defs)),
+		   qw(sentence a/ref_type a/afun a/is_member m/form m/lemma m/tag w/token w/no_space_after a/ord a/parent_id hide));
+  $defs->{$_} = ' P' for qw(m/form m/lemma m/tag w/token a/parent_id a/ref_type);
+  $defs->{$_} = ' P L=0|1' for qw(a/is_member w/no_space_after);
+  $defs->{'a/afun'} = ' P L=---|Pred|Pnom|AuxV|Sb|Obj|Atr|Adv|AtrAdv|AdvAtr|Coord|AtrObj|ObjAtr|AtrAtr|AuxT|AuxR|AuxP|Apos|ExD|AuxC|Atv|AtvV|AuxO|AuxZ|AuxY|AuxG|AuxK|AuxX|AuxS';
+  $defs->{hide} = ' H';
+  $defs->{sentence} = ' V';
+  $defs->{'a/ord'} = ' W';
+
+  FileMetaData("schema",undef);
+  FileMetaData("fs-require",undef);
+  FileMetaData("ref",{});
+  FileMetaData("ref-index",{});
+  $fsfile->changeFilename($filename);
+  $fsfile->changeBackend('FSBackend');
+  $fsfile->changeEncoding('utf-8');
+
+  ChangingFile(1);
+}
+
+package PML_A;
+
+#binding-context PML_A
+#bind adata2netgraph to G
+
+sub adata2netgraph {
+  die "Can't operate on non adata file\n" unless SchemaName() eq 'adata';
+  my $filename = FileName();
+  $filename =~ s/\.pls(\.gz)?//;
+  $filename .= ".fs";
+
+  my $defs = FS()->defs;
+  my $new_defs = {};
+  my $type_defs = {};
+  my %attrs_cache;
+  my $schema = Schema();
+  foreach my $tree (GetTrees()) {
+    foreach my $node ($tree,$tree->descendants) {
+      my $new_node = {};
+      my $type = join ":",$node->type;
+      $attrs_cache{$type} = [$node->type->attributes()] unless exists $attrs_cache{$type};
+      $member_cache{$type} = [$node->type->members()] unless exists $members_cache{$type};
+      foreach my $attr (@{ $attrs_cache{$type} }) {
+	$attrs_cache{$type.":".$attr} = $node->type->find($attr) unless exists $attrs_cache{$type.":".$attr};
+	my $fs_attr = $attr;
+	#$fs_attr=~s{/}{_}g;
+
+	# declare if not yet declared
+	if (!exists $new_defs->{$fs_attr}) {
+	  my $attr_type = $node->type->find($attr);
+	  $attr_type = $node->type->schema->resolve_type($attr_type);
+
+	  if (ref($attr_type) and exists($attr_type->{list}) or exists($attr_type->{alt})){
+	    $attr_type = $schema->resolve_type($attr_type->{list} || $attr_type->{alt});
+	  }
+	  $new_defs->{$fs_attr} = ' P';
+	  if (ref($attr_type) and $attr_type->{choice}) {
+	    $new_defs->{$fs_attr} .= ' L='.join("|",sort @{$attr_type->{choice}});
+	  } elsif (ref($attr_type) and $attr_type->{constant}) {
+	    $new_defs->{$fs_attr} .= ' L='.$attr_type->{constant};
+	  }
+	  $type_defs->{ $node->type->type_decl->{name}.">".$fs_attr } = 1;
+	} elsif (!exists($type_defs->{ $node->type->type_decl->{name}.">".$fs_attr })) {
+	  my $attr_type = $node->type->find($attr);
+	  $attr_type = $node->type->schema->resolve_type($attr_type);
+	  if (ref($attr_type) and exists($attr_type->{list}) or exists($attr_type->{alt})){
+	    $attr_type = $schema->resolve_type($attr_type->{list} || $attr_type->{alt});
+	  }
+	  if (ref($attr_type) and $attr_type->{choice}) {
+	    foreach (sort @{$attr_type->{choice}}) {
+	      $new_defs->{$fs_attr} .= "|".$_ unless $new_defs->{$fs_attr}=~/\|\Q$_\E($|\|)/;
+	    }
+	  } elsif (ref($attr_type) and $attr_type->{constant}) {
+	    my $val = $attr_type->{constant};
+	    $new_defs->{$fs_attr} .= "|".$val unless $new_defs->{$fs_attr}=~/\|\Q$val\E($|\|)/;
+	  }
+	  $type_defs->{ $node->type->type_decl->{name}.">".$fs_attr } = 1;
+	}
+	my $value = $node->attr($attr);
+	if (IsList($value) or IsAlt($value)) {
+	  $new_node->{$attr} = join "|",ListV($value);
+	} else {
+	  $new_node->{$attr} = $value;
+	}
+      }
+
+      delete $node->{$_} for @{$members_cache{$type}};
+      $node->set_type(undef);
+      $node->{$_}=$new_node->{$_} for keys %$new_node;
+    }
+  }
+
+  for (keys %$new_defs) {
+    $defs->{$_} = $new_defs->{$_} unless exists $defs->{$_};
+    @{FS()->list} = sort keys(%$new_defs);
+  }
+  $defs->{'m/w/token'} = ' V'.$defs->{'m/w/token'};
+
+  my $fsfile = $grp->{FSFile};
+  FileMetaData("schema",undef);
+  FileMetaData("fs-require",undef);
+  FileMetaData("ref",{});
+  FileMetaData("ref-index",{});
+  $fsfile->changeFilename($filename);
+  $fsfile->changeBackend('FSBackend');
+  $fsfile->changeEncoding('utf-8');
+
+  ChangingFile(1);
+}
+
+1;

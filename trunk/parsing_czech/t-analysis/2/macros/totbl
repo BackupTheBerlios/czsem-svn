@@ -1,0 +1,1 @@
+btred -d ISO88592 -qWI $A2T/2/macros/totbl.pl $@

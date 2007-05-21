@@ -1,0 +1,1 @@
+lemma afun tpos tspos tgen tnum tcas tper tten tgrd tneg tvoi plemma pafun ppos pspos pgen pnum pcas pper pten pgrd pneg pvoi func pdel => tfunc tpdel

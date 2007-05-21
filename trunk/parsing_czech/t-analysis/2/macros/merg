@@ -1,0 +1,1 @@
+btred -d ISO8859-2 -qWI $A2T/2/macros/merg.pl -s .t1.pls.gz -a .t2.pls.gz $@

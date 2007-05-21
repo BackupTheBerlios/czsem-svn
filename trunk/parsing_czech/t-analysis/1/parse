@@ -1,0 +1,25 @@
+#! /bin/bash
+
+if [ -z $2 ] ; then
+	echo "Usage: $0 dirname rulefile" >&2
+	exit
+fi
+
+echo -e "Converting..." >&2
+$A2T/1/macros/totbl $1/*.a.pls.gz
+
+echo -e "\nTransforming..." >&2
+for f1 in $1/*.1i.tbl; do
+	f=${f1/.1i.tbl/}
+	echo $f >&2
+	$FNTBL/exec/most_likely_tag.prl -l $A2T/1/train/T-func.lex -t 'RSTR','RSTR' $f1 |\
+	$FNTBL/exec/most_likely_tag.prl -l $A2T/1/train/T-pdel.lex -t '-','-' - > $f1.lex
+	$A2T/1/apply $f1.lex $2 2>&1 > $f.1o.tbl | sed 's/^.*\ch//g'
+done
+
+echo -e "\nMerging..." >&2
+$A2T/1/macros/merg $1/*.t0.pls.gz > /dev/null
+rm -f $1/*.t1.*~
+
+#../compare $1 t\#.pls.gz t1.pls.gz
+

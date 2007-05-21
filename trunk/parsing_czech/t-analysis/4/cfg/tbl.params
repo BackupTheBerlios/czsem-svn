@@ -1,0 +1,6 @@
+MAIN                  = /tmp/czsem/parsing_czech/t-analysis/4/cfg;
+FILE_TEMPLATE         = ${MAIN}/feat;
+RULE_TEMPLATES        = ${MAIN}/rule;
+EMPTY_LINES_ARE_SEPARATORS = 0;
+
+ORDER_BASED_ON_SIZE = 1;

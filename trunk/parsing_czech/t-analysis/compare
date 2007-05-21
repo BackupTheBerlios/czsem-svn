@@ -1,0 +1,17 @@
+#! /bin/bash
+
+export A2T=/net/projects/t-analysis
+
+if [ -z $3 ] ; then
+	echo "Usage: $0 dirname golden_standard_suffix test_suffix" >&2
+	exit 1
+fi
+													
+echo -e "\nComparing..." >&2
+ARG=""
+for f in $1/*.$2; do
+	ARG="$ARG $f ${f/$2/$3}"
+done
+
+btred -qWPI $A2T/macros/compare.pl $ARG
+

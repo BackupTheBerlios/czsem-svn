@@ -1,0 +1,86 @@
+#!btred -e pml2pls
+# -*- cperl -*-
+
+=head1 pml2pls.btred
+
+Converts PML data to the Storable C<.pls.gz> format suitable for fast
+access using the TrEd toolkit
+
+=head1 SYNOPSIS
+
+  btred -Y -m pml2pls.btred files ...
+or
+  ntred -Y -i files ...
+  ntred -m pml2pls.btred
+
+=head1 OUTPUT
+
+The output files are named as the originals with C<.pls.gz> extension
+appended (with possible extension C<.gz> stripped previously). The
+original filenames may also be adjusted using C<btred>'s renaming
+options.
+
+=head1 DESCRIPTION
+
+This script loads a PML instance and dumps it using the Storable perl
+module in a binary format which allows C<tred>/C<btred>/C<ntred> to
+retrieve with extreme speed.
+
+In order to achieve internal reference consistency, references to
+other tree-data files are also renamed accordingly, so e.g. a
+reference to a adata file C<ref_filename> in a tdata file processed
+with this script is changed to refer to C<ref_filename.pls.gz>. Hence,
+it is required to apply this script both on adata and tdata files.
+
+The following btred/ntred flags can be useful:
+
+C<-a|-r|-s|-p> - affect filenames of the output files
+
+=head1 AUTHOR
+
+Petr Pajas <pajas@matfyz.cz>
+
+Copyright 2005 Petr Pajas, All rights reserved.
+
+=cut
+
+package TredMacro;
+sub pml2pls {
+  my $req=FileMetaData("fs-require");
+  if (ref($req)) {
+    print (map { "@$_," } @$req);
+    print "\n";
+    for (@$req)	{
+      $_->[1]=~s{^.*/}{};
+      unless ($_->[1]=~/\.pls\.gz$/) {
+	$_->[1]=~s{\.gz$}{};
+	$_->[1].=".pls.gz";
+      }
+      $_->[1]=main::save_transform_filename($_->[1]);
+    }
+    print map { "@$_," } @$req;
+    print "\n";
+    FileMetaData("fs-require",$req);
+  } else {
+    print "no fs-require\n";
+  }
+
+  my $ref = FileMetaData("ref");
+  if ($ref) {
+    print (map { "ref: $_ => $ref->{$_}\n" } keys %$ref);
+  }
+  FileMetaData("ref",{});
+  my $idx = FileMetaData("ref");
+  if ($idx) {
+    print (map { "ref-index: $_ => $idx->{$_}\n" } keys %$idx);
+  }
+  FileMetaData("ref-index",{});
+
+  $grp->{FSFile}->changeBackend('StorableBackend');
+  my $fn = FileName();
+  $fn=~s{\.gz$}{};
+  $grp->{FSFile}->changeFilename($fn.".pls.gz");
+  $grp->{FSFile}->changeBackend('StorableBackend');
+
+  ChangingFile(1);
+}

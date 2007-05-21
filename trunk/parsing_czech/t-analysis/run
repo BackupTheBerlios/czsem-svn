@@ -1,0 +1,36 @@
+#! /bin/bash
+
+export A2T=/tmp/czsem/parsing_czech/t-analysis
+export FNTBL=/tmp/czsem/parsing_czech/fnTBL-1.2
+
+if [ -z $1 ] ; then
+	echo "Usage: $0 dirname" >&2
+  exit
+fi
+
+DIR=${1%/}
+
+. /home/pajas/bin/setup_platform
+                                                                                
+
+umask 0002
+date
+echo -e "\n======================= INITIAL CONVERSION ========================"
+$A2T/1/prepare-data $DIR
+echo -e "\n============================= PHASE 1 ============================="
+$A2T/1/parse $DIR $A2T/1/R
+echo -e "\n============================= PHASE 2 ============================="
+$A2T/2/parse $DIR $A2T/2/R
+echo -e "\n============================= PHASE 3 ============================="
+$A2T/3/parse $DIR $A2T/3/R
+echo -e "\n============================= PHASE 4 ============================="
+$A2T/4/parse $DIR $A2T/4/R
+echo -e "\n======================== FINAL CONVERSION ========================="
+rename t4.pls.gz t.pls.gz $DIR/*.t4.pls.gz
+btred -qWe '$refs = FileMetaData("references"); for (values(%$refs)) { s{vallex\.xml}{vallex2.xml}g; s{\.pls\.gz$}{.gz}; s{\.gz$}{} if /\.gz$/ && ! -e $_; s{.*/}{}g; } $grp->{FSFile}->changeBackend("PMLBackend")' -S -s .pls.gz -a .gz --no-secondary-files $DIR/*.t.pls.gz
+find $DIR -name '*.[1-4][io].tbl' -exec rm {} \;
+find $DIR -name '*.[1-4]i.tbl.lex' -exec rm {} \;
+find $DIR -name '*.[at].pls.gz' -exec rm {} \;
+find $DIR -name '*.t[0-3].pls.gz' -exec rm {} \;
+find $DIR -name '*.pls.gz~' -exec rm {} \;
+date

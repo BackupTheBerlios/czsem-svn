@@ -1,0 +1,1882 @@
+#train_voc_file: /tmp/czsem/parsing_czech/t-analysis/2/cfg/T.voc
+GOOD:1402 BAD:147 SCORE:1255 RULE: pafun=Coord rtag=--- ltag=--- => trans=A(B)->B(A)
+GOOD:1888 BAD:710 SCORE:1178 RULE: afun=Atr ptag=C= pfunc=RSTR rtag=--- ltag=--- => trans=A(B)->B(A)
+GOOD:1295 BAD:685 SCORE:610 RULE: cafun=AuxZ cfunc=RHEM => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:455 BAD:21 SCORE:434 RULE: func=DENOM pafun=AuxS rafun=ExD ltag=--- => trans=A(B,C)->A(B(C))+ExD
+GOOD:429 BAD:127 SCORE:302 RULE: afun=Atr ptag=C4 pfunc=RSTR rtag=--- ltag=--- => trans=A(B)->B(A)
+GOOD:338 BAD:108 SCORE:230 RULE: afun=Atr pfunc=RSTR rtag=--- lfunc=EXT => trans=A(B)->B(A)
+GOOD:313 BAD:131 SCORE:182 RULE: tag=N1 pfunc=PRED cafun=AuxZ+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:160 BAD:9 SCORE:151 RULE: afun=ExD cafun=AuxZ => trans=-
+GOOD:212 BAD:67 SCORE:145 RULE: tag=N2 pafun=Sb pfunc=RSTR rtag=--- ltag=--- => trans=A(B)->B(A)
+GOOD:263 BAD:135 SCORE:128 RULE: pafun=Pred rtag=--- cafun=AuxZ+Atr+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:204 BAD:81 SCORE:123 RULE: cafun=Atv cfunc=COMPL => trans=A(B(C))->A(B,C)+Atv
+GOOD:117 BAD:5 SCORE:112 RULE: func=TWHEN pafun=AuxS rafun=ExD ltag=--- => trans=A(B,C)->A(*(*(C),B))+ExD:PRED+ACT
+GOOD:94 BAD:1 SCORE:93 RULE: tag=C= afun=Atr => trans=-
+GOOD:92 BAD:11 SCORE:81 RULE: pafun=AuxS rtag=Z: ltag=--- => trans=A(B,C)->A(B(C))+Coord
+GOOD:94 BAD:14 SCORE:80 RULE: plemma=###### rfunc=ACT ltag=--- => trans=A(B,C)->A(*(B,C))+ExD:PRED
+GOOD:130 BAD:54 SCORE:76 RULE: cafun=Atr+Atv => trans=A(B(C))->A(B,C)+Atv
+GOOD:79 BAD:3 SCORE:76 RULE: func=DIR1 pafun=AuxS rafun=--- ltag=--- => trans=A(B)->A(*(B)):PRED
+GOOD:129 BAD:54 SCORE:75 RULE: afun=Atr pfunc=OPER rtag=--- lfunc=RSTR+RSTR => trans=A(B)->B(A)
+GOOD:177 BAD:107 SCORE:70 RULE: afun=Atr pafun=ExD => trans=-
+GOOD:72 BAD:3 SCORE:69 RULE: func=MANN ptag=## rtag=--- ltag=--- cfunc=--- => trans=A(B)->A(*(B)):PRED
+GOOD:157 BAD:90 SCORE:67 RULE: rtag=--- cfunc=RHEM+APP => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:71 BAD:11 SCORE:60 RULE: pafun=AuxS rtag=N6 ltag=--- => trans=A(B,C)->A(*(B,C))+ExD:PRED
+GOOD:94 BAD:35 SCORE:59 RULE: func=FPHR pafun=Atr rafun=Atr ltag=--- => trans=A(B,C)->*(A,B,C)+Atr:ID
+GOOD:74 BAD:24 SCORE:50 RULE: tag=N2 afun=Atr ptag=Dg rtag=--- ltag=--- => trans=A(B)->B(A)
+GOOD:161 BAD:113 SCORE:48 RULE: func=PAT pfunc=PRED cafun=AuxZ+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:43 BAD:1 SCORE:42 RULE: afun=ExD pafun=Coord => trans=-
+GOOD:73 BAD:32 SCORE:41 RULE: ltag=--- cafun=Adv cfunc=RHEM => trans=A(B(C))->A(B,C)+Adv
+GOOD:49 BAD:11 SCORE:38 RULE: cafun=AuxZ+Sb+Sb => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:37 BAD:0 SCORE:37 RULE: lemma=foto rafun=ExD+ExD => trans=A(B,C,D)->A(*(B,C(D)))+ExD+ExD:PRED
+GOOD:90 BAD:53 SCORE:37 RULE: pafun=Coord cfunc=RHEM => trans=-
+GOOD:66 BAD:30 SCORE:36 RULE: afun=Adv cfunc=RHEM+PAT => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:66 BAD:31 SCORE:35 RULE: pafun=Pred cafun=AuxZ+Atr+Atr+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:39 BAD:4 SCORE:35 RULE: plemma=###### rfunc=EFF ltag=--- => trans=A(B,C(D))->A(D(B,C))+ExD+AuxG
+GOOD:43 BAD:12 SCORE:31 RULE: cafun=Atv cfunc=EFF => trans=A(B(C))->A(B,C)+Atv
+GOOD:62 BAD:31 SCORE:31 RULE: afun=Atr func=PAT plemma=ten ltag=--- => trans=A(B)->B|B
+GOOD:46 BAD:16 SCORE:30 RULE: plemma=###### rfunc=PAT ltag=--- => trans=A(B,C)->A(*(B,C))+ExD:PRED
+GOOD:29 BAD:0 SCORE:29 RULE: plemma=###### rtag=Z:+C= => trans=A(B,C,D)->A(C(*(D),B))+ExD+ExD:TWHEN
+GOOD:46 BAD:17 SCORE:29 RULE: func=EXT rfunc=RSTR+MAT => trans=A(B,C)->A(C(B))+Atr
+GOOD:108 BAD:80 SCORE:28 RULE: pafun=Obj cafun=AuxZ+Atr+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:44 BAD:16 SCORE:28 RULE: afun=Coord cafun=AuxZ+Adv+Adv => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:40 BAD:13 SCORE:27 RULE: cafun=Atr+Atr+Atv => trans=A(B(C))->A(B,C)+Atv
+GOOD:152 BAD:125 SCORE:27 RULE: lemma=a pafun=Atr rtag=--- ltag=--- cfunc=RSTR+RSTR => trans=A(B(C,D))->B(A(D),a(C))+Atr+Atr;@
+GOOD:33 BAD:7 SCORE:26 RULE: tag=N2 plemma=: rafun=Pred ltag=--- => trans=A(B)->A(*(B)):PRED
+GOOD:29 BAD:4 SCORE:25 RULE: rtag=Z:+N1 rafun=ExD+ExD => trans=A(B,C,D)->A(C(B,D))+ExD+ExD
+GOOD:30 BAD:5 SCORE:25 RULE: pafun=Apos cfunc=RHEM => trans=-
+GOOD:27 BAD:2 SCORE:25 RULE: afun=ExD pafun=ExD rtag=Z: => trans=A(B(C),D)->C(A,B(D))+AuxG+Coord
+GOOD:35 BAD:10 SCORE:25 RULE: pafun=Sb pfunc=FPHR rafun=--- ltag=--- => trans=A(B)->*(A,B):ACT
+GOOD:29 BAD:5 SCORE:24 RULE: pafun=AuxS rtag=C=+C= ltag=--- => trans=A(B,C,D)->A(*(*(C,D),B))+ExD+ExD:PRED+CONJ
+GOOD:77 BAD:53 SCORE:24 RULE: tag=AX pafun=Atr pfunc=FPHR rtag=--- ltag=--- => trans=A(B)->*(A,B):ID
+GOOD:23 BAD:0 SCORE:23 RULE: cfunc=EXT+RSTR+MAT => trans=-
+GOOD:163 BAD:140 SCORE:23 RULE: afun=Adv pafun=Pred cfunc=RHEM+RSTR => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:51 BAD:29 SCORE:22 RULE: pafun=Pred cafun=AuxZ+Coord => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:28 BAD:6 SCORE:22 RULE: tag=P2 afun=Atr => trans=-
+GOOD:32 BAD:10 SCORE:22 RULE: afun=AuxZ func=EXT ptag=N4 rfunc=RSTR => trans=A(B,C)->A(C(B))+Atr
+GOOD:37 BAD:15 SCORE:22 RULE: plemma=v¹ak rtag=--- ltag=--- cfunc=PRED+PRED => trans=A(B(C))->B(C(A))+Pred
+GOOD:22 BAD:1 SCORE:21 RULE: afun=AuxY rafun=Pred ltag=--- => trans=A(B,C)->C(A,B)+Pred
+GOOD:36 BAD:15 SCORE:21 RULE: func=RSTR ptag=Dg rafun=Atr => trans=A(B,C)->A(C(B))+Atr
+GOOD:33 BAD:12 SCORE:21 RULE: lemma=i pafun=Atr rtag=--- ltag=--- cfunc=RSTR+RSTR => trans=A(B(C,D))->B(A(D),a(C))+Atr+Atr;@
+GOOD:32 BAD:12 SCORE:20 RULE: tag=J^ cfunc=RHEM+PAT+PAT => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:24 BAD:4 SCORE:20 RULE: pafun=AuxS rtag=N2 ltag=--- => trans=A(B,C)->A(*(B,C))+ExD:PRED
+GOOD:30 BAD:10 SCORE:20 RULE: tag=N6 plemma=###### rafun=--- ltag=--- => trans=A(B)->A(*(B)):PRED
+GOOD:23 BAD:3 SCORE:20 RULE: func=RSTR ptag=Dg rtag=N2 cafun=Atr => trans=A(B(C),D)->A(C(B,D))+Atr+Atr
+GOOD:51 BAD:33 SCORE:18 RULE: lemma=rok pfunc=PRED => trans=-
+GOOD:25 BAD:7 SCORE:18 RULE: func=RSTR pfunc=PRED => trans=-
+GOOD:19 BAD:1 SCORE:18 RULE: pafun=AuxS rtag=N4 ltag=--- => trans=A(B,C)->A(*(B,C))+ExD:PRED
+GOOD:30 BAD:12 SCORE:18 RULE: afun=Pnom cafun=ExD cfunc=ACT => trans=A(B(C))->A(B(a(C,b)))+ExD;CPR+@
+GOOD:21 BAD:3 SCORE:18 RULE: lemma=- func=CONJ ptag=## rafun=Coord => trans=A(B,C)->A(*(B,C))+Coord:PRED
+GOOD:17 BAD:0 SCORE:17 RULE: pafun=Pred cfunc=EXT+MAT => trans=-
+GOOD:17 BAD:0 SCORE:17 RULE: lemma=, func=APPS ptag=## rafun=Coord => trans=A(B,C(D))->A(D(B,C))+Coord+AuxG
+GOOD:18 BAD:1 SCORE:17 RULE: tag=A2 func=RSTR ptag=C= pfunc=RSTR => trans=-
+GOOD:18 BAD:2 SCORE:16 RULE: cfunc=EXT+RSTR => trans=-
+GOOD:91 BAD:75 SCORE:16 RULE: pafun=Atr cfunc=RHEM+RSTR => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:43 BAD:26 SCORE:17 RULE: tag=N6 ptag=Vp cafun=AuxZ+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:21 BAD:5 SCORE:16 RULE: func=TWHEN plemma=###### rtag=NX => trans=A(B)->A(*(B)):PRED
+GOOD:17 BAD:1 SCORE:16 RULE: func=PAT plemma=mít ctag=A2 => trans=A(B(C))->A(B,C)+Atr
+GOOD:17 BAD:1 SCORE:16 RULE: tag=C= func=TWHEN plemma=###### rafun=Coord => trans=A(B,C)->A(*(*(C),B))+Coord:PRED+ACT
+GOOD:19 BAD:3 SCORE:16 RULE: pafun=Sb pfunc=FPHR rafun=Atr ltag=--- => trans=A(B,C)->*(A,B,C)+Atr:ACT
+GOOD:21 BAD:6 SCORE:15 RULE: tag=N4 cfunc=RHEM+MAT => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:20 BAD:4 SCORE:16 RULE: tag=N4 pafun=Coord => trans=-
+GOOD:15 BAD:0 SCORE:15 RULE: afun=Atv rafun=--- => trans=-
+GOOD:24 BAD:9 SCORE:15 RULE: afun=Pnom func=PAT cafun=Adv+ExD => trans=A(B(C))->A(B(a(C,b)))+ExD;CPR+@
+GOOD:15 BAD:0 SCORE:15 RULE: tag=N1 afun=ExD rtag=--- => trans=-
+GOOD:46 BAD:31 SCORE:15 RULE: func=RSTR ptag=C= rtag=N2 ltag=--- cfunc=--- => trans=A(B,C)->C(A,B)+Atr
+GOOD:24 BAD:10 SCORE:14 RULE: func=DIR1 pfunc=RSTR => trans=-
+GOOD:14 BAD:0 SCORE:14 RULE: tag=NX plemma=###### rafun=Coord => trans=A(B,C)->A(*(B,C))+Coord:CONJ
+GOOD:14 BAD:0 SCORE:14 RULE: tag=NX ptag=C= pfunc=RSTR rtag=NX ltag=--- => trans=A(B,C)->B(A,C)+Atr
+GOOD:29 BAD:16 SCORE:13 RULE: lemma=ten cfunc=RHEM+PAT => trans=A(B(C,D))->A(C,D)+AuxZ+Atr|D
+GOOD:17 BAD:4 SCORE:13 RULE: ctag=Db+N6 cafun=AuxZ+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:15 BAD:2 SCORE:13 RULE: plemma=a¾ lafun=ExD+ExD => trans=-
+GOOD:14 BAD:1 SCORE:13 RULE: pafun=AuxS rtag=N3 ltag=--- => trans=A(B,C)->A(*(B,C))+ExD:PRED
+GOOD:14 BAD:1 SCORE:13 RULE: afun=Sb func=RESTR ptag=VB => trans=A(B)->A(*(B)):ACT
+GOOD:14 BAD:1 SCORE:13 RULE: pafun=AuxC pfunc=PREC rafun=--- ltag=--- => trans=A(B)->B(A)
+GOOD:12 BAD:0 SCORE:12 RULE: lemma=spolupráce afun=AuxP => trans=A(B)->B(A)
+GOOD:15 BAD:3 SCORE:12 RULE: pafun=Atr ctag=C=+C= => trans=-
+GOOD:18 BAD:6 SCORE:12 RULE: pafun=AuxS rtag=N7 ltag=--- => trans=A(B,C)->A(*(B,C))+ExD:PRED
+GOOD:19 BAD:7 SCORE:12 RULE: tag=N2 func=PAR pafun=ExD => trans=A(B)->B(A)
+GOOD:12 BAD:0 SCORE:12 RULE: lemma=delta plemma=auto rafun=--- => trans=A(B)->B(A)
+GOOD:12 BAD:0 SCORE:12 RULE: plemma=###### rfunc=APPS ltag=--- => trans=A(B)->A(*(B)):PRED
+GOOD:21 BAD:9 SCORE:12 RULE: tag=N4 afun=Obj cfunc=RHEM+PAT => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:14 BAD:2 SCORE:12 RULE: tag=AX func=RSTR rtag=--- => trans=-
+GOOD:13 BAD:1 SCORE:12 RULE: func=DENOM pfunc=### rtag=Vs rafun=ExD => trans=A(B,C)->A(C(B))+ExD
+GOOD:19 BAD:8 SCORE:11 RULE: lemma=témìø rafun=Atr+Atr => trans=A(B,C)->A(C(B))+Atr
+GOOD:20 BAD:9 SCORE:11 RULE: tag=N1 pafun=Coord => trans=-
+GOOD:15 BAD:4 SCORE:11 RULE: tag=Db plemma=###### rafun=ExD ltag=--- => trans=A(B,C)->A(*(B,C))+ExD:PRED
+GOOD:19 BAD:9 SCORE:10 RULE: lemma=% afun=AuxG => trans=A(B)->B(A)
+GOOD:31 BAD:21 SCORE:10 RULE: ptag=VB cfunc=RHEM+RSTR+RSTR => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:11 BAD:1 SCORE:10 RULE: ptag=Dg cfunc=RHEM => trans=-
+GOOD:10 BAD:0 SCORE:10 RULE: plemma=, rfunc=PRED cfunc=EFF+EFF => trans=A(B,C)->C(*(B))+Pred:COMPL|0
+GOOD:36 BAD:26 SCORE:10 RULE: func=ACT pafun=Obj cafun=AuxZ+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:16 BAD:6 SCORE:10 RULE: afun=Obj rtag=--- cafun=AuxZ+Atr+Coord => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:43 BAD:33 SCORE:10 RULE: afun=Adv func=LOC cfunc=RHEM+RSTR => trans=-
+GOOD:14 BAD:4 SCORE:10 RULE: tag=J^ func=CONJ ptag=C= pfunc=RSTR => trans=A(B)->B(A)
+GOOD:16 BAD:6 SCORE:10 RULE: tag=N3 afun=Obj rtag=--- cafun=AuxZ+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:10 BAD:0 SCORE:10 RULE: tag=NX afun=Atr ptag=NX pfunc=MAT ltag=--- => trans=A(B)->B(A)
+GOOD:14 BAD:4 SCORE:10 RULE: lemma=hodina ptag=C= ltag=--- ctag=--- cfunc=--- => trans=A(B)->B(A)
+GOOD:10 BAD:1 SCORE:9 RULE: cfunc=FPHR => trans=-
+GOOD:23 BAD:14 SCORE:9 RULE: lemma=ani¾ func=CONJ => trans=A(B)->B(A)
+GOOD:12 BAD:3 SCORE:9 RULE: tag=Dg cafun=Atr+ExD => trans=A(B(C,D))->A(C(B(a(D))))+Atr+ExD;CPR
+GOOD:15 BAD:6 SCORE:9 RULE: lemma=ten plemma=bıt => trans=-
+GOOD:10 BAD:1 SCORE:9 RULE: func=CPR ptag=Dg rafun=Atr => trans=A(B,C)->A(B(C))+Atr
+GOOD:12 BAD:3 SCORE:9 RULE: plemma=- rtag=--- ltag=C=+C= => trans=A(B)->B(A)
+GOOD:24 BAD:15 SCORE:9 RULE: tag=Dg ptag=Vp cafun=ExD => trans=A(B(C))->A(B(a(C)))+ExD;CPR
+GOOD:14 BAD:5 SCORE:9 RULE: afun=Atr func=RSTR ptag=C1 rfunc=ACT => trans=A(B,C)->C(A,B)+Atr
+GOOD:13 BAD:4 SCORE:9 RULE: tag=VB func=EFF plemma=, rafun=Pred => trans=A(B,C)->C(*(B))+Pred:COMPL|0
+GOOD:11 BAD:2 SCORE:9 RULE: lemma=tak func=MANN ptag=Vf rafun=Adv => trans=A(B)->A|#
+GOOD:15 BAD:6 SCORE:9 RULE: ptag=Vf pafun=Sb rtag=--- cafun=AuxZ+Atr+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:15 BAD:6 SCORE:9 RULE: pafun=Sb pfunc=PAT rafun=--- ltag=--- => trans=-
+GOOD:8 BAD:0 SCORE:8 RULE: plemma=###### rfunc=CONJ+EXT => trans=A(B,C,D)->A(*(B,C,D))+Coord+ExD:PRED
+GOOD:8 BAD:0 SCORE:8 RULE: pfunc=DENOM rfunc=DENOM+DENOM => trans=A(B,C,D)->*(A,B,C,D)+ExD+ExD:CONJ
+GOOD:8 BAD:0 SCORE:8 RULE: lemma=dopis plemma=, => trans=A(B(C),D)->B(C(D))+Atr+ExD|0
+GOOD:15 BAD:7 SCORE:8 RULE: afun=Atr cfunc=COMPL => trans=-
+GOOD:8 BAD:0 SCORE:8 RULE: func=CONJ plemma=###### rtag=NX => trans=A(B,C)->A(B(C))+ExD
+GOOD:13 BAD:5 SCORE:8 RULE: tag=J, func=APPS pafun=Sb => trans=A(B)->B(A)
+GOOD:27 BAD:19 SCORE:8 RULE: tag=N7 pfunc=PRED cafun=AuxZ+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:9 BAD:1 SCORE:8 RULE: lemma=rok ptag=VB => trans=-
+GOOD:9 BAD:1 SCORE:8 RULE: pfunc=CONJ ltag=N2 cafun=AuxZ+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:27 BAD:19 SCORE:8 RULE: afun=Sb rtag=--- cafun=AuxZ+Atr+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:9 BAD:1 SCORE:8 RULE: tag=N6 func=LOC pafun=Coord => trans=-
+GOOD:14 BAD:6 SCORE:8 RULE: afun=AuxZ func=EXT ptag=N2 rfunc=RSTR => trans=A(B,C)->A(C(B))+Atr
+GOOD:9 BAD:1 SCORE:8 RULE: lemma=tak func=EXT rtag=VB ltag=--- => trans=A(B,C)->A(B(C))+Adv
+GOOD:9 BAD:1 SCORE:8 RULE: tag=Dg plemma=###### rafun=ExD ltag=--- => trans=A(B,C)->A(*(B,C))+ExD:PRED
+GOOD:10 BAD:2 SCORE:8 RULE: func=PAT pafun=AuxS rafun=ExD ltag=--- => trans=A(B,C)->A(*(B,C))+ExD:PRED
+GOOD:9 BAD:1 SCORE:8 RULE: afun=Atr func=FPHR ptag=Z: rfunc=FPHR => trans=A(B,C)->*(A,B,C)+Atr:ID
+GOOD:15 BAD:7 SCORE:8 RULE: afun=Atr ptag=J^ rtag=--- cfunc=CM => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:13 BAD:5 SCORE:8 RULE: tag=AX pafun=Adv pfunc=FPHR rtag=--- ltag=--- => trans=A(B)->*(A,B):LOC
+GOOD:12 BAD:4 SCORE:8 RULE: func=CPR pafun=Adv rtag=--- ltag=--- cafun=--- => trans=-
+GOOD:7 BAD:0 SCORE:7 RULE: plemma=pøípadnì => trans=-
+GOOD:8 BAD:1 SCORE:7 RULE: plemma=- rfunc=TWHEN+LOC => trans=A(B,C,D)->*(B,C,D)+ExD+ExD:PRED|0
+GOOD:8 BAD:1 SCORE:7 RULE: lemma=tak¾e pfunc=EFF => trans=A(B)->B(A)
+GOOD:7 BAD:0 SCORE:7 RULE: plemma=a ltag=N4+C4 => trans=A(B)->B(A)
+GOOD:9 BAD:2 SCORE:7 RULE: ctag=Db+J^ cfunc=RHEM+RHEM => trans=A(B(C,D))->A(B,C,D)+AuxZ+AuxZ
+GOOD:10 BAD:3 SCORE:7 RULE: rtag=--- cafun=AuxX+Atr => trans=A(B(C))->C(A,B)+AuxX
+GOOD:8 BAD:1 SCORE:7 RULE: pfunc=PREC cfunc=PRED+CM+PRED => trans=A(B(C))->B(C(A))+Pred
+GOOD:8 BAD:1 SCORE:7 RULE: pafun=Pred cfunc=RHEM+DIR1 => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:8 BAD:1 SCORE:7 RULE: func=PAT cafun=AuxZ+Coord+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:9 BAD:2 SCORE:7 RULE: lafun=Obj cafun=AuxZ+Atr+Atr+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:8 BAD:1 SCORE:7 RULE: afun=Sb cfunc=COMPL+RSTR => trans=A(B(C))->A(B,C)+Atv
+GOOD:7 BAD:0 SCORE:7 RULE: ltag=--- cafun=Sb+Sb+Atv => trans=A(B(C))->A(B,C)+Atv
+GOOD:10 BAD:3 SCORE:7 RULE: plemma=znamenat rfunc=--- => trans=-
+GOOD:17 BAD:10 SCORE:7 RULE: rtag=C= cfunc=--- => trans=-
+GOOD:8 BAD:1 SCORE:7 RULE: lemma=program rafun=--- => trans=-
+GOOD:9 BAD:2 SCORE:7 RULE: afun=Adv func=DIFF => trans=-
+GOOD:7 BAD:0 SCORE:7 RULE: lemma=a ptag=N1 => trans=-
+GOOD:8 BAD:1 SCORE:7 RULE: pfunc=PRED cfunc=EXT+RSTR => trans=-
+GOOD:9 BAD:2 SCORE:7 RULE: tag=C= rfunc=PAT => trans=-
+GOOD:11 BAD:4 SCORE:7 RULE: lemma=bıt ptag=J^ rafun=ExD+ExD => trans=A(B,C,D)->A(B,b(C,D))+ExD+ExD;@
+GOOD:8 BAD:1 SCORE:7 RULE: plemma=###### rfunc=LOC+TTILL ltag=--- => trans=A(B,C,D)->A(*(B,C,D))+ExD+ExD:PRED
+GOOD:7 BAD:0 SCORE:7 RULE: plemma=: rtag=C= ctag=N4 => trans=A(B,C(D))->A(B(D),C)+Pnom+Atr
+GOOD:9 BAD:2 SCORE:7 RULE: ltag=N2 cafun=AuxZ cfunc=RHEM => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:9 BAD:2 SCORE:7 RULE: tag=N6 lafun=Obj+Sb cafun=AuxZ+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:7 BAD:0 SCORE:7 RULE: func=ACT lafun=Adv cafun=AuxZ+Atr+Atr+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:16 BAD:9 SCORE:7 RULE: ptag=Vf pfunc=ACT cfunc=RHEM+RSTR => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:17 BAD:10 SCORE:7 RULE: func=MANN pafun=Obj cafun=ExD => trans=A(B(C))->A(B(a(C)))+ExD;CPR
+GOOD:7 BAD:0 SCORE:7 RULE: plemma=mít ltag=N1 cafun=AuxZ+Atr => trans=-
+GOOD:9 BAD:2 SCORE:7 RULE: func=FPHR pafun=Atr rafun=Atr+Atr+Atr ltag=--- => trans=A(B,C,D,E)->*(A,B,C,D,E)+Atr+Atr+Atr:ID
+GOOD:15 BAD:8 SCORE:7 RULE: func=FPHR pafun=Atr rafun=Atr+Atr ltag=--- => trans=A(B,C,D)->*(A,B,C,D)+Atr+Atr:ID
+GOOD:11 BAD:4 SCORE:7 RULE: func=ACMP pafun=AuxS rafun=--- ltag=--- => trans=A(B)->A(*(B)):PRED
+GOOD:12 BAD:5 SCORE:7 RULE: func=ACT ptag=VB ltag=--- cafun=AuxZ+Atr+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:11 BAD:4 SCORE:7 RULE: tag=NX ptag=C= pfunc=PAR rtag=--- ltag=--- => trans=A(B)->B(A)
+GOOD:10 BAD:3 SCORE:7 RULE: afun=ExD pafun=Coord rtag=--- ltag=--- ctag=--- => trans=A(B)->*(A,B):PRED
+GOOD:29 BAD:22 SCORE:7 RULE: tag=N1 pafun=Atr pfunc=FPHR rtag=--- ltag=--- => trans=A(B)->*(A,B):ID
+GOOD:13 BAD:4 SCORE:9 RULE: tag=N1 func=RSTR pafun=Atr => trans=-
+GOOD:7 BAD:0 SCORE:7 RULE: lemma=a pfunc=APP rtag=A2 ltag=--- ctag=A2+A2 => trans=A(B(C,D),E)->B(A(D),E,a(C))+Atr+Atr+Atr;@
+GOOD:7 BAD:0 SCORE:7 RULE: afun=Atr pafun=Coord rtag=--- ltag=--- ctag=--- => trans=-
+GOOD:7 BAD:1 SCORE:6 RULE: cfunc=RHEM+PAT+PAT+PAT+PAT => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:7 BAD:1 SCORE:6 RULE: lemma=od ptag=N6 => trans=A(B,C(D))->A(C(B(D)))+Atr+Atr
+GOOD:8 BAD:2 SCORE:6 RULE: lemma=mo¾nı afun=Adv => trans=A(B)->A(*(B)):COND
+GOOD:6 BAD:0 SCORE:6 RULE: pafun=Pred cfunc=RHEM+PAT+PAT+PAT => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:7 BAD:1 SCORE:6 RULE: lafun=Adv cfunc=RHEM+CONJ => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:7 BAD:1 SCORE:6 RULE: pafun=Pnom cfunc=RHEM+RSTR => trans=-
+GOOD:7 BAD:1 SCORE:6 RULE: plemma=Open rfunc=--- => trans=-
+GOOD:10 BAD:4 SCORE:6 RULE: lemma=minuta afun=Adv => trans=-
+GOOD:9 BAD:3 SCORE:6 RULE: ctag=Db+C6 => trans=-
+GOOD:7 BAD:1 SCORE:6 RULE: afun=ExD ctag=Db => trans=-
+GOOD:9 BAD:3 SCORE:6 RULE: lemma=a pfunc=BEN => trans=-
+GOOD:7 BAD:1 SCORE:6 RULE: afun=Pred func=PRED rfunc=DENOM+PAT => trans=A(B,C,D)->A(B,b(C,D))+ExD+ExD;@
+GOOD:6 BAD:0 SCORE:6 RULE: tag=N6 plemma=###### rtag=N1 => trans=A(B,C)->A(*(B,C))+ExD:PRED
+GOOD:6 BAD:0 SCORE:6 RULE: lemma=oba afun=ExD pafun=Coord => trans=A(B,C)->A(*(B,C))+ExD:PAR
+GOOD:8 BAD:2 SCORE:6 RULE: afun=AuxY func=FPHR ltag=--- => trans=A(B)->*(A,B):ID
+GOOD:11 BAD:5 SCORE:6 RULE: tag=N7 pfunc=PAT cafun=AuxZ+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:12 BAD:6 SCORE:6 RULE: pfunc=EFF ltag=--- cafun=AuxZ+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:7 BAD:1 SCORE:6 RULE: afun=Obj ptag=Vp cafun=Atv+Atr+Atr => trans=A(B(C))->A(B,C)+Atv
+GOOD:9 BAD:3 SCORE:6 RULE: func=LOC ptag=Vs rafun=--- => trans=-
+GOOD:6 BAD:0 SCORE:6 RULE: afun=Atr pafun=Sb cfunc=ACT => trans=-
+GOOD:7 BAD:1 SCORE:6 RULE: tag=N2 afun=Atr ptag=C= rtag=N2 => trans=A(B,C)->B(A,C)+Atr
+GOOD:9 BAD:3 SCORE:6 RULE: afun=Atr pfunc=OPER rtag=--- lfunc=RSTR+RSTR+EXT => trans=A(B)->B(A)
+GOOD:6 BAD:0 SCORE:6 RULE: tag=N2 afun=Atr ptag=Dg rtag=VB => trans=A(B)->B(A)
+GOOD:15 BAD:9 SCORE:6 RULE: tag=N2 func=RSTR ptag=C1 pfunc=RSTR => trans=A(B)->B(A)
+GOOD:15 BAD:9 SCORE:6 RULE: afun=Sb pfunc=GRAD rtag=N1 lfunc=--- => trans=A(B(C),D(E))->A(B,C,D,E)+AuxZ+Sb+AuxZ
+GOOD:7 BAD:1 SCORE:6 RULE: func=PAT plemma=a ltag=--- => trans=-
+GOOD:9 BAD:3 SCORE:6 RULE: ptag=J^ pafun=Coord ltag=--- cafun=Pred+Coord => trans=A(B(C))->B(C(A))+Pred
+GOOD:14 BAD:8 SCORE:6 RULE: lemma=pouze pfunc=RSTR rtag=N2 ltag=--- ctag=--- => trans=A(B,C)->C(A,B)+Atr
+GOOD:6 BAD:0 SCORE:6 RULE: func=PREC ptag=## rtag=--- ltag=--- cfunc=--- => trans=A(B)->A(*(B)):PRED
+GOOD:6 BAD:0 SCORE:6 RULE: tag=AC afun=ExD ptag=Vp pfunc=PRED ltag=--- => trans=A(B)->A(*(B)):PAR
+GOOD:10 BAD:4 SCORE:6 RULE: lemma=a pafun=Atr rtag=--- ltag=--- cfunc=RSTR+RSTR+RSTR => trans=A(B(C,D,E))->B(A(E),a(C),a(D))+Atr+Atr+Atr;@+@
+GOOD:5 BAD:0 SCORE:5 RULE: cafun=Atv+Obj+Obj => trans=A(B(C))->A(B,C)+Atv
+GOOD:5 BAD:0 SCORE:5 RULE: cfunc=EXT+RSTR+APP => trans=-
+GOOD:5 BAD:0 SCORE:5 RULE: plemma=610 => trans=-
+GOOD:5 BAD:0 SCORE:5 RULE: plemma=D => trans=-
+GOOD:5 BAD:0 SCORE:5 RULE: plemma=###### rtag=NX+N1 => trans=A(B,C,D)->A(*(C(B),D))+ExD+ExD:CONJ
+GOOD:9 BAD:4 SCORE:5 RULE: pafun=Apos rafun=AuxY+Coord => trans=A(B,C)->C(A,B)+AuxY
+GOOD:5 BAD:0 SCORE:5 RULE: lemma=rozhodèí rafun=AuxG => trans=A(B,C)->C(A,B)+AuxG
+GOOD:6 BAD:1 SCORE:5 RULE: func=EXT rfunc=RSTR+APP => trans=A(B,C)->A(C(B))+Atr
+GOOD:8 BAD:3 SCORE:5 RULE: afun=Atr plemma=pøíli¹ => trans=A(B)->B(A)
+GOOD:8 BAD:3 SCORE:5 RULE: func=APPS cafun=Atr => trans=A(B)->B(A)
+GOOD:6 BAD:1 SCORE:5 RULE: lemma=tak¾e ptag=Vs => trans=A(B)->B(A)
+GOOD:8 BAD:3 SCORE:5 RULE: func=COMPL pfunc=DENOM => trans=A(B)->*(A,B):PRED
+GOOD:5 BAD:0 SCORE:5 RULE: lemma=Pro plemma=Thalia => trans=A(B)->*(A,B):ID
+GOOD:5 BAD:0 SCORE:5 RULE: cafun=Atr+AuxZ cfunc=ACT+RHEM => trans=A(B(C,D))->A(B,C,D)+Atr+AuxZ
+GOOD:7 BAD:2 SCORE:5 RULE: afun=Adv cfunc=RHEM+CPR => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:7 BAD:2 SCORE:5 RULE: func=CONJ cafun=AuxZ+Adv+Adv+Adv => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:6 BAD:1 SCORE:5 RULE: lfunc=PAT ctag=Db+A4 => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:8 BAD:3 SCORE:5 RULE: ptag=Vf cfunc=RHEM+ACT => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:5 BAD:0 SCORE:5 RULE: ptag=VB cfunc=RHEM+LOC => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:5 BAD:0 SCORE:5 RULE: func=EXT ctag=N3 => trans=A(B(C))->A(B,C)+Adv
+GOOD:6 BAD:1 SCORE:5 RULE: lemma=a plemma=banka => trans=-
+GOOD:5 BAD:0 SCORE:5 RULE: lemma=mìsíc afun=Adv => trans=-
+GOOD:7 BAD:2 SCORE:5 RULE: func=TTILL cafun=--- => trans=-
+GOOD:7 BAD:2 SCORE:5 RULE: lemma=bıt pfunc=PAT => trans=-
+GOOD:5 BAD:0 SCORE:5 RULE: afun=Pred rafun=ExD+ExD+Pred ltag=--- => trans=A(B,C,D)->A(B,b(C,D))+ExD+ExD;@
+GOOD:6 BAD:1 SCORE:5 RULE: afun=ExD plemma=###### rtag=Db+N7 => trans=A(B,C,D)->A(*(B,C,D))+ExD+ExD:PRED
+GOOD:5 BAD:0 SCORE:5 RULE: tag=N1 func=PAT rtag=Vs+Vp => trans=A(B,C)->A(C(B))+Pred
+GOOD:7 BAD:2 SCORE:5 RULE: plemma=a rtag=Vs+VB rafun=Pred+Pred => trans=A(B,C)->A(C(B))+Pred
+GOOD:6 BAD:1 SCORE:5 RULE: func=ACT pfunc=CONJ rafun=Pnom+Pred => trans=A(B,C)->A(C(B))+Pnom
+GOOD:5 BAD:0 SCORE:5 RULE: tag=N1 plemma=###### rfunc=ORIG => trans=A(B,C)->A(B(*(C)))+ExD:PAR
+GOOD:6 BAD:1 SCORE:5 RULE: plemma=###### rfunc=MANN ltag=--- => trans=A(B,C)->A(*(B,C))+ExD:PRED
+GOOD:5 BAD:0 SCORE:5 RULE: lemma=foto ptag=## rafun=Coord => trans=A(B,C)->A(*(B,C))+Coord:PRED
+GOOD:6 BAD:1 SCORE:5 RULE: afun=AuxY func=FPHR rfunc=FPHR => trans=A(B,C)->*(A,B,C)+AuxY:ID
+GOOD:18 BAD:13 SCORE:5 RULE: ltag=NX => trans=-
+GOOD:10 BAD:4 SCORE:6 RULE: afun=Sb ptag=VB rtag=--- cfunc=RHEM+RSTR => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:6 BAD:1 SCORE:5 RULE: pafun=Atr cfunc=RHEM+APP => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:5 BAD:0 SCORE:5 RULE: tag=Z: plemma=###### rafun=Obj => trans=A(B,C(D))->A(D(B,C))+Obj+AuxG
+GOOD:7 BAD:2 SCORE:5 RULE: lemma=èlovìk ptag=C= rafun=--- => trans=A(B)->B(A)
+GOOD:6 BAD:1 SCORE:5 RULE: lfunc=RSTR+RHEM => trans=-
+GOOD:8 BAD:3 SCORE:5 RULE: lfunc=RHEM ctag=--- => trans=-
+GOOD:8 BAD:3 SCORE:5 RULE: lemma=minuta func=THL ctag=--- => trans=A(B)->B(A)
+GOOD:6 BAD:1 SCORE:5 RULE: lemma=tak ptag=Vs rafun=Adv => trans=A(B)->A|#
+GOOD:6 BAD:1 SCORE:5 RULE: afun=ExD func=ACT lafun=Adv+Sb => trans=A(B)->A(*(a(B))):MANN;CPR
+GOOD:6 BAD:1 SCORE:5 RULE: lemma=vlevo afun=ExD pafun=ExD => trans=A(B)->A(*(B)):PAR
+GOOD:6 BAD:1 SCORE:5 RULE: lemma=a plemma=poji¹tìní ltag=--- => trans=A(B(C,D))->B(A(D),a(C))+Atr+Atr;@
+GOOD:5 BAD:0 SCORE:5 RULE: func=ACT pfunc=PRED cafun=AuxZ+AuxZ+Atr => trans=A(B(C,D))->A(B,C,D)+AuxZ+AuxZ
+GOOD:5 BAD:0 SCORE:5 RULE: func=LOC plemma=ale ctag=TT => trans=A(B(C),D(E))->A(B,C,D,E)+AuxZ+Adv+AuxZ
+GOOD:6 BAD:1 SCORE:5 RULE: func=PAT pfunc=DISJ cafun=AuxZ => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:6 BAD:1 SCORE:5 RULE: pafun=Pred rtag=--- cafun=AuxZ+Atr+Atr+Atr+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:6 BAD:1 SCORE:5 RULE: tag=A2 pfunc=CONJ cafun=AuxZ => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:6 BAD:1 SCORE:5 RULE: pafun=Pred rtag=--- cfunc=RHEM+APPS => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:9 BAD:4 SCORE:5 RULE: pfunc=CONJ ltag=N1 cafun=AuxZ+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:5 BAD:0 SCORE:5 RULE: afun=Obj ltag=N3 cafun=AuxZ => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:5 BAD:0 SCORE:5 RULE: afun=Atr func=DIR3 cafun=AuxZ+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:5 BAD:0 SCORE:5 RULE: tag=N3 afun=Obj cafun=AuxZ+Atr+Atr+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:5 BAD:0 SCORE:5 RULE: lemma=málo func=PAT ctag=N2 => trans=A(B(C))->A(B,C)+Atr
+GOOD:22 BAD:17 SCORE:5 RULE: afun=Adv cafun=Adv cfunc=RHEM => trans=A(B(C))->A(B,C)+Adv
+GOOD:7 BAD:2 SCORE:5 RULE: afun=Atr cafun=Adv cfunc=CM => trans=A(B(C))->A(B,C)+Adv
+GOOD:8 BAD:3 SCORE:5 RULE: func=RHEM pfunc=PRED cafun=ExD => trans=A(B(C))->A(B(a(C)))+ExD;CPR
+GOOD:5 BAD:0 SCORE:5 RULE: lemma=hodnì ltag=P1 cfunc=RSTR+TWHEN => trans=A(B(C(D),E))->A(B(D(C),a(E)))+Adv+Atr+ExD;CPR
+GOOD:5 BAD:0 SCORE:5 RULE: func=RHEM pafun=Adv cafun=AuxZ => trans=-
+GOOD:5 BAD:0 SCORE:5 RULE: tag=N6 lafun=Sb+Adv cafun=AuxZ => trans=-
+GOOD:7 BAD:2 SCORE:5 RULE: tag=N7 afun=Pnom ltag=--- => trans=-
+GOOD:5 BAD:0 SCORE:5 RULE: ptag=N2 pfunc=RSTR cafun=Atr+Atr => trans=-
+GOOD:7 BAD:2 SCORE:5 RULE: tag=A7 rtag=--- cfunc=RHEM => trans=-
+GOOD:5 BAD:0 SCORE:5 RULE: lemma=stupeò func=RSTR ctag=NX => trans=-
+GOOD:6 BAD:1 SCORE:5 RULE: func=LOC pafun=AuxS rafun=ExD+ExD ltag=--- => trans=A(B,C,D)->A(*(B,C,D))+ExD+ExD:PRED
+GOOD:5 BAD:0 SCORE:5 RULE: func=PREC pafun=Coord rafun=Pred+Pred ltag=--- => trans=A(B,C)->A(C(B))+Pred
+GOOD:6 BAD:1 SCORE:5 RULE: tag=N2 plemma=###### rafun=ExD ltag=--- => trans=A(B,C)->A(*(B,C))+ExD:PRED
+GOOD:17 BAD:12 SCORE:5 RULE: tag=N2 func=RSTR ptag=C= pafun=ExD => trans=A(B)->B(A)
+GOOD:7 BAD:2 SCORE:5 RULE: afun=Atr func=RSTR plemma=jedinı ltag=--- => trans=A(B)->*(A,B):PAT
+GOOD:6 BAD:1 SCORE:5 RULE: func=PAT ptag=Vf pfunc=RSTR cfunc=RHEM+RSTR => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:8 BAD:3 SCORE:5 RULE: func=PAT ptag=Vp rtag=--- cafun=Atv+Atr => trans=A(B(C))->A(B,C)+Atv
+GOOD:13 BAD:8 SCORE:5 RULE: ptag=N2 pafun=Atr rtag=--- cafun=AuxZ => trans=-
+GOOD:5 BAD:0 SCORE:5 RULE: tag=A2 afun=Atr ptag=C4 rtag=--- => trans=-
+GOOD:11 BAD:6 SCORE:5 RULE: lemma=je¹tì pfunc=RSTR rtag=N2 ltag=--- ctag=--- => trans=A(B,C)->C(A,B)+Atr
+GOOD:6 BAD:1 SCORE:5 RULE: tag=N2 pafun=Pnom pfunc=RSTR rtag=--- ltag=--- => trans=A(B)->B(A)
+GOOD:8 BAD:3 SCORE:5 RULE: afun=AuxG ptag=AX pfunc=RSTR rtag=--- ltag=--- => trans=A(B)->A|0
+GOOD:9 BAD:4 SCORE:5 RULE: afun=ExD pafun=AuxS rtag=--- ltag=--- ctag=A4 => trans=A(B)->A(*(B)):PRED
+GOOD:6 BAD:1 SCORE:5 RULE: lemma=osobnì ptag=VB ltag=--- ctag=--- cfunc=--- => trans=A(B)->A(*(B)):ACT
+GOOD:5 BAD:1 SCORE:4 RULE: plemma=souèasnì => trans=A(B)->B|B
+GOOD:6 BAD:2 SCORE:4 RULE: cfunc=RHEM+RSTR+RSTR+CONJ => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:4 BAD:0 SCORE:4 RULE: cfunc=FPHR+FPHR => trans=-
+GOOD:4 BAD:0 SCORE:4 RULE: cfunc=EXT+RSTR+MAT => trans=-
+GOOD:5 BAD:1 SCORE:4 RULE: plemma=14.5 => trans=-
+GOOD:4 BAD:0 SCORE:4 RULE: ctag=J^+C6 => trans=-
+GOOD:5 BAD:1 SCORE:4 RULE: ctag=TT+A4+N2 => trans=-
+GOOD:5 BAD:1 SCORE:4 RULE: ctag=Db+C1 => trans=-
+GOOD:4 BAD:0 SCORE:4 RULE: lfunc=PAT+CM => trans=-
+GOOD:4 BAD:0 SCORE:4 RULE: lafun=Pnom+Sb+Adv => trans=-
+GOOD:4 BAD:0 SCORE:4 RULE: rtag=J,+N1 lfunc=--- => trans=A(B,C,D)->C(A,B,D)+AuxY+Sb
+GOOD:4 BAD:0 SCORE:4 RULE: lemma=divák rafun=ExD+ExD => trans=A(B,C,D)->A(C(B,D))+ExD+ExD
+GOOD:4 BAD:0 SCORE:4 RULE: plemma=###### rtag=Db+A1 => trans=A(B,C,D)->A(*(B,C,D))+ExD+ExD:PRED
+GOOD:6 BAD:2 SCORE:4 RULE: lemma=milión rtag=NX => trans=A(B,C)->B(A,C)+Atr
+GOOD:4 BAD:0 SCORE:4 RULE: lemma=kterı rtag=VB+Vs => trans=A(B,C)->A(C(B))+Atr
+GOOD:4 BAD:0 SCORE:4 RULE: lemma=témìø rtag=C= => trans=A(B,C)->A(C(B))+Atr
+GOOD:4 BAD:0 SCORE:4 RULE: lemma=zhruba ptag=N7 => trans=A(B,C)->A(C(B))+Atr
+GOOD:5 BAD:1 SCORE:4 RULE: lemma=natolik rafun=Adv => trans=A(B,C)->A(B(C))+Adv
+GOOD:4 BAD:0 SCORE:4 RULE: lemma=dur cfunc=--- => trans=A(B)->B(A)
+GOOD:4 BAD:0 SCORE:4 RULE: plemma=x ltag=C=+C=+C= => trans=A(B)->B(A)
+GOOD:4 BAD:0 SCORE:4 RULE: pafun=Apos ctag=N1+P1 => trans=A(B)->A(*(B)):DENOM
+GOOD:4 BAD:0 SCORE:4 RULE: lemma=ani plemma=malı => trans=A(B)->*(A,B):EXT
+GOOD:4 BAD:0 SCORE:4 RULE: rtag=--- cfunc=APPS+RSTR+APPS => trans=A(B(C,D))->C(A,B)+AuxX+AuxX|0
+GOOD:4 BAD:0 SCORE:4 RULE: cafun=Adv+ExD cfunc=TWHEN+LOC => trans=A(B(C,D))->A(C,D)+Adv+ExD|0
+GOOD:4 BAD:0 SCORE:4 RULE: ctag=TT+N2 cfunc=CM+PAT => trans=A(B(C),D(E))->A(B,C,D,E)+AuxZ+Obj+AuxZ
+GOOD:4 BAD:0 SCORE:4 RULE: rafun=Obj ctag=TT+A4 => trans=A(B(C),D(E))->A(B,C,D,E)+AuxZ+Obj+AuxZ
+GOOD:4 BAD:0 SCORE:4 RULE: func=PAT cafun=ObjAtr => trans=A(B(C))->A(B,C)+ObjAtr
+GOOD:4 BAD:0 SCORE:4 RULE: afun=Obj cfunc=CM+RSTR+RSTR => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:4 BAD:0 SCORE:4 RULE: pafun=Pnom cafun=AuxZ+Coord => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:4 BAD:0 SCORE:4 RULE: ltag=P1 cafun=AuxZ+Coord => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:7 BAD:3 SCORE:4 RULE: func=CONJ cafun=AuxZ+Sb+Sb+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:5 BAD:1 SCORE:4 RULE: ptag=Vp ctag=Db+N1+N1 => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:4 BAD:0 SCORE:4 RULE: afun=Sb cafun=AuxZ+Atr+Obj => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:4 BAD:0 SCORE:4 RULE: ctag=J^+N2+N2 cafun=AuxZ+Atr+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:4 BAD:0 SCORE:4 RULE: plemma=jít cfunc=RHEM+RSTR => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:4 BAD:0 SCORE:4 RULE: pfunc=CPHR cfunc=RHEM+PAT => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:4 BAD:0 SCORE:4 RULE: pfunc=PRED cfunc=RHEM+APP+CONJ => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:4 BAD:0 SCORE:4 RULE: ptag=Vp cfunc=RHEM+RSTR+LOC => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:5 BAD:1 SCORE:4 RULE: afun=Sb cafun=AuxY+Atr => trans=A(B(C))->A(B,C)+AuxY
+GOOD:5 BAD:1 SCORE:4 RULE: ltag=--- cafun=Atr+Atr+Atr+Atv => trans=A(B(C))->A(B,C)+Atv
+GOOD:5 BAD:1 SCORE:4 RULE: rtag=--- cafun=Atv+Atr+Atr+Atr => trans=A(B(C))->A(B,C)+Atv
+GOOD:4 BAD:0 SCORE:4 RULE: lemma=610 rafun=--- => trans=A(B(C))->A(B,C)+Atr
+GOOD:4 BAD:0 SCORE:4 RULE: lemma=pìt ctag=P2 => trans=A(B(C))->A(B,C)+Atr
+GOOD:4 BAD:0 SCORE:4 RULE: lafun=Atr cfunc=CM+PAT => trans=A(B(C))->A(B,C)+Adv
+GOOD:4 BAD:0 SCORE:4 RULE: afun=Pnom ctag=C=+N1 => trans=A(B(C(D),E))->A(B(D(C),a(E,b)))+Adv+Atr+ExD;CPR+@
+GOOD:4 BAD:0 SCORE:4 RULE: lemma=tak plemma=###### => trans=-
+GOOD:7 BAD:3 SCORE:4 RULE: pfunc=PRED lfunc=RSTR => trans=-
+GOOD:5 BAD:1 SCORE:4 RULE: lemma=závod rafun=--- => trans=-
+GOOD:4 BAD:0 SCORE:4 RULE: func=RSTR cafun=AuxZ+Atr+Atr => trans=-
+GOOD:4 BAD:0 SCORE:4 RULE: pafun=Obj ctag=J^+A1+N2 => trans=-
+GOOD:6 BAD:2 SCORE:4 RULE: lafun=Pnom+Sb cafun=AuxZ+Atr => trans=-
+GOOD:4 BAD:0 SCORE:4 RULE: lafun=Pnom+Adv cfunc=RHEM+RSTR => trans=-
+GOOD:6 BAD:2 SCORE:4 RULE: lafun=Adv cfunc=RHEM+RSTR+PAT => trans=-
+GOOD:5 BAD:1 SCORE:4 RULE: pfunc=RSTR cafun=Atv+Atr => trans=-
+GOOD:4 BAD:0 SCORE:4 RULE: plemma=1.8 ltag=--- => trans=-
+GOOD:4 BAD:0 SCORE:4 RULE: lfunc=--- ctag=Db+A1+A1 => trans=-
+GOOD:4 BAD:0 SCORE:4 RULE: rtag=N1 ctag=Db+C= => trans=-
+GOOD:4 BAD:0 SCORE:4 RULE: tag=C4 cfunc=RHEM+PAT => trans=-
+GOOD:5 BAD:1 SCORE:4 RULE: func=MAT pafun=Adv => trans=-
+GOOD:4 BAD:0 SCORE:4 RULE: lemma=dùvod func=ACT => trans=-
+GOOD:4 BAD:0 SCORE:4 RULE: func=APP ptag=C= => trans=-
+GOOD:7 BAD:3 SCORE:4 RULE: rtag=N2 lfunc=ACT => trans=-
+GOOD:4 BAD:0 SCORE:4 RULE: pfunc=ACT cfunc=ACT+PAT => trans=-
+GOOD:4 BAD:0 SCORE:4 RULE: pfunc=DIFF rfunc=--- => trans=-
+GOOD:6 BAD:2 SCORE:4 RULE: tag=N7 plemma=uzavøít rafun=Obj => trans=A(B,C)->A(C(B))+Obj
+GOOD:4 BAD:0 SCORE:4 RULE: rtag=N1+Vp lfunc=--- ctag=N4 => trans=A(B,C)->A(B(C))+Sb
+GOOD:4 BAD:0 SCORE:4 RULE: plemma=###### rfunc=COND ltag=--- => trans=A(B,C)->A(*(B,C))+ExD:PRED
+GOOD:4 BAD:0 SCORE:4 RULE: plemma=###### rfunc=ID ltag=--- => trans=A(B,C)->A(*(*(C),B))+ExD:PRED+ACT
+GOOD:4 BAD:0 SCORE:4 RULE: func=FPHR ptag=N1 rafun=AuxG => trans=A(B,C)->*(A,B,C)+AuxG:ID
+GOOD:4 BAD:0 SCORE:4 RULE: plemma=35 rtag=--- ltag=--- => trans=A(B)->B(A)
+GOOD:4 BAD:0 SCORE:4 RULE: tag=Z: afun=ExD rtag=NX => trans=A(B)->B(A)
+GOOD:6 BAD:2 SCORE:4 RULE: afun=AuxC ptag=VB ctag=Vf => trans=A(B)->B(A)
+GOOD:4 BAD:0 SCORE:4 RULE: lafun=Coord+Adv => trans=-
+GOOD:4 BAD:0 SCORE:4 RULE: afun=Obj func=PAT ptag=C= => trans=A(B)->B(A)
+GOOD:4 BAD:0 SCORE:4 RULE: lemma=a ltag=--- cfunc=APP+RSTR => trans=A(B(C,D))->B(A(D),a(C))+Atr+Atr;@
+GOOD:4 BAD:0 SCORE:4 RULE: func=RSTR ptag=Vf cfunc=RHEM+ACT => trans=A(B(C,D))->A(C,D(B))+AuxZ+Atr
+GOOD:4 BAD:0 SCORE:4 RULE: tag=Z: pfunc=PRED cafun=AuxZ+Obj+Obj => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:5 BAD:1 SCORE:4 RULE: afun=Atr ptag=N2 cafun=Adv+AuxZ => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:4 BAD:0 SCORE:4 RULE: tag=J^ ptag=VB cafun=AuxZ+Sb+Sb+Sb+Sb+Sb => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:4 BAD:0 SCORE:4 RULE: pfunc=EFF ltag=P1 cafun=AuxZ+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:5 BAD:1 SCORE:4 RULE: pfunc=CONJ ltag=N7 cafun=AuxZ+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:6 BAD:2 SCORE:4 RULE: afun=Adv func=TWHEN cfunc=RHEM+RSTR+APP => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:4 BAD:0 SCORE:4 RULE: tag=N6 ptag=N4 ctag=Db+A6 => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:4 BAD:0 SCORE:4 RULE: afun=Adv cafun=AuxY+Atr cfunc=RHEM+RSTR => trans=A(B(C))->A(B,C)+AuxY
+GOOD:4 BAD:0 SCORE:4 RULE: tag=P4 plemma=mít cfunc=PAT => trans=A(B(C))->A(B,C)+Atr
+GOOD:6 BAD:2 SCORE:4 RULE: afun=Adv func=MANN cafun=Adv+ExD => trans=A(B(C))->A(B(a(C)))+ExD;CPR
+GOOD:5 BAD:1 SCORE:4 RULE: pafun=Pred rtag=--- ltag=Db+Db => trans=-
+GOOD:4 BAD:0 SCORE:4 RULE: afun=Sb ptag=VB ctag=TT => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:5 BAD:1 SCORE:4 RULE: func=LOC pfunc=PRED cafun=AuxZ+Atr+Atr+Atr => trans=-
+GOOD:4 BAD:0 SCORE:4 RULE: func=ACT plemma=###### rtag=Z: => trans=-
+GOOD:7 BAD:3 SCORE:4 RULE: pafun=Atr rtag=N2 cafun=--- => trans=-
+GOOD:4 BAD:0 SCORE:4 RULE: func=PREC ptag=J^ rafun=--- => trans=-
+GOOD:12 BAD:8 SCORE:4 RULE: tag=N4 ltag=P1 cafun=AuxZ+Atr => trans=-
+GOOD:4 BAD:0 SCORE:4 RULE: func=CONJ pafun=Coord cafun=AuxZ+Adv+Adv => trans=-
+GOOD:4 BAD:0 SCORE:4 RULE: tag=C= ptag=Z: cafun=--- => trans=-
+GOOD:8 BAD:4 SCORE:4 RULE: tag=N4 ptag=VB cafun=AuxZ+Atr+Atr+Atr => trans=-
+GOOD:5 BAD:1 SCORE:4 RULE: tag=A1 ltag=--- ctag=J^ => trans=-
+GOOD:7 BAD:3 SCORE:4 RULE: func=ACT pafun=Obj ctag=P1 => trans=-
+GOOD:5 BAD:1 SCORE:4 RULE: ptag=Vp ctag=N4 cfunc=PAT => trans=-
+GOOD:5 BAD:1 SCORE:4 RULE: tag=A1 pfunc=RSTR lafun=--- => trans=-
+GOOD:4 BAD:0 SCORE:4 RULE: lemma=tady ptag=VB pfunc=PRED => trans=-
+GOOD:4 BAD:0 SCORE:4 RULE: afun=Obj func=CPHR lafun=Obj => trans=-
+GOOD:6 BAD:2 SCORE:4 RULE: func=PAT ptag=VB cfunc=RHEM+ACT => trans=-
+GOOD:9 BAD:5 SCORE:4 RULE: tag=N4 ptag=VB ctag=Db+N2 => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:7 BAD:1 SCORE:6 RULE: cfunc=EXT+MAT => trans=-
+GOOD:4 BAD:0 SCORE:4 RULE: tag=A6 func=RSTR pafun=Atr => trans=-
+GOOD:4 BAD:0 SCORE:4 RULE: func=FPHR pafun=Obj rafun=Atr+Atr+Atr ltag=--- => trans=A(B,C,D,E)->*(A,B,C,D,E)+Atr+Atr+Atr:PAT
+GOOD:4 BAD:0 SCORE:4 RULE: tag=J^ plemma=###### rafun=ExD+ExD ltag=--- => trans=A(B,C,D)->A(*(B,C,D))+ExD+ExD:PRED
+GOOD:4 BAD:0 SCORE:4 RULE: afun=Atr ptag=C= rtag=C2 cfunc=--- => trans=A(B,C)->C(A,B)+Atr
+GOOD:4 BAD:0 SCORE:4 RULE: tag=TT func=EXT ptag=N2 pafun=Atr => trans=A(B,C)->A(C(B))+Atr
+GOOD:4 BAD:0 SCORE:4 RULE: afun=Atr pfunc=CONJ rtag=--- lfunc=RSTR+RSTR+EXT => trans=A(B)->B(A)
+GOOD:4 BAD:0 SCORE:4 RULE: afun=ExD func=PAT ptag=C4 rfunc=--- => trans=A(B)->B(A)
+GOOD:7 BAD:3 SCORE:4 RULE: tag=TT plemma=play rafun=--- ltag=--- => trans=A(B)->*(A,B):LOC
+GOOD:8 BAD:4 SCORE:4 RULE: lemma=SF pfunc=FPHR ltag=--- cafun=--- => trans=A(B)->*(A,B):ID
+GOOD:4 BAD:0 SCORE:4 RULE: plemma=firma rtag=--- ltag=--- ctag=A1+A1 => trans=A(B(C,D))->B(A(D),a(C))+Atr+Atr;@
+GOOD:4 BAD:0 SCORE:4 RULE: ptag=N4 pafun=Obj ltag=--- cafun=Atv => trans=A(B(C))->A(B,C)+Atv
+GOOD:4 BAD:0 SCORE:4 RULE: func=DIFF pafun=ExD rafun=--- ltag=--- => trans=-
+GOOD:4 BAD:0 SCORE:4 RULE: tag=N4 afun=Adv rtag=--- cafun=AuxZ+Coord => trans=-
+GOOD:4 BAD:0 SCORE:4 RULE: tag=A2 pafun=Obj pfunc=RSTR rtag=NX ltag=--- => trans=A(B,C)->C(A,B)+Atr
+GOOD:4 BAD:0 SCORE:4 RULE: lemma=co pafun=Coord rtag=N1 ltag=--- cfunc=--- => trans=A(B,C)->*(A,B,C)+ExD:PRED
+GOOD:4 BAD:0 SCORE:4 RULE: afun=Coord ptag=C1 pfunc=RSTR rtag=--- ltag=--- => trans=A(B)->B(A)
+GOOD:5 BAD:1 SCORE:4 RULE: tag=N2 afun=Atr ptag=C= pfunc=EXT ltag=--- => trans=A(B)->B(A)
+GOOD:5 BAD:1 SCORE:4 RULE: tag=R1 pafun=Adv pfunc=FPHR rtag=--- ltag=--- => trans=A(B)->*(A,B):MANN
+GOOD:5 BAD:1 SCORE:4 RULE: func=CONJ rtag=--- ltag=--- ctag=A6+A6+A6 cfunc=RSTR+RSTR+RSTR => trans=A(B(C,D,E))->B(A(E),a(C),a(D))+Atr+Atr+Atr;@+@
+GOOD:4 BAD:0 SCORE:4 RULE: lemma=i pafun=Sb rtag=N2 ltag=--- cfunc=RSTR+RSTR => trans=A(B(C,D),E)->B(A(D),E,a(C))+Atr+Atr+Atr;@
+GOOD:4 BAD:0 SCORE:4 RULE: lemma=èi pafun=Obj rtag=--- ltag=--- cfunc=RSTR+RSTR => trans=A(B(C,D))->B(A(D),a(C))+Atr+Atr;@
+GOOD:7 BAD:3 SCORE:4 RULE: lemma=i pafun=Sb rtag=--- ltag=--- cfunc=RSTR+RSTR => trans=A(B(C,D))->B(A(D),a(C))+Atr+Atr;@
+GOOD:4 BAD:0 SCORE:4 RULE: lemma=a pfunc=LOC rtag=--- ltag=--- ctag=A7+A7 => trans=A(B(C,D))->B(A(D),a(C))+Atr+Atr;@
+GOOD:4 BAD:0 SCORE:4 RULE: lemma=sto pfunc=RSTR rtag=--- ltag=--- ctag=--- => trans=-
+GOOD:4 BAD:0 SCORE:4 RULE: func=PAT ptag=VB rtag=--- ltag=--- cfunc=RHEM+RSTR+RSTR => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: lemma=sic => trans=A(B,C,D)->*(A,B,C,D)+Atr+Atr:DENOM
+GOOD:3 BAD:0 SCORE:3 RULE: plemma=ROM => trans=A(B)->B(A)
+GOOD:4 BAD:1 SCORE:3 RULE: plemma=televizní => trans=A(B)->B(A)
+GOOD:3 BAD:0 SCORE:3 RULE: plemma=112 => trans=A(B)->B(A)
+GOOD:3 BAD:0 SCORE:3 RULE: lemma=Downing => trans=A(B)->*(A,B):DIR1
+GOOD:3 BAD:0 SCORE:3 RULE: plemma=Wyborcza => trans=A(B)->*(A,B):DENOM
+GOOD:3 BAD:0 SCORE:3 RULE: ctag=C=+C=+C=+C= => trans=A(B(C,D,E,F))->B(A(C),a(D),a(E),a(F))+Atr+Atr+Atr+Atr;@+@+@
+GOOD:4 BAD:1 SCORE:3 RULE: cfunc=RHEM+CONJ+RSTR => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:0 SCORE:3 RULE: cfunc=RHEM+ORIG => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:0 SCORE:3 RULE: cfunc=RHEM+AIM => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:0 SCORE:3 RULE: cfunc=RHEM+ACT+ACT+CONJ => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:0 SCORE:3 RULE: cafun=AuxZ+Adv+Adv+Adv+Adv => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:0 SCORE:3 RULE: cafun=AuxZ+Coord+Atr+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:0 SCORE:3 RULE: cafun=Obj+Obj+Atv => trans=A(B(C))->A(B,C)+Atv
+GOOD:3 BAD:0 SCORE:3 RULE: plemma=headline => trans=A(B(C))->*(A,B,C)+Atr:ID
+GOOD:3 BAD:0 SCORE:3 RULE: cfunc=EXT+RSTR+PAT => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: plemma=13.9 => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: plemma=navazovat => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: plemma=vypadat => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: plemma=poskytnout => trans=-
+GOOD:4 BAD:1 SCORE:3 RULE: lemma=Èech => trans=-
+GOOD:4 BAD:1 SCORE:3 RULE: lemma=festival => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: lemma=ètvrtletí => trans=-
+GOOD:4 BAD:1 SCORE:3 RULE: lemma=kam => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: lemma=aspekt => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: lemma=zbo¾í => trans=-
+GOOD:4 BAD:1 SCORE:3 RULE: lemma=pøesto => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: func=GRAD => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: ctag=TT+A3 => trans=-
+GOOD:4 BAD:1 SCORE:3 RULE: ctag=P1+P1 => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: lfunc=CM => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: plemma=###### rfunc=CONJ+EXT+EXT => trans=A(B,C,D,E)->A(*(*(D,E),B,C))+Coord+ExD+ExD:PRED+CONTRA
+GOOD:3 BAD:0 SCORE:3 RULE: plemma=, rtag=N4+N1 => trans=A(B,C,D)->A(B,b(C,D))+ExD+ExD;@
+GOOD:3 BAD:0 SCORE:3 RULE: func=PRED rtag=N2+N1 => trans=A(B,C,D)->A(B,b(C,D))+ExD+ExD;@
+GOOD:3 BAD:0 SCORE:3 RULE: tag=A6 rfunc=FPHR+FPHR => trans=A(B,C,D)->*(A,B,C,D)+Atr+Atr:LOC
+GOOD:3 BAD:0 SCORE:3 RULE: func=PRED rtag=P7+N1 => trans=A(B,C,D(E))->A(B,b(C,D,E))+ExD+ExD+AuxZ;@
+GOOD:3 BAD:0 SCORE:3 RULE: lemma=Frıdek plemma=- => trans=A(B,C)->C(B)+Atr|0
+GOOD:5 BAD:2 SCORE:3 RULE: func=ACT rtag=Vp+Vs => trans=A(B,C)->A(C(B))+Pred
+GOOD:3 BAD:0 SCORE:3 RULE: rtag=VB+Vs cafun=Atr+Atr => trans=A(B,C)->A(C(B))+Pred
+GOOD:3 BAD:0 SCORE:3 RULE: rtag=Vs+Vf rafun=Obj+Obj => trans=A(B,C)->A(C(B))+Obj
+GOOD:3 BAD:0 SCORE:3 RULE: lemma=témìø rtag=A6 => trans=A(B,C)->A(C(B))+Atr
+GOOD:4 BAD:1 SCORE:3 RULE: rtag=Vs+Vp rafun=Atr+Atr => trans=A(B,C)->A(C(B))+Atr
+GOOD:3 BAD:0 SCORE:3 RULE: plemma=###### rfunc=CONTRA => trans=A(B,C)->A(*(C(B)))+AuxP:PRED
+GOOD:3 BAD:0 SCORE:3 RULE: lemma=deviza rtag=N1 => trans=A(B,C)->A(*(B,C))+ExD:CONJ
+GOOD:3 BAD:0 SCORE:3 RULE: plemma=by» ltag=--- => trans=A(B,C)->*(B,C)+ExD:CNCS|#
+GOOD:3 BAD:0 SCORE:3 RULE: lemma=pøíslu¹nı rtag=J^ => trans=A(B,C(D,E))->C(A(E),B,a(D))+Coord+Atr+Atr;@
+GOOD:3 BAD:0 SCORE:3 RULE: plemma=pøestávka rtag=C= => trans=A(B,C(D))->A(D(C),d(B))+Atr+Atr;@
+GOOD:3 BAD:0 SCORE:3 RULE: lemma=od plemma=odnìtí => trans=A(B,C(D))->A(D(B(C)))+Atr+Atr
+GOOD:3 BAD:0 SCORE:3 RULE: lemma=mìsto plemma=Liberec => trans=A(B)->B(A)
+GOOD:3 BAD:0 SCORE:3 RULE: lemma=mrtvı ptag=C= => trans=A(B)->B(A)
+GOOD:3 BAD:0 SCORE:3 RULE: plemma=2500 lafun=Atr => trans=A(B)->B(A)
+GOOD:3 BAD:0 SCORE:3 RULE: lemma=procento func=PAR => trans=A(B)->B(A)
+GOOD:5 BAD:2 SCORE:3 RULE: func=PAT ptag=CX => trans=A(B)->B(A)
+GOOD:3 BAD:0 SCORE:3 RULE: func=APP ptag=C2 => trans=A(B)->B(A)
+GOOD:3 BAD:0 SCORE:3 RULE: lemma=versus lfunc=--- => trans=A(B)->B(A)
+GOOD:3 BAD:0 SCORE:3 RULE: lemma=se rafun=Adv+Adv+Adv+Adv => trans=A(B)->A|A
+GOOD:3 BAD:0 SCORE:3 RULE: afun=ExD plemma=pøipadat => trans=A(B)->A(*(a(B))):MANN;CPR
+GOOD:3 BAD:0 SCORE:3 RULE: afun=ExD plemma=cítit => trans=A(B)->A(*(a(B))):MANN;CPR
+GOOD:3 BAD:0 SCORE:3 RULE: func=CPR plemma=vypadat => trans=A(B)->A(*(a(B))):MANN;CPR
+GOOD:4 BAD:1 SCORE:3 RULE: plemma=###### rfunc=FPHR => trans=A(B)->A(*(B)):PRED
+GOOD:3 BAD:0 SCORE:3 RULE: lemma=hodnì plemma=dokázat => trans=A(B)->A(*(B)):PAT
+GOOD:3 BAD:0 SCORE:3 RULE: func=EFF plemma=uzavírat => trans=A(B)->A(*(B)):COMPL
+GOOD:3 BAD:0 SCORE:3 RULE: func=ID plemma=vedení => trans=A(B)->A(*(B)):APP
+GOOD:3 BAD:0 SCORE:3 RULE: ctag=Vf+Vf cfunc=RESTR+RESTR => trans=A(B)->A(*(B)):ACT
+GOOD:3 BAD:0 SCORE:3 RULE: lfunc=ACT+ACT ctag=Z:+Z: => trans=A(B)->*(A,B):PRED
+GOOD:3 BAD:0 SCORE:3 RULE: lemma=byznys pafun=ExD => trans=A(B)->*(A,B):ID
+GOOD:3 BAD:0 SCORE:3 RULE: lemma=nebo cfunc=RSTR+RSTR+RSTR => trans=A(B(C,D,E))->B(A(E),a(C),a(D))+Atr+Atr+Atr;@+@
+GOOD:3 BAD:0 SCORE:3 RULE: ptag=N1 ctag=P1+P1 => trans=A(B(C,D))->B(A(D),a(C))+Atr+Atr;@
+GOOD:3 BAD:0 SCORE:3 RULE: tag=Cv cfunc=RHEM+LOC => trans=A(B(C,D))->A(B,C,D)+AuxZ+Adv
+GOOD:4 BAD:1 SCORE:3 RULE: cafun=AuxZ+ExD cfunc=RHEM+ACT => trans=A(B(C,D))->A(B(a(D)),C)+AuxZ+ExD;CPR
+GOOD:3 BAD:0 SCORE:3 RULE: lemma=L rafun=Atr => trans=A(B(C),D)->*(A,B,C,D)+AuxG+Atr:ID
+GOOD:3 BAD:0 SCORE:3 RULE: rtag=N4 cfunc=CM+PAT+PAT => trans=A(B(C),D(E))->A(B,C,D,E)+AuxZ+Obj+AuxZ
+GOOD:3 BAD:0 SCORE:3 RULE: func=RSTR cafun=AuxX+Atr+Atr => trans=A(B(C))->C(A,B)+AuxX
+GOOD:3 BAD:0 SCORE:3 RULE: plemma=v¹ak cfunc=EFF+EFF => trans=A(B(C))->B(C(A))+Obj
+GOOD:3 BAD:0 SCORE:3 RULE: pafun=Adv ctag=N1+N1+Z: => trans=A(B(C))->A(B,C)+Coord
+GOOD:4 BAD:1 SCORE:3 RULE: cafun=Atr+AuxZ cfunc=PAT+RHEM => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:0 SCORE:3 RULE: afun=Obj cfunc=RHEM+ACMP => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:5 BAD:2 SCORE:3 RULE: afun=Obj cfunc=RHEM+APP+RSTR => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:4 BAD:1 SCORE:3 RULE: pafun=Sb cafun=AuxZ+Atr+Atr+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:4 BAD:1 SCORE:3 RULE: pafun=Obj cafun=AuxZ+Obj => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:4 BAD:1 SCORE:3 RULE: pafun=Pred cafun=AuxZ+Adv+Obj => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:0 SCORE:3 RULE: func=PAT cafun=AuxZ+Pnom => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:0 SCORE:3 RULE: ptag=Vp ctag=J^+N1+N1 => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:0 SCORE:3 RULE: pafun=Obj ctag=TT+A3 => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:5 BAD:2 SCORE:3 RULE: pafun=Obj ctag=TT+A2 => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:0 SCORE:3 RULE: func=LOC ctag=Db+N7 => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:4 BAD:1 SCORE:3 RULE: lafun=AuxY+Sb cfunc=RHEM+RSTR => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:0 SCORE:3 RULE: lafun=Adv+Adv cfunc=RHEM+APP => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:0 SCORE:3 RULE: lafun=Adv cfunc=RHEM+MAT => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:0 SCORE:3 RULE: lemma=¹kola cfunc=RHEM+RSTR+RSTR => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:5 BAD:2 SCORE:3 RULE: lemma=rok cfunc=RHEM => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:11 BAD:7 SCORE:4 RULE: lemma=rok ptag=Vp rafun=--- => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: tag=N6 cfunc=RHEM+ACT+RSTR => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:0 SCORE:3 RULE: tag=N1 cfunc=RHEM+APP+RSTR => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:9 BAD:6 SCORE:3 RULE: pfunc=RSTR cfunc=RHEM+RSTR+RSTR => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:4 BAD:0 SCORE:4 RULE: afun=ExD cafun=AuxZ+Atr+Atr => trans=-
+GOOD:4 BAD:1 SCORE:3 RULE: plemma=vydávat => trans=-
+GOOD:6 BAD:3 SCORE:3 RULE: cafun=AuxY cfunc=RHEM => trans=A(B(C))->A(B,C)+AuxY
+GOOD:3 BAD:0 SCORE:3 RULE: lemma=dùchod => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: cafun=Atr+AtrAtr cfunc=PAT+RSTR => trans=A(B(C))->A(B,C)+AtrAtr
+GOOD:3 BAD:0 SCORE:3 RULE: ltag=Db cafun=Atr+Adv => trans=A(B(C))->A(B,C)+Atr
+GOOD:3 BAD:0 SCORE:3 RULE: cafun=Adv+Adv cfunc=CM+MANN => trans=A(B(C))->A(B,C)+Adv
+GOOD:3 BAD:0 SCORE:3 RULE: lemma=vloni cfunc=TWHEN => trans=A(B(C))->A(B,C)+Adv
+GOOD:3 BAD:0 SCORE:3 RULE: pafun=Pred cfunc=EXT+APP => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: afun=Adv cfunc=RSTR+COMPL => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: afun=Adv cfunc=EXT => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: afun=Atr cfunc=DISJ => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: afun=ExD cfunc=RHEM+PAT => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: plemma=2500 rfunc=ACT => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: pafun=Coord cafun=ExD => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: afun=Sb plemma=pøedstavit => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: afun=Sb plemma=nutit => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: afun=Adv plemma=zaøídit => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: afun=Pred plemma=nebo» => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: rtag=N4+N4 cfunc=RHEM => trans=-
+GOOD:5 BAD:2 SCORE:3 RULE: func=CPHR cafun=--- => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: func=COND cafun=Adv => trans=-
+GOOD:4 BAD:1 SCORE:3 RULE: ptag=Vs ctag=Db+A7 => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: ptag=N2 ctag=VB+VB => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: lafun=Adv+Apos cafun=AuxZ+Atr => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: func=TWHEN ctag=J^+A6+N2 => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: func=TWHEN ctag=N2 => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: func=PAT ctag=TT+C4 => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: lemma=osud cfunc=RHEM+APP => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: lemma=pracovník cfunc=RHEM+RSTR => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: lemma=èlovìk cfunc=COMPL => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: lemma=tøi cfunc=RHEM => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: pfunc=GRAD cafun=Atr => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: pfunc=GRAD cafun=--- => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: pfunc=CM cafun=AuxZ+Atr => trans=-
+GOOD:5 BAD:2 SCORE:3 RULE: plemma=ale ltag=N1 => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: plemma=podat cfunc=RHEM+RSTR => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: plemma=pou¾ít cfunc=RHEM+RSTR => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: lemma=vıhra ctag=C= => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: lemma=otázka ptag=Vp => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: plemma=souviset lafun=Sb => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: plemma=rozhodovat ptag=VB => trans=-
+GOOD:4 BAD:1 SCORE:3 RULE: plemma=sto ptag=N2 => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: plemma=èlovìk ptag=N2 => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: rtag=C= ctag=TT => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: rtag=Vp ctag=J^+A1 => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: tag=Vs cfunc=RHEM => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: func=EXT ltag=N4+N1 => trans=-
+GOOD:5 BAD:2 SCORE:3 RULE: func=PAT ltag=Dg+P1 => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: func=PAT plemma=po¹kodit => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: func=RSTR plemma=osmdesát => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: pfunc=PRED cfunc=CM+RSTR => trans=-
+GOOD:4 BAD:1 SCORE:3 RULE: pfunc=ACT rfunc=RSTR+RSTR => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: tag=C6 func=RSTR => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: lemma=stejnì lfunc=ACT => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: lemma=èlen lfunc=LOC => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: plemma=, rfunc=ACT+PAT+ACT ltag=--- => trans=A(B,C,D,E)->A(*(B,C),*(D,E))+ExD+ExD+ExD:PAR+PAR
+GOOD:3 BAD:0 SCORE:3 RULE: plemma=bıt rtag=Vs+N1 ltag=--- => trans=A(B,C,D)->C(B,D)+Pnom+Sb|C
+GOOD:4 BAD:1 SCORE:3 RULE: afun=Obj rafun=AuxX+Obj ltag=--- => trans=A(B,C,D)->C(A,B,D)+AuxX+Obj
+GOOD:6 BAD:3 SCORE:3 RULE: plemma=tedy rafun=AuxX+Adv ltag=--- => trans=A(B,C,D)->C(A,B,D)+AuxX+Adv
+GOOD:3 BAD:0 SCORE:3 RULE: rtag=Vs+N1 rafun=ExD+ExD cafun=--- => trans=A(B,C,D)->A(C(B,D))+ExD+ExD
+GOOD:5 BAD:2 SCORE:3 RULE: lemma=mít ptag=J^ rafun=ExD+ExD => trans=A(B,C,D)->A(B,b(C,D))+ExD+ExD;@
+GOOD:3 BAD:0 SCORE:3 RULE: pafun=AuxS rtag=N6+C= cafun=Atr+Atr => trans=A(B,C,D)->A(*(*(B),C,D))+ExD+ExD:PRED+ACT
+GOOD:3 BAD:0 SCORE:3 RULE: func=TWHEN pfunc=PAT rafun=AuxV => trans=A(B,C)->C(A,B)+AuxV
+GOOD:4 BAD:1 SCORE:3 RULE: lemma=stále ptag=Dg rafun=Atr => trans=A(B,C)->C(A,B)+Atr
+GOOD:3 BAD:0 SCORE:3 RULE: lemma=sto ptag=C4 rafun=Atr => trans=A(B,C)->B(A,C)+Atr
+GOOD:3 BAD:0 SCORE:3 RULE: lemma=procento ptag=C= rafun=Atr => trans=A(B,C)->B(A,C)+Atr
+GOOD:3 BAD:0 SCORE:3 RULE: tag=C= afun=ExD rtag=N2+N6 => trans=A(B,C)->A(C,c(B))+Adv;@
+GOOD:3 BAD:0 SCORE:3 RULE: tag=NX plemma=###### rafun=Pred => trans=A(B,C)->A(C(B))+Pred
+GOOD:3 BAD:0 SCORE:3 RULE: tag=N4 plemma=podat rafun=Obj => trans=A(B,C)->A(C(B))+Obj
+GOOD:4 BAD:1 SCORE:3 RULE: tag=N7 plemma=mít rfunc=CPHR => trans=A(B,C)->A(C(B))+Obj
+GOOD:7 BAD:4 SCORE:3 RULE: lemma=se plemma=nechat rafun=Obj => trans=A(B,C)->A(C(B))+Obj
+GOOD:3 BAD:0 SCORE:3 RULE: func=PAR plemma=###### rtag=N1 => trans=A(B,C)->A(C(B))+ExD
+GOOD:3 BAD:0 SCORE:3 RULE: tag=P1 afun=Sb rtag=Vp+Vs => trans=A(B,C)->A(C(B))+Atr
+GOOD:3 BAD:0 SCORE:3 RULE: func=PRED plemma=a rtag=N1+Vs => trans=A(B,C)->A(B(C))+Sb
+GOOD:3 BAD:0 SCORE:3 RULE: tag=Vp plemma=ale rtag=N1+Vp => trans=A(B,C)->A(B(C))+Sb
+GOOD:3 BAD:0 SCORE:3 RULE: plemma=a rfunc=ACT+PRED cfunc=DIR3 => trans=A(B,C)->A(B(C))+Sb
+GOOD:3 BAD:0 SCORE:3 RULE: tag=Vp plemma=###### rafun=ExD => trans=A(B,C)->A(B(C))+ExD
+GOOD:5 BAD:2 SCORE:3 RULE: tag=N2 pfunc=EXT rafun=Atr => trans=A(B,C)->A(B(C))+Atr
+GOOD:4 BAD:1 SCORE:3 RULE: afun=ExD func=TWHEN lafun=Atr+Atr => trans=A(B,C)->A(*(B,C))+ExD:PAR
+GOOD:3 BAD:0 SCORE:3 RULE: ptag=Dg ctag=N2+N2 cfunc=PAT+PAT => trans=A(B)->B(A)
+GOOD:5 BAD:2 SCORE:3 RULE: func=CONJ plemma=02 ctag=--- => trans=A(B)->B(A)
+GOOD:3 BAD:0 SCORE:3 RULE: func=DIR1 plemma=málo ltag=Db => trans=A(B)->B(A)
+GOOD:3 BAD:0 SCORE:3 RULE: tag=N1 afun=ExD plemma=chovat => trans=A(B)->A(*(a(B))):MANN;CPR
+GOOD:3 BAD:0 SCORE:3 RULE: tag=N1 afun=ExD plemma=pùsobit => trans=A(B)->A(*(a(B))):MANN;CPR
+GOOD:3 BAD:0 SCORE:3 RULE: afun=ExD plemma=vypadat cafun=Atr => trans=A(B)->A(*(a(B))):MANN;CPR
+GOOD:3 BAD:0 SCORE:3 RULE: lemma=naopak ptag=Z: rafun=Obj => trans=A(B)->A(*(B)):PRED
+GOOD:8 BAD:5 SCORE:3 RULE: afun=Sb func=ID ptag=VB => trans=A(B)->A(*(B)):ACT
+GOOD:3 BAD:0 SCORE:3 RULE: ptag=Db pfunc=MAT cafun=Atr => trans=A(B)->*(A,B):CONJ
+GOOD:3 BAD:0 SCORE:3 RULE: tag=J^ plemma=stav cfunc=RSTR+RSTR => trans=A(B(C,D),E)->B(A(D),E,a(C))+Atr+Atr+Atr;@
+GOOD:3 BAD:0 SCORE:3 RULE: tag=P4 ltag=--- cafun=AuxZ+Coord => trans=A(B(C,D))->A(C,D)+AuxZ+Coord|#
+GOOD:3 BAD:0 SCORE:3 RULE: afun=Obj ptag=J^ cafun=AuxZ+AuxZ => trans=A(B(C,D))->A(B,C,D)+AuxZ+AuxZ
+GOOD:3 BAD:0 SCORE:3 RULE: tag=VB plemma=ale rafun=ExD+ExD => trans=A(B(C),D,E)->A(B,C,b(D,E))+Sb+ExD+ExD;@
+GOOD:3 BAD:0 SCORE:3 RULE: afun=Pnom ptag=J^ ctag=TT+N2 => trans=A(B(C),D(E))->A(B,C,D,E)+AuxZ+Pnom+AuxZ
+GOOD:3 BAD:0 SCORE:3 RULE: afun=Pnom rtag=N7 cafun=AuxZ+Atr+Atr => trans=A(B(C),D(E))->A(B,C,D,E)+AuxZ+Pnom+AuxZ
+GOOD:3 BAD:0 SCORE:3 RULE: plemma=ale rtag=N4 ctag=TT => trans=A(B(C),D(E))->A(B,C,D,E)+AuxZ+Obj+AuxZ
+GOOD:3 BAD:0 SCORE:3 RULE: plemma=ale rfunc=CONJ cfunc=CM => trans=A(B(C),D(E))->A(B,C,D,E)+AuxZ+Coord+AuxZ
+GOOD:3 BAD:0 SCORE:3 RULE: ptag=J^ ctag=Vf+J^ cfunc=PRED+CONJ => trans=A(B(C))->B(C(A))+Obj
+GOOD:3 BAD:0 SCORE:3 RULE: tag=Dg plemma=rok cfunc=RSTR => trans=A(B(C))->B(A(C))+Adv
+GOOD:3 BAD:0 SCORE:3 RULE: tag=Db afun=Adv cafun=Obj => trans=A(B(C))->A(B,C)+Obj
+GOOD:3 BAD:0 SCORE:3 RULE: func=DIR1 pfunc=RSTR cafun=AuxZ+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:0 SCORE:3 RULE: ltag=Vf cafun=AuxZ cfunc=CM => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:0 SCORE:3 RULE: ltag=N4 cafun=AuxZ+Atr cfunc=RHEM+APP => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:4 BAD:1 SCORE:3 RULE: ltag=NX cafun=AuxZ cfunc=RHEM => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:0 SCORE:3 RULE: func=ACT pafun=Pnom cafun=AuxZ+Atr+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:4 BAD:1 SCORE:3 RULE: func=ACT pafun=Obj cafun=AuxZ+Coord => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:0 SCORE:3 RULE: tag=P1 ptag=Vf cafun=AuxZ => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:0 SCORE:3 RULE: tag=N6 ptag=Vf cafun=AuxZ+Coord => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:0 SCORE:3 RULE: tag=Vf lafun=Sb cafun=AuxZ+Obj => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:5 BAD:2 SCORE:3 RULE: tag=N7 ltag=--- ctag=Db+N2 => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:4 BAD:1 SCORE:3 RULE: pafun=Pred rtag=Vf cfunc=RHEM+RSTR => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:4 BAD:1 SCORE:3 RULE: func=PAT lafun=--- cafun=Obj+AuxZ => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:5 BAD:2 SCORE:3 RULE: pfunc=COND ltag=--- cafun=AuxZ+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:0 SCORE:3 RULE: lemma=pøíjem func=PAT => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: pfunc=CONJ ltag=N6 cafun=AuxZ => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:0 SCORE:3 RULE: func=ACT pafun=Coord ctag=Db+NX => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:4 BAD:1 SCORE:3 RULE: afun=Adv func=TWHEN cafun=AuxZ+Adv => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:4 BAD:1 SCORE:3 RULE: tag=N4 afun=Atr cafun=AuxZ => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:0 SCORE:3 RULE: plemma=a rfunc=PRED+PRED cfunc=RHEM+RSTR => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:4 BAD:1 SCORE:3 RULE: ptag=VB pfunc=PRED cfunc=RHEM+TWHEN => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:0 SCORE:3 RULE: lemma=mo¾nost func=PAT ctag=Db+Vf => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:0 SCORE:3 RULE: ltag=--- ctag=N7 cafun=AtrAtr => trans=A(B(C))->A(B,C)+AtrAtr
+GOOD:3 BAD:0 SCORE:3 RULE: tag=N4 afun=Adv cafun=Atr+Atr+AtrAdv => trans=A(B(C))->A(B,C)+AtrAdv
+GOOD:3 BAD:0 SCORE:3 RULE: afun=Obj func=DPHR cfunc=LOC => trans=A(B(C))->A(B,C)+Atr
+GOOD:3 BAD:0 SCORE:3 RULE: tag=C2 ptag=N2 ctag=C2 => trans=A(B(C))->A(B,C)+Atr
+GOOD:3 BAD:0 SCORE:3 RULE: afun=Pnom pafun=Obj cfunc=TWHEN => trans=A(B(C))->A(B,C)+Adv
+GOOD:3 BAD:0 SCORE:3 RULE: afun=Pnom pafun=Adv cfunc=LOC => trans=A(B(C))->A(B,C)+Adv
+GOOD:3 BAD:0 SCORE:3 RULE: pafun=Coord rtag=N1+C= cfunc=ACT+RSTR => trans=A(B(C(D)),E,F(G))->A(B(D(C)),b(E,G(F)))+Obj+Atr+ExD+ExD+Atr;@
+GOOD:3 BAD:0 SCORE:3 RULE: lemma=, plemma=bıt ltag=P7 => trans=A(B(C(D)))->A(B(C),D)+Sb+AuxZ
+GOOD:3 BAD:0 SCORE:3 RULE: plemma=220 rtag=--- ltag=--- => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: func=DENOM plemma=###### rtag=--- => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: tag=Db pfunc=DIR3 cafun=--- => trans=-
+GOOD:4 BAD:1 SCORE:3 RULE: tag=A2 ptag=J^ cafun=AuxZ => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: tag=N2 func=EXT plemma=1500 => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: tag=N1 ltag=A1 ctag=J^+A1 => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: lemma=tak ptag=A1 rafun=--- => trans=-
+GOOD:4 BAD:1 SCORE:3 RULE: func=THO lafun=Sb+Adv cafun=AuxZ => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: pafun=Adv pfunc=CAUS rafun=Obj => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: tag=N2 afun=Atr ltag=N6 => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: func=DIR3 pafun=Pred ctag=J^+A4 => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: func=RSTR pafun=Adv ctag=TT => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: afun=Adv func=ATT cfunc=RHEM => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: func=ACT pfunc=RSTR rafun=Pnom => trans=-
+GOOD:5 BAD:2 SCORE:3 RULE: tag=N2 pfunc=PAT lafun=Atr => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: tag=Dg ptag=J^ pafun=Coord => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: afun=Sb plemma=bıt cafun=Atr+Atr+Atv => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: afun=Obj plemma=plnit cafun=AuxZ+Atr => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: func=LOC plemma=bıt ctag=Db+A6+A6 => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: rtag=N1 rafun=Atr cafun=AuxZ => trans=-
+GOOD:4 BAD:1 SCORE:3 RULE: ptag=C2 pafun=Atr cafun=--- => trans=-
+GOOD:4 BAD:1 SCORE:3 RULE: afun=Adv pafun=Coord cfunc=--- => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: func=PAT ptag=Vf cfunc=RHEM+RSTR+CONJ => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: ptag=VB pafun=Pred ctag=A1+N1 => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: tag=Db rtag=Dg cfunc=--- => trans=-
+GOOD:4 BAD:1 SCORE:3 RULE: tag=P1 plemma=bıt cfunc=RHEM+RSTR => trans=-
+GOOD:4 BAD:1 SCORE:3 RULE: afun=Sb ctag=J^+Vs => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:0 SCORE:3 RULE: func=FPHR pafun=Atr rafun=Atr+Atr+Atr+Atr ltag=--- => trans=A(B,C,D,E,F)->*(A,B,C,D,E,F)+Atr+Atr+Atr+Atr:ID
+GOOD:4 BAD:1 SCORE:3 RULE: func=RSTR pafun=Coord rafun=ExD+Obj ltag=--- => trans=A(B,C,D)->A(D,d(B,C))+ExD+Obj;@
+GOOD:3 BAD:0 SCORE:3 RULE: tag=N4 plemma=###### rafun=ExD+ExD ltag=--- => trans=A(B,C,D)->A(*(B,C,D))+ExD+ExD:PRED
+GOOD:3 BAD:0 SCORE:3 RULE: plemma=###### rtag=N1+N1 ltag=--- cfunc=--- => trans=A(B,C,D)->A(*(B,C,D))+ExD+ExD:CONJ
+GOOD:3 BAD:0 SCORE:3 RULE: pafun=Sb pfunc=FPHR rafun=Atr+Atr ltag=--- => trans=A(B,C,D(E))->*(A,B,C,D,E)+Atr+Atr+AuxG:ACT
+GOOD:6 BAD:3 SCORE:3 RULE: tag=A2 afun=Atr ptag=C= rtag=Z: => trans=A(B,C)->C(A,B)+Atr
+GOOD:3 BAD:0 SCORE:3 RULE: afun=Atr func=EXT ptag=C= rfunc=REG => trans=A(B,C)->B(A,C)+Atr
+GOOD:4 BAD:1 SCORE:3 RULE: lemma=málo pfunc=ACT ltag=--- cafun=--- => trans=A(B,C)->A(C(B))+Atr
+GOOD:4 BAD:1 SCORE:3 RULE: pafun=Coord pfunc=PREC rafun=Sb+Pred ltag=--- => trans=A(B,C)->A(B(C))+Sb
+GOOD:3 BAD:0 SCORE:3 RULE: afun=ExD pafun=Adv rafun=ExD rfunc=PAR => trans=A(B,C)->A(*(B,C))+ExD:PAR
+GOOD:10 BAD:7 SCORE:3 RULE: func=FPHR pafun=ExD rafun=Atr ltag=--- => trans=A(B,C)->*(A,B,C)+Atr:DENOM
+GOOD:3 BAD:0 SCORE:3 RULE: afun=Pnom func=ACT rtag=--- ltag=--- => trans=A(B)->B|B
+GOOD:3 BAD:0 SCORE:3 RULE: func=APP plemma=cesta ptag=N7 rtag=--- => trans=A(B)->B|B
+GOOD:3 BAD:0 SCORE:3 RULE: afun=Coord ptag=P7 pafun=Adv ltag=--- => trans=A(B)->B|#
+GOOD:3 BAD:0 SCORE:3 RULE: func=CSQ ptag=Vf pfunc=PRED cfunc=PRED => trans=A(B)->B(A)
+GOOD:3 BAD:0 SCORE:3 RULE: afun=Atr ptag=A7 pafun=Pnom cafun=--- => trans=A(B)->*(A,B):PAT
+GOOD:3 BAD:0 SCORE:3 RULE: tag=II func=FPHR ptag=N1 pafun=Atr => trans=A(B)->*(A,B):ID
+GOOD:3 BAD:0 SCORE:3 RULE: tag=NX plemma=rallye rafun=--- ltag=--- => trans=A(B)->*(A,B):APP
+GOOD:3 BAD:0 SCORE:3 RULE: plemma=hudba rtag=--- ltag=--- cfunc=RSTR+RSTR => trans=A(B(C,D))->B(A(D),a(C))+Atr+Atr;@
+GOOD:3 BAD:0 SCORE:3 RULE: plemma=¹kola rtag=--- ltag=--- cfunc=RSTR+RSTR => trans=A(B(C,D))->B(A(D),a(C))+Atr+Atr;@
+GOOD:4 BAD:1 SCORE:3 RULE: plemma=Evropa rtag=--- ltag=--- cfunc=RSTR+RSTR => trans=A(B(C,D))->B(A(D),a(C))+Atr+Atr;@
+GOOD:5 BAD:2 SCORE:3 RULE: tag=N7 plemma=ale rafun=Adv ltag=--- => trans=A(B(C),D(E))->A(B,C,D,E)+AuxZ+Adv+AuxZ
+GOOD:3 BAD:0 SCORE:3 RULE: func=DPHR ptag=VB pfunc=PAT cfunc=PAT => trans=A(B(C))->A(B,C)+Obj
+GOOD:5 BAD:2 SCORE:3 RULE: ptag=J^ pafun=Coord rtag=--- cafun=AuxZ+Atr+Coord => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:0 SCORE:3 RULE: ptag=Vf pafun=Obj ltag=N1 cafun=AuxZ => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:0 SCORE:3 RULE: afun=Sb ptag=J^ rtag=Vp+Vp cfunc=RHEM => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:0 SCORE:3 RULE: plemma=asociace rtag=--- ltag=--- cfunc=RSTR+APP => trans=A(B(C))->A(B,C)+Atr
+GOOD:3 BAD:0 SCORE:3 RULE: func=RSTR ptag=NX rtag=N2 cafun=Atr => trans=A(B(C))->A(B,C)+Atr
+GOOD:4 BAD:1 SCORE:3 RULE: lemma=hodnì tag=Dg rafun=Obj cafun=ExD => trans=A(B(C))->A(B(a(C)))+ExD;CPR
+GOOD:3 BAD:0 SCORE:3 RULE: func=ACT pafun=Pred rafun=Adv+Coord ltag=--- => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: func=RSTR pafun=Coord rafun=--- ltag=N6 => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: tag=C1 func=ACT ptag=VB pafun=Pred => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: ptag=VB pafun=Pred rtag=Db+N1 cafun=AuxZ => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: lemma=firma func=ACT ptag=VB ltag=--- => trans=-
+GOOD:9 BAD:6 SCORE:3 RULE: afun=Atr ptag=P4 pafun=Obj ltag=--- => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: lemma=návrh func=PAT ptag=Vf rafun=--- => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: tag=P1 func=ACT ptag=Vf pfunc=PAT => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: ptag=Vp pafun=Pred ltag=N1 cafun=Adv => trans=-
+GOOD:13 BAD:10 SCORE:3 RULE: lemma=u¾ pfunc=RSTR rtag=N2 ltag=--- ctag=--- => trans=A(B,C)->C(A,B)+Atr
+GOOD:3 BAD:0 SCORE:3 RULE: tag=Db func=RHEM plemma=pìt => trans=A(B,C)->C(A,B)+Atr
+GOOD:7 BAD:4 SCORE:3 RULE: afun=AuxZ func=RHEM ptag=C= rfunc=EXT => trans=A(B,C)->C(A,B)+Atr
+GOOD:3 BAD:0 SCORE:3 RULE: tag=C= ptag=N1 pfunc=DENOM rtag=C= ltag=--- => trans=A(B,C)->*(A,B,C)+Atr:PRED
+GOOD:3 BAD:0 SCORE:3 RULE: tag=N7 afun=Atr ptag=C7 pfunc=RSTR ltag=--- => trans=A(B)->B(A)
+GOOD:3 BAD:0 SCORE:3 RULE: func=PAT ptag=C= rtag=--- ltag=--- cfunc=RSTR => trans=A(B)->B(A)
+GOOD:3 BAD:0 SCORE:3 RULE: func=DENOM ptag=J^ rtag=--- ltag=--- cfunc=RSTR => trans=A(B)->*(A,B):PRED
+GOOD:7 BAD:4 SCORE:3 RULE: lemma=US pfunc=FPHR rtag=--- ltag=--- ctag=--- => trans=A(B)->*(A,B):APP
+GOOD:8 BAD:5 SCORE:3 RULE: lemma=i pafun=Obj rtag=--- ltag=--- cfunc=RSTR+RSTR => trans=A(B(C,D))->B(A(D),a(C))+Atr+Atr;@
+GOOD:3 BAD:0 SCORE:3 RULE: lemma=hodnì ptag=N2 ltag=--- ctag=C= cfunc=RSTR => trans=A(B(C))->B(A(C))+Adv
+GOOD:3 BAD:0 SCORE:3 RULE: func=LOC ptag=Vp rtag=--- ltag=N1 cfunc=RHEM+RSTR => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:4 BAD:1 SCORE:3 RULE: tag=Dg afun=Sb ptag=Vp rtag=--- ltag=--- => trans=A(B(C))->A(B,C)+Atr
+GOOD:3 BAD:0 SCORE:3 RULE: func=RSTR rtag=--- ltag=N1 ctag=P2 cfunc=PAT => trans=A(B(C))->A(B,C)+Atr
+GOOD:3 BAD:0 SCORE:3 RULE: afun=Atr pafun=Coord rtag=--- ltag=Vf ctag=Db+N4 => trans=A(B(C))->A(B,C)+Adv
+GOOD:3 BAD:0 SCORE:3 RULE: afun=Adv ptag=VB pfunc=PRED rtag=N1 ltag=N6 => trans=-
+GOOD:5 BAD:2 SCORE:3 RULE: tag=C2 afun=Atr ptag=C= pfunc=RSTR ltag=Db => trans=-
+GOOD:3 BAD:0 SCORE:3 RULE: tag=N7 ptag=J^ pfunc=GRAD rtag=--- ltag=N7 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=Four => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=wyborcza => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=Stockholm => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=72 => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=vedle => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: ltag=J*+A6 => trans=A(B)->A(*(B)):PAR
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=snáø => trans=A(B)->A(*(B)):LOC
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=netøeba => trans=A(B)->*(A,B):PRED
+GOOD:3 BAD:1 SCORE:2 RULE: plemma=foto => trans=A(B)->*(A,B):PRED
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=Set => trans=A(B)->*(A,B):PAR
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=Abbas => trans=A(B)->*(A,B):PAR
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=Pro => trans=A(B)->*(A,B):ID
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=today => trans=A(B)->*(A,B):ID
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=Pikes => trans=A(B)->*(A,B):DIR3
+GOOD:2 BAD:0 SCORE:2 RULE: ctag=C=+C=+C=+C=+NX => trans=A(B(C,D,E,F,G))->B(A(g(C)),a(G(F)),a(g(D)),a(g(E)))+Atr+Atr+Atr+Atr+Atr;@+@+@+@+@+@
+GOOD:2 BAD:0 SCORE:2 RULE: cfunc=RHEM+CNCS => trans=A(B(C,D))->A(C,D)+AuxZ+Atr|D
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=Port => trans=A(B(C),D(E))->*(A,B,C,D,E)+AuxG+Atr+AuxG:LOC
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=Tchien => trans=A(B(C),D(E))->*(A,B,C,D,E)+AuxG+Atr+AuxG:ID
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=393 => trans=A(B(C))->C(A,B)+AuxG
+GOOD:2 BAD:0 SCORE:2 RULE: cafun=Atr+Atr+ObjAtr => trans=A(B(C))->A(B,C)+ObjAtr
+GOOD:2 BAD:0 SCORE:2 RULE: cafun=Atr+ObjAtr => trans=A(B(C))->A(B,C)+ObjAtr
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=0831 => trans=A(B(C))->A(B,C)+Coord
+GOOD:2 BAD:0 SCORE:2 RULE: ctag=C2+N2+J^ => trans=A(B(C))->A(B,C)+Coord
+GOOD:2 BAD:0 SCORE:2 RULE: cfunc=RHEM+RHEM+RSTR+PAT => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: cfunc=RHEM+PAT+PAT+RSTR => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: cafun=AuxZ+Atr+Atr+ExD => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: cafun=AuxZ+Atr+Sb+Sb => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:1 SCORE:2 RULE: cafun=AuxZ+Atr+Atr+Atr+Atr+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: cafun=AuxZ+Atr+AtrAtr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:1 SCORE:2 RULE: cafun=AuxZ+Sb+Sb+Sb+Sb => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:1 SCORE:2 RULE: cafun=AuxZ+AtrAdv => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: ctag=J^+A1+N2+J^ => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: ctag=Dg+N6+N6 => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: ctag=Db+A6+NX => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: lfunc=CM+MANN => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: cafun=Sb+Coord+Atv => trans=A(B(C))->A(B,C)+Atv
+GOOD:2 BAD:0 SCORE:2 RULE: cafun=Atr+Coord+Atv => trans=A(B(C))->A(B,C)+Atv
+GOOD:2 BAD:0 SCORE:2 RULE: ctag=P4+Dg+VB => trans=A(B(C))->A(B,C)+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: ltag=Vf+N1+P2 => trans=A(B(C))->A(B,C)+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=ITAR => trans=A(B(C))->*(A,B,C)+AuxG:ID
+GOOD:2 BAD:0 SCORE:2 RULE: ctag=C=+J, => trans=A(B(C(D),E(F,G)))->A(B(D(C),a(F,G,b)))+Adv+Atr+AuxC+ExD+ExD;CPR+@|A
+GOOD:2 BAD:0 SCORE:2 RULE: cfunc=ACT+PAT+RSTR => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: cfunc=ID+RSTR => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: cfunc=PREC+RSTR => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=Govett => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=9.1 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=Centre => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=194 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=180000 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=soustøeïovat => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=konkurenceschopnost => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=záchrana => trans=-
+GOOD:3 BAD:1 SCORE:2 RULE: plemma=zajistit => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=56 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=støílet => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=technologie => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=pøekroèit => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=49.9 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=pùl => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=nabıvat => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=péèe => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=úspì¹nı => trans=-
+GOOD:3 BAD:1 SCORE:2 RULE: plemma=J => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=dílo => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=potøeba => trans=-
+GOOD:4 BAD:2 SCORE:2 RULE: plemma=spoleènost => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=bì¾nı => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=Deum => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=kontejner => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=Farda => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=dealer => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=prozatím => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=svìdomí => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=power => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=Slovák => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=¾ebøíèek => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=turista => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=stanovisko => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=ukazatel => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=bıvat => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=schopnost => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=otevøení => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=nezamìstnanost => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=paragraf => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=potøebnı => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: ctag=Dg+P6+A6 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: ctag=Db+C1+A1 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: ctag=Db+A6+N7 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: ctag=Db+C6 => trans=-
+GOOD:3 BAD:1 SCORE:2 RULE: ctag=Db+C2 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lfunc=ACT+RHEM+LOC => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lfunc=LOC+PAT+ACT => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lfunc=ATT+LOC => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lfunc=PAT+RHEM => trans=-
+GOOD:3 BAD:1 SCORE:2 RULE: lfunc=PAT+ACT+TWHEN => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lafun=AuxZ+AuxY => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lafun=ExD+Pred => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lafun=AuxG => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: ltag=AC+J^ => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: ltag=VB+Db => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: ltag=A1+N4 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: ltag=Z:+N4 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: ltag=N2+NX => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=###### rfunc=DENOM+DENOM+DENOM+DENOM+DENOM+DENOM+DENOM => trans=A(B,C,D,E,F,G,H,I)->A(*(B,C,D,E,F,G,H,I))+ExD+ExD+ExD+ExD+ExD+ExD+ExD:CONJ
+GOOD:2 BAD:0 SCORE:2 RULE: pfunc=PAR rfunc=FPHR+FPHR+FPHR+FPHR+FPHR+FPHR => trans=A(B,C,D,E,F,G,H)->*(A,B,C,D,E,F,G,H)+Atr+Atr+Atr+Atr+Atr+Atr:PAR
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=###### rfunc=CONJ+EXT+ACT+DENOM => trans=A(B,C,D,E,F)->A(*(*(E,F),B,C,D))+Coord+ExD+ExD+ExD:PRED+PAR
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=g rfunc=LOC+LOC+LOC+LOC+RSTR => trans=A(B,C,D,E,F)->*(A,B,C,D,E,F)+Atr+Atr+Atr+Atr:CONJ
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=i rtag=N1+J,+N1 => trans=A(B,C,D,E)->D(A,B,C,E)+Sb+AuxY+Sb
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=tedy rtag=Z:+N6+Z: => trans=A(B,C,D,E)->C(A,B,D)+AuxX+Adv+AuxX|0
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=10 rtag=C=+C=+N2 => trans=A(B,C,D,E)->A(E(D),e(B),e(C))+Atr+Atr+Atr;@+@
+GOOD:2 BAD:0 SCORE:2 RULE: func=PRED rtag=N1+Db+A1 => trans=A(B,C,D,E)->A(B,b(C,D,E))+ExD+ExD+ExD;@
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=, rfunc=PAT+DENOM+PAT => trans=A(B,C,D,E)->A(*(B,C),*(D,E))+ExD+ExD+ExD:PRED+PRED
+GOOD:2 BAD:0 SCORE:2 RULE: func=RSTR rfunc=FPHR+FPHR+CONJ => trans=A(B,C,D,E)->*(A,B,C,D,E)+Atr+Atr+Coord:ACT
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Atr rafun=Atr+Atr+AuxG => trans=A(B,C,D,E)->*(A,B,C,D,E)+Atr+Atr+AuxG:ID
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=management rfunc=RSTR+RSTR+RSTR => trans=A(B,C,D,E)->*(A,B,C,D,E)+Atr+Atr+Atr:PAT
+GOOD:2 BAD:0 SCORE:2 RULE: rtag=NX+RX+AX lfunc=--- => trans=A(B,C,D,E)->*(A,B,C,D,E)+Atr+Atr+Atr:APP
+GOOD:2 BAD:0 SCORE:2 RULE: func=RSTR rfunc=FPHR+FPHR+FPHR => trans=A(B,C,D,E)->*(A,B,C,D,E)+Atr+Atr+Atr:ACT
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=bıt rtag=P1+N4 => trans=A(B,C,D)->C(B,D)+AuxY+Obj|C
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=i rtag=J,+N7 => trans=A(B,C,D)->C(A,B,D)+AuxY+Adv
+GOOD:4 BAD:2 SCORE:2 RULE: afun=Atr rafun=AuxX+Atr => trans=A(B,C,D)->C(A,B,D)+AuxX+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=mluvit rafun=ExD+ExD => trans=A(B,C,D)->A(B,b(C,D))+ExD+ExD;@
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=hrát rafun=ExD+ExD => trans=A(B,C,D)->A(B,b(C,D))+ExD+ExD;@
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=daò rafun=ExD+ExD => trans=A(B,C,D)->A(B,b(C,D))+ExD+ExD;@
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Pred rtag=Dg+N2 => trans=A(B,C,D)->A(B,b(C,D))+ExD+ExD;@
+GOOD:2 BAD:0 SCORE:2 RULE: rtag=N6+J^ cafun=Adv+Obj => trans=A(B,C,D)->A(B,b(C,D))+ExD+Coord;@
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=, rfunc=PRED+ACT+TWHEN => trans=A(B,C,D)->A(*(D),C(B))+ExD+ExD:PRED
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=###### rfunc=TWHEN+BEN => trans=A(B,C,D)->A(*(B,C,D))+ExD+ExD:PRED
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=###### rfunc=LOC+PAR => trans=A(B,C,D)->A(*(B,C,D))+ExD+ExD:PRED
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=###### rtag=Dg+TT => trans=A(B,C,D)->A(*(B,C,D))+ExD+ExD:PRED
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=ne rafun=ExD+ExD+Pred => trans=A(B,C,D)->A(*(B,C,D))+ExD+ExD:PRED
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=###### rfunc=CONJ+CONJ => trans=A(B,C,D)->A(*(B,C,D))+Coord+Coord:PRED
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=###### rfunc=ACMP+LOC => trans=A(B,C,D)->A(*(B(C),D))+ExD+ExD:PRED
+GOOD:2 BAD:0 SCORE:2 RULE: rtag=N1+Z: ctag=C=+C= => trans=A(B,C,D)->A(*(*(C),B,D))+ExD+Coord:PRED+ACT
+GOOD:2 BAD:0 SCORE:2 RULE: rtag=N6+C= cfunc=LOC => trans=A(B,C,D)->A(*(*(B),C,D))+ExD+ExD:PRED+ACT
+GOOD:2 BAD:0 SCORE:2 RULE: func=RSTR rtag=A6+AX => trans=A(B,C,D)->*(A,B,C,D)+Atr+Atr:LOC
+GOOD:2 BAD:0 SCORE:2 RULE: pfunc=CONTRA rfunc=RSTR+CONJ => trans=A(B,C,D)->*(A(B(C)),D)+Atr+Coord:PRED
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=###### rfunc=LOC+CONJ => trans=A(B,C,D(E,F))->A(*(*(B),C,E,F))+ExD+Coord+Coord+ExD:PRED+ACT|0
+GOOD:2 BAD:0 SCORE:2 RULE: func=PRED rfunc=TWHEN+DENOM => trans=A(B,C,D(E))->A(B,b(C,D,E))+ExD+ExD+AuxZ;@
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=a» rtag=J^ => trans=A(B,C)->C(B)+Coord|C
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=i rafun=Pred => trans=A(B,C)->C(A,B)+Pred
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=bıt rtag=J,+N1 => trans=A(B,C)->C(A,B)+AuxY
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=jen plemma=dvacet => trans=A(B,C)->C(A,B)+Atr
+GOOD:3 BAD:1 SCORE:2 RULE: lemma=alespoò ptag=C= => trans=A(B,C)->C(A,B)+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=rovnì¾ ptag=C= => trans=A(B,C)->C(A,B)+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: func=RHEM plemma=18 => trans=A(B,C)->C(A,B)+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: func=RHEM plemma=60 => trans=A(B,C)->C(A,B)+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=, cfunc=EFF+EFF+EFF => trans=A(B,C)->C(*(B))+Pred:COMPL|0
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=Pøibyl plemma=- => trans=A(B,C)->B(C)+ExD|0
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=Hula lfunc=--- => trans=A(B,C)->B(C)+ExD|0
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=deset rtag=N4 => trans=A(B,C)->B(A,C)+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=m rtag=N2 => trans=A(B,C)->B(A,C)+Atr
+GOOD:3 BAD:1 SCORE:2 RULE: afun=ExD plemma=uskuteènit => trans=A(B,C)->A(C,c(B))+Adv;@
+GOOD:2 BAD:0 SCORE:2 RULE: func=DIR3 plemma=lze => trans=A(B,C)->A(C(B))+Sb
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=v¹ak rtag=Vs+J^ => trans=A(B,C)->A(C(B))+Pred
+GOOD:2 BAD:0 SCORE:2 RULE: rtag=Db+VB+VB cafun=Sb+Sb => trans=A(B,C)->A(C(B))+Pred
+GOOD:2 BAD:0 SCORE:2 RULE: func=BEN rtag=Db+A1+VB => trans=A(B,C)->A(C(B))+Pnom
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=mnohı rafun=Sb+Pnom => trans=A(B,C)->A(C(B))+Pnom
+GOOD:2 BAD:0 SCORE:2 RULE: rafun=Pnom ctag=P2+A2 => trans=A(B,C)->A(C(B))+Pnom
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=rallye lfunc=ACT => trans=A(B,C)->A(C(B))+Pnom
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=jak plemma=dokázat => trans=A(B,C)->A(C(B))+Obj
+GOOD:3 BAD:1 SCORE:2 RULE: lemma=se rtag=Db+Vf => trans=A(B,C)->A(C(B))+Obj
+GOOD:2 BAD:0 SCORE:2 RULE: func=DIR3 plemma=zaujímat => trans=A(B,C)->A(C(B))+Obj
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=###### rfunc=PRED+CONJ => trans=A(B,C)->A(C(B))+ExD
+GOOD:2 BAD:0 SCORE:2 RULE: func=EXT rtag=C6 => trans=A(B,C)->A(C(B))+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: func=PAT rtag=Vs+Vf => trans=A(B,C)->A(C(B))+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=témìø rtag=P6 => trans=A(B,C)->A(C(B))+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=témìø rtag=P1 => trans=A(B,C)->A(C(B))+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: tag=Dg plemma=úroveò => trans=A(B,C)->A(C(B))+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: func=EXT plemma=publikum => trans=A(B,C)->A(C(B))+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=dávat rfunc=ADDR+EFF => trans=A(B,C)->A(B(C))+Obj
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=platnost rtag=C= => trans=A(B,C)->A(B(C))+ExD
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=slovo plemma=sborník => trans=A(B,C)->A(B(C))+Coord
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=dokázat rfunc=COMPL => trans=A(B,C)->A(B(C))+AtvV
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=první rafun=Atr+Atr+AtrAdv => trans=A(B,C)->A(B(C))+AtrAdv
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=èekací rafun=Atr => trans=A(B,C)->A(B(C))+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Pnom rtag=N4+VB => trans=A(B,C)->A(B(C))+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=obsáhnout lfunc=ACT => trans=A(B,C)->A(B(C))+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=co plemma=, => trans=A(B,C)->A(*(B,C))+ExD:PRED
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=cyklus rfunc=MANN => trans=A(B,C)->A(*(B,C))+ExD:ID
+GOOD:2 BAD:0 SCORE:2 RULE: afun=ExD rafun=Coord+Apos => trans=A(B,C)->A(*(B,C))+Coord:PRED
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=muset rfunc=ACT => trans=A(B,C)->*(B,C)+Sb:PRED|#
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=smìt ltag=--- => trans=A(B,C)->*(B,C)+Adv:PRED|#
+GOOD:2 BAD:0 SCORE:2 RULE: pfunc=PREC rfunc=ACT => trans=A(B,C)->*(A,B,C)+ExD:PRED
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=joint plemma=venture => trans=A(B,C)->*(A,B,C)+Atr:PAT
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=NX rtag=PX => trans=A(B,C)->*(A,B,C)+Atr:ID
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=Deum rfunc=ID => trans=A(B,C)->*(A,B,C)+Atr:ACT
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=Vi rtag=C= => trans=A(B,C)->*(*(A),B,C)+ExD:PRED+ACT
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=takzvanı rafun=Coord => trans=A(B,C(D,E))->C(A(E),B,a(D))+Coord+Atr+Atr;@
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=K rafun=Atr+Atr => trans=A(B,C(D),E)->A(E(B,C))+Atr+AuxG+Atr|0
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=pøipadat rafun=ExD+ExD => trans=A(B,C(D),E)->A(B,b(D(C),E))+ExD+Atr+ExD;@
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=20.05 plemma=###### => trans=A(B,C(D))->A(*(B,C(*(D))))+Apos+ExD:PRED+ACT
+GOOD:3 BAD:1 SCORE:2 RULE: func=DIR1 plemma=velkı => trans=A(B)->b(A,B);@
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=forma cfunc=RSTR+RSTR+RSTR => trans=A(B)->B|B
+GOOD:2 BAD:0 SCORE:2 RULE: func=AIM pfunc=BEN => trans=A(B)->B|B
+GOOD:2 BAD:0 SCORE:2 RULE: func=CRIT pfunc=REG => trans=A(B)->B|B
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=tøeba plemma=tak => trans=A(B)->B|#
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=pouze plemma=tehdy => trans=A(B)->B|#
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=P2 cfunc=PAT+PAT => trans=A(B)->B|#
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=57 rfunc=--- => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=Kè plemma=3000 => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=milión plemma=1.5 => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=a plemma=opora => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=dvojice rafun=Sb+Sb => trans=A(B)->B(A)
+GOOD:3 BAD:1 SCORE:2 RULE: tag=P2 plemma=ten => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: tag=NX plemma=10 => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: tag=NX plemma=110 => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N2 plemma=tolik => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: lafun=Adv+Adv+Adv+Sb cfunc=PRED => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: lafun=Obj+Adv+Sb cfunc=PRED => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: lafun=Obj+Obj cfunc=PRED => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=litr pfunc=RSTR => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=krátce pfunc=TWHEN => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=a ltag=N4+C4+Db => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=a¾ ltag=C4+C4 => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=048 cfunc=RSTR+RSTR => trans=A(B)->B(A)
+GOOD:3 BAD:1 SCORE:2 RULE: plemma=padesát cfunc=APP => trans=A(B)->B(A)
+GOOD:3 BAD:0 SCORE:3 RULE: rtag=--- lfunc=FPHR => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=dìlník ptag=C= => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: func=CSQ ltag=N1+Vp => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=IFK lfunc=--- => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=ani plemma=ani => trans=A(B)->A|A
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=ruka pfunc=DPHR => trans=A(B)->A|A
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=tam lfunc=PAT+ACT => trans=A(B)->A|#
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=oko cfunc=LOC => trans=A(B)->A(a(B));CPR
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=pes plemma=pøipadat => trans=A(B)->A(*(a(B))):MANN;CPR
+GOOD:2 BAD:0 SCORE:2 RULE: afun=ExD plemma=vyrazit => trans=A(B)->A(*(a(B))):MANN;CPR
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=###### rfunc=OPER => trans=A(B)->A(*(B)):PRED
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=normál plemma=###### => trans=A(B)->A(*(B)):PRED
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=23.30 plemma=###### => trans=A(B)->A(*(B)):PRED
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=19.20 plemma=###### => trans=A(B)->A(*(B)):PRED
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=¹atna plemma=###### => trans=A(B)->A(*(B)):PRED
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=pravda plemma=, => trans=A(B)->A(*(B)):PRED
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=objednávka plemma=, => trans=A(B)->A(*(B)):PRED
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=20.05 rafun=ExD => trans=A(B)->A(*(B)):PRED
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=## ctag=N1+N1+Vp => trans=A(B)->A(*(B)):PRED
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Coord ctag=C1 => trans=A(B)->A(*(B)):PRED
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=zákruta plemma=vysílání => trans=A(B)->A(*(B)):PAT
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=hodnì plemma=jít => trans=A(B)->A(*(B)):PAT
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=AtrAdv ctag=P4 => trans=A(B)->A(*(B)):PAT
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=ano pafun=Adv => trans=A(B)->A(*(B)):PAT
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=odjezd plemma=rychlík => trans=A(B)->A(*(B)):PAR
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=sloveso rfunc=--- => trans=A(B)->A(*(B)):ID
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=¹patnı afun=Adv => trans=A(B)->A(*(B)):DIR1
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=se plemma=dobrı => trans=A(B)->A(*(B)):CPR
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=vysvìtlovat rtag=N1+N4 => trans=A(B)->A(*(B)):COMPL
+GOOD:2 BAD:0 SCORE:2 RULE: func=EFF plemma=doplòovat => trans=A(B)->A(*(B)):COMPL
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=vysvìtlit func=EFF => trans=A(B)->A(*(B)):COMPL
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=EB plemma=reklama => trans=A(B)->A(*(B)):APP
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=Z: ctag=N7+P2 => trans=A(B)->A(*(B)):ACT
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=tì¾ko plemma=øíci => trans=A(B)->*(A,B):PRED
+GOOD:3 BAD:1 SCORE:2 RULE: afun=AuxZ plemma=naopak => trans=A(B)->*(A,B):PRED
+GOOD:2 BAD:0 SCORE:2 RULE: func=LOC rfunc=DENOM+DENOM => trans=A(B)->*(A,B):PRED
+GOOD:2 BAD:0 SCORE:2 RULE: func=PREC pfunc=DENOM => trans=A(B)->*(A,B):PRED
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=pink ptag=NX => trans=A(B)->*(A,B):MANN
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=in pafun=Adv => trans=A(B)->*(A,B):MANN
+GOOD:3 BAD:1 SCORE:2 RULE: lemma=world plemma=News => trans=A(B)->*(A,B):ID
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=Inform pfunc=ID => trans=A(B)->*(A,B):ID
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=KCF pafun=Atr => trans=A(B)->*(A,B):ID
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=vysokı ctag=P7 => trans=A(B)->*(A,B):DIFF
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=a cfunc=DIR1+DIR1+DIR1+DIR1+DIR1 => trans=A(B(C,D,E,F,G))->B(A(C),a(D),a(E),a(F),a(G))+Atr+Atr+Atr+Atr+Atr;@+@+@+@
+GOOD:2 BAD:0 SCORE:2 RULE: lfunc=--- ctag=A6+A6+A6+A6 => trans=A(B(C,D,E,F))->B(A(F),a(C),a(D),a(E))+Atr+Atr+Atr+Atr;@+@+@
+GOOD:2 BAD:0 SCORE:2 RULE: rtag=Db cfunc=ACT+BEN+PAT => trans=A(B(C,D,E),F)->A(B(E),C,D,b(F,e))+Sb+Adv+Pnom+ExD;@+@
+GOOD:2 BAD:0 SCORE:2 RULE: func=FPHR cafun=Atr+Atr+Coord => trans=A(B(C,D,E))->A(*(B,C,D),E)+Atr+Atr+Coord:ID
+GOOD:2 BAD:0 SCORE:2 RULE: rtag=Db ctag=N1+A1 => trans=A(B(C,D),E)->A(B(D),C,b(E,d))+Sb+Pnom+ExD;@+@
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=J^ ctag=N1+Vs+VB => trans=A(B(C,D))->B(A,D(C))+Sb+Pred
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=NX ctag=N6+N6 => trans=A(B(C,D))->B(A(C),a(D))+AtrAdv+AtrAdv;@
+GOOD:2 BAD:0 SCORE:2 RULE: cafun=Atr+Atr+AtrAtr cfunc=ID+ID+LOC => trans=A(B(C,D))->B(A(C),a(D))+Atr+Atr;@
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=i plemma=sedadlo => trans=A(B(C,D))->B(A(C),a(D))+Atr+Atr;@
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=a plemma=národ => trans=A(B(C,D))->B(A(C),a(D))+Atr+Atr;@
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=a plemma=kopie => trans=A(B(C,D))->B(A(C),a(D))+Atr+Atr;@
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=èi cfunc=APP+RSTR => trans=A(B(C,D))->B(A(C),a(D))+Atr+Atr;@
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=moc cfunc=RSTR+RSTR => trans=A(B(C,D))->B(A(C),a(D))+Atr+Atr;@
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=tak ctag=NX+NX => trans=A(B(C,D))->B(A(C),a(D))+Atr+Atr;@
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=zástupce cfunc=PAT+APPS => trans=A(B(C,D))->B(A(C),a(D))+Atr+Apos;@
+GOOD:2 BAD:0 SCORE:2 RULE: lafun=AuxY+Pnom cfunc=RHEM+PAT => trans=A(B(C,D))->A(C,D)+AuxZ+Atr|D
+GOOD:2 BAD:0 SCORE:2 RULE: tag=C1 cfunc=RHEM+CONJ => trans=A(B(C,D))->A(C,D(B))+AuxZ+Coord
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=nìkolik plemma=vzdálenı => trans=A(B(C,D))->A(C,D(B))+AuxZ+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: ltag=AC+N1 cafun=AuxZ+Atr => trans=A(B(C,D))->A(C,D(B))+AuxZ+Atr
+GOOD:3 BAD:1 SCORE:2 RULE: rtag=N4 cfunc=RHEM+THL => trans=A(B(C,D))->A(C,D(B))+AuxZ+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: cafun=Atr+ExD cfunc=PAT+ACT => trans=A(B(C,D))->A(C(B(a(D))))+Atr+ExD;CPR
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=Adv cfunc=RHEM+RHEM => trans=A(B(C,D))->A(B,C,D)+AuxZ+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: func=ACT cafun=AuxZ+AuxZ+Atr+Atr+Atr => trans=A(B(C,D))->A(B,C,D)+AuxZ+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: func=LOC cafun=AuxZ+AuxZ+Atr+Atr => trans=A(B(C,D))->A(B,C,D)+AuxZ+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: func=PAT ctag=Db+J^+Vp => trans=A(B(C,D))->A(B,C,D)+AuxZ+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: tag=A4 cafun=AuxZ+Atr => trans=A(B(C,D))->A(B,C,D)+AuxZ+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: cafun=Atv+Atv cfunc=COMPL+DPHR => trans=A(B(C,D))->A(B,C(D))+Atv+Atv
+GOOD:2 BAD:0 SCORE:2 RULE: cafun=Atv+Atr cfunc=COMPL+DPHR => trans=A(B(C,D))->A(B,C(D))+Atv+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Pnom cfunc=RHEM+TWHEN => trans=A(B(C,D))->A(B(a(D,b)),C)+AuxZ+ExD;CPR+@
+GOOD:2 BAD:0 SCORE:2 RULE: rtag=N6+C= cfunc=TWHEN+ACT+RSTR => trans=A(B(C,D(E)),F,G(H))->A(B(E(D)),C,b(F,H(G)))+Sb+Obj+Atr+ExD+ExD+Atr;@
+GOOD:2 BAD:0 SCORE:2 RULE: func=PRED rfunc=LOC+RSTR => trans=A(B(C,D(E)),F,G(H))->A(B(E(D)),C,b(F,H(G)))+Sb+Adv+Atr+ExD+ExD+Atr;@
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=, plemma=narodit => trans=A(B(C,D(E(F))))->A(C,D(E(a(F))))+Adv+Adv+Atr+ExD;CPR|0
+GOOD:2 BAD:0 SCORE:2 RULE: rtag=N1+NX+N1 cfunc=APPS+RSTR => trans=A(B(C),D,E,F)->C(A,B,D,E,F)+AuxX+Atr+Atr+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: rafun=ExD+ExD ctag=N7+Z: => trans=A(B(C),D,E)->A(B,C,b(D,E))+Pnom+ExD+ExD;@
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=a rfunc=RSTR+RHEM => trans=A(B(C),D,E)->A(B(C),b(E,c(D)))+Sb+ExD+ExD;@+@
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=jít rafun=ExD+ExD => trans=A(B(C),D,E)->A(B(C),b(D,c(E)))+Obj+ExD+ExD;@+@
+GOOD:2 BAD:0 SCORE:2 RULE: rtag=N1+C= cafun=Adv+Sb+Obj => trans=A(B(C),D,E(F))->A(B,C,b(D,F(E)))+Adv+ExD+ExD+Atr;@
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=málo rafun=AuxC => trans=A(B(C),D)->D(A(B,C))+Atr+AuxC
+GOOD:2 BAD:0 SCORE:2 RULE: cafun=Atr cfunc=DENOM => trans=A(B(C),D)->A(*(C(B),D))+Atr+ExD:CONJ
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=plus rfunc=FPHR => trans=A(B(C),D)->*(A,B,C,D)+AuxG+Atr:ID
+GOOD:2 BAD:0 SCORE:2 RULE: rafun=Sb ctag=TT+A1 => trans=A(B(C),D(E))->A(B,C,D,E)+AuxZ+Sb+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: rtag=J^ cfunc=CM+RSTR+RSTR => trans=A(B(C),D(E))->A(B,C,D,E)+AuxZ+Coord+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: rtag=J^ cfunc=CM+RSTR => trans=A(B(C),D(E))->A(B,C,D,E)+AuxZ+Coord+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=J^ ctag=TT+N7+N7 => trans=A(B(C),D(E))->A(B,C,D,E)+AuxZ+Coord+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: cafun=AuxZ+Atr+Atr cfunc=CM+PAT+PAT => trans=A(B(C),D(E))->A(B,C,D,E)+AuxZ+Atr+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: rtag=N2 cfunc=CM+APP => trans=A(B(C),D(E))->A(B,C,D,E)+AuxZ+Adv+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Atr cfunc=PRED => trans=A(B(C))->C(A,B)+AuxG
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=1968 pfunc=RSTR => trans=A(B(C))->C(A,B)+AuxG
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=1980 pfunc=RSTR => trans=A(B(C))->C(A,B)+AuxG
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=zlikvidovat rtag=Vp => trans=A(B(C))->A(B,C)+Sb
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=zneu¾ívat rtag=VB => trans=A(B(C))->A(B,C)+Sb
+GOOD:2 BAD:0 SCORE:2 RULE: pfunc=ADVS cafun=Sb+AuxY+Obj => trans=A(B(C))->A(B,C)+Sb
+GOOD:2 BAD:0 SCORE:2 RULE: rtag=Vf ctag=N1+N6+N4 => trans=A(B(C))->A(B,C)+Sb
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=on cfunc=CONJ => trans=A(B(C))->A(B,C)+Coord
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=se cfunc=CONJ => trans=A(B(C))->A(B,C)+Coord
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=kterı cfunc=DISJ => trans=A(B(C))->A(B,C)+Coord
+GOOD:2 BAD:0 SCORE:2 RULE: cafun=AuxZ+Adv cfunc=RHEM+THL => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=Obj cfunc=RHEM+RSTR+APP+RSTR => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=Obj cfunc=RHEM+ID => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=Obj cfunc=RHEM+CM => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=Pred cfunc=RHEM+ADDR+ADDR => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=Atr cfunc=RHEM+RSTR+ID => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Obj cfunc=RHEM+RSTR+MAT+RSTR => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Obj cfunc=RHEM+ADDR => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Atr cfunc=RHEM+DIR1 => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=Pred cafun=AuxZ+Atr+Atr+Coord+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: ltag=N2+N4+N1 cafun=AuxZ+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: ltag=P1+N3 cafun=AuxZ+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: ltag=N7+N7+N7 cafun=AuxZ+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: ltag=N4+N4 cafun=AuxZ+Atr+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: ltag=A2 cafun=AuxZ+Adv => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: rtag=VB+VB cfunc=RHEM => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: rtag=N4 cfunc=RHEM+RSTR+APP => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: rtag=--- cfunc=CM+RSTR+RSTR+RSTR => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: func=CRIT cafun=AuxZ+Atr+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: func=COND cafun=AuxZ+Sb+Adv => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: func=THL cafun=Adv+AuxZ => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:1 SCORE:2 RULE: func=CONJ cafun=AuxZ+Adv+Adv+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=Vs ctag=Db+A6 => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=Vf ctag=TT+A1 => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=VB ctag=J^+P4+N7 => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:1 SCORE:2 RULE: pafun=Adv ctag=Db+A4 => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: afun=AtvV ctag=Db+A1+N2 => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Adv ctag=TT+VB => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: lafun=Adv+Sb cafun=AuxZ+AuxZ => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: lafun=Adv+Adv cafun=AuxZ+Obj+Obj+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: lafun=ExD+ExD cfunc=RHEM+PAT => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: lafun=Adv+Adv cfunc=RHEM+ACMP => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: lafun=Obj cfunc=RHEM+DIR3 => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: lafun=Obj cfunc=RHEM+BEN => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=okres cfunc=RHEM+RSTR => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: pfunc=COND cafun=AuxZ+Coord => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: ctag=N6+J^ cafun=Adv+AuxZ => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=koncentrace cfunc=RHEM => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=vzdìlávání cfunc=RHEM => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=tvrdit cfunc=RHEM+RSTR => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=platit cfunc=RHEM+RSTR => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=a cfunc=CM+CONJ => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=místo ctag=TT+A6 => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=èást ctag=Db+N2 => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=jeden ctag=J^+P2 => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: tag=C1 cafun=Adv+AuxZ => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: ctag=Db+A6+N6 cfunc=RHEM+RSTR+LOC => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:1 SCORE:2 RULE: ctag=J^+Vf cfunc=RHEM+PAT => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: ctag=Db+P1 cfunc=RHEM+APP => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: rtag=A1 ctag=J^+A6 => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:1 SCORE:2 RULE: tag=N3 cfunc=CM => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:1 SCORE:2 RULE: tag=N2 cfunc=RHEM+ACT => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N6 cfunc=RHEM+ID => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N6 cfunc=CM+PAT => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: rtag=N6+N1 cafun=AuxZ+Atr+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: rtag=Vp cafun=AuxZ+Atr+Coord => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:4 BAD:2 SCORE:2 RULE: pfunc=ADVS cfunc=CM+APP => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: pfunc=PRED cfunc=RHEM+ADVS => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: pfunc=PAT cfunc=RHEM+RSTR+ID+RSTR => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: pfunc=RSTR cfunc=RHEM+RSTR+RSTR+RSTR => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=N7 cfunc=RHEM+RSTR+RSTR => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: cafun=AuxY+Atr cfunc=RHEM+PAT => trans=A(B(C))->A(B,C)+AuxY
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=Adv cafun=Atv+Atr+Atr => trans=A(B(C))->A(B,C)+Atv
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=Pred cafun=Coord+Atv => trans=A(B(C))->A(B,C)+Atv
+GOOD:2 BAD:0 SCORE:2 RULE: ctag=N3 cafun=AtrObj => trans=A(B(C))->A(B,C)+AtrObj
+GOOD:2 BAD:0 SCORE:2 RULE: cafun=Atr+Atr+AtrAtr cfunc=RSTR+RSTR+TWHEN => trans=A(B(C))->A(B,C)+AtrAtr
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=udìlat cfunc=RSTR+LOC => trans=A(B(C))->A(B,C)+AtrAdv
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=Solidet plemma=staro¾itnictví => trans=A(B(C))->A(B,C)+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=Praga plemma=antikva => trans=A(B(C))->A(B,C)+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=role cfunc=RSTR+TWHEN => trans=A(B(C))->A(B,C)+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=veøejnost cfunc=PAT => trans=A(B(C))->A(B,C)+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=Brialy cfunc=RSTR => trans=A(B(C))->A(B,C)+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=konsorcium cfunc=RSTR => trans=A(B(C))->A(B,C)+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=sedm ctag=C6 => trans=A(B(C))->A(B,C)+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=prémie ctag=N4 => trans=A(B(C))->A(B,C)+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=právo ctag=A4+NX => trans=A(B(C))->A(B,C)+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: ctag=N2+N2+NX cfunc=APP+APP+APP => trans=A(B(C))->A(B,C)+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: rtag=A2 ctag=A2+NX => trans=A(B(C))->A(B,C)+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=Vp cfunc=RSTR+COND => trans=A(B(C))->A(B,C)+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: lafun=Coord cafun=Atr+Atr+AdvAtr => trans=A(B(C))->A(B,C)+AdvAtr
+GOOD:2 BAD:0 SCORE:2 RULE: pfunc=EFF cafun=AdvAtr+Atr => trans=A(B(C))->A(B,C)+AdvAtr
+GOOD:2 BAD:0 SCORE:2 RULE: afun=AuxP cfunc=PAT => trans=A(B(C))->A(B,C)+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=pøíli¹ plemma=dotknout => trans=A(B(C))->A(B,C)+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: rtag=N1+Vp cfunc=CAUS+PAT => trans=A(B(C))->A(B,C)+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=Coord ctag=VB+N6+N2 => trans=A(B(C))->A(B,C)+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: func=THO ctag=P6 => trans=A(B(C))->A(B,C)+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: lafun=Adv+Sb cfunc=MOD => trans=A(B(C))->A(B,C)+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: lafun=Obj cfunc=THO => trans=A(B(C))->A(B,C)+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=hned cfunc=TWHEN => trans=A(B(C))->A(B,C)+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=daleko cfunc=LOC => trans=A(B(C))->A(B,C)+Adv
+GOOD:3 BAD:1 SCORE:2 RULE: lemma=letos cfunc=TWHEN => trans=A(B(C))->A(B,C)+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=zùstat cfunc=THL => trans=A(B(C))->A(B,C)+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=stále ctag=Dg => trans=A(B(C))->A(B,C)+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=P2 cfunc=DIR1 => trans=A(B(C))->A(B,C)+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=science rafun=--- => trans=A(B(C))->*(A,B,C)+AuxG:RSTR
+GOOD:2 BAD:0 SCORE:2 RULE: rafun=Sb+Adv+Obj ctag=J, => trans=A(B(C(D,E)))->A(B(a(D,E)))+AuxC+ExD+ExD;CPR|A
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=Val plemma=###### => trans=A(B(C(D)),E)->A(*(B,C,D,E))+AuxP+Atr+ExD:DENOM
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=hodnì pfunc=MAT => trans=A(B(C(D)))->B(D(A,C))+Adv+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=mluvit rfunc=SUBS => trans=A(B(C(D)))->A(B,C,D)+Atv+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=pøihlí¾et cfunc=PAT+PAT => trans=A(B(C(D)))->A(B(C),D)+Obj+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=: cfunc=LOC+CONJ => trans=A(B(C(D)))->A(B(C),D)+Adv+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=- cfunc=THO+CONJ => trans=A(B(C(D)))->A(B(C),D)+Adv+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=zakládání ptag=N2 => trans=A(B(C(D)))->A(*(B(C,D)))+Atr+Atr:APP
+GOOD:2 BAD:0 SCORE:2 RULE: rtag=A1+C=+N6 cfunc=ACT+TWHEN => trans=A(B(C(D(E))),F,G(H),I)->A(B(C(E(D))),b(I,c(F,H(G))))+Sb+Atr+Atr+ExD+ExD+Atr+ExD;@+@
+GOOD:2 BAD:0 SCORE:2 RULE: cafun=AtrAtr cfunc=PAT => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: cafun=Apos cfunc=CM => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=Atr cfunc=EXT+RSTR => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Sb cfunc=RHEM+PAT+LOC => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Pnom cfunc=RHEM+RSTR+APP => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Atr cfunc=ACT+BEN+PAT => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=pokou¹et rfunc=--- => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=vyhnout rfunc=--- => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=odhalit rfunc=--- => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=bod rfunc=--- => trans=-
+GOOD:3 BAD:1 SCORE:2 RULE: plemma=stát rfunc=LOC => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=získat rfunc=CRIT => trans=-
+GOOD:4 BAD:2 SCORE:2 RULE: plemma=nìkolik rfunc=THL => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=dávat rfunc=ADDR+CPHR => trans=-
+GOOD:7 BAD:5 SCORE:2 RULE: lemma=Pink plemma=Floyd => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=Wall plemma=Street => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=kurt plemma=###### => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=jméno plemma=bıt => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=èlovìk plemma=dvacet => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=èást plemma=mít => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=ani¾ plemma=prodat => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=tisíc plemma=400 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=procento plemma=16 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=u¾ plemma=pìt => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=milión plemma=115 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=rok plemma=40 => trans=-
+GOOD:4 BAD:2 SCORE:2 RULE: lemma=a plemma=dohoda => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=a plemma=oblast => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=16 rtag=N2 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=nechat rtag=N4 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=45 rtag=N2 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=tedy rtag=Z:+N2 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=vìøit rtag=N4 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=31 rtag=Z: => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: pfunc=TOWH lfunc=--- => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: pfunc=PAT lfunc=PAT+TWHEN+ACT => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=továrna afun=Atr => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=tvorba afun=Obj => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=dlouhı afun=Atr => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=stroj afun=Atr => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=úrok afun=Adv => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=cesta afun=Adv => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=pravidlo afun=ExD => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=Apos cafun=ExD => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=Sb cafun=AuxZ+Obj+Obj => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: ltag=J^+N1 cafun=AuxZ+Atr => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: ltag=C1 cafun=AuxZ+Atr => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: ltag=N2+N4 cafun=AuxZ+Coord => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: ltag=--- cafun=AuxY => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Sb plemma=vzpomínat => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Adv plemma=pøipadat => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Adv plemma=otevøít => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Adv plemma=vlastnit => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: rtag=VB cfunc=RHEM+RHEM => trans=-
+GOOD:3 BAD:1 SCORE:2 RULE: rtag=N3 cfunc=RHEM+RSTR => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lfunc=ACT ctag=Db+A6 => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: rtag=N2 cfunc=RHEM+ACT => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: rtag=N6 cfunc=EFF => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: func=MOD rtag=P1 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: func=EXT rtag=J^ => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=vıraznì rafun=--- => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=tehdy rafun=Adv => trans=-
+GOOD:3 BAD:1 SCORE:2 RULE: lemma=pøíèina rafun=--- => trans=-
+GOOD:5 BAD:2 SCORE:3 RULE: afun=Obj pfunc=PRED rtag=--- lfunc=MANN => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=mluvit cfunc=RHEM+RSTR => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N4 cfunc=RHEM+APPS => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=pøedtím rafun=Obj => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=tento rafun=--- => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: func=CONJ cafun=ExD+Pred => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: func=PAT cafun=Sb+Obj+Obj => trans=-
+GOOD:3 BAD:1 SCORE:2 RULE: ptag=Vp ctag=Db+P2 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: func=DIR1 ctag=Db+P2 => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=A4 ctag=J^ => trans=-
+GOOD:3 BAD:1 SCORE:2 RULE: ptag=VB ctag=Db+A3+A3 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=VB ctag=NX => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: func=ACT rfunc=RHEM+PAT => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=Sb ctag=P1 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=Pnom ctag=Db+C7 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=Obj ctag=J^+A6+A6 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=Pred ctag=Db+C4+A4 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=Atr ctag=J^+A2+A2 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=Atr ctag=Vp => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: afun=ExD ctag=P4 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lafun=AuxZ+Obj+Sb cafun=AuxZ+Atr => trans=-
+GOOD:3 BAD:1 SCORE:2 RULE: lafun=Obj+Sb cafun=AuxZ+Adv+Adv => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: cafun=AuxZ+Adv+Adv cfunc=RHEM+MEANS+MEANS => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: lafun=Sb+Adv cafun=Atr+Atv => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Atv rafun=Atr => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: func=TPAR ctag=Db => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: func=TWHEN ctag=J^+A4 => trans=-
+GOOD:3 BAD:1 SCORE:2 RULE: func=PAT ctag=Db+Vs => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: func=LOC ctag=J^+P6 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Sb cafun=ExD => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Adv cafun=Adv+Obj => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Atr cafun=Atr+ExD+ExD => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: tag=Dg plemma=dìlat => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N7 plemma=podpoøit => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N4 plemma=jednat => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N2 plemma=62 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lafun=AuxY+Obj cfunc=RHEM+RSTR => trans=-
+GOOD:3 BAD:1 SCORE:2 RULE: lafun=Pnom cfunc=RHEM+RSTR+PAT => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=dívka pfunc=TWHEN => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=vùz pfunc=PRED => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=ani¾ pfunc=EFF => trans=-
+GOOD:3 BAD:1 SCORE:2 RULE: lemma=mo¾nost pfunc=RSTR => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=nedìle cfunc=--- => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=kategorie cfunc=--- => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=student cfunc=RSTR => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=titul cfunc=--- => trans=-
+GOOD:4 BAD:2 SCORE:2 RULE: lemma=dítì cfunc=RHEM+RSTR => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=zemì cfunc=RSTR+APP => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=tolik cfunc=RHEM => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=% cfunc=PAT => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=hranice cfunc=RHEM+RSTR => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=zákon cfunc=RHEM+RSTR => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: pfunc=PREC cafun=Pred+Pred+Pred => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: ctag=Vf cafun=ExD => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=800 ltag=TT => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=pøinést ltag=N1 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=dojít ltag=N2 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=mìnit ltag=--- => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=- ltag=C=+C=+TT => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lfunc=PAT+TWHEN ctag=J^+A1 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lfunc=ACT ctag=P1 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lfunc=TWHEN+PAT+ACT ctag=TT => trans=-
+GOOD:4 BAD:2 SCORE:2 RULE: lfunc=--- ctag=Dg+N1 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=13.2 cfunc=--- => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=vykazovat cfunc=RHEM+RSTR => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=vzdát cfunc=RHEM => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=pøistoupit cfunc=RHEM => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=navrhovat cfunc=RHEM => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=20000 cfunc=RSTR => trans=-
+GOOD:4 BAD:2 SCORE:2 RULE: plemma=23 cfunc=--- => trans=-
+GOOD:4 BAD:2 SCORE:2 RULE: plemma=17 cfunc=RSTR => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=13 cfunc=RSTR => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=dosáhnout cfunc=RHEM+RSTR+MAT => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=v¹ak cfunc=ACT+PAT+MANN => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=vùz ctag=N2 => trans=-
+GOOD:3 BAD:1 SCORE:2 RULE: lemma=zde ctag=Db => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N2 cafun=Atr+ExD => trans=-
+GOOD:3 BAD:1 SCORE:2 RULE: tag=N6 cafun=Coord => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: ctag=TT+P4 cfunc=RHEM+RSTR => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: ctag=TT+P1 cfunc=RHEM+RSTR => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: ctag=N2+N2 cfunc=RSTR+RSTR => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=centimetr ptag=C1 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=zástupce ptag=VB => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=místo ptag=Dg => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=68 lafun=AuxZ => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=tıkat lafun=Sb+Adv => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=uèit ptag=VB => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=zastavit ptag=Vf => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=podporovat ptag=Vf => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: func=ORIG pfunc=PRED => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: rtag=N3 ctag=N2 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: rtag=A1 ctag=J^+PX => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: rtag=--- ctag=J^+C= => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: tag=C= cfunc=RHEM+RSTR => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: tag=Vf cfunc=TWHEN => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: func=DIR3 ltag=Db+N4 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: func=DIFF plemma=dvacet => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: func=DIFF plemma=300 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: func=ACT plemma=25000 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: rtag=N4+N4 cafun=AuxZ+Atr => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: rtag=Dg cafun=AuxZ+Atr+Atr => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: rafun=Adv ctag=C1 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=vítìzství func=PAT => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=kùò func=ACT => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=¾ena func=RSTR => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=celek func=PAT => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: rtag=N2+Vp rafun=Atr+Atr => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: rtag=Z: rafun=ExD => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=SF pafun=Sb => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=l pafun=Pnom => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: rtag=--- lfunc=ACT+THO => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: pfunc=PREC cfunc=CONJ+PRED => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: pfunc=PAT cfunc=PAT+COMPL => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=VB rtag=N4+N3 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=VB rtag=NX+N4 => trans=-
+GOOD:3 BAD:1 SCORE:2 RULE: ptag=A1 rtag=Dg => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: tag=Z: rfunc=FPHR => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=Vf lfunc=ACMP => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=specialista lfunc=--- => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=poboèka lfunc=--- => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=ten lfunc=CONJ => trans=-
+GOOD:3 BAD:1 SCORE:2 RULE: tag=Vp plemma=a rafun=ExD+ExD+ExD => trans=A(B,C,D,E)->A(B,b(C,D,E))+ExD+ExD+ExD;@
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=, rfunc=DENOM+ACT+DENOM ltag=--- => trans=A(B,C,D,E)->A(*(B,C),*(D,E))+ExD+ExD+ExD:PRED+PRED
+GOOD:2 BAD:0 SCORE:2 RULE: func=PAT pfunc=ADVS rafun=ExD+ExD+ExD => trans=A(B,C,D,E)->A(*(B,C),*(D,E))+ExD+ExD+ExD:PRED+PRED
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=jen ptag=C= rafun=Atr+Atr => trans=A(B,C,D)->D(A,B,C)+Atr+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: func=PAT pfunc=APPS rafun=AuxY+Atr => trans=A(B,C,D)->C(B,D)+AuxY+Atr|C
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Atr rafun=ExD+ExD ctag=N4 => trans=A(B,C,D)->A(B,b(C,D))+ExD+ExD;@
+GOOD:2 BAD:0 SCORE:2 RULE: func=RSTR pfunc=CONJ rafun=Coord+ExD => trans=A(B,C,D)->A(B,b(C,D))+Coord+ExD;@
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=mo¾ná ptag=## rafun=ExD+ExD => trans=A(B,C,D)->A(*(B,C,D))+ExD+ExD:PRED
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=###### rtag=N1+N1 ctag=N1 => trans=A(B,C,D)->A(*(*(C(D)),B))+ExD+ExD:PRED+ACT
+GOOD:2 BAD:0 SCORE:2 RULE: func=AIM ptag=J^ rafun=ExD+ExD => trans=A(B,C,D(E))->A(B,b(C,D,E))+ExD+ExD+AuxZ;@
+GOOD:2 BAD:0 SCORE:2 RULE: func=RHEM plemma=50 rtag=N2 => trans=A(B,C)->C(A,B)+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: tag=J, ptag=C= cafun=--- => trans=A(B,C)->C(A,B)+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: tag=TT func=RHEM plemma=a¾ => trans=A(B,C)->C(A,B)+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=jen ptag=C1 rafun=Adv+Atr => trans=A(B,C)->C(A,B)+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: tag=P2 ptag=C= pafun=Atr => trans=A(B,C)->C(A,B)+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: func=PRED pfunc=APPS rafun=ExD => trans=A(B,C)->B(C)+ExD|0
+GOOD:3 BAD:1 SCORE:2 RULE: plemma=( rfunc=DENOM cfunc=RSTR => trans=A(B,C)->B(C)+ExD|0
+GOOD:2 BAD:0 SCORE:2 RULE: rtag=VB rafun=ExD cafun=Sb+Obj+Adv => trans=A(B,C)->B(*(C))+ExD:COMPL|0
+GOOD:2 BAD:0 SCORE:2 RULE: tag=A6 afun=ExD rtag=N6 => trans=A(B,C)->A(C,c(B))+Adv;@
+GOOD:2 BAD:0 SCORE:2 RULE: afun=ExD rtag=N4+N7 cafun=--- => trans=A(B,C)->A(C,c(B))+Adv;@
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=album afun=Sb pafun=Coord => trans=A(B,C)->A(C(B))+Pred
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=Apos rtag=N4+J^ cafun=--- => trans=A(B,C)->A(C(B))+Obj
+GOOD:3 BAD:1 SCORE:2 RULE: tag=P7 func=ACMP plemma=mít => trans=A(B,C)->A(C(B))+Obj
+GOOD:2 BAD:0 SCORE:2 RULE: tag=P4 func=DIR3 plemma=podat => trans=A(B,C)->A(C(B))+Obj
+GOOD:2 BAD:0 SCORE:2 RULE: func=DIR3 plemma=najít ctag=--- => trans=A(B,C)->A(C(B))+Obj
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N1 plemma=jít rfunc=ACT => trans=A(B,C)->A(C(B))+Obj
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=Coord rtag=Vs ltag=C= => trans=A(B,C)->A(C(B))+ExD
+GOOD:2 BAD:0 SCORE:2 RULE: func=PARTL ptag=## rafun=ExD => trans=A(B,C)->A(C(B))+ExD
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=: rtag=Vs rafun=ExD => trans=A(B,C)->A(C(B))+ExD
+GOOD:2 BAD:0 SCORE:2 RULE: func=PAR plemma=###### rtag=J^ => trans=A(B,C)->A(C(B))+Coord
+GOOD:3 BAD:1 SCORE:2 RULE: func=EXT pfunc=PAT rafun=Atr+Atr+Atr => trans=A(B,C)->A(C(B))+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: afun=AuxZ pafun=Atr rtag=C4 => trans=A(B,C)->A(C(B))+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=Atr rtag=Dg+N1+N2 ltag=--- => trans=A(B,C)->A(C(B))+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N1 plemma=patøit rfunc=LOC+RSTR => trans=A(B,C)->A(B,b(C))+Obj;DIR3
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=Adv rtag=A7 cfunc=APP => trans=A(B,C)->A(B,b(C))+ExD;EFF
+GOOD:3 BAD:1 SCORE:2 RULE: func=DIR1 ptag=Vp rafun=ExD => trans=A(B,C)->A(B,b(C))+ExD;DIR3
+GOOD:2 BAD:0 SCORE:2 RULE: tag=VB pfunc=GRAD rafun=ExD => trans=A(B,C)->A(B,b(C))+ExD;@
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=model ptag=J^ rafun=Atr => trans=A(B,C)->A(B,b(C))+Atr;@
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=zaèínat rtag=N1 ltag=Db+Db => trans=A(B,C)->A(B(C))+Sb
+GOOD:3 BAD:1 SCORE:2 RULE: tag=Vp rtag=N1+Vp cfunc=--- => trans=A(B,C)->A(B(C))+Sb
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=AuxS rtag=Vp cfunc=RSTR+PAT => trans=A(B,C)->A(B(C))+Pred
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Adv pafun=Pred rtag=Vp+Vf => trans=A(B,C)->A(B(C))+Pred
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N4 plemma=uzavøít rafun=Obj+Adv => trans=A(B,C)->A(B(C))+Obj
+GOOD:2 BAD:0 SCORE:2 RULE: tag=Vf rtag=N4 cfunc=ADDR => trans=A(B,C)->A(B(C))+Obj
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=###### rtag=N1 ctag=AX => trans=A(B,C)->A(B(C))+ExD
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Pred plemma=###### rtag=N1 => trans=A(B,C)->A(B(C))+ExD
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=srpen func=DENOM ctag=--- => trans=A(B,C)->A(B(C))+ExD
+GOOD:2 BAD:0 SCORE:2 RULE: func=ID plemma=hotel rtag=N1 => trans=A(B,C)->A(B(C))+Atr
+GOOD:3 BAD:1 SCORE:2 RULE: plemma=zákon rtag=NX ctag=C= => trans=A(B,C)->A(B(C))+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=takovı ptag=N2 pfunc=EXT => trans=A(B,C)->A(B(C))+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: rtag=Vs rafun=Atr cafun=Atr+Atr+Atr => trans=A(B,C)->A(B(C))+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: tag=C4 afun=Obj rtag=Db => trans=A(B,C)->A(B(C))+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=pøipravit ptag=VB rafun=Adv => trans=A(B,C)->A(B(C))+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=já ptag=VB rafun=Adv+Obj+Adv => trans=A(B,C)->A(B(C))+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: func=ACT plemma=###### rtag=TT => trans=A(B,C)->A(*(B,C))+ExD:PRED
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N4 plemma=###### rtag=N1 => trans=A(B,C)->A(*(B,C))+ExD:PRED
+GOOD:3 BAD:1 SCORE:2 RULE: func=LOC ptag=J^ rafun=ExD+Pred => trans=A(B,C)->A(*(B,C))+ExD:PRED
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=, rfunc=LOC+PRED ltag=--- => trans=A(B,C)->A(*(B,C))+ExD:PRED
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=AuxS rtag=C= cfunc=MANN => trans=A(B,C)->A(*(B,C))+ExD:PRED
+GOOD:2 BAD:0 SCORE:2 RULE: rfunc=DENOM ctag=A7 cafun=Atr => trans=A(B,C)->A(*(B,C))+ExD:PRED
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=###### rfunc=LOC cfunc=RSTR => trans=A(B,C)->A(*(B,C))+ExD:PRED
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N1 plemma=###### rfunc=PAT => trans=A(B,C)->A(*(B,C))+ExD:PRED
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=ptát rtag=N1 ctag=--- => trans=A(B,C)->A(*(B,C))+ExD:PAT
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=muset rtag=Db ltag=--- => trans=A(B,C)->*(B,C)+Adv:PRED|#
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=ne ptag=N4 rafun=AuxZ => trans=A(B,C)->*(A,B,C)+AuxZ:EXT
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=nìkterı ptag=N6 rafun=Coord => trans=A(B,C(D,E))->C(A(E),B,a(D))+Coord+Atr+Atr;@
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=novı plemma=vùz rafun=Coord => trans=A(B,C(D,E))->C(A(E),B,a(D))+Coord+Atr+Atr;@
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N2 plemma=ministr rafun=Coord => trans=A(B,C(D,E))->C(A(D),B,a(E))+Coord+Atr+Atr;@
+GOOD:3 BAD:1 SCORE:2 RULE: pafun=Sb pfunc=FPHR rafun=Atr+AuxG => trans=A(B,C(D),E)->*(A,B,C,D,E)+Atr+AuxG+AuxG:ACT
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=celkem ptag=Vs rafun=Sb => trans=A(B,C(D))->A(D(C(B)))+Sb+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Apos pafun=Coord rtag=C= => trans=A(B,C(D))->A(D(B,C))+ExD+AuxX
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=AuxS rtag=A1 cfunc=RSTR => trans=A(B,C(D))->A(*(B,C,D))+ExD+Adv:PRED
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Obj ptag=P3 cafun=Sb+Obj => trans=A(B)->B|B
+GOOD:4 BAD:2 SCORE:2 RULE: tag=C= ptag=A2 cafun=--- => trans=A(B)->B|B
+GOOD:3 BAD:1 SCORE:2 RULE: tag=NX func=APP plemma=strana => trans=A(B)->B|B
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Pnom plemma=ten cafun=Sb => trans=A(B)->B|B
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Obj plemma=ten cafun=Adv+Sb+Obj => trans=A(B)->B|B
+GOOD:2 BAD:0 SCORE:2 RULE: func=TWHEN plemma=proces ltag=--- => trans=A(B)->B|B
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=u¾ ptag=P1 rafun=Atr => trans=A(B)->B|#
+GOOD:3 BAD:1 SCORE:2 RULE: func=ADVS pfunc=PRED cafun=Adv => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: ltag=C2+C2 cafun=Atr cfunc=MAT => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=v¹ak rtag=--- ctag=Vp+Vf => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=, rtag=VB ctag=N6+N1+C= => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: tag=P2 func=PAT plemma=¹est => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N4 func=PAT plemma=jeden => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=pozornost ptag=Dg rafun=--- => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: func=PRED pafun=Obj ctag=N2 => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Atr func=EXT rfunc=ACMP => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=FC ltag=--- cfunc=--- => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=bod ltag=A2 cfunc=--- => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: afun=AuxC ptag=Vp ctag=Vs => trans=A(B)->B(A)
+GOOD:3 BAD:1 SCORE:2 RULE: afun=Coord plemma=hodnì cafun=Atr+Atr+Atr => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Atr plemma=kolik cafun=Atr => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=mnoho ltag=--- cafun=Atr+Atr+Atr => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=èi ltag=C=+C= cafun=--- => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=peníze plemma=hodnì rafun=--- => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: func=PAT plemma=málo ltag=C= => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: tag=P3 afun=AuxO rtag=N1 => trans=A(B)->A|A
+GOOD:2 BAD:0 SCORE:2 RULE: tag=P3 plemma=vynutit rafun=Obj => trans=A(B)->A|A
+GOOD:2 BAD:0 SCORE:2 RULE: tag=P4 plemma=zapsat rafun=Adv => trans=A(B)->A|A
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=Adv pfunc=MANN rafun=Obj+Adv+Sb => trans=A(B)->A|A
+GOOD:4 BAD:2 SCORE:2 RULE: lemma=vlastní ptag=N4 pfunc=DPHR => trans=A(B)->A|A
+GOOD:2 BAD:0 SCORE:2 RULE: tag=P3 plemma=udìlat rfunc=CPHR => trans=A(B)->A|A
+GOOD:2 BAD:0 SCORE:2 RULE: tag=J, rtag=P4 cfunc=--- => trans=A(B)->A|A
+GOOD:2 BAD:0 SCORE:2 RULE: func=MANN plemma=vypadat rtag=VB => trans=A(B)->A|#
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=tak ltag=Db+N1 cfunc=--- => trans=A(B)->A|#
+GOOD:2 BAD:0 SCORE:2 RULE: tag=P1 afun=ExD ltag=N7+N1 => trans=A(B)->A(*(a(B))):MANN;CPR
+GOOD:2 BAD:0 SCORE:2 RULE: afun=ExD ptag=VB ctag=N1 => trans=A(B)->A(*(a(B))):MANN;CPR
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N1 pfunc=CPR rafun=Pred => trans=A(B)->A(*(a(B))):MANN;CPR
+GOOD:2 BAD:0 SCORE:2 RULE: tag=P1 afun=ExD rtag=Vf => trans=A(B)->A(*(B)):PRED
+GOOD:2 BAD:0 SCORE:2 RULE: tag=Dg plemma=: rafun=Pred => trans=A(B)->A(*(B)):PRED
+GOOD:3 BAD:1 SCORE:2 RULE: func=MOD plemma=###### rtag=--- => trans=A(B)->A(*(B)):PRED
+GOOD:2 BAD:0 SCORE:2 RULE: tag=C4 plemma=###### rtag=C= => trans=A(B)->A(*(B)):PRED
+GOOD:4 BAD:2 SCORE:2 RULE: lemma=proè ptag=## rafun=--- => trans=A(B)->A(*(B)):PRED
+GOOD:2 BAD:0 SCORE:2 RULE: func=ADDR pafun=AuxS ctag=N2 => trans=A(B)->A(*(B)):PRED
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=## ctag=N6+N6 cfunc=PAT+PAT => trans=A(B)->A(*(B)):PRED
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Adv func=DIR3 ptag=## => trans=A(B)->A(*(B)):PRED
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=nyní plemma=###### ltag=--- => trans=A(B)->A(*(B)):PRED
+GOOD:2 BAD:0 SCORE:2 RULE: ltag=--- ctag=N7+N7+N7 cafun=ExD+ExD+ExD => trans=A(B)->A(*(B)):PRED
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N2 plemma=chystat rafun=--- => trans=A(B)->A(*(B)):PAT
+GOOD:2 BAD:0 SCORE:2 RULE: func=RSTR plemma=dát rtag=N3 => trans=A(B)->A(*(B)):PAT
+GOOD:2 BAD:0 SCORE:2 RULE: tag=Vf func=CPR plemma=bıt => trans=A(B)->A(*(B)):PAT
+GOOD:2 BAD:0 SCORE:2 RULE: tag=Dg afun=Obj plemma=èekat => trans=A(B)->A(*(B)):PAT
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Obj func=ID lafun=Sb => trans=A(B)->A(*(B)):PAT
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=Casio tag=N2 ctag=--- => trans=A(B)->A(*(B)):PAT
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N4 func=ID pafun=Pred => trans=A(B)->A(*(B)):PAT
+GOOD:2 BAD:0 SCORE:2 RULE: rfunc=--- ctag=P3+N2 cafun=Sb+Adv => trans=A(B)->A(*(B)):MANN
+GOOD:2 BAD:0 SCORE:2 RULE: tag=TT plemma=øíci rafun=--- => trans=A(B)->A(*(B)):EFF
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=právo func=ID ctag=A2 => trans=A(B)->A(*(B)):DIR1
+GOOD:2 BAD:0 SCORE:2 RULE: rtag=N4+N1 rafun=Obj+Sb cafun=Adv+Obj => trans=A(B)->A(*(B)):COMPL
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=nadanı tag=A4 pafun=Adv => trans=A(B)->A(*(B)):BEN
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N1 ptag=NX pafun=AtrAdv => trans=A(B)->*(A,B):LOC
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=Motors rtag=--- ltag=--- => trans=A(B)->*(A,B):APP
+GOOD:3 BAD:1 SCORE:2 RULE: func=CONJ pafun=Obj ctag=A3+A3+A3 => trans=A(B(C,D,E))->B(A(E),a(C),a(D))+Atr+Atr+Atr;@+@
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N2 pfunc=ACT cafun=AuxY+AuxZ+Atr => trans=A(B(C,D))->C(A,D,a(B))+AuxY+AuxZ;@
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=vláda rtag=--- ctag=A1+A1 => trans=A(B(C,D))->B(A(D),a(C))+Atr+Atr;@
+GOOD:4 BAD:2 SCORE:2 RULE: func=CONJ pafun=Atr ctag=P2+P2 => trans=A(B(C,D))->B(A(D),a(C))+Atr+Atr;@
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=prostøedek rfunc=--- cfunc=RSTR+RSTR => trans=A(B(C,D))->B(A(D),a(C))+Atr+Atr;@
+GOOD:3 BAD:1 SCORE:2 RULE: tag=J^ plemma=trh cfunc=RSTR+RSTR => trans=A(B(C,D))->B(A(D),a(C))+Atr+Atr;@
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=automobilka rtag=--- ctag=NX+N1 => trans=A(B(C,D))->B(A(C),a(D))+Atr+Atr;@
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=a plemma=delegace ltag=--- => trans=A(B(C,D))->B(A(C),a(D))+Atr+Atr;@
+GOOD:5 BAD:3 SCORE:2 RULE: ptag=N7 pfunc=ACT cfunc=APP+APP => trans=A(B(C,D))->B(A(C),a(D))+Atr+Atr;@
+GOOD:3 BAD:0 SCORE:3 RULE: tag=J^ lafun=Atr cafun=Atr+Atr => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: tag=P4 ltag=--- cafun=AuxZ+Obj => trans=A(B(C,D))->A(C,D)+AuxZ+Obj|D
+GOOD:2 BAD:0 SCORE:2 RULE: tag=P1 pfunc=PRED cafun=AuxZ+Coord => trans=A(B(C,D))->A(C,D)+AuxZ+Coord|#
+GOOD:2 BAD:0 SCORE:2 RULE: tag=P2 pfunc=EFF cafun=AuxZ+Atr => trans=A(B(C,D))->A(C,D)+AuxZ+Atr|D
+GOOD:2 BAD:0 SCORE:2 RULE: tag=P6 afun=Obj cfunc=RHEM+RSTR => trans=A(B(C,D))->A(C,D)+AuxZ+Atr|D
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Adv func=RSTR cfunc=RHEM+ACT => trans=A(B(C,D))->A(C,D)+AuxZ+Atr|D
+GOOD:2 BAD:0 SCORE:2 RULE: tag=C4 pfunc=PRED cafun=AuxZ+AuxZ+Atr => trans=A(B(C,D))->A(C,D(B))+AuxZ+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: tag=Dg ptag=Vp cafun=AuxZ+Atr => trans=A(B(C,D))->A(C,D(B))+AuxZ+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=1.5 ptag=VB rafun=--- => trans=A(B(C,D))->A(C,D(B))+AuxZ+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=Vp ctag=Db+Z: cfunc=RHEM+PAT => trans=A(B(C,D))->A(C,D(B))+AuxZ+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: tag=C= ptag=VB ctag=J^+N2 => trans=A(B(C,D))->A(C,D(B))+AuxZ+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: func=RSTR plemma=sní¾it ctag=TT+NX => trans=A(B(C,D))->A(C,D(B))+AuxZ+Atr
+GOOD:4 BAD:2 SCORE:2 RULE: tag=C= plemma=mít cfunc=RHEM+PAT => trans=A(B(C,D))->A(C,D(B))+AuxZ+Atr
+GOOD:3 BAD:0 SCORE:3 RULE: ltag=N6+N1 ctag=TT+N2 cafun=AuxZ+Atr => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=Coord rtag=Vf cafun=Obj+AuxY+Sb => trans=A(B(C,D))->A(B,C,D)+Obj+Sb
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=spoleènost rtag=VB ctag=AX+AX => trans=A(B(C,D(E)))->A(B,C,D)+Atr+Atr+AuxG|0
+GOOD:2 BAD:0 SCORE:2 RULE: rtag=N1+Z: lfunc=--- ctag=Z:+N7 => trans=A(B(C),D,E)->C(A,B,D,E)+AuxX+Atr+Coord
+GOOD:2 BAD:0 SCORE:2 RULE: tag=VB afun=Pred rtag=Db+N2 => trans=A(B(C),D,E)->A(B,C,b(D,E))+Sb+ExD+ExD;@
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=Coord rtag=Db+N4 cafun=Sb+Adv+Obj => trans=A(B(C),D,E)->A(B,C,b(D,E))+Sb+ExD+ExD;@
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Pred pafun=Coord rtag=N4+N4 => trans=A(B(C),D,E)->A(B,C,b(D,E))+Adv+ExD+ExD;@
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=Pred rtag=J, cfunc=RHEM+PAT => trans=A(B(C),D)->D(A(B,C))+AuxZ+AuxC
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=mít rfunc=ACT cfunc=PRED => trans=A(B(C),D)->C(B,D)+Atv+Sb|C
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=Dg ctag=N2 cfunc=CPR => trans=A(B(C),D)->A(C(B,D))+Atr+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=bıt rfunc=TWHEN cfunc=RHEM => trans=A(B(C),D)->A(B(D),C)+AuxZ+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: func=THO pfunc=### cafun=AuxZ => trans=A(B(C),D)->A(*(B,C,D))+AuxZ+ExD:PRED
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=###### rtag=N6 ctag=N6 => trans=A(B(C),D)->A(*(B,C,D))+Atr+ExD:PRED
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=Obj rtag=N4 cafun=Atv => trans=A(B(C),D(E))->A(B,D(E(C)))+Atv+Obj+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: ltag=N1 cafun=AuxZ+Obj cfunc=CM+PAT => trans=A(B(C),D(E))->A(B,C,D,E)+AuxZ+Pred+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N7 afun=Pnom cfunc=CM => trans=A(B(C),D(E))->A(B,C,D,E)+AuxZ+Pnom+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: tag=Vs ptag=J^ ctag=TT => trans=A(B(C),D(E))->A(B,C,D,E)+AuxZ+Pnom+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=ale rtag=N2 ctag=TT+A2 => trans=A(B(C),D(E))->A(B,C,D,E)+AuxZ+Adv+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=Kè rtag=--- ctag=NX => trans=A(B(C))->C(A,B)+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=pøesto rtag=--- ctag=Vp+Vp => trans=A(B(C))->B(C(A))+Pred
+GOOD:2 BAD:0 SCORE:2 RULE: func=CONJ pfunc=PREC cafun=Obj+Pred => trans=A(B(C))->B(C(A))+Obj
+GOOD:2 BAD:0 SCORE:2 RULE: tag=Z: pfunc=PREC cafun=Obj+Obj => trans=A(B(C))->B(C(A))+Obj
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=Dg pafun=Obj ctag=A4+A4 => trans=A(B(C))->B(C(A))+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=Coord rtag=Vf cafun=Sb+Sb => trans=A(B(C))->B(A(C))+Sb
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=J^ ctag=Vp+Vp cfunc=RSTR+RSTR => trans=A(B(C))->B(A(C))+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: tag=Dg pfunc=ACMP cafun=Adv => trans=A(B(C))->B(A(C))+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: tag=Dg afun=Atr rfunc=MAT => trans=A(B(C))->B(A(C))+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: rfunc=PRED ctag=N1+VB cafun=Sb+Atr => trans=A(B(C))->A(B,C)+Sb
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=v¹ak rfunc=PRED cfunc=ACT+TWHEN+PAT => trans=A(B(C))->A(B,C)+Sb
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=a rfunc=PAT cfunc=MANN+ACT+PAT => trans=A(B(C))->A(B,C)+Sb
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=umo¾nit plemma=a ltag=--- => trans=A(B(C))->A(B,C)+Sb
+GOOD:2 BAD:0 SCORE:2 RULE: func=APP pfunc=APP cafun=Atr+Obj => trans=A(B(C))->A(B,C)+Obj
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=jasnı ltag=--- cfunc=BEN => trans=A(B(C))->A(B,C)+Obj
+GOOD:2 BAD:0 SCORE:2 RULE: pfunc=APP ltag=--- cafun=Atr+Atr+Coord => trans=A(B(C))->A(B,C)+Coord
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=Vp ctag=P1+J^ cfunc=RSTR+CONJ => trans=A(B(C))->A(B,C)+Coord
+GOOD:4 BAD:2 SCORE:2 RULE: func=ACT pfunc=DISJ cafun=AuxZ+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:0 SCORE:3 RULE: pafun=Coord pfunc=DISJ rafun=Sb => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: func=ACT pfunc=TWHEN cafun=AuxZ+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: func=ACT pfunc=ACT cafun=AuxZ+Coord => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: func=RSTR pfunc=ADVS cafun=AuxZ+Obj => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=a rtag=--- ltag=Db+N6 => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: ltag=C1 cafun=AuxZ+Atr cfunc=RHEM+RSTR => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: func=LOC plemma=trvat rtag=--- => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: tag=C6 pfunc=PRED cafun=AuxZ => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:1 SCORE:2 RULE: tag=A1 pfunc=DENOM cafun=AuxZ => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:1 SCORE:2 RULE: tag=N1 pfunc=DISJ cafun=AuxZ => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:1 SCORE:2 RULE: afun=Adv ptag=Vp cafun=AuxZ+Atr+Coord => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:1 SCORE:2 RULE: lemma=minuta pfunc=PRED => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=tj rtag=--- ctag=Db+N2 => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N6 ltag=Db+N1 cafun=AuxZ => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: func=PAT pafun=Atr cafun=AuxZ+Coord => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: tag=C2 ptag=Vf cafun=AuxZ+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: tag=VB afun=Atr cfunc=RHEM+ACT+PAT => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: tag=A4 lafun=Sb cafun=AuxZ => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N4 lafun=Adv+Sb+Adv cafun=AuxZ+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N6 lafun=AuxY cafun=AuxZ+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N1 ltag=--- ctag=Db+A1+J^ => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: func=CNCS lafun=--- cafun=AuxZ+Atr+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: pfunc=RSTR ltag=N7 cafun=AuxZ+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=doba ltag=N4 cfunc=RHEM+RSTR => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:1 SCORE:2 RULE: ptag=Vp ctag=TT+N2 cfunc=RHEM+APP => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=VB ctag=Db+Vs cfunc=RHEM+PAT => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=VB ctag=TT cfunc=MOD => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:1 SCORE:2 RULE: afun=Obj func=ACT cafun=AuxZ+Atr+Atr+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Atr func=PAT cafun=AuxZ+Adv => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Sb func=PAT cfunc=RHEM+PAT => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N6 ptag=N2 ctag=Dg => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=J^ pfunc=CONJ cafun=Atr+AuxZ => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:1 SCORE:2 RULE: rtag=N7 rafun=Obj cafun=AuxZ+Atr+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Sb rtag=A1 cafun=AuxZ => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:1 SCORE:2 RULE: ltag=P1 ctag=J^+N2 cafun=AuxZ+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: func=PAT ptag=VB cfunc=RHEM+RSTR+LOC => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=N2 pfunc=PAT cfunc=RHEM+RSTR => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=Vf pafun=Pred ctag=TT+C= => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=VB pafun=Sb ctag=J^+N2 => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: tag=P1 rtag=N6 cfunc=RHEM => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:3 BAD:1 SCORE:2 RULE: tag=N4 rtag=--- cfunc=RHEM+RSTR+ACT => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N6 plemma=mít cfunc=RHEM+RSTR => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=ale ltag=A4 cafun=AuxZ => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=bıt ltag=P3 cafun=AuxZ => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Obj cafun=AuxZ cfunc=ATT => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Obj plemma=uznat cafun=Atv => trans=A(B(C))->A(B,C)+Atv
+GOOD:3 BAD:1 SCORE:2 RULE: ltag=--- cafun=AtrAtr cfunc=APP => trans=A(B(C))->A(B,C)+AtrAtr
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=N1 ctag=N2 => trans=-
+GOOD:5 BAD:3 SCORE:2 RULE: afun=Atr ptag=N7 cafun=AtrAtr => trans=A(B(C))->A(B,C)+AtrAtr
+GOOD:2 BAD:0 SCORE:2 RULE: ltag=--- ctag=Vp cafun=AtrAtr => trans=A(B(C))->A(B,C)+AtrAtr
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N2 ltag=NX cafun=Atr+Atr+Atr+Atr => trans=A(B(C))->A(B,C)+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: tag=C= ltag=N2 ctag=P2 => trans=A(B(C))->A(B,C)+Atr
+GOOD:3 BAD:1 SCORE:2 RULE: tag=N2 ltag=C= ctag=N4 => trans=A(B(C))->A(B,C)+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=vyu¾ití ptag=J^ rafun=--- => trans=A(B(C))->A(B,C)+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=pozor ltag=--- cfunc=PAT => trans=A(B(C))->A(B,C)+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Atr plemma=uzákonìní cafun=Atr+Atr => trans=A(B(C))->A(B,C)+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: func=RSTR plemma=prodat ctag=P2 => trans=A(B(C))->A(B,C)+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=mír func=APP ctag=C= => trans=A(B(C))->A(B,C)+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=mnoho func=PAT ctag=N2 => trans=A(B(C))->A(B,C)+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Adv ltag=--- cafun=AdvAtr => trans=A(B(C))->A(B,C)+AdvAtr
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=Vp pafun=Obj cafun=Atr+AdvAtr => trans=A(B(C))->A(B,C)+AdvAtr
+GOOD:2 BAD:0 SCORE:2 RULE: func=INTT pfunc=EFF cafun=Obj+Adv => trans=A(B(C))->A(B,C)+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: ltag=A4 cafun=Adv cfunc=RHEM => trans=A(B(C))->A(B,C)+Adv
+GOOD:3 BAD:1 SCORE:2 RULE: ltag=N1 cafun=Adv+Obj cfunc=CRIT+PAT => trans=A(B(C))->A(B,C)+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=jezdit rtag=--- ctag=Dg => trans=A(B(C))->A(B,C)+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: tag=AC ltag=--- cafun=Obj+Adv => trans=A(B(C))->A(B,C)+Adv
+GOOD:3 BAD:1 SCORE:2 RULE: tag=Dg afun=Adv cfunc=PREC => trans=A(B(C))->A(B,C)+Adv
+GOOD:5 BAD:3 SCORE:2 RULE: tag=A2 ltag=--- ctag=Db+Db => trans=A(B(C))->A(B,C)+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: tag=Db ltag=N4 ctag=Dg => trans=A(B(C))->A(B,C)+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=Pred rtag=Vf cfunc=MOD => trans=A(B(C))->A(B,C)+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Adv func=DPHR cfunc=MANN => trans=A(B(C))->A(B,C)+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: tag=A2 ptag=N2 ctag=A2 => trans=A(B(C))->A(B,C)+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: tag=Vf pfunc=GRAD lafun=Sb+Sb => trans=A(B(C))->A(B,C)+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=, rfunc=PRED cfunc=CRIT+ACT+PAT => trans=A(B(C))->A(B,C)+Adv
+GOOD:3 BAD:1 SCORE:2 RULE: afun=Pnom pafun=Pred cfunc=THL => trans=A(B(C))->A(B,C)+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Pnom ltag=Db+N1 cafun=ExD => trans=A(B(C))->A(B(a(C,b)))+ExD;CPR+@
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Obj plemma=mít cafun=ExD => trans=A(B(C))->A(B(a(C,b)))+ExD;CPR+@
+GOOD:2 BAD:0 SCORE:2 RULE: tag=Dg ltag=N1 cafun=Adv+ExD => trans=A(B(C))->A(B(a(C)))+ExD;CPR
+GOOD:2 BAD:0 SCORE:2 RULE: func=MANN lafun=Adv+Adv+Sb cafun=ExD => trans=A(B(C))->A(B(a(C)))+ExD;CPR
+GOOD:2 BAD:0 SCORE:2 RULE: func=EXT lafun=Obj cafun=ExD => trans=A(B(C))->A(B(a(C)))+ExD;CPR
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=Vf ctag=Db cfunc=TTILL => trans=A(B(C))->A(B(a(C)))+ExD;CPR
+GOOD:2 BAD:0 SCORE:2 RULE: tag=AX ptag=NX cafun=Atr => trans=A(B(C))->*(A,B,C)+Atr:ID
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=Atr rtag=--- cafun=Adv+AuxX+Adv => trans=A(B(C(D),E,F))->A(D,E(B,C,F))+Adv+AuxZ+AuxX+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: tag=A1 ltag=--- ctag=N4+N1 => trans=A(B(C(D),E))->A(B(C,D,a(E,b)))+Adv+AuxZ+ExD;CPR+@
+GOOD:2 BAD:0 SCORE:2 RULE: func=APPS pafun=Pred ctag=C=+Dg => trans=A(B(C(D),E(F)))->A(B(D(C),E(a(F))))+Sb+Atr+Sb+ExD;CPR
+GOOD:2 BAD:0 SCORE:2 RULE: tag=C= plemma=zákon rtag=NX => trans=A(B(C(D)),E)->A(D(B,C,E))+Atr+AuxG+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=v¹ak rfunc=--- cfunc=TWHEN+LOC+PAT => trans=A(B(C(D)))->B(A,C,D)+Adv+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: func=TWHEN pafun=Pnom cafun=Adv => trans=A(B(C(D)))->A(B,C,D)+Adv+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=vzpomínat tag=VB ctag=N1+N4 => trans=A(B(C(D)))->A(B(D),C)+Sb+Atv
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=nebo ltag=A1 cfunc=ACT+ACT => trans=A(B(C(D)))->A(B(C),D)+Sb+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=, plemma=potvrdit ltag=N4 => trans=A(B(C(D)))->A(B(C),D)+Sb+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: func=CONJ pafun=Atr ctag=N6+J^ => trans=A(B(C(D)))->A(B(C),D)+Adv+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=Sb rtag=--- ltag=N2+A1 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=ExD rtag=N4 ltag=N1 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=ExD rtag=--- ltag=A2 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=mít rtag=--- ltag=Dg => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: tag=C= afun=Atr rtag=N2 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N7 afun=Obj rtag=N7 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: tag=Z: plemma=, rafun=--- => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: tag=P1 plemma=mít rafun=Adv+Obj => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N6 plemma=vyhrát rafun=--- => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N1 plemma=a rafun=Sb => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: func=PRED plemma=###### rtag=--- => trans=-
+GOOD:3 BAD:1 SCORE:2 RULE: func=RSTR plemma=osm rtag=--- => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=Coord rtag=--- cafun=ExD+ExD => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N1 plemma=bıt rtag=N6 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=komise rtag=--- ctag=A2+A2 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=získat rtag=--- ctag=TT+A4 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=bıt rtag=N7+N1 ctag=Db => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=###### rtag=N1 ctag=N1 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Obj plemma=vìdìt rtag=--- => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: tag=P1 ltag=P3 cafun=AuxZ => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N2 ltag=Z: cafun=AuxZ => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=pøíspìvek tag=N1 pafun=Pred => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: tag=Dg ptag=C= cafun=--- => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N2 lafun=Atr cafun=AtrAtr => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N1 lafun=Adv cafun=Atr+Atr+Atv => trans=-
+GOOD:3 BAD:1 SCORE:2 RULE: tag=N2 func=DIFF plemma=50 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N1 ltag=N4 ctag=J^+J^ => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=Obj rtag=VB cfunc=RHEM+RSTR => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: func=COND lafun=Adv cafun=AuxZ+Atr => trans=-
+GOOD:3 BAD:1 SCORE:2 RULE: func=THL lafun=Atr cafun=--- => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: pfunc=MAT ltag=--- cafun=AuxZ+Atr => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: pfunc=PRED ltag=N4+N7 cafun=AuxZ+Atr => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N4 func=PAT rtag=Db => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: rtag=N6 lfunc=ACT+TWHEN ctag=Db => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: rtag=--- lfunc=--- ctag=J^+A1+N2 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N4 afun=Obj ltag=Db+Db+N1 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: func=RSTR pafun=Pnom ctag=Dg => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Sb func=PAT ltag=Dg+Db => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Obj func=PAT ltag=N4+P1 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Adv func=BEN ltag=A1 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=km ltag=TT cfunc=--- => trans=-
+GOOD:5 BAD:3 SCORE:2 RULE: lemma=tisíc ltag=Dg cfunc=MAT => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=tisíc plemma=800 => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=tak ltag=N1 cfunc=RHEM => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=koruna ltag=Dg cfunc=--- => trans=-
+GOOD:3 BAD:1 SCORE:2 RULE: afun=Atr func=RSTR cfunc=TWHEN => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N2 plemma=400 => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: afun=ExD func=LOC cfunc=PAT => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: tag=VB afun=Atr cafun=Sb+Adv => trans=-
+GOOD:3 BAD:1 SCORE:2 RULE: func=FPHR pfunc=DENOM rafun=Atr => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: func=CAUS pfunc=PRED rafun=Obj => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: tag=Cv pfunc=PAT lafun=--- => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N4 ptag=Vs pafun=Atr => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: tag=A1 ptag=N1 pafun=Obj => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Adv plemma=fungovat cafun=AuxZ+Atr => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=a ptag=N6 pfunc=RSTR => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: func=DIFF plemma=1.2 ctag=--- => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: func=ACT plemma=bıt ctag=TT+A1 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: func=RSTR plemma=deset ctag=N2 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: afun=AuxC func=CSQ lafun=Adv+Adv+Sb => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Obj func=ADDR lafun=Sb+Obj => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: func=RSTR ptag=A1 cfunc=RHEM => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=VB pfunc=PAT cfunc=RHEM+APP+RSTR => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=N3 pfunc=PAT cfunc=RHEM => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=C4 pafun=Adv ctag=A2+N2 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=VB pafun=Atr ctag=Db+N6 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: tag=P4 pafun=Pred rtag=Vf => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=Pred rtag=N4+N2 rafun=Obj+Obj => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: tag=Z: plemma=20 cfunc=MAT => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N1 plemma=bıt cfunc=RHEM+RSTR+MAT => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=zaznamenat ltag=--- cafun=AuxZ+Atr => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=poèítat ltag=N7 cafun=AuxZ+Atr => trans=-
+GOOD:3 BAD:1 SCORE:2 RULE: tag=N4 func=ACT pafun=Obj => trans=-
+GOOD:4 BAD:2 SCORE:2 RULE: tag=N2 func=TWHEN pafun=ExD => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Sb rafun=Coord ctag=TT => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=zamìstnanec func=ACT ctag=--- => trans=-
+GOOD:3 BAD:1 SCORE:2 RULE: lemma=miliarda func=DIFF ctag=--- => trans=-
+GOOD:3 BAD:1 SCORE:2 RULE: func=DIFF ptag=C= rafun=Atr => trans=A(B,C)->B(A,C)+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=miliarda func=EXT ctag=--- => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: func=ACT plemma=sedm ltag=Db => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: tag=Dg pfunc=PRED rafun=Obj+Adv => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: tag=Db pfunc=RSTR rafun=Pnom => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=bıt tag=VB rafun=ExD+ExD+ExD cafun=Pnom+Sb => trans=A(B,C,D,E)->A(B,b(C,D,E))+ExD+ExD+ExD;@
+GOOD:2 BAD:0 SCORE:2 RULE: tag=Vp func=RSTR plemma=a rafun=ExD+ExD => trans=A(B,C,D)->A(B,b(C,D))+ExD+ExD;@
+GOOD:2 BAD:0 SCORE:2 RULE: func=FPHR pafun=Adv rafun=Atr+Atr ltag=--- => trans=A(B,C,D)->*(A,B,C,D)+Atr+Atr:PAR
+GOOD:3 BAD:1 SCORE:2 RULE: func=FPHR pafun=Sb rafun=Atr+Atr ltag=--- => trans=A(B,C,D)->*(A,B,C,D)+Atr+Atr:ACT
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=myslit func=EFF ptag=Z: ltag=--- => trans=A(B,C)->C(B)+Pred|0
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Atr func=EXT ptag=C= rfunc=MAT => trans=A(B,C)->B(C(A))+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=koruna tag=N2 rafun=AtrAdv cafun=--- => trans=A(B,C)->B(A,C)+AtrAdv
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N2 afun=Atr ptag=C4 rtag=N2 => trans=A(B,C)->B(A,C)+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Atr ptag=C= rtag=N7 cfunc=--- => trans=A(B,C)->B(A,C)+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=17 pfunc=PRED ltag=N1 cafun=--- => trans=A(B,C)->A(C,c(B))+Adv;@
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N2 func=DIR1 plemma=lze rafun=Sb => trans=A(B,C)->A(C(B))+Sb
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Atr pfunc=APPS rtag=N1+N1 lfunc=--- => trans=A(B,C)->A(C(B))+Sb
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Adv pafun=Pred rafun=Pnom+Obj rfunc=PAT+CAUS => trans=A(B,C)->A(C(B))+Pnom
+GOOD:2 BAD:0 SCORE:2 RULE: func=BEN plemma=bıt ptag=Vp rtag=A1+Vp => trans=A(B,C)->A(C(B))+Pnom
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N6 pafun=Pred rtag=Vf rafun=Pnom => trans=A(B,C)->A(C(B))+Pnom
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=jen¾ func=BEN rtag=N1+A1 ltag=--- => trans=A(B,C)->A(C(B))+Pnom
+GOOD:2 BAD:0 SCORE:2 RULE: func=RHEM pafun=Coord rafun=Obj+Obj ltag=N1 => trans=A(B,C)->A(C(B))+Obj
+GOOD:2 BAD:0 SCORE:2 RULE: func=DIR3 plemma=mít ptag=VB rtag=N4 => trans=A(B,C)->A(C(B))+Obj
+GOOD:2 BAD:0 SCORE:2 RULE: afun=AuxZ func=EXT rtag=A1+A1 ltag=--- => trans=A(B,C)->A(C(B))+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Atr pafun=Coord rafun=Sb+Atr rfunc=ACT+PAT => trans=A(B,C)->A(B(C))+Sb
+GOOD:2 BAD:0 SCORE:2 RULE: tag=NX plemma=###### rtag=C= ltag=--- => trans=A(B,C)->A(B(C))+ExD
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=AC func=APP ptag=N1 rafun=Atr => trans=A(B,C)->A(B(C))+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=7 func=EXT rtag=C= ltag=C= => trans=A(B,C)->A(B(C))+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: func=DENOM ptag=## rtag=VB cafun=Atr => trans=A(B,C)->A(*(B,C))+Pred:PRED
+GOOD:2 BAD:0 SCORE:2 RULE: func=PAT pafun=Coord rafun=ExD+Pred ltag=--- => trans=A(B,C)->A(*(B,C))+ExD:PRED
+GOOD:2 BAD:0 SCORE:2 RULE: func=LOC pafun=Sb rafun=ExD ltag=--- => trans=A(B,C)->A(*(B,C))+ExD:PAR
+GOOD:2 BAD:0 SCORE:2 RULE: tag=Db afun=ExD ptag=N1 rtag=N1 => trans=A(B,C)->A(*(B,C))+ExD:PAR
+GOOD:2 BAD:0 SCORE:2 RULE: tag=Z: plemma=: rafun=Coord ltag=N1 => trans=A(B,C)->A(*(B,C))+Coord:PRED
+GOOD:2 BAD:0 SCORE:2 RULE: tag=Vp plemma=pøedtím rafun=--- ltag=--- => trans=A(B)->B|B
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=ten rtag=--- ltag=--- ctag=N2+N4 => trans=A(B)->B|B
+GOOD:2 BAD:0 SCORE:2 RULE: tag=Db afun=AuxZ ptag=P7 rtag=J^ => trans=A(B)->B|#
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N2 plemma=hodnì rafun=--- ltag=P7 => trans=A(B)->B(A)
+GOOD:3 BAD:1 SCORE:2 RULE: tag=P2 func=PAT plemma=hodnì rafun=--- => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Obj func=PRED rtag=N1+N1 ltag=--- => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=tisíc func=RSTR ptag=N4 ltag=--- => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=kus func=PAT ptag=C= rafun=--- => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: func=THL ptag=C4 ltag=A2 cafun=--- => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: func=PAT ptag=C= ltag=--- cafun=Atr+Atr => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N2 func=ACT ptag=Dg pfunc=EXT => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N2 func=PAT ptag=C= pfunc=PAR => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N1 func=ID ptag=NX pfunc=RSTR => trans=A(B)->B(A)
+GOOD:3 BAD:1 SCORE:2 RULE: ptag=C= pafun=Atr ltag=TT cafun=Atr => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=se pfunc=PAT ltag=Dg cafun=--- => trans=A(B)->A|A
+GOOD:2 BAD:0 SCORE:2 RULE: afun=ExD pfunc=EFF rtag=--- lfunc=ACT => trans=A(B)->A(*(a(B))):PAT;CPR
+GOOD:2 BAD:0 SCORE:2 RULE: func=CRIT pafun=AuxS rafun=--- ltag=--- => trans=A(B)->A(*(B)):PRED
+GOOD:2 BAD:0 SCORE:2 RULE: afun=ExD func=BEN plemma=: ltag=--- => trans=A(B)->A(*(B)):PRED
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=oko func=MEANS ptag=## ltag=--- => trans=A(B)->A(*(B)):PRED
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=zaèátek pfunc=### ltag=--- cafun=--- => trans=A(B)->A(*(B)):PRED
+GOOD:2 BAD:0 SCORE:2 RULE: tag=VB func=CPR ptag=Vf pafun=Sb => trans=A(B)->A(*(B)):MANN
+GOOD:2 BAD:0 SCORE:2 RULE: afun=ExD ptag=P1 pafun=Pnom ltag=--- => trans=A(B)->A(*(B)):CPR
+GOOD:2 BAD:0 SCORE:2 RULE: func=ID ptag=Vp ltag=--- cafun=--- => trans=A(B)->A(*(B)):ACT
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=nebo rtag=--- ltag=--- cfunc=ACT+PAT => trans=A(B)->*(A,B):PRED
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N1 func=APP ptag=NX pfunc=ID => trans=A(B)->*(A,B):ID
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=Bohemia pfunc=ID ltag=--- cafun=--- => trans=A(B)->*(A,B):ID
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=36 func=PAR ptag=N1 ltag=--- => trans=A(B)->*(A,B):ACT
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=, pfunc=LOC ltag=--- cafun=Atr+Atr+Atr+Atr => trans=A(B(C,D,E,F))->B(A(C),a(D),a(E),a(F))+Atr+Atr+Atr+Atr;@+@+@
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Coord ptag=N1 rtag=N2 cfunc=RSTR+RSTR+RSTR => trans=A(B(C,D,E),F)->B(A(E),F,a(C),a(D))+Atr+Atr+Atr+Atr;@+@
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=cena rtag=--- ltag=--- cfunc=PAT+PAT+PAT => trans=A(B(C,D,E))->B(A(C),a(D),a(E))+Atr+Atr+Atr;@+@
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=i func=CONJ ptag=N6 rafun=Atr => trans=A(B(C,D),E)->B(A(D),E,a(C))+Atr+Atr+Atr;@
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=organizace rtag=--- ltag=--- cfunc=RSTR+RSTR => trans=A(B(C,D))->B(A(D),a(C))+Atr+Atr;@
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=spoleènost rtag=--- ltag=--- ctag=A1+A1 => trans=A(B(C,D))->B(A(D),a(C))+Atr+Atr;@
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=podnik rtag=--- ltag=--- ctag=A1+A1 => trans=A(B(C,D))->B(A(D),a(C))+Atr+Atr;@
+GOOD:2 BAD:0 SCORE:2 RULE: func=DISJ ptag=N6 pfunc=TWHEN cfunc=RSTR+RSTR => trans=A(B(C,D))->B(A(D),a(C))+Atr+Atr;@
+GOOD:2 BAD:0 SCORE:2 RULE: tag=J^ plemma=stanice rafun=--- ltag=--- => trans=A(B(C,D))->B(A(C),a(D))+Atr+Atr;@
+GOOD:3 BAD:1 SCORE:2 RULE: lemma=nebo pfunc=LOC ltag=--- cafun=Atr+Atr => trans=A(B(C,D))->B(A(C),a(D))+Atr+Atr;@
+GOOD:2 BAD:0 SCORE:2 RULE: func=PAT ptag=VB ltag=--- cafun=AuxZ+AuxZ+Atr => trans=A(B(C,D))->A(B,C,D)+AuxZ+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=VB pafun=Pred ltag=N6 cafun=AuxZ+Coord => trans=A(B(C,D(E,F)))->A(C,D(B(F),b(E)))+AuxZ+Coord+Atr+Atr;@
+GOOD:2 BAD:0 SCORE:2 RULE: func=TWHEN ptag=VB rtag=Vp cafun=AuxZ => trans=A(B(C),D)->A(B(D),C)+AuxZ+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Obj pafun=Atr rafun=AuxC rfunc=RSTR => trans=A(B(C),D(E,F))->A(B(C(a(E,F))))+Atr+AuxC+ExD+ExD;CPR|A
+GOOD:2 BAD:0 SCORE:2 RULE: func=LOC ptag=Vf rtag=N4 cafun=AuxZ+Atr => trans=A(B(C),D(E))->A(B,C,D,E)+AuxZ+Obj+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=dùvod tag=N2 rafun=Adv cafun=AuxZ+Atr => trans=A(B(C),D(E))->A(B,C,D,E)+AuxZ+Adv+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=mnoho rtag=--- ltag=--- ctag=N2+N2 => trans=A(B(C))->B(C(A))+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Atr pafun=Coord rafun=ExD rfunc=PAT => trans=A(B(C))->B(A(C))+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=a rtag=VB ltag=--- cfunc=ADDR+ACT+PAT => trans=A(B(C))->A(B,C)+Sb
+GOOD:2 BAD:0 SCORE:2 RULE: tag=Vp afun=Atr rtag=VB cafun=Sb+Obj+Obj => trans=A(B(C))->A(B,C)+Sb
+GOOD:2 BAD:0 SCORE:2 RULE: tag=Vf afun=Obj rtag=Vf cafun=Sb+Adv+Coord => trans=A(B(C))->A(B,C)+Sb
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=nechat rtag=--- ltag=P1 cfunc=PAT => trans=A(B(C))->A(B,C)+Obj
+GOOD:3 BAD:1 SCORE:2 RULE: plemma=a rtag=--- ltag=N1 cfunc=RHEM => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: afun=ExD plemma=a cafun=AuxZ => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=a rtag=--- ltag=N4 ctag=Db => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: func=REG ptag=Vf pfunc=PRED cfunc=RHEM+RSTR => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=N6 pafun=Obj rtag=--- cafun=AuxZ+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=minuta tag=N6 rafun=Obj cafun=AuxZ+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=práce tag=N4 rafun=--- cafun=AuxZ+Atr+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: func=CAUS ptag=Vp ltag=--- cafun=AuxZ+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: func=BEN ptag=Vs ltag=N1 cafun=AuxZ+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=rok pfunc=PRED ltag=N4+N1 cafun=AuxZ+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=rok pfunc=PRED ltag=N2 cafun=AuxZ+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=VB pafun=Pred ltag=NX cafun=AuxZ+Atr => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N1 plemma=slou¾it rafun=--- ltag=--- => trans=A(B(C))->A(B,C)+Atv
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Obj ptag=Vf pafun=Pred cafun=Atr+AtrAdv => trans=A(B(C))->A(B,C)+AtrAdv
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Sb ptag=Vs rtag=--- cfunc=RSTR+TWHEN => trans=A(B(C))->A(B,C)+AtrAdv
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=ZPS pfunc=ID ltag=--- cafun=Atr => trans=A(B(C))->A(B,C)+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=lhùta pfunc=PRED ltag=N1 cafun=Atr+Atr => trans=A(B(C))->A(B,C)+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: func=PAT ptag=Vp ltag=P1 cafun=AdvAtr => trans=A(B(C))->A(B,C)+AdvAtr
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=nìkde tag=Db rafun=--- cafun=Adv => trans=A(B(C))->A(B,C)+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=rovnou tag=Db rafun=--- cafun=Adv => trans=A(B(C))->A(B,C)+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=daleko func=EXT ptag=VB rafun=--- => trans=A(B(C))->A(B,C)+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: func=PAT ptag=J^ ltag=Vf cafun=Adv+Obj+Obj => trans=A(B(C))->A(B,C)+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=pøímo pfunc=PRED ltag=--- cafun=Adv => trans=A(B(C))->A(B,C)+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Pnom ptag=Vp rtag=--- cfunc=TWHEN+PAT => trans=A(B(C))->A(B,C)+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: func=EXT ptag=VB ltag=--- cafun=ExD => trans=A(B(C))->A(B(a(C)))+ExD;CPR
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=mít pfunc=PREC ltag=--- cafun=Obj+Sb => trans=A(B(C(D)))->B(A,C,D)+Sb+AuxZ
+GOOD:3 BAD:1 SCORE:2 RULE: lemma=a pfunc=PRED ltag=N2 cafun=Obj+Obj => trans=A(B(C(D)))->A(B(C),D)+Obj+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Atr pfunc=CONJ rtag=--- lfunc=--- => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: func=CONJ pafun=Pred rafun=--- ltag=P4 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=10 rtag=--- ltag=--- ctag=NX => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N4 func=EFF ptag=Vp pafun=Adv => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=Vf pafun=Atr rtag=N6 cafun=Atv => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=on func=ADDR ptag=Vp ltag=--- => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Adv ptag=Vp pafun=Pred ltag=N4+N2 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=miliarda func=DIFF ptag=C4 rafun=--- => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: func=MANN ptag=Vf ltag=P4 cafun=AuxZ => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: func=PAT ptag=Dg ltag=Dg cafun=--- => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Coord ptag=Db pfunc=CM rfunc=--- => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Atr ptag=NX pfunc=ACT rfunc=FPHR+FPHR => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: pafun=Pred pfunc=PRED rafun=Adv+Adv ltag=Db => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: ptag=VB pafun=Atr ltag=N2 cafun=AuxZ+Atr => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: func=ACT plemma=rozhodnout ptag=Vf rtag=--- => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: func=PAT plemma=jedenáct ptag=C4 rtag=--- => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: func=RSTR plemma=padesát ptag=C4 rtag=--- => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: func=RSTR plemma=tak ptag=J^ rtag=--- => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: tag=Db pafun=Obj rtag=N2 rafun=Adv => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=stejnì func=MANN rtag=--- ltag=--- => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: func=ACT ptag=Vp rtag=--- cafun=Atr+Atr+Atv => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: tag=C4 ptag=C4 pfunc=RSTR rtag=N2 ltag=--- => trans=A(B,C)->C(A,B)+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: func=EXT ptag=## rtag=N1 ltag=--- cfunc=--- => trans=A(B,C)->A(C(B))+ExD
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=zhruba pafun=Obj rtag=C= ltag=--- cfunc=--- => trans=A(B,C)->A(C(B))+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N2 pafun=Pnom pfunc=PAT rtag=VB ltag=--- => trans=A(B,C)->A(B(C))+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Atr ptag=NX pfunc=DIR1 rtag=AX ltag=--- => trans=A(B,C)->*(A,B,C)+Atr:DIR1
+GOOD:2 BAD:0 SCORE:2 RULE: tag=AX pafun=Sb pfunc=ACT rtag=AX ltag=--- => trans=A(B,C)->*(A,B,C)+Atr:ACT
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=dùvod pafun=Pred rtag=J^ ltag=--- cfunc=PAT => trans=A(B,C(D,E))->C(A(D),B,a(E))+Coord+Sb+Sb;@
+GOOD:2 BAD:0 SCORE:2 RULE: func=ACT pafun=AuxS rtag=C= ltag=--- cafun=Atr => trans=A(B,C(D))->A(*(B,D(C)))+ExD+Atr:PRED
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=pøesvìdèit ptag=VB ltag=--- ctag=Vf cfunc=PAT => trans=A(B)->B|B
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N2 pafun=Obj pfunc=RSTR rtag=Vp ltag=--- => trans=A(B)->B(A)
+GOOD:4 BAD:2 SCORE:2 RULE: tag=N1 afun=Atr ptag=C1 rtag=--- ltag=--- => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=tøi => trans=-
+GOOD:3 BAD:1 SCORE:2 RULE: lemma=tisíc ptag=C1 ltag=--- ctag=N2 cfunc=MAT => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=miliarda ptag=C= ltag=Db ctag=N2 cfunc=MAT => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=tak ptag=Vf ltag=Vp ctag=--- cfunc=--- => trans=A(B)->A|#
+GOOD:2 BAD:0 SCORE:2 RULE: tag=AX ptag=AX pfunc=RSTR rtag=--- ltag=--- => trans=A(B)->*(A,B):ID
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N1 afun=Atr ptag=NX pfunc=DIR3 ltag=--- => trans=A(B)->*(A,B):DIR3
+GOOD:2 BAD:0 SCORE:2 RULE: tag=TT pafun=Adv pfunc=FPHR rtag=--- ltag=--- => trans=A(B)->*(A,B):DIR3
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=play pafun=Atr rtag=--- ltag=--- cfunc=--- => trans=A(B)->*(A,B):DIR3
+GOOD:2 BAD:0 SCORE:2 RULE: func=PAR ptag=N1 rtag=--- ltag=N2 cfunc=--- => trans=A(B)->*(A,B):ACT
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=a pfunc=ACT rtag=--- ltag=--- ctag=A1+A1+A1 => trans=A(B(C,D,E))->B(A(E),a(C),a(D))+Atr+Atr+Atr;@+@
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=a ptag=N7 ltag=--- ctag=N2+N2+N2 cfunc=PAT+PAT+PAT => trans=A(B(C,D,E))->B(A(C),a(D),a(E))+Atr+Atr+Atr;@+@
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=a ptag=N1 ltag=--- ctag=C1+C1 cfunc=RSTR+RSTR => trans=A(B(C,D),E)->B(A(D),E,a(C))+Atr+Atr+Atr;@
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=nebo pfunc=APP rtag=--- ltag=--- ctag=A2+A2 => trans=A(B(C,D))->B(A(D),a(C))+Atr+Atr;@
+GOOD:3 BAD:1 SCORE:2 RULE: lemma=a pfunc=ADDR rtag=--- ltag=--- ctag=A3+A3 => trans=A(B(C,D))->B(A(D),a(C))+Atr+Atr;@
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=dítì => trans=-
+GOOD:3 BAD:1 SCORE:2 RULE: lemma=a pfunc=PAT rtag=--- ltag=--- ctag=A3+A3 => trans=A(B(C,D))->B(A(D),a(C))+Atr+Atr;@
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Coord pafun=AtrAdv rtag=--- ltag=--- ctag=A6+A6 => trans=A(B(C,D))->B(A(D),a(C))+Atr+Atr;@
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=a pfunc=ACT rtag=--- ltag=--- ctag=N2+NX => trans=A(B(C,D))->B(A(C),a(D))+Atr+Atr;@
+GOOD:2 BAD:0 SCORE:2 RULE: func=RSTR rtag=--- ltag=--- ctag=Db+N2 cfunc=RHEM+THL => trans=A(B(C,D))->A(C,D(B))+AuxZ+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=¹est ptag=VB ltag=--- ctag=N2 cfunc=ACT => trans=A(B(C),D)->A(C(B,D))+Atr+Adv
+GOOD:3 BAD:1 SCORE:2 RULE: lemma=a pfunc=ADVS rtag=--- ltag=--- ctag=VB+VB => trans=A(B(C))->B(C(A))+Pred
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=: ptag=J^ ltag=--- ctag=VB+VB cfunc=PRED+PRED => trans=A(B(C))->B(C(A))+Pred
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N4 afun=Obj ptag=J^ rtag=N2 ltag=--- => trans=A(B(C))->B(A(C))+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=bıt pafun=Coord rtag=VB ltag=--- cfunc=ACT+PAT+LOC => trans=A(B(C))->A(B,C)+Sb
+GOOD:2 BAD:0 SCORE:2 RULE: func=PAT rtag=Vf ltag=--- ctag=N1+N4 cfunc=ACT+PAT => trans=A(B(C))->A(B,C)+Sb
+GOOD:2 BAD:0 SCORE:2 RULE: func=LOC ptag=Vp rtag=--- ltag=N4 cfunc=RHEM+RSTR => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: func=MANN rtag=Dg ltag=--- ctag=TT cfunc=RHEM => trans=A(B(C))->A(B,C)+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: func=PAT rtag=--- ltag=A1 ctag=Vp cfunc=RSTR => trans=A(B(C))->A(B,C)+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=velkı pafun=Sb rtag=A1 ltag=--- cfunc=LOC => trans=A(B(C))->A(B,C)+Adv
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=stejnì ptag=VB ltag=--- ctag=N1 cfunc=ACT => trans=A(B(C))->A(B(a(C)))+ExD;CPR
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=bıt pfunc=PREC rtag=--- ltag=--- ctag=P1+N7 => trans=A(B(C(D)))->B(A,C,D)+Sb+AuxZ
+GOOD:2 BAD:0 SCORE:2 RULE: func=PRED ptag=J^ rtag=--- ltag=--- cfunc=LOC+RSTR => trans=A(B(C(D)))->B(A,C,D)+Sb+Atr
+GOOD:2 BAD:0 SCORE:2 RULE: afun=Sb ptag=Vf pfunc=PRED rtag=N7 ltag=--- => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=peníze pafun=Sb rtag=--- ltag=--- cfunc=--- => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=koruna pafun=Obj rtag=--- ltag=--- cfunc=APP => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: tag=N1 afun=Sb ptag=Vp rtag=N6 ltag=N4 => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: func=ACT ptag=Vp rtag=N4 ltag=--- cfunc=RHEM+RSTR => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: func=ACT ptag=Vp rtag=--- ltag=Db cfunc=RHEM+RSTR+RSTR => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: func=ACT rtag=--- ltag=--- ctag=J^+N6 cfunc=RHEM+LOC => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: func=PAT rtag=--- ltag=--- ctag=Db+C4+N2 cfunc=RHEM+RSTR+APP => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: func=LOC rtag=--- ltag=N6 ctag=Db cfunc=RHEM => trans=-
+GOOD:5 BAD:3 SCORE:2 RULE: func=RSTR rtag=--- ltag=Db ctag=--- cfunc=--- => trans=-
+GOOD:2 BAD:0 SCORE:2 RULE: plemma=96 rfunc=--- => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=procento plemma=15 => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: lemma=ha tag=NX ctag=--- => trans=A(B)->B(A)
+GOOD:2 BAD:0 SCORE:2 RULE: func=RSTR rtag=--- ltag=--- ctag=J^+VB cfunc=RHEM+PAT => trans=-

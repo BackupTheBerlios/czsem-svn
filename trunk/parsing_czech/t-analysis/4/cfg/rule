@@ -1,0 +1,50 @@
+alay func pspos => lem0
+alay func => lem0
+alay func pneg => lem0
+alay func finv pspos => lem0
+alay func finv => lem0
+
+alay lem1 {syn1,syn2,syn3} => lem1
+alay lem1 => lem1
+
+func => subf
+{syn1,syn2,syn3} => subf
+func {syn1,syn2,syn3} => subf
+
+alay => type
+func => type
+lem1 => type
+pspos => type
+alay func => type
+alay lem1 => type
+alay pspos => type
+func lem1 => type
+func pspos => type
+lem1 pspos => type
+
+alay => sem
+func => sem
+lem1 => sem
+pspos => sem
+spos => sem
+alay func => sem
+alay lem1 => sem
+alay pspos => sem
+alay spos => sem
+func lem1 => sem
+func pspos => sem
+func spos => sem
+lem1 pspos => sem
+lem1 spos => sem
+pspos spos => sem
+alay func lem1 => sem
+alay func pspos => sem
+alay func spos => sem
+alay lem1 pspos => sem
+alay lem1 spos => sem
+alay pspos spos => sem
+func lem1 pspos => sem
+func lem1 spos => sem
+func pspos spos => sem
+lem1 pspos spos => sem
+
