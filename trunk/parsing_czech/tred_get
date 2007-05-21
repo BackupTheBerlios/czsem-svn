@@ -6,4 +6,4 @@ gunzip tred-1.3036.tar.gz
 
 tar xvf tred-1.3036.tar
 
-export PATH=$PATH:/tmp/czsem/parsing_czech/tred
+echo 'export PATH=$PATH:/tmp/czsem/parsing_czech/tred'
