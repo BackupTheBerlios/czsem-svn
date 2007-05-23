@@ -1,0 +1,9 @@
+#!/bin/bash
+
+mkdir out
+
+ for f in *; do
+	 xsltproc ../details.xsl $f | sed -n -e '/http/p' > out/$f.list
+done
+
+ 

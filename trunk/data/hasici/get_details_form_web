@@ -1,0 +1,11 @@
+#!/bin/bash
+
+
+ for f in *; do
+	mkdir $f.out
+	cd $f.out
+	wget -i ../$f
+	cd ..
+done
+
+ 
