@@ -2,8 +2,8 @@
 
 use Getopt::Std;
 
-$bin_dir = "/tmp/_dedek_lingv/fnTBL-1.2/bin";
-$exec_dir = "/tmp/_dedek_lingv/fnTBL-1.2/exec";
+$bin_dir = "/tmp/czsem/parsing_czech/fnTBL-1.2/bin";
+$exec_dir = "/tmp/czsem/parsing_czech/fnTBL-1.2/exec";
 
 sub log_me {
   open f, ">>logfile";

@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-$exec_dir = "/tmp/_dedek_lingv/fnTBL-1.2/exec";
+$exec_dir = "/tmp/czsem/parsing_czech/fnTBL-1.2/exec";
 #require "locales.prl";
 require "$exec_dir/smartOpen.pl";
 use Getopt::Std;

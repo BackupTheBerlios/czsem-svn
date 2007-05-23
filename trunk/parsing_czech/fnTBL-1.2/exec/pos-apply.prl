@@ -16,8 +16,8 @@ $now_string = strftime "%a %b %e %H:%M:%S %Y", localtime;
 print f $now_string, " $0 @ARGV\n";
 close f;
 
-$bin_dir = "/tmp/_dedek_lingv/fnTBL-1.2/bin";
-$exec_dir = "/tmp/_dedek_lingv/fnTBL-1.2/exec";
+$bin_dir = "/tmp/czsem/parsing_czech/fnTBL-1.2/bin";
+$exec_dir = "/tmp/czsem/parsing_czech/fnTBL-1.2/exec";
 
 use Getopt::Std;
 
