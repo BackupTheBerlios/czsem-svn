@@ -1,0 +1,8 @@
+#!/bin/bash
+
+for d in *; do 
+
+/tmp/czsem/parsing_czech/machine-annotation/run_all $d/out $d/*.txt
+/tmp/czsem/parsing_czech/t-analysis/run $d/out/5-pml
+
+done 

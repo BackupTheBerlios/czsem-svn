@@ -1,6 +1,12 @@
 #!/bin/bash
 
- for dir1 in *.list.out; do
+ mkdir txt_src
+
+cd html_src
+ 
+for dir1 in *; do
+	
+	mkdir ../txt_src/$dir1
 	
 	cd $dir1
 
@@ -42,7 +48,9 @@ sed \
 -e 's/<[^>]*>//' \
 -e 's/<[^>]*>//' \
 -e 's/<[^>]*>//' \
-< $f > txt_$f.txt
+< $f > ../../txt_src/$dir1/$f.txt
+
+	rename .htm '' ../../txt_src/$dir1/$f.txt
 
 
 	done
