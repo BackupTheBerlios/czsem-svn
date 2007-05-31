@@ -1,0 +1,28 @@
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina49449.t.pls.gz (1/1)
+
+likvidovat ------------- (ACT), (LOC), (PAT), (CONJ),--------------
+next:   ACT: hasiè,   
+next:   LOC: technika,   RSTR: dýchací,   
+next:   PAT: po¾ár,   
+next:   CONJ: a,   MEANS: vysokotlak,   MEANS: proud,   RSTR: c,   RSTR: 2,   
+
+likvidovat ------------- (ACT), (PAT), (PAT),--------------
+next:   ACT: hasiè,   
+next:   PAT: po¾ár,   
+next:   PAT: proud,   APP: c,   RSTR: 2,   
+
+likvidovat ------------- (ACT), (RHEM), (PAT),--------------
+next:   ACT: #PersPron,   
+next:   RHEM: také,   
+next:   PAT: únik,   ACT: kapalina,   RSTR: provozní,   
+
+likvidovat ------------- (ACT), (MEANS), (ACT), (LOC),--------------
+next:   ACT: hasiè,   
+next:   MEANS: proud,   RSTR: C,   RSTR: 3,   
+next:   ACT: ohnisko,   RSTR: kolik,   
+next:   LOC: plocha,   RSTR: délka,   RSTR: 3,   EXT: cca,   RSTR: km,   
+
+likvidovat ------------- (ACT), (ACT), (MEANS),--------------
+next:   ACT: po¾ár,   LOC: plocha,   RSTR: 250,   EXT: cca,   RSTR: m2,   
+next:   ACT: hasiè,   
+next:   MEANS: proud,   RSTR: c,   RSTR: 2,   
