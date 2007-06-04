@@ -1,0 +1,3 @@
+#!/bin/bash
+
+btred -I  /tmp/czsem/parsing_czech/format-conversions/pdt_formats/pml2pls.btred /tmp/czsem/data/hasici/pml/*/*.[at].gz
