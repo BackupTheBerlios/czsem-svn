@@ -19,6 +19,7 @@ sub root_verb_flow()
 			print " -------------";
 			foreach my $ch ($this->children()) {print " (" . $ch->{functor} . "),";}
 			print "--------------";
+			print "\n" . PML_T::GetSentenceString($root);
 			
 #			print_ANodes();
 #			my @acts = find_functor_node($this, "ACT");
@@ -45,7 +46,16 @@ sub print_subtree($node)
 {
 	my($node) = @_;
 	
-	print $node->{functor} . ": " . $node->{t_lemma} . ",   ";
+	print $node->{functor} . "(";
+	
+	foreach my $a (PML_T::GetANodes($node))
+	{
+		# hledat pad http://ufal.mff.cuni.cz/pdt2.0/doc/manuals/cz/a-layer/html/
+		print $a->{afun}. " ";
+	}
+	
+	
+	print "): " . $node->{t_lemma} . ",   ";
 
 	
 	foreach my $ch ($node->children())
