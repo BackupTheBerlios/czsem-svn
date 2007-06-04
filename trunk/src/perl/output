@@ -1,33 +1,97 @@
 BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina49449.t.pls.gz (1/1)
 
+zasahovat ------------- (PAT), (TWHEN), (ACT), (LOC),--------------
+V nedìli hasièi zasahovali u 6 událostí. 
+next:   PAT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): nedìle,   
+        V nedìli 
+next:   ACT(Sb ): hasiè,   
+        hasièi 
+next:   LOC(Adv AuxP ): událost,   RSTR(Atr ): 6,   
+        u 6 událostí 
+
+zasahovat ------------- (PAT), (TWHEN), (RSTR), (TWHEN), (ACT), (LOC),--------------
+V pátek 11. 5. po 18. hodinì hasièi z Jihlavy zasahovali u po¾áru chaty v Brtnické ulici v blízkosti lesa. 
+next:   PAT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): pátek,   
+        V pátek 
+next:   RSTR(Obj ): 5,   PAT(Atr ): 11,   
+        11 5 
+next:   TWHEN(Adv AuxP ): hodina,   RSTR(Atr ): 18,   
+        po 18 hodinì 
+next:   ACT(Sb ): hasiè,   DIR1(Atr AuxP ): Jihlava,   
+        hasièi z Jihlavy 
+next:   LOC(Adv AuxP ): po¾ár,   APP(Atr ): chata,   LOC(Atr AuxP ): ulice,   RSTR(Atr ): brtnický,   LOC(Atr Atr AuxP ): les,   
+        u po¾áru chaty v Brtnické ulici v blízkosti lesa 
+
 likvidovat ------------- (ACT), (LOC), (PAT), (CONJ),--------------
 Hasièi v dýchací technice po¾ár likvidovali pomocí vysokotlaku a pomocí 2 C proudù. 
 next:   ACT(Sb ): hasiè,   
+        Hasièi 
 next:   LOC(Adv AuxP ): technika,   RSTR(Atr ): dýchací,   
+        v dýchací technice 
 next:   PAT(Obj ): po¾ár,   
+        po¾ár 
 next:   CONJ(Coord ): a,   MEANS(Adv AuxP ): vysokotlak,   MEANS(Adv AuxP ): proud,   RSTR(Atr ): c,   RSTR(Atr ): 2,   
+        pomocí vysokotlaku a pomocí 2 C proudù 
 
 likvidovat ------------- (ACT), (PAT), (PAT),--------------
 Hasièi po¾ár likvidovali 2 C proudy. 
 next:   ACT(Sb ): hasiè,   
+        Hasièi 
 next:   PAT(Obj ): po¾ár,   
+        po¾ár 
 next:   PAT(Obj ): proud,   APP(Atr ): c,   RSTR(Atr ): 2,   
+        2 C proudy 
 
 likvidovat ------------- (ACT), (RHEM), (PAT),--------------
 Likvidovali také únik provozních kapalin. 
 next:   ACT(): #PersPron,   
+        
 next:   RHEM(AuxZ ): také,   
+        také 
 next:   PAT(Obj ): únik,   ACT(Atr ): kapalina,   RSTR(Atr ): provozní,   
+        únik provozních kapalin 
+
+zasahovat ------------- (ACT), (TSIN), (PAT), (CONJ), (PAT), (LOC), (RSTR), (TSIN), (DIR3),--------------
+Od nedìlního poledne zasahovalo 5 jednotek profesionálních i dobrovolných hasièù ze ®ïáru nad Sázavou, Sázavy, Velké Losenice a také hasièi podniku Èeské dráhy Brno u po¾áru suché trávy na ¾eleznièním náspu od obce Sázava smìrem na Ní¾kov. 
+next:   ACT(): #PersPron,   
+        
+next:   TSIN(Adv AuxP ): poledne,   RSTR(Atr ): nedìlní,   
+        Od nedìlního poledne 
+next:   PAT(Atr ): jednotka,   RSTR(Obj ): 5,   CONJ(Coord ): i,   APP(Atr ): hasiè,   RSTR(Atr ): dobrovolný,   APP(Atr ): hasiè,   RSTR(Atr ): profesionální,   DIR1(Atr AuxP ): ®ïár,   RSTR(Atr AuxP ): Sázava,   
+        5 jednotek profesionálních i dobrovolných hasièù hasièù ze ®ïáru nad Sázavou 
+next:   CONJ(Coord ): a,   RSTR(AuxX ): #Comma,   RSTR(Adv ): Sázava,   RSTR(Adv ): Losenice,   RSTR(Atr ): velký,   ACT(Sb ): hasiè,   RHEM(AuxZ ): také,   APP(Atr ): podnik,   
+        Sázavy , Velké Losenice a také hasièi podniku 
+next:   PAT(Obj ): dráha,   RSTR(Atr ): Èeský,   RSTR(Atr ): Brno,   
+        Èeské dráhy Brno 
+next:   LOC(Adv AuxP ): po¾ár,   APP(Atr ): tráva,   RSTR(Atr ): suchý,   
+        u po¾áru suché trávy 
+next:   RSTR(Atr AuxP ): násep,   RSTR(Obj ): ¾eleznièní,   
+        na ¾eleznièním náspu 
+next:   TSIN(Adv AuxP ): obec,   ID(Atr ): Sázava,   
+        od obce Sázava 
+next:   DIR3(Adv AuxP AuxP ): Ní¾kov,   
+        smìrem na Ní¾kov 
 
 likvidovat ------------- (ACT), (MEANS), (ACT), (LOC),--------------
 Hasièi likvidovali pomocí 3 C proudù nìkolik ohnisek na plo¹e v délce cca 3 km. 
 next:   ACT(Sb ): hasiè,   
+        Hasièi 
 next:   MEANS(Adv AuxP ): proud,   RSTR(Atr ): C,   RSTR(Atr ): 3,   
+        pomocí 3 C proudù 
 next:   ACT(Atr ): ohnisko,   RSTR(Sb ): kolik,   
+        nìkolik ohnisek 
 next:   LOC(Adv AuxP ): plocha,   RSTR(Atr AuxP ): délka,   RSTR(Atr ): 3,   EXT(AuxZ ): cca,   RSTR(Atr ): km,   
+        na plo¹e v délce cca 3 km 
 
 likvidovat ------------- (ACT), (ACT), (MEANS),--------------
 Po¾ár na plo¹e cca 250 m2 hasièi likvidovali pomocí 2 C proudù. 
 next:   ACT(Sb ): po¾ár,   LOC(Atr AuxP ): plocha,   RSTR(Atr ): 250,   EXT(AuxZ ): cca,   RSTR(Atr ): m2,   
+        Po¾ár na plo¹e cca 250 m2 
 next:   ACT(Sb ): hasiè,   
+        hasièi 
 next:   MEANS(Adv AuxP ): proud,   RSTR(Atr ): c,   RSTR(Atr ): 2,   
+        pomocí 2 C proudù 

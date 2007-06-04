@@ -3,45 +3,89 @@
 
 use vars qw($this $root);
 
-my $verb = "likvidovat";
+my @verbs = ("vyjest", "zasahovat", "likvidovat", "zlikvidovat");
 
-
-
+################################################################################
 sub root_verb_flow()
 {
-	
 	if ($this->{gram}{sempos} eq "v")
 	{
-		if ($this->{t_lemma}  eq $verb)
-		{
-			print "\n";
-			print $this->{t_lemma};
-			print " -------------";
-			foreach my $ch ($this->children()) {print " (" . $ch->{functor} . "),";}
-			print "--------------";
-			print "\n" . PML_T::GetSentenceString($root);
-			
-#			print_ANodes();
-#			my @acts = find_functor_node($this, "ACT");
-			my @acts = $this->children();
-						
-			foreach my $act (@acts)
+		foreach my $v (@verbs)
+		{		
+			if ($this->{t_lemma} eq $v )
 			{
-				print "\nnext:   ";
-				print_subtree ($act);
-
+				print "\n";
+				print $this->{t_lemma};
+				print " -------------";
+				foreach my $ch ($this->children()) {print " (" . $ch->{functor} . "),";}
+				print "--------------";
+				print "\n" . PML_T::GetSentenceString($root);
+				
+	#			print_ANodes();
+	#			my @acts = find_functor_node($this, "ACT");
+				my @acts = $this->children();
+							
+				foreach my $act (@acts)
+				{
+					print "\nnext:   ";
+					print_subtree ($act);
+					print_subtree_as_text($act);
+	
+				}
+	
+				print "\n" 
 			}
-
-			print "\n" 
 		}
 	}
 }
 
-sub pokus2 (xxx, yyy)
+################################################################################
+#sub add_anodes_to_list #($t_node, $a_list)
+#{
+#	my ($t_node, $a_list) = @_;
+#
+#	foreach my $a (PML_T::GetANodes($t_node))
+#	{
+#		push(@$a_list, $a);
+# 	}	
+#}
+
+################################################################################
+sub print_subtree_as_text($node)
 {
+	print "\n        ";
 	
+	my($node) = @_;
+	my @anode_list = ();
+	my @stack = ($node);
+		
+	while (defined($top = pop(@stack)))
+	{
+		foreach my $a (PML_T::GetANodes($top))
+		{
+			push(@anode_list, $a);
+ 		}	
+
+		foreach my $ch ($top->children())
+		{
+			push (@stack, $ch);
+		}
+		
+	}
+	
+	
+	my @s_alist = sort {$a->attr('ord') <=> $b->attr('ord')} @anode_list;	
+	
+
+	foreach my $a (@s_alist)
+	{
+		print $a->attr('m/form') . " ";
+	}
+	
+
 }
 
+################################################################################
 sub print_subtree($node)
 {
 	my($node) = @_;
@@ -64,6 +108,7 @@ sub print_subtree($node)
 	}	
 }
 
+################################################################################
 sub find_functor_node($parent, $functor)
 {
 	my($parent, $functor) = @_;
@@ -85,6 +130,7 @@ sub find_functor_node($parent, $functor)
 }
 
 
+################################################################################
 sub print_ANodes()
 {
 			 foreach my $anode (PML_T::GetANodes($this))
