@@ -3,7 +3,8 @@
 
 use vars qw($this $root);
 
-my @verbs = ("vyjest", "zasahovat", "likvidovat", "zlikvidovat");
+#my @verbs = ("vyjest", "zasahovat", "likvidovat", "zlikvidovat");
+my @verbs = ("zranit");
 
 ################################################################################
 sub root_verb_flow()

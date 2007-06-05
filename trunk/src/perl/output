@@ -1,97 +1,1038 @@
-BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina49449.t.pls.gz (1/1)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky47443.t.pls.gz (1/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky47444.t.pls.gz (2/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky47460.t.pls.gz (3/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky48187.t.pls.gz (4/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky48188.t.pls.gz (5/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky48203.t.pls.gz (6/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky48461.t.pls.gz (7/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky48462.t.pls.gz (8/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky48463.t.pls.gz (9/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky48699.t.pls.gz (10/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky48749.t.pls.gz (11/199)
 
-zasahovat ------------- (PAT), (TWHEN), (ACT), (LOC),--------------
-V nedìli hasièi zasahovali u 6 událostí. 
-next:   PAT(): #Gen,   
+zranit ------------- (PAT), (ACT),--------------
+Spolujezdec na zadním sedadle zranìn nebyl. 
+next:   PAT(): #PersPron,   
         
-next:   TWHEN(Adv AuxP ): nedìle,   
-        V nedìli 
-next:   ACT(Sb ): hasiè,   
-        hasièi 
-next:   LOC(Adv AuxP ): událost,   RSTR(Atr ): 6,   
-        u 6 událostí 
-
-zasahovat ------------- (PAT), (TWHEN), (RSTR), (TWHEN), (ACT), (LOC),--------------
-V pátek 11. 5. po 18. hodinì hasièi z Jihlavy zasahovali u po¾áru chaty v Brtnické ulici v blízkosti lesa. 
-next:   PAT(): #Gen,   
+next:   ACT(): #Gen,   
         
-next:   TWHEN(Adv AuxP ): pátek,   
-        V pátek 
-next:   RSTR(Obj ): 5,   PAT(Atr ): 11,   
-        11 5 
-next:   TWHEN(Adv AuxP ): hodina,   RSTR(Atr ): 18,   
-        po 18 hodinì 
-next:   ACT(Sb ): hasiè,   DIR1(Atr AuxP ): Jihlava,   
-        hasièi z Jihlavy 
-next:   LOC(Adv AuxP ): po¾ár,   APP(Atr ): chata,   LOC(Atr AuxP ): ulice,   RSTR(Atr ): brtnický,   LOC(Atr Atr AuxP ): les,   
-        u po¾áru chaty v Brtnické ulici v blízkosti lesa 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky48752.t.pls.gz (12/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky48793.t.pls.gz (13/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky48880.t.pls.gz (14/199)
 
-likvidovat ------------- (ACT), (LOC), (PAT), (CONJ),--------------
-Hasièi v dýchací technice po¾ár likvidovali pomocí vysokotlaku a pomocí 2 C proudù. 
-next:   ACT(Sb ): hasiè,   
-        Hasièi 
-next:   LOC(Adv AuxP ): technika,   RSTR(Atr ): dýchací,   
-        v dýchací technice 
-next:   PAT(Obj ): po¾ár,   
-        po¾ár 
-next:   CONJ(Coord ): a,   MEANS(Adv AuxP ): vysokotlak,   MEANS(Adv AuxP ): proud,   RSTR(Atr ): c,   RSTR(Atr ): 2,   
-        pomocí vysokotlaku a pomocí 2 C proudù 
-
-likvidovat ------------- (ACT), (PAT), (PAT),--------------
-Hasièi po¾ár likvidovali 2 C proudy. 
-next:   ACT(Sb ): hasiè,   
-        Hasièi 
-next:   PAT(Obj ): po¾ár,   
-        po¾ár 
-next:   PAT(Obj ): proud,   APP(Atr ): c,   RSTR(Atr ): 2,   
-        2 C proudy 
-
-likvidovat ------------- (ACT), (RHEM), (PAT),--------------
-Likvidovali také únik provozních kapalin. 
-next:   ACT(): #PersPron,   
+zranit ------------- (PAT), (ACT), (TWHEN),--------------
+©estatøicetiletý øidiè kamionu pøi nehodì zranìn nebyl. 
+next:   PAT(): #PersPron,   
         
-next:   RHEM(AuxZ ): také,   
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): nehoda,   
+        pøi nehodì 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky49245.t.pls.gz (15/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky49246.t.pls.gz (16/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky49476.t.pls.gz (17/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky49477.t.pls.gz (18/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky49502.t.pls.gz (19/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky49640.t.pls.gz (20/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky49735.t.pls.gz (21/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky49736.t.pls.gz (22/199)
+
+zranit ------------- (ACT), (LOC), (CONJ),--------------
+Profesionální hasièi ze stanice v Pohoøelicích na Brnìnsku vyjí¾dìli krátce po 18. hodinì k odstranìní následkù nehody vozidla Ford Escort, ve kterém byli zranìni 20letý øidiè a 19letý spolujezdec. 
+next:   ACT(): #Gen,   
+        
+next:   LOC(Adv AuxP ): který,   
+        ve kterém 
+next:   CONJ(Coord ): a,   PAT(Sb ): øidiè,   RSTR(Atr ): 20letý,   PAT(Sb ): spolujezdec,   RSTR(Atr ): 19letý,   
+        20letý øidiè a 19letý spolujezdec 
+
+zranit ------------- (ACT), (PAT),--------------
+Ètyøiatøicetiletý øidiè nebyl zranìn. 
+next:   ACT(): #Gen,   
+        
+next:   PAT(Sb ): øidiè,   RSTR(Atr ): ètyøiatøicetiletý,   
+        Ètyøiatøicetiletý øidiè 
+
+zranit ------------- (TWHEN), (PAT),--------------
+Pøi nehodì byli zranìni tøi lidé a havárie zcela zablokovala silnici z Pohoøelic do ®abèic v obou smìrech. 
+next:   TWHEN(Adv AuxP ): nehoda,   
+        Pøi nehodì 
+next:   PAT(Sb ): èlovìk,   RSTR(Atr ): tøi,   
+        tøi lidé 
+
+zranit ------------- (ACT), (PAT), (TWHEN), (TWHEN), (TWHEN), (LOC),--------------
+Dva lidé byli v úterý veèer zranìni pøi nehodì vozidel Toyota Jaris a ©koda Felicia v Bauerovì ulici v Brnì-Pisárkách. 
+next:   ACT(): #Gen,   
+        
+next:   PAT(Sb ): èlovìk,   RSTR(Atr ): dva,   
+        Dva lidé 
+next:   TWHEN(Adv AuxP ): úterý,   
+        v úterý 
+next:   TWHEN(Adv ): veèer,   
+        veèer 
+next:   TWHEN(Adv AuxP ): nehoda,   CONJ(Coord ): a,   APP(Atr ): vozidlo,   RSTR(Atr ): ©koda,   RSTR(Atr ): Felicia,   APP(Atr ): vozidlo,   RSTR(Atr ): Toyota,   RSTR(Atr ): Jaris,   
+        pøi nehodì vozidel vozidel Toyota Jaris a ©koda Felicia 
+next:   LOC(Adv AuxP ): ulice,   RSTR(Atr ): Bauerùv,   LOC(Atr AuxP ): Brnì,   
+        v Bauerovì ulici v Brnì-Pisárkách 
+
+zranit ------------- (LOC), (PAT),--------------
+Nehoda byla operaènímu støedisku HZS ohlá¹ena ve 23.28 hodin a v autì byla zranìna 26letá spolujezdkynì. 
+next:   LOC(Adv AuxP ): auto,   
+        v autì 
+next:   PAT(Sb ): spolujezdkynì,   RSTR(Atr ): 26letý,   
+        26letá spolujezdkynì 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky49737.t.pls.gz (23/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky49738.t.pls.gz (24/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky49801.t.pls.gz (25/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky49802.t.pls.gz (26/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky49903.t.pls.gz (27/199)
+
+zranit ------------- (ACT), (PAT),--------------
+Øidiè nebyl zranìn, nafta ani olej z vozidla neunikaly. 
+next:   ACT(): #Gen,   
+        
+next:   PAT(Sb ): øidiè,   
+        Øidiè 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky49921.t.pls.gz (28/199)
+
+zranit ------------- (TWHEN), (PAT),--------------
+Pøi po¾áru nebyl nikdo zranìn, oheò zpùsobil ¾havý odlitek, který se pøi transportu pøevrátil a ¾ár zapálil gumové pásy tøí dopravníkù. 
+next:   TWHEN(Adv AuxP ): po¾ár,   
+        Pøi po¾áru 
+next:   PAT(Sb ): kdo,   
+        nikdo 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky49950.t.pls.gz (29/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky50262.t.pls.gz (30/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky48194.t.pls.gz (31/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky48200.t.pls.gz (32/199)
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Pøi po¾áru nebyl nikdo zranìn. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): po¾ár,   
+        Pøi po¾áru 
+next:   PAT(Sb ): kdo,   
+        nikdo 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky48202.t.pls.gz (33/199)
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Pøi po¾áru nebyl nikdo zranìn. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): po¾ár,   
+        Pøi po¾áru 
+next:   PAT(Sb ): kdo,   
+        nikdo 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky48325.t.pls.gz (34/199)
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Pøi po¾áru nebyl nikdo zranìn. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): po¾ár,   
+        Pøi po¾áru 
+next:   PAT(Sb ): kdo,   
+        nikdo 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky48334.t.pls.gz (35/199)
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Pøi po¾áru nebyl nikdo zranìn. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): po¾ár,   
+        Pøi po¾áru 
+next:   PAT(Sb ): kdo,   
+        nikdo 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky48494.t.pls.gz (36/199)
+
+zranit ------------- (PAT), (RHEM),--------------
+Spolujezdkynì z osobního vozidla byla také zranìna a pøepravena do nemocnice. 
+next:   PAT(Sb ): spolujezdkynì,   DIR1(Atr AuxP ): vozidlo,   RSTR(Atr ): osobní,   
+        Spolujezdkynì z osobního vozidla 
+next:   RHEM(Adv ): také,   
         také 
-next:   PAT(Obj ): únik,   ACT(Atr ): kapalina,   RSTR(Atr ): provozní,   
-        únik provozních kapalin 
 
-zasahovat ------------- (ACT), (TSIN), (PAT), (CONJ), (PAT), (LOC), (RSTR), (TSIN), (DIR3),--------------
-Od nedìlního poledne zasahovalo 5 jednotek profesionálních i dobrovolných hasièù ze ®ïáru nad Sázavou, Sázavy, Velké Losenice a také hasièi podniku Èeské dráhy Brno u po¾áru suché trávy na ¾eleznièním náspu od obce Sázava smìrem na Ní¾kov. 
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Pøi nehodì byla jedna osoba zranìna. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): nehoda,   
+        Pøi nehodì 
+next:   PAT(Sb ): osoba,   RSTR(Atr ): jeden,   
+        jedna osoba 
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Pøi po¾áru nebyl nikdo zranìn. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): po¾ár,   
+        Pøi po¾áru 
+next:   PAT(Sb ): kdo,   
+        nikdo 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky48683.t.pls.gz (37/199)
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Pøi po¾áru nebyl nikdo zranìn. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): po¾ár,   
+        Pøi po¾áru 
+next:   PAT(Sb ): kdo,   
+        nikdo 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky48860.t.pls.gz (38/199)
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Pøi støetu dvou osobních vozidel byly tøi osoby zranìny. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): støet,   ACT(Atr ): vozidlo,   RSTR(Atr ): dva,   RSTR(Atr ): osobní,   
+        Pøi støetu dvou osobních vozidel 
+next:   PAT(Sb ): osoba,   RSTR(Atr ): tøi,   
+        tøi osoby 
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Pøi nehodì nebyl nikdo zranìn. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): nehoda,   
+        Pøi nehodì 
+next:   PAT(Sb ): kdo,   
+        nikdo 
+
+zranit ------------- (ACT), (PAT), (DIR1),--------------
+Nikdo z posádky vozidla nebyl zranìn. 
+next:   ACT(): #Gen,   
+        
+next:   PAT(Sb ): kdo,   
+        Nikdo 
+next:   DIR1(Adv AuxP ): posádka,   APP(Atr ): vozidlo,   
+        z posádky vozidla 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky49022.t.pls.gz (39/199)
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Pøi po¾áru nebyl nikdo zranìn. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): po¾ár,   
+        Pøi po¾áru 
+next:   PAT(Sb ): kdo,   
+        nikdo 
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Pøi po¾áru nebyl nikdo zranìn. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): po¾ár,   
+        Pøi po¾áru 
+next:   PAT(Sb ): kdo,   
+        nikdo 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky49198.t.pls.gz (40/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky49447.t.pls.gz (41/199)
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Pøi po¾áru nebyl nikdo zranìn. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): po¾ár,   
+        Pøi po¾áru 
+next:   PAT(Sb ): kdo,   
+        nikdo 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky49448.t.pls.gz (42/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky49469.t.pls.gz (43/199)
+
+zranit ------------- (ACT), (PAT),--------------
+Jedna osoba byla zranìna. 
+next:   ACT(): #Gen,   
+        
+next:   PAT(Sb ): osoba,   RSTR(Atr ): jeden,   
+        Jedna osoba 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky49470.t.pls.gz (44/199)
+
+zranit ------------- (ACT),--------------
+Uvnitø zèásti zøícené budovy zùstane uvìznìno a zranìno zhruba 10 osob. 
+next:   ACT(Atr ): osoba,   RSTR(Sb ): 10,   EXT(AuxZ ): zhruba,   
+        zhruba 10 osob 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky49606.t.pls.gz (45/199)
+
+zranit ------------- (ACT), (PAT),--------------
+Tøi osoby byly zranìny a o¹etøeny záchrannou slu¾bou. 
+next:   ACT(): #Gen,   
+        
+next:   PAT(Sb ): osoba,   RSTR(Atr ): tøi,   
+        Tøi osoby 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky49690.t.pls.gz (46/199)
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Pøi po¾áru nebyl nikdo zranìn. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): po¾ár,   
+        Pøi po¾áru 
+next:   PAT(Sb ): kdo,   
+        nikdo 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky49732.t.pls.gz (47/199)
+
+zranit ------------- (ACT), (MANN), (PAT),--------------
+Pøi tì¾bì døeva spadl na lesního dìlníka strom a tì¾ce ho zranil. 
 next:   ACT(): #PersPron,   
         
-next:   TSIN(Adv AuxP ): poledne,   RSTR(Atr ): nedìlní,   
-        Od nedìlního poledne 
-next:   PAT(Atr ): jednotka,   RSTR(Obj ): 5,   CONJ(Coord ): i,   APP(Atr ): hasiè,   RSTR(Atr ): dobrovolný,   APP(Atr ): hasiè,   RSTR(Atr ): profesionální,   DIR1(Atr AuxP ): ®ïár,   RSTR(Atr AuxP ): Sázava,   
-        5 jednotek profesionálních i dobrovolných hasièù hasièù ze ®ïáru nad Sázavou 
-next:   CONJ(Coord ): a,   RSTR(AuxX ): #Comma,   RSTR(Adv ): Sázava,   RSTR(Adv ): Losenice,   RSTR(Atr ): velký,   ACT(Sb ): hasiè,   RHEM(AuxZ ): také,   APP(Atr ): podnik,   
-        Sázavy , Velké Losenice a také hasièi podniku 
-next:   PAT(Obj ): dráha,   RSTR(Atr ): Èeský,   RSTR(Atr ): Brno,   
-        Èeské dráhy Brno 
-next:   LOC(Adv AuxP ): po¾ár,   APP(Atr ): tráva,   RSTR(Atr ): suchý,   
-        u po¾áru suché trávy 
-next:   RSTR(Atr AuxP ): násep,   RSTR(Obj ): ¾eleznièní,   
-        na ¾eleznièním náspu 
-next:   TSIN(Adv AuxP ): obec,   ID(Atr ): Sázava,   
-        od obce Sázava 
-next:   DIR3(Adv AuxP AuxP ): Ní¾kov,   
-        smìrem na Ní¾kov 
+next:   MANN(Adv ): tì¾ký,   
+        tì¾ce 
+next:   PAT(Obj ): #PersPron,   
+        ho 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky49777.t.pls.gz (48/199)
 
-likvidovat ------------- (ACT), (MEANS), (ACT), (LOC),--------------
-Hasièi likvidovali pomocí 3 C proudù nìkolik ohnisek na plo¹e v délce cca 3 km. 
-next:   ACT(Sb ): hasiè,   
-        Hasièi 
-next:   MEANS(Adv AuxP ): proud,   RSTR(Atr ): C,   RSTR(Atr ): 3,   
-        pomocí 3 C proudù 
-next:   ACT(Atr ): ohnisko,   RSTR(Sb ): kolik,   
-        nìkolik ohnisek 
-next:   LOC(Adv AuxP ): plocha,   RSTR(Atr AuxP ): délka,   RSTR(Atr ): 3,   EXT(AuxZ ): cca,   RSTR(Atr ): km,   
-        na plo¹e v délce cca 3 km 
+zranit ------------- (TWHEN), (PAT),--------------
+Pøi støetu tøí osobních vozidel byli zranìni øidièi vozidel a museli být pøevezeni do nemocnice. 
+next:   TWHEN(Adv AuxP ): støet,   ACT(Atr ): vozidlo,   RSTR(Atr ): tøi,   RSTR(Atr ): osobní,   
+        Pøi støetu tøí osobních vozidel 
+next:   PAT(Sb ): øidiè,   APP(Atr ): vozidlo,   
+        øidièi vozidel 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky49931.t.pls.gz (49/199)
 
-likvidovat ------------- (ACT), (ACT), (MEANS),--------------
-Po¾ár na plo¹e cca 250 m2 hasièi likvidovali pomocí 2 C proudù. 
-next:   ACT(Sb ): po¾ár,   LOC(Atr AuxP ): plocha,   RSTR(Atr ): 250,   EXT(AuxZ ): cca,   RSTR(Atr ): m2,   
-        Po¾ár na plo¹e cca 250 m2 
-next:   ACT(Sb ): hasiè,   
-        hasièi 
-next:   MEANS(Adv AuxP ): proud,   RSTR(Atr ): c,   RSTR(Atr ): 2,   
-        pomocí 2 C proudù 
+zranit ------------- (PAT), (TWHEN), (ACT),--------------
+Pøi explozi bylo zranìno osm lidí. 
+next:   PAT(): #PersPron,   
+        
+next:   TWHEN(Adv AuxP ): exploze,   
+        Pøi explozi 
+next:   ACT(Atr ): èlovìk,   RSTR(Sb ): osm,   
+        osm lidí 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky50045.t.pls.gz (50/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky50279.t.pls.gz (51/199)
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Pøi po¾áru nebyl nikdo zranìn. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): po¾ár,   
+        Pøi po¾áru 
+next:   PAT(Sb ): kdo,   
+        nikdo 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky50280.t.pls.gz (52/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky50292.t.pls.gz (53/199)
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Pøi po¾áru nebyl nikdo zranìn. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): po¾ár,   
+        Pøi po¾áru 
+next:   PAT(Sb ): kdo,   
+        nikdo 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky50304.t.pls.gz (54/199)
+
+zranit ------------- (ACT), (PAT), (TWHEN),--------------
+Jedna osoba byla pøi nehodì zranìna a pøepravena záchrannou slu¾bou do nemocnice. 
+next:   ACT(): #Gen,   
+        
+next:   PAT(Sb ): osoba,   RSTR(Atr ): jeden,   
+        Jedna osoba 
+next:   TWHEN(Adv AuxP ): nehoda,   
+        pøi nehodì 
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Pøi nehodì byly tøi osoby zranìny a musely být o¹etøeny záchrannou slu¾bou. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): nehoda,   
+        Pøi nehodì 
+next:   PAT(Sb ): osoba,   RSTR(Atr ): tøi,   
+        tøi osoby 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky50311.t.pls.gz (55/199)
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Pøi po¾áru nebyl nikdo zranìn. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): po¾ár,   
+        Pøi po¾áru 
+next:   PAT(Sb ): kdo,   
+        nikdo 
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Pøi po¾áru nebyl nikdo zranìn. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): po¾ár,   
+        Pøi po¾áru 
+next:   PAT(Sb ): kdo,   
+        nikdo 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky50479.t.pls.gz (56/199)
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Pøi støetu byla jedna osoba zranìna. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): støet,   
+        Pøi støetu 
+next:   PAT(Sb ): osoba,   RSTR(Atr ): jeden,   
+        jedna osoba 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky50583.t.pls.gz (57/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky46754.t.pls.gz (58/199)
+
+zranit ------------- (ACT), (TWHEN), (TWHEN), (PAT),--------------
+Pøi nehodì ani likvidaci úniku plynu nebyl nikdo zranìn. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): nehoda,   
+        Pøi nehodì 
+next:   TWHEN(Adv ): likvidace,   CONJ(Coord ): ani,   PAT(Atr ): únik,   ACT(Atr ): plyn,   
+        ani likvidaci úniku plynu 
+next:   PAT(Sb ): kdo,   
+        nikdo 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky46920.t.pls.gz (59/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky47081.t.pls.gz (60/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky47106.t.pls.gz (61/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky47118.t.pls.gz (62/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky47122.t.pls.gz (63/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky47139.t.pls.gz (64/199)
+
+zranit ------------- (ACT), (PAT),--------------
+©koda na majetku èiní zhruba 300 tisíc korun, nikdo nebyl zranìn. 
+next:   ACT(): #Gen,   
+        
+next:   PAT(Sb ): kdo,   
+        nikdo 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky47232.t.pls.gz (65/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky47300.t.pls.gz (66/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky47301.t.pls.gz (67/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky47438.t.pls.gz (68/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky47547.t.pls.gz (69/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky47603.t.pls.gz (70/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky47718.t.pls.gz (71/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky47820.t.pls.gz (72/199)
+
+zranit ------------- (ACT), (TWHEN), (TWHEN), (PAT),--------------
+Pøi nehodì ani likvidaci úniku plynu nebyl nikdo zranìn. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): nehoda,   
+        Pøi nehodì 
+next:   TWHEN(Adv ): likvidace,   CONJ(Coord ): ani,   PAT(Atr ): únik,   ACT(Atr ): plyn,   
+        ani likvidaci úniku plynu 
+next:   PAT(Sb ): kdo,   
+        nikdo 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky47821.t.pls.gz (73/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky48179.t.pls.gz (74/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky48184.t.pls.gz (75/199)
+
+zranit ------------- (MANN), (CONJ),--------------
+Pád tì¾kého panelu nepøe¾il øidiè osobního automobilu, v autobusu byl pøimáèknut zbytky ¾eleznièního mostu a kolejemi a tì¾ce zranìn øidiè a také jeho nejbli¾¹í spolujezdec. 
+next:   MANN(Adv ): tì¾ký,   
+        tì¾ce 
+next:   CONJ(Coord ): a,   PAT(Sb ): øidiè,   RHEM(AuxZ ): také,   PAT(Sb ): spolujezdec,   APP(Atr ): #PersPron,   RSTR(Atr ): blízký,   
+        øidiè a také jeho nejbli¾¹í spolujezdec 
+
+zranit ------------- (PAT), (ACT), (CONJ), (MANN),--------------
+Dal¹ích 15 "¾ivých" osob hlavnì v autobusu a také v Avii bylo zranìno lehce. 
+next:   PAT(): #PersPron,   
+        
+next:   ACT(Atr ): osoba,   RSTR(Atr ): dal¹í,   RSTR(Sb ): 15,   ID(Atr ): ¾ivý,   
+        Dal¹ích 15 ¾ivých osob 
+next:   CONJ(Coord ): a,   RHEM(Adv ): hlavnì,   LOC(Adv AuxP ): autobus,   RHEM(AuxZ ): také,   LOC(Adv AuxP ): Avia,   
+        hlavnì v autobusu a také v Avii 
+next:   MANN(Adv ): lehký,   
+        lehce 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky48327.t.pls.gz (76/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky48873.t.pls.gz (77/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky49247.t.pls.gz (78/199)
+
+zranit ------------- (ACT), (PAT),--------------
+Byl zranìn pracovník údr¾by, kterému se v¹ak podaøilo z kotelny uniknout na venkovní schodi¹tì u strojovny výtahu. 
+next:   ACT(): #Gen,   
+        
+next:   PAT(Sb ): pracovník,   APP(Atr ): údr¾ba,   RSTR(Atr AuxT ): podaøit_se,   ACT(Obj ): který,   ADVS(Coord ): v¹ak,   PAT(Obj ): uniknout,   ACT(): #Cor,   DIR1(Adv AuxP ): kotelna,   DIR3(Adv AuxP ): schodi¹tì,   RSTR(Atr ): venkovní,   LOC(Atr AuxP ): strojovna,   APP(Atr ): výtah,   
+        pracovník údr¾by kterému se v¹ak podaøilo z kotelny uniknout na venkovní schodi¹tì u strojovny výtahu 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky49250.t.pls.gz (79/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky49291.t.pls.gz (80/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky49397.t.pls.gz (81/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky49779.t.pls.gz (82/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky49910.t.pls.gz (83/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky50035.t.pls.gz (84/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky50303.t.pls.gz (85/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky50487.t.pls.gz (86/199)
+
+zranit ------------- (PAT), (ACT), (RSTR),--------------
+Øidiè z Orlové (roèník 1977) nebyl zranìn, ¹koda na autì èiní asi jeden milion korun. 
+next:   PAT(): #PersPron,   
+        
+next:   ACT(): #Gen,   
+        
+next:   RSTR(AuxG ): #Bracket,   RSTR(Sb ): øidiè,   DIR1(Atr AuxP ): Orlová,   RSTR(Sb ): roèník,   RSTR(Atr ): 1977,   
+        Øidiè z Orlové ( roèník 1977 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/olomoucky/olomoucky38397.t.pls.gz (87/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/olomoucky/olomoucky44834.t.pls.gz (88/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/olomoucky/olomoucky46899.t.pls.gz (89/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/olomoucky/olomoucky49401.t.pls.gz (90/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/olomoucky/olomoucky49555.t.pls.gz (91/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/olomoucky/olomoucky49557.t.pls.gz (92/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/olomoucky/olomoucky49559.t.pls.gz (93/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/olomoucky/olomoucky49560.t.pls.gz (94/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/olomoucky/olomoucky49741.t.pls.gz (95/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/olomoucky/olomoucky49861.t.pls.gz (96/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/olomoucky/olomoucky50240.t.pls.gz (97/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/olomoucky/olomoucky50288.t.pls.gz (98/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky47435.t.pls.gz (99/199)
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Pøi nehodì byla zranìna jedna osoba. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): nehoda,   
+        Pøi nehodì 
+next:   PAT(Sb ): osoba,   RSTR(Atr ): jeden,   
+        jedna osoba 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky47551.t.pls.gz (100/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky47578.t.pls.gz (101/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky47719.t.pls.gz (102/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky47735.t.pls.gz (103/199)
+
+zranit ------------- (ACT), (LOC), (PAT), (MANN),--------------
+Na místì byla jedna osoba lehce zranìna. 
+next:   ACT(): #Gen,   
+        
+next:   LOC(Adv AuxP ): místo,   
+        Na místì 
+next:   PAT(Sb ): osoba,   RSTR(Atr ): jeden,   
+        jedna osoba 
+next:   MANN(Adv ): lehký,   
+        lehce 
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Pøi kolizi nebyl nikdo zranìn. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): kolize,   
+        Pøi kolizi 
+next:   PAT(Sb ): kdo,   
+        nikdo 
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Pøi nehodì byly zranìny dvì osoby. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): nehoda,   
+        Pøi nehodì 
+next:   PAT(Sb ): osoba,   RSTR(Atr ): dva,   
+        dvì osoby 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky47791.t.pls.gz (104/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky47836.t.pls.gz (105/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky48182.t.pls.gz (106/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky48183.t.pls.gz (107/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky48185.t.pls.gz (108/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky48287.t.pls.gz (109/199)
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Pøi nehodì byla jedna osoba zranìna. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): nehoda,   
+        Pøi nehodì 
+next:   PAT(Sb ): osoba,   RSTR(Atr ): jeden,   
+        jedna osoba 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky48444.t.pls.gz (110/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky48493.t.pls.gz (111/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky48655.t.pls.gz (112/199)
+
+zranit ------------- (ACT), (PAT),--------------
+Zranìny byly dvì osoby, které si do péèe pøevzala zdravotnická záchranná slu¾ba. 
+next:   ACT(): #Gen,   
+        
+next:   PAT(Sb ): osoba,   RSTR(Atr ): dva,   RSTR(Atr AuxT ): pøevzít,   PAT(Obj ): který,   DIR3(Adv AuxP ): péèe,   ACT(Sb ): slu¾ba,   RSTR(Atr ): zdravotnický,   RSTR(Atr ): záchranný,   
+        dvì osoby které si do péèe pøevzala zdravotnická záchranná slu¾ba 
+
+zranit ------------- (PAT), (TWHEN), (ACT),--------------
+Pøi nehodì bylo celkem zranìno 5 osob. 
+next:   PAT(): #PersPron,   
+        
+next:   TWHEN(Adv AuxP ): nehoda,   
+        Pøi nehodì 
+next:   ACT(Atr ): osoba,   RSTR(Sb ): 5,   EXT(Adv ): celkem,   
+        celkem 5 osob 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky48871.t.pls.gz (113/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky49169.t.pls.gz (114/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky49172.t.pls.gz (115/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky49441.t.pls.gz (116/199)
+
+zranit ------------- (ACT), (EXT), (PAT), (MANN),--------------
+Celkem byly dvì osoby zranìny tì¾ce a jedna lehce. 
+next:   ACT(): #Gen,   
+        
+next:   EXT(Adv ): celkem,   
+        Celkem 
+next:   PAT(Sb ): osoba,   RSTR(Atr ): dva,   
+        dvì osoby 
+next:   MANN(Adv ): tì¾ký,   
+        tì¾ce 
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Pøi nehodì byly zranìny je¹tì tøi osoby. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): nehoda,   
+        Pøi nehodì 
+next:   PAT(Sb ): osoba,   RHEM(AuxZ ): je¹tì,   RSTR(Atr ): tøi,   
+        je¹tì tøi osoby 
+
+zranit ------------- (ACT), (LOC), (PAT), (MANN),--------------
+Na místì byly zranìny ètyøi osoby tì¾ce. 
+next:   ACT(): #Gen,   
+        
+next:   LOC(Adv AuxP ): místo,   
+        Na místì 
+next:   PAT(Sb ): osoba,   RSTR(Atr ): ètyøi,   
+        ètyøi osoby 
+next:   MANN(Adv ): tì¾ký,   
+        tì¾ce 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky49547.t.pls.gz (117/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky49581.t.pls.gz (118/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky49607.t.pls.gz (119/199)
+
+zranit ------------- (PAT), (RSTR),--------------
+Úèastníci budou seznámeni s platnou legislativou, tématem ¹kolení budou i detekèní prostøedky, problematika dekontaminace, individuální ochrana pøed chemickými zranìni apod. 
+next:   PAT(Pnom ): téma,   APP(Atr ): ¹kolení,   PAT(): #Gen,   ACT(): #Gen,   
+        tématem ¹kolení 
+next:   RSTR(AuxX ): #Comma,   ACT(Sb ): prostøedek,   CONJ(Coord ): i,   RSTR(Atr ): detekèní,   RSTR(Atr ): ochrana,   RSTR(Atr ): individuální,   RSTR(Atr AuxP ): chemický,   ACT(Sb ): prostøedek,   RSTR(Atr ): problematika,   APP(Atr ): dekontaminace,   
+        i detekèní prostøedky prostøedky problematika dekontaminace , individuální ochrana pøed chemickými 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky49688.t.pls.gz (120/199)
+
+zranit ------------- (ACT), (TWHEN), (PAT), (MANN),--------------
+Pøi kolizi byla jedna osoba zranìna lehce. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): kolize,   
+        Pøi kolizi 
+next:   PAT(Sb ): osoba,   RSTR(Atr ): jeden,   
+        jedna osoba 
+next:   MANN(Adv ): lehký,   
+        lehce 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky49733.t.pls.gz (121/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky49860.t.pls.gz (122/199)
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Pøi kolizi nebyl nikdo zranìn. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): kolize,   
+        Pøi kolizi 
+next:   PAT(Sb ): kdo,   
+        nikdo 
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Pøi po¾áru nebyl nikdo zranìn. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): po¾ár,   
+        Pøi po¾áru 
+next:   PAT(Sb ): kdo,   
+        nikdo 
+
+zranit ------------- (ACT), (LOC), (PAT), (MANN),--------------
+Na místì byly zranìny dvì osoby lehce. 
+next:   ACT(): #Gen,   
+        
+next:   LOC(Adv AuxP ): místo,   
+        Na místì 
+next:   PAT(Sb ): osoba,   RSTR(Atr ): dva,   
+        dvì osoby 
+next:   MANN(Adv ): lehký,   
+        lehce 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky50117.t.pls.gz (123/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky50271.t.pls.gz (124/199)
+
+zranit ------------- (ACT), (TWHEN), (RHEM), (PAT),--------------
+Pøi nehodì vozidla, které skonèilo na støe¹e, byly zranìny lehce dvì osoby. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): nehoda,   APP(Atr ): vozidlo,   RSTR(Atr ): skonèit,   ACT(Sb ): který,   LOC(Adv AuxP ): støecha,   
+        Pøi nehodì vozidla které skonèilo na støe¹e 
+next:   RHEM(AuxZ ): lehký,   
+        lehce 
+next:   PAT(Sb ): osoba,   RSTR(Atr ): dva,   
+        dvì osoby 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky50397.t.pls.gz (125/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky50436.t.pls.gz (126/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky50448.t.pls.gz (127/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky50556.t.pls.gz (128/199)
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Pøi této události nebylo nikdo zranìn. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): událost,   RSTR(Atr ): tento,   
+        Pøi této události 
+next:   PAT(Sb ): kdo,   
+        nikdo 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/plzensky/plzensky48663.t.pls.gz (129/199)
+
+zranit ------------- (PAT),--------------
+Pøi po¾árech od poèátku roku byly dvì osoby usmrceny a ¹estnáct osob zranìno. 
+next:   PAT(Sb ): ¹estnáct,   ACT(Atr ): osoba,   
+        ¹estnáct osob 
+
+zranit ------------- (PAT), (ACT), (TWHEN), (RSTR),--------------
+Pøi zásazích u po¾árù bylo zranìno také tøináct hasièù, z toho deset profesionálních. 
+next:   PAT(): #PersPron,   
+        
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): zásah,   LOC(Atr AuxP ): po¾ár,   
+        Pøi zásazích u po¾árù 
+next:   RSTR(AuxX ): #Comma,   RSTR(Sb ): tøináct,   RHEM(AuxZ ): také,   ACT(Atr ): hasiè,   RSTR(Sb ): deset,   DIR1(Atr AuxP ): ten,   PAT(Atr ): profesionální,   
+        také tøináct hasièù , z toho deset profesionálních 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/plzensky/plzensky48881.t.pls.gz (130/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/plzensky/plzensky49032.t.pls.gz (131/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/plzensky/plzensky49036.t.pls.gz (132/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/plzensky/plzensky49076.t.pls.gz (133/199)
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Pøi nehodì byly zranìny dvì osoby. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): nehoda,   
+        Pøi nehodì 
+next:   PAT(Sb ): osoba,   RSTR(Atr ): dva,   
+        dvì osoby 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/plzensky/plzensky49187.t.pls.gz (134/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/plzensky/plzensky49188.t.pls.gz (135/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/plzensky/plzensky49200.t.pls.gz (136/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/plzensky/plzensky49244.t.pls.gz (137/199)
+
+zranit ------------- (ACT), (PAT),--------------
+Nikdo nebyl zranìn. 
+next:   ACT(): #Gen,   
+        
+next:   PAT(Sb ): kdo,   
+        Nikdo 
+
+zranit ------------- (ACT), (PAT), (ATT),--------------
+Øidièka vozidla nebyla na¹tìstí zranìna. 
+next:   ACT(): #Gen,   
+        
+next:   PAT(Sb ): øidièka,   APP(Atr ): vozidlo,   
+        Øidièka vozidla 
+next:   ATT(Adv ): na¹tìstí,   
+        na¹tìstí 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/plzensky/plzensky49288.t.pls.gz (138/199)
+
+zranit ------------- (ACT), (PAT), (ATT),--------------
+Øidièka nebyla na¹tìstí zranìna. 
+next:   ACT(): #Gen,   
+        
+next:   PAT(Sb ): øidièka,   
+        Øidièka 
+next:   ATT(Adv ): na¹tìstí,   
+        na¹tìstí 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/plzensky/plzensky49294.t.pls.gz (139/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/plzensky/plzensky49615.t.pls.gz (140/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/plzensky/plzensky49898.t.pls.gz (141/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/plzensky/plzensky49899.t.pls.gz (142/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/plzensky/plzensky49901.t.pls.gz (143/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/plzensky/plzensky50068.t.pls.gz (144/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/plzensky/plzensky50219.t.pls.gz (145/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/plzensky/plzensky50243.t.pls.gz (146/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/plzensky/plzensky50606.t.pls.gz (147/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky45611.t.pls.gz (148/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky45894.t.pls.gz (149/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky46031.t.pls.gz (150/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky46049.t.pls.gz (151/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky46445.t.pls.gz (152/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky46747.t.pls.gz (153/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky46881.t.pls.gz (154/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky46915.t.pls.gz (155/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky47079.t.pls.gz (156/199)
+
+zranit ------------- (PAT), (TWHEN), (ACT),--------------
+Pøi nehodì bylo zranìno 6 lidí, z toho dvì dìti. 
+next:   PAT(): #PersPron,   
+        
+next:   TWHEN(Adv AuxP ): nehoda,   
+        Pøi nehodì 
+next:   ACT(Atr ): èlovìk,   RSTR(Sb ): 6,   
+        6 lidí 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky47119.t.pls.gz (157/199)
+
+zranit ------------- (ACT), (TWHEN), (PAT), (PAT),--------------
+Pøi nehodì byl jeden èlovìk zranìn, ovezla jej zdravotnická záchranná slu¾ba. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): nehoda,   
+        Pøi nehodì 
+next:   PAT(Sb ): èlovìk,   RSTR(Atr ): jeden,   
+        jeden èlovìk 
+next:   PAT(Sb ): slu¾ba,   RSTR(Atr ): ovezla,   ACT(Atr ): #PersPron,   RSTR(Atr ): zdravotnický,   RSTR(Atr ): záchranný,   
+        ovezla jej zdravotnická záchranná slu¾ba 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky47392.t.pls.gz (158/199)
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Pøi nehodì nikdo nebyl zranìn. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): nehoda,   
+        Pøi nehodì 
+next:   PAT(Sb ): kdo,   
+        nikdo 
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Pøi nehodì nikdo nebyl zranìn. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): nehoda,   
+        Pøi nehodì 
+next:   PAT(Sb ): kdo,   
+        nikdo 
+
+zranit ------------- (ACT), (PAT),--------------
+Nikdo nebyl zranìn. 
+next:   ACT(): #Gen,   
+        
+next:   PAT(Sb ): kdo,   
+        Nikdo 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky47549.t.pls.gz (159/199)
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Pøi nehodì nikdo nebyl zranìn. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): nehoda,   
+        Pøi nehodì 
+next:   PAT(Sb ): kdo,   
+        nikdo 
+
+zranit ------------- (TWHEN), (PAT),--------------
+Pøi nehodì byl jeden èlovìk zranìn, byl pøevzat do péèe zdravotnické záchranné slu¾by. 
+next:   TWHEN(Adv AuxP ): nehoda,   
+        Pøi nehodì 
+next:   PAT(Sb ): èlovìk,   RSTR(Atr ): jeden,   
+        jeden èlovìk 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky47552.t.pls.gz (160/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky47692.t.pls.gz (161/199)
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Pøi nehodì byli dva lidé zranìni. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): nehoda,   
+        Pøi nehodì 
+next:   PAT(Adv ): èlovìk,   RSTR(Atr ): dva,   
+        dva lidé 
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Pøi nehodì byl jeden èlovìk zranìn. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): nehoda,   
+        Pøi nehodì 
+next:   PAT(Sb ): èlovìk,   RSTR(Atr ): jeden,   
+        jeden èlovìk 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky47886.t.pls.gz (162/199)
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Pøi nehodì byl jeden èlovìk zranìn. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): nehoda,   
+        Pøi nehodì 
+next:   PAT(Sb ): èlovìk,   RSTR(Atr ): jeden,   
+        jeden èlovìk 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky48181.t.pls.gz (163/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky48277.t.pls.gz (164/199)
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Pøi nehodì byl jeden èlovìk zranìn. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): nehoda,   
+        Pøi nehodì 
+next:   PAT(Sb ): èlovìk,   RSTR(Atr ): jeden,   
+        jeden èlovìk 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky48451.t.pls.gz (165/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky48647.t.pls.gz (166/199)
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Pøi nehodì byl jeden èlovìk zranìn. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): nehoda,   
+        Pøi nehodì 
+next:   PAT(Sb ): èlovìk,   RSTR(Atr ): jeden,   
+        jeden èlovìk 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky48807.t.pls.gz (167/199)
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Pøi nehodì nikdo nebyl zranìn. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): nehoda,   
+        Pøi nehodì 
+next:   PAT(Sb ): kdo,   
+        nikdo 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky48968.t.pls.gz (168/199)
+
+zranit ------------- (TWHEN), (PAT),--------------
+Pøi nehodì byli dva lidé zranìni, auto bylo pøevrácené na støe¹e. 
+next:   TWHEN(Adv AuxP ): nehoda,   
+        Pøi nehodì 
+next:   PAT(Adv ): èlovìk,   RSTR(Atr ): dva,   
+        dva lidé 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky49186.t.pls.gz (169/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky49231.t.pls.gz (170/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky49402.t.pls.gz (171/199)
+
+zranit ------------- (ACT), (PAT), (MANN),--------------
+V autì pøi nehodì jeden èlovìk zahynul, jeden byl tì¾ce zranìn, hasièi jej pøedali zdravotnické záchranné slu¾bì, a tøi lidé byli lehce zranìni. (V autì bylo 5 lidí.) Jednotka provedla protipo¾ární opatøení 
+next:   ACT(): #Gen,   
+        
+next:   PAT(Sb ): jeden,   
+        jeden 
+next:   MANN(Adv ): tì¾ký,   
+        tì¾ce 
+
+zranit ------------- (ACT), (PAT), (MANN), (RSTR),--------------
+V autì pøi nehodì jeden èlovìk zahynul, jeden byl tì¾ce zranìn, hasièi jej pøedali zdravotnické záchranné slu¾bì, a tøi lidé byli lehce zranìni. (V autì bylo 5 lidí.) Jednotka provedla protipo¾ární opatøení 
+next:   ACT(): #Gen,   
+        
+next:   PAT(Sb ): èlovìk,   RSTR(Atr ): tøi,   
+        tøi lidé 
+next:   MANN(Adv ): lehký,   
+        lehce 
+next:   RSTR(AuxG ): #Period,   RSTR(Obj ): být,   ACT(): #PersPron,   LOC(Adv AuxP ): auto,   PAT(Atr ): èlovìk,   RSTR(Pnom ): 5,   RSTR(Sb ExD ): jednotka,   
+        V autì bylo 5 lidí . ) Jednotka 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky49474.t.pls.gz (172/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky49550.t.pls.gz (173/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky49689.t.pls.gz (174/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky49847.t.pls.gz (175/199)
+
+zranit ------------- (ACT), (PAT),--------------
+Jedno auto se pøi nehodì pøevrátilo na støechu, nikdo nebyl zranìn. 
+next:   ACT(): #Gen,   
+        
+next:   PAT(Sb ): kdo,   
+        nikdo 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky50067.t.pls.gz (176/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina38933.t.pls.gz (177/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina42215.t.pls.gz (178/199)
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Do¹lo zde ke støetu dvou osobních automobilù, pøi kterém byly 2 osoby zranìny. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): který,   
+        pøi kterém 
+next:   PAT(Sb ): osoba,   RSTR(Atr ): 2,   
+        2 osoby 
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Pøi dopravní nehodì byly 2 osoby zranìny. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): nehoda,   RSTR(Atr ): dopravní,   
+        Pøi dopravní nehodì 
+next:   PAT(Sb ): osoba,   RSTR(Atr ): 2,   
+        2 osoby 
+
+zranit ------------- (ACT), (TWHEN), (PAT), (MANN),--------------
+Pøi dopravní nehodì byla jedna osoba lehce zranìna -- byla o¹etøena zdravotnickou záchrannou slu¾bou na místì události. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): nehoda,   RSTR(Atr ): dopravní,   
+        Pøi dopravní nehodì 
+next:   PAT(Sb ): osoba,   RSTR(Atr ): jeden,   
+        jedna osoba 
+next:   MANN(Adv ): lehký,   
+        lehce 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina42217.t.pls.gz (179/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina42990.t.pls.gz (180/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina43036.t.pls.gz (181/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina43037.t.pls.gz (182/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina43038.t.pls.gz (183/199)
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Pøi dopravní nehodì byly 2 osoby zranìny -- byly pøedány zdravotnické záchranné slu¾bì. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): nehoda,   RSTR(Atr ): dopravní,   
+        Pøi dopravní nehodì 
+next:   PAT(Sb ): osoba,   RSTR(Atr ): 2,   
+        2 osoby 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina43039.t.pls.gz (184/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina43040.t.pls.gz (185/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina43255.t.pls.gz (186/199)
+
+zranit ------------- (ACT), (LOC), (PAT),--------------
+Hasièi do odpoledních hodin zasahovali u 12 dopravních nehod, pøi kterých byly zranìny 2 osoby. 
+next:   ACT(): #Gen,   
+        
+next:   LOC(Adv AuxP ): který,   
+        pøi kterých 
+next:   PAT(Sb ): osoba,   RSTR(Atr ): 2,   
+        2 osoby 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina43599.t.pls.gz (187/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina44003.t.pls.gz (188/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina44234.t.pls.gz (189/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina45207.t.pls.gz (190/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina45780.t.pls.gz (191/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina47849.t.pls.gz (192/199)
+
+zranit ------------- (PAT),--------------
+Jedna z krav byla na místì usmrcena a jedna zranìna - ta byla pozdìji utracena pøivolaným veterináøem. 
+next:   PAT(Sb ): jeden,   
+        jedna 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina48967.t.pls.gz (193/199)
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Pøi po¾áru byla zranìna 1 osoba. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): po¾ár,   
+        Pøi po¾áru 
+next:   PAT(Sb ): osoba,   RSTR(Atr ): 1,   
+        1 osoba 
+
+zranit ------------- (ACT), (TWHEN), (TWHEN), (PAT),--------------
+Pøi dopravní nehodì byli 4 osoby zranìny -- 2 dospìlé osoby a 2 dìti. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): nehoda,   RSTR(Atr ): dopravní,   
+        Pøi dopravní nehodì 
+next:   TWHEN(Adv ): osoba,   RSTR(Atr ): 4,   
+        4 osoby 
+next:   PAT(Sb ): dítì,   CONJ(Coord ): a,   RSTR(Atr ): osoba,   RSTR(Atr ): 2,   RSTR(Atr ): dospìlý,   RSTR(Atr ): 2,   
+        2 dospìlé osoby a 2 dìti 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina48986.t.pls.gz (194/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina48987.t.pls.gz (195/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina49449.t.pls.gz (196/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina49844.t.pls.gz (197/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina50234.t.pls.gz (198/199)
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+V 18:15 vyjí¾dìli hasièi z Jihlavy na 120 km dálnice D1 ve smìru na Brno k dopravní nehodì automobilu VW Transporter, pøi které byla zranìna 1 osoba. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): který,   
+        pøi které 
+next:   PAT(Sb ): osoba,   RSTR(Atr ): 1,   
+        1 osoba 
+
+zranit ------------- (ACT), (TWHEN), (PAT),--------------
+Následnì na úseku asi 300 m do¹lo k dal¹ím dvìma dopravním nehodám, pøi kterých byly zranìny dal¹í 2 osoby. 
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): který,   
+        pøi kterých 
+next:   PAT(Sb ): osoba,   RSTR(Atr ): dal¹í,   RSTR(Atr ): 2,   
+        dal¹í 2 osoby 
+
+zranit ------------- (PAT), (ACT), (TWHEN), (RSTR),--------------
+Pøi dopravní nehodì bylo zranìno 6 osob (5 osob z dodávky + 1 osoba z osobního automobilu). 
+next:   PAT(): #PersPron,   
+        
+next:   ACT(): #Gen,   
+        
+next:   TWHEN(Adv AuxP ): nehoda,   RSTR(Atr ): dopravní,   
+        Pøi dopravní nehodì 
+next:   RSTR(AuxG ): #Bracket,   ACT(Atr ): osoba,   RSTR(Sb ): 6,   ACT(Atr ): osoba,   RSTR(Sb ): 5,   RSTR(AuxP ): z,   RSTR(AuxG ): +,   RSTR(Atr ): dodávka,   RSTR(Sb ): osoba,   RSTR(Atr ): 1,   DIR1(Atr AuxP ): automobil,   RSTR(Atr ): osobní,   
+        6 osob ( 5 osob z dodávky + 1 osoba z osobního automobilu 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina50293.t.pls.gz (199/199)
