@@ -17,7 +17,9 @@ sub root_verb_flow()
 			{
 				print "\n";
 				print $this->{t_lemma};
-				print " -------------";
+				print ": -------- a(";
+				print_ANodes($this);
+				print ") ---------";
 				foreach my $ch ($this->children()) {print " (" . $ch->{functor} . "),";}
 				print "--------------";
 				print "\n" . PML_T::GetSentenceString($root);
@@ -39,6 +41,8 @@ sub root_verb_flow()
 		}
 	}
 }
+
+################################################################################
 
 ################################################################################
 #sub add_anodes_to_list #($t_node, $a_list)
@@ -132,13 +136,14 @@ sub find_functor_node($parent, $functor)
 
 
 ################################################################################
-sub print_ANodes()
+sub print_ANodes($t_node)
 {
-			 foreach my $anode (PML_T::GetANodes($this))
-			 {
-        			print $anode->attr('m/tag');
-				print " ";
-				print $anode->attr('m/form');
-				print ", ";
-			}
+	my($t_node) = @_;
+
+	foreach my $anode (PML_T::GetANodes($t_node))
+	{
+		#print $anode->attr('m/tag');
+		print $anode->attr('m/form');
+		print ", ";
+	}
 }
