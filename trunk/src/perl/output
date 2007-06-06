@@ -1,6 +1,6 @@
 BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky47549.t.pls.gz (1/1)
 
-zranit: -------- a(zranìn, nebyl, ) --------- (ACT), (TWHEN), (PAT),--------------
+zranit: -------- a(zranìn.A, nebyl.N, ) --------- (ACT), (TWHEN), (PAT),--------------
 Pøi nehodì nikdo nebyl zranìn. 
 next:   ACT(): #Gen,   
         
@@ -9,7 +9,7 @@ next:   TWHEN(Adv AuxP ): nehoda,
 next:   PAT(Sb ): kdo,   
         nikdo 
 
-zranit: -------- a(zranìn, byl, ) --------- (TWHEN), (PAT),--------------
+zranit: -------- a(zranìn.A, byl.A, ) --------- (TWHEN), (PAT),--------------
 Pøi nehodì byl jeden èlovìk zranìn, byl pøevzat do péèe zdravotnické záchranné slu¾by. 
 next:   TWHEN(Adv AuxP ): nehoda,   
         Pøi nehodì 

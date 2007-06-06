@@ -43,6 +43,12 @@ sub root_verb_flow()
 }
 
 ################################################################################
+sub get_negation_from_Anode#($anode)
+{
+	my ($anode) = @_;
+	
+	return substr ($anode->attr('m/tag'), 10, 1);		
+}
 
 ################################################################################
 #sub add_anodes_to_list #($t_node, $a_list)
@@ -144,6 +150,7 @@ sub print_ANodes($t_node)
 	{
 		#print $anode->attr('m/tag');
 		print $anode->attr('m/form');
+		print "." . get_negation_from_Anode($anode);
 		print ", ";
 	}
 }
