@@ -1,10 +1,51 @@
-#!btred -TNe root_verb_flow()
-
+#!btred -TNe main()
 
 use vars qw($this $root);
 
 #my @verbs = ("vyjest", "zasahovat", "likvidovat", "zlikvidovat");
-my @verbs = ("zranit");
+my @verbs = ("vytáhnout");
+my @injure_verbs = ("zranit", "usmrtit", "zemřít");
+
+################################################################################
+sub main
+{
+	#print_injured();
+	root_verb_flow();
+}
+
+################################################################################
+sub print_injured
+{
+	if ($this->{gram}{sempos} eq "v")
+	{
+		foreach my $v (@injure_verbs)
+		{		
+			if ($this->{t_lemma} eq $v )
+			{
+				print "\n";
+				print $this->{t_lemma};
+				print ": -------- a(";
+				print_ANodes($this);
+				print ") ---------";
+#				foreach my $ch ($this->children()) {print " (" . $ch->{functor} . "),";}
+#				print "--------------";
+				print "\n" . PML_T::GetSentenceString($root);
+				
+				my @acts = find_functor_node($this, "PAT");
+							
+				foreach my $act (@acts)
+				{
+					print "\nnext:   ";
+					print_subtree ($act);
+					print_subtree_as_text($act);	
+				}
+	
+				print "\n" 
+			}
+		}
+	}
+	
+} 
 
 ################################################################################
 sub root_verb_flow()
@@ -12,7 +53,8 @@ sub root_verb_flow()
 	if ($this->{gram}{sempos} eq "v")
 	{
 		foreach my $v (@verbs)
-		{		
+		{
+			#print "$v\n";		
 			if ($this->{t_lemma} eq $v )
 			{
 				print "\n";
@@ -129,7 +171,7 @@ sub find_functor_node($parent, $functor)
 
 	foreach my $child ($parent->children())
 	{
-		if ($child-{functor} =~ /^$functor/)
+		if ($child->{functor} =~ /^$functor/)
 		{
 			push(@ret, $child);
 #			print $child->{functor} . " - ";

@@ -1,17 +1,427 @@
-BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky47549.t.pls.gz (1/1)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky47443.t.pls.gz (1/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky47444.t.pls.gz (2/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky47460.t.pls.gz (3/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky48187.t.pls.gz (4/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky48188.t.pls.gz (5/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky48203.t.pls.gz (6/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky48461.t.pls.gz (7/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky48462.t.pls.gz (8/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky48463.t.pls.gz (9/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky48699.t.pls.gz (10/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky48749.t.pls.gz (11/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky48752.t.pls.gz (12/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky48793.t.pls.gz (13/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky48880.t.pls.gz (14/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky49245.t.pls.gz (15/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky49246.t.pls.gz (16/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky49476.t.pls.gz (17/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky49477.t.pls.gz (18/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky49502.t.pls.gz (19/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky49640.t.pls.gz (20/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky49735.t.pls.gz (21/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky49736.t.pls.gz (22/199)
 
-zranit: -------- a(zranìn.A, nebyl.N, ) --------- (ACT), (TWHEN), (PAT),--------------
-Pøi nehodì nikdo nebyl zranìn. 
+vytáhnout: -------- a(vytáhli.A, ) --------- (DIR1), (TWHEN), (ACT), (PAT), (CONJ), (DIR3), (LOC),--------------
+Po vy¹etøení nehody hasièi auto pomocí lana a navijáku vytáhli zpìt na silnici a pomohli nalo¾it k odtahu. 
+next:   DIR1(): #Oblfm,   
+        
+next:   TWHEN(Adv AuxP ): vy¹etøení,   ACT(): #Gen,   PAT(Atr ): nehoda,   
+        Po vy¹etøení nehody 
+next:   ACT(Sb ): hasiè,   
+        hasièi 
+next:   PAT(Obj ): auto,   
+        auto 
+next:   CONJ(Coord ): a,   PAT(Adv ): lano,   PAT(Adv ): naviják,   
+        lana a navijáku 
+next:   DIR3(Adv ): zpìt,   
+        zpìt 
+next:   LOC(Adv AuxP ): silnice,   
+        na silnici 
+
+vytáhnout: -------- a(vyta¾eno.A, byla.A, ) --------- (PAT), (DIR1), (MEANS), (LOC),--------------
+Auto byla pomocí textilních vazákù vyta¾eno na silnici a pøedáno majiteli. 
+next:   PAT(Sb ): auto,   
+        Auto 
+next:   DIR1(): #Oblfm,   
+        
+next:   MEANS(Adv AuxP ): vazák,   RSTR(Atr ): textilní,   
+        pomocí textilních vazákù 
+next:   LOC(Adv AuxP ): silnice,   
+        na silnici 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky49737.t.pls.gz (23/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky49738.t.pls.gz (24/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky49801.t.pls.gz (25/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky49802.t.pls.gz (26/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky49903.t.pls.gz (27/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky49921.t.pls.gz (28/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky49950.t.pls.gz (29/199)
+
+vytáhnout: -------- a(vytáhli.A, ) --------- (DIR1), (ACT), (TWHEN), (DIR3),--------------
+Obì havarovaná vozidla pak vytáhli na vozovku a pomohli je nalo¾it k odtahu. 
+next:   DIR1(): #Oblfm,   
+        
+next:   ACT(Sb ): vozidlo,   RSTR(Atr ): oba,   RSTR(Atr ): havarovaný,   
+        Obì havarovaná vozidla 
+next:   TWHEN(Adv ): potom,   
+        pak 
+next:   DIR3(Adv AuxP ): vozovka,   
+        na vozovku 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/jihomoravsky/jihomoravsky50262.t.pls.gz (30/199)
+
+vytáhnout: -------- a(vytáhli.A, ) --------- (DIR1), (ACT),--------------
+Tam zvíøe chytili a vytáhli. 
+next:   DIR1(): #Oblfm,   
+        
+next:   ACT(): #PersPron,   
+        
+
+vytáhnout: -------- a(vytáhnout.A, ) --------- (DIR1), (ACT),--------------
+I kdy¾ nebyl zji¹tìn únik ropných látek, hasièi na øece postavili nornou stìnu a auto se lanem navijáku ze zásahového vozidla pokusili vytáhnout. 
+next:   DIR1(): #Oblfm,   
+        
+next:   ACT(): #Cor,   
+        
+
+vytáhnout: -------- a(vytáhli.A, ) --------- (DIR1), (APP), (ACT), (TWHEN), (PAT),--------------
+Na místo byl proto povolán automobilový jeøáb ze stanice v Lidické ulici v Brnì a s jeho pomocí hasièi pøed 2. hodinou po pùlnoci auto ze Svitavy vytáhli. 
+next:   DIR1(): #Oblfm,   
+        
+next:   APP(Atr AuxP AuxP ): #PersPron,   
+        s jeho pomocí 
+next:   ACT(Sb ): hasiè,   
+        hasièi 
+next:   TWHEN(Adv AuxP ): hodina,   RSTR(Atr ): 2,   TWHEN(Atr AuxP ): pùlnoc,   
+        pøed 2 hodinou po pùlnoci 
+next:   PAT(Obj ): auto,   DIR1(Atr AuxP ): Svitava,   
+        auto ze Svitavy 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky48194.t.pls.gz (31/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky48200.t.pls.gz (32/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky48202.t.pls.gz (33/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky48325.t.pls.gz (34/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky48334.t.pls.gz (35/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky48494.t.pls.gz (36/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky48683.t.pls.gz (37/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky48860.t.pls.gz (38/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky49022.t.pls.gz (39/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky49198.t.pls.gz (40/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky49447.t.pls.gz (41/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky49448.t.pls.gz (42/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky49469.t.pls.gz (43/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky49470.t.pls.gz (44/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky49606.t.pls.gz (45/199)
+
+vytáhnout: -------- a(vytáhnout.A, ) --------- (DIR1), (ACT),--------------
+Hasièským vozidlem se návìs nepodaøilo vytáhnout, proto byla na místo pøivolána specializovaná firma. 
+next:   DIR1(): #Oblfm,   
+        
+next:   ACT(): #Cor,   
+        
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky49690.t.pls.gz (46/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky49732.t.pls.gz (47/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky49777.t.pls.gz (48/199)
+
+vytáhnout: -------- a(vytáhli.A, ) --------- (DIR1), (MEANS), (ACT),--------------
+Pomocí vypro¹»ovacího automobilu vytáhli jedno z havarovaných vozidel z pøíkopu. 
+next:   DIR1(): #Oblfm,   
+        
+next:   MEANS(Adv AuxP ): automobil,   RSTR(Atr ): vypro¹»ovací,   
+        Pomocí vypro¹»ovacího automobilu 
+next:   ACT(Sb ): jeden,   DIR1(Atr AuxP ): vozidlo,   RSTR(Atr ): havarovaný,   DIR1(Atr AuxP ): pøíkop,   
+        jedno z havarovaných vozidel z pøíkopu 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky49931.t.pls.gz (49/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky50045.t.pls.gz (50/199)
+
+vytáhnout: -------- a(vytáhnout.A, ) --------- (DIR1), (ACT), (DIR3), (TPAR),--------------
+Hasièùm se podaøilo první ovci vytáhnout na bøeh bìhem deseti minut. 
+next:   DIR1(): #Oblfm,   
+        
+next:   ACT(): #Cor,   
+        
+next:   DIR3(Adv AuxP ): bøeh,   
+        na bøeh 
+next:   TPAR(Adv AuxP ): minuta,   RSTR(Atr ): deset,   
+        bìhem deseti minut 
+
+vytáhnout: -------- a(vytáhli.A, ) --------- (DIR1), (PAT), (ACT), (RHEM),--------------
+Zhruba 500 metrù proti proudu øeky se nacházela druhá ovce, kterou hasièi také vytáhli a obì zvíøata pøedali majiteli. 
+next:   DIR1(): #Oblfm,   
+        
+next:   PAT(Obj ): který,   
+        kterou 
+next:   ACT(Sb ): hasiè,   
+        hasièi 
+next:   RHEM(Adv ): také,   
+        také 
+
+vytáhnout: -------- a(vytáhnout.A, ) --------- (DIR1), (ACT), (PAT), (ACMP),--------------
+Hasièi na místo vyrazili i s èlunem, ale nakonec se jim podaøilo srnku vytáhnout i bez pou¾ití èlunu. 
+next:   DIR1(): #Oblfm,   
+        
+next:   ACT(): #Cor,   
+        
+next:   PAT(Obj ): srnka,   
+        srnku 
+next:   ACMP(Adv AuxP ): pou¾ití,   ACT(): #Gen,   CONJ(Coord ): i,   PAT(Atr ): èlun,   
+        i bez pou¾ití èlunu 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky50279.t.pls.gz (51/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky50280.t.pls.gz (52/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky50292.t.pls.gz (53/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky50304.t.pls.gz (54/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky50311.t.pls.gz (55/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky50479.t.pls.gz (56/199)
+
+vytáhnout: -------- a(vyta¾ena.A, byla.A, ) --------- (DIR1), (ACT), (PAT), (TWHEN),--------------
+®ena byla vyta¾ena je¹tì pøed pøíjezdem hasièù. 
+next:   DIR1(): #Oblfm,   
+        
 next:   ACT(): #Gen,   
         
-next:   TWHEN(Adv AuxP ): nehoda,   
-        Pøi nehodì 
-next:   PAT(Sb ): kdo,   
-        nikdo 
+next:   PAT(Sb ): ¾ena,   
+        ®ena 
+next:   TWHEN(Adv AuxP ): pøíjezd,   RHEM(AuxP ): je¹tì,   ACT(Atr ): hasiè,   
+        je¹tì pøed pøíjezdem hasièù 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/kralovehradecky/kralovehradecky50583.t.pls.gz (57/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky46754.t.pls.gz (58/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky46920.t.pls.gz (59/199)
 
-zranit: -------- a(zranìn.A, byl.A, ) --------- (TWHEN), (PAT),--------------
-Pøi nehodì byl jeden èlovìk zranìn, byl pøevzat do péèe zdravotnické záchranné slu¾by. 
-next:   TWHEN(Adv AuxP ): nehoda,   
-        Pøi nehodì 
-next:   PAT(Sb ): èlovìk,   RSTR(Atr ): jeden,   
-        jeden èlovìk 
+vytáhnout: -------- a(vytáhli.A, ) --------- (DIR1), (ACT), (DIR3),--------------
+Hasièi zranìného vytáhli na povrch a tam pøedali Zdravotnické záchranné slu¾bì. 
+next:   DIR1(): #Oblfm,   
+        
+next:   ACT(Sb ): hasiè,   RSTR(ExD ): zranìný,   
+        Hasièi zranìného 
+next:   DIR3(Adv AuxP ): povrch,   
+        na povrch 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky47081.t.pls.gz (60/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky47106.t.pls.gz (61/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky47118.t.pls.gz (62/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky47122.t.pls.gz (63/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky47139.t.pls.gz (64/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky47232.t.pls.gz (65/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky47300.t.pls.gz (66/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky47301.t.pls.gz (67/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky47438.t.pls.gz (68/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky47547.t.pls.gz (69/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky47603.t.pls.gz (70/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky47718.t.pls.gz (71/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky47820.t.pls.gz (72/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky47821.t.pls.gz (73/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky48179.t.pls.gz (74/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky48184.t.pls.gz (75/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky48327.t.pls.gz (76/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky48873.t.pls.gz (77/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky49247.t.pls.gz (78/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky49250.t.pls.gz (79/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky49291.t.pls.gz (80/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky49397.t.pls.gz (81/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky49779.t.pls.gz (82/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky49910.t.pls.gz (83/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky50035.t.pls.gz (84/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky50303.t.pls.gz (85/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/moravskoslezsky/moravskoslezsky50487.t.pls.gz (86/199)
+
+vytáhnout: -------- a(vytáhli.A, ) --------- (TWHEN), (PAT), (DIR1),--------------
+Dvì jednotky HZS Moravskoslezského kraje z Nového Jièína a Vítkova po dohodì s Policií ÈR poøezaly dva vzrostlé stromy, které bránily vypro¹tìní auta, a pak jej z potoka vytáhli. 
+next:   TWHEN(Adv ): potom,   
+        pak 
+next:   PAT(Obj ): #PersPron,   
+        jej 
+next:   DIR1(Adv AuxP ): potok,   
+        z potoka 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/olomoucky/olomoucky38397.t.pls.gz (87/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/olomoucky/olomoucky44834.t.pls.gz (88/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/olomoucky/olomoucky46899.t.pls.gz (89/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/olomoucky/olomoucky49401.t.pls.gz (90/199)
+
+vytáhnout: -------- a(vytáhli.A, ) --------- (DIR1), (TWHEN), (ACT), (CONJ),--------------
+Po pøíjezdu hasièi ve spolupráci s mìstskou policií a po dohodì s odborem ¾ivotního prostøedí bobra z øeky pomocí sítì vytáhli. 
+next:   DIR1(): #Oblfm,   
+        
+next:   TWHEN(Adv AuxP ): pøíjezd,   
+        Po pøíjezdu 
+next:   ACT(Sb ): hasiè,   
+        hasièi 
+next:   CONJ(Coord ): a,   MANN(Adv AuxP ): spolupráce,   ADDR(Atr AuxP ): policie,   RSTR(Atr ): mìstský,   TWHEN(Adv AuxP ): dohoda,   ADDR(Atr AuxP ): odbor,   APP(Atr ): prostøedí,   RSTR(Atr ): ¾ivotní,   APP(Atr ): bobr,   DIR1(Atr AuxP ): øeka,   MEANS(Atr AuxP ): sí»,   
+        ve spolupráci s mìstskou policií a po dohodì s odborem ¾ivotního prostøedí bobra z øeky pomocí sítì 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/olomoucky/olomoucky49555.t.pls.gz (91/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/olomoucky/olomoucky49557.t.pls.gz (92/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/olomoucky/olomoucky49559.t.pls.gz (93/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/olomoucky/olomoucky49560.t.pls.gz (94/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/olomoucky/olomoucky49741.t.pls.gz (95/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/olomoucky/olomoucky49861.t.pls.gz (96/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/olomoucky/olomoucky50240.t.pls.gz (97/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/olomoucky/olomoucky50288.t.pls.gz (98/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky47435.t.pls.gz (99/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky47551.t.pls.gz (100/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky47578.t.pls.gz (101/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky47719.t.pls.gz (102/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky47735.t.pls.gz (103/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky47791.t.pls.gz (104/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky47836.t.pls.gz (105/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky48182.t.pls.gz (106/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky48183.t.pls.gz (107/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky48185.t.pls.gz (108/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky48287.t.pls.gz (109/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky48444.t.pls.gz (110/199)
+
+vytáhnout: -------- a(vyta¾en.A, ) --------- (PAT), (DIR1), (EXT), (EXT),--------------
+V malé kabince ovládacího stanovi¹tì byl posti¾enému nasazen záchranný trojúhelník a pomocí kladkostroje byl vyta¾en nad kabinku, kde byla ji¾ pøipravena nosítka do nich¾ byl zranìný pøelo¾en a transportován na zem. 
+next:   PAT(): #Cor,   
+        
+next:   DIR1(): #Oblfm,   
+        
+next:   EXT(Adv AuxP ): kabinka,   
+        nad kabinku 
+next:   EXT(Adv AuxV ): pøipravit,   LOC(Adv ): kde,   TWHEN(Adv ): ji¾,   PAT(Sb ): nosítka,   
+        kde byla ji¾ pøipravena nosítka 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky48493.t.pls.gz (111/199)
+
+vytáhnout: -------- a(vytáhli.A, ) --------- (DIR1), (ACT), (PAT),--------------
+Po zadokumentování této události policisty, byl na místo pøivolán jeøáb a hasièi vytáhli havarované vozidlo ze strouhy. 
+next:   DIR1(): #Oblfm,   
+        
+next:   ACT(Sb ): hasiè,   
+        hasièi 
+next:   PAT(Obj ): vozidlo,   RSTR(Atr ): havarovaný,   DIR1(Atr AuxP ): strouha,   
+        havarované vozidlo ze strouhy 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky48655.t.pls.gz (112/199)
+
+vytáhnout: -------- a(vytáhnout.A, ) --------- (DIR1), (ACT), (MAT),--------------
+Jeden policista mìl z vozidla vypadnout a druhého z havarovaného vozu pomohli vytáhnout místní obyvatelé. 
+next:   DIR1(): #Oblfm,   
+        
+next:   ACT(): #Cor,   
+        
+next:   MAT(Sb ): obyvatel,   RSTR(Atr ): místní,   
+        místní obyvatelé 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky48871.t.pls.gz (113/199)
+
+vytáhnout: -------- a(vytáhli.A, ) --------- (DIR1), (ACT), (PAT),--------------
+Hasièi vytáhli vozidlo z vody a postavili ho zpìt na kola. 
+next:   DIR1(): #Oblfm,   
+        
+next:   ACT(Sb ): hasiè,   
+        Hasièi 
+next:   PAT(Obj ): vozidlo,   DIR1(Atr AuxP ): voda,   
+        vozidlo z vody 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky49169.t.pls.gz (114/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky49172.t.pls.gz (115/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky49441.t.pls.gz (116/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky49547.t.pls.gz (117/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky49581.t.pls.gz (118/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky49607.t.pls.gz (119/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky49688.t.pls.gz (120/199)
+
+vytáhnout: -------- a(vytáhli.A, ) --------- (DIR1), (ACT), (MEANS), (PAT),--------------
+Hasièi pomocí navijáku automobil vytáhli. 
+next:   DIR1(): #Oblfm,   
+        
+next:   ACT(Sb ): hasiè,   
+        Hasièi 
+next:   MEANS(Adv AuxP ): naviják,   
+        pomocí navijáku 
+next:   PAT(Obj ): automobil,   
+        automobil 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky49733.t.pls.gz (121/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky49860.t.pls.gz (122/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky50117.t.pls.gz (123/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky50271.t.pls.gz (124/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky50397.t.pls.gz (125/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky50436.t.pls.gz (126/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky50448.t.pls.gz (127/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/pardubicky/pardubicky50556.t.pls.gz (128/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/plzensky/plzensky48663.t.pls.gz (129/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/plzensky/plzensky48881.t.pls.gz (130/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/plzensky/plzensky49032.t.pls.gz (131/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/plzensky/plzensky49036.t.pls.gz (132/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/plzensky/plzensky49076.t.pls.gz (133/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/plzensky/plzensky49187.t.pls.gz (134/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/plzensky/plzensky49188.t.pls.gz (135/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/plzensky/plzensky49200.t.pls.gz (136/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/plzensky/plzensky49244.t.pls.gz (137/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/plzensky/plzensky49288.t.pls.gz (138/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/plzensky/plzensky49294.t.pls.gz (139/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/plzensky/plzensky49615.t.pls.gz (140/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/plzensky/plzensky49898.t.pls.gz (141/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/plzensky/plzensky49899.t.pls.gz (142/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/plzensky/plzensky49901.t.pls.gz (143/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/plzensky/plzensky50068.t.pls.gz (144/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/plzensky/plzensky50219.t.pls.gz (145/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/plzensky/plzensky50243.t.pls.gz (146/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/plzensky/plzensky50606.t.pls.gz (147/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky45611.t.pls.gz (148/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky45894.t.pls.gz (149/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky46031.t.pls.gz (150/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky46049.t.pls.gz (151/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky46445.t.pls.gz (152/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky46747.t.pls.gz (153/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky46881.t.pls.gz (154/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky46915.t.pls.gz (155/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky47079.t.pls.gz (156/199)
+
+vytáhnout: -------- a(vytáhnout.A, ) --------- (DIR1), (ACT), (CONJ), (PAT),--------------
+Jednotky se chystají za pomoci jeøábu a policejního potápìèe auto vytáhnout. 
+next:   DIR1(): #Oblfm,   
+        
+next:   ACT(): #Cor,   
+        
+next:   CONJ(Coord ): a,   PAT(Atr ): jeøáb,   PAT(Atr ): potápìè,   RSTR(Atr ): policejní,   
+        jeøábu a policejního potápìèe 
+next:   PAT(Obj ): auto,   
+        auto 
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky47119.t.pls.gz (157/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky47392.t.pls.gz (158/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky47549.t.pls.gz (159/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky47552.t.pls.gz (160/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky47692.t.pls.gz (161/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky47886.t.pls.gz (162/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky48181.t.pls.gz (163/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky48277.t.pls.gz (164/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky48451.t.pls.gz (165/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky48647.t.pls.gz (166/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky48807.t.pls.gz (167/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky48968.t.pls.gz (168/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky49186.t.pls.gz (169/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky49231.t.pls.gz (170/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky49402.t.pls.gz (171/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky49474.t.pls.gz (172/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky49550.t.pls.gz (173/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky49689.t.pls.gz (174/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky49847.t.pls.gz (175/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/ustecky/ustecky50067.t.pls.gz (176/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina38933.t.pls.gz (177/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina42215.t.pls.gz (178/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina42217.t.pls.gz (179/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina42990.t.pls.gz (180/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina43036.t.pls.gz (181/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina43037.t.pls.gz (182/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina43038.t.pls.gz (183/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina43039.t.pls.gz (184/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina43040.t.pls.gz (185/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina43255.t.pls.gz (186/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina43599.t.pls.gz (187/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina44003.t.pls.gz (188/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina44234.t.pls.gz (189/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina45207.t.pls.gz (190/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina45780.t.pls.gz (191/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina47849.t.pls.gz (192/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina48967.t.pls.gz (193/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina48986.t.pls.gz (194/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina48987.t.pls.gz (195/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina49449.t.pls.gz (196/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina49844.t.pls.gz (197/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina50234.t.pls.gz (198/199)
+BTRED: Processing: /tmp/czsem/data/hasici/pml/vysocina/vysocina50293.t.pls.gz (199/199)
+
+vytáhnout: -------- a(vyta¾en.A, byl.A, ) --------- (DIR1), (ACT), (LOC), (PAT), (DIR3),--------------
+Kolem poledne byl havarovaný kamion vyta¾en na vozovku. 
+next:   DIR1(): #Oblfm,   
+        
+next:   ACT(): #Gen,   
+        
+next:   LOC(Adv AuxP ): poledne,   
+        Kolem poledne 
+next:   PAT(Sb ): kamión,   RSTR(Atr ): havarovaný,   
+        havarovaný kamion 
+next:   DIR3(Adv AuxP ): vozovka,   
+        na vozovku 
