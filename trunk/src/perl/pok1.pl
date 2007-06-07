@@ -3,17 +3,41 @@
 use vars qw($this $root);
 
 #my @verbs = ("vyjest", "zasahovat", "likvidovat", "zlikvidovat");
-my @verbs = ("zasypat");
+my @verbs = ("odstranit");
 my @injure_verbs = ("zranit", "usmrtit", "zemřít");
-my @key_words = ("nehoda");
+my @key_words = ("strom", "xhodina", "xnehoda");
+my @functors = ("TWHEN");
 
 ################################################################################
 sub main
 {
 	#print_injured();
-	#root_verb_flow();
-	
-	key_word_search();
+	root_verb_flow();
+	#key_word_search();
+	#functor_search();
+}
+
+################################################################################
+sub functor_search
+{
+	foreach my $functor (@functors)
+	{		
+		if ($this->{functor} =~ /^$functor/)		
+#		if ($this->{functor} eq $functor )
+		{
+			print "\n". $this->{functor} ."---------------". $this->{t_lemma} ."----------------";
+			#print $this->{t_lemma};
+			print "\n" . PML_T::GetSentenceString($root)."\n";
+			
+#			print_sub_functors($this);
+			
+			
+			print_subtree ($this);
+			print_subtree_as_text($this);
+#			print "\n";
+			
+		}
+	}	
 }
 
 ################################################################################
@@ -25,7 +49,7 @@ sub key_word_search
 		{
 			print "\n---------------". $this->{t_lemma} ."----------------";
 			#print $this->{t_lemma};
-			#print "\n" . PML_T::GetSentenceString($root)."\n";
+			print "\n" . PML_T::GetSentenceString($root)."\n";
 			
 			print_sub_functors($this);
 			
