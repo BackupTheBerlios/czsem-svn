@@ -3,14 +3,40 @@
 use vars qw($this $root);
 
 #my @verbs = ("vyjest", "zasahovat", "likvidovat", "zlikvidovat");
-my @verbs = ("vytáhnout");
+my @verbs = ("zasypat");
 my @injure_verbs = ("zranit", "usmrtit", "zemřít");
+my @key_words = ("nehoda");
 
 ################################################################################
 sub main
 {
 	#print_injured();
-	root_verb_flow();
+	#root_verb_flow();
+	
+	key_word_search();
+}
+
+################################################################################
+sub key_word_search
+{
+	foreach my $key (@key_words)
+	{		
+		if ($this->{t_lemma} eq $key )
+		{
+			print "\n---------------". $this->{t_lemma} ."----------------";
+			#print $this->{t_lemma};
+			#print "\n" . PML_T::GetSentenceString($root)."\n";
+			
+			print_sub_functors($this);
+			
+			
+#			print_subtree ($this);
+#			print_subtree_as_text($this);
+#			print "\n";
+			
+		}
+	}
+	
 }
 
 ################################################################################
@@ -68,20 +94,27 @@ sub root_verb_flow()
 				
 	#			print_ANodes();
 	#			my @acts = find_functor_node($this, "ACT");
-				my @acts = $this->children();
+#				my @acts = $this->children();
+
+				print_sub_functors($this);
 							
-				foreach my $act (@acts)
-				{
-					print "\nnext:   ";
-					print_subtree ($act);
-					print_subtree_as_text($act);
-	
-				}
 	
 				print "\n" 
 			}
 		}
 	}
+}
+
+sub print_sub_functors($t_node)
+{
+	my ($t_node) = @_;
+						
+	foreach my $act ($t_node->children())
+	{
+		print "\nnext:   ";
+		print_subtree ($act);
+		print_subtree_as_text($act);
+	}	
 }
 
 ################################################################################
