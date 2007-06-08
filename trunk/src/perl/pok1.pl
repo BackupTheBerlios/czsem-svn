@@ -6,23 +6,24 @@ use vars qw($this $root);
 my @verbs = ("odstranit");
 my @injure_verbs = ("zranit", "usmrtit", "zemřít");
 my @key_words = ("strom", "xhodina", "xnehoda");
-my @functors = ("TWHEN");
+my @functors = ("^.*HEN");
 
 ################################################################################
 sub main
 {
-	#print_injured();
-	root_verb_flow();
+	print_injured();
+	#root_verb_flow();
 	#key_word_search();
 	#functor_search();
 }
+
 
 ################################################################################
 sub functor_search
 {
 	foreach my $functor (@functors)
 	{		
-		if ($this->{functor} =~ /^$functor/)		
+		if ($this->{functor} =~ /$functor/)		
 #		if ($this->{functor} eq $functor )
 		{
 			print "\n". $this->{functor} ."---------------". $this->{t_lemma} ."----------------";
@@ -81,7 +82,7 @@ sub print_injured
 #				print "--------------";
 				print "\n" . PML_T::GetSentenceString($root);
 				
-				my @acts = find_functor_node($this, "PAT");
+				my @acts = find_node_by_attr($this, 'functor', "PAT");
 							
 				foreach my $act (@acts)
 				{
@@ -142,25 +143,6 @@ sub print_sub_functors($t_node)
 }
 
 ################################################################################
-sub get_negation_from_Anode#($anode)
-{
-	my ($anode) = @_;
-	
-	return substr ($anode->attr('m/tag'), 10, 1);		
-}
-
-################################################################################
-#sub add_anodes_to_list #($t_node, $a_list)
-#{
-#	my ($t_node, $a_list) = @_;
-#
-#	foreach my $a (PML_T::GetANodes($t_node))
-#	{
-#		push(@$a_list, $a);
-# 	}	
-#}
-
-################################################################################
 sub print_subtree_as_text($node)
 {
 	print "\n        ";
@@ -218,27 +200,51 @@ sub print_subtree($node)
 	}	
 }
 
+
 ################################################################################
-sub find_functor_node($parent, $functor)
+sub find_node($parent, $test_sub)
 {
-	my($parent, $functor) = @_;
-	
+	my($parent, $test_sub) = @_;	
 	my @ret = ();
 	
+	shift();
+	shift();
 
 	foreach my $child ($parent->children())
 	{
-		if ($child->{functor} =~ /^$functor/)
+		if (&$test_sub($child, @_))
 		{
 			push(@ret, $child);
-#			print $child->{functor} . " - ";
-#			print $child->{t_lemma} . ",    ";
 		}
 	}
-	
+
 	return @ret;
 }
 
+################################################################################
+sub test_attr($node, $attr, $value)
+{
+	my($node, $attr, $value) = @_;
+	($node->attr($attr) =~ /$value/)	
+}
+
+
+################################################################################
+sub find_node_by_attr($parent, $attr, $value)
+{
+	my($parent, $attr, $value) = @_;		
+	return &find_node($parent, \&test_attr, $attr, $value);	
+}
+
+
+
+################################################################################
+sub get_negation_from_Anode($anode)
+{
+	my ($anode) = @_;
+	
+	return substr ($anode->attr('m/tag'), 10, 1);		
+}
 
 ################################################################################
 sub print_ANodes($t_node)
@@ -249,7 +255,8 @@ sub print_ANodes($t_node)
 	{
 		#print $anode->attr('m/tag');
 		print $anode->attr('m/form');
-		print "." . get_negation_from_Anode($anode);
+		print "." . &get_negation_from_Anode($anode);
 		print ", ";
 	}
 }
+
