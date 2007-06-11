@@ -7,14 +7,84 @@ my @verbs = ("odstranit");
 my @injure_verbs = ("zranit", "usmrtit", "zemřít");
 my @key_words = ("strom", "xhodina", "xnehoda");
 my @functors = ("^.*HEN");
+my @persons = ("kdo", "člověk", "osoba", "muž", "žena", "dítě", "řidička", "řidič", "spolujezdec", "spolujezdkyně");
+my @numbers = ("jeden", "dva", "tři", "čtyři", "pět", "šest", "sedm", "osm", "devět", "deset", "jedenáct",
+ "dvanáct", "třináct", "čtrnáct", "patnáct", "šestnáct", "sedmnáct", "osmnáct", "devatenáct", "dvacet");
 
 ################################################################################
 sub main
 {
-	print_injured();
+	$num = test_number("deset");
+	
+	if (defined $num)
+	{
+		print "*$num*";
+	}
+	else
+	{
+		print "Neeeeeeeeeeeee\n"
+	}
+	
+	#print_injured();
 	#root_verb_flow();
 	#key_word_search();
 	#functor_search();
+}
+
+################################################################################
+sub filter_list(@list, $test_sub)
+{
+	my (@list, $test_sub) = @_;
+	shift(); shift(); 
+	
+	my @ret = ();
+	
+	foreach $i (@list)
+	{
+		if (&$tes_sub($i, @_))
+		{
+			push (@ret, $i);			
+		}
+	}
+	
+	return @ret;		
+}
+
+################################################################################
+sub test_attr($node, $attr, $value)
+{
+	my($node, $attr, $value) = @_;
+	($node->attr($attr) =~ /$value/)	
+}
+
+################################################################################
+sub filter_list_by_attr(@list, $attr_name, $attr_value)
+{
+	my (@list) = @_;
+	shift();
+	
+	return filter_list(@list, \&test_attr, @_)			
+}
+
+################################################################################
+sub test_number($str)
+{
+	my $str = $_[0];
+	
+	for ($i = 0; $i <= $#numbers; $i++)
+	{
+		if ($str eq @numbers[$i])
+		{ 
+			return $i + 1;
+		} 
+    }
+    
+    if ($str =~ /^[0-9]*$/)
+    {
+    	return $str;
+    }
+    
+    return;
 }
 
 
@@ -73,25 +143,35 @@ sub print_injured
 		{		
 			if ($this->{t_lemma} eq $v )
 			{
-				print "\n";
-				print $this->{t_lemma};
-				print ": -------- a(";
-				print_ANodes($this);
-				print ") ---------";
-#				foreach my $ch ($this->children()) {print " (" . $ch->{functor} . "),";}
-#				print "--------------";
-				print "\n" . PML_T::GetSentenceString($root);
+				my @pats = find_node_by_attr($this, 'functor', '^PAT');
 				
-				my @acts = find_node_by_attr($this, 'functor', "PAT");
-							
-				foreach my $act (@acts)
+				foreach my $p (@pats)
 				{
-					print "\nnext:   ";
-					print_subtree ($act);
-					print_subtree_as_text($act);	
+					print $p->{t_lemma}. ": ";
+					print_subtree_as_text($p);
+					print "\n";
 				}
-	
-				print "\n" 
+				
+				
+#				print "\n";
+#				print $this->{t_lemma};
+#				print ": -------- a(";
+#				print_ANodes($this);
+#				print ") ---------";
+##				foreach my $ch ($this->children()) {print " (" . $ch->{functor} . "),";}
+##				print "--------------";
+#				print "\n" . PML_T::GetSentenceString($root);
+#				
+#				my @acts = find_node_by_attr($this, 'functor', "PAT");
+#							
+#				foreach my $act (@acts)
+#				{
+#					print "\nnext:   ";
+#					print_subtree ($act);
+#					print_subtree_as_text($act);	
+#				}
+#	
+#				print "\n" 
 			}
 		}
 	}
@@ -130,6 +210,7 @@ sub root_verb_flow()
 	}
 }
 
+################################################################################
 sub print_sub_functors($t_node)
 {
 	my ($t_node) = @_;
@@ -145,7 +226,7 @@ sub print_sub_functors($t_node)
 ################################################################################
 sub print_subtree_as_text($node)
 {
-	print "\n        ";
+	#print "\n        ";
 	
 	my($node) = @_;
 	my @anode_list = ();
@@ -200,8 +281,30 @@ sub print_subtree($node)
 	}	
 }
 
+################################################################################
+#Otestuje A-uzly odpovidajici T-uzlu $T_node 
+sub find_A_node($T_node, $test_sub)
+{
+	my($T_node, $test_sub) = @_;	
+	my @ret = ();
+
+	shift();
+	shift();
+
+	foreach my $anode (PML_T::GetANodes($T_node))
+	{
+		if (&$test_sub($anode, @_))
+		{
+			push(@ret, $ch);
+		}
+	}
+	
+	return @ret;	
+}
+
 
 ################################################################################
+#Rekurentne hleda v T-podstromu $parent uzlu
 sub find_node($parent, $test_sub)
 {
 	my($parent, $test_sub) = @_;	
@@ -210,22 +313,23 @@ sub find_node($parent, $test_sub)
 	shift();
 	shift();
 
-	foreach my $child ($parent->children())
+	my @stack = ($parent);
+	
+	while (defined(my $top = pop(@stack)))
 	{
-		if (&$test_sub($child, @_))
+		foreach my $ch ($top->children())
 		{
-			push(@ret, $child);
+			if (&$test_sub($ch, @_))
+			{
+				push(@ret, $ch);
+			}
+			
+			push (@stack, $ch);
 		}
+		
 	}
-
+	
 	return @ret;
-}
-
-################################################################################
-sub test_attr($node, $attr, $value)
-{
-	my($node, $attr, $value) = @_;
-	($node->attr($attr) =~ /$value/)	
 }
 
 
@@ -243,6 +347,8 @@ sub get_negation_from_Anode($anode)
 {
 	my ($anode) = @_;
 	
+	#print $this->attr('gram/negation');
+	
 	return substr ($anode->attr('m/tag'), 10, 1);		
 }
 
@@ -259,4 +365,5 @@ sub print_ANodes($t_node)
 		print ", ";
 	}
 }
+
 
