@@ -4,8 +4,8 @@ use vars qw($this $root);
 
 #my @verbs = ("vyjest", "zasahovat", "likvidovat", "zlikvidovat");
 my @verbs = ("odstranit");
-my @injure_verbs = ("zranit", "usmrtit", "zemřít");
-my @key_words = ("strom", "xhodina", "xnehoda");
+my @injure_verbs = ("zranit", "usmrtit", "zemřít", "zahynout", "přežít"); #podlehnout, utrpět zranění, těžce zraněný, s těžkým zraněním
+my @key_words = ("těžký", "xstrom", "xhodina", "xnehoda");
 my @functors = ("^.*HEN");
 my @persons = ("kdo", "člověk", "osoba", "muž", "žena", "dítě", "řidička", "řidič", "spolujezdec", "spolujezdkyně");
 my @numbers = ("jeden", "dva", "tři", "čtyři", "pět", "šest", "sedm", "osm", "devět", "deset", "jedenáct",
@@ -14,40 +14,21 @@ my @numbers = ("jeden", "dva", "tři", "čtyři", "pět", "šest", "sedm", "osm"
 ################################################################################
 sub main
 {
-	$num = test_number("deset");
-	
-	if (defined $num)
-	{
-		print "*$num*";
-	}
-	else
-	{
-		print "Neeeeeeeeeeeee\n"
-	}
+#	$num = test_number("deset");
+#	
+#	if (defined $num)
+#	{
+#		print "*$num*";
+#	}
+#	else
+#	{
+#		print "Neeeeeeeeeeeee\n"
+#	}
 	
 	#print_injured();
 	#root_verb_flow();
-	#key_word_search();
+	key_word_search();
 	#functor_search();
-}
-
-################################################################################
-sub filter_list(@list, $test_sub)
-{
-	my (@list, $test_sub) = @_;
-	shift(); shift(); 
-	
-	my @ret = ();
-	
-	foreach $i (@list)
-	{
-		if (&$tes_sub($i, @_))
-		{
-			push (@ret, $i);			
-		}
-	}
-	
-	return @ret;		
 }
 
 ################################################################################
@@ -71,7 +52,7 @@ sub test_number($str)
 {
 	my $str = $_[0];
 	
-	for ($i = 0; $i <= $#numbers; $i++)
+	for (my $i = 0; $i <= $#numbers; $i++)
 	{
 		if ($str eq @numbers[$i])
 		{ 
@@ -84,7 +65,7 @@ sub test_number($str)
     	return $str;
     }
     
-    return;
+    return ();
 }
 
 
@@ -135,6 +116,47 @@ sub key_word_search
 }
 
 ################################################################################
+sub filter_list($test_sub, @list)
+{
+	my ($test_sub, @list) = @_;
+	shift(); shift(); 
+	
+	my @ret = ();
+	
+	foreach my $i (@list)
+	{
+		if (&$test_sub($i, @_))
+		{
+			push (@ret, $i);			
+		}
+	}
+	
+	return @ret;		
+}
+
+################################################################################
+sub test_person($person_node)
+{
+	my $person_node = $_[0];
+	
+	foreach my $p (@persons)
+	{
+		if ($p eq $person_node->{t_lemma})
+		{
+			return 1;
+		}		
+	}
+	return 0;	
+}
+
+sub test_number_lemma($t_node)
+{
+	my $t_node = $_[0];
+	
+	return &test_number($t_node->{t_lemma});	
+}
+
+################################################################################
 sub print_injured
 {
 	if ($this->{gram}{sempos} eq "v")
@@ -143,11 +165,21 @@ sub print_injured
 		{		
 			if ($this->{t_lemma} eq $v )
 			{
-				my @pats = find_node_by_attr($this, 'functor', '^PAT');
+				print $this->{t_lemma} . ": " . PML_T::GetSentenceString($root) . "\n";
+
+				my @pats = find_node_by_attr($this, 'functor', '^[PA][AC]T');
+				@pats = &filter_list(\&test_person, @pats);
 				
 				foreach my $p (@pats)
 				{
-					print $p->{t_lemma}. ": ";
+					print $p->{t_lemma};
+
+					my @cnt = find_node_by_attr($p, 'functor', '^RSTR');
+					@cnt = &filter_list(\&test_number_lemma, @cnt);
+					my $cnt1 = pop(@cnt);
+					print " cnt: " . &test_number($cnt1->{t_lemma}) if ($cnt1);
+	
+					print " str: ";
 					print_subtree_as_text($p);
 					print "\n";
 				}
@@ -177,6 +209,7 @@ sub print_injured
 	}
 	
 } 
+
 
 ################################################################################
 sub root_verb_flow()
@@ -304,19 +337,22 @@ sub find_A_node($T_node, $test_sub)
 
 
 ################################################################################
-#Rekurentne hleda v T-podstromu $parent uzlu
-sub find_node($parent, $test_sub)
+#Rekurentne hleda v T-podstromu $parent uzlu, pouze do hlobky zadane v promenne $depth 
+sub find_node_depth($parent, $depth, $test_sub)
 {
-	my($parent, $test_sub) = @_;	
-	my @ret = ();
+	my($parent, $depth, $test_sub) = @_;
 	
+	
+	shift();
 	shift();
 	shift();
 
-	my @stack = ($parent);
+	my @ret = ();
+	my @stack = ($depth, $parent);
 	
 	while (defined(my $top = pop(@stack)))
 	{
+		my $d = pop(@stack);
 		foreach my $ch ($top->children())
 		{
 			if (&$test_sub($ch, @_))
@@ -324,12 +360,26 @@ sub find_node($parent, $test_sub)
 				push(@ret, $ch);
 			}
 			
-			push (@stack, $ch);
+			if ($d > 0)
+			{
+				 push (@stack, $d-1);
+				 push (@stack, $ch);
+			}
 		}
 		
 	}
 	
-	return @ret;
+	return @ret;	
+}
+
+################################################################################
+#Rekurentne hleda v T-podstromu uzlu $parent
+sub find_node($parent, $test_sub)
+{
+	my($parent, $test_sub) = @_;
+	shift();
+	shift();
+	return &find_node_depth($parent, 1000, $test_sub, @_);
 }
 
 
