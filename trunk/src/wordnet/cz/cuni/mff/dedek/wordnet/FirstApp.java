@@ -8,6 +8,7 @@ import java.io.*;
 import java.security.*;
 import java.security.cert.*;
 import javax.net.ssl.*;
+import org.json.*;
 
 
 /**
@@ -42,7 +43,9 @@ public class FirstApp
     			String line;
     			while ((line = br.readLine()) != null)
     			{
-    				System.out.println(line);			
+    				JSONObject jo = new JSONObject(line);
+    				System.out.println(jo.getJSONObject("slovniky").getJSONObject("wncze1").getString("nazov"));
+    				//System.out.println(line);			
     			}
 
     			br.close();
@@ -59,6 +62,18 @@ public class FirstApp
                is.close();
 */
             }
+            else
+            {
+        		char [] chars = MyAuthenticator.getPassword();
+
+        		System.err.print("pass: ");
+        		for (int a=0; a< chars.length; a++)
+        		{
+        			System.err.print(chars[a]);
+        		}
+        		System.err.println();        		
+            }
+            
             con.disconnect();
 
          } catch (NoSuchAlgorithmException e) {
@@ -71,6 +86,8 @@ public class FirstApp
             e.printStackTrace();
          } catch (IOException e) {
             e.printStackTrace();
+         } catch (Exception e) {
+        	 e.printStackTrace();
          }
 
 /*		
@@ -126,9 +143,11 @@ class MyAuthenticator extends Authenticator
 {
 	private static char Key = '*'; 
 	private static String UserName = "jdedek"; 
-	private static String Password = "nevim"; 
+	private static String Password = "heslo";
 	
-	public static char [] xorCript(String msg, char key)
+	public static char [] getPassword() {return xorCript(Password, Key); }
+	
+	private static char [] xorCript(String msg, char key)
 	{
 		char [] chars = msg.toCharArray();
 		
@@ -137,20 +156,12 @@ class MyAuthenticator extends Authenticator
 			chars[a] = (char) (chars[a] ^ key); 
 
 		}
-
-		
-		System.err.print("pass: ");
-		for (int a=0; a< chars.length; a++)
-		{
-			System.err.print(chars[a]);
-		}
-		System.err.println();
 		
 		return chars;		
 	}
 	
     protected PasswordAuthentication getPasswordAuthentication()
     {
-       return new PasswordAuthentication(UserName, xorCript(Password, Key));
+       return new PasswordAuthentication(UserName, getPassword());
     }
 }
