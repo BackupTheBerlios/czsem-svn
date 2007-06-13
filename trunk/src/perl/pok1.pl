@@ -25,9 +25,9 @@ sub main
 #		print "Neeeeeeeeeeeee\n"
 #	}
 	
-	#print_injured();
+	print_injured();
 	#root_verb_flow();
-	key_word_search();
+	#key_word_search();
 	#functor_search();
 }
 
@@ -103,12 +103,12 @@ sub key_word_search
 			#print $this->{t_lemma};
 			print "\n" . PML_T::GetSentenceString($root)."\n";
 			
-			print_sub_functors($this);
+#			print_sub_functors($this);
 			
 			
-#			print_subtree ($this);
-#			print_subtree_as_text($this);
-#			print "\n";
+			print_subtree ($this);
+			print_subtree_as_text($this);
+			print "\n";
 			
 		}
 	}
@@ -165,8 +165,24 @@ sub print_injured
 		{		
 			if ($this->{t_lemma} eq $v )
 			{
+				print "* ";
+
+				#negation
+				print "NOT " if test_negation($this);
+
 				print $this->{t_lemma} . ": " . PML_T::GetSentenceString($root) . "\n";
 
+				
+				#manner of injurance
+				my @mans = find_node_by_attr_depth($this, 0, 'functor', '^MANN');
+				if (@mans)
+				{
+					print "MANNs: "; 
+					foreach my $m (@mans) {print $m->{t_lemma} . " "};
+					print "\n" 
+				}
+				
+				#actors and patients
 				my @pats = find_node_by_attr($this, 'functor', '^[PA][AC]T');
 				@pats = &filter_list(\&test_person, @pats);
 				
@@ -174,6 +190,7 @@ sub print_injured
 				{
 					print $p->{t_lemma};
 
+					#patients count
 					my @cnt = find_node_by_attr($p, 'functor', '^RSTR');
 					@cnt = &filter_list(\&test_number_lemma, @cnt);
 					my $cnt1 = pop(@cnt);
@@ -315,16 +332,16 @@ sub print_subtree($node)
 }
 
 ################################################################################
-#Otestuje A-uzly odpovidajici T-uzlu $T_node 
-sub find_A_node($T_node, $test_sub)
+#Otestuje A-uzly odpovidajici T-uzlu $t_node 
+sub find_A_node($t_node, $test_sub)
 {
-	my($T_node, $test_sub) = @_;	
+	my($t_node, $test_sub) = @_;	
 	my @ret = ();
 
 	shift();
 	shift();
 
-	foreach my $anode (PML_T::GetANodes($T_node))
+	foreach my $anode (PML_T::GetANodes($t_node))
 	{
 		if (&$test_sub($anode, @_))
 		{
@@ -384,6 +401,13 @@ sub find_node($parent, $test_sub)
 
 
 ################################################################################
+sub find_node_by_attr_depth($parent, $depth ,$attr, $value)
+{
+	my($parent, $depth, $attr, $value) = @_;			
+	return &find_node_depth($parent, $depth , \&test_attr, $attr, $value);	
+}
+
+################################################################################
 sub find_node_by_attr($parent, $attr, $value)
 {
 	my($parent, $attr, $value) = @_;		
@@ -393,10 +417,27 @@ sub find_node_by_attr($parent, $attr, $value)
 
 
 ################################################################################
+sub test_negation($t_node)
+{
+	my ($t_node) = @_;
+	
+	#pro T-uzel by melo fungovat, buhuzel nas anlyzator to nevyplnuje
+	#print $t_anode->attr('gram/negation');
+	
+	foreach my $a (PML_T::GetANodes($t_node))
+	{
+		return 1 if get_negation_from_Anode($a) eq "N";		
+	}
+	
+	return 0;
+}
+
+################################################################################
 sub get_negation_from_Anode($anode)
 {
 	my ($anode) = @_;
 	
+	#pro T-uzel by melo fungovat, buhuzel nas anlyzator to nevyplnuje
 	#print $this->attr('gram/negation');
 	
 	return substr ($anode->attr('m/tag'), 10, 1);		
