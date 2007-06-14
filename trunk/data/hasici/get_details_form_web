@@ -6,7 +6,7 @@ for list in *.xml.list; do
 	mkdir ../../html_src/$list.out
 	cd ../../html_src/$list.out
 	wget -i  ../../rss/url_lists_archive/$list
-	cd  ../rss/url_lists_archive
+	cd  ../../rss/url_lists_archive
 done
 
  
