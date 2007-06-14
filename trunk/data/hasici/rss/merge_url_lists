@@ -1,0 +1,8 @@
+#!/bin/bash
+
+cd url_lists_archive
+
+for list in *.xml.list; do
+    cat $list >> ../url_lists_tmp/$list
+    sort ../url_lists_tmp/$list | uniq > $list
+done

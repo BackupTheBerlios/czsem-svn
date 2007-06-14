@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cd xml_feeds
+rm *.xml
+wget -i ../RSS_Feeds_list

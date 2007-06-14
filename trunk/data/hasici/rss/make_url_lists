@@ -1,0 +1,8 @@
+#!/bin/bash
+
+cd xml_feeds
+
+for feed in *.xml; do
+    xsltproc ../extract_detail_URLs.xsl $feed | sed -e '1d' > ../url_lists_tmp/$feed.list
+    
+done
