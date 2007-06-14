@@ -1,0 +1,21 @@
+Instalace czsem (diplomka Jan Dědek)
+
+
+ 1) Stžení SVN repository
+ (obsahuje zdrojové kódy, skripty, data)
+ - nutné mít nainstalovaného SVN klienta (např. http://subversion.tigris.org/)
+ 
+ příkaz:
+ svn checkout http://svn.berlios.de/svnroot/repos/czsem/trunk
+ 
+ (V aktuálním adresáři vytvoří adresář "trunk" a do něho stáhne obsah repository)
+ 
+ ---------------------------------------------------------------------------------------------------------------
+  
+  2) Instalace programu Tree Editor TrEd
+  (Program btred - součást editoru TrEd je nutný pro fungování většiny lingvistických operací)
+  
+  Instrukce pro instalaci včetně instalčního balíčku je k dispozici na adrese:
+  http://ufal.mff.cuni.cz/~pajas/tred/
+  
+  
