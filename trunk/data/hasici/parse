@@ -6,3 +6,7 @@ for d in *; do
 /tmp/czsem/parsing_czech/t-analysis/run $d/out/5-pml
 
 done 
+
+
+#ja to spustit na pozadi:
+#echo './parse > parse_log 2>&1 &!' | zsh
