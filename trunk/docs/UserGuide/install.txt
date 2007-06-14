@@ -1,21 +1,48 @@
-Instalace czsem (diplomka Jan Dědek)
+Instalace czsem (diplomová práce Jan Dědek)
+---------------------------------------------------------------------------------------------------------------
 
+1) Stažení SVN repository
+(obsahuje zdrojové kódy, skripty, data)
+- nutné mít nainstalovaného SVN klienta (např. http://subversion.tigris.org/)
 
- 1) Stžení SVN repository
- (obsahuje zdrojové kódy, skripty, data)
- - nutné mít nainstalovaného SVN klienta (např. http://subversion.tigris.org/)
- 
- příkaz:
- svn checkout http://svn.berlios.de/svnroot/repos/czsem/trunk
- 
- (V aktuálním adresáři vytvoří adresář "trunk" a do něho stáhne obsah repository)
- 
- ---------------------------------------------------------------------------------------------------------------
-  
-  2) Instalace programu Tree Editor TrEd
-  (Program btred - součást editoru TrEd je nutný pro fungování většiny lingvistických operací)
-  
-  Instrukce pro instalaci včetně instalčního balíčku je k dispozici na adrese:
-  http://ufal.mff.cuni.cz/~pajas/tred/
-  
-  
+příkaz:
+svn checkout http://svn.berlios.de/svnroot/repos/czsem/trunk
+
+(V aktuálním adresáři vytvoří adresář "trunk" a do něho stáhne obsah repository)
+---------------------------------------------------------------------------------------------------------------
+
+2) Instalace programu Tree Editor TrEd
+Program btred (součást editoru TrEd) je nutný pro fungování většiny lingvistických operací
+
+Instrukce pro instalaci včetně instalačního balíčku je k dispozici na adrese:
+http://ufal.mff.cuni.cz/~pajas/tred/
+Další možnost, jak získat TrEd, je nainstalovat si ho z PDT2.0 CD-ROM. Viz dále.
+
+Po instalaci je ještě nutné přidat adresář "tred" (obsahující skript "btred") do proměnné PATH.
+---------------------------------------------------------------------------------------------------------------
+
+3) Instalace Tools for machine annotation (from PDT2.0)
+Jedná o skupinu nástrojů, které provádějí lingvistickou analýzu textu až po analytickou vrstvu.
+
+Tyto nástroje obsahuje CD-ROM The Prague Dependency Treebank 2.0.
+Instrukce, jak získat tento CD-ROM jsou na stránkách  PDT2.0 v sekci "7. Distribution & License".
+http://ufal.mff.cuni.cz/pdt2.0/
+
+Instalace Tools for machine annotation je součástí hlavního instalačního procesu PDT2.0.
+Viz sekce "8. Installation" na stránkách  PDT2.0 (http://ufal.mff.cuni.cz/pdt2.0/)
+
+Tyto nástroje fungují pouze na operačních systémech Linux běžících na i386 architektuře.
+
+Za dodržení licenčních podmínek je též možné si CD-ROM PDT2.0 zapůjčit u autora diplomové práce.
+---------------------------------------------------------------------------------------------------------------
+
+4) Nástroj pro tektogramatickou analýzu češtiny - Václav Klimeš
+Jedná o nástroj, který provádí tektogramatickou lingvistickou anotaci.
+Jako vstup akceptuje výstup nástrojů výše (Tools for machine annotation).
+
+Nástroj lze získat přímo od Václava Klimeše.
+http://ufal.mff.cuni.cz/~klimes/ (kontaktní informace)
+
+Pro pouhé otestování funkčnosti diplomové práce lze použít kopii tohoto nástroje v SVN repository.
+Instalace této kopie:
+
