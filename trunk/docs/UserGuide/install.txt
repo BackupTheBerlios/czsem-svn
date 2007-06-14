@@ -50,8 +50,8 @@ Nejprve je nutné stáhnout a nainstalovat fnTBL Toolkit.
 http://nlp.cs.jhu.edu/~rflorian/fntbl/index.html
 Návod k instalaci je uvnitř staženého archivu v souboru "README".
 
-Dále je nutné nakofigurovat cesty k důležitým souborům t-analysis.
-V souboru "run" nastavte proměnou "A2T" na cestu k adresáři "t-analysis" a proměnnou "FNTBL" na cestu kde je nainstalovaný  fnTBL Toolkit. 
-V souborech "t-analysis/[1-4]/cfg/tbl.params" a "t-analysis[1-4]/R" změnte vždy na prvním řádku cestu tak, aby odpovídala aktuálnímu umístění souborů.
+Dále je nutné nakonfigurovat cesty k důležitým souborům t-analysis.
+V souboru "run" nastavte proměnou "A2T" na cestu k adresáři "t-analysis" a proměnnou "FNTBL" na cestu kde je nainstalovaný  fnTBL Toolkit.
+V souborech "t-analysis/[1-4]/cfg/tbl.params" a "t-analysis[1-4]/R" změňte vždy na prvním řádku cestu tak, aby odpovídala aktuálnímu umístění souborů.
 
 Zajistěte, aby adresář s programem btred, což je součást TrEdu, byl v PATH. (Stačí, když na něj bude symlink v nějakém vašem adresáři bin.)
