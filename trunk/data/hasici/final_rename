@@ -1,0 +1,13 @@
+#!/bin/bash
+
+
+cd txt_src
+
+rename "hzs_" '' *
+rename ".xml.list.out.isol2" '' *
+ 
+for dir1 in *; do
+	rename 'article.php?id=' $dir1 $dir1/* 
+done
+ 
+

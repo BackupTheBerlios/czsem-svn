@@ -1,5 +1,5 @@
 #!/bin/bash
 
-./get_RSS_feeds
-./make_url_lists
-./merge_url_lists
+sh ./get_RSS_feeds
+sh ./make_url_lists
+sh ./merge_url_lists

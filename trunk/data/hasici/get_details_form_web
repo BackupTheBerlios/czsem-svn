@@ -1,12 +1,12 @@
 #!/bin/bash
 
-cd rss/url_list_archive
+cd rss/url_lists_archive
 
 for list in *.xml.list; do
-	mkdir ../../html_src/$f.out
-	cd ../../html_src/$f.out
-	wget -i  ../rss/url_list_archive/$f
-	cd  ../rss/url_list_archive
+	mkdir ../../html_src/$list.out
+	cd ../../html_src/$list.out
+	wget -i  ../../rss/url_lists_archive/$list
+	cd  ../rss/url_lists_archive
 done
 
  

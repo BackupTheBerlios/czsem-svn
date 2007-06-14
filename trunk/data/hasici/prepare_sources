@@ -1,0 +1,11 @@
+#!/bin/bash
+
+
+cd rss
+sh ./update_url_lists_archive
+
+cd ..
+sh ./get_details_form_web
+sh ./cs_convert
+sh ./strip_HTML_complete
+sh ./final_rename

@@ -1,11 +1,15 @@
 #!/bin/bash
 
+cd html_src
+
 for dir1 in *.list.out; do
+
+	mkdir $dir1.isol2
 	
 	cd $dir1
 
-	for f in short_*.htm; do
-		cstocs 1250 il2 < $f > isol2_$f
+	for f in article.php*; do
+		cstocs 1250 il2 < $f > ../$dir1.isol2/$f
 	done
 	
 	cd ..
