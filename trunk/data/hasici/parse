@@ -1,9 +1,15 @@
 #!/bin/bash
 
+cd txt_src
+
 for d in *; do 
 
-/tmp/czsem/parsing_czech/machine-annotation/run_all $d/out $d/*.txt
+#/tmp/czsem/parsing_czech/machine-annotation/run_all $d/out $d/*.txt
+/tmp/PDT/tools/machine-annotation/run_all $d/out $d/*.txt
 /tmp/czsem/parsing_czech/t-analysis/run $d/out/5-pml
+
+mkdir ../pml/$d
+mv $d/out/5-pml/*.[wmat].gz ../pml/$d
 
 done 
 

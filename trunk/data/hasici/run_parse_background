@@ -1,0 +1,3 @@
+#!/bin/bash
+
+echo 'zsh ./parse > parse.log 2>&1 &!' | zsh
