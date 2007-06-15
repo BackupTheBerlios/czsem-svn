@@ -30,6 +30,10 @@ http://ufal.mff.cuni.cz/pdt2.0/
 
 Instalace Tools for machine annotation je součástí hlavního instalačního procesu PDT2.0.
 Viz sekce "8. Installation" na stránkách  PDT2.0 (http://ufal.mff.cuni.cz/pdt2.0/)
+Pro otestování diplomové práce stačí spustit custom instalaci a vybrat položky:
+26 -Scripts for Format Conversions, with documentation 98.7 kB
+27- Machine Annotation Tools (Linux binaries) 155.9 MB
+Jako cílový adresář nastavte "parsing_czech/PDT" v adresáři, kam jste stáhli SVN repository (..../trunk/parsing_czech/PDT).
 
 Tyto nástroje fungují pouze na operačních systémech Linux běžících na i386 architektuře.
 
