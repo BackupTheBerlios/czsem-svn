@@ -1,4 +1,4 @@
-Instalace czsem (diplomová práce Jan Dědek)
+﻿Instalace czsem (diplomová práce Jan Dědek)
 
 ________________________________________________________________________________
 1) Stažení SVN repository
@@ -22,7 +22,7 @@ Po instalaci je ještě nutné přidat adresář "tred" (obsahující skript "bt
 
 ________________________________________________________________________________
 3) Instalace Tools for machine annotation (from PDT2.0)
-Jedná o skupinu nástrojů, které provádějí lingvistickou analýzu textu až po analytickou vrstvu.
+Jedná o skupinu nástrojů, které provádějí lingvistickou analýzu textu až po analytickou rovinu.
 
 Tyto nástroje obsahuje CD-ROM The Prague Dependency Treebank 2.0.
 Instrukce, jak získat tento CD-ROM jsou na stránkách  PDT2.0 v sekci "7. Distribution & License".
