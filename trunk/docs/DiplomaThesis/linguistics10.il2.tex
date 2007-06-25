@@ -1,0 +1,90 @@
+\chapter{Lingvistická anotace}
+
+
+Úrovnì
+analytickou rovinu
+Tektogramatická rovina.
+Lemma
+
+PML http://ufal.mff.cuni.cz/pdt2.0/doc/data-formats/pml/index.html
+
+\section{The Prague Dependency Treebank}
+
+
+Pra¾ský závislostní korpus (PDT) je probíhající projekt Centra poèítaèové lingvistiky Ústavu formální a aplikované lingvistiky (ÚFAL) v Praze\footnote{http://ufal.mff.cuni.cz/}
+
+Náplní projektu je pøedev¹ím ruèní lingvistická anotace velkého mno¾ství èeských textù. Projekt se vyznaèuje velkou hloubkou anotace, která sahá a¾ po tektogramatickou rovinou. Kromì velkého mno¾ství anotovaných textù bylo v souvislosti s projektem vyvinuto i mno¾ství u¾iteèných nástrojù pro práci s anotacemi a nástroje, které umo¾òují automatickou lingvistickou anotaci èeského textu.
+
+dopsat
+PDT 1.0
+PDT 2.0
+
+
+\section{Lingvistické nástroje}
+
+\subsection{NetGraph}
+\subsection{Tred}
+
+\subsection{Tools for machine annotation - PDT 2.0}
+
+
+Jedná o skupinu nástrojù, které provádìjí lingvistickou analýzu èeského textu. Ze surových èeských vìt vytváøejí závislostní stromy na analytické rovinì. Proces anotace se skládá z následujících funkcí.
+
+\begin{enumerate}
+\item Rozpoznání slovních jednotek ve vstupním surovém textu a rozdìlení textu na vìty.
+\item Morfologická analýza a tagging (morfologická disambiguace).
+\item Závislostní parsing.
+\item Pøiøazení analytických (závislostních) funkcí v¹em uzlùm zparsovaného stromu.
+\end{enumerate}
+
+Tyto funkce jsou implementovány v celkem ¹esti oddìlených nástrojích. Vstupem ka¾dého nástroje je v¾dy výstup pøedchozího s výjimkou prvního, jeho¾ vstupem je prostý text. Nástroje jsou napsány z èásti v Perlu, zbytek tvoøí pøelo¾ený kód (C++) pro Linux bì¾ící na i386 architektuøe.
+
+Celý øetìz nástrojù se dá spustit jediným skriptem \emph{run\_all}.
+
+
+Tyto nástroje a jejich podrobný popis\footnote{http://ufal.mff.cuni.cz/pdt2.0/doc/tools/machine-annotation/} (vèetnì namìøené chybovosti) jsou k dispozici jako souèást PDT 2.0 CD-ROM.
+
+
+Následuje podrobnìj¹í popis jednotlivých nástrojù.
+
+
+
+\subsubsection*{Segmentation and tokenization}
+
+
+Provádí rozdìlení textu na slova a interpunkèní znaménka (tokenizace) a rozdìlí tyto tokeny do vìt (segmentace).
+
+\subsubsection*{Morphological analysis}
+
+Pro ka¾dé slovo vyhledá v¹echna mo¾ná lemmata a morfologické znaèky, která by mu mohly odpovídat.
+
+\subsubsection*{Morphological tagging}
+
+Ze v¹ech mo¾ných alternativ získaných v pøedchozím kroku pro ka¾dé slovo vybere jedno lemma a morfologickou znaèku. Tento proces se èasto nazývá disambiguation.
+Tagging pro Èe¹tinu je pomìrnì zajímavý vìdecký problém, který je podrobnì rozpracován v mnoha  publikacích\footnote{http://ufal.mff.cuni.cz/czech-tagging/}.
+
+\subsubsection*{Parsing}
+
+Morfologicky oznaèkovaná slova v ka¾dé vìtì uspoøádá do závislostního stromu.
+Problém automatického závislostního parsingu\footnote{http://ufal.mff.cuni.cz/czech-parsing/}
+je stále pomìrnì ¾ivý. Aktuálnì nejlep¹í parser \cite{zeman_parser} dosahuje pøesnosti pøibli¾nì 86\%
+
+\subsubsection*{Analytical function assignment}
+
+Jednotlivým hranám závislostního stromu, které vznikly v pøedchozím kroku, pøiøadí funktory analytické roviny. Nástroj pracuje jako klasifikátor zalo¾ený na rozhodovacím stromu. Øídící rozhodovací strom byl vytvoøen pomocí Quinlanova C5 klasifikátoru z dat PDT1.0.
+
+\subsubsection*{Conversion into PML}
+
+Zapí¹e výstup pøedchozího nástroje v PML jazyce.
+
+
+\chapter{Data}
+
+
+\subsection{Volba zdrojových textù}
+
+
+Proè hasièi?
+Proè ne PDT?
++ pokusy s PDT sample data.
+

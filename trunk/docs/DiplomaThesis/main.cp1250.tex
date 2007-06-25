@@ -1,0 +1,81 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                                    %%%
+%%% Diolomová práce MFF UK             %%%
+%%%                                    %%%
+%%% Jan Dìdek                          %%%
+%%%                                    %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\documentclass[12pt,notitlepage]{report}
+%\pagestyle{headings}
+\pagestyle{plain}
+
+\frenchspacing % aktivuje použití nìkterých èeských typografických pravidel
+
+\usepackage[latin2]{inputenc} % nastavuje použité kódování, uživatelé Windows zamìní latin2 za cp1250
+%\usepackage{czech}
+\usepackage[czech]{babel}
+\usepackage{a4wide} % nastavuje standardní evropský formát stránek A4
+%\usepackage{index} % nutno použít v pøípadì tvorby rejstøíku balíèkem makeindex
+%\usepackage{fancybox} % umožòuje pokroèilé rámeèkování :-)
+\usepackage{graphicx} % nezbytné pro standardní vkládání obrázkù do dokumentu
+
+\usepackage[left=4cm]{geometry} % nastavení dané velikosti okrajù
+
+%\newindex{default}{idx}{ind}{Rejstøík} % zavádí rejstøík v pøípadì použití balíku index
+
+\title{Sémantická anotace dat z webovských zdrojù}   % tyto dvì položky jsou zde v podstatì formálnì, ve skuteènosti nejsou nikde 
+\author{Jan Dìdek} % dále v dokumentu použity
+
+%\date{}
+
+\includeonly{1st_page.il2,linguistics10.il2}
+%\includeonly{linguistics10.il2}
+
+
+\begin{document}
+
+%\csprimeson % zapne jednoduché psaní èeských uvozovek pomocí klasických znakù, ale potom pozor 
+             % na originální apostrofy, které budou chybnì interpretovány!!!
+
+
+%\vloží titulní stranu
+\include{1st_page.il2}
+
+
+\tableofcontents % vkládá automaticky generovaný obsah dokumentu
+
+
+
+%\newpage
+
+%%% Následuje text diplomové práce èlenìný do kapitol, které se èíslují, oznaèí názvy a graficky oddìlí.
+%%% Nedoporuèuje se používat víc než dvì úrovnì èíslování kapitol, viz pøíklad níže.
+
+\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+
+
+\include{linguistics10.il2}
+
+%\setlength{\parskip}{0ex}
+
+
+%%% Seznam literatury
+%%%
+%%% Literatura se øadí abecednì. Úvádí se pouze literatura, na kterou se v textu odkazuje.
+%%% Pøi odkazu na knihu se vždy uvádìjí èísla stránek.
+
+\begin{thebibliography}{99}
+\addcontentsline{toc}{chapter}{Literatura}
+
+ \bibitem{zeman_parser} Zeman D., Zdenìk Žabokrtský (2005): Improving Parsing Accuracy by Combining Diverse Dependency Parsers. In: Proceedings of the International Workshop on Parsing Technologies (IWPT 2005). Association for Computational Linguistics, Vancouver, British Columbia.
+
+%-----------------------------------------------------------------------------------------------
+%ukazkové smazat
+ \bibitem{abraham-marsden}Abraham R., Marsden J. E.: {\em Foundations of Mechanics}, Addison-Wesley, Reading, 1985.
+ \bibitem{derbes}Derbes D.: {\em Reinventing the wheel: Hodographic solutions to the Kepler problems}, Am. J. Phys. {\bf 69} (2001) 481--489.
+ \bibitem{kvasnica}Kvasnica J.: {\em Teorie elektromagnetického pole}, Academia, Praha, 1985.
+\end{thebibliography}
+
+\end{document}

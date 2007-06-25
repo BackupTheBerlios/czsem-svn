@@ -1,0 +1,8 @@
+#!/bin/bash
+
+for f in *.il2.tex; do
+
+	cstocs il2 1250 < $f > `echo $f | sed -e 's/il2/cp1250/'`
+	
+done
+ 
