@@ -13,7 +13,9 @@
 
 \frenchspacing % aktivuje použití nìkterých èeských typografických pravidel
 
-\usepackage[latin2]{inputenc} % nastavuje použité kódování, uživatelé Windows zamìní latin2 za cp1250
+\usepackage[cp1250]{inputenc} % nastavuje použité kódování, uživatelé Windows zamìní latin2 za cp1250
+%\usepackage[latin2]{inputenc} % nastavuje použité kódování, uživatelé Windows zamìní latin2 za cp1250
+
 %\usepackage{czech}
 \usepackage[czech]{babel}
 \usepackage{a4wide} % nastavuje standardní evropský formát stránek A4
@@ -25,23 +27,23 @@
 
 %\newindex{default}{idx}{ind}{Rejstøík} % zavádí rejstøík v pøípadì použití balíku index
 
-\title{Sémantická anotace dat z webovských zdrojù}   % tyto dvì položky jsou zde v podstatì formálnì, ve skuteènosti nejsou nikde 
+\title{Sémantická anotace dat z webovských zdrojù}   % tyto dvì položky jsou zde v podstatì formálnì, ve skuteènosti nejsou nikde
 \author{Jan Dìdek} % dále v dokumentu použity
 
 %\date{}
 
-\includeonly{1st_page.il2,linguistics10.il2}
+\includeonly{1st_page,linguistics10}
 %\includeonly{linguistics10.il2}
 
 
 \begin{document}
 
-%\csprimeson % zapne jednoduché psaní èeských uvozovek pomocí klasických znakù, ale potom pozor 
+%\csprimeson % zapne jednoduché psaní èeských uvozovek pomocí klasických znakù, ale potom pozor
              % na originální apostrofy, které budou chybnì interpretovány!!!
 
 
 %\vloží titulní stranu
-\include{1st_page.il2}
+\include{1st_page}
 
 
 \tableofcontents % vkládá automaticky generovaný obsah dokumentu
@@ -56,7 +58,7 @@
 \setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
 
 
-\include{linguistics10.il2}
+\include{linguistics10}
 
 %\setlength{\parskip}{0ex}
 

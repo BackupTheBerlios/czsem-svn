@@ -1,8 +1,10 @@
 #!/bin/bash
 
-for f in *.cp1250.tex; do
+cd cp1250
 
-	cstocs 1250 il2 < $f > `echo $f | sed -e 's/cp1250/il2/'`
-	
+for f in *.tex; do
+
+	cstocs 1250 il2 < $f > ../il2/$f
+
 done
- 
+
