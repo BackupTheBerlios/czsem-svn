@@ -6,9 +6,36 @@ Korpusová lingvistika je podobnì novou disciplínou, jejíž vznik, stejnì jako cel
 
 Korpusy se v zásadì znaèkují tøemi druhy znaèek. 1) Znaèky správní zachycují identifikaèní údaje o každém textu - informace o jeho pùvodu a zdroji. 2) Znaèky strukturní zachycují hierarchickou strukturu textu tj rozdìlení textu do kapitol, odstavcù, vìt, slov a interpunkèních znamének (tokenù). 3) Znaèky lingvistické jsou pøiøazeny k jednotlivým slovùm a nesou informaci o lingvistických kategoriích, které dané slovo slovo nese.
 
+XXxx
+
+Xxxx rozebrat závislostní X složkovou lingvistickou anotaci
+
+Xxxx http://citeseer.ist.psu.edu/149407.html 
+
+Xxxx
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Lingvistické znaèky}
-Lingvistické znaèky rozdìlím do tøí kategorií. V projektu PDT (viz \ref{sec:PDT}) podle roviny lingvistické anotace. , tak jak se je dìlí napøíklad v projektu PDT.
+Lingvistické znaèky rozdìlím do tøí kategorií. Podle roviny lingvistické anotace, tak jak se jsou rozdìleny v projektu PDT (viz oddíl~\ref{sec:PDT}).
+
+Následuje struèný popis jednotlivých znaèek každé roviny. Podrobnìjší popis lingvistických znaèek je možné najít napøíklad v \cite{morphological_annotation}, \cite{analytic_annotation}, \cite{tectogramtic_annotation}.
+
+\subsection{Morfologická rovina}
+\subsubsection{Slovní tvar}
+Tato znaèka obsahuje tvar, v jakém se dané slovo vyskytuje v pùvodním textu vèetnì zápisu malých a velkých písmen. Od pùvodního výskytu se liší se jen ve výjimeèných pøípadech, kdy napøíklad pùvodní slovní tvar byl èíslice s desetinnou èárkou (snaha o jednotný zápis èísel) nebo se jednalo o pøeklep.
+\subsubsection{Lemma}
+Lemma je takzvaný základní tvar slova. Jednoznaènì slovo identifikuje. V tomto tvaru je dané slovo obvykle uvádìno ve slovnících.
+\subsubsection{Morfologická znaèka}
+Morfologická znaèka v sobì spojuje informaci o morfologických kategoriích, které dané slovo nese. Z morfologické znaèky je možné zjistit slovní druh, jmenný rod, èíslo, pád, osobu, èas, atd.
+
+\subsection{Analytická rovina}
+Analytická úroveò je v této dobì hlavní úroveò pro strukturní anotaci. Opouští se zde lineární anotace, kdy je každé slovo bráno samostatnì bez ohledu na kontext, a do anotace textu zavádí se vìtná struktura (nikoli však ještì struktura textu). Všechna pùvodní slova textu zùstávají zachována a dostávají ve výsledné struktuøe svou funkci.
+    Strukturou se rozumí strom (orientovaný acyklický graf s jedním koøenem), jehož uzly jsou ohodnoceny atributy (pozn.: slovo atribut zde používáme v matematickém smyslu, nikoli lingvistickém ve smyslu pøívlastek - viz kap. 4.1 Seznam analytických funkcí). Každý uzel má nyní 12 atributù. Hrany stromu representují vztahy ?závislosti? mezi lexikálními jednotkami, pøíp. vztahy jiného typu (podle hodnot atributù). Základním cílem anotace je správná struktura vìty a oznaèení typu závislosti. Typ závislosti je jedním z atributù každého uzlu a je z pochopitelných dùvodù orientován ?nahoru?, tj. smìrem ke svému ?øídícímu? uzlu.
+    
+%%    http://ufal.mff.cuni.cz/pdt/Corpora/PDT_1.0/Doc/amanual/uuvod.html#2.2.2%20analytick%E1%20%FArove%F2.
+    http://ufal.mff.cuni.cz/pdt/Corpora/PDT_1.0/Doc/amanual/uuvod.html
+    
+\subsection{Tektogramatická rovina}
 
 Ve své práci buduu
 
@@ -27,7 +54,7 @@ PML http://ufal.mff.cuni.cz/pdt2.0/doc/data-formats/pml/index.html
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The Prague Dependency Treebank}
-\label{PDT}
+\label{sec:PDT}
 
 
 Pražský závislostní korpus (PDT) je probíhající projekt Centra poèítaèové lingvistiky Ústavu formální a aplikované lingvistiky (ÚFAL) v Praze\footnote{http://ufal.mff.cuni.cz/}
@@ -94,7 +121,7 @@ je stále pomìrnì živý. Aktuálnì nejlepší parser \cite{zeman_parser} dosahuje pøe
 
 \subsubsection*{Analytical function assignment}
 
-Jednotlivým hranám závislostního stromu, které vznikly v pøedchozím kroku, pøiøadí funktory analytické roviny. Nástroj pracuje jako klasifikátor založený na rozhodovacím stromu. Øídící rozhodovací strom byl vytvoøen pomocí Quinlanova C5 klasifikátoru z dat PDT1.0.
+Jednotlivým hranám závislostního stromu, které vznikly v pøedchozím kroku, pøiøadí funktory analytické roviny. Nástroj pracuje jako klasifikátor založený na rozhodovacím stromu. Øídící rozhodovací strom byl vytvoøen pomocí Quinlanova C5 klasifikátoru z dat PDT 1.0.
 
 \subsubsection*{Conversion into PML}
 
