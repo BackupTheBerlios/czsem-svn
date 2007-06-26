@@ -1,5 +1,17 @@
 \chapter{Lingvistická anotace}
 
+Lingvistickou anotací budu ve své práci oznaèovat èinnost pøi které se text pøirozeného jazyka obohacuje o lingvistickou informaci o slovech, vìtách, vztazích mezi slovy, mezi vìtami apod. Lingvistická anotace nebo té¾ znaèkování korpusu je jedna z èinností korpusové lingvistiky. Korpusem rozumíme soubor textù. Korpusová lingvistika se zabývá zkoumáním a shroma¾ïováním textù  pøirozeného jazyka (zkoumáním a vytváøením korpusu).
+
+Korpusová lingvistika je podobnì novou disciplínou, její¾ vznik, stejnì jako celé poèítaèové lingvistiky vùbec, umo¾nil rozvoj výpoèetní techniky posledních let.  Tato èinnost dnes nemalou mírou pøispívá k jazykovému výzkumu. Na stránkách Èeského národního korpusu\footnote{http://ucnk.ff.cuni.cz/} se dokonce uvádí, ¾e pøiná¹í natolik nové poznatky o jazyce, ¾e do dosavadního vývoje jazykovìdy vná¹í radikální pøevrat.
+
+Korpusy se v zásadì znaèkují tøemi druhy znaèek. 1) Znaèky správní zachycují identifikaèní údaje o ka¾dém textu - informace o jeho pùvodu a zdroji. 2) Znaèky strukturní zachycují hierarchickou strukturu textu tj rozdìlení textu do kapitol, odstavcù, vìt, slov a interpunkèních znamének (tokenù). 3) Znaèky lingvistické jsou pøiøazeny k jednotlivým slovùm a nesou informaci o lingvistických kategoriích, které dané slovo slovo nese.
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Lingvistické znaèky}
+
+Ve své práci buduu 
+
+Poèítaèová lingvistika  Natural language processing, NLP)
 
 Úrovnì
 analytickou rovinu
@@ -8,18 +20,27 @@ Lemma
 
 PML http://ufal.mff.cuni.cz/pdt2.0/doc/data-formats/pml/index.html
 
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The Prague Dependency Treebank}
 
 
 Pra¾ský závislostní korpus (PDT) je probíhající projekt Centra poèítaèové lingvistiky Ústavu formální a aplikované lingvistiky (ÚFAL) v Praze\footnote{http://ufal.mff.cuni.cz/}
 
-Náplní projektu je pøedev¹ím ruèní lingvistická anotace velkého mno¾ství èeských textù. Projekt se vyznaèuje velkou hloubkou anotace, která sahá a¾ po tektogramatickou rovinou. Kromì velkého mno¾ství anotovaných textù bylo v souvislosti s projektem vyvinuto i mno¾ství u¾iteèných nástrojù pro práci s anotacemi a nástroje, které umo¾òují automatickou lingvistickou anotaci èeského textu.
+Náplní projektu je pøedev¹ím ruèní lingvistická anotace velkého mno¾ství èeských textù. Projekt se vyznaèuje velkou hloubkou anotace, která sahá a¾ po tektogramatickou rovinou. Kromì velkého mno¾ství anotovaných textù bylo v souvislosti s projektem vyvinuto i mno¾ství u¾iteèných nástrojù pro práci s anotacemi a nástroje, které umo¾òují automatickou lingvistickou anotaci èeského textu.
 
 dopsat
 PDT 1.0
 PDT 2.0
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{WordNet}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Lingvistické nástroje}
 
 \subsection{NetGraph}
@@ -28,7 +49,7 @@ PDT 2.0
 \subsection{Tools for machine annotation - PDT 2.0}
 
 
-Jedná o skupinu nástrojù, které provádìjí lingvistickou analýzu èeského textu. Ze surových èeských vìt vytváøejí závislostní stromy na analytické rovinì. Proces anotace se skládá z následujících funkcí.
+Jedná o skupinu nástrojù, které provádìjí lingvistickou analýzu èeského textu. Ze surových èeských vìt vytváøejí závislostní stromy na analytické rovinì. Proces anotace se skládá z následujících funkcí.
 
 \begin{enumerate}
 \item Rozpoznání slovních jednotek ve vstupním surovém textu a rozdìlení textu na vìty.
@@ -37,12 +58,12 @@ Jedná o skupinu nástrojù, které provádìjí lingvistickou analýzu èeského textu. Z
 \item Pøiøazení analytických (závislostních) funkcí v¹em uzlùm zparsovaného stromu.
 \end{enumerate}
 
-Tyto funkce jsou implementovány v celkem ¹esti oddìlených nástrojích. Vstupem ka¾dého nástroje je v¾dy výstup pøedchozího s výjimkou prvního, jeho¾ vstupem je prostý text. Nástroje jsou napsány z èásti v Perlu, zbytek tvoøí pøelo¾ený kód (C++) pro Linux bì¾ící na i386 architektuøe.
+Tyto funkce jsou implementovány v celkem ¹esti oddìlených nástrojích. Vstupem ka¾dého nástroje je v¾dy výstup pøedchozího s výjimkou prvního, jeho¾ vstupem je prostý text. Nástroje jsou napsány z èásti v Perlu, zbytek tvoøí pøelo¾ený kód (C++) pro Linux bì¾ící na i386 architektuøe.
 
 Celý øetìz nástrojù se dá spustit jediným skriptem \emph{run\_all}.
 
 
-Tyto nástroje a jejich podrobný popis\footnote{http://ufal.mff.cuni.cz/pdt2.0/doc/tools/machine-annotation/} (vèetnì namìøené chybovosti) jsou k dispozici jako souèást PDT 2.0 CD-ROM.
+Tyto nástroje a jejich podrobný popis\footnote{http://ufal.mff.cuni.cz/pdt2.0/doc/tools/machine-annotation/} (vèetnì namìøené chybovosti) jsou k dispozici jako souèást PDT 2.0 CD-ROM.
 
 
 Následuje podrobnìj¹í popis jednotlivých nástrojù.
@@ -60,24 +81,25 @@ Pro ka¾dé slovo vyhledá v¹echna mo¾ná lemmata a morfologické znaèky, která by mu
 
 \subsubsection*{Morphological tagging}
 
-Ze v¹ech mo¾ných alternativ získaných v pøedchozím kroku pro ka¾dé slovo vybere jedno lemma a morfologickou znaèku. Tento proces se èasto nazývá disambiguation.
-Tagging pro Èe¹tinu je pomìrnì zajímavý vìdecký problém, který je podrobnì rozpracován v mnoha  publikacích\footnote{http://ufal.mff.cuni.cz/czech-tagging/}.
+Ze v¹ech mo¾ných alternativ získaných v pøedchozím kroku pro ka¾dé slovo vybere jedno lemma a morfologickou znaèku. Tento proces se èasto nazývá disambiguace.
+Tagging pro Èe¹tinu je pomìrnì zajímavý vìdecký problém, který je podrobnì rozpracován v mnoha  publikacích\footnote{http://ufal.mff.cuni.cz/czech-tagging/}.
 
 \subsubsection*{Parsing}
 
-Morfologicky oznaèkovaná slova v ka¾dé vìtì uspoøádá do závislostního stromu.
+Morfologicky oznaèkovaná slova v ka¾dé vìtì uspoøádá do závislostního stromu.
 Problém automatického závislostního parsingu\footnote{http://ufal.mff.cuni.cz/czech-parsing/}
 je stále pomìrnì ¾ivý. Aktuálnì nejlep¹í parser \cite{zeman_parser} dosahuje pøesnosti pøibli¾nì 86\%
 
 \subsubsection*{Analytical function assignment}
 
-Jednotlivým hranám závislostního stromu, které vznikly v pøedchozím kroku, pøiøadí funktory analytické roviny. Nástroj pracuje jako klasifikátor zalo¾ený na rozhodovacím stromu. Øídící rozhodovací strom byl vytvoøen pomocí Quinlanova C5 klasifikátoru z dat PDT1.0.
+Jednotlivým hranám závislostního stromu, které vznikly v pøedchozím kroku, pøiøadí funktory analytické roviny. Nástroj pracuje jako klasifikátor zalo¾ený na rozhodovacím stromu. Øídící rozhodovací strom byl vytvoøen pomocí Quinlanova C5 klasifikátoru z dat PDT1.0.
 
 \subsubsection*{Conversion into PML}
 
-Zapí¹e výstup pøedchozího nástroje v PML jazyce.
+Zapí¹e výstup pøedchozího nástroje v PML jazyce.
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Data}
 
 

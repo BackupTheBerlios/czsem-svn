@@ -1,0 +1,19 @@
+[Config]
+Relative path=1
+Compilator.SaveAll=0
+Compilator.Capture=0
+Compilator.HideOutput=0
+DefaultDir=D:\czsem\docs\DiplomaThesis
+DefaultCPIndex=2
+LogtoEnd=1
+DontOpen=0
+FileFormat=0
+[Project tree]
+DiplomaThesis
+	+DiplomaThesis
+		1st_page.il2.tex
+		linguistics10.il2.tex
+		main.il2.tex
+[Open project files]
+[Selected Project Files]
+Main=
