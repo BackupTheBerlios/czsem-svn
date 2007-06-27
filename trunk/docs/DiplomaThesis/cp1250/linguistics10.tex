@@ -10,16 +10,17 @@ XXxx
 
 Xxxx rozebrat závislostní X složkovou lingvistickou anotaci
 
-Xxxx http://citeseer.ist.psu.edu/149407.html 
+Xxxx http://citeseer.ist.psu.edu/149407.html
 
 Xxxx
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Lingvistické znaèky}
-Lingvistické znaèky rozdìlím do tøí kategorií. Podle roviny lingvistické anotace, tak jak se jsou rozdìleny v projektu PDT (viz oddíl~\ref{sec:PDT}).
+Lingvistické znaèky rozdìlím do tøí kategorií. Podle roviny lingvistické anotace, tak jak se jsou rozdìleny v projektu PDT (viz oddíl~\ref{sec:PDT}). Znaèky morfologické roviny jsou nezávisle pøiøazovány jednotlivým slovùm. Naproti tomu znaèky analytické a tektogramatické roviny popisují strukturu vìty a jejich znaèky popisující vztahy mezi jednotlivými slovy se mohou týkat více slov najednou.
 
 Následuje struèný popis jednotlivých znaèek každé roviny. Podrobnìjší popis lingvistických znaèek je možné najít napøíklad v \cite{morphological_annotation}, \cite{analytic_annotation}, \cite{tectogramtic_annotation}.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Morfologická rovina}
 \subsubsection{Slovní tvar}
 Tato znaèka obsahuje tvar, v jakém se dané slovo vyskytuje v pùvodním textu vèetnì zápisu malých a velkých písmen. Od pùvodního výskytu se liší se jen ve výjimeèných pøípadech, kdy napøíklad pùvodní slovní tvar byl èíslice s desetinnou èárkou (snaha o jednotný zápis èísel) nebo se jednalo o pøeklep.
@@ -28,25 +29,126 @@ Lemma je takzvaný základní tvar slova. Jednoznaènì slovo identifikuje. V tomto t
 \subsubsection{Morfologická znaèka}
 Morfologická znaèka v sobì spojuje informaci o morfologických kategoriích, které dané slovo nese. Z morfologické znaèky je možné zjistit slovní druh, jmenný rod, èíslo, pád, osobu, èas, atd.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Analytická rovina}
-Analytická úroveò je v této dobì hlavní úroveò pro strukturní anotaci. Opouští se zde lineární anotace, kdy je každé slovo bráno samostatnì bez ohledu na kontext, a do anotace textu zavádí se vìtná struktura (nikoli však ještì struktura textu). Všechna pùvodní slova textu zùstávají zachována a dostávají ve výsledné struktuøe svou funkci.
-    Strukturou se rozumí strom (orientovaný acyklický graf s jedním koøenem), jehož uzly jsou ohodnoceny atributy (pozn.: slovo atribut zde používáme v matematickém smyslu, nikoli lingvistickém ve smyslu pøívlastek - viz kap. 4.1 Seznam analytických funkcí). Každý uzel má nyní 12 atributù. Hrany stromu representují vztahy ?závislosti? mezi lexikálními jednotkami, pøíp. vztahy jiného typu (podle hodnot atributù). Základním cílem anotace je správná struktura vìty a oznaèení typu závislosti. Typ závislosti je jedním z atributù každého uzlu a je z pochopitelných dùvodù orientován ?nahoru?, tj. smìrem ke svému ?øídícímu? uzlu.
-    
-%%    http://ufal.mff.cuni.cz/pdt/Corpora/PDT_1.0/Doc/amanual/uuvod.html#2.2.2%20analytick%E1%20%FArove%F2.
-    http://ufal.mff.cuni.cz/pdt/Corpora/PDT_1.0/Doc/amanual/uuvod.html
-    
+Analytická rovina je první úroveò pro strukturní anotaci. Opouští se zde lineární anotace, kdy je každé slovo bráno samostatnì bez ohledu na kontext, a do anotace textu se zavádí vìtná struktura. Všechna pùvodní slova textu zùstávají zachována a dostávají ve výsledné struktuøe svou funkci.
+
+Na analytické rovinì se vytváøí stromová struktura vìty (stromem rozumíme orientovaný acyklický graf s jedním koøenem). Uzly stromu jsou tvoøeny jednotlivými slovy respektive tokeny. Hrany stromu reprezentují vztahy závislosti. Do koøene vìty je umístìno øídící sloveso vìty, na toto sloveso se pak zavìšují ostatní slova. Základním cílem anotace je správná struktura vìty a oznaèení typu závislosti. Typ závislosti je uložen uvnitø lingvistické znaèky \emph{analytická funkce}.
+
+\subsubsection{Analytická funkce}
+Analytická funkce je pomìrnì dobøe známý pojem, který se požívá na èeských základních a støedních školách pøi takzvaném vìtném rozboru. Tam se ale vìtšinou neoznaèuje jako analytická funkce ale jako \emph{vìtný èlen}.
+
+V závislostním stromu analytické roviny anotace, se analytickou funkcí oznaèí každá závislostní hrana. Analytická funkce oznaèuje typ této závislosti.
+
+\noindent Pøíklady analytických funkcí:
+\begin{itemize}
+\item Subjekt (podmìt)
+\item Objekt (pøedmìt)
+\item Atribut (pøívlastek)
+\item Adverbiale (pøísloveèné urèení)
+\item ...
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Tektogramatická rovina}
+Tektogramatická rovina slouží k zachycení významové struktury vìty. Struktura reprezentace zùstává stejná jako na analytické úrovni, avšak nìkteré uzly se vypouští, nìkteré se pøidávají, a struktura vìty mùže být obecnì jiná, než na analytické úrovni. U vìt které pøipouštìjí více rùzných významù (víceznaèné vìty) je teoreticky možné vytvoøit více tektogramatických stromù. V pøípadì synonymie mùže naopak rùzným vìtám odpovídat tentýž tektogramatický strom. Tedy zatímco na morfologické rovinì jsou každému slovu vìty pøiøazeny jeho lema a tag (morfologická znaèka) a na analytické rovinì každému slovu vìty odpovídá uzel v analytickém stromì s pøíslušnou analytickou funkcí, tektogramatická rovina už tento tìsný vztah k povrchovému zápisu vìty nemá. Uzly tektogramatické roviny v sobì nesou informaci rozdìlenou do nìkolika atributù. Základními atributy uzlu tektogramatického stromu jsou tektogramatické lema, gramatémy a funktor. Vztah mezi uzly tektogramatické a analytické roviny (který je obecnì typu M:N), je též zachycen v nìkolika atributech uzlù tektogramatického stromu. Následuje podrobnìjší popis nìkterých atributù
 
-Ve své práci buduu
+\subsubsection{Tektogramatické lemma}
+Tektogramatické lemma (t-lemma) zachycuje lexikální význam uzlu. U jednoduchých uzlù odpovídá lemmatu, které bylo øídícímu slovu tektogramatického uzlu pøiøazeno na morfologické rovinì. Uzlùm na tektogramatické rovinì novì vytvoøeným je pøiøazeno zástupné t-lema speciálního tvaru.
 
-Poèítaèová lingvistika  Natural language processing, NLP)
+\subsubsection{Gramatémy}
+Gramatémy jsou tektogramatickým rozšíøením morfologických znaèek. Gramatémy nalezneme pouze mezi atributy uzlù u kterých to má smysl, tedy u uzlù které se vztahují k nìjakému významovému slovu vìty.
 
-Úrovnì
-analytickou rovinu
-Tektogramatická rovina.
-Lemma
+\subsubsection{Funktor}
+Funktory jsou velkým pøínosem tektogramatické roviny po praktické stránce. Funktory chápeme jako sémantické ohodnocení hran mezi uzly tektogramatického stromu. Tektogramatické funktory mùžeme též chápat jako ekvivalent analytických funkcí. Rozdíl mezi tektogramatickými funktory a analytickými funkcemi je v tom, že funtoktory se snaží postihnout sémantiku vztahu, zatímco analytické funkce se zamìøují na jeho syntaktickou roli. Následuje popis nìkterých dùležitých funktorù vždy s nìkolika pøíklady jejich výskytu ve vìtì. Vyèerpávající seznam je možné nalézt napøíklad v \cite{tectogramtic_annotation}.
 
-PML http://ufal.mff.cuni.cz/pdt2.0/doc/data-formats/pml/index.html
+
+\begin{itemize}
+
+\item Funktor ACT (actor) oznaèuje pùvodce dìje, nositele dìje nebo vlastnosti.
+\begin{description}
+\item[-] Její \emph{manžel}.ACT tam však pracuje dál.
+\item[-] Ten \emph{román}.ACT mì oslovil.
+\item[-] Èeským \emph{skokanùm}.ACT se daøilo dobøe.
+\item[-] Je \emph{mi}.ACT smutno.
+\end{description}
+
+\item Funktor ADDR (addressee) odpovídá roli pøíjemce dìje.
+\begin{description}
+\item[-] Dal \emph{dítìti}.ADDR hraèku.
+\item[-] Uèí \emph{dìti}.ADDR angliètinu.
+\item[-] Obrátil se na \emph{soud}.ADDR s problémem.
+\end{description}
+
+\item Funktor PAT (patiens) oznaèuje pøedmìt dìjem zasažený.
+\begin{description}
+\item[-] Snìdl \emph{polévku}.PAT
+\item[-] Neubližujte \emph{zvíøatùm}.PAT
+\item[-] Uèil se \emph{kominíkem}.PAT
+\item[-] Mít dost \emph{penìz}.PAT
+\end{description}
+
+\item Funktor MANN (manner) vyjadøuje, hodnotí zpùsob provedení dìje.
+\begin{description}
+\item[-] Pracuje \emph{pomalu}.MANN
+\item[-] \emph{Nìjak}.MANN to udìláme.
+\item[-] \emph{Prudce}.MANN se zvýšily mezibankovní úrokové míry.
+\end{description}
+
+\item Funktor TWHEN (temporal : when) vyjadøuje èasové urèení odpovídající na otázku "kdy?".
+\begin{description}
+\item[-] \emph{Zítra}.TWHEN má být už hezky.
+\item[-] \emph{Hned}.TWHEN se vrátím.
+\item[-] Souèástka se \emph{èasem}.TWHEN opotøebuje.
+\end{description}
+
+\item Funktor LOC (locative) oznaèuje místo, do kterého je dìj nebo stav vyjádøený øídícím slovem lokalizován.
+\begin{description}
+\item[-] Zùstaò \emph{doma}.LOC
+\item[-] \emph{Nalevo}.LOC stál pìkný dùm.
+\item[-] \emph{Místy}.LOC ležel v ulicích ještì sníh.
+\end{description}
+
+\item Funktor DIR1 (directional: from) vyjadøuje urèení místa odpovídající na otázku "odkud?".
+\begin{description}
+\item[-] Pøijel z \emph{Prahy}.DIR1
+\end{description}
+
+\item Funktor DIR2 (directional: which way) vyjadøuje urèení místa odpovídající na otázku "kudy?".
+\begin{description}
+\item[-] Jdou \emph{lesem}.DIR2
+\end{description}
+
+\item Funktor DIR3 (directional: to) vyjadøuje urèení místa odpovídající na otázku "kam?".
+\begin{description}
+\item[-] Pøišel \emph{domù}.DIR3
+\end{description}
+
+\item Funktor RSTR volnì doplòuje blíže specifikující øídící substantivum.
+\begin{description}
+\item[-] \emph{velký}.RSTR dùm
+\end{description}
+
+\item Funktor CONJ (conjuction) je koøen souøadné struktury (tektogramatického podstromu), která reprezentuje spojení dvou a více obsahù.
+\begin{description}
+\item[-] Jezte ovoce \emph{a}.CONJ zeleninu.
+\end{description}
+
+\end{itemize}
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Jazyky pro zápis lingvistických anotací}
+\subsection{PML}
+
+http://ufal.mff.cuni.cz/pdt2.0/doc/data-formats/pml/index.html
 
 
 
