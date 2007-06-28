@@ -3,6 +3,9 @@ Sémantická anotace je .........
 
 Sémantický web
 
+\section{Motivace}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Pøínosy práce}
 
 Komu?
@@ -11,7 +14,7 @@ Komu?
 
 Srozumitelné pro nelingvistu.
 
-Mimo jiné: Tato práce se snaží pøiblížit možnosti, jak využít dostupné lingvistické nástroje analyzující èeský text pøedevším lidem, kteøí se zabývají extrakcí informací z textu ale nejen jim. Práce na ètenáøe neklade žádné nároky co se týká lingvistického vzdìlání a sama základní znalosti z lingvistiky poskytuje. Tìmito znalostmi se snaží pokrýt  požadavky, které klade používání lingvistických nástrojù zde popisovaných. Zbìžné znalosti zde poskytnuté jsou doplnìny odkazy a referencemi na zdroje, kde se ètenáø o dané problematice mùže dovìdìt vice.
+Mimo jiné: Tato práce se snaží pøiblížit možnosti, jak využít dostupné lingvistické nástroje analyzující èeský text pøedevším lidem, kteøí se zabývají extrakcí informací z textu ale nejen jim. Práce na ètenáøe neklade žádné nároky co se týká lingvistického vzdìlání a sama základní znalosti z lingvistiky poskytuje. Tìmito znalostmi se snaží pokrýt  požadavky, které klade používání lingvistických nástrojù zde popisovaných. Zbìžné znalosti zde poskytnuté jsou doplnìny odkazy a referencemi na zdroje, kde se ètenáø o dané problematice mùže dovìdìt více.
 
 \subsection{Souhrn}
 Práce poskytuje základní souhrn v oblasti sémantické anotace, takže si ètenáø mùže udìlat pøedstavu o tom, kterými smìry se sémantická anotace ubírá, jaké metody byly využity, s jakou úspìšností atp.
@@ -23,23 +26,53 @@ Základní pøehled ontlogií.
 Doporuèení autorùm stánek (DRFA, HTML-A)
 
 \subsection{Prùzkum}
-Souèástí práce jsou praktické experimenty s lingvistickými nástroji. Ètenáøi jsou poskytnuty zkušenosti z tìchto experimentù. Tyto zkušenosti se týkají pøedevším dostupnosti, zprovoznìní, výkonnosti, pøínosù a nedostatkù tìchto nástrojù.
+Souèástí práce je praktický experiment s lingvistickými nástroji. Ètenáøi jsou poskytnuty zkušenosti z týkající se použití tìchto nástrojù a z prací které s jejích použitím souvisely. Tyto zkušenosti se týkají pøedevším dostupnosti, zprovoznìní, výkonnosti, pøínosù a nedostatkù tìchto nástrojù.
+
+Postup experimentu se v jednotlivých fázích snaží kopírovat skuteèné akce, které by bylo nutné provést v opravdovém projektu zamìøeném na sémantickou anotaci. V práci tak vzniká jednoduchá základní analýza tohoto typu projektù. Ve skuteèném projektu pak bude možné ji pøinejmenším jako inspiraci využít.
 
 \subsection{Návrhy}
-V práci je dále je zde navržena metodika, jak by se pøi extrakci informací pomocí tìchto nástrojù dalo postupovat.
+V práci je navržena metodika, jak by se pøi extrakci informací pomocí nástrojù v rámci této práce testovaných dalo postupovat.
 
-Je zde navržený jednoduchý dotazovací jazyk pro lingvistické anotace. 
+Je zde navržený jednoduchý dotazovací jazyk pro lingvistické anotace.
 
 Struèný návrh indukce vzorù.
 
+Zamyšlení nad možnostmi lingvistické anotace pro indexaci dokumentù.
+
 \subsection{Teorie}
+Pokus o teoretický pøínos v oblasti sémantické anotace.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Sémantická anotace}
+\label{sec:sem_anotace}
+Sémantická anotace není v souèasné dobì pøesnì vymezený termín. V této práci budu s tímto pojmem pracovat pomìrnì volnì až na kapitolu o teoretických otázkách sémantické anotace \ref{sec:teorie}, kde bych se o takové vymezení chtìl pokusit. V knize \cite{annotaton_for_semweb} se tomuto termínu vyhýbají opisem \emph{annotation for the Semantic Web} tedy anotace pro sémantický web. V tomto smyslu budu užívat pojem sémantické anotace ve zbytku práce. Tedy sémantickou anotací budu rozumìt takovou anotaci, která je urèená pro sémantický web. Pro pøesnost ještì doplòme, že anotací jako hotovým dílem rozumíme výsledek, výstup pøípadnì výstupní data procesu anotace.
+
+Èlovìk by intuitivnì oèekával, že výsledkem sémantické anotace bude nìjak oznaèkovaný text, který je jejím vstupem. Pøípadnì se nemusí jednat o text ale o strukturovaná data - nejèastìji HTML pøípadnì XML. V našem zpùsobu chápání sémantické anotace, tedy jako anotace pro sémantický web, však jejím výstupem mùže být témìø libovolný datový celek. Pøíznaèné pro sémantické anotace je to, že nìjakým zpùsoben využívají ontologie a RDF, viz !!!!!!!!!!!!!!doplnit!!!!!!!!!!!!!!!!!!!!!!!.
+
+Autorská anotace.
+
+Dodateèná anotace, strojová.
+
+\section{Rozdìlení}
+Po praktické stránce: dostupnost, upravitelnost (jiná doména), stabilita - náchylnost na zmìny v datech
+
+Po teoretické stránce: èísla (úspìšnost), metody
+
+Labský (pouze extrakce informací, praktický, granty)
+
+
+\section{Teorie}
+\label{sec:teorie}
 Domnívám se, že nebylo mnoho teoretických otázek týkajících se sémantická anotace vùbec formulováno, natož uspokojivì vìdecky vyøešeno.
 
 XXX
+
 rozdíl mezi konkrétním a abstraktním
 
 Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
 Zbytek rozpracováno
+
 Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 V cem tkvi semanticnost anotace?
@@ -75,15 +108,6 @@ zpusobem vynechame?
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Sémantická anotace}
-\section{Rozdìlení}
-Po praktické stránce: dostupnost, upravitelnost (jiná doména), stabilita - náchylnost na zmìny v datech
-
-Po teoretické stránce: èísla (úspìšnost), metody
-
-Labský (pouze extrakce informací, praktický, granty)
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Lingvistická anotace}
 
 Lingvistickou anotací budu ve své práci oznaèovat èinnost pøi které se text pøirozeného jazyka obohacuje o lingvistickou informaci o slovech, vìtách, vztazích mezi slovy, mezi vìtami apod. Lingvistická anotace nebo též znaèkování korpusu je jedna z èinností korpusové lingvistiky. Korpusem rozumíme soubor textù. Korpusová lingvistika se zabývá zkoumáním a shromažïováním textù  pøirozeného jazyka (zkoumáním a vytváøením korpusu).
@@ -94,9 +118,9 @@ Korpusy se v zásadì znaèkují tøemi druhy znaèek. 1) Znaèky správní zachycují ide
 
 XXxx
 
-Xxxx rozebrat závislostní X složkovou lingvistickou anotaci
+Xxxx rozebrat závislostní X složkovou lingvistickou anotaci, Rozepsat se o ÚFALu a Praze, jejich vlastní cestì. Odkaz na PDT?
 
-Xxxx http://citeseer.ist.psu.edu/149407.html
+Xxxx složkovou lingvistickou anotace: http://citeseer.ist.psu.edu/149407.html
 
 Xxxx
 
@@ -138,6 +162,8 @@ V závislostním stromu analytické roviny anotace, se analytickou funkcí oznaèí ka
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Tektogramatická rovina}
+Pøidat referenci !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!, je to velmi rozsáhlý koncept s hlubokou lingvistickou teorií v pozadí.
+
 Tektogramatická rovina slouží k zachycení významové struktury vìty. Struktura reprezentace zùstává stejná jako na analytické úrovni, avšak nìkteré uzly se vypouští, nìkteré se pøidávají, a struktura vìty mùže být obecnì jiná, než na analytické úrovni. U vìt které pøipouštìjí více rùzných významù (víceznaèné vìty) je teoreticky možné vytvoøit více tektogramatických stromù. V pøípadì synonymie mùže naopak rùzným vìtám odpovídat tentýž tektogramatický strom. Tedy zatímco na morfologické rovinì jsou každému slovu vìty pøiøazeny jeho lema a tag (morfologická znaèka) a na analytické rovinì každému slovu vìty odpovídá uzel v analytickém stromì s pøíslušnou analytickou funkcí, tektogramatická rovina už tento tìsný vztah k povrchovému zápisu vìty nemá. Uzly tektogramatické roviny v sobì nesou informaci rozdìlenou do nìkolika atributù. Základními atributy uzlu tektogramatického stromu jsou tektogramatické lema, gramatémy a funktor. Vztah mezi uzly tektogramatické a analytické roviny (který je obecnì typu M:N), je též zachycen v nìkolika atributech uzlù tektogramatického stromu. Následuje podrobnìjší popis nìkterých atributù
 
 \subsubsection{Tektogramatické lemma}
@@ -336,19 +362,37 @@ Zapíše výstup pøedchozího nástroje v PML jazyce. Pro podrobnìjší informace o PML
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\chapter{Experimentování s lingvistickou anotací}
 \chapter{Experiment}
+Experiment provedený v rámci této práce spoèíval v otestování nìkterých dostupných nástrojù pro lingvistickou anotaci èeských textù. Jmenovitì se jednalo o tyto nástroje: !!!!!!!!!!!!!doplnit!!!!!!!!!!!!!!!!. Byly prozkoumány možnosti vyžití tìchto nástrojù pro extrakci informací a sémantickou anotaci.
 
-\section{Data}
+!!!!!!!Pzor následující odstavec jsem okopíroval i do kapitoly pøínosy - vyøešit
+
+Postup experimentu se v jednotlivých fázích snaží kopírovat skuteèné akce, které by bylo nutné provést v opravdovém projektu zamìøeném na sémantickou anotaci. V práci tak vzniká jednoduchá základní analýza tohoto typu projektù. Ve skuteèném projektu pak bude možné ji pøinejmenším jako inspiraci využít.
+
+Pro experiment byla vybrána a použita data ze dvou pomìrnì odlyšných zdrojù. 
+
+Extrakce a èištìní (zamyšlení nad rùznými formáty zdroje PDF, DOC, HTML, XML, èásteèné øešení v GATE softu)
+
+Lingvistická nanotace
+
+Extrkace informací
+
+Sémantické anotace - víceménì jen teoreticky
+
+\section{Vstupní data}
 Volba zdrojových textù
 
 Proè hasièi?
 
-Proè ne korpus PDT?
+\textbf{Proè ne korpus PDT?} --- Dùraz byl kladen na co možná nejvìtší se pøiblížení k podmínkám a problémùm skuteèného projektu. V takovém pøípadì bychom se tìžko mohli opøít o to, že by nám data která chceme analyzovat nìkdo ruènì lingvisticky anotoval.
 
-+ pokusy s PDT sample data.
++ pokusy s PDT sample data. Nicménì pokusy nad ruèními lingvistickými anotacemi dat PDT\footnote{Jedná se o \emph{sample data} PDT 2.0, http://ufal.mff.cuni.cz/pdt2.0/data/sample/} probìhly.
 
 \subsection{Hasièi}
 
 \subsection{Úpadci}
+
+\section{Výstupní data}
+Vzhledem k tomu, že pojem sémantické anotace, jak ho zmiòuji v kapitole \ref{sec:sem_anotace}, je velmi široký, není ani pøesnì urèeno, jaká data by pøi procesu sémantické anotace mìla vzniknout.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Software}
