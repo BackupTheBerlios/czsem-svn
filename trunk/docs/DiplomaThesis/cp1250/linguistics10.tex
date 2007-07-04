@@ -134,7 +134,7 @@ zpusobem vynechame?
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Lingvistická anotace}
 
-Lingvistickou anotací budeme v této práci oznaèovat èinnost, pøi které se text pøirozeného jazyka obohacuje o lingvistickou informaci o slovech, vìtách, vztazích mezi slovy, mezi vìtami, o typu a pùvodu textu atp. Lingvistická anotace nebo též znaèkování korpusu je jedna z èinností korpusové lingvistiky. Korpusem rozumíme soubor textù spolu s lingvistickou informací k nim dodanou. Korpusová lingvistika je pomìrnì novou disciplínou, jejíž vznik, stejnì jako vznik celé poèítaèové lingvistiky vùbec, umožnil rozvoj výpoèetní techniky posledních let. Korpusová lingvistika se zabývá zkoumáním a shromažïováním textù pøirozeného jazyka (vytváøením korpusu). Texty se anotují pøevážnì ruènì avšak pomocí poèítaèe. Takto anotované texty pøedstavují velmi cenná data, ze kterých se pøedevším pomocí statistických metod dají vyvodit nové poznatky o jazyce. Díky ruènì anotovaným korpusùm dnes vzniká vìtšina softwarových nástrojù pro poèítaèové zpracování pøirozeného jazyka.
+Lingvistickou anotací budeme v této práci oznaèovat èinnost, pøi které se text pøirozeného jazyka obohacuje o lingvistickou informaci o slovech, vìtách, vztazích mezi slovy, mezi vìtami, o typu a pùvodu textu atp. Lingvistická anotace nebo též znaèkování korpusu je jedna z èinností korpusové lingvistiky. Korpusem rozumíme soubor textù spolu s lingvistickou informací k nim dodanou. Korpusová lingvistika je pomìrnì novou disciplínou, jejíž vznik, stejnì jako vznik celé poèítaèové lingvistiky vùbec, umožnil rozvoj výpoèetní techniky posledních let. Korpusová lingvistika se zabývá zkoumáním a shromažïováním textù pøirozeného jazyka (vytváøením korpusu). Texty se anotují za velké podpory poèítaèe - napøíklad morfologická desambiguace (viz~\ref{sec:morphological_tagging}) by byla bez softwarové podpory nadlidský úkol. Avšak pro anotaci korpusu je stále nutná spousta lidské \uv{ruèní} práce. Takto anotované texty pøedstavují velmi cenná data, ze kterých se pøedevším pomocí statistických metod dají vyvodit nové poznatky o jazyce. Díky ruènì anotovaným korpusùm vynikla a stále vyniká vìtšina softwarových nástrojù pro poèítaèové zpracování pøirozeného jazyka.
 
 Korpusová lingvistika dnes nemalou mírou pøispívá k jazykovému výzkumu. Na stránkách Èeského národního korpusu\footnote{http://ucnk.ff.cuni.cz/} se dokonce uvádí, že pøináší natolik nové poznatky o jazyce, že do dosavadního vývoje jazykovìdy vnáší radikální pøevrat. Toto tvrzení nemusí pùsobit pøekvapivì, pokud napøíklad srovnáme pùvodní latinskou lingvistickou terminologii s tou, která vzniká v poèítaèové lingvistice v poslední dobì.
 
@@ -163,7 +163,7 @@ Morfologická znaèka v sobì spojuje informaci o morfologických kategoriích, které
 \subsection{Analytická rovina}
 Analytická rovina je první úroveò pro strukturní anotaci. Opouští se zde lineární anotace, kdy je každé slovo bráno samostatnì bez ohledu na kontext, a do anotace textu se zavádí vìtná struktura. Všechna pùvodní slova textu zùstávají zachována a dostávají ve výsledné struktuøe svou funkci.
 
-Na analytické rovinì se vytváøí stromová struktura vìty (stromem rozumíme orientovaný acyklický graf s jedním koøenem). Uzly stromu jsou tvoøeny jednotlivými slovy respektive tokeny. Hrany stromu reprezentují vztahy závislosti. Do koøene vìty je umístìno øídící sloveso vìty, na toto sloveso se pak zavìšují ostatní slova. Základním cílem anotace je správná struktura vìty a oznaèení typu závislosti. Typ závislosti je uložen uvnitø lingvistické znaèky \emph{analytická funkce}.
+Na analytické rovinì se vytváøí stromová struktura vìty (stromem rozumíme orientovaný acyklický graf s jedním koøenem). Uzly stromu jsou tvoøeny jednotlivými slovy respektive tokeny. Hrany stromu reprezentují vztahy závislosti. Do koøene stromu je umístìno øídící sloveso vìty, na toto sloveso se pak zavìšují ostatní slova. V pøípadì, že se jedná o souøadné souvìtí, koøenem stromu je spojka pøípadnì èárka, která jednotlivé vìty souvìtí oddìluje. Základním cílem je korektní zachycení struktury vìty a oznaèení typu závislosti. Typ závislosti je uložen uvnitø lingvistické znaèky \emph{analytická funkce}.
 
 \subsubsection{Analytická funkce}
 Analytická funkce je pomìrnì dobøe známý pojem, který se požívá na èeských základních a støedních školách pøi takzvaném vìtném rozboru. Tam se ale vìtšinou neoznaèuje jako analytická funkce ale jako \emph{vìtný èlen}.
@@ -183,7 +183,7 @@ V závislostním stromu analytické roviny anotace, se analytickou funkcí oznaèí ka
 \begin{figure}[!h]
 \begin{center}
 \framebox{\includegraphics[scale=0.7]{../analytic_example.eps}}
-\caption{Pøíklad notace na analytické rovinì.} \label{analytic_example}
+\caption{Pøíklad notace na analytické rovinì.} \label{pict:analytic_example}
 \end{center}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -281,26 +281,41 @@ Funktory jsou velkým pøínosem tektogramatické roviny po praktické stránce. Funkt
 \begin{figure}[!h]
 \begin{center}
 \framebox{\includegraphics[scale=0.7]{../tecto_example.eps}}
-\caption{Pøíklad notace na tektogramatické rovinì.} \label{tecto_example}
+\caption{Pøíklad notace na tektogramatické rovinì.} \label{pict:tecto_example}
 \end{center}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%\newpage
 \subsection{Pøíklady}
-Pro ilustraci pøedkládáme dva obrázky závislostních stromù, které vznikli anotací vìty: \begin{quote}
+Pro ilustraci pøedkládáme dva obrázky závislostních stromù, které vznikli ruèní anotací vìty:
+\begin{quote}
 \emph{Pìtice finských vzpìraèù byla svou národní federací potrestána za doping.}
 \end{quote}
-Na obrázku~\ref{analytic_example} je strom analytické roviny a na obrázku~\ref{tecto_example} je strom tektogramatické roviny. Oba tyto pøíklady pocházejí z PDT 2.0 - sample data.
+Na obrázku~\ref{pict:analytic_example} je strom analytické roviny a na obrázku~\ref{pict:tecto_example} je strom tektogramatické roviny. Za povšimnutí stojí rozdíl v poètu uzlù obou stromù, který je na tektogramatické rovinì o nìco menší. Oba tyto pøíklady pocházejí z PDT 2.0 - sample data. Obrázky jsou vygenerované pomocí editoru TrEd. Kromì struktury jednotlivých stromù v této kapitole popisovaných jsou na obrázcích vidìt i další pøedevším technické jevy spojené s konkrétní reprezentací lingvistické anotace. Napøíklad tetogramatické funktory a analytické funkce nejsou pøiøazeny k hranám stromu ale k~závislému uzlu, každý strom má navíc takzvaný \emph{technický koøen}, na kterém teprve skuteèný koøen lingvistického stromu visí. U analytického stromu též stojí za povšimnutí umístìní teèky na konci vìty, která je potomkem umìlého koøene. Podrobnìjší vysvìtlení jednotlivých znaèek na tìchto obrázcích je možné nalézt v kapitole \ref{sec:tred} vìnované editoru TrEd.
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Jazyky pro zápis lingvistických anotací}
 
-\subsection{PML}
+\subsection{PML - The Prague Markup Language}
 \label{sec:PML}
 
+Hlavním formátem dat v PDT 2.0 je formát nazvaný PML, který je založený na XML.
+
 http://ufal.mff.cuni.cz/pdt2.0/doc/data-formats/pml/index.html
+
+\subsection{FS - Feature structure}
+Formát FS byl vytvoøen pro vyhledávací program Netgraph (pøísnì vzato vlastnì pro jeho pøedchùdce, editor Graph).
+
+Formát FS ("feature structure") je formát souborù pro reprezentaci stromù, jejichž uzly jsou struktury atribut-hodnota. Mùže být chápán jako "meta formát", podobnì jako SGML nebo XML. Konkrétní použití tohoto formátu je plnì specifikováno deklarací atributù v hlavièce FS souboru (hlavièka FS souboru tak hraje podobnou roli jako DTD u SGML souboru).
+
+\subsection{CSTS - Czech sentence tree structure}
+Formát zvaný CSTS, založený na SGML\footnote{http://www.w3.org/MarkUp/SGML/}, byl hlavním formátem dat v PDT 1.0. Nyní je používán jen jako pøechodný formát pro kompatibilitu se staršími nástroji pro zpracovnání jazyka (taggery, parsery, ...).
+CSTS mùže reprezentovat jen morfologickou a analytickou anotaci, není schopen plného popisu tektogramatické roviny.
+
+\subsection{Konverze mezi formáty PDT}
 
 
 
@@ -329,7 +344,21 @@ PDT 2.0
 \section{Lingvistické nástroje}
 
 \subsection{NetGraph}
-\subsection{Tred}
+Netgraph je aplikace typu klient-server, která umožòuje prohledávat PDT 2.0 souèasnì nìkolika uživateli, pøipojenými pøes internet. Netgraph je navržený tak, aby prohledávání bylo co nejjednodušší a intuitivní, pøi zachování vysoké síly dotazovacího jazyka.
+
+http://quest.ms.mff.cuni.cz/netgraph/
+%%file:///C:/Program%20Files/PDT-2.0/doc/tools/netgraph/netgraph_server_install.html
+
+\subsection{Tree Editor TrEd}
+\label{sec:tred}
+
+http://ufal.mff.cuni.cz/~pajas/tred/
+
+Nejpøehlednìjší a nejpohodlnìjší zobrazení dat PDT 2.0 poskytuje TrEd. Prvotnì sloužil jako hlavní anotaèní nástroj, ale mùže být použit i k prohlížení dat a obsahuje také nìkolik druhù vyhledávacích funkcí.
+
+Editor TrEd umožòuje rychlé, pohodlné a flexibilní procházení, prohlížení a úpravu jednotlivých stromù.
+
+Na obrázku~\ref{pict:analytic_example} je strom analytické roviny a na obrázku~\ref{pict:tecto_example} je strom tektogramatické roviny. Oba tyto pøíklady
 
 \subsection{Tools for machine annotation - PDT 2.0}
 
@@ -338,7 +367,7 @@ Jedná o skupinu nástrojù, které provádìjí plnì automatickou lingvistickou analýz
 
 \begin{enumerate}
 \item Rozpoznání slovních jednotek ve vstupním surovém textu a rozdìlení textu na vìty.
-\item Morfologická analýza a tagging (morfologická disambiguace).
+\item Morfologická analýza a tagging (morfologická desambiguace).
 \item Závislostní parsing.
 \item Pøiøazení analytických (závislostních) funkcí všem uzlùm zparsovaného stromu.
 \end{enumerate}
@@ -365,8 +394,9 @@ Provádí rozdìlení textu na slova a interpunkèní znaménka (tokenizace) a rozdìlí 
 Pro každé slovo vyhledá všechna možná lemmata a morfologické znaèky, která by mu mohly odpovídat.
 
 \subsubsection*{Morphological tagging}
+\label{sec:morphological_tagging}
 
-Ze všech možných alternativ získaných v pøedchozím kroku pro každé slovo vybere jedno lemma a morfologickou znaèku. Tento proces se èasto nazývá disambiguace.
+Ze všech možných alternativ získaných v pøedchozím kroku pro každé slovo vybere jedno lemma a morfologickou znaèku. Tento proces se èasto nazývá desambiguace.
 Tagging pro Èeštinu je pomìrnì zajímavý vìdecký problém, který je podrobnì rozpracován v mnoha  publikacích\footnote{http://ufal.mff.cuni.cz/czech-tagging/}.
 
 \subsubsection*{Parsing}
