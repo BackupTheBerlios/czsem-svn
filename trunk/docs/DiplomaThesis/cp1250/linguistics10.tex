@@ -155,6 +155,7 @@ Následuje struèný popis jednotlivých znaèek každé roviny. Podrobnìjší popis ling
 \subsubsection{Slovní tvar}
 Tato znaèka obsahuje tvar, v jakém se dané slovo vyskytuje v pùvodním textu vèetnì zápisu malých a velkých písmen. Od pùvodního výskytu se liší se jen ve výjimeèných pøípadech, kdy napøíklad pùvodní slovní tvar byl èíslice s desetinnou èárkou (snaha o jednotný zápis èísel) nebo se jednalo o pøeklep.
 \subsubsection{Lemma}
+\label{sec:lemma}
 Lemma je takzvaný základní tvar slova. Jednoznaènì slovo identifikuje. V tomto tvaru je dané slovo obvykle uvádìno ve slovnících.
 \subsubsection{Morfologická znaèka}
 Morfologická znaèka v sobì spojuje informaci o morfologických kategoriích, které dané slovo nese. Z morfologické znaèky je možné zjistit slovní druh, jmenný rod, èíslo, pád, osobu, èas, atd.
@@ -192,7 +193,7 @@ V závislostním stromu analytické roviny anotace, se analytickou funkcí oznaèí ka
 \subsection{Tektogramatická rovina}
 Tektogramatická rovina je pomìrnì rozsáhlý koncept s hlubokou lingvistickou teorií v pozadí. Byla popsána už v roce 1961 v èlánku \cite{curry_t_rovina}.
 
-Tektogramatická rovina slouží k zachycení významové struktury vìty. Struktura reprezentace zùstává stejná jako na analytické úrovni, avšak nìkteré uzly se vypouští, nìkteré se pøidávají, a struktura vìty mùže být obecnì jiná, než na analytické úrovni. U vìt které pøipouštìjí více rùzných významù (víceznaèné vìty) je teoreticky možné vytvoøit více tektogramatických stromù. V pøípadì synonymie mùže naopak rùzným vìtám odpovídat tentýž tektogramatický strom. Tedy zatímco na morfologické rovinì jsou každému slovu vìty pøiøazeny jeho lema a tag (morfologická znaèka) a na analytické rovinì každému slovu vìty odpovídá uzel v analytickém stromì s pøíslušnou analytickou funkcí, tektogramatická rovina už tento tìsný vztah k povrchovému zápisu vìty nemá. Uzly tektogramatické roviny v sobì nesou informaci rozdìlenou do nìkolika atributù. Základními atributy uzlu tektogramatického stromu jsou tektogramatické lema, gramatémy a funktor. Vztah mezi uzly tektogramatické a analytické roviny (který je obecnì typu M:N), je též zachycen v nìkolika atributech uzlù tektogramatického stromu. Následuje podrobnìjší popis nìkterých atributù
+Tektogramatická rovina slouží k zachycení významové struktury vìty. Struktura reprezentace zùstává stejná jako na analytické úrovni, avšak nìkteré uzly se vypouští, nìkteré se pøidávají, a struktura vìty mùže být obecnì jiná, než na analytické úrovni. U vìt které pøipouštìjí více rùzných významù (víceznaèné vìty) je teoreticky možné vytvoøit více tektogramatických stromù. V pøípadì synonymie mùže naopak rùzným vìtám odpovídat tentýž tektogramatický strom. Tedy zatímco na morfologické rovinì jsou každému slovu vìty pøiøazeny jeho lema a tag (morfologická znaèka) a na~analytické rovinì každému slovu vìty odpovídá uzel v analytickém stromì s pøíslušnou analytickou funkcí, tektogramatická rovina už tento tìsný vztah k povrchovému zápisu vìty nemá. Uzly tektogramatické roviny v sobì nesou informaci rozdìlenou do nìkolika atributù. Základními atributy uzlu tektogramatického stromu jsou tektogramatické lema, gramatémy a funktor. Vztah mezi uzly tektogramatické a analytické roviny (který je obecnì typu M:N), je též zachycen v nìkolika atributech uzlù tektogramatického stromu. Následuje podrobnìjší popis nìkterých atributù
 
 \subsubsection{Tektogramatické lemma}
 Tektogramatické lemma (t-lemma) zachycuje lexikální význam uzlu. U jednoduchých uzlù odpovídá lemmatu, které bylo øídícímu slovu tektogramatického uzlu pøiøazeno na morfologické rovinì. Uzlùm na tektogramatické rovinì novì vytvoøeným je pøiøazeno zástupné t-lema speciálního tvaru.
@@ -292,7 +293,7 @@ Pro ilustraci pøedkládáme dva obrázky závislostních stromù, které vznikli ruèní 
 \begin{quote}
 \emph{Pìtice finských vzpìraèù byla svou národní federací potrestána za doping.}
 \end{quote}
-Na obrázku~\ref{pict:analytic_example} je strom analytické roviny a na obrázku~\ref{pict:tecto_example} je strom tektogramatické roviny. Za povšimnutí stojí rozdíl v poètu uzlù obou stromù, který je na tektogramatické rovinì o nìco menší. Oba tyto pøíklady pocházejí z PDT 2.0 - sample data. Obrázky jsou vygenerované pomocí editoru TrEd. Kromì struktury jednotlivých stromù v této kapitole popisovaných jsou na obrázcích vidìt i další pøedevším technické jevy spojené s konkrétní reprezentací lingvistické anotace. Napøíklad tetogramatické funktory a analytické funkce nejsou pøiøazeny k hranám stromu ale k~závislému uzlu, každý strom má navíc takzvaný \emph{technický koøen}, na kterém teprve skuteèný koøen lingvistického stromu visí. U analytického stromu též stojí za povšimnutí umístìní teèky na konci vìty, která je potomkem umìlého koøene. Podrobnìjší vysvìtlení jednotlivých znaèek na tìchto obrázcích je možné nalézt v kapitole \ref{sec:tred} vìnované editoru TrEd.
+Na obrázku~\ref{pict:analytic_example} je strom analytické roviny a na obrázku~\ref{pict:tecto_example} je strom tektogramatické roviny. Za povšimnutí stojí rozdíl v poètu uzlù obou stromù, který je na tektogramatické rovinì o nìco menší. Oba tyto pøíklady pocházejí z PDT 2.0 - sample data. Obrázky jsou vygenerované pomocí editoru TrEd. Kromì struktury jednotlivých stromù v této kapitole popisovaných jsou na obrázcích vidìt i další pøedevším technické jevy spojené s konkrétní reprezentací lingvistické anotace. Napøíklad tetogramatické funktory a analytické funkce nejsou pøiøazeny k hranám stromu ale k~závislému uzlu, každý strom má navíc takzvaný \emph{technický koøen}, na kterém teprve skuteèný koøen lingvistického stromu visí. U analytického stromu též stojí za povšimnutí umístìní teèky na konci vìty, která je potomkem umìlého koøene. Podrobnìjší vysvìtlení jednotlivých znaèek na tìchto obrázcích je možné nalézt v podkapitole \ref{sec:tred} vìnované editoru TrEd.
 
 
 
@@ -307,6 +308,7 @@ Hlavním formátem dat v PDT 2.0 je formát nazvaný PML, který je založený na XML.
 http://ufal.mff.cuni.cz/pdt2.0/doc/data-formats/pml/index.html
 
 \subsection{FS - Feature structure}
+\label{sec:FS}
 Formát FS byl vytvoøen pro vyhledávací program Netgraph (pøísnì vzato vlastnì pro jeho pøedchùdce, editor Graph).
 
 Formát FS ("feature structure") je formát souborù pro reprezentaci stromù, jejichž uzly jsou struktury atribut-hodnota. Mùže být chápán jako "meta formát", podobnì jako SGML nebo XML. Konkrétní použití tohoto formátu je plnì specifikováno deklarací atributù v hlavièce FS souboru (hlavièka FS souboru tak hraje podobnou roli jako DTD u SGML souboru).
@@ -344,9 +346,18 @@ PDT 2.0
 \section{Lingvistické nástroje}
 
 \subsection{NetGraph}
-Netgraph je aplikace typu klient-server, která umožòuje prohledávat PDT 2.0 souèasnì nìkolika uživateli, pøipojenými pøes internet. Netgraph je navržený tak, aby prohledávání bylo co nejjednodušší a intuitivní, pøi zachování vysoké síly dotazovacího jazyka.
+Netgraph je aplikace typu klient-server, která umožòuje prohledávat korpus podobný PDT (anotace mají strukturu závislostního stromu) souèasnì nìkolika uživateli, pøipojenými pøes internet. Netgraph je navržený tak, aby prohledávání bylo co nejjednodušší a intuitivní, pøi zachování vysoké síly dotazovacího jazyka. Funkènost aplikace je rozdìlena na èást, kterou vykonává klient, a na èást, kterou vykonává server.
 
-http://quest.ms.mff.cuni.cz/netgraph/
+Netgraph klient je napsán v Javì a je nezávislý na platformì. Existuje ve dvou formách - jako samostatná Java aplikace a jako Java applet. Applet verze je oproti plné Java aplikaci ochuzena o nìkteré funkce, pøesto však poskytuje plnou vyhledávací sílu. Funkce klienta zahrnuje vytvoøení (návrh) dotazu, jeho odeslání serveru a zobrazení, pøípadnì další zpracování výsledkù vrácených serverem.
+
+Netgraph server je napsán v C a C++ a bìží v operaèním systému Linux i dalších systémech - podrobnosti je možné nalézt v \cite{mirovsky_netgraph}. Umožòuje nastavit uživatelská konta s rùznými pøístupovými právy. Korpus, urèený k prohledávání Netgraphem, musí být ve formátu FS (viz~\ref{sec:FS}). Funkce serveru spoèívá ve vyhodnocování dotazù zasílaných klienty. Server prohledává korpus a stromy, které vyhovují dotazu vrací jako odpovìï.
+
+Dotazy v Netgraphu jsou definovány pomocí vlastního dotazovacího jazyka. Jedná se o jazyk formálnì velmi jednoduchý avšak s vysokou expressivitou. Definovat dotaz v Netgraphu znamená definovat podstrom, který se má v prohledávaných stromech vyskytovat. Tedy v dotazu mùžeme definovat požadovanou strukturu stromu. Navíc mùžeme v každém uzlu dotazu vynutit hodnotu nìkterých atributù tohoto uzlu. Takový velmi jednoduchý dotaz, kdy chceme vyhledat všechny stromy obsahující slovo \uv{hasiè} se skládá z jediného uzlu a restrikce na hodnotu atributu \emph{lemma} (viz~\ref{sec:lemma}) na hodnotu \emph{hasiè} v tomto uzlu. Podrobnosti o možnostech a syntaxi tohoto dotazovacího jazyka je možné nalézt napøíklad v~\cite{mirovsky_netgraph}. Poznamenejme ještì, že 
+dotazy mohou být dále rozšíøeny tzv. meta atributy, které umožòují urèení pozice dotazu v nalezených stromech, omezení velikosti nalezených stromù, urèení vztahù mezi hodnotami atributù u rùzných uzlù v nalezených stromech, negaci a mnoho dalších podmínek.
+
+Dotazy se v Netgraph klientu vytváøejí v uživatelsky pøívìtivém grafickém prostøedí. Uživatel si zde mùže \uv{naklikat} celý strom, který se má pøi vyhodnocování dotazu hledat. V grafickém rozhraní Netgraph klienta má uživatel snadný pøístup k možnostem dotazovacího jazyka, aniž by musel tento jazyk podrobnì znát.
+
+%%http://quest.ms.mff.cuni.cz/netgraph/
 %%file:///C:/Program%20Files/PDT-2.0/doc/tools/netgraph/netgraph_server_install.html
 
 \subsection{Tree Editor TrEd}
@@ -363,7 +374,7 @@ Na obrázku~\ref{pict:analytic_example} je strom analytické roviny a na obrázku~\
 \subsection{Tools for machine annotation - PDT 2.0}
 
 
-Jedná o skupinu nástrojù, které provádìjí plnì automatickou lingvistickou analýzu èeského textu. Ze surových èeských vìt vytváøejí závislostní stromy na analytické rovinì. Proces anotace se skládá z následujících funkcí.
+Jedná o skupinu nástrojù, které provádìjí plnì automatickou lingvistickou analýzu èeského textu. Ze surových èeských vìt vytváøejí závislostní stromy na~analytické rovinì. Proces anotace se skládá z následujících funkcí.
 
 \begin{enumerate}
 \item Rozpoznání slovních jednotek ve vstupním surovém textu a rozdìlení textu na vìty.
