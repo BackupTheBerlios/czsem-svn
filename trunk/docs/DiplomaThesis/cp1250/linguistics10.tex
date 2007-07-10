@@ -299,6 +299,7 @@ Na obrázku~\ref{pict:analytic_example} je strom analytické roviny a na obrázku~\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Jazyky pro zápis lingvistických anotací}
+\label{sec:ling_lang}
 
 \subsection{PML - The Prague Markup Language}
 \label{sec:PML}
@@ -328,7 +329,7 @@ CSTS mùže reprezentovat jen morfologickou a analytickou anotaci, není schopen pl
 \label{sec:PDT}
 
 
-Pražský závislostní korpus (PDT) je probíhající projekt Centra poèítaèové lingvistiky Ústavu formální a aplikované lingvistiky (ÚFAL) v Praze\footnote{http://ufal.mff.cuni.cz/}
+Pražský závislostní korpus (PDT) je probíhající projekt Centra poèítaèové lingvistiky Ústavu formální a aplikované lingvistiky (ÚFAL) v Praze\footnote{http://ufal.mf\/f.cuni.cz/}
 
 Náplní projektu je pøedevším ruèní lingvistická anotace velkého množství èeských textù. Projekt se vyznaèuje velkou hloubkou anotace, která sahá až po tektogramatickou rovinou. Kromì velkého množství anotovaných textù bylo v souvislosti s projektem vyvinuto i množství užiteèných nástrojù pro práci s anotacemi a nástroje, které umožòují automatickou lingvistickou anotaci èeského textu.
 
@@ -345,6 +346,9 @@ PDT 2.0
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Lingvistické nástroje}
 
+dopsat, ze pocházejí z PDT, ÚFALu a odkud ještì? 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{NetGraph}
 Netgraph je aplikace typu klient-server, která umožòuje prohledávat korpus podobný PDT (anotace mají strukturu závislostního stromu) souèasnì nìkolika uživateli, pøipojenými pøes internet. Netgraph je navržený tak, aby prohledávání bylo co nejjednodušší a intuitivní, pøi zachování vysoké síly dotazovacího jazyka. Funkènost aplikace je rozdìlena na èást, kterou vykonává klient, a na èást, kterou vykonává server.
 
@@ -352,28 +356,35 @@ Netgraph klient je napsán v Javì a je nezávislý na platformì. Existuje ve dvou f
 
 Netgraph server je napsán v C a C++ a bìží v operaèním systému Linux i dalších systémech - podrobnosti je možné nalézt v \cite{mirovsky_netgraph}. Umožòuje nastavit uživatelská konta s rùznými pøístupovými právy. Korpus, urèený k prohledávání Netgraphem, musí být ve formátu FS (viz~\ref{sec:FS}). Funkce serveru spoèívá ve vyhodnocování dotazù zasílaných klienty. Server prohledává korpus a stromy, které vyhovují dotazu vrací jako odpovìï.
 
-Dotazy v Netgraphu jsou definovány pomocí vlastního dotazovacího jazyka. Jedná se o jazyk formálnì velmi jednoduchý avšak s vysokou expressivitou. Definovat dotaz v Netgraphu znamená definovat podstrom, který se má v prohledávaných stromech vyskytovat. Tedy v dotazu mùžeme definovat požadovanou strukturu stromu. Navíc mùžeme v každém uzlu dotazu vynutit hodnotu nìkterých atributù tohoto uzlu. Takový velmi jednoduchý dotaz, kdy chceme vyhledat všechny stromy obsahující slovo \uv{hasiè} se skládá z jediného uzlu a restrikce na hodnotu atributu \emph{lemma} (viz~\ref{sec:lemma}) na hodnotu \emph{hasiè} v tomto uzlu. Podrobnosti o možnostech a syntaxi tohoto dotazovacího jazyka je možné nalézt napøíklad v~\cite{mirovsky_netgraph}. Poznamenejme ještì, že 
+Dotazy v Netgraphu jsou definovány pomocí vlastního dotazovacího jazyka. Jedná se o jazyk formálnì velmi jednoduchý avšak s vysokou expressivitou. Definovat dotaz v Netgraphu znamená definovat podstrom, který se má v prohledávaných stromech vyskytovat. Tedy v dotazu mùžeme definovat požadovanou strukturu stromu. Navíc mùžeme v každém uzlu dotazu vynutit hodnotu nìkterých atributù tohoto uzlu. Takový velmi jednoduchý dotaz, kdy chceme vyhledat všechny stromy obsahující slovo \uv{hasiè} se skládá z jediného uzlu a restrikce na hodnotu atributu \emph{lemma} (viz~\ref{sec:lemma}) na hodnotu \emph{hasiè} v tomto uzlu. Podrobnosti o možnostech a syntaxi tohoto dotazovacího jazyka je možné nalézt napøíklad v~\cite{mirovsky_netgraph}. Poznamenejme ještì, že
 dotazy mohou být dále rozšíøeny tzv. meta atributy, které umožòují urèení pozice dotazu v nalezených stromech, omezení velikosti nalezených stromù, urèení vztahù mezi hodnotami atributù u rùzných uzlù v nalezených stromech, negaci a mnoho dalších podmínek.
 
 Dotazy se v Netgraph klientu vytváøejí v uživatelsky pøívìtivém grafickém prostøedí. Uživatel si zde mùže \uv{naklikat} celý strom, který se má pøi vyhodnocování dotazu hledat. V grafickém rozhraní Netgraph klienta má uživatel snadný pøístup k možnostem dotazovacího jazyka, aniž by musel tento jazyk podrobnì znát.
 
+Další informace o aplikaci Netgraph je též možné nalézt na její domovské stránce\footnote{http://quest.ms.mf\/f.cuni.cz/netgraph/}.
+
 %%http://quest.ms.mff.cuni.cz/netgraph/
 %%file:///C:/Program%20Files/PDT-2.0/doc/tools/netgraph/netgraph_server_install.html
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Tree Editor TrEd}
 \label{sec:tred}
+Tree Editor TrEd je velmi komplexní grafický editor, který umožòuje rychlé, pohodlné a flexibilní procházení, prohlížení a úpravu stromù v korpusech podobným PDT. TrEd prvotnì sloužil jako hlavní anotaèní nástroj PDT, ale mùže být použit i k prohlížení dat a obsahuje nìkolik druhù vyhledávacích funkcí. TrEd se vyznaèuje svými možnostmi nastavení a pøizpùsobení celé aplikace na míru potøebám nejrùznìjších uživatelù. Silný nástroj pøedstavují uživatelská makra, která mohou být do aplikace kýmkoliv doprogramována v jazyce Perl. TrEd podporuje velké množství vstupních a výstupních formátù dat, jmenujme napøíklad FS, CSTS, PDT-PML (pro podrobnosti k jednotlivým formátùm viz~\ref{sec:ling_lang}).
 
-http://ufal.mff.cuni.cz/~pajas/tred/
+TrEd je možné nainstalovat na vìtšinì v souèasné dobì používaných operaèních systémù: Linux, UNIX (MacOS X, BSD, Solaris, ...) i Windows (funguje díky ActivePerl for Windows, který musí být v systému nainstalovaný). Na domovské stránce\footnote{http://ufal.mf\/f.cuni.cz/\~{}pajas/tred/} editoru TrEd lze získat jednotlivé instalaèní balíèky i podrobné instrukce k instalaci na konkrétním operaèním systému.
 
-Nejpøehlednìjší a nejpohodlnìjší zobrazení dat PDT 2.0 poskytuje TrEd. Prvotnì sloužil jako hlavní anotaèní nástroj, ale mùže být použit i k prohlížení dat a obsahuje také nìkolik druhù vyhledávacích funkcí.
+Na obrázcích~\ref{pict:analytic_example} a \ref{pict:tecto_example} jsou schémata stromù vytisknutá pøímo z editoru TrEd. Takto jsou v TrEd editoru zobrazovány analytické a tektogramatické stromy ve výchozím nastavení. V obou pøípadech je zobrazen technický koøen, který nese administrativní atributy stromu (napøíklad atribut \emph{id} - jednoznaèný identifikátor). Uzly obou stromù jsou zleva doprava uspoøádány podle poøadí, v jakém se slova odpovídající daným uzlùm vyskytují v pùvodní vìtì.
 
-Editor TrEd umožòuje rychlé, pohodlné a flexibilní procházení, prohlížení a úpravu jednotlivých stromù.
+Schéma analytického stromu je jednodušší. Pod každým uzlem jsou vytištìny hodnoty dvou atributù. První atribut obsahuje pùvodní \emph{slovní tvar} a v druhém je zkratka \emph{analytické funkce} tohoto uzlu.
 
-Na obrázku~\ref{pict:analytic_example} je strom analytické roviny a na obrázku~\ref{pict:tecto_example} je strom tektogramatické roviny. Oba tyto pøíklady
+Schéma tektogramatického stromu je o nìco složitìjší. 
 
+\subsubsection{btred / ntred}
+There is also a non-graphical (off-line) variant of TrEd, usefull for batch processing of tree-like data. It is called btred — “Batch-mode Tree Editor” and allows users to apply TrEd macros on trees without having to enter the graphical interface. This tool is further acompanied by another tool, named ntred. NTrEd allows for parallelizing btred processing over a cluster of networked machines. In combination with TrEd, it can also be used as an extremely powerful search engine over large base of data.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Tools for machine annotation - PDT 2.0}
-
-
 Jedná o skupinu nástrojù, které provádìjí plnì automatickou lingvistickou analýzu èeského textu. Ze surových èeských vìt vytváøejí závislostní stromy na~analytické rovinì. Proces anotace se skládá z následujících funkcí.
 
 \begin{enumerate}
@@ -388,7 +399,7 @@ Tyto funkce jsou implementovány v celkem šesti oddìlených nástrojích. Vstupem ka
 Celý øetìz nástrojù se dá spustit jediným skriptem \emph{run\_all}.
 
 
-Tyto nástroje a jejich podrobný popis\footnote{http://ufal.mff.cuni.cz/pdt2.0/doc/tools/machine-annotation/} (vèetnì namìøené chybovosti) jsou k dispozici jako souèást PDT 2.0 CD-ROM.
+Tyto nástroje a jejich podrobný popis\footnote{http://ufal.mf\/f.cuni.cz/pdt2.0/doc/tools/machine-annotation/} (vèetnì namìøené chybovosti) jsou k dispozici jako souèást PDT 2.0 CD-ROM.
 
 
 Následuje podrobnìjší popis jednotlivých nástrojù.
@@ -408,12 +419,12 @@ Pro každé slovo vyhledá všechna možná lemmata a morfologické znaèky, která by mu
 \label{sec:morphological_tagging}
 
 Ze všech možných alternativ získaných v pøedchozím kroku pro každé slovo vybere jedno lemma a morfologickou znaèku. Tento proces se èasto nazývá desambiguace.
-Tagging pro Èeštinu je pomìrnì zajímavý vìdecký problém, který je podrobnì rozpracován v mnoha  publikacích\footnote{http://ufal.mff.cuni.cz/czech-tagging/}.
+Tagging pro Èeštinu je pomìrnì zajímavý vìdecký problém, který je podrobnì rozpracován v mnoha  publikacích\footnote{http://ufal.mf\/f.cuni.cz/czech-tagging/}.
 
 \subsubsection*{Parsing}
 
 Morfologicky oznaèkovaná slova v každé vìtì uspoøádá do závislostního stromu.
-Problém automatického závislostního parsingu\footnote{http://ufal.mff.cuni.cz/czech-parsing/}
+Problém automatického závislostního parsingu\footnote{http://ufal.mf\/f.cuni.cz/czech-parsing/}
 je stále pomìrnì živý. Aktuálnì nejlepší parser \cite{zeman_parser} dosahuje pøesnosti pøibližnì 86\%
 
 \subsubsection*{Analytical function assignment}
@@ -424,9 +435,29 @@ Jednotlivým hranám závislostního stromu, které vznikly v pøedchozím kroku, pøiøa
 
 Zapíše výstup pøedchozího nástroje v PML jazyce. Pro podrobnìjší informace o PML viz oddíl~\ref{sec:PDT}.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Nástroj pro tektogramatickou analýzu èeštiny}
+Jedná o nástroj, který provádí tektogramatickou lingvistickou anotaci.
+Jako vstup akceptuje výstup nástrojù výše (Tools for machine annotation).
+
+Nástroj lze získat pøímo od Václava Klimeše.
+%%http://ufal.mff.cuni.cz/~klimes/ (kontaktní informace)
+
+%%Pro pouhé otestování funkènosti diplomové práce lze použít kopii tohoto nástroje v SVN repository (v adresáøi trunk/parsing_czech/t-analysis).
+Instalace této kopie:
+
+Nejprve je nutné stáhnout a nainstalovat fnTBL Toolkit.
+%%http://nlp.cs.jhu.edu/~rflorian/fntbl/index.html
+Návod k instalaci je uvnitø staženého archivu v souboru "README".
+
+Dále je nutné nakonfigurovat cesty k dùležitým souborùm t-analysis.
+V souboru "run" nastavte promìnou "A2T" na cestu k adresáøi "t-analysis" a promìnnou "FNTBL" na cestu kde je nainstalovaný  fnTBL Toolkit.
+%%V souborech "t-analysis/[1-4]/cfg/tbl.params" a "t-analysis[1-4]/R" zmìòte vždy na prvním øádku cestu tak, aby odpovídala aktuálnímu umístìní souborù.
+
+Zajistìte, aby adresáø s programem btred, což je souèást TrEdu, byl v PATH. (Staèí, když na nìj bude symlink v nìjakém vašem adresáøi bin.)
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\chapter{Experimentování s lingvistickou anotací}
 \chapter{Experiment}
 Experiment provedený v rámci této práce spoèíval v otestování nìkterých dostupných nástrojù pro lingvistickou anotaci èeských textù. Jmenovitì se jednalo o tyto nástroje: !!!!!!!!!!!!!doplnit!!!!!!!!!!!!!!!!. Byly prozkoumány možnosti vyžití tìchto nástrojù pro extrakci informací a sémantickou anotaci.
 
@@ -451,7 +482,7 @@ Proè hasièi?
 
 \textbf{Proè ne korpus PDT?} --- Dùraz byl kladen na co možná nejvìtší se pøiblížení k podmínkám a problémùm skuteèného projektu. V takovém pøípadì bychom se tìžko mohli opøít o to, že by nám data která chceme analyzovat nìkdo ruènì lingvisticky anotoval.
 
-+ pokusy s PDT sample data. Nicménì pokusy nad ruèními lingvistickými anotacemi dat PDT\footnote{Jedná se o \emph{sample data} PDT 2.0, http://ufal.mff.cuni.cz/pdt2.0/data/sample/} probìhly.
++ pokusy s PDT sample data. Nicménì pokusy nad ruèními lingvistickými anotacemi dat PDT\footnote{Jedná se o \emph{sample data} PDT 2.0, http://ufal.mf\/f.cuni.cz/pdt2.0/data/sample/} probìhly.
 
 \subsection{Hasièi}
 
