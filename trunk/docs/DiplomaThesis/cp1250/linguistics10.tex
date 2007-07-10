@@ -146,6 +146,7 @@ Kromì toho, že je možné strukturu vìty pøirozeného jazyka zapisovat pomocí rùzný
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Lingvistické znaèky}
+\label{sec:ling_tag}
 Lingvistické znaèky rozdìlíme do tøí kategorií. Podle roviny lingvistické anotace, tak jak jsou rozdìleny v projektu PDT (viz oddíl~\ref{sec:PDT}). Znaèky morfologické roviny jsou nezávisle pøiøazovány jednotlivým slovùm. Naproti tomu znaèky analytické a tektogramatické roviny popisují strukturu vìty a jejich znaèky popisující vztahy mezi jednotlivými slovy se mohou týkat více slov najednou.
 
 Následuje struèný popis jednotlivých znaèek každé roviny. Podrobnìjší popis lingvistických znaèek je možné najít napøíklad v \cite{morphological_annotation}, \cite{analytic_annotation}, \cite{tectogramtic_annotation}.
@@ -173,6 +174,7 @@ V závislostním stromu analytické roviny anotace, se analytickou funkcí oznaèí ka
 
 \noindent Pøíklady analytických funkcí:
 \begin{itemize}
+\item Predikát (pøísudek)
 \item Subjekt (podmìt)
 \item Objekt (pøedmìt)
 \item Atribut (pøívlastek)
@@ -198,8 +200,11 @@ Tektogramatická rovina slouží k zachycení významové struktury vìty. Struktura re
 \subsubsection{Tektogramatické lemma}
 Tektogramatické lemma (t-lemma) zachycuje lexikální význam uzlu. U jednoduchých uzlù odpovídá lemmatu, které bylo øídícímu slovu tektogramatického uzlu pøiøazeno na morfologické rovinì. Uzlùm na tektogramatické rovinì novì vytvoøeným je pøiøazeno zástupné t-lema speciálního tvaru.
 
+\subsubsection{Sémantický slovní druh a jeho podskupiny}
+Uzly tektogramatického stromu (respektive jejich øídící slova) se rozdìlují do takzvaných \emph{sémantických podskupin slovního druhu}. Toto dìlení zaèíná rozdìlením uzlù podle takzvaných \emph{sémantických slovních druhù}. Z pùvodních deseti slovních druhù, které v èeštinì rozlišujeme, vzniknou ètyøi sémantické slovní druhy: sémantická substantiva, sémantická adjektiva, sémantická adverbia a sémantická slovesa. Tato se pak dále dìlí do sémantických podskupin. Napøíklad sémantická substantiva se dìlí na \emph{pojmenovací}, \emph{pronominální} a \emph{kvantifikaèní}. Podrobnì je celé toto rozdìlení popsáno v~\cite{tectogramtic_annotation}.
+
 \subsubsection{Gramatémy}
-Gramatémy jsou tektogramatickým rozšíøením morfologických znaèek. Gramatémy nalezneme pouze mezi atributy uzlù u kterých to má smysl, tedy u uzlù které se vztahují k nìjakému významovému slovu vìty.
+Gramatémy jsou tektogramatickým rozšíøením morfologických znaèek. Gramatémy nalezneme pouze mezi atributy uzlù u kterých to má smysl, tedy u uzlù které se vztahují k nìjakému významovému slovu vìty. Navíc rùzným slovním druhùm lze pøidìlit jen nìkteré gramatémy (napøíklad nemá smysl urèovat slovesný èas u podstatného jména). Podle toho, do které sémantické podskupiny slovního druhu daný uzel patøí, je možné urèit, které gramatémy pro nìj mají smysl a které nikoli.
 
 \subsubsection{Funktor}
 Funktory jsou velkým pøínosem tektogramatické roviny po praktické stránce. Funktory chápeme jako sémantické ohodnocení hran mezi uzly tektogramatického stromu. Tektogramatické funktory mùžeme též chápat jako ekvivalent analytických funkcí. Rozdíl mezi tektogramatickými funktory a analytickými funkcemi je v tom, že funtoktory se snaží postihnout sémantiku vztahu, zatímco analytické funkce se zamìøují na jeho syntaktickou roli. Následuje popis nìkterých dùležitých funktorù vždy s nìkolika pøíklady jejich výskytu ve vìtì. Vyèerpávající seznam je možné nalézt napøíklad v \cite{tectogramtic_annotation}.
@@ -214,6 +219,8 @@ Funktory jsou velkým pøínosem tektogramatické roviny po praktické stránce. Funkt
 \item[-] Èeským \emph{skokanùm}.ACT se daøilo dobøe.
 \item[-] Je \emph{mi}.ACT smutno.
 \end{description}
+
+\pagebreak
 
 \item Funktor ADDR (addressee) odpovídá roli pøíjemce dìje.
 \begin{description}
@@ -279,23 +286,32 @@ Funktory jsou velkým pøínosem tektogramatické roviny po praktické stránce. Funkt
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[!h]
+\begin{figure}[!bh]
 \begin{center}
 \framebox{\includegraphics[scale=0.7]{../tecto_example.eps}}
 \caption{Pøíklad notace na tektogramatické rovinì.} \label{pict:tecto_example}
 \end{center}
 \end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\newpage
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Pøíklady}
+%%\begin{nopagebreak}{4}
 Pro ilustraci pøedkládáme dva obrázky závislostních stromù, které vznikli ruèní anotací vìty:
 \begin{quote}
 \emph{Pìtice finských vzpìraèù byla svou národní federací potrestána za doping.}
 \end{quote}
-Na obrázku~\ref{pict:analytic_example} je strom analytické roviny a na obrázku~\ref{pict:tecto_example} je strom tektogramatické roviny. Za povšimnutí stojí rozdíl v poètu uzlù obou stromù, který je na tektogramatické rovinì o nìco menší. Oba tyto pøíklady pocházejí z PDT 2.0 - sample data. Obrázky jsou vygenerované pomocí editoru TrEd. Kromì struktury jednotlivých stromù v této kapitole popisovaných jsou na obrázcích vidìt i další pøedevším technické jevy spojené s konkrétní reprezentací lingvistické anotace. Napøíklad tetogramatické funktory a analytické funkce nejsou pøiøazeny k hranám stromu ale k~závislému uzlu, každý strom má navíc takzvaný \emph{technický koøen}, na kterém teprve skuteèný koøen lingvistického stromu visí. U analytického stromu též stojí za povšimnutí umístìní teèky na konci vìty, která je potomkem umìlého koøene. Podrobnìjší vysvìtlení jednotlivých znaèek na tìchto obrázcích je možné nalézt v podkapitole \ref{sec:tred} vìnované editoru TrEd.
+%%\end{nopagebreak}
+Na obrázku~\ref{pict:analytic_example} je strom analytické roviny a na obrázku~\ref{pict:tecto_example} je strom tektogramatické roviny. Za povšimnutí stojí rozdíl v poètu uzlù obou stromù, který je na tektogramatické rovinì o nìco menší. Oba tyto pøíklady pocházejí z PDT 2.0 - sample data. Obrázky jsou vygenerované pomocí editoru TrEd (viz~\ref{sec:tred}).
 
+Kromì struktury jednotlivých stromù v této kapitole popisovaných jsou na obrázcích vidìt i další pøedevším technické jevy spojené s konkrétní reprezentací lingvistické anotace. Napøíklad tetogramatické funktory a analytické funkce nejsou pøiøazeny k hranám stromu ale k~závislému uzlu, každý strom má navíc takzvaný \emph{technický koøen}, na kterém teprve skuteèný koøen lingvistického stromu visí. Technický koøen nese administrativní atributy stromu (napøíklad atribut \emph{id} -- jednoznaèný identifikátor). U analytického stromu též stojí za povšimnutí umístìní teèky na konci vìty, která je potomkem umìlého koøene. Uzly obou stromù jsou zleva doprava uspoøádány podle poøadí, v jakém se slova odpovídající daným uzlùm vyskytují v pùvodní vìtì.
 
+Schéma analytického stromu je jednodušší. Pod každým uzlem jsou vytištìny hodnoty dvou atributù (hodnoty dvou lingvistických znaèek). První atribut obsahuje pùvodní \emph{tvar slova} a v druhém je zkratka \emph{analytické funkce} tohoto uzlu.
+
+Schéma tektogramatického stromu je o nìco složitìjší. Pod každým uzlem jsou vytištìny hodnoty tøí atributù. První atribut obsahuje \emph{lemma}, prostøední tektogramatický \emph{funktor} a poslední vyjadøuje \emph{sémantickou podskupinu slovního druhu}, do které øídicí slovo tohoto uzlu patøí. Podrobnosti o tìchto atributech a jejich hodnotách je možné nalézt v~\cite{tectogramtic_annotation}.
+
+Na obrázku~\ref{pict:tecto_example} (tektogramatického stromu) je vidìt speciální zahnutá šipka od uzlu \emph{\#PersPron} k uzlu \emph{pìtice}. Konec této šipky ukazuje na cíl, na který odkazuje zájmeno uvnitø prvního (poèáteèního) uzlu.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Jazyky pro zápis lingvistických anotací}
@@ -346,7 +362,7 @@ PDT 2.0
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Lingvistické nástroje}
 
-dopsat, ze pocházejí z PDT, ÚFALu a odkud ještì? 
+dopsat, ze pocházejí z PDT, ÚFALu a odkud ještì?
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{NetGraph}
@@ -369,25 +385,26 @@ Další informace o aplikaci Netgraph je též možné nalézt na její domovské stránce
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Tree Editor TrEd}
 \label{sec:tred}
-Tree Editor TrEd je velmi komplexní grafický editor, který umožòuje rychlé, pohodlné a flexibilní procházení, prohlížení a úpravu stromù v korpusech podobným PDT. TrEd prvotnì sloužil jako hlavní anotaèní nástroj PDT, ale mùže být použit i k prohlížení dat a obsahuje nìkolik druhù vyhledávacích funkcí. TrEd se vyznaèuje svými možnostmi nastavení a pøizpùsobení celé aplikace na míru potøebám nejrùznìjších uživatelù. Silný nástroj pøedstavují uživatelská makra, která mohou být do aplikace kýmkoliv doprogramována v jazyce Perl. TrEd podporuje velké množství vstupních a výstupních formátù dat, jmenujme napøíklad FS, CSTS, PDT-PML (pro podrobnosti k jednotlivým formátùm viz~\ref{sec:ling_lang}).
+Tree Editor TrEd je velmi komplexní grafický editor, který umožòuje rychlé, pohodlné a flexibilní procházení, prohlížení a úpravu stromù v~korpusech podobným PDT. TrEd prvotnì sloužil jako hlavní anotaèní nástroj PDT, ale mùže být použit i k prohlížení dat a obsahuje nìkolik druhù vyhledávacích funkcí. TrEd se vyznaèuje svými možnostmi nastavení a pøizpùsobení celé aplikace na míru potøebám nejrùznìjších uživatelù. Silný nástroj pøedstavují uživatelská makra, která mohou být do aplikace kýmkoliv doprogramována v jazyce Perl. TrEd podporuje velké množství vstupních a výstupních formátù dat, jmenujme napøíklad FS, CSTS, PDT-PML (podrobnosti k jednotlivým formátùm -- viz~\ref{sec:ling_lang}).
 
-TrEd je možné nainstalovat na vìtšinì v souèasné dobì používaných operaèních systémù: Linux, UNIX (MacOS X, BSD, Solaris, ...) i Windows (funguje díky ActivePerl for Windows, který musí být v systému nainstalovaný). Na domovské stránce\footnote{http://ufal.mf\/f.cuni.cz/\~{}pajas/tred/} editoru TrEd lze získat jednotlivé instalaèní balíèky i podrobné instrukce k instalaci na konkrétním operaèním systému.
+TrEd je možné nainstalovat na vìtšinì v souèasné dobì používaných operaèních systémù: Linux, UNIX (MacOS X, BSD, Solaris, ...) i Windows (funguje díky ActivePerl for Windows, který musí být v systému nainstalovaný). Na domovské stránce\footnote{http://ufal.mf\/f.cuni.cz/\~{}pajas/tred/} editoru TrEd lze získat jednotlivé instalaèní balíèky i podrobné instrukce pro instalaci na konkrétní operaèní systém.
 
-Na obrázcích~\ref{pict:analytic_example} a \ref{pict:tecto_example} jsou schémata stromù vytisknutá pøímo z editoru TrEd. Takto jsou v TrEd editoru zobrazovány analytické a tektogramatické stromy ve výchozím nastavení. V obou pøípadech je zobrazen technický koøen, který nese administrativní atributy stromu (napøíklad atribut \emph{id} - jednoznaèný identifikátor). Uzly obou stromù jsou zleva doprava uspoøádány podle poøadí, v jakém se slova odpovídající daným uzlùm vyskytují v pùvodní vìtì.
-
-Schéma analytického stromu je jednodušší. Pod každým uzlem jsou vytištìny hodnoty dvou atributù. První atribut obsahuje pùvodní \emph{slovní tvar} a v druhém je zkratka \emph{analytické funkce} tohoto uzlu.
-
-Schéma tektogramatického stromu je o nìco složitìjší. 
-
+\subsubsection{Ukázkové obrázky}
+Na obrázcích~\ref{pict:analytic_example} a \ref{pict:tecto_example} jsou schémata stromù získaná pøímo z editoru TrEd. Takto jsou pøi výchozím nastavení v~TrEd editoru zobrazovány analytické a tektogramatické stromy.
+ 
 \subsubsection{btred / ntred}
-There is also a non-graphical (off-line) variant of TrEd, usefull for batch processing of tree-like data. It is called btred — “Batch-mode Tree Editor” and allows users to apply TrEd macros on trees without having to enter the graphical interface. This tool is further acompanied by another tool, named ntred. NTrEd allows for parallelizing btred processing over a cluster of networked machines. In combination with TrEd, it can also be used as an extremely powerful search engine over large base of data.
+Souèástí editoru TrEd jsou též dva nástroje - \emph{btred} a \emph{ntred}, které umožòují automatické (dávkové) zpracování stromù korpusu. Ntred je pouze rozšíøením nástroje btred o možnost zpracovávat korpus paralelnì více poèítaèi v~síti najednou.
+
+Tyto nástroje se spouštìjí pøímo z pøíkazové øádky, nemají grafické rozhraní. Èinnost tìchto nástrojù, je øízena uživatelským programem (makrem btred-u), které uživatel musí napsat v programovacím jazyce Perl. Pøi psaní toho makra má uživatel k~dispozici velké množství specializovaných funkcí pro práci se strukturami korpusu: s~jednotlivými stromy, s~uzly stromù, s~atributy uzlù atp.
+
+Pøehledný a dobøe srozumitelný návod -- \uv{btred/ntred tutorial}\footnote{http://ufal.mf\/f.cuni.cz/\~{}pajas/tred/bn-tutorial.html}, jak pracovat s nástroji btred a ntred je možné nalézt na domovských stránkách editoru TrEd.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Tools for machine annotation - PDT 2.0}
 Jedná o skupinu nástrojù, které provádìjí plnì automatickou lingvistickou analýzu èeského textu. Ze surových èeských vìt vytváøejí závislostní stromy na~analytické rovinì. Proces anotace se skládá z následujících funkcí.
 
-\begin{enumerate}
+\nopagebreak\begin{enumerate}
 \item Rozpoznání slovních jednotek ve vstupním surovém textu a rozdìlení textu na vìty.
 \item Morfologická analýza a tagging (morfologická desambiguace).
 \item Závislostní parsing.
@@ -439,6 +456,8 @@ Zapíše výstup pøedchozího nástroje v PML jazyce. Pro podrobnìjší informace o PML
 \subsection{Nástroj pro tektogramatickou analýzu èeštiny}
 Jedná o nástroj, který provádí tektogramatickou lingvistickou anotaci.
 Jako vstup akceptuje výstup nástrojù výše (Tools for machine annotation).
+
+Podrobnosti je možné nalézt napøíklad v~\cite{klimes_t-nalysis}.
 
 Nástroj lze získat pøímo od Václava Klimeše.
 %%http://ufal.mff.cuni.cz/~klimes/ (kontaktní informace)
