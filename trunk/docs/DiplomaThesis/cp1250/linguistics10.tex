@@ -314,68 +314,76 @@ Schéma tektogramatického stromu je o nìco sloitìjší. Pod kadım uzlem jsou vyti
 Na obrázku~\ref{pict:tecto_example} (tektogramatického stromu) je vidìt speciální zahnutá šipka od uzlu \emph{\#PersPron} k uzlu \emph{pìtice}. Konec této šipky ukazuje na cíl, na kterı odkazuje zájmeno uvnitø prvního (poèáteèního) uzlu.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Jazyky pro zápis lingvistickıch anotací}
-\label{sec:ling_lang}
-
-\subsection{PML - The Prague Markup Language}
-\label{sec:PML}
-
-Hlavním formátem dat v PDT 2.0 je formát nazvanı PML, kterı je zaloenı na XML.
-
-http://ufal.mff.cuni.cz/pdt2.0/doc/data-formats/pml/index.html
-
-\subsection{FS - Feature structure}
-\label{sec:FS}
-Formát FS byl vytvoøen pro vyhledávací program Netgraph (pøísnì vzato vlastnì pro jeho pøedchùdce, editor Graph).
-
-Formát FS ("feature structure") je formát souborù pro reprezentaci stromù, jejich uzly jsou struktury atribut-hodnota. Mùe bıt chápán jako "meta formát", podobnì jako SGML nebo XML. Konkrétní pouití tohoto formátu je plnì specifikováno deklarací atributù v hlavièce FS souboru (hlavièka FS souboru tak hraje podobnou roli jako DTD u SGML souboru).
-
-\subsection{CSTS - Czech sentence tree structure}
-Formát zvanı CSTS, zaloenı na SGML\footnote{http://www.w3.org/MarkUp/SGML/}, byl hlavním formátem dat v PDT 1.0. Nyní je pouíván jen jako pøechodnı formát pro kompatibilitu se staršími nástroji pro zpracovnání jazyka (taggery, parsery, ...).
-CSTS mùe reprezentovat jen morfologickou a analytickou anotaci, není schopen plného popisu tektogramatické roviny.
-
-\subsection{Konverze mezi formáty PDT}
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The Prague Dependency Treebank}
 \label{sec:PDT}
-
-
 Praskı závislostní korpus (PDT) je probíhající projekt Centra poèítaèové lingvistiky Ústavu formální a aplikované lingvistiky (ÚFAL) v Praze\footnote{http://ufal.mf\/f.cuni.cz/}
 
 Náplní projektu je pøedevším ruèní lingvistická anotace velkého mnoství èeskıch textù. Projekt se vyznaèuje velkou hloubkou anotace, která sahá a po tektogramatickou rovinou. Kromì velkého mnoství anotovanıch textù bylo v souvislosti s projektem vyvinuto i mnoství uiteènıch nástrojù pro práci s anotacemi a nástroje, které umoòují automatickou lingvistickou anotaci èeského textu.
 
-dopsat
+Historie projektu PDT zaèíná v roce 1995. Od té doby se korpus PDT rozšíøil a na souèasnou (PDT~2.0) velikost 2 milióny slov s provázanımi anotacemi na úrovni morfologie (2 milióny slov), povrchové syntaxe (1,5~mil. slov) a hloubkové syntaxe a sémantiky (0,8 mil.~slov). Poprvé byl korpus PDT (verze~0.5) veøejnì pøedstaven v roce 1998. V roce 2001 bylo publikováno CD-ROM PDT 1.0, které obsahovalo pøiblinì 1,5 mil. slovních jednotek anotovanıch na analytické rovinì.
 
-PDT 1.0
+V roce 2006 byla publikována poslední souèasná verze korpusu jako CD-ROM PDT~2.0 \cite{PDT20}. Korpus PDT je v této verzi rozšíøen o tektogramaticky anotvaná data. CD-ROM PDT~2.0 dále obsahuje mnoství kvalitních lingvistickıch nástrojù (viz~\ref{sec:ling_tools}) a publikací, mezi které patøí obsáhlı manuál (více ne 1000 stran) pro tektogramatické znaèkování \cite{tectogramtic_annotation}.
 
-PDT 2.0
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{WordNet}
+\section{Jazyky pro zápis lingvistickıch anotací}
+\label{sec:ling_lang}
+Nyní krátce rozvedeme, v jakıch formátech se lingvistické anotace uchovávají. Jedná se vìtšinou o formáty vzniklé pro potøeby korpusu PDT a pøíbuznıch nástrojù. Podrobnosti\footnote{http://ufal.mf\/f.cuni.cz/pdt2.0/doc/data-formats/} o tìchto formátech je moné nalézt v~Prùvodci PDT 2.0 \cite{PDT20}.
 
+\subsection{CSTS - Czech Sentence Tree Structure}
+Formát zvanı CSTS, zaloenı na SGML\footnote{http://www.w3.org/MarkUp/SGML/}, byl hlavním formátem dat v PDT 1.0. Nyní (v PDT 2.0) je pouíván jen jako pøechodnı formát pro kompatibilitu se staršími nástroji pro zpracování jazyka (taggery, parsery, ...).
+CSTS mùe reprezentovat jen morfologickou a analytickou anotaci, není schopen plného popisu tektogramatické roviny.
+
+\subsection{PML - The Prague Markup Language}
+\label{sec:PML}
+Hlavním formátem dat v PDT 2.0 je formát nazvanı PML. PML je zaloenı na XML, je navrenı pro reprezentaci bohaté lingvistické anotace textù, jako jsou morfologické znaèkování, závislostní stromy apod. V PML se mohou jednotlivé oddìlené roviny anotace pøekrıvat a mohou bıt konzistentnì propojeny jak mezi sebou, tak i s dalšími zdroji dat. Kadá rovina anotace je popsána v souboru PML schéma, kterı je jakousi formalizací abstraktního anotaèního schématu pro tu konkrétní rovinu anotace.
+
+Anotace PDT 2.0 je rozdìlena do ètyø rovin, naskládanıch jedna na druhou. Kadá z tìchto rovin má vlastní PML schéma a zpravidla se ukládá do zvláštního soubotu. Jedná se o tyto ètyøi roviny: rovina slovní (soubory~\emph{.w}), rovina morfologická (soubory~\emph{.m}), rovina analytická (soubory~\emph{.a}) a rovina tektogramatická (soubory~\emph{.t}). Pro podrobnosti o rovinách lingvistické anotace viz \ref{sec:ling_tag}.
+
+Další informace je moné nalézt na stránkách PML projektu\footnote{http://ufal.mf\/f.cuni.cz/jazz/PML/} pøípadnì v publikaci~\cite{PML}.
+
+%%http://ufal.mff.cuni.cz/pdt2.0/doc/data-formats/pml/index.html
+
+\subsection{FS - Feature Structure}
+\label{sec:FS}
+Formát FS (\uv{feature structure"}) je formát souborù pro reprezentaci stromù, jejich uzly jsou struktury atribut-hodnota. Mùe bıt chápán jako "meta formát", podobnì jako SGML nebo XML. Konkrétní pouití tohoto formátu je plnì specifikováno deklarací atributù v hlavièce FS souboru. Formát FS byl primárnì vytvoøen pro vyhledávací program Netgraph (viz \ref{sec:netgraph}).
+
+\subsection{PLS - Perl Storable Format}
+Èistì z~dùvodù optimalizace a èasové úspory se pøi práci s nástroji TrEd a btred poívá formát PLS. Nástroje TrEd a btred jsou zaloeny na Perlu, pøi naèítaní dat ve formátu PML a pøevodu PML dat do vnitøní pamìové reprezentace Perlu se spotøebuje mnoho èasu. Této èasovì nároèné transformaci se lze vyhnout vyuitím formátu PLS (Perl Storable Format). Jde o binární datovı formát, kterı pøímo odráí vnitøní pamìovou reprezentaci dat v Perlu. Jeho ukládání a zpìtné naèítání nástroji TrEd a btred je tedy mnohem rychlejší.
+
+\subsection{Konverze mezi formáty PDT}
+Problém s konverzí mezi formáty lingvistické anotace je v tom, e všechny formáty nemohou nést pøesnì stejné mnoství informací. Pøesto jsou v projektu PDT 2.0 zahrnuty skripty pro konverzi nìkterıch formátù:
+
+\begin{itemize}
+\item konverze analytické anotace typu PDT 1.0 do PML
+\item konverze a-dat PML do CSTS
+\item konverze m-dat PML do CSTS
+\item konverze dat PDT 2.0 do FS pro Netgraph
+\item konverze dat PDT 2.0 do PLS
+\end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Lingvistické nástroje}
-
-dopsat, ze pocházejí z PDT, ÚFALu a odkud ještì?
+\label{sec:ling_tools}
+Nyní popíšeme nìkteré lingvistické nástroje, které mohou pomoci pøi zpracování textù pøirozeného jazyka a extrakci informací z nich. Vìtšina tìchto nástrojù je vyvíjena na Ústavu formální a aplikované lingvistiky (ÚFAL). Tyto nástroje je moné (kromì tektogramatického analyzátoru \ref{sec:t-nalysis}) získat jakou souèást PDT 2.0 CD-ROM~\cite{PDT20}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{NetGraph}
+\label{sec:netgraph}
 Netgraph je aplikace typu klient-server, která umoòuje prohledávat korpus podobnı PDT (anotace mají strukturu závislostního stromu) souèasnì nìkolika uivateli, pøipojenımi pøes internet. Netgraph je navrenı tak, aby prohledávání bylo co nejjednodušší a intuitivní, pøi zachování vysoké síly dotazovacího jazyka. Funkènost aplikace je rozdìlena na èást, kterou vykonává klient, a na èást, kterou vykonává server.
 
 Netgraph klient je napsán v Javì a je nezávislı na platformì. Existuje ve dvou formách - jako samostatná Java aplikace a jako Java applet. Applet verze je oproti plné Java aplikaci ochuzena o nìkteré funkce, pøesto však poskytuje plnou vyhledávací sílu. Funkce klienta zahrnuje vytvoøení (návrh) dotazu, jeho odeslání serveru a zobrazení, pøípadnì další zpracování vısledkù vrácenıch serverem.
 
 Netgraph server je napsán v C a C++ a bìí v operaèním systému Linux i dalších systémech - podrobnosti je moné nalézt v \cite{mirovsky_netgraph}. Umoòuje nastavit uivatelská konta s rùznımi pøístupovımi právy. Korpus, urèenı k prohledávání Netgraphem, musí bıt ve formátu FS (viz~\ref{sec:FS}). Funkce serveru spoèívá ve vyhodnocování dotazù zasílanıch klienty. Server prohledává korpus a stromy, které vyhovují dotazu vrací jako odpovìï.
 
-Dotazy v Netgraphu jsou definovány pomocí vlastního dotazovacího jazyka. Jedná se o jazyk formálnì velmi jednoduchı avšak s vysokou expressivitou. Definovat dotaz v Netgraphu znamená definovat podstrom, kterı se má v prohledávanıch stromech vyskytovat. Tedy v dotazu mùeme definovat poadovanou strukturu stromu. Navíc mùeme v kadém uzlu dotazu vynutit hodnotu nìkterıch atributù tohoto uzlu. Takovı velmi jednoduchı dotaz, kdy chceme vyhledat všechny stromy obsahující slovo \uv{hasiè} se skládá z jediného uzlu a restrikce na hodnotu atributu \emph{lemma} (viz~\ref{sec:lemma}) na hodnotu \emph{hasiè} v tomto uzlu. Podrobnosti o monostech a syntaxi tohoto dotazovacího jazyka je moné nalézt napøíklad v~\cite{mirovsky_netgraph}. Poznamenejme ještì, e
+Dotazy v Netgraphu jsou definovány pomocí vlastního dotazovacího jazyka. Jedná se o jazyk formálnì velmi jednoduchı avšak s vysokou expressivitou. Definovat dotaz v Netgraphu znamená definovat podstrom, kterı se má v prohledávanıch stromech vyskytovat. Tedy v dotazu mùeme definovat poadovanou strukturu stromu. Navíc mùeme v kadém uzlu dotazu vynutit hodnotu nìkterıch atributù tohoto uzlu.
+
+Velmi jednoduchı dotaz, kdy chceme vyhledat všechny stromy obsahující slovo \uv{hasiè} se skládá z jediného uzlu a restrikce na hodnotu atributu \emph{lemma} (viz~\ref{sec:lemma}) na hodnotu \emph{hasiè} v tomto uzlu.
+
+Podrobnosti o monostech a syntaxi tohoto dotazovacího jazyka je moné nalézt napøíklad v~\cite{mirovsky_netgraph}. Poznamenejme ještì, e
 dotazy mohou bıt dále rozšíøeny tzv. meta atributy, které umoòují urèení pozice dotazu v nalezenıch stromech, omezení velikosti nalezenıch stromù, urèení vztahù mezi hodnotami atributù u rùznıch uzlù v nalezenıch stromech, negaci a mnoho dalších podmínek.
 
-Dotazy se v Netgraph klientu vytváøejí v uivatelsky pøívìtivém grafickém prostøedí. Uivatel si zde mùe \uv{naklikat} celı strom, kterı se má pøi vyhodnocování dotazu hledat. V grafickém rozhraní Netgraph klienta má uivatel snadnı pøístup k monostem dotazovacího jazyka, ani by musel tento jazyk podrobnì znát.
+Dotazy se v Netgraph klient vytváøejí v uivatelsky pøívìtivém grafickém prostøedí. Uivatel si zde mùe \uv{naklikat} celı strom, kterı se má pøi vyhodnocování dotazu hledat. V grafickém rozhraní Netgraph klient má uivatel snadnı pøístup k monostem dotazovacího jazyka, ani by musel tento jazyk podrobnì znát.
 
 Další informace o aplikaci Netgraph je té moné nalézt na její domovské stránce\footnote{http://quest.ms.mf\/f.cuni.cz/netgraph/}.
 
@@ -385,13 +393,13 @@ Další informace o aplikaci Netgraph je té moné nalézt na její domovské stránce
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Tree Editor TrEd}
 \label{sec:tred}
-Tree Editor TrEd je velmi komplexní grafickı editor, kterı umoòuje rychlé, pohodlné a flexibilní procházení, prohlíení a úpravu stromù v~korpusech podobnım PDT. TrEd prvotnì slouil jako hlavní anotaèní nástroj PDT, ale mùe bıt pouit i k prohlíení dat a obsahuje nìkolik druhù vyhledávacích funkcí. TrEd se vyznaèuje svımi monostmi nastavení a pøizpùsobení celé aplikace na míru potøebám nejrùznìjších uivatelù. Silnı nástroj pøedstavují uivatelská makra, která mohou bıt do aplikace kımkoliv doprogramována v jazyce Perl. TrEd podporuje velké mnoství vstupních a vıstupních formátù dat, jmenujme napøíklad FS, CSTS, PDT-PML (podrobnosti k jednotlivım formátùm -- viz~\ref{sec:ling_lang}).
+Tree Editor TrEd je velmi komplexní grafickı editor, kterı umoòuje rychlé, pohodlné a flexibilní procházení, prohlíení a úpravu stromù v~korpusech podobnım PDT. TrEd prvotnì slouil jako hlavní anotaèní nástroj PDT, ale mùe bıt pouit i k prohlíení dat a obsahuje nìkolik druhù vyhledávacích funkcí. TrEd se vyznaèuje svımi monostmi nastavení a pøizpùsobení celé aplikace na míru potøebám nejrùznìjších uivatelù. Silnı nástroj pøedstavují uivatelská makra, která mohou bıt do aplikace kımkoliv doprogramována v~jazyce Perl. TrEd podporuje velké mnoství vstupních a vıstupních formátù dat, jmenujme napøíklad FS, CSTS, PDT-PML (podrobnosti k jednotlivım formátùm -- viz~\ref{sec:ling_lang}).
 
 TrEd je moné nainstalovat na vìtšinì v souèasné dobì pouívanıch operaèních systémù: Linux, UNIX (MacOS X, BSD, Solaris, ...) i Windows (funguje díky ActivePerl for Windows, kterı musí bıt v systému nainstalovanı). Na domovské stránce\footnote{http://ufal.mf\/f.cuni.cz/\~{}pajas/tred/} editoru TrEd lze získat jednotlivé instalaèní balíèky i podrobné instrukce pro instalaci na konkrétní operaèní systém.
 
 \subsubsection{Ukázkové obrázky}
 Na obrázcích~\ref{pict:analytic_example} a \ref{pict:tecto_example} jsou schémata stromù získaná pøímo z editoru TrEd. Takto jsou pøi vıchozím nastavení v~TrEd editoru zobrazovány analytické a tektogramatické stromy.
- 
+
 \subsubsection{btred / ntred}
 Souèástí editoru TrEd jsou té dva nástroje - \emph{btred} a \emph{ntred}, které umoòují automatické (dávkové) zpracování stromù korpusu. Ntred je pouze rozšíøením nástroje btred o monost zpracovávat korpus paralelnì více poèítaèi v~síti najednou.
 
@@ -402,6 +410,7 @@ Pøehlednı a dobøe srozumitelnı návod -- \uv{btred/ntred tutorial}\footnote{http:
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Tools for machine annotation - PDT 2.0}
+\label{sec:anot_tools}
 Jedná o skupinu nástrojù, které provádìjí plnì automatickou lingvistickou analızu èeského textu. Ze surovıch èeskıch vìt vytváøejí závislostní stromy na~analytické rovinì. Proces anotace se skládá z následujících funkcí.
 
 \nopagebreak\begin{enumerate}
@@ -416,7 +425,7 @@ Tyto funkce jsou implementovány v celkem šesti oddìlenıch nástrojích. Vstupem ka
 Celı øetìz nástrojù se dá spustit jedinım skriptem \emph{run\_all}.
 
 
-Tyto nástroje a jejich podrobnı popis\footnote{http://ufal.mf\/f.cuni.cz/pdt2.0/doc/tools/machine-annotation/} (vèetnì namìøené chybovosti) jsou k dispozici jako souèást PDT 2.0 CD-ROM.
+Tyto nástroje a jejich podrobnı popis\footnote{http://ufal.mf\/f.cuni.cz/pdt2.0/doc/tools/machine-annotation/} (vèetnì namìøené chybovosti) jsou k dispozici jako souèást PDT 2.0 CD-ROM \cite{PDT20}.
 
 
 Následuje podrobnìjší popis jednotlivıch nástrojù.
@@ -454,26 +463,28 @@ Zapíše vıstup pøedchozího nástroje v PML jazyce. Pro podrobnìjší informace o PML
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Nástroj pro tektogramatickou analızu èeštiny}
-Jedná o nástroj, kterı provádí tektogramatickou lingvistickou anotaci.
-Jako vstup akceptuje vıstup nástrojù vıše (Tools for machine annotation).
+\label{sec:t-nalysis}
+Jedná o nástroj, kterı provádí automatickou tektogramatickou lingvistickou anotaci. Jako vstup akceptuje na analytické rovinì anotovaná data uloená ve formátu PML. Tedy dokáe vıstup nástrojù vıše (\ref{sec:anot_tools} -- Tools for machine annotation) povıšit na tektogramatickou rovinu.
 
-Podrobnosti je moné nalézt napøíklad v~\cite{klimes_t-nalysis}.
+Nástroj je zaloenı na strojovém uèení, pro které byl pouit nástroj \emph{fnTBL toolkit}\footnote{http://nlp.cs.jhu.edu/\~{}rf\/lorian/fntbl/index.html} \cite{fnTBL}. Pro èeštinu bylo uèení realizováno na datech PDT 2.0.  Podrobnosti o algoritmu a jeho úspìšnosti je moné nalézt v~èlánku \cite{klimes_t-nalysis}.
 
-Nástroj lze získat pøímo od Václava Klimeše.
-%%http://ufal.mff.cuni.cz/~klimes/ (kontaktní informace)
+Autorem tohoto nástroje je Václav Klimeš\footnote{http://ufal.mf\/f.cuni.cz/\~{}klimes/}. U nìho je moné tento nástroj získat spoleènì s dalšími informacemi a instrukcemi pro instalaci. Poslední verze (rok 2007) byla urèena pro operaèní systém Linux.
 
-%%Pro pouhé otestování funkènosti diplomové práce lze pouít kopii tohoto nástroje v SVN repository (v adresáøi trunk/parsing_czech/t-analysis).
-Instalace této kopie:
+%%http://ufal.mff.cuni.cz/~klimes/ (Václav Klimeš kontaktní informace)
+%%http://nlp.cs.jhu.edu/~rflorian/fntbl/index.html fnTBL Toolkit
 
-Nejprve je nutné stáhnout a nainstalovat fnTBL Toolkit.
-%%http://nlp.cs.jhu.edu/~rflorian/fntbl/index.html
-Návod k instalaci je uvnitø staeného archivu v souboru "README".
 
-Dále je nutné nakonfigurovat cesty k dùleitım souborùm t-analysis.
-V souboru "run" nastavte promìnou "A2T" na cestu k adresáøi "t-analysis" a promìnnou "FNTBL" na cestu kde je nainstalovanı  fnTBL Toolkit.
-%%V souborech "t-analysis/[1-4]/cfg/tbl.params" a "t-analysis[1-4]/R" zmìòte vdy na prvním øádku cestu tak, aby odpovídala aktuálnímu umístìní souborù.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{WordNet}
 
-Zajistìte, aby adresáø s programem btred, co je souèást TrEdu, byl v PATH. (Staèí, kdy na nìj bude symlink v nìjakém vašem adresáøi bin.)
+
+
+
+
+
+
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
