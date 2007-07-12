@@ -293,16 +293,14 @@ Funktory jsou velkım pøínosem tektogramatické roviny po praktické stránce. Funkt
 \end{center}
 \end{figure}
 
-\newpage
+\pagebreak
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Pøíklady}
-%%\begin{nopagebreak}{4}
 Pro ilustraci pøedkládáme dva obrázky závislostních stromù, které vznikli ruèní anotací vìty:
 \begin{quote}
 \emph{Pìtice finskıch vzpìraèù byla svou národní federací potrestána za doping.}
 \end{quote}
-%%\end{nopagebreak}
 Na obrázku~\ref{pict:analytic_example} je strom analytické roviny a na obrázku~\ref{pict:tecto_example} je strom tektogramatické roviny. Za povšimnutí stojí rozdíl v poètu uzlù obou stromù, kterı je na tektogramatické rovinì o nìco menší. Oba tyto pøíklady pocházejí z PDT 2.0 - sample data. Obrázky jsou vygenerované pomocí editoru TrEd (viz~\ref{sec:tred}).
 
 Kromì struktury jednotlivıch stromù v této kapitole popisovanıch jsou na obrázcích vidìt i další pøedevším technické jevy spojené s konkrétní reprezentací lingvistické anotace. Napøíklad tetogramatické funktory a analytické funkce nejsou pøiøazeny k hranám stromu ale k~závislému uzlu, kadı strom má navíc takzvanı \emph{technickı koøen}, na kterém teprve skuteènı koøen lingvistického stromu visí. Technickı koøen nese administrativní atributy stromu (napøíklad atribut \emph{id} -- jednoznaènı identifikátor). U analytického stromu té stojí za povšimnutí umístìní teèky na konci vìty, která je potomkem umìlého koøene. Uzly obou stromù jsou zleva doprava uspoøádány podle poøadí, v jakém se slova odpovídající danım uzlùm vyskytují v pùvodní vìtì.
@@ -413,7 +411,7 @@ Pøehlednı a dobøe srozumitelnı návod -- \uv{btred/ntred tutorial}\footnote{http:
 \label{sec:anot_tools}
 Jedná o skupinu nástrojù, které provádìjí plnì automatickou lingvistickou analızu èeského textu. Ze surovıch èeskıch vìt vytváøejí závislostní stromy na~analytické rovinì. Proces anotace se skládá z následujících funkcí.
 
-\nopagebreak\begin{enumerate}
+\begin{enumerate}
 \item Rozpoznání slovních jednotek ve vstupním surovém textu a rozdìlení textu na vìty.
 \item Morfologická analıza a tagging (morfologická desambiguace).
 \item Závislostní parsing.
@@ -475,7 +473,45 @@ Autorem tohoto nástroje je Václav Klimeš\footnote{http://ufal.mf\/f.cuni.cz/\~{}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{WordNet}
+\chapter{WordNet}
+WordNet \cite{WordNet5p}, \cite{WordNetBook} je lexikální databáze vybudovaná na základì psycholexikologického vızkumu o lidské lexikální pamìti. Jazykové jednotky nejsou ve~WordNetu uspoøádány abecednì, ale podle jejich sémantickıch vztahù, tedy hierarchicky a shlukovì. Tento typ lexikální databáze se èasto oznaèuje jako \emph{sémantická sí}.
+
+\subsubsection{Lexikální matice}
+Základním formálním prostøedkem pro zachycení vıznamu slova je \emph{lexikální matice}. Øádky této matice tvoøí jednotlivé vıznamy, sloupce jednotlivá slova. Záznam lexikální matice na souøadnicích [\emph{i}~,~\emph{j}] znamená, e slovo \emph{j} nese vıznam \emph{i}. Pokud se objeví dva záznamy na stejném øádku, znamená to, e odpovídající dvì slova mají stejnı vıznam, jsou synonymní. Pokud se naopak objeví více záznamù v jednom sloupci, znamená to, e toto slovo nese více monıch vıznamù, je polysémické.
+
+\subsubsection{Synset}
+Záznamy ve WordNetu jsou organizovány podle vıznamu, tedy podle øádkù lexikální matice. Kadı takovı øádek ve~WordNetu oznaèujeme jako \emph{synset} (mnoina synonym nebo té synonymická øada). Synset je pro WordNet tímté, èím je heslo pro obyèejnı slovník.
+
+\subsubsection{Èíslování vıznamù - literály}
+Zatím jsme o sloupcích lexikální matice mluvili zjednodušenì jako o slovech. Synsety však obsahují i slovní spojení (sousloví), napø. \uv{vysoká škola}. Obecnì tedy mluvíme o jazykovıch \emph{vırazech}.
+
+Jednotlivé prvky synsetù oznaèujeme jako \emph{literály}. Literál reprezentuje jeden záznam v lexikální matici, tedy dvojici vıraz-vıznam. Literál budeme chápat jako vıraz (slovo) v daném vıznamu. Literály resp. vıznamy daného slova se ve~WordNetu èíslují. Napøíklad anglické podstatné jméno \emph{bank:1} oznaèuje finanèní instituci, \emph{bank:2} - bøeh.
+
+\subsubsection{Sémantické vazby}
+Wordnet obsahuje celou øadu sémantickıch vazeb mezi literály a zejména mezi synsety. Vzniká tak sí slov, tedy WordNet. Popišme nyní tyto vazby podrobnìji.
+
+\begin{itemize}
+\item \emph{Hyperonymie a hyponymie} jsou vztahy vıznamové nadøazenosti a vıznamové podøízenosti. Napøíklad \emph{flanel} je druhem \emph{textilie}. Vztahy hyperonymie a hyponymie vytváøejí základní hierarchickou strukturu WordNetu pro podstatná jména. V zásadì se jedná o stromovitou strukturu, kde blíe ke koøenu stromu znamená obecnìjší a blíe k listùm znamená specifiètìjší. Tomuto vztahu se nìkdy té øíká \emph{lexikální dìdiènost}.
+
+\item \emph{Meronymie a holonymie} vyjadøují vztah mezi celkem a èástí. Tedy napøíklad slovu \emph{dùm} je slovo \emph{okno} meronymum a \emph{mìsto} holonymum.
+
+\item \emph{Antonymie} vyjadøuje sémantickou protikladnost dvou synsetù. Napøíklad slova \emph{mokrı} a \emph{suchı} jsou antonymická.
+\end{itemize}
+
+
+\pagebreak
+\section{Princeton WordNet}
+Duchovním otcem WordNetu je George A. Miller z univerzity v Princetonu. Zde je té pod Millerovım vedením stále vyvíjen a rozšiøován první a souèasnì nejvìtší (americkı) \emph{Princeton WordNet}\footnote{http://wordnet.princeton.edu} (PWN). PWN v souèasné verzi WordNet~3.0 obsahuje 207~016 literálù (párù slovo-vıznam) v 117~597 synsetech.
+
+\section{Èeskı WordNet}
+Èeskı WordNet zaèal vznikat v roce 1998 na Fakultì informatiky Masarykovy univerzity v Brnì\footnote{http://www.fi.muni.cz} v rámci druhé fáze projektu EuroWordNet\footnote{http://www.illc.uva.nl/EuroWordNet/} \cite{WordNetCZ}. Cílem projektu EuroWordNet bylo vytvoøit WordNety pro další jazyky (holandštinu, španìlštinu, italštinu, francouzštinu, nìmèinu, estonštinu a èeštinu) a provázat je do~multilingvální databáze. Tato èinnost byla v~roce 2001 rozšíøena projektem BalkaNet\footnote{http://www.ceid.upatras.gr/Balkanet/} o dalších pìt balkánskıch jazykù (bulharštinu, rumunštinu, øeètinu, srbštinu a tureètinu).
+
+
+
+Aktuální velikost èeského wordnetu je pøiblinì 30~000 synsetù.
+
+
+
 
 
 
