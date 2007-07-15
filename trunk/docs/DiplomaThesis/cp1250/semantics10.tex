@@ -135,4 +135,45 @@ Abox? Nebo v anotaci pouzijeme nejake volne promenne pro individua.
 Nebo budeme anotovat pouze pomoci nazvu trid a instance nejakym
 zpusobem vynechame?
 
+\subsection{Deskripèní ligika}
+\begin{equation} \label{eq:dl_sem}
+\begin{array}{rcl}
+\top^\mathcal{I} & = & \Delta^\mathcal{I} \\[6pt]
+\bot^\mathcal{I} & = & \emptyset \\[6pt]
+(\neg C)^\mathcal{I} & = & \Delta^\mathcal{I} \ \backslash \ C^\mathcal{I} \\[6pt]
+(C \sqcap D)^\mathcal{I} & = & C^\mathcal{I} \cap D^\mathcal{I} \\[6pt]
+(C \sqcup D)^\mathcal{I} & = & C^\mathcal{I} \cup D^\mathcal{I} \\[6pt]
+(\forall R.C)^\mathcal{I} & = & \{a \in \Delta^\mathcal{I} \  : \  \forall b. \  (a,b) \in R^\mathcal{I} \rightarrow b \in C^\mathcal{I}\} \\[6pt]
+(\exists R.C)^\mathcal{I} & = & \{a \in \Delta^\mathcal{I} \  : \  \exists b. \  (a,b) \in R^\mathcal{I} \ \wedge \ b \in C^\mathcal{I}\} \\[6pt]
+%(\exists R.\top)^\mathcal{I} & = & \{a \in \Delta^\mathcal{I} \  | \  \exists b. \  (a,b) \in R^\mathcal{I}\}.
+(\geqslant n \, R)^\mathcal{I} & = & \Big\{a \in \Delta^\mathcal{I} \ : \ \Big| \{b \ : \ (a,b) \in R^\mathcal{I}\}\Big| \geq n\Big\} \\[10pt]
+(\leqslant n \, R)^\mathcal{I} & = & \Big\{a \in \Delta^\mathcal{I} \ : \ \Big| \{b \ : \ (a,b) \in R^\mathcal{I}\}\Big| \leq n\Big\}
+\end{array}
+\end{equation}
 
+
+Z~(\ref{eq:dl_sem}) dostáváme nìco nìco
+
+\begin{equation} \label{eq:dl_example}
+\begin{array}{rcl}
+\mathsf{Woman} & \equiv & \mathsf{Person} \sqcap \mathsf{Female} \\
+\mathsf{Man} & \equiv & \mathsf{Person} \sqcap \neg\mathsf{Woman} \\
+\mathsf{Mother} & \equiv & \mathsf{Woman} \sqcap \exists\mathsf{hasChild.Person} \\
+\mathsf{Father} & \equiv & \mathsf{Man} \sqcap \exists\mathsf{hasChild.Person} \\
+\mathsf{Parent} & \equiv & \mathsf{Father} \sqcup \mathsf{Mother} \\
+\mathsf{Grandmother} & \equiv & \mathsf{Mother}\sqcap \exists\mathsf{hasChild.Parent} \\
+\mathsf{MotherWithManyChildren} & \equiv & \mathsf{Mother}\,\sqcap \geqslant 3\,\mathsf{hasChild} \\
+\mathsf{MotherWithoutDaughter} & \equiv & \mathsf{Mother}\sqcap \forall\mathsf{hasChild.}\neg\mathsf{Woman} \\
+\mathsf{Wife} & \equiv & \mathsf{Woman} \sqcap \exists\mathsf{hasHusband.Man}
+\end{array}
+\end{equation}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=0.5]{../KB.eps}
+\caption{Knowledge base} \label{pict:KB}
+\end{center}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
