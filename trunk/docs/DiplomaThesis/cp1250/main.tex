@@ -13,11 +13,18 @@
 
 \frenchspacing % aktivuje použití nìkterých èeských typografických pravidel
 
-\usepackage[cp1250]{inputenc} % nastavuje použité kódování, uživatelé Windows zamìní latin2 za cp1250
-%\usepackage[latin2]{inputenc} % nastavuje použité kódování, uživatelé Windows zamìní latin2 za cp1250
 
-\usepackage{czech}
-%\usepackage[czech]{babel}
+
+\usepackage[cp1250]{inputenc}
+%\usepackage[latin2]{inputenc}
+% nastavuje použité kódování
+
+
+
+\usepackage{czech} %definice cestiny pro csLaTex
+%\usepackage[czech]{babel} %definice cestiny pro obycejny LaTex
+
+
 \usepackage{a4wide} % nastavuje standardní evropský formát stránek A4
 %\usepackage{index} % nutno použít v pøípadì tvorby rejstøíku balíèkem makeindex
 %\usepackage{fancybox} % umožòuje pokroèilé rámeèkování :-)
@@ -27,51 +34,62 @@
 
 %\newindex{default}{idx}{ind}{Rejstøík} % zavádí rejstøík v pøípadì použití balíku index
 
-\title{Sémantická anotace dat z webovských zdrojù}   % tyto dvì položky jsou zde v podstatì formálnì, ve skuteènosti nejsou nikde
-\author{Jan Dìdek} % dále v dokumentu použity
+\title{Sémantická anotace dat z webovských zdrojù}
+\author{Jan Dìdek}
+
+                   % tyto dvì položky jsou zde v podstatì formálnì, ve skuteènosti nejsou nikde dále v dokumentu použity
 
 %\date{}
 
-%\includeonly{1st_page,linguistics10,WordNet10}
-\includeonly{WordNet10}
+%\includeonly{1st_page,semantics10,linguistics10,WordNet10}
+\includeonly{semantics10}
 
 
 \begin{document}
 
-%\csprimeson % zapne jednoduché psaní èeských uvozovek pomocí klasických znakù, ale potom pozor
-             % na originální apostrofy, které budou chybnì interpretovány!!!
+%\csprimeson
+                   % zapne jednoduché psaní èeských uvozovek pomocí klasických znakù, ale potom pozor na originální apostrofy, které budou chybnì interpretovány!!!
+
+
 
 
 %\vloží titulní stranu
-\include{1st_page}
 
+\include{1st_page}
 
 \tableofcontents % vkládá automaticky generovaný obsah dokumentu
 
 
-
-%\newpage
-
-%%% Následuje text diplomové práce èlenìný do kapitol, které se èíslují, oznaèí názvy a graficky oddìlí.
-%%% Nedoporuèuje se používat víc než dvì úrovnì èíslování kapitol, viz pøíklad níže.
-
 \setlength{\parskip}{0.8ex plus 0.5ex minus 0.2ex}
+                  % mìní vzhled všech odstavcù. Zvìtšili jsme mezeru mezi dvìma odstavci (nastavili jsme hodnotu registru \parskip na 1ex s mírnou vùlí. Takovýto formát odstavcù — neodsazované odstavce oddìlené mezerou — je v Evropì bìžný.
 
 
+%%% Nedoporuèuje se používat víc než dvì úrovnì èíslování kapitol, viz pøíklad níže.
+\include{semantics10}
 \include{linguistics10}
 \include{WordNet10}
 
+
+
 %\setlength{\parskip}{0ex}
 
-%%\listoffigures
+
+
+%%\listoffigures %%% kládá seznam obráykù, pozor - vyresit, aby se objevil i v obsahu
+
+
+
 
 %%% Seznam literatury
 %%%
-%%% Literatura se øadí abecednì. Úvádí se pouze literatura, na kterou se v textu odkazuje.
+%%% Literatura se øadí abecednì.
+%%% Úvádí se pouze literatura, na kterou se v textuodkazuje.
 %%% Pøi odkazu na knihu se vždy uvádìjí èísla stránek.
 
 \begin{thebibliography}{99}
 \addcontentsline{toc}{chapter}{Literatura}
+
+ \bibitem{the_sem_web} Tim Berners-Lee, James Hendler, Ora Lassila. The Semantic Web.  Scientific American, 2001.
 
  \bibitem{annotaton_for_semweb} S. Handschuh, S. Staab (edited by). Annotation  for the Semantic Web. Volume 96 Frontiers in Artificial Intelligence and Applications. IOS Press, Amsterdam, The Netherlands, 2003. ISBN 1-58603-345-x.
 
@@ -102,10 +120,10 @@
  \bibitem{WordNet5p} G. Miller, R. Beckwith, C. Fellbaum, D. Gross, K. Miller. Five papers on wordnet. Technical Report CSL Report 43, Cognitive Science Laboratory, Princeton University, 1990.
 
  \bibitem{WordNetBook} Christiane Fellbaum (editor). WordNet: An Electronic Lexical Database. Bradford Books, The MIT Press, 1998. ISBN 0-262-06197-x.
-     
+
  \bibitem{EuroWordNet} Vossen P. EuroWordNet: a multilingual database for information retrieval. In Proceedings of DELOS workshop on Cross-language Information Retrieval, 1997.
-     
- \bibitem{WordNetCZ} Pala K., Ševeèek P. The Czech WordNet, final report. Technical report, Masarykova univerzita, 1999.
+
+ \bibitem{WordNetCZ} Pala K., Ševeèek P. The Czech WordNet, final report. Technical report, Masarykova univerzita, Brno, 1999.
 
  \bibitem{Capek} Tomáš Èapek. Systém pro èásteèné sémantické znaèkování volného textu. Diplomová práce, Fakulta informatiky, Masarykova univerzita, Brno, 2006.
 
