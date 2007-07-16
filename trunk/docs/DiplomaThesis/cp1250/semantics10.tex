@@ -27,6 +27,8 @@ Vìtšina tìchto informací je již dnes na webu dostupná, avšak i zkušeného uživate
 
 Softwarový agenti pravdìpodobnì nebudou v dohledné dobì tak \uv{chytøí}, aby se vyznali ve webových stránkách souèasného internetu a dokázali z nich vytìžit informace, které potøebují. Proto se v souvislosti s myšlenkou sémantického webu snažíme tyto stránky sw agentùm pøiblížit, udìlat je srozumitelnìjší respektive pøístupnìjší pro strojové získávání informací z nich. Do stránek se vkládají takzvaná metadata (\emph{data o datech}), která co možná formálnì nejpøesnìji zachycují obsah stránek jinak srozumitelný jen pro èlovìka. Tomuto obohacování stránek o metadata budeme øíkat \emph{sémantická anotace}.
 
+Matulik SemWeb, WNet: \cite{Matulik_SemWeb}
+
 \section{Motivace}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -135,8 +137,34 @@ Abox? Nebo v anotaci pouzijeme nejake volne promenne pro individua.
 Nebo budeme anotovat pouze pomoci nazvu trid a instance nejakym
 zpusobem vynechame?
 
-\subsection{Deskripèní ligika}
-\begin{equation} \label{eq:dl_sem}
+\subsection{Deskripèní logika}
+
+Franz Baader, Werner Nutt. Basic Description Logics: \cite{description_logics}
+\begin{figure}[!ht]
+\begin{center}
+\begin{math}
+\begin{array}{rll}
+C, D \ \rightarrow & A \ | & \textrm{(atomický pojem)} \\[6pt]
+& \top \ | & \textrm{(univerzální pojem)} \\[6pt]
+& \bot \ | & \textrm{(prázdný pojem)} \\[6pt]
+& \neg C \ | & \textrm{(negace)} \\[6pt]
+& C \sqcap D \ | & \textrm{(prùnik)} \\[6pt]
+& C \sqcup D \ | & \textrm{(sjednocení)} \\[6pt]
+& \forall R.C \ | & \textrm{(hodnotová restrikce)} \\[6pt]
+& \exists R.C \ | & \textrm{(existenèní kvantifikátor)} \\[6pt]
+& \geqslant n \, R \ |\qquad & \textrm{(maximální kardinalita)} \\[6pt]
+& \leqslant n \, R & \textrm{(minimální  kardinalita)}
+\end{array}
+\end{math}
+\end{center}
+\caption{Syntax deskripèní logiky} \label{pict:dl_syntax}
+\end{figure}
+
+ssdsddd
+
+\begin{figure}[!ht]
+\begin{center}
+\begin{math} 
 \begin{array}{rcl}
 \top^\mathcal{I} & = & \Delta^\mathcal{I} \\[6pt]
 \bot^\mathcal{I} & = & \emptyset \\[6pt]
@@ -149,12 +177,17 @@ zpusobem vynechame?
 (\geqslant n \, R)^\mathcal{I} & = & \Big\{a \in \Delta^\mathcal{I} \ : \ \Big| \{b \ : \ (a,b) \in R^\mathcal{I}\}\Big| \geq n\Big\} \\[10pt]
 (\leqslant n \, R)^\mathcal{I} & = & \Big\{a \in \Delta^\mathcal{I} \ : \ \Big| \{b \ : \ (a,b) \in R^\mathcal{I}\}\Big| \leq n\Big\}
 \end{array}
-\end{equation}
+\end{math}
+\end{center}
+\caption{Interpretace deskripèní logiky} \label{pict:dl_interpret}
+\end{figure}
 
 
-Z~(\ref{eq:dl_sem}) dostáváme nìco nìco
+Z~(\ref{pict:dl_interpret}) dostáváme nìco nìco
 
-\begin{equation} \label{eq:dl_example}
+\begin{figure}[!ht]
+\begin{center}
+\begin{math}
 \begin{array}{rcl}
 \mathsf{Woman} & \equiv & \mathsf{Person} \sqcap \mathsf{Female} \\
 \mathsf{Man} & \equiv & \mathsf{Person} \sqcap \neg\mathsf{Woman} \\
@@ -166,14 +199,32 @@ Z~(\ref{eq:dl_sem}) dostáváme nìco nìco
 \mathsf{MotherWithoutDaughter} & \equiv & \mathsf{Mother}\sqcap \forall\mathsf{hasChild.}\neg\mathsf{Woman} \\
 \mathsf{Wife} & \equiv & \mathsf{Woman} \sqcap \exists\mathsf{hasHusband.Man}
 \end{array}
-\end{equation}
+\end{math}
+\end{center}
+\caption{Terminologie (TBox) pro popis rodinných vztahù} \label{pict:dl_tbox}
+\end{figure}
+
+ppopo
+
+\begin{figure}[!ht]
+\begin{center}
+\begin{math}
+\begin{array}{ll}
+\mathsf{MotherWithoutDaughter(MARY)}\quad & \mathsf{Father(PETER)} \\
+\mathsf{hasChild(MARY, PETER)} & \mathsf{hasChild(PETER, HARRY)} \\
+\mathsf{hasChild(MARY, PAUL)}
+\end{array}
+\end{math}
+\end{center}
+\caption{Tvrzení o individuích (ABox) v terminologii rodinných vztahù} \label{pict:dl_abox}
+\end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[scale=0.5]{../KB.eps}
-\caption{Knowledge base} \label{pict:KB}
+\caption{Knowledge base systému pro reprezentaci znalostí} \label{pict:KB}
 \end{center}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
