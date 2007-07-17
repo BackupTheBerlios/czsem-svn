@@ -1,5 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Lingvistická anotace}
+\label{sec:ling_anot}
 
 Lingvistickou anotací budeme v této práci oznaèovat èinnost, pøi které se text pøirozeného jazyka obohacuje o lingvistickou informaci o slovech, vìtách, vztazích mezi slovy, mezi vìtami, o typu a pùvodu textu atp. Lingvistická anotace nebo též znaèkování korpusu je jedna z èinností korpusové lingvistiky. Korpusem rozumíme soubor textù spolu s lingvistickou informací k nim dodanou. Korpusová lingvistika je pomìrnì novou disciplínou, jejíž vznik, stejnì jako vznik celé poèítaèové lingvistiky vùbec, umožnil rozvoj výpoèetní techniky posledních let. Korpusová lingvistika se zabývá zkoumáním a shromažïováním textù pøirozeného jazyka (vytváøením korpusu). Texty se anotují za velké podpory poèítaèe - napøíklad morfologická desambiguace (viz~\ref{sec:morphological_tagging}) by byla bez softwarové podpory nadlidský úkol. Avšak pro anotaci korpusu je stále nutná spousta lidské \uv{ruèní} práce. Takto anotované texty pøedstavují velmi cenná data, ze kterých se pøedevším pomocí statistických metod dají vyvodit nové poznatky o jazyce. Díky ruènì anotovaným korpusùm vynikla a stále vyniká vìtšina softwarových nástrojù pro poèítaèové zpracování pøirozeného jazyka.
 
@@ -24,7 +25,7 @@ Následuje struèný popis jednotlivých znaèek každé roviny. Podrobnìjší popis ling
 Tato znaèka obsahuje tvar, v jakém se dané slovo vyskytuje v pùvodním textu vèetnì zápisu malých a velkých písmen. Od pùvodního výskytu se liší se jen ve výjimeèných pøípadech, kdy napøíklad pùvodní slovní tvar byl èíslice s desetinnou èárkou (snaha o jednotný zápis èísel) nebo se jednalo o pøeklep.
 \subsubsection{Lemma}
 \label{sec:lemma}
-Lemma je takzvaný základní tvar slova. Jednoznaènì slovo identifikuje. V tomto tvaru je dané slovo obvykle uvádìno ve slovnících.
+Lemma je takzvaný základní tvar slova. Jednoznaènì slovo identifikuje. V~tomto tvaru je dané slovo obvykle uvádìno ve slovnících.
 \subsubsection{Morfologická znaèka}
 Morfologická znaèka v sobì spojuje informaci o morfologických kategoriích, které dané slovo nese. Z morfologické znaèky je možné zjistit slovní druh, jmenný rod, èíslo, pád, osobu, èas, atd.
 
@@ -174,7 +175,7 @@ Kromì struktury jednotlivých stromù v této kapitole popisovaných jsou na obrázcí
 
 Schéma analytického stromu je jednodušší. Pod každým uzlem jsou vytištìny hodnoty dvou atributù (hodnoty dvou lingvistických znaèek). První atribut obsahuje pùvodní \emph{tvar slova} a v druhém je zkratka \emph{analytické funkce} tohoto uzlu.
 
-Schéma tektogramatického stromu je o nìco složitìjší. Pod každým uzlem jsou vytištìny hodnoty tøí atributù. První atribut obsahuje \emph{lemma}, prostøední tektogramatický \emph{funktor} a poslední vyjadøuje \emph{sémantickou podskupinu slovního druhu}, do které øídicí slovo tohoto uzlu patøí. Podrobnosti o tìchto atributech a jejich hodnotách je možné nalézt v~\cite{tectogramtic_annotation}.
+Schéma tektogramatického stromu je o nìco složitìjší. Pod každým uzlem jsou vytištìny hodnoty tøí atributù. První atribut obsahuje \emph{lemma}, prostøední tektogramatický \emph{funktor} a poslední vyjadøuje \emph{sémantickou podskupinu slovního druhu}, do které øídicí slovo tohoto uzlu patøí. Podrobnosti o~tìchto atributech a jejich hodnotách je možné nalézt v~\cite{tectogramtic_annotation}.
 
 Na obrázku~\ref{pict:tecto_example} (tektogramatického stromu) je vidìt speciální zahnutá šipka od uzlu \emph{\#PersPron} k uzlu \emph{pìtice}. Konec této šipky ukazuje na cíl, na který odkazuje zájmeno uvnitø prvního (poèáteèního) uzlu.
 
@@ -338,4 +339,27 @@ Autorem tohoto nástroje je Václav Klimeš\footnote{http://ufal.mf\/f.cuni.cz/\~{}
 %%http://ufal.mff.cuni.cz/~klimes/ (Václav Klimeš kontaktní informace)
 %%http://nlp.cs.jhu.edu/~rflorian/fntbl/index.html fnTBL Toolkit
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Lingvistika a znalostní inženýrství}
+\label{sec:ling_knowledge}
+
+\section{Znalosti formulované v pøirozeném jazyce}
+Pri hledani nejake vety k ukazkove anotaci jsem narazil na tuhle:
+(je to z prihlasky na DS)
+
+Uchazec vyplni obor studia, vyzkumne tema, skalici pracoviste, zajisti
+podpis skolitele a podpis predsedy ...
+
+
+Tahle veta je zvlastni v tom, ze je formulovana obecne: pro vsechny
+uchazece, pro libovolne tema, pracoviste, podpis libovolneho
+skolitele, predsedy. Avsak skolitel je pevne spojen s tematem prace a
+predseda je spojen s pracovistem.
+
+Jak anotovat takovou vetu? Jaka je jeji semantika? Vznikne nejaky
+Abox? Nebo v anotaci pouzijeme nejake volne promenne pro individua.
+Nebo budeme anotovat pouze pomoci nazvu trid a instance nejakym
+zpusobem vynechame?
+
+\section{Rozdíl mezi konkrétním a abstraktním}
 
