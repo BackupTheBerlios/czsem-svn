@@ -21,7 +21,7 @@ Literály resp. vıznamy daného slova se ve~WordNetu èíslují. Napøíklad anglické p
 Wordnet obsahuje celou øadu sémantickıch vazeb mezi literály a zejména mezi synsety. Vzniká tak sí slov, tedy WordNet. Popišme nyní tyto vazby podrobnìji.
 
 \begin{itemize}
-\item \emph{Hyperonymie a hyponymie} jsou vztahy vıznamové nadøazenosti a vıznamové podøízenosti. Napøíklad \emph{flanel} je druhem \emph{textilie}. Vztahy hyperonymie a hyponymie vytváøejí základní hierarchickou strukturu WordNetu pro podstatná jména. V zásadì se jedná o stromovitou strukturu, kde blíe ke koøenu stromu znamená obecnìjší a blíe k listùm znamená specifiètìjší. Tomuto vztahu se nìkdy té øíká \emph{lexikální dìdiènost}.
+\item \emph{Hyperonymie a hyponymie} jsou vztahy vıznamové nadøazenosti a vıznamové podøízenosti. Napøíklad \emph{flanel} je druhem \emph{textilie}. Vztahy hyperonymie a hyponymie vytváøejí základní hierarchickou strukturu WordNetu pro podstatná jména. V zásadì se jedná o stromovitou strukturu, kde blíe ke koøenu stromu znamená obecnìjší a blíe k listùm znamená specifiètìjší. Tomuto vztahu se nìkdy té øíká \emph{lexikální dìdiènost}. Pøíklad stromu lexikální dìdiènosti je na~obrázku~\ref{pict:wn_tree}.
 
 \item \emph{Meronymie a holonymie} vyjadøují vztah mezi celkem a èástí. Tedy napøíklad slovu \emph{dùm} je slovo \emph{okno} meronymum a \emph{mìsto} holonymum.
 
@@ -60,21 +60,43 @@ Zajímavı experiment s èeskım WordNetem provedl Tomáš Èapek ve své práci \cite{Ca
 
 Experiment spoèíval ve spuštìní tohoto nástroje na èást èeského korpusu DESAM (vyvinutého na Fakultì informatiky MU Brno). Ukázalo se, e pøiblinì 50\% slov není v èeském WordNetu zastoupeno vùbec, avšak uvìdomíme-li si, e WordNet pokrıvá pouze vırazy nesoucí kognitivní vıznam (tedy podstatná jména, pøídavná jména, pøíslovce a slovesa), není tento vısledek tak špatnı. Autor dokonce tvrdí, e vìtšina nenalezenıch slov patøí právì do kategorie slov bez kognitivní sémantiky.
 
+\pagebreak
+
+\section{Kritika WordNetu}
+WordNet bıvá èasto kritizován (\cite{SemWeb_Matulik}, \cite{WordNet_transformation}) z rùznıch dùvodù. Tradièní lexikografové vidí mnoho problémù v nejasnì definované (a v èase se mìnící) koncepci tvorby hesel (synsetù), ve kterıch panuje znaènı nepoøádek (synonyma nejsou pøesnımi synonymy, hyponyma jsou nestejnorodá, klasifikace nenavazují na bìné oborové klasifikace).
+
+V našem experimentu (viz kapitola \ref{sec:experiment}) s èeskım WordNetem jsme se potıkali s~nedostateènım pokrytím èeské slovní zásoby. Provázání synsetù sémantickımi hranami je v èeském WordNetu té pomìrnì øídké. Napøíklad nejbliší spoleèné hyperonymum pro slova \emph{autobus} a \emph{kamion} není synset \emph{motorové vozidlo:1} ani \emph{dopravní prostøedek:1} ale a synset \emph{pøepravní prostøedek:1, transportní prostøedek:1}. Na obrázku \ref{pict:wn_tree} je vidìt stromu lexikální dìdiènosti tato dvì slova.
 
 
 
-
-
-
-
-
-
-
+\begin{figure}
+\small
+\begin{verbatim}
+entita:1
+  objekt:1
+    celek:1
+      artefakt:1, vıtvor:2, vırobek:2
+        vybavení:2
+          pøepravní prostøedek:1, transportní prostøedek:1
+            veøejná doprava:1
+               autobus:1, autokar:1
+            dopravní prostøedek:1
+               kolové vozidlo:1
+                 samohybné vozidlo:1, vozidlo s vlastním pohonem:1
+                   motorové vozidlo:1
+                     nákladní automobil:1
+                       kamion:1
+\end{verbatim}
+\normalsize
+\caption{Pøíklad stromu lexikální dìdiènosti v èeském WordNetu pro~slova kamion a autobus}
+\label{pict:wn_tree}
+\end{figure}
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Experiment}
+\label{sec:experiment}
 Experiment provedenı v rámci této práce spoèíval v otestování nìkterıch dostupnıch nástrojù pro lingvistickou anotaci èeskıch textù. Jmenovitì se jednalo o tyto nástroje: !!!!!!!!!!!!!doplnit!!!!!!!!!!!!!!!!. Byly prozkoumány monosti vyití tìchto nástrojù pro extrakci informací a sémantickou anotaci.
 
 !!!!!!!Pzor následující odstavec jsem okopíroval i do kapitoly pøínosy - vyøešit
