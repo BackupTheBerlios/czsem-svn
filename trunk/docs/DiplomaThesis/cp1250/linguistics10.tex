@@ -8,7 +8,7 @@ Korpusová lingvistika dnes nemalou mírou pøispívá k jazykovému vızkumu. Na strán
 
 Korpusy se v zásadì znaèkují tøemi druhy znaèek. 1) Znaèky správní zachycují identifikaèní údaje o kadém textu - informace o jeho pùvodu a zdroji. 2) Znaèky strukturní zachycují hierarchickou strukturu textu tj rozdìlení textu do kapitol, odstavcù, vìt, slov a interpunkèních znamének (tokenù). 3) Znaèky lingvistické jsou pøiøazeny k jednotlivım slovùm a nesou informaci o lingvistickıch kategoriích, které dané slovo nese.
 
-Samostatnou kapitolou lingvistické anotace je potom zachycení gramatické stavby vìty. K tomu se pouívají dva typy gramatik - sloková a závislostní gramatika. Závislostní gramatika má dlouholetou tradici v popisu jazykù evropského kontinentu a zdá se, e má urèité vıhody i pro popis angliètiny, která bıvá èastìji zpracovávána gramatikou slokovou. Slokovı popis je blíe Chomského pojetí jazyka. Vìta je podle slokové gramatiky rekurzivnì dìlena do menších a menších sloek. Postup zaèíná rozdìlením vìty na èást podmìtnou a pøísudkovou a postupuje dìlením tìchto sloek na podsloky a dojde k jednotlivım slovùm. Závislostní pøístup naproti tomu vezme jednotlivá slova a ta pospojuje závislostními hranami do takzvaného závislostního stromu. Velmi podrobnì je problematika gramatik a vìtné syntaxe popsána v \cite{sgall_syntaxe}.
+Samostatnou kapitolou lingvistické anotace je potom zachycení gramatické stavby vìty. K tomu se pouívají dva typy gramatik - sloková a závislostní gramatika. Závislostní gramatika má dlouholetou tradici v popisu jazykù evropského kontinentu a zdá se, e má urèité vıhody i pro popis angliètiny, která bıvá èastìji zpracovávána gramatikou slokovou. Slokovı popis je blíe Chomského pojetí jazyka. Vìta je podle slokové gramatiky rekurzivnì dìlena do menších a menších sloek. Postup zaèíná rozdìlením vìty na èást podmìtnou a pøísudkovou a postupuje dìlením tìchto sloek na~podsloky, a dojde k jednotlivım slovùm. Závislostní pøístup naproti tomu vezme jednotlivá slova a ta pospojuje závislostními hranami do takzvaného závislostního stromu. Velmi podrobnì je problematika gramatik a vìtné syntaxe popsána v \cite{sgall_syntaxe}.
 
 Kromì toho, e je moné strukturu vìty pøirozeného jazyka zapisovat pomocí rùznıch typù gramatik, je té moné zapisovat tuto strukturu na rùznıch vıznamovıch rovinách. Lingvistickı vızkum rùznıch jazykù ukazuje vhodnost takového vícevrstvého popisu. Na~rùznıch rovinách je toti moné pøehlednìji postihnout rùzné jazykové jevy. Tento problém je podrobnìji rozveden v~práci \cite{platek_cz_pc}, dále je zde pøedstavena tradièní trojice rovin pro popis struktury vìty. Jsou to 1) rovina morfématická (té morfologická) - tvarosloví 2) rovina povrchové syntaxe (té rovina mluvnické stavby vìty èi analytická rovina) 3) rovina tektogramatická neboli vıznamová stavba vìty nebo té hloubková syntax. Stejnì jsou roviny lingvistické anotace zpracovány v projektu PDT (viz oddíl~\ref{sec:PDT}), z jeho popisu budeme dále vycházet.
 
@@ -22,21 +22,22 @@ Následuje struènı popis jednotlivıch znaèek kadé roviny. Podrobnìjší popis ling
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Morfologická rovina}
 \subsubsection{Slovní tvar}
-Tato znaèka obsahuje tvar, v jakém se dané slovo vyskytuje v pùvodním textu vèetnì zápisu malıch a velkıch písmen. Od pùvodního vıskytu se liší se jen ve vıjimeènıch pøípadech, kdy napøíklad pùvodní slovní tvar byl èíslice s desetinnou èárkou (snaha o jednotnı zápis èísel) nebo se jednalo o pøeklep.
+Tato znaèka obsahuje tvar, v jakém se dané slovo vyskytuje v pùvodním textu, vèetnì zápisu malıch a velkıch písmen. Od pùvodního vıskytu se liší jen ve vıjimeènıch pøípadech, kdy napøíklad pùvodní slovní tvar byl èíslice s desetinnou èárkou (snaha o jednotnı zápis èísel) nebo se jednalo o pøeklep.
 \subsubsection{Lemma}
 \label{sec:lemma}
-Lemma je takzvanı základní tvar slova. Jednoznaènì slovo identifikuje. V~tomto tvaru je dané slovo obvykle uvádìno ve slovnících.
+Lemma je takzvanı základní tvar slova. Jednoznaènì slovo identifikuje.\\
+V~tomto tvaru je dané slovo obvykle uvádìno ve slovnících.
 \subsubsection{Morfologická znaèka}
 Morfologická znaèka v sobì spojuje informaci o morfologickıch kategoriích, které dané slovo nese. Z morfologické znaèky je moné zjistit slovní druh, jmennı rod, èíslo, pád, osobu, èas, atd.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Analytická rovina}
-Analytická rovina je první úroveò pro strukturní anotaci. Opouští se zde lineární anotace, kdy je kadé slovo bráno samostatnì bez ohledu na kontext, a do anotace textu se zavádí vìtná struktura. Všechna pùvodní slova textu zùstávají zachována a dostávají ve vısledné struktuøe svou funkci.
+Analytická rovina je první úroveò pro strukturní anotaci. Opouští se zde lineární anotace, kdy je kadé slovo bráno samostatnì bez ohledu na kontext a do anotace textu se zavádí vìtná struktura. Všechna pùvodní slova textu zùstávají zachována a dostávají ve vısledné struktuøe svou funkci.
 
-Na analytické rovinì se vytváøí stromová struktura vìty (stromem rozumíme orientovanı acyklickı graf s jedním koøenem). Uzly stromu jsou tvoøeny jednotlivımi slovy respektive tokeny. Hrany stromu reprezentují vztahy závislosti. Do koøene stromu je umístìno øídící sloveso vìty, na toto sloveso se pak zavìšují ostatní slova. V pøípadì, e se jedná o souøadné souvìtí, koøenem stromu je spojka pøípadnì èárka, která jednotlivé vìty souvìtí oddìluje. Základním cílem je korektní zachycení struktury vìty a oznaèení typu závislosti. Typ závislosti je uloen uvnitø lingvistické znaèky \emph{analytická funkce}.
+Na analytické rovinì se vytváøí stromová struktura vìty (stromem rozumíme orientovanı acyklickı graf s jedním koøenem). Uzly stromu jsou tvoøeny jednotlivımi slovy, respektive tokeny. Hrany stromu reprezentují vztahy závislosti. Do koøene stromu je umístìno øídící sloveso vìty, na toto sloveso se pak zavìšují ostatní slova. V pøípadì, e se jedná o souøadné souvìtí, koøenem stromu je spojka, pøípadnì èárka, která jednotlivé vìty souvìtí oddìluje. Základním cílem je korektní zachycení struktury vìty a oznaèení typu závislosti. Typ závislosti je uloen uvnitø lingvistické znaèky \emph{analytická funkce}.
 
 \subsubsection{Analytická funkce}
-Analytická funkce je pomìrnì dobøe známı pojem, kterı se poívá na èeskıch základních a støedních školách pøi takzvaném vìtném rozboru. Tam se ale vìtšinou neoznaèuje jako analytická funkce ale jako \emph{vìtnı èlen}.
+Analytická funkce je pomìrnì dobøe známı pojem, kterı se pouívá na èeskıch základních a støedních školách pøi takzvaném vìtném rozboru. Tam se ale vìtšinou neoznaèuje jako analytická funkce ale jako \emph{vìtnı èlen}.
 
 V závislostním stromu analytické roviny anotace, se analytickou funkcí oznaèí kadá závislostní hrana. Analytická funkce oznaèuje typ této závislosti.
 
@@ -63,7 +64,7 @@ V závislostním stromu analytické roviny anotace, se analytickou funkcí oznaèí ka
 \subsection{Tektogramatická rovina}
 Tektogramatická rovina je pomìrnì rozsáhlı koncept s hlubokou lingvistickou teorií v pozadí. Byla popsána u v roce 1961 v èlánku \cite{curry_t_rovina}.
 
-Tektogramatická rovina slouí k zachycení vıznamové struktury vìty. Struktura reprezentace zùstává stejná jako na analytické úrovni, avšak nìkteré uzly se vypouští, nìkteré se pøidávají, a struktura vìty mùe bıt obecnì jiná, ne na analytické úrovni. U vìt které pøipouštìjí více rùznıch vıznamù (víceznaèné vìty) je teoreticky moné vytvoøit více tektogramatickıch stromù. V pøípadì synonymie mùe naopak rùznım vìtám odpovídat tentı tektogramatickı strom. Tedy zatímco na morfologické rovinì jsou kadému slovu vìty pøiøazeny jeho lema a tag (morfologická znaèka) a na~analytické rovinì kadému slovu vìty odpovídá uzel v analytickém stromì s pøíslušnou analytickou funkcí, tektogramatická rovina u tento tìsnı vztah k povrchovému zápisu vìty nemá. Uzly tektogramatické roviny v sobì nesou informaci rozdìlenou do nìkolika atributù. Základními atributy uzlu tektogramatického stromu jsou tektogramatické lema, gramatémy a funktor. Vztah mezi uzly tektogramatické a analytické roviny (kterı je obecnì typu M:N), je té zachycen v nìkolika atributech uzlù tektogramatického stromu. Následuje podrobnìjší popis nìkterıch atributù
+Tektogramatická rovina slouí k zachycení vıznamové struktury vìty. Struktura reprezentace zùstává stejná jako na analytické úrovni, avšak nìkteré uzly se vypouští, nìkteré se pøidávají a struktura vìty mùe bıt obecnì jiná, ne na analytické úrovni. U~vìt, které pøipouštìjí více rùznıch vıznamù (víceznaèné vìty), je teoreticky moné vytvoøit více tektogramatickıch stromù. V pøípadì synonymie mùe naopak rùznım vìtám odpovídat tentı tektogramatickı strom. Tedy zatímco na morfologické rovinì jsou kadému slovu vìty pøiøazeny jeho lema a tag (morfologická znaèka) a na~analytické rovinì kadému slovu vìty odpovídá uzel v analytickém stromì s pøíslušnou analytickou funkcí, tektogramatická rovina u tento tìsnı vztah k povrchovému zápisu vìty nemá. Uzly tektogramatické roviny v sobì nesou informaci rozdìlenou do nìkolika atributù. Základními atributy uzlu tektogramatického stromu jsou tektogramatické lema, gramatémy a funktor. Vztah mezi uzly tektogramatické a analytické roviny (kterı je obecnì typu M:N), je té zachycen v nìkolika atributech uzlù tektogramatického stromu. Následuje podrobnìjší popis nìkterıch atributù.
 
 \subsubsection{Tektogramatické lemma}
 Tektogramatické lemma (t-lemma) zachycuje lexikální vıznam uzlu. U jednoduchıch uzlù odpovídá lemmatu, které bylo øídícímu slovu tektogramatického uzlu pøiøazeno na morfologické rovinì. Uzlùm na tektogramatické rovinì novì vytvoøenım je pøiøazeno zástupné t-lema speciálního tvaru.
@@ -72,10 +73,10 @@ Tektogramatické lemma (t-lemma) zachycuje lexikální vıznam uzlu. U jednoduchıch 
 Uzly tektogramatického stromu (respektive jejich øídící slova) se rozdìlují do takzvanıch \emph{sémantickıch podskupin slovního druhu}. Toto dìlení zaèíná rozdìlením uzlù podle takzvanıch \emph{sémantickıch slovních druhù}. Z pùvodních deseti slovních druhù, které v èeštinì rozlišujeme, vzniknou ètyøi sémantické slovní druhy: sémantická substantiva, sémantická adjektiva, sémantická adverbia a sémantická slovesa. Tato se pak dále dìlí do sémantickıch podskupin. Napøíklad sémantická substantiva se dìlí na \emph{pojmenovací}, \emph{pronominální} a \emph{kvantifikaèní}. Podrobnì je celé toto rozdìlení popsáno v~\cite{tectogramtic_annotation}.
 
 \subsubsection{Gramatémy}
-Gramatémy jsou tektogramatickım rozšíøením morfologickıch znaèek. Gramatémy nalezneme pouze mezi atributy uzlù u kterıch to má smysl, tedy u uzlù které se vztahují k nìjakému vıznamovému slovu vìty. Navíc rùznım slovním druhùm lze pøidìlit jen nìkteré gramatémy (napøíklad nemá smysl urèovat slovesnı èas u podstatného jména). Podle toho, do které sémantické podskupiny slovního druhu danı uzel patøí, je moné urèit, které gramatémy pro nìj mají smysl a které nikoli.
+Gramatémy jsou tektogramatickım rozšíøením morfologickıch znaèek. Gramatémy nalezneme pouze mezi atributy uzlù, u kterıch to má smysl, tedy u uzlù, které se vztahují k nìjakému vıznamovému slovu vìty. Navíc rùznım slovním druhùm lze pøidìlit jen nìkteré gramatémy (napøíklad nemá smysl urèovat slovesnı èas u podstatného jména). Podle toho, do které sémantické podskupiny slovního druhu danı uzel patøí, je moné urèit, které gramatémy pro nìj mají smysl a které nikoli.
 
 \subsubsection{Funktor}
-Funktory jsou velkım pøínosem tektogramatické roviny po praktické stránce. Funktory chápeme jako sémantické ohodnocení hran mezi uzly tektogramatického stromu. Tektogramatické funktory mùeme té chápat jako ekvivalent analytickıch funkcí. Rozdíl mezi tektogramatickımi funktory a analytickımi funkcemi je v tom, e funtoktory se snaí postihnout sémantiku vztahu, zatímco analytické funkce se zamìøují na jeho syntaktickou roli. Následuje popis nìkterıch dùleitıch funktorù vdy s nìkolika pøíklady jejich vıskytu ve vìtì. Vyèerpávající seznam je moné nalézt napøíklad v \cite{tectogramtic_annotation}.
+Funktory jsou velkım pøínosem tektogramatické roviny po praktické stránce. Funktory chápeme jako sémantické ohodnocení hran mezi uzly tektogramatického stromu. Tektogramatické funktory mùeme té chápat jako ekvivalent analytickıch funkcí. Rozdíl mezi tektogramatickımi funktory a analytickımi funkcemi je v tom, e funtoktory se snaí postihnout sémantiku vztahu, zatímco analytické funkce se zamìøují na jeho syntaktickou roli. Následuje popis nìkterıch dùleitıch funktorù, vdy s nìkolika pøíklady jejich vıskytu ve vìtì. Vyèerpávající seznam je moné nalézt napøíklad v \cite{tectogramtic_annotation}.
 
 
 \begin{itemize}
@@ -85,7 +86,7 @@ Funktory jsou velkım pøínosem tektogramatické roviny po praktické stránce. Funkt
 \item[-] Její \emph{manel}.ACT tam však pracuje dál.
 \item[-] Ten \emph{román}.ACT mì oslovil.
 \item[-] Èeskım \emph{skokanùm}.ACT se daøilo dobøe.
-\item[-] Je \emph{mi}.ACT smutno.
+%\item[-] Je \emph{mi}.ACT smutno.
 \end{description}
 
 \pagebreak
@@ -165,24 +166,24 @@ Funktory jsou velkım pøínosem tektogramatické roviny po praktické stránce. Funkt
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Pøíklady}
-Pro ilustraci pøedkládáme dva obrázky závislostních stromù, které vznikli ruèní anotací vìty:
+Pro ilustraci pøedkládáme dva obrázky závislostních stromù, které vznikly ruèní anotací vìty:
 \begin{quote}
 \emph{Pìtice finskıch vzpìraèù byla svou národní federací potrestána za doping.}
 \end{quote}
 Na obrázku~\ref{pict:analytic_example} je strom analytické roviny a na obrázku~\ref{pict:tecto_example} je strom tektogramatické roviny. Za povšimnutí stojí rozdíl v poètu uzlù obou stromù, kterı je na tektogramatické rovinì o nìco menší. Oba tyto pøíklady pocházejí z PDT 2.0 - sample data. Obrázky jsou vygenerované pomocí editoru TrEd (viz~\ref{sec:tred}).
 
-Kromì struktury jednotlivıch stromù v této kapitole popisovanıch jsou na obrázcích vidìt i další pøedevším technické jevy spojené s konkrétní reprezentací lingvistické anotace. Napøíklad tetogramatické funktory a analytické funkce nejsou pøiøazeny k hranám stromu ale k~závislému uzlu, kadı strom má navíc takzvanı \emph{technickı koøen}, na kterém teprve skuteènı koøen lingvistického stromu visí. Technickı koøen nese administrativní atributy stromu (napøíklad atribut \emph{id} -- jednoznaènı identifikátor). U analytického stromu té stojí za povšimnutí umístìní teèky na konci vìty, která je potomkem umìlého koøene. Uzly obou stromù jsou zleva doprava uspoøádány podle poøadí, v jakém se slova odpovídající danım uzlùm vyskytují v pùvodní vìtì.
+Kromì struktury jednotlivıch stromù v této kapitole popisovanıch jsou na obrázcích vidìt i další, pøedevším technické jevy, spojené s konkrétní reprezentací lingvistické anotace. Napøíklad tektogramatické funktory a analytické funkce nejsou pøiøazeny k hranám stromu, ale k~závislému uzlu. Kadı strom má navíc takzvanı \emph{technickı koøen}, na kterém teprve skuteènı koøen lingvistického stromu visí. Technickı koøen nese administrativní atributy stromu (napøíklad atribut \emph{id} -- jednoznaènı identifikátor). U analytického stromu té stojí za povšimnutí umístìní teèky na konci vìty, která je potomkem umìlého koøene. Uzly obou stromù jsou zleva doprava uspoøádány podle poøadí, v jakém se slova odpovídající danım uzlùm vyskytují v pùvodní vìtì.
 
 Schéma analytického stromu je jednodušší. Pod kadım uzlem jsou vytištìny hodnoty dvou atributù (hodnoty dvou lingvistickıch znaèek). První atribut obsahuje pùvodní \emph{tvar slova} a v druhém je zkratka \emph{analytické funkce} tohoto uzlu.
 
-Schéma tektogramatického stromu je o nìco sloitìjší. Pod kadım uzlem jsou vytištìny hodnoty tøí atributù. První atribut obsahuje \emph{lemma}, prostøední tektogramatickı \emph{funktor} a poslední vyjadøuje \emph{sémantickou podskupinu slovního druhu}, do které øídicí slovo tohoto uzlu patøí. Podrobnosti o~tìchto atributech a jejich hodnotách je moné nalézt v~\cite{tectogramtic_annotation}.
+Schéma tektogramatického stromu je o nìco sloitìjší. Pod kadım uzlem jsou vytištìny hodnoty tøí atributù. První atribut obsahuje \emph{lemma}, prostøední tektogramatickı \emph{funktor} a poslední vyjadøuje \emph{sémantickou podskupinu slovního druhu}, do které øídící slovo tohoto uzlu patøí. Podrobnosti o~tìchto atributech a jejich hodnotách je moné nalézt v~\cite{tectogramtic_annotation}.
 
 Na obrázku~\ref{pict:tecto_example} (tektogramatického stromu) je vidìt speciální zahnutá šipka od uzlu \emph{\#PersPron} k uzlu \emph{pìtice}. Konec této šipky ukazuje na cíl, na kterı odkazuje zájmeno uvnitø prvního (poèáteèního) uzlu.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The Prague Dependency Treebank}
 \label{sec:PDT}
-Praskı závislostní korpus (PDT) je probíhající projekt Centra poèítaèové lingvistiky Ústavu formální a aplikované lingvistiky (ÚFAL) v Praze\footnote{http://ufal.mf\/f.cuni.cz/}
+Praskı závislostní korpus (PDT) je probíhající projekt Centra poèítaèové lingvistiky Ústavu formální a aplikované lingvistiky (ÚFAL) v Praze\footnote{http://ufal.mf\/f.cuni.cz/}.
 
 Náplní projektu je pøedevším ruèní lingvistická anotace velkého mnoství èeskıch textù. Projekt se vyznaèuje velkou hloubkou anotace, která sahá a po tektogramatickou rovinou. Kromì velkého mnoství anotovanıch textù bylo v souvislosti s projektem vyvinuto i mnoství uiteènıch nástrojù pro práci s anotacemi a nástroje, které umoòují automatickou lingvistickou anotaci èeského textu.
 
@@ -206,13 +207,13 @@ Hlavním formátem dat v PDT 2.0 je formát nazvanı PML. PML je zaloenı na XML, je
 
 Anotace PDT 2.0 je rozdìlena do ètyø rovin, naskládanıch jedna na druhou. Kadá z tìchto rovin má vlastní PML schéma a zpravidla se ukládá do zvláštního soubotu. Jedná se o tyto ètyøi roviny: rovina slovní (soubory~\emph{.w}), rovina morfologická (soubory~\emph{.m}), rovina analytická (soubory~\emph{.a}) a rovina tektogramatická (soubory~\emph{.t}). Pro podrobnosti o rovinách lingvistické anotace viz \ref{sec:ling_tag}.
 
-Další informace je moné nalézt na stránkách PML projektu\footnote{http://ufal.mf\/f.cuni.cz/jazz/PML/} pøípadnì v publikaci~\cite{PML}.
+Další informace je moné nalézt na stránkách PML projektu\footnote{http://ufal.mf\/f.cuni.cz/jazz/PML/}, pøípadnì v publikaci~\cite{PML}.
 
 %%http://ufal.mff.cuni.cz/pdt2.0/doc/data-formats/pml/index.html
 
 \subsection{FS - Feature Structure}
 \label{sec:FS}
-Formát FS (\uv{feature structure"}) je formát souborù pro reprezentaci stromù, jejich uzly jsou struktury atribut-hodnota. Mùe bıt chápán jako "meta formát", podobnì jako SGML nebo XML. Konkrétní pouití tohoto formátu je plnì specifikováno deklarací atributù v hlavièce FS souboru. Formát FS byl primárnì vytvoøen pro vyhledávací program Netgraph (viz \ref{sec:netgraph}).
+Formát FS (\uv{feature structure}) je formát souborù pro reprezentaci stromù, jejich uzly jsou struktury atribut-hodnota. Mùe bıt chápán jako \uv{meta formát}, podobnì jako SGML nebo XML. Konkrétní pouití tohoto formátu je plnì specifikováno deklarací atributù v hlavièce FS souboru. Formát FS byl primárnì vytvoøen pro vyhledávací program Netgraph (viz \ref{sec:netgraph}).
 
 \subsection{PLS - Perl Storable Format}
 Èistì z~dùvodù optimalizace a èasové úspory se pøi práci s nástroji TrEd a btred poívá formát PLS. Nástroje TrEd a btred jsou zaloeny na Perlu, pøi naèítaní dat ve formátu PML a pøevodu PML dat do vnitøní pamìové reprezentace Perlu se spotøebuje mnoho èasu. Této èasovì nároèné transformaci se lze vyhnout vyuitím formátu PLS (Perl Storable Format). Jde o binární datovı formát, kterı pøímo odráí vnitøní pamìovou reprezentaci dat v Perlu. Jeho ukládání a zpìtné naèítání nástroji TrEd a btred je tedy mnohem rychlejší.
@@ -231,7 +232,7 @@ Problém s konverzí mezi formáty lingvistické anotace je v tom, e všechny formát
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Lingvistické nástroje}
 \label{sec:ling_tools}
-Nyní popíšeme nìkteré lingvistické nástroje, které mohou pomoci pøi zpracování textù pøirozeného jazyka a extrakci informací z nich. Vìtšina tìchto nástrojù je vyvíjena na Ústavu formální a aplikované lingvistiky (ÚFAL). Tyto nástroje je moné (kromì tektogramatického analyzátoru \ref{sec:t-nalysis}) získat jakou souèást PDT 2.0 CD-ROM~\cite{PDT20}.
+Nyní popíšeme nìkteré lingvistické nástroje, které mohou pomoci pøi zpracování textù pøirozeného jazyka a extrakci informací z nich. Vìtšina tìchto nástrojù je vyvíjena na Ústavu formální a aplikované lingvistiky (ÚFAL). Tyto nástroje je moné (kromì tektogramatického analyzátoru \ref{sec:t-nalysis}) získat jako souèást PDT 2.0 CD-ROM~\cite{PDT20}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{NetGraph}
@@ -240,9 +241,9 @@ Netgraph je aplikace typu klient-server, která umoòuje prohledávat korpus podob
 
 Netgraph klient je napsán v Javì a je nezávislı na platformì. Existuje ve dvou formách - jako samostatná Java aplikace a jako Java applet. Applet verze je oproti plné Java aplikaci ochuzena o nìkteré funkce, pøesto však poskytuje plnou vyhledávací sílu. Funkce klienta zahrnuje vytvoøení (návrh) dotazu, jeho odeslání serveru a zobrazení, pøípadnì další zpracování vısledkù vrácenıch serverem.
 
-Netgraph server je napsán v C a C++ a bìí v operaèním systému Linux i dalších systémech - podrobnosti je moné nalézt v \cite{mirovsky_netgraph}. Umoòuje nastavit uivatelská konta s rùznımi pøístupovımi právy. Korpus, urèenı k prohledávání Netgraphem, musí bıt ve formátu FS (viz~\ref{sec:FS}). Funkce serveru spoèívá ve vyhodnocování dotazù zasílanıch klienty. Server prohledává korpus a stromy, které vyhovují dotazu vrací jako odpovìï.
+Netgraph server je napsán v C a C++ a bìí v operaèním systému Linux i dalších systémech - podrobnosti je moné nalézt v \cite{mirovsky_netgraph}. Umoòuje nastavit uivatelská konta s rùznımi pøístupovımi právy. Korpus, urèenı k prohledávání Netgraphem, musí bıt ve formátu FS (viz~\ref{sec:FS}). Funkce serveru spoèívá ve vyhodnocování dotazù zasílanıch klienty. Server prohledává korpus a stromy, které vyhovují dotazu, vrací jako odpovìï.
 
-Dotazy v Netgraphu jsou definovány pomocí vlastního dotazovacího jazyka. Jedná se o jazyk formálnì velmi jednoduchı avšak s vysokou expressivitou. Definovat dotaz v Netgraphu znamená definovat podstrom, kterı se má v prohledávanıch stromech vyskytovat. Tedy v dotazu mùeme definovat poadovanou strukturu stromu. Navíc mùeme v kadém uzlu dotazu vynutit hodnotu nìkterıch atributù tohoto uzlu.
+Dotazy v Netgraphu jsou definovány pomocí vlastního dotazovacího jazyka. Jedná se o jazyk formálnì velmi jednoduchı, avšak s vysokou expressivitou. Definovat dotaz v Netgraphu, znamená definovat podstrom, kterı se má v prohledávanıch stromech vyskytovat. Tedy v dotazu mùeme definovat poadovanou strukturu stromu. Navíc mùeme v kadém uzlu dotazu vynutit hodnotu nìkterıch atributù tohoto uzlu.
 
 Velmi jednoduchı dotaz, kdy chceme vyhledat všechny stromy obsahující slovo \uv{hasiè} se skládá z jediného uzlu a restrikce na hodnotu atributu \emph{lemma} (viz~\ref{sec:lemma}) na hodnotu \emph{hasiè} v tomto uzlu.
 
@@ -269,7 +270,7 @@ Na obrázcích~\ref{pict:analytic_example} a \ref{pict:tecto_example} jsou schémat
 \subsubsection{btred / ntred}
 Souèástí editoru TrEd jsou té dva nástroje - \emph{btred} a \emph{ntred}, které umoòují automatické (dávkové) zpracování stromù korpusu. Ntred je pouze rozšíøením nástroje btred o monost zpracovávat korpus paralelnì více poèítaèi v~síti najednou.
 
-Tyto nástroje se spouštìjí pøímo z pøíkazové øádky, nemají grafické rozhraní. Èinnost tìchto nástrojù, je øízena uivatelskım programem (makrem btred-u), které uivatel musí napsat v programovacím jazyce Perl. Pøi psaní toho makra má uivatel k~dispozici velké mnoství specializovanıch funkcí pro práci se strukturami korpusu: s~jednotlivımi stromy, s~uzly stromù, s~atributy uzlù atp.
+Tyto nástroje se spouštìjí pøímo z pøíkazové øádky, nemají grafické rozhraní. Èinnost tìchto nástrojù je øízena uivatelskım programem (makrem btred-u), které uivatel musí napsat v programovacím jazyce Perl. Pøi psaní toho makra má uivatel k~dispozici velké mnoství specializovanıch funkcí pro práci se strukturami korpusu: s~jednotlivımi stromy, s~uzly stromù, s~atributy uzlù atp.
 
 Pøehlednı a dobøe srozumitelnı návod -- \uv{btred/ntred tutorial}\footnote{http://ufal.mf\/f.cuni.cz/\~{}pajas/tred/bn-tutorial.html}, jak pracovat s nástroji btred a ntred je moné nalézt na domovskıch stránkách editoru TrEd.
 
@@ -277,7 +278,7 @@ Pøehlednı a dobøe srozumitelnı návod -- \uv{btred/ntred tutorial}\footnote{http:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Tools for machine annotation - PDT 2.0}
 \label{sec:anot_tools}
-Jedná o skupinu nástrojù, které provádìjí plnì automatickou lingvistickou analızu èeského textu. Ze surovıch èeskıch vìt vytváøejí závislostní stromy na~analytické rovinì. Proces anotace se skládá z následujících funkcí.
+Jedná se o skupinu nástrojù, které provádìjí plnì automatickou lingvistickou analızu èeského textu. Ze surovıch èeskıch vìt vytváøejí závislostní stromy na~analytické rovinì. Proces anotace se skládá z následujících funkcí.
 
 \begin{enumerate}
 \item Rozpoznání slovních jednotek ve vstupním surovém textu a rozdìlení textu na vìty.
@@ -286,7 +287,7 @@ Jedná o skupinu nástrojù, které provádìjí plnì automatickou lingvistickou analız
 \item Pøiøazení analytickıch (závislostních) funkcí všem uzlùm zparsovaného stromu.
 \end{enumerate}
 
-Tyto funkce jsou implementovány v celkem šesti oddìlenıch nástrojích. Vstupem kadého nástroje je vdy vıstup pøedchozího s vıjimkou prvního, jeho vstupem je prostı text. Nástroje jsou napsány z èásti v Perlu, zbytek tvoøí pøeloenı kód (C++) pro Linux bìící na i386 architektuøe.
+Tyto funkce jsou implementovány celkem v~šesti oddìlenıch nástrojích. Vstupem kadého nástroje je vdy vıstup pøedchozího s vıjimkou prvního, jeho vstupem je prostı text. Nástroje jsou napsány z èásti v Perlu, zbytek tvoøí pøeloenı kód (C++) pro Linux bìící na i386 architektuøe.
 
 Celı øetìz nástrojù se dá spustit jedinım skriptem \emph{run\_all}.
 
@@ -343,23 +344,63 @@ Autorem tohoto nástroje je Václav Klimeš\footnote{http://ufal.mf\/f.cuni.cz/\~{}
 \chapter{Lingvistika a znalostní inenırství}
 \label{sec:ling_knowledge}
 
+\section{Nejednoznaènost pøi lingvistické anotaci}
+Potøebujeme další znalosti, \emph{znát} kontext. Mnoho informací je vyjádøeno implicitnì.
+\\u pøíkladù doplnit zdroj...
+
+\begin{quote}
+Banky sniují úroky z ekonomickıch dùvodù.\\
+Banky sniují úroky z krátkodobıch pùjèek.
+
+enu enu.
+
+I saw a man with a telescope.
+
+Vèera jsem chytil tlouštì na višni.
+\end{quote}
+
 \section{Znalosti formulované v pøirozeném jazyce}
-Pri hledani nejake vety k ukazkove anotaci jsem narazil na tuhle:
-(je to z prihlasky na DS)
+%Pri hledani nejake vety k ukazkove anotaci jsem narazil na tuhle: (je to z prihlasky na DS)
 
-Uchazec vyplni obor studia, vyzkumne tema, skalici pracoviste, zajisti
-podpis skolitele a podpis predsedy ...
+Existuje více typù vìt i zdrojù - provést kategorizaci.
+
+\begin{quote}
+ena se stane matkou, kdy porodí dítì.
+
+Uspoøádaná dvojice je dvouprvková mnoina, ve které rozlišujeme poøadí prvkù.
+
+Hasièskı oddíl z Hostinného vyrazil v 7.46 k~poáru v~Dolní~Kalné.
+
+Vstup zakázán.
+
+Podepište se, prosím.
+
+Uchazeè vyplní obor studia, vızkumné téma, školicí pracovištì, zajistí podpis školitele a podpis pøedsedy oborové rady.
+\end{quote}
 
 
-Tahle veta je zvlastni v tom, ze je formulovana obecne: pro vsechny
-uchazece, pro libovolne tema, pracoviste, podpis libovolneho
-skolitele, predsedy. Avsak skolitel je pevne spojen s tematem prace a
-predseda je spojen s pracovistem.
+\noindent Poslední vìta je formulovaná obecnì: pro všechny uchazeèe, pro libovolné téma, pracovištì, podpis libovolného školitele, pøedsedy. Avšak školitel je pevnì spojen s tématem práce a pøedseda je spojen s pracovištìm.
 
-Jak anotovat takovou vetu? Jaka je jeji semantika? Vznikne nejaky
-Abox? Nebo v anotaci pouzijeme nejake volne promenne pro individua.
-Nebo budeme anotovat pouze pomoci nazvu trid a instance nejakym
-zpusobem vynechame?
+Jak anotovat takovou vìtu? Jaká je její sémantika?
+
+Máme nìkolik moností.
+\begin{itemize}
+\item TBox - tvrzení o pojmech.
+\item Zapojit promìnné, které probíhají prvky domény a vytvoøit na nì restrikce.
+\item Nebo se na vìtu dívat v kontextu jazyka formuláøù a brát ji jako obsah jedné konkrétní instance formuláøe.
+\end{itemize}
+
+Co pøináší jaké vıhody?
+
+%Vznikne nejaky Abox? Nebo v anotaci pouzijeme nejake promenne pro individua. Nebo budeme anotovat pouze pomoci nazvu trid a instance nejakym zpusobem vynechame?
 
 \section{Rozdíl mezi konkrétním a abstraktním}
+Tøídy X instance, pojmy X individua.
 
+Tvrzení se èasto dají chápat jako obecná z jednoho pohledu a konkrétní z druhého.
+
+\begin{center}
+Banky sniují úroky z ekonomickıch dùvodù.
+\\v kontextu
+\\\emph{Investièní i Komerèní banka informovaly o~plánované zmìnì úrokové míry.}
+\end{center}

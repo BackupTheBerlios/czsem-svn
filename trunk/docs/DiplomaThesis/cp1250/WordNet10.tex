@@ -1,5 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{WordNet}
+\label{sec:wordnet}
 WordNet \cite{WordNet5p}, \cite{WordNetBook} je lexikální databáze vybudovaná na základì psycholexikologického vızkumu o lidské lexikální pamìti. Jazykové jednotky nejsou ve~WordNetu uspoøádány abecednì, ale podle jejich sémantickıch vztahù, tedy hierarchicky a shlukovì. Tento typ lexikální databáze se èasto oznaèuje jako \emph{sémantická sí}.
 
 WordNet jakoto sémantická sí obsahuje pouze slova, která nesou nìjakı kognitivní vıznam, tedy podstatná jména, pøídavná jména, pøíslovce a slovesa. Navíc jsou ve WordNetu obsaena i slovní spojení (sousloví), napøíklad \uv{vysoká škola}. V dalším textu si však pro lepší pøehlednost dovolíme zjednodušení a o~všech tìchto jazykovıch vırazech, které mùeme ve WordNetu nalézt budeme mluvit jako o slovech.
@@ -8,9 +9,9 @@ WordNet jakoto sémantická sí obsahuje pouze slova, která nesou nìjakı kognitiv
 Základním formálním prostøedkem pro zachycení vıznamu slova je \emph{lexikální matice}. Øádky této matice tvoøí jednotlivé vıznamy, sloupce jednotlivá slova. Záznam lexikální matice na souøadnicích [\emph{i}~,~\emph{j}] znamená, e slovo \emph{j} nese vıznam \emph{i}. Pokud se objeví dva záznamy na stejném øádku, znamená to, e odpovídající dvì slova mají stejnı vıznam, jsou synonymní. Pokud se naopak objeví více záznamù v jednom sloupci, znamená to, e toto slovo nese více monıch vıznamù, je polysémické.
 
 \subsubsection{Synset}
-Záznamy ve WordNetu jsou organizovány podle vıznamu, tedy podle øádkù lexikální matice. Kadı takovı øádek ve~WordNetu oznaèujeme jako \emph{synset} (mnoina synonym nebo té synonymická øada). Synset je pro WordNet tímté, èím je heslo pro obyèejnı slovník.
+Záznamy ve WordNetu jsou organizovány podle vıznamu, tedy podle øádkù lexikální matice. Kadı takovı øádek ve~WordNetu oznaèujeme jako \emph{synset} (mnoina synonym nebo té synonymická øada). Synset je pro WordNet tím, èím je heslo pro obyèejnı slovník.
 
-Jeliko rùzné slovní druhy nemohou bıt synonymi v pravém slova smyslu, je sémantická sí WordNetu budovaná pro kadı slovní druh zvláš.
+Jeliko rùzné slovní druhy nemohou bıt synonymy v pravém slova smyslu, je sémantická sí WordNetu budovaná pro kadı slovní druh zvláš.
 
 \subsubsection{Èíslování vıznamù - literály}
 Jednotlivé prvky synsetù oznaèujeme jako \emph{literály}. Literál reprezentuje jeden záznam v lexikální matici, tedy dvojici slovo-vıznam. Literál budeme chápat jako slovo v daném vıznamu.
@@ -51,7 +52,7 @@ Dalším vylepšením novıch WordNetù bylo rozšíøení poètu sémantickıch relací v rám
 \section{Èeskı WordNet}
 Èeskı WordNet \cite{WordNetCZ} zaèal pod vedením doc. Karla Paly vznikat v roce 1998 na Fakultì informatiky Masarykovy univerzity v Brnì\footnote{http://www.fi.muni.cz} v~rámci druhé fáze projektu EuroWordNet. V souèasné dobì obsahuje èeskı WordNet pøiblinì 30~000 synsetù.
 
-Online interface k èeskému WordNetu je dostupnı pøes internet, pøístupnı po domluvì podmínek s~vedoucím projektu doc. Karlem Palou\footnote{http://www.muni.cz/fi/people/Karel.Pala}. K dispozici je webové rozhraní a jednoduché dobøe dokumentované programátorské API\footnote{http://nlp.fi.muni.cz/trac/deb2/wiki/WordNetApi}, skrz které má programátor pøístup ke všem funkcím online databáze WordNet.
+Online interface k èeskému WordNetu je dostupnı pøes internet, pøístupnı po domluvì podmínek s~vedoucím projektu doc. Karlem Palou\footnote{http://www.muni.cz/fi/people/Karel.Pala}. K dispozici je webové rozhraní a jednoduché dobøe dokumentované programátorské API\footnote{http://nlp.fi.muni.cz/trac/deb2/wiki/WordNetApi}, jeho prostøednictvím má programátor pøístup ke všem funkcím online databáze WordNet.
 
 V rámci projektu DEB II je vyvíjen i vizuální prohlíeè a editor online WordNetu DEBVisDic, kterı je volnì k~dispozici na stránkách\footnote{http://nlp.fi.muni.cz/projekty/deb2/} projektu.
 
@@ -65,7 +66,7 @@ Experiment spoèíval ve spuštìní tohoto nástroje na èást èeského korpusu DESAM (v
 \section{Kritika WordNetu}
 WordNet bıvá èasto kritizován (\cite{SemWeb_Matulik}, \cite{WordNet_transformation}) z rùznıch dùvodù. Tradièní lexikografové vidí mnoho problémù v nejasnì definované (a v èase se mìnící) koncepci tvorby hesel (synsetù), ve kterıch panuje znaènı nepoøádek (synonyma nejsou pøesnımi synonymy, hyponyma jsou nestejnorodá, klasifikace nenavazují na bìné oborové klasifikace).
 
-V našem experimentu (viz kapitola \ref{sec:experiment}) s èeskım WordNetem jsme se potıkali s~nedostateènım pokrytím èeské slovní zásoby. Provázání synsetù sémantickımi hranami je v èeském WordNetu té pomìrnì øídké. Napøíklad nejbliší spoleèné hyperonymum pro slova \emph{autobus} a \emph{kamion} není synset \emph{motorové vozidlo:1} ani \emph{dopravní prostøedek:1} ale a synset \emph{pøepravní prostøedek:1, transportní prostøedek:1}. Na obrázku \ref{pict:wn_tree} je vidìt stromu lexikální dìdiènosti tato dvì slova.
+V našem experimentu (viz kapitola \ref{sec:experiment}) s èeskım WordNetem jsme se potıkali s~nedostateènım pokrytím èeské slovní zásoby. Provázání synsetù sémantickımi hranami je v èeském WordNetu té pomìrnì øídké. Napøíklad nejbliší spoleèné hyperonymum pro slova \emph{autobus} a \emph{kamion} není synset \emph{motorové vozidlo:1} ani \emph{dopravní prostøedek:1} ale a synset \emph{pøepravní prostøedek:1, transportní prostøedek:1}. Na obrázku \ref{pict:wn_tree} je vidìt stromu lexikální dìdiènosti èeského WordNetu, kterı tuto situaci ilustruje.
 
 
 
@@ -99,12 +100,14 @@ entita:1
 \label{sec:experiment}
 Experiment provedenı v rámci této práce spoèíval v otestování nìkterıch dostupnıch nástrojù pro lingvistickou anotaci èeskıch textù. Jmenovitì se jednalo o tyto nástroje: !!!!!!!!!!!!!doplnit!!!!!!!!!!!!!!!!. Byly prozkoumány monosti vyití tìchto nástrojù pro extrakci informací a sémantickou anotaci.
 
-!!!!!!!Pzor následující odstavec jsem okopíroval i do kapitoly pøínosy - vyøešit
+%!!!!!!!Pzor následující odstavec jsem okopíroval i do kapitoly pøínosy - vyøešit
 
-Postup experimentu se v jednotlivıch fázích snaí kopírovat skuteèné akce, které by bylo nutné provést v opravdovém projektu zamìøeném na sémantickou anotaci. V práci tak vzniká jednoduchá základní analıza tohoto typu projektù. Ve skuteèném projektu pak bude moné ji pøinejmenším jako inspiraci vyuít.
+%Postup experimentu se v jednotlivıch fázích snaí kopírovat skuteèné akce, které by bylo nutné provést v opravdovém projektu zamìøeném na sémantickou anotaci. V práci tak vzniká jednoduchá základní analıza tohoto typu projektù. Ve skuteèném projektu pak bude moné ji pøinejmenším jako inspiraci vyuít.
 
 Pro experiment byla vybrána a pouita data ze dvou pomìrnì odlyšnıch zdrojù.
 
+\section{Osnova prací}
+\label{sec:osnaova_praci}
 Extrakce a èištìní (zamyšlení nad rùznımi formáty zdroje PDF, DOC, HTML, XML, èásteèné øešení v GATE softu)
 
 Lingvistická nanotace
@@ -118,7 +121,7 @@ Volba zdrojovıch textù
 
 Proè hasièi?
 
-\textbf{Proè ne korpus PDT?} --- Dùraz byl kladen na co moná nejvìtší se pøiblíení k podmínkám a problémùm skuteèného projektu. V takovém pøípadì bychom se tìko mohli opøít o to, e by nám data která chceme analyzovat nìkdo ruènì lingvisticky anotoval.
+\textbf{Proè ne korpus PDT?} --- Dùraz byl kladen na co moná nejvìtší pøiblíení se k~podmínkám a problémùm skuteèného projektu. V takovém pøípadì bychom se tìko mohli opøít o to, e by nám data která chceme analyzovat nìkdo ruènì lingvisticky anotoval.
 
 + pokusy s PDT sample data. Nicménì pokusy nad ruèními lingvistickımi anotacemi dat PDT\footnote{Jedná se o \emph{sample data} PDT 2.0, http://ufal.mf\/f.cuni.cz/pdt2.0/data/sample/} probìhly.
 
@@ -127,10 +130,19 @@ Proè hasièi?
 \subsection{Úpadci}
 
 \section{Vıstupní data}
-Vzhledem k tomu, e pojem sémantické anotace, jak ho zmiòuji v kapitole \ref{sec:sem_anotace}, je velmi širokı, není ani pøesnì urèeno, jaká data by pøi procesu sémantické anotace mìla vzniknout.
+%Vzhledem k tomu, e pojem sémantické anotace, jak ho zmiòuji v kapitole \ref{sec:sem_anotace}, je velmi širokı, není ani pøesnì urèeno, jaká data by pøi procesu sémantické anotace mìla vzniknout.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Software}
-
-
-\subsection{Modul XY}
+\subsection{Skripty pro pøípravu dat}
+\subsection{Modul pro extrakci informací}
+Makro btred
+\subsection{Hledání pøíbuznıch slov pomocí WordNetu}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Návrhy a zkušenosti}
+\section{Dotazování nad lingvistickımi závislostními stromy}
+\label{sec:tree_query}
+\subsection{Indexace}
+\label{sec:tree_indexing}
+\section{Indukce vzorù}
+\label{sec:patern_induction}

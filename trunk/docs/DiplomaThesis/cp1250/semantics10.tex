@@ -21,52 +21,65 @@
 Sémantická anotace je .........
 
 \section{Motivace}
+\subsection{Vylepšeme své stránky!}
+Tvoøíte právì nové stránky? Pøemýšleli jste už nìkdy o tom, jak by se stránky daly udìlat \uv{inteligentní}? Nemyslíte, že by bylo velkou výhodu, když by vašim stránkám rozumìly kromì lidských návštìvníkù i softwarové programy? Odpovìï bude pravdìpodobnì ano - bylo velmi pøínosné, využít prostøedky, které by nìco takového umožnily i ve vašich stránkách.
+
+Pøedstavte si nové možnosti, které takové stránky pøinesou. Každý by snadno nalezl co hledá, protože by mohl využít služeb softwarových agentù, pro které není problém vyznat se ve stránkách s rozšíøeným \uv{sématickým} obsahem. Nakupování, vzdìlávání se, hledání nejrùznìjších dokumentù, získávání kontaktních informací a jakékoliv brouzdání po internetu se stane mnohem efektivnìjší. Tato budoucnost vùbec není nepravdìpodobná. Jistì na~ni chcete být pøipraveni!
+
+Co chybí vašim stránkám, aby se mohly stát souèástí takového integrovaného souboru znalostí - sémantických informací, aby se mohly stát souèástí Sémantického webu? Jsou to právì sémantické anotace!
+
+Tento motivaèní text je pøevzatý ze stránek Semantic Web - Annotation and Authoring\footnote{http://annotation.semanticweb.org/}.
+
+Je nìkolik možností, jak anotovat stránky pro~sémantický web. Budeme se jimi zabývat v této práci.
+
+\subsection{Spojme naše znalosti!}
+\label{sec:data_mine}
+Je mnoho oblastí výzkumu, kde se více lidí na rùzných místech zabývá podobným nebo dokonce stejným tématem. Bylo by jistì pøínosné, když by tito lidé mohli snadno porovnat a spojit své výsledky. Takovou oblastí je napøíklad Data Mining. Èasto se stává že více lidí zkoumá stejná data a každý z nich v tìchto datech objeví jiné závislosti a vztahy. Každý odborník na závìr svého datového výzkumu sepíše své výsledky do analytické zprávy. Pokud chceme výsledky všech prací nìjak porovnat a shrnout, nezbude nám než projít všechny analytické zprávy a srovnání provést ruènì. Nebo se mùžeme pokusit znalosti ve zprávách popisované reprezentovat nìjakým strojovì srozumitelným zpùsobem.
+
+dopsat: Co všecko sem. anotace pøinese.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Pøínosy práce}
 
 Komu? Èím? Srozumitelné pro nelingvistu....
 
-Mimo jiné: Tato práce se snaží pøiblížit možnosti, jak využít dostupné lingvistické nástroje analyzující èeský text (\ref{sec:anot_tools}) pøedevším lidem, kteøí se zabývají extrakcí informací z textu ale nejen jim. Práce na ètenáøe neklade žádné nároky co se týká lingvistického vzdìlání a sama základní znalosti z lingvistiky podnìcuje (\ref{sec:ling_anot}). Tìmito znalostmi se snaží pokrýt  požadavky, které klade používání lingvistických nástrojù zde popisovaných. Zbìžné znalosti zde poskytnuté jsou doplnìny odkazy a referencemi na zdroje, kde se ètenáø o dané problematice mùže dozvìdìt více.
+\subsection{Seznámení s lingvistikou a WordNetem}
+Tato práce se snaží pøiblížit možnosti, jak využít dostupné lingvistické nástroje analyzující èeský text (sekce \ref{sec:anot_tools}) pøedevším lidem, kteøí se zabývají extrakcí informací z textu, ale nejen jim. Práce na ètenáøe neklade žádné nároky co se týká lingvistického vzdìlání a sama základní znalosti z lingvistiky podnìcuje (kapitola \ref{sec:ling_anot}). Tìmito znalostmi se snaží pokrýt  požadavky, které klade používání lingvistických nástrojù zde popisovaných. Zbìžné znalosti zde poskytnuté jsou doplnìny odkazy a referencemi na zdroje, kde se ètenáø o dané problematice mùže dozvìdìt více.
+
+V kapitole \ref{sec:wordnet} se ètenáø seznámí se sémantickým lexikonem WordNet a získá pøedstavu o možnostech jeho využití pøi analýze èeských textù.
 
 \subsection{Souhrn}
-Práce poskytuje základní souhrn v oblasti sémantické anotace, takže si ètenáø mùže udìlat pøedstavu o tom, kterými smìry se sémantická anotace ubírá, jaké metody byly využity, s~jakou úspìšností atp. \ref{sec:rozdelni_anotace}
+Práce poskytuje základní pøehled v oblasti sémantické anotace a shrnuje myšlenky, které jsou v~jejím pozadí (kapitola \ref{sec:znalosti}). Ètenáø si mùže udìlat pøedstavu o tom, kterými smìry se sémantická anotace ubírá, jaké metody byly využity, s~jakou úspìšností, ve~kterých projektech (oddíl \ref{sec:projekty} a sekce~\ref{sec:rozdelni_anotace}).
 
-Doporuèení autorùm stánek (DRFa, HTML-A, pøehled ontlogií) \ref{sec:autorum}.
+V práci jsou shrnuta doporuèení autorùm webových stánek, jak postupovat pøi tvorbì stránek se sémantickým obsahem (oddíl \ref{sec:autorum}).
 
 \subsection{Prùzkum}
-Souèástí práce je praktický experiment (\ref{sec:experiment}) s lingvistickými nástroji: !!!!!!!!!!!!dopsat!!!!!!!!!!!. Ètenáøi jsou poskytnuty zkušenosti z týkající se použití tìchto nástrojù a z prací které s jejich použitím souvisely. Tyto zkušenosti se týkají pøedevším dostupnosti, zprovoznìní, výkonnosti, pøínosù a nedostatkù tìchto nástrojù. !!!!!!!!!!!!!!!!!!!!!!!!!!rozvést: navržený postup X další možnosti
-
+Souèástí práce je praktický experiment (kapitola \ref{sec:experiment}) s lingvistickými nástroji: !!!!!!!!!!!!dopsat!!!!!!!!!!!. Ètenáøi jsou poskytnuty zkušenosti z~praktického používání tìchto nástrojù a z~prací které s jejich použitím souvisely. Tyto zkušenosti se týkají pøedevším dostupnosti, zprovoznìní, výkonnosti, pøínosù a nedostatkù tìchto nástrojù. 
 Postup experimentu se v jednotlivých fázích snaží kopírovat skuteèné akce, které by bylo nutné provést v opravdovém projektu zamìøeném na sémantickou anotaci. V práci tak vzniká jednoduchá základní analýza tohoto typu projektù. Ve skuteèném projektu pak bude možné ji pøinejmenším jako inspiraci využít.
 
 \subsection{Návrhy}
-V práci je navržena metodika, jak by se pøi extrakci informací pomocí nástrojù v rámci této práce testovaných dalo postupovat.
+V práci je navržena metodika, pro extrakci informací z~pøirozeného textu pomocí nástrojù !!!doplnit!!! (sekce \ref{sec:osnaova_praci}). Je zde navržený jednoduchý dotazovací jazyk pro lingvistické anotace (oddíl \ref{sec:tree_query}), struèný návrh indukce vzorù (oddíl \ref{sec:patern_induction}) a zamyšlení nad možnostmi lingvistické anotace pro indexaci dokumentù (sekce \ref{sec:tree_indexing}).
 
-Je zde navržený jednoduchý dotazovací jazyk pro lingvistické anotace.\\
-Struèný návrh indukce vzorù.\\
-Zamyšlení nad možnostmi lingvistické anotace pro indexaci dokumentù.\\
 
 \subsection{Teorie}
-Pokus o teoretický pøínos v oblasti sémantické anotace. \ref{sec:teorie}
-
-Zamyšlení mad možnými pøínosy a vztahem mezi poèítaèovou lingvistikou a formální reprezentací znalostí. \ref{sec:ling_knowledge}
+V oddíle \ref{sec:teorie} je proveden pokus o~teoretický pøínos v oblasti sémantické anotace. Kapitola \ref{sec:ling_knowledge} se zamýšlí mad možnými pøínosy a vztahem mezi poèítaèovou lingvistikou a formální reprezentací znalostí.
 
 \section{Sémantický web}
-V roce 2001 napsal Tim Berners-Lee, tvùrce souèasného webu a øeditel Konsorcia W3C spolu s dalšími autory velmi známý èlánek The Semantic Web \cite{the_sem_web} (volný èeský pøeklad je k~dispozici napøíklad v~\cite{SemWeb_Matulik}). V tomto èlánku je popsána lákavá pøedstava svìta, kde všechny nepøíjemné problémy spojené s zaøizováním bìžných životních problémù, jako je napøíklad návštìva lékaøe, pomáhají vyøídit softwarový agenti. Pomáhají je vyøídit pøedevším tím, že naleznou a zkombinují všechny dùležité relevantní informace, které jsou potøeba. Tedy napøíklad najdou lékaøe, který se specializuje na daný druh zdravotních potíží, adresu a otvírací dobu jeho ordinace, dopravní dostupnost tohoto místa atd.
+V roce 2001 napsal Tim Berners-Lee, tvùrce souèasného webu a øeditel Konsorcia W3C spolu s dalšími autory velmi známý èlánek The Semantic Web \cite{the_sem_web} (volný èeský pøeklad je k~dispozici napøíklad v~\cite{SemWeb_Matulik}). V tomto èlánku je popsána lákavá pøedstava svìta, kde všechny nepøíjemné problémy spojené se zaøizováním bìžných životních problémù, jako je napøíklad návštìva lékaøe, pomáhají vyøídit softwarový agenti. Pomáhají je vyøídit pøedevším tím, že naleznou a zkombinují všechny dùležité relevantní informace, které jsou potøeba. Napøíklad najdou lékaøe, který se specializuje na daný druh zdravotních potíží, adresu a otvírací dobu jeho ordinace, dopravní dostupnost tohoto místa atd.
 
 Vìtšina tìchto informací je již dnes na webu dostupná, avšak i zkušeného uživatele internetu stojí jejich nalezení nezanedbatelný èas a energii. Navíc nalezení informací je teprve první èást problému. To, jakým zpùsobem je zkombinovat a vyhodnotit, je èást druhá. Avšak vyøešení tohoto druhého problému není pro souèasný software žádnou utopií. Napøíklad nalézt dopravní spojení na adresu lékaøovy ordinace v~dnešní dobì rozhodnì nepovažujeme za programátorsky neøešitelný problém.
 
-Softwarový agenti pravdìpodobnì nebudou v dohledné dobì tak \uv{chytøí}, aby se vyznali ve webových stránkách souèasného internetu a dokázali z~nich vytìžit informace, které potøebují. Proto se v souvislosti s myšlenkou sémantického webu snažíme tyto stránky softwarovým agentùm pøiblížit, udìlat je srozumitelnìjší respektive pøístupnìjší pro strojové získávání informací z nich. Do stránek se vkládají takzvaná metadata (\emph{data o~datech}), která co~možná nejpøesnìji formálnì zachycují obsah stránek jinak srozumitelný jen pro èlovìka. Tomuto obohacování stránek o~metadata budeme øíkat \emph{sémantická anotace}.
+Softwaroví agenti pravdìpodobnì nebudou v dohledné dobì tak \uv{chytøí}, aby se vyznali ve webových stránkách souèasného internetu a dokázali z~nich vytìžit informace, které potøebují. Proto se v souvislosti s myšlenkou sémantického webu snažíme tyto stránky softwarovým agentùm pøiblížit, udìlat je srozumitelnìjší respektive pøístupnìjší pro strojové získávání informací z nich. Do stránek se vkládají takzvaná metadata (\emph{data o~datech}), která co~možná nejpøesnìji formálnì zachycují obsah stránek jinak srozumitelný jen pro èlovìka. Tomuto obohacování stránek o~metadata budeme øíkat \emph{sémantická anotace}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Reprezentace znalostí}
+\label{sec:znalosti}
 
 Úvod podle: Matulik SemWeb \cite{SemWeb_Matulik}
 
-
 \section{Deskripèní logika}
-Franz Baader, Werner Nutt. Basic Description Logics: \cite{description_logics}
+Doplnit podle Franz Baader, Werner Nutt. Basic Description Logics: \cite{description_logics}
 
 Budeme zde popisovat deskripèní jazyk $\mathcal{ALCN}$, který je z~jazykù deskripèní logiky nejbohatší.
 
@@ -171,18 +184,24 @@ Svátek: Verze OWL\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Sémantická anotace}
 \label{sec:sem_anotace}
-Sémantická anotace není v souèasné dobì pøesnì vymezený termín. V této práci budu s tímto pojmem pracovat pomìrnì volnì až na kapitolu o teoretických otázkách sémantické anotace \ref{sec:teorie}, kde bych se o takové vymezení chtìl pokusit. V knize \cite{annotaton_for_semweb} se tomuto termínu vyhýbají opisem \emph{annotation for the Semantic Web} tedy anotace pro sémantický web. V tomto smyslu budu užívat pojem sémantické anotace ve zbytku práce. Tedy sémantickou anotací budu rozumìt takovou anotaci, která je urèená pro sémantický web. Pro pøesnost ještì doplòme, že anotací jako hotovým dílem rozumíme výsledek, výstup pøípadnì výstupní data procesu anotace.
+Sémantická anotace není v souèasné dobì pøesnì vymezený termín. V této práci budeme s~tímto pojmem pracovat pomìrnì volnì až na kapitolu o teoretických otázkách sémantické anotace \ref{sec:teorie}, kde se o takové vymezení pokusíme. V knize \cite{annotaton_for_semweb} se tomuto termínu vyhýbají opisem \emph{annotation for the Semantic Web} tedy anotace pro sémantický web. V tomto smyslu budeme užívat pojem sémantické anotace ve zbytku práce. Avšak nemusíme se nutnì omezovat pouze na anotaci zdrojù urèených pro veøejnou publikaci na~internetu. Již v motivaèním pøíkladu \ref{sec:data_mine} jsme naznaèili, jak by bylo pøínosné proces sémantické anotace aplikovat v oblasti psaní analytických zpráv. Proces sémantické anotace se v~tomto pøípadì témìø neliší od~anotace pro sémantický web. Stále se snažíme o~pøesné, formální a volnì-pøenosné zachycení znalostí, které jsou ve zdroji obsaženy.
 
-Èlovìk by intuitivnì oèekával, že výsledkem sémantické anotace bude nìjak oznaèkovaný text, který je jejím vstupem. Pøípadnì se nemusí jednat o text ale o strukturovaná data - nejèastìji HTML pøípadnì XML. V našem zpùsobu chápání sémantické anotace, tedy jako anotace pro sémantický web, však jejím výstupem mùže být témìø libovolný datový celek. Pøíznaèné pro sémantické anotace je to, že nìjakým zpùsoben využívají ontologie a RDF, viz~\ref{sec:ontologie}.
+Pro pøesnost ještì doplòme, že anotací jako hotovým dílem rozumíme výsledek, výstup pøípadnì výstupní data procesu anotace. Mùže se jednat o~nìjak oznaèkovaný text, který byl vstupem tohoto procesu. Èastìji to budou strukturovaná data - HTML pøípadnì XML, obohacená novými - sémantickými znaèkami. Sémantickou anotací však mohou vzniknout i data na~pùvodním zdroji nezávislá. Pøípadnì data sice nezávislá, ale obsahující v sobì odkazy k~pùvodu svého vzniku. Napøíklad samostatný datový soubor obsahující sémantickou anotaci nìjakého textu mùže u~jednotlivých \uv{znalostí} obsahovat i pointery na~slova, ze~kterých tyto znalosti vznikly ve~vstupním textu. Podrobnìji rozebereme uložení a reprezentaci sémantické anotace v oddíle \ref{sec:reprezntace_anotaci}.
+
+%V našem zpùsobu chápání sémantické anotace, tedy jako anotace pro sémantický web, však jejím výstupem mùže být témìø libovolný datový celek. Pøíznaèné pro sémantické anotace je to, že nìjakým zpùsoben využívají ontologie a RDF, viz~\ref{sec:ontologie}.
+
+\section{Reprezentace anotací}
+\label{sec:reprezntace_anotaci}
+RDFa, HTML-A
+\section{Uznávané ontologie}
 
 \section{Autorùm Web-stránek}
 \label{sec:autorum}
-Autorská anotace. RDFa, HTML-A
-\subsection{Èasto používané ontologie}
 
 \section{Dodateèná anotace, strojová}
 \subsection{Rozdìlení}
 \label{sec:rozdelni_anotace}
+pøedìlat, doplnit, rozvést
 
 Po praktické stránce: dostupnost, upravitelnost (jiná doména), stabilita - náchylnost na zmìny v datech
 
@@ -274,21 +293,25 @@ SemTag\footnote{http://tap.stanford.edu/semtag/index.html}
 %%Xxxx http://citeseer.ist.psu.edu/149407.html ?chunks? složkovou lingvistickou anotace:
 
 
-\section{Nìkteré projekty}
+\section{Projekty}
+\label{sec:projekty}
 \subsection{Semantic MediaWiki}
-Semantic MediaWiki (SMW)
+Semantic MediaWiki (SMW) poskytuje autorùm uživatelsky pøívìtivé prostøedí pro sémantické obohacování jejich èlánkù. Navíc umožòuje \uv{inline query}.
 \subsection{Artequakt}
+Automaticky generuje texty životopisù známých umìlcù. Podklady sbírá sémantickou anotací èlánkù na webu.
 \subsection{WEESA}
 V èlánku !!!!doplnit!!!! je navržena pøímoèará deterministická metoda, jak XML data pøevádìt na RDF data. K~XML datùm je nejprve nutné vytvoøit jednoduchou ontologii pokrývající tøídy a atributy, které chceme pøevést. Tato ontologie se pak automaticky naplní daty ze zdrojového XML. Metoda dobøe funguje pro "dobøe strukturované" XML data (XML elementy odpovídají tøídám atp.) Problémy nastávají s daty tvaru:
 
+\noindent\begin{center}
 \begin{quote}
 \verb|<SearchDataElement name="Processor Speed" value="500MHZ">|
 \end{quote}
+\end{center}
 
-...To že se jedná o vlastnost Processor Speed s hodnotou 500MHZ tato metoda nedokáže postihnout (zámìrnì -- dùraz byl kladen na jednoduchost a konzistenci návrhu).
+To, že se jedná o vlastnost Processor Speed s hodnotou 500MHZ, tato metoda nedokáže postihnout (zámìrnì -- dùraz byl kladen na jednoduchost a konzistenci návrhu).
 
 \subsection{The Lixto Project}
-Software umožòující automaticky stahovat vybrané informace z webových stránek. Uživatelsky pøíjemné a propracované prostøedí. Jedná se o nástroj, ve kterém si uživatel mùže naprogramovat svùj wrapper na míru šitý svým potøebám. 
+!!!upravit!!! Software umožòující automaticky stahovat vybrané informace z webových stránek. Uživatelsky pøíjemné a propracované prostøedí. Jedná se o nástroj, ve kterém si uživatel mùže naprogramovat svùj wrapper šitý na~míru svým potøebám.
 
 \subsubsection{Lixto server}
 Lixto server umožòuje automaticky spouštìt hotové Wrappery a získaná data dále zpracovat. Pro zpracování dat je k dispozici široká paleta možností. Zpracovaná data server umí doruèit nejrùznìjším aplikacím i zaøízením.
@@ -296,17 +319,25 @@ Lixto server umožòuje automaticky spouštìt hotové Wrappery a získaná data dále z
 \subsubsection{Možnosti automatické sémantické anotace}
 Pro využití pøi automatizované sémantické anotaci je velkou pøekážkou nutnost pokaždé znovu ruènì naprogramovat Lixto na každou stránku.
 
-\subsection{The KIM Platform: Knowledge \& Information Management}
+\subsection{The KIM Platform}
+The KIM Platform: Knowledge \& Information Management, Bulharsko
 
 \subsection{Image Semantics without Annotations}
-Teoreticky bohatý èlánek !!!!doplnit!!!!, zabývá se indexací a vyhledáváním obrázkù v~internetu podobné databázi. Definuje internet jako graf provázaných dokumentù a obrázkù. Navržena je algebra pro manipulaci s takovým grafem (operace jako: insert, delete, nodes, edges, union, ...) Velmi propracované je porovnávání obrázkù pomocí (adaptivní) podobnostní míry, která se skládá ze tøech složek:
+Teoreticky bohatý èlánek !!!!doplnit!!!!, zabývá se indexací a vyhledáváním obrázkù v~internetu podobné databázi. Definuje internet jako graf provázaných dokumentù a obrázkù. Navržena je algebra pro manipulaci s takovým grafem (operace jako: insert, delete, nodes, edges, union, ...) Velmi propracované je porovnávání obrázkù pomocí (adaptivní) podobnostní míry, která se skládá ze~tøí složek:
 
 \begin{itemize}
-\item Linguistic Modality (popisky, okolní text)
-\item Closed Word Modality (ustálené, pøesné pojmy uvnitø uzavøené komunity)
-\item Emergent Modality pøíp. User Modality (míra vzniklá z akcí a operací souvisejících s~obrázky)
+\item Linguistic Modality
 \begin{description}
-\item Upravuje se napø. pomocí dialogu ve kterém uživatel "pøetahuje" podobné obrázky k sobì.
+\item[-] popisky, okolní text
+\end{description}
+\item Closed Word Modality
+\begin{description}
+\item[-] ustálené, pøesné pojmy uvnitø uzavøené komunity
+\end{description}
+\item Emergent Modality pøíp. User Modality
+\begin{description}
+\item[-] míra vzniklá z akcí a operací souvisejících s~obrázky
+\item[-] Nastavuje se napø. pomocí dialogu ve kterém uživatel "pøetahuje" podobné obrázky k sobì.
 \end{description}
 \end{itemize}
 
@@ -316,22 +347,37 @@ NLP projekt MUMIS\footnote{http://hmi.ewi.utwente.nl/Projects/mumis/} využívajíc
 
 \section{Teorie}
 \label{sec:teorie}
-Domnívám se, že nebylo mnoho teoretických otázek týkajících se sémantická anotace vùbec formulováno, natož uspokojivì vìdecky vyøešeno.
+Domnívám se, že nebylo mnoho teoretických otázek týkajících se sémantické anotace vùbec formulováno, natož uspokojivì vìdecky vyøešeno.
 
 \subsection{Otázky}
 
 \subsubsection{V èem tkví sémantiènost anotace?}
+Aby notace byla sémantická, musí být jistì konzistentní s~tím, jak lidé znalosti a informace chápou.
+
+Na sémantickou anotaci se mùžeme dívat ze dvou úhlù. Totiž z~hlediska její standardnosti a z~hlediska její otevøenosti k~odvozování znalostí.
+
+\begin{itemize}
+\item Standardnost anotace mùžeme mìøit tím, jak široké publikum \uv{posluchaèù} jí bude rozumìt.
+\item Otevøenost anotace k~odvozování znalostí chápeme jako možnost ji pøímo použít pøi automatické dedukci znalostí. Chceme, aby se tato anotace mohla zapojit do znalostní báze a mohla zde sloužit jako zdroj dalších znalostí.
+\end{itemize}
 
 \subsubsection{Co si pøedstavujeme pod ideální sémantickou anotací?}
+V kontextu dvou pohledù výše:
+\begin{itemize}
+\item Plnì standardní anotace, které by každý rozumìl.
+\item Anotace, která má maximální možný užitek pro znalostní bázi, všechny anotované informace lze využít pro odvozování dalších znalostí.
+\end{itemize}
+
+\subsubsection{Jak vypadá ideální anotace v ideálním pøípadì?}
+Pokusit se stanovit podmínky které ideální anotaci braní, resp. pøedpoklady které by ji umožnily.
+
+Jistì budeme chtít jedinou všemi používanou ontologii, pøípadnì dokonalá mapování. Budeme však též požadovat, aby už obsahovala všecky znalosti svìta? My bychom pak pouze oznaèovali, které èásti textu respektive zdroje vyjadøují jednotlivé znalosti. Pak už bychom ale nepotøebovali nic anotovat, už známe všechny odpovìdi.
 
 \subsubsection{Jaký je vztah lingvistické a sémantické anotace?}
 Jsou mezi nimi hranice? Kde pøibližnì?
 
 \subsubsection{Dá se lingvistická anotace pøevést na sémantickou?}
-Dal by se z toho odvodit nijaký univerzálnìjší návod / algoritmus, jak od lingvistické anotace k té sémantické pøejít?
+Dal by se z toho odvodit nìjaký univerzálnìjší návod / algoritmus, jak od lingvistické anotace k té sémantické pøejít?
 
-\subsubsection{Jak vypadá ideální anotace v ideálním pøípadì?}
-Pokusit se stanovit podmínky které ideální anotaci braní, resp. pøedpoklady které by ji umožnily.
-
-\subsubsection{Jaky je rozdil mezi prirozenym jazykem a deskripcni logikou?}
-viz \ref{sec:ling_knowledge}
+\subsubsection{Jaký je vztah mezi pøirozeným jazykem a deskripèní logikou?}
+Kapitola \ref{sec:ling_knowledge} 
