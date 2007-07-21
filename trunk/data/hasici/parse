@@ -1,5 +1,10 @@
 #!/bin/bash
 
+echo "*****************************start date****************************"
+date
+echo "*****************************start date****************************"
+
+
 sh clear_tmp
 
 sh prepare_sources
@@ -24,3 +29,7 @@ sh make_pls
 
 #ja to spustit na pozadi:
 #echo './parse > parse_log 2>&1 &!' | zsh
+
+echo "*****************************end date****************************"
+date
+echo "*****************************end date****************************"
