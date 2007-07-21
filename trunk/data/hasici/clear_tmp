@@ -1,0 +1,6 @@
+#!/bin/bash
+
+rm -r html_src/*
+rm -r txt_src/*
+rm -r pml/*
+

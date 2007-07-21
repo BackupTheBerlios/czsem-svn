@@ -1,5 +1,9 @@
 #!/bin/bash
 
+sh clear_tmp
+
+sh prepare_sources
+
 cd txt_src
 
 for d in *; do 
