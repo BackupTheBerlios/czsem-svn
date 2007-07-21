@@ -54,8 +54,9 @@ V závislostním stromu analytické roviny anotace, se analytickou funkcí oznaèí ka
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[!ht]
 \begin{center}
-\framebox{\includegraphics[scale=0.7]{../analytic_example.eps}}
-\caption{Pøíklad notace na analytické rovinì} \label{pict:analytic_example}
+\framebox{\includegraphics[width=11cm, height=8cm]{../analytic_example.eps}}
+%\framebox{\includegraphics[scale=0.9]{../analytic_example.eps}}
+\caption{Pøíklad anotace na analytické rovinì} \label{pict:analytic_example}
 \end{center}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -157,10 +158,13 @@ Funktory jsou velkým pøínosem tektogramatické roviny po praktické stránce. Funkt
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[!bh]
 \begin{center}
-\framebox{\includegraphics[scale=0.7]{../tecto_example.eps}}
-\caption{Pøíklad notace na tektogramatické rovinì} \label{pict:tecto_example}
+%\framebox{\includegraphics[scale=0.9]{../tecto_example.eps}}
+\framebox{\includegraphics[width=11cm, height=10cm]{../tecto_example.eps}}
+\caption{Pøíklad anotace na tektogramatické rovinì} \label{pict:tecto_example}
 \end{center}
 \end{figure}
+
+%\includegraphics{../Kalna2007.jpg}
 
 \pagebreak
 
@@ -189,7 +193,7 @@ Náplní projektu je pøedevším ruèní lingvistická anotace velkého množství èeských
 
 Historie projektu PDT zaèíná v roce 1995. Od té doby se korpus PDT rozšíøil až na souèasnou (PDT~2.0) velikost 2 milióny slov s provázanými anotacemi na úrovni morfologie (2 milióny slov), povrchové syntaxe (1,5~mil. slov) a hloubkové syntaxe a sémantiky (0,8 mil.~slov). Poprvé byl korpus PDT (verze~0.5) veøejnì pøedstaven v roce 1998. V roce 2001 bylo publikováno CD-ROM PDT 1.0, které obsahovalo pøibližnì 1,5 mil. slovních jednotek anotovaných na analytické rovinì.
 
-V roce 2006 byla publikována poslední souèasná verze korpusu jako CD-ROM PDT~2.0 \cite{PDT20}. Korpus PDT je v této verzi rozšíøen o tektogramaticky anotvaná data. CD-ROM PDT~2.0 dále obsahuje množství kvalitních lingvistických nástrojù (viz~\ref{sec:ling_tools}) a publikací, mezi které patøí obsáhlý manuál (více než 1000 stran) pro tektogramatické znaèkování \cite{tectogramtic_annotation}.
+V roce 2006 byla publikována poslední souèasná verze korpusu jako CD-ROM PDT~2.0 \cite{PDT20}. Korpus PDT je v této verzi rozšíøen o tektogramaticky anotovaná data. CD-ROM PDT~2.0 dále obsahuje množství kvalitních lingvistických nástrojù (viz~\ref{sec:ling_tools}) a publikací, mezi které patøí obsáhlý manuál (více než 1000 stran) pro tektogramatické znaèkování \cite{tectogramtic_annotation}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -270,7 +274,7 @@ Na obrázcích~\ref{pict:analytic_example} a \ref{pict:tecto_example} jsou schémat
 \subsubsection{btred / ntred}
 Souèástí editoru TrEd jsou též dva nástroje - \emph{btred} a \emph{ntred}, které umožòují automatické (dávkové) zpracování stromù korpusu. Ntred je pouze rozšíøením nástroje btred o možnost zpracovávat korpus paralelnì více poèítaèi v~síti najednou.
 
-Tyto nástroje se spouštìjí pøímo z pøíkazové øádky, nemají grafické rozhraní. Èinnost tìchto nástrojù je øízena uživatelským programem (makrem btred-u), které uživatel musí napsat v programovacím jazyce Perl. Pøi psaní toho makra má uživatel k~dispozici velké množství specializovaných funkcí pro práci se strukturami korpusu: s~jednotlivými stromy, s~uzly stromù, s~atributy uzlù atp.
+Tyto nástroje se spouštìjí pøímo z pøíkazového øádku, nemají grafické rozhraní. Èinnost tìchto nástrojù je øízena uživatelským programem (makrem btred-u), které uživatel musí napsat v programovacím jazyce Perl. Pøi psaní toho makra má uživatel k~dispozici velké množství specializovaných funkcí pro práci se strukturami korpusu: s~jednotlivými stromy, s~uzly stromù, s~atributy uzlù atp.
 
 Pøehledný a dobøe srozumitelný návod -- \uv{btred/ntred tutorial}\footnote{http://ufal.mf\/f.cuni.cz/\~{}pajas/tred/bn-tutorial.html}, jak pracovat s nástroji btred a ntred je možné nalézt na domovských stránkách editoru TrEd.
 
