@@ -1,0 +1,97 @@
+%Pracovní\\
+%Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+%
+%Hrubá osnova vızkumné zprávy:
+%
+%\begin{enumerate}
+%\item Úvod charakterizující kontext problému
+%\item Pøesné vymezení problému a cílù vızkumu v daném kontextu
+%\item Struktura práce ve vztahu k vytyèenım cílùm
+%\item Analıza problému z rùznıch hledisek
+%\item Návrh øešení s diskusí alternativ
+%\item Rozpracování vybraného pøístupu
+%\item Zhodnocení splnìní cílù, otevøené problémy, event. doporuèení dalšího smìru vızkumu
+%\item Srovnání s jinımi pøístupy známımi z literatury s explicitním zdùraznìním pùvodního pøínosu
+%\item Závìr se struènım shrnutím vısledkù a pøínosu
+%\item Seznam citované literatury
+%\end{enumerate}
+
+%zadání
+%
+%Diplomová práce má za cíl zmapovat oblast sémantické anotace dat. Prùzkum se bude tıkat pouívanıch metod a jejich efektivity a obecnosti, vzorovıch dat a software (a komerèního nebo veøejnì pøístupného). Souèástí vızkumu bude i ryze praktické seznámení s lingvistickımi metodami, speciálnì s wordnetem.
+%V praktické èásti se øešitel pokusí o anotaci v urèené doménì. Vyuije metody prozkoumané v teoretické èásti, které bude moci upravit podle zvolené domény.
+%Tema je z dynamicky se vyvíjejíci domény a pøedpokládá kontinuální kontakt (zadání diplomové práce se bude prùbìnì upøesòovat). Nedílnou souèástí práce je sbìr dat, implementace v definovaném prostøedí a experiment.
+
+
+\chapter{Úvod}
+Cílù této práce bylo nìkolik. Nejprve jsme se pokusili zmapovat oblast sémantické anotace jako takové. Zjistili jsme, e pole sémantické anotace je široké a e na tuto èinnost mùeme nahlíet rùznì. Na nejpovrchnìjší úrovni zkoumání jsme sémantickou anotaci rozdìlili na~takzvanou \emph{anotaci autorskou} a \emph{anotaci dodateènou}. Rozdíl mezi tìmito pohledy na anotaci je velkı, avšak oba pøístupy mají mnoho spoleèného a dá se øíci, e se vzájemnì doplòují.
+
+\emph{Autorskou anotací} budeme oznaèovat proces, kdy autor vytváøí web-stránku, pøípadnì jinı potenciální zdroj informací a tento zdroj obohatí o takzvanı \uv{sémantickı popis}. Tedy e formálnì popíše informace, které jsou ve zdroji obsaené tak, aby byli vyuitelné pro strojové zpracování. Mùeme to také chápat tak, e autor, kterı tvoøí web-stránku ve svém pøirozeném jazyce pro lidské návštìvníky, ji vytvoøí ještì ve verzi pro softwarové návštìvníky ve formálním strojovém jazyce. %další øádek moná pøesunout?
+Mùe se to zdát nároèné, ale není. Strojovı jazyk je struènı a pøímoèarı, nehledí na design ani stylistiku. Navíc autor mùe vybrat jen nìkteré nejdùleitìjší informace, které formálnì vyjádøí. Pøínos je potenciálnì obrovskı. %rozvést - co nás v kontextu autorské anotace nejvíc zajímá
+
+%pøidat odkaz na podrobnosti v kapitole...
+
+
+
+\emph{Dodateènou anotací} budeme oznaèovat proces, kdy 
+
+
+
+%Sémantická anotace je .........
+
+\section{Motivace}
+\subsection{Vylepšeme své stránky!}
+Pøekládáme nyní krátkı motivaèní text, volnì pøevzatı ze stránek Semantic Web - Annotation and Authoring\footnote{http://annotation.semanticweb.org/}.
+
+\begin{quotation}
+Tvoøíte právì nové stránky? Pøemıšleli jste u nìkdy o tom, jak by se stránky daly udìlat \uv{inteligentní}? Nemyslíte, e by bylo velkou vıhodu, kdy by vašim stránkám rozumìly kromì lidskıch návštìvníkù i softwarové programy? Odpovìï bude pravdìpodobnì ano - bylo velmi pøínosné, vyuít prostøedky, které by nìco takového umonily i ve vašich stránkách.
+
+Pøedstavte si nové monosti, které takové stránky pøinesou. Kadı by snadno nalezl co hledá, protoe by mohl vyuít slueb softwarovıch agentù, pro které není problém vyznat se ve stránkách s rozšíøenım \uv{sématickım} obsahem. Nakupování, vzdìlávání se, hledání nejrùznìjších dokumentù, získávání kontaktních informací a jakékoliv brouzdání po internetu se stane mnohem efektivnìjší. Tato budoucnost vùbec není nepravdìpodobná. Jistì na~ni chcete bıt pøipraveni!
+
+Co chybí vašim stránkám, aby se mohly stát souèástí takového integrovaného souboru znalostí - sémantickıch informací, aby se mohly stát souèástí Sémantického webu? Jsou to právì sémantické anotace!
+\end{quotation}
+
+Je nìkolik moností, jak anotovat stránky pro~sémantickı web. I~jimi se budeme v této práci zabıvat. Doplòme ještì komentáøem tvrzení, e kadı majitel web-stránek by pravdìpodobnì ocenil jejich \uv{sémantiènost}.
+
+\subsubsection{Softwarovı agenti a reklama}
+V souèasné dobì trní ekonomiky je reklama silnı nástroj, kterı obchodníci pouívají aby pøilákali více zákazníkù a reklama na~webovıch stránkách dnes není nièím vıjimeènım. Je jasné, e softwarovı agenti psychologickému tlaku reklamy nepodléhají a tak vzniká otázka, zda se majitelé komerèních stránek nebudou sémantickım technologiím bránit. Ztrátu, kterou by obchodníci utrpìli sníením efektivity web-reklamy, bude pravdìpodobnì nutné kompenzovat. Jak by taková kompenzace mohla vypadat, pøípadnì jak bychom mohli obchodníky motivovat k~pouívání sémantickıch technologií na jejich stránkách, nechme zatím stranou. Je ale moné, e jednou pøijde doba, kdy si lidé budou moci snadno vybrat pro nì ideální dostupnı vırobek èi slubu, ani by museli odolávat psychologickému nátlaku reklamy. Sémantická anotace by k tomu mohla pøispìt.
+
+\subsection{Spojme naše znalosti!}
+\label{sec:data_mine}
+Je mnoho oblastí vızkumu, kde se více lidí na rùznıch místech zabıvá podobnım nebo dokonce stejnım tématem. Bylo by jistì pøínosné, kdy by tito lidé mohli snadno porovnat a spojit své vısledky. Takovou oblastí je napøíklad Data Mining. Èasto se stává e více lidí zkoumá stejná data a kadı z nich v tìchto datech objeví jiné závislosti a vztahy. Kadı odborník na závìr svého datového vızkumu sepíše své vısledky do analytické zprávy. Pokud chceme vısledky všech prací nìjak porovnat a shrnout, nezbude nám ne projít všechny analytické zprávy a srovnání provést ruènì. Nebo se mùeme pokusit znalosti ve zprávách popisované reprezentovat nìjakım strojovì srozumitelnım zpùsobem.
+
+dopsat: Co všecko sem. anotace pøinese.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Pøínosy práce}
+
+Komu? Èím? Srozumitelné pro nelingvistu....
+
+\subsection{Seznámení s lingvistikou a WordNetem}
+Tato práce se snaí pøiblíit monosti, jak vyuít dostupné lingvistické nástroje analyzující èeskı text (sekce \ref{sec:anot_tools}) pøedevším lidem, kteøí se zabıvají extrakcí informací z textu, ale nejen jim. Práce na ètenáøe neklade ádné nároky co se tıká lingvistického vzdìlání a sama základní znalosti z lingvistiky podnìcuje (kapitola \ref{sec:ling_anot}). Tìmito znalostmi se snaí pokrıt  poadavky, které klade pouívání lingvistickıch nástrojù zde popisovanıch. Zbìné znalosti zde poskytnuté jsou doplnìny odkazy a referencemi na zdroje, kde se ètenáø o dané problematice mùe dozvìdìt více.
+
+V kapitole \ref{sec:wordnet} se ètenáø seznámí se sémantickım lexikonem WordNet a získá pøedstavu o monostech jeho vyuití pøi analıze èeskıch textù.
+
+\subsection{Souhrn}
+Práce poskytuje základní pøehled v oblasti sémantické anotace a shrnuje myšlenky, které jsou v~jejím pozadí (kapitola \ref{sec:znalosti}). Ètenáø si mùe udìlat pøedstavu o tom, kterımi smìry se sémantická anotace ubírá, jaké metody byly vyuity, s~jakou úspìšností, ve~kterıch projektech (oddíl \ref{sec:projekty} a sekce~\ref{sec:rozdelni_anotace}).
+
+V práci jsou shrnuta doporuèení autorùm webovıch stánek, jak postupovat pøi tvorbì stránek se sémantickım obsahem (oddíl \ref{sec:autorum}).
+
+\subsection{Prùzkum}
+Souèástí práce je praktickı experiment (kapitola \ref{sec:experiment}) s lingvistickımi nástroji: !!!!!!!!!!!!dopsat!!!!!!!!!!!. Ètenáøi jsou poskytnuty zkušenosti z~praktického pouívání tìchto nástrojù a z~prací které s jejich pouitím souvisely. Tyto zkušenosti se tıkají pøedevším dostupnosti, zprovoznìní, vıkonnosti, pøínosù a nedostatkù tìchto nástrojù.
+Postup experimentu se v jednotlivıch fázích snaí kopírovat skuteèné akce, které by bylo nutné provést v opravdovém projektu zamìøeném na sémantickou anotaci. V práci tak vzniká jednoduchá základní analıza tohoto typu projektù. Ve skuteèném projektu pak bude moné ji pøinejmenším jako inspiraci vyuít.
+
+\subsection{Návrhy}
+V práci je navrena metodika, pro extrakci informací z~pøirozeného textu pomocí nástrojù !!!doplnit!!! (sekce \ref{sec:osnaova_praci}). Je zde navrenı jednoduchı dotazovací jazyk pro lingvistické anotace (oddíl \ref{sec:tree_query}), struènı návrh indukce vzorù (oddíl \ref{sec:patern_induction}) a zamyšlení nad monostmi lingvistické anotace pro indexaci dokumentù (sekce \ref{sec:tree_indexing}).
+
+
+\subsection{Teorie}
+V oddíle \ref{sec:teorie} je proveden pokus o~teoretickı pøínos v oblasti sémantické anotace. Kapitola \ref{sec:ling_knowledge} se zamıšlí mad monımi pøínosy a vztahem mezi poèítaèovou lingvistikou a formální reprezentací znalostí.
+
+\section{Sémantickı web}
+V roce 2001 napsal Tim Berners-Lee, tvùrce souèasného webu a øeditel Konsorcia W3C spolu s dalšími autory velmi známı èlánek The Semantic Web \cite{the_sem_web} (volnı èeskı pøeklad je k~dispozici napøíklad v~\cite{SemWeb_Matulik}). V tomto èlánku je popsána lákavá pøedstava svìta, kde všechny nepøíjemné problémy spojené se zaøizováním bìnıch ivotních problémù, jako je napøíklad návštìva lékaøe, pomáhají vyøídit softwarovı agenti. Pomáhají je vyøídit pøedevším tím, e naleznou a zkombinují všechny dùleité relevantní informace, které jsou potøeba. Napøíklad najdou lékaøe, kterı se specializuje na danı druh zdravotních potíí, adresu a otvírací dobu jeho ordinace, dopravní dostupnost tohoto místa atd.
+
+Vìtšina tìchto informací je ji dnes na webu dostupná, avšak i zkušeného uivatele internetu stojí jejich nalezení nezanedbatelnı èas a energii. Navíc nalezení informací je teprve první èást problému. To, jakım zpùsobem je zkombinovat a vyhodnotit, je èást druhá. Avšak vyøešení tohoto druhého problému není pro souèasnı software ádnou utopií. Napøíklad nalézt dopravní spojení na adresu lékaøovy ordinace v~dnešní dobì rozhodnì nepovaujeme za programátorsky neøešitelnı problém.
+
+Softwaroví agenti pravdìpodobnì nebudou v dohledné dobì tak \uv{chytøí}, aby se vyznali ve webovıch stránkách souèasného internetu a dokázali z~nich vytìit informace, které potøebují. Proto se v souvislosti s myšlenkou sémantického webu snaíme tyto stránky softwarovım agentùm pøiblíit, udìlat je srozumitelnìjší respektive pøístupnìjší pro strojové získávání informací z nich. Do stránek se vkládají takzvaná metadata (\emph{data o~datech}), která co~moná nejpøesnìji formálnì zachycují obsah stránek jinak srozumitelnı jen pro èlovìka. Tomuto obohacování stránek o~metadata budeme øíkat \emph{sémantická anotace}.
+
