@@ -24,20 +24,26 @@
 
 
 \chapter{Úvod}
-Cílù této práce bylo nìkolik. Nejprve jsme se pokusili zmapovat oblast sémantické anotace jako takové. Zjistili jsme, že pole sémantické anotace je široké a že na tuto èinnost mùžeme nahlížet rùznì. Na nejpovrchnìjší úrovni zkoumání jsme sémantickou anotaci rozdìlili na~takzvanou \emph{anotaci autorskou} a \emph{anotaci dodateènou}. Rozdíl mezi tìmito pohledy na anotaci je velký, avšak oba pøístupy mají mnoho spoleèného a dá se øíci, že se vzájemnì doplòují.
+Tato práce se zabývá sémantickou anotací webovských zdrojù. Slovo anotace znamená pøipojování poznámek èi vysvìtlivek. V sémantické anotaci, tedy v sémantických poznámkách èi vysvìtlivkách, se snažíme o~zachycení významu (sémantiky) anotovaného zdroje. Tuto sémantiku chceme vyjádøit formálnì, tak aby byla strojovì (softwarovì) zpracovatelná a pøispìla tak k~vytvoøení takzvaného \uv{sémantického webu}, který je podrobnìji popsán v~oddíle \ref{sec:sem_web}. Pøi této anotaci se zamìøujeme na~zdroje webu -- pøedevším web-stránky, nicménì ukážeme, že sémantická anotace má stejný smysl i v~jiných oblastech. Pøíklad takové oblasti je možné najít hned v~podkapitole \ref{sec:data_mine}.
 
-\emph{Autorskou anotací} budeme oznaèovat proces, kdy autor vytváøí web-stránku, pøípadnì jiný potenciální zdroj informací a tento zdroj obohatí o takzvaný \uv{sémantický popis}. Tedy že formálnì popíše informace, které jsou ve zdroji obsažené tak, aby byli využitelné pro strojové zpracování. Mùžeme to také chápat tak, že autor, který tvoøí web-stránku ve svém pøirozeném jazyce pro lidské návštìvníky, ji vytvoøí ještì ve verzi pro softwarové návštìvníky ve formálním strojovém jazyce. %další øádek možná pøesunout?
+Tato práce má nìkolik cílù. Nejprve jsme se pokusili zmapovat oblast sémantické anotace jako takové. Zjistili jsme, že pole sémantické anotace je široké a že na tuto èinnost mùžeme nahlížet rùznì. Na nejpovrchnìjší úrovni zkoumání jsme sémantickou anotaci rozdìlili na~takzvanou \emph{anotaci autorskou} a \emph{anotaci dodateènou}. Rozdíl mezi tìmito pohledy na anotaci je velký, avšak oba pøístupy mají mnoho spoleèného a dá se øíci, že se vzájemnì doplòují.
+
+\emph{Autorskou anotací} budeme oznaèovat proces, kdy autor vytváøí web-stránku, pøípadnì jiný potenciální zdroj informací a tento zdroj obohatí o~takzvaný \uv{sémantický popis}. Tedy že formálnì popíše informace, které jsou ve zdroji obsažené tak, aby byli využitelné pro strojové zpracování. Mùžeme to také chápat tak, že autor, který tvoøí web-stránku pro~lidské návštìvníky v~pøirozeném jazyce, ji vytvoøí ještì ve~verzi pro~softwarové návštìvníky ve~formálním strojovém jazyce. %další øádek možná pøesunout?
 Mùže se to zdát nároèné, ale není. Strojový jazyk je struèný a pøímoèarý, nehledí na design ani stylistiku. Navíc autor mùže vybrat jen nìkteré nejdùležitìjší informace, které formálnì vyjádøí. Pøínos je potenciálnì obrovský. %rozvést - co nás v kontextu autorské anotace nejvíc zajímá
 
 %pøidat odkaz na podrobnosti v kapitole...
 
 
 
-\emph{Dodateènou anotací} budeme oznaèovat proces, kdy 
+\emph{Dodateènou anotací} budeme oznaèovat proces, kdy web-stránky (pøípadnì i jiné zdroje)  už existují a my se je pokoušíme anotovat dodateènì. V~tomto pøípadì je vìtšinou autor anotace jiný než majitel pùvodní stránky. Hotové anotace se v~pùvodním zdroji neobjeví, nejsou urèeny k~pøímé publikaci (která by se pravdìpodobnì musela právnì ošetøit autorskou smlouvu). Primární cíl této anotace je jiný. Snažíme se ze~zdroje získat co nejvíce sémantických dat, která jsou urèená pro další zpracování. Napøíklad, mùžeme chtít vytvoøit speciální vyhledávaè pracovních nabídek, který shromažïuje data o~nabídkách práce z~velkého množství rùzných web-stránek. Právì takový projekt v souèasné dobì vzniká na Slovensku pod názvem NAZOU\footnote{http://nazou.fiit.stuba.sk}. Dodateèná sémantická anotace se velmi podobá extrakci informací z webu (web data mining, web content mining), nejvìtší dùraz je zde kladen na~automatizaci celého procesu a na robustnost extrakèní metody k~rùzným typùm web-stránek. Navíc oproti obyèejné extrakci informací se zde snažíme využít pokroèilé metody pro formální reprezentaci znalostí.
 
 
 
-%Sémantická anotace je .........
+
+
+
+
+
 
 \section{Motivace}
 \subsection{Vylepšeme své stránky!}
@@ -54,7 +60,7 @@ Co chybí vašim stránkám, aby se mohly stát souèástí takového integrovaného soubo
 Je nìkolik možností, jak anotovat stránky pro~sémantický web. I~jimi se budeme v této práci zabývat. Doplòme ještì komentáøem tvrzení, že každý majitel web-stránek by pravdìpodobnì ocenil jejich \uv{sémantiènost}.
 
 \subsubsection{Softwarový agenti a reklama}
-V souèasné dobì tržní ekonomiky je reklama silný nástroj, který obchodníci používají aby pøilákali více zákazníkù a reklama na~webových stránkách dnes není nièím výjimeèným. Je jasné, že softwarový agenti psychologickému tlaku reklamy nepodléhají a tak vzniká otázka, zda se majitelé komerèních stránek nebudou sémantickým technologiím bránit. Ztrátu, kterou by obchodníci utrpìli snížením efektivity web-reklamy, bude pravdìpodobnì nutné kompenzovat. Jak by taková kompenzace mohla vypadat, pøípadnì jak bychom mohli obchodníky motivovat k~používání sémantických technologií na jejich stránkách, nechme zatím stranou. Je ale možné, že jednou pøijde doba, kdy si lidé budou moci snadno vybrat pro nì ideální dostupný výrobek èi službu, aniž by museli odolávat psychologickému nátlaku reklamy. Sémantická anotace by k tomu mohla pøispìt.
+V souèasné dobì tržní ekonomiky je reklama silný nástroj, který obchodníci používají aby pøilákali více zákazníkù a reklama na~webových stránkách dnes není nièím výjimeèným. Je jasné, že softwarový agenti psychologickému tlaku reklamy nepodléhají, a tak vzniká otázka, zda se majitelé komerèních stránek nebudou sémantickým technologiím bránit. Ztrátu, kterou by obchodníci utrpìli snížením efektivity web-reklamy, bude pravdìpodobnì nutné kompenzovat. Jak by taková kompenzace mohla vypadat, pøípadnì jak bychom mohli obchodníky motivovat k~používání sémantických technologií na jejich stránkách, nechme zatím stranou. Je ale možné, že jednou pøijde doba, kdy si lidé budou moci snadno vybrat pro nì ideální dostupný výrobek èi službu, aniž by museli odolávat psychologickému nátlaku reklamy. Sémantický web a sémantická anotace by k tomu mohly pøispìt.
 
 \subsection{Spojme naše znalosti!}
 \label{sec:data_mine}
@@ -89,6 +95,7 @@ V práci je navržena metodika, pro extrakci informací z~pøirozeného textu pomocí 
 V oddíle \ref{sec:teorie} je proveden pokus o~teoretický pøínos v oblasti sémantické anotace. Kapitola \ref{sec:ling_knowledge} se zamýšlí mad možnými pøínosy a vztahem mezi poèítaèovou lingvistikou a formální reprezentací znalostí.
 
 \section{Sémantický web}
+\label{sec:sem_web}
 V roce 2001 napsal Tim Berners-Lee, tvùrce souèasného webu a øeditel Konsorcia W3C spolu s dalšími autory velmi známý èlánek The Semantic Web \cite{the_sem_web} (volný èeský pøeklad je k~dispozici napøíklad v~\cite{SemWeb_Matulik}). V tomto èlánku je popsána lákavá pøedstava svìta, kde všechny nepøíjemné problémy spojené se zaøizováním bìžných životních problémù, jako je napøíklad návštìva lékaøe, pomáhají vyøídit softwarový agenti. Pomáhají je vyøídit pøedevším tím, že naleznou a zkombinují všechny dùležité relevantní informace, které jsou potøeba. Napøíklad najdou lékaøe, který se specializuje na daný druh zdravotních potíží, adresu a otvírací dobu jeho ordinace, dopravní dostupnost tohoto místa atd.
 
 Vìtšina tìchto informací je již dnes na webu dostupná, avšak i zkušeného uživatele internetu stojí jejich nalezení nezanedbatelný èas a energii. Navíc nalezení informací je teprve první èást problému. To, jakým zpùsobem je zkombinovat a vyhodnotit, je èást druhá. Avšak vyøešení tohoto druhého problému není pro souèasný software žádnou utopií. Napøíklad nalézt dopravní spojení na adresu lékaøovy ordinace v~dnešní dobì rozhodnì nepovažujeme za programátorsky neøešitelný problém.
