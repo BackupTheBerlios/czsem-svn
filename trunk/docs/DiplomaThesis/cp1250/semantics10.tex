@@ -223,7 +223,55 @@ SemTag\footnote{http://tap.stanford.edu/semtag/index.html}
 \section{Projekty}
 \label{sec:projekty}
 \subsection{Semantic MediaWiki}
-Semantic MediaWiki (SMW) \cite{SMWiki} poskytuje autorùm uivatelsky pøívìtivé prostøedí pro sémantické obohacování jejich èlánkù. Navíc umoòuje \uv{inline query}.
+Semantic MediaWiki (SMW) \cite{SMWiki} je rozšíøením známého \emph{MediaWiki} enginu, kterı kromì mnoha jinıch wiki-stránek zajišuje i chod otevøené Wikipedia encyklopedie\footnote{http://wikipedia.org}. U samotná MediaWiki v~nìkterıch rysech pøipomíná sémantickı web. Uivatel, kterı píše èlánek v~klasické MediaWiki, má mnoho moností, pro~formátování textu. Kromì formátování však mùe jednotlivım slovùm pøiøadit vıznam tak, e je oznaèí jako hypertextové odkazy. Podívejme se napøíklad na vìtu z~èeské Wikipedie:
+
+\begin{quotation}
+\begin{verbatim}
+Praha je [[hlavní mìsto]] [[Èesko|Èeské republiky]].
+\end{verbatim}
+\end{quotation}
+
+\noindent Slovní spojení \uv{hlavní mìsto} je oznaèeno a toto oznaèení znamená, e jeho \emph{sémantiku} vysvìtluje èlánek se stejnım názvem. Podobnì sémantika slovního spojení \uv{Èeské republiky} je popsána v~èlánku s názvem \uv{Èesko}. Nepøipomíná to sémantickou anotaci?
+ 
+Dalšími monostmi anotace v~klasické MediaWiki jsou zaøazení èlánku do nìkteré kategorie a pouití takzvané \emph{šablony}. Šablony jsou v klasické MediaWiki urèeny pøedevším pro snazší formátování podobnıch èlánkù, ale lze jimi definovat i jisté \uv{datové schéma}.
+
+SMW pùvodní MediaWiki rozšiøuje o další sémantické vlastnosti a skuteènì sémanticky wiki-data interpretuje za pouití ontologií a RDF. V~èláncích SMW má autor následující tøi základní monosti anotace:
+
+\subsubsection{Kategorie}
+V~SMW tvoøí všechny èlánky dohromady jedinou ontologii. Ta se s~kadım novım èlánkem rozšiøuje a mìní. Kategorie hrají v~této ontologii roli tøíd, èlánky roli individuí. Tím, e èlánek zaøadíme do~nìkteré kategorie, zaøadíme i~odpovídající individuum do odpovídající tøídy.
+
+To, e Praha patøí do kategorie mìsto, v SMW vyjádøíme uvnitø èlánku o~Praze zápisem: \hspace{0.5cm} \verb|[[Category:City]]|
+
+
+
+\subsubsection{Relace}
+Relace umoòují definovat binární vztah mezi èlánky SMW respektive binární relaci mezi individui ontologie SMW. Vıše uvedená vìta v~èlánku o~Praze by v~SMW vypadala takto:
+
+\begin{quote}
+\begin{verbatim}
+Praha je [[Relation:capital of|hlavní mìsto]]
+[[capital of::Èesko|Èeské republiky]].
+\end{verbatim}
+\end{quote}
+
+\noindent \uv{Relation:capital of} reprezentuje odkaz na~èlánek, kterı popisuje relaci s~názvem \uv{capital of}.
+
+\subsubsection{Atributy}
+Atributy se pouívají k~definici vlastností èlánku, jejich hodnota má jednoduchı datovı typ. Jsou to vìtšinou èísla, èasy, data, které se k èlánku vztahují. Jako pøíklad uveïme vìtu o~rozloze našeho hlavního mìsta:
+
+\begin{quote}
+\begin{verbatim}
+Katastrální vımìra Prahy je [[area:=496km^(2)]].
+\end{verbatim}
+\end{quote}
+
+\noindent V~ontologii se opìt hodnota atributu vztahuje k~individuu, které èlánek reprezentuje. Kategorie, relace i atributy mùe do SMW kdokoliv pøidávat stejnì jako jakékoliv jiné èlánky. Prostì vytvoøí èlánek s~odpovídajícím názvem (napøíklad \uv{Attribute:Area}). Hezkou vlastností atributù je monost definovat jejich typ. Napøíklad atribut \emph{Attribute:Area} je typu \emph{Type:Area}. Pøi~ètení èlánku si ètenáø mùe nechat všechny atributy pøepoèítat do~jednotek které mu vyhovují (vzdálenosti na~metry èi míle, objem na litry èi galony a podobnì).
+
+
+
+poskytuje autorùm uivatelsky pøívìtivé prostøedí pro sémantické obohacování jejich èlánkù. Navíc umoòuje \uv{inline query}.
+
+
 \subsection{Artequakt}
 \cite{Artequakt}
 
@@ -250,8 +298,15 @@ Lixto server umoòuje automaticky spouštìt hotové Wrappery a získaná data dále z
 \subsubsection{Monosti automatické sémantické anotace}
 Pro vyuití pøi automatizované sémantické anotaci je velkou pøekákou nutnost pokadé znovu ruènì naprogramovat Lixto na kadou stránku.
 
+\subsection{GATE}
+\label{sec:GATE}
+!!!doplnit!!!
+
 \subsection{The KIM Platform}
+\label{sec:KIM}
 \cite{KIM} The KIM Platform: Knowledge \& Information Management, Bulharsko
+
+Pøi prezentaci vyvolal vıpadek serveru úsmìv u~vìtšiny posluchaèù. K~povznesené náladì jistì pøispìl i fakt, e se jedná o~projekt bulharskı. %Zdá se, e se s tím Bulharskem potıkají i na jinıch konferencích.
 
 \subsection{Image Semantics without Annotations}
 Teoreticky bohatı èlánek \cite{IMG_Santini}, zabıvá se indexací a vyhledáváním obrázkù v~internetu podobné databázi. Definuje internet jako graf provázanıch dokumentù a obrázkù. Navrena je algebra pro manipulaci s takovım grafem (operace jako: insert, delete, nodes, edges, union, ...) Velmi propracované je porovnávání obrázkù pomocí (adaptivní) podobnostní míry, která se skládá ze~tøí sloek:

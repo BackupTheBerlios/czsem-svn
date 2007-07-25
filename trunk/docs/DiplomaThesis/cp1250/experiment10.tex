@@ -1,6 +1,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Experiment}
 \label{sec:experiment}
+Pùvodním zámìrem experimentu v~této práci bylo vyzkoušet nìkterou existující metodu automatické sémantické anotace. Pøi hledání vhodné metody jsme zjistili, že ve~vìtšinì projektù je algoritmická dokumentace použitých metod velmi struèná (alespoò dokumentace, která je veøejnì k dispozici). Získat nìjaký použitelný kód nebo knihovnu bylo problematické. Výjimku tvoøí projekty KIM (popsaný v~sekci\ref{sec:KIM}) a GATE (sekce \ref{sec:GATE}). Avšak zamìøení tìchto dvou projektù pøíliš nevyhovovalo požadavkùm na~náš experiment.
+
+Pøestavba architektury projektu KIM by byla pomìrnì nároèná a její výsledek nejistý. Pravdìpodobnì by vznikl pouze slabší \uv{bratr} bulharského KIM, který je podpoøen masivní databází informací v~pozadí. %která zde byla v~prùbìhu projektu KIM vytvoøena.
+
+Projekt GATE je naproti KIM otevøený a modulární. Jedná se o velmi obecnou softwarovou základnu pro lingvistickou anotaci a extrakci informací.
+
+
+
 Experiment provedený v rámci této práce spoèíval v otestování nìkterých dostupných nástrojù pro lingvistickou anotaci èeských textù. Jmenovitì se jednalo o tyto nástroje: !!!!!!!!!!!!!doplnit!!!!!!!!!!!!!!!!. Byly prozkoumány možnosti vyžití tìchto nástrojù pro extrakci informací a sémantickou anotaci.
 
 %!!!!!!!Pzor následující odstavec jsem okopíroval i do kapitoly pøínosy - vyøešit
@@ -61,7 +69,17 @@ Makro btred
 \chapter{Návrhy a zkušenosti}
 \section{Dotazování nad lingvistickými závislostními stromy}
 \label{sec:tree_query}
+
+%kapitola Netgraph:: V prùbìhu experimentu, který je popsán v~kapitole \ref{sec:experiment}, jsme narazili na~potøebu dotazovacího jazyka, pomocí kterého bychom se mohli programovì dotazovat na~hodnoty atributù lingvistických stromù. Též by se nám velmi hodil jazyk, ve kterém by bylo možné vyjádøit vzory stromù, které se v~korpusu našeho experimentu èastìji vyskytují. Dotazovací jazyk, který používá aplikace Netgraph, je naší pøedstavì velmi blízký. Tuto problematiku podrobnìji rozebíráme v~oddíle \ref{sec:tree_query}.
+
+\begin{center}
+\includegraphics[scale=0.8]{../NetGraph1.eps}
+\end{center}
+
 \subsection{Indexace}
 \label{sec:tree_indexing}
+
+Indexace XML dat (pro optimalizaci vyhodnocování dotazù XPath, XQuery a podobných) je v~souèasnosti otevøeným problémem. Stále ještì hledáme algoritmus, který by dokázal efektivnì indexovat XML data libovolné struktury. Tuto situaci ilustrují napøíklad èlánky
+!!!doplnit!!! Zalosti 2007, \cite{saptial_index}.
 \section{Indukce vzorù}
 \label{sec:patern_induction} 
