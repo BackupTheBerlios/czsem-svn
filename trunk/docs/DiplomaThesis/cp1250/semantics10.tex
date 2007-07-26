@@ -232,10 +232,10 @@ Praha je [[hlavní mìsto]] [[Èesko|Èeské republiky]].
 \end{quotation}
 
 \noindent Slovní spojení \uv{hlavní mìsto} je oznaèeno a toto oznaèení znamená, že jeho \emph{sémantiku} vysvìtluje èlánek se stejným názvem. Podobnì sémantika slovního spojení \uv{Èeské republiky} je popsána v~èlánku s názvem \uv{Èesko}. Nepøipomíná to sémantickou anotaci?
- 
+
 Dalšími možnostmi anotace v~klasické MediaWiki jsou zaøazení èlánku do nìkteré kategorie a použití takzvané \emph{šablony}. Šablony jsou v klasické MediaWiki urèeny pøedevším pro snazší formátování podobných èlánkù, ale lze jimi definovat i jisté \uv{datové schéma}.
 
-SMW pùvodní MediaWiki rozšiøuje o další sémantické vlastnosti a skuteènì sémanticky wiki-data interpretuje za použití ontologií a RDF. V~èláncích SMW má autor následující tøi základní možnosti anotace:
+SMW pùvodní MediaWiki rozšiøuje o další sémantické vlastnosti a skuteènì sémanticky wiki-data interpretuje za použití ontologií a OWL/RDF. Všechna sémantické data, která sem autoøi èlánkù vkládají je možné snadno exportovat do OWL/RDF formátu. V~èláncích SMW má autor následující tøi základní možnosti anotace:
 
 \subsubsection{Kategorie}
 V~SMW tvoøí všechny èlánky dohromady jedinou ontologii. Ta se s~každým novým èlánkem rozšiøuje a mìní. Kategorie hrají v~této ontologii roli tøíd, èlánky roli individuí. Tím, že èlánek zaøadíme do~nìkteré kategorie, zaøadíme i~odpovídající individuum do odpovídající tøídy.
@@ -267,9 +267,11 @@ Katastrální výmìra Prahy je [[area:=496km^(2)]].
 
 \noindent V~ontologii se opìt hodnota atributu vztahuje k~individuu, které èlánek reprezentuje. Kategorie, relace i atributy mùže do SMW kdokoliv pøidávat stejnì jako jakékoliv jiné èlánky. Prostì vytvoøí èlánek s~odpovídajícím názvem (napøíklad \uv{Attribute:Area}). Hezkou vlastností atributù je možnost definovat jejich typ. Napøíklad atribut \emph{Attribute:Area} je typu \emph{Type:Area}. Pøi~ètení èlánku si ètenáø mùže nechat všechny atributy pøepoèítat do~jednotek které mu vyhovují (vzdálenosti na~metry èi míle, objem na litry èi galony a podobnì).
 
+Anotace èlánkù SMW pøináší nìkolik výhod. Jednou z~nich je možnost do èlánkù vkládat takzvané \uv{inline query}. Jedná se o~dotaz na~data ontologie. Výsledek dotazu se objeví v~textu èlánku na~místì, kde je dotaz zapsán. Obsah èlánku se tak stává dynamickým, takto vložená data jsou vždy aktuální. Napøíklad mùžeme chtít pøi psaní èlánku o~Èeské republice zmínit pìt našich nejvìtších mìst. Místo abychom do èlánku opsali tabulku s~tìmito mìsty a jejich poèty obyvatel pøípadnì rozlohou, vložíme do èlánku dotaz, který nám tuto tabulku vygeneruje. Èísla v~tabulce budou vždy aktuální, tak jak jsou právì uvedena v èláncích o~jednotlivých mìstech.
 
+Už klasická MediaWiki je výjimeèná tím, jak kdokoliv mùže mìnit a rozšiøovat její obsah. Velmi to pøipomíná samotný web a jeho živelné vznikání. SMW tento rys zachovává ve~všech svých vlastnostech. V~øeèi ontologie to znamená, že kdokoliv mùže mìnit jak ABox (individua) tak TBox (tøídy, relace, definice atributù). Pøi~sémantické anotaci obecnì bychom rádi mìli nìjakou globálnì uznávanou a používanou ontologii. Taková ontologie by èasem mohla vzniknout z~sémantické Wikipedia encyklopedie. Na jejím vzniku i používání by se podílelo velké množství lidí, brzy by se ukázalo, které koncepty jsou funkèní a které nikoliv.
 
-poskytuje autorùm uživatelsky pøívìtivé prostøedí pro sémantické obohacování jejich èlánkù. Navíc umožòuje \uv{inline query}.
+SMW engine je volnì dostupný vèetnì zdrojových kódù na stránkách SMW projektu\footnote{http://sourceforge.net/projects/semediawiki}. Zkušební verze SMW bìží na~Internetu na~stránkách Ontoworld.org a každý si ji mùže vyzkoušet. SMW na~Ontoworld.org je pomìrnì bohatá a poskytuje dobrou dokumentaci celého SMW enginu. V~naší práci jsme Ontoworld.org využili k~publikaci nìkterých pracovních poznámek\footnote{Napøíklad èlánek se souhrnnými informacemi má adresu:\\ http://ontoworld.org/wiki/Semantic\_annotation\_of\_data\_from\_web\_resources}.
 
 
 \subsection{Artequakt}
@@ -300,7 +302,7 @@ Pro využití pøi automatizované sémantické anotaci je velkou pøekážkou nutnost po
 
 \subsection{GATE}
 \label{sec:GATE}
-!!!doplnit!!!
+\cite{GATE} !!!doplnit!!!
 
 \subsection{The KIM Platform}
 \label{sec:KIM}
@@ -318,6 +320,7 @@ Teoreticky bohatý èlánek \cite{IMG_Santini}, zabývá se indexací a vyhledáváním o
 \end{description}
 \item Closed Word Modality
 \begin{description}
+\item[-] podobná Linguistic Modality, ale slova zde mají pøesný význam
 \item[-] ustálené, pøesné pojmy uvnitø uzavøené komunity
 \end{description}
 \item Emergent Modality pøíp. User Modality
