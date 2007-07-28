@@ -25,22 +25,23 @@ Hned na zaèátku poznamenejme, e pojem \emph{des\-krip\-èní logika} (DL) je nepø
 %Vyjadøovací síla deskripèních jazykù je pøedmìtem vìdeckého zkoumání.
 Pøesné vymezení jednotlivıch deskripèních jazykù je základním pøedpokladem pro~formální studium algoritmù pro~odvozování znalostí (reasoning, inference). V~této práci se zajímáme spíš o~dostupné konstrukce jazykù DL, proto vystaèíme s~jedním jazykem formálnì oznaèovanım jako $\mathcal{ALCN}$, kterı podrobnìji popíšeme pozdìji v~\ref{sec:DL_syntax}.
 
-\subsection{Znalostní báze - knowledge base}
-Systémy pro~reprezentaci znalostí zaloené na~DL tyto znalosti uchovávají v takzvané \uv{znalostí bázi} (knowledge base). Znalostní báze je také základnou pro~odvozování znalostí (reasoning). Reasoning se v~tìchto systémech pouívá pro~vìtšinu operací se~znalostmi: zjišování subsumpce tøíd, testování konzistence modelu, tj. splnitelnosti formulí vymezujících tøídy, zjišování pøíslušnosti individuí ke tøídám. Tyto operace se pak pouívají k~vyhodnocování dotazù.
-
-Obrázek \ref{pict:KB} ukazuje rozdìlení znalostní báze na~\emph{TBox} (terminologii) a \emph{ABox} (vyuití terminologie k~popisu svìta).
-
-\begin{figure}[!hbt]
+\begin{figure}[!b]
 \begin{center}
 \includegraphics[scale=0.5]{../KB.eps}
 \caption{Knowledge base systému pro reprezentaci znalostí \cite{description_logics}} \label{pict:KB}
 \end{center}
 \end{figure}
 
+\subsection{Znalostní báze - knowledge base}
+
+Systémy pro~reprezentaci znalostí zaloené na~DL tyto znalosti uchovávají v takzvané \uv{znalostí bázi} (knowledge base). Znalostní báze je také základnou pro~odvozování znalostí (reasoning). Reasoning se v~tìchto systémech pouívá pro~vìtšinu operací se~znalostmi: zjišování subsumpce, ekvivalence èi disjunkce tøíd, testování konzistence modelu, tj. splnitelnosti všech logickıch axiomù, zjišování pøíslušnosti individuí ke~tøídám. Tyto operace umoòují vyhodnocování dotazù na~znalosti uloené v~bázi. A to nejen na znalosti explicitnì uvedené, ale i na~znalosti, které z nich implicitnì plynou, a které se z~nich dají pomocí reasoning-u odvodit.
+
+Obrázek \ref{pict:KB} ukazuje rozdìlení znalostní báze na~\emph{TBox} (terminologii) a \emph{ABox} (vyuití terminologie k~popisu svìta).
+
 
 \subsection{Syntax deskripèní logiky}
 \label{sec:DL_syntax}
-Uvedeme zde syntax destrukèního jazyka $\mathcal{ALCN}$. Jazyk $\mathcal{ALCN}$ vznikne  ze~základního jazyka deskripèní logiky $\mathcal{AL}$ (attributive language) pøidáním sjednocení, obecné negace, plného existenèního kvantifikátoru a restrikcí kardinality. Relace povolujeme pouze binární.
+Uvedeme zde syntax destrukèního jazyka $\mathcal{ALCN}$. Jazyk $\mathcal{ALCN}$ vznikne  ze~základního jazyka deskripèní logiky $\mathcal{AL}$ (attributive language) \cite{description_logics} pøidáním sjednocení, obecné negace, plného existenèního kvantifikátoru a restrikcí kardinality. Relace povolujeme pouze binární.
 
 Tøídy v~DL chápeme jako mnoiny individuí. Tøídy se v~DL velmi èasto oznaèují jako \emph{koncepty}. Role reprezentují (binární) relace mezi individui. Základním stavebním kamenem jsou \emph{atomické tøídy} a \emph{atomické role}, ostatní koncepty se z~nich podle pravidel (konstruktorù) na obrázku \ref{pict:dl_syntax}. Písmena $C$ a $D$ zastupují obecné tøídy, písmeno $A$ atomickou tøídu, písmeno $R$ atomickou relaci.
 
@@ -96,7 +97,7 @@ Formální sémantiku DL definujeme pomocí \emph{interpretace} $\mathcal{I}$. Inter
 TBox reprezentuje terminologii, dalo by se té øíci slovník znalostní báze. Uvnitø TBox-u jsou definovány \emph{tøídy} a \emph{role} znalostní báze pomocí \emph{axiomù} DL. Tyto axiomy se tvoøí pomocí relací subsumpce ($\sqsubseteq$) a ekvivalence ($\equiv$).
 
 Dùleitou vlastností TBox-u je jeho bezespornost tj. existence jeho \emph{modelu}. Modelem rozumíme takovou interpretaci $\mathcal{I}$, která splòuje všechny axiomy terminologie (všechny ekvivalence a subsumpce). Podrobnosti je moné nalézt v~\cite{description_logics}.
- 
+
 Pøíklad formálnì zapsaného TBox-u je na~obrázku~\ref{pict:dl_tbox}.
 
 \begin{figure}[!h]
@@ -128,7 +129,7 @@ Sémantiku ABox-u zavedeme rozšíøením vıše zmínìné \emph{interpretace} $\mathcal{
 
 Dùleitou vlastností ABox-u je jeho konzistentnost -- existence modelu, kterı splòuje podmínky kladené pouitou terminologií (TBox-em).
 
-Øíkáme, e interpretace $\mathcal{I}$ \emph{splòuje} tvrzení $C(a)$ kdy $a^\mathcal{I} \in C^\mathcal{I}$ a tvrzení $R(b,c)$ kdy $(b^\mathcal{I}, c^\mathcal{I}) \in R^\mathcal{I}$. Pokud interpretace $\mathcal{I}$ splòuje všechna tvrzení ABox-u, øíkáme, e je jeho \emph{modelem}. 
+Øíkáme, e interpretace $\mathcal{I}$ \emph{splòuje} tvrzení $C(a)$ kdy $a^\mathcal{I} \in C^\mathcal{I}$ a tvrzení $R(b,c)$ kdy $(b^\mathcal{I}, c^\mathcal{I}) \in R^\mathcal{I}$. Pokud interpretace $\mathcal{I}$ splòuje všechna tvrzení ABox-u, øíkáme, e je jeho \emph{modelem}.
 
 Pøíklad formálnì zapsaného ABox-u je na~obrázku~\ref{pict:dl_abox}.
 

@@ -10,7 +10,38 @@ Korpusy se v zásadì znaèkují tøemi druhy znaèek. 1) Znaèky správní zachycují ide
 
 Samostatnou kapitolou lingvistické anotace je potom zachycení gramatické stavby vìty. K tomu se používají dva typy gramatik - složková a závislostní gramatika. Závislostní gramatika má dlouholetou tradici v popisu jazykù evropského kontinentu a zdá se, že má urèité výhody i pro popis angliètiny, která bývá èastìji zpracovávána gramatikou složkovou. Složkový popis je blíže Chomského pojetí jazyka. Vìta je podle složkové gramatiky rekurzivnì dìlena do menších a menších složek. Postup zaèíná rozdìlením vìty na èást podmìtnou a pøísudkovou a postupuje dìlením tìchto složek na~podsložky, až dojde k jednotlivým slovùm. Závislostní pøístup naproti tomu vezme jednotlivá slova a ta pospojuje závislostními hranami do takzvaného závislostního stromu. Velmi podrobnì je problematika gramatik a vìtné syntaxe popsána v \cite{sgall_syntaxe}.
 
-Kromì toho, že je možné strukturu vìty pøirozeného jazyka zapisovat pomocí rùzných typù gramatik, je též možné zapisovat tuto strukturu na rùzných významových rovinách. Lingvistický výzkum rùzných jazykù ukazuje vhodnost takového vícevrstvého popisu. Na~rùzných rovinách je totiž možné pøehlednìji postihnout rùzné jazykové jevy. Tento problém je podrobnìji rozveden v~práci \cite{platek_cz_pc}, dále je zde pøedstavena tradièní trojice rovin pro popis struktury vìty. Jsou to 1) rovina morfématická (též morfologická) - tvarosloví 2) rovina povrchové syntaxe (též rovina mluvnické stavby vìty èi analytická rovina) 3) rovina tektogramatická neboli významová stavba vìty nebo též hloubková syntax. Stejnì jsou roviny lingvistické anotace zpracovány v projektu PDT (viz oddíl~\ref{sec:PDT}), z jehož popisu budeme dále vycházet.
+Kromì toho, že je možné strukturu vìty pøirozeného jazyka zapisovat pomocí rùzných typù gramatik, je též možné zapisovat tuto strukturu na rùzných významových rovinách. Lingvistický výzkum rùzných jazykù ukazuje vhodnost takového vícevrstvého popisu. Na~rùzných rovinách je totiž možné pøehlednìji postihnout rùzné jazykové jevy. Tento problém je podrobnìji rozveden v~práci \cite{platek_cz_pc}, dále je zde pøedstavena tradièní trojice rovin pro popis struktury vìty. Stejnì jsou roviny lingvistické anotace zpracovány v~projektu PDT (viz oddíl~\ref{sec:PDT}), ze kterého budeme dále vycházet. Roviny lingvistické anotace:
+
+\begin{itemize}
+\item Rovina morfologická
+\begin{description}
+  \item[-] též morfématická -- tvarosloví
+  \item[-] \verb|m-layer|
+\end{description}
+\item Rovina analytická
+\begin{description}
+  \item[-] rovina povrchové syntaxe pøípadnì rovina mluvnické stavby vìty
+  \item[-] \verb|a-layer|
+\end{description}
+\item Rovina tektogramatická
+\begin{description}
+  \item[-] významová stavba vìty nebo též hloubková syntax
+  \item[-] \verb|t-layer|
+\end{description}
+\end{itemize}
+
+
+\begin{figure}[!p]
+\begin{center}
+  \includegraphics[scale=0.5]{../PDT_roviny.eps}
+\end{center}
+  \caption[Roviny lingvistické anotace PDT 2.0 \cite{PDT_pruvodce}]{Roviny lingvistické anotace PDT 2.0 \cite{PDT_pruvodce}\\[6pt]
+  Pøíklad na obrázku je pøevzatý z~Prùvodce PDT 2.0 \cite{PDT_pruvodce}, znázoròuje vztah mezi sousedními rovinami anotace PDT.\\[6pt]
+  Zobrazená èeská vìta \uv{Byl by šel dolesa.} obsahuje minulý èas podmiòovacího zpùsobu slovesa jít a tiskovou chybu.\\[6pt]
+  Poslední zobrazená takzvaná \emph{slovní rovina} (w-layer) obsahuje \uv{surový text}, ten je zde rozdìlen do dokumentù a odstavcù. Jsou tu rozlišeny slovní jednotky (slova, èísla, interpunkce) a jsou opatøeny jednoznaènými identifikátory.}
+  \label{pict:roviny_anotace}
+\end{figure}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Lingvistické znaèky}
@@ -18,6 +49,8 @@ Kromì toho, že je možné strukturu vìty pøirozeného jazyka zapisovat pomocí rùzný
 Lingvistické znaèky rozdìlíme do tøí kategorií. Podle roviny lingvistické anotace, tak jak jsou rozdìleny v projektu PDT (viz oddíl~\ref{sec:PDT}). Znaèky morfologické roviny jsou nezávisle pøiøazovány jednotlivým slovùm. Naproti tomu znaèky analytické a tektogramatické roviny popisují strukturu vìty a jejich znaèky popisující vztahy mezi jednotlivými slovy se mohou týkat více slov najednou.
 
 Následuje struèný popis jednotlivých znaèek každé roviny. Podrobnìjší popis lingvistických znaèek je možné najít napøíklad v \cite{PDT_pruvodce}, \cite{morphological_annotation}, \cite{analytic_annotation}, \cite{tectogramtic_annotation}.
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Morfologická rovina}
@@ -184,8 +217,6 @@ Schéma tektogramatického stromu je o nìco složitìjší. Pod každým uzlem jsou vyti
 
 Na obrázku~\ref{pict:tecto_example} (tektogramatického stromu) je vidìt speciální zahnutá šipka od uzlu \emph{\#PersPron} k uzlu \emph{pìtice}. Konec této šipky ukazuje na cíl, na který odkazuje zájmeno uvnitø prvního (poèáteèního) uzlu.
 
-\includegraphics[scale=0.5]{../PDT_roviny.eps}
-\\Pøíklad pochází z Prùvodce PDT 2.0 \cite{PDT_pruvodce}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
