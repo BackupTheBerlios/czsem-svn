@@ -2,13 +2,31 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Reprezentace znalostí}
 \label{sec:znalosti}
+Jedním ze základních krokù k vytvoøení sémantického webu je konceptualizace dat dostupných na internetu \cite{SemWeb_Matulik}. Jedním z klíèových nástrojù konceptualizace jsou ontologie. Ontologie lze charakterizovat jako formalizované reprezentace znalostí urèené k~jejich sdílení a znovupoužití. Ontologie jsou èasto doménového (oborového) zamìøení a bývají konstruovány jako pojmové (konceptuální) hierarchie nebo sítì.
 
-Úvod podle: Matulik SemWeb \cite{SemWeb_Matulik}
+Právì o~konceptuální a formálnì pøesné vyjádøení znalostí, které jsou obsaženy ve zdroji, se snažíme pøi sémantické anotaci.
+
+\section{Základní struktury}
+K~modelování znalostí nejèastìji používáme tøi základní prvky:
+\begin{itemize}
+\item Tøídy (koncepty, kategorie nebo pojmy)
+\item Role (vztahy, relace, pøípadnì vlastnosti)
+\item Individua (instance tøíd, objekty)
+\end{itemize}
+
+\noindent Budeme je podrobnìji rozebírat v~celé této kapitole.
 
 \section{Deskripèní logika}
-Doplnit podle Franz Baader, Werner Nutt. Basic Description Logics: \cite{description_logics}
+Formálními prostøedky pro zachycení znalostí disponuje též deskripèní logika. Její vyjadøovací prostøedky jsou pøehledné, jejich interpretace je pøesnì definovaná. Deskripèní logika se èasto používá jako základní terminologie formálního popisu znalostí. Podívejme se na~ni nyní trochu podrobnìji, pojmy zavedená v~deskripèní logice pak budeme moci používat dále.
 
-Budeme zde popisovat deskripèní jazyk $\mathcal{ALCN}$, který je z~jazykù deskripèní logiky nejbohatší.
+V~tomto oddíle se budeme opírat o~èlánek \cite{description_logics}, který poskytuje základní úvod do~deskripèní logiky. Pøíklady zde uvedené pocházejí z~tohoto èlánku.
+
+Hned na zaèátku poznamenejme, že pojem \emph{des\-krip\-èní logika} (DL) je nepøesný. Správnì bychom mìli mluvit o~deskripèních logikách, pøípadnì o~jazycích deskripèní logiky. Jazykù deskripèní logiky je mnoho, každý používá trochu jiné konstrukce a má i jinou vyjadøovací sílu.
+%Vyjadøovací síla deskripèních jazykù je pøedmìtem vìdeckého zkoumání.
+Pøesné vymezení jednotlivých deskripèních jazykù je základním pøedpokladem pro~formální studium algoritmù pro~odvozování znalostí (reasoning). V~této práci se zajímáme spíš o~dostupné konstrukce jazykù DL, proto vystaèíme s~jedním jazykem formálnì oznaèovaným jako $\mathcal{ALCN}$, který podrobnìji popíšeme pozdìji v~\ref{sec:DL_syntax}. 
+
+\subsection{Znalostní báze - knowledge base}
+Systémy pro~reprezentaci znalostí založené na~DL tyto znalosti uchovávají v takzvané \uv{znalostí bázi} (knowledge base). Znalostní báze je také základnou pro~odvozování znalostí (reasoning). Reasoning se v~tìchto systémech používá mimo jiné k~vyhodnocování dotazù. Nás však pøedevším zajímá rozdìlení znalostní báze na~\emph{TBox} (terminologii) a \emph{ABox} (využití terminologie k~popisu svìta). Tuto situaci ilustruje obrázek \ref{pict:KB}.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -17,8 +35,19 @@ Budeme zde popisovat deskripèní jazyk $\mathcal{ALCN}$, který je z~jazykù deskri
 \end{center}
 \end{figure}
 
+\subsection{TBox}
+TBox reprezentuje terminologii, dalo by se též øíci slovník znalostní báze. Uvnitø TBox-u jsou definovány \emph{tøídy} a \emph{role} znalostní báze. Tøídy v~DL chápeme jako množiny individuí. Role reprezentují (binární) relace mezi individui. Pøíklad formálnì zapsaného TBox-u je na~obrázku \ref{pict:dl_tbox}. Dùležitou vlastností TBox-u je jeho bezespornost -- to, jestli si v~nìm kladené podmínky neprotiøeèí (podrobnìji v~sekci \ref{sec:DL_intepretace} o~interpretaci DL).
 
-\begin{figure}[!p]
+\subsection{ABox}
+ABox je množina tvrzení o~pojmenovaných individuích. Používáme slovník definovaný v~TBox-u. ABox mùžeme též nazvat množinou tvrzení o svìtì. Jednotlivá individua se zde zaøadí do~tøíd a rolí. existence modelu, který splòuje podmínky TBox-em kladené
+Pøíklad formálnì zapsaného ABox-u je na~obrázku \ref{pict:dl_abox}.
+ 
+ 
+\subsection{Syntax deskripèní logiky}
+\label{sec:DL_syntax}
+Jazyk $\mathcal{ALCN}$ je základní jazyk deskripèní logiky $\mathcal{AL}$ obohacený o~sjednocení, obecnou negaci, plný existenèní kvantifikátor a restrikce kardinality. V~tomto jazyce povolujeme pouze binární relace.
+
+\begin{figure}[!h]
 \begin{center}
 \begin{math}
 \begin{array}{rll}
@@ -38,6 +67,8 @@ C, D \ \rightarrow & A \ | & \textrm{(atomický pojem)} \\[6pt]
 \caption{Syntax deskripèní logiky \cite{description_logics}} \label{pict:dl_syntax}
 \end{figure}
 
+\subsection{Interpretace deskripèní logiky}
+\label{sec:DL_intepretace}
 \begin{figure}[!p]
 \begin{center}
 \begin{math}
@@ -87,7 +118,7 @@ C, D \ \rightarrow & A \ | & \textrm{(atomický pojem)} \\[6pt]
 \end{array}
 \end{math}
 \end{center}
-\caption[Tvrzení o individuích (ABox) \cite{description_logics}]{Tvrzení o individuích (ABox) v terminologii rodinných vztahù \cite{description_logics}} \label{pict:dl_abox}
+\caption[Tvrzení o individuích (ABox) \cite{description_logics}]{Tvrzení o individuích (ABox) rodinných vztahù \cite{description_logics}} \label{pict:dl_abox}
 \end{figure}
 
 \cleardoublepage

@@ -17,7 +17,7 @@ Kromì toho, že je možné strukturu vìty pøirozeného jazyka zapisovat pomocí rùzný
 \label{sec:ling_tag}
 Lingvistické znaèky rozdìlíme do tøí kategorií. Podle roviny lingvistické anotace, tak jak jsou rozdìleny v projektu PDT (viz oddíl~\ref{sec:PDT}). Znaèky morfologické roviny jsou nezávisle pøiøazovány jednotlivým slovùm. Naproti tomu znaèky analytické a tektogramatické roviny popisují strukturu vìty a jejich znaèky popisující vztahy mezi jednotlivými slovy se mohou týkat více slov najednou.
 
-Následuje struèný popis jednotlivých znaèek každé roviny. Podrobnìjší popis lingvistických znaèek je možné najít napøíklad v \cite{morphological_annotation}, \cite{analytic_annotation}, \cite{tectogramtic_annotation}.
+Následuje struèný popis jednotlivých znaèek každé roviny. Podrobnìjší popis lingvistických znaèek je možné najít napøíklad v \cite{PDT_pruvodce}, \cite{morphological_annotation}, \cite{analytic_annotation}, \cite{tectogramtic_annotation}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Morfologická rovina}
@@ -87,10 +87,10 @@ Funktory jsou velkým pøínosem tektogramatické roviny po praktické stránce. Funkt
 \item[-] Její \emph{manžel}.ACT tam však pracuje dál.
 \item[-] Ten \emph{román}.ACT mì oslovil.
 \item[-] Èeským \emph{skokanùm}.ACT se daøilo dobøe.
-%\item[-] Je \emph{mi}.ACT smutno.
+\item[-] Je \emph{mi}.ACT smutno.
 \end{description}
 
-\pagebreak
+%\pagebreak
 
 \item Funktor ADDR (addressee) odpovídá roli pøíjemce dìje.
 \begin{description}
@@ -184,6 +184,10 @@ Schéma tektogramatického stromu je o nìco složitìjší. Pod každým uzlem jsou vyti
 
 Na obrázku~\ref{pict:tecto_example} (tektogramatického stromu) je vidìt speciální zahnutá šipka od uzlu \emph{\#PersPron} k uzlu \emph{pìtice}. Konec této šipky ukazuje na cíl, na který odkazuje zájmeno uvnitø prvního (poèáteèního) uzlu.
 
+\includegraphics[scale=0.5]{../PDT_roviny.eps}
+\\Pøíklad pochází z Prùvodce PDT 2.0 \cite{PDT_pruvodce}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The Prague Dependency Treebank}
 \label{sec:PDT}
@@ -276,7 +280,7 @@ Na obrázcích~\ref{pict:analytic_example} a \ref{pict:tecto_example} jsou schémat
 \subsubsection{btred / ntred}
 Souèástí editoru TrEd jsou též dva nástroje - \emph{btred} a \emph{ntred}, které umožòují automatické (dávkové) zpracování stromù korpusu. Ntred je pouze rozšíøením nástroje btred o možnost zpracovávat korpus paralelnì více poèítaèi v~síti najednou.
 
-Tyto nástroje se spouštìjí pøímo z pøíkazového øádku, nemají grafické rozhraní. Èinnost tìchto nástrojù je øízena uživatelským programem (makrem btred-u), které uživatel musí napsat v programovacím jazyce Perl. Pøi psaní toho makra má uživatel k~dispozici velké množství specializovaných funkcí pro práci se strukturami korpusu: s~jednotlivými stromy, s~uzly stromù, s~atributy uzlù atp.
+Tyto nástroje se spouštìjí pøímo z pøíkazového øádku, nemají grafické rozhraní. Èinnost tìchto nástrojù je øízena uživatelským programem (mak\-rem btred-u), které uživatel musí napsat v programovacím jazyce Perl. Pøi psaní toho makra má uživatel k~dispozici velké množství specializovaných funkcí pro práci se strukturami korpusu: s~jednotlivými stromy, s~uzly stromù, s~atributy uzlù atp.
 
 Pøehledný a dobøe srozumitelný návod -- \uv{btred/ntred tutorial}\footnote{http://ufal.mf\/f.cuni.cz/\~{}pajas/tred/bn-tutorial.html}, jak pracovat s nástroji btred a ntred je možné nalézt na domovských stránkách editoru TrEd.
 
