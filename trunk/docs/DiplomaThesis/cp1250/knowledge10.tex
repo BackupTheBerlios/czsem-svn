@@ -1,0 +1,231 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Reprezentace znalostí}
+\label{sec:znalosti}
+Jedním ze základních krokù k vytvoøení sémantického webu je konceptualizace dat dostupnıch na internetu \cite{SemWeb_Matulik}. Jedním z klíèovıch nástrojù konceptualizace jsou ontologie. Ontologie lze charakterizovat jako formalizované reprezentace znalostí urèené k~jejich sdílení a znovupouití. Ontologie jsou èasto doménového (oborového) zamìøení a bıvají konstruovány jako pojmové (konceptuální) hierarchie nebo sítì.
+
+Právì o~konceptuální a formálnì pøesné vyjádøení znalostí, které jsou obsaeny ve zdroji, se snaíme pøi sémantické anotaci.
+
+\section{Základní struktury}
+K~modelování znalostí nejèastìji pouíváme tøi základní prvky:
+\begin{itemize}
+\item Tøídy (koncepty, kategorie nebo pojmy)
+\item Role (vztahy, relace, pøípadnì vlastnosti)
+\item Individua (instance tøíd, objekty)
+\end{itemize}
+
+\noindent Budeme je podrobnìji rozebírat v~celé této kapitole.
+
+\section{Deskripèní logika}
+Formálními prostøedky pro zachycení znalostí disponuje té deskripèní logika. Její vyjadøovací prostøedky jsou pøehledné, jejich interpretace je pøesnì definovaná. Deskripèní logika se èasto pouívá jako základní terminologie formálního popisu znalostí. Podívejme se na~ni nyní trochu podrobnìji, pojmy zavedená v~deskripèní logice pak budeme moci pouívat dále.
+
+V~tomto oddíle se budeme opírat o~èlánek \cite{description_logics}, kterı poskytuje základní úvod do~deskripèní logiky. Pøíklady zde uvedené pocházejí z~tohoto èlánku.
+
+Hned na zaèátku poznamenejme, e pojem \emph{des\-krip\-èní logika} (DL) je nepøesnı. Správnì bychom mìli mluvit o~deskripèních logikách, pøípadnì o~jazycích deskripèní logiky. Jazykù deskripèní logiky je mnoho, kadı pouívá trochu jiné konstrukce a má i jinou vyjadøovací sílu.
+%Vyjadøovací síla deskripèních jazykù je pøedmìtem vìdeckého zkoumání.
+Pøesné vymezení jednotlivıch deskripèních jazykù je základním pøedpokladem pro~formální studium algoritmù pro~odvozování znalostí (reasoning, inference). V~této práci se zajímáme spíš o~dostupné konstrukce jazykù DL, proto vystaèíme s~jedním jazykem formálnì oznaèovanım jako $\mathcal{ALCN}$, kterı podrobnìji popíšeme pozdìji v~\ref{sec:DL_syntax}.
+
+\begin{figure}[!b]
+\begin{center}
+\includegraphics[scale=0.5]{../KB.eps}
+\caption{Knowledge base systému pro reprezentaci znalostí \cite{description_logics}} \label{pict:KB}
+\end{center}
+\end{figure}
+
+\subsection{Znalostní báze - knowledge base}
+
+Systémy pro~reprezentaci znalostí zaloené na~DL tyto znalosti uchovávají v takzvané \uv{znalostí bázi} (knowledge base). Znalostní báze je také základnou pro~odvozování znalostí (reasoning). Reasoning se v~tìchto systémech pouívá pro~vìtšinu operací se~znalostmi: zjišování subsumpce, ekvivalence èi disjunkce tøíd, testování konzistence modelu, tj. splnitelnosti všech logickıch axiomù, zjišování pøíslušnosti individuí ke~tøídám. Tyto operace umoòují vyhodnocování dotazù na~znalosti uloené v~bázi. A to nejen na znalosti explicitnì uvedené, ale i na~znalosti, které z nich implicitnì plynou, a které se z~nich dají pomocí reasoning-u odvodit.
+
+Obrázek \ref{pict:KB} ukazuje rozdìlení znalostní báze na~\emph{TBox} (terminologii) a \emph{ABox} (vyuití terminologie k~popisu svìta).
+
+
+\subsection{Syntax deskripèní logiky}
+\label{sec:DL_syntax}
+Uvedeme zde syntax destrukèního jazyka $\mathcal{ALCN}$. Jazyk $\mathcal{ALCN}$ vznikne  ze~základního jazyka deskripèní logiky $\mathcal{AL}$ (attributive language) \cite{description_logics} pøidáním sjednocení, obecné negace, plného existenèního kvantifikátoru a restrikcí kardinality. Relace povolujeme pouze binární.
+
+Tøídy v~DL chápeme jako mnoiny individuí. Tøídy se v~DL velmi èasto oznaèují jako \emph{koncepty}. Role reprezentují (binární) relace mezi individui. Základním stavebním kamenem jsou \emph{atomické tøídy} a \emph{atomické role}, ostatní koncepty se z~nich podle pravidel (konstruktorù) na obrázku \ref{pict:dl_syntax}. Písmena $C$ a $D$ zastupují obecné tøídy, písmeno $A$ atomickou tøídu, písmeno $R$ atomickou relaci.
+
+\begin{figure}[!hb]
+\begin{center}
+\begin{math}
+\begin{array}{rll}
+C, D \ \rightarrow & A \ | & \textrm{(atomickı pojem)} \\[6pt]
+& \top \ | & \textrm{(univerzální pojem)} \\[6pt]
+& \bot \ | & \textrm{(prázdnı pojem)} \\[6pt]
+& \neg C \ | & \textrm{(negace)} \\[6pt]
+& C \sqcap D \ | & \textrm{(prùnik)} \\[6pt]
+& C \sqcup D \ | & \textrm{(sjednocení)} \\[6pt]
+& \forall R.C \ | & \textrm{(hodnotová restrikce)} \\[6pt]
+& \exists R.C \ | & \textrm{(existenèní kvantifikátor)} \\[6pt]
+& \geqslant n \, R \ |\qquad & \textrm{(maximální kardinalita)} \\[6pt]
+& \leqslant n \, R & \textrm{(minimální  kardinalita)}
+\end{array}
+\end{math}
+\end{center}
+\caption{Syntax deskripèní logiky \cite{description_logics}} \label{pict:dl_syntax}
+\end{figure}
+
+\subsection{Interpretace deskripèní logiky}
+\label{sec:DL_intepretace}
+Formální sémantiku DL definujeme pomocí \emph{interpretace} $\mathcal{I}$. Interpretace $\mathcal{I}$ se skládá z~neprázdné mnoiny $\Delta^\mathcal{I}$ (doména interpretace) a interpretaèní funkce, která kadé atomické tøídì $A$ pøiøadí mnoinu $A^\mathcal{I}\subseteq\Delta^\mathcal{I}$ a kadé atomické roli $R$ pøiøadí binární relaci $R^\mathcal{I}\subseteq\Delta^\mathcal{I}\times\Delta^\mathcal{I}$. Interpretace odvozenıch konstrukcí je zapsána na obrázku \ref{pict:dl_interpret}.
+
+\pagebreak
+
+Øíkáme, e tøídy $C$ a $D$ jsou ekvivalentní ($C \equiv D$), kdy $C^\mathcal{I} = D^\mathcal{I}$ pøi libovolné interpretaci $\mathcal{I}$. Napøíklad tøída zapsaná jako $\forall\mathsf{hasChild.Female}\sqcap\forall\mathsf{hasChild.Student}$ je ekvivalentní tøídì $\forall\mathsf{hasChild.}(\mathsf{Female}\sqcap\mathsf{Student})$. Vztah podtøídy a nadtøídy (subsumpce) $C \sqsubseteq D$ je definován analogicky $C^\mathcal{I} \subseteq D^\mathcal{I}$.
+
+\begin{figure}[!h]
+\begin{center}
+\begin{math}
+\begin{array}{rcl}
+\top^\mathcal{I} & = & \Delta^\mathcal{I} \\[6pt]
+\bot^\mathcal{I} & = & \emptyset \\[6pt]
+(\neg C)^\mathcal{I} & = & \Delta^\mathcal{I} \ \backslash \ C^\mathcal{I} \\[6pt]
+(C \sqcap D)^\mathcal{I} & = & C^\mathcal{I} \cap D^\mathcal{I} \\[6pt]
+(C \sqcup D)^\mathcal{I} & = & C^\mathcal{I} \cup D^\mathcal{I} \\[6pt]
+(\forall R.C)^\mathcal{I} & = & \{a \in \Delta^\mathcal{I} \  : \  \forall b. \  (a,b) \in R^\mathcal{I} \rightarrow b \in C^\mathcal{I}\} \\[6pt]
+(\exists R.C)^\mathcal{I} & = & \{a \in \Delta^\mathcal{I} \  : \  \exists b. \  (a,b) \in R^\mathcal{I} \ \wedge \ b \in C^\mathcal{I}\} \\[6pt]
+%(\exists R.\top)^\mathcal{I} & = & \{a \in \Delta^\mathcal{I} \  | \  \exists b. \  (a,b) \in R^\mathcal{I}\}.
+(\geqslant n \, R)^\mathcal{I} & = & \Big\{a \in \Delta^\mathcal{I} \ : \ \Big| \{b \ : \ (a,b) \in R^\mathcal{I}\}\Big| \geq n\Big\} \\[10pt]
+(\leqslant n \, R)^\mathcal{I} & = & \Big\{a \in \Delta^\mathcal{I} \ : \ \Big| \{b \ : \ (a,b) \in R^\mathcal{I}\}\Big| \leq n\Big\}
+\end{array}
+\end{math}
+\end{center}
+\caption{Interpretace deskripèní logiky \cite{description_logics}} \label{pict:dl_interpret}
+\end{figure}
+
+\subsection{TBox}
+TBox reprezentuje terminologii, dalo by se té øíci slovník znalostní báze. Uvnitø TBox-u jsou definovány \emph{tøídy} a \emph{role} znalostní báze pomocí \emph{axiomù} DL. Tyto axiomy se tvoøí pomocí relací subsumpce ($\sqsubseteq$) a ekvivalence ($\equiv$).
+
+Dùleitou vlastností TBox-u je jeho bezespornost tj. existence jeho \emph{modelu}. Modelem rozumíme takovou interpretaci $\mathcal{I}$, která splòuje všechny axiomy terminologie (všechny ekvivalence a subsumpce). Podrobnosti je moné nalézt v~\cite{description_logics}.
+
+Pøíklad formálnì zapsaného TBox-u je na~obrázku~\ref{pict:dl_tbox}.
+
+\begin{figure}[!th]
+\caption{Terminologie (TBox) pro popis rodinnıch vztahù \cite{description_logics}} \label{pict:dl_tbox}
+\begin{center}
+\begin{math}
+\begin{array}{rcl}
+\mathsf{Woman} & \equiv & \mathsf{Person} \sqcap \mathsf{Female} \\
+\mathsf{Man} & \equiv & \mathsf{Person} \sqcap \neg\mathsf{Woman} \\
+\mathsf{Mother} & \equiv & \mathsf{Woman} \sqcap \exists\mathsf{hasChild.Person} \\
+\mathsf{Father} & \equiv & \mathsf{Man} \sqcap \exists\mathsf{hasChild.Person} \\
+\mathsf{Parent} & \equiv & \mathsf{Father} \sqcup \mathsf{Mother} \\
+\mathsf{Grandmother} & \equiv & \mathsf{Mother}\sqcap \exists\mathsf{hasChild.Parent} \\
+\mathsf{MotherWithManyChildren} & \equiv & \mathsf{Mother}\,\sqcap \geqslant 3\,\mathsf{hasChild} \\
+\mathsf{MotherWithoutDaughter} & \equiv & \mathsf{Mother}\sqcap \forall\mathsf{hasChild.}\neg\mathsf{Woman} \\
+\mathsf{Wife} & \equiv & \mathsf{Woman} \sqcap \exists\mathsf{hasHusband.Man}
+\end{array}
+\end{math}
+\end{center}
+\end{figure}
+
+\subsection{ABox}
+ABox je mnoina tvrzení o~pojmenovanıch individuích. Pro vyjádøení jednotlivıch tvrzení pouíváme terminologii (TBox) znalostní báze. ABox mùeme té nazvat mnoinou tvrzení o svìtì. Jednotlivá individua se zde zaøadí do~tøíd a rolí pomocí následující syntaxe.
+
+\pagebreak
+
+Nech $a$, $b$, $c$ jsou jména individuí.
+\begin{center}
+\begin{tabular}{ll}
+Tvrzení, e $a$ patøí do tøídy $C$, zapíšeme: & $C(a)$. \\
+Tvrzení, e $c$ je s~$b$ spojeno rolí $R$ zapíšeme: & $R(b,c)$.
+\end{tabular}
+\end{center}
+
+Sémantiku ABox-u zavedeme rozšíøením vıše zmínìné \emph{interpretace} $\mathcal{I}$ na~jednotlivá individua. Kadému individuu $a$ pøiøadíme nìjakı prvek $a^\mathcal{I} \in \Delta^\mathcal{I}$ z~domény. Toto pøiøazení provedeme vzájemnì jednoznaènì. Tedy rùznım individuím $a$, $b$ odpovídali rùzné prvky domény ($a^\mathcal{I} \neq b^\mathcal{I}$).
+
+Dùleitou vlastností ABox-u je jeho konzistentnost -- existence modelu, kterı splòuje podmínky kladené pouitou terminologií (TBox).
+
+\begin{center}
+\begin{tabular}{@{} r @{ } llll @{}}
+Øíkáme, e interpretace $\mathcal{I}$ \emph{splòuje} & tvrzení & $C(a)$ & kdy & $a^\mathcal{I}
+ \in C^\mathcal{I}$ \\
+a & tvrzení & $R(b,c)$ & kdy & $(b^\mathcal{I}, c^\mathcal{I}) \in R^\mathcal{I}$.
+\end{tabular}
+\end{center}
+
+\noindent Pokud interpretace $\mathcal{I}$ splòuje všechna tvrzení ABox-u, øíkáme, e je jeho \emph{modelem}. Podrobnosti je moné nalézt v~\cite{description_logics}.
+
+Pøíklad formálnì zapsaného ABox-u je na~obrázku~\ref{pict:dl_abox}.
+
+\begin{figure}[!h]
+\begin{center}
+\begin{math}
+\begin{array}{ll}
+\mathsf{MotherWithoutDaughter(MARY)}\quad & \mathsf{Father(PETER)} \\
+\mathsf{hasChild(MARY, PETER)} & \mathsf{hasChild(PETER, HARRY)} \\
+\mathsf{hasChild(MARY, PAUL)}
+\end{array}
+\end{math}
+\end{center}
+\caption[Tvrzení o individuích (ABox) \cite{description_logics}]{Tvrzení o individuích (ABox) rodinnıch vztahù \cite{description_logics}}
+\label{pict:dl_abox}
+\end{figure}
+
+
+
+\section{Ontologie}
+\label{sec:ontologie}
+Ontologie v tradièním filosofickém pojetí oznaèuje nauku o bytí (jsoucnu). V~oblasti informatiky jsou ontologie chápány jako explicitní, formální specifikace pojmù a vztahù mezi nimi. V~\cite{Svatek_ontologie} je uvedena definice W. Borsta: \uv{Ontologie je formální specifikace sdílené konceptualizace.} Tedy cílem ontologie je definovat spoleèné, jednotné chápání pojmù urèité oblasti. Pro~sémantickou anotaci jsou ontologie ideální referenèní základnou pro vyjádøení znalostí, které je moné sdílet napøíklad v~rámci sémantického webu.
+
+Hlavními prvky, které tvoøí strukturu ontologie, jsou opìt \emph{tøídy}, \emph{role} a \emph{individua}. Naproti DL se však tyto prvky pouívají více \uv{informaticky}, mnoina individuí je rozšíøena o~\emph{primitivní hodnoty} definovanıch datovıch typù, role se klasifikují a pøesnìji specifikují, zavádìjí takzvané vlastnosti -- \emph{properties}, zuuje se jejich definièní obor, obor hodnot, dají se deklarovat jako funkèní, tranzitivní atd.
+
+Základní kostrou ontologie je hierarchie tøíd -- taxonomie. Ta se narozdíl od~DL\footnote{Subsumpce tøíd je v~DL vyhodnocována dynamicky na základì popisù tøíd, tedy i celá taxonomie vzniká dynamicky.} vìtšinou definuje explicitnì pomocí role \emph{rdfs:subClassOf} nebo pomocí nìjakého jejího ekvivalentu v~jazycích, které nejsou zaloeny na RDF. Definice tøíd je moné doplnit axiomatikou, která je napøíklad v~OWL pøímo pøevzata z~DL. Pomocí axiomù je v~OWL moné vyjádøit ekvivalenci tøíd èi rolí, disjunknost tøíd, implicitní zaøazení individuí do~tøídy pomocí dodateènıch podmínek, atd. Ontologie tak mùe pøedstavovat plnohodnotnou znalostní bázi s~reasoningem DL.
+
+%Ontologické jazyky pro WWW se svım pragmatismem a snahou o jednoduchost (by z pohledu firemní praxe moná ještì nedostateènou!) stále více vymykají z tradièního pojetí formálnì-logické reprezentace znalostí v umìlé inteligenci. Dokonce i èasto zdùrazòované zakotvení webovıch ontologií v deskripèní logice je v poslední dobì zpochybòováno30.
+
+Není jisté, jestli pro potøebu sémantického webu potøebujeme axiomatiku DL, která jazyk ontologie zesloiuje. Pøedstava sémantického webu jako jedné veliké znalostní báze, ve~které se kadı dotaz dá vyhodnotit pomocí obecného reasoningu, se zdá bıt ponìkud utopická. Naproti tomu vìtší vyjadøovací síla jazykù mùe skuteènì zvyšovat míru axiomatizace teorií, a tím snad i objektivitu ontologií \cite{Svatek_ontologie}. Otázkou je, kde všude je moné matematickou axiomatizaci aplikovat. Napøíklad u u medicíny by byl matematickı zpùsob dosahování objektivity v~øadì pøípadù kontroverzní, o vìtšinì spoleèenskıch vìd ani nemluvì.
+
+
+Pøi tvorbì stránek pro~sémantickı web bychom se rádi opøeli o~slovník nìjaké standardní, uznávané ontologie. Vìtších i menších ontologií vzniklo v~posledních letech mnoho, na~standard si však pravdìpodobnì budeme muset ještì poèkat. Pøehled nìkolika známıch ontologií uvádíme v~oddílu \ref{sec:ontoindex}. Ukazuje se, e pouití \uv{špatné} ontologie nemusí bıt a takovı problém. Konstrukce jednotlivıch ontologií se na~sebe dají vzájemnì \uv{mapovat}. Problémem mapování ontologií se podrobnì zabıvá Michal Fiedler ve~své práci~\cite{Fiedler_matching}.
+
+%Problematika ontologií je podrobnìji zpracována napøíklad v~\cite{Svatek_ontologie}.
+
+
+Uvedeme nyní dva hlavní formální jazyky pouívané pro~reprezentaci ontologií na~webu -- RDF a OWL.
+
+\subsection{RDF - Resource Description Framework}
+%\begin{figure}
+  % Requires \usepackage{graphicx}
+\begin{center}
+  \includegraphics[scale=0.6]{../RDF.eps}
+
+A Vehicle Class Hierarchy\footnote{http://www.w3.org/TR/rdf-primer/}
+
+  \includegraphics[scale=0.6]{../RDF2.eps}
+
+individuum a hodnota jednoduchého datového typu
+
+  \includegraphics[scale=0.6]{../RDF3.eps}
+\end{center}
+% \caption{}\label{}
+%\end{figure}
+
+Problém RDF je v jeho volnosti a obecnosti.
+Vıhoda ve standardnosti.
+
+<rdf:Property> <rdfs:domain> <rdfs:range>
+
+xxxxxxxxxxxxx matlik xxxxxxxxxxxxxxxxxxxxxx\\
+Technologickım základem sémantického webu by se podle organizace W3C mìl stát její standard RDF, Resource Description Framework. Podle oficiální definice jde o obecnı rámec pro popis, vımìnu a znovupouití metadat.
+
+Rámec RDF poskytuje jednoduchı model pro popis zdrojù, kterı není závislı na konkrétní implementaci. Datovı model RDF zjednodušenì øeèeno umoní specifikovat trojice {zdroj, vlastnost, hodnota vlastnosti} s vıznamem: "Danı zdroj má danou hodnotu dané vlastnosti."
+
+Trojice jsou v oficiální terminologii nazıvány tvrzení a v rámci daného tvrzení je zdroj subjektem, vlastnost predikátem a hodnota vlastnosti objektem. Hodnotou vlastnosti mùe bıt buï øetìzec znakù (literál) nebo jinı zdroj. Tento abstraktní datovı model mùe bıt vyuit v mnoha oblastech rùznımi zpùsoby. Pøíkladem je vytváøení katalogù popisujících obsah, usnadnìní sdílení a vımìny znalostí, podpora tzv. dùvìryhodného webu nebo pøiøazení sémantiky webovım zdrojùm. My se budeme vìnovat pouze poslednímu zmínìnému pøípadu, protoe právì ten je pro sémantickı web klíèovı.
+
+\subsection{OWL - Web Ontology Language}
+Mùeme se vyhnout \uv{temnım trojicím} RDF \cite{Svatek_ontologie}, které zatemòují sémantiku jazyka. usnadníme mapování
+
+objectProperty dataProperty, domain, range). Napøíklad v~OWL vlastnosti, atributy owl:ObjectProperty, <owl:DatatypeProperty
+
+Svátek: Verze OWL\\
+\\
+* OWL Lite \\
+– omezenı z hlediska elementárních konstruktù; zejména neumoòuje definovat kardinalitu jinou ne 0 nebo 1; vıpoètovì efektivní\\
+* OWL DL – \uv{default} verze\\
+– stále ještì zachovává rozhodnutelnost hlavních odvozovacích úloh\\
+– aktuálnì vzniká obohacená verze OWL1.1\\
+* OWL Full\\
+– stejné konstrukty jako OWL DL, ale ménì omezení pøi jejich pouívání\\
+– nezachovává oddìlenost tøíd, vlastností a instancí\\
+– teprve OWL Full je nadjazykem RDF/S!
