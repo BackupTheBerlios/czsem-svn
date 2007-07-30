@@ -100,7 +100,8 @@ Dùleitou vlastností TBox-u je jeho bezespornost tj. existence jeho \emph{modelu
 
 Pøíklad formálnì zapsaného TBox-u je na~obrázku~\ref{pict:dl_tbox}.
 
-\begin{figure}[!h]
+\begin{figure}[!th]
+\caption{Terminologie (TBox) pro popis rodinnıch vztahù \cite{description_logics}} \label{pict:dl_tbox}
 \begin{center}
 \begin{math}
 \begin{array}{rcl}
@@ -116,24 +117,38 @@ Pøíklad formálnì zapsaného TBox-u je na~obrázku~\ref{pict:dl_tbox}.
 \end{array}
 \end{math}
 \end{center}
-\caption{Terminologie (TBox) pro popis rodinnıch vztahù \cite{description_logics}} \label{pict:dl_tbox}
 \end{figure}
 
-\pagebreak
 \subsection{ABox}
-ABox je mnoina tvrzení o~pojmenovanıch individuích. Pouíváme slovník definovanı v~TBox-u. ABox mùeme té nazvat mnoinou tvrzení o svìtì. Jednotlivá individua se zde zaøadí do~tøíd a rolí pomocí následující syntaxe.
+ABox je mnoina tvrzení o~pojmenovanıch individuích. Pro vyjádøení jednotlivıch tvrzení pouíváme terminologii (TBox) znalostní báze. ABox mùeme té nazvat mnoinou tvrzení o svìtì. Jednotlivá individua se zde zaøadí do~tøíd a rolí pomocí následující syntaxe.
 
-Nech $a$, $b$, $c$ jsou jména individuí. Tvrzení, e $a$ patøí do tøídy $C$, zapíšeme: $C(a)$. Tvrzení, e $c$ je s~$b$ spojeno rolí $R$ zapíšeme: $R(b,c)$.
+\pagebreak
 
-Sémantiku ABox-u zavedeme rozšíøením vıše zmínìné \emph{interpretace} $\mathcal{I}$ na~jednotlivá individua tak, e kadému individuu $a$ pøiøadíme nìjakı prvek $a^\mathcal{I} \in \Delta^\mathcal{I}$. Toto pøiøazení provedeme jednoznaènì tak, aby rùznım individuím $a$, $b$ odpovídali rùzné prvky domény ($a^\mathcal{I} \neq b^\mathcal{I}$).
+Nech $a$, $b$, $c$ jsou jména individuí.
+\begin{center}
+\begin{tabular}{ll}
+Tvrzení, e $a$ patøí do tøídy $C$, zapíšeme: & $C(a)$. \\
+Tvrzení, e $c$ je s~$b$ spojeno rolí $R$ zapíšeme: & $R(b,c)$.
+\end{tabular}
+\end{center}
 
-Dùleitou vlastností ABox-u je jeho konzistentnost -- existence modelu, kterı splòuje podmínky kladené pouitou terminologií (TBox-em).
+Sémantiku ABox-u zavedeme rozšíøením vıše zmínìné \emph{interpretace} $\mathcal{I}$ na~jednotlivá individua. Kadému individuu $a$ pøiøadíme nìjakı prvek $a^\mathcal{I} \in \Delta^\mathcal{I}$ z~domény. Toto pøiøazení provedeme vzájemnì jednoznaènì. Tedy rùznım individuím $a$, $b$ odpovídali rùzné prvky domény ($a^\mathcal{I} \neq b^\mathcal{I}$).
 
-Øíkáme, e interpretace $\mathcal{I}$ \emph{splòuje} tvrzení $C(a)$ kdy $a^\mathcal{I} \in C^\mathcal{I}$ a tvrzení $R(b,c)$ kdy $(b^\mathcal{I}, c^\mathcal{I}) \in R^\mathcal{I}$. Pokud interpretace $\mathcal{I}$ splòuje všechna tvrzení ABox-u, øíkáme, e je jeho \emph{modelem}.
+Dùleitou vlastností ABox-u je jeho konzistentnost -- existence modelu, kterı splòuje podmínky kladené pouitou terminologií (TBox).
+
+\begin{center}
+\begin{tabular}{@{} r @{ } llll @{}}
+Øíkáme, e interpretace $\mathcal{I}$ \emph{splòuje} & tvrzení & $C(a)$ & kdy & $a^\mathcal{I}
+ \in C^\mathcal{I}$ \\
+a & tvrzení & $R(b,c)$ & kdy & $(b^\mathcal{I}, c^\mathcal{I}) \in R^\mathcal{I}$.
+\end{tabular}
+\end{center}
+
+\noindent Pokud interpretace $\mathcal{I}$ splòuje všechna tvrzení ABox-u, øíkáme, e je jeho \emph{modelem}. Podrobnosti je moné nalézt v~\cite{description_logics}.
 
 Pøíklad formálnì zapsaného ABox-u je na~obrázku~\ref{pict:dl_abox}.
 
-\begin{figure}[!b]
+\begin{figure}[!h]
 \begin{center}
 \begin{math}
 \begin{array}{ll}
@@ -143,15 +158,30 @@ Pøíklad formálnì zapsaného ABox-u je na~obrázku~\ref{pict:dl_abox}.
 \end{array}
 \end{math}
 \end{center}
-\caption[Tvrzení o individuích (ABox) \cite{description_logics}]{Tvrzení o individuích (ABox) rodinnıch vztahù \cite{description_logics}} \label{pict:dl_abox}
+\caption[Tvrzení o individuích (ABox) \cite{description_logics}]{Tvrzení o individuích (ABox) rodinnıch vztahù \cite{description_logics}}
+\label{pict:dl_abox}
 \end{figure}
+
 
 
 \section{Ontologie}
 \label{sec:ontologie}
-Svatek ontologie: \cite{Svatek_ontologie}
+Ontologie v tradièním filosofickém pojetí oznaèuje nauku o bytí (jsoucnu). V~oblasti informatiky jsou ontologie chápány jako explicitní, formální specifikace pojmù a vztahù mezi nimi. V~\cite{Svatek_ontologie} je uvedena definice W. Borsta: \uv{Ontologie je formální specifikace sdílené konceptualizace.} Tedy cílem ontologie je definovat spoleèné, jednotné chápání pojmù urèité oblasti. Pro~sémantickou anotaci jsou ontologie ideální referenèní základnou pro vyjádøení znalostí, které je moné sdílet napøíklad v~rámci sémantického webu.
 
-Subsumpce tøíd je v~DL vyhodnocována dynamicky na základì jejich popisù, tedy i celá taxonomie vzniká dynamicky.
+Hlavními prvky, které tvoøí strukturu ontologie, jsou opìt \emph{tøídy}, \emph{role} a \emph{individua}. Naproti DL se však tyto prvky pouívají více \uv{informaticky}, mnoina individuí je rozšíøena o~\emph{primitivní hodnoty} definovanıch datovıch typù, role se klasifikují a pøesnìji specifikují, zavádìjí takzvané vlastnosti -- \emph{properties}, zuuje se jejich definièní obor, obor hodnot, dají se deklarovat jako funkèní, tranzitivní atd. Základní kostrou ontologie je hierarchie tøíd -- taxonomie. Ta se, narozdíl od~DL\footnote{Subsumpce tøíd je v~DL vyhodnocována dynamicky na základì popisù tøíd, tedy i celá taxonomie vzniká dynamicky.}, vìtšinou definuje explicitnì pomocí role \emph{rdfs:subClassOf} nebo pomocí nìjakého jejího ekvivalentu v~ostatních jazycích. !!!dopsat axiomy pro definici tøíd
+
+
+
+
+xxxxxxxxxxxxx matlik xxxxxxxxxxxxxxxxxxxxxx\\
+Je zøejmé, e "jednotnosti" se snáze dosáhne v urèité uzavøené oblasti - doménì. Proto dnes existuje pomìrnì velké mnoství tzv. doménovıch ontologií. Aktuální otázkou vızkumu je, zda pro úspìšnou realizaci informaèních systémù budoucnosti postaèí rozšiøování poètu tìchto "kamínkù mozaiky" sémantického webu, èi zda je nutné zapojit i nìjakou obecnou, široce pojatou, "všeobjímající" ontologii.
+
+Mapováním ontologií se zabıvá Michal Fiedler ve~své práci \cite{Fiedler_matching}.
+\\xxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxxx
+
+Problematika ontologií je podrobnìji zpracována napøíklad v~\cite{Svatek_ontologie}.
+
+Uvedeme nyní dva hlavní formální jazyky pouívané pro~reprezentaci ontologií na~webu -- RDF a OWL.
 
 \subsection{RDF - Resource Description Framework}
 %\begin{figure}
@@ -170,7 +200,23 @@ individuum a hodnota jednoduchého datového typu
 % \caption{}\label{}
 %\end{figure}
 
+Problém RDF je v jeho volnosti a obecnosti.
+Vıhoda ve standardnosti.
+
+<rdf:Property> <rdfs:domain> <rdfs:range>
+
+xxxxxxxxxxxxx matlik xxxxxxxxxxxxxxxxxxxxxx\\
+Technologickım základem sémantického webu by se podle organizace W3C mìl stát její standard RDF, Resource Description Framework. Podle oficiální definice jde o obecnı rámec pro popis, vımìnu a znovupouití metadat.
+
+Rámec RDF poskytuje jednoduchı model pro popis zdrojù, kterı není závislı na konkrétní implementaci. Datovı model RDF zjednodušenì øeèeno umoní specifikovat trojice {zdroj, vlastnost, hodnota vlastnosti} s vıznamem: "Danı zdroj má danou hodnotu dané vlastnosti."
+
+Trojice jsou v oficiální terminologii nazıvány tvrzení a v rámci daného tvrzení je zdroj subjektem, vlastnost predikátem a hodnota vlastnosti objektem. Hodnotou vlastnosti mùe bıt buï øetìzec znakù (literál) nebo jinı zdroj. Tento abstraktní datovı model mùe bıt vyuit v mnoha oblastech rùznımi zpùsoby. Pøíkladem je vytváøení katalogù popisujících obsah, usnadnìní sdílení a vımìny znalostí, podpora tzv. dùvìryhodného webu nebo pøiøazení sémantiky webovım zdrojùm. My se budeme vìnovat pouze poslednímu zmínìnému pøípadu, protoe právì ten je pro sémantickı web klíèovı.
+
 \subsection{OWL - Web Ontology Language}
+Mùeme se vyhnout \uv{temnım trojicím} RDF \cite{Svatek_ontologie}, které zatemòují sémantiku jazyka. usnadníme mapování
+
+objectProperty dataProperty, domain, range). Napøíklad v~OWL vlastnosti, atributy owl:ObjectProperty, <owl:DatatypeProperty
+
 Svátek: Verze OWL\\
 \\
 * OWL Lite \\
