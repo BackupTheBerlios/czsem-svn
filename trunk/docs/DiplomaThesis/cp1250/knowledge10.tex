@@ -197,40 +197,57 @@ Technologickým základem sémantického webu by se podle organizace W3C mìl stát je
 
 \noindent Této tøíprvkové konstrukci øíkáme \emph{tvrzení} (statement, pøípadnì RDF triple). Každé takové \emph{tvrzení} øíká, že vlastnost identifikovaná jako \emph{predikát} daného \emph{subjektu} má hodnotu \emph{objekt}. Neboli \emph{subjekt} je s~\emph{objektem} spojen rolí \emph{predikát}. Každý z~trojice prvkù libovolného \emph{tvrzení} reprezentuje nìjaký \emph{zdroj} (resource) a je jednoznaènì identifikovaný svým URI\footnote{URI -- Uniform Resource Identifier, RFC 1630}. Zdrojem mùže být web-stránka, objekt web-stránky èi libovolná entita webu i mimo web, která se dá identifikovat pomocí URI. Výjimku z~tohoto pravidla pøedstavuje situace, kdy \emph{objekt} obsahuje pøímo primitivní hodnotu nìjakého datového typu (viz dále). Nejèastìji jako zdroje používáme jednotlivé \emph{tøídy}, \emph{role} a \emph{individua} ontologií.
 
-V~zápisech zdrojù pomocí URI
-
-RDF je nezávislý na~konkrétní fyzické interpretaci, nejèastìji se ukládá ve formì XML.
-
-
-
-%\begin{figure}
-  % Requires \usepackage{graphicx}
+V~zápisech zdrojù pomocí URI máme možnost používat zkratky -- takzvané \emph{namespace prefix} známé z~XML. V~dalším textu budeme používat následující prefixy.
 
 \begin{center}
+\begin{tabular}{r|l|l}
+prefix & namespace URI & poznámka\\
+  \hline
+rdf: &  {\footnotesize\verb|http://www.w3.org/1999/02/22-rdf-syntax-ns#|} & RDF zdroje\\
+rdfs: & {\footnotesize\verb|http://www.w3.org/2000/01/rdf-schema#|} & RDFS zdroje\\
+owl: & {\footnotesize\verb|http://www.w3.org/2002/07/owl#|} & OWL zdroje\\
+xsd: & {\footnotesize\verb|http://www.w3.org/2001/XMLSchema#|} & datové typy\\[6px]
+ex: & {\footnotesize\verb|http://example.org/schemas/vehicles#|} & pøíklady W3C\\
+exterms: & {\footnotesize\verb|http://example.org/terms/|} & ...\\
+exthings: & {\footnotesize\verb|http://example.org/things/|} & ...
+\end{tabular}
+\end{center}
+
+\subsubsection{RDF Schema}
+RDF Schema\footnote{http://www.w3.org/TR/rdf-schema/} (RDFS) je jednoduchou nadstavbou RDF, která definuje nìkolik konstrukcí pro reprezentaci znalostí. Na obrázku \ref{pict:RDF_classes} je vidìt použití predikátu \emph{rdfs:subClassOf} k~vytvoøení jednoduché taxonomie motorových vozidel.
 
 
-RDFS -- RDF Schema\footnote{http://www.w3.org/TR/rdf-schema/}
-
-A Vehicle Class Hierarchy\footnote{http://www.w3.org/TR/rdf-primer/}
-
+\begin{figure}[b!]
+\begin{center}
   \includegraphics[scale=0.6]{../RDF2.eps}
+\end{center}
+  \caption[Pøíklad hierarchie tøíd v RDF]{Pøíklad hierarchie tøíd v RDF: A Vehicle Class Hierarchy\\
+  Pøíklad pochází z~dokumentu RDF Primer.\\
+  http://www.w3.org/TR/rdf-primer/}
+  \label{pict:RDF_classes}
+\end{figure}
 
-individuum a hodnota jednoduchého datového typu
 
+
+\begin{figure}[t!]
+\begin{center}
   \includegraphics[scale=0.6]{../RDF3.eps}
 \end{center}
-% \caption{}\label{}
-%\end{figure}
+  \caption[Pøiøazení individua do tøídy v~RDF]{Pøiøazení individua do tøídy a použití hodnoty jednoduchého datového typu. Pøíklad pochází z~dokumentu RDF Primer.\\
+  http://www.w3.org/TR/rdf-primer/}
+  \label{pict:RDF_individual}
+\end{figure}
+
+
+
+
 
 Problém RDF je v jeho volnosti a obecnosti.
 Výhoda ve standardnosti.
 
 <rdf:Property> <rdfs:domain> <rdfs:range>
 
-
-Rámec RDF poskytuje jednoduchý model pro popis zdrojù, který není závislý na konkrétní implementaci. Datový model RDF zjednodušenì øeèeno umožní specifikovat trojice {zdroj, vlastnost, hodnota vlastnosti} s významem: "Daný zdroj má danou hodnotu dané vlastnosti."
-
-Trojice jsou v oficiální terminologii nazývány tvrzení a v rámci daného tvrzení je zdroj subjektem, vlastnost predikátem a hodnota vlastnosti objektem. Hodnotou vlastnosti mùže být buï øetìzec znakù (literál) nebo jiný zdroj. Tento abstraktní datový model mùže být využit v mnoha oblastech rùznými zpùsoby. Pøíkladem je vytváøení katalogù popisujících obsah, usnadnìní sdílení a výmìny znalostí, podpora tzv. dùvìryhodného webu nebo pøiøazení sémantiky webovým zdrojùm. My se budeme vìnovat pouze poslednímu zmínìnému pøípadu, protože právì ten je pro sémantický web klíèový.
+RDF je nezávislý na~konkrétní fyzické interpretaci, nejèastìji se ukládá ve formì XML.
 
 \subsection{OWL - Web Ontology Language}
 Mùžeme se vyhnout \uv{temným trojicím} RDF \cite{Svatek_ontologie}, které zatemòují sémantiku jazyka. usnadníme mapování
