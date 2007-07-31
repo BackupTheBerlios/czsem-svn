@@ -182,13 +182,34 @@ Pøi tvorbì stránek pro~sémantický web bychom se rádi opøeli o~slovník nìjaké sta
 %Problematika ontologií je podrobnìji zpracována napøíklad v~\cite{Svatek_ontologie}.
 
 
-Uvedeme nyní dva hlavní formální jazyky používané pro~reprezentaci ontologií na~webu -- RDF a OWL.
+Uvedeme nyní dva hlavní formální jazyky používané pro~reprezentaci ontologií na~webu: RDF a OWL.
 
 \subsection{RDF - Resource Description Framework}
-%\begin{figure}
-  % Requires \usepackage{graphicx}
+Technologickým základem sémantického webu by se podle organizace W3C mìl stát její standard RDF -- Resource Description Framework\footnote{http://www.w3.org/RDF/}. Jde o~obecný rámec pro popis, výmìnu a znovupoužití metadat. Rámec RDF poskytuje jednoduchý model pro popis zdrojù. Datový model RDF je založen na~tøíprvkové konstrukci \emph{subject} (subjekt) -- \emph{predicate} (predikát) -- \emph{object} (objekt), viz obrázek \ref{pict:RDF_triple}.
+
+\begin{figure}[h!]
 \begin{center}
   \includegraphics[scale=0.6]{../RDF.eps}
+\end{center}
+  \caption{RDF triple: \emph{subject} -- \emph{predicate} -- \emph{object}}
+  \label{pict:RDF_triple}
+\end{figure}
+
+\noindent Této tøíprvkové konstrukci øíkáme \emph{tvrzení} (statement, pøípadnì RDF triple). Každé takové \emph{tvrzení} øíká, že vlastnost identifikovaná jako \emph{predikát} daného \emph{subjektu} má hodnotu \emph{objekt}. Neboli \emph{subjekt} je s~\emph{objektem} spojen rolí \emph{predikát}. Každý z~trojice prvkù libovolného \emph{tvrzení} reprezentuje nìjaký \emph{zdroj} (resource) a je jednoznaènì identifikovaný svým URI\footnote{URI -- Uniform Resource Identifier, RFC 1630}. Zdrojem mùže být web-stránka, objekt web-stránky èi libovolná entita webu i mimo web, která se dá identifikovat pomocí URI. Výjimku z~tohoto pravidla pøedstavuje situace, kdy \emph{objekt} obsahuje pøímo primitivní hodnotu nìjakého datového typu (viz dále). Nejèastìji jako zdroje používáme jednotlivé \emph{tøídy}, \emph{role} a \emph{individua} ontologií.
+
+V~zápisech zdrojù pomocí URI
+
+RDF je nezávislý na~konkrétní fyzické interpretaci, nejèastìji se ukládá ve formì XML.
+
+
+
+%\begin{figure}
+  % Requires \usepackage{graphicx}
+
+\begin{center}
+
+
+RDFS -- RDF Schema\footnote{http://www.w3.org/TR/rdf-schema/}
 
 A Vehicle Class Hierarchy\footnote{http://www.w3.org/TR/rdf-primer/}
 
@@ -206,8 +227,6 @@ Výhoda ve standardnosti.
 
 <rdf:Property> <rdfs:domain> <rdfs:range>
 
-xxxxxxxxxxxxx matlik xxxxxxxxxxxxxxxxxxxxxx\\
-Technologickým základem sémantického webu by se podle organizace W3C mìl stát její standard RDF, Resource Description Framework. Podle oficiální definice jde o obecný rámec pro popis, výmìnu a znovupoužití metadat.
 
 Rámec RDF poskytuje jednoduchý model pro popis zdrojù, který není závislý na konkrétní implementaci. Datový model RDF zjednodušenì øeèeno umožní specifikovat trojice {zdroj, vlastnost, hodnota vlastnosti} s významem: "Daný zdroj má danou hodnotu dané vlastnosti."
 

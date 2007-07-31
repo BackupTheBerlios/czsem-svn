@@ -2,15 +2,28 @@
 \chapter{Lingvistická anotace}
 \label{sec:ling_anot}
 
-Lingvistickou anotací budeme v této práci oznaèovat èinnost, pøi které se text pøirozeného jazyka obohacuje o lingvistickou informaci o slovech, vìtách, vztazích mezi slovy, mezi vìtami, o typu a pùvodu textu atp. Lingvistická anotace nebo též znaèkování korpusu je jedna z èinností korpusové lingvistiky. Korpusem rozumíme soubor textù spolu s lingvistickou informací k nim dodanou. Korpusová lingvistika je pomìrnì novou disciplínou, jejíž vznik, stejnì jako vznik celé poèítaèové lingvistiky vùbec, umožnil rozvoj výpoèetní techniky posledních let. Korpusová lingvistika se zabývá zkoumáním a shromažïováním textù pøirozeného jazyka (vytváøením korpusu). Texty se anotují za velké podpory poèítaèe - napøíklad morfologická desambiguace (viz~\ref{sec:morphological_tagging}) by byla bez softwarové podpory nadlidský úkol. Avšak pro anotaci korpusu je stále nutná spousta lidské \uv{ruèní} práce. Takto anotované texty pøedstavují velmi cenná data, ze kterých se pøedevším pomocí statistických metod dají vyvodit nové poznatky o jazyce. Díky ruènì anotovaným korpusùm vynikla a stále vyniká vìtšina softwarových nástrojù pro poèítaèové zpracování pøirozeného jazyka.
+Lingvistickou anotací budeme v této práci oznaèovat èinnost, pøi které se text pøirozeného jazyka obohacuje o lingvistickou informaci o slovech, vìtách, vztazích mezi slovy, mezi vìtami, o typu a pùvodu textu atp. Lingvistická anotace nebo též znaèkování korpusu je jedna z èinností korpusové lingvistiky. Korpusem rozumíme soubor textù spolu s dodanou lingvistickou informací. Korpusová lingvistika je pomìrnì novou disciplínou, jejíž vznik, stejnì jako vznik celé poèítaèové lingvistiky vùbec, umožnil rozvoj výpoèetní techniky posledních let. Korpusová lingvistika se zabývá zkoumáním a shromažïováním textù pøirozeného jazyka (vytváøením korpusu). Texty se anotují za velké podpory poèítaèe - napøíklad morfologická desambiguace (viz~\ref{sec:morphological_tagging}) by byla bez softwarové podpory nadlidský úkol. Avšak pro anotaci korpusu je stále nutná spousta lidské \uv{ruèní} práce. Takto anotované texty pøedstavují velmi cenná data, ze kterých se pøedevším pomocí statistických metod dají vyvodit nové poznatky o jazyce. Díky ruènì anotovaným korpusùm vynikla a stále vyniká vìtšina softwarových nástrojù pro poèítaèové zpracování pøirozeného jazyka.
 
 Korpusová lingvistika dnes nemalou mírou pøispívá k jazykovému výzkumu. Na stránkách Èeského národního korpusu\footnote{http://ucnk.ff.cuni.cz/} se dokonce uvádí, že pøináší natolik nové poznatky o jazyce, že do dosavadního vývoje jazykovìdy vnáší radikální pøevrat. Toto tvrzení nemusí pùsobit pøekvapivì, pokud napøíklad srovnáme pùvodní latinskou lingvistickou terminologii s tou, která vzniká v poèítaèové lingvistice v poslední dobì.
 
-Korpusy se v zásadì znaèkují tøemi druhy znaèek. 1) Znaèky správní zachycují identifikaèní údaje o každém textu - informace o jeho pùvodu a zdroji. 2) Znaèky strukturní zachycují hierarchickou strukturu textu tj rozdìlení textu do kapitol, odstavcù, vìt, slov a interpunkèních znamének (tokenù). 3) Znaèky lingvistické jsou pøiøazeny k jednotlivým slovùm a nesou informaci o lingvistických kategoriích, které dané slovo nese.
+Korpusy se v zásadì znaèkují tøemi druhy znaèek:
+\begin{description}
+\item [Znaèky správní] zachycují identifikaèní údaje o každém textu - informace o jeho pùvodu a zdroji.
+\item [Znaèky strukturní] zachycují hierarchickou strukturu textu tj rozdìlení textu do kapitol, odstavcù, vìt a \emph{tokenù} (slov a interpunkèních znamének).
+\item [Znaèky lingvistické] jsou pøiøazeny k jednotlivým slovùm a nesou informaci o lingvistických kategoriích, které dané slovo nese.
+\end{description}
 
-Samostatnou kapitolou lingvistické anotace je potom zachycení gramatické stavby vìty. K tomu se používají dva typy gramatik - složková a závislostní gramatika. Závislostní gramatika má dlouholetou tradici v popisu jazykù evropského kontinentu a zdá se, že má urèité výhody i pro popis angliètiny, která bývá èastìji zpracovávána gramatikou složkovou. Složkový popis je blíže Chomského pojetí jazyka. Vìta je podle složkové gramatiky rekurzivnì dìlena do menších a menších složek. Postup zaèíná rozdìlením vìty na èást podmìtnou a pøísudkovou a postupuje dìlením tìchto složek na~podsložky, až dojde k jednotlivým slovùm. Závislostní pøístup naproti tomu vezme jednotlivá slova a ta pospojuje závislostními hranami do takzvaného závislostního stromu. Velmi podrobnì je problematika gramatik a vìtné syntaxe popsána v \cite{sgall_syntaxe}.
+Samostatnou kapitolou lingvistické anotace je potom zachycení gramatické stavby vìty \cite{sgall_syntaxe}. K~tomu se používají dva typy gramatik - \emph{složková} a \emph{závislostní} gramatika. Závislostní gramatika má dlouholetou tradici v popisu jazykù evropského kontinentu a zdá se, že má urèité výhody i pro popis angliètiny, která bývá èastìji zpracovávána gramatikou složkovou.
 
-Kromì toho, že je možné strukturu vìty pøirozeného jazyka zapisovat pomocí rùzných typù gramatik, je též možné zapisovat tuto strukturu na rùzných významových rovinách. Lingvistický výzkum rùzných jazykù ukazuje vhodnost takového vícevrstvého popisu. Na~rùzných rovinách je totiž možné pøehlednìji postihnout rùzné jazykové jevy. Tento problém je podrobnìji rozveden v~práci \cite{platek_cz_pc}, dále je zde pøedstavena tradièní trojice rovin pro popis struktury vìty. Stejnì jsou roviny lingvistické anotace zpracovány v~projektu PDT (viz oddíl~\ref{sec:PDT}), ze kterého budeme dále vycházet. Roviny lingvistické anotace:
+Složkový popis je blíže Chomského pojetí jazyka. Vìta je podle složkové gramatiky rekurzivnì dìlena do menších a menších složek. Postup zaèíná rozdìlením vìty na èást podmìtnou a pøísudkovou a postupuje dìlením tìchto složek na~podsložky, až dojde k jednotlivým slovùm.
+
+Závislostní pøístup naproti tomu vezme jednotlivá slova a ta pospojuje závislostními hranami do takzvaného závislostního stromu. Velmi podrobnì je problematika gramatik a vìtné syntaxe popsána v \cite{sgall_syntaxe}.
+
+Kromì toho, že je možné strukturu vìty pøirozeného jazyka zapisovat pomocí rùzných typù gramatik, je též možné zapisovat tuto strukturu na rùzných významových rovinách. Lingvistický výzkum rùzných jazykù ukazuje vhodnost takového vícevrstvého popisu. Na~rùzných rovinách je totiž možné pøehlednìji postihnout rùzné jazykové jevy \cite{platek_cz_pc}.
+
+Pøedstavme nyní tradièní trojici rovin lingvistické anotace, která je pro popis struktury vìty používána v~projektu PDT (viz oddíl~\ref{sec:PDT}). Z~terminologie projektu PDT zde budeme vycházet, protože vìtšina lingvistických nástrojù, které pøedstavíme (oddíl \ref{sec:ling_tools}), buï z~tohoto projektu pochází nebo je s~ním úzce spojena a tuto terminologii sdílí.
+
+\subsubsection{Roviny lingvistické anotace}
 
 \begin{itemize}
 \item Rovina morfologická
@@ -46,59 +59,93 @@ Kromì toho, že je možné strukturu vìty pøirozeného jazyka zapisovat pomocí rùzný
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Lingvistické znaèky}
 \label{sec:ling_tag}
-Lingvistické znaèky rozdìlíme do tøí kategorií. Podle roviny lingvistické anotace, tak jak jsou rozdìleny v projektu PDT (viz oddíl~\ref{sec:PDT}). Znaèky morfologické roviny jsou nezávisle pøiøazovány jednotlivým slovùm. Naproti tomu znaèky analytické a tektogramatické roviny popisují strukturu vìty a jejich znaèky popisující vztahy mezi jednotlivými slovy se mohou týkat více slov najednou.
+Lingvistické znaèky rozdìlíme do tøí kategorií podle roviny lingvistické anotace. Znaèky morfologické roviny jsou nezávisle pøiøazovány jednotlivým slovùm. Naproti tomu znaèky analytické a tektogramatické roviny popisují strukturu vìty a jejich znaèky popisující i vztahy mezi jednotlivými slovy.
 
-Následuje struèný popis jednotlivých znaèek každé roviny. Podrobnìjší popis lingvistických znaèek je možné najít napøíklad v \cite{PDT_pruvodce}, \cite{morphological_annotation}, \cite{analytic_annotation}, \cite{tectogramtic_annotation}.
+Vztah jednotlivých rovin anotace je znázornìn na~obrázku \ref{pict:roviny_anotace}. Následuje struèný popis jednotlivých znaèek každé roviny. Podrobnìjší popis lingvistických znaèek je možné najít napøíklad v \cite{PDT_pruvodce}, \cite{morphological_annotation}, \cite{analytic_annotation}, \cite{tectogramtic_annotation}.
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Morfologická rovina}
 \subsubsection{Slovní tvar}
-Tato znaèka obsahuje tvar, v jakém se dané slovo vyskytuje v pùvodním textu, vèetnì zápisu malých a velkých písmen. Od pùvodního výskytu se liší jen ve výjimeèných pøípadech, kdy napøíklad pùvodní slovní tvar byl èíslice s desetinnou èárkou (snaha o jednotný zápis èísel) nebo se jednalo o pøeklep.
+Tato znaèka obsahuje tvar, v jakém se dané slovo vyskytuje v pùvodním textu, vèetnì zápisu malých a velkých písmen. Od pùvodního výskytu se liší jen ve výjimeèných pøípadech, kdy napøíklad pùvodní slovní tvar byl èíslice s desetinnou èárkou (snaha o jednotný zápis èísel) nebo se jednalo o pøeklep. Slovní tvar je v~korpusech PDT uložen pod atributem \emph{m/form}. Na~obrázku \ref{pict:roviny_anotace} je slovní tvar uveden v~prvním øádku roviny \emph{m-layer} a v~popiscích uzlù roviny \emph{a-layer}.
+
 \subsubsection{Lemma}
 \label{sec:lemma}
-Lemma je takzvaný základní tvar slova. Jednoznaènì slovo identifikuje.\\
-V~tomto tvaru je dané slovo obvykle uvádìno ve slovnících.
+Lemma je takzvaný základní tvar slova. Jednoznaènì slovo identifikuje. V~tomto tvaru je dané slovo obvykle uvádìno ve slovnících.
+
+Morfologické lemma je v~korpusech PDT uloženo pod atributem \emph{m/lemma}. Na~obrázku \ref{pict:roviny_anotace} jsou morfologická lemmata ve~druhém øádku roviny \emph{m-layer}.
+
 \subsubsection{Morfologická znaèka}
 Morfologická znaèka v sobì spojuje informaci o morfologických kategoriích, které dané slovo nese. Z morfologické znaèky je možné zjistit slovní druh, jmenný rod, èíslo, pád, osobu, èas, atd.
 
+V~korpusech PDT je možné morfologickou znaèku najít jako \emph{m/tag}, její hodnotou je patnácti místný øetìzec, každý znak nese nìkterou z~morfologických kategorií. Napøíklad písmeno na první pozici vyjadøuje slovní druh, hodnota \verb|N| (Noun) znamená podstatné jméno, \verb|V| (Verb) sloveso, \verb|R| (Preposition) pøedložka, atd. Pro podrobnosti viz napøíklad \cite{morphological_annotation}. Na~obrázku \ref{pict:roviny_anotace} jsou morfologické znaèky v~posledním øádku roviny \emph{m-layer}.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Analytická rovina}
-Analytická rovina je první úroveò pro strukturní anotaci. Opouští se zde lineární anotace, kdy je každé slovo bráno samostatnì bez ohledu na kontext a do anotace textu se zavádí vìtná struktura. Všechna pùvodní slova textu zùstávají zachována a dostávají ve výsledné struktuøe svou funkci.
-
-Na analytické rovinì se vytváøí stromová struktura vìty (stromem rozumíme orientovaný acyklický graf s jedním koøenem). Uzly stromu jsou tvoøeny jednotlivými slovy, respektive tokeny. Hrany stromu reprezentují vztahy závislosti. Do koøene stromu je umístìno øídící sloveso vìty, na toto sloveso se pak zavìšují ostatní slova. V pøípadì, že se jedná o souøadné souvìtí, koøenem stromu je spojka, pøípadnì èárka, která jednotlivé vìty souvìtí oddìluje. Základním cílem je korektní zachycení struktury vìty a oznaèení typu závislosti. Typ závislosti je uložen uvnitø lingvistické znaèky \emph{analytická funkce}.
-
-\subsubsection{Analytická funkce}
-Analytická funkce je pomìrnì dobøe známý pojem, který se používá na èeských základních a støedních školách pøi takzvaném vìtném rozboru. Tam se ale vìtšinou neoznaèuje jako analytická funkce ale jako \emph{vìtný èlen}.
-
-V závislostním stromu analytické roviny anotace, se analytickou funkcí oznaèí každá závislostní hrana. Analytická funkce oznaèuje typ této závislosti.
-
-\noindent Pøíklady analytických funkcí:
-\begin{itemize}
-\item Predikát (pøísudek)
-\item Subjekt (podmìt)
-\item Objekt (pøedmìt)
-\item Atribut (pøívlastek)
-\item Adverbiale (pøísloveèné urèení)
-\item ...
-\end{itemize}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[!ht]
+\begin{figure}[!h]
 \begin{center}
 \framebox{\includegraphics[width=11cm, height=8cm]{../analytic_example.eps}}
 %\framebox{\includegraphics[scale=0.9]{../analytic_example.eps}}
-\caption{Pøíklad anotace na analytické rovinì} \label{pict:analytic_example}
+\caption[Pøíklad anotace na analytické rovinì]{Pøíklad anotace na analytické rovinì
+\\ Podrobný popis obrázku je v~sekci \ref{sec:ling_example}.}
+\label{pict:analytic_example}
 \end{center}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Tektogramatická rovina}
-Tektogramatická rovina je pomìrnì rozsáhlý koncept s hlubokou lingvistickou teorií v pozadí. Byla popsána už v roce 1961 v èlánku \cite{curry_t_rovina}.
+Analytická rovina je první úroveò pro strukturní anotaci. Opouští se zde lineární anotace, kdy je každé slovo bráno samostatnì bez ohledu na kontext a do anotace textu se zavádí vìtná struktura. Všechna pùvodní slova textu zùstávají zachována a dostávají ve výsledné struktuøe svou funkci.
 
-Tektogramatická rovina slouží k zachycení významové struktury vìty. Struktura reprezentace zùstává stejná jako na analytické úrovni, avšak nìkteré uzly se vypouští, nìkteré se pøidávají a struktura vìty mùže být obecnì jiná, než na analytické úrovni. U~vìt, které pøipouštìjí více rùzných významù (víceznaèné vìty), je teoreticky možné vytvoøit více tektogramatických stromù. V pøípadì synonymie mùže naopak rùzným vìtám odpovídat tentýž tektogramatický strom. Tedy zatímco na morfologické rovinì jsou každému slovu vìty pøiøazeny jeho lema a tag (morfologická znaèka) a na~analytické rovinì každému slovu vìty odpovídá uzel v analytickém stromì s pøíslušnou analytickou funkcí, tektogramatická rovina už tento tìsný vztah k povrchovému zápisu vìty nemá. Uzly tektogramatické roviny v sobì nesou informaci rozdìlenou do nìkolika atributù. Základními atributy uzlu tektogramatického stromu jsou tektogramatické lema, gramatémy a funktor. Vztah mezi uzly tektogramatické a analytické roviny (který je obecnì typu M:N), je též zachycen v nìkolika atributech uzlù tektogramatického stromu. Následuje podrobnìjší popis nìkterých atributù.
+Na analytické rovinì se vytváøí stromová struktura vìty (stromem rozumíme orientovaný acyklický graf s jedním koøenem). Uzly stromu jsou tvoøeny jednotlivými slovy, respektive tokeny. Hrany stromu reprezentují vztahy závislosti.
+
+Do koøene stromu\footnote{Koøenem zde myslíme skuteèný koøen závislostního stromu. V~anotacích PDT se z~administrativních dùvodù používá ještì takzvaný \emph{technický koøen}, který je otcem skuteèného koøene vìty.} je umístìno øídící sloveso vìty, na toto sloveso se pak zavìšují ostatní slova. V pøípadì, že se jedná o souøadné souvìtí, koøenem stromu je spojka, pøípadnì èárka, která jednotlivé vìty souvìtí oddìluje. Základním cílem je korektní zachycení struktury vìty a oznaèení typu závislosti. Typ závislosti je uložen uvnitø lingvistické znaèky \emph{analytická funkce}.
+
+\subsubsection{Analytická funkce}
+Analytická funkce je pomìrnì dobøe známý pojem, který se používá na èeských základních a støedních školách pøi takzvaném vìtném rozboru. Tam se ale vìtšinou neoznaèuje jako analytická funkce ale jako \emph{vìtný èlen}.
+
+V závislostním stromu oznaèujeme analytickou funkcí jednotlivé hrany stromu, analytická funkce vyjadøuje typ závislosti, kterou hrana znázoròuje.
+
+V korpusech PDT je hodnota analytické funkce uložena pod atributem \emph{a/afun} uvnitø závislého uzlu. Na obrazcích \ref{pict:analytic_example} a \ref{pict:roviny_anotace} jsou zkratky analytických funkcí zapsány ve~druhém øádku pod každým uzlem. Následují pøíklady analytických funkcí spolu se svými zkratkami užívanými v~PDT, úplný seznam je možné nalézt napøíklad v~\cite{analytic_annotation}.
+
+\begin{center}
+\begin{tabular}{l @{\hspace{2cm}} l @{\hspace{2cm}} l}
+Predikát & pøísudek & \verb|Pred| \\[6pt]
+Subjekt & podmìt & \verb|Sb| \\[6pt]
+Objekt & pøedmìt & \verb|Obj| \\[6pt]
+Atribut & pøívlastek & \verb|Atr|\\[6pt]
+Adverbiale & pøísloveèné urèení &  \verb|Adv|\\[6pt]
+... &&
+\end{tabular}
+\end{center}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Tektogramatická rovina}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[!t]
+\begin{center}
+%\framebox{\includegraphics[scale=0.9]{../tecto_example.eps}}
+\framebox{\includegraphics[width=11cm, height=10cm]{../tecto_example.eps}}
+\caption[Pøíklad anotace na tektogramatické rovinì]{Pøíklad anotace na tektogramatické rovinì
+\\ Podrobný popis obrázku je v~sekci \ref{sec:ling_example}.} 
+\label{pict:tecto_example}
+\end{center}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Tektogramatická rovina je pomìrnì rozsáhlý koncept s hlubokou lingvistickou teorií v~pozadí. Byla popsána už v roce 1961 v èlánku \cite{curry_t_rovina}.
+
+Tektogramatická rovina slouží k zachycení významové struktury vìty. Struktura reprezentace zùstává stejná jako na analytické úrovni, avšak nìkteré uzly se vypouští, nìkteré se pøidávají a struktura vìty mùže být obecnì jiná, než na analytické úrovni. Na~obrázku \ref{pict:roviny_anotace} je vidìt, jak se tøi uzly (\verb|Byl|, \verb|by|, \verb|šel|) analytické rovny \uv{smrsknou} do~jediného uzlu (\verb|jít|) tektogramatické roviny. Naproti tomu t-uzel \verb|#PersPron|, který vyjadøuje èinitele dìje, je do~tektogramatického stromu pøidán bez vazby na~nižší roviny anotace.
+
+U~vìt, které pøipouštìjí více rùzných významù (víceznaèné vìty), je teoreticky možné vytvoøit více tektogramatických stromù. V pøípadì synonymie mùže naopak rùzným vìtám odpovídat tentýž tektogramatický strom. Tedy zatímco na morfologické rovinì jsou každému slovu vìty pøiøazeny jeho \emph{lema} a \emph{tag} (morfologická znaèka) a na~analytické rovinì uzel analytického stromu a \emph{analytická funkce}, tektogramatická rovina už tento tìsný vztah k povrchovému zápisu vìty nemá.
+
+Uzly tektogramatické roviny v~sobì nesou informaci rozdìlenou do nìkolika atributù. Základními atributy uzlu tektogramatického stromu jsou \emph{tektogramatické lema}, \emph{gramatémy} a \emph{funktor}. Vztah mezi uzly tektogramatické a analytické roviny (který je obecnì typu M:N), je též zachycen v~atributech uzlù tektogramatického stromu. Následuje popis jednotlivých atributù.
+
+%XXXXXXXXXXXXXX pokracovat XXXXXXXXXXXXX
 
 \subsubsection{Tektogramatické lemma}
 Tektogramatické lemma (t-lemma) zachycuje lexikální význam uzlu. U jednoduchých uzlù odpovídá lemmatu, které bylo øídícímu slovu tektogramatického uzlu pøiøazeno na morfologické rovinì. Uzlùm na tektogramatické rovinì novì vytvoøeným je pøiøazeno zástupné t-lema speciálního tvaru.
@@ -188,21 +235,8 @@ Funktory jsou velkým pøínosem tektogramatické roviny po praktické stránce. Funkt
 
 \end{itemize}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[!bh]
-\begin{center}
-%\framebox{\includegraphics[scale=0.9]{../tecto_example.eps}}
-\framebox{\includegraphics[width=11cm, height=10cm]{../tecto_example.eps}}
-\caption{Pøíklad anotace na tektogramatické rovinì} \label{pict:tecto_example}
-\end{center}
-\end{figure}
-
-%\includegraphics{../Kalna2007.jpg}
-
-\pagebreak
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Pøíklady}
+\label{sec:ling_example}
 Pro ilustraci pøedkládáme dva obrázky závislostních stromù, které vznikly ruèní anotací vìty:
 \begin{quote}
 \emph{Pìtice finských vzpìraèù byla svou národní federací potrestána za doping.}
@@ -215,7 +249,7 @@ Schéma analytického stromu je jednodušší. Pod každým uzlem jsou vytištìny hodnot
 
 Schéma tektogramatického stromu je o nìco složitìjší. Pod každým uzlem jsou vytištìny hodnoty tøí atributù. První atribut obsahuje \emph{lemma}, prostøední tektogramatický \emph{funktor} a poslední vyjadøuje \emph{sémantickou podskupinu slovního druhu}, do které øídící slovo tohoto uzlu patøí. Podrobnosti o~tìchto atributech a jejich hodnotách je možné nalézt v~\cite{tectogramtic_annotation}.
 
-Na obrázku~\ref{pict:tecto_example} (tektogramatického stromu) je vidìt speciální zahnutá šipka od uzlu \emph{\#PersPron} k uzlu \emph{pìtice}. Konec této šipky ukazuje na cíl, na který odkazuje zájmeno uvnitø prvního (poèáteèního) uzlu.
+Na obrázku~\ref{pict:tecto_example} (tektogramatického stromu) je vidìt speciální zahnutá šipka od uzlu \emph{\#PersPron} k uzlu \emph{pìtice}. Konec této šipky ukazuje na cíl, na který odkazuje zájmeno (\verb|svou|) uvnitø prvního (poèáteèního) uzlu.
 
 
 
