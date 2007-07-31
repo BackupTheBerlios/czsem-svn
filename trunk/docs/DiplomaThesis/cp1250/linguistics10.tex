@@ -131,7 +131,7 @@ Adverbiale & pøísloveèné urèení &  \verb|Adv|\\[6pt]
 %\framebox{\includegraphics[scale=0.9]{../tecto_example.eps}}
 \framebox{\includegraphics[width=11cm, height=10cm]{../tecto_example.eps}}
 \caption[Pøíklad anotace na tektogramatické rovinì]{Pøíklad anotace na tektogramatické rovinì
-\\ Podrobný popis obrázku je v~sekci \ref{sec:ling_example}.} 
+\\ Podrobný popis obrázku je v~sekci \ref{sec:ling_example}.}
 \label{pict:tecto_example}
 \end{center}
 \end{figure}
@@ -150,14 +150,24 @@ Uzly tektogramatické roviny v~sobì nesou informaci rozdìlenou do nìkolika atribu
 \subsubsection{Tektogramatické lemma}
 Tektogramatické lemma (t-lemma) zachycuje lexikální význam uzlu. U jednoduchých uzlù odpovídá lemmatu, které bylo øídícímu slovu tektogramatického uzlu pøiøazeno na morfologické rovinì. Uzlùm na tektogramatické rovinì novì vytvoøeným je pøiøazeno zástupné t-lema speciálního tvaru.
 
+V korpusech PDT je tektogramatické lemma uloženo jako atribut \emph{t\_lemma} uzlù tektogramatického stromu. Na~obrázcích \ref{pict:roviny_anotace} a \ref{pict:tecto_example} jsou tato lemmata vytištìna na prvním øádku popiskù jednotlivých tektogramatický uzlù.
+
 \subsubsection{Sémantický slovní druh a jeho podskupiny}
 Uzly tektogramatického stromu (respektive jejich øídící slova) se rozdìlují do takzvaných \emph{sémantických podskupin slovního druhu}. Toto dìlení zaèíná rozdìlením uzlù podle takzvaných \emph{sémantických slovních druhù}. Z pùvodních deseti slovních druhù, které v èeštinì rozlišujeme, vzniknou ètyøi sémantické slovní druhy: sémantická substantiva, sémantická adjektiva, sémantická adverbia a sémantická slovesa. Tato se pak dále dìlí do sémantických podskupin. Napøíklad sémantická substantiva se dìlí na \emph{pojmenovací}, \emph{pronominální} a \emph{kvantifikaèní}. Podrobnì je celé toto rozdìlení popsáno v~\cite{tectogramtic_annotation}.
+
+V korpusech PDT je sémantický slovní druh se svými podskupinami zapsán v~teèkové notaci uvnitø atributu \emph{gram/sempos} uzlù tektogramatického stromu. Na~obrázku \ref{pict:tecto_example} je sémantický slovní druh a jeho podskupiny vytištìn na tøetím øádku popiskù.
 
 \subsubsection{Gramatémy}
 Gramatémy jsou tektogramatickým rozšíøením morfologických znaèek. Gramatémy nalezneme pouze mezi atributy uzlù, u kterých to má smysl, tedy u uzlù, které se vztahují k nìjakému významovému slovu vìty. Navíc rùzným slovním druhùm lze pøidìlit jen nìkteré gramatémy (napøíklad nemá smysl urèovat slovesný èas u podstatného jména). Podle toho, do které sémantické podskupiny slovního druhu daný uzel patøí, je možné urèit, které gramatémy pro nìj mají smysl a které nikoli.
 
+V korpusech PDT jsou gramatémy uloženy v~nìkolika atributech tektogramatických uzlù. Tyto atributy zaèínají prefixem \emph{gram/}. Napøíklad \emph{gram/tense} (slovesný èas), \emph{gram/negation} (slovo se vyskytuje v negaci -- slova \verb|byl| a \verb|nebyl| mají stejné lemma \verb|být| ale rùznou hodnotu atributu \emph{gram/negation}), \emph{gram/verbmod} (slovesná modalita -- oznamovací, rozkazovací, podmiòovací). Výstup automatické lingvistické anotace má vìtšinou vyplnìné jen velmi omezené množství tektogramatických gramatémù.
+
 \subsubsection{Funktor}
-Funktory jsou velkým pøínosem tektogramatické roviny po praktické stránce. Funktory chápeme jako sémantické ohodnocení hran mezi uzly tektogramatického stromu. Tektogramatické funktory mùžeme též chápat jako ekvivalent analytických funkcí. Rozdíl mezi tektogramatickými funktory a analytickými funkcemi je v tom, že funtoktory se snaží postihnout sémantiku vztahu, zatímco analytické funkce se zamìøují na jeho syntaktickou roli. Následuje popis nìkterých dùležitých funktorù, vždy s nìkolika pøíklady jejich výskytu ve vìtì. Vyèerpávající seznam je možné nalézt napøíklad v \cite{tectogramtic_annotation}.
+Funktory jsou velkým pøínosem tektogramatické roviny po praktické stránce. Funktory chápeme jako sémantické ohodnocení hran mezi uzly tektogramatického stromu. Tektogramatické funktory mùžeme též chápat jako ekvivalent analytických funkcí. Rozdíl mezi tektogramatickými funktory a analytickými funkcemi je v tom, že funktory se snaží postihnout sémantiku vztahu, zatímco analytické funkce se zamìøují na jeho syntaktickou roli.
+
+V korpusech PDT je funktor uložen uvnitø atributu \emph{functor} závislého uzlu. Na~obrázcích \ref{pict:roviny_anotace} a \ref{pict:tecto_example} jsou funktory vytištìna ve druhém øádku popiskù.
+
+Následuje popis nìkterých dùležitých funktorù, vždy s nìkolika pøíklady jejich výskytu ve vìtì. Vyèerpávající seznam je možné nalézt napøíklad v~\cite{tectogramtic_annotation}.
 
 
 \begin{itemize}
@@ -169,8 +179,6 @@ Funktory jsou velkým pøínosem tektogramatické roviny po praktické stránce. Funkt
 \item[-] Èeským \emph{skokanùm}.ACT se daøilo dobøe.
 \item[-] Je \emph{mi}.ACT smutno.
 \end{description}
-
-%\pagebreak
 
 \item Funktor ADDR (addressee) odpovídá roli pøíjemce dìje.
 \begin{description}
@@ -186,6 +194,8 @@ Funktory jsou velkým pøínosem tektogramatické roviny po praktické stránce. Funkt
 \item[-] Uèil se \emph{kominíkem}.PAT
 \item[-] Mít dost \emph{penìz}.PAT
 \end{description}
+
+\pagebreak
 
 \item Funktor MANN (manner) vyjadøuje, hodnotí zpùsob provedení dìje.
 \begin{description}
@@ -235,6 +245,8 @@ Funktory jsou velkým pøínosem tektogramatické roviny po praktické stránce. Funkt
 
 \end{itemize}
 
+\pagebreak
+
 \subsection{Pøíklady}
 \label{sec:ling_example}
 Pro ilustraci pøedkládáme dva obrázky závislostních stromù, které vznikly ruèní anotací vìty:
@@ -249,7 +261,8 @@ Schéma analytického stromu je jednodušší. Pod každým uzlem jsou vytištìny hodnot
 
 Schéma tektogramatického stromu je o nìco složitìjší. Pod každým uzlem jsou vytištìny hodnoty tøí atributù. První atribut obsahuje \emph{lemma}, prostøední tektogramatický \emph{funktor} a poslední vyjadøuje \emph{sémantickou podskupinu slovního druhu}, do které øídící slovo tohoto uzlu patøí. Podrobnosti o~tìchto atributech a jejich hodnotách je možné nalézt v~\cite{tectogramtic_annotation}.
 
-Na obrázku~\ref{pict:tecto_example} (tektogramatického stromu) je vidìt speciální zahnutá šipka od uzlu \emph{\#PersPron} k uzlu \emph{pìtice}. Konec této šipky ukazuje na cíl, na který odkazuje zájmeno (\verb|svou|) uvnitø prvního (poèáteèního) uzlu.
+Na obrázku~\ref{pict:tecto_example} (tektogramatického stromu) je vidìt speciální zahnutá šipka od uzlu \emph{\#PersPron} k uzlu \emph{pìtice}. Konec této šipky ukazuje na cíl, na který odkazuje zájmeno (\verb|svou|) uvnitø prvního (poèáteèního) uzlu. Tento jev lingvisté oznaèují jako \emph{koreference}. V~automaticky generovaných anotacích PDT koreference nejsou zachyceny. Strojové vyhodnocování lingvistických koreferencí je prezentováno v~projektu Artequakt (viz sekce \ref{sec:Artequakt}).
+
 
 
 
@@ -347,7 +360,7 @@ Souèástí editoru TrEd jsou též dva nástroje - \emph{btred} a \emph{ntred}, které
 
 Tyto nástroje se spouštìjí pøímo z pøíkazového øádku, nemají grafické rozhraní. Èinnost tìchto nástrojù je øízena uživatelským programem (mak\-rem btred-u), které uživatel musí napsat v programovacím jazyce Perl. Pøi psaní toho makra má uživatel k~dispozici velké množství specializovaných funkcí pro práci se strukturami korpusu: s~jednotlivými stromy, s~uzly stromù, s~atributy uzlù atp.
 
-Pøehledný a dobøe srozumitelný návod -- \uv{btred/ntred tutorial}\footnote{http://ufal.mf\/f.cuni.cz/\~{}pajas/tred/bn-tutorial.html}, jak pracovat s nástroji btred a ntred je možné nalézt na domovských stránkách editoru TrEd.
+Pøehledný a dobøe srozumitelný návod -- \uv{btred/ntred tutorial}\footnote{http://ufal.mf\/f.cuni.cz/\~{}pajas/tred/bn-tutorial.html}, jak pracovat s nástroji btred a ntred je možné nalézt na stránkách editoru TrEd.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -168,7 +168,7 @@ Pøíklad formálnì zapsaného ABox-u je na~obrázku~\ref{pict:dl_abox}.
 \label{sec:ontologie}
 Ontologie v tradièním filosofickém pojetí oznaèuje nauku o bytí (jsoucnu). V~oblasti informatiky jsou ontologie chápány jako explicitní, formální specifikace pojmù a vztahù mezi nimi. V~\cite{Svatek_ontologie} je uvedena definice W. Borsta: \uv{Ontologie je formální specifikace sdílené konceptualizace.} Tedy cílem ontologie je definovat spoleèné, jednotné chápání pojmù urèité oblasti. Pro~sémantickou anotaci jsou ontologie ideální referenèní základnou pro vyjádøení znalostí, které je možné sdílet napøíklad v~rámci sémantického webu.
 
-Hlavními prvky, které tvoøí strukturu ontologie, jsou opìt \emph{tøídy}, \emph{role} a \emph{individua}. Naproti DL se však tyto prvky používají více \uv{informaticky}, množina individuí je rozšíøena o~\emph{primitivní hodnoty} definovaných datových typù, role se klasifikují a pøesnìji specifikují, zavádìjí takzvané vlastnosti -- \emph{properties}, zužuje se jejich definièní obor, obor hodnot, dají se deklarovat jako funkèní, tranzitivní atd.
+Hlavními prvky, které tvoøí strukturu ontologie, jsou opìt \emph{tøídy}, \emph{role} a \emph{individua}. Naproti DL se však tyto prvky používají více \uv{informaticky}, množina individuí je rozšíøena o~\emph{primitivní hodnoty} definovaných datových typù, role se klasifikují a pøesnìji specifikují, zavádìjí takzvané vlastnosti -- \emph{properties}, je možné urèit jejich definièní obor, obor hodnot, dají se deklarovat jako funkèní, tranzitivní atd.
 
 Základní kostrou ontologie je hierarchie tøíd -- taxonomie. Ta se narozdíl od~DL\footnote{Subsumpce tøíd je v~DL vyhodnocována dynamicky na základì popisù tøíd, tedy i celá taxonomie vzniká dynamicky.} vìtšinou definuje explicitnì pomocí role \emph{rdfs:subClassOf} nebo pomocí nìjakého jejího ekvivalentu v~jazycích, které nejsou založeny na RDF. Definice tøíd je možné doplnit axiomatikou, která je napøíklad v~OWL pøímo pøevzata z~DL. Pomocí axiomù je v~OWL možné vyjádøit ekvivalenci tøíd èi rolí, disjunknost tøíd, implicitní zaøazení individuí do~tøídy pomocí dodateèných podmínek, atd. Ontologie tak mùže pøedstavovat plnohodnotnou znalostní bázi s~reasoningem DL.
 
@@ -214,8 +214,7 @@ exthings: & {\footnotesize\verb|http://example.org/things/|} & ...
 \end{center}
 
 \subsubsection{RDF Schema}
-RDF Schema\footnote{http://www.w3.org/TR/rdf-schema/} (RDFS) je jednoduchou nadstavbou RDF, která definuje nìkolik konstrukcí pro reprezentaci znalostí. Na obrázku \ref{pict:RDF_classes} je vidìt použití predikátu \emph{rdfs:subClassOf} k~vytvoøení jednoduché taxonomie motorových vozidel.
-
+RDF Schema\footnote{http://www.w3.org/TR/rdf-schema/} (RDFS) je jednoduchou nadstavbou RDF, která definuje nìkolik konstrukcí pro reprezentaci znalostí. Na obrázku \ref{pict:RDF_classes} je vidìt použití predikátu \emph{rdfs:subClassOf} k~vytvoøení jednoduché taxonomie motorových vozidel. Na obrázku \ref{pict:RDF_individual} je vidìt použití predikátu \emph{rdf:type} pro pøiøazení individua \emph{exthings:companyCar} do tøídy \emph{ex:MotorVehicle}. Dále je zde vidìt použití nového predikátu \emph{exterms:weight} k~pøiøazení váhy tomuto vozidlu pomocí jednoduché hodnoty \emph{2500} datového typu \emph{xsd:integer}.
 
 \begin{figure}[b!]
 \begin{center}
@@ -227,27 +226,30 @@ RDF Schema\footnote{http://www.w3.org/TR/rdf-schema/} (RDFS) je jednoduchou nads
   \label{pict:RDF_classes}
 \end{figure}
 
-
-
 \begin{figure}[t!]
 \begin{center}
   \includegraphics[scale=0.6]{../RDF3.eps}
 \end{center}
-  \caption[Pøiøazení individua do tøídy v~RDF]{Pøiøazení individua do tøídy a použití hodnoty jednoduchého datového typu. Pøíklad pochází z~dokumentu RDF Primer.\\
-  http://www.w3.org/TR/rdf-primer/}
+  \caption[Pøiøazení individua do tøídy v~RDF]{Pøiøazení individua do tøídy a použití hodnoty jednoduchého datového typu. Pøíklad pochází z~dokumentu RDF Primer.}
   \label{pict:RDF_individual}
 \end{figure}
 
 
+Konstrukce \emph{rdfs:domain} a \emph{rdfs:range} umožòují pøiøadit predikátùm jejich definièní obor a obor hodnot. Toto pøiøazení však není restriktivní. RDF není formalismus pro syntaktickou kontrolu. Tím, že deklarujeme definièní obor predikátu, nezužujeme možnosti jeho použití, ale dodáváme o~nìm další znalosti. Napøíklad deklarací definièního oboru \emph{ex:MotorVehicle} pro predikát \emph{exterms:weight} øíkáme, že všechny zdroje uvedené jako \emph{subjekt} predikátu \emph{exterms:weight} automaticky patøí do~tøídy \emph{ex:MotorVehicle}. Podrobnosti o~sémantice RDF je možné nalézt v~èlánku RDF Semantics\footnote{http://www.w3.org/TR/rdf-mt/} na webu W3C.
+
+%Pro klasifikaci rolí respektive RDF predikátù mùžeme použít  \emph{rdf:Property},  , .
+
+%Další možnosti nabízí jazyk OWL (viz dále).
+
+%\emph{rdf:Property} (tøída všech vlastností),  \emph{rdfs:domain} (definièní obor), \emph{rdfs:range} (obor hodnot). Další možnosti nabízí jazyk OWL (viz dále).
+
+%Pro predikátù  mùžeme blížeji specifikovat kteroukoliv roli, tím dodáváme do
+
+RDF je nezávislý na~konkrétní fyzické interpretaci, nejèastìji se ukládá ve formì XML. Popis této XML syntaxe je podrobnì zpracován v~èlánku RDF/XML Syntax Specification\footnote{http://www.w3.org/TR/rdf-syntax-grammar/} na webu W3C.
+
+Velkou výhodou RDF je jeho široké rozšíøení, RDF je doporuèením W3C z roku 1999 pro reprezentaci struktury webových metadat. RDF je však velmi obecný, napøíklad neumožòuje preciznìji specifikovat podmínky pøíslušnosti ke tøídám. Pro konstrukci ontologií se vìtšinou používají jeho nadstavby jako napøíklad OWL. Další nevýhodou RDF je jeho pøílišná jednoduchost. Nìkteré složitìjší konstrukty ontologií (logické výrazy) musí být rozloženy do nìkolika trojic RDF, které se spojují pomocí promìnných. Sémantika tvrzení je pak pomìrnì \uv{zatemnìná}, hovoøí se o takzvaných \uv{dark triples}~\cite{Svatek_ontologie}.
 
 
-
-Problém RDF je v jeho volnosti a obecnosti.
-Výhoda ve standardnosti.
-
-<rdf:Property> <rdfs:domain> <rdfs:range>
-
-RDF je nezávislý na~konkrétní fyzické interpretaci, nejèastìji se ukládá ve formì XML.
 
 \subsection{OWL - Web Ontology Language}
 Mùžeme se vyhnout \uv{temným trojicím} RDF \cite{Svatek_ontologie}, které zatemòují sémantiku jazyka. usnadníme mapování
