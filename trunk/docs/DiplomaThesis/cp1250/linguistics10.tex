@@ -291,7 +291,7 @@ CSTS mùže reprezentovat jen morfologickou a analytickou anotaci, není schopen pl
 \label{sec:PML}
 Hlavním formátem dat v PDT 2.0 je formát nazvaný PML. PML je založený na XML, je navržený pro reprezentaci bohaté lingvistické anotace textù, jako jsou morfologické znaèkování, závislostní stromy apod. V PML se mohou jednotlivé oddìlené roviny anotace pøekrývat a mohou být konzistentnì propojeny jak mezi sebou, tak i s dalšími zdroji dat. Každá rovina anotace je popsána v souboru PML schéma, který je jakousi formalizací abstraktního anotaèního schématu pro tu konkrétní rovinu anotace.
 
-Anotace PDT 2.0 je rozdìlena do ètyø rovin, naskládaných jedna na druhou. Každá z tìchto rovin má vlastní PML schéma a zpravidla se ukládá do zvláštního soubotu. Jedná se o tyto ètyøi roviny: rovina slovní (soubory~\emph{.w}), rovina morfologická (soubory~\emph{.m}), rovina analytická (soubory~\emph{.a}) a rovina tektogramatická (soubory~\emph{.t}). Pro podrobnosti o rovinách lingvistické anotace viz \ref{sec:ling_tag}.
+Anotace PDT 2.0 je rozdìlena do ètyø rovin, naskládaných jedna na druhou. Každá z tìchto rovin má vlastní PML schéma a zpravidla se ukládá do zvláštního soubotu. Jedná se o tyto ètyøi roviny: rovina slovní (soubory~\emph{.w}), rovina morfologická (soubory~\emph{.m}), rovina analytická (soubory~\emph{.a}) a rovina tektogramatická (soubory~\emph{.t}). Pro podrobnosti o rovinách lingvistické anotace viz \ref{sec:ling_tag}. Vztah jednotlivých rovin PDT je znázornìn na obrázku \ref{pict:roviny_anotace}.
 
 Další informace je možné nalézt na stránkách PML projektu\footnote{http://ufal.mf\/f.cuni.cz/jazz/PML/}, pøípadnì v publikaci~\cite{PML}.
 
@@ -415,6 +415,8 @@ Jednotlivým hranám závislostního stromu, které vznikly v pøedchozím kroku, pøiøa
 \subsubsection*{Conversion into PML}
 
 Zapíše výstup pøedchozího nástroje v PML jazyce. Pro podrobnìjší informace o PML viz oddíl~\ref{sec:PDT}.
+
+\pagebreak
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Nástroj pro tektogramatickou analýzu èeštiny}

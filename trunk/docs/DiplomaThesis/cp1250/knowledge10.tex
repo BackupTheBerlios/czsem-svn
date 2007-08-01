@@ -195,7 +195,7 @@ Technologickým základem sémantického webu by se podle organizace W3C mìl stát je
   \label{pict:RDF_triple}
 \end{figure}
 
-\noindent Této tøíprvkové konstrukci øíkáme \emph{tvrzení} (statement, pøípadnì RDF triple). Každé takové \emph{tvrzení} øíká, že vlastnost identifikovaná jako \emph{predikát} daného \emph{subjektu} má hodnotu \emph{objekt}. Neboli \emph{subjekt} je s~\emph{objektem} spojen rolí \emph{predikát}. Každý z~trojice prvkù libovolného \emph{tvrzení} reprezentuje nìjaký \emph{zdroj} (resource) a je jednoznaènì identifikovaný svým URI\footnote{URI -- Uniform Resource Identifier, RFC 1630}. Zdrojem mùže být web-stránka, objekt web-stránky èi libovolná entita webu i mimo web, která se dá identifikovat pomocí URI. Výjimku z~tohoto pravidla pøedstavuje situace, kdy \emph{objekt} obsahuje pøímo primitivní hodnotu nìjakého datového typu (viz dále). Nejèastìji jako zdroje používáme jednotlivé \emph{tøídy}, \emph{role} a \emph{individua} ontologií.
+\noindent Této tøíprvkové konstrukci øíkáme \emph{tvrzení} (statement, pøípadnì RDF triple). Každé takové \emph{tvrzení} øíká, že vlastnost identifikovaná jako \emph{predikát} daného \emph{subjektu} má hodnotu \emph{objekt}. Neboli \emph{subjekt} je s~\emph{objektem} spojen rolí \emph{predikát}. Každý z~trojice prvkù libovolného \emph{tvrzení} reprezentuje nìjaký \emph{zdroj} (resource) a je jednoznaènì identifikovaný svým URI\footnote{URI -- Uniform Resource Identifier, RFC 1630}. Zdrojem mùže být web-stránka, objekt web-stránky èi libovolná entita webu i mimo web, která se dá identifikovat pomocí URI. Výjimku z~tohoto pravidla pøedstavuje situace, kdy \emph{objekt} obsahuje \emph{literál} -- primitivní hodnotu nìjakého datového typu (viz dále). Nejèastìji jako zdroje používáme jednotlivé \emph{tøídy}, \emph{predikáty}. Individua nejsou v~RDF explicitnì zavedena.
 
 V~zápisech zdrojù pomocí URI máme možnost používat zkratky -- takzvané \emph{namespace prefix} známé z~XML. V~dalším textu budeme používat následující prefixy.
 
@@ -214,7 +214,7 @@ exthings: & {\footnotesize\verb|http://example.org/things/|} & ...
 \end{center}
 
 \subsubsection{RDF Schema}
-RDF Schema\footnote{http://www.w3.org/TR/rdf-schema/} (RDFS) je jednoduchou nadstavbou RDF, která definuje nìkolik konstrukcí pro reprezentaci znalostí. Na obrázku \ref{pict:RDF_classes} je vidìt použití predikátu \emph{rdfs:subClassOf} k~vytvoøení jednoduché taxonomie motorových vozidel. Na obrázku \ref{pict:RDF_individual} je vidìt použití predikátu \emph{rdf:type} pro pøiøazení individua \emph{exthings:companyCar} do tøídy \emph{ex:MotorVehicle}. Dále je zde vidìt použití nového predikátu \emph{exterms:weight} k~pøiøazení váhy tomuto vozidlu pomocí jednoduché hodnoty \emph{2500} datového typu \emph{xsd:integer}.
+RDF Schema\footnote{http://www.w3.org/TR/rdf-schema/} (RDFS) je jednoduchou nadstavbou RDF, která definuje nìkolik konstrukcí pro reprezentaci znalostí. Na obrázku \ref{pict:RDF_classes} je vidìt použití predikátu \emph{rdfs:subClassOf} k~vytvoøení jednoduché taxonomie motorových vozidel. Na obrázku \ref{pict:RDF_individual} je vidìt použití predikátu \emph{rdf:type} pro pøiøazení \uv{individua} \emph{exthings:companyCar} do tøídy \emph{ex:MotorVehicle}. Dále je zde vidìt použití nového predikátu \emph{exterms:weight} k~pøiøazení váhy tomuto vozidlu pomocí jednoduché hodnoty \emph{2500} datového typu \emph{xsd:integer}. Tìmto hodnotám øíkáme \emph{literály}.
 
 \begin{figure}[b!]
 \begin{center}
@@ -230,11 +230,12 @@ RDF Schema\footnote{http://www.w3.org/TR/rdf-schema/} (RDFS) je jednoduchou nads
 \begin{center}
   \includegraphics[scale=0.6]{../RDF3.eps}
 \end{center}
-  \caption[Pøiøazení individua do tøídy v~RDF]{Pøiøazení individua do tøídy a použití hodnoty jednoduchého datového typu. Pøíklad pochází z~dokumentu RDF Primer.}
+  \caption[Pøiøazení individua do tøídy v~RDF]{Pøiøazení individua do tøídy a použití literálu. Pøíklad pochází z~dokumentu RDF Primer.}
   \label{pict:RDF_individual}
 \end{figure}
 
 
+\pagebreak
 Konstrukce \emph{rdfs:domain} a \emph{rdfs:range} umožòují pøiøadit predikátùm jejich definièní obor a obor hodnot. Toto pøiøazení však není restriktivní. RDF není formalismus pro syntaktickou kontrolu. Tím, že deklarujeme definièní obor predikátu, nezužujeme možnosti jeho použití, ale dodáváme o~nìm další znalosti. Napøíklad deklarací definièního oboru \emph{ex:MotorVehicle} pro predikát \emph{exterms:weight} øíkáme, že všechny zdroje uvedené jako \emph{subjekt} predikátu \emph{exterms:weight} automaticky patøí do~tøídy \emph{ex:MotorVehicle}. Podrobnosti o~sémantice RDF je možné nalézt v~èlánku RDF Semantics\footnote{http://www.w3.org/TR/rdf-mt/} na webu W3C.
 
 %Pro klasifikaci rolí respektive RDF predikátù mùžeme použít  \emph{rdf:Property},  , .
@@ -245,25 +246,66 @@ Konstrukce \emph{rdfs:domain} a \emph{rdfs:range} umožòují pøiøadit predikátùm j
 
 %Pro predikátù  mùžeme blížeji specifikovat kteroukoliv roli, tím dodáváme do
 
-RDF je nezávislý na~konkrétní fyzické interpretaci, nejèastìji se ukládá ve formì XML. Popis této XML syntaxe je podrobnì zpracován v~èlánku RDF/XML Syntax Specification\footnote{http://www.w3.org/TR/rdf-syntax-grammar/} na webu W3C.
+Každý popis zapsaný v~RDF je složený ze samostatných \emph{tvrzení} -- uspoøádaných trojic zdrojù. Jako takový je nezávislý na~konkrétní fyzické interpretaci, nejèastìji se však ukládá ve formì XML. Popis této XML syntaxe je podrobnì zpracován v~èlánku RDF/XML Syntax Specification\footnote{http://www.w3.org/TR/rdf-syntax-grammar/} na webu W3C.
 
 Velkou výhodou RDF je jeho široké rozšíøení, RDF je doporuèením W3C z roku 1999 pro reprezentaci struktury webových metadat. RDF je však velmi obecný, napøíklad neumožòuje preciznìji specifikovat podmínky pøíslušnosti ke tøídám. Pro konstrukci ontologií se vìtšinou používají jeho nadstavby jako napøíklad OWL. Další nevýhodou RDF je jeho pøílišná jednoduchost. Nìkteré složitìjší konstrukty ontologií (logické výrazy) musí být rozloženy do nìkolika trojic RDF, které se spojují pomocí promìnných. Sémantika tvrzení je pak pomìrnì \uv{zatemnìná}, hovoøí se o takzvaných \uv{dark triples}~\cite{Svatek_ontologie}.
 
-
-
 \subsection{OWL - Web Ontology Language}
-Mùžeme se vyhnout \uv{temným trojicím} RDF \cite{Svatek_ontologie}, které zatemòují sémantiku jazyka. usnadníme mapování
+Jazyk OWL\footnote{http://www.w3.org/2004/OWL/} nabízí bohatší slovník a sémantiku pro budování ontologií. Vychází z~RDF a RDFS, využívá jejich vlastnosti a pøidává nové možnosti pro pøesnìjší definici tøíd, rolí i individuí. OWL pøebírá vìtšinu konstrukcí deskripèní logiky a propojuje je s RDF, rozšiøuje koncept definovaných tøíd, umožòuje použití logických podmínek. Jazyk OWL vydalo W3C jako své doporuèení v~roce 2004.
 
-objectProperty dataProperty, domain, range). Napøíklad v~OWL vlastnosti, atributy owl:ObjectProperty, <owl:DatatypeProperty
+Kvùli snazší implementaci OWL v~programových nástrojích a možnostem efektivního reasoningu je jazyk OWL rozdìlen do tøí tøíd podle složitosti:
+\begin{itemize}
+  \item OWL Lite
+  \item OWL DL
+  \item OWL Full
+\end{itemize}
 
-Svátek: Verze OWL\\
-\\
-* OWL Lite \\
-– omezený z hlediska elementárních konstruktù; zejména neumožòuje definovat kardinalitu jinou než 0 nebo 1; výpoètovì efektivní\\
-* OWL DL – \uv{default} verze\\
-– stále ještì zachovává rozhodnutelnost hlavních odvozovacích úloh\\
-– aktuálnì vzniká obohacená verze OWL1.1\\
-* OWL Full\\
-– stejné konstrukty jako OWL DL, ale ménì omezení pøi jejich používání\\
-– nezachovává oddìlenost tøíd, vlastností a instancí\\
-– teprve OWL Full je nadjazykem RDF/S!
+
+Sémantika OWL je trochu odlišná od RDF. Napøíklad RDF pøíliš nerozlišuje mezi individui a tøídami. Stejný zdroj mùže v~jednom tvrzení vystupovat jako tøída a v~jiném jako \uv{individuum}. Sémantika OWL je pøísnìjší. Napøíklad takto volný vztah mezi individui a~tøídami povoluje až na úrovni OWL Full. Až jazyk OWL Full je plným nadjazykem RDF/S. Díky tìmto restrikcím mùžou v~ontologii definované pomocí OWL vzniknout nekonzistence a sporná tvrzení. Složitost programového algoritmu pro kontrolu konzistence se liší na~rùzných úrovních jazyka OWL. Podrobnosti o~OWL sémantice je možné najít v~èlánku OWL Web Ontology Language Semantics and Abstract Syntax\footnote{http://www.w3.org/TR/owl-semantics/} na webu W3C.
+
+Uvedeme nyní nìkteré konstrukce OWL rozdìlené do oblastí jejich vyžití.
+
+\subsubsection{Množinové operace}
+\begin{tabular}{rl}
+\texttt{owl:disjointWith} & Oznaèuje dvì tøídy jako disjunktní. \\
+\texttt{owl:unionOf}  & Definuje tøídu jako sjednocení dvou stávajících. \\
+\texttt{owl:complementOf} & Definuje tøídu jako doplnìk stávající. \\
+\texttt{owl:intersectionOf} & Definuje tøídu jako prùnik dvou stávajících.
+\end{tabular}
+
+\subsubsection{Definice rolí}
+Pomocí následujících definovaných tøíd v~OWL vymezujeme typ role.
+\\[5pt]
+\begin{tabular}{rl}
+\texttt{rdf:Property} & Tøída všech rolí.\\[5pt]
+\texttt{owl:ObjectProperty} & Role jejichž objektem jsou individua.\\
+\texttt{owl:DatatypeProperty} & Role jejichž objektem jsou literály.\\[5pt]
+\texttt{owl:TransitiveProperty} & Tranzitivní role.\\
+\texttt{owl:SymmetricProperty} & Symetrické role.\\
+\texttt{owl:FunctionalProperty} & Funkèní role.\\[5pt]
+\texttt{owl:inverseOf} & Predikát pro oznaèení dvou inverzních rolí.
+\end{tabular}
+
+\subsubsection{Omezení rolí podmínkami}
+Role je možné v~RDF omezit pomocí konstrukcí \emph{owl:Restriction} a \emph{owl:onProperty}. Takovým omezením role mùžeme napøíklad definovat novou podtøídu, která obsahuje jen individua, která vyhovují kladeným podmínkám. Podmínky je pak možné rozlišit na nutné a postaèující. K~dispozici jsou následující konstrukce známé z~DL.
+\\[5pt]
+\begin{tabular}{rl}
+\texttt{owl:allValuesFrom} & Univerzální kvantifikátor.\\
+\texttt{owl:someValuesFrom} & Existenèní kvantifikátor.\\[5pt]
+\texttt{owl:minCardinality} & Minimální kardinalita role.\\
+\texttt{owl:maxCardinality} & Maximální kardinalita role.\\
+\texttt{owl:cardinality} & Pøesné urèení kardinality role.
+\end{tabular}
+
+
+\subsubsection{Ekvivalence a rozdílnost tøíd}
+OWL obsahuje i nìkolik konstrukcí pro vzájemné vymezení tøíd.
+\\[5pt]
+\begin{tabular}{rl}
+\texttt{owl:equivalentClass} & Množina individuí pøíslušných tøíd je stejná.\\
+\texttt{owl:equivalentProperty} & Deklaruje dvì role jako shodné.\\[5pt]
+\texttt{owl:sameAs} & Deklaruje ekvivalenci individuí.\\
+\texttt{owl:differentFrom} & Deklaruje rozdílnost individuí.
+\end{tabular}
+
+
