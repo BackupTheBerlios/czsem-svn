@@ -5,20 +5,29 @@ Pùvodním zámìrem experimentu v~této práci bylo vyzkoušet nìkterou existující met
 
 Pøestavba architektury projektu KIM by byla pomìrnì nároèná a její výsledek nejistý. Pravdìpodobnì by vznikl pouze slabší \uv{bratr} bulharského KIM, který je podpoøen masivní databází informací v~pozadí. %která zde byla v~prùbìhu projektu KIM vytvoøena.
 
-Projekt GATE je naproti KIM otevøený a modulární. Jedná se o velmi obecnou softwarovou základnu pro lingvistickou anotaci a extrakci informací.
+Projekt GATE je naproti KIM otevøený a modulární. Jedná se o velmi obecnou softwarovou základnu pro lingvistickou anotaci a extrakci informací, která nabízí mnoho možností, k~dispozici je velké množství funkèních modulù. Ale k~èemu pøesnì bychom GATE chtìli použít? Ponechali jsme tedy GATE jako otevøenou možnost a zaèali pøesnìji hledat a specifikovat problém, který budeme øešit.
 
+Paralelnì s~touto prací jsme mohli sledovat vývoj prací Dušana Marušèáka a Roberta Novotného !!!citovat!!!. V~tìchto pracích se pokoušejí o~anotaci / extrakci informací ze~strukturovaných web-stránek. Tento pøístup se èasto oznaèuje jako konstrukce \emph{wrapper-u}. Obì tyto práce se opírají o~zajímavý nápad využití opakujících se struktur uvnitø stránek. Vzniklé metody jsou pak témìø nezávislé na~konkrétní podobì vstupní stránky. Avšak pevná (HTML) struktura stránky podmiòuje použití tìchto metod.
 
+Zaèali jsme si uvìdomovat, mezeru v~oblasti extrakce informací z~pøirozeného textu v~Èeském jazyce. Nejsou nám známy výsledky žádné práce, která by se tímto tématem zabývala. Pøitom èeská poèítaèová lingvistika je na~velmi vysoké úrovni.
 
-Experiment provedený v rámci této práce spoèíval v otestování nìkterých dostupných nástrojù pro lingvistickou anotaci èeských textù. Jmenovitì se jednalo o tyto nástroje: !!!!!!!!!!!!!doplnit!!!!!!!!!!!!!!!!. Byly prozkoumány možnosti vyžití tìchto nástrojù pro extrakci informací a sémantickou anotaci.
+Otevøela se nám možnost spolupráce s~Martinem Labským a Vojtìchem Svátekem na~èásti projektu The RAINBOW Project\footnote{http://rainbow.vse.cz/}. Konkrétnì bychom se zde zabývali rozšíøením jejich systému pro extrakci informací pomocí \uv{extrakèní ontologie}. Jedná se o~propracovaný systém založený na~široké paletì extrakèních pravidel, která jsou definovaná v~extrakèní ontologii. Jde však také pøedevším o konstrukci wrapper-u. Jedna z~možností naší spolupráce mìla spoèívat v~rozšíøení palety pravidel jejich projektu o~pravidla založená na~lingvistice.
+
+K~žádné spolupráci zatím nedošlo, ale v~experimentu této práce se pokoušíme otestovat dostupné nástroje pro~lingvistickou anotaci èeských textù a prozkoumat možnosti jejich využití pro~extrakci informací a automatickou sémantickou anotaci.
+
+%Jmenovitì se jednalo o tyto nástroje: !!!!!!!!!!!!!doplnit!!!!!!!!!!!!!!!!. Byly 
 
 %!!!!!!!Pzor následující odstavec jsem okopíroval i do kapitoly pøínosy - vyøešit
 
 %Postup experimentu se v jednotlivých fázích snaží kopírovat skuteèné akce, které by bylo nutné provést v opravdovém projektu zamìøeném na sémantickou anotaci. V práci tak vzniká jednoduchá základní analýza tohoto typu projektù. Ve skuteèném projektu pak bude možné ji pøinejmenším jako inspiraci využít.
 
-Pro experiment byla vybrána a použita data ze dvou pomìrnì odlišných zdrojù.
 
 \section{Osnova prací}
 \label{sec:osnaova_praci}
+Postupem prací v~experimentu se snažíme simulovat postup opravdového projektu, který by byl zamìøený na dodateènou automatickou sémantickou anotaci nìkterých zdrojù webu. Tedy jsme v~situaci, kdy chceme nìjakým zpùsobem využít data na webu publikovaná. Abychom mohli tato data použít, potøebujeme je získat v~takové formì, aby se dala strojovì zpracovávat a vyhodnocovat. Na webu jsou však tato data publikována tak, aby si je mohli prohlížet obyèejní lidští návštìvníci, nemají strukturu, kterou požadujeme.
+
+Data která nás zajímají\footnote{Podrobnìjší diskuse o~vstupních datech experimentu je v~oddíle \ref{sec:data_in}.} mohou být vyjádøena pøirozeným jazykem v~textech èlánkù nìkolika webových portálù. V~našem experimentu se jedná o~èlánky hasièského zpravodajství z~èeských regionù na portálu MVÈR (podrobnìji v~oddíle \ref{sec:data_in}). Abychom se od tìchto èlánkù dostali k~datùm, která potøebujeme, budeme postupovat podle následující osnovy.
+
 \begin{figure}[!thb]
 \begin{center}
 \includegraphics[width=7cm, height=9cm]{../AP_schema1.eps}
@@ -26,15 +35,11 @@ Pro experiment byla vybrána a použita data ze dvou pomìrnì odlišných zdrojù.
 \end{center}
 \end{figure}
 
-Extrakce a èištìní (zamyšlení nad rùznými formáty zdroje PDF, DOC, HTML, XML, èásteèné øešení v GATE softu)
-
-Lingvistická nanotace
-
-Extrkace informací
-
-Sémantické anotace - víceménì jen teoreticky
 
 \subsection{Pøíprava vstupních dat}
+První, co musíme udìlat, je stáhnout požadované èlánky z~internetu k~dalšímu zpracování. Programy, které se zabývají touto èinností nazýváme \emph{web crawler}. V~našem experimentu jsme naprogramovali velmi jednoduchý web crawler, který využívá kanál RSS\footnote{RSS -- RDF Site Summary je také oznaèováno jako technologie sémantického webu, napøíklad v~\cite{SemWeb_Matulik}.} publikovaný na~portálu MVÈR a stáhne všechny web-stránky s~èlánky, které nás zajímají.
+
+Extrakce a èištìní (zamyšlení nad rùznými formáty zdroje PDF, DOC, HTML, XML, èásteèné øešení v GATE softu)
 \subsection{Lingvistická anotace}
 \subsection{Extrakce dat}
 \subsection{Formální reprezentace dat}
@@ -44,7 +49,17 @@ Sémantické anotace - víceménì jen teoreticky
 \label{sec:data_in}
 Volba zdrojových textù
 
+Pro experiment byla vybrána a použita data ze dvou pomìrnì odlišných zdrojù.
+
 Proè hasièi?
+
+V~našem experimentu se jedná o~èlánky hasièského zpravodajství z~èeských regionù na portálu MVÈR
+
+Bleskové hasièské zpravodajství RSS z regionù
+
+Ministerstvo vnitra Èeské republiky
+
+http://www.mvcr.cz/rss/regionhzs.html
 
 \textbf{Proè ne korpus PDT?} --- Dùraz byl kladen na co možná nejvìtší pøiblížení se k~podmínkám a problémùm skuteèného projektu. V takovém pøípadì bychom se tìžko mohli opøít o to, že by nám data která chceme analyzovat nìkdo ruènì lingvisticky anotoval.
 
