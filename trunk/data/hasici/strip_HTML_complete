@@ -18,8 +18,13 @@ sed -n \
 -e 's/<img[^>]*>//g' \
 -e 's/<[^Pp>]*>//g' \
 -e 's/\([0-9]\):\([0-9][[0-9]\)/\1.\2/g' \
--e 's/<[Pp][^>]*>\([^< ][^<]*\)[^>]*>/\.\n\1/gp' \
+-e 's/<[Pp][^>]*>\([^< ][^<]*\)[^>]*>/\n\n\1/gp' \
 < $f > ../../txt_src/$dir1/$f.txt
+
+#Input format: The input is plain Czech text in ISO 8859-2 encoding.
+#Line break serves as a sentence separator (if we want to force the tool to separate them);
+#double line break is a paragraph separator.
+#-e 's/<[Pp][^>]*>\([^< ][^<]*\)[^>]*>/\.\n\1/gp' \
 
 #	rename .htm '' ../../txt_src/$dir1/$f.txt
 #-e 's/^.*[^0-9]\([0-9]*[0-9]\):\([0-9][0-9]\).*$/\1.\2/g' \

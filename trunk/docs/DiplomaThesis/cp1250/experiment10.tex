@@ -15,7 +15,7 @@ Otevøela se nám možnost spolupráce s~Martinem Labským a Vojtìchem Svátekem na~èá
 
 K~žádné spolupráci zatím nedošlo, ale v~experimentu této práce se pokoušíme otestovat dostupné nástroje pro~lingvistickou anotaci èeských textù a prozkoumat možnosti jejich využití pro~extrakci informací a automatickou sémantickou anotaci.
 
-%Jmenovitì se jednalo o tyto nástroje: !!!!!!!!!!!!!doplnit!!!!!!!!!!!!!!!!. Byly 
+%Jmenovitì se jednalo o tyto nástroje: !!!!!!!!!!!!!doplnit!!!!!!!!!!!!!!!!. Byly
 
 %!!!!!!!Pzor následující odstavec jsem okopíroval i do kapitoly pøínosy - vyøešit
 
@@ -37,22 +37,65 @@ Data která nás zajímají\footnote{Podrobnìjší diskuse o~vstupních datech experime
 
 
 \subsection{Pøíprava vstupních dat}
-První, co musíme udìlat, je stáhnout požadované èlánky z~internetu k~dalšímu zpracování. Programy, které se zabývají touto èinností nazýváme \emph{web crawler}. V~našem experimentu jsme naprogramovali velmi jednoduchý web crawler, který využívá kanál RSS\footnote{RSS -- RDF Site Summary je také oznaèováno jako technologie sémantického webu, napøíklad v~\cite{SemWeb_Matulik}.} publikovaný na~portálu MVÈR a stáhne všechny web-stránky s~èlánky, které nás zajímají.
+První, co musíme udìlat, je stáhnout požadované èlánky z~internetu k~dalšímu zpracování. Programy, které se zabývají touto èinností nazýváme \emph{web crawler}. V~našem experimentu jsme naprogramovali velmi jednoduchý web crawler, který využívá kanál RSS\footnote{RSS -- RDF Site Summary bývá oznaèováno \cite{SemWeb_Matulik} jako technologie sémantického webu.} publikovaný na~portálu MVÈR a stáhne všechny web-stránky s~èlánky, které nás zajímají.
 
-Extrakce a èištìní (zamyšlení nad rùznými formáty zdroje PDF, DOC, HTML, XML, èásteèné øešení v GATE softu)
+Nyní potøebujeme ze~stažených èlánkù extrahovat text, který budeme analyzovat. V~pøípadì hasièských èlánkù to nebyl velký problém. Staèil jednoduchý skript, který pomocí nìkolika regulárních výrazù oddìlil text èlánku od HTML struktury web-stránky. Pøi našem druhém pokusu s~daty evidence úpadcù ÈR (viz \ref{sec:upadci}) jsme narazili na problém se~specifickými formáty textu (DOC a RTF). Automatické zpracování tìchto dat by bylo implementaènì nároèné a kladlo by pøemrštìné èasové nároky. Pro~potøeby experimentu jsme tato data zpracovali v~malém rozsahu ruènì.
+
+Nesnadným problémem je obecná automatizace pøedchozích dvou procedur. Napøíklad pro~stahování \uv{zajímavých} èlánkù by se dal použít univerzální web crawler nìjakého internetového vyhledávaèe, tím je napøíklad Egothor\footnote{http://www.egothor.org/} vyvíjený týmem Lea Galamboše. Stránky, které tento crawler stahuje, by se filtrovaly pomocí heuristiky. Ta by vybrala stránky, které má cenu dále zpracovávat. Následuje problém, jak na~stránce automaticky najít texty, které nás zajímají. Pravdìpodobnì by se i tento problém dal øešit pomocí nìjaké heuristiky s~podporou metod pro konstrukci wrapper-u. Poznamenejme ještì, že Egothor kromì HTML zpracovává i zdroje ve~formátech PDF, PS, DOC a XLS.
+
+Poslední transformace, kterou jsme pøed lingvistickým zpracováním textù provedli, byl pøevod kódování èeských znakù, pøeklad znakových entit HTML (\verb|&nbsp; &amp;| ...) a sjednocení zápisu èasových údajù (10:45 $\rightarrow$ 10.45, dvojteèku považoval lingvistický analyzátor za oddìlovaè slov, zatímco èasový údaj zapsaný s~teèkou vyhodnocuje správnì). Tyto transformace se dají snadno automatizovat, pouze pøi pøevodu kódování èeských znakù musíme správnì urèit originální kódování zdroje.
+
+Podrobnosti o~implementaci této fáze našeho experimentu je možné nalézt v~sekci \ref{sec:data_prepare}.
+
 \subsection{Lingvistická anotace}
+Nyní se nacházíme v situaci, kdy máme texty, které chceme analyzovat uložené v~prostých textových souborech ve~správném kódování (ISO 8859-2). Spustíme jejich automatickou lingvistickou anotaci, která se skládá z~øetìzu nástrojù Tools for machine annotation - PDT 2.0 (viz sekce \ref{sec:anot_tools}) a nástroje pro~tektogramatickou analýzu (sekce \ref{sec:t-nalysis}). 
+
+
+Výstupem bude 
+
+Pokud bych chtìli náš software veøejnì prezentovat nebo dokonce prodávat, bylo by nutné instalaci zjednodušit a ošetøit právní nároky tøetích stran. To však nebylo pøedmìtem našeho experimentu. Problematiku instalace jednotlivých komponent necháváme jejich autorùm.
+
 \subsection{Extrakce dat}
 \subsection{Formální reprezentace dat}
+Technicky pouhá XSLT-transformace
+
+Teoreticky hledání, rozvažování nad úèelem použití dat, tvorba ontologie.
+
+Tuto fází jsme v~experimentu vynechali. 
+
+nedostatek surových dat
+
+
+Pokud by se nám podaøilo konceptuálnì správnì data zachytit, vznikla by skuteènì sémantická anotace tìchto dat, která by byla nezávislá na úèelu použití.
+
+Vzniklé vzory nejsou závislé na vstupních datech, jsou závislé pouze na jazyce (na Èeštinì). Navíc tektogramatický popis se snaží rozpouštìt rozdíly mezi jednotlivými jazyky. Pøi pøekladu lemmat (napøíklad pomocí WordNetu a ILI -- viz oddíl \ref{sec:EuroWordNet}) by se tyto vzory mohli stát též na jazyce nezávislé. Ovšem za~pøedpokladu, že bychom dokázali tektogramaticky analyzovat i ostatní jazyky. Mohla by pak vzniknout databáze lingvisticko-sémantických vzorù, která by se dala sdílet a rozšiøovat v~širokém spektru projektù.
+
 
 
 \section{Vstupní data}
 \label{sec:data_in}
-Volba zdrojových textù
+Dlouho jsme hledali vhodný zdroj dat, na~kterém bychom pomocí experimentu ukázali výhody lingvistického pøístupu k~extrakci informací a sémantické anotaci. Potøebovali jsme zdroj, kde jsou data vyjádøena pøirozeným jazykem ve~volném textu. K~tomu, aby naše automatická metoda mohla ukázat nìjaký pøínos proti prostému manuálnímu pøepisu dat, potøebujeme, aby se v~textech opakovali informace podobného typu a aby byly podobnì vyjádøeny. V~textech díky tomu mùžeme najít vzory opakujících se tvrzení a pomocí nich hromadnì extrahovat data, která tato tvrzení vyjadøují.
+
+Opakující se zprávy
 
 Pro experiment byla vybrána a použita data ze dvou pomìrnì odlišných zdrojù.
 
-Proè hasièi?
+Další možnosti:
+analytické reporty, wikipedie (nemoci), sportovní zápasy, výroèní zprávy podnikù, PDT
 
+
+Proè hasièi a úpadci?
+\begin{itemize}
+  \item nejvìtší míra opakování, zprávy se jedna druhé velmi podobají, pøitom pokaždé nesou rùzná data.
+  \item Snadné stažení z~webu a extrakce textù.
+\end{itemize}
+
+\textbf{Proè ne korpus PDT?} --- Dùraz byl kladen na co možná nejvìtší pøiblížení se k~podmínkám a problémùm skuteèného projektu. V takovém pøípadì bychom se tìžko mohli opøít o to, že by nám data která chceme analyzovat nìkdo ruènì lingvisticky anotoval.
+
++ pokusy s PDT sample data. Nicménì pokusy nad ruèními lingvistickými anotacemi dat PDT\footnote{Jedná se o \emph{sample data} PDT 2.0, http://ufal.mf\/f.cuni.cz/pdt2.0/data/sample/} probìhly.
+
+\subsection{Hasièi}
+\label{sec:hasici}
 V~našem experimentu se jedná o~èlánky hasièského zpravodajství z~èeských regionù na portálu MVÈR
 
 Bleskové hasièské zpravodajství RSS z regionù
@@ -61,15 +104,14 @@ Ministerstvo vnitra Èeské republiky
 
 http://www.mvcr.cz/rss/regionhzs.html
 
-\textbf{Proè ne korpus PDT?} --- Dùraz byl kladen na co možná nejvìtší pøiblížení se k~podmínkám a problémùm skuteèného projektu. V takovém pøípadì bychom se tìžko mohli opøít o to, že by nám data která chceme analyzovat nìkdo ruènì lingvisticky anotoval.
-
-+ pokusy s PDT sample data. Nicménì pokusy nad ruèními lingvistickými anotacemi dat PDT\footnote{Jedná se o \emph{sample data} PDT 2.0, http://ufal.mf\/f.cuni.cz/pdt2.0/data/sample/} probìhly.
-
-\subsection{Hasièi}
-\label{sec:hasici}
-
 \subsection{Úpadci}
 \label{sec:upadci}
+
+Evidence úpadcù
+
+Ministerstvo spravedlnosti Èeské republiky
+
+http://portal.justice.cz/
 
 \section{Výstupní data}
 %Vzhledem k tomu, že pojem sémantické anotace, jak ho zmiòuji v kapitole \ref{sec:sem_anotace}, je velmi široký, není ani pøesnì urèeno, jaká data by pøi procesu sémantické anotace mìla vzniknout.
@@ -77,9 +119,15 @@ http://www.mvcr.cz/rss/regionhzs.html
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Software}
 \subsection{Skripty pro pøípravu dat}
+\label{sec:data_prepare}
+
 \subsection{Modul pro extrakci informací}
 Makro btred
+
 \subsection{Hledání pøíbuzných slov pomocí WordNetu}
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Návrhy a zkušenosti}
 \section{Dotazování nad lingvistickými závislostními stromy}
