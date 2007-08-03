@@ -37,6 +37,7 @@ Data která nás zajímají\footnote{Podrobnìjší diskuse o~vstupních datech experime
 
 
 \subsection{Pøíprava vstupních dat}
+\label{sec:phase_data_prepare}
 První, co musíme udìlat, je stáhnout požadované èlánky z~internetu k~dalšímu zpracování. Programy, které se zabývají touto èinností nazýváme \emph{web crawler}. V~našem experimentu jsme naprogramovali velmi jednoduchý web crawler, který využívá kanál RSS\footnote{RSS -- RDF Site Summary bývá oznaèováno \cite{SemWeb_Matulik} jako technologie sémantického webu.} publikovaný na~portálu MVÈR a stáhne všechny web-stránky s~èlánky, které nás zajímají.
 
 Nyní potøebujeme ze~stažených èlánkù extrahovat text, který budeme analyzovat. V~pøípadì hasièských èlánkù to nebyl velký problém. Staèil jednoduchý skript, který pomocí nìkolika regulárních výrazù oddìlil text èlánku od HTML struktury web-stránky. Pøi našem druhém pokusu s~daty evidence úpadcù ÈR (viz \ref{sec:upadci}) jsme narazili na problém se~specifickými formáty textu (DOC a RTF). Automatické zpracování tìchto dat by bylo implementaènì nároèné a kladlo by pøemrštìné èasové nároky. Pro~potøeby experimentu jsme tato data zpracovali v~malém rozsahu ruènì.
@@ -48,20 +49,22 @@ Poslední transformace, kterou jsme pøed lingvistickým zpracováním textù provedli
 Podrobnosti o~implementaci této fáze našeho experimentu je možné nalézt v~sekci \ref{sec:data_prepare}.
 
 \subsection{Lingvistická anotace}
-Nyní se nacházíme v situaci, kdy máme texty, které chceme analyzovat uložené v~prostých textových souborech ve~správném kódování (ISO 8859-2). Spustíme jejich automatickou lingvistickou anotaci, která se skládá z~øetìzu nástrojù Tools for machine annotation - PDT 2.0 (viz sekce \ref{sec:anot_tools}) a nástroje pro~tektogramatickou analýzu (sekce \ref{sec:t-nalysis}). 
+\label{sec:phase_ling_anot}
+Tato fáze pøedstavuje pøevod prostých textù na strukturovaná data lingvistických anotací. V~souèasné dobì nemáme na~výbìr moc možností jak tuto fázi realizovat. Kromì lingvistických analyzátorù PDT, existují ještì nástroje vyvíjené na~Masarykovì univerzitì v~Brnì, o~nich se zmiòuje napøíklad práce \cite{Capek}. Bylo by jistì zajímavé v~experimentu obì varianty porovnat, ale už samotné poskládání nástrojù PDT bylo organizaènì pomìrnì nároèné, realizace téhož s~brnìnskou stranou by práci èasovì protáhla a domníváme se, že by pro tuto práci nebyla \uv{pøevratným} pøínosem. Tento potenciální pøínos ale nepopíráme.
 
+V~našem experimentu se nyní nacházíme v situaci, kdy máme texty, které chceme analyzovat uložené v~prostých textových souborech ve~správném kódování (ISO 8859-2). Spustíme jejich automatickou lingvistickou anotaci, která se skládá z~øetìzu nástrojù Tools for machine annotation - PDT 2.0 (viz sekce \ref{sec:anot_tools}) a nástroje pro~tektogramatickou analýzu (sekce \ref{sec:t-nalysis}). Po delší dobì (lingvistická anotace je èasovì pomìrnì nároèná) získáme výstup v~podobì lingvistických anotací na~všech rovinách popisu PDT, uložených ve formátu PML i PLS. Kvalita automaticky generovaných lingvistických anotací se rùzní vìta od vìty. Domníváme se však, že pro typ aplikací, který zde simulujeme, je kvalita anotací více-ménì dostaèující.
 
-Výstupem bude 
-
-Pokud bych chtìli náš software veøejnì prezentovat nebo dokonce prodávat, bylo by nutné instalaci zjednodušit a ošetøit právní nároky tøetích stran. To však nebylo pøedmìtem našeho experimentu. Problematiku instalace jednotlivých komponent necháváme jejich autorùm.
+Programová realizace této fáze experimentu je popsaná v~sekci \ref{sec:data_prepare}.
 
 \subsection{Extrakce dat}
+V této fázi se budeme snažit pomocí struktury lingvistických anotací extrahovat data obsažená v~pùvodních textech.
+
 \subsection{Formální reprezentace dat}
 Technicky pouhá XSLT-transformace
 
 Teoreticky hledání, rozvažování nad úèelem použití dat, tvorba ontologie.
 
-Tuto fází jsme v~experimentu vynechali. 
+Tuto fází jsme v~experimentu vynechali.
 
 nedostatek surových dat
 
@@ -96,13 +99,9 @@ Proè hasièi a úpadci?
 
 \subsection{Hasièi}
 \label{sec:hasici}
-V~našem experimentu se jedná o~èlánky hasièského zpravodajství z~èeských regionù na portálu MVÈR
+Ministerstvo vnitra Èeské republiky pravidelnì zveøejòuje krátké zprávy o~akcích, kterých se úèastnily hasièské sbory jednotlivých regionù ÈR. Tyto zprávy se nám z~výše zmínìných dùvodù zdály vhodné jako zdrojová data experimentu. Tyto èlánky jsou k~dispozici na internetovém portálu MVÈR jako \uv{Bleskové hasièské zpravodajství RSS z~regionù}\footnote{http://www.mvcr.cz/rss/regionhzs.html}. Odtud je pomocí programových nástrojù (popsaných v~sekci \ref{sec:data_prepare}) stahujeme a dále zpracováváme. Aktuálnì zpracovávaný archiv obsahuje pøibližnì 700 èlánkù (celkem cca 1MB textových dat).
 
-Bleskové hasièské zpravodajství RSS z regionù
-
-Ministerstvo vnitra Èeské republiky
-
-http://www.mvcr.cz/rss/regionhzs.html
+Tyto zprávy se nejèastìji týkají výjezdu hasièských oddílù k~dopravní nehodì nebo požáru, ménì èasto informují o~rùzných hasièských slavnostech a dalších zásazích hasièské služby (ochrana vodních zdrojù pøed chemickým zneèištìním, opatøení proti ptaèí chøipce, kuriózní nehody v~domácnostech).
 
 \subsection{Úpadci}
 \label{sec:upadci}
@@ -118,8 +117,21 @@ http://portal.justice.cz/
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Software}
+Pro ukládání a verzování programové èásti práce jsme využili služeb veøejného serveru BerliOS\footnote{Naše stránky zde mají adresu http://czsem.berlios.de/}, kde nám byl poskytnut úèet spolu s~veøejným SVN repository\footnote{Adresa naší SVN repository: http://svn.berlios.de/svnroot/repos/czsem/trunk/}. V~tomto SVN úložišti je možné nalézt aktuální verze softwarových komponent i textù této práce. Na CD-ROM pøiloženém k~této práci je v~adresáøi \emph{czsem} umístìna kopie SVN repository ve~verzi z~10.~8. Chystáme se však práci dále vyvíjet, proto doporuèujeme data v~SVN repository na~pøiloženém CD-ROM pøed používáním èi prohlížením aktualizovat (Pro~podrobnosti viz soubor ReadMe.txt na~pøiloženém CD-ROM).
+
+\subsection{Instalace}
+\label{sec:install}
+
+Pro otestování jednotlivých programových èástí je nutná pomìrnì komplikovaná instalace použitých lingvistických nástrojù. K~publikaci nìkterých z~nich navíc nemáme svolení. Ètenáø, který pravdìpodobnì bude chtít programovou èást práce vyzkoušet, má dvì možnosti. Buï si všechny nástroje i s~licencí pro~jejich používání obstará sám nebo se mùže obrátit na~autory práce a vyžádat si zapùjèení tìchto nástrojù za~úèelem testování této práce -- tato èinnost pak bude pokryta platnou licencí autorù práce. Druhá varianta zahrnuje i propùjèení uživatelského úètu (vèetnì hesla) pro~pøístup k~webovému rozhraní èeského WordNetu (pro~podrobnosti o~èeském WordNetu viz~\ref{sec:wordnet_cz}).
+
+Postup instalace vèetnì odkazù na~poskytovatele jednotlivých nástrojù je popsaný v~souboru \emph{install.txt}\footnote{Soubor install.txt je umístìný v~adresáøi \emph{docs/UserGuide} SVN repository.}.
+
+Autoøi práce jsou si vìdomi toho, že pokud by chtìli svùj software veøejnì publikovat nebo dokonce prodávat, bylo by nutné instalaci zjednodušit a ošetøit právní nároky tøetích stran. To však nebylo pøedmìtem tohoto experimentu. Problematiku instalace externích komponent ponechme jejich autorùm.
+
 \subsection{Skripty pro pøípravu dat}
 \label{sec:data_prepare}
+Skripty, pomocí kterých se stáhnou a transformují stránky hasièského zpravodajství jsou umístìné v~adresáøi \emph{data/hasici} SVN repository. Jedná se o~sadu \emph{bash} skriptù, které by mìli fungovat na vìtšinì UNIX-ových systémù. Pøed jejich spuštìním je však nutné do~systému nainstalovat potøebné lingvistické nástroje (pro popis instalace viz \ref{sec:install}). Kompletní dávku spustíme (na~pozadí) skriptem \emph{run\_parse\_background}. Tato dávka postupnì vykoná všechny akce popsané v~sekcích \ref{sec:phase_data_prepare} a \ref{sec:phase_ling_anot}. Výstupní lingvistické anotace budou uloženy v~adresáøi \emph{data/hasici/pml}. Celý bìh této dávky mùže trvat i více než tøi hodiny. Hlášení o~prùbìhu jednotlivých akcí je zaznamenáváno v~log-souboru \emph{parse.log}. Podrobnosti k~funkci jednotlivých skriptù je možné nalézt v~komentáøích uvnitø každého skriptu.
+
 
 \subsection{Modul pro extrakci informací}
 Makro btred
