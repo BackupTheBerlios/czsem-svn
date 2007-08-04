@@ -57,7 +57,34 @@ V~našem experimentu se nyní nacházíme v situaci, kdy máme texty, které chceme an
 Programová realizace této fáze experimentu je popsaná v~sekci \ref{sec:data_prepare}.
 
 \subsection{Extrakce dat}
-V této fázi se budeme snažit pomocí struktury lingvistických anotací extrahovat data obsažená v~pùvodních textech.
+V této fázi se budeme snažit pomocí struktury lingvistických anotací extrahovat data obsažená v~pùvodních textech. Popíšeme zde \uv{øešení}, které jsme zvolili. Jedná se ale spíš o~prùzkum než o~nìjakou ucelenou metodu. Pøí popisu tohoto øešení se budeme snažit komentovat další alternativy a možnosti.
+
+\subsubsection{XML nebo btred?}
+Nejprve jsme se chtìli s~daty blíže seznámit. V~tomto bodì jsme museli provést první rozhodnutí, totiž jestli bude pro~naše úèely vhodnìjší na~programové úrovni pracovat s~lingvistickými daty pøímo nebo prostøednictvím nástroje btred (popsaný v~sekci \ref{sec:tred}).
+
+Lingvistická data ve~formátu PML jsou uložena jako~XML pomìrnì složité struktury. Manipulace s~XML je v~souèasné dobì podpoøena širokou paletou programových nástrojù a nepøedstavuje pro~programátora velkou pøekážku, pøedpokládá však detailní znalost struktury zpracovávaných dat.
+
+Btred, který nám byl lingvisty doporuèován, nabízí mnoho užiteèných funkcí pro~manipulaci s~PML daty, tøi práci s~nástrojem btred tedy programátor nepotøebuje tak podrobné znalosti formátu PML, programátor ale musí zvládnout funkce tohoto nástroje. Jedinou možností, jak s~nástrojem btred pracovat, je naprogramování vlastního btred-makra, které pak tento nástroj nad~lingvistickými daty vyhodnotí. Tato makra se zapisují v jazyce Perl, který je v~oblasti softwarových systémù zøídka používaný. Integrace btred-makra se zbytkem softwarového systému mùže být komplikovanìjší.
+
+K~poèáteènímu prùzkumu jsme zvolili druhou variantu -- btred. Pro komplexní projekt by však bylo vhodné tuto volbu ještì zvážit a porovnat s možnostmi vytvoøení a použití dotazovacího jazyka nad lingvistickými stromy, viz dále.
+
+\subsubsection{Frekvenèní analýza}
+Jako základní pohled na data nám posloužila frekvenèní analýza uzlù v~lingvistických stromech, konkrétnì analýza tektogramatických lemmat, zvláštì pak její podmnožina omezená pouze na~slovesa. Výsledky tìchto analýz jsou uloženy v~souborech \emph{data/hasici/freq.txt} a \emph{data/hasici/freq\_verb.txt} SVN repository.
+
+\subsubsection{Pravidla pro extrakci dat}
+Díky frekvenèním analýzám jsme se mohli zamìøit na~ta tvrzení, která se v~textech èasto vyskytují. Vizuální prohlídka jednotlivých vìt nám pak umožnila vypozorovat ve~vìtách jednoduché vzory typu: Na slovese \texttt{zranit} visí pod~funktorem \texttt{PAT} podstrom vìty, který blíže specifikuje osoby, jich poèty, a druh zranìní, které utrpìly a tento podstrom má opìt ve~vìtšinì pøípadù podobnou strukturu. Na základì tìchto pozorování je možné zkonstruovat deterministická programová pravidla pro~extrakci dat. O~konstrukci nìkolika takových pravidel jsme se pokusili.
+
+Ukázalo se, že naprogramování extrakèního pravidla pomocí nástroje btred pøedstavuje i pro~velmi jednoduchý vzor mnoho práce. Pøesto, že jsme se snažili program strukturovat do vìtšího množství obecnìjších funkcí a podprocedur, byl zápis pravidla velmi nepøehledný. Tento závìr není pøekvapivý, více-ménì jsme ho pøedpokládali. Díky tomuto pokusu jsme ale podrobnìji poznali úskalí, která konstrukce tìchto pravidel pøináší.
+
+\subsubsection{Zápis a interpretace pravidel}
+Programování extrakèních pravidel èistì pomocí nástroje btred nám ukázalo výhody, které by pøinesl formální dotazovací jazyk nad~lingvistickými stromy. Tento jazyk by dále umožnil formalizovat pravidla pro~extrakci dat a formální zápis tìchto pravidel by umožnil jejich uživatelskou editaci, strojovou indukci i sdílení. V~oddíle \ref{sec:tree_query} jsme se pokusili o~návrh takového jazyka a v~oddíle \ref{sec:patern_induction} se zamýšlíme nad~možnostmi strojové indukce pravidel pro extrakci dat.
+
+
+\subsubsection{Shrnutí}
+Závìrem: díky rùznì získaným pravidlùm extrahovat data. Šlo by i ruènì anotovat korpus, strojové uèení anotuje zbytek, ale lépe: strojové uèení vytvoøí pravidla
+
+Odkaz na sw øešení s podrobnostmi o~pokusných pravidlech.
+
 
 \subsection{Formální reprezentace dat}
 Technicky pouhá XSLT-transformace
@@ -126,7 +153,7 @@ Pro otestování jednotlivých programových èástí je nutná pomìrnì komplikovaná ins
 
 Postup instalace vèetnì odkazù na~poskytovatele jednotlivých nástrojù je popsaný v~souboru \emph{install.txt}\footnote{Soubor install.txt je umístìný v~adresáøi \emph{docs/UserGuide} SVN repository.}.
 
-Autoøi práce jsou si vìdomi toho, že pokud by chtìli svùj software veøejnì publikovat nebo dokonce prodávat, bylo by nutné instalaci zjednodušit a ošetøit právní nároky tøetích stran. To však nebylo pøedmìtem tohoto experimentu. Problematiku instalace externích komponent ponechme jejich autorùm.
+Autoøi práce jsou si vìdomi toho, že pokud by chtìli svùj software veøejnì publikovat nebo dokonce prodávat, bylo by nutné instalaci zjednodušit a ošetøit právní nároky tøetích stran. To však nebylo pøedmìtem tohoto experimentu. Problematiku instalace externích komponent ponechme jejich autorùm. Nejménì pøíjemná je instalace tektogramatického analyzátoru (sekce \ref{sec:t-nalysis}), tento nástroj je ale stále ve~vývoji a jeho instalaci je nutné považovat za~doèasné øešení.
 
 \subsection{Skripty pro pøípravu dat}
 \label{sec:data_prepare}
@@ -136,6 +163,9 @@ Skripty, pomocí kterých se stáhnou a transformují stránky hasièského zpravodajst
 \subsection{Modul pro extrakci informací}
 Makro btred
 
+skripty pro frekvenèní analýzu \emph{data/hasici/freq.btred}
+
+Pro podrobnosti o~funkci jednotlivých skriptù se opìt odvoláváme na~kód jednotlivých skriptù a komentáøe uvnitø.
 \subsection{Hledání pøíbuzných slov pomocí WordNetu}
 
 
@@ -147,6 +177,8 @@ Makro btred
 
 %kapitola Netgraph:: V prùbìhu experimentu, který je popsán v~kapitole \ref{sec:experiment}, jsme narazili na~potøebu dotazovacího jazyka, pomocí kterého bychom se mohli programovì dotazovat na~hodnoty atributù lingvistických stromù. Též by se nám velmi hodil jazyk, ve kterém by bylo možné vyjádøit vzory stromù, které se v~korpusu našeho experimentu èastìji vyskytují. Dotazovací jazyk, který používá aplikace Netgraph, je naší pøedstavì velmi blízký. Tuto problematiku podrobnìji rozebíráme v~oddíle \ref{sec:tree_query}.
 
+interpretace - XPath, XPath pøehlednìjší v~lineárním zápisu, vizualizace dotazu podobnì jako v NG klientu
+
 Skryté uzly v~nástroji Netgraph XXX btred a rùzné roviny, \verb|PML_T::GetANodes($this)|
 
 \begin{center}
@@ -157,11 +189,32 @@ Skryté uzly v~nástroji Netgraph XXX btred a rùzné roviny, \verb|PML_T::GetANodes
 
 Za každým uzlem následuje v~kulatých závorkách èárkami oddìlený seznam jeho dìtí.
 
+\subsection{Extrakèní pravidla}
+
 \subsection{Indexace}
 \label{sec:tree_indexing}
 
 Indexace XML dat (pro optimalizaci vyhodnocování dotazù XPath, XQuery a podobných) je v~souèasnosti otevøeným problémem. Stále ještì hledáme algoritmus, který by dokázal efektivnì indexovat XML data libovolné struktury. Tuto situaci ilustrují napøíklad èlánky
 \cite{saptial_index}, \cite{baca_znalosti}.
 
+
 \section{Indukce vzorù}
 \label{sec:patern_induction} 
+klasifikace - dendrogram
+od frekvenèní analýzy lemmat dále po rùzných osách struktury, rùzné délky tranzitivních hran stromu, zahrnou rùzné atributy
+
+konstrukce dendrogramu interaktivní, napø. se fixují jednotlivá lemmata
+
+pøevod vzoru na pravidlo: uživatel oznaèí atributy které ho zajímají, zapíše transformaci výstupu na formální reprezentaci znalostí (4. krok osnovy), lze též vizualizovat ontologii a mapovat vizuálnì.
+
+Oznaèí korpus a nasadit strojové uèení.
+.. pravidla by vznikala jako èerná - až šedá skøíòka
+.. problém s vytváøením korpusu, ruèní anotace
+
+
+\section{Závìr práce}
+Otevírá mnoho možností
+
+Základní prùzkum
+\\- teoretický
+\\- praktický
