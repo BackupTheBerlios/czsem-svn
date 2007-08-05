@@ -40,7 +40,7 @@ Data která nás zajímají\footnote{Podrobnìjší diskuse o~vstupních datech experime
 \label{sec:phase_data_prepare}
 První, co musíme udìlat, je stáhnout požadované èlánky z~internetu k~dalšímu zpracování. Programy, které se zabývají touto èinností nazýváme \emph{web crawler}. V~našem experimentu jsme naprogramovali velmi jednoduchý web crawler, který využívá kanál RSS\footnote{RSS -- RDF Site Summary bývá oznaèováno \cite{SemWeb_Matulik} jako technologie sémantického webu.} publikovaný na~portálu MVÈR a stáhne všechny web-stránky s~èlánky, které nás zajímají.
 
-Nyní potøebujeme ze~stažených èlánkù extrahovat text, který budeme analyzovat. V~pøípadì hasièských èlánkù to nebyl velký problém. Staèil jednoduchý skript, který pomocí nìkolika regulárních výrazù oddìlil text èlánku od HTML struktury web-stránky. Pøi našem druhém pokusu s~daty evidence úpadcù ÈR (viz \ref{sec:upadci}) jsme narazili na problém se~specifickými formáty textu (DOC a RTF). Automatické zpracování tìchto dat by bylo implementaènì nároèné a kladlo by pøemrštìné èasové nároky. Pro~potøeby experimentu jsme tato data zpracovali v~malém rozsahu ruènì.
+Nyní potøebujeme ze~stažených èlánkù extrahovat text, který budeme analyzovat. V~pøípadì hasièských èlánkù to nebyl velký problém. Staèil jednoduchý skript, který pomocí nìkolika regulárních výrazù oddìlil text èlánku od HTML struktury web-stránky. Pøi našem druhém pokusu s~daty evidence úpadcù ÈR (viz \ref{sec:upadci}) jsme narazili na problém se~specifickými formáty textu (pøedevším formát DOC). Automatické zpracování tìchto dat by bylo implementaènì nároèné a kladlo by pøemrštìné èasové nároky. Pro~potøeby experimentu jsme tato data zpracovali v~malém rozsahu ruènì.
 
 Nesnadným problémem je obecná automatizace pøedchozích dvou procedur. Napøíklad pro~stahování \uv{zajímavých} èlánkù by se dal použít univerzální web crawler nìjakého internetového vyhledávaèe, tím je napøíklad Egothor\footnote{http://www.egothor.org/} vyvíjený týmem Lea Galamboše. Stránky, které tento crawler stahuje, by se filtrovaly pomocí heuristiky. Ta by vybrala stránky, které má cenu dále zpracovávat. Následuje problém, jak na~stránce automaticky najít texty, které nás zajímají. Pravdìpodobnì by se i tento problém dal øešit pomocí nìjaké heuristiky s~podporou metod pro konstrukci wrapper-u. Poznamenejme ještì, že Egothor kromì HTML zpracovává i zdroje ve~formátech PDF, PS, DOC a XLS.
 
@@ -106,25 +106,13 @@ Extrakèní vzory vzniklé v~pøedchozí fázi nejsou závislé na~vstupních datech, jso
 
 \section{Vstupní data}
 \label{sec:data_in}
-Dlouho jsme hledali vhodný zdroj dat, na~kterém bychom pomocí experimentu ukázali výhody lingvistického pøístupu k~extrakci informací a sémantické anotaci. Potøebovali jsme zdroj, kde jsou data vyjádøena pøirozeným jazykem ve~volném textu. K~tomu, aby naše automatická metoda mohla ukázat nìjaký pøínos proti prostému manuálnímu pøepisu dat, potøebujeme, aby se v~textech opakovali informace podobného typu a aby byly podobnì vyjádøeny. V~textech díky tomu mùžeme najít vzory opakujících se tvrzení a pomocí nich hromadnì extrahovat data, která tato tvrzení vyjadøují.
+Dlouho jsme hledali vhodný zdroj dat, na~kterém bychom pomocí experimentu ukázali výhody lingvistického pøístupu k~extrakci informací a sémantické anotaci. Potøebovali jsme zdroj, kde jsou data vyjádøena pøirozeným jazykem ve~volném textu. K~tomu, aby naše automatická metoda mohla ukázat nìjaký pøínos proti prostému manuálnímu pøepisu dat, potøebujeme, aby se v~textech opakovali informace podobného typu a aby byly podobnì vyjádøeny. V~textech díky tomu mùžeme najít vzory opakujících se tvrzení a pomocí nich hromadnì extrahovat data, která tato tvrzení nesou.
 
-Opakující se zprávy
+Tyto podmínky splòuje širší spektrum zdrojù. Uvažovali jsme o~anotaci analytických reportù o výsledcích dataminingu, o~èláncích otevøené encyklopedie Wikipedia, o~zprávách ze~sportovních zápasù i o~výroèních zprávách podnikù ÈR. Výhody sémanticky anotovaných reportù zmiòujeme už v~úvodu (sekce \ref{sec:data_mine}).  V~pøípadì Wikipedia encyklopedie bychom naše sémantické anotace mohli ukládat pomocí SMW (viz sekce \ref{sec:SMW}) a pøispívat tak k~vytvoøení sémantické Wikipedie. V~tomto pøípadì bychom se ale museli zamìøit na~nìjakou užší oblast èlánkù.
 
-Pro experiment byla vybrána a použita data ze dvou pomìrnì odlišných zdrojù.
+Nakonec jsme vybrali dva pomìrnì odlišné zdroje: hasièské zpravodajství a databázi úpadcù ÈR. Hlavními dùvody tohoto rozhodnutí byla vysoká míra opakování se podobných témat ve~zprávách a pomìrnì snadná dostupnost tìchto dat. Oba zdroje podrobnìji popíšeme níže.
 
-Další možnosti:
-analytické reporty, wikipedie (nemoci), sportovní zápasy, výroèní zprávy podnikù, PDT
-
-
-Proè hasièi a úpadci?
-\begin{itemize}
-  \item nejvìtší míra opakování, zprávy se jedna druhé velmi podobají, pøitom pokaždé nesou rùzná data.
-  \item Snadné stažení z~webu a extrakce textù.
-\end{itemize}
-
-\textbf{Proè ne korpus PDT?} --- Dùraz byl kladen na co možná nejvìtší pøiblížení se k~podmínkám a problémùm skuteèného projektu. V takovém pøípadì bychom se tìžko mohli opøít o to, že by nám data která chceme analyzovat nìkdo ruènì lingvisticky anotoval.
-
-+ pokusy s PDT sample data. Nicménì pokusy nad ruèními lingvistickými anotacemi dat PDT\footnote{Jedná se o \emph{sample data} PDT 2.0, http://ufal.mf\/f.cuni.cz/pdt2.0/data/sample/} probìhly.
+Další ponìkud odlišnou možností vstupních dat pøedstavuje korpus PDT. V~tomto pøípadì bychom se mohli opøít o~velmi kvalitní \uv{ruèní} lingvistické anotace. Data korpusu PDT jsou pestrá a opakující témata bychom zde hledali obtížnì. Navíc dùraz experimentu byl kladen na co možná nejvìtší pøiblížení se k~podmínkám a problémùm skuteèného projektu. V~takovém pøípadì bychom se tìžko mohli opøít o~to, že by nám data která chceme analyzovat nìkdo ruènì lingvisticky anotoval. Nicménì pokusy s~ruèními lingvistickými anotacemi dat PDT\footnote{Jedná se o \emph{sample data} PDT 2.0, http://ufal.mf\/f.cuni.cz/pdt2.0/data/sample/} (pøedevším z~tréninkových dùvodù) probìhly.
 
 \subsection{Hasièi}
 \label{sec:hasici}
@@ -134,14 +122,14 @@ Tyto zprávy se nejèastìji týkají výjezdu hasièských oddílù k~dopravní nehodì neb
 
 \subsection{Úpadci}
 \label{sec:upadci}
+Na Informaèním serveru èeského soudnictví\footnote{http://portal.justice.cz/} je veøejnì dostupná \emph{Evidence úpadcù} Ministerstva spravedlnosti Èeské republiky. Tato rozsáhlá a neustále aktualizovaná evidence obsahuje kromì dalších dat i texty jednotlivých soudních rozhodnutí a ustanovení. Právì tyto texty jsme zvolili jako vstupní data experimentu.
 
-Evidence úpadcù
+Automatické stažení a proèištìní dat z~tohoto datového zdroje by bylo pomìrnì komplikované. Texty jsou na~serveru uložené ve~formátu DOC, k~tìmto dokumentùm neexistují perzistentní URL, stahování jednotlivých dokumentù probíhá pøes náhodnou doèasnì zvolenou adresu, která vzniká pøi generování web-stránky s detailním popisem každého konkurzu. Ještì nároènìjší by však bylo automaticky extrahovat texty, které nás zajímají z~jednotlivých DOC souborù. Tyto soubory nemají jednotnou strukturu, jsou napsané rùznými autory, jsou rùznì formátované, texty ustálených nadpisù se vyskytují v~nìkolika variantách. 
 
-Ministerstvo spravedlnosti Èeské republiky
+Tento datový zdroj hraje v~našem experimentu spíše doplòkovou roli. Chtìli jsme porovnat kvalitu lingvistických anotací a možnosti naší metody na~datech v~další doménì. K~tomuto úèelu jsme tato data zpracovali v~malém rozsahu ruènì, jsou uložena v~souboru \emph{data/upadci/sample\_data.txt} SVN repository.
 
-http://portal.justice.cz/
 
-\section{Výstupní data}
+%\section{Výstupní data}
 %Vzhledem k tomu, že pojem sémantické anotace, jak ho zmiòuji v kapitole \ref{sec:sem_anotace}, je velmi široký, není ani pøesnì urèeno, jaká data by pøi procesu sémantické anotace mìla vzniknout.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
