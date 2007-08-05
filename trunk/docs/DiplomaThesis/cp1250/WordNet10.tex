@@ -3,7 +3,9 @@
 \label{sec:wordnet}
 WordNet \cite{WordNet5p}, \cite{WordNetBook} je lexikální databáze vybudovaná na základì psycholexikologického vızkumu o lidské lexikální pamìti. Jazykové jednotky nejsou ve~WordNetu uspoøádány abecednì, ale podle jejich sémantickıch vztahù, tedy hierarchicky a shlukovì. Tento typ lexikální databáze se èasto oznaèuje jako \emph{sémantická sí}.
 
-WordNet jakoto sémantická sí obsahuje pouze slova, která nesou nìjakı kognitivní vıznam, tedy podstatná jména, pøídavná jména, pøíslovce a slovesa. Navíc jsou ve WordNetu obsaena i slovní spojení (sousloví), napøíklad \uv{vysoká škola}. V dalším textu si však pro lepší pøehlednost dovolíme zjednodušení a o~všech tìchto jazykovıch vırazech, které mùeme ve WordNetu nalézt budeme mluvit jako o slovech.
+U jednoduché mapování slov na~jejich vıznamy uloené jako \emph{synsety} WordNetu (viz dále) se~nìkdy oznaèuje jako sémantická analıza textu (napøíklad v~\cite{Capek}). V~experimentu, kterı je souèástí této práce, jsme technologii WordNet chtìli pouít k~zobecnìní metody pro~extrakci dat z~textu. Podrobnosti o~tomto experimentu je moné nalézt v~kapitole~\ref{sec:experiment}.
+
+WordNet jakoto sémantická sí obsahuje pouze slova, která nesou nìjakı kognitivní vıznam, tedy podstatná jména, pøídavná jména, pøíslovce a slovesa. Navíc jsou ve WordNetu obsaena i slovní spojení (sousloví), napøíklad \uv{vysoká škola}. V dalším textu si však pro~lepší pøehlednost dovolíme zjednodušení a o~všech tìchto jazykovıch vırazech, které mùeme ve~WordNetu nalézt budeme mluvit jako o~slovech.
 
 \subsubsection{Lexikální matice}
 Základním formálním prostøedkem pro zachycení vıznamu slova je \emph{lexikální matice}. Øádky této matice tvoøí jednotlivé vıznamy, sloupce jednotlivá slova. Záznam lexikální matice na souøadnicích [\emph{i}~,~\emph{j}] znamená, e slovo \emph{j} nese vıznam \emph{i}. Pokud se objeví dva záznamy na stejném øádku, znamená to, e odpovídající dvì slova mají stejnı vıznam, jsou synonymní. Pokud se naopak objeví více záznamù v jednom sloupci, znamená to, e toto slovo nese více monıch vıznamù, je polysémické.

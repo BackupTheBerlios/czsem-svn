@@ -26,7 +26,7 @@ K~ádné spolupráci zatím nedošlo, ale v~experimentu této práce se pokoušíme otes
 \label{sec:osnaova_praci}
 Postupem prací v~experimentu se snaíme simulovat postup opravdového projektu, kterı by byl zamìøenı na dodateènou automatickou sémantickou anotaci nìkterıch zdrojù webu. Tedy jsme v~situaci, kdy chceme nìjakım zpùsobem vyuít data na webu publikovaná. Abychom mohli tato data pouít, potøebujeme je získat v~takové formì, aby se dala strojovì zpracovávat a vyhodnocovat. Na webu jsou však tato data publikována tak, aby si je mohli prohlíet obyèejní lidští návštìvníci, nemají strukturu, kterou poadujeme.
 
-Data která nás zajímají\footnote{Podrobnìjší diskuse o~vstupních datech experimentu je v~oddíle \ref{sec:data_in}.} mohou bıt vyjádøena pøirozenım jazykem v~textech èlánkù nìkolika webovıch portálù. V~našem experimentu se jedná o~èlánky hasièského zpravodajství z~èeskıch regionù na portálu MVÈR (podrobnìji v~oddíle \ref{sec:data_in}). Abychom se od tìchto èlánkù dostali k~datùm, která potøebujeme, budeme postupovat podle následující osnovy.
+Data která nás zajímají\footnote{Podrobnìjší diskuse o~vstupních datech experimentu je v~oddíle \ref{sec:data_in}.} mohou bıt vyjádøena pøirozenım jazykem v~textech èlánkù nìkolika webovıch portálù. V~našem experimentu se jedná o~èlánky hasièského zpravodajství z~èeskıch regionù na portálu MVÈR (podrobnìji v~oddíle \ref{sec:data_in}). Abychom se od tìchto èlánkù dostali k~datùm, která potøebujeme, budeme postupovat podle následující osnovy, která je graficky znázornìna na~obrázku \ref{pict:AP_schema1}.
 
 \begin{figure}[!thb]
 \begin{center}
@@ -62,43 +62,45 @@ V této fázi se budeme snait pomocí struktury lingvistickıch anotací extrahovat 
 \subsubsection{XML nebo btred?}
 Nejprve jsme se chtìli s~daty blíe seznámit. V~tomto bodì jsme museli provést první rozhodnutí, toti jestli bude pro~naše úèely vhodnìjší na~programové úrovni pracovat s~lingvistickımi daty pøímo nebo prostøednictvím nástroje btred (popsanı v~sekci \ref{sec:tred}).
 
-Lingvistická data ve~formátu PML jsou uloena jako~XML pomìrnì sloité struktury. Manipulace s~XML je v~souèasné dobì podpoøena širokou paletou programovıch nástrojù a nepøedstavuje pro~programátora velkou pøekáku, pøedpokládá však detailní znalost struktury zpracovávanıch dat.
+Lingvistická data ve~formátu PML jsou uloena jako~XML pomìrnì sloité struktury. Manipulace s~XML je v~souèasné dobì podpoøena širokou paletou programovıch nástrojù a nepøedstavuje pro~programátora velkou pøekáku, ale pøedpokládá detailní znalost struktury zpracovávanıch dat.
 
 Btred, kterı nám byl lingvisty doporuèován, nabízí mnoho uiteènıch funkcí pro~manipulaci s~PML daty, tøi práci s~nástrojem btred tedy programátor nepotøebuje tak podrobné znalosti formátu PML, programátor ale musí zvládnout funkce tohoto nástroje. Jedinou moností, jak s~nástrojem btred pracovat, je naprogramování vlastního btred-makra, které pak tento nástroj nad~lingvistickımi daty vyhodnotí. Tato makra se zapisují v jazyce Perl, kterı je v~oblasti softwarovıch systémù zøídka pouívanı. Integrace btred-makra se zbytkem softwarového systému mùe bıt komplikovanìjší.
 
-K~poèáteènímu prùzkumu jsme zvolili druhou variantu -- btred. Pro komplexní projekt by však bylo vhodné tuto volbu ještì zváit a porovnat s monostmi vytvoøení a pouití dotazovacího jazyka nad lingvistickımi stromy, viz dále.
+K~poèáteènímu prùzkumu jsme zvolili druhou variantu -- btred. Pro komplexní projekt by ale bylo vhodné tuto volbu ještì zváit a porovnat s monostmi vytvoøení a pouití dotazovacího jazyka nad lingvistickımi stromy, viz dále.
 
 \subsubsection{Frekvenèní analıza}
-Jako základní pohled na data nám poslouila frekvenèní analıza uzlù v~lingvistickıch stromech, konkrétnì analıza tektogramatickıch lemmat, zvláštì pak její podmnoina omezená pouze na~slovesa. Vısledky tìchto analız jsou uloeny v~souborech \emph{data/hasici/freq.txt} a \emph{data/hasici/freq\_verb.txt} SVN repository.
+Jako základní pohled na data nám poslouila frekvenèní analıza uzlù v~lingvistickıch stromech, konkrétnì analıza tektogramatickıch lemmat, zvláštì pak její podmnoina omezená pouze na~slovesa. Vısledky tìchto analız jsou uloeny v~souborech\footnote{Vısledky frekvenèních analız jsou uloeny v~souborech freq.txt a freq\_verb.txt pro~kadı datovı zdroj zvláš, konkrétnì v~adresáøích \emph{data/hasici} a \emph{data/upadci}.} \emph{freq.txt} a \emph{freq\_verb.txt} SVN repository.
 
 \subsubsection{Pravidla pro extrakci dat}
 Díky frekvenèním analızám jsme se mohli zamìøit na~ta tvrzení, která se v~textech èasto vyskytují. Vizuální prohlídka jednotlivıch vìt nám pak umonila vypozorovat ve~vìtách jednoduché vzory typu: Na slovese \texttt{zranit} visí pod~funktorem \texttt{PAT} podstrom vìty, kterı blíe specifikuje osoby, jich poèty, a druh zranìní, které utrpìly a tento podstrom má opìt ve~vìtšinì pøípadù podobnou strukturu. Na základì tìchto pozorování je moné zkonstruovat deterministická programová pravidla pro~extrakci dat. O~konstrukci nìkolika takovıch pravidel jsme se pokusili.
 
 Ukázalo se, e naprogramování extrakèního pravidla pomocí nástroje btred pøedstavuje i pro~velmi jednoduchı vzor mnoho práce. Pøesto, e jsme se snaili program strukturovat do vìtšího mnoství obecnìjších funkcí a podprocedur, byl zápis pravidla velmi nepøehlednı. Tento závìr není pøekvapivı, více-ménì jsme ho pøedpokládali. Díky tomuto pokusu jsme ale podrobnìji poznali úskalí, která konstrukce tìchto pravidel pøináší.
 
-\subsubsection{Zápis a interpretace pravidel}
-Programování extrakèních pravidel èistì pomocí nástroje btred nám ukázalo vıhody, které by pøinesl formální dotazovací jazyk nad~lingvistickımi stromy. Tento jazyk by dále umonil formalizovat pravidla pro~extrakci dat a formální zápis tìchto pravidel by umonil jejich uivatelskou editaci, strojovou indukci i sdílení. V~oddíle \ref{sec:tree_query} jsme se pokusili o~návrh takového jazyka a v~oddíle \ref{sec:patern_induction} se zamıšlíme nad~monostmi strojové indukce pravidel pro extrakci dat.
+\subsubsection{Zápis pravidel}
+Programování extrakèních pravidel èistì pomocí nástroje btred nám ukázalo vıhody, které by pøinesl formální dotazovací jazyk nad~lingvistickımi stromy. Tento jazyk by dále umonil formalizovat pravidla pro~extrakci dat a formální zápis tìchto pravidel by umonil jejich uivatelskou editaci, strojovou indukci i sdílení. Bohuel ádnı takovı pøímo pouitelnı dotazovací jazyk pro~lingvistické stromy neexistuje. V~oddíle \ref{sec:tree_query} jsme se pokusili o~návrh takového jazyka a v~oddíle \ref{sec:patern_induction} se zamıšlíme nad~monostmi strojové indukce pravidel pro~extrakci dat.
 
+\subsubsection{Vyuití WordNetu}
+U v~zadání této práce je zmínka o~monosti vyuít databázi WordNet. Tato monost se nabízí právì zde. Pomocí lexikální sítì WordNetu by bylo moné zobecnit extrakèní pravidla. Napøíklad tam, kde bychom v~pùvodním extrakèním pravidle (bez WordNetu) poadovali pøesnou hodnotu tektogramatického lemma, bychom mohli povolit i jeho libovolné synonymum. Na jiném místì bychom mohli poadovat libovolné hyponymum pøípadnì libovolnı prvek podstromu lexikální dìdiènosti, napøíklad ve~zprávách o~dopravních nehodách bychom libovolné \emph{motorové vozidlo} nalezli v~podstromu lexikální dìdiènosti tohoto spojení.
+
+Pøi~zkoumání èeského WordNetu jsme bohuel zjistili nedostateèné pokrytí èeské slovní zásoby a pomìrnì øídké provázání \emph{synsetù} sémantickımi hranami. Zvláštì patrné je to, pokud se zamìøíme na~nìjakou specifickou oblast, jako jsou napøíklad motorová vozidla. Nepovaujeme tedy za~pøínosné souèasnı èeskı WordNet pøímo na~extrakèní pravidla napojit. Na~druhou stranu se nemusíme vzdávat zobecnìní, které by sémantická lexikální sí pøinesla a mùeme na~základì WordNetu a dalších obdobnıch zdrojù takovou sí vytvoøit. Tato sí mùe bıt úzce specializovaná na~doménu ve~které se pohybujeme, nemusí zdaleka dosahovat rozsahu a plné obecnosti, která je na~WordNetu pozoruhodná.
+
+Podrobnosti o~programovıch nástrojích, které jsme pro~zkoumání èeského WordNetu vyvinuly je moné nalézt v~sekci \ref{sec:wn_find}.
 
 \subsubsection{Shrnutí}
-Závìrem: díky rùznì získanım pravidlùm extrahovat data. Šlo by i ruènì anotovat korpus, strojové uèení anotuje zbytek, ale lépe: strojové uèení vytvoøí pravidla
+V~praktickém experimentu jsme zjistili, e extrakci dat z~lingvisticky anotovanıch textù je moné provést pomocí extrakèních pravidel. Podrobnosti o~pravidlech, která jsme programovì realizovali pøedkládáme v~sekci~\ref{sec:extract_exp}. Vytvoøení takovıch funkèních pravidel je ale se souèasnımi programovımi prostøedky zbyteènì pracné a málo úèelné. Efektivní návrh a vyuití extrakèních pravidel by umonil dotazovací jazyk a jeho interpret nad~lingvistickımi stromy. Návrh takového jazyka pøedkládáme v~oddíle \ref{sec:tree_query}.
 
-Odkaz na sw øešení s podrobnostmi o~pokusnıch pravidlech.
-
+Další moností, jak extrahovat data z~lingvisticky anotovanıch textù, je zapojení nìkteré metody strojového uèení. Pro~tyto metody bychom musely vytvoøit trénovací data. Vytvoøení takovıch dat pøedstavuje mnoho ruèní práce, která však mùe bıt srovnatelná s~prací nutnou k~návrhu extrakèních pravidel.
+%Zajímavou moností by mohla bıt kombinace obou pøístupù, toti metodou strojového uèení hledat extrakèní pravidla. ----- to je asi blbost ... museli bychom mít pravidla i tren. data
+Za~nejlepší monost povaujeme poloautomatické vytvoøení extrakèních pravidel z~opakujících se vzorù ve~zkoumanıch datech. Diskuse nad~monostmi indukce takovıch vzorù je v~oddíle~\ref{sec:patern_induction}.
 
 \subsection{Formální reprezentace dat}
-Technicky pouhá XSLT-transformace
+Nacházíme se nyní v~situaci, kdy se nám podaøilo z~lingvisticky anotovanıch textù extrahovat data, která nás zajímají. Chtìli bychom je uchovávat v~takové formì, která by vystihovala jejich sémantiku. Vyuijeme tedy nìjakı konceptuální formální popis (ontologii), pomocí kterého data zapíšeme. Vznikne tak interpretace tìchto dat pomocí slovníku zvolené ontologie. Libovolnı programovı nástroj, kterı \uv{porozumí} dané ontologii, bude moci s~tìmito daty pracovat.
 
-Teoreticky hledání, rozvaování nad úèelem pouití dat, tvorba ontologie.
+Technicky není tato fáze nároèná. Jedná se o~jednoduchou datovou transformaci, kterou je napøíklad pro~XML moné realizovat pomocí XSLT. V~našem experimentu jsme tuto fázi programovì nerealizovali, dùvodem byl mimo jiné nedostatek extrahovanıch dat.
 
-Tuto fází jsme v~experimentu vynechali.
+Nároènost této fáze spoèívá v~nalezení, pøípadnì vytvoøení vhodné ontologie, pomocí které budeme data interpretovat. Je potøeba zváit všechny moné pøípady, ve~kterıch by se data dala pouít a najít takové øešení, které bude ve~vìtšinì pøípadù vyhovovat. Konkrétnì pouít rozšíøenou ontologii, pøípadnì maximálnì usnadnit mapování pouité ontologie na~koncepty ostatních. Pokud se podaøí konceptuálnì správnì data zachytit, vznikne skuteènì sémantická anotace tìchto dat, která není závislá na~úèelu jejich pouití.
 
-nedostatek surovıch dat
-
-
-Pokud by se nám podaøilo konceptuálnì správnì data zachytit, vznikla by skuteènì sémantická anotace tìchto dat, která by byla nezávislá na úèelu pouití.
-
-Vzniklé vzory nejsou závislé na vstupních datech, jsou závislé pouze na jazyce (na Èeštinì). Navíc tektogramatickı popis se snaí rozpouštìt rozdíly mezi jednotlivımi jazyky. Pøi pøekladu lemmat (napøíklad pomocí WordNetu a ILI -- viz oddíl \ref{sec:EuroWordNet}) by se tyto vzory mohli stát té na jazyce nezávislé. Ovšem za~pøedpokladu, e bychom dokázali tektogramaticky analyzovat i ostatní jazyky. Mohla by pak vzniknout databáze lingvisticko-sémantickıch vzorù, která by se dala sdílet a rozšiøovat v~širokém spektru projektù.
+Extrakèní vzory vzniklé v~pøedchozí fázi nejsou závislé na~vstupních datech, jsou závislé pouze na jazyce (na Èeštinì). Navíc tektogramatickı popis se snaí rozpouštìt rozdíly mezi jednotlivımi jazyky. Pøi pøekladu lemmat (napøíklad pomocí WordNetu a ILI -- viz oddíl \ref{sec:EuroWordNet}) by se tyto vzory mohli stát té na~jazyce nezávislé. Ovšem za~pøedpokladu, e bychom dokázali tektogramaticky analyzovat i ostatní jazyky a zdokonalili souèasnı EuroWordNet. Mohla by tak vzniknout databáze lingvisticko-sémantickıch vzorù, která by se dala sdílet a rozšiøovat v~širokém spektru projektù.
 
 
 
@@ -153,21 +155,24 @@ Pro otestování jednotlivıch programovıch èástí je nutná pomìrnì komplikovaná ins
 
 Postup instalace vèetnì odkazù na~poskytovatele jednotlivıch nástrojù je popsanı v~souboru \emph{install.txt}\footnote{Soubor install.txt je umístìnı v~adresáøi \emph{docs/UserGuide} SVN repository.}.
 
-Autoøi práce jsou si vìdomi toho, e pokud by chtìli svùj software veøejnì publikovat nebo dokonce prodávat, bylo by nutné instalaci zjednodušit a ošetøit právní nároky tøetích stran. To však nebylo pøedmìtem tohoto experimentu. Problematiku instalace externích komponent ponechme jejich autorùm. Nejménì pøíjemná je instalace tektogramatického analyzátoru (sekce \ref{sec:t-nalysis}), tento nástroj je ale stále ve~vıvoji a jeho instalaci je nutné povaovat za~doèasné øešení.
+Autoøi práce jsou si vìdomi toho, e pokud by chtìli svùj software veøejnì publikovat nebo dokonce prodávat, bylo by nutné instalaci zjednodušit a ošetøit právní nároky tøetích stran. To ale nebylo pøedmìtem tohoto experimentu. Problematiku instalace externích komponent ponechme jejich autorùm. Nejménì pøíjemná je instalace tektogramatického analyzátoru (sekce \ref{sec:t-nalysis}), tento nástroj je ale stále ve~vıvoji a jeho instalaci je nutné povaovat za~doèasné øešení.
 
 \subsection{Skripty pro pøípravu dat}
 \label{sec:data_prepare}
-Skripty, pomocí kterıch se stáhnou a transformují stránky hasièského zpravodajství jsou umístìné v~adresáøi \emph{data/hasici} SVN repository. Jedná se o~sadu \emph{bash} skriptù, které by mìli fungovat na vìtšinì UNIX-ovıch systémù. Pøed jejich spuštìním je však nutné do~systému nainstalovat potøebné lingvistické nástroje (pro popis instalace viz \ref{sec:install}). Kompletní dávku spustíme (na~pozadí) skriptem \emph{run\_parse\_background}. Tato dávka postupnì vykoná všechny akce popsané v~sekcích \ref{sec:phase_data_prepare} a \ref{sec:phase_ling_anot}. Vıstupní lingvistické anotace budou uloeny v~adresáøi \emph{data/hasici/pml}. Celı bìh této dávky mùe trvat i více ne tøi hodiny. Hlášení o~prùbìhu jednotlivıch akcí je zaznamenáváno v~log-souboru \emph{parse.log}. Podrobnosti k~funkci jednotlivıch skriptù je moné nalézt v~komentáøích uvnitø kadého skriptu.
+Skripty, pomocí kterıch se stáhnou a transformují stránky hasièského zpravodajství jsou umístìné v~adresáøi \emph{data/hasici} SVN repository. Jedná se o~sadu \emph{bash} skriptù, které by mìli fungovat na vìtšinì UNIX-ovıch systémù. Pøed jejich spuštìním je nutné do~systému nainstalovat potøebné lingvistické nástroje (pro popis instalace viz \ref{sec:install}). Kompletní dávku spustíme (na~pozadí) skriptem \emph{run\_parse\_background}. Tato dávka postupnì vykoná všechny akce popsané v~sekcích \ref{sec:phase_data_prepare} a \ref{sec:phase_ling_anot}. Vıstupní lingvistické anotace budou uloeny v~adresáøi \emph{data/hasici/pml}. Celı bìh této dávky mùe trvat i více ne tøi hodiny. Hlášení o~prùbìhu jednotlivıch akcí je zaznamenáváno v~log-souboru \emph{parse.log}. Podrobnosti k~funkci jednotlivıch skriptù je moné nalézt v~komentáøích uvnitø kadého skriptu.
 
 
 \subsection{Modul pro extrakci informací}
+\label{sec:extract_exp}
+
 Makro btred
 
 skripty pro frekvenèní analızu \emph{data/hasici/freq.btred}
 
 Pro podrobnosti o~funkci jednotlivıch skriptù se opìt odvoláváme na~kód jednotlivıch skriptù a komentáøe uvnitø.
-\subsection{Hledání pøíbuznıch slov pomocí WordNetu}
 
+\subsection{Hledání pøíbuznıch slov pomocí WordNetu}
+\label{sec:wn_find}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -199,7 +204,7 @@ Indexace XML dat (pro optimalizaci vyhodnocování dotazù XPath, XQuery a podobnıc
 
 
 \section{Indukce vzorù}
-\label{sec:patern_induction} 
+\label{sec:patern_induction}
 klasifikace - dendrogram
 od frekvenèní analızy lemmat dále po rùznıch osách struktury, rùzné délky tranzitivních hran stromu, zahrnou rùzné atributy
 
