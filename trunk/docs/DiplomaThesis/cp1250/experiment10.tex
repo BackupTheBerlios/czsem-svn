@@ -150,14 +150,14 @@ Autoøi práce jsou si vìdomi toho, že pokud by chtìli svùj software veøejnì publi
 Skripty, pomocí kterých se stáhnou a transformují stránky hasièského zpravodajství jsou umístìné v~adresáøi \emph{data/hasici} SVN repository. Jedná se o~sadu \emph{bash} skriptù, které by mìli fungovat na vìtšinì UNIX-ových systémù. Pøed jejich spuštìním je nutné do~systému nainstalovat potøebné lingvistické nástroje (pro popis instalace viz \ref{sec:install}). Kompletní dávku spustíme (na~pozadí) skriptem \emph{run\_parse\_background}. Tato dávka postupnì vykoná všechny akce popsané v~sekcích \ref{sec:phase_data_prepare} a \ref{sec:phase_ling_anot}. Výstupní lingvistické anotace budou uloženy v~adresáøi \emph{data/hasici/pml}. Celý bìh této dávky mùže trvat i více než tøi hodiny. Hlášení o~prùbìhu jednotlivých akcí je zaznamenáváno v~log-souboru \emph{parse.log}. Podrobnosti k~funkci jednotlivých skriptù je možné nalézt v~komentáøích uvnitø každého skriptu.
 
 
-\subsection{Modul pro extrakci informací}
+\subsection{Makra pro extrakci dat}
 \label{sec:extract_exp}
+V~prùbìhu experimentu jsme vytvoøili nìkolik maker pro~nástroj btred (sekce \ref{sec:tred}). Jednalo se o~makra pro~frekvenèní analýzu, makra pomocí kterých jsme podrobnìji zkoumali vstupní data a makra která simulují extrakci dat. Pøíklad extrakèního pravidla, které jsme se pokusili realizovat je znázornìno v~sekci \ref{sec:extract_rule}.
 
-Makro btred
+Všechny tyto makra (Perl-skripty) jsou umístìny v~adresáøi \emph{src/perl} SVN repository. Podrobnosti o~jednotlivých makrech je možné nalézt v~souboru \emph{src/perl/info.txt} a v~komentáøích uvnitø kódu jednotlivých skriptù.
 
-skripty pro frekvenèní analýzu \emph{data/hasici/freq.btred}
+%Napøíklad frekvenèní analýza hasièských dat probíhá pomocí skriptu \emph{data/hasici/freq.btred} v~SVN repository.
 
-Pro podrobnosti o~funkci jednotlivých skriptù se opìt odvoláváme na~kód jednotlivých skriptù a komentáøe uvnitø.
 
 \subsection{Hledání pøíbuzných slov pomocí WordNetu}
 \label{sec:wn_find}
@@ -183,6 +183,7 @@ Skryté uzly v~nástroji Netgraph XXX btred a rùzné roviny, \verb|PML_T::GetANodes
 Za každým uzlem následuje v~kulatých závorkách èárkami oddìlený seznam jeho dìtí.
 
 \subsection{Extrakèní pravidla}
+\label{sec:extract_rule}
 
 \subsection{Indexace}
 \label{sec:tree_indexing}
