@@ -69,7 +69,7 @@ Btred, kterı nám byl lingvisty doporuèován, nabízí mnoho uiteènıch funkcí pro~m
 K~poèáteènímu prùzkumu jsme zvolili druhou variantu -- btred. Pro komplexní projekt by ale bylo vhodné tuto volbu ještì zváit a porovnat s monostmi vytvoøení a pouití dotazovacího jazyka nad lingvistickımi stromy, viz dále.
 
 \subsubsection{Frekvenèní analıza}
-Jako základní pohled na data nám poslouila frekvenèní analıza uzlù v~lingvistickıch stromech, konkrétnì analıza tektogramatickıch lemmat, zvláštì pak její podmnoina omezená pouze na~slovesa. Vısledky tìchto analız jsou uloeny v~souborech\footnote{Vısledky frekvenèních analız jsou uloeny v~souborech freq.txt a freq\_verb.txt pro~kadı datovı zdroj zvláš, konkrétnì v~adresáøích \emph{data/hasici} a \emph{data/upadci}.} \emph{freq.txt} a \emph{freq\_verb.txt} SVN repository.
+Jako základní pohled na data nám poslouila frekvenèní analıza uzlù v~lingvistickıch stromech, konkrétnì analıza tektogramatickıch lemmat, zvláštì pak její podmnoina omezená pouze na~slovesa. Vısledky tìchto analız jsou uloeny v~souborech\footnote{Vısledky frekvenèních analız jsou uloeny v~souborech freq.txt a freq\_verb.txt pro~kadı datovı zdroj zvláš, konkrétnì v~adresáøích \emph{data/hasici} a \emph{data/upadci}.} \emph{freq.txt} a \emph{freq\_verb.txt} SVN repository. Èást vısledkù je grafickı zpracována na~obrázcích \ref{pict:freq_hasici} a \ref{pict:freq_upadci}.
 
 \subsubsection{Pravidla pro extrakci dat}
 Díky frekvenèním analızám jsme se mohli zamìøit na~ta tvrzení, která se v~textech èasto vyskytují. Vizuální prohlídka jednotlivıch vìt nám pak umonila vypozorovat ve~vìtách jednoduché vzory typu: Na slovese \texttt{zranit} visí pod~funktorem \texttt{PAT} podstrom vìty, kterı blíe specifikuje osoby, jich poèty, a druh zranìní, které utrpìly a tento podstrom má opìt ve~vìtšinì pøípadù podobnou strukturu. Na základì tìchto pozorování je moné zkonstruovat deterministická programová pravidla pro~extrakci dat. O~konstrukci nìkolika takovıch pravidel jsme se pokusili.
@@ -116,13 +116,24 @@ Další ponìkud odlišnou moností vstupních dat pøedstavuje korpus PDT. V~tomto pø
 
 \subsection{Hasièi}
 \label{sec:hasici}
-Ministerstvo vnitra Èeské republiky pravidelnì zveøejòuje krátké zprávy o~akcích, kterıch se úèastnily hasièské sbory jednotlivıch regionù ÈR. Tyto zprávy se nám z~vıše zmínìnıch dùvodù zdály vhodné jako zdrojová data experimentu. Tyto èlánky jsou k~dispozici na internetovém portálu MVÈR jako \uv{Bleskové hasièské zpravodajství RSS z~regionù}\footnote{http://www.mvcr.cz/rss/regionhzs.html}. Odtud je pomocí programovıch nástrojù (popsanıch v~sekci \ref{sec:data_prepare}) stahujeme a dále zpracováváme. Aktuálnì zpracovávanı archiv obsahuje pøiblinì 700 èlánkù (celkem cca 1MB textovıch dat).
+Ministerstvo vnitra Èeské republiky pravidelnì zveøejòuje krátké zprávy o~akcích, kterıch se úèastnily hasièské sbory jednotlivıch regionù ÈR. Tyto zprávy se nám z~vıše zmínìnıch dùvodù zdály vhodné jako zdrojová data experimentu. Tyto èlánky jsou k~dispozici na internetovém portálu MVÈR jako \uv{Bleskové hasièské zpravodajství RSS z~regionù}\footnote{http://www.mvcr.cz/rss/regionhzs.html}. Odtud je pomocí programovıch nástrojù (popsanıch v~sekci \ref{sec:data_prepare}) stahujeme a dále zpracováváme. Aktuálnì zpracovávanı archiv obsahuje pøiblinì 500 èlánkù (celkem cca 1MB textovıch dat).
 
 Tyto zprávy se nejèastìji tıkají vıjezdu hasièskıch oddílù k~dopravní nehodì nebo poáru, ménì èasto informují o~rùznıch hasièskıch slavnostech a dalších zásazích hasièské sluby (ochrana vodních zdrojù pøed chemickım zneèištìním, opatøení proti ptaèí chøipce, kuriózní nehody v~domácnostech). Následuje úryvek z~jedné zprávy\footnote{http://www.mvcr.cz/rs\_atlantic/project/article.php?id=59311}.
 
 \begin{quote}
 Na 241,5 kilometru dálnice D1 ve smìru na Kromìøí havaroval tahaè Volvo s návìsem. Souprava jedoucí v levém, rychlém jízdním pruhu zezadu narazila do dvou speciálních vozidel správy a údrby dálnic – do dodávky Renault s varovnou svìtelnou šipkou a do traktoru k údrbì dálnice. V kabinì tahaèe Volvo byli zranìni 25letı øidiè a jeho desetimìsíèní dítì. Jednadvacetiletá matka dítìte vyvázla bez zranìní. Do nemocnice byli pøevezeni také øidièi speciálních vozidel – 35letı øidiè dodávky Renault a 34letı øidiè traktoru, kterı ale byl po ošetøení propuštìn.
 \end{quote}
+
+\begin{figure}[t!]
+  % Requires \usepackage{graphicx}
+\begin{center}
+  \includegraphics[scale=0.54]{../freq_hasici.eps}
+  \includegraphics[scale=0.54]{../freq_verb_hasici.eps}\\
+\end{center}
+
+  \caption[Frekvenèní analıza hasièskıch zpráv]{Frekvenèní analıza hasièskıch zpráv -- vpravo pouze slovesa.}
+  \label{pict:freq_hasici}
+\end{figure}
 
 
 \subsection{Úpadci}
@@ -131,16 +142,32 @@ Na Informaèním serveru èeského soudnictví\footnote{http://portal.justice.cz/} je
 
 Automatické staení a proèištìní dat z~tohoto datového zdroje by bylo pomìrnì komplikované. Texty jsou na~serveru uloené ve~formátu DOC, k~tìmto dokumentùm neexistují perzistentní URL, stahování jednotlivıch dokumentù probíhá pøes náhodnou doèasnì zvolenou adresu, která vzniká pøi generování web-stránky s detailním popisem kadého konkurzu. Ještì nároènìjší by však bylo automaticky extrahovat texty, které nás zajímají z~jednotlivıch DOC souborù. Tyto soubory nemají jednotnou strukturu, jsou napsané rùznımi autory, jsou rùznì formátované, texty ustálenıch nadpisù se vyskytují v~nìkolika variantách.
 
-Tento datovı zdroj hraje v~našem experimentu spíše doplòkovou roli. Chtìli jsme porovnat kvalitu lingvistickıch anotací a monosti naší metody na~datech v~další doménì. K~tomuto úèelu jsme tato data zpracovali v~malém rozsahu ruènì, jsou uloena v~souboru \emph{data/upadci/sample\_data.txt} SVN repository. Následuje úryvek z~jednoho textu\footnote{http://www.justice.cz/upkuk/s\_i10.sqw?konkurs=127}.
+Tento datovı zdroj hraje v~našem experimentu spíše doplòkovou roli. Chtìli jsme porovnat kvalitu lingvistickıch anotací a monosti naší metody na~datech v~další doménì. K~tomuto úèelu jsme tato data zpracovali v~malém rozsahu ruènì, jsou uloena v~souboru \emph{data/upadci/sample\_data.txt} SVN repository. Z~testu, kterı jsme provedli na~zmínìném vzorku dat se ukazuje, e automaticky generované lingvistické anotace jsou i v~tomto pøípadì pouitelné. Lingvistické analyzátory si velmi dobøe poradily napøíklad s~èlenìním a èíslováním paragrafù jednotlivıch zákonù. Problémy se ukazují pøi analıze nìkterıch témìø a neuvìøitelnıch souvìtí o~délce pøes ètyøicet slov.
+
+\pagebreak
+Následuje úryvek z~textu jednoho soudního usnesení.
 
 \begin{quote}
 Rozdìlení vıtìku získaného zpenìením konkurzní podstaty vychází z údajù obsaenıch ve schválené koneèné zprávì a bylo provedeno v souladu s ust. § 31 a 32 zák. o konkurzu a vyrovnání.  Po odeètení nákladù spojenıch se správou a údrbou konkurzní podstaty, pøiznání odmìny správci, nároku oddìleného vìøitele a vymìøení soudního poplatku, zùstala k rozdìlení mezi vìøitele II. tøídy èástka 15,921.636,70 Kè, která bude rozdìlena v pomìru 14,927871 \% zjištìnıch pohledávek. Tím bude celá konkurzní podstata vyèerpána.
 \end{quote}
 
 
+\begin{figure}[b!]
+  % Requires \usepackage{graphicx}
+\begin{center}
+  \includegraphics[scale=0.55]{../freq_upadci.eps}
+  \includegraphics[scale=0.55]{../freq_verb_upadci.eps}
+\end{center}
+
+  \caption[Frekvenèní analıza evidence úpadcù]{Frekvenèní analıza evidence úpadcù -- vpravo pouze slovesa.}
+
+  \label{pict:freq_upadci}
+\end{figure}
 
 %\section{Vıstupní data}
 %Vzhledem k tomu, e pojem sémantické anotace, jak ho zmiòuji v kapitole \ref{sec:sem_anotace}, je velmi širokı, není ani pøesnì urèeno, jaká data by pøi procesu sémantické anotace mìla vzniknout.
+
+\pagebreak
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Software}
@@ -155,6 +182,7 @@ Postup instalace vèetnì odkazù na~poskytovatele jednotlivıch nástrojù je popsanı
 
 Autoøi práce jsou si vìdomi toho, e pokud by chtìli svùj software veøejnì publikovat nebo dokonce prodávat, bylo by nutné instalaci zjednodušit a ošetøit právní nároky tøetích stran. To ale nebylo pøedmìtem tohoto experimentu. Problematiku instalace externích komponent ponechme jejich autorùm. Nejménì pøíjemná je instalace tektogramatického analyzátoru (sekce \ref{sec:t-nalysis}), tento nástroj je ale stále ve~vıvoji a jeho instalaci je nutné povaovat za~doèasné øešení.
 
+\pagebreak
 \subsection{Skripty pro pøípravu dat}
 \label{sec:data_prepare}
 Skripty, pomocí kterıch se stáhnou a transformují stránky hasièského zpravodajství jsou umístìné v~adresáøi \emph{data/hasici} SVN repository. Jedná se o~sadu \emph{bash} skriptù, které by mìli fungovat na vìtšinì UNIX-ovıch systémù. Pøed jejich spuštìním je nutné do~systému nainstalovat potøebné lingvistické nástroje (pro popis instalace viz \ref{sec:install}). Kompletní dávku spustíme (na~pozadí) skriptem \emph{run\_parse\_background}. Tato dávka postupnì vykoná všechny akce popsané v~sekcích \ref{sec:phase_data_prepare} a \ref{sec:phase_ling_anot}. Vıstupní lingvistické anotace budou uloeny v~adresáøi \emph{data/hasici/pml}. Celı bìh této dávky mùe trvat i více ne tøi hodiny. Hlášení o~prùbìhu jednotlivıch akcí je zaznamenáváno v~log-souboru \emph{parse.log}. Podrobnosti k~funkci jednotlivıch skriptù je moné nalézt v~komentáøích uvnitø kadého skriptu.
