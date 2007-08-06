@@ -118,15 +118,25 @@ Další ponìkud odlišnou možností vstupních dat pøedstavuje korpus PDT. V~tomto pø
 \label{sec:hasici}
 Ministerstvo vnitra Èeské republiky pravidelnì zveøejòuje krátké zprávy o~akcích, kterých se úèastnily hasièské sbory jednotlivých regionù ÈR. Tyto zprávy se nám z~výše zmínìných dùvodù zdály vhodné jako zdrojová data experimentu. Tyto èlánky jsou k~dispozici na internetovém portálu MVÈR jako \uv{Bleskové hasièské zpravodajství RSS z~regionù}\footnote{http://www.mvcr.cz/rss/regionhzs.html}. Odtud je pomocí programových nástrojù (popsaných v~sekci \ref{sec:data_prepare}) stahujeme a dále zpracováváme. Aktuálnì zpracovávaný archiv obsahuje pøibližnì 700 èlánkù (celkem cca 1MB textových dat).
 
-Tyto zprávy se nejèastìji týkají výjezdu hasièských oddílù k~dopravní nehodì nebo požáru, ménì èasto informují o~rùzných hasièských slavnostech a dalších zásazích hasièské služby (ochrana vodních zdrojù pøed chemickým zneèištìním, opatøení proti ptaèí chøipce, kuriózní nehody v~domácnostech).
+Tyto zprávy se nejèastìji týkají výjezdu hasièských oddílù k~dopravní nehodì nebo požáru, ménì èasto informují o~rùzných hasièských slavnostech a dalších zásazích hasièské služby (ochrana vodních zdrojù pøed chemickým zneèištìním, opatøení proti ptaèí chøipce, kuriózní nehody v~domácnostech). Následuje úryvek z~jedné zprávy\footnote{http://www.mvcr.cz/rs\_atlantic/project/article.php?id=59311}.
+
+\begin{quote}
+Na 241,5 kilometru dálnice D1 ve smìru na Kromìøíž havaroval tahaè Volvo s návìsem. Souprava jedoucí v levém, rychlém jízdním pruhu zezadu narazila do dvou speciálních vozidel správy a údržby dálnic – do dodávky Renault s varovnou svìtelnou šipkou a do traktoru k údržbì dálnice. V kabinì tahaèe Volvo byli zranìni 25letý øidiè a jeho desetimìsíèní dítì. Jednadvacetiletá matka dítìte vyvázla bez zranìní. Do nemocnice byli pøevezeni také øidièi speciálních vozidel – 35letý øidiè dodávky Renault a 34letý øidiè traktoru, který ale byl po ošetøení propuštìn.
+\end{quote}
+
 
 \subsection{Úpadci}
 \label{sec:upadci}
 Na Informaèním serveru èeského soudnictví\footnote{http://portal.justice.cz/} je veøejnì dostupná \emph{Evidence úpadcù} Ministerstva spravedlnosti Èeské republiky. Tato rozsáhlá a neustále aktualizovaná evidence obsahuje kromì dalších dat i texty jednotlivých soudních rozhodnutí a ustanovení. Právì tyto texty jsme zvolili jako vstupní data experimentu.
 
-Automatické stažení a proèištìní dat z~tohoto datového zdroje by bylo pomìrnì komplikované. Texty jsou na~serveru uložené ve~formátu DOC, k~tìmto dokumentùm neexistují perzistentní URL, stahování jednotlivých dokumentù probíhá pøes náhodnou doèasnì zvolenou adresu, která vzniká pøi generování web-stránky s detailním popisem každého konkurzu. Ještì nároènìjší by však bylo automaticky extrahovat texty, které nás zajímají z~jednotlivých DOC souborù. Tyto soubory nemají jednotnou strukturu, jsou napsané rùznými autory, jsou rùznì formátované, texty ustálených nadpisù se vyskytují v~nìkolika variantách. 
+Automatické stažení a proèištìní dat z~tohoto datového zdroje by bylo pomìrnì komplikované. Texty jsou na~serveru uložené ve~formátu DOC, k~tìmto dokumentùm neexistují perzistentní URL, stahování jednotlivých dokumentù probíhá pøes náhodnou doèasnì zvolenou adresu, která vzniká pøi generování web-stránky s detailním popisem každého konkurzu. Ještì nároènìjší by však bylo automaticky extrahovat texty, které nás zajímají z~jednotlivých DOC souborù. Tyto soubory nemají jednotnou strukturu, jsou napsané rùznými autory, jsou rùznì formátované, texty ustálených nadpisù se vyskytují v~nìkolika variantách.
 
-Tento datový zdroj hraje v~našem experimentu spíše doplòkovou roli. Chtìli jsme porovnat kvalitu lingvistických anotací a možnosti naší metody na~datech v~další doménì. K~tomuto úèelu jsme tato data zpracovali v~malém rozsahu ruènì, jsou uložena v~souboru \emph{data/upadci/sample\_data.txt} SVN repository.
+Tento datový zdroj hraje v~našem experimentu spíše doplòkovou roli. Chtìli jsme porovnat kvalitu lingvistických anotací a možnosti naší metody na~datech v~další doménì. K~tomuto úèelu jsme tato data zpracovali v~malém rozsahu ruènì, jsou uložena v~souboru \emph{data/upadci/sample\_data.txt} SVN repository. Následuje úryvek z~jednoho textu\footnote{http://www.justice.cz/upkuk/s\_i10.sqw?konkurs=127}.
+
+\begin{quote}
+Rozdìlení výtìžku získaného zpenìžením konkurzní podstaty vychází z údajù obsažených ve schválené koneèné zprávì a bylo provedeno v souladu s ust. § 31 a 32 zák. o konkurzu a vyrovnání.  Po odeètení nákladù spojených se správou a údržbou konkurzní podstaty, pøiznání odmìny správci, nároku oddìleného vìøitele a vymìøení soudního poplatku, zùstala k rozdìlení mezi vìøitele II. tøídy èástka 15,921.636,70 Kè, která bude rozdìlena v pomìru 14,927871 \% zjištìných pohledávek. Tím bude celá konkurzní podstata vyèerpána.
+\end{quote}
+
 
 
 %\section{Výstupní data}
@@ -161,6 +171,10 @@ Všechny tyto makra (Perl-skripty) jsou umístìny v~adresáøi \emph{src/perl} SVN r
 
 \subsection{Hledání pøíbuzných slov pomocí WordNetu}
 \label{sec:wn_find}
+Èeský WordNet jsme prohlíželi pomocí vizuálního prohlížeèe DEBVisDic (viz oddíl \ref{sec:wordnet_cz}) a pomocí jednoduchého vlastního programového nástroje, který jsme k~tomuto úèelu vytvoøili v~jazyce Java. Tento nástroj pøistupuje k~èeskému WordNetu pøes web-rozhraní též zmínìné v~oddíle \ref{sec:wordnet_cz}. Nástroj umožòuje hledat ve~WordNetu libovolné slovo èi slovní spojení, stahovat jednotlivé synsety ve~formátu XML a obsahuje i funkci, která pro~daný synset získá úplnou øadu hyperonym až ke~koøenu lexikální dìdiènosti. Pro~dvì takové øady pak umí nalézt jejich prùnik.
+
+Tento nástroj je možné nalézt v~adresáøi \emph{src/wordnet} SVN repository. Podrobnìjší popis tohoto nástroje je v~souboru \emph{WordNet\_info.txt}, implementaèní detaily jednotlivých funkcí jsou komentovány ve~zdrojových kódech.
+ 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
