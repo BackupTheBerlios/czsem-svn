@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo Default > hasici_t_pls.fl
+
+for d in pml/*; do
+  for f in $d/*.t.pls.gz; do
+
+    echo `pwd` $f  | sed -e 's/ /\//' >> hasici_t_pls.fl
+
+  done
+done

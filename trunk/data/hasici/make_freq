@@ -1,0 +1,4 @@
+#!/bin/bash
+
+btred -I ../../src/perl/freq.btred -l hasici_t_pls.fl | sort | uniq -c | sort -nr > freq.txt
+btred -I ../../src/perl/freq_verb.btred -l hasici_t_pls.fl | sort | uniq -c | sort -nr > freq_verb.txt

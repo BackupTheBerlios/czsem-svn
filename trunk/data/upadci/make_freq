@@ -1,0 +1,4 @@
+#!/bin/bash
+
+btred -I ../../src/perl/freq.btred pml/*.t.gz | sort | uniq -c | sort -nr > freq.txt
+btred -I ../../src/perl/freq_verb.btred pml/*.t.gz | sort | uniq -c | sort -nr > freq_verb.txt

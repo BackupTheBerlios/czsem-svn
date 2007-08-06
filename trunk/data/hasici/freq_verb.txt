@@ -1,863 +1,1295 @@
-    418 být
-    155 vyjet
-    132 zasahovat
-    118 likvidovat
-    108 zlikvidovat
-     95 zranit
-     93 jednat_se
-     76 vyjí¾dìt
-     70 zajistit
-     70 pøivolat
-     70 dojít
-     60 mít
-     53 pøedat
-     53 provést
-     50 zjistit
-     50 podaøit_se
-     47 odstranit
-     46 skonèit
-     44 ohlásit
-     39 vyèíslit
-     39 vyprostit
-     39 dostat
-     37 ¹etøit
-     37 hoøet
-     36 stát_se
-     34 zpùsobit
-     32 pøipravit
-     29 odstraòovat
-     28 pomoci
-     28 narazit
-     27 zùstat
-     26 zasáhnout
-     25 zamezit
-     24 povolat
-     23 pou¾ít
-     23 odpojit
+   1142 být
+    753 vyjí¾dìt
+    457 zasahovat
+    443 zlikvidovat
+    411 vyjet
+    381 zajistit
+    363 likvidovat
+    346 jednat_se
+    298 zranit
+    257 dojít
+    229 zjistit
+    219 pøedat
+    217 provést
+    173 pøivolat
+    173 odstranit
+    168 obejít_se
+    165 ¹etøit
+    161 vyèíslit
+    157 odpojit
+    147 vyprostit
+    145 podaøit_se
+    144 hoøet
+    140 skonèit
+    120 nahlásit
+    116 ohlásit
+    113 pomoci
+    113 odstraòovat
+    110 nacházet_se
+    102 lokalizovat
+     98 mít
+     95 stát_se
+     94 povolat
+     89 zùstat
+     89 uhasit
+     85 zpùsobit
+     83 asistovat
+     82 odvézt
+     81 otevøít
+     81 narazit
+     80 zasáhnout
+     80 vyrazit
+     79 informovat
+     77 utrpìt
+     75 zasypat
+     74 zaèít
+     71 uzavøít
+     69 dostat
+     68 nasadit
+     63 dostavit_se
+     62 spadnout
+     61 zamezit
+     61 pøevzít
+     59 naleznout
+     58 po¹kodit
+     57 vytáhnout
+     53 provádìt
+     51 vrátit_se
+     49 ukonèit
+     49 pou¾ít
+     48 znièit
+     48 uniknout
+     48 pøipravit
+     47 odvìtrat
+     45 uklidit
+     45 pøevrátit_se
+     45 poskytnout
+     44 vy¾ádat_si
+     44 unikat
+     43 ohro¾ovat
+     43 odhadnout
+     42 pøevézt
+     41 zabezpeèit
+     40 nalo¾it
+     40 hrozit
+     39 o¹etøit
+     36 ulo¾it
+     36 pomáhat
+     36 =
+     35 udìlat
+     35 dostat_se
+     34 poskytovat
+     33 zøídit
+     33 vzniknout
+     32 èekat
+     32 zabránit
+     32 postavit
+     32 otevírat
+     31 trvat
+     30 zaznamenat
+     30 vniknout
+     28 vynést
+     28 pøepravit
+     27 sna¾it_se
+     27 po¾ádat
+     27 patøit
+     27 dohasit
+     26 pøedvést
+     26 pokraèovat
+     25 ¹tìtit
+     25 uvíznout
+     25 probíhat
+     25 nalézt
+     24 øídit
+     24 vypnout
+     24 støetnout_se
+     23 zúèastnit_se
+     23 uvádìt
+     23 transportovat
+     23 rozøezat
+     23 najít
      23 jít
-     22 vytáhnout
-     22 pøevzít
-     22 obejít_se
-     22 nahlásit
-     21 spadnout
-     20 zabezpeèit
-     20 po¹kodit
-     20 lokalizovat
-     19 utrpìt
-     19 ukonèit
-     19 uhasit
-     19 provádìt
-     19 odvézt
-     18 zaèít
-     18 vrátit_se
-     18 uklidit
-     18 nasadit
-     18 hrozit
-     17 zúèastnit_se
-     17 trvat
-     17 otevøít
-     17 nacházet_se
-     17 konat_se
-     16 zasypat
-     16 vzniknout
-     16 udìlat
-     14 znièit
-     14 uzavøít
-     14 uskuteènit_se
-     14 ohro¾ovat
-     13 stanovit
-     13 nalo¾it
-     12 pøijet
-     12 o¹etøit
-     12 naleznout
-     12 lze
-     11 vyrazit
-     11 pøevézt
-     11 patøit
-     11 informovat
-     11 evakuovat
-     10 uniknout
-     10 unikat
-     10 uchránit
-     10 pøevrátit_se
-     10 prohlédnout_si
-     10 probíhat
-     10 postavit
-     10 dostat_se
-      9 ¹tìtit
-      9 zavolat
-      9 zapojit_se
-      9 zabránit
-      9 vyzkou¹et
-      9 vycházet
-      9 slou¾it
-      9 roz¹íøit_se
-      9 pøepravit
-      9 po¾ádat
-      8 èekat
-      8 uvolnit
-      8 ulo¾it
-      8 transportovat
-      8 soutì¾it
-      8 sna¾it_se
-      8 simulovat
-      8 pokraèovat
-      8 podílet_se
-      8 odhadnout
-      8 najít
-      8 hlásit
-      8 asanovat
-      7 øídit
+     23 evakuovat
+     22 vypro¹»ovat
+     22 uchránit
+     22 rozhodnout
+     22 rozebrat
+     22 potvrdit
+     22 padnout
+     22 obsadit
+     21 zastavit
+     21 vycházet
+     21 roz¹íøit_se
+     21 oznámit
+     20 èerpat
+     20 vy¹etøovat
+     20 vrátit
+     20 stanovit
+     20 sebrat
+     20 odèerpávat
+     20 odebrat
+     20 nechat
+     19 staèit
+     19 prohlédnout
+     18 podlehnout
+     18 nadýchat_se
+     17 spustit
+     17 sjet_se
+     17 rozebírat
+     17 prohlédnout_si
+     17 poøádat
+     17 odchytit
+     17 konstatovat
+     17 hlásit
+     16 zemøít
+     16 zapálit
+     16 uvolnit
+     16 uskuteènit_se
+     16 umístit
+     16 spolupracovat
+     16 pøipsat
+     16 odèerpat
+     16 odtáhnout
+     16 obdr¾et
+     16 havarovat
+     15 zji¹»ovat
+     15 vìnovat_se
+     15 vyslat
+     15 pøipadat
+     15 pøijet
+     15 pøevá¾et
+     15 podílet_se
+     15 jet
+     14 zkontrolovat
+     14 zaji¹»ovat
+     14 vznítit
+     14 vyzkou¹et
+     14 vyváznout
+     14 stát
+     14 soutì¾it
+     14 konat_se
+     14 blokovat
+     13 zprùjezdnit
+     13 znamenat
+     13 zaklínit
+     13 zachránit
+     13 usmrtit
+     13 uchopit
+     13 sundat
+     13 strhnout
+     13 ponechat
+     13 komplikovat
+     13 jevit
+     13 docházet
+     13 chybìt
+     13 asanovat
+     12 èinit
+     12 zavolat
+     12 zahájit
+     12 vytéci
+     12 vypustit
+     12 vypuknout
+     12 vidìt
+     12 uskladnit
+     12 poèít
+     12 odklánìt
+     12 odjet
+     12 le¾et
+     12 dorazit
+     12 doha¹ovat
+     11 vyrozumìt
+     11 uvìznit
+     11 umístit_se
+     11 tvoøit
+     11 srazit_se
+     11 slou¾it
+     11 prohledávat
+     11 pohybovat_se
+     11 ochlazovat
+     11 namìøit
+     11 kontaktovat
+     11 jímat
+     11 dopravit
+     11 dezinfikovat
+     11 desinfikovat
+     11 cestovat
+     10 vytvoøit
+     10 vyklidit
+     10 vybavit
+     10 vjet
+     10 uvést
+     10 utéci
+     10 stì¾ovat_si
+     10 sledovat
+     10 sdìlit
+     10 prokázat
+     10 probìhnout
+     10 odnést
+     10 odehrát_se
+     10 napáchat
+     10 hasit
+     10 dát
+      9 zamìstnat
+      9 vyu¾ívat
+      9 vypadnout
+      9 vyhlá¹et
+      9 uvidìt
+      9 urèit
+      9 ukázat
+      9 pøipravovat
+      9 pracovat
+      9 pou¾ívat
+      9 odøíznout
+      9 ochladit
+      9 objevit
+      9 lze
+      9 komunikovat
+      9 dosáhnout
+      9 chránit
+      8 zvítìzit
+      8 zalo¾it
+      8 zakouøit
+      8 zachytit
+      8 vyèkat
+      8 vylézt
+      8 viset
+      8 utrhnout
+      8 støe¾it
+      8 pøijít
+      8 pøeru¹it
+      8 pøekonat
+      8 pustit_se
+      8 projí¾dìt
+      8 padat
+      8 odvolat
+      8 odtlaèit
+      8 odejít
+      8 následovat
+      8 chovat_se
+      7 ¹lehat
       7 získat
-      7 zemøít
-      7 zapálit
-      7 zachránit
-      7 vìdìt
-      7 vrátit
-      7 upozornit
-      7 spojit
+      7 zvát
+      7 zpozorovat
+      7 zbýt
+      7 zaplynovat
+      7 zahynout
+      7 zablokovat
+      7 vést
+      7 vyvést
+      7 vytyèit
+      7 vysvobodit
+      7 vystoupit
+      7 vyndat
+      7 usmìròovat
+      7 upevnit
+      7 uklízet
+      7 snést
+      7 skladovat
+      7 seznámit_se
+      7 rozvinout
       7 rozhoøet_se
-      7 poøádat
-      7 pou¾ívat
-      7 pomáhat
-      7 oznámit
-      7 odèerpávat
-      7 obdr¾et
-      7 docházet
-      6 øíci
+      7 pøesouvat
+      7 prorazit
+      7 prolít
+      7 plnit
+      7 oznaèit
+      7 opláchnout
+      7 ohrozit
+      7 natáhnout
+      7 hledat
+      7 dotýkat_se
+      7 dekontaminovat
+      7 bì¾et
+      7 absolvovat
       6 øe¹it
-      6 èinit
-      6 zvítìzit
-      6 zji¹»ovat
-      6 zaznamenat
-      6 zakázat
-      6 vy¹etøovat
-      6 vyu¾ívat
-      6 uvidìt
-      6 uchopit
-      6 tvoøit
-      6 støetnout_se
-      6 staèit
-      6 sjet_se
-      6 rozøezat
+      6 ¹íøit_se
+      6 zùstávat
+      6 zvládnout
+      6 zaèínat
+      6 zasypávat
+      6 zapomenout
+      6 vìdìt
+      6 vyèerpat
+      6 vyná¹et
+      6 utìsnit
+      6 upozornit
+      6 udìlit
+      6 støídat_se
+      6 srazit
+      6 rýt
       6 roz¹íøit
-      6 poskytnout
-      6 podívat_se
-      6 plnit
-      6 ohrozit
-      6 odchytit
-      6 objevit
-      6 nechat
-      6 nalézt
-      6 nadýchat_se
-      6 hodnotit
-      6 dosáhnout
-      6 dostavit_se
-      6 chybìt
-      6 asistovat
-      5 zøídit
-      5 zalo¾it
-      5 vyváznout
-      5 vytvoøit
-      5 vypustit
-      5 vynést
+      6 pøijmout
+      6 pøeèerpat
+      6 pøe¾ít
+      6 provìøit
+      6 poèkat
+      6 ponièit
+      6 polo¾it
+      6 odøezat
+      6 odklízet
+      6 odklidit
+      6 odhodit
+      6 objevit_se
+      6 dopravovat
+      6 cítit
+      5 úèastnit_se
+      5 èistit
+      5 zøítit
+      5 zmìøit
+      5 zdemolovat
+      5 zaujmout
+      5 zachvátit
+      5 vìnovat
+      5 vyèistit
+      5 vyvá¾et
+      5 vyu¾ít
+      5 vytékat
+      5 vytahovat
       5 vyhodnotit
-      5 uvìznit
-      5 usmrtit
-      5 spolupracovat
-      5 seznámit_se
-      5 rozebrat
-      5 pøijít
-      5 pøe¾ít
-      5 pøevá¾et
-      5 pøekonat
-      5 pøedvést
+      5 vybìhnout
+      5 vybrat
+      5 vstoupit
+      5 volat
+      5 uzamknout
+      5 spotøebovat
+      5 slanit
+      5 shoøet
+      5 rozlomit
+      5 pøistát
+      5 pøipomenout
+      5 pøijít_si
+      5 pøeèerpávat
       5 pøedstavit_si
-      5 provìøit
-      5 prokázat
-      5 projí¾dìt
-      5 probìhnout
-      5 polo¾it
-      5 padnout
-      5 odvìtrat
-      5 obsadit
-      5 napáchat
-      5 hledat
-      5 dohasit
-      4 úèastnit_se
-      4 zvát
-      4 zvládnout
-      4 zapomenout
-      4 vyslat
-      4 vypuknout
-      4 vypnout
-      4 vypadat
+      5 pøedstavit
+      5 poèítat
+      5 pouèit
+      5 potøebovat
+      5 posypat
+      5 posoudit
+      5 pokusit_se
+      5 omezit
+      5 ohranièit
+      5 odmr¹tit
+      5 odlo¾it
+      5 nasvìdèovat
+      5 moci
+      5 doutnat
+      5 dosahovat
+      5 doplòovat
+      5 dokázat
+      5 dokonèit
+      5 bránit
+      4 zranit_se
+      4 zprovoznit
+      4 zneèistit
+      4 zdolat
+      4 zatopit
+      4 zasednout
+      4 zapojit_se
+      4 zakázat
+      4 zachvácet
+      4 zabouchnout
+      4 vzít_si
+      4 vzplanout
+      4 vyvézt
+      4 vytlaèit
+      4 vysypat
+      4 vystøídat
+      4 vylovit
       4 vyhrát
-      4 vybìhnout
-      4 vybrat
-      4 viset
-      4 vidìt
+      4 vyhoøet
+      4 vyhodit
+      4 vyhlásit
+      4 vyhledávat
+      4 vydezinfikovat
+      4 vybuchnout
+      4 vracet_se
       4 uvìdomit_si
-      4 uvést
-      4 urèit
-      4 rozvinout
-      4 rozebírat
-      4 pøipomenout
-      4 pøijít_si
-      4 pracovat
-      4 poèítat
-      4 povést_se
-      4 povolit
-      4 ponièit
-      4 pohybovat_se
-      4 podlehnout
-      4 otevírat
-      4 organizovat
-      4 odèerpat
-      4 odtáhnout
-      4 odlo¾it
-      4 odebrat
+      4 utratit
+      4 usadit_se
+      4 upøesnit
+      4 upadnout
+      4 uhynout
+      4 spláchnout
+      4 spatøit
+      4 sní¾it
+      4 seznámit
+      4 sesbírat
+      4 rozøezávat
+      4 rozlít
+      4 pøivézt
+      4 pøihlásit
+      4 pøesunout
+      4 pøesahovat
+      4 pøenést_se
+      4 pøenést
+      4 pøehnat_se
+      4 pøedávat
+      4 pøedjí¾dìt
+      4 pátrat
+      4 prozkoumat
+      4 prohledat
+      4 procházet
+      4 potrvat
+      4 pojmout
+      4 podívat_se
+      4 pocházet
+      4 plavat
+      4 platit
+      4 oèistit
+      4 otoèit
+      4 odvá¾et
+      4 obnovit
       4 naplánovat
-      4 monitorovat
+      4 nacházet
+      4 kvalifikovat
+      4 kouøit
+      4 hrát
       4 hlídat
-      4 dát
-      4 doprovázet
-      4 doporuèovat
+      4 existovat
+      4 dìlat
+      4 dávat
+      4 doporuèit
+      4 dohlí¾et
       4 dodr¾ovat
+      4 dobrzdit
       4 cvièit
-      4 blokovat
-      3 ztí¾et
-      3 zprùjezdnit
+      4 chytit
+      4 chystat_se
+      4 aplikovat
+      3 øíci
+      3 zvednout
+      3 ztratit
+      3 zpùsobovat
+      3 zpøístupnit
       3 zpracovat
-      3 zkontrolovat
-      3 zaklínit
-      3 zahájit
-      3 vìnovat
-      3 v¹imnout_si
-      3 vzít_si
-      3 vznítit
-      3 vyèkat
-      3 vy¾ádat_si
-      3 vyvést
-      3 vyhlá¹et
-      3 vybíhat
-      3 vniknout
-      3 vjet
-      3 uvádìt
-      3 uva¾ovat
-      3 umístit
-      3 trénovat
-      3 srazit
-      3 spustit
-      3 sledovat
-      3 sdìlit
-      3 pøipravovat
-      3 pøipadat
-      3 pøihlásit
-      3 pøedávat
+      3 zmizet
+      3 zkoumat
+      3 zhlédnout
+      3 zavítat
+      3 zavinit
+      3 zavadit
+      3 zatarasit
+      3 zapoèít
+      3 zapadnout
+      3 zakonèit
+      3 zajet
+      3 zadr¾et
+      3 zachytávat
+      3 vzbudit
+      3 vy¹lehnout
+      3 vytváøet
+      3 vytvoøit_se
+      3 vystøíkat
+      3 vystøíhat
+      3 vypadat
+      3 vyhrávat
+      3 vydat_se
+      3 vracet
+      3 vlézt
+      3 velet
+      3 utopit_se
+      3 usídlit
+      3 ustavit
+      3 usnout
+      3 ukazovat
+      3 uhoøet
+      3 udìlovat
+      3 stáhnout
+      3 slézt
+      3 shodit
+      3 seskoèit
+      3 sehnat
+      3 rozøedit
+      3 roztáhnout
+      3 rozhrabat
+      3 rozhodovat
+      3 resuscitovat
+      3 reagovat
+      3 radit
+      3 pùsobit
+      3 pøizpùsobit
+      3 pøitáhnout
+      3 pøipojit
+      3 pøestøihnout
+      3 proèistit
+      3 propadnout_se
+      3 procvièit
+      3 prasknout
       3 povzbudit
-      3 posoudit
-      3 poru¹it
-      3 ponechat
-      3 pokusit_se
-      3 pojmout
-      3 otoèit
+      3 povolit
+      3 postupovat
+      3 popálit
+      3 podat
+      3 plánovat
+      3 o¾ivit
+      3 oznamovat
+      3 opustit
+      3 opravit
       3 omluvit
       3 omezovat
-      3 ohranièit
-      3 odnést
-      3 odklánìt
-      3 odjet
-      3 odejít
-      3 ochlazovat
-      3 obhajovat
-      3 moci
-      3 komplikovat
-      3 jevit
-      3 havarovat
-      3 hasit
-      3 dìlat
-      3 doprovodit
-      3 dopravovat
+      3 odtrhnout
+      3 odsát
+      3 odstøihnout
+      3 odpovídat
+      3 odlétnout
+      3 odkopat
+      3 odhalit
+      3 odhadovat
+      3 oborat
+      3 nastat
+      3 nakazit_se
+      3 najet
+      3 nadzvednout
+      3 nacvièovat
+      3 muset
+      3 kontrolovat
+      3 hodnotit
+      3 dozvìdìt_se
       3 dopou¹tìt_se
-      3 doplòovat
-      3 dojet
-      3 doha¹ovat
-      3 dodat
-      3 chránit
-      3 bránit
-      3 blí¾it_se
+      3 donést
+      3 doklidit
+      3 dohodnout_se
+      3 dohlédnout
+      3 dodávat
+      3 disponovat
+      3 dbát
       2 útoèit
-      2 ¾ít
       2 ¹kubat
-      2 zùstávat
-      2 zøítit
-      2 závodit
-      2 zvednout
-      2 zpùsobovat
+      2 zvìt¹it
+      2 zvy¹ovat
       2 zoufat
+      2 znát
       2 zneu¾ít
-      2 znamenat
-      2 zmìøit
-      2 zhlédnout
-      2 zaèínat
-      2 zavítat
-      2 zastavit
-      2 zaplatit
+      2 znemo¾òovat
+      2 zmìnit
+      2 zlomit
+      2 zkrápìt
+      2 zbavit
+      2 zaøídit
+      2 zaznamenávat
+      2 zasoutì¾it
+      2 zaplavovat
+      2 zapalovat
+      2 zamìstnávat
+      2 zamést
+      2 zamknout
+      2 zalít
+      2 zakoupit
+      2 zahubit
       2 zahrát
+      2 zahlédnout
       2 zachovat_se
-      2 zablokovat
-      2 vìøit
-      2 vìnovat_se
+      2 zabrzdit
+      2 zabrat
+      2 zabezpeèovat
       2 vézt
-      2 vést
-      2 vy¹lehnout
+      2 vzít
+      2 vy¹plhat_se
+      2 vy¹etøit
       2 vyvrátit
-      2 vyu¾ít
+      2 vyvrcholit
       2 vytýèit
-      2 vytéci
-      2 vyrozumìt
-      2 vypro¹»ovat
-      2 vyplatit_se
-      2 vypadnout
-      2 vylovit
-      2 vyhrávat
+      2 vyskoèit
+      2 vysednout
+      2 vypalovat
+      2 vymezit
+      2 vylít
+      2 vylouèit
+      2 vykládat
+      2 vyhro¾ovat
+      2 vyhnout_se
+      2 vyhledat
+      2 vydesinfikovat
       2 vydat
-      2 vybavit
-      2 vlézt
-      2 varovat
-      2 uzamknout
-      2 uvíznout
-      2 utìsnit
-      2 utéci
-      2 usmìròovat
-      2 uskladnit
-      2 usadit_se
-      2 umo¾òovat
+      2 vybojovat
+      2 vsáknout
+      2 vpustit
+      2 vlévat
+      2 vlo¾it
+      2 vaøit
+      2 uzemnit
+      2 uzavírat
+      2 uva¾ovat
+      2 utonout
+      2 utkat_se
+      2 usly¹et
+      2 uskuteènit
+      2 upøesòovat
+      2 umýt
       2 umo¾nit
       2 ulítnout
-      2 ukázat
-      2 uklízet
-      2 ukazovat
+      2 ukládat
       2 ujet
+      2 ucpat
       2 ublí¾it
-      2 tì¹it_se
-      2 stì¾ovat_si
-      2 stát
-      2 strhnout
-      2 srazit_se
+      2 týkat_se
+      2 téci
+      2 tlaèit
+      2 sídlit
+      2 svìdèit
+      2 strèit
+      2 stihnout
+      2 startovat
+      2 spát
       2 spoèívat
-      2 splnit
-      2 spalovat
-      2 sní¾it
-      2 smìøovat
-      2 shodit
-      2 seznámit
-      2 setkávat_se
-      2 rozmyslet
+      2 spojit_se
+      2 spojit
+      2 sni¾ovat
+      2 slo¾it
+      2 skácet
+      2 skrápìt
+      2 skoèit
+      2 sklidit
+      2 sklepnout
+      2 simulovat
+      2 shlédnout
+      2 seèíst
+      2 sedìt
+      2 roztéci
+      2 rozmetat
       2 rozhodnout_se
-      2 rozdìlávat
+      2 rozdìlit
+      2 rozbít
       2 realizovat
-      2 pøizpùsobit
-      2 pøivézt
+      2 pøivázat
+      2 pøitékat
+      2 pøispìt
       2 pøipomínat
-      2 pøimáèknout
-      2 pøijmout
-      2 pøiblí¾it_se
+      2 pøinést
+      2 pøihodit_se
+      2 pøibýt
+      2 pøibít
       2 pøiblí¾it
       2 pøe¾ívat
-      2 pøenést
+      2 pøevìsit
+      2 pøetoèit
+      2 pøespávat
+      2 pøerazit
+      2 pøepravovat
+      2 pøemístit
+      2 pøelo¾it
+      2 pøeká¾et
       2 pøejít
+      2 pøejet
+      2 putovat
+      2 pro¹kolit
       2 provìøovat
       2 provázet
-      2 prohlédnout
-      2 prohledat
-      2 procvièit
-      2 poøezat
-      2 poèkat
-      2 potvrdit
-      2 potrvat
-      2 porazit
+      2 protékat
+      2 proniknout
+      2 prolévat
+      2 projít
+      2 prohoøívat
+      2 prohlí¾et_si
+      2 poøídit
+      2 pozvat
+      2 povìøit
+      2 povolávat
+      2 povalovat
+      2 posbírat
       2 poradit
-      2 pokoøit_se
-      2 podepsat
-      2 platit
+      2 pokácet
+      2 pohøe¹ovat
+      2 parkovat
       2 panikaøit
-      2 pamatovat
-      2 padat
       2 oèekávat
-      2 oznamovat
+      2 o¹etøovat
       2 ovìøit
-      2 opustit
+      2 otvírat
+      2 osvìtlit
+      2 opøít_se
+      2 opatøit
+      2 omýt
       2 ohánìt_se
-      2 odøezat
-      2 odstøihnout
-      2 odlétnout
-      2 odklonit
+      2 odøezávat
+      2 odstavit
+      2 odrazit_se
+      2 odmítnout
       2 odjí¾dìt
-      2 odhodit
-      2 ocenit
-      2 nést
-      2 následovat
-      2 navést
+      2 odebrat_se
+      2 oddìlit
+      2 odchytávat
+      2 odbagrovat
+      2 ocitnout_se
+      2 ochránit
+      2 obohatit
+      2 naøídit
       2 nav¹tívit
-      2 nastoupit
-      2 namìøit
-      2 najet
-      2 nacvièovat
-      2 mìøit
-      2 le¾et
-      2 lehnout
-      2 kouøit
-      2 konstatovat
-      2 komunikovat
-      2 jímat
-      2 jet
-      2 hrát
+      2 navazovat
+      2 nasvítit
+      2 naru¹it
+      2 nalézat_se
+      2 naklonìný
+      2 nainstalovat
+      2 monitorovat
+      2 létat
+      2 klást
+      2 jistit
+      2 jezdit
+      2 intoxikovat
+      2 hovoøit
       2 hasièi
-      2 fungovat
-      2 existovat
-      2 dìkovat
-      2 dozvìdìt_se
-      2 dosahovat
-      2 dopravit
+      2 explodovat
+      2 dát_si
+      2 dr¾et
+      2 dovézt
+      2 dová¾et
+      2 dostavìt
+      2 doprovodit
+      2 doporuèovat
       2 doplnit
-      2 dokázat
-      2 doklidit
-      2 dohlédnout
-      2 dobíhat
+      2 dopadnout
+      2 domluvit_se
+      2 domluvit
+      2 dohodnout
+      2 dodat
       2 dobìhnout
-      2 cítit
-      2 chytit
-      2 chovat_se
+      2 demontovat
+      2 chystat
+      2 chodit
       2 bojovat
-      2 aplikovat
-      2 absolvovat
+      2 blí¾it_se
       1 øíkat
-      1 èerpat
-      1 ¹lehat
+      1 ¾ít
+      1 ¾ihlit
+      1 ¾hnout
+      1 ¹íøit
+      1 ¹plhat
+      1 ¹krtnout
       1 ¹kolit
+      1 zú¾en
       1 zále¾et
-      1 zvá¾it
+      1 zábránit
+      1 zvý¹it
       1 zvolit
-      1 ztì¾ovat
       1 ztrácet
-      1 ztratit
+      1 ztratit_se
       1 zpívat
-      1 zprovoznit
-      1 zpravit
-      1 zpozorovat
-      1 znít
+      1 zpracovávat
+      1 zpestøet
+      1 zopakovat
       1 znemo¾nit
-      1 zmìnit
-      1 zlomit
-      1 zlep¹ovat
-      1 zkusit
-      1 zkrápìt
-      1 zkontaktovat
-      1 zhodnotit
-      1 zdát_se
-      1 zdolat
+      1 znehybnit
+      1 zmínit
+      1 zkøí¾it
+      1 zkolaudovat
+      1 zhroutit_se
       1 zdokonalovat
+      1 zdokonalit
       1 zdobit
+      1 zdevastovat
+      1 zdaøit_se
       1 zbývat
-      1 zbýt
+      1 zaøadit_se
       1 zaøadit
-      1 zaznamenávat
-      1 zavzpomínat_si
-      1 zavadit
-      1 zaujmout
+      1 zazvonit
+      1 zavøít
+      1 zavìsit
+      1 zavá¾et
+      1 zavápnit
+      1 zavaøit
+      1 zavalit
       1 zatì¾ovat
-      1 zatoèit
-      1 zateplovat
-      1 zasypávat
-      1 zasoutì¾it
-      1 zaslou¾it_si
+      1 zatékat
+      1 zasíci
+      1 zasunout
+      1 zastøílet
+      1 zastávat
+      1 zastoupit
+      1 zaslat
       1 zaskákat
+      1 zasedat
       1 zareagovat
       1 zapùjèit
-      1 zapumpovat
-      1 zapoèítávat
-      1 zapoèít
-      1 zapojit
-      1 zapalovat
-      1 zanedbat
+      1 zapomínat
+      1 zapnout
+      1 zaplatit
+      1 zaparkovat
       1 zamíøit
-      1 zamìøit_se
-      1 zamìøit
-      1 zamìstnat
-      1 zamést
+      1 zamoøit
+      1 zamotat
       1 zamlsat
-      1 zakrýt
-      1 zakouøit
-      1 zakládat
-      1 zaji¹»ovat
+      1 zametat
+      1 zaletìt
+      1 zalepit
+      1 zalarmovat
+      1 zakopat
+      1 zajímat_se
       1 zaizolovat
-      1 zahynout
+      1 zahrnovat
+      1 zahrnout
+      1 zahradit
       1 zahoøet
-      1 zadr¾et
-      1 zachytávat
-      1 zachytit
-      1 zachvácet
+      1 zahnat
+      1 zafixovat
+      1 zadokumentovat
       1 zachraòovat
       1 zachovat_si
-      1 zabrzdit
-      1 zabouchnout
+      1 zachovat
+      1 zabývat_se
+      1 zabìhnout
+      1 zabudovat
+      1 zabalit
+      1 vítat
+      1 vídat
+      1 vìøit
       1 vìtvit
       1 vìtrat
-      1 válet
       1 váhat
-      1 vzít
-      1 vzpøíèit
-      1 vzplanout
-      1 vzbudit
-      1 vyøe¹it
-      1 vyènívat
-      1 vyèistit
+      1 v¹imnout_si
+      1 vyøíznout
+      1 vyèíslovat
       1 vy¾adovat
-      1 vyzývat
-      1 vyzvat
+      1 vy¹roubovat
+      1 vyzvednout
+      1 vyznaèit
+      1 vyzdvihnout
       1 vyzbrojit
-      1 vyvézt
-      1 vyvá¾et
-      1 vytékat
-      1 vytyèit
+      1 vyvozit
+      1 vyvaøit
+      1 vyvarovat_se
+      1 vyvalit
+      1 vytì¾it
+      1 vytyèovat
       1 vytrhávat
-      1 vytknout
-      1 vytahovat
-      1 vysypat
-      1 vysvobodit
-      1 vystøíhat
+      1 vytoèit
+      1 vytopit
+      1 vysát
+      1 vysvìtlovat
+      1 vystøíknout
+      1 vystøihávat
       1 vystrojit
-      1 vystoupit
       1 vystoupat
-      1 vystartovat
-      1 vyskytovat_se
+      1 vyskytnout_se
       1 vyskládat
       1 vyskladnit
+      1 vysadit
       1 vyrobit
-      1 vypùjèit_si
+      1 vypáèit
+      1 vypravit_se
+      1 vypravit
+      1 vypou¹tìt
       1 vyplynout
       1 vypla¹it
-      1 vypalovat
-      1 vyndat
+      1 vyplatit_se
+      1 vynosit
+      1 vymstít
+      1 vymr¹tit
+      1 vymontovat
       1 vymknout_se
-      1 vylézt
-      1 vylouèit
-      1 vyklopit
-      1 vyhro¾ovat
-      1 vyhradit
-      1 vyhníst
-      1 vyhnout_se
+      1 vylétnout
+      1 vyluèovat
+      1 vylo¾it
+      1 vylomit
+      1 vykopat
+      1 vyklízet
+      1 vyjednávat
+      1 vyhýbat_se
+      1 vyháèkovat
       1 vyhnat
-      1 vyhlásit
+      1 vyhloubit
       1 vyhla¹ovat
-      1 vydesinfikovat
-      1 vydat_se
       1 vycítit
-      1 vybuchnout
-      1 vstoupit
-      1 vracet_se
+      1 vybít
+      1 vybírat
+      1 vybíjet
+      1 vybudovat
+      1 vybuchovat
+      1 vyboèit
+      1 vtékat
+      1 vtáhnout
+      1 vstát
+      1 vsakovat
       1 volit
-      1 volat
-      1 vlo¾it
-      1 vhazovat
+      1 vkládat
+      1 vhodit
       1 vbìhnout
-      1 vadit
       1 uøíznout
       1 uèít
-      1 uèit
       1 u¾ívat
       1 u¹tìknout
-      1 uzemnit
-      1 uveøejnit
-      1 utíkat
-      1 utrhnout
-      1 utratit
-      1 utopit_se
-      1 usídlit
+      1 uzpùsobit
+      1 uvítat
+      1 uvázat
+      1 uvolòovat
+      1 utáhnout
+      1 utvoøit
+      1 utkávat_se
       1 ustoupit
-      1 usnout
-      1 usly¹et
-      1 uskuteènit
+      1 usmrcovat
       1 urgovat
-      1 upøesòovat
-      1 upøesnit
       1 upustit
+      1 upozoròovat
       1 upoutat
-      1 upevnit
+      1 uplatnit
+      1 umývat
+      1 umo¾òovat
+      1 umis»ovat
+      1 ulétnout
+      1 ulomit
+      1 uletìt
       1 ukázat_se
+      1 ukrýt
+      1 ukotvit
+      1 uklouznout
+      1 uklidòovat
       1 uklidnit
-      1 uhynout
-      1 uhoøet
-      1 uhasnout
-      1 udìlit
+      1 uhodit
       1 udusit
       1 udeøit
-      1 ucpat
       1 ucházet_se
-      1 ubìhnout
-      1 týkat_se
-      1 trávit
-      1 toèit
+      1 tì¹it_se
       1 toulat_se
+      1 topit_se
+      1 síci
+      1 sáhnout
       1 svìøit
       1 svìtit
       1 svìdìt
       1 svézt_se
-      1 sundat
-      1 støe¾it
-      1 stáhnout
-      1 strávit
+      1 svést
+      1 svolat
+      1 støíkat
       1 stoupnout
-      1 stoupat
+      1 stlaèit
+      1 stavìt_se
       1 stavìt
-      1 startovat
+      1 stavit
       1 starat_se
       1 stanovovat
-      1 spát
-      1 spotøebovat
-      1 spojit_se
+      1 stabilizovat
+      1 srovnávat
+      1 spálit
+      1 spou¹tìt
+      1 spolykat
+      1 spojovat
+      1 splnit
+      1 specifikovat
       1 spatøovat
-      1 spatøit
+      1 spalovat
       1 souviset
-      1 snést
+      1 soustøeïovat_se
+      1 soupeøit
+      1 smìøovat
+      1 smést
       1 slíbit
-      1 slézt
-      1 slo¾it
-      1 slanit
-      1 skácet
-      1 skrývat_se
+      1 sly¹et
       1 skrývat
+      1 skládat_se
+      1 sjí¾dìt_se
       1 sjí¾dìt
-      1 shoøet
-      1 seèíst
-      1 seskoèit
-      1 sehrávat
+      1 shánìt
+      1 seznamovat_se
+      1 setkávat_se
+      1 sesunout
+      1 sejít_se
+      1 sejmout
       1 sehrát
-      1 sedìt
-      1 rýt
+      1 sbírat
+      1 sahat
       1 rùst
+      1 roz¹iøovat
       1 rozvíjet_se
       1 rozvíjet
       1 roztékat
-      1 roztáhnout
+      1 roztoèit
+      1 rozsypat
       1 rozrazit
-      1 roznést
-      1 rozmístit
-      1 rozlomit
+      1 rozptylovat
+      1 rozpoznat
+      1 rozpadnout_se
+      1 rozmyslet
+      1 rozjezdit
+      1 rozjet_se
+      1 rozházet
+      1 rozhrnovat
+      1 rozhrnout
       1 rozhrabávat
-      1 rozhrabat
-      1 rozhodovat
-      1 rozehrát
-      1 rozdìlit
-      1 rozdmýchat
-      1 rozbít
+      1 rozdìlávat
+      1 rozdvojovat
       1 rojit
       1 riskovat
       1 reprezentovat
-      1 reagovat
-      1 radit
-      1 pùsobit
+      1 regulovat
+      1 radovat_se
+      1 pùjèit
       1 pøíslu¹et
+      1 pøièíst
+      1 pøizvednout
+      1 pøiznat_se
       1 pøivítat
-      1 pøivázat
-      1 pøistát
+      1 pøivést
+      1 pøivá¾et
+      1 pøistavit
       1 pøipálit
       1 pøipojovat
       1 pøipojit_se
-      1 pøipojit
-      1 pøinést
-      1 pøinutit
+      1 pøiotrávit
+      1 pøiná¹et
+      1 pøimáèknout
+      1 pøilétnout
+      1 pøilo¾it
       1 pøiletìt
-      1 pøikládat
-      1 pøibít
-      1 pøeèerpat
+      1 pøiklopit
+      1 pøicházet
+      1 pøibývat
+      1 pøiblí¾it_se
+      1 pøibli¾ovat_se
+      1 pøibli¾ovat
       1 pøe¹típnout
+      1 pøetrhnout
       1 pøetrhat
-      1 pøetoèit
+      1 pøesáhnout
       1 pøesvìdèit_se
       1 pøesvìdèit
       1 pøestìhovat
+      1 pøestoupit
       1 pøestavìt
-      1 pøestat
+      1 pøestavovat
       1 pøeskoèit
-      1 pøeskakovat
-      1 pøeru¹it
-      1 pøelo¾it
-      1 pøelepit
-      1 pøeká¾et
-      1 pøejet
+      1 pøepou¹tìt
+      1 pøeplout
+      1 pøená¹et
+      1 pøelévat
+      1 pøekroèit
+      1 pøekládat
       1 pøehánìt
-      1 pøehrát
       1 pøehodnotit
       1 pøedznamenávat
-      1 pøedstavit
-      1 pøedjí¾dìt
+      1 pøedpokládat
       1 pøedejít
-      1 pískat
+      1 pøebíhat
+      1 pøebìhnout
       1 pálit
-      1 putovat
-      1 pustit_se
+      1 pustit
+      1 proøíznout
+      1 proèi¹»ovat
       1 pro¹lehávat
-      1 pro¹kolit
       1 pro¹etøovat
-      1 prozkou¹et
+      1 provzdu¹òovat
       1 protrhnout
-      1 prorazit
+      1 prosit
+      1 prosakovat
+      1 propíchnout
       1 propadat
-      1 prolít
-      1 prolévat
+      1 pronajmout
+      1 prokopat
       1 projevovat_se
-      1 prohrát
-      1 prohlí¾et_si
+      1 projet
+      1 projednávat
+      1 prohoøet
+      1 prohlí¾et
       1 prohlubovat
-      1 probírat
-      1 poøídit
+      1 procvièovat
+      1 probudit
+      1 poøezat
       1 poèínat_si
       1 po¾ít
       1 po¾adovat
-      1 po¹kozovat
-      1 pozvat
       1 pozorovat
       1 povìsit
+      1 povést_se
       1 pova¾ovat
       1 pou¹tìt
-      1 potøebovat
-      1 potì¾kat
+      1 potopit
       1 potkat
       1 potit
       1 posílat
-      1 posypat
+      1 posypávat
+      1 posunout_se
+      1 posunout
+      1 postøíkat
+      1 postoupit
       1 postihnout
-      1 postavit_se
-      1 poslou¾it
-      1 poskytovat
-      1 popálit
+      1 postaèit
+      1 postarat_se
+      1 poslat
+      1 posilovat
+      1 poru¹it
+      1 poranit
+      1 poradit_si
       1 popraskat
       1 popisovat
       1 popadat
       1 pomyslet
+      1 polít
+      1 polekat_se
       1 pokutovat
-      1 pojistit
+      1 pokrýt
+      1 pokou¹et_se
+      1 pohledávat
       1 pogratulovat
+      1 podøíznout
+      1 podstrèit
+      1 podrobit_se
+      1 podpálit
       1 podléhat
       1 podlo¾it
+      1 podklouznout
+      1 podepøít
+      1 podepsat
       1 podchytit
-      1 podat
-      1 pocházet
-      1 plazit
-      1 plavat
-      1 o¾ivit
-      1 o¹etøovat
-      1 otvírat
+      1 pobývat
+      1 peèovat
+      1 pasovat
+      1 pamatovat
+      1 pacifikovat
+      1 oøezat
+      1 o¾ivovat
+      1 ozvat_se
+      1 ovládat
+      1 ovlivnit
+      1 otrávit_se
+      1 otevøít_se
+      1 osvítit
+      1 osvì¾it
+      1 osvìtlovat
+      1 osvìdèit_se
+      1 ostraòovat
       1 oslavit
       1 osahat
-      1 opravit
-      1 opatøit
-      1 opakovat_se
-      1 omezit
-      1 ohradit
-      1 odøíznout
+      1 osadit
+      1 organizovat
+      1 opéci
+      1 opozdit
+      1 oplachovat
+      1 opadnout
+      1 ohledat
       1 od¹oupnout
-      1 odvìtrávat
-      1 odvá¾et
+      1 odvést
+      1 odvrátit
       1 odvracet
-      1 odvolat
-      1 odtrhnout
-      1 odtlaèit
-      1 odrazit_se
-      1 odpovídat
-      1 odmr¹tit
-      1 odkopat
-      1 odklízet
-      1 odklidit
+      1 odtì¾it
+      1 odtékat
+      1 odtéci
+      1 odtrhávat
+      1 odtlakovat
+      1 odstartovat
+      1 odradit
+      1 odporovat
+      1 odpojovat
+      1 odorizovat
+      1 odletìt
+      1 odkázat
+      1 odklonit
+      1 odhánìt
       1 odhrnout
       1 odhrabávat
-      1 odhrabat
-      1 odhalit
-      1 odhadovat
       1 odeznít
-      1 oddìlit
+      1 odemknout
+      1 odehrávat_se
       1 odcházet
-      1 odchytávat
-      1 odbagrovat
-      1 ochránit
-      1 ochladit
+      1 ocenit
+      1 obávat_se
       1 obstát
+      1 obsluhovat
       1 obsahovat
+      1 obrátit
       1 obracet_se
-      1 obohatit
       1 oblo¾it
+      1 obleèený
       1 objí¾dìt
       1 objevovat_se
       1 obdivovat
+      1 obcházet
+      1 nést_se
+      1 nést
+      1 nutit
       1 nudit_se
       1 nièit
+      1 neutralizovat
       1 nechávat
+      1 navádìt
+      1 navrátit
       1 navrhovat
       1 navozovat
-      1 navazovat
+      1 navléknout
       1 nauèit
-      1 natáhnout
-      1 nasávat
-      1 nasát
-      1 nasvìdèovat
-      1 nastøíkat
       1 nastupovat
+      1 nastoupit
+      1 nastavit
+      1 nasimulovat
       1 nará¾et
-      1 naru¹it
-      1 napájet
+      1 narodit_se
       1 napomáhat
+      1 napojit
+      1 naplavit
+      1 namotat
+      1 namontovat
+      1 namazat
       1 namalovat
+      1 nalévat
+      1 nalétávat
       1 nalomit
+      1 nakládat
+      1 nají¾dìt
       1 naházet
+      1 nahromadit
+      1 nahradit
       1 nahlédnout
       1 nadlehèit
       1 nabýt
-      1 nabrat
-      1 muset
+      1 nabídnout
+      1 mìøit
+      1 mìnit
+      1 myslit_si
+      1 myslet_si
       1 moderovat
-      1 mluvit
-      1 manipulovat
       1 léèit
-      1 kutálet
+      1 louèit_se
+      1 letìt
+      1 krvácet
       1 koupit
       1 konzultovat
-      1 kontrolovat
-      1 jistit
+      1 konstruovat
+      1 kolaudovat
+      1 kapat
+      1 jiskøit
+      1 jevit_se
       1 jednat
       1 izolovat
-      1 intoxikovat
+      1 instruovat
+      1 instalovat
+      1 imitovat
       1 hýbat_se
       1 hynout
       1 hubnout
       1 hubit
-      1 hovoøit
       1 hospitalizovat
+      1 hodit
+      1 hnát
       1 hlásit_se
-      1 fotit
+      1 foukat
       1 fixovat
-      1 explodovat
+      1 evidovat
       1 eliminovat
       1 dít_se
-      1 dávat
-      1 dát_si
-      1 dr¾et
-      1 dová¾et
-      1 dovolat_se
-      1 dostavìt
-      1 dorazit
-      1 doporuèit
-      1 dopomoci
-      1 dopadnout
-      1 domluvit
+      1 dovést
+      1 dovolovat
+      1 dotáhnout
+      1 dotknout_se
+      1 dosypávat
+      1 dostavovat_se
+      1 doprovázet
+      1 doplatit
       1 dokladovat
-      1 dohodnout
+      1 dokazovat
+      1 dojet
+      1 dohoøet
+      1 dohledat
       1 dodr¾et
-      1 dobrzdit
-      1 demontovat
-      1 dekontaminovat
-      1 dbát
-      1 chystat_se
+      1 dobnout
+      1 diskvalifikovat
+      1 daøit_se
+      1 couvat
+      1 chytnout
+      1 chytat
+      1 chodívat
+      1 bát_se
+      1 bydlet
+      1 brázdit
+      1 bruslit
+      1 bolet
       1 bodat
+      1 aktivovat

@@ -4,7 +4,14 @@ use vars qw($this $root);
 
 sub freq_lemma()
 {
-	print $this->{t_lemma} . "\n"
+	if ($this->{t_lemma} eq "")
+	{
+#		print $this->{t_lemma} . "\n"
+	}
+	else
+	{
+		print $this->{t_lemma} . "\n"
+	}
 }
 
 sub freq_verb()

@@ -26,6 +26,8 @@ done
 cd ..
 sh make_pls
 
+sh make_tpls_list
+
 
 #ja to spustit na pozadi:
 #echo './parse > parse_log 2>&1 &!' | zsh

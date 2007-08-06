@@ -1,4 +1,4 @@
-#!btred -TNe freq_lemma()
+#!btred -TNe freq_verb()
 
 use vars qw($this $root);
 
