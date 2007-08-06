@@ -1,0 +1,9 @@
+#!/bin/bash
+
+../../parsing_czech/PDT/tools/machine-annotation/run_all out sample_data.txt
+../../parsing_czech/t-analysis/run out/5-pml
+
+
+mkdir pml
+mv out/5-pml/*.[wmat].gz pml
+
