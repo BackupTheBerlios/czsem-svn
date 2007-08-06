@@ -230,15 +230,37 @@ Za~tìmito závorkami následuje v~kulatých závorkách èárkami oddìlený seznam jeho 
 \begin{center}
 \includegraphics[scale=0.8]{../NetGraph1.eps}
 \end{center}
-  \caption{Linearizace stromu v~dotazovacím jazyce Netgraph.}
+  \caption{Linearizace stromu v~dotazovacím jazyce Netgraph}
   \label{pict:tree_linearize}
 \end{figure}
 
 \subsubsection{Atributy uzlù}
-V~každém uzlu dotazu je možné omezit hodnoty jeho atributù. Tato omezení zapisujeme mezi hranaté závorky, které mu v~lineárním zápisu dotazu pøísluší. Tato omezení se píší ve tvaru \emph{název atributu} \verb|=| \emph{hodnota atributu}, pøípadnì \verb|!=|, \verb|<|, \verb|<=|, \verb|>|, \verb|>=|. Jednotlivá omezení uvnitø každého uzlu oddìlujeme èárkami. Operátorem \verb+|+ mùžeme zapsat alternativní hodnoty. Napøíklad zápis \verb+[t_lemma=hasiè,functor=ACT|PAT]+ omezuje tektogramatické lemma tohoto uzlu na~hodnotu \emph{hasiè} a funktor na hodnotu \emph{ACT} nebo \emph{PAT}.
+V~každém uzlu dotazu je možné omezit hodnoty jeho atributù. Tato omezení zapisujeme mezi hranaté závorky, které mu v~lineárním zápisu dotazu pøísluší. Tato omezení se píší ve tvaru \emph{název atributu} \verb|=| \emph{hodnota atributu}, pøípadnì \verb|!=|, \verb|<|, \verb|<=|, \verb|>|, \verb|>=|. Jednotlivá omezení uvnitø každého uzlu oddìlujeme èárkami. Operátorem \verb+|+ mùžeme zapsat alternativní hodnoty, pomocí zástupných znakù \verb|?| (libovolný znak) a \verb|*| (libovolný øetìzec) mùžeme hodnotu atributu zobecnit.
 
-\subsubsection{Roviny lingvistické anotace}
-Skryté uzly -- atribut \emph{hide} v~nástroji Netgraph XXX btred a rùzné roviny, \verb|PML_T::GetANodes($this)|
+Napøíklad zápis \verb+[t_lemma=hasiè,functor=ACT|PAT,gram/sempos=n.*]+ omezuje tektogramatické lemma tohoto uzlu na~hodnotu \emph{hasiè} a funktor na hodnotu \emph{ACT} nebo \emph{PAT} a sémantický slovní druh (gram/sempos) na~hodnoty zaèínající \emph{n.} tedy libovolná sémantická substantiva.
+
+Kromì atributù, které jsou spojeny s~daty lingvistických anotací, mùžeme v~dotazech používat ještì takzvané \emph{meta-atributy}, pomocí kterých je možné dotaz dále upøesnit. Uveïme nyní nìkteré z~nich s~krátkým popisem.
+
+\begin{center}
+\begin{tabular}{rl}
+  \verb|_optional| & Umožòuje vypustit tento uzel z~dotazu.\\
+  \verb|_transitive| & Deklaruje tranzitivní hranu stromu.\\
+  \verb|_#occurrences| & Umožòuje omezit délku tranzitivní hrany.\\
+  \verb|_depth| & Vzdálenost od~koøene stromu.\\
+  \verb|_name| & Nastavuje jméno uzlu.\\[1pt]
+  \verb|hide| & Definuje skrytý uzel (viz dále).
+\end{tabular}    
+\end{center}
+
+
+Atribut \emph{\_name} v~dotazech umožòuje použít referenci na~libovolný pojmenovaný uzel. Pøi~omezování hodnoty nìkterého atributu se mùžeme pomocí reference odkázat na~hodnoty atributù referenèního uzlu. Napøíklad zápisem \verb|[a/ord<{N1.a/ord}]| vyjádøíme, že poøadí tohoto uzlu ve~vìtì (hodnota atributu \emph{a/ord}) má být nižší než poøadí uzlu se jménem \emph{N1}. Podrobnosti o~referencích je možné nalézt v~manuálu aplikace Netgraph.
+
+
+\subsubsection{Skryté uzly a roviny lingvistické anotace}
+Pomìrnì elegantnì je v~aplikaci Netgraph vyøešen pøechod z~tektogramatické roviny na~rovinu analytickou. Obì tyto roviny lingvistického popisu jsou v~aplikaci Netgraph spojeny. Od~každého tektogramatického uzlu vedou hrany ke~všem odpovídajícím analytickým uzlùm. Analytické uzly jsou pøímo zavìšeny na~tektogramatických jako jejich listy -- z~analytických uzlù už žádné hrany nevedou.
+
+Aby bylo možné tektogramatické uzly od~analytických snadno oddìlit, jsou analytické uzly v~Netgraphu oznaèeny jako skryté. Dotazy se standardnì na~skrytých uzlech nevyhodnocují. 
+V~dotazu na~skryté analytické uzly, musíme u~všech uzlù dotazu, které mají odpovídat skrytým uzlùm dat, nastavit meta atribut \verb|hide=true|.
 
 \subsubsection{Interpretace}
 interpretace - XPath, XPath pøehlednìjší v~lineárním zápisu, vizualizace dotazu podobnì jako v NG klientu
@@ -248,7 +270,7 @@ interpretace - XPath, XPath pøehlednìjší v~lineárním zápisu, vizualizace dotazu 
 \begin{verbatim}
 [ _name=action_type,
   gram/sempos=v,
-  t_lemma=zranit|usmrtit|zemøít|zahynout|pøežít ]
+  t_lemma=zranit | usmrtit | zemøít | zahynout | pøežít ]
 ( [ _name=a-negation,
     m/tag=??????????N*,
     hide=true,
@@ -257,12 +279,12 @@ interpretace - XPath, XPath pøehlednìjší v~lineárním zápisu, vizualizace dotazu 
     functor=MANN,
     _optional=true ],
   [ _name=participant,
-    functor=ACT|PAT,
-    t_lemma=kdo|èlovìk|osoba|muž|žena|dítì|
-      øidiè|øidièka|spolujezdec|spolujezdkynì ]
+    functor=ACT | PAT,
+    t_lemma=kdo | èlovìk | osoba | muž | žena | dítì |
+      øidiè | øidièka | spolujezdec | spolujezdkynì ]
   ( [ _name=quantity,
       functor=RSTR,
-      gram/sempos=n.quant.*|adj.quant.*,
+      gram/sempos=n.quant.* | adj.quant.*,
       _optional=true ] ) )
 \end{verbatim}
 
@@ -270,7 +292,7 @@ interpretace - XPath, XPath pøehlednìjší v~lineárním zápisu, vizualizace dotazu 
 \begin{center}
 \includegraphics[scale=0.54]{../extract_patern.eps}
 \end{center}
-  \caption{Pøíklad extrakèního vzoru jako dotaz Netgraphu.}
+  \caption{Pøíklad extrakèního vzoru jako dotaz Netgraphu}
   \label{pict:extract_patern}
 \end{figure}
 
@@ -280,6 +302,8 @@ interpretace - XPath, XPath pøehlednìjší v~lineárním zápisu, vizualizace dotazu 
 
 \subsection{Extrakèní pravidla}
 \label{sec:extract_rule}
+
+XML-QL\footnote{XML-QL: A Query Language for XML, http://www.w3.org/TR/NOTE-xml-ql/}
 
 \subsection{Indexace}
 \label{sec:tree_indexing}
