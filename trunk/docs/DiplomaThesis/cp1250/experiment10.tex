@@ -235,13 +235,45 @@ Za~tìmito závorkami následuje v~kulatých závorkách èárkami oddìlený seznam jeho 
 \end{figure}
 
 \subsubsection{Atributy uzlù}
-V~každém uzlu dotazu je možné omezit hodnoty jeho atributù. Tato omezení zapisujeme mezi hranaté závorky, které mu v~lineárním zápisu dotazu pøísluší.
+V~každém uzlu dotazu je možné omezit hodnoty jeho atributù. Tato omezení zapisujeme mezi hranaté závorky, které mu v~lineárním zápisu dotazu pøísluší. Tato omezení se píší ve tvaru \emph{název atributu} \verb|=| \emph{hodnota atributu}, pøípadnì \verb|!=|, \verb|<|, \verb|<=|, \verb|>|, \verb|>=|. Jednotlivá omezení uvnitø každého uzlu oddìlujeme èárkami. Operátorem \verb+|+ mùžeme zapsat alternativní hodnoty. Napøíklad zápis \verb+[t_lemma=hasiè,functor=ACT|PAT]+ omezuje tektogramatické lemma tohoto uzlu na~hodnotu \emph{hasiè} a funktor na hodnotu \emph{ACT} nebo \emph{PAT}.
 
 \subsubsection{Roviny lingvistické anotace}
 Skryté uzly -- atribut \emph{hide} v~nástroji Netgraph XXX btred a rùzné roviny, \verb|PML_T::GetANodes($this)|
 
 \subsubsection{Interpretace}
 interpretace - XPath, XPath pøehlednìjší v~lineárním zápisu, vizualizace dotazu podobnì jako v NG klientu
+
+\subsubsection{Pøíklad}
+%[_name=action_type,gram/sempos=v,t_lemma=zranit|usmrtit|zemøít|zahynout|pøežít]([m/tag=??????????N*,_name=a-negation,hide=true,_optional=true],[functor=MANN,_name=injury_manner,_optional=true],[functor=ACT|PAT,t_lemma=kdo|èlovìk|osoba|muž|žena|dítì|øidiè|øidièka|spolujezdec|spolujezdkynì,_name=participant]([functor=RSTR,gram/sempos=n.quant.*|adj.quant.*,_optional=true,_name=quantity]))
+\begin{verbatim}
+[ _name=action_type,
+  gram/sempos=v,
+  t_lemma=zranit|usmrtit|zemøít|zahynout|pøežít ]
+( [ _name=a-negation,
+    m/tag=??????????N*,
+    hide=true,
+   _optional=true ],
+  [ _name=injury_manner,
+    functor=MANN,
+    _optional=true ],
+  [ _name=participant,
+    functor=ACT|PAT,
+    t_lemma=kdo|èlovìk|osoba|muž|žena|dítì|
+      øidiè|øidièka|spolujezdec|spolujezdkynì ]
+  ( [ _name=quantity,
+      functor=RSTR,
+      gram/sempos=n.quant.*|adj.quant.*,
+      _optional=true ] ) )
+\end{verbatim}
+
+\begin{figure}[!t]
+\begin{center}
+\includegraphics[scale=0.54]{../extract_patern.eps}
+\end{center}
+  \caption{Pøíklad extrakèního vzoru jako dotaz Netgraphu.}
+  \label{pict:extract_patern}
+\end{figure}
+
 
 
 
