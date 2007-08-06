@@ -1,0 +1,16 @@
+#!btred -TNe freq_lemma()
+
+use vars qw($this $root);
+
+sub freq_lemma()
+{
+	print $this->{t_lemma} . "\n"
+}
+
+sub freq_verb()
+{
+	if ($this->{gram}{sempos} eq "v")
+	{
+		print $this->{t_lemma} . "\n"
+	}
+}

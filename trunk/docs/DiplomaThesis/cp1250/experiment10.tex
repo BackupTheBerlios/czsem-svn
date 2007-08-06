@@ -87,7 +87,7 @@ Pøi~zkoumání èeského WordNetu jsme bohužel zjistili nedostateèné pokrytí èeské s
 Podrobnosti o~programových nástrojích, které jsme pro~zkoumání èeského WordNetu vyvinuly je možné nalézt v~sekci \ref{sec:wn_find}.
 
 \subsubsection{Shrnutí}
-V~praktickém experimentu jsme zjistili, že extrakci dat z~lingvisticky anotovaných textù je možné provést pomocí extrakèních pravidel. Podrobnosti o~pravidlech, která jsme programovì realizovali pøedkládáme v~sekci~\ref{sec:extract_exp}. Vytvoøení takových funkèních pravidel je ale se souèasnými programovými prostøedky zbyteènì pracné a málo úèelné. Efektivní návrh a využití extrakèních pravidel by umožnil dotazovací jazyk a jeho interpret nad~lingvistickými stromy. Návrh takového jazyka pøedkládáme v~oddíle \ref{sec:tree_query}.
+V~praktickém experimentu jsme zjistili, že extrakci dat z~lingvisticky anotovaných textù je možné provést pomocí extrakèních pravidel. Informace o~pravidlech, která jsme programovì realizovali pøedkládáme v~sekcích~\ref{sec:extract_exp} a \ref{sec:extract_rule}. Vytvoøení takových funkèních pravidel je ale se souèasnými programovými prostøedky zbyteènì pracné a málo úèelné. Efektivní návrh a využití extrakèních pravidel by umožnil dotazovací jazyk a jeho interpret nad~lingvistickými stromy. Návrh takového jazyka pøedkládáme v~oddíle \ref{sec:tree_query}.
 
 Další možností, jak extrahovat data z~lingvisticky anotovaných textù, je zapojení nìkteré metody strojového uèení. Pro~tyto metody bychom musely vytvoøit trénovací data. Vytvoøení takových dat pøedstavuje mnoho ruèní práce, která však mùže být srovnatelná s~prací nutnou k~návrhu extrakèních pravidel.
 %Zajímavou možností by mohla být kombinace obou pøístupù, totiž metodou strojového uèení hledat extrakèní pravidla. ----- to je asi blbost ... museli bychom mít pravidla i tren. data
@@ -179,22 +179,44 @@ Tento nástroj je možné nalézt v~adresáøi \emph{src/wordnet} SVN repository. Podr
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Návrhy a zkušenosti}
-\section{Dotazování nad lingvistickými závislostními stromy}
+\section{Dotazování nad lingvistickými stromy}
 \label{sec:tree_query}
+Bìhem našeho experimentu jsme narazili na~potøebu dotazovacího jazyka, pomocí kterého bychom se mohli programovì dotazovat na~hodnoty atributù lingvistických stromù a pomocí kterého by bylo možné obecnì zachytit strukturu podobných vìt (vzorù), které se v~datech vyskytují. Dotazovací jazyk, který používá aplikace Netgraph (viz sekce \ref{sec:netgraph}), je naší pøedstavì velmi blízký.
+
+%Vytvoøení takových funkèních pravidel je ale se souèasnými programovými prostøedky zbyteènì pracné a málo úèelné. Efektivní návrh a využití extrakèních pravidel by umožnil dotazovací jazyk a jeho interpret nad~lingvistickými stromy. Návrh takového jazyka pøedkládáme v~oddíle \ref{sec:tree_query}.
 
 %kapitola Netgraph:: V prùbìhu experimentu, který je popsán v~kapitole \ref{sec:experiment}, jsme narazili na~potøebu dotazovacího jazyka, pomocí kterého bychom se mohli programovì dotazovat na~hodnoty atributù lingvistických stromù. Též by se nám velmi hodil jazyk, ve kterém by bylo možné vyjádøit vzory stromù, které se v~korpusu našeho experimentu èastìji vyskytují. Dotazovací jazyk, který používá aplikace Netgraph, je naší pøedstavì velmi blízký. Tuto problematiku podrobnìji rozebíráme v~oddíle \ref{sec:tree_query}.
 
-interpretace - XPath, XPath pøehlednìjší v~lineárním zápisu, vizualizace dotazu podobnì jako v NG klientu
+\subsection{Dotazovací jazyk aplikace Netgraph}
+Nyní se pokusíme struènì popsat dotazovací jazyk aplikace Netgraph. Podrobný popis tohoto jazyka je možné nalézt v~manuálu aplikace Netgraph\footnote{http://quest.ms.mf\/f.cuni.cz/netgraph/doc/netgraph\_manual.html}, pøípadnì v~\cite{mirovsky_netgraph}.
 
-Skryté uzly v~nástroji Netgraph XXX btred a rùzné roviny, \verb|PML_T::GetANodes($this)|
+Definovat dotaz v~tomto jazyce, znamená definovat podstrom, který se má v~prohledávaných stromech vyskytovat. Tento dotazovací jazyk tedy umožòuje definovat strukturu stromu. Navíc mùžeme v~každém uzlu dotazu omezit hodnoty atributù daného uzlu.
 
+\subsubsection{Linearizace struktury stromu}
+Dotazy v~jazyce, který popisujeme, se zapisují lineárnì jako textové øetìzce. Ukážeme nyní, jak strukturu stromu dotazu pøevedeme do~lineárního zápisu dotazu.
+
+Každý jednotlivý uzel je v~dotazu zapsán mezi dvojici hranatých závorek \verb|[ ]|. 
+Za~tìmito závorkami následuje v~kulatých závorkách èárkami oddìlený seznam jeho dìtí, napøíklad \verb|([],[])|. Zápis dotazu tedy zaèíná u~koøene a podle pøedchozích dvou pravidel postupuje až k~listùm stromu dotazu. Na~obrázku \ref{pict:tree_linearize} je znázornìn strom s~pìti uzly, který zapíšeme jako \verb|[]([]([],[]),[])|. Èísla uzlù na obrázku odpovídají poøadovému èíslu hranatých závorek, které danému uzlu v~zápisu odpovídají.
+
+\begin{figure}[!t]
 \begin{center}
 \includegraphics[scale=0.8]{../NetGraph1.eps}
 \end{center}
+  \caption{Linearizace stromu v~dotazovacím jazyce Netgraph.}
+  \label{pict:tree_linearize}
+\end{figure}
 
-[]([]([],[]),[]) %pøekreslit
+\subsubsection{Atributy uzlù}
+V~každém uzlu dotazu je možné omezit hodnoty jeho atributù. Tato omezení zapisujeme mezi hranaté závorky, které mu v~lineárním zápisu dotazu pøísluší.
 
-Za každým uzlem následuje v~kulatých závorkách èárkami oddìlený seznam jeho dìtí.
+\subsubsection{Roviny lingvistické anotace}
+Skryté uzly -- atribut \emph{hide} v~nástroji Netgraph XXX btred a rùzné roviny, \verb|PML_T::GetANodes($this)|
+
+\subsubsection{Interpretace}
+interpretace - XPath, XPath pøehlednìjší v~lineárním zápisu, vizualizace dotazu podobnì jako v NG klientu
+
+
+
 
 \subsection{Extrakèní pravidla}
 \label{sec:extract_rule}

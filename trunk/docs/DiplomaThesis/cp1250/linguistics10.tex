@@ -71,7 +71,6 @@ Vztah jednotlivých rovin anotace je znázornìn na~obrázku \ref{pict:roviny_anotac
 Tato znaèka obsahuje tvar, v jakém se dané slovo vyskytuje v pùvodním textu, vèetnì zápisu malých a velkých písmen. Od pùvodního výskytu se liší jen ve výjimeèných pøípadech, kdy napøíklad pùvodní slovní tvar byl èíslice s desetinnou èárkou (snaha o jednotný zápis èísel) nebo se jednalo o pøeklep. Slovní tvar je v~korpusech PDT uložen pod atributem \emph{m/form}. Na~obrázku \ref{pict:roviny_anotace} je slovní tvar uveden v~prvním øádku roviny \emph{m-layer} a v~popiscích uzlù roviny \emph{a-layer}.
 
 \subsubsection{Lemma}
-\label{sec:lemma}
 Lemma je takzvaný základní tvar slova. Jednoznaènì slovo identifikuje. V~tomto tvaru je dané slovo obvykle uvádìno ve slovnících.
 
 Morfologické lemma je v~korpusech PDT uloženo pod atributem \emph{m/lemma}. Na~obrázku \ref{pict:roviny_anotace} jsou morfologická lemmata ve~druhém øádku roviny \emph{m-layer}.
@@ -148,6 +147,7 @@ Uzly tektogramatické roviny v~sobì nesou informaci rozdìlenou do nìkolika atribu
 %XXXXXXXXXXXXXX pokracovat XXXXXXXXXXXXX
 
 \subsubsection{Tektogramatické lemma}
+\label{sec:t_lemma}
 Tektogramatické lemma (t-lemma) zachycuje lexikální význam uzlu. U jednoduchých uzlù odpovídá lemmatu, které bylo øídícímu slovu tektogramatického uzlu pøiøazeno na morfologické rovinì. Uzlùm na tektogramatické rovinì novì vytvoøeným je pøiøazeno zástupné t-lema speciálního tvaru.
 
 V korpusech PDT je tektogramatické lemma uloženo jako atribut \emph{t\_lemma} uzlù tektogramatického stromu. Na~obrázcích \ref{pict:roviny_anotace} a \ref{pict:tecto_example} jsou tato lemmata vytištìna na prvním øádku popiskù jednotlivých tektogramatický uzlù.
@@ -331,7 +331,7 @@ Netgraph server je napsán v C a C++ a bìží v operaèním systému Linux i dalších s
 
 Dotazy v Netgraphu jsou definovány pomocí vlastního dotazovacího jazyka. Jedná se o jazyk formálnì velmi jednoduchý, avšak s vysokou expressivitou. Definovat dotaz v Netgraphu, znamená definovat podstrom, který se má v prohledávaných stromech vyskytovat. Tedy v dotazu mùžeme definovat požadovanou strukturu stromu. Navíc mùžeme v každém uzlu dotazu vynutit hodnotu nìkterých atributù tohoto uzlu.
 
-Velmi jednoduchý dotaz, kdy chceme vyhledat všechny stromy obsahující slovo \uv{hasiè} se skládá z jediného uzlu a restrikce na hodnotu atributu \emph{lemma} (viz~\ref{sec:lemma}) na hodnotu \emph{hasiè} v tomto uzlu.
+Velmi jednoduchý dotaz, kdy chceme vyhledat všechny stromy obsahující slovo \uv{hasiè} se skládá z jediného uzlu a restrikce na hodnotu atributu \emph{t\_lemma} (viz~\ref{sec:t_lemma}) na hodnotu \emph{hasiè} v tomto uzlu.
 
 Podrobnosti o možnostech a syntaxi tohoto dotazovacího jazyka je možné nalézt napøíklad v~\cite{mirovsky_netgraph}. Poznamenejme ještì, že
 dotazy mohou být dále rozšíøeny tzv. meta atributy, které umožòují urèení pozice dotazu v~nalezených stromech, omezení velikosti nalezených stromù, urèení vztahù mezi hodnotami atributù u rùzných uzlù v nalezených stromech, negaci a mnoho dalších podmínek.
