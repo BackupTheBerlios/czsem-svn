@@ -1,8 +1,7 @@
 #!/bin/bash
 
-
 cd html_src
- 
+
 for dir1 in *.isol2; do
 	
 	mkdir ../txt_src/$dir1
