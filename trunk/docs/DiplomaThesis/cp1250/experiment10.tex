@@ -7,7 +7,7 @@ Pøestavba architektury projektu KIM by byla pomìrnì nároèná a její výsledek neji
 
 Projekt GATE je naproti KIM otevøený a modulární. Jedná se o velmi obecnou softwarovou základnu pro lingvistickou anotaci a extrakci informací, která nabízí mnoho možností, k~dispozici je velké množství funkèních modulù. Ale k~èemu pøesnì bychom GATE chtìli použít? Ponechali jsme tedy GATE jako otevøenou možnost a zaèali pøesnìji hledat a specifikovat problém, který budeme øešit.
 
-Paralelnì s~touto prací jsme mohli sledovat vývoj prací Dušana Marušèáka a Roberta Novotného !!!citovat!!!. V~tìchto pracích se pokoušejí o~anotaci / extrakci informací ze~strukturovaných web-stránek. Tento pøístup se èasto oznaèuje jako konstrukce \emph{wrapper-u}. Obì tyto práce se opírají o~zajímavý nápad využití opakujících se struktur uvnitø stránek. Vzniklé metody jsou pak témìø nezávislé na~konkrétní podobì vstupní stránky. Avšak pevná (HTML) struktura stránky podmiòuje použití tìchto metod.
+Paralelnì s~touto prací jsme mohli sledovat vývoj prací Dušana Marušèáka a Róberta Novotného \cite{maruscak_novotny}. V~tìchto pracích se pokoušejí o~anotaci/extrakci informací ze~strukturovaných web-stránek. Tento pøístup se èasto oznaèuje jako konstrukce \emph{wrapper-u}. Obì tyto práce se opírají o~zajímavý nápad využití opakujících se struktur uvnitø stránek. Vzniklé metody jsou pak témìø nezávislé na~konkrétní podobì vstupní stránky. Avšak pevná (HTML) struktura stránky podmiòuje použití tìchto metod.
 
 Zaèali jsme si uvìdomovat, mezeru v~oblasti extrakce informací z~pøirozeného textu v~Èeském jazyce. Nejsou nám známy výsledky žádné práce, která by se tímto tématem zabývala. Pøitom èeská poèítaèová lingvistika je na~velmi vysoké úrovni.
 
@@ -99,7 +99,7 @@ Za~nejlepší možnost považujeme poloautomatické vytvoøení extrakèních pravidel z~
 \subsection{Formální reprezentace dat}
 Nacházíme se nyní v~situaci, kdy se nám podaøilo z~lingvisticky anotovaných textù extrahovat data, která nás zajímají. Chtìli bychom je uchovávat v~takové formì, která by vystihovala jejich sémantiku. Využijeme tedy nìjaký konceptuální formální popis (ontologii), pomocí kterého data zapíšeme. Vznikne tak interpretace tìchto dat pomocí slovníku zvolené ontologie. Libovolný programový nástroj, který \uv{porozumí} dané ontologii, bude moci s~tìmito daty pracovat.
 
-Technicky není tato fáze nároèná. Jedná se o~jednoduchou datovou transformaci, kterou je napøíklad pro~XML možné realizovat pomocí XSLT. V~našem experimentu jsme tuto fázi programovì nerealizovali, dùvodem byl mimo jiné nedostatek extrahovaných dat.
+Technicky není tato fáze nároèná. Jedná se o~jednoduchou datovou transformaci, kterou je napøíklad pro~XML možné realizovat pomocí XSLT\footnote{XSL Transformations (XSLT), http://www.w3.org/TR/xslt}. V~našem experimentu jsme tuto fázi programovì nerealizovali, dùvodem byl mimo jiné nedostatek extrahovaných dat.
 
 Nároènost této fáze spoèívá v~nalezení, pøípadnì vytvoøení vhodné ontologie, pomocí které budeme data interpretovat. Je potøeba zvážit všechny možné pøípady, ve~kterých by se data dala použít a najít takové øešení, které bude ve~vìtšinì pøípadù vyhovovat. Konkrétnì použít rozšíøenou ontologii, pøípadnì maximálnì usnadnit mapování použité ontologie na~koncepty ostatních. Pokud se podaøí konceptuálnì správnì data zachytit, vznikne skuteènì sémantická anotace tìchto dat, která není závislá na~úèelu jejich použití.
 
@@ -127,13 +127,12 @@ Tyto zprávy se nejèastìji týkají výjezdu hasièských oddílù k~dopravní nehodì neb
 Na 241,5 kilometru dálnice D1 ve smìru na Kromìøíž havaroval tahaè Volvo s návìsem. Souprava jedoucí v levém, rychlém jízdním pruhu zezadu narazila do dvou speciálních vozidel správy a údržby dálnic – do dodávky Renault s varovnou svìtelnou šipkou a do traktoru k údržbì dálnice. V kabinì tahaèe Volvo byli zranìni 25letý øidiè a jeho desetimìsíèní dítì. Jednadvacetiletá matka dítìte vyvázla bez zranìní. Do nemocnice byli pøevezeni také øidièi speciálních vozidel – 35letý øidiè dodávky Renault a 34letý øidiè traktoru, který ale byl po ošetøení propuštìn.
 \end{quote}
 
-\begin{figure}[t!]
+\begin{figure}[h!]
   % Requires \usepackage{graphicx}
 \begin{center}
   \includegraphics[scale=0.54]{../freq_hasici.eps}
   \includegraphics[scale=0.54]{../freq_verb_hasici.eps}\\
 \end{center}
-
   \caption[Frekvenèní analýza hasièských zpráv]{Frekvenèní analýza hasièských zpráv -- vpravo pouze slovesa.}
   \label{pict:freq_hasici}
 \end{figure}
@@ -147,7 +146,7 @@ Automatické stažení a proèištìní dat z~tohoto datového zdroje by bylo pomìrnì ko
 
 Tento datový zdroj hraje v~našem experimentu spíše doplòkovou roli. Chtìli jsme porovnat kvalitu lingvistických anotací a možnosti naší metody na~datech v~další doménì. K~tomuto úèelu jsme tato data zpracovali v~malém rozsahu ruènì, jsou uložena v~souboru \emph{data/upadci/sample\_data.txt} SVN repository. Z~testu, který jsme provedli na~zmínìném vzorku dat se ukazuje, že automaticky generované lingvistické anotace jsou i v~tomto pøípadì použitelné. Lingvistické analyzátory si velmi dobøe poradily napøíklad s~èlenìním a èíslováním paragrafù jednotlivých zákonù. Problémy se ukazují pøi analýze nìkterých témìø až neuvìøitelných souvìtí o~délce pøes ètyøicet slov.
 
-\pagebreak
+%\pagebreak
 Následuje úryvek z~textu jednoho soudního usnesení.
 
 \begin{quote}
@@ -155,22 +154,19 @@ Rozdìlení výtìžku získaného zpenìžením konkurzní podstaty vychází z údajù obsaže
 \end{quote}
 
 
-\begin{figure}[b!]
-  % Requires \usepackage{graphicx}
+\begin{figure}[h!]
 \begin{center}
   \includegraphics[scale=0.55]{../freq_upadci.eps}
   \includegraphics[scale=0.55]{../freq_verb_upadci.eps}
 \end{center}
-
-  \caption[Frekvenèní analýza evidence úpadcù]{Frekvenèní analýza evidence úpadcù -- vpravo pouze slovesa.}
-
+\caption[Frekvenèní analýza evidence úpadcù]{Frekvenèní analýza evidence úpadcù vpravo pouze slovesa.}
   \label{pict:freq_upadci}
 \end{figure}
 
 %\section{Výstupní data}
 %Vzhledem k tomu, že pojem sémantické anotace, jak ho zmiòuji v kapitole \ref{sec:sem_anotace}, je velmi široký, není ani pøesnì urèeno, jaká data by pøi procesu sémantické anotace mìla vzniknout.
 
-\pagebreak
+%\pagebreak
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Software}
@@ -185,7 +181,7 @@ Postup instalace vèetnì odkazù na~poskytovatele jednotlivých nástrojù je popsaný
 
 Autoøi práce jsou si vìdomi toho, že pokud by chtìli svùj software veøejnì publikovat nebo dokonce prodávat, bylo by nutné instalaci zjednodušit a ošetøit právní nároky tøetích stran. To ale nebylo pøedmìtem tohoto experimentu. Problematiku instalace externích komponent ponechme jejich autorùm. Nejménì pøíjemná je instalace tektogramatického analyzátoru (sekce \ref{sec:t-nalysis}), tento nástroj je ale stále ve~vývoji a jeho instalaci je nutné považovat za~doèasné øešení.
 
-\pagebreak
+%\pagebreak
 \subsection{Skripty pro pøípravu dat}
 \label{sec:data_prepare}
 Skripty, pomocí kterých se stáhnou a transformují stránky hasièského zpravodajství jsou umístìné v~adresáøi \emph{data/hasici} SVN repository. Jedná se o~sadu \emph{bash} skriptù, které by mìli fungovat na vìtšinì UNIX-ových systémù. Pøed jejich spuštìním je nutné do~systému nainstalovat potøebné lingvistické nástroje (pro popis instalace viz \ref{sec:install}). Kompletní dávku spustíme (na~pozadí) skriptem \emph{run\_parse\_background}. Tato dávka postupnì vykoná všechny akce popsané v~sekcích \ref{sec:phase_data_prepare} a \ref{sec:phase_ling_anot}. Výstupní lingvistické anotace budou uloženy v~adresáøi \emph{data/hasici/pml}. Celý bìh této dávky mùže trvat i více než tøi hodiny. Hlášení o~prùbìhu jednotlivých akcí je zaznamenáváno v~log-souboru \emph{parse.log}. Podrobnosti k~funkci jednotlivých skriptù je možné nalézt v~komentáøích uvnitø každého skriptu.
@@ -195,7 +191,7 @@ Skripty, pomocí kterých se stáhnou a transformují stránky hasièského zpravodajst
 \label{sec:extract_exp}
 V~prùbìhu experimentu jsme vytvoøili nìkolik maker pro~nástroj btred (sekce \ref{sec:tred}). Jednalo se o~makra pro~frekvenèní analýzu, makra pomocí kterých jsme podrobnìji zkoumali vstupní data a makra která simulují extrakci dat. Pøíklad extrakèního pravidla, které jsme se pokusili realizovat je znázornìno v~sekci \ref{sec:extract_rule}.
 
-Všechny tyto makra (Perl-skripty) jsou umístìny v~adresáøi \emph{src/perl} SVN repository. Podrobnosti o~jednotlivých makrech je možné nalézt v~souboru \emph{src/perl/info.txt} a v~komentáøích uvnitø kódu jednotlivých skriptù.
+Všechna tato makra (Perl-skripty) jsou umístìna v~adresáøi \emph{src/perl} SVN repository. Podrobnosti o~jednotlivých makrech je možné nalézt v~souboru \emph{src/perl/info.txt} a v~komentáøích uvnitø kódu jednotlivých skriptù.
 
 %Napøíklad frekvenèní analýza hasièských dat probíhá pomocí skriptu \emph{data/hasici/freq.btred} v~SVN repository.
 
@@ -230,10 +226,10 @@ Každý jednotlivý uzel je v~dotazu zapsán mezi dvojici hranatých závorek \verb|[ 
 Za~tìmito závorkami následuje v~kulatých závorkách èárkami oddìlený seznam jeho dìtí, napøíklad \verb|([],[])|. Zápis dotazu tedy zaèíná u~koøene a podle pøedchozích dvou pravidel postupuje až k~listùm stromu dotazu. Na~obrázku \ref{pict:tree_linearize} je znázornìn strom s~pìti uzly, který zapíšeme jako \verb|[]([]([],[]),[])|. Èísla uzlù na obrázku odpovídají poøadovému èíslu hranatých závorek, které danému uzlu v~zápisu odpovídají.
 
 \begin{figure}[!t]
+  \caption{Linearizace stromu v~dotazovacím jazyce Netgraph}
 \begin{center}
 \includegraphics[scale=0.8]{../NetGraph1.eps}
 \end{center}
-  \caption{Linearizace stromu v~dotazovacím jazyce Netgraph}
   \label{pict:tree_linearize}
 \end{figure}
 
@@ -330,9 +326,11 @@ Kontaktovali jsme správce aplikace Netgraph -- Jiøího Mírovského a získali pøedb
 
 \subsection{Extrakèní pravidla}
 \label{sec:extract_rule}
-Extrakèní pravidla pro~získávání dat z~lingvisticky anotovaných textù se skládají z~dotazu a z~jeho zpracování. V~dotazu specifikujeme, jaká data hledáme. Pøi zpracování výsledku urèíme, jakou podobu budou mít nalezená data ve~výstupu extrakèního procesu.
+V~sekci \ref{sec:phase_data_extract} o~získávání dat z~lingvisticky anotovaných textù navrhujeme použití formálnì zapsaných extrakèních pravidel. Pokusíme se nyní tato pravidla blíže popsat. Taková pravidla by se jistì mìla skládat ze~dvou èástí: z~dotazu nad lingvistickými daty a ze~zpracování výsledku tohoto dotazu. V~dotazu specifikujeme, jaká data hledáme. Pøi zpracování výsledku urèíme, jakou podobu budou mít nalezená data ve~výstupu extrakèního procesu.
 
-Pro ukázku nyní zkonstruujeme dva pøíklady, jak by taková extrakèní pravidla mohla vypadat. V~obou pøíkladech zafixujeme èást \uv{lingvistického} dotazu na~dotaz v~jazyce aplikace Netgraph z~pøedchozího textu. Tedy dotazem bude právì text z~obrázku \ref{pict:extract_patern}. První pøíklad formátuje výstup extrakèního pravidla jako tabulku relaèní databáze. Druhý pøíklad je inspirovaný dotazovacím jazykem XML-QL\footnote{XML-QL: A Query Language for XML, http://www.w3.org/TR/NOTE-xml-ql/} a jeho výstupem jsou data ve~formátu XML.
+Pro ukázku nyní zkonstruujeme dva pøíklady, jak by taková extrakèní pravidla mohla vypadat. V~obou pøíkladech zafixujeme èást \uv{lingvistického} dotazu na~dotaz v~jazyce aplikace Netgraph z~pøedchozího textu. Tedy dotazem bude právì text z~obrázku \ref{pict:extract_patern}.
+
+Pøi~konstrukci tìchto pravidel se opíráme o~možnost pojmenovat uzly v~dotazu aplikace Netgraph. Pomocí tìchto jmen pak adresujeme uzly ve~stromech, které vyhovují dotazu. Jména uzlù používáme v~následujících pøíkladech jako promìnné a hodnoty jejich atributù tiskneme na~výstup.
 
 \subsubsection{SQL tabulková forma pravidla}
 \begin{verbatim}
@@ -343,10 +341,22 @@ Pro ukázku nyní zkonstruujeme dva pøíklady, jak by taková extrakèní pravidla moh
 \end{verbatim}
 
 \subsubsection{XML-QL forma pravidla}
+\begin{verbatim}
+    WHERE
+        *** text Netgraph dotazu ***
+    CONSTRUCT 
+      <injured_result>
+        <action type=$action_type.t_lemma>
+          <negation> $a-negation.m/tag </negation>
+          <manner> $injury_manner.t_lemma </manner>
+          <participant type=$participant.t_lemma>
+            <quantity> $quantity.t_lemma </quantity>
+          </participant>
+        </action>
+      </injured_result>
+\end{verbatim}
 
-
-\subsubsection{Další možnosti}
-
+První pøíklad formátuje výstup extrakèního pravidla jako tabulku relaèní databáze. Druhý pøíklad je inspirovaný dotazovacím jazykem XML-QL\footnote{XML-QL: A Query Language for XML, http://www.w3.org/TR/NOTE-xml-ql/} a jeho výstupem jsou data ve~formátu XML.
 
 \subsection{Indexace}
 \label{sec:tree_indexing}
@@ -368,6 +378,8 @@ Oznaèí korpus a nasadit strojové uèení.
 .. pravidla by vznikala jako èerná - až šedá skøíòka
 .. problém s vytváøením korpusu, ruèní anotace
 
+\subsubsection{Dotazy a odvozování znalostí}
+Podíváme-li se na~extrakèní pravidla, která jsme navrhli v~sekci \ref{sec:extract_rule}, zjistíme, že nejde o nic jiného než o~dotazy v~nìjakém dalším jazyce. Z~toho je vidìt, že dotazování respektive formulace dotazù patøí mezi zpùsoby, jakými lze odvodit nové znalosti. Indukce vzorù, kterou se zde zabýváme, není nièím jiným než hledáním zajímavých dotazù.
 
 \section{Závìr práce}
 Otevírá mnoho možností

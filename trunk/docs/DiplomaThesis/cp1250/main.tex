@@ -7,7 +7,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\documentclass[12pt,notitlepage]{report}
+\documentclass[12pt,notitlepage,twoside]{report} %twoside
 %\pagestyle{headings}
 \pagestyle{plain}
 
@@ -30,10 +30,19 @@
 %\usepackage{fancybox} % umožòuje pokroèilé rámeèkování :-)
 \usepackage{graphicx} % nezbytné pro standardní vkládání obrázkù do dokumentu
 
+
+% nastavení dané velikosti okrajù
+%\usepackage[twoside, hscale=0.88, vscale=0.88, bindingoffset=1cm]{geometry}
 \usepackage[left=4cm]{geometry} % nastavení dané velikosti okrajù
 \usepackage{amssymb}
 
 \addtolength{\textheight}{1.5cm}
+
+%\addtolength{\evensidemargin}{-1.5cm}
+\addtolength{\evensidemargin}{-3.5cm}
+\addtolength{\textwidth}{2cm}
+\addtolength{\hoffset}{0.5cm}
+
 %\newindex{default}{idx}{ind}{Rejstøík} % zavádí rejstøík v pøípadì použití balíku index
 
 \title{Sémantická anotace dat z webovských zdrojù}
@@ -123,10 +132,14 @@
      URL http://www.ontotext.com/publications/SemAIR\_SWJ.pdf
 
  \bibitem{IMG_Santini} Simone Santini. Image Semantics without Annotations. S.~Handschuh, S. Staab (editors). Annotation for the Semantic Web, volume 96 of Frontiers in Artificial Intelligence and Applications. IOS Press, Amsterdam, 2003. 156 --179
+     
+ \bibitem{maruscak_novotny} Dušan Marušèák, Róbert Novotný, Peter Vojtáš. Unsupervised Structured Web Data and Attribute Value Extraction. Technical report, KSI, MFF UK, Prague, Czech Republic, 2007.
 
- \bibitem{platek_cz_pc} E. Hajíèová, M. Plátek, P. Sgall: Komunikace s poèítaèem v èeštinì, Sborník referátov seminára SOFSEM 81, Výzkumné výpoètové stredisko Bratislava, 1981. 85--114.
+ \bibitem{platek_cz_pc} E. Hajíèová, M. Plátek, P. Sgall. Komunikace s poèítaèem v èeštinì, Sborník referátov seminára SOFSEM 81, Výzkumné výpoètové stredisko Bratislava, 1981. 85--114.
 
- \bibitem{sgall_syntaxe} P. Sgall a kolektiv: Úvod do syntaxe a sémantiky, Academia, Praha, 1986.
+ \bibitem{marketa_lopatkova} Markéta Lopatková. O~homonymii pøedložkových skupin v~èeštinì (Co~umí poèítaè?), Karolinum, MFF UK, Praha, 2003. ISBN 80-246-0648-8.
+
+ \bibitem{sgall_syntaxe} P. Sgall a kolektiv. Úvod do syntaxe a sémantiky, Academia, Praha, 1986.
 
  \bibitem{curry_t_rovina} Curry, H. B.: Some logical aspects of grammatical structure, Structure of Language and Its Mathematical Aspects (red. R. Jakobson), Proceedings of Symposia in Applied Mathematics 12. American Math. Society, Providence, RI 1961.
 
