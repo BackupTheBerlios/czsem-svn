@@ -71,9 +71,10 @@ Vztah jednotlivých rovin anotace je znázornìn na~obrázku \ref{pict:roviny_anotac
 Tato znaèka obsahuje tvar, v jakém se dané slovo vyskytuje v pùvodním textu, vèetnì zápisu malých a velkých písmen. Od pùvodního výskytu se liší jen ve výjimeèných pøípadech, kdy napøíklad pùvodní slovní tvar byl èíslice s desetinnou èárkou (snaha o jednotný zápis èísel) nebo se jednalo o pøeklep. Slovní tvar je v~korpusech PDT uložen pod atributem \emph{m/form}. Na~obrázku \ref{pict:roviny_anotace} je slovní tvar uveden v~prvním øádku roviny \emph{m-layer} a v~popiscích uzlù roviny \emph{a-layer}.
 
 \subsubsection{Lemma}
-Lemma je takzvaný základní tvar slova. Jednoznaènì slovo identifikuje. V~tomto tvaru je dané slovo obvykle uvádìno ve slovnících.
+Lemma je takzvaný základní tvar slova. Jednoznaènì slovo identifikuje.
+\\V~tomto tvaru je dané slovo obvykle uvádìno ve slovnících.
 
-Morfologické lemma je v~korpusech PDT uloženo pod atributem \emph{m/lemma}. Na~obrázku \ref{pict:roviny_anotace} jsou morfologická lemmata ve~druhém øádku roviny \emph{m-layer}.
+Morfologické lemma je v~korpusech PDT uloženo uvnitø atributu s~názvem \emph{m/lemma}. Na~obrázku \ref{pict:roviny_anotace} jsou morfologická lemmata ve~druhém øádku roviny \emph{m-layer}.
 
 \subsubsection{Morfologická znaèka}
 Morfologická znaèka v sobì spojuje informaci o morfologických kategoriích, které dané slovo nese. Z morfologické znaèky je možné zjistit slovní druh, jmenný rod, èíslo, pád, osobu, èas, atd.
@@ -160,7 +161,7 @@ V korpusech PDT je sémantický slovní druh se svými podskupinami zapsán v~teèkové
 \subsubsection{Gramatémy}
 Gramatémy jsou tektogramatickým rozšíøením morfologických znaèek. Gramatémy nalezneme pouze mezi atributy uzlù, u kterých to má smysl, tedy u uzlù, které se vztahují k nìjakému významovému slovu vìty. Navíc rùzným slovním druhùm lze pøidìlit jen nìkteré gramatémy (napøíklad nemá smysl urèovat slovesný èas u podstatného jména). Podle toho, do které sémantické podskupiny slovního druhu daný uzel patøí, je možné urèit, které gramatémy pro nìj mají smysl a které nikoli.
 
-V korpusech PDT jsou gramatémy uloženy v~nìkolika atributech tektogramatických uzlù. Tyto atributy zaèínají prefixem \emph{gram/}. Napøíklad \emph{gram/tense} (slovesný èas), \emph{gram/negation} (slovo se vyskytuje v negaci -- slova \verb|byl| a \verb|nebyl| mají stejné lemma \verb|být| ale rùznou hodnotu atributu \emph{gram/negation}), \emph{gram/verbmod} (slovesná modalita -- oznamovací, rozkazovací, podmiòovací). Výstup automatické lingvistické anotace má vìtšinou vyplnìné jen velmi omezené množství tektogramatických gramatémù.
+V korpusech PDT jsou gramatémy uloženy v~nìkolika atributech tektogramatických uzlù. Názvy tìchto atributù zaèínají prefixem \emph{gram/}. Napøíklad \emph{gram/tense} (slovesný èas), \emph{gram/negation} (negace -- slova \verb|byl| a \verb|nebyl| mají stejné lemma \verb|být| ale rùznou hodnotu atributu \emph{gram/negation}), \emph{gram/verbmod} (slovesná modalita -- oznamovací, rozkazovací, podmiòovací). Výstup automatické lingvistické anotace má vìtšinou vyplnìné jen velmi omezené množství tektogramatických gramatémù.
 
 \subsubsection{Funktor}
 Funktory jsou velkým pøínosem tektogramatické roviny po praktické stránce. Funktory chápeme jako sémantické ohodnocení hran mezi uzly tektogramatického stromu. Tektogramatické funktory mùžeme též chápat jako ekvivalent analytických funkcí. Rozdíl mezi tektogramatickými funktory a analytickými funkcemi je v tom, že funktory se snaží postihnout sémantiku vztahu, zatímco analytické funkce se zamìøují na jeho syntaktickou roli.

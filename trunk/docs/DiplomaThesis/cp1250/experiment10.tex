@@ -26,7 +26,7 @@ K~žádné spolupráci zatím nedošlo, ale v~experimentu této práce se pokoušíme otes
 \label{sec:osnaova_praci}
 Postupem prací v~experimentu se snažíme simulovat postup opravdového projektu, který by byl zamìøený na dodateènou automatickou sémantickou anotaci nìkterých zdrojù webu. Tedy jsme v~situaci, kdy chceme nìjakým zpùsobem využít data na webu publikovaná. Abychom mohli tato data použít, potøebujeme je získat v~takové formì, aby se dala strojovì zpracovávat a vyhodnocovat. Na webu jsou však tato data publikována tak, aby si je mohli prohlížet obyèejní lidští návštìvníci, nemají strukturu, kterou požadujeme.
 
-Data která nás zajímají\footnote{Podrobnìjší diskuse o~vstupních datech experimentu je v~oddíle \ref{sec:data_in}.} mohou být vyjádøena pøirozeným jazykem v~textech èlánkù nìkolika webových portálù. V~našem experimentu se jedná o~èlánky hasièského zpravodajství z~èeských regionù na portálu MVÈR (podrobnìji v~oddíle \ref{sec:data_in}). Abychom se od tìchto èlánkù dostali k~datùm, která potøebujeme, budeme postupovat podle následující osnovy, která je graficky znázornìna na~obrázku \ref{pict:AP_schema1}.
+Data která nás zajímají\footnote{Podrobnìjší diskuse o~vstupních datech experimentu je v~oddíle \ref{sec:data_in}.} mohou být vyjádøena pøirozeným jazykem v~textech èlánkù nìkolika rùzných webových portálù. V~našem experimentu se jedná o~texty èlánkù hasièského zpravodajství z~èeských regionù na portálu MVÈR (podrobnìji v~oddíle \ref{sec:data_in}). Abychom se od tìchto èlánkù dostali k~datùm, která potøebujeme, budeme postupovat podle následující osnovy, která je graficky znázornìna na~obrázku \ref{pict:AP_schema1}.
 
 \begin{figure}[!thb]
 \begin{center}
@@ -89,7 +89,7 @@ Podrobnosti o~programových nástrojích, které jsme pro~zkoumání èeského WordNetu 
 
 \subsubsection{Shrnutí}
 V~praktickém experimentu jsme zjistili, že extrakci dat z~lingvisticky anotovaných textù je možné provést pomocí extrakèních pravidel. Informace o~pravidlech, která jsme programovì realizovali pøedkládáme v~sekci~\ref{sec:extract_exp}. V~oddíle \ref{sec:tree_query} a na~obrázku \ref{pict:extract_patern} je možné nalézt konkrétní pøíklad realizovaného extrakèního pravidla.
- 
+
 Vytvoøení funkèních extrakèních pravidel je se souèasnými programovými prostøedky zbyteènì pracné a málo úèelné. Efektivní návrh a využití extrakèních pravidel by umožnil dotazovací jazyk a jeho interpret nad~lingvistickými stromy. Návrh realizace takového jazyka pøedkládáme v~oddíle~\ref{sec:tree_query}.
 
 Další možností, jak extrahovat data z~lingvisticky anotovaných textù, je zapojení nìkteré metody strojového uèení. Pro~tyto metody bychom musely vytvoøit trénovací data. Vytvoøení takových dat pøedstavuje mnoho ruèní práce, která však mùže být srovnatelná s~prací nutnou k~návrhu extrakèních pravidel.
@@ -301,7 +301,7 @@ Popišme nyní struènì pøíklad na~obrázku \ref{pict:extract_patern}. Èísla v~tomto
 
 \begin{enumerate}
   \item Uzel \verb|action_type| -- Hlavní sloveso pravidla.
-  \item Uzel \verb|a-negation| -- Hledáme negaci slovesa \verb|action_type|. Protože automatický tektogramatický analyzátor nevyplòuje atribut \emph{gram/negation}, hledáme negaci na~analytické rovinì uvnitø morfologické znaèky \emph{m/tag}.
+  \item Uzel \verb|a-negation| -- Hledáme negaci slovesa \verb|action_type|. Protože automatický tektogramatický analyzátor v~souèasné dobì nevyplòuje atribut \emph{gram/negation}, hledáme negaci na~analytické rovinì uvnitø morfologické znaèky \emph{m/tag}.
   \item Uzel \verb|injury_manner| -- Druh zranìní, napøíklad lehce / tìžce.
   \item Uzel \verb|participant| -- Postižené osoby.
   \item Uzel \verb|quantity| -- Poèet postižených osob, hodnoty \emph{n.quant} a \emph{adj.quant} zastupují kvantifikaèní substantiva a adjektiva.
@@ -334,7 +334,7 @@ Pøi~konstrukci tìchto pravidel se opíráme o~možnost pojmenovat uzly v~dotazu apl
 
 \subsubsection{SQL tabulková forma pravidla}
 \begin{verbatim}
-    SELECT action_type.t_lemma, a-negation.m/tag, 
+    SELECT action_type.t_lemma, a-negation.m/tag,
            injury_manner.t_lemma, participant.t_lemma,
            quantity.t_lemma
     FORM *** text Netgraph dotazu ***
@@ -344,7 +344,7 @@ Pøi~konstrukci tìchto pravidel se opíráme o~možnost pojmenovat uzly v~dotazu apl
 \begin{verbatim}
     WHERE
         *** text Netgraph dotazu ***
-    CONSTRUCT 
+    CONSTRUCT
       <injured_result>
         <action type=$action_type.t_lemma>
           <negation> $a-negation.m/tag </negation>
@@ -360,23 +360,37 @@ První pøíklad formátuje výstup extrakèního pravidla jako tabulku relaèní databáz
 
 \subsection{Indexace}
 \label{sec:tree_indexing}
+S tím, jak se zlepšuje kvalita automatické lingvistické anotace, mùžeme pøedpokládat i rozšíøení jejího použití do rùzných oblastí. Jednou se možná doèkáme internetového vyhledávaèe, který bude umožòovat vyhledávání podle lingvistické struktury vìty. Byla by to zajímavá alternativa boolského a vektorového modelu dokumentografických systémù.
 
-Indexace XML dat (pro optimalizaci vyhodnocování dotazù XPath, XQuery a podobných) je v~souèasnosti otevøeným problémem. Stále ještì hledáme algoritmus, který by dokázal efektivnì indexovat XML data libovolné struktury. Tuto situaci ilustrují napøíklad èlánky
-\cite{saptial_index}, \cite{baca_znalosti}.
+Prohledávání korpusu PDT pomocí aplikace Netgraph probíhá prozatím lineárnì. Na~souèasný korpus PDT~2.0 tato metoda dostaèuje, 50 000 vìt server Netgraph prohledá do~pùl minuty. Do~budoucna by však bylo zajímavé lingvistické anotace indexovat. Indexace velkých dat je zmínìna i v~ToDo-listu\footnote{http://quest.ms.mf\/f.cuni.cz/netgraph/doc/ToDo.txt} aplikace Netgraph.
+
+Problém indexace lingvistických stromù vypadá pomìrnì zajímavì. Stromovou strukturu mají i data XML, jejichž indexace (pro optimalizaci vyhodnocování dotazù XPath, XQuery a podobných) je v~souèasnosti otevøeným problémem. Stále ještì hledáme algoritmus, který by dokázal efektivnì indexovat XML data libovolné struktury. Tuto situaci ilustrují napøíklad èlánky \cite{saptial_index}, \cite{baca_znalosti}.
+
+Problém indexace lingvistických dat ale není tak obecný. Stromy vìt pøirozeného jazyka zdaleka nejsou tak rozsáhlé, jak mùžou být stromy obecných XML dat. Struktura lingvistických dat se øídí pevnì danými pravidly jazyka PML (FS v~pøípadì Netgraph), pøedem známe vìtšinu hodnot atributù. Mùžeme pøedpokládat urychlení vyhledávacího procesu pouze použitím klasických databázových indexù na~jednotlivých atributech.
 
 
 \section{Indukce vzorù}
 \label{sec:patern_induction}
-klasifikace - dendrogram
-od frekvenèní analýzy lemmat dále po rùzných osách struktury, rùzné délky tranzitivních hran stromu, zahrnou rùzné atributy
+Pokusíme se nyní zbìžnì naèrtnout pøedstavu, jak by bylo možné (polo)auto\-matizovat hledání opakujících se vzorù vìt v~lingvisticky anotovaných textech. Domníváme se, že by taková metoda mohla vycházet z~postupu, kterým jsme takové vzory hledali v~našem experimentu, konkrétnì ve~fázi extrakce dat popsané v~sekci \ref{sec:phase_data_extract}.
 
-konstrukce dendrogramu interaktivní, napø. se fixují jednotlivá lemmata
+V~našem experimentu jsme pøi~hledání vzorù vyšli z~frekvenèní analýzy, konkrétnì z~analýzy èetností tektogramatických lemmat. Automatická metoda by mohla tuto analýzu rozšíøit a vyhodnocovat èetnosti složitìjších vìtných struktur -- vìtných podstromù. Vznikla by tak klasifikace tìchto podstromù do~segmentù. Tyto segmenty by se staly základem vìtných vzorù.
 
-pøevod vzoru na pravidlo: uživatel oznaèí atributy které ho zajímají, zapíše transformaci výstupu na formální reprezentaci znalostí (4. krok osnovy), lze též vizualizovat ontologii a mapovat vizuálnì.
+Zaøazení podstromù do~segmentù by stále mohlo vycházet z~hodnot tektogramatického lemma. Analýza lemmat by se dala podpoøit lexikální sítí, která by umožnila spojit slova s~podobným významem.
 
-Oznaèí korpus a nasadit strojové uèení.
-.. pravidla by vznikala jako èerná - až šedá skøíòka
-.. problém s vytváøením korpusu, ruèní anotace
+Jako kritéria segmentace bychom mohli použít i další lingvistické atributy uzlù, pøedevším tektogramatický funktor. Zajímavá by mohla být segmentace provedená èistì na~základì hodnot funktorù.
+
+V~klasifikovaných podstromech bychom mohli pro~spojení uzlù použít tranzitivní hrany\footnote{Tranzitivní hrana se v~pùvodním stromu skládá z~nìkolika navazujících hran. Pøesnìji:~Tranzitivní hranou rozumíme cestu v~pùvodním stromu.}. To by nám umožnilo pøeskakovat nezajímavé èásti pùvodních stromù. Právì uzly pøeskoèené tranzitivní hranou by mohlo být zajímavé dále analyzovat.
+
+\subsubsection{Uživatelské rozhraní}
+S~rostoucí velikostí klasifikovaných podstromù by jistì klesala mohutnost jednotlivých segmentù. Tento jev by se dal uživateli znázornit napøíklad pomocí dendrogramu. Uživatel by pak mohl ve~vybraných segmentech zafixovat hodnoty atributù (napøíklad vybraná lemmata) a urèit kritéria další segmentace.
+
+%pøevod vzoru na pravidlo: uživatel oznaèí atributy které ho zajímají, zapíše transformaci výstupu na formální reprezentaci znalostí (4. krok osnovy), lze též vizualizovat ontologii a mapovat vizuálnì.
+
+Touto metodou však postihujeme pøedevším kvantitu. Zamìøujeme se na~vzory, které, po pøevodu na extrakèní pravidla, budou mít vysokou výtìžnost dat, ale tato data mohou být velmi obecná a nezajímavá. Specifiètìjší vzory budou vyžadovat vìtší spolupráci s~uživatelem. Vhodnì navržené uživatelské rozhraní takovéto metody by mohlo vést k~rozumnému kompromisu.
+
+%Oznaèí korpus a nasadit strojové uèení.
+%.. pravidla by vznikala jako èerná - až šedá skøíòka
+%.. problém s vytváøením korpusu, ruèní anotace
 
 \subsubsection{Dotazy a odvozování znalostí}
 Podíváme-li se na~extrakèní pravidla, která jsme navrhli v~sekci \ref{sec:extract_rule}, zjistíme, že nejde o nic jiného než o~dotazy v~nìjakém dalším jazyce. Z~toho je vidìt, že dotazování respektive formulace dotazù patøí mezi zpùsoby, jakými lze odvodit nové znalosti. Indukce vzorù, kterou se zde zabýváme, není nièím jiným než hledáním zajímavých dotazù.
@@ -389,4 +403,4 @@ Otevírá mnoho možností
 Základní prùzkum
 \\- teoretický
 \\- praktický
-\\navádí na~zaèátek, kdekoliv je možné pokraèovat
+\\navádí na~zaèátek, kdekoliv je možné pokraèovat 
