@@ -57,6 +57,7 @@ V~našem experimentu se nyní nacházíme v situaci, kdy máme texty, které chceme an
 Programová realizace této fáze experimentu je popsaná v~sekci \ref{sec:data_prepare}.
 
 \subsection{Extrakce dat}
+\label{sec:phase_data_extract}
 V této fázi se budeme snažit pomocí struktury lingvistických anotací extrahovat data obsažená v~pùvodních textech. Popíšeme zde \uv{øešení}, které jsme zvolili. Jedná se ale spíš o~prùzkum než o~nìjakou ucelenou metodu. Pøí popisu tohoto øešení se budeme snažit komentovat další alternativy a možnosti.
 
 \subsubsection{XML nebo btred?}
@@ -77,7 +78,7 @@ Díky frekvenèním analýzám jsme se mohli zamìøit na~ta tvrzení, která se v~textec
 Ukázalo se, že naprogramování extrakèního pravidla pomocí nástroje btred pøedstavuje i pro~velmi jednoduchý vzor mnoho práce. Pøesto, že jsme se snažili program strukturovat do vìtšího množství obecnìjších funkcí a podprocedur, byl zápis pravidla velmi nepøehledný. Tento závìr není pøekvapivý, více-ménì jsme ho pøedpokládali. Díky tomuto pokusu jsme ale podrobnìji poznali úskalí, která konstrukce tìchto pravidel pøináší.
 
 \subsubsection{Zápis pravidel}
-Programování extrakèních pravidel èistì pomocí nástroje btred nám ukázalo výhody, které by pøinesl formální dotazovací jazyk nad~lingvistickými stromy. Tento jazyk by dále umožnil formalizovat pravidla pro~extrakci dat a formální zápis tìchto pravidel by umožnil jejich uživatelskou editaci, strojovou indukci i sdílení. Bohužel žádný takový pøímo použitelný dotazovací jazyk pro~lingvistické stromy neexistuje. V~oddíle \ref{sec:tree_query} jsme se pokusili o~návrh takového jazyka a v~oddíle \ref{sec:patern_induction} se zamýšlíme nad~možnostmi strojové indukce pravidel pro~extrakci dat.
+Programování extrakèních pravidel èistì pomocí nástroje btred nám ukázalo výhody, které by pøinesl formální dotazovací jazyk nad~lingvistickými stromy. Tento jazyk by dále umožnil formalizovat pravidla pro~extrakci dat a formální zápis tìchto pravidel by umožnil jejich uživatelskou editaci, strojovou indukci i sdílení. Bohužel žádný takový pøímo použitelný dotazovací jazyk pro~lingvistické stromy zatím není k~dispozici. V~oddíle \ref{sec:tree_query} jsme se pokusili o~návrh, jak takový jazyk realizovat, a v~oddíle \ref{sec:patern_induction} se zamýšlíme nad~možnostmi strojové indukce pravidel pro~extrakci dat.
 
 \subsubsection{Využití WordNetu}
 Už v~zadání této práce je zmínka o~možnosti využít databázi WordNet. Tato možnost se nabízí právì zde. Pomocí lexikální sítì WordNetu by bylo možné zobecnit extrakèní pravidla. Napøíklad tam, kde bychom v~pùvodním extrakèním pravidle (bez WordNetu) požadovali pøesnou hodnotu tektogramatického lemma, bychom mohli povolit i jeho libovolné synonymum. Na jiném místì bychom mohli požadovat libovolné hyponymum pøípadnì libovolný prvek podstromu lexikální dìdiènosti, napøíklad ve~zprávách o~dopravních nehodách bychom libovolné \emph{motorové vozidlo} nalezli v~podstromu lexikální dìdiènosti tohoto spojení.
@@ -87,7 +88,9 @@ Pøi~zkoumání èeského WordNetu jsme bohužel zjistili nedostateèné pokrytí èeské s
 Podrobnosti o~programových nástrojích, které jsme pro~zkoumání èeského WordNetu vyvinuly je možné nalézt v~sekci \ref{sec:wn_find}.
 
 \subsubsection{Shrnutí}
-V~praktickém experimentu jsme zjistili, že extrakci dat z~lingvisticky anotovaných textù je možné provést pomocí extrakèních pravidel. Informace o~pravidlech, která jsme programovì realizovali pøedkládáme v~sekcích~\ref{sec:extract_exp} a \ref{sec:extract_rule}. Vytvoøení takových funkèních pravidel je ale se souèasnými programovými prostøedky zbyteènì pracné a málo úèelné. Efektivní návrh a využití extrakèních pravidel by umožnil dotazovací jazyk a jeho interpret nad~lingvistickými stromy. Návrh takového jazyka pøedkládáme v~oddíle \ref{sec:tree_query}.
+V~praktickém experimentu jsme zjistili, že extrakci dat z~lingvisticky anotovaných textù je možné provést pomocí extrakèních pravidel. Informace o~pravidlech, která jsme programovì realizovali pøedkládáme v~sekci~\ref{sec:extract_exp}. V~oddíle \ref{sec:tree_query} a na~obrázku \ref{pict:extract_patern} je možné nalézt konkrétní pøíklad realizovaného extrakèního pravidla.
+ 
+Vytvoøení funkèních extrakèních pravidel je se souèasnými programovými prostøedky zbyteènì pracné a málo úèelné. Efektivní návrh a využití extrakèních pravidel by umožnil dotazovací jazyk a jeho interpret nad~lingvistickými stromy. Návrh realizace takového jazyka pøedkládáme v~oddíle~\ref{sec:tree_query}.
 
 Další možností, jak extrahovat data z~lingvisticky anotovaných textù, je zapojení nìkteré metody strojového uèení. Pro~tyto metody bychom musely vytvoøit trénovací data. Vytvoøení takových dat pøedstavuje mnoho ruèní práce, která však mùže být srovnatelná s~prací nutnou k~návrhu extrakèních pravidel.
 %Zajímavou možností by mohla být kombinace obou pøístupù, totiž metodou strojového uèení hledat extrakèní pravidla. ----- to je asi blbost ... museli bychom mít pravidla i tren. data
@@ -202,7 +205,7 @@ Všechny tyto makra (Perl-skripty) jsou umístìny v~adresáøi \emph{src/perl} SVN r
 Èeský WordNet jsme prohlíželi pomocí vizuálního prohlížeèe DEBVisDic (viz oddíl \ref{sec:wordnet_cz}) a pomocí jednoduchého vlastního programového nástroje, který jsme k~tomuto úèelu vytvoøili v~jazyce Java. Tento nástroj pøistupuje k~èeskému WordNetu pøes web-rozhraní též zmínìné v~oddíle \ref{sec:wordnet_cz}. Nástroj umožòuje hledat ve~WordNetu libovolné slovo èi slovní spojení, stahovat jednotlivé synsety ve~formátu XML a obsahuje i funkci, která pro~daný synset získá úplnou øadu hyperonym až ke~koøenu lexikální dìdiènosti. Pro~dvì takové øady pak umí nalézt jejich prùnik.
 
 Tento nástroj je možné nalézt v~adresáøi \emph{src/wordnet} SVN repository. Podrobnìjší popis tohoto nástroje je v~souboru \emph{WordNet\_info.txt}, implementaèní detaily jednotlivých funkcí jsou komentovány ve~zdrojových kódech.
- 
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -223,7 +226,7 @@ Definovat dotaz v~tomto jazyce, znamená definovat podstrom, který se má v~prohle
 \subsubsection{Linearizace struktury stromu}
 Dotazy v~jazyce, který popisujeme, se zapisují lineárnì jako textové øetìzce. Ukážeme nyní, jak strukturu stromu dotazu pøevedeme do~lineárního zápisu dotazu.
 
-Každý jednotlivý uzel je v~dotazu zapsán mezi dvojici hranatých závorek \verb|[ ]|. 
+Každý jednotlivý uzel je v~dotazu zapsán mezi dvojici hranatých závorek \verb|[ ]|.
 Za~tìmito závorkami následuje v~kulatých závorkách èárkami oddìlený seznam jeho dìtí, napøíklad \verb|([],[])|. Zápis dotazu tedy zaèíná u~koøene a podle pøedchozích dvou pravidel postupuje až k~listùm stromu dotazu. Na~obrázku \ref{pict:tree_linearize} je znázornìn strom s~pìti uzly, který zapíšeme jako \verb|[]([]([],[]),[])|. Èísla uzlù na obrázku odpovídají poøadovému èíslu hranatých závorek, které danému uzlu v~zápisu odpovídají.
 
 \begin{figure}[!t]
@@ -249,7 +252,7 @@ Kromì atributù, které jsou spojeny s~daty lingvistických anotací, mùžeme v~dotaz
   \verb|_depth| & Vzdálenost od~koøene stromu.\\
   \verb|_name| & Nastavuje jméno uzlu.\\[1pt]
   \verb|hide| & Definuje skrytý uzel (viz dále).
-\end{tabular}    
+\end{tabular}
 \end{center}
 
 
@@ -259,14 +262,18 @@ Atribut \emph{\_name} v~dotazech umožòuje použít referenci na~libovolný pojmenov
 \subsubsection{Skryté uzly a roviny lingvistické anotace}
 Pomìrnì elegantnì je v~aplikaci Netgraph vyøešen pøechod z~tektogramatické roviny na~rovinu analytickou. Obì tyto roviny lingvistického popisu jsou v~aplikaci Netgraph spojeny. Od~každého tektogramatického uzlu vedou hrany ke~všem odpovídajícím analytickým uzlùm. Analytické uzly jsou pøímo zavìšeny na~tektogramatických jako jejich listy -- z~analytických uzlù už žádné hrany nevedou.
 
-Aby bylo možné tektogramatické uzly od~analytických snadno oddìlit, jsou analytické uzly v~Netgraphu oznaèeny jako skryté. Dotazy se standardnì na~skrytých uzlech nevyhodnocují. 
+Aby bylo možné tektogramatické uzly od~analytických snadno oddìlit, jsou analytické uzly v~Netgraphu oznaèeny jako skryté. Dotazy se standardnì na~skrytých uzlech nevyhodnocují.
 V~dotazu na~skryté analytické uzly, musíme u~všech uzlù dotazu, které mají odpovídat skrytým uzlùm dat, nastavit meta atribut \verb|hide=true|.
 
-\subsubsection{Interpretace}
-interpretace - XPath, XPath pøehlednìjší v~lineárním zápisu, vizualizace dotazu podobnì jako v NG klientu
 
 \subsubsection{Pøíklad}
 %[_name=action_type,gram/sempos=v,t_lemma=zranit|usmrtit|zemøít|zahynout|pøežít]([m/tag=??????????N*,_name=a-negation,hide=true,_optional=true],[functor=MANN,_name=injury_manner,_optional=true],[functor=ACT|PAT,t_lemma=kdo|èlovìk|osoba|muž|žena|dítì|øidiè|øidièka|spolujezdec|spolujezdkynì,_name=participant]([functor=RSTR,gram/sempos=n.quant.*|adj.quant.*,_optional=true,_name=quantity]))
+Uvedeme nyní vìtší pøíklad dotazu v~popisovaném dotazovacím jazyce. Jedná se o~souèást extrakèního pravidla, které jsme se pokusili programovì realizovat v~rámci fáze \ref{sec:phase_data_extract}. Naprogramování extrakèního pravidla, které pøibližnì odpovídá tomuto dotazu, bylo pomocí nástroje btred nároèné. Rozsáhlé btred makro s~mnoha podprocedurami, které vyhodnocuje tento dotaz, mùžeme nahradit nìkolika øádky dotazu aplikace Netgraph.
+
+\begin{figure}[!t]
+\begin{center}
+\includegraphics[scale=0.54]{../extract_patern.eps}
+\end{center}
 \begin{verbatim}
 [ _name=action_type,
   gram/sempos=v,
@@ -288,22 +295,58 @@ interpretace - XPath, XPath pøehlednìjší v~lineárním zápisu, vizualizace dotazu 
       _optional=true ] ) )
 \end{verbatim}
 
-\begin{figure}[!t]
-\begin{center}
-\includegraphics[scale=0.54]{../extract_patern.eps}
-\end{center}
   \caption{Pøíklad extrakèního vzoru jako dotaz Netgraphu}
   \label{pict:extract_patern}
 \end{figure}
 
+Na~obrázku \ref{pict:extract_patern} mùžeme nalézt graficky znázornìný dotaz spolu se~svým lineárním zápisem. Je zde vidìt, že lineární zápis dotazu není moc pøehledný. Na~druhou stranu návrh a uživatelská manipulace s~tìmito dotazy mùže probíhat v~grafickém rozhraní, podobnì jako v~Netgraph klientu (viz \ref{sec:netgraph}).
 
+Popišme nyní struènì pøíklad na~obrázku \ref{pict:extract_patern}. Èísla v~tomto popisu odpovídají èíslùm uzlù na~obrázku.
+
+\begin{enumerate}
+  \item Uzel \verb|action_type| -- Hlavní sloveso pravidla.
+  \item Uzel \verb|a-negation| -- Hledáme negaci slovesa \verb|action_type|. Protože automatický tektogramatický analyzátor nevyplòuje atribut \emph{gram/negation}, hledáme negaci na~analytické rovinì uvnitø morfologické znaèky \emph{m/tag}.
+  \item Uzel \verb|injury_manner| -- Druh zranìní, napøíklad lehce / tìžce.
+  \item Uzel \verb|participant| -- Postižené osoby.
+  \item Uzel \verb|quantity| -- Poèet postižených osob, hodnoty \emph{n.quant} a \emph{adj.quant} zastupují kvantifikaèní substantiva a adjektiva.
+\end{enumerate}
+
+\noindent Tomuto dotazu vyhovují napøíklad vìty:
+\begin{quote}
+Pøi nehodì nebyl nikdo zranìn.\\[5pt]
+Pìt osob bylo zranìno tìžce, dvì lehce.\\[5pt]
+Øidiè automobilu nehodu nepøežil.
+\end{quote}
+
+
+\subsubsection{Interpretace}
+Pokud bychom zde popisovaný dotazovací jazyk chtìli použít pøi extrakci informací, potøebovali bychom interpret, který dotaz nad lingvistickými daty vyhodnotí a vrátí nám výsledek. Tento interpret by navíc musel být dostupný skrz nìjaké programové API.
+
+Aplikace Netgraph je urèena k~prohledávání korpusu PDT a podobných. Je zamìøena na~uživatelsky pohodlný návrh dotazu a pøehledné zobrazení výsledkù. Dotazovací jazyk zde hraje roli prostøedku pro~pøedání dotazu serveru, který ho nad~korpusem vyhodnotí. Vývoj tohoto jazyka je souèástí celé aplikace a oddìlený interpret jazyka s~programovým API zatím není k~dispozici.
+
+Kontaktovali jsme správce aplikace Netgraph -- Jiøího Mírovského a získali pøedbìžný pøíslib spolupráce pøi~tvorbì oddìleného interpreta pro~zmínìný dotazovací jazyk. Varianta, kdy by tento interpret vystupoval jako další klient aplikace Netgraph, by pro~svou realizaci potøebovala pouze dokumentaci komunikaèního protokolu mezi klientem a serverem aplikace Netgraph. Vytvoøení této dokumentace je též souèástí vlastního plánu vývoje aplikace Netgraph.
 
 
 
 \subsection{Extrakèní pravidla}
 \label{sec:extract_rule}
+Extrakèní pravidla pro~získávání dat z~lingvisticky anotovaných textù se skládají z~dotazu a z~jeho zpracování. V~dotazu specifikujeme, jaká data hledáme. Pøi zpracování výsledku urèíme, jakou podobu budou mít nalezená data ve~výstupu extrakèního procesu.
 
-XML-QL\footnote{XML-QL: A Query Language for XML, http://www.w3.org/TR/NOTE-xml-ql/}
+Pro ukázku nyní zkonstruujeme dva pøíklady, jak by taková extrakèní pravidla mohla vypadat. V~obou pøíkladech zafixujeme èást \uv{lingvistického} dotazu na~dotaz v~jazyce aplikace Netgraph z~pøedchozího textu. Tedy dotazem bude právì text z~obrázku \ref{pict:extract_patern}. První pøíklad formátuje výstup extrakèního pravidla jako tabulku relaèní databáze. Druhý pøíklad je inspirovaný dotazovacím jazykem XML-QL\footnote{XML-QL: A Query Language for XML, http://www.w3.org/TR/NOTE-xml-ql/} a jeho výstupem jsou data ve~formátu XML.
+
+\subsubsection{SQL tabulková forma pravidla}
+\begin{verbatim}
+    SELECT action_type.t_lemma, a-negation.m/tag, 
+           injury_manner.t_lemma, participant.t_lemma,
+           quantity.t_lemma
+    FORM *** text Netgraph dotazu ***
+\end{verbatim}
+
+\subsubsection{XML-QL forma pravidla}
+
+
+\subsubsection{Další možnosti}
+
 
 \subsection{Indexace}
 \label{sec:tree_indexing}
@@ -329,6 +372,9 @@ Oznaèí korpus a nasadit strojové uèení.
 \section{Závìr práce}
 Otevírá mnoho možností
 
+široké téma, citovat zadání -- úvodní práce, otevøení tohoto téma
+
 Základní prùzkum
 \\- teoretický
 \\- praktický
+\\navádí na~zaèátek, kdekoliv je možné pokraèovat
