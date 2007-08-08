@@ -10,101 +10,156 @@ Pro pøesnost ještì doplòme, e anotací jako hotovım dílem rozumíme vısledek, vıs
 
 \section{Reprezentace anotací}
 \label{sec:reprezntace_anotaci}
-RDFa, HTML-A
+RDFa, HTML-A \cite{manual_anot}
 \section{Uznávané ontologie}
 \label{sec:ontoindex}
 
-\section{Autorùm Web-stránek}
-\label{sec:autorum}
+%\section{Autorùm Web-stránek}
+%\label{sec:autorum}
 
-\section{Dodateèná anotace, strojová}
-\subsection{Rozdìlení}
-\label{sec:rozdelni_anotace}
-pøedìlat, doplnit, rozvést
+\section{Pøístupy k~sémantické anotaci}
+Pole sémantické anotace je široké. Pøi anotaci jsou pouívány rùzné metody, anotace je zamìøena na~rùzné objekty -- web-stránky, prosté texty, XML, obrázky i další média jako jsou záznamy zvuku a videa. Jednoduché a pøehledné rozdìlení témat sémantické anotace je provedeno v~knize \cite{annotaton_for_semweb}, tohoto rozdìlení se pøidríme a popíšeme nyní jednotlivá témata.
 
-Po praktické stránce: dostupnost, upravitelnost (jiná doména), stabilita - náchylnost na zmìny v datech
+\subsection{Ruèní anotace}
+Ruèní anotace musí pøedcházet všem metodám, které jsou zaloeny na~strojovém uèení. S~pøibıvajícím mnostvím ruèních anotací je pak moné se stále vyšší úspìšnosti metody strojového uèení aplikovat. Ruèní anotace s~sebou pøináší také mnoho problémù spojenıch lidskım faktorem, lidé chybují, kadı èlovìk chápe svoji úlohu trochu jinak -- vynikají nekonzistence. Velmi hezky je popsána ruèní anotace se všemi svımi aspekty v~èlánku \cite{manual_anot}.
+\subsection{Wrapping}
+Wrapping nebo té konstrukce wrapper-u je metoda, kdy se snaíme vyuít (HTML) strukturu web-stránek a díky ní na~stránce najít a extrahovat data, která nás zajímají. Tyto metody bıvají závislé na~konkrétní podobì stránky, kterou analyzují. Pøechod na jinı druh stránek bıvá spojen s~obtíemi.
 
-Po teoretické stránce: èísla (úspìšnost), metody, podle \cite{surway_sa_pl} + doplnit.
+Klasickım zástupcem této kategorie je komerèní projekt Lixto popsanı v~sekci \ref{sec:lixto}. Wrapping-em nad strukturou XML dat se zabıvá projekt WEESA (sekce \ref{sec:WEESA}). Dva zajímavé nápady, jak wrapping automatizovat a zmírnit obtíe spojené s~pøechodem mezi rùznımi strukturami web-stránek pøedstavují Dušan Marušèák a Róbert Novotnı v~èlánku \cite{maruscak_novotny}.
 
-\begin{verbatim}
-*  Multistrategy
-      o Pattern-based
-            + Discovery (Seed expansion)
-            + Rules (JAPE, Taxonomy label matching)
-      o Machine Learning-based
-            + Probabilistic (Hidden Markov Models, N-gram analysis)
-            + Induction (Linguistic, Structural)
-\end{verbatim}
+\subsection{Lingvistika a extrakce informací}
+Mnoho projektù pøi~sémantické anotaci vyuívá nástroje pro~zpracování pøirozeného jazyka (NLP). Takovım nástrojem je pøedevším GATE, podrobnìji popsanı v~sekci \ref{sec:GATE}. Nástroj GATE vyuívá projekt Artequakt (sekce \ref{sec:Artequakt}) a tento nástroj je hlavním prostøedkem pro~extrakci informací v~bulharském projektu KIM (sekce \ref{sec:KIM}). Lingvistická analıza textù v~rùznıch jazycích je souèástí projektu MUMIS (sekce \ref{sec:MUMIS}).
 
-\begin{center}
-\begin{tabular}{|l|l|c|c|c|}
-\hline
-Platform
-& Method
-& Machine
-& Manual
-& Bootstrap
-\\
-&& Learning & Rules &  Ontology\\
-\hline\hline
-AeroDAML
-& Rule
-& N
-& Y
-& WordNet
-\\
-\hline
-Armadillo\footnote{http://nlp.shef.ac.uk/wig/armadillo\_home.html}
-& Pattern Discovery
-& N
-& Y
-& User
-\\
-\hline
-KIM
-& Rule
-& N
-& Y
-& KIMO
-\\
-\hline
-MnM\footnote{http://kmi.open.ac.uk/projects/akt/MnM/}
-& Wrapper Induction
-& Y
-& N
-& KMi
-\\
-\hline
-MUSE\footnote{http://www.dcs.shef.ac.uk/\~{}hamish/muse.html}
-& Rule
-& N
-& Y
-& User
-\\
-\hline
-Ont-O-Mat: Amilcare\footnote{http://nlp.shef.ac.uk/amilcare/}
-& Wrapper Induction
-& Y
-& N
-& User
-\\
-\hline
-Ont-O-Mat: PANKOW\footnote{http://annotation.semanticweb.org/ontomat}
-& Pattern Discovery
-& N
-& N
-& User
-\\
-\hline
-SemTag\footnote{http://tap.stanford.edu/semtag/index.html}
-& Rule
-& N
-& N
-& TAP
-\\
-\hline
-\end{tabular}
-\end{center}
+Tìmito projekty jsme se nechali inspirovat a pokusili se do~sémantické anotace zapojit i èeskou lingvistiku. Tento experiment popisujeme v~kapitole~\ref{sec:experiment}.
+
+
+
+\subsection{Sémantika obrázkù}
+Z~širší skupiny prací, které se zabıvají sémantickou anotací obrázkù uveïme práci od~Simone Santiniho: Image Semantics without Annotations publikovanou v~èlánku \cite{IMG_Santini}.
+
+Autor práce se snaí zachytit sémantiku obrázkù ani by bylo nutné je ruènì anotovat. Tato práce je velmi teoreticky bohatá. Èlánek modeluje internet jako distribuovanou databázi dokumentù a obrázkù. Pøesnìji øeèeno definuje internet jako graf provázanıch dokumentù a obrázkù. Zabıvá se indexací a vyhledáváním obrázkù v~tomto modelu. Navrena je algebra pro manipulaci s takovım grafem (operace jako: insert, delete, nodes, edges, union, ...) Velmi propracované je porovnávání obrázkù pomocí (adaptivní) podobnostní míry, která se skládá ze~tøí sloek:
+
+\begin{itemize}
+\item Linguistic Modality
+\begin{description}
+\item[-] Tato sloka podobnostní míry je odvozena z~podobnosti popiskù a okolního textu jednotlivıch obrázku.
+\end{description}
+\item Closed Word Modality
+\begin{description}
+\item[-] Tato sloka je podobná Linguistic Modality, ale slova zde mají pøesnı ustálenı vıznam zavedenı uvnitø uzavøené komunity uivatelù.
+\end{description}
+\item Emergent Modality pøíp. User Modality
+\begin{description}
+\item[-] Sloka odvozená od~akcí a operací, kterımi uivatelé s~obrázky manipulují.
+\item[-] Nastavuje se napø. pomocí dialogu ve kterém uivatel \uv{pøetahuje} podobné obrázky k sobì.
+\end{description}
+\end{itemize}
+
+\subsection{Metody automatické dodateèné anotace}
+\label{sec:rozdelni_stroj_anotace}
+Pøi dodateèné strojové anotaci klademe dùraz na~automatizaci procesu anotace respektive extrakce informací. Pøehledné rozdìlení metod, které se k~tomuto úèelu pouívají, poskytuje èlánek \cite{surway_sa_pl}. Pokusíme se zde struènì toto rozdìlení zprostøedkovat. %související projekty pak pøedstavíme v~oddíle \ref{sec:projekty}.
+
+Všechny pouívané metody mùeme rozdìlit do dvou kategorií: na metody strojového uèení a na~metody zaloená na~pravidlech (pattern-based). Nìkteré projekty oba pøístupy kombinují, pak mluvíme o~\emph{multistrategy} pøístupu.
+
+\subsubsection{Metody strojového uèení}
+Metody strojového uèení pouívané pøi~sémantické anotaci mùeme dále rozdìlit na~pravdìpodobnostní a induktivní. Pravdìpodobnostní metody jsou nejèastìji zaloeny na Skrytıch Markovovıch modelech. Induktivní pøístupy vìtšinou vyuívají $(\textrm{LP})^2$ algoritmus\footnote{http://nlp.shef.ac.uk/amilcare/lp2.html} vyvinutı na~univerzitì v~Sheffieldu.
+
+\subsubsection{Pravidla}
+Metody zaloené na~pravidlech mùeme dále rozdìlit na~metody, které tato pravidla automaticky \uv{indukují} a metody, které jsou závislé na~ruèní definici pravidel. Indukèní metody nejèastìji postupují algoritmem postupného rozšiøování vstupních vzorù (seed expansion).
+
+%indukce pravidel [3] Brin, S., Extracting Patterns and Relations from the World Wide Web in WebDB Workshop at 6th International Conference on Extending Database Technology, (1998).
+
+\subsubsection{Mìøení úspìšnosti}
+Pokud je k~dispozici testovací korpus s~referenèními anotacemi, mùeme vısledky automatickıch metod porovnat s~ideálními vısledky, které referenèní anotace testovacího korpusu pøedstavují. Úspìšnost metod se pak vyèísluje pomocí známıch metrik \emph{precision}, \emph{recall} a \emph{F-measure} (pro~podrobnı popis viz \cite{surway_sa_pl}).
+
+%
+%Pokusme se nejprve o~rozdìlení jednotlivıch metod.
+%
+%pøedìlat, doplnit, rozvést
+%
+%Po praktické stránce: dostupnost, upravitelnost (jiná doména), stabilita - náchylnost na zmìny v datech
+%
+%Po teoretické stránce: èísla (úspìšnost), metody, podle  + doplnit.
+
+%\begin{verbatim}
+%*  Multistrategy
+%      o Pattern-based
+%            + Discovery (Seed expansion)
+%            + Rules (JAPE, Taxonomy label matching)
+%      o Machine Learning-based
+%            + Probabilistic (Hidden Markov Models, N-gram analysis)
+%            + Induction (Linguistic, Structural)
+%\end{verbatim}
+
+%\begin{center}
+%\begin{tabular}{|l|l|c|c|c|}
+%\hline
+%Platform
+%& Method
+%& Machine
+%& Manual
+%& Bootstrap
+%\\
+%&& Learning & Rules &  Ontology\\
+%\hline\hline
+%AeroDAML
+%& Rule
+%& N
+%& Y
+%& WordNet
+%\\
+%\hline
+%Armadillo\footnote{http://nlp.shef.ac.uk/wig/armadillo\_home.html}
+%& Pattern Discovery
+%& N
+%& Y
+%& User
+%\\
+%\hline
+%KIM
+%& Rule
+%& N
+%& Y
+%& KIMO
+%\\
+%\hline
+%MnM\footnote{http://kmi.open.ac.uk/projects/akt/MnM/}
+%& Wrapper Induction
+%& Y
+%& N
+%& KMi
+%\\
+%\hline
+%MUSE\footnote{http://www.dcs.shef.ac.uk/\~{}hamish/muse.html}
+%& Rule
+%& N
+%& Y
+%& User
+%\\
+%\hline
+%Ont-O-Mat: Amilcare\footnote{http://nlp.shef.ac.uk/amilcare/}
+%& Wrapper Induction
+%& Y
+%& N
+%& User
+%\\
+%\hline
+%Ont-O-Mat: PANKOW\footnote{http://annotation.semanticweb.org/ontomat}
+%& Pattern Discovery
+%& N
+%& N
+%& User
+%\\
+%\hline
+%SemTag\footnote{http://tap.stanford.edu/semtag/index.html}
+%& Rule
+%& N
+%& N
+%& TAP
+%\\
+%\hline
+%\end{tabular}
+%\end{center}
 
 
 %Labskı (pouze extrakce informací, praktickı, granty)
@@ -114,6 +169,8 @@ SemTag\footnote{http://tap.stanford.edu/semtag/index.html}
 
 \section{Projekty}
 \label{sec:projekty}
+Popíšeme nyní nìkolik projektù, které se sémantickou anotací zabıvají. Na~jednotlivıch projektech bude vidìt, velkı rozdíl mezi jednotlivımi pøístupy. 
+
 \subsection{Semantic MediaWiki}
 \label{sec:SMW}
 Semantic MediaWiki (SMW) \cite{SMWiki} je rozšíøením známého \emph{MediaWiki} enginu, kterı kromì mnoha jinıch wiki-stránek zajišuje i chod otevøené Wikipedia encyklopedie\footnote{http://wikipedia.org}. U samotná MediaWiki v~nìkterıch rysech pøipomíná sémantickı web. Uivatel, kterı píše èlánek v~klasické MediaWiki, má mnoho moností, pro~formátování textu. Kromì formátování však mùe jednotlivım slovùm pøiøadit vıznam tak, e je oznaèí jako hypertextové odkazy. Podívejme se napøíklad na vìtu z~èeské Wikipedie:
@@ -167,13 +224,15 @@ U klasická MediaWiki je vıjimeèná tím, jak kdokoliv mùe mìnit a rozšiøovat jej
 SMW engine je volnì dostupnı vèetnì zdrojovıch kódù na stránkách SMW projektu\footnote{http://sourceforge.net/projects/semediawiki}. Zkušební verze SMW bìí na~Internetu na~stránkách Ontoworld.org a kadı si ji mùe vyzkoušet. SMW na~Ontoworld.org je pomìrnì bohatá a poskytuje dobrou dokumentaci celého SMW enginu. V~naší práci jsme Ontoworld.org vyuili k~publikaci nìkterıch pracovních poznámek\footnote{Napøíklad èlánek se souhrnnımi informacemi má adresu:\\ http://ontoworld.org/wiki/Semantic\_annotation\_of\_data\_from\_web\_resources}.
 
 
-\subsection{Artequakt}
-\cite{Artequakt}
+\subsection{ArtEquAKT}
 \label{sec:Artequakt}
+Projekt ArtEquAKT\footnote{http://www.artequakt.ecs.soton.ac.uk/} \cite{Artequakt} je pomìrnì blízkı základní pøedstavì staršího èlánku \cite{platek_cz_pc} o~komunikaci s~poèítaèem v~pøirozeném jazyce. V~projektu Art\-EquAKT jsou z~textù rùznıch web-stránek extrahovány informace o~svìtovıch umìlcích. Tyto informace jsou ukládány do~znalostní báze. Na~základì uivatelského dotazu jsou ze~znalostí báze umìle syntetizovány ivotopisy vybranıch umìlcù v~pøirozeném jazyce. Uivatel mùe zvolit šablonu ivotopisu, omezit jeho detailnost.
 
-Automaticky generuje texty ivotopisù známıch umìlcù. Podklady sbírá sémantickou anotací èlánkù na webu.
 \subsection{WEESA}
-V èlánku \cite{XML_RDF} je navrena pøímoèará deterministická metoda, jak XML data pøevádìt na RDF data. K~XML datùm je nejprve nutné vytvoøit jednoduchou ontologii pokrıvající tøídy a atributy, které chceme pøevést. Tato ontologie se pak automaticky naplní daty ze zdrojového XML. Metoda dobøe funguje pro "dobøe strukturované" XML data (XML elementy odpovídají tøídám atp.) Problémy nastávají s daty tvaru:
+\label{sec:WEESA}
+Projekt WEESA\footnote{http://www.infosys.tuwien.ac.at/weesa/} -- Web Engineering for Semantic Web Applications se zamìøuje na~usnadnìní konstrukce sémantickıch metadat pro~internetové stránky.
+
+V~jednom starším èlánku \cite{XML_RDF}, kterı souvisí se vznikem tohoto projektu, je navrena pøímoèará deterministická metoda, jak XML data pøevádìt na RDF data. K~XML datùm je nejprve nutné vytvoøit jednoduchou ontologii pokrıvající tøídy a atributy, které chceme pøevést. Tato ontologie se pak automaticky naplní daty ze zdrojového XML. Metoda dobøe funguje pro~\uv{dobøe strukturované} XML data (XML elementy odpovídají tøídám atp.) Problémy nastávají s daty tvaru:
 
 \noindent\begin{center}
 \begin{quote}
@@ -181,67 +240,68 @@ V èlánku \cite{XML_RDF} je navrena pøímoèará deterministická metoda, jak XML da
 \end{quote}
 \end{center}
 
-To, e se jedná o vlastnost Processor Speed s hodnotou 500MHZ, tato metoda nedokáe postihnout (zámìrnì -- dùraz byl kladen na jednoduchost a konzistenci návrhu).
+To, e se jedná o vlastnost Processor Speed s hodnotou 500MHZ, tato metoda nedokáe postihnout, zámìrnì -- dùraz byl kladen na jednoduchost a konzistenci návrhu. Takové konstrukce, jakou vidíme v~pøíkladu, zatemòují sémantiku dat, ztìují jejich konceptualizaci a nìkdy se pøímo zakazují.
 
 \subsection{The Lixto Project}
-\cite{Lixto}
-
-!!!upravit!!! Software umoòující automaticky stahovat vybrané informace z webovıch stránek. Uivatelsky pøíjemné a propracované prostøedí. Jedná se o nástroj, ve kterém si uivatel mùe naprogramovat svùj wrapper šitı na~míru svım potøebám.
+\label{sec:lixto}
+Komerèní software Lixto\footnote{http://www.lixto.com} \cite{Lixto} umoòuje automaticky stahovat vybrané informace z~webovıch stránek. Poskytuje uivatelsky pøíjemné a propracované prostøedí, na které je v~projektu kladen velkı dùraz. V~tomto prostøedí si uivatel mùe vizuálnì velmi snadno naprogramovat svùj wrapper šitı na~míru jeho potøebám. Interaktivní vizuální programování wrapper-u probíhá ve~speciálním Lixto prohlíeèi web stránek. Uivatel oznaèuje objekty, které ho zajímají a urèuje, která data (které texty) se mají pøi spuštìní hotového wrapper-u extrahovat. Nejedná se zde pøímo o sémantickou anotaci, ale Lixto lze k~tìmto úèelùm té vyuít.
 
 \subsubsection{Lixto server}
-Lixto server umoòuje automaticky spouštìt hotové Wrappery a získaná data dále zpracovat. Pro zpracování dat je k dispozici široká paleta moností. Zpracovaná data server umí doruèit nejrùznìjším aplikacím i zaøízením.
+Lixto server umoòuje automaticky spouštìt hotové wrapper-y a získaná data dále zpracovat. Pro zpracování dat je k~dispozici široká paleta moností. Zpracovaná data server umí doruèit nejrùznìjším aplikacím i zaøízením.
 
 \subsubsection{Monosti automatické sémantické anotace}
 Pro vyuití pøi automatizované sémantické anotaci je velkou pøekákou nutnost pokadé znovu ruènì naprogramovat Lixto na kadou stránku.
 
 \subsection{GATE}
 \label{sec:GATE}
-\cite{GATE} !!!doplnit!!!
+GATE\footnote{http://www.gate.ac.uk/} \cite{GATE} je otevøenı a modulární systém urèenı pro~zpracování pøirozeného jazyka (NLP). Jedná se o~velmi obecnou softwarovou základnu pro~lingvistickou anotaci a extrakci informací, která nabízí mnoho moností. K~dispozici je velké mnoství funkèních modulù. Dùleitım nástrojem GATE je engine JAPE -- Java Annotation Patterns Engine. Tento engine umoòuje konstruovat komplexní regulární vırazy nad~nejrùznìjšími typy anotací dokumentu.
+
+Modularita systému je zajištìna moností propojit GATE se tøemi typy \uv{plugin-ù}, kterım se v~GATE øíká \emph{resources}:
+\\ \hspace*{1cm} Language Resources, Processing Resources a Visual Resources.
+
+Z~dostupnıch plugin-ù\footnote{Úplnı seznam \emph{plugins to GATE}: http://www.gate.ac.uk/gate/doc/plugins.html} pro GATE jmenujme napøíklad: Part-of-speech tagger pro angliètinu, francouzštinu, nìmèinu, a španìlštinu, Google API, Ontology Editor, WordNet Viewer, atd.
+
 
 \subsection{The KIM Platform}
 \label{sec:KIM}
-\cite{KIM} The KIM Platform: Knowledge \& Information Management, Bulharsko
-
-Pøi prezentaci vyvolal vıpadek serveru úsmìv u~vìtšiny posluchaèù. K~povznesené náladì jistì pøispìl i fakt, e se jedná o~projekt bulharskı. %Zdá se, e se s tím Bulharskem potıkají i na jinıch konferencích.
-
-\subsection{Image Semantics without Annotations}
-Teoreticky bohatı èlánek \cite{IMG_Santini}, zabıvá se indexací a vyhledáváním obrázkù v~internetu podobné databázi. Definuje internet jako graf provázanıch dokumentù a obrázkù. Navrena je algebra pro manipulaci s takovım grafem (operace jako: insert, delete, nodes, edges, union, ...) Velmi propracované je porovnávání obrázkù pomocí (adaptivní) podobnostní míry, která se skládá ze~tøí sloek:
-
+The KIM Platform: Knowledge \& Information Management\footnote{http://www.ontotext.com/kim/} \cite{KIM} je softwarová platforma, která umoòuje:
 \begin{itemize}
-\item Linguistic Modality
-\begin{description}
-\item[-] popisky, okolní text
-\end{description}
-\item Closed Word Modality
-\begin{description}
-\item[-] podobná Linguistic Modality, ale slova zde mají pøesnı vıznam
-\item[-] ustálené, pøesné pojmy uvnitø uzavøené komunity
-\end{description}
-\item Emergent Modality pøíp. User Modality
-\begin{description}
-\item[-] míra vzniklá z akcí a operací souvisejících s~obrázky
-\item[-] Nastavuje se napø. pomocí dialogu ve kterém uivatel "pøetahuje" podobné obrázky k sobì.
-\end{description}
+  \item Sémantickou anotaci textù a semi-strukturovanıch dat, spojenou s~\uv{populováním ontologie} (ontology population) daty, která pøi anotaci vzniknou.
+  \item Indexaci dokumentù a sémantické dotazování nad~nimi.
+  \item Dotazování nad~znalostní bází aplikace a prohlíení její ontologie.
 \end{itemize}
+ 
+\noindent KIM se skládá z nìkolika programovıch èástí.
+
+KIM server spravuje znalostní bázi a provádí veškeré anotace. Tyto anotace spoèívají pøedevším v~rozpoznávání pojmenovanıch entit -- názvù osob, firem, míst, atp. Souèástí KIM je obsáhlá databáze tìchto jmen, která anotaci podstatnì usnadòuje.
+
+KIM server pravidelnì anotuje èlánky vìtšiny svìtovıch zpravodajskıch serverù internetu. Tyto èlánky indexuje a ukládá do~své databáze. Dotazování nad~touto databází umoòuje napøíklad konstruovat grafy popularity pojmenovanıch entit v~rùznıch èasovıch obdobích. KIM poskytuje propracované web-rozhraní pro~dotazování nad~svou bází dat.
+
+Další softwarová komponenta KIM je plug-in do~internetového prohlíeèe MS Internet Explorer, kterı umoòuje aktuálnì prohlíenou stránku odeslat KIM serveru k~anotaci a vısledné anotace pak v~oknì prohlíeèe barevnì zvıraznit.
+
+Pøi praktickém testování této platformy nás pøíjemnì pøekvapil rozsah KIM databáze. Mìli jsme však problémy technické rázu. KIM server, kterı je moné stáhnout ze~stránek projektu, šel velmi tìko nainstalovat a dostupnost veøejného serveru KIM není stoprocentní. Pøi~veøejné prezentaci KIM vyvolal vıpadek serveru úsmìv u~vìtšiny posluchaèù. K~povznesené náladì jistì pøispìl i fakt, e se jedná o~projekt bulharskı. %Zdá se, e se s tím Bulharskem potıkají i na jinıch konferencích.
 
 
 \subsection{MUMIS - Multi-Media Indexing and Searching}
-NLP projekt MUMIS\footnote{http://hmi.ewi.utwente.nl/Projects/mumis/} vyuívající sémantickou anotaci (nejen) textù o fotbalovıch zápasech k~(sémantické) indexaci videozáznamù tìchto zápasù. Informace o zápasech jsou získávány z~rùznıch zdrojù (texty - vice i ménì strukturované, zvukovı záznam øeèi) v rùznıch jazycích (En, Ge, Nl - Dutch).
+\label{sec:MUMIS}
+MUMIS\footnote{http://hmi.ewi.utwente.nl/Projects/mumis/} je projekt Evropské Unie zamìøenı na~indexaci multimediálních zdrojù rùzného typu. V~èlánku \cite{MUMIS} je popsaná lingvistická metoda sémantické anotace tìchto zdrojù. Tato metoda se opírá texty související s~indexovanımi videozáznamy fotbalovıch zápasù. Texty k~tìmto zápasùm jsou získávány z~rùznıch zdrojù (texty - vice i ménì strukturované, zvukovı záznam øeèi) a v~rùznıch jazycích -- v~angliètinì, nìmèinì a holandštinì.
+
 
 \section{Teorie}
 \label{sec:teorie}
-Domnívám se, e nebylo mnoho teoretickıch otázek tıkajících se sémantické anotace vùbec formulováno, nato uspokojivì vìdecky vyøešeno.
+Pøi hledání teoretickıch podkladù k~sémantické anotaci jako takové -- tedy nikoliv k~formální reprezentaci znalostí, jsme neuspìli. Domníváme se, e mnoho zajímavıch teoretickıch otázek tıkajících se sémantické anotace nebylo vùbec formulováno, nato uspokojivì vìdecky vyøešeno.
 
 \subsection{Otázky}
+Pokusíme se nyní poloit nìkolik otázek, které by mohly pøispìt k~dalšímu rozvoji teorie sémantické anotace.
 
 \subsubsection{V èem tkví sémantiènost anotace?}
-Aby notace byla sémantická, musí bıt jistì konzistentní s~tím, jak lidé znalosti a informace chápou.
+Aby anotace byla sémantická, musí bıt jistì konzistentní s~tím, jak lidé znalosti a informace chápou.
 
 Na sémantickou anotaci se mùeme dívat ze dvou úhlù. Toti z~hlediska její standardnosti a z~hlediska její otevøenosti k~odvozování znalostí.
 
 \begin{itemize}
 \item Standardnost anotace mùeme mìøit tím, jak široké publikum \uv{posluchaèù} jí bude rozumìt.
-\item Otevøenost anotace k~odvozování znalostí chápeme jako monost ji pøímo pouít pøi automatické dedukci znalostí. Chceme, aby se tato anotace mohla zapojit do znalostní báze a mohla zde slouit jako zdroj dalších znalostí.
+\item Otevøenost anotace k~odvozování znalostí chápeme jako monost ji pøímo pouít pøi~automatické dedukci znalostí. Chceme, aby se tato anotace mohla zapojit do znalostní báze a mohla zde slouit jako zdroj dalších znalostí.
 \end{itemize}
 
 %\cite{Svatek_ontologie}
@@ -262,18 +322,27 @@ V kontextu dvou pohledù vıše:
 \end{itemize}
 
 \subsubsection{Jak vypadá ideální anotace v ideálním pøípadì?}
-Pokusit se stanovit podmínky které ideální anotaci braní, resp. pøedpoklady které by ji umonily.
+Mohlo by bıt zajímavé se pokusit stanovit podmínky které ideální anotaci braní, resp. pøedpoklady které by ideální anotaci umonily.
 
-Jistì budeme chtít jedinou všemi pouívanou ontologii, pøípadnì dokonalá mapování. Budeme však té poadovat, aby u obsahovala všecky znalosti svìta? My bychom pak pouze oznaèovali, které èásti textu respektive zdroje vyjadøují jednotlivé znalosti. Pak u bychom ale nepotøebovali nic anotovat, u známe všechny odpovìdi.
+Pro realizaci ideální sémantické anotace jistì budeme chtít jedinou všemi pouívanou ontologii, pøípadnì dokonalá mapování.
+
+Jak je to ale s~obsahem této ontologie? Pravdìpodobnì by se hodil úplnı TBox, kterı by obsahoval všechny potøebné koncepty pro~vyjádøení libovolné anotace. Poadavek úplného TBox-u je ale nesmyslnı z~hlediska vıvoje svìta jako takového. Napøíklad vìda se jistì bude stále vyvíjet a snait se obsáhnout veškerou její budoucí terminologii je naprostı nesmysl.
 
 \subsubsection{Jakı je vztah lingvistické a sémantické anotace?}
 Jsou mezi nimi hranice? Kde pøiblinì?
 
+Rozdíl mezi lingvistickou a sémantickou anotací (jak ji chápeme v~této práci) je ten, e sémantická anotace se snaí odhlédnout od~rùznıch jazykovıch formulací \uv{tého} a informaci zachycenou v~textu chce reprezentovat jednoznaènì a formálnì, nìkdy i za~cenu pøehlédnutí (ignorování) jemnıch rozdílù ve~vıznamu blízkıch jazykovıch formulací, rùznıch jazykovıch zabarvení. Sémantická anotace má bıt srozumitelná pro~stroj!
+
+Sémantické anotace by mìly bıt naprosto nezávislé na~kterémkoliv pøirozeném jazyce, reprezentují informaci, nikoliv její jazykové vyjádøení. 
+
 \subsubsection{Dá se lingvistická anotace pøevést na sémantickou?}
-Dal by se z toho odvodit nìjakı univerzálnìjší návod / algoritmus, jak od lingvistické anotace k té sémantické pøejít?
+Dal by se odvodit nìjakı návod, formální algoritmus, jak od lingvistické anotace pøejít k~sémantické?
 
 \subsubsection{Jakı je vztah mezi pøirozenım jazykem a deskripèní logikou?}
-Kapitola \ref{sec:ling_knowledge}
+
+Základem k vyøešení tìchto otázek by byla formální specifikace pojmu lingvistické a sémantické anotace a potamo pøirozeného jazyka.
+
+%Kapitola \ref{sec:ling_knowledge}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Lingvistika a znalostní inenırství}

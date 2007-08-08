@@ -29,7 +29,7 @@ Tato práce se zabývá sémantickou anotací webovských zdrojù. Slovo anotace znamen
 Tato práce má nìkolik cílù. Nejprve jsme se pokusili zmapovat oblast sémantické anotace jako takové. Zjistili jsme, že pole sémantické anotace je široké a že na tuto èinnost mùžeme nahlížet rùznì. Na nejpovrchnìjší úrovni zkoumání jsme sémantickou anotaci rozdìlili na~takzvanou \emph{anotaci autorskou} a \emph{anotaci dodateènou}. Rozdíl mezi tìmito pohledy na anotaci je velký, avšak oba pøístupy mají mnoho spoleèného a dá se øíci, že se vzájemnì doplòují.
 
 \emph{Autorskou anotací} budeme oznaèovat proces, kdy autor vytváøí web-stránku, pøípadnì jiný potenciální zdroj informací a tento zdroj obohatí o~takzvaný \uv{sémantický popis}. Tedy že formálnì popíše informace, které jsou ve zdroji obsažené tak, aby byli využitelné pro strojové zpracování. Mùžeme to také chápat tak, že autor, který tvoøí web-stránku pro~lidské návštìvníky v~pøirozeném jazyce, ji vytvoøí ještì ve~verzi pro~softwarové návštìvníky ve~formálním strojovém jazyce. %další øádek možná pøesunout?
-Mùže se to zdát nároèné, ale není. Strojový jazyk je struèný a pøímoèarý, nehledí na design ani stylistiku. Navíc autor mùže vybrat jen nìkteré nejdùležitìjší informace, které formálnì vyjádøí. Pøínos je potenciálnì obrovský. %rozvést - co nás v kontextu autorské anotace nejvíc zajímá
+Tvoøit stránku ve~dvou rùzných se mùže zdát nároèné, ale nemusí tomu tak být. Strojový jazyk je struèný a pøímoèarý, nehledí na design ani stylistiku. Navíc autor mùže vybrat jen nejdùležitìjší informace, které formálnì vyjádøí, pøípadnì použít programový nástroj, který mu práci usnadní. Pøínos je potenciálnì obrovský. %rozvést - co nás v kontextu autorské anotace nejvíc zajímá
 
 %pøidat odkaz na podrobnosti v kapitole...
 
@@ -41,19 +41,11 @@ Poté, co jsme takto sémantickou anotaci rozdìlili, zkoumáme obì oblasti víceménì
 
 Dodateènou anotaci zkoumáme v~kontextu mnoha existujících projektù a metod, které byly pro~automatickou extrakci dat z webových zdrojù použity. Seznámili jsme se s~množstvím rùzných pøístupù k~tomuto problému. Kromì metod strojového uèení, je v~projektech èasto využívána poèítaèová lingvistika.
 
-Cílem praktické èásti práce byl pokus o~realizaci nìkteré automatické metody. Vybrali jsme lingvistický pøístup v~èeském prostøedí. Pokusili jsme se využít dostupné lingvistické nástroje pro~analýzu èeských textù, jmenovitì nástroje PDT (viz oddíl \ref{sec:PDT}) pro~automatickou lingvistickou anotaci Èeštiny a èeský WordNet (kapitola \ref{sec:wordnet}). Jedním z~hlavních dùvodù pro volbu èeské lingvistiky byl fakt, že jsme nenarazily na žádnou, práci, ve~které by tyto nástroje byly použity pro extrakci informací. Domníváme se, že zkušenosti z~našeho experimentu mohou být pøínosné nejen pro další sémantickou anotaci èeských textù, pøípadnì pro~extrakci informací z~nich, ale i pro~samotnou èeskou lingvistiku.
+Cílem praktické èásti práce byl pokus o~realizaci nìkteré automatické metody. Vybrali jsme lingvistický pøístup v~èeském prostøedí. Pokusili jsme se využít dostupné lingvistické nástroje pro~analýzu èeských textù, jmenovitì nástroje PDT (viz oddíl \ref{sec:PDT}) pro~automatickou lingvistickou anotaci èeštiny a èeský WordNet (kapitola \ref{sec:wordnet}). Jedním z~hlavních dùvodù pro volbu èeské lingvistiky byl fakt, že jsme nenarazily na žádnou, práci, ve~které by tyto nástroje byly použity pro extrakci informací. Domníváme se, že zkušenosti z~našeho experimentu mohou být pøínosné nejen pro další sémantickou anotaci èeských textù, pøípadnì pro~extrakci informací z~nich, ale i pro~samotnou èeskou lingvistiku.
 
-Hledali jsme vhodnou oblast pro aplikaci lingvistických metod. Jako zdroj anotace jsme nakonec použili data hasièské záchranné služby a databázi úpadcù Ministerstva spravedlnosti Èeské republiky. Tyto zdroje jsou popsány v~podkapitole \ref{sec:data_in}.
+Hledali jsme vhodnou oblast pro~aplikaci lingvistických metod. Jako datový zdroj, který jsme se pokusili sémanticky anotovat, jsme nakonec použili texty èlánkù o~zásazích hasièské záchranné služby a evidenci úpadcù Ministerstva spravedlnosti Èeské republiky. Tyto zdroje jsou popsány v~podkapitole \ref{sec:data_in}.
 
-Zkušenosti, metodika !!!dopsat!!!
-
-
-
-
-
-
-
-
+Z~praktického experimentu (kapitola~\ref{sec:experiment}) vzešlo mnoho zajímavých zkušeností. Zjistili jsme, že kvalita automaticky generovaných lingvistických anotací je dostaèující k~tomu, aby usnadnila extrakci informací z~textu. Tuto extrakci informací  nad~lingvistickými anotacemi je pak možné realizovat pomocí \uv{extrakèních pravidel}, která reprezentují transformaci lingvisticky anotovaného textu na~surová data. Vytvoøení funkèních extrakèních pravidel je se souèasnými programovými prostøedky velmi pracné a málo úèelné. Efektivní návrh a využití extrakèních pravidel by umožnil dotazovací jazyk a jeho interpret nad~lingvistickými anotacemi. V~závìru práce pøedkládáme návrh využít existující dotazovací jazyk aplikace Netgraph a vytvoøit pro~nìj obecné aplikaèní rozhraní. Tento návrh je možné nalézt spolu s~nìkolika dalšími podnìty, které vzešly z~této práce, v~kapitole~\ref{sec:navrhy}.
 
 \section{Motivace}
 \subsection{Vylepšeme své stránky!}
@@ -86,8 +78,8 @@ Zatím jsme mluvili pouze o~Data Miningu v~medicínské doménì. Nasnadì je však myš
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Pøínosy práce}
+Tato práce je urèena pøedevším lidem, kteøí se zabývají technologiemi sémantického webu a anotací zamìøenou na~jeho rozšiøování a postupnou realizaci. Práce mùže být užiteèná lidem, kteøí se zabývají automatickou extrakcí dat z~rùzných zdrojù, mohou se zde doèíst o~možnostech èeské poèítaèové lingvistiky a o~zpùsobu jak ji pøi extrakci dat z~volného textu využít. V~neposlední øadì mùže být práce zajímavá i pro~zkušeného lingvistu. Ten sice neocení zde podávaný zjednodušený úvod do~lingvistické teorie, ale mùže se doèíst o~relativnì novém zpùsobu využití lingvistických technologií, které v~této práci navrhujeme.
 
-Komu? Èím? Srozumitelné pro nelingvistu....
 
 \subsection{Seznámení s lingvistikou a WordNetem}
 Tato práce se snaží pøiblížit možnosti, jak využít dostupné lingvistické nástroje analyzující èeský text (sekce \ref{sec:anot_tools}) pøedevším lidem, kteøí se zabývají extrakcí informací z textu, ale nejen jim. Práce na ètenáøe neklade žádné nároky co se týká lingvistického vzdìlání a sama základní znalosti z lingvistiky podnìcuje (kapitola \ref{sec:ling_anot}). Tìmito znalostmi se snaží pokrýt  požadavky, které klade používání lingvistických nástrojù zde popisovaných. Zbìžné znalosti zde poskytnuté jsou doplnìny odkazy a referencemi na zdroje, kde se ètenáø o dané problematice mùže dozvìdìt více.
@@ -95,24 +87,24 @@ Tato práce se snaží pøiblížit možnosti, jak využít dostupné lingvistické nástroj
 V kapitole \ref{sec:wordnet} se ètenáø seznámí se sémantickým lexikonem WordNet a získá pøedstavu o možnostech jeho využití pøi analýze èeských textù.
 
 \subsection{Souhrn}
-Práce poskytuje základní pøehled v oblasti sémantické anotace a shrnuje myšlenky, které jsou v~jejím pozadí (kapitola \ref{sec:znalosti}). Ètenáø si mùže udìlat pøedstavu o tom, kterými smìry se sémantická anotace ubírá, jaké metody byly využity, s~jakou úspìšností, ve~kterých projektech (oddíl \ref{sec:projekty} a sekce~\ref{sec:rozdelni_anotace}).
+Práce poskytuje základní pøehled v oblasti sémantické anotace a shrnuje myšlenky, které jsou v~jejím pozadí (kapitola \ref{sec:znalosti}). Ètenáø si mùže udìlat pøedstavu o tom, kterými smìry se sémantická anotace ubírá, jaké metody byly využity, s~jakou úspìšností, ve~kterých projektech (oddíl \ref{sec:projekty} a sekce~\ref{sec:rozdelni_stroj_anotace}).
 
-V práci jsou shrnuta doporuèení autorùm webových stánek, jak postupovat pøi tvorbì stránek se sémantickým obsahem (oddíl \ref{sec:autorum}).
+%V práci jsou shrnuta doporuèení autorùm webových stánek, jak postupovat pøi tvorbì stránek se sémantickým obsahem (oddíl \ref{sec:autorum}).
 
 \subsection{Prùzkum}
-Souèástí práce je praktický experiment (kapitola \ref{sec:experiment}) s lingvistickými nástroji: Tools for machine annotation z PDT (viz sekce \ref{sec:anot_tools}), nástroj pro tektogramatickou analýzu èeštiny od Václava Klimeše (sekce \ref{sec:t-nalysis}), èeský WordNet (oddíl \ref{sec:wordnet_cz}) a nìkteré další. Ètenáøi jsou poskytnuty zkušenosti z~praktického používání tìchto nástrojù a z~prací které s jejich použitím souvisely. Tyto zkušenosti se týkají pøedevším dostupnosti, zprovoznìní, výkonnosti, pøínosù a nedostatkù tìchto nástrojù.
-Postup experimentu se v jednotlivých fázích snaží kopírovat skuteèné akce, které by bylo nutné provést v opravdovém projektu zamìøeném na sémantickou anotaci. V práci tak vzniká jednoduchá základní analýza tohoto typu projektù. Ve skuteèném projektu pak bude možné ji pøinejmenším jako inspiraci využít.
+Souèástí práce je praktický experiment (kapitola \ref{sec:experiment}) s lingvistickými nástroji: Tools for machine annotation z PDT (viz sekce \ref{sec:anot_tools}), nástroj pro tektogramatickou analýzu èeštiny od Václava Klimeše (sekce \ref{sec:t-nalysis}), èeský WordNet (oddíl \ref{sec:wordnet_cz}) a nìkteré další. Ètenáøi jsou poskytnuty zkušenosti z~praktického používání tìchto nástrojù a z~prací které s jejich použitím souvisely. Tyto zkušenosti se týkají pøedevším dostupnosti, zprovoznìní, výkonnosti, výhod a nìkterých nedostatkù tìchto nástrojù.
+Postup experimentu se v~jednotlivých fázích snaží kopírovat skuteèné akce, které by bylo nutné provést v~opravdovém projektu zamìøeném na sémantickou anotaci (oddíl \ref{sec:osnaova_praci}). V~práci tak vzniká jednoduchá základní analýza tohoto typu projektù. Ve~skuteèném projektu pak bude možné ji pøinejmenším jako inspiraci využít.
 
 \subsection{Návrhy}
-V práci je navržena metodika, pro extrakci informací z~pøirozeného textu pomocí zmínìných lingvistických nástrojù (sekce \ref{sec:osnaova_praci}). Je zde navržený jednoduchý dotazovací jazyk pro lingvistické anotace (oddíl \ref{sec:tree_query}), struèný návrh indukce vzorù (oddíl \ref{sec:patern_induction}) a zamyšlení nad možnostmi lingvistické anotace pro indexaci dokumentù (sekce \ref{sec:tree_indexing}).
+V práci je navržena metodika, pro extrakci informací z~pøirozeného textu pomocí zmínìných lingvistických nástrojù (sekce \ref{sec:osnaova_praci}). Je zde pøedstaven dotazovací jazyk pro~lingvistické anotace (oddíl \ref{sec:tree_query}) spolu s~návrhem realize jeho programového rozhraní. Pøedstaven je struèný návrh indukce vzorù (oddíl \ref{sec:patern_induction}) a zamyšlení nad možnostmi lingvistické anotace pro~indexaci dokumentù (sekce \ref{sec:tree_indexing}).
 
 
 \subsection{Teorie}
-V oddíle \ref{sec:teorie} je proveden pokus o~teoretický pøínos v oblasti sémantické anotace. Oddíl \ref{sec:ling_knowledge} se zamýšlí mad možnými pøínosy a vztahem mezi poèítaèovou lingvistikou a formální reprezentací znalostí.
+V oddíle \ref{sec:teorie} je proveden pokus o~teoretický pøínos v oblasti sémantické anotace. Oddíl \ref{sec:ling_knowledge} se krátce zamýšlí nad vztahem mezi poèítaèovou lingvistikou a formální reprezentací znalostí.
 
 \section{Sémantický web}
 \label{sec:sem_web}
-V roce 2001 napsal Tim Berners-Lee, tvùrce souèasného webu a øeditel Konsorcia W3C spolu s dalšími autory velmi známý èlánek The Semantic Web \cite{the_sem_web} (volný èeský pøeklad je k~dispozici napøíklad v~\cite{SemWeb_Matulik}). V tomto èlánku je popsána lákavá pøedstava svìta, kde všechny nepøíjemné problémy spojené se zaøizováním bìžných životních problémù, jako je napøíklad návštìva lékaøe, pomáhají vyøídit softwarový agenti. Pomáhají je vyøídit pøedevším tím, že naleznou a zkombinují všechny dùležité relevantní informace, které jsou potøeba. Napøíklad najdou lékaøe, který se specializuje na daný druh zdravotních potíží, adresu a otvírací dobu jeho ordinace, dopravní dostupnost tohoto místa atd.
+V roce 2001 napsal Tim Berners-Lee, tvùrce souèasného webu a øeditel Konsorcia W3C spolu s dalšími autory velmi známý èlánek The Semantic Web~\cite{the_sem_web} (volný èeský pøeklad je k~dispozici napøíklad v~\cite{SemWeb_Matulik}). V tomto èlánku je popsána lákavá pøedstava svìta, kde všechny nepøíjemné problémy spojené se zaøizováním bìžných životních problémù, jako je napøíklad návštìva lékaøe, pomáhají vyøídit softwarový agenti. Pomáhají je vyøídit pøedevším tím, že naleznou a zkombinují všechny dùležité relevantní informace, které jsou potøeba. Napøíklad najdou lékaøe, který se specializuje na daný druh zdravotních potíží, adresu a otvírací dobu jeho ordinace, dopravní dostupnost tohoto místa atd.
 
 Vìtšina tìchto informací je již dnes na webu dostupná, avšak i zkušeného uživatele internetu stojí jejich nalezení nezanedbatelný èas a energii. Navíc nalezení informací je teprve první èást problému. To, jakým zpùsobem je zkombinovat a vyhodnotit, je èást druhá. Avšak vyøešení tohoto druhého problému není pro souèasný software žádnou utopií. Napøíklad nalézt dopravní spojení na adresu lékaøovy ordinace v~dnešní dobì rozhodnì nepovažujeme za programátorsky neøešitelný problém.
 
