@@ -24,7 +24,7 @@
 
 
 \chapter{Úvod}
-Tato práce se zabývá sémantickou anotací webovských zdrojù. Slovo anotace znamená pøipojování poznámek èi vysvìtlivek. V sémantické anotaci, tedy v sémantických poznámkách èi vysvìtlivkách, se snažíme o~zachycení významu (sémantiky) anotovaného zdroje. Tuto sémantiku chceme vyjádøit formálnì, tak aby byla strojovì (softwarovì) zpracovatelná a pøispìla tak k~vytvoøení takzvaného \uv{sémantického webu}, který je podrobnìji popsán v~oddíle \ref{sec:sem_web}. Pøi této anotaci se zamìøujeme na~zdroje webu -- pøedevším web-stránky, nicménì ukážeme, že sémantická anotace má stejný smysl i v~jiných oblastech. Pøíklad takové oblasti je možné najít hned v~podkapitole \ref{sec:data_mine}.
+Tato práce se zabývá sémantickou anotací webovských zdrojù. Slovo anotace znamená pøipojování poznámek èi vysvìtlivek. V sémantické anotaci, tedy v sémantických poznámkách èi vysvìtlivkách, se snažíme o~zachycení významu (sémantiky) anotovaného zdroje. Tuto sémantiku chceme vyjádøit formálnì, tak aby byla strojovì (softwarovì) zpracovatelná a pøispìla tak k~vytvoøení takzvaného \uv{sémantického webu}, který je podrobnìji popsán v~oddíle \ref{sec:sem_web}. Pøi této anotaci se zamìøujeme na~zdroje webu -- pøedevším web-stránky\footnote{Zajímavá by byla sémantická anotace e-mailù. Lákavá je už jednoduchá pøedstava, kdy se datum akce, na~kterou pøišla pozvánka, automaticky uloží do~kalendáøe.}, nicménì ukážeme, že sémantická anotace má stejný smysl i v~jiných oblastech. Pøíklad takové oblasti je možné najít hned v~podkapitole \ref{sec:data_mine}.
 
 Tato práce má nìkolik cílù. Nejprve jsme se pokusili zmapovat oblast sémantické anotace jako takové. Zjistili jsme, že pole sémantické anotace je široké a že na tuto èinnost mùžeme nahlížet rùznì. Na nejpovrchnìjší úrovni zkoumání jsme sémantickou anotaci rozdìlili na~takzvanou \emph{anotaci autorskou} a \emph{anotaci dodateènou}. Rozdíl mezi tìmito pohledy na anotaci je velký, avšak oba pøístupy mají mnoho spoleèného a dá se øíci, že se vzájemnì doplòují.
 
@@ -35,7 +35,7 @@ Tvoøit stránku ve~dvou rùzných se mùže zdát nároèné, ale nemusí tomu tak být. St
 
 
 
-\emph{Dodateènou anotací} budeme oznaèovat proces, kdy web-stránky (pøípadnì i jiné zdroje)  už existují a my se je pokoušíme anotovat dodateènì. V~tomto pøípadì je vìtšinou autor anotace jiný než majitel pùvodní stránky. Hotové anotace se v~pùvodním zdroji neobjeví, nejsou urèeny k~pøímé publikaci (která by se pravdìpodobnì musela právnì ošetøit autorskou smlouvu). Primární cíl této anotace je jiný. Snažíme se ze~zdroje získat co nejvíce sémantických dat, která jsou urèená pro další zpracování. Napøíklad, mùžeme chtít vytvoøit speciální vyhledávaè pracovních nabídek, který shromažïuje data o~nabídkách práce z~velkého množství rùzných web-stránek. Právì takový projekt v souèasné dobì vzniká na Slovensku pod názvem NAZOU\footnote{http://nazou.f\/iit.stuba.sk}. Dodateèná sémantická anotace se velmi podobá extrakci informací z webu (web data mining, web content mining), nejvìtší dùraz je zde kladen na~automatizaci celého procesu a na robustnost extrakèní metody k~rùzným typùm web-stránek. Navíc oproti obyèejné extrakci informací se zde snažíme využít pokroèilé metody pro formální reprezentaci znalostí.
+\emph{Dodateènou anotací} budeme oznaèovat proces, kdy web-stránky (pøípadnì i jiné zdroje) už existují a my se je pokoušíme anotovat dodateènì. V~tomto pøípadì je vìtšinou autor anotace jiný než majitel pùvodní stránky. Hotové anotace se v~pùvodním zdroji neobjeví, nejsou urèeny k~pøímé publikaci (která by se pravdìpodobnì musela právnì ošetøit autorskou smlouvu). Primární cíl této anotace je jiný. Snažíme se ze~zdroje získat co nejvíce sémantických dat, která jsou urèená pro další zpracování. Napøíklad, mùžeme chtít vytvoøit speciální vyhledávaè pracovních nabídek, který shromažïuje data o~nabídkách práce z~velkého množství rùzných web-stránek. Právì takový projekt v souèasné dobì vzniká na Slovensku pod názvem NAZOU\footnote{http://nazou.f\/iit.stuba.sk}. Dodateèná sémantická anotace se velmi podobá extrakci informací z webu (web data mining, web content mining), nejvìtší dùraz je zde kladen na~automatizaci celého procesu a na robustnost extrakèní metody k~rùzným typùm web-stránek. Navíc oproti obyèejné extrakci informací se zde snažíme využít pokroèilé metody pro formální reprezentaci znalostí.
 
 Poté, co jsme takto sémantickou anotaci rozdìlili, zkoumáme obì oblasti víceménì oddìlenì. Autorskou anotací se zabýváme z~hlediska možných standardù a formalismù pro~reprezentaci znalostí. Podrobnìji rozebíráme nìkteré uznávané ontologie pro~popis dat frekventovanìjších domén.
 
@@ -100,7 +100,7 @@ V práci je navržena metodika, pro extrakci informací z~pøirozeného textu pomocí 
 
 
 \subsection{Teorie}
-V oddíle \ref{sec:teorie} je proveden pokus o~teoretický pøínos v oblasti sémantické anotace. Oddíl \ref{sec:ling_knowledge} se krátce zamýšlí nad vztahem mezi poèítaèovou lingvistikou a formální reprezentací znalostí.
+V oddíle \ref{sec:teorie} je proveden pokus o~teoretický pøínos v oblasti sémantické anotace. Také se zde krátce zamýšlíme nad~vztahem mezi poèítaèovou lingvistikou a formální reprezentací znalostí.
 
 \section{Sémantický web}
 \label{sec:sem_web}

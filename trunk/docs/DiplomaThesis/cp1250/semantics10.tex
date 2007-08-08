@@ -10,9 +10,49 @@ Pro pøesnost ještì doplòme, že anotací jako hotovým dílem rozumíme výsledek, výs
 
 \section{Reprezentace anotací}
 \label{sec:reprezntace_anotaci}
-RDFa, HTML-A \cite{manual_anot}
+Pokud chceme vložit sémantické anotace na~web-stránku, máme k~tomu nìkolik možností.
+
+V~práci \cite{manual_anot} mùžeme nalézt jednoduchý návrh formalismu \emph{HTML-A}, jak vložit sémantické anotace do~HTML kódu stránky. Tento návrh spoèívá v~rozšíøení množiny atributù HTML tag-u \uv{A} o~atribut \emph{onto}.
+
+Podobným návrhem je RDFa\footnote{http://www.w3.org/TR/xhtml-rdfa-primer/} formalismus pro~vkládání RDF anotací do~XHTML stránek. Tento návrh spoèívá v~rozšíøení množiny atributù nìkterých HTML tag-ù. Pomocí nových atributù je pak možné specifikovat RDF zdroj, ke kterému se vztahuje obsah daného tagu. Následuje pøíklad sémantické anotace data pomocí tag-u \emph{span} role \emph{dc:date}.
+
+\begin{center}
+\verb+<span property="dc:date" datatype="xsd:date">2007-01-02</span>+
+\end{center}
+
+V~poslední dobì však mùžeme sémantické anotace na~stránkách nejèastìji potkat v~formì odkazu na~externí RDF soubor, který obsahuje všechny relevantní sémantické informace k~dané stránce. Tento odkaz má èasto titulek \uv{RDF/XML Metadata} pøípadnì \uv{RDF feed} (podobnì jako RSS feed) a bývá opatøen obrázkem loga RDF. Tímto zpùsobem mùžeme spojit sémantické anotace se zdrojem v~libovolném formátu.
+
+Bohužel zatím není mnoho softwarových nástrojù, které by sémantické anotace na~stránkách vyhodnocovali.
+
 \section{Uznávané ontologie}
 \label{sec:ontoindex}
+Vyjmenujeme nyní nìkolik známých ontologií, èasto používaných pro~reprezentaci znalostí na~webu.
+\begin{description}
+  \item[FOAF] -- The Friend of a Friend umožòuje zveøejnit osobní informace.
+  \\http://www.foaf-project.org/ 
+  \item[vCard] -- Formát pro~kontaktní informace podle RFC 2426
+  \\http://www.w3.org/TR/vcard-rdf
+  \item[iCalendar] -- Formát pro~položky kalendáøe
+  \\http://www.w3.org/TR/rdfcal
+  \item[Dublin Core] -- Velmi uznávaný slovník, témìø pro cokoliv.
+  \\http://dublincore.org/, http://www.ics.muni.cz/dublin\_core/
+  \item[SUMO] -- Ontologie obecných konceptù vytvoøená na základì WordNetu.
+  \\http://www.ontologyportal.org/
+  
+\end{description}
+
+
+%\begin{center}
+%\begin{tabular}{p{8cm}|l}
+%  název a popis & odkaz podrobnosti \\[2pt]
+%  \hline
+%   -  & \footnotesize \\[4pt]
+%    & \footnotesize  \\[4pt]
+%   - Formát pro~položky kalendáøe & \footnotesize
+%\end{tabular}
+%\end{center}
+
+
 
 %\section{Autorùm Web-stránek}
 %\label{sec:autorum}
@@ -345,30 +385,36 @@ Základem k vyøešení tìchto otázek by byla formální specifikace pojmu lingvistick
 %Kapitola \ref{sec:ling_knowledge}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Lingvistika a znalostní inženýrství}
-\label{sec:ling_knowledge}
+\subsection{Lingvistika a znalostní inženýrství}
+%\label{sec:ling_knowledge}
+Automatická lingvistická anotace a strojové metody vyhodnocování pøirozeného jazyka vùbec se potýkají s~problémy, které plynou z~faktu, že lidé pøi~svém vyjadøování používají mozek -- obrovskou zásobárnu znalostí. V~lidských formulací je mnoho informací je vyjádøeno implicitnì. Tyto implicitní informace si mozek na~základì explicitního tvrzení dokáže odvodit. Napøíklad v~práci \cite{platek_cz_pc} se mùžeme doèíst o~tom, že èlovìk využívá pøi~interpretaci textu svých vìcných znalostí, nevystaèí pouze s~pravidly jazyka. Tato práce pøedkládá i návrh øešení tohoto problému v~poèítaèových systémech. Pokusíme se nyní tuto problematiku doplnit o nìkolik poznámek z~oblasti formální reprezentace znalostí.
 
-\subsection{Nejednoznaènost pøi lingvistické anotaci}
-marketa lopatkova: \cite{marketa_lopatkova}
+\subsubsection{Nejednoznaènost pøi lingvistické anotaci}
+Nejednoznaènosti v~textech jsou velmi známým jevem pro vìtšinu lingvistù. Popis tìchto jevù mùžeme nalézt v~\cite{marketa_lopatkova} i \cite{platek_cz_pc}. Tyto nejednoznaènosti jsou v~zásadì dvou druhù:
+\begin{itemize}
+  \item Chybìjí nám dodateèné informace, potøebujeme znát kontext tvrzení.
+  \item Nejednoznaèný je už samotný zápis, ani èlovìk nedokáže správný význam rozpoznat.
+\end{itemize}
 
-Potøebujeme další znalosti, \emph{znát} kontext. Mnoho informací je vyjádøeno implicitnì.
-\\u pøíkladù doplnit zdroj...
-
+Nashromáždili jsme nìkolik pøíkladù nejednoznaèných tvrzení:
 \begin{quote}
-Banky snižují úroky z ekonomických dùvodù.\\
-Banky snižují úroky z krátkodobých pùjèek.
-
 Ženu ženu.
 
 I saw a man with a telescope.
 
 Vèera jsem chytil tlouštì na višni.
+
+Banky snižují úroky z ekonomických dùvodù.\\
+Banky snižují úroky z krátkodobých pùjèek.
 \end{quote}
 
-\subsection{Znalosti formulované v pøirozeném jazyce}
+Poslední dvì tvrzení jsou nejednoznaèná z~hlediska automatické lingvistické analýzy. Bez~hlubšího porozumìní slovùm \emph{dùvod} a \emph{úvìr} není možné urèit, jestli je èást vìty zaèínající pøedložkou \uv{z} závislá na~slovì \emph{úroky} nebo na~slovì \emph{snižují}.
+
+\subsubsection{Znalosti formulované v pøirozeném jazyce}
 %Pri hledani nejake vety k ukazkove anotaci jsem narazil na tuhle: (je to z prihlasky na DS)
 
-Existuje více typù vìt i zdrojù - provést kategorizaci.
+Pokud se zamyslíme nad sémantickou anotací textù pøirozeného jazyka obecnì. Brzy dojdeme k~tomu, že existuje více typù vìt. %i zdrojù - provést kategorizaci.
+Nìkteré se dají sémanticky anotovat snadno jiné vùbec ne. Opìt pøedkládáme nìkolik pøíkladù. 
 
 \begin{quote}
 Žena se stane matkou, když porodí dítì.
@@ -391,19 +437,17 @@ Jak anotovat takovou vìtu? Jaká je její sémantika?
 
 Máme nìkolik možností.
 \begin{itemize}
-\item TBox - tvrzení o pojmech.
-\item Zapojit promìnné, které probíhají prvky domény a vytvoøit na nì restrikce.
-\item Nebo se na vìtu dívat v kontextu jazyka formuláøù a brát ji jako obsah jedné konkrétní instance formuláøe.
+\item Vytvoøíme TBox - obecnì platné tvrzení o pojmech.
+\item Zapojíme promìnné, které probíhají prvky domény a vytvoøíme pro~nì restrikce.
+\item Nebo se na vìtu mùžeme dívat v~kontextu jazyka formuláøù a brát ji jako obsah jedné konkrétní instance formuláøe.
 \end{itemize}
 
 Co pøináší jaké výhody?
 
 %Vznikne nejaky Abox? Nebo v anotaci pouzijeme nejake promenne pro individua. Nebo budeme anotovat pouze pomoci nazvu trid a instance nejakym zpusobem vynechame?
 
-\subsection{Rozdíl mezi konkrétním a abstraktním}
-Tøídy X instance, pojmy X individua.
-
-Tvrzení se èasto dají chápat jako obecná z jednoho pohledu a konkrétní z druhého.
+\subsubsection{Rozdíl mezi konkrétním a abstraktním}
+Tvrzení se èasto dají chápat jako obecná z jednoho pohledu a konkrétní z druhého. Napøíklad
 
 \begin{center}
 Banky snižují úroky z ekonomických dùvodù.
