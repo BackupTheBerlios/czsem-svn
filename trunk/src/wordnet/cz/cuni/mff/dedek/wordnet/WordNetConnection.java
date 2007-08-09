@@ -4,8 +4,11 @@
 package cz.cuni.mff.dedek.wordnet;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.Authenticator;
 import java.net.PasswordAuthentication;
@@ -18,6 +21,7 @@ import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.X509TrustManager;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathExpressionException;
 
 import org.json.*;
 import org.w3c.dom.Element;
@@ -33,8 +37,6 @@ public class WordNetConnection extends Authenticator
 	private String server_address;
 	private String dictionary_code;
 	
-	private SubtreeXMLWriter xml_writer;
-
 	
 	/**
 	 * Standard constructor
@@ -137,7 +139,15 @@ public class WordNetConnection extends Authenticator
 			System.out.println(line);
 
 			JSONTokener jt = new JSONTokener(line);
-			System.out.println("xml: " + jt.nextValue().toString());
+			String xml_str =  jt.nextValue().toString();
+
+			System.out.println("xml:");
+			System.out.println(xml_str);
+			
+			OutputStreamWriter w = new OutputStreamWriter(new FileOutputStream(new File(synsetID + ".xml")), "UTF-8");
+			w.write("<?xml version=\"1.0\"?>\n");
+			w.write(xml_str);
+			w.close();
 		}
 
 		br.close();		
@@ -146,7 +156,7 @@ public class WordNetConnection extends Authenticator
 	
 	public void saveSebtree(String synsetID, String file_name) throws IOException, JSONException, ParserConfigurationException
 	{
-		xml_writer = new SubtreeXMLWriter();
+		SubtreeXMLWriter xml_writer = new SubtreeXMLWriter();
 		saveSebtree(synsetID, (Element) null);
 		xml_writer.seveToFile(file_name);
 	}
@@ -173,7 +183,7 @@ public class WordNetConnection extends Authenticator
 				
 				System.out.println();				
 				saveSebtree(jo.getString("id"),
-						xml_writer.appendNode(jo.getString("val"), jo.getString("id"), dest));				
+						SubtreeXMLWriter.appendNode(jo.getString("val"), jo.getString("id"), dest));				
 			}
 		}
 
@@ -206,6 +216,20 @@ public class WordNetConnection extends Authenticator
 		}
 
 		br.close();		
+	}
+	
+	public void findIntersection(String synsetID1, String synsetID2) throws ParserConfigurationException, IOException, JSONException, XPathExpressionException
+	{
+		SubtreeXMLWriter xml_writer1 = new SubtreeXMLWriter();
+		SubtreeXMLWriter xml_writer2 = new SubtreeXMLWriter();
+
+		saveSebtree(synsetID1, xml_writer1.getRootElement());
+		saveSebtree(synsetID2, xml_writer2.getRootElement());
+		
+		xml_writer1.seveToFile(synsetID1+"_subtree.xml");
+		xml_writer2.seveToFile(synsetID2+"_subtree.xml");
+
+		SubtreeXMLIntersection.findIntersection(xml_writer1.getRootElement(), xml_writer2.getRootElement());
 	}
 	
 	

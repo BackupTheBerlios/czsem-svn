@@ -8,6 +8,7 @@ import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathExpressionException;
 
 import org.json.JSONException;
 
@@ -34,10 +35,16 @@ public class WordNetApp
 			WordNetConnection connection1 = new WordNetConnection(UserName, xorCript(Password, Key), ServerAddress, DictionaryCode);
 			
 //			connection1.init();
-//			connection1.query("hasiè");
-//			connection1.loadSynset("ENG20-09444162-n");
+//			connection1.query("autobus");
+			connection1.loadSynset("ENG20-09444162-n"); //hasiè
+//			connection1.loadSynset("ENG20-03553164-n"); //kamion
+//			connection1.loadSynset("ENG20-02820094-n"); //autobus
 //			connection1.loadSebtree("ENG20-09444162-n");
-			connection1.saveSebtree("ENG20-09444162-n", "subtree1.xml");
+//			connection1.saveSebtree("ENG20-09444162-n", "subtree1.xml");
+
+			if (false)
+				connection1.findIntersection("ENG20-03553164-n", "ENG20-02820094-n");
+			
 			
 			
 		} catch (KeyManagementException e) {
@@ -50,6 +57,9 @@ public class WordNetApp
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (XPathExpressionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ParserConfigurationException e) {

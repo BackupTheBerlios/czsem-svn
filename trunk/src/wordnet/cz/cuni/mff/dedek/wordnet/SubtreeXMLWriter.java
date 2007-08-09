@@ -53,12 +53,14 @@ public class SubtreeXMLWriter
 		serializer.serialize(xml_doc);		
 	}
 	
-	public Element appendNode(String value, String id, Element dest)
+	public Element getRootElement()
 	{
-		if (dest == null)
-		{
-			dest = xml_doc.getDocumentElement();
-		}
+		return xml_doc.getDocumentElement();		
+	}
+	
+	public static Element appendNode(String value, String id, Element dest)
+	{
+		Document xml_doc = dest.getOwnerDocument();
 		
 		Element node = (Element) xml_doc.createElement("TreeNode");
 		
