@@ -7,7 +7,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.net.*;
+import java.net.Authenticator;
+import java.net.PasswordAuthentication;
+import java.net.URL;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
@@ -15,12 +17,10 @@ import java.security.cert.X509Certificate;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.X509TrustManager;
+import javax.xml.parsers.ParserConfigurationException;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONString;
-import org.json.JSONTokener;
+import org.json.*;
+import org.w3c.dom.Element;
 
 /**
  * @author dedej1am
@@ -32,6 +32,9 @@ public class WordNetConnection extends Authenticator
 	private char[] password;
 	private String server_address;
 	private String dictionary_code;
+	
+	private SubtreeXMLWriter xml_writer;
+
 	
 	/**
 	 * Standard constructor
@@ -99,33 +102,6 @@ public class WordNetConnection extends Authenticator
 
 		br.close();
 	}
-
-	/**
-	 * coverts to utf8, example: hasiè -> hasi%E8
-	 * @param orig - original string 
-	 * @return orig converted to utf8 
-	 */
-	private static String strToUtf8(String orig)
-	{
-		try
-		{
-			byte [] arr = orig.getBytes("UTF-8");
-
-			String ret = "";
-
-			for (int a=0; a<arr.length; a++)
-			{
-				ret += "%" + Integer.toHexString(arr[a] & 0xFF);
-			}
-
-			return ret;
-
-		} 
-		catch (UnsupportedEncodingException e)
-		{
-			return orig;
-		}		
-	}
 	
 	public void query(String search_query) throws IOException, JSONException
 	{
@@ -159,35 +135,108 @@ public class WordNetConnection extends Authenticator
 		while ((line = br.readLine()) != null)
 		{
 			System.out.println(line);
-//			JSONObject jo = new JSONObject(line);
-			
+
 			JSONTokener jt = new JSONTokener(line);
-			
-			
-			
 			System.out.println("xml: " + jt.nextValue().toString());
-/*			JSONObject jo = new JSONObject();
-			jo.
-			
-			System.out.println("xml: " + jo.toString());
-			
-/*			JSONArray ja = new JSONArray(line);
-			
-			for (int a=0; a<ja.length(); a++)
-			{
-				System.out.println("value: " + ja.getJSONObject(a).getString("value"));
-				System.out.println("label: " + ja.getJSONObject(a).getString("label"));				
-			}
-			*/
 		}
 
 		br.close();		
 	}
 
 	
+	public void saveSebtree(String synsetID, String file_name) throws IOException, JSONException, ParserConfigurationException
+	{
+		xml_writer = new SubtreeXMLWriter();
+		saveSebtree(synsetID, (Element) null);
+		xml_writer.seveToFile(file_name);
+	}
+
+	public void saveSebtree(String synsetID, Element dest) throws IOException, JSONException, ParserConfigurationException
+	{
+        URL url = new URL(getDictionaryAddress() + "?action=subtree&query=" + synsetID);
+        BufferedReader br = new BufferedReader (new InputStreamReader(url.openStream(), "UTF8"));
+             		
+		String line;
+		while ((line = br.readLine()) != null)
+		{
+			System.out.println(line);			
+			
+			JSONArray ja = new JSONArray(line);
+						
+			for (int a=0; a<ja.length(); a++)
+			{				
+				JSONObject jo = ja.getJSONObject(a);
+			
+				System.out.println("val: " + jo.getString("val"));
+				System.out.println("id: " + jo.getString("id"));
+				System.out.println("parent: " + jo.getString("parent"));
+				
+				System.out.println();				
+				saveSebtree(jo.getString("id"),
+						xml_writer.appendNode(jo.getString("val"), jo.getString("id"), dest));				
+			}
+		}
+
+		br.close();				
+	}
+	
+	public void loadSebtree(String synsetID) throws IOException, JSONException
+	{
+        URL url = new URL(getDictionaryAddress() + "?action=subtree&query=" + synsetID);
+        BufferedReader br = new BufferedReader (new InputStreamReader(url.openStream(), "UTF8"));
+             		
+		String line;
+		while ((line = br.readLine()) != null)
+		{
+			System.out.println(line);			
+			
+			JSONArray ja = new JSONArray(line);
+						
+			for (int a=0; a<ja.length(); a++)
+			{				
+				JSONObject jo = ja.getJSONObject(a);
+			
+				System.out.println("val: " + jo.getString("val"));
+				System.out.println("id: " + jo.getString("id"));
+				System.out.println("parent: " + jo.getString("parent"));
+
+				System.out.println();				
+				loadSebtree(jo.getString("id"));				
+			}
+		}
+
+		br.close();		
+	}
 	
 	
 	
+	
+	/**
+	 * coverts to utf8, example: hasiè -> hasi%E8
+	 * @param orig - original string 
+	 * @return orig converted to utf8 
+	 */
+	private static String strToUtf8(String orig)
+	{
+		try
+		{
+			byte [] arr = orig.getBytes("UTF-8");
+
+			String ret = "";
+
+			for (int a=0; a<arr.length; a++)
+			{
+				ret += "%" + Integer.toHexString(arr[a] & 0xFF);
+			}
+
+			return ret;
+
+		} 
+		catch (UnsupportedEncodingException e)
+		{
+			return orig;
+		}		
+	}
 	
     /**
      * SSL autentification
