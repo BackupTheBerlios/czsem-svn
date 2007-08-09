@@ -20,6 +20,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONString;
+import org.json.JSONTokener;
 
 /**
  * @author dedej1am
@@ -157,8 +158,17 @@ public class WordNetConnection extends Authenticator
 		String line;
 		while ((line = br.readLine()) != null)
 		{
-			System.out.println(line);	
-			JSONObject jo = new JSONObject(line);
+			System.out.println(line);
+//			JSONObject jo = new JSONObject(line);
+			
+			JSONTokener jt = new JSONTokener(line);
+			
+			
+			
+			System.out.println("xml: " + jt.nextValue().toString());
+/*			JSONObject jo = new JSONObject();
+			jo.
+			
 			System.out.println("xml: " + jo.toString());
 			
 /*			JSONArray ja = new JSONArray(line);
