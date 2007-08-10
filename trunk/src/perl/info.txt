@@ -1,31 +1,31 @@
-DIPLOMOVµ PRµCE
-Matematicko-fyzik ln¡ fakulta
+DIPLOMOVÁ PRÁCE
+Matematicko-fyzikální fakulta
 Univerzita Karlova v Praze
-S‚mantick  anotace dat z webovskìch zdroj…
-Jan DØdek
+Sémantická anotace dat z webovskıch zdrojù
+Jan Dìdek
 http://czsem.berlios.de/
 ________________________________________________________________________________
 POPIS BTRED MAKER
 
 
-1) SpuçtØn¡ makra
-Btred makra se spouçtØj¡ pı¡kazem: 
-btred -I JMNO_SOUBORU_MAKRA SEZNAM_VSTUPNÖCH_SOUBORŞ
-pı¡padnØ 
-btred -I JMNO_SOUBORU_MAKRA -l SOUBOR_SE_SEZNAM_VSTUPNÖCH_SOUBORŞ
+1) Spuštìní makra
+Btred makra se spouštìjí pøíkazem: 
+btred -I JMÉNO_SOUBORU_MAKRA SEZNAM_VSTUPNÍCH_SOUBORÙ
+pøípadnì 
+btred -I JMÉNO_SOUBORU_MAKRA -l SOUBOR_SE_SEZNAM_VSTUPNÍCH_SOUBORÙ
 
-napı¡klad:
+napøíklad:
 btred -I extract_rule.pl *.t.pls.gz
 btred -I extract_rule.pl -l data/hasici/hasici_t_pls.fl
 
 
  
-2) FrekvenŸn¡ analìza
-Makra freq.btred a freq_verb.btred se pou§¡vaj¡ pro frekvenŸn¡ analìzy.
-Cel  frekvenŸn¡ analìza se pouçt¡ bash skripty data/hasici/make_freq a data/upadci/make_freq  
+2) Frekvenèní analıza
+Makra freq.btred a freq_verb.btred se pouívají pro frekvenèní analızy.
+Celá frekvenèní analıza se pouští bash skripty data/hasici/make_freq a data/upadci/make_freq  
 
 
 
-3) ExtrakŸn¡ pravidla
-Soubor extract_rule.pl obsahuje rozs hlejç¡ makro, ve kter‚m jsme se pokusili extrahovat nØkter  data z korpusu hasiŸskìch zpr v.
-Pro testov n¡ tohoto makra doporuŸujeme Eclipse a plugin pro Perl. 
+3) Extrakèní pravidla
+Soubor extract_rule.pl obsahuje rozsáhlejší makro, ve kterém jsme se pokusili extrahovat nìkterá data z korpusu hasièskıch zpráv.
+Pro testování tohoto makra doporuèujeme Eclipse a plugin pro Perl. 

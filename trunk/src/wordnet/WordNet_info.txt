@@ -1,19 +1,19 @@
-DIPLOMOVµ PRµCE
-Matematicko-fyzik ln¡ fakulta
+DIPLOMOVÁ PRÁCE
+Matematicko-fyzikální fakulta
 Univerzita Karlova v Praze
-S‚mantick  anotace dat z webovskìch zdroj…
-Jan DØdek
+Sémantická anotace dat z webovskıch zdrojù
+Jan Dìdek
 http://czsem.berlios.de/
 ________________________________________________________________________________
-POPIS SOFTWAROVHO MODULU PRO PRµCI S DATABµZÖ WORDNET
+POPIS SOFTWAROVÉHO MODULU PRO PRÁCI S DATABÁZÍ WORDNET
 
-Pro testov n¡ datab ze WordNet jsme vytvoıili jednoduchou Java aplikaci. Pro naçe testov n¡ jsme nepotıebovali § dn‚ u§ivatelsk‚ rozhran¡, kter‚ v t‚to verzi aplikaci chyb¡. Aktualizujte pros¡m tuto aplikaci z SVN repository, nov  verze u§ pravdØpodobnØ toto rozhran¡ m¡t bude.
+Pro testování databáze WordNet jsme vytvoøili jednoduchou Java aplikaci. Pro naše testování jsme nepotøebovali ádné uivatelské rozhraní, které v této verzi aplikaci chybí. Aktualizujte prosím tuto aplikaci z SVN repository, nová verze u pravdìpodobnì toto rozhraní mít bude.
 
-Aplikace obsahuje dva bal¡Ÿky: cz.cuni.mff.dedek.wordnet a org.json.
+Aplikace obsahuje dva balíèky: cz.cuni.mff.dedek.wordnet a org.json.
 
-Bal¡Ÿek org.json je bezezmØn pıevzarì http://json.org/. Slou§¡ pro pr ci JSON rozhran¡m WordNetu.
+Balíèek org.json je bezezmìn pøevzarı http://json.org/. Slouí pro práci JSON rozhraním WordNetu.
 
-Bal¡Ÿek cz.cuni.mff.dedek.wordnet obsahuje naçi testovac¡ aplikaci. K £spØçn‚mu fungov n¡ aplikace je nutn‚ pıed pıekladem nastavit u§ivatelsk‚ jm‚no a heslo v promØnnìch WordNetApp.UserName a WordNetApp.Password. 
+Balíèek cz.cuni.mff.dedek.wordnet obsahuje naši testovací aplikaci. K úspìšnému fungování aplikace je nutné pøed pøekladem nastavit uivatelské jméno a heslo v promìnnıch WordNetApp.UserName a WordNetApp.Password. 
 
 
-Pro otestov n¡ aplikace doporuŸujeme Eclipse. 
+Pro otestování aplikace doporuèujeme Eclipse. 
