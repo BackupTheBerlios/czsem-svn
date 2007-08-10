@@ -1,4 +1,14 @@
-﻿Instalace czsem (diplomová práce Jan Dědek)
+DIPLOMOVÁ PRÁCE
+Matematicko-fyzikální fakulta
+Univerzita Karlova v Praze
+Sémantická anotace dat z webovských zdrojů
+Jan Dědek
+http://czsem.berlios.de/
+________________________________________________________________________________
+POKYNY K INSTALACI KOMPONENT
+
+Softwarová část této práce je určená pro operační systém LINUX.
+Pro fungování všech softwarových komponent je nutné do systému nainstalovat programové nástroje třetích stran. Tento soubor obsahuje návod, jak tyto programové nástroje získat a nainstalovat.   
 
 ________________________________________________________________________________
 1) Stažení SVN repository

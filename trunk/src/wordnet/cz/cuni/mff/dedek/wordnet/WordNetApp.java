@@ -21,7 +21,7 @@ public class WordNetApp
 {
 	private static char Key = '*'; 
 	private static String UserName = "jdedek"; 
-	private static String Password = "NX_BKA";
+	private static String Password = ""; //please insert right password
 	private static String ServerAddress = "https://apollo.fi.muni.cz:9001";
 	private static String DictionaryCode = "wncz";
 
@@ -36,7 +36,7 @@ public class WordNetApp
 			
 //			connection1.init();
 //			connection1.query("autobus");
-			connection1.loadSynset("ENG20-09444162-n"); //hasiè
+			connection1.loadSynset("ENG20-09444162-n"); //hasiR
 //			connection1.loadSynset("ENG20-03553164-n"); //kamion
 //			connection1.loadSynset("ENG20-02820094-n"); //autobus
 //			connection1.loadSebtree("ENG20-09444162-n");

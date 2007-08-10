@@ -1,0 +1,19 @@
+DIPLOMOVµ PRµCE
+Matematicko-fyzik ln¡ fakulta
+Univerzita Karlova v Praze
+S‚mantick  anotace dat z webovskìch zdroj…
+Jan DØdek
+http://czsem.berlios.de/
+________________________________________________________________________________
+POPIS SOFTWAROVHO MODULU PRO PRµCI S DATABµZÖ WORDNET
+
+Pro testov n¡ datab ze WordNet jsme vytvoıili jednoduchou Java aplikaci. Pro naçe testov n¡ jsme nepotıebovali § dn‚ u§ivatelsk‚ rozhran¡, kter‚ v t‚to verzi aplikaci chyb¡. Aktualizujte pros¡m tuto aplikaci z SVN repository, nov  verze u§ pravdØpodobnØ toto rozhran¡ m¡t bude.
+
+Aplikace obsahuje dva bal¡Ÿky: cz.cuni.mff.dedek.wordnet a org.json.
+
+Bal¡Ÿek org.json je bezezmØn pıevzarì http://json.org/. Slou§¡ pro pr ci JSON rozhran¡m WordNetu.
+
+Bal¡Ÿek cz.cuni.mff.dedek.wordnet obsahuje naçi testovac¡ aplikaci. K £spØçn‚mu fungov n¡ aplikace je nutn‚ pıed pıekladem nastavit u§ivatelsk‚ jm‚no a heslo v promØnnìch WordNetApp.UserName a WordNetApp.Password. 
+
+
+Pro otestov n¡ aplikace doporuŸujeme Eclipse. 
