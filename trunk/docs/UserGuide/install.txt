@@ -1,71 +1,71 @@
-ï»¿DIPLOMOVÃ PRÃCE
-Matematicko-fyzikÃ¡lnÃ­ fakulta
+DIPLOMOVÁ PRÁCE
+Matematicko-fyzikální fakulta
 Univerzita Karlova v Praze
-SÃ©mantickÃ¡ anotace dat z webovskÃ½ch zdrojÅ¯
-Jan DÄ›dek
+Sémantická anotace dat z webovskıch zdrojù
+Jan Dìdek
 http://czsem.berlios.de/
 ________________________________________________________________________________
 POKYNY K INSTALACI KOMPONENT
 
-SoftwarovÃ¡ ÄÃ¡st tÃ©to prÃ¡ce je urÄenÃ¡ pro operaÄnÃ­ systÃ©m LINUX.
-Pro fungovÃ¡nÃ­ vÅ¡ech softwarovÃ½ch komponent je nutnÃ© do systÃ©mu nainstalovat programovÃ© nÃ¡stroje tÅ™etÃ­ch stran. Tento soubor obsahuje nÃ¡vod, jak tyto programovÃ© nÃ¡stroje zÃ­skat a nainstalovat.   
+Softwarová èást této práce je urèená pro operaèní systém LINUX.
+Pro fungování všech softwarovıch komponent je nutné do systému nainstalovat programové nástroje tøetích stran. Tento soubor obsahuje návod, jak tyto programové nástroje získat a nainstalovat.   
 
 ________________________________________________________________________________
-1) StaÅ¾enÃ­ SVN repository
-(obsahuje zdrojovÃ© kÃ³dy, skripty, data)
-- nutnÃ© mÃ­t nainstalovanÃ©ho SVN klienta (napÅ™. http://subversion.tigris.org/)
+1) Staení SVN repository
+(obsahuje zdrojové kódy, skripty, data)
+- nutné mít nainstalovaného SVN klienta (napø. http://subversion.tigris.org/)
 
-pÅ™Ã­kaz:
+pøíkaz:
 svn checkout http://svn.berlios.de/svnroot/repos/czsem/trunk
 
-(V aktuÃ¡lnÃ­m adresÃ¡Å™i vytvoÅ™Ã­ adresÃ¡Å™ "trunk" a do nÄ›ho stÃ¡hne obsah repository)
+(V aktuálním adresáøi vytvoøí adresáø "trunk" a do nìho stáhne obsah repository)
 
 ________________________________________________________________________________
 2) Instalace programu Tree Editor TrEd
-Program btred (souÄÃ¡st editoru TrEd) je nutnÃ½ pro fungovÃ¡nÃ­ vÄ›tÅ¡iny lingvistickÃ½ch operacÃ­
+Program btred (souèást editoru TrEd) je nutnı pro fungování vìtšiny lingvistickıch operací
 
-Instrukce pro instalaci vÄetnÄ› instalaÄnÃ­ho balÃ­Äku je k dispozici na adrese:
+Instrukce pro instalaci vèetnì instalaèního balíèku je k dispozici na adrese:
 http://ufal.mff.cuni.cz/~pajas/tred/
-DalÅ¡Ã­ moÅ¾nost, jak zÃ­skat TrEd, je nainstalovat si ho z PDT2.0 CD-ROM. Viz dÃ¡le.
+Další monost, jak získat TrEd, je nainstalovat si ho z PDT2.0 CD-ROM. Viz dále.
 
-Po instalaci je jeÅ¡tÄ› nutnÃ© pÅ™idat adresÃ¡Å™ "tred" (obsahujÃ­cÃ­ skript "btred") do promÄ›nnÃ© PATH.
+Po instalaci je ještì nutné pøidat adresáø "tred" (obsahující skript "btred") do promìnné PATH.
 
 ________________________________________________________________________________
 3) Instalace Tools for machine annotation (from PDT2.0)
-JednÃ¡ o skupinu nÃ¡strojÅ¯, kterÃ© provÃ¡dÄ›jÃ­ lingvistickou analÃ½zu textu aÅ¾ po analytickou rovinu.
+Jedná o skupinu nástrojù, které provádìjí lingvistickou analızu textu a po analytickou rovinu.
 
-Tyto nÃ¡stroje obsahuje CD-ROM The Prague Dependency Treebank 2.0.
-Instrukce, jak zÃ­skat tento CD-ROM jsou na strÃ¡nkÃ¡ch  PDT2.0 v sekci "7. Distribution & License".
+Tyto nástroje obsahuje CD-ROM The Prague Dependency Treebank 2.0.
+Instrukce, jak získat tento CD-ROM jsou na stránkách  PDT2.0 v sekci "7. Distribution & License".
 http://ufal.mff.cuni.cz/pdt2.0/
 
-Instalace Tools for machine annotation je souÄÃ¡stÃ­ hlavnÃ­ho instalaÄnÃ­ho procesu PDT2.0.
-Viz sekce "8. Installation" na strÃ¡nkÃ¡ch  PDT2.0 (http://ufal.mff.cuni.cz/pdt2.0/)
-Pro otestovÃ¡nÃ­ diplomovÃ© prÃ¡ce staÄÃ­ spustit custom instalaci a vybrat poloÅ¾ky:
+Instalace Tools for machine annotation je souèástí hlavního instalaèního procesu PDT2.0.
+Viz sekce "8. Installation" na stránkách  PDT2.0 (http://ufal.mff.cuni.cz/pdt2.0/)
+Pro otestování diplomové práce staèí spustit custom instalaci a vybrat poloky:
 26 -Scripts for Format Conversions, with documentation 98.7 kB
 27- Machine Annotation Tools (Linux binaries) 155.9 MB
-Jako cÃ­lovÃ½ adresÃ¡Å™ nastavte "parsing_czech/PDT" v adresÃ¡Å™i, kam jste stÃ¡hli SVN repository (..../trunk/parsing_czech/PDT).
+Jako cílovı adresáø nastavte "parsing_czech/PDT" v adresáøi, kam jste stáhli SVN repository (..../trunk/parsing_czech/PDT).
 
-Tyto nÃ¡stroje fungujÃ­ pouze na operaÄnÃ­ch systÃ©mech Linux bÄ›Å¾Ã­cÃ­ch na i386 architektuÅ™e.
+Tyto nástroje fungují pouze na operaèních systémech Linux bìících na i386 architektuøe.
 
-Za dodrÅ¾enÃ­ licenÄnÃ­ch podmÃ­nek je tÃ©Å¾ moÅ¾nÃ© si CD-ROM PDT2.0 zapÅ¯jÄit u autora diplomovÃ© prÃ¡ce.
+Za dodrení licenèních podmínek je té moné si CD-ROM PDT2.0 zapùjèit u autora diplomové práce.
 
 ________________________________________________________________________________
-4) NÃ¡stroj pro tektogramatickou analÃ½zu ÄeÅ¡tiny - VÃ¡clav KlimeÅ¡
-JednÃ¡ o nÃ¡stroj, kterÃ½ provÃ¡dÃ­ tektogramatickou lingvistickou anotaci.
-Jako vstup akceptuje vÃ½stup nÃ¡strojÅ¯ vÃ½Å¡e (Tools for machine annotation).
+4) Nástroj pro tektogramatickou analızu èeštiny - Václav Klimeš
+Jedná o nástroj, kterı provádí tektogramatickou lingvistickou anotaci.
+Jako vstup akceptuje vıstup nástrojù vıše (Tools for machine annotation).
 
-NÃ¡stroj lze zÃ­skat pÅ™Ã­mo od VÃ¡clava KlimeÅ¡e.
-http://ufal.mff.cuni.cz/~klimes/ (kontaktnÃ­ informace)
+Nástroj lze získat pøímo od Václava Klimeše.
+http://ufal.mff.cuni.cz/~klimes/ (kontaktní informace)
 
-Pro pouhÃ© otestovÃ¡nÃ­ funkÄnosti diplomovÃ© prÃ¡ce lze pouÅ¾Ã­t kopii tohoto nÃ¡stroje v SVN repository (v adresÃ¡Å™i trunk/parsing_czech/t-analysis).
-Instalace tÃ©to kopie:
+Pro pouhé otestování funkènosti diplomové práce lze pouít kopii tohoto nástroje v SVN repository (v adresáøi trunk/parsing_czech/t-analysis).
+Instalace této kopie:
 
-Nejprve je nutnÃ© stÃ¡hnout a nainstalovat fnTBL Toolkit.
+Nejprve je nutné stáhnout a nainstalovat fnTBL Toolkit.
 http://nlp.cs.jhu.edu/~rflorian/fntbl/index.html
-NÃ¡vod k instalaci je uvnitÅ™ staÅ¾enÃ©ho archivu v souboru "README".
+Návod k instalaci je uvnitø staeného archivu v souboru "README".
 
-DÃ¡le je nutnÃ© nakonfigurovat cesty k dÅ¯leÅ¾itÃ½m souborÅ¯m t-analysis.
-V souboru "run" nastavte promÄ›nou "A2T" na cestu k adresÃ¡Å™i "t-analysis" a promÄ›nnou "FNTBL" na cestu kde je nainstalovanÃ½  fnTBL Toolkit.
-V souborech "t-analysis/[1-4]/cfg/tbl.params" a "t-analysis[1-4]/R" zmÄ›Åˆte vÅ¾dy na prvnÃ­m Å™Ã¡dku cestu tak, aby odpovÃ­dala aktuÃ¡lnÃ­mu umÃ­stÄ›nÃ­ souborÅ¯.
+Dále je nutné nakonfigurovat cesty k dùleitım souborùm t-analysis.
+V souboru "run" nastavte promìnou "A2T" na cestu k adresáøi "t-analysis" a promìnnou "FNTBL" na cestu kde je nainstalovanı  fnTBL Toolkit.
+V souborech "t-analysis/[1-4]/cfg/tbl.params" a "t-analysis[1-4]/R" zmìòte vdy na prvním øádku cestu tak, aby odpovídala aktuálnímu umístìní souborù.
 
-ZajistÄ›te, aby adresÃ¡Å™ s programem btred, coÅ¾ je souÄÃ¡st TrEdu, byl v PATH. (StaÄÃ­, kdyÅ¾ na nÄ›j bude symlink v nÄ›jakÃ©m vaÅ¡em adresÃ¡Å™i bin.)
+Zajistìte, aby adresáø s programem btred, co je souèást TrEdu, byl v PATH. (Staèí, kdy na nìj bude symlink v nìjakém vašem adresáøi bin.)
