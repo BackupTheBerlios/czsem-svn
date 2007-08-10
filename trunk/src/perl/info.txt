@@ -8,8 +8,8 @@ ________________________________________________________________________________
 POPIS BTRED MAKER
 
 
-1) Spuštìní makra
-Btred makra se spouštìjí pøíkazem: 
+1) Spu¹tìní makra
+Btred makra se spou¹tìjí pøíkazem: 
 btred -I JMÉNO_SOUBORU_MAKRA SEZNAM_VSTUPNÍCH_SOUBORÙ
 pøípadnì 
 btred -I JMÉNO_SOUBORU_MAKRA -l SOUBOR_SE_SEZNAM_VSTUPNÍCH_SOUBORÙ
@@ -21,11 +21,11 @@ btred -I extract_rule.pl -l data/hasici/hasici_t_pls.fl
 
  
 2) Frekvenèní analýza
-Makra freq.btred a freq_verb.btred se používají pro frekvenèní analýzy.
-Celá frekvenèní analýza se pouští bash skripty data/hasici/make_freq a data/upadci/make_freq  
+Makra freq.btred a freq_verb.btred se pou¾ívají pro frekvenèní analýzy.
+Celá frekvenèní analýza se pou¹tí bash skripty data/hasici/make_freq a data/upadci/make_freq  
 
 
 
 3) Extrakèní pravidla
-Soubor extract_rule.pl obsahuje rozsáhlejší makro, ve kterém jsme se pokusili extrahovat nìkterá data z korpusu hasièských zpráv.
+Soubor extract_rule.pl obsahuje rozsáhlej¹í makro, ve kterém jsme se pokusili extrahovat nìkterá data z korpusu hasièských zpráv.
 Pro testování tohoto makra doporuèujeme Eclipse a plugin pro Perl. 
