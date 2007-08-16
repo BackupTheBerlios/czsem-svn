@@ -42,7 +42,7 @@ public class WordNetConnection extends Authenticator
 	 * Standard constructor
 	 * @param _user_name
 	 * @param _password
-	 * @param _server_address full address includnig port number, exmaple: https://apollo.fi.muni.cz:9001 
+	 * @param _server_address full address including port number, example: https://apollo.fi.muni.cz:9001 
 	 * @param _dictionary_code exmaple: wncze1
 	 * @throws NoSuchAlgorithmException 
 	 * @throws KeyManagementException 
@@ -236,7 +236,7 @@ public class WordNetConnection extends Authenticator
 	
 	
 	/**
-	 * coverts to utf8, example: hasiè -> hasi%E8
+	 * converts to utf8, example: hasiè -> hasi%E8
 	 * @param orig - original string 
 	 * @return orig converted to utf8 
 	 */
@@ -263,7 +263,7 @@ public class WordNetConnection extends Authenticator
 	}
 	
     /**
-     * SSL autentification
+     * SSL authentication / authorization
      */
 	protected PasswordAuthentication getPasswordAuthentication()
     {

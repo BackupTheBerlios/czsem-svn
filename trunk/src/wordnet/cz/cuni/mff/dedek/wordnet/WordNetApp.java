@@ -31,12 +31,13 @@ public class WordNetApp
 	public static void main(String[] args)
 	{
 		
+		
 		try {
 			WordNetConnection connection1 = new WordNetConnection(UserName, xorCript(Password, Key), ServerAddress, DictionaryCode);
 			
 //			connection1.init();
 //			connection1.query("autobus");
-			connection1.loadSynset("ENG20-09444162-n"); //hasiR
+			connection1.loadSynset("ENG20-09444162-n"); //hasiè
 //			connection1.loadSynset("ENG20-03553164-n"); //kamion
 //			connection1.loadSynset("ENG20-02820094-n"); //autobus
 //			connection1.loadSebtree("ENG20-09444162-n");
@@ -74,7 +75,7 @@ public class WordNetApp
 	}
 	
 	/**
-	 * Utility presdure for simle password encoding
+	 * Utility procedure for simple password encoding
 	 * @param msg source string
 	 * @param key key used for encoding
 	 * @return encoded string
