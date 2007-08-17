@@ -8,7 +8,6 @@ import java.net.ProtocolException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 
-import javax.swing.JFrame;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 
@@ -24,13 +23,12 @@ public class WordNetApp
 {
 	private static final String SettingsFile = "settings.dat";
 	
-	private static void configureSettings(Settings s)
+	private static void configureSettings()
 	{
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run()
 			{
 				SettingsDialog dlg1 = new SettingsDialog(SettingsFile);
-				dlg1.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				dlg1.setVisible(true);
 			}
 		});	 
@@ -41,15 +39,17 @@ public class WordNetApp
 	 */
 	public static void main(String[] args)
 	{
+		configureSettings();
+		
+		if (true) return;
+
 		Settings sett1;
 		try {
 			sett1 = Settings.load(SettingsFile);
 		} catch (Exception e1) {
 			sett1 = new Settings();
 //			sett1.save(SettingsFile);
-		}
-		
-		configureSettings(sett1);
+		}		
 		
 		try {
 			
