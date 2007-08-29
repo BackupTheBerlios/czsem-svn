@@ -1,6 +1,19 @@
 #!btred -TNe main()
 
+################################################################################
+#DIPLOMOVÁ PRÁCE
+#Matematicko-fyzikální fakulta
+#Univerzita Karlova v Praze
+#Sémantická anotace dat z webovských zdrojů
+#Jan Dědek
+#http://czsem.berlios.de/
+################################################################################
+
 use vars qw($this $root);
+
+################################################################################
+# konstanty
+################################################################################
 
 #my @verbs = ("vyjest", "zasahovat", "likvidovat", "zlikvidovat");
 my @verbs = ("odstranit");
@@ -12,11 +25,21 @@ my @numbers = ("jeden", "dva", "tři", "čtyři", "pět", "šest", "sedm", "osm"
  "dvanáct", "třináct", "čtrnáct", "patnáct", "šestnáct", "sedmnáct", "osmnáct", "devatenáct", "dvacet");
 
 ################################################################################
+# hlavní funkce programu - spouští jednu ze čtyř funkcí (extrakčních pravidel),
+# které jsou v tomoto souboru implemantovány  
+################################################################################
 sub main
 {	
+	# nejrozsáhlejší pravidlo - tiskne infotrmace o zraněních při nehodě 
 	print_injured();
+
+	# tiskne podrobnosti o řídících slovesech věty
 	#root_verb_flow();
+
+	# tiskne podrobnosti o klíčových slovech - viz seznam @key_words
 	#key_word_search();
+
+	# tiskne podrobnosti o slovech s hodnotou funktoru @functors
 	#functor_search();
 }
 
@@ -193,7 +216,7 @@ sub print_injured
 				
 				foreach my $p (@pats)
 				{
-					print "<participant type=\">" . $p->{t_lemma} . "\">";
+					print "<participant type=\"" . $p->{t_lemma} . "\">";
 
 					#patients count
 					my @cnt = find_node_by_attr($p, 'functor', '^RSTR');
