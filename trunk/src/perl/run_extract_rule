@@ -5,7 +5,7 @@ echo "<injured_result>" >> output.xml
 
 
 
-btred -I extract_rule.pl -l ../../data/hasici/hasici_t_pls.fl >> output.xml 2> /dev/null
+btred -I extract_rule.pl -l ../../data/hasici/hasici_t_pls.fl >> output.xml
  
 echo "</injured_result>" >> output.xml
 
