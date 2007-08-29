@@ -7,13 +7,16 @@ http://czsem.berlios.de/
 ________________________________________________________________________________
 POPIS SOFTWAROVÉHO MODULU PRO PRÁCI S DATABÁZÍ WORDNET
 
-Pro testování databáze WordNet jsme vytvoøili jednoduchou Java aplikaci. Pro na¹e testování jsme nepotøebovali ¾ádné u¾ivatelské rozhraní, které v této verzi aplikaci chybí. Aktualizujte prosím tuto aplikaci z SVN repository, nová verze u¾ pravdìpodobnì toto rozhraní mít bude.
+Tento adresáø obsahuje kromì zdrojovývh kódù také JAR archiv WordNetApp.jar s pøelo¾enou aplikací pro Java 5.0
+Aplikaji je mo¾né spustit pøíkazem:
+java -jar WordNetApp.jar
+Takto spu¹tìná aplikace (bez parametrù) pouze vypí¹e instrukce ke svému pou¾ívání.
+
+K úspì¹nému fungování aplikace je nutné pøed jejím pou¾íváním nastavit u¾ivatelské jméno a heslo v konfiguraèním dialogu WordNetApp, který se vyvolá pøíkazem:
+java -jar WordNetApp.jar -c
 
 Aplikace obsahuje dva balíèky: cz.cuni.mff.dedek.wordnet a org.json.
 
 Balíèek org.json je bezezmìn pøevzarý http://json.org/. Slou¾í pro práci JSON rozhraním WordNetu.
 
-Balíèek cz.cuni.mff.dedek.wordnet obsahuje na¹i testovací aplikaci. K úspì¹nému fungování aplikace je nutné pøed pøekladem nastavit u¾ivatelské jméno a heslo v promìnných WordNetApp.UserName a WordNetApp.Password. 
-
-
-Pro otestování aplikace doporuèujeme Eclipse. 
+Balíèek cz.cuni.mff.dedek.wordnet obsahuje na¹i testovací aplikaci.
