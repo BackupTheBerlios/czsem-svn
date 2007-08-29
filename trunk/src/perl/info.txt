@@ -16,7 +16,7 @@ btred -I JMÉNO_SOUBORU_MAKRA -l SOUBOR_SE_SEZNAM_VSTUPNÍCH_SOUBORÙ
 
 napøíklad:
 btred -I extract_rule.pl *.t.pls.gz
-btred -I extract_rule.pl -l data/hasici/hasici_t_pls.fl
+btred -I extract_rule.pl -l ../../data/hasici/hasici_t_pls.fl
 
 
  
