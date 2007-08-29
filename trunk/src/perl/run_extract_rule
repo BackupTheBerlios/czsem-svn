@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo "<?xml version=\"1.0\" encoding=\"ISO-8859-2\"?>" > output.xml
+echo "<injured_result>" >> output.xml
+
+
+
+btred -I extract_rule.pl -l ../../data/hasici/hasici_t_pls.fl >> output.xml 2> /dev/null
+ 
+echo "</injured_result>" >> output.xml
+
