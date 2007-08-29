@@ -107,7 +107,6 @@ public class SettingsDialog extends JDialog implements ActionListener
 
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == cancelButton)
 		{
