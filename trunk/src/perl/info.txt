@@ -30,3 +30,5 @@ Celá frekvenèní analýza se pou¹tí bash skripty data/hasici/make_freq a data/upad
 3) Extrakèní pravidla
 Soubor extract_rule.pl obsahuje rozsáhlej¹í makro, ve kterém jsme se pokusili extrahovat nìkterá data z korpusu hasièských zpráv.
 Pro testování tohoto makra doporuèujeme Eclipse a plugin pro Perl. 
+Pro spu¹tìní tohoto makra je v aktuálním adresáøi vytvoøený bash-skript: run_extract_rule
+Tento bash-skript spustí extrakci pravidel zapsaných uvnitø souboru extract_rule.pl nad korpusem hasiských zpráv a výsledek ulo¾í do souboru output.xml.
