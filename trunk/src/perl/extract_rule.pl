@@ -5,7 +5,7 @@ use vars qw($this $root);
 #my @verbs = ("vyjest", "zasahovat", "likvidovat", "zlikvidovat");
 my @verbs = ("odstranit");
 my @injure_verbs = ("zranit", "usmrtit", "zemřít", "zahynout", "přežít"); #podlehnout, utrpět zranění, těžce zraněný, s těžkým zraněním
-my @key_words = ("těžký", "xstrom", "xhodina", "xnehoda");
+my @key_words = ("těžký", "strom", "hodina", "nehoda");
 my @functors = ("^.*HEN");
 my @persons = ("kdo", "člověk", "osoba", "muž", "žena", "dítě", "řidička", "řidič", "spolujezdec", "spolujezdkyně");
 my @numbers = ("jeden", "dva", "tři", "čtyři", "pět", "šest", "sedm", "osm", "devět", "deset", "jedenáct",
@@ -13,18 +13,7 @@ my @numbers = ("jeden", "dva", "tři", "čtyři", "pět", "šest", "sedm", "osm"
 
 ################################################################################
 sub main
-{
-#	$num = test_number("deset");
-#	
-#	if (defined $num)
-#	{
-#		print "*$num*";
-#	}
-#	else
-#	{
-#		print "Neeeeeeeeeeeee\n"
-#	}
-	
+{	
 	print_injured();
 	#root_verb_flow();
 	#key_word_search();
@@ -165,21 +154,37 @@ sub print_injured
 		{		
 			if ($this->{t_lemma} eq $v )
 			{
-				print "* ";
+				#action type
+				print "<action type=\"" . $this->{t_lemma} . "\">";
+
+				#sentece
+				print "<sentece>" . PML_T::GetSentenceString($root) . "</sentece>";
+				print "<sentece_id>" . $root->{id} . "</sentece_id>";
+				
 
 				#negation
-				print "NOT " if test_negation($this);
+				if (test_negation($this))
+				{
+					print "<negation>true</negation>" ;					
+				}
+				else
+				{
+					print "<negation>false</negation>" ;										
+				}
+				
 
-				print $this->{t_lemma} . ": " . PML_T::GetSentenceString($root) . "\n";
 
 				
 				#manner of injurance
 				my @mans = find_node_by_attr_depth($this, 0, 'functor', '^MANN');
 				if (@mans)
 				{
-					print "MANNs: "; 
-					foreach my $m (@mans) {print $m->{t_lemma} . " "};
-					print "\n" 
+					foreach my $m (@mans)
+					{
+						print "<manner>"; 
+						print $m->{t_lemma};
+						print "</manner>"; 
+					};
 				}
 				
 				#actors and patients
@@ -188,39 +193,24 @@ sub print_injured
 				
 				foreach my $p (@pats)
 				{
-					print $p->{t_lemma};
+					print "<participant type=\">" . $p->{t_lemma} . "\">";
 
 					#patients count
 					my @cnt = find_node_by_attr($p, 'functor', '^RSTR');
 					@cnt = &filter_list(\&test_number_lemma, @cnt);
 					my $cnt1 = pop(@cnt);
-					print " cnt: " . &test_number($cnt1->{t_lemma}) if ($cnt1);
+					print "<quantity>" . &test_number($cnt1->{t_lemma}) . "</quantity>" if ($cnt1);
 	
-					print " str: ";
+					print "<full_string>";
 					print_subtree_as_text($p);
-					print "\n";
+					print "</full_string>";
+
+					print "</participant>";
 				}
 				
-				
-#				print "\n";
-#				print $this->{t_lemma};
-#				print ": -------- a(";
-#				print_ANodes($this);
-#				print ") ---------";
-##				foreach my $ch ($this->children()) {print " (" . $ch->{functor} . "),";}
-##				print "--------------";
-#				print "\n" . PML_T::GetSentenceString($root);
-#				
-#				my @acts = find_node_by_attr($this, 'functor', "PAT");
-#							
-#				foreach my $act (@acts)
-#				{
-#					print "\nnext:   ";
-#					print_subtree ($act);
-#					print_subtree_as_text($act);	
-#				}
-#	
-#				print "\n" 
+				#action end
+				print "</action>\n";
+											
 			}
 		}
 	}
