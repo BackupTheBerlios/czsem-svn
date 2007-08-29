@@ -33,26 +33,15 @@ public class WordNetApp
 	{
 		System.out.println("WordNetApp: Application for WordNet query.");
 		System.out.println("(c) Jan Dìdek 2007, http://czsem.berlios.de/");
-		System.out.println("Usage:");
-		System.out.println("WordNetApp");
-/*
-		if (args[0] == "-c") 
-		{
-			configureSettings();
-			return;
-		}
-		if (args[0] == "--info")
-			connection1.init();
-		else if ((args[0] == "-q") && (args.length >= 2))			
-			connection1.query(args[1]);
-		else if ((args[0] == "-s") && (args.length >= 2))						
-			connection1.loadSynset(args[1]); 
-		else if ((args[0] == "-t") && (args.length >= 2))						
-			connection1.saveSebtree(args[1], args[1] + "_tree.xml");
-		else if ((args[0] == "-i") && (args.length >= 3))						
-			connection1.findIntersection(args[1], args[2]);
-		else printUse();
-*/		
+		System.out.println("Parameters:");
+		System.out.println("-c              Shows configuration dialog.");
+		System.out.println("-info           Prints current account info.");
+		System.out.println("-q query_word   Query WordNet for given word");
+		System.out.println("-s synset_id    Saves given synset to the file synset_id.xml");
+		System.out.println("-t synset_id    Saves subtree of given synset to the file synset_id_subtree.xml");
+		System.out.println();		
+		System.out.println("-i synset_id1 synset_id2");
+		System.out.println("     Saves subtree of both synsets and prints their intersection.");
 	}
 
 	/**
@@ -68,7 +57,7 @@ public class WordNetApp
 		}
 		
 		//command configure
-		if (args[0] == "-c") 
+		if (args[0].equals("-c")) 
 		{
 			configureSettings();
 			return;
@@ -91,15 +80,15 @@ public class WordNetApp
 					sett1.getServerAddress(),
 					sett1.getDictionaryCode());
 
-			if (args[0] == "--info")
+			if (args[0].equals("-info"))
 				connection1.init();
-			else if ((args[0] == "-q") && (args.length >= 2))			
+			else if ((args[0].equals("-q")) && (args.length >= 2))			
 				connection1.query(args[1]);
-			else if ((args[0] == "-s") && (args.length >= 2))						
+			else if ((args[0].equals("-s")) && (args.length >= 2))						
 				connection1.loadSynset(args[1]); 
-			else if ((args[0] == "-t") && (args.length >= 2))						
-				connection1.saveSebtree(args[1], args[1] + "_tree.xml");
-			else if ((args[0] == "-i") && (args.length >= 3))						
+			else if ((args[0].equals("-t")) && (args.length >= 2))						
+				connection1.saveSebtree(args[1], args[1] + "_subtree.xml");
+			else if ((args[0].equals("-i")) && (args.length >= 3))						
 				connection1.findIntersection(args[1], args[2]);
 			else printUse();
 

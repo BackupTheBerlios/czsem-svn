@@ -16,6 +16,7 @@ import java.net.URL;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
+import java.util.Iterator;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -98,8 +99,16 @@ public class WordNetConnection extends Authenticator
 		while ((line = br.readLine()) != null)
 		{
 			System.out.println(line);			
+
 			JSONObject jo = new JSONObject(line);
-			System.out.println(jo.getJSONObject("slovniky").getJSONObject("wncze1").getString("nazov"));
+			System.out.println();
+			System.out.println("Dictionries:");
+			Iterator key = jo.getJSONObject("slovniky").keys();
+			while (key.hasNext())
+			{
+				System.out.println(
+						jo.getJSONObject("slovniky").getJSONObject((String) key.next()).getString("dict"));
+            }
 		}
 
 		br.close();
@@ -157,7 +166,7 @@ public class WordNetConnection extends Authenticator
 	public void saveSebtree(String synsetID, String file_name) throws IOException, JSONException, ParserConfigurationException
 	{
 		SubtreeXMLWriter xml_writer = new SubtreeXMLWriter();
-		saveSebtree(synsetID, (Element) null);
+		saveSebtree(synsetID, xml_writer.getRootElement());
 		xml_writer.seveToFile(file_name);
 	}
 

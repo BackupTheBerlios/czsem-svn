@@ -42,7 +42,7 @@ public class SubtreeXMLIntersection
 			id_set2.add(nodes2.item(i).getNodeValue());
 		}
 		
-		System.out.println("-----"); 						
+		System.out.println("----- intersection: ----- "); 						
 
 		
 		//intersection:
