@@ -18,6 +18,7 @@ sed -n \
 -e 's/<[^Pp>]*>//g' \
 -e 's/\([0-9]\):\([0-9][[0-9]\)/\1.\2/g' \
 -e 's/<[Pp][^>]*>\([^< ][^<]*\)[^>]*>/\n\n\1/gp' \
+-e 's/<[^>]*>//g' \
 < $f > ../../txt_src/$dir1/$f.txt
 
 #Input format: The input is plain Czech text in ISO 8859-2 encoding.
