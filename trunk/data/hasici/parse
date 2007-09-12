@@ -14,8 +14,10 @@ cd txt_src
 for d in *; do 
 
 #/tmp/czsem/parsing_czech/machine-annotation/run_all $d/out $d/*.txt
-../../../parsing_czech/PDT/tools/machine-annotation/run_all $d/out $d/*.txt
-../../../parsing_czech/t-analysis/run $d/out/5-pml
+cd $d
+../../../../parsing_czech/PDT/tools/machine-annotation/run_all out '*.txt'
+../../../../parsing_czech/t-analysis/run out/5-pml
+cd ..
 
 
 mkdir ../pml/$d
