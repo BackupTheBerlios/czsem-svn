@@ -11,15 +11,18 @@ for dir1 in *.isol2; do
 	for f in *; do
 
 sed -n \
+-e 's/^[^<]*<[^p^P][^>]*>//g' \
 -e 's/&#188;/ètvrtina/g' \
 -e 's/&amp;/\&/g' \
 -e 's/&nbsp;/ /g' \
--e 's/<img[^>]*>//g' \
--e 's/<[^Pp>]*>//g' \
 -e 's/\([0-9]\):\([0-9][[0-9]\)/\1.\2/g' \
--e 's/<[Pp][^>]*>\([^< ][^<]*\)[^>]*>/\n\n\1/gp' \
--e 's/<[^>]*>//g' \
+-e 's/<[Pp]>\(.*\)<\/[Pp]>/\n\n\1/gp' \
 < $f > ../../txt_src/$dir1/$f.txt
+
+#-e 's/<[Pp]>\([^<]*\)<\/[Pp]>/\n\n\1/gp' \
+#-e 's/<img[^>]*>//g' \
+#-e 's/<[^Pp>]*>//g' \
+#-e 's/<[^>]*>//g' \
 
 #Input format: The input is plain Czech text in ISO 8859-2 encoding.
 #Line break serves as a sentence separator (if we want to force the tool to separate them);
