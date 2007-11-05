@@ -7,7 +7,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\documentclass[12pt,notitlepage,twoside]{book} %twoside report
+\documentclass[12pt,notitlepage]{report} %twoside report
+%\documentclass[12pt,notitlepage,twoside]{book} %twoside report
 %\pagestyle{headings}
 \pagestyle{plain}
 
@@ -32,16 +33,20 @@
 
 
 % nastavení dané velikosti okrajù
+
+%pro oboustranny format
 %\usepackage[twoside, hscale=0.88, vscale=0.88, bindingoffset=1cm]{geometry}
+
 \usepackage[left=4cm]{geometry} % nastavení dané velikosti okrajù
 \usepackage{amssymb}
 
 \addtolength{\textheight}{1.5cm}
 
-%\addtolength{\evensidemargin}{-1.5cm}
-\addtolength{\evensidemargin}{-3.5cm}
-\addtolength{\textwidth}{2cm}
-\addtolength{\hoffset}{0.5cm}
+
+%pro oboustranny format
+%\addtolength{\evensidemargin}{-3.5cm}
+%\addtolength{\textwidth}{2cm}
+%\addtolength{\hoffset}{0.5cm}
 
 %\newindex{default}{idx}{ind}{Rejstøík} % zavádí rejstøík v pøípadì použití balíku index
 
