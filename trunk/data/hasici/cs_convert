@@ -9,7 +9,8 @@ for dir1 in *.list.out; do
 	cd $dir1
 
 	for f in article.php*; do
-		cstocs 1250 il2 < $f > ../$dir1.isol2/$f
+		#cstocs 1250 il2 < $f > ../$dir1.isol2/$f
+		recode windows-1250..l2 < $f > ../$dir1.isol2/$f
 	done
 	
 	cd ..

@@ -27,6 +27,7 @@ done
 
 cd ..
 sh make_pls
+sh convert2fs.sh
 
 sh make_tpls_list
 
