@@ -1,0 +1,27 @@
+# Config file for the Netgraph server
+# Don't use '=' between a parameter name and its value!
+# 
+
+# the initial path of the treebank for clients
+#dir /home/mirovsky/programovani/netgraph/distribution/CD/treebank
+dir /tmp/czsem/netgraph/corpus
+
+# identifier of the treebank (used by clients to distinguish files of saved settings for different servers)
+corpus_identifier DEDEK
+
+# use the preset head from this file instead of creating a global head from all selected files;
+# a special value FIRST indicates that the first file from the selected files should be used
+preset_head FIRST
+
+# the maximum allowed number of clients connected at once
+max_clients 15
+
+# accept this client even if the maximum allowed number of connected clients has already been reached (can be used multiple times)
+always_accept localhost
+
+# don't accept this client (can be used multiple times)
+never_accept hacker.cz
+
+# don't mention connections from this client to the log output (can be used multiple times)
+#do_not_record localhost
+

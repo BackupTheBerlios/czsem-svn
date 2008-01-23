@@ -27,9 +27,18 @@ done
 
 cd ..
 sh make_pls
+sh make_tpls_list
+
 sh convert2fs.sh
 
-sh make_tpls_list
+
+cd pml
+
+for fs in *; do
+mkdir ../../../netgraph/corpus/hasici/$fs
+mv $fs/*.t.gz.fs ../../../netgraph/corpus/hasici/$fs
+done 
+
 
 
 #ja to spustit na pozadi:

@@ -1,0 +1,37 @@
+# Netgraph server coreference patterns file
+# the pattern of a coreference and possible values:
+# start_attr=attr_name, end_attr=attr_name,[ start_ignore=value,]*[ end_ignore=value,]* start_nil_arrow=true/false, end_nil_arrow=true/false, general_color=hex_number, general_shape=shape, value_depend_attr=attr_name,[ value_depend=value;color;shape,]*
+#
+# one pattern must be at one line, the only formatting spaces may be at the start of line and after ',' (all other spaces are parts of names/values)
+#
+# name: a name of the coreference that appears in the menu of the client
+# display: should the coreference be displayed in the client?
+#          possible values: 0=never, 1=always, 2=user controlled, yes defaultly, 3=user controlled, no defaultly
+# start_attr: a name of an attribute (at a starting node) setting a value which should be matched with a value at an ending node of a coreference
+# end_attr: a name of an attribute (at an ending node) keeping a value which should be matched with a value at an starting node of a coreference
+# start_ignore: (may be used multiple times) sets values of the given attribute at starting node which do not mean a starting point of a coreference
+# end_ignore: (may be used multiple times) sets values of the given attribute at ending node which do not mean an ending point of a coreference
+# start_nil_arrow: (true/false) if no ending node matches with this starting node in an actual tree, should nil arrow be displayed?
+# end_nil_arrow: [not implemented!] (true/false) if no starting node matches with this ending node in an actual tree, should nil arrow be displayed?
+# general_color: a general color to be used for displaying the coreference arrow; rgb number (decimal or hexadecimal with leading #)
+# general_shape: (integer) a general shape of the coreference arrow (the value is a sum of the following)
+#  - bits 0-2: stroke type (value 0 means simple line, value 1 means dashed line, value 2 means dot-and-dashed line, value 3 means dotted line, other values are reserverd for future use)
+#  - bit 3: draw arrow endpoint at the starting node?
+#  - bit 4: draw arrow endpoint at the ending node?
+#  - bits 5-7: curve type (value 32 means straight line, value 64 means down-curved quad curve with control point near starting node,
+#                          value 128 means up-curved quad curve with control point near starting node; all other values are reserved for future use)
+# value_depend_attr: a name of an attribute (at the starting node) which determines a type of the coreference - color and shape may depend on it
+# value_depend: (may be used multiple times) a pattern determining a color and shape of coreference arrow depending on a value (value;color;shape ~ value;hex_number;int_number)
+#
+# Example:
+#start_attr=coref, end_attr=AID, start_ignore= , start_ignore=null, end_ignore= , end_ignore=null, start_nil_arrow=true, end_nil_arrow=false, general_color=#231812, general_shape=41, value_depend_attr=cortype, value_depend=grammatical;#D2A10F;41, value_depend=textual;#2C79FF;41
+#
+# the comment character '#' must be the first charecter of a commented line
+# the maximum length of one coreference pattern is 1000 characters (defined in dotser.c: MAX_COREFERENCE_LENGTH)
+
+name=grammatical coreference, display=2, start_attr=coref_gram.rf, end_attr=id, start_ignore= , start_ignore=null, end_ignore= , end_ignore=null, start_nil_arrow=true, end_nil_arrow=false, general_color=#D2A10F, general_shape=81
+name=textual coreference, display=2, start_attr=coref_text.rf, end_attr=id, start_ignore= , start_ignore=null, end_ignore= , end_ignore=null, start_nil_arrow=true, end_nil_arrow=false, general_color=#2C79FF, general_shape=81
+name=predicative complements, display=2, start_attr=compl.rf, end_attr=id, start_ignore= , start_ignore=null, end_ignore= , end_ignore=null, start_nil_arrow=true, end_nil_arrow=false, general_color=#E3CE56, general_shape=146
+name=effective parentage, display=2, start_attr=eparents_diff, end_attr=id, start_ignore= , start_ignore=null, end_ignore= , end_ignore=null, start_nil_arrow=true, end_nil_arrow=false, general_color=#7cbcff, general_shape=146
+name=effective parentage all, display=3, start_attr=eparents, end_attr=id, start_ignore= , start_ignore=null, end_ignore= , end_ignore=null, start_nil_arrow=true, end_nil_arrow=false, general_color=#7cbcff, general_shape=146
+

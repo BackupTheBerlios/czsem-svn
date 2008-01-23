@@ -1,0 +1,9 @@
+# Netgraph server accounts file
+# the pattern of records and possible values:
+# login_name:encoded_password:account_state:account_type:root_directory:max_number_of_trees:client_save_trees_permission:change_passwordd_permission:e_mail:user_name:user_info
+#                               enabled        user         default      0 (= unlimited - dang.)      yes                         yes
+#                               disabled     anonymous    (directory)      (another number)            no                          no
+#
+
+dedek:50eb3b47fbee4df59eaef6368261063b:enabled:user:default:100000:yes:yes:dedek@ksi.mff.cuni.cz:Jan Dedek:KSI MFF UK
+anonymous:294de3557d9d00b3d2d8a1e6aab028cf:enabled:anonymous:default:1000000:no:no::anyone:anywhere
