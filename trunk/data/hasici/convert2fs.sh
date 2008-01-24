@@ -29,7 +29,7 @@ for dir1 in *; do
 	cd ..
 done
 
-cd..
+cd ..
  
 
 

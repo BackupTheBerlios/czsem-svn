@@ -8,11 +8,11 @@ for dir1 in *; do
 	cd $dir1
 
 	for f1 in *.[at].gz; do
-		btred -I  ../../parsing_czech/format-conversions/pdt_formats/pml2pls.btred $f1
+		btred -I  ../../../../parsing_czech/format-conversions/pdt_formats/pml2pls.btred $f1
 	done
 
 	cd ..
 done
 
-cd..
+cd ..
 
