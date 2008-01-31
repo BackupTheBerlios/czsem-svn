@@ -11,6 +11,7 @@ import cz.cuni.mff.mirovsky.account.ServerCommunicationFormatErrorException;
 import cz.cuni.mff.mirovsky.account.UserAccount;
 import cz.cuni.mff.mirovsky.trees.Attribute;
 import cz.cuni.mff.mirovsky.trees.NGTreeHead;
+import czsem.net.NetgraphServerComunication.LoadTreeResult.SingleMatch;
 import czsem.utils.CZSemTree;
 
 public class NetgraphServerComunication extends NetgraphProtocolConnection {
@@ -27,7 +28,7 @@ public class NetgraphServerComunication extends NetgraphProtocolConnection {
         public final static char GET_TREE_SUBTYPE_FIRST = 'f';		
 	}
 
-	public class NetgraphConnectionInfo
+	public static class NetgraphConnectionInfo
 	{
 	    public String server_version;
 	    public String client_required_version;
@@ -36,11 +37,25 @@ public class NetgraphServerComunication extends NetgraphProtocolConnection {
 	    public String corpus_identifier;		
 	}
 
-	public class LoadTreeResult
+	public static class LoadTreeResult
 	{
+		public static class SingleMatch
+		{
+			public SingleMatch(int tree_index, int current_node_index, int query_node_index)
+			{
+				this.query_tree_index = tree_index;
+				this.current_node_index = current_node_index;
+				this.query_node_index = query_node_index;
+			}			
+
+			public int query_tree_index;
+			public int current_node_index;
+			public int query_node_index;
+		}
+		
 		public String filename;
 		public String query_match_str;
-		public ArrayList<int []> query_match = new ArrayList<int[]>();
+		public ArrayList<SingleMatch> query_match = new ArrayList<SingleMatch>();
 		
 		public QueryStatistics query_statistics; 
 				
@@ -49,7 +64,7 @@ public class NetgraphServerComunication extends NetgraphProtocolConnection {
 	
 	}
 
-	public class QueryStatistics
+	public static class QueryStatistics
 	{
 		public int number_of_actual_occurrence;
 		public int number_of_actual_tree;
@@ -279,17 +294,23 @@ public class NetgraphServerComunication extends NetgraphProtocolConnection {
         		model_list_actual_head.getSize());
                                 
         //set query match
-        int match_attr_number = getGlobalHead().getIndexOfAttribute(META_ATTR_QUERY_MATCH); 
-        StringTokenizer st = new StringTokenizer(res.query_match_str, ":,");
-        while (st.hasMoreTokens())
+        int match_attr_number = getGlobalHead().getIndexOfAttribute(META_ATTR_QUERY_MATCH);
+        int tree_index = 0;
+        StringTokenizer out_st = new StringTokenizer(res.query_match_str, ";");
+        while (out_st.hasMoreTokens())
         {
-        	String which_node_str = st.nextToken();
-			String match_with_str = st.nextToken();
-			int which_node = Integer.parseInt(which_node_str);
-			int match_with = Integer.parseInt(match_with_str);
-			res.query_match.add(new int[] { which_node, match_with });
-
-			res.tree.setNodeAttributeValue(which_node, match_attr_number, match_with_str);
+	        StringTokenizer in_st = new StringTokenizer(out_st.nextToken(), ":,");
+	        while (in_st.hasMoreTokens())
+	        {
+	        	String which_node_str = in_st.nextToken();
+				String match_with_str = in_st.nextToken();
+				int which_node = Integer.parseInt(which_node_str);
+				int match_with = Integer.parseInt(match_with_str);
+				res.query_match.add(new SingleMatch(tree_index, which_node, match_with ));
+	
+				res.tree.setNodeAttributeValue(which_node, match_attr_number, match_with_str);
+	        }
+	        tree_index++;
         }
 
         return res;				

@@ -11,32 +11,41 @@ import javax.xml.stream.XMLStreamWriter;
 
 import cz.cuni.mff.mirovsky.account.UserAccount;
 import cz.cuni.mff.mirovsky.trees.NGForest;
+import cz.cuni.mff.mirovsky.trees.NGTree;
 import czsem.net.NetgraphServerComunication;
 import czsem.net.NetgraphServerComunication.LoadTreeResult;
 import czsem.net.NetgraphServerComunication.NetgraphConnectionInfo;
 import czsem.net.NetgraphServerComunication.QueryStatistics;
 import czsem.net.NetgraphServerComunication.TreeSubtypeChars;
+import czsem.net.NetgraphServerComunication.LoadTreeResult.SingleMatch;
 import czsem.utils.NetgraphQuery.ResultProcessor;
 
 
 public class SimpleXMLQueryProcessor implements ResultProcessor {
-	private class Selector
+	private static class Selector
 	{
 		public Selector(String node_name, String attribute_name, NetgraphQuery nq)
 		{
 			this.node_name = node_name;
 			this.attribute_name = attribute_name;
+			this.query_node_index = -1;
+			this.query_tree_index = -1;					
 			
-			NGForest query_forest = nq.getQueryForest();
-
-			this.query_node_index = 
-				CZSemTree.findFirstNodeByAttributeValueInForest(
-						query_forest,
-						AttributeIndexes.NAME,
-						node_name);
-
+			int actual_tree = 0;
+			NGForest query_forest = nq.getQueryForest();			
+			for (NGTree tree : query_forest.getTrees()) {
+				CZSemTree czsem_tree = new CZSemTree(tree);
+				int found = czsem_tree.findFirstNodeByAttributeValue(AttributeIndexes.NAME, node_name);
+				if (found != -1)
+				{
+					this.query_node_index = found;
+					this.query_tree_index = actual_tree;					
+				}				
+				actual_tree++;
+			}
 		}
 		
+		public int query_tree_index;
 		public int query_node_index;
 		public String node_name;		
 		public String attribute_name;		
@@ -194,8 +203,9 @@ public class SimpleXMLQueryProcessor implements ResultProcessor {
 			
 			
 			// find corresponding node in the result tree			
-			for (int [] tree_match : tree_result.query_match) {
-				if (tree_match[1] == selector.query_node_index)
+			for (SingleMatch tree_match : tree_result.query_match) {
+				if (tree_match.query_tree_index == selector.query_tree_index &&
+						tree_match.query_node_index == selector.query_node_index)
 				{
 					//corresponding found - write its value to the output 					
 					out.writeStartElement("Value");
@@ -205,7 +215,7 @@ public class SimpleXMLQueryProcessor implements ResultProcessor {
 					int attribute_index = nc.getGlobalHead().getIndexOfAttribute(selector.attribute_name);
 					out.writeCharacters(
 							tree_result.tree.getFirstNodeAttributeValue(
-									tree_match[0],
+									tree_match.current_node_index,
 									attribute_index));
 
 					out.writeEndElement();			

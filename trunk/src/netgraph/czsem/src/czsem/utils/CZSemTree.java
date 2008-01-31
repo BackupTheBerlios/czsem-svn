@@ -53,7 +53,8 @@ public class CZSemTree {
 	public int findFirstNodeByAttributeValue(int attr_index, String value)
 	{
 		for (int i=0; i<node_array.length; i++) {
-			if (getFirstNodeAttributeValue(i, attr_index).equals(value)) return i;
+			String actual_valeu = getFirstNodeAttributeValue(i, attr_index);  
+			if (actual_valeu != null && actual_valeu.equals(value)) return i;
 		}
 		
 		return -1;

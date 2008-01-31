@@ -24,7 +24,7 @@ public class NetgraphProtocolConnection {
 		/** "1.91 (12.11.2007)" */
 	}
 		
-	public class NetgraphProtocolException extends Exception
+	public static class NetgraphProtocolException extends Exception
 	{
 		
 		NetgraphProtocolException(char error_msg, int error_code)
