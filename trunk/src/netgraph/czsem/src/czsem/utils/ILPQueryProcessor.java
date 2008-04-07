@@ -1,27 +1,87 @@
 package czsem.utils;
 
+import java.text.Normalizer;
+import java.text.Normalizer.Form;
+
+import cz.cuni.mff.mirovsky.trees.NGTreeHead;
 import czsem.net.NetgraphServerComunication.LoadTreeResult;
 import czsem.utils.NetgraphQuery.ResultProcessor;
 
 public class ILPQueryProcessor implements ResultProcessor
 {
-
-	public void endProcessing()
+	
+	int tree_num = 0;
+	
+	public static String ASCIINormalise(String src)
 	{
-		// TODO Auto-generated method stub
-
+		if (src == null) return "null";
+		String norm = Normalizer.normalize(src, Form.NFD); 
+		norm = norm.replaceAll("[^\\p{ASCII}]", "");
+		return norm;
+		
 	}
 
+	public static String VarNormalise(String src)
+	{
+		String norm = ASCIINormalise(src); 
+		norm = norm.replaceAll("^[-^#./ \\\\]", "qqq");
+		norm = norm.replaceAll("[-^#.,:;/ \\\\]", "_");
+		return norm;
+		
+	}
+
+
+	private String getNodeStr(int node_index)
+	{
+		return "node" +tree_num+ "_" + node_index;
+	}
+
+	private void printAttributes(NGTreeHead head, CZSemTree tree, int node_index)	
+	{
+		for (int attr = 0; attr < head.getSize(); attr++) {
+			String val = tree.getFirstNodeAttributeValue(node_index, attr);
+			if (val != null)
+			{
+				System.out.print(VarNormalise(head.getAttributeAt(attr).getName()));
+				System.out.print("(" + getNodeStr(node_index) + ", ");
+				System.out.print(VarNormalise(val) + ").");
+
+				System.out.println("         const(" + VarNormalise(val) + ").");				
+			}			
+		}		
+	}
+	
 	public void processSingleTreeResult(LoadTreeResult tree_result)
 	{
-		// TODO Auto-generated method stub
+		System.out.println("\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+		System.out.println("% " + ASCIINormalise(tree_result.tree.getSentenceString(tree_result.tree_head)));
+		
+		System.out.println("tree_root("+getNodeStr(0)+").");
+		
+		for (int i = 0; i < tree_result.tree.getCountOfNodes(); i++)			
+		{
+			System.out.println("%%%%%%%% " + getNodeStr(i) + " %%%%%%%%%%%%%%%%%%%");
+			System.out.println("node("+getNodeStr(i)+").");
+			
+			printAttributes(tree_result.tree_head, tree_result.tree, i);
 
+//			System.out.println("node_attr(node" +tree_num+ "_"+i+","+ ASCIINormalise(tree_result.tree.getFirstNodeAttributeValue(i, 35)) +").");
+//			System.out.println("const(" + ASCIINormalise(tree_result.tree.getFirstNodeAttributeValue(i, 35)) +").");
+		} 
+
+		
+		for (int i=0; i < tree_result.tree.getEdges().length; i++)
+		{
+			System.out.println("edge(node" +tree_num+ "_" + tree_result.tree.getEdges()[i][0] + ", node"
+					+tree_num+ "_" + tree_result.tree.getEdges()[i][1]+").");
+		}
+		
+		tree_num++;				
 	}
 
 	public void startProcessing()
-	{
-		// TODO Auto-generated method stub
-
-	}
-
+	{}
+	
+	public void endProcessing()
+	{}
 }

@@ -25,6 +25,59 @@ public class CZSemTree {
 		initNodeArray();		
 	}
 	
+	public int getCountOfNodes()
+	{
+		return node_array.length;
+	}
+	
+	public int[][] getEdges()
+	{
+		if (getCountOfNodes() <= 0) return null;
+		
+		int [][] ret = new int[getCountOfNodes()-1][];
+		
+		getEdgesDeepOrd(ret, node_array[0], 0, -1);
+		
+		return ret;		
+	}
+	
+	/**
+	 * 
+	 * @param edges
+	 * @param node - currently processed node 
+	 * @param position - deep order of currently processed node
+	 * @param parent - deep order of parent of currently processed node
+	 * @return - deep order of next processed node
+	 */
+	private int getEdgesDeepOrd(int[][] edges, TNode node, int position, int parent)
+	{		
+		int next_pos = position; // position of next processed node
+		
+		if (node.first_son != null)
+		{
+			edges[position] = createEdge(position, position+1);
+			next_pos = getEdgesDeepOrd(edges, node.first_son, position+1, position);
+		}
+		
+		if (node.brother != null)
+		{
+			edges[next_pos] = createEdge(parent, next_pos+1);
+			next_pos = getEdgesDeepOrd(edges, node.brother, next_pos+1, parent);			
+		}		
+		
+		return next_pos;		
+	}
+
+	
+	private static int[] createEdge(int a, int b)
+	{
+		int[] ret = new int[2];
+		ret[0] = a;
+		ret[1] = b;
+		
+		return ret;
+	}
+	
 
 	/**
 	 * Replace the original value of the node attribute by a new one. 
