@@ -11,9 +11,11 @@ public class ILPQueryProcessor implements ResultProcessor
 {
 	
 	int tree_num = 0;
-	int max_trees = 500;
+	int max_trees = 50;
 	
 	boolean neagtive = false;
+	
+	public static int[] interest_attr = {};
 	
 	public static String ASCIINormalise(String src)
 	{
@@ -71,10 +73,10 @@ public class ILPQueryProcessor implements ResultProcessor
 		
 		System.out.println("tree_root("+getNodeStr(0)+").");
 		
-		if (isNeagtive()) 
-			System.out.println(":- valid_root("+getNodeStr(0)+").");
-		else
-			System.out.println("valid_root("+getNodeStr(0)+").");
+		//negative
+		if (isNeagtive()) System.out.print(":- ");
+			
+		System.out.println("injured("+getNodeStr(0)+").");
 			
 		
 		for (int i = 0; i < tree_result.tree.getCountOfNodes(); i++)			

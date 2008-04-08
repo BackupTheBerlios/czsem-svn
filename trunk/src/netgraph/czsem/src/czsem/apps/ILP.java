@@ -5,6 +5,7 @@ import java.io.IOException;
 import cz.cuni.mff.mirovsky.account.ServerCommunicationFormatErrorException;
 import czsem.net.NetgraphServerComunication;
 import czsem.net.NetgraphProtocolConnection.NetgraphProtocolException;
+import czsem.net.NetgraphServerComunication.TreeSubtypeChars;
 import czsem.utils.ILPQueryProcessor;
 import czsem.utils.NetgraphQuery;
 
@@ -52,6 +53,7 @@ public class ILP {
 
 	
 		NetgraphQuery nq = new NetgraphQuery(query_string, nc);
+		nq.setResultTreeSubtype(TreeSubtypeChars.GET_TREE_SUBTYPE_TREE);
 				
 		nq.startTheQuery();
 
@@ -77,7 +79,7 @@ public class ILP {
 
 		//ilp_qp = new ILPQueryProcessor();
 		ilp_qp.setNeagtive(true);
-		ilp_qp.setMaxTrees(1000);
+		ilp_qp.setMaxTrees(100);
 
 		try {
 		
@@ -88,6 +90,7 @@ public class ILP {
 			System.err.println("%-end of trees - negative-");
 		}
 
+		/**/
 		
 		nc.close();		
 	}
