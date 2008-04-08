@@ -712,7 +712,8 @@ a_afun(node6_8, auxv).         const(auxv).
 m_form(node6_8, nebyl).         const(nebyl).
 m_lemma(node6_8, byt).         const(byt).
 m_tag(node6_8, vpys___xr_na___).         const(vpys___xr_na___).
-negation(node6_8)%%%%%%%% node6_9 %%%%%%%%%%%%%%%%%%%
+negation(node6_8).
+%%%%%%%% node6_9 %%%%%%%%%%%%%%%%%%%
 node(node6_9).
 a_afun(node6_9, pred).         const(pred).
 m_form(node6_9, zranen).         const(zranen).
@@ -868,7 +869,8 @@ a_afun(node8_5, pred).         const(pred).
 m_form(node8_5, neprezil).         const(neprezil).
 m_lemma(node8_5, prezit).         const(prezit).
 m_tag(node8_5, vpys___xr_na___).         const(vpys___xr_na___).
-negation(node8_5)%%%%%%%% node8_6 %%%%%%%%%%%%%%%%%%%
+negation(node8_5).
+%%%%%%%% node8_6 %%%%%%%%%%%%%%%%%%%
 node(node8_6).
 functor(node8_6, act).         const(act).
 gram_sempos(node8_6, n_denot).         const(n_denot).
@@ -1069,7 +1071,8 @@ a_afun(node10_7, auxv).         const(auxv).
 m_form(node10_7, nebyl).         const(nebyl).
 m_lemma(node10_7, byt).         const(byt).
 m_tag(node10_7, vpys___xr_na___).         const(vpys___xr_na___).
-negation(node10_7)%%%%%%%% node10_8 %%%%%%%%%%%%%%%%%%%
+negation(node10_7).
+%%%%%%%% node10_8 %%%%%%%%%%%%%%%%%%%
 node(node10_8).
 a_afun(node10_8, pred).         const(pred).
 m_form(node10_8, zranen).         const(zranen).
@@ -1120,7 +1123,8 @@ a_afun(node11_5, auxv).         const(auxv).
 m_form(node11_5, nebyla).         const(nebyla).
 m_lemma(node11_5, byt).         const(byt).
 m_tag(node11_5, vpqw___xr_na___).         const(vpqw___xr_na___).
-negation(node11_5)%%%%%%%% node11_6 %%%%%%%%%%%%%%%%%%%
+negation(node11_5).
+%%%%%%%% node11_6 %%%%%%%%%%%%%%%%%%%
 node(node11_6).
 a_afun(node11_6, pred).         const(pred).
 m_form(node11_6, zranena).         const(zranena).
@@ -1288,7 +1292,8 @@ a_afun(node12_25, auxv).         const(auxv).
 m_form(node12_25, nebyla).         const(nebyla).
 m_lemma(node12_25, byt).         const(byt).
 m_tag(node12_25, vpqw___xr_na___).         const(vpqw___xr_na___).
-negation(node12_25)%%%%%%%% node12_26 %%%%%%%%%%%%%%%%%%%
+negation(node12_25).
+%%%%%%%% node12_26 %%%%%%%%%%%%%%%%%%%
 node(node12_26).
 a_afun(node12_26, pnom).         const(pnom).
 m_form(node12_26, zranena).         const(zranena).
@@ -1618,7 +1623,8 @@ a_afun(node15_9, auxv).         const(auxv).
 m_form(node15_9, nebyl).         const(nebyl).
 m_lemma(node15_9, byt).         const(byt).
 m_tag(node15_9, vpys___xr_na___).         const(vpys___xr_na___).
-negation(node15_9)%%%%%%%% node15_10 %%%%%%%%%%%%%%%%%%%
+negation(node15_9).
+%%%%%%%% node15_10 %%%%%%%%%%%%%%%%%%%
 node(node15_10).
 a_afun(node15_10, pred).         const(pred).
 m_form(node15_10, zranen).         const(zranen).
@@ -1915,7 +1921,8 @@ a_afun(node18_5, auxv).         const(auxv).
 m_form(node18_5, nebyl).         const(nebyl).
 m_lemma(node18_5, byt).         const(byt).
 m_tag(node18_5, vpys___xr_na___).         const(vpys___xr_na___).
-negation(node18_5)%%%%%%%% node18_6 %%%%%%%%%%%%%%%%%%%
+negation(node18_5).
+%%%%%%%% node18_6 %%%%%%%%%%%%%%%%%%%
 node(node18_6).
 a_afun(node18_6, pred).         const(pred).
 m_form(node18_6, zranen).         const(zranen).
@@ -3005,7 +3012,8 @@ a_afun(node25_9, auxv).         const(auxv).
 m_form(node25_9, nebyl).         const(nebyl).
 m_lemma(node25_9, byt).         const(byt).
 m_tag(node25_9, vpys___xr_na___).         const(vpys___xr_na___).
-negation(node25_9)%%%%%%%% node25_10 %%%%%%%%%%%%%%%%%%%
+negation(node25_9).
+%%%%%%%% node25_10 %%%%%%%%%%%%%%%%%%%
 node(node25_10).
 a_afun(node25_10, pred).         const(pred).
 m_form(node25_10, zranen).         const(zranen).
@@ -4326,7 +4334,8 @@ a_afun(node32_5, auxv).         const(auxv).
 m_form(node32_5, nebyl).         const(nebyl).
 m_lemma(node32_5, byt).         const(byt).
 m_tag(node32_5, vpys___xr_na___).         const(vpys___xr_na___).
-negation(node32_5)%%%%%%%% node32_6 %%%%%%%%%%%%%%%%%%%
+negation(node32_5).
+%%%%%%%% node32_6 %%%%%%%%%%%%%%%%%%%
 node(node32_6).
 a_afun(node32_6, pred).         const(pred).
 m_form(node32_6, zranen).         const(zranen).
@@ -4375,7 +4384,8 @@ a_afun(node33_5, auxv).         const(auxv).
 m_form(node33_5, nebyl).         const(nebyl).
 m_lemma(node33_5, byt).         const(byt).
 m_tag(node33_5, vpys___xr_na___).         const(vpys___xr_na___).
-negation(node33_5)%%%%%%%% node33_6 %%%%%%%%%%%%%%%%%%%
+negation(node33_5).
+%%%%%%%% node33_6 %%%%%%%%%%%%%%%%%%%
 node(node33_6).
 a_afun(node33_6, pred).         const(pred).
 m_form(node33_6, zranen).         const(zranen).
@@ -4447,7 +4457,8 @@ a_afun(node34_9, auxv).         const(auxv).
 m_form(node34_9, nebyla).         const(nebyla).
 m_lemma(node34_9, byt).         const(byt).
 m_tag(node34_9, vpqw___xr_na___).         const(vpqw___xr_na___).
-negation(node34_9)%%%%%%%% node34_10 %%%%%%%%%%%%%%%%%%%
+negation(node34_9).
+%%%%%%%% node34_10 %%%%%%%%%%%%%%%%%%%
 node(node34_10).
 a_afun(node34_10, pred).         const(pred).
 m_form(node34_10, zranena).         const(zranena).
@@ -4932,7 +4943,8 @@ a_afun(node38_5, auxv).         const(auxv).
 m_form(node38_5, nebyl).         const(nebyl).
 m_lemma(node38_5, byt).         const(byt).
 m_tag(node38_5, vpys___xr_na___).         const(vpys___xr_na___).
-negation(node38_5)%%%%%%%% node38_6 %%%%%%%%%%%%%%%%%%%
+negation(node38_5).
+%%%%%%%% node38_6 %%%%%%%%%%%%%%%%%%%
 node(node38_6).
 a_afun(node38_6, pred).         const(pred).
 m_form(node38_6, zranen).         const(zranen).
@@ -5257,7 +5269,8 @@ a_afun(node40_5, auxv).         const(auxv).
 m_form(node40_5, nebyl).         const(nebyl).
 m_lemma(node40_5, byt).         const(byt).
 m_tag(node40_5, vpys___xr_na___).         const(vpys___xr_na___).
-negation(node40_5)%%%%%%%% node40_6 %%%%%%%%%%%%%%%%%%%
+negation(node40_5).
+%%%%%%%% node40_6 %%%%%%%%%%%%%%%%%%%
 node(node40_6).
 a_afun(node40_6, pred).         const(pred).
 m_form(node40_6, zranen).         const(zranen).
@@ -5671,7 +5684,8 @@ a_afun(node43_5, auxv).         const(auxv).
 m_form(node43_5, nebyl).         const(nebyl).
 m_lemma(node43_5, byt).         const(byt).
 m_tag(node43_5, vpys___xr_na___).         const(vpys___xr_na___).
-negation(node43_5)%%%%%%%% node43_6 %%%%%%%%%%%%%%%%%%%
+negation(node43_5).
+%%%%%%%% node43_6 %%%%%%%%%%%%%%%%%%%
 node(node43_6).
 a_afun(node43_6, pred).         const(pred).
 m_form(node43_6, zranen).         const(zranen).
@@ -6192,7 +6206,8 @@ a_afun(node48_7, auxv).         const(auxv).
 m_form(node48_7, nebyla).         const(nebyla).
 m_lemma(node48_7, byt).         const(byt).
 m_tag(node48_7, vpqw___xr_na___).         const(vpqw___xr_na___).
-negation(node48_7)%%%%%%%% node48_8 %%%%%%%%%%%%%%%%%%%
+negation(node48_7).
+%%%%%%%% node48_8 %%%%%%%%%%%%%%%%%%%
 node(node48_8).
 a_afun(node48_8, pred).         const(pred).
 m_form(node48_8, zranena).         const(zranena).
@@ -6376,7 +6391,8 @@ a_afun(node50_5, auxv).         const(auxv).
 m_form(node50_5, nebyl).         const(nebyl).
 m_lemma(node50_5, byt).         const(byt).
 m_tag(node50_5, vpys___xr_na___).         const(vpys___xr_na___).
-negation(node50_5)%%%%%%%% node50_6 %%%%%%%%%%%%%%%%%%%
+negation(node50_5).
+%%%%%%%% node50_6 %%%%%%%%%%%%%%%%%%%
 node(node50_6).
 a_afun(node50_6, pred).         const(pred).
 m_form(node50_6, zranen).         const(zranen).
@@ -7134,7 +7150,8 @@ a_afun(node54_21, adv).         const(adv).
 m_form(node54_21, nesly).         const(nesly).
 m_lemma(node54_21, jit).         const(jit).
 m_tag(node54_21, vptp___xr_na___).         const(vptp___xr_na___).
-negation(node54_21)%%%%%%%% node54_22 %%%%%%%%%%%%%%%%%%%
+negation(node54_21).
+%%%%%%%% node54_22 %%%%%%%%%%%%%%%%%%%
 node(node54_22).
 functor(node54_22, intt).         const(intt).
 gram_sempos(node54_22, v).         const(v).
@@ -10279,7 +10296,8 @@ a_afun(node70_4, pred).         const(pred).
 m_form(node70_4, nechybela).         const(nechybela).
 m_lemma(node70_4, chybet__t___nekde_neco_chybi_).         const(chybet__t___nekde_neco_chybi_).
 m_tag(node70_4, vpqw___xr_na___).         const(vpqw___xr_na___).
-negation(node70_4)%%%%%%%% node70_5 %%%%%%%%%%%%%%%%%%%
+negation(node70_4).
+%%%%%%%% node70_5 %%%%%%%%%%%%%%%%%%%
 node(node70_5).
 functor(node70_5, rstr).         const(rstr).
 id(node70_5, t_plzensky51278_txt_001_p2s4a2).         const(t_plzensky51278_txt_001_p2s4a2).
