@@ -11,7 +11,7 @@ public class ILPQueryProcessor implements ResultProcessor
 {
 	
 	int tree_num = 0;
-	int max_trees = 50;
+	int max_trees = 500;
 	
 	boolean neagtive = false;
 	

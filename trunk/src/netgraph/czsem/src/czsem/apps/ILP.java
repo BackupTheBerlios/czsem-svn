@@ -77,7 +77,7 @@ public class ILP {
 
 		//ilp_qp = new ILPQueryProcessor();
 		ilp_qp.setNeagtive(true);
-		ilp_qp.setMaxTrees(100);
+		ilp_qp.setMaxTrees(1000);
 
 		try {
 		
