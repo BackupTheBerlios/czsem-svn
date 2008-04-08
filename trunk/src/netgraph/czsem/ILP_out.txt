@@ -12946,7 +12946,7 @@ deepord(node8_31, x14_2).         const(x14_2).
 a_ref_type(node8_31, tree).         const(tree).
 a_afun(node8_31, Pred).         const(Pred).
 m_form(node8_31, mohla).         const(mohla).
-m_lemma(node8_31, moci___mit_moznost_[neco_delat]_).         const(moci___mit_moznost_[neco_delat]_).
+m_lemma(node8_31, moci___mit_moznost__neco_delat__).         const(moci___mit_moznost__neco_delat__).
 m_tag(node8_31, VpQW___XR_AA___).         const(VpQW___XR_AA___).
 w_token(node8_31, mohla).         const(mohla).
 a_ord(node8_31, 19).         const(19).
@@ -15257,7 +15257,7 @@ deepord(node15_17, x9_1).         const(x9_1).
 a_ref_type(node15_17, tree).         const(tree).
 a_afun(node15_17, Pred).         const(Pred).
 m_form(node15_17, mohli).         const(mohli).
-m_lemma(node15_17, moci___mit_moznost_[neco_delat]_).         const(moci___mit_moznost_[neco_delat]_).
+m_lemma(node15_17, moci___mit_moznost__neco_delat__).         const(moci___mit_moznost__neco_delat__).
 m_tag(node15_17, VpMP___XR_AA___).         const(VpMP___XR_AA___).
 w_token(node15_17, mohli).         const(mohli).
 a_ord(node15_17, 10).         const(10).
@@ -17330,7 +17330,7 @@ deepord(node21_16, x7_2).         const(x7_2).
 a_ref_type(node21_16, tree).         const(tree).
 a_afun(node21_16, Atr).         const(Atr).
 m_form(node21_16, moci).         const(moci).
-m_lemma(node21_16, moci___mit_moznost_[neco_delat]_).         const(moci___mit_moznost_[neco_delat]_).
+m_lemma(node21_16, moci___mit_moznost__neco_delat__).         const(moci___mit_moznost__neco_delat__).
 m_tag(node21_16, Vf________A____).         const(Vf________A____).
 w_token(node21_16, moci).         const(moci).
 a_ord(node21_16, 8).         const(8).
@@ -25892,7 +25892,7 @@ deepord(node50_9, x4_1).         const(x4_1).
 a_ref_type(node50_9, tree).         const(tree).
 a_afun(node50_9, Obj).         const(Obj).
 m_form(node50_9, jiz).         const(jiz).
-m_lemma(node50_9, jenz___ktery_[ve_vedl_vete]_).         const(jenz___ktery_[ve_vedl_vete]_).
+m_lemma(node50_9, jenz___ktery__ve_vedl_vete__).         const(jenz___ktery__ve_vedl_vete__).
 m_tag(node50_9, PJFS2__________).         const(PJFS2__________).
 w_token(node50_9, jiz).         const(jiz).
 a_ord(node50_9, 3).         const(3).
