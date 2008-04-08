@@ -62,7 +62,8 @@ public class ILP {
 			nq.processResult(ilp_qp);
 		
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.err.println("%-end of trees-");
 		}
 
 		/**/

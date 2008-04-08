@@ -24,7 +24,7 @@ public class ILPQueryProcessor implements ResultProcessor
 	public static String VarNormalise(String src)
 	{
 		String norm = ASCIINormalise(src); 
-		norm = norm.replaceAll("[-^#*(),.:';/ \\\\]", "_");
+		norm = norm.replaceAll("[-^#*(),.:`';/ \\\\]", "_");
 		if (! Character.isLetter((norm.charAt(0))))
 		{
 			try
@@ -61,7 +61,7 @@ public class ILPQueryProcessor implements ResultProcessor
 		}		
 	}
 	
-	public void processSingleTreeResult(LoadTreeResult tree_result)
+	public void processSingleTreeResult(LoadTreeResult tree_result) throws Exception
 	{
 		System.out.println("\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 		System.out.println("% " + ASCIINormalise(tree_result.tree.getSentenceString(tree_result.tree_head)));
@@ -86,7 +86,9 @@ public class ILPQueryProcessor implements ResultProcessor
 					+tree_num+ "_" + tree_result.tree.getEdges()[i][1]+").");
 		}
 		
-		tree_num++;				
+		tree_num++;
+		
+		if (tree_num > 20) throw new Exception(); 
 	}
 
 	public void startProcessing()
