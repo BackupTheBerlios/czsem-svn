@@ -26,7 +26,7 @@ public class ILP {
 		
 		nc.setSearchPathAndInitializeGlobalHead(nc.getCurrentDirectory());
 		
-
+/**/
 		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%");
 		System.out.println("% Declarations");
 		System.out.println("%:- set(nodes,500000)?");
@@ -36,7 +36,7 @@ public class ILP {
 		System.out.println(":- set(verbose,2)?");
 		System.out.println(":- modeh(1,tree_root(+node))?");
 //		System.out.println(":- modeh(1,negation(#node))?");
-		System.out.println(":- modeh(1,injured(+node))?");
+		System.out.println(":- modeh(1,injured(+const))?");
 		System.out.println(":- modeb(*,edge(-node,+node))?");
 		System.out.println(":- modeb(*,edge(+node,-node))?");
 		System.out.println(":- modeb(*,edge(+node,+node))?");
@@ -61,7 +61,7 @@ public class ILP {
 		}
 		System.out.println("% end of definitions of linguistic attributes");			
 
-
+/**/
 	
 		NetgraphQuery nq = new NetgraphQuery(query_string, nc);
 		nq.setResultTreeSubtype(TreeSubtypeChars.GET_TREE_SUBTYPE_TREE);

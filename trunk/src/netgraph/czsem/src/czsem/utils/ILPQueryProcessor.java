@@ -81,6 +81,18 @@ public class ILPQueryProcessor implements ResultProcessor
 		}		
 	}
 	
+	public void processSingleTreeResult3(LoadTreeResult tree_result) throws Exception
+	{
+		//negative
+		if (isNeagtive()) System.out.print(":- ");
+
+		System.out.println("injured("+VarNormalise(tree_result.tree.getFirstNodeAttributeValue(0, 23)) +").");
+
+		tree_num++;
+		
+		if (tree_num > getMaxTrees()) throw new Exception(); 		
+	}
+
 	public void processSingleTreeResult(LoadTreeResult tree_result) throws Exception
 	{
 		System.out.println("\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
@@ -91,7 +103,7 @@ public class ILPQueryProcessor implements ResultProcessor
 		//negative
 		if (isNeagtive()) System.out.print(":- ");
 			
-		System.out.println("injured("+getNodeStr(0)+").");
+//		System.out.println("injured("+getNodeStr(0)+").");
 			
 		
 		for (int i = 0; i < tree_result.tree.getCountOfNodes(); i++)			
