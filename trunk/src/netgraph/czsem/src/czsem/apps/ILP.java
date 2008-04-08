@@ -35,7 +35,7 @@ public class ILP {
 		System.out.println(":- set(c,2),set(i,2),  set(inflate,800)?");
 		System.out.println(":- set(verbose,2)?");
 		System.out.println(":- modeh(1,tree_root(+node))?");
-		System.out.println(":- modeh(1,valid_root(+node))?");
+		System.out.println(":- modeh(1,injured(+node))?");
 		System.out.println(":- modeb(*,edge(-node,+node))?");
 		System.out.println(":- modeb(*,edge(+node,-node))?");
 		System.out.println(":- modeb(*,edge(+node,+node))?\n");
@@ -43,10 +43,11 @@ public class ILP {
 		
 		// print artrt list
 		System.out.println("% begin of definitions of linguistic attributes");			
-		for (int i = 0; i < nc.getGlobalHead().getSize(); i++)
+//		for (int i = 0; i < nc.getGlobalHead().getSize(); i++)
+		for (int i = 0; i < ILPQueryProcessor.interest_attr.length; i++)			
 		{
 			System.out.println(":- modeb(1,"+ ILPQueryProcessor.VarNormalise(
-					nc.getGlobalHead().getAttributeAt(i).getName()) +"(+node,#const))?");			
+					nc.getGlobalHead().getAttributeAt(ILPQueryProcessor.interest_attr[i]).getName()) +"(+node,#const))?");			
 		}
 		System.out.println("% end of definitions of linguistic attributes");			
 

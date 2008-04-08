@@ -15,14 +15,14 @@ public class ILPQueryProcessor implements ResultProcessor
 	
 	boolean neagtive = false;
 	
-	public static int[] interest_attr = {};
+	public static int[] interest_attr = {6, 20, 23, 35, 40, 42, 43, 44};
 	
 	public static String ASCIINormalise(String src)
 	{
 		if (src == null) return "null";
 		String norm = Normalizer.normalize(src, Form.NFD); 
-		norm = norm.replaceAll("[^\\p{ASCII}]", "");
-		return norm;
+		norm = norm.replaceAll("[^\\p{ASCII}]", "");		
+		return norm.toLowerCase();
 		
 	}
 
@@ -53,15 +53,21 @@ public class ILPQueryProcessor implements ResultProcessor
 
 	private void printAttributes(NGTreeHead head, CZSemTree tree, int node_index)	
 	{
-		for (int attr = 0; attr < head.getSize(); attr++) {
-			String val = tree.getFirstNodeAttributeValue(node_index, attr);
+		for (int attr = 0; attr < interest_attr.length; attr++) {
+			String val = tree.getFirstNodeAttributeValue(node_index, interest_attr[attr]);
 			if (val != null)
 			{
-				System.out.print(VarNormalise(head.getAttributeAt(attr).getName()));
+				System.out.print(VarNormalise(head.getAttributeAt(interest_attr[attr]).getName()));
 				System.out.print("(" + getNodeStr(node_index) + ", ");
 				System.out.print(VarNormalise(val) + ").");
 
-				System.out.println("         const(" + VarNormalise(val) + ").");				
+				System.out.println("         const(" + VarNormalise(val) + ").");
+				
+				if (interest_attr[attr] == 44) //   m/tag
+				{
+					if (val.charAt(10) == 'N')
+						System.out.print("negation("+ getNodeStr(node_index) +")");
+				}
 			}			
 		}		
 	}
