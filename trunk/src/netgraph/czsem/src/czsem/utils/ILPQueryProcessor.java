@@ -72,7 +72,7 @@ public class ILPQueryProcessor implements ResultProcessor
 					{
 						char ch = val.toLowerCase().charAt(i);
 						if (ch != '-')
-							System.out.print("m_tag"+ i +"("+getNodeStr(node_index)+"," + ch +"). const("+ch+"). ");			
+							System.out.print("m_tag"+ i +"("+getNodeStr(node_index)+",'" + ch +"'). const('"+ch+"'). ");			
 					}
 					System.out.println();
 
