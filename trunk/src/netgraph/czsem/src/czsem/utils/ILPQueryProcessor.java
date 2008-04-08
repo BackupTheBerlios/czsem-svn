@@ -11,6 +11,9 @@ public class ILPQueryProcessor implements ResultProcessor
 {
 	
 	int tree_num = 0;
+	int max_trees = 50;
+	
+	boolean neagtive = false;
 	
 	public static String ASCIINormalise(String src)
 	{
@@ -24,7 +27,7 @@ public class ILPQueryProcessor implements ResultProcessor
 	public static String VarNormalise(String src)
 	{
 		String norm = ASCIINormalise(src); 
-		norm = norm.replaceAll("[-^#*(),.:`';/ \\\\]", "_");
+		norm = norm.replaceAll("[-^#*(),.:`';/ \\\\\"]", "_");
 		if (! Character.isLetter((norm.charAt(0))))
 		{
 			try
@@ -68,6 +71,12 @@ public class ILPQueryProcessor implements ResultProcessor
 		
 		System.out.println("tree_root("+getNodeStr(0)+").");
 		
+		if (isNeagtive()) 
+			System.out.println(":- valid_root("+getNodeStr(0)+").");
+		else
+			System.out.println("valid_root("+getNodeStr(0)+").");
+			
+		
 		for (int i = 0; i < tree_result.tree.getCountOfNodes(); i++)			
 		{
 			System.out.println("%%%%%%%% " + getNodeStr(i) + " %%%%%%%%%%%%%%%%%%%");
@@ -88,7 +97,7 @@ public class ILPQueryProcessor implements ResultProcessor
 		
 		tree_num++;
 		
-		if (tree_num > 20) throw new Exception(); 
+		if (tree_num > max_trees) throw new Exception(); 
 	}
 
 	public void startProcessing()
@@ -96,4 +105,12 @@ public class ILPQueryProcessor implements ResultProcessor
 	
 	public void endProcessing()
 	{}
+
+	public boolean isNeagtive() {
+		return neagtive;
+	}
+
+	public void setNeagtive(boolean neagtive) {
+		this.neagtive = neagtive;
+	}
 }

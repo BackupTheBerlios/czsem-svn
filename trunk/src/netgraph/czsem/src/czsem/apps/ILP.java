@@ -34,6 +34,7 @@ public class ILP {
 		System.out.println(":- set(c,2),set(i,2),  set(inflate,800)?");
 		System.out.println(":- set(verbose,2)?");
 		System.out.println(":- modeh(1,tree_root(+node))?");
+		System.out.println(":- modeh(1,valid_root(+node))?");
 		System.out.println(":- modeb(*,edge(-node,+node))?");
 		System.out.println(":- modeb(*,edge(+node,-node))?");
 		System.out.println(":- modeb(*,edge(+node,+node))?\n");
@@ -51,7 +52,7 @@ public class ILP {
 
 	
 		NetgraphQuery nq = new NetgraphQuery(query_string, nc);
-		
+				
 		nq.startTheQuery();
 
 
@@ -63,11 +64,30 @@ public class ILP {
 		
 		} catch (Exception e) {
 			//e.printStackTrace();
-			System.err.println("%-end of trees-");
+			System.err.println("%-end of trees - positive-");
+		}
+		
+		/**/
+		
+		System.out.println("\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+		System.out.println("% N E G A T I V E      E X A M P L E S");
+		
+		nq.setInvertMatch(true);
+		nq.startTheQuery();
+
+		ilp_qp = new ILPQueryProcessor();
+		ilp_qp.setNeagtive(true);
+
+		try {
+		
+			nq.processResult(ilp_qp);
+		
+		} catch (Exception e) {
+			//e.printStackTrace();
+			System.err.println("%-end of trees - negative-");
 		}
 
-		/**/
-
+		
 		nc.close();		
 	}
 
