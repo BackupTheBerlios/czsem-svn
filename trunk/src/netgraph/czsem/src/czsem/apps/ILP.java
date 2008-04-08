@@ -25,11 +25,28 @@ public class ILP {
 		
 		nc.setSearchPathAndInitializeGlobalHead(nc.getCurrentDirectory());
 		
-		//print artrt list
-		/**		for (int i = 0; i < nc.getGlobalHead().getSize(); i++) {
-					System.out.println(i+": "+nc.getGlobalHead().getAttributeAt(i).getName());			
-				}
-		/**/
+
+		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%");
+		System.out.println("% Declarations");
+		System.out.println("%:- set(nodes,500000)?");
+		System.out.println("%:- set(h,1000000)?");
+		System.out.println("%:- set(r,10000)?");
+		System.out.println(":- set(c,2),set(i,2),  set(inflate,800)?");
+		System.out.println(":- set(verbose,2)?");
+		System.out.println(":- modeh(1,tree_root(+node))?");
+		System.out.println(":- modeb(*,edge(-node,+node))?");
+		System.out.println(":- modeb(*,edge(+node,-node))?");
+		System.out.println(":- modeb(*,edge(+node,+node))?\n");
+		
+		
+		// print artrt list
+		System.out.println("% begin of definitions of linguistic attributes");			
+		for (int i = 0; i < nc.getGlobalHead().getSize(); i++)
+		{
+			System.out.println(":- modeb(1,"+ ILPQueryProcessor.VarNormalise(
+					nc.getGlobalHead().getAttributeAt(i).getName()) +"(+node,#const))?");			
+		}
+		System.out.println("% end of definitions of linguistic attributes");			
 
 
 	
