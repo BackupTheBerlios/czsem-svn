@@ -65,8 +65,17 @@ public class ILPQueryProcessor implements ResultProcessor
 				
 				if (interest_attr[attr] == 44) //   m/tag
 				{
-					if (val.charAt(10) == 'N')
+/**					if (val.charAt(10) == 'N')
 						System.out.println("negation("+ getNodeStr(node_index) +").");
+/**/
+					for (int i = 0; i < 15; i++)
+					{
+						char ch = val.toLowerCase().charAt(i);
+						if (ch != '-')
+							System.out.print("m_tag"+ i +"("+getNodeStr(node_index)+"," + ch +"). const("+ch+"). ");			
+					}
+					System.out.println();
+
 				}
 			}			
 		}		

@@ -35,10 +35,20 @@ public class ILP {
 		System.out.println(":- set(c,2),set(i,2),  set(inflate,800)?");
 		System.out.println(":- set(verbose,2)?");
 		System.out.println(":- modeh(1,tree_root(+node))?");
+//		System.out.println(":- modeh(1,negation(#node))?");
 		System.out.println(":- modeh(1,injured(+node))?");
 		System.out.println(":- modeb(*,edge(-node,+node))?");
 		System.out.println(":- modeb(*,edge(+node,-node))?");
-		System.out.println(":- modeb(*,edge(+node,+node))?\n");
+		System.out.println(":- modeb(*,edge(+node,+node))?");
+		System.out.println();		
+		for (int i = 0; i < 15; i++)
+		{
+			System.out.println(":- modeb(1,m_tag"+ i +"(+node,#const))?");			
+		}
+		System.out.println();
+		
+		
+
 		
 		
 		// print artrt list
