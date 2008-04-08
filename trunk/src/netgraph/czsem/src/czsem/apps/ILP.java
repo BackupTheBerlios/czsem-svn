@@ -75,8 +75,9 @@ public class ILP {
 		nq.setInvertMatch(true);
 		nq.startTheQuery();
 
-		ilp_qp = new ILPQueryProcessor();
+		//ilp_qp = new ILPQueryProcessor();
 		ilp_qp.setNeagtive(true);
+		ilp_qp.setMaxTrees(100);
 
 		try {
 		

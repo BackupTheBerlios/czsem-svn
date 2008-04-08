@@ -97,7 +97,7 @@ public class ILPQueryProcessor implements ResultProcessor
 		
 		tree_num++;
 		
-		if (tree_num > max_trees) throw new Exception(); 
+		if (tree_num > getMaxTrees()) throw new Exception(); 
 	}
 
 	public void startProcessing()
@@ -112,5 +112,13 @@ public class ILPQueryProcessor implements ResultProcessor
 
 	public void setNeagtive(boolean neagtive) {
 		this.neagtive = neagtive;
+	}
+
+	public int getMaxTrees() {
+		return max_trees;
+	}
+
+	public void setMaxTrees(int max_trees) {
+		this.max_trees = max_trees;
 	}
 }
