@@ -11,7 +11,7 @@ public class ILPQueryProcessor implements ResultProcessor
 {
 	
 	int tree_num = 0;
-	int max_trees = 50;
+	int max_trees = 50000;
 	
 	boolean neagtive = false;
 	
@@ -101,7 +101,7 @@ public class ILPQueryProcessor implements ResultProcessor
 		System.out.println("tree_root("+getNodeStr(0)+").");
 		
 		//negative
-		if (isNeagtive()) System.out.print(":- ");
+//		if (isNeagtive()) System.out.print(":- ");
 			
 //		System.out.println("injured("+getNodeStr(0)+").");
 			

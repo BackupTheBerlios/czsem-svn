@@ -36,7 +36,7 @@ public class ILP {
 		System.out.println(":- set(verbose,2)?");
 		System.out.println(":- modeh(1,tree_root(+node))?");
 //		System.out.println(":- modeh(1,negation(#node))?");
-		System.out.println(":- modeh(1,injured(+const))?");
+//		System.out.println(":- modeh(1,injured(+const))?");
 		System.out.println(":- modeb(*,edge(-node,+node))?");
 		System.out.println(":- modeb(*,edge(+node,-node))?");
 		System.out.println(":- modeb(*,edge(+node,+node))?");
@@ -80,7 +80,7 @@ public class ILP {
 			System.err.println("%-end of trees - positive-");
 		}
 		
-		/**/
+		/**
 		
 		System.out.println("\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 		System.out.println("% N E G A T I V E      E X A M P L E S");
@@ -115,7 +115,8 @@ public class ILP {
 	public static void main(String[] args) throws NetgraphProtocolException, IOException, ServerCommunicationFormatErrorException {
 //		ILP ilp = new ILP("[deepord=0]");
 		 
-		ILP ilp = new ILP("[_name=action_type,gram/sempos=v,t_lemma=zranit|usmrtit|zemřít|zahynout|přežít]([m/tag=??????????N*,_name=a-negation,hide=true,_optional=true],[functor=MANN,_name=injury_manner,_optional=true],[functor=ACT|PAT,t_lemma=kdo|člověk|osoba|muž|žena|dítě|řidič|řidička|spolujezdec|spolujezdkyně,_name=participant,_transitive=true]([functor=RSTR,gram/sempos=n.quant.*|adj.quant.*,_name=quantity,_optional=true]))");
+//		ILP ilp = new ILP("[_name=action_type,gram/sempos=v,t_lemma=zranit|usmrtit|zemřít|zahynout|přežít]([m/tag=??????????N*,_name=a-negation,hide=true,_optional=true],[functor=MANN,_name=injury_manner,_optional=true],[functor=ACT|PAT,t_lemma=kdo|člověk|osoba|muž|žena|dítě|řidič|řidička|spolujezdec|spolujezdkyně,_name=participant,_transitive=true]([functor=RSTR,gram/sempos=n.quant.*|adj.quant.*,_name=quantity,_optional=true]))");
+		ILP ilp = new ILP("[t_lemma=Škoda]([hide=hide,m/lemma=Škoda-1,a/ord>1])");
 
 		
 		ilp.perform();

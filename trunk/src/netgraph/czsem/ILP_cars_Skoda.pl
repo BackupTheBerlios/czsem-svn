@@ -3478,7 +3478,7 @@ edge(node9_63, node9_64).
 edge(node9_63, node9_65).
 edge(node9_63, node9_66).
 edge(node9_66, node9_67).
-.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % k dopravni nehode osobnich automobilu opel astra, skoda felicia a ford mondeo na krizovatce silnic z horazdovic na susici a maly bor vyjizdeli v nedeli profesionalni hasici z horazdovic. 
 tree_root(node10_0).
@@ -6184,7 +6184,7 @@ edge(node18_34, node18_35).
 edge(node18_35, node18_36).
 edge(node18_34, node18_37).
 edge(node18_34, node18_38).
-.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % v susicke ulici v kasperskych horach padla cast stromu na osobni automobil skoda felicie combi. 
 tree_root(node19_0).
@@ -13311,7 +13311,7 @@ edge(node45_29, node45_31).
 edge(node45_27, node45_32).
 edge(node45_27, node45_33).
 edge(node45_33, node45_34).
-.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % k nejvetsim uspechum profesionalnich hasicu v nasem kraji v roce 2007 se da bezesporu pricist zachrana mladika z potopene skody favorit, se kterou skoncil o cervnove noci v hlubokem potoce mezi dvema kalisti v karvine-loukach pri "mejdanu" skupiny mladych lidi. 
 tree_root(node46_0).
@@ -14259,7 +14259,7 @@ edge(node48_26, node48_28).
 edge(node48_25, node48_29).
 edge(node48_25, node48_30).
 edge(node48_30, node48_31).
-.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % dopravni nehoda kamionu a osobniho auta skoda superb omezila patnact minut pred devatou provoz na silnicnim tahu na skritek ve stare vsi na bruntalsku. 
 tree_root(node49_0).
@@ -15037,7 +15037,7 @@ edge(node50_55, node50_56).
 edge(node50_52, node50_57).
 edge(node50_52, node50_58).
 edge(node50_58, node50_59).
-.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % posledni ze ctyr pozaru vozidla v moravskoslezskem kraji (zhruba behem 24 hodin) se stal ve stredu rano 17.10. v ostrave v hornopolni ulici (cast moravska ostrava a privoz), kde zacala pred sestou hodinou ranni horet skoda fabia. 
 tree_root(node51_0).
@@ -16137,7 +16137,7 @@ edge(node52_49, node52_73).
 edge(node52_73, node52_74).
 edge(node52_73, node52_75).
 edge(node52_75, node52_76).
-..
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % u novych sedlic se srazila kia picanto s oplem astrou a se skodou felicii, jedouci na zemni plyn. 
 tree_root(node53_0).
@@ -16384,7 +16384,7 @@ edge(node53_28, node53_29).
 edge(node53_29, node53_30).
 edge(node53_28, node53_31).
 edge(node53_28, node53_32).
-.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ve skutecnosti ale v gollove ulici horela zaparkovana skoda felicia. 
 tree_root(node54_0).
@@ -17524,7 +17524,7 @@ edge(node58_40, node58_44).
 edge(node58_44, node58_45).
 edge(node58_44, node58_46).
 edge(node58_44, node58_47).
-..
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % k dalsi dopravni nehode v 17.49 hodin vyjizdeli hasici z kamenice nad lipou k obci stritez, kde doslo k narazu osobniho automobilu skoda felicie do stromu. 
 tree_root(node59_0).
@@ -18474,7 +18474,7 @@ edge(node61_27, node61_31).
 edge(node61_31, node61_32).
 edge(node61_31, node61_33).
 edge(node61_33, node61_34).
-.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % osobni automobil skoda octavia zde narazil do stromu. 
 tree_root(node62_0).
@@ -18802,7 +18802,7 @@ edge(node63_22, node63_23).
 edge(node63_1, node63_24).
 edge(node63_24, node63_25).
 edge(node63_24, node63_26).
-.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % v 13.08 hodin hasici vyjizdeli na zadost policie cr k obci priseka u brtnice na jihlavsku ke shorelemu osobnimu automobilu skoda favorit, pri ktere uhorela jedna osoba. 
 tree_root(node64_0).
@@ -19346,7 +19346,7 @@ a_afun(node65_27, sb).         const(sb).
 m_form(node65_27, ktery).         const(ktery).
 m_lemma(node65_27, ktery).         const(ktery).
 m_tag(node65_27, p4ys1__________).         const(p4ys1__________).
-m_tag0(node65_27,'p'). const('p'). m_tag1(node65_27,'4'). const('4'). m_tag2(node65_27,'y'). const('y'). m_tag3(node65_27,'s'). const('s'). m_tag4(node65_27,'1').. const('1'). 
+m_tag0(node65_27,'p'). const('p'). m_tag1(node65_27,'4'). const('4'). m_tag2(node65_27,'y'). const('y'). m_tag3(node65_27,'s'). const('s'). m_tag4(node65_27,'1'). const('1'). 
 %%%%%%%% node65_28 %%%%%%%%%%%%%%%%%%%
 node(node65_28).
 functor(node65_28, twhen).         const(twhen).
@@ -19575,7 +19575,7 @@ edge(node65_47, node65_51).
 edge(node65_51, node65_52).
 edge(node65_47, node65_53).
 edge(node65_47, node65_54).
-.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % jednotka profesionalnich hasicu ze stanice jihlava vyprostila za pomoci specialniho naradi zaklinenou osobu ze skody 120 a nasledne ji predala do pece zdravotnicke zachranne sluzbe. 
 tree_root(node66_0).
@@ -20196,7 +20196,7 @@ edge(node67_26, node67_32).
 edge(node67_32, node67_33).
 edge(node67_32, node67_34).
 edge(node67_34, node67_35).
-....
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % na misto vyrazili profesionalni hasici ze sumperku, kteri po prijezdu na misto museli vyprostit z vozidla skoda felicia dve mrtve osoby, jednu zranenou pomahali lekarum resuscitovat, bohuzel neuspesne. 
 tree_root(node68_0).
@@ -21017,7 +21017,7 @@ edge(node69_47, node69_50).
 edge(node69_47, node69_51).
 edge(node69_51, node69_52).
 edge(node69_51, node69_53).
-..
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % jednotka hzs ps petrovice likvidovala pozar auta (skoda 120) v obci libouchec. 
 tree_root(node70_0).
@@ -21216,7 +21216,7 @@ edge(node70_22, node70_23).
 edge(node70_22, node70_24).
 edge(node70_22, node70_25).
 edge(node70_25, node70_26).
-.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % maje hlasen pozar osobniho auta skoda 105. 
 tree_root(node71_0).
@@ -21918,7 +21918,7 @@ edge(node74_23, node74_27).
 edge(node74_23, node74_28).
 edge(node74_28, node74_29).
 edge(node74_28, node74_30).
-.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % jednotka hzs cps chomutov zasahovala u dopravni nehody osobniho auta skoda 120 na prazske ulici v chomutove, smer cernovice. 
 tree_root(node75_0).
@@ -22044,7 +22044,7 @@ node(node75_19).
 a_afun(node75_19, atr).         const(atr).
 m_form(node75_19, osobniho).         const(osobniho).
 m_lemma(node75_19, osobni).         const(osobni).
-m_tag.(node75_19, aans2____1a____).         const(aans2____1a____).
+m_tag(node75_19, aans2____1a____).         const(aans2____1a____).
 m_tag0(node75_19,'a'). const('a'). m_tag1(node75_19,'a'). const('a'). m_tag2(node75_19,'n'). const('n'). m_tag3(node75_19,'s'). const('s'). m_tag4(node75_19,'2'). const('2'). m_tag9(node75_19,'1'). const('1'). m_tag10(node75_19,'a'). const('a'). 
 %%%%%%%% node75_20 %%%%%%%%%%%%%%%%%%%
 node(node75_20).
@@ -22461,7 +22461,7 @@ edge(node76_28, node76_32).
 edge(node76_28, node76_33).
 edge(node76_33, node76_34).
 edge(node76_33, node76_35).
-.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % pozar byl zlikvidovan v 12.28 skoda byla predbezne odhadnuta na 30 tisic korun. 
 tree_root(node77_0).
@@ -22869,7 +22869,7 @@ edge(node78_23, node78_25).
 edge(node78_1, node78_26).
 edge(node78_26, node78_27).
 edge(node78_26, node78_28).
-.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % jednotka hzs ps podborany vyjela k dopravni nehode osobniho auta (skoda octavia) k obci vroutek u podboran. 
 tree_root(node79_0).
@@ -23128,7 +23128,7 @@ edge(node79_30, node79_31).
 edge(node79_30, node79_32).
 edge(node79_32, node79_33).
 edge(node79_32, node79_34).
-..
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % dalsimi ucastniky nehody byla dodavka peugeot boxer a osobni vozidlo skoda fabia. 
 tree_root(node80_0).
@@ -23977,7 +23977,7 @@ edge(node83_22, node83_24).
 edge(node83_1, node83_25).
 edge(node83_25, node83_26).
 edge(node83_25, node83_27).
-.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % k horicimu vozidlu skoda felicia hasici v nedeli 42 minut po pulnoci vyjizdeli do brafovy ulice v brne-zabovreskach. 
 tree_root(node84_0).
@@ -25093,7 +25093,7 @@ edge(node88_15, node88_18).
 edge(node88_18, node88_19).
 edge(node88_18, node88_20).
 edge(node88_20, node88_21).
-.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % na misto je zavolali rodice 1,5leteho chlapce, ktery zustal v kabine vozidla skoda octavia se zabouchnutymi dvermi. 
 tree_root(node89_0).
@@ -26743,7 +26743,7 @@ edge(node94_21, node94_22).
 edge(node94_17, node94_23).
 edge(node94_23, node94_24).
 edge(node94_23, node94_25).
-.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % v 10.14 byla ohlasena nehoda vozidla skoda octavia mestske policie a vozidla honda na novych sadech v brne. 
 tree_root(node95_0).
@@ -27578,7 +27578,7 @@ edge(node97_23, node97_27).
 edge(node97_27, node97_28).
 edge(node97_27, node97_29).
 edge(node97_29, node97_30).
-.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % na silnici c. 425 se mezi obcemi vojkovice a holasice celne srazila vozidla skoda 105 a peugeot 206. 
 tree_root(node98_0).
@@ -28768,7 +28768,7 @@ edge(node102_27, node102_28).
 edge(node102_26, node102_29).
 edge(node102_26, node102_30).
 edge(node102_30, node102_31).
-.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % dnesni nehoda se stala na stejnem prejezdu, na kterem 19. listopadu hasici zasahovali pri srazce nakladniho vozidla skoda 706 s lokomotivou. 
 tree_root(node103_0).
@@ -30581,7 +30581,7 @@ m_tag0(node108_6,'n'). const('n'). m_tag1(node108_6,'n'). const('n'). m_tag2(nod
 node(node108_7).
 functor(node108_7, act).         const(act).
 gram_sempos(node108_7, n_denot).         const(n_denot).
-id(node108_7, .t_jihomoravsky79436_txt_001_p2s1a5).         const(t_jihomoravsky79436_txt_001_p2s1a5).
+id(node108_7, t_jihomoravsky79436_txt_001_p2s1a5).         const(t_jihomoravsky79436_txt_001_p2s1a5).
 t_lemma(node108_7, vozidlo).         const(vozidlo).
 %%%%%%%% node108_8 %%%%%%%%%%%%%%%%%%%
 node(node108_8).
@@ -31959,7 +31959,7 @@ edge(node114_17, node114_19).
 edge(node114_1, node114_20).
 edge(node114_20, node114_21).
 edge(node114_20, node114_22).
-..
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % hasici podniku skoda auto kvasiny vyjeli k nehode, ktera se stala v arealu zavodu. 
 tree_root(node115_0).
@@ -32169,7 +32169,7 @@ edge(node115_23, node115_24).
 edge(node115_23, node115_25).
 edge(node115_23, node115_26).
 edge(node115_26, node115_27).
-..
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % na krizovatce ulic kutnohorska a vlckovicka se srazila skoda felicie combi s peugeotem 306. 
 tree_root(node116_0).
@@ -32724,7 +32724,7 @@ edge(node117_40, node117_41).
 edge(node117_39, node117_42).
 edge(node117_39, node117_43).
 edge(node117_43, node117_44).
-.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % k dalsi dopravni nehode vyjeli profesionalni hasici z rychnova nad kneznou a hasici podniku skoda auto kvasiny k obci jestetice. 
 tree_root(node118_0).
@@ -33002,7 +33002,7 @@ edge(node118_32, node118_33).
 edge(node118_32, node118_34).
 edge(node118_32, node118_35).
 edge(node118_35, node118_36).
-.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ridic (18 let) osobniho vozidla ford escort predjizdel v neprehledne zatacce cyklistu, vyjel do protismeru, kde se bocne stretl s protijedoucim vozidlem skoda octavia. 
 tree_root(node119_0).
@@ -33478,7 +33478,7 @@ edge(node120_7, node120_8).
 edge(node120_1, node120_9).
 edge(node120_9, node120_10).
 edge(node120_9, node120_11).
-.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % profesionalni hasici z rychnova nad kneznou, dobrovolni hasici ze solnice a hasici hzs podniku skoda auto kvasiny vyjeli na pozar travy u arealu zavodu v solnici. 
 tree_root(node121_0).
@@ -33853,7 +33853,7 @@ edge(node121_45, node121_46).
 edge(node121_45, node121_47).
 edge(node121_47, node121_48).
 edge(node121_47, node121_49).
-....
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % krome profesionalnich hasicu z rychnova nad kneznou byli na misto privolani dobrovolni hasici z kostelce nad orlici, rychnova nad kneznou, vamberku a hasici podniku skoda auto kvasiny. 
 tree_root(node122_0).
@@ -34235,4 +34235,3 @@ edge(node122_45, node122_47).
 edge(node122_47, node122_48).
 edge(node122_47, node122_49).
 edge(node122_49, node122_50).
-E
