@@ -24831,7 +24831,7 @@ node(node87_19).
 a_afun(node87_19, atr).         const(atr).
 m_form(node87_19, iii).         const(iii).
 m_lemma(node87_19, iii_3_3).         const(iii_3_3).
-m_tag(node87_19, c}_____________).         const(c}_____________).
+m_tag(node87_19, c______________).         const(c______________).
 m_tag0(node87_19,'c'). const('c'). m_tag1(node87_19,'}'). const('}'). 
 %%%%%%%% node87_20 %%%%%%%%%%%%%%%%%%%
 node(node87_20).

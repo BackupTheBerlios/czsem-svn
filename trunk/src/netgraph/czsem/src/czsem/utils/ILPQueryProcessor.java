@@ -29,7 +29,7 @@ public class ILPQueryProcessor implements ResultProcessor
 	public static String VarNormalise(String src)
 	{
 		String norm = ASCIINormalise(src); 
-		norm = norm.replaceAll("[-^#*(),.:`';/ \\\\\"\\[\\]]", "_");
+		norm = norm.replaceAll("[-^#*(),.:`';/{} \\\\\"\\[\\]]", "_");
 		if (! Character.isLetter((norm.charAt(0))))
 		{
 			try
