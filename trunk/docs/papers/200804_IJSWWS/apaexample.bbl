@@ -1,0 +1,56 @@
+\begin{thebibliography}{}
+
+\bibitem[\protect\citeauthoryear{%
+Last%
+}{%
+Last%
+}{%
+{\protect\APACyear{1900}}%
+}]{%
+art1}%
+\APACinsertmetastar{%
+art1}%
+Last, F.%
+%
+\newblock{}\BBOP{}1900\BBCP{}.
+\newblock{}\BBOQ{}A fictitious journal article.\BBCQ{}
+\newblock{}\Bem{Journal of nothingness}, \Bem{2}, 1-2.
+
+\bibitem[\protect\citeauthoryear{%
+Ozturke%
+, Tsoukias%
+\BCBL{}\ \BBA{} Vincke%
+}{%
+Ozturke%
+\ \protect\BOthers{.}}{%
+{\protect\APACyear{2006}}%
+}]{%
+Ozturk}%
+\APACinsertmetastar{%
+Ozturk}%
+Ozturke, M.%
+, Tsoukias, A.%
+\BCBL{}\ \BBA{} Vincke, P.%
+%
+\newblock{}\BBOP{}2006\BBCP{}.
+\newblock{}\Bem{Preference modelling. multiple criteria decision analysis:
+  State of the art surveys}.
+\newblock{}Springer New York.
+
+\bibitem[\protect\citeauthoryear{%
+Writer%
+}{%
+Writer%
+}{%
+{\protect\APACyear{2000}}%
+}]{%
+boo1}%
+\APACinsertmetastar{%
+boo1}%
+Writer, R.%
+%
+\newblock{}\BBOP{}2000\BBCP{}.
+\newblock{}\Bem{A silly book}.
+\newblock{}Somewhere: PublishCo.
+
+\end{thebibliography}
