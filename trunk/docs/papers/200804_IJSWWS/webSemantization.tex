@@ -5,7 +5,7 @@
 %                                      %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass[man]{apa}
+\documentclass{apa}
 \usepackage[cp1250]{inputenc}
 \usepackage{times,epsfig}
 
@@ -33,10 +33,27 @@ Introduction.
 In our work for web semantization, we started with an illustrative example of a user buying a used car. She wants to get a reliable car with a small consumption. The car should also have as many airbags as possible. There are lot of other attributes of a car that may or may not be significant for the user. There are also attributes of the seller of the car, such as the price of the car, the confidence of the seller or the geographical position of the shop, where the car is parked.\par
 In the current state of Web, our user has to access several (many) web pages to find a car she would really like. She can have no assurance that she have found the best one; she maybe missed one seller or did not look on the right page. Web pages of sellers also often do not present all necessary information about the cars they offer. She have to go to e.g. the car manufacturer's page, where the given car model is described.\par
 
-There exists pages that gather information about cars or other goods (http://www.activeshopper.com). These pages are often only a list of names of goods with their price and sellers without any further information about the product. For making use of them, the user have to first find what type of car she wants and then find the lowest price. Even then she might not be satisfied - the seller might be in other region or be unreliable etc. The price is not the only criteria.
 
+	\begin{figure}
+		    \begin{center}
+		          	\includegraphics[scale=0.4]{screenshots/activeshopper.jpg}		          
+		    \end{center}
+		    \caption{A screenshot from Active shopper website}
+		    \label{fig:activeShopper}
+  \end{figure}
+  
+There exists pages that gather information about cars or other goods (http://www.activeshopper.com, see Figure \ref{fig:activeShopper}). These pages are often only a list of names of goods with their price and sellers without any further information about the product. For making use of them, the user have to first find what type of car she wants and then find the lowest price. Even then she might not be satisfied - the seller might be in other region or be unreliable etc. The price is not the only criteria.
+
+	\begin{figure}
+		    \begin{center}
+		          	\includegraphics[scale=0.4]{screenshots/googleSearch.jpg}		          
+		    \end{center}
+		    \caption{Results from keyword search from Google.com}
+		    \label{fig:googleSearch}
+  \end{figure}
+  
 \subsubsection{Keyword search limitations}
-If the user wanted to use Google \cite{google} to find a good car, she would not be any more successful. Using keywords is a good method when searching some information about cars, but not so much when you search a car with some properties. Using keywords such as "airbags" or "low consumption" may lead to a better results, but the search on the web page is necessary.
+If the user wanted to use Google \cite{google} (see Figure \ref{fig:googleSearch}) to find a good car, she would not be any more successful. Using keywords is a good method when searching some information about cars, but not so much when you search a car with some properties. Using keywords such as "airbags" or "low consumption" may lead to a better results, but the search on the web page is necessary.
 
 \subsubsection{Car search in a semantized web}
 Let's assume that web have gone a little bit semantized - some information is stored on web pages in a machine-readable form, there are distributed lists of such pages, some ontologies exists and are widely used.\par
@@ -64,7 +81,6 @@ There exist many tools for extraction of information form web pages \textbf{dopl
 
 Making such search engine cold help to arch over %preklenout :-)
 the gap between Web of today and the Semantic Web. We can expect that performance and quality of extraction tools will improve in near future and so the semantics provided by the search engine will be better and better. Authors of web pages have the possibility to support semantic content on their pages and this way they can improve contemporary Web and indeed the search engine. Success of such search engine would motivate both: (1) authors of web pages to include semantic content and (2) authors of software agents to exploit the semantic content.
-
 
 \subsection{Third party annotations}
 
@@ -97,6 +113,16 @@ This problem is widely addressed in the database engine field. Among most import
 \subsection{Top-k search}
 Our top-k search is based on the model from \cite{Fagin}. This model is based on a two-step approach. In the first step, $N$ lists $L_i$ of objects are created, where $N$ is the number of attributes. Each list $L_i$ is ordered by the preference by the preference on the attribute $A_i$. In our example, in the list $L_Consumption$ ordered by the preference on consumption, cars with low consumption would be on the top of $L_Consumption$ and cars with high consumption would be on the bottom of $L_Consumption$. Each list has to be able to return the top element on the list in a sequential way. The algorithm proceeds from the top to the bottom of each list.\par
 Lists consist basically of tuples $(Car, Degree of preference of attribute value)$, e.g. for list $L_Consumption$ one tuples may be $(Audi TT, 0.2)$. This tuple says that car Audi TT has preference of its consumption 0.2, in other words, it has not very good consumption. The algorithm then combines the preference degrees obtained from each list into the global score of the car. This step corresponds to the aggregation function.\par
+
+
+	\begin{figure}
+		    \begin{center}
+		          	\includegraphics[scale=0.4]{figures/topk.pdf}		          
+		    \end{center}
+		    \caption{Data flow in a top-k system}
+		    \label{fig:topk}
+  \end{figure}
+  
 One big advantage of this approach is that the lists can be generated in different places. This allows computation over distributed sources of data. This is ideal for our situation, when the agent has to combined preferences on data which are gathered from different web sites, maybe using different annotation software. \par
 
 \subsubsection{Certainty about the global ratings}
