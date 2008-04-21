@@ -1,0 +1,7 @@
+digraph "ontology" {
+
+"Annotation" [shape=box, label="Annotation", color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0"]
+"Extractor" [shape=box, label="Extractor", color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0"]
+"Uncertainty" [shape=box, label="Uncertainty", color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0"]
+"Car" [shape=record, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", label="{Car|{hasCarProducer|String*}|{hasCarPrice|String*}|{hasYear|String*}}"]
+}

@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns="file:/C:/data/progs/tmp/maruscak/Software/vidomeBack/ontology/vidomeontology.owl#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:p1="file:///c:/data/progs/tmp/maruscak/Software/vidomeBack/ontology/xsp.owl#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xml:base="file:/C:/data/progs/tmp/maruscak/Software/vidomeBack/ontology/vidomeontology.owl">
+  <owl:Ontology rdf:about="file:/C:/data/progs/tmp/maruscak/Software/vidomeBack/ontology/vidomeontology.owl">
+    <owl:imports rdf:resource="file:///c:/data/progs/tmp/maruscak/Software/vidomeBack/ontology/xsp.owl"/>
+  </owl:Ontology>
+  <owl:Class rdf:ID="Producer"/>
+  <owl:Class rdf:ID="DataSet"/>
+  <owl:Class rdf:ID="Annotation"/>
+  <owl:Class rdf:ID="Car"/>
+  <owl:Class rdf:ID="Uncertainty"/>
+  <owl:Class rdf:ID="Extractor"/>
+  <owl:Class rdf:ID="AnnotationFeedback"/>
+  <owl:Class rdf:ID="Notebook"/>
+  <owl:ObjectProperty rdf:ID="feedbacks">
+    <rdfs:range rdf:resource="file:/C:/data/progs/tmp/maruscak/Software/vidomeBack/ontology/vidomeontology.owl#AnnotationFeedback"/>
+    <rdfs:domain rdf:resource="file:/C:/data/progs/tmp/maruscak/Software/vidomeBack/ontology/vidomeontology.owl#Annotation"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="feedback">
+    <rdfs:domain rdf:resource="file:/C:/data/progs/tmp/maruscak/Software/vidomeBack/ontology/vidomeontology.owl#AnnotationFeedback"/>
+    <rdfs:range rdf:resource="file:/C:/data/progs/tmp/maruscak/Software/vidomeBack/ontology/vidomeontology.owl#Uncertainty"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="hasCarProducer">
+    <rdfs:domain rdf:resource="file:/C:/data/progs/tmp/maruscak/Software/vidomeBack/ontology/vidomeontology.owl#Car"/>
+    <p1:enumeration rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >ACURA ALFA ARO ASIA AUDI AUSTIN BENTLEY BMW BUICK CADILLAC CHEVROLET CHRYSLER CITROEN CITROËN DACIA DAEWOO DAF DAIHATSU DELOREAN DODGE EAGLE FERRARI FIAT FORD FSO GAZ PEUGEOT HONDA HUMMER HYUNDAI INFINITY ISUZU IVECO JAGUAR JEEP KAIPAN KIA LAMBORGHINI LANCIA ROVER LEXUS LINCOLN MASERATI MAZDA MERCEDES MITSUBISHI NISSAN OPEL PORSCHE SUBARU SUZUKY ŠKODA SKODA TOYOTA TATRA VW VOLVO </p1:enumeration>
+    <rdfs:range rdf:resource="file:/C:/data/progs/tmp/maruscak/Software/vidomeBack/ontology/vidomeontology.owl#Producer"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >PRODUCER</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="trainedAt">
+    <rdfs:domain rdf:resource="file:/C:/data/progs/tmp/maruscak/Software/vidomeBack/ontology/vidomeontology.owl#Extractor"/>
+    <rdfs:range rdf:resource="file:/C:/data/progs/tmp/maruscak/Software/vidomeBack/ontology/vidomeontology.owl#DataSet"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:ID="hasSizeOfRAM">
+    <p1:pattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >[1-9][\d][\d][\d]?.?[Mm][Bb] [1-2][Gg][Bb] 128\z 256\z 512\z 1024\z</p1:pattern>
+    <p1:maxLength rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >10</p1:maxLength>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >SIZE_OF_RAM</rdfs:label>
+    <rdfs:domain rdf:resource="file:/C:/data/progs/tmp/maruscak/Software/vidomeBack/ontology/vidomeontology.owl#Notebook"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="extractionDate">
+    <rdfs:domain rdf:resource="file:/C:/data/progs/tmp/maruscak/Software/vidomeBack/ontology/vidomeontology.owl#Annotation"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="hasWIFI">
+    <rdfs:domain rdf:resource="file:/C:/data/progs/tmp/maruscak/Software/vidomeBack/ontology/vidomeontology.owl#Notebook"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <p1:keyWords rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >WIFI</p1:keyWords>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >WiFi</rdfs:label>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="name">
+    <rdfs:domain rdf:resource="file:/C:/data/progs/tmp/maruscak/Software/vidomeBack/ontology/vidomeontology.owl#Extractor"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="hasNotebookProducer">
+    <p1:enumeration rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >IBM ASUS MSI LENOVO ACER SONY TOSHIBA FUJITSU PREMIO PRESTIGIO HP COMPAQ SIEMENS ADVENT</p1:enumeration>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >PRODUCER</rdfs:label>
+    <rdfs:domain rdf:resource="file:/C:/data/progs/tmp/maruscak/Software/vidomeBack/ontology/vidomeontology.owl#Notebook"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="feedbackFrom">
+    <rdfs:domain rdf:resource="file:/C:/data/progs/tmp/maruscak/Software/vidomeBack/ontology/vidomeontology.owl#AnnotationFeedback"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="hasCarPrice">
+    <p1:pattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >[1-9][\d]?.?[\d][\d][\d],- [1-9][\d]+.?[\d][\d][\d], [1-9][\d]?.?[\d][\d][\d].?[Kk][��] [1-9][\d][\d][\d][\d][\d]?\z</p1:pattern>
+    <p1:maxLength rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >10</p1:maxLength>
+    <rdfs:domain rdf:resource="file:/C:/data/progs/tmp/maruscak/Software/vidomeBack/ontology/vidomeontology.owl#Car"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >PRICE</rdfs:label>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="hasYear">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >YEAR</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="file:/C:/data/progs/tmp/maruscak/Software/vidomeBack/ontology/vidomeontology.owl#Car"/>
+    <p1:maxLength rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >10</p1:maxLength>
+    <p1:pattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >19[1-9][0-9] 200[0-8]</p1:pattern>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="hasSizeOfHDD">
+    <rdfs:domain rdf:resource="file:/C:/data/progs/tmp/maruscak/Software/vidomeBack/ontology/vidomeontology.owl#Notebook"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <p1:maxLength rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >10</p1:maxLength>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    ></rdfs:comment>
+    <p1:pattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >\d\d\d?.?[Gg][Bb5]</p1:pattern>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >SIZE_OF_HDD</rdfs:label>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="hasProcesor">
+    <p1:keyWords rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Centrino Turion Core P-M Semp64 C-M AMD Celeron P4 Pentium PIII C2D Via</p1:keyWords>
+    <p1:maxLength rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >25</p1:maxLength>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >PROCESOR</rdfs:label>
+    <rdfs:domain rdf:resource="file:/C:/data/progs/tmp/maruscak/Software/vidomeBack/ontology/vidomeontology.owl#Notebook"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="hasDisplaySize">
+    <rdfs:domain rdf:resource="file:/C:/data/progs/tmp/maruscak/Software/vidomeBack/ontology/vidomeontology.owl#Notebook"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <p1:pattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >[1-9][\d]\.[\d].?" [1-9][\d]\.[\d].?' [1-9][\d]\.[\d] [1-9][\d]["']</p1:pattern>
+    <p1:maxLength rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >10</p1:maxLength>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >DISPLAY_SIZE</rdfs:label>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="hasNotebookPrice">
+    <p1:pattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >[1-9][\d]?.?[\d][\d][\d],- [1-9][\d]+.?[\d][\d][\d], [1-9][\d]?.?[\d][\d][\d].?[Kk][��] [1-9][\d][\d][\d][\d][\d]?\z</p1:pattern>
+    <p1:maxLength rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >10</p1:maxLength>
+    <rdfs:domain rdf:resource="file:/C:/data/progs/tmp/maruscak/Software/vidomeBack/ontology/vidomeontology.owl#Notebook"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >PRICE</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:FunctionalProperty rdf:ID="extractedBy">
+    <rdfs:range rdf:resource="file:/C:/data/progs/tmp/maruscak/Software/vidomeBack/ontology/vidomeontology.owl#Extractor"/>
+    <rdfs:domain rdf:resource="file:/C:/data/progs/tmp/maruscak/Software/vidomeBack/ontology/vidomeontology.owl#Annotation"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="trainError">
+    <rdfs:domain rdf:resource="file:/C:/data/progs/tmp/maruscak/Software/vidomeBack/ontology/vidomeontology.owl#Extractor"/>
+    <rdfs:range rdf:resource="file:/C:/data/progs/tmp/maruscak/Software/vidomeBack/ontology/vidomeontology.owl#Uncertainty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="uncertainty">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:range rdf:resource="file:/C:/data/progs/tmp/maruscak/Software/vidomeBack/ontology/vidomeontology.owl#Uncertainty"/>
+    <rdfs:domain rdf:resource="file:/C:/data/progs/tmp/maruscak/Software/vidomeBack/ontology/vidomeontology.owl#Annotation"/>
+  </owl:FunctionalProperty>
+</rdf:RDF>
+
+<!-- Created with Protege (with OWL Plugin 3.3.1, Build 430)  http://protege.stanford.edu -->
