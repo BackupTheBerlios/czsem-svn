@@ -1,0 +1,20 @@
+digraph ontology {
+	node [label="\N"];
+	graph [bb="0,0,954,482"];
+	Annotation [label="{Annotation|{extractionDate|String*}}", shape=record, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", pos="420,377", rects="238,452,602,482 238,422,450,452 450,422,602,452 238,392,333,422 333,392,424,422 424,392,602,422 238,362,376,392 376,362,484,392 \
+484,362,602,392 238,332,352,362 352,332,457,362 457,332,602,362 238,302,366,332 366,302,471,332 471,302,602,332 238,272,602,302", width="2.06", height="0.92"];
+	AnnotationFeedback [label="{AnnotationFeedback|{feedbackFrom|Any*}}", shape=record, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", pos="270,154", rects="128,169,413,199 128,139,305,169 305,139,413,169 128,109,215,139 215,109,306,139 306,109,413,139", width="2.94", height="0.85"];
+	Extractor [label="{Extractor|{name|Any*}}", shape=record, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", pos="570,154", rects="430,184,711,214 430,154,570,184 570,154,711,184 430,124,526,154 526,124,625,154 625,124,711,154 430,94,523,124 523,94,604,124 60\
+4,94,711,124", width="1.90", height="0.85"];
+	"rdf:Statement" [label="rdf:Statement", shape=record, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", pos="841,154", rects="728,184,955,214 728,154,826,184 826,154,925,184 925,154,955,184 728,124,843,154 843,124,934,154 934,124,955,154 728,94,831,124 8\
+31,94,928,124 928,94,955,124", width="1.50", height="0.50"];
+	Uncertainty [label=Uncertainty, shape=box, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", pos="270,18", width="1.47", height="0.50"];
+	DataSet [label=DataSet, shape=box, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", pos="570,18", width="1.08", height="0.50"];
+	Annotation -> AnnotationFeedback [style=filled, label="feedbacks*", color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0", pos="e,300,199 349,272 334,249 319,227 306,207", lp="382,243"];
+	Annotation -> Extractor [style=filled, label=extractedBy, color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0", pos="e,530,214 491,272 502,255 514,238 524,223", lp="562,243"];
+	Annotation -> "rdf:Statement" [style=filled, label=annotates, color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0", pos="e,728,214 602,280 642,260 682,238 719,219", lp="717,243"];
+	Annotation -> Uncertainty [style=filled, label=uncertainty, color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0", pos="e,217,27 238,347 161,324 78,284 31,214 2,169 0,137 31,94 52,66 143,42 207,29", lp="75,154"];
+	AnnotationFeedback -> Uncertainty [style=filled, label="feedback*", color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0", pos="e,270,36 270,109 270,88 270,64 270,46", lp="311,65"];
+	Extractor -> DataSet [style=filled, label="trainedAt*", color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0", pos="e,570,36 570,94 570,77 570,60 570,46", lp="611,65"];
+	Extractor -> Uncertainty [style=filled, label=trainError, color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0", pos="e,314,36 444,94 415,81 384,67 355,54 345,49 334,45 323,40", lp="442,65"];
+}
