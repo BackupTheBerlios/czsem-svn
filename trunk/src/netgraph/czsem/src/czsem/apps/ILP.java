@@ -116,7 +116,9 @@ public class ILP {
 //		ILP ilp = new ILP("[deepord=0]");
 		 
 //		ILP ilp = new ILP("[_name=action_type,gram/sempos=v,t_lemma=zranit|usmrtit|zemřít|zahynout|přežít]([m/tag=??????????N*,_name=a-negation,hide=true,_optional=true],[functor=MANN,_name=injury_manner,_optional=true],[functor=ACT|PAT,t_lemma=kdo|člověk|osoba|muž|žena|dítě|řidič|řidička|spolujezdec|spolujezdkyně,_name=participant,_transitive=true]([functor=RSTR,gram/sempos=n.quant.*|adj.quant.*,_name=quantity,_optional=true]))");
-		ILP ilp = new ILP("[t_lemma=Škoda]([hide=hide,m/lemma=Škoda-1,a/ord>1])");
+//		ILP ilp = new ILP("[t_lemma=Škoda]([hide=hide,m/lemma=Škoda-1,a/ord>1])");
+		ILP ilp = new ILP("[t_lemma=Trabant]([t_lemma=zdemolovaný])");
+		
 
 		
 		ilp.perform();
