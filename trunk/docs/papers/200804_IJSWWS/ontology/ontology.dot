@@ -1,30 +1,22 @@
 digraph ontology {
 	node [label="\N"];
-	graph [bb="0,0,875,566"];
-	Color [label=Color, shape=box, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", pos="34,45", width="0.83", height="0.50"];
-	CarAttributes [label=CarAttributes, shape=box, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", pos="203,253", width="1.67", height="0.50"];
-	CarOffer [label="{CarOffer|{price|Float}|{distanceTravelled|Float}|{yearOfConstruction|String}|{carOffered|Instance|{CarType}}}", shape=record, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", pos="454,491", rects="320,536,588,566 320,506,454,536 454,506,588,536 320,476,503,506 503,476,588,506 320,446,508,476 508,446,588,476 320,416,422,446 \
-422,416,503,446 503,416,588,446", width="3.72", height="2.08"];
-	CarType [label="{CarType|{ratioOfInjured|Float}|{numberOfAirbags|Integer}|{ratioOfAccidents|Float}|{ratioOfDeaths|Float}|{consumption|Float}|{..\
-.}}", shape=record, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", pos="454,253", rects="341,328,568,358 341,298,490,328 490,298,568,328 341,268,497,298 497,268,568,298 341,238,501,268 501,238,568,268 341,208,490,238 \
-490,208,568,238 341,178,485,208 485,178,568,208 341,148,568,178", width="3.14", height="2.92"];
-	Radio [label=Radio, shape=box, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", pos="206,45", width="0.86", height="0.50"];
-	FuelType [label=FuelType, shape=box, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", pos="333,45", width="1.25", height="0.50"];
-	Producer [label=Producer, shape=box, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", pos="472,45", width="1.22", height="0.50"];
-	ABS [label=ABS, shape=box, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", pos="123,45", width="0.75", height="0.50"];
-	Transmission [label="{Transmission|{automaticTransmission|Boolean}|{speeds|Integer}}", shape=record, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", pos="737,45", rects="599,60,876,90 599,30,795,60 795,30,876,60 599,0,736,30 736,0,876,30", width="3.83", height="1.25"];
-	CarAttributes -> Color [dir=back, label=isa, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", pos="s,149,235 140,231 95,212 38,179 11,130 0,108 11,81 22,63", lp="22,119"];
-	CarOffer -> CarType [label=carOffered, color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0", style=filled, pos="e,454,358 454,416 454,401 454,385 454,368", lp="497,387"];
-	CarAttributes -> Radio [dir=back, label=isa, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", pos="s,194,235 190,226 178,196 164,148 174,108 178,92 187,75 194,63", lp="185,119"];
-	CarAttributes -> FuelType [dir=back, label=isa, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", pos="s,214,235 219,226 235,201 260,163 280,130 294,107 311,80 321,63", lp="300,119"];
-	CarAttributes -> Producer [dir=back, label=isa, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", pos="s,220,235 227,228 251,203 290,168 332,148 365,131 383,150 414,130 426,121 448,85 461,63", lp="440,119"];
-	CarType -> Producer [label=carProducer, color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0", style=filled, pos="e,516,61 568,196 592,178 614,156 628,130 632,121 633,116 628,108 624,103 569,81 525,65", lp="679,119"];
-	CarType -> ABS [label=carABS, color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0", style=filled, pos="e,139,63 341,182 318,170 295,158 272,148 248,137 237,144 214,130 204,122 205,116 195,108 184,98 178,99 166,90 159,84 152,77 146,\
-71", lp="251,119"];
-	CarType -> Color [label=carColor, color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0", style=filled, pos="e,43,63 341,178 318,166 295,155 272,148 200,124 168,166 101,130 78,116 59,91 48,72", lp="141,119"];
-	CarType -> FuelType [label=carFuelType, color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0", style=filled, pos="e,366,63 475,148 474,134 470,120 462,108 450,90 437,98 419,90 404,83 389,75 375,68", lp="520,119"];
-	CarType -> Radio [label=carRadio, color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0", style=filled, pos="e,235,63 362,148 347,133 331,120 315,108 300,97 294,98 279,90 267,83 255,76 244,69", lp="374,119"];
-	CarType -> Transmission [label=carTransimission, color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0", style=filled, pos="e,743,90 568,232 627,215 694,184 732,130 738,121 741,111 742,100", lp="804,119"];
-	CarAttributes -> ABS [dir=back, label=isa, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", pos="s,161,235 152,230 113,210 62,176 39,130 35,121 34,116 39,108 48,93 59,99 73,90 84,82 96,72 105,63", lp="50,119"];
-	CarAttributes -> Transmission [dir=back, label=isa, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", pos="s,218,235 225,228 248,202 289,165 332,148 432,108 473,168 574,130 589,124 589,116 603,108 613,102 624,96 634,90", lp="613,119"];
+	graph [bb="0,0,738,318"];
+	Uncertainty [label=Uncertainty, shape=box, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", pos="93,18", width="1.47", height="0.50"];
+	AnnotationFeedback [label=AnnotationFeedback, shape=box, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", pos="221,206", width="2.47", height="0.50"];
+	Person [label=Person, shape=box, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", pos="217,112", width="0.97", height="0.50"];
+	Extractor [label=Extractor, shape=box, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", pos="315,112", width="1.25", height="0.50"];
+	DataSet [label=DataSet, shape=box, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", pos="315,18", width="1.08", height="0.50"];
+	Annotation [label=Annotation, shape=box, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", pos="417,300", width="1.42", height="0.50"];
+	URL [label=URL, shape=box, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", pos="557,206", width="0.75", height="0.50"];
+	"rdf:Statement" [label="rdf:Statement", shape=box, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", pos="678,206", width="1.67", height="0.50"];
+	AnnotationFeedback -> Uncertainty [style=filled, label=feedback, color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0", pos="e,91,36 170,188 144,176 116,157 102,130 89,104 88,70 90,46", lp="141,112"];
+	AnnotationFeedback -> Person [style=filled, label=feedbackFrom, color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0", pos="e,182,124 172,188 165,183 158,177 154,170 149,161 150,156 154,148 158,140 166,134 173,129", lp="214,159"];
+	AnnotationFeedback -> Extractor [style=filled, label=feedbackFrom, color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0", pos="e,301,130 246,188 253,182 261,176 267,170 277,160 287,148 295,138", lp="344,159"];
+	Extractor -> DataSet [style=filled, label="trainedAt*", color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0", pos="e,315,36 315,94 315,81 315,62 315,46", lp="357,65"];
+	Extractor -> Uncertainty [style=filled, label=trainError, color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0", pos="e,135,36 272,94 236,78 184,57 145,40", lp="270,65"];
+	Annotation -> AnnotationFeedback [style=filled, label="feedbacks*", color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0", pos="e,247,224 366,284 349,278 330,272 314,264 294,254 273,241 256,230", lp="365,253"];
+	Annotation -> URL [style=filled, label=extractedFrom, color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0", pos="e,530,224 444,282 466,268 497,246 521,230", lp="555,253"];
+	Annotation -> Extractor [style=filled, label=extractedBy, color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0", pos="e,360,120 421,282 426,251 432,188 403,148 394,137 382,129 369,124", lp="471,206"];
+	Annotation -> "rdf:Statement" [style=filled, label=annotates, color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0", pos="e,664,224 468,294 518,288 591,277 617,264 632,256 647,243 657,232", lp="680,253"];
+	Annotation -> Uncertainty [style=filled, label=uncertainty, color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0", pos="e,74,36 366,291 268,274 61,230 25,170 0,128 38,75 67,44", lp="72,159"];
 }
