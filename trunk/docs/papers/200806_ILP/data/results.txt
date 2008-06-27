@@ -1,0 +1,38 @@
+number_injured(t_plzensky60412_txt_001_p1s2,3).
+number_injured(t_plzensky60412_txt_001_p4s2,3).
+number_injured(t_plzensky57870_txt_001_p1s1,2).
+number_injured(t_plzensky57870_txt_001_p8s2,2).
+number_injured(t_plzensky62815_txt_001_p1s12,1).
+number_injured(t_plzensky59310_txt_001_p11s2,2).
+number_injured(t_plzensky57770_txt_001_p5s2,5).
+number_injured(t_plzensky56858_txt_001_p3s3,4).
+number_injured(t_plzensky58020_txt_001_p1s2,2).
+number_injured(t_plzensky58020_txt_001_p1s4,2).
+number_injured(t_plzensky69694_txt_001_p4s2,2).
+number_injured(t_plzensky58562_txt_001_p3s3,1).
+number_injured(t_plzensky69695_txt_001_p1s1,5).
+number_injured(t_plzensky69694_txt_001_p3s4,1).
+number_injured(t_plzensky71760_txt_001_p2s7,5).
+number_injured(t_plzensky69691_txt_001_p2s4,1).
+number_injured(t_plzensky72675_txt_001_p7s2,3).
+number_injured(t_plzensky60661_txt_001_p1s2,1).
+number_injured(t_plzensky58576_txt_001_p5s2,3).
+number_injured(A,18).
+number_injured(A,5321).
+number_injured(A,1) :- id(B,A), edge(B,C), edge(C,D), edge(D,
+        E), functor(D,pat), m_tag3(E,s).
+[Total number of clauses = 22]
+
+number_severe_injury(t_plzensky57870_txt_001_p8s2,2).
+number_severe_injury(t_plzensky62815_txt_001_p1s12,1).
+number_severe_injury(t_plzensky69695_txt_001_p1s1,2).
+number_severe_injury(A,1) :- id(B,A), edge(B,C), edge(C,D), edge(D,
+        E), m_tag3(E,s), m_tag4(E,1).
+[Total number of clauses = 4]
+
+
+number_dead(t_plzensky57870_txt_001_p8s2,2).
+number_dead(t_plzensky62815_txt_001_p1s4,1).
+number_dead(t_plzensky69691_txt_001_p2s4,1).
+number_dead(t_plzensky60661_txt_001_p1s2,1).
+[Total number of clauses = 4]
