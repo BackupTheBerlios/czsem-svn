@@ -12758,7 +12758,7 @@ m_tag0(t_vysocina50234_txt_001_p9s3d11_1,'r'). const('r'). m_tag1(t_vysocina5023
 %%%%%%%% node112_23 %%%%%%%%%%%%%%%%%%%
 node(t_vysocina50234_txt_001_p9s3d13).
 functor(t_vysocina50234_txt_001_p9s3d13, rstr).         const(rstr).
-t_lemma(t_vysocina50234_txt_001_p9s3d13, x+).         const(x+).
+t_lemma(t_vysocina50234_txt_001_p9s3d13, x_).         const(x_).
 %%%%%%%% node112_24 %%%%%%%%%%%%%%%%%%%
 node(t_vysocina50234_txt_001_p9s3d12).
 functor(t_vysocina50234_txt_001_p9s3d12, rstr).         const(rstr).
@@ -12774,8 +12774,8 @@ m_tag0(t_vysocina50234_txt_001_p9s3d12_1,'n'). const('n'). m_tag1(t_vysocina5023
 %%%%%%%% node112_26 %%%%%%%%%%%%%%%%%%%
 node(t_vysocina50234_txt_001_p9s3d13_1).
 a_afun(t_vysocina50234_txt_001_p9s3d13_1, auxg).         const(auxg).
-m_form(t_vysocina50234_txt_001_p9s3d13_1, x+).         const(x+).
-m_lemma(t_vysocina50234_txt_001_p9s3d13_1, x+).         const(x+).
+m_form(t_vysocina50234_txt_001_p9s3d13_1, x_).         const(x_).
+m_lemma(t_vysocina50234_txt_001_p9s3d13_1, x_).         const(x_).
 m_tag(t_vysocina50234_txt_001_p9s3d13_1, z______________).         const(z______________).
 m_tag0(t_vysocina50234_txt_001_p9s3d13_1,'z'). const('z'). m_tag1(t_vysocina50234_txt_001_p9s3d13_1,':'). const(':'). 
 %%%%%%%% node112_27 %%%%%%%%%%%%%%%%%%%
