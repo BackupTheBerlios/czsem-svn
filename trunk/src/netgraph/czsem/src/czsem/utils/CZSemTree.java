@@ -1,5 +1,7 @@
 package czsem.utils;
 
+import java.util.Iterator;
+
 import cz.cuni.mff.mirovsky.ShowMessagesAble;
 import cz.cuni.mff.mirovsky.trees.NGForest;
 import cz.cuni.mff.mirovsky.trees.NGTree;
@@ -10,7 +12,11 @@ import cz.cuni.mff.mirovsky.trees.TNode;
 public class CZSemTree {
     /** Array of all tree nodes, ordered by DepthOrder */
 	private TNode [] node_array;
-	private NGTree tree;	
+	private NGTree tree;
+	
+	public static int id_attr = 23;
+	public static int deepord_attr = 5;
+
 
 	public CZSemTree(ShowMessagesAble p_mess) {
 		tree = new NGTree(p_mess);
@@ -30,6 +36,40 @@ public class CZSemTree {
 		return node_array.length;
 	}
 	
+	private static class BrotherIterator implements Iterator<TNode>, Iterable<TNode>
+	{		
+		private TNode node;
+		
+		BrotherIterator(TNode node)
+		{
+			this.node = node; 
+		}
+
+		public boolean hasNext() {
+			return node != null;
+		}
+		
+		public TNode next() {
+			TNode ret = node;
+			node = node.brother;
+			return ret;
+		}
+
+		public void remove() {}
+
+		public Iterator<TNode> iterator() {
+			return this;
+		}		
+	}
+	
+	public static Iterable<TNode> getNodeSons(TNode node)
+	{
+		return new BrotherIterator(node.first_son);
+	}
+	
+	/**
+	 * @return array of edges - each edge is represented with two deepord indexes of beginning and ending node  
+	 */
 	public int[][] getEdges()
 	{
 		if (getCountOfNodes() <= 0) return null;
@@ -98,6 +138,11 @@ public class CZSemTree {
     	return node_array[node_index].getValue(0, attr_index, 0);        	        	        			
 	}
 	
+	public TNode getNodeByDeepOrd(int deep_ord)
+	{
+		return node_array[deep_ord];		
+	}
+	
 	/**
 	 * @param attr_index - index of attribute to match
 	 * @param value - desired value
@@ -142,6 +187,15 @@ public class CZSemTree {
 	public String getSentenceString(NGTreeHead head) {
 		return tree.getSentenceString(head);
 	}
+	
+	public String getNodeID(int node_index)
+	{
+		String root_id = getFirstNodeAttributeValue(0, id_attr);
+		String deep_ord = getFirstNodeAttributeValue(node_index, deepord_attr);
+				
+		return ILPQueryProcessor.VarNormalise(root_id+ "d" +deep_ord);		
+	}
+
 
 	
 }

@@ -5,7 +5,7 @@
 %:- set(inflate,800000)?
 %:- set(posonly,1)?
 
-:- set(c,11),set(i,11)?
+:- set(c,5),set(i,5)?
 :- set(verbose,1)?
 %:- set(noise,0.5)?
 :- set(h,2000)?
