@@ -29,6 +29,13 @@ public class NetgraphQuery {
 		void processSingleTreeResult(LoadTreeResult tree_result) throws Exception;
 		void endProcessing() throws Exception;
 	}
+	
+	public static class EmptyProcessor implements ResultProcessor 
+	{
+		public void endProcessing() throws Exception {}
+		public void processSingleTreeResult(LoadTreeResult tree_result){}
+		public void startProcessing() throws Exception {}		
+	}
 
 	
 	public NetgraphQuery(String query_string, NetgraphServerComunication netgraph_comunication)
