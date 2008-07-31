@@ -104,8 +104,8 @@ public class SimpleXMLQueryProcessor implements ResultProcessor {
 		out.writeStartElement("UserAccount");
 
 //	    out.writeAttribute("login_name", i.getLogin_name()); //returns always anonymous
-	    out.writeAttribute("user_name", i.getUser_name()); 
-		out.writeAttribute("max_number_of_trees", Long.toString(i.getMax_number_of_trees()));
+	    out.writeAttribute("user_name", i.getUserName()); 
+		out.writeAttribute("max_number_of_trees", Long.toString(i.getMaxNumberOfTrees()));
 				
 		out.writeEndElement();		
 	}

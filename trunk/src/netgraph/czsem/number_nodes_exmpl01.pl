@@ -260,7 +260,7 @@ contains_num_injured(t_plzensky49076_txt_001_p1s5d2). % jeden (jednu )
 :- contains_num_injured(t_plzensky63162_txt_001_p1s1d3). % jeden (k prvni )
 :- contains_num_injured(t_plzensky63162_txt_001_p1s1d5). % pet (pate )
 % ve vozidle cestovaly dve osoby, ridic byl lehce zranen a do sve pece ho prevzala zzs. 
-contains_num_injured(t_plzensky63162_txt_001_p1s3d3). % dva (dve )
+:- contains_num_injured(t_plzensky63162_txt_001_p1s3d3). % dva (dve )
 % po sedme hodine ranni zde doslo k dalsi dopravni nehode, tentokrat dvou kamionu. 
 :- contains_num_injured(t_plzensky63162_txt_001_p2s1d1). % sedm (sedme )
 :- contains_num_injured(t_plzensky63162_txt_001_p2s1d11). % dva (dvou )
