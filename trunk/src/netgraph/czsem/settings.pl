@@ -1,12 +1,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%
 % Declarations
 %:- set(nodes,500000)?
-:- set(h,300)?
+:- set(h,30)?
 %:- set(r,10000)?
-:- set(c,6),set(i,5),  set(inflate,800)?
+:- set(c,4),set(i,4),  set(inflate,800)?
 :- set(verbose,2)?
-:- modeh(1,tree_root(+node))?
+%:- modeh(1,tree_root(+node))?
 :- modeh(1,contains_num_injured(+node))?
+:- modeh(1,contains_num_injured_root(+node))?
 :- modeb(*,edge(-node,+node))?
 :- modeb(*,edge(+node,-node))?
 :- modeb(*,edge(+node,+node))?
@@ -33,12 +34,19 @@
 :- modeb(1,t_lemma(+node,#const))?
 :- modeb(1,a_afun(+node,#const))?
 :- modeb(1,m_form(+node,#const))?
-:- modeb(1,m_lemma(+node,#const))?
-:- modeb(1,m_tag(+node,#const))?
+%:- modeb(1,m_lemma(+node,#const))?
+%:- modeb(1,m_tag(+node,#const))?
 % end of definitions of linguistic attributes
 
 consult(number_nodes_bkg01)?
 consult(number_nodes_bkg02)?
 
-consult(number_nodes_exmpl01)?
-consult(number_nodes_exmpl02)?
+%consult(number_nodes_exmpl01)?
+%consult(train_roots_number_nodes_exmpl03)?
+consult(train_number_nodes_exmpl03)?
+
+generalise(contains_num_injured/1)?
+%generalise(contains_num_injured_root/1)?
+
+test(test_number_nodes_exmpl03)?
+%test(test_roots_number_nodes_exmpl03)?

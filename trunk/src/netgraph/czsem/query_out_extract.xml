@@ -1,9 +1,15 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <QueryResult>
-  <NetgraphConnectionInfo server_address="localhost/127.0.0.1" server_port="2000" server_version="1.91 L (12.11.2007)" client_required_version="1.75" path_actual="/tmp/czsem/netgraph/corpus" client_recommended_version="1.91" corpus_identifier="DEDEK"></NetgraphConnectionInfo>
-  <UserAccount user_name="Jan Dedek" max_number_of_trees="100000"></UserAccount>
-  <Query time_stamp="Thu Mar 13 18:44:40 CET 2008" search_path="/tmp/czsem/netgraph/corpus" invert_match="false" first_match_only="false" above_previous_query="false" match_lemma_variants="true" match_lemma_comments="true" result_tree_subtype="GET_TREE_SUBTYPE_OCCURENCE">
-    <QueryString>[_name=action_type,gram/sempos=v,t_lemma=zranit|usmrtit|zemřít|zahynout|přežít]([m/tag=??????????N*,_name=a-negation,hide=true,_optional=true],[functor=MANN,_name=injury_manner,_optional=true],[functor=ACT|PAT,t_lemma=kdo|člověk|osoba|muž|žena|dítě|řidič|řidička|spolujezdec|spolujezdkyně,_name=participant,_transitive=true]([functor=RSTR,gram/sempos=n.quant.*|adj.quant.*,_name=quantity,_optional=true]))</QueryString>
+  <Query time_stamp="Thu Mar 13 18:44:40 CET 2008"
+    result_tree_subtype="GET_TREE_SUBTYPE_OCCURENCE">
+    <QueryString>[_name=action_type,gram/sempos=v,
+      t_lemma=zranit|usmrtit|zemřít|zahynout|přežít]([m/tag=??????????N*,
+      _name=a-negation,hide=true,_optional=true],[functor=MANN,
+      _name=injury_manner,_optional=true],[functor=ACT|PAT,
+      t_lemma=kdo|člověk|osoba|muž|žena|dítě|řidič|řidička|spolujezdec|spolujezdkyně,
+      _name=participant,_transitive=true]([functor=RSTR,
+      gram/sempos=n.quant.*|adj.quant.*,_name=quantity,_optional=true]))
+    </QueryString>
     <Selectors>
       <Selector>action_type.t_lemma</Selector>
       <Selector>a-negation.m/tag</Selector>
@@ -12,8 +18,9 @@
       <Selector>quantity.t_lemma</Selector>
     </Selectors>
     <QueryMatches>
-      <Match file_name="/tmp/czsem/netgraph/corpus/hasici/vysocina/vysocina63466.t.gz.fs" root_id="T-vysocina63466.txt-001-p1s4" match_string="2:0,7:3,8:4,11:2">
-        <Sentence>Při požáru byla jedna osoba lehce zraněna - jednalo se o majitele domu, který si vykloubil rameno. </Sentence>
+      <Match root_id="T-vysocina63466.txt-001-p1s4" match_string="2:0,7:3,8:4,11:2">
+        <Sentence>Při požáru byla jedna osoba lehce zraněna - jednalo se 
+          o majitele domu, který si vykloubil rameno.</Sentence>
         <Data>
           <Value variable_name="action_type" attribute_name="t_lemma">zranit</Value>
           <Value variable_name="injury_manner" attribute_name="t_lemma">lehký</Value>
@@ -21,24 +28,28 @@
           <Value variable_name="quantity" attribute_name="t_lemma">jeden</Value>
         </Data>
       </Match>
-      <Match file_name="/tmp/czsem/netgraph/corpus/hasici/jihomoravsky/jihomoravsky49640.t.gz.fs" root_id="T-jihomoravsky49640.txt-001-p1s4" match_string="1:0,13:3,14:4">
-        <Sentence>Ve zdemolovaném trabantu na místě zemřeli dva muži - 82letý senior a další muž, jehož totožnost zjišťují policisté. </Sentence>
+      <Match root_id="T-jihomoravsky49640.txt-001-p1s4" match_string="1:0,13:3,14:4">
+        <Sentence>Ve zdemolovaném trabantu na místě zemřeli dva muži - 82letý senior
+          a další muž, jehož totožnost zjišťují policisté.</Sentence>
         <Data>
           <Value variable_name="action_type" attribute_name="t_lemma">zemřít</Value>
           <Value variable_name="participant" attribute_name="t_lemma">muž</Value>
           <Value variable_name="quantity" attribute_name="t_lemma">dva</Value>
         </Data>
       </Match>
-      <Match file_name="/tmp/czsem/netgraph/corpus/hasici/jihomoravsky/jihomoravsky49736.t.gz.fs" root_id="T-jihomoravsky49736.txt-001-p4s3" match_string="1:0,3:3,7:1">
-        <Sentence>Čtyřiatřicetiletý řidič nebyl zraněn. </Sentence>
+      <Match root_id="T-jihomoravsky49736.txt-001-p4s3" match_string="1:0,3:3,7:1">
+        <Sentence>Čtyřiatřicetiletý řidič nebyl zraněn.</Sentence>
         <Data>
           <Value variable_name="action_type" attribute_name="t_lemma">zranit</Value>
-          <Value variable_name="a-negation" attribute_name="m/tag">VpYS---XR-NA---</Value>
+          <Value variable_name="a-negation" attribute_name="m/tag">
+             VpYS---XR-NA---</Value>
           <Value variable_name="participant" attribute_name="t_lemma">řidič</Value>
         </Data>
       </Match>
     </QueryMatches>
-    <QueryStatistics time_stamp="Thu Mar 13 18:45:04 CET 2008" number_of_actual_occurrence="1268" number_of_actual_tree="604" number_of_found_occurences="1268" number_of_found_trees="604" number_of_searched_trees="22458"></QueryStatistics>
+    <QueryStatistics time_stamp="Thu Mar 13 18:45:04 CET 2008"
+      number_of_actual_occurrence="1268" number_of_actual_tree="604"
+      number_of_found_occurences="1268" number_of_found_trees="604"
+      number_of_searched_trees="22458"></QueryStatistics>
   </Query>
 </QueryResult>
-    

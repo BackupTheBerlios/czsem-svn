@@ -11,9 +11,9 @@ import czsem.utils.ILPStringList;
  */
 public class ILPDatasetMaker {
 	
-	private static final double train_test_ratio = 0.3;
+	private static final double train_test_ratio = 0.6;
 
-	public void makeDatasets(String filename) throws IOException
+	public static void makeDatasets(String filename) throws IOException
 	{
 		ILPStringList ilp_list = new ILPStringList();
 		
@@ -24,15 +24,16 @@ public class ILPDatasetMaker {
 		
 		System.err.println("file >" + filename + "< no of used lines: "+ lines + " no of train lines: "+ train_lines);
 		
-		PrintStream f_train = new PrintStream("train_"+filename);
-						
+		// TRAIN data
+		PrintStream f_train = new PrintStream("train_"+filename);								
 		for (int i = 0; i < train_lines; i++)
 		{
 			f_train.println(ilp_list.removeRandomLine());			
 		}		
 
+		// TEST data
 		PrintStream f_test = new PrintStream("test_"+filename);		
-		for (int i = train_lines; i <= lines; i++)
+		for (int i = train_lines; i < lines; i++)
 		{
 			f_test.println(ilp_list.removeRandomLine());			
 		}		
@@ -40,7 +41,10 @@ public class ILPDatasetMaker {
 	
 	public static void main(String[] args) throws IOException
 	{
-		ILPStringList ilpsl1 = new ILPStringList();
+		makeDatasets("number_nodes_exmpl03.pl");
+		makeDatasets("roots_number_nodes_exmpl03.pl");
+		
+/*		ILPStringList ilpsl1 = new ILPStringList();
 		
 		ilpsl1.readFromFile("number_nodes_exmpl01.pl");
 		
@@ -50,7 +54,7 @@ public class ILPDatasetMaker {
 		{
 //			System.out.println(ilpsl1.removeRandomLine());			
 		}
-
+*/
 	}
 
 }

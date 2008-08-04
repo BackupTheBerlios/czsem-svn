@@ -1,7 +1,5 @@
 % osobni automobily skoda octavia a vw golf po celnim stretu zustaly na vozovce, treti vozidlo skoncilo na kolech v prikopu. 
 :- contains_num_injured(t_plzensky70827_txt_001_p1s1d13). % tri (treti )
-% pri nehode byly zraneny dve osoby. 
-contains_num_injured(t_plzensky70827_txt_001_p1s3d4). % dva (dve )
 % dle policie cr, ktera se pred jedenactou hodinou rozhodla na misto povolat soudniho znalce, by silnice mohla byt uzavrena jeste ctyri hodiny. 
 :- contains_num_injured(t_plzensky70827_txt_001_p1s10d5). % jedenact (jedenactou )
 :- contains_num_injured(t_plzensky70827_txt_001_p1s10d16). % ctyri (ctyri )
@@ -146,8 +144,6 @@ contains_num_injured(t_plzensky70827_txt_001_p1s3d4). % dva (dve )
 :- contains_num_injured(t_plzensky72450_txt_001_p19s1d6). % pet (peti )
 :- contains_num_injured(t_plzensky72450_txt_001_p19s1d9). % jeden (jednoho )
 :- contains_num_injured(t_plzensky72450_txt_001_p19s1d15). % osm (osme )
-% pri nehode byla lehce zranena jedna osoba. 
-contains_num_injured(t_plzensky72450_txt_001_p19s2d5). % jeden (jedna )
 % k dopravni nehode, srazce dvou osobnich automobilu, pred obchodnim domem centrum v masarykove ulici v plzni - doubravce vyjizdeli dnes pred devatou hodinou ranni profesionalni hasici ze stanice pobrezni. 
 :- contains_num_injured(t_plzensky72450_txt_001_p20s1d18). % devet (devatou )
 :- contains_num_injured(t_plzensky72450_txt_001_p20s1d4). % dva (dvou )
@@ -157,8 +153,6 @@ contains_num_injured(t_plzensky72450_txt_001_p20s2d11). % jeden (jedne osobe )
 :- contains_num_injured(t_plzensky72450_txt_001_p21s1d9). % devet (devate )
 % proverovaci cviceni zamerene na zachranu horolezce a horolezkyne u obce krsy absolvovali po devate hodine ranni profesionalni hasici ze stanice kosutka. 
 :- contains_num_injured(t_plzensky72450_txt_001_p22s1d12). % devet (devate )
-% pri nehode byly zraneny dve osoby. 
-contains_num_injured(t_plzensky49076_txt_001_p1s3d4). % dva (dve )
 % jednu zranenou osobu odvezla sanitka zzs a druhou do nemocnice dopravil vrtulnik lzs. 
 contains_num_injured(t_plzensky49076_txt_001_p1s5d2). % jeden (jednu )
 :- contains_num_injured(t_plzensky49076_txt_001_p1s5d10). % dva (druhou )
@@ -259,8 +253,6 @@ contains_num_injured(t_plzensky49076_txt_001_p1s5d2). % jeden (jednu )
 % k te prvni doslo po pate hodine ranni. 
 :- contains_num_injured(t_plzensky63162_txt_001_p1s1d3). % jeden (k prvni )
 :- contains_num_injured(t_plzensky63162_txt_001_p1s1d5). % pet (pate )
-% ve vozidle cestovaly dve osoby, ridic byl lehce zranen a do sve pece ho prevzala zzs. 
-:- contains_num_injured(t_plzensky63162_txt_001_p1s3d3). % dva (dve )
 % po sedme hodine ranni zde doslo k dalsi dopravni nehode, tentokrat dvou kamionu. 
 :- contains_num_injured(t_plzensky63162_txt_001_p2s1d1). % sedm (sedme )
 :- contains_num_injured(t_plzensky63162_txt_001_p2s1d11). % dva (dvou )
@@ -323,8 +315,6 @@ contains_num_injured(t_plzensky49076_txt_001_p1s5d2). % jeden (jednu )
 :- contains_num_injured(t_plzensky72795_txt_001_p2s1d12). % 2007 (2007 )
 % jedno vozidlo nasledkem nehody zustalo napric vozovky a muselo byt odstraneno, jelikoz branilo prujezdu sanitky s pacientem. 
 :- contains_num_injured(t_plzensky72795_txt_001_p2s2d1). % jeden (jedno )
-% pri nehode byla zranena jedna osoba. 
-contains_num_injured(t_plzensky72795_txt_001_p2s3d4). % jeden (jedna )
 % bez zraneni osob se obesla dopravni nehoda na 56. km dalnice d5 praha - rozvadov, v useku myto - svojkovice. 
 :- contains_num_injured(t_plzensky72795_txt_001_p3s1d7). % 56 (56 )
 % pozar hasici lokalizovali po par minutach a zlikvidovali asi po 25 minutach za pomoci vysokotlakeho proudu vody. 
@@ -480,8 +470,6 @@ contains_num_injured(t_plzensky53193_txt_001_p1s1d11). % tri (tremi )
 :- contains_num_injured(t_plzensky60375_txt_001_p1s1d7). % 320 (320 )
 % obe vozidla po srazce zustala na kolech na vozovce. 
 :- contains_num_injured(t_plzensky60375_txt_001_p1s4d1). % oba (obe )
-% vazne zranen byl i ridic druheho automobilu. 
-:- contains_num_injured(t_plzensky60375_txt_001_p1s6d6). % dva (druheho )
 % oba zranene do nemocnice dopravily vrtulniky lzs. 
 contains_num_injured(t_plzensky60375_txt_001_p1s7d2). % oba (oba )
 % hasici dale zajistili misto nehody, odpojili u obou vozidel akumulatory, pomahali zdravotnikum a unikle provozni kapaliny zlikvidovali pomoci sorbentu. 
@@ -690,9 +678,6 @@ contains_num_injured(t_plzensky51802_txt_001_p1s7d24). % oba (obou )
 :- contains_num_injured(t_plzensky51802_txt_001_p5s7d5). % 50 (na 50 )
 % jednu zranenou osobu si vyzadala dopravni nehoda osobniho automobilu daewoo matiz u obce rabi. 
 contains_num_injured(t_plzensky51802_txt_001_p6s1d1). % jeden (jednu )
-% v dobe prijezdu hasicu byla jedna zranena osoba v peci rzr, druha nebyla zranena. 
-contains_num_injured(t_plzensky51802_txt_001_p6s2d4). % jeden (jedna )
-:- contains_num_injured(t_plzensky51802_txt_001_p6s2d10). % dva (druha )
 % v obci privetice zatopila voda tri sklepy. 
 :- contains_num_injured(t_plzensky52868_txt_001_p1s1d6). % tri (tri )
 % v soucasne dobe maji hasici vycerpanu vodu ze dvou sklepu. 
