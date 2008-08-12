@@ -68,7 +68,7 @@ email: {\texttt{leo.galambos@mff.cuni.cz}}).}
 \date{30 July 2008}
 \maketitle
 \begin{abstract}
-In this paper we developed the idea of web semantization, which can help to arch over the gap between Web of today and the Semantic Web. We present a proof of concept that even today it is possible to develop a semantic search engine (in the scale of pages of Czech domain - *.cz) and an intelligent software agent. In particular contributions consists of models, methods and tools of a web repository, two sorts of automated third party annotation of existing web resources, semantic repository serving as a sample of semantized web with extension of the ontology model for additional annotation (e.g. uncertainty annotation) and a proposal of an intelligent agent . In many places of this work, both in the modeling part and in implementation we are using soft computing techniques.
+In this paper we developed the idea of web semantization, which can help to arch over the gap between the web of today and the Semantic web. We present a proof of concept that even today it is possible to develop a semantic search engine (in the scale of pages of Czech domain -- *.cz) designed for software agents. The idea is supported by models, methods and tools of a web crawler, web repository, automated annotation tools producing third party semantic annotations, semantic repository serving as a sample of semantized web and a proposal of an intelligent software agent.
 \end{abstract}
 
 % A category with the (minimum) three required fields
@@ -83,15 +83,15 @@ In this paper we developed the idea of web semantization, which can help to arch
 \keywords{Semantic Web, Web Content Mining, Linguistic Analysis}
 
 \section{Introduction}
-In their Scientific American 2001 article \cite{biblio:2001-Berners-Lee-SemanticWeb}, Tim Berners-Lee, James Hendler and Ora Lassila unveiled a nascent vision of the semantic web: a highly interconnected network of data that could be easily accessed and understood by a desktop or handheld machine. They painted a future of intelligent software agents that would {\dots} answer to a particular question without our having to search for information or pore through results (quoted from \cite{biblio:feigenbaum_semantic_2007}, italicized authors). Lee Feigenbaum, Ivan Herman, Tonya Hongsermeier, Eric Neumann and Susie Stephens in their Scientific American 2007 article \cite{biblio:feigenbaum_semantic_2007} conclude that "Grand visions rarely progress exactly as planned, but the Semantic Web is indeed emerging and is making online information more useful as ever". L. Feigenbaum et al. support their claim with success of semantic web technology in drug discovery and health care (a several further applications). These are mainly corporate applications with human annotated data.  Ben Adida when bridging clickable and Semantic Web with RDFa (\cite{biblio:AdidaClickable}) assumes also human (assisted) activity by annotations of newly created web resources. 
+In their Scientific American 2001 article \cite{biblio:2001-Berners-Lee-SemanticWeb}, Tim Berners-Lee, James Hendler and Ora Lassila unveiled a nascent vision of the semantic web: a highly interconnected network of data that could be easily accessed and understood by a desktop or handheld machine. They painted a future of intelligent software agents that would {\dots} answer to a particular question without our having to search for information or pore through results (quoted from \cite{biblio:feigenbaum_semantic_2007}, italicized authors). Lee Feigenbaum, Ivan Herman, Tonya Hongsermeier, Eric Neumann and Susie Stephens in their Scientific American 2007 article \cite{biblio:feigenbaum_semantic_2007} conclude that "Grand visions rarely progress exactly as planned, but the Semantic Web is indeed emerging and is making online information more useful as ever". L. Feigenbaum et al. support their claim with success of semantic web technology in drug discovery and health care (a several further applications). These are mainly corporate applications with human annotated data. Ben Adida when bridging clickable and Semantic Web with RDFa (\cite{biblio:AdidaClickable}) assumes also human (assisted) activity by annotations of newly created web resources. 
 
 Nobody seems to care in the semantic web community about the content of the web of today or of pages published without annotations. By our opinion the content of the web of today is too valuable to be lost for emerging semantic web applications. 
 
-In this paper we would like to address the problem of semantization (enrichment) of current web content as an automated process of third party annotation for making (at least a part, increasing in time) of today web accessible for machine processing and hence enabling intelligent tools for searching and recommending things on the Web (see \textbf{[4???]}). 
+In this paper we would like to address the problem of semantization (enrichment) of current web content as an automated process of third party annotation for making (at least a part, increasing in time) of today web accessible for machine processing and hence enabling intelligent tools for searching and recommending things on the web (see \cite{biblio:LeeWebThings}). 
 
-Our main idea is to create a semantic repository of information automatically extracted from the Web and corresponding annotated copies of (mainly textual) parts of web pages, and make it available to intelligent agents. For extraction and annotation we also use soft computing techniques. We give a proof of concept that this idea is realizable in the size of several TB of textual part of Czech web (domain *.cz).
+Our main idea is to fill a semantic repository with information automatically extracted from the web and make it available to software agents. We give a proof of concept that this idea is realizable in the size of several TB (terabytes) of textual part of the Czech web (domain *.cz).
 
-Our web crawler (see Fig.\ref{img:Semantization}) downloads a part of the web to a web store. Resources with semantic content can be uploaded directly to Semantic store. Extractor 1 (classifier) extracts those parts of Web store which are suitable to for further semantic enrichment (we are able to enrich only a part of resources). Further semantic content is created by several extractors and annotators in several phases. Emphasis is on automation and usage of such enriched data.
+Our web crawler (see Fig.\ref{img:Semantization}) downloads a part of the web to a web repository (Web Store). Resources with semantic content can be uploaded directly to semantic repository (Semantic Store). Extractor~1 (classifier) extracts those parts of Web Store which are suitable to for further semantic enrichment (we are able to enrich only a part of resources). Further semantic content is created by several extractors and annotators in several phases. Emphasis is on automation and usage of such extracted/enriched data.
 
 \begin{figure}
 \centering
@@ -101,46 +101,44 @@ Our web crawler (see Fig.\ref{img:Semantization}) downloads a part of the web to
 \end{figure}
 
 
-\subsection{Motivation example}
+%\subsection{Motivation example}
 
-Our motivation example aims to illustrate a possible use of such a semantized web by an intelligent agent. 
+%Our motivation example aims to illustrate a possible use of such a semantized web by an intelligent agent. Imagine a user wanting to buy a car. She has special requirements on car properties (possibly containing conflicting objectives as price and consumption) and its safety when used in Czech Republic (she knows about the increase of traffic accidents after unification of Germany, when fast western cars crashed on narrow roads of eastern part often \textbf{[6??]}).  Information about car properties can be extracted from several web shop pages typically in tables. Information about involvement in traffic accidents and if involved, then of injury rate, are hidden e.g. in textual traffic accidents reports of regional fire department (in Czech Republic responsible for emergency recovery). Our semantic store contains these information annotated (by possibly several tools) also by uncertainty of extraction and/or annotation process. Our intelligent agent can aggregate these (often conflicting) information and offer user best (top-k) answers according to a user dependent equilibrium between car properties, safety and reliability and/or (un)certainty of this information.
 
-Imagine a user wanting to buy a car. She has special requirements on car properties (possibly containing conflicting objectives as price and consumption) and its safety when used in Czech Republic (she knows about the increase of traffic accidents after unification of Germany, when fast western cars crashed on narrow roads of eastern part often \textbf{[6??]}).  Information about car properties can be extracted from several web shop pages typically in tables. Information about involvement in traffic accidents and if involved, then of injury rate, are hidden e.g. in textual traffic accidents reports of regional fire department (in Czech Republic responsible for emergency recovery). Our semantic store contains these information annotated (by possibly several tools) also by uncertainty of extraction and/or annotation process. Our intelligent agent can aggregate these (often conflicting) information and offer user best (top-k) answers according to a user dependent equilibrium between car properties, safety and reliability and/or (un)certainty of this information.
+%\subsection{Our contributions}
 
-\subsection{Our contributions}
+%Our main contribution is the proof of concept of the idea of semantization of the web of today as an automated process making it ready for intelligent machine search. Particular contributions consists of models, methods and tools of :
 
- Our main contribution is the proof of concept of the idea of semantization of the web of today as an automated process making it ready for intelligent machine search. Particular contributions consists of models, methods and tools of :
-
-\begin{itemize}
-\item web repository based on highly efficient web crawler and a repository with extended soft computing classification (search) capabilities (see chapter 4??); 
-\item automated domain independent intermediate annotation of suitable pages from our web repository with soft computing heuristics (see chapter 5??);
-\item automated domain dependent annotation with extraction ontology and ILP learning from similar repeating structured linguistic data (see chapter 6??); 
-\item Semantic repository serving as a sample of semantized web, extension of the ontology model for additional annotation (e.g. uncertainty annotation) (see chapter 7??)
-\item Intelligent agent using soft computing tools for matching user preferences (see chapter 8??).
-\end{itemize}
-
+%\begin{itemize}
+%\item web repository based on highly efficient web crawler and a repository with extended soft computing classification (search) capabilities (see chapter 4??); 
+%\item automated domain independent intermediate annotation of suitable pages from our web repository with soft computing heuristics (see chapter 5??);
+%\item automated domain dependent annotation with extraction ontology and ILP learning from similar repeating structured linguistic data (see chapter 6??); 
+%\item Semantic repository serving as a sample of semantized web, extension of the ontology model for additional annotation (e.g. uncertainty annotation) (see chapter 7??)
+%\item Intelligent agent using soft computing tools for matching user preferences (see chapter 8??).
+%\end{itemize}
+%
 
 
 
-\section{Where is the problem with semantization of the Web of today?}
+%\section{Where is the problem with semantization of the Web of today?}
 
-Web of today contains lot of valuable information which is worth of being subject of intelligent search (also archived non-existing pages, e.g. http://www.archive.org/index.php and http://www.searchengineshowdown.com/others/archive.shtml ). Main obstacle is that these resources are designed for human consumption and are hardly understandable for a machine. The size of these resources excludes human search. Using traditional search engines has limited capabilities. One solution is to semantically enrich these pages (semantize) and make them machine processable.  As it is not an easy task, the problem is who will do it and why. This is well under way for new corporate applications and publishers willing to annotate their resources and the driver can be better services (and higher profit, faster emergency warning, ... \textbf{[3??]}).
+%Web of today contains lot of valuable information which is worth of being subject of intelligent search (also archived non-existing pages, e.g. http://www.archive.org/index.php and http://www.searchengineshowdown.com/others/archive.shtml ). Main obstacle is that these resources are designed for human consumption and are hardly understandable for a machine. The size of these resources excludes human search. Using traditional search engines has limited capabilities. One solution is to semantically enrich these pages (semantize) and make them machine processable.  As it is not an easy task, the problem is who will do it and why. This is well under way for new corporate applications and publishers willing to annotate their resources and the driver can be better services (and higher profit, faster emergency warning, ... \textbf{[3??]}).
 
-A step in direction of semantic enrichment is presented also by indexes of various search engines - they represent a certain sort of semantic enrichment. The problem is that those indexes are not available for writing own applications. Moreover search engines of today fail in linguistic search. Fixed page rank prohibits one to find relevant pages which are not highly quoted (e.g. traffic accident reports). Web shops enable only conjunctive query search. Web shops are mainly classified as hidden web, and are hard for machine processing. Survey pages can usually find cheapest item (when you know what you want). Linguistic search engines are just starting to be developed, mainly with some narrow focus. Another step to semantic enrichment are different WIE - 
+%A step in direction of semantic enrichment is presented also by indexes of various search engines - they represent a certain sort of semantic enrichment. The problem is that those indexes are not available for writing own applications. Moreover search engines of today fail in linguistic search. Fixed page rank prohibits one to find relevant pages which are not highly quoted (e.g. traffic accident reports). Web shops enable only conjunctive query search. Web shops are mainly classified as hidden web, and are hard for machine processing. Survey pages can usually find cheapest item (when you know what you want). Linguistic search engines are just starting to be developed, mainly with some narrow focus. Another step to semantic enrichment are different WIE - 
 
-Web Information Extraction tools, nevertheless they do not annotate sources, From our point of view, we see the main problem of current tools with own enrichment of web content is that this enrichment mostly serves query answering and does not produce annotation of sources accessible for public for further processing.
-When we understand semantization (of the web of today) as a semantic enrichment automatically producing semantically annotated resources for further (third party) machine processing, then main problems of semantic enrichment of the web are:
-\\- How to do it automatically, in which order, which pages should be enriched first, \dots? Do the enrichment in the time of query or in advance?
-\\- Where to store such enriched (annotated) pages?
-\\- With respect to which ontology to make annotation?
-\\- What are metrics of satisfactory semantic enrichment?
-\\- When done, how to use it? Current RDF querying languages are not very promising for intelligent search.
-\\- How to achieve reusability/social web - agent once trained can be used by other user (with changed user preferences)
-\\- Which extractors are trustworthy; which URLs to search (Czech car offers)
-\\- User friendly - no need to search by keyword, only user preferences input.
-\\- Automation - when a new offer emerges on a page, extractor captures the information, stores it in the semantic store and agent has always information up-to-date.
-\\- When one extractor misses an attribute value, another can find it and store it. Such an automated semantic enrichment will be error prone. How to represent uncertainty? Problem of complete information?
-
+%Web Information Extraction tools, nevertheless they do not annotate sources, From our point of view, we see the main problem of current tools with own enrichment of web content is that this enrichment mostly serves query answering and does not produce annotation of sources accessible for public for further processing.
+%When we understand semantization (of the web of today) as a semantic enrichment automatically producing semantically annotated resources for further (third party) machine processing, then main problems of semantic enrichment of the web are:
+%\\- How to do it automatically, in which order, which pages should be enriched first, \dots? Do the enrichment in the time of query or in advance?
+%\\- Where to store such enriched (annotated) pages?
+%\\- With respect to which ontology to make annotation?
+%\\- What are metrics of satisfactory semantic enrichment?
+%\\- When done, how to use it? Current RDF querying languages are not very promising for intelligent search.
+%\\- How to achieve reusability/social web - agent once trained can be used by other user (with changed user preferences)
+%\\- Which extractors are trustworthy; which URLs to search (Czech car offers)
+%\\- User friendly - no need to search by keyword, only user preferences input.
+%\\- Automation - when a new offer emerges on a page, extractor captures the information, stores it in the semantic store and agent has always information up-to-date.
+%\\- When one extractor misses an attribute value, another can find it and store it. Such an automated semantic enrichment will be error prone. How to represent uncertainty? Problem of complete information?
+%
 
 
 
@@ -149,7 +147,7 @@ When we understand semantization (of the web of today) as a semantic enrichment 
 
 
 \section{Idea of Web semantization}
-Here we would like to present the idea of our contribution to web semantization.
+%Here we would like to present the idea of our contribution to web semantization.
 
 \textbf{First idea is the idea of a web repository.} In details it develops as follows. Semantic enrichment is in fact an inductive task (although a special one) - to add to web documents knowledge (which is obvious for human perception not for a machine). Such an inductive task will be easier to solve when there is a sort of repetition (modulo some similarity). So our initial idea is to use repetitions for our inductive task (which is to annotate data by concepts from an ontology which is the same as to map instances to ontology). 
 
