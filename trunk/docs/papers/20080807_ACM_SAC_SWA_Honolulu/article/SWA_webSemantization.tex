@@ -166,8 +166,15 @@ Further important idea is do \textbf{design semantic repository}. Besides above 
 
 Last, but most \textbf{important idea is to design at least one agent} which will give evidence that our semantization really improved general web search. Besides using annotated data it should also contain some user dependent preference search capabilities
 
+
+\begin{figure}
+\centering
+\epsfig{file=img/UserSearch,  width=\hsize}
+\caption{Process of querying Semantic Search Engine by an agent}
+\label{img:UserSearch}
+\end{figure}
  
-The process of a user searching for a used car is represented in Figure 2??. Our main focus is in the agent and in the extractors. 
+The process of a user searching for a used car is represented in Figure \ref{img:UserSearch}. Our main focus is in the agent and in the extractors. 
 
 Last idea is to use soft computing techniques, because the whole problem is too hard to be solved by crisp techniques. 
 
@@ -221,7 +228,14 @@ First approach for domain independent intermediate information extraction and se
 
 As web pages of web shops are intended for human usage creators have to make their comprehension easier. Acquaintance with several years of web shops has converged to a more or less similar design fashion. There are often cumulative pages with many products in a form of a table with cells and some brief description and then there are links detailed pages to each product. Of course many pages of Web shops belong to hidden (deep) web and require some form of initialization. Links to detailed pages can be replaced by some scripts. This can make the crawling of such pages problematic; we do not solve this problem here. Once (a part of these pages) is crawled and stored in our Egothor repository, we can process them further. 
 
-Main idea (illustrated in the Figure 4???) is to use a DOM tree representation of the summary web page and by breadth first search encounter similar subtrees. The similarity of these subtrees is used to determine the data region - a place where all the objects are stored. It is represented as a node in the DOM tree, underneath it there are the similar sub-trees, which are called data records. Our ontology engineering part is based on a bottom-up approach of building ontologies. The first classes are "table page", "data region" and "data record" which are connected with properties "hasDataRegion" and "hasDataRecord". Also, between data record and its detail Data\_region and Detailed\_page we have property "hasDetailPage". Note that these concepts and properties have soft computing nature which can be modeled by a fuzzy ontology. For instance, being an instance has a degree of membership depending on the precision of our algorithm (dependent on similarity measures used to detect data regions and/or records). Using some heuristics we can detect what are resources described in this page (Table\_page describes rdfs:Resources). To detect possible attributes and even their values we explore similarities between data record content and corresponding detailed page content. The main idea is to find same pieces of text in the data record and in the detail page. This occurs often, because a brief summary of the object is present in the data record. Somewhere near the attribute values are located the names of attributes in the detail page. These names of attributes can be extracted. The extraction of attribute names is easy because on every detail page the names will be the same.  The names of attributes can be used in our low-level ontology as names of properties - each object will be represented by the URL of the detail page, and a set of properties that consists of the attribute values found on the detail page.
+\begin{figure}
+\centering
+\epsfig{file=img/StructuralSimilarity,  width=\hsize}
+\caption{Structural similarity in web pages}
+\label{img:StructuralSimilarity}
+\end{figure}
+
+Main idea (illustrated in the Figure \ref{img:StructuralSimilarity}) is to use a DOM tree representation of the summary web page and by breadth first search encounter similar subtrees. The similarity of these subtrees is used to determine the data region - a place where all the objects are stored. It is represented as a node in the DOM tree, underneath it there are the similar sub-trees, which are called data records. Our ontology engineering part is based on a bottom-up approach of building ontologies. The first classes are "table page", "data region" and "data record" which are connected with properties "hasDataRegion" and "hasDataRecord". Also, between data record and its detail Data\_region and Detailed\_page we have property "hasDetailPage". Note that these concepts and properties have soft computing nature which can be modeled by a fuzzy ontology. For instance, being an instance has a degree of membership depending on the precision of our algorithm (dependent on similarity measures used to detect data regions and/or records). Using some heuristics we can detect what are resources described in this page (Table\_page describes rdfs:Resources). To detect possible attributes and even their values we explore similarities between data record content and corresponding detailed page content. The main idea is to find same pieces of text in the data record and in the detail page. This occurs often, because a brief summary of the object is present in the data record. Somewhere near the attribute values are located the names of attributes in the detail page. These names of attributes can be extracted. The extraction of attribute names is easy because on every detail page the names will be the same.  The names of attributes can be used in our low-level ontology as names of properties - each object will be represented by the URL of the detail page, and a set of properties that consists of the attribute values found on the detail page.
 
 This idea was implemented in [5???] on the top of Mozilla Firefox API and experimentally tested on table pages from several domains (cars, notebooks, hotels). Tree representation was the DOM of the page, similarity between subtrees was Levenshtein editing distance (for a subtree considered as a linear string), learning thresholds for decision were trained (more see [13???]).
 
@@ -252,7 +266,63 @@ Further improvement of annotation is left for domain dependent annotation where 
 \subsection{Method based on Czech linguistics}
 Second approach for Web information extraction is based on Czech linguistics and NLP tools. We use a chain of linguistic analyzers (\cite{biblio:HajicMorfTag}, \cite{biblio:collinshbrt_1999}, \cite{biblio:KlTransformationBasedTectogrammatical2006}) that process text presented on a web page and produce linguistic (syntactic) trees corresponding with particular sentences. These trees serve as a basis of our semantic extraction.
 
-Unlike the usual approaches to the description of English syntax, the Czech syntactic descriptions are dependency-based, which means, that every edge of a syntactic tree captures the relation of dependency between a governor and its dependent node. Especially the tectogrammatical (deep syntactic) level of representation \cite{biblio:MiBeAnnotationtectogrammatical2006} is closer to the meaning of the sentence. The tectogrammatical trees (Example of such a tree will be presented in section 6.3??? on the Figure 8???) have a very convenient property of containing just the type of information we need for our purpose (extraction of semantic information), namely the information about inner participants of verbs - actor, patient, addressee etc. So far this tool does not work with the context of the sentence and hence does not exploit frequent occurrence of similar sentences.
+\begin{figure}
+{\footnotesize\begin{verbatim}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Ve zdemolovanem trabantu na miste zemreli dva
+% muzi - 82lety senior a dalsi muz, jehoz ...
+%
+% Two men died on the spot in the demolished 
+% trabant - a senior 82 years old and another 
+% man, who's ...
+
+%%%%%%%% Nodes %%%%%%%%
+tree_root(node0_0). node(node0_0). 
+id(node0_0, t_jihomoravsky49640_txt_001_p1s4).
+
+node(node0_1).
+t_lemma(node0_1, zemrit).
+functor(node0_1, pred).
+gram_sempos(node0_1, v). 
+
+node(node0_2).
+t_lemma(node0_2, x_perspron).
+functor(node0_2, act).
+gram_sempos(node0_2, n_pron_def_pers).
+...
+
+%%%%%%%% Edges %%%%%%%%
+edge(node0_0, node0_1). edge(node0_1, node0_2). edge(node0_1, node0_3). 
+... 
+edge(node0_34, node0_35).
+
+%%%%%%%% Injury %%%%%%%%
+injured(t_jihomoravsky49640_txt_001_p1s4).
+
+\end{verbatim}}
+\caption{Sample from prolog representation of a sentence }
+\label{img:prologFacts}
+\end{figure}
+
+
+\begin{figure}
+\centering
+\epsfig{file=img/TectogramaticalTree,  width=\hsize}
+\caption{A tectogrammatical tree of sentence: "Two men died on the spot in the demolished Trabant..."}
+\label{img:tectogrammatical}
+\end{figure}
+
+
+
+\begin{figure}
+\centering
+\epsfig{file=img/ExtractionOntology,  width=\hsize}
+\caption{An example of extraction rule and its mapping to ontology}
+\label{img:ExtractionOntology}
+\end{figure}
+
+
+Unlike the usual approaches to the description of English syntax, the Czech syntactic descriptions are dependency-based, which means, that every edge of a syntactic tree captures the relation of dependency between a governor and its dependent node. Especially the tectogrammatical (deep syntactic) level of representation \cite{biblio:MiBeAnnotationtectogrammatical2006} is closer to the meaning of the sentence. The tectogrammatical trees (Example of such a tree will be presented in section 6.3??? on the Figure \ref{img:tectogrammatical}) have a very convenient property of containing just the type of information we need for our purpose (extraction of semantic information), namely the information about inner participants of verbs - actor, patient, addressee etc. So far this tool does not work with the context of the sentence and hence does not exploit frequent occurrence of similar sentences.
 
 
 
@@ -270,11 +340,11 @@ In this paper we do not deal with learning of extraction ontology. Please notice
 
 \subsection{Domain dependent Extraction and annotation based on linguistics}
 
-Assume we have pages annotated by linguistic annotator and we have a domain ontology. The extraction method we have used is based on extraction rules. An example of such extraction rule is on the Figure 7??? (on the left side). These rules represent common structural patterns that occur in sentences (more precisely in corresponding trees) with the same or similar meaning. Mapping of the extraction rules to the concepts of target ontology enables the semantic extraction. Example of such mapping is demonstrated in the Figure 7???.
+Assume we have pages annotated by linguistic annotator and we have a domain ontology. The extraction method we have used is based on extraction rules. An example of such extraction rule is on the Figure \ref{img:ExtractionOntology} (on the left side). These rules represent common structural patterns that occur in sentences (more precisely in corresponding trees) with the same or similar meaning. Mapping of the extraction rules to the concepts of target ontology enables the semantic extraction. Example of such mapping is demonstrated in the Figure \ref{img:ExtractionOntology}.
 
 We experimented with obtaining extraction rules in two ways.
 \begin{enumerate}
-\item Rules and mappings were designed manually (like the rule on the Fig. 7???) and 
+\item Rules and mappings were designed manually (like the rule on the Fig. \ref{img:ExtractionOntology}) and 
 \item rules and mappings were learned using Inductive Logic Programming (ILP) methods (see following section).
 \end{enumerate}
 
@@ -292,42 +362,69 @@ The main advantage of ILP is that it can be trained to mine arbitrary data descr
 
 Thanks to the fact that ILP learns from positive and negative examples, we can propose an assisted learning procedure for learning and also tuning the extractor (described in previous section). The process is such that extractor gets pure textual or semantically annotated (by the extractor) data from a web page and presents it to the user. He or she then annotates or only corrects the data saying which are good and which are badly annotated. Extractor can be learned and tuned to the desired goal in this way. Of course the user has to understand the semantics of the annotations - so he or she has to be an expert in that way of understanding the target ontology, but this ontology can be quite simple in the case we are interested only in a specific kind of information e.g. number of people injured during a car accident like in our experiments (see next section) and motivation. 
 
-We discovered that we can use a straightforward transformation of linguistic trees (see an example on the Figure 8???) to predicates of ILP (example of the transformation is in the Figure 9???) and the learning procedure responds with significant results, which are presented in next section.
+We discovered that we can use a straightforward transformation of linguistic trees (see an example on the Figure \ref{img:tectogrammatical}) to predicates of ILP (example of the transformation is in the Figure \ref{img:prologFacts}) and the learning procedure responds with significant results, which are presented in next section.
 
-On the Figure 8??? we can see the relationship between particular words of a sentence and nodes of tectogrammatical tree -- the highlighted node of the tree corresponds with the word "two" in the sentence (also highlighted). This relationship allows propagation of information form user (which annotates just text of sentence) to the ILP learning procedure.
+On the Figure \ref{img:tectogrammatical} we can see the relationship between particular words of a sentence and nodes of tectogrammatical tree -- the highlighted node of the tree corresponds with the word "two" in the sentence (also highlighted). This relationship allows propagation of information form user (which annotates just text of sentence) to the ILP learning procedure.
 
 
 \subsection{Experiments}
 Our experiment was to enable our agent to access information from various sources. The first source is data structured into tables, from which the semantic information is extracted. We used extraction tool [5???] for the extraction. Data extracted in this way represents car offers with attributes of the car offered, the price, the seller of the car etc.
 
-In Table 2 is presented a typical form of extracted data (using the extraction tool [5???]). Data can be stored in a relational database or in an ontology as was described in Section 5.1??? and 6.1???. This data provide a base set of attributes that can be enriched by other source of data, for example from natural language texts.
+\begin{table}
+\label{tab:extracted}
+\centering
+\caption{Example of extracted data from cars offers }
+\begin{tabular}{|p{35pt}|p{35pt}|p{35pt}|p{35pt}|p{35pt}|} \hline
+Manu-fac-turer&Model  of car	&Price&Con-sump-tion &Number of airbags	\\ \hline\hline
+Skoda	& 120&3 000,-&7&0 \\ \hline
+Trabant	& Kombi&8 000,-&7&0 \\ \hline
+Audi	& A4&85 000,-&6,5&6 \\ \hline
+Fiat	& Punto 1,1i&32 900,-&6&2 \\ \hline
+Tatra	& T613&48 000,-&12&0 \\ \hline
+Kia	& Joice&140 000,-&10&2 \\ \hline
+Ford	& Focus 1.6i&45 000,-&6,2&6 \\ \hline
+\end{tabular}
+\end{table}
+
+
+In Table \ref{tab:extracted} is presented a typical form of extracted data (using the extraction tool [5???]). Data can be stored in a relational database or in an ontology as was described in Section 5.1??? and 6.1???. This data provide a base set of attributes that can be enriched by other source of data, for example from natural language texts.
 The price of the car is in Czech crowns; about 17 Czech crowns is 1\$. There were more than one offer for each car type, we chose the offer randomly. In reality, all offers are stored in the ontology (as was presented in Figure 6???).
 
-The second source of data is natural language text. We wanted to find out the number of injured persons during car accidents. We have used firemen reports; some of them were about car accidents, some were not. Each report was split into sentences and each sentence was linguistically analyzed and transformed into a tectogrammatical tree, as described in previous two sections. These trees were transformed to a set of Prolog facts (see Figure 9???). 
+The second source of data is natural language text. We wanted to find out the number of injured persons during car accidents. We have used firemen reports; some of them were about car accidents, some were not. Each report was split into sentences and each sentence was linguistically analyzed and transformed into a tectogrammatical tree, as described in previous two sections. These trees were transformed to a set of Prolog facts (see Figure \ref{img:prologFacts}). 
 Sentences, which talk about an injury during a car accident, were manually tagged by predicate injured(X), where X is the ID of the sentence. Those sentences that do not talk about injured persons during a car accident were tagged as :-injured(X), which represents negative example. This tagging can be done even by an user unexperienced in linguistics and ILP, but he or she has to understand the semantics of information he is tagging (in usually means that he or she has to understand the target ontology).
 These tagged sentences were input for ILP, we used 22 sentences as positive examples and 13 as negative examples. We used Progol [20???] as ILP software.
-The rules ILP found are in following Table 3???.
+The rules ILP found are in following Figure \ref{img:rules}.
 
+\begin{figure}
+{\footnotesize
 \begin{verbatim}
-injured(A) :- id(B,A), id(B,t_plzensky57770_txt_001_p5s2).
-injured(A) :- id(B,A), id(B,t_plzensky60375_txt_001_p1s6).
-injured(A) :- id(B,A), id(B,t_plzensky57870_txt_001_p8s2).
-injured(A) :- id(B,A), id(B,t_plzensky57870_txt_001_p1s1).
-injured(A) :- id(B,A), edge(B,C), edge(C,D), t_lemma(D,zranit).
-injured(A) :- id(B,A), edge(B,C), edge(C,D), t_lemma(D,nehoda).
+injured(A) :- id(B,A), id(B,t_57770_txt_001_p5s2).
+injured(A) :- id(B,A), id(B,t_60375_txt_001_p1s6).
+injured(A) :- id(B,A), id(B,t_57870_txt_001_p8s2).
+injured(A) :- id(B,A), id(B,t_57870_txt_001_p1s1).
+injured(A) :- id(B,A), edge(B,C), edge(C,D), 
+			t_lemma(D,zranit).
+injured(A) :- id(B,A), edge(B,C), edge(C,D), 
+			t_lemma(D,nehoda).
 Table 3: Rules found by ILP
-\end{verbatim}
+\end{verbatim}}
+\caption{Rules mined by ILP }
+\label{img:rules}
+\end{figure}
 
 The first four rules are overfitted to specific sentences. Only the last two represent generally applicable rules. But they do make sense - "zranit" means "to hurt" and "nehoda" means "an accident" in Czech. These two rules mean that the root element is connected either to a noun that means an accident or to a verb that means to hurt.
-We tested these rules on the set of 15 positive and 23 negative examples. The result accuracy was 86.84\%. Results are in Table 4. P is the positive sentence from ILP, ~P is negative sentence, A is sentence tagged as positive and $\neg$A is sentence tagged as negative. 11 sentences that were tagged as positive were also tagged as positive by ILP, 4 was tagged as negative by ILP. 22 sentences that were tagged as negative were also tagged as negative by ILP, only 1 was tagged as positive by ILP.
+We tested these rules on the set of 15 positive and 23 negative examples. The result accuracy was 86.84\%. Results are in Table \ref{tab:results}. P is the positive sentence from ILP, ~P is negative sentence, A is sentence tagged as positive and $\neg$A is sentence tagged as negative. 11 sentences that were tagged as positive were also tagged as positive by ILP, 4 was tagged as negative by ILP. 22 sentences that were tagged as negative were also tagged as negative by ILP, only 1 was tagged as positive by ILP.
 
-
-\begin{verbatim}
-	A	~A
-P	11	1
-~P	4	22
-Table 4. Results on the test set.
-\end{verbatim}
+\begin{table}
+\label{tab:results}
+\centering
+\caption{Results on the test set}
+\begin{tabular}{|c|c|c|} \hline
+ 		&A	&$\neg$A	\\ \hline
+P		& 11&1 \\ \hline
+$\neg$P	& 4 &22\\ \hline
+\hline\end{tabular}
+\end{table}
 
 
 In this case we learned set of rules that identify relevant sentences - roots of relevant tectogrammatical trees. We understand these results as proof of concept that ILP can be also used for finding other kinds of information present in nodes and structure of linguistic trees. Se we can for example extract number of injured people from relevant trees if we modify the training data. 
