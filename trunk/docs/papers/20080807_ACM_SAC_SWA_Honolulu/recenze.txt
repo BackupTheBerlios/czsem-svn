@@ -1,0 +1,56 @@
+PaperName:  	SWA-104
+Status: 	Rejected
+Technical Content and Accuracy: 	1
+Significance of the Work: 	1
+Appropriate Title, Introduction, and Conclusion: 	4
+Overall Organization: 	6
+Appropriateness for SAC 2009: 	7
+Style and Clarity of the Paper: 	5
+Originality of the content: 	4
+Referee's Confidence in the Paper's Subject: 	8
+As a Referee, how do you rate your knowledge, ability, and confidence in reviewing this paper: 	8
+Score: 	2
+Comment:
+The paper discusses the idea of "Web Semantization", i.e. the process of enriching the current web with semantic annotations based on the Semantic Web vision. Unfortunately, I have to say that most of the ideas presented in this paper are either not really new or they are presented only in a very abstract way such that it does not become clear how realistic their implementation is. Particular remarks (mostly wrt. section 2): * The overall purpose of the annotation effort is not spelled out explicitly. While, implicitly, it should be clear that the purpose is to enable "Semantic Search", it is not clear what is meant by this in the particular setting. Is it just about "tagging" web resources with concepts? is it about extracting instance assertions like "person xyz" has phone number "789" and making those available in the search engine? * Web repository. - As far as I understand the paper, the authors envision that the actual web content is crawled, indexed and annotated within a separate web repository. In essence, this would mean that the web content is duplicated which I believe is neither particularly useful nor feasible, even for a small fraction of the web like the *cz portion mentioned by the authors. * It is unclear, with what kind of annotations the web pages should be annotated in step 2 and 3. The paper also stresses the need for manual annotation of large proportions of the data which again raises the question of scalability. * The steps "design of semantic repository" and "design at least one agent..." are merely mentioned but not related to any particular technical content. * The ILP experiment reported in section 5 is merely anecdotal. It is not clear how the purpose of the experiment ("finding web pages which talk about the number of injured persons during a car accident") relates to the overall idea of improved web search. The actual experiment uses a very specific and very small dataset. It is not clear how the results should generalize. * ILP is well-known to show substantial problems in presence of large amounts of data. I do not see how the approach should scale to the sizes needed for web annotation. As a general remark, I would like to point to existing work on semantic annotation, e.g. S. Handschuh, S. Staab (eds.). Annotation for the Semantic Web. IOS Press, 2003 I believe much of the issues that are unclear in the present paper are somewhat covered in these publications and I am missing a disucssion of any related work.
+PaperName: 	SWA-104
+Status: 	Rejected
+Technical Content and Accuracy: 	5
+Significance of the Work: 	3
+Appropriate Title, Introduction, and Conclusion: 	2
+Overall Organization: 	3
+Appropriateness for SAC 2009: 	6
+Style and Clarity of the Paper: 	5
+Originality of the content: 	1
+Referee's Confidence in the Paper's Subject: 	10
+As a Referee, how do you rate your knowledge, ability, and confidence in reviewing this paper: 	10
+Score: 	2
+Comment:
+I fail to see the novel aspect of the work presented in this paper. The automatic annotation of Web pages has been largely explored but the authors fail to present a section with related work. It is not clear how the approach is different from previous work. Semantic enrichment of Web pages can be viewed as a data mining task or a natural language possessing task or even an IR task. The use of Czech to show a proof of concept adds an unnecessary complexity especially for researcher wanting to duplicate the experiment. The results obtained seem to be too optimistic. A 86% accuracy is not typically archived.
+PaperName: 	SWA-104
+Status: 	Rejected
+Technical Content and Accuracy: 	5
+Significance of the Work: 	3
+Appropriate Title, Introduction, and Conclusion: 	8
+Overall Organization: 	5
+Appropriateness for SAC 2009: 	7
+Style and Clarity of the Paper: 	2
+Originality of the content: 	6
+Referee's Confidence in the Paper's Subject: 	6
+As a Referee, how do you rate your knowledge, ability, and confidence in reviewing this paper: 	7
+Score: 	4
+Comment:
+The paper touches upon a very important topic, i.e. that of semanticizing the existing web. It presents very promising introduction but disappoints the reader in the rest of the paper. To start with, the abstract does not give much clue about what is inside and the reader needs to go through the introduction to get a feel of the paper. This lack of clarity of thought and presentation remains throughout the paper and at several places makes the paper unreadable. For instance, the entire section 2 on the Idea of Web Semantization appears to be superfluous and abstract. The authors give ‘space constraint’ as the reason for not backing up their arguments (refer page 2, column 2, para 1 last line). However, one can observe that there is plenty of space available in this 5 page paper. Specifically, the figure on page 4 is occupying only ½ of the column, and there is extra space left after the references as well. Given that the hard upper limit is 8 pages, even more pages could have been added, to explain vital concepts. On most crucial points, the paper stops at presenting a viewpoint without sufficient arguments to back it up. For instance, page 2, col 2, para 3, the statement “For grammatical pages repetitions make…an ontology.” is provided with no support in terms of an explanation or a reference. The next statement : “This domain (task) … acquaintance” is again given without any concrete example or reasoning. Section2, page 2, col1, para 4, the term PDT tectogrammatical structure is used without its expansion or explanation. The statement itself is not clear. There are several such instances of unclear text without concrete, explanatory/reasoning statements throughout the entire section as well as rest of the paper. Section 3, figure 3 is not in English and despite that not explained well. Section 3, figure 4, again the figure is not in English, not large enough to be read properly and despite all this not explained well. In essence, the paper is hard to read due to its poor presentation and content. Further, the approach also appears to be too restrictive in nature to be of practical use (for instance, the technique followed seems to be relying upon linguistic characteristics of Czech language and may not apply to other languages). Compared to that the claim of the paper (as mentioned in its title) is quite grand.
+PaperName: 	SWA-104
+Status: 	Rejected
+Technical Content and Accuracy: 	1
+Significance of the Work: 	2
+Appropriate Title, Introduction, and Conclusion: 	3
+Overall Organization: 	1
+Appropriateness for SAC 2009: 	8
+Style and Clarity of the Paper: 	1
+Originality of the content: 	5
+Referee's Confidence in the Paper's Subject: 	10
+As a Referee, how do you rate your knowledge, ability, and confidence in reviewing this paper: 	10
+Score: 	1
+Comment:
+The paper aims to enrich web content with semantic markup and claims to do this in an automatic way. Overall the paper felt like a marketing handout with very little technical detail. Most ideas appear grand but vague. I will point to specific examples as we go along. Page 1, Col 2: I think the remark "Nobody seems to care in the semantic web community .." is a little flippant and should be revised. There is plenty of literature in the Ontology learning community, for example, to discover ontologies from web. Page 2, Col 1: "We restrict to pages with grammatical content" -- How is that done automatically? And what is considered grammatical? As a side note, a vast fraction of the readable web (like blogs) is of poor linguistic quality. The last paragraph on Pg2, Col1 doesn't make much sense. Please be specific. What is meant by "We make use of their achievements originally focused on machine translation"? Page 3, Col1: "In this chapter ..." This is a paper. Looks like the text for this paper was copy/pasted from elsewhere. The extraction of information is done using arbitrary rules without proper motivation. Fig 5. shows rules just for ONE sentence. How will this work for the whole web? Will more rules be added? How can this be done at a scale fitting for the whole web? The experiment section is very weak. For a paper aiming the whole web, or the *.cz pages at least, testing the rules on 50 odd sentences appeared entirely artificial. How were these sentences selected? With very strong conviction, I feel this paper is not ready for peer consumption yet. There are lot of gaps that should be addressed. Good luck!
