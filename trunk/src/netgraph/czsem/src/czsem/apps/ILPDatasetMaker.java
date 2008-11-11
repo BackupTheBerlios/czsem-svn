@@ -11,9 +11,7 @@ import czsem.utils.ILPStringList;
  */
 public class ILPDatasetMaker {
 	
-	private static final double train_test_ratio = 0.6;
-
-	public static void makeDatasets(String filename) throws IOException
+	public static void makeDatasets(String filename, double train_test_ratio) throws IOException
 	{
 		ILPStringList ilp_list = new ILPStringList();
 		
@@ -41,8 +39,15 @@ public class ILPDatasetMaker {
 	
 	public static void main(String[] args) throws IOException
 	{
-		makeDatasets("number_nodes_exmpl03.pl");
-		makeDatasets("roots_number_nodes_exmpl03.pl");
+		if (args.length < 2)
+		{
+			System.err.println("Usage:   ILPDatasetMaker source_file train_test_ratio");			
+			System.err.println("Example: ILPDatasetMaker number_nodes_exmpl03.pl 0.1");
+			
+			return;
+		}
+
+		makeDatasets(args[0], Double.parseDouble(args[1]));
 		
 /*		ILPStringList ilpsl1 = new ILPStringList();
 		
