@@ -1,0 +1,222 @@
+\documentclass{article}
+
+\usepackage[cp1250]{inputenc}  % or [cp1250], or [latin2], or whatever
+                               % suitable for your system
+
+\usepackage{url}
+
+\begin{document}
+
+\title{Connecting Web and User}
+
+\author{Jan Dìdek \and Alan Eckhardt \and Peter Vojtáš}
+
+%\affil{Charles University, Faculty  of  Mathematics  and  Physics, Prague, Czech Republic.}
+
+\begin{abstract}
+The paper addresses a problem of Connecting Web and User
+\end{abstract}
+
+%\begin{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The idea of the Semantic Web \dots
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{\textbf{Pracovni} seznam abstraktu}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsection{Dedek, Vojtas: Znalosti2008}
+\cite{biblio:DeVoExtrakceinformaci2008}
+
+The authors present a linguistic-based method for extraction of information from text-based web resources. The paper deals with several linguistic tools for Czech, namely Tools for machine annotation -- PDT 2.0 and The Czech WordNet.
+
+\subsection{Dedek, Vojtas: IIS 2008 (Zkopane)} 
+\cite{biblio:DeVoExploitationlinguistic2008}
+
+The paper addresses a problem of information extraction from Czech texts from the Web. The method described in the paper exploits existing linguistic tools created originally for a syntactically annotated corpus, Prague Dependency Treebank (PDT 2.0). We propose a system which captures text of web-pages, annotates it linguistically by PDT tools, extracts data and stores the data in an ontology. We report on initial experiments in the domain of reports of traffic accidents. These experiments are promising, e.g. enabling summarization of the number of injured people.
+
+
+\subsection{Dedek, Vojtas: IDC 2008} 
+\cite{biblio:DeVoLinguisticextraction2008}
+
+Bottleneck for semantic web services is lack of semantically annotated information. We deal with linguistic information extraction from Czech texts from the Web for semantic annotation. The method described in the paper exploits existing linguistic tools created originally for a syntactically annotated corpus, Prague Dependency Treebank (PDT 2.0). We propose a system which captures text of web-pages, annotates it linguistically by PDT tools, extracts data and stores the data in an ontology. We focus on the third phase -- data extraction -- and present methods for learning queries over linguistically annotated data. Our experiments in the domain of reports of traffic accidents enable e.g. summarization of the number of injured people. This serves as a proof of concept of our solution. More experiments, for different queries and different domain are planned in the future. This will improve third party semantic annotation of web resources.
+
+\subsection{Dedek, Vojtas: ADVCOMP 2008 (Valencie)}
+\cite{biblio:DeVoComputingaggregations2008}
+
+Semantic computing aims to connect the intention of humans with computational content. We present a study of a problem of this type: extract information from large number of similar linguistic web resources to compute various aggregations (sum, average,...). In our motivating example we calculate the sum of injured people in traffic accidents in a certain period in a certain region. We restrict ourselves to pages written in Czech language. Our solution  exploits existing linguistic tools created originally for a syntactically annotated corpus, Prague Dependency Treebank (PDT 2.0). We propose a solutions which learns tree queries to extract data from PDT2.0 annotations and transforms the data in an ontology. This method is not limited to Czech language  and can be used with any structured linguistic representation. We present a proof of concept of our method. This enables to compute various aggregations over linguistic web resources. 
+
+
+\subsection{Dedek, Eckhardt, Vojtas: ILP 2008}
+\cite{biblio:DeEcExperimentswith2008}
+
+In this paper we present basic experiments that we have made in connection with our research in the domain of the Semantic Web. These experiments should demonstrate possibilities of employing ILP technique in the task of acquisition of semantic information from text of Czech Web pages. These experiments are preceded by complex linguistic analysis of the texts and the output of linguistic tools is processed in the ILP procedure.
+
+\subsection{Dedek, Eckhardt, Galambos, Vojtas: URSW 2008} \cite{biblio:DeEcDiscussionUncertainty2008}
+
+In this position paper we discuss the what, who, when, where, why and how of uncertain reasoning based on achievements of URW3XG [2], our experiments and some future plans.  
+What and Why - improving semantic web practice through uncertain reasoning. This vision is described in the URW3XG charter (see [2]), especially the objective is "to identify and describe situations […] for which uncertainty reasoning would significantly increase the potential for extracting useful information; and to identify methodologies that can be applied to these situations and the fundamentals of a standardized representation that could serve as the basis for information exchange necessary for these methodologies to be effectively used." A crucial point in this is uncertainty annotation of web (extending W3C standards [3]). 
+Who and When - will create, maintain and use this annotation. Will this annotation be done by a human creator using an annotation supporting tool for web page creation? Or will it be done by a third party annotation? For this, we will discuss a refinement of URW3XG use cases. Possible use of this enriched web will be for humans and services.
+Where - will be this annotations stored. Our proposal is based on the web crawler Egothor repository [4] (we have crawled data in size of several TB from .cz domain) and an additional semantic repository build on the top using data pile technology [5]. 
+How - to semantically enrich information and how to measure success and/or progress of such enrichment. This problem consists of two parts, namely, a data mining task and an ontology modeling task. Third party annotation of great size can be done only in an automated way and it should be done according to an ontology. 
+
+Our annotation ontology grows out of URW3XG uncertainty ontology and extends some features needed for annotation. Below we show a part of our annotation ontology in Fig. 1. We start here from an assumption that a part of annotation will be done by a web information extraction and that this is the main source of uncertainty.
+
+Web information extraction splits pages to dominantly tabular and/or textual. Uncertainty issues connected with information extraction (and annotation) from tabular pages were discussed in [1]. Extraction of textual pages will use techniques described in [6]. Both approaches (and any other approach) generate a level of (un)certainty they have about their annotations. Also users, human or agents, can review these uncertainties and provide feedback about them.
+Success of this approach can be measured primarily by the advance of semantic web functionalities. This is easier to measure for software agents. More difficult is to design metrics to measure human user satisfaction. All these aspects will be discussed in this presentation.
+
+
+\subsection{Dedek, Eckhardt, Galambos, Vojtas: Datakon 2008}
+\cite{biblio:DeEcSemantickyWeb2008}
+
+Cílem je podat pøehled vývoje zpracování informací na webu s dùrazem na Sémantický web. Prvním klasifikaèním hlediskem je, zda informace na webu jsou urèeny pouze pro lidského konzumenta nebo také pro strojové zpracování (agent, služba). Vize Sémantického webu vidí ve strojovém zpracování webu možnost, jak obsah celého webu zpøístupnit všem. Základním stavebním kamenem Sémantického webu je RDF datový model s metadaty ve formì RDF schématu a OWL ontologií, vše standardizováno konsorciem W3C. Alternativní cesta Web 2.0 pøedkládá chytøejší uživatelská rozhraní a proprietární "mashup" webových dat. Nezanedbatelný je i podíl lidské práce (školené i neškolené) a automatizovaných procesù potøebný pro každou z tìchto alternativ. Extrémní snaha vytvoøit Sémantický web "od nuly" naráží na problém nejednotnosti ontologií, jejich rùzné kvality a potøeby jejich (automatizovaného) mapování. Na závìr pøedstavíme náš projekt sémantizace webu jako procesu, ve kterém klíèovou roli hraje extrakce dat z webu a anotace webových zdrojù.
+
+
+
+
+
+%od Alana
+
+
+
+
+
+
+\subsection{Inductive Models of User Preferences for Semantic Web}
+, DATESO 2007, Eckhardt, Alan
+\cite{biblio:EcInductiveModels2007}
+
+User preferences became recently a hot topic. The massive use of internet shops and social webs require the presence of a user modelling, which helps users to orient them selfs on a page. There are many different approaches to model user preferences. In this paper, we will overview the current state-of-the-art in the area of acquisition of user preferences and their induction. Main focus will be on the models of user preferences and on the induction of these models, but also the process of extracting preferences from the user behaviour will be studied. We will also present our contribution to the probabilistic user models.
+
+\subsection{Uživatelské preference pøi vyhledávání ve webovských zdrojích}
+, Eckhardt, Alan Vojtáš, Peter, Znalosti 2007
+\cite{biblio:EcVoUzivatelskepreference2007}
+
+This paper is focused on models of user preferences in semantic web. We present
+a model for querying over RDF data with user preferences and for ordering of
+results by a user’s aggregation function. This model has theoretical base in a
+modification of a fuzzy description logic, which is embedable into the two valued
+description logic and which extends OWL. We describe experiments made with
+Tokaf - an implementation of framework for the flexible querying. We also test
+a new heuristic for the algorithm for searching top k answers.
+
+\subsection{Integrating user and group preferences for top-k search}
+, Eckhardt, Alan Pokorný, J. Vojtáš, Peter, Database and Expert Systems Applications (DEXA) 2007
+\cite{biblio:EcPoIntegratinguser2007}
+
+We discuss models of user and group preferences in social networks and the Semantic web. We construct a model for user and group preference querying over RDF data as well as for ordering of answers by aggregation of particular attribute ranking. We have implemented our methods and heuristics into the Tokaf middleware framework prototype. We describe also experiments with Tokaf.
+
+\subsection{A system recommending top-k objects for multiple users preferences}
+, Eckhardt, Alan Pokorný, J. Vojtáš, Peter, 2007 IEEE Conference on Fuzzy Systems (FUZZ-IEEE)
+\cite{biblio:EcPoAsystem2007}
+
+We discuss models of user preferences in Web environment.
+We construct a model for user preference querying
+over a number of data sources and ordering of answers by
+a combination of particular attribute rankings. We generalize
+Fagin’s algorithm in two directions - we develop some new
+heuristics for top-k search in the model without random access
+and propose a method of ordering lists of objects by user
+fuzzy function. To enable different user preferences our system
+does not require objects to be sorted - instead we use a B+-
+tree on each of the attribute domains. This leads to a more
+realistic model of Web services. We implement our methods and
+heuristics for search of top-k answers into Tokaf middleware
+framework prototype. We describe experiments with Tokaf
+and compare different performance measures with some other
+methods.
+
+\subsection{PHASES: A User Profile Learning Approach for Web Search}
+,     Eckhardt, Alan Horváth, T. Vojtáš, Peter, 2007 IEEE/WIC/ACM International Conference on Web Intelligence - WI 2007
+\cite{biblio:EcHoPHASESA2007}
+
+Web search heuristics based on Fagin’s threshold
+algorithm assume we have the user profile in the form
+of particular attribute ordering and a fuzzy
+aggregation function representing the user combining
+function. Having these, there are sufficient algorithms
+for searching top-k answers. Finding particular
+attribute ordering and aggregation for a user still
+remains a problem. In this short paper our main
+contribution is a proof of concept of a new iterative
+process of acquisition of user preferences and attribute
+ordering.
+
+\subsection{Learning different user profile annotated rules for fuzzy preference top-k querying}
+, Eckhardt, Alan Horváth, T. Vojtáš, Peter, International Conference on Scalable Uncertainty Management SUM 2007
+\cite{biblio:EcHoLearningdifferent2007}
+
+Uncertainty querying of large data can be solved by providing top-k
+answers according to a user fuzzy ranking/scoring function. Usually different
+users have different fuzzy scoring function – a user preference model. Main
+goal of this paper is to assign a user a preference model automatically. To
+achieve this we decompose user’s fuzzy ranking function to ordering of
+particular attributes and to a combination function. To solve the problem of
+automatic assignment of user model we design two algorithms, one for learning
+user preference on particular attribute and second for learning the combination
+function. Methods were integrated into a Fagin-like top-k querying system with
+some new heuristics and tested.
+
+\subsection{Uncertainty Issues in Automating Process Connecting Web and User}
+, Eckhardt, Alan Horváth, T. Marušèák, D. Novotný, R. Vojtáš, Peter, URSW '07 Uncertainty Reasoning for the Semantic Web - Volume 3
+\cite{biblio:EcHoUncertaintyIssues2007}
+
+We are interested in replacing human processing of web resources by automated processing. Based on an experimental system we identify uncertainty issues making this process difficult for automated processing. We show these uncertainty issues are connected with Web content mining and user preference mining. We conclude with a discussion of possible future development heading to an extension of web modeling standards with uncertainty features.
+
+\subsection{Návrh agenta øízeného uživatelskými preferencemi}
+, Eckhardt, Alan, ITAT 2008 Informaèné Technológie - Aplikácie a Teória, Hrebienok, Slovakia, September 2008
+\cite{biblio:EcNavrhagenta2008}
+
+Vize semantickeho webu vykresluje web tak, .ze bude
+pochopitelny pro stroje. Tento .clanek p.ristupuje k semantickemu
+webu z opa.cneho konce - od u.zivatele. Navrhneme softwaroveho
+agenta vyu.z.vaj.c.ho semanticka data z.skana anotac., ktery je
+bude prezentovat u.zivateli podle jeho preferenc.. Tento agent usnadn. u.zivateli hledan. a vyb.er idealn.ho objektu, podle jeho preferenc
+..
+
+\subsection{Considering data-mining techniques in user preference learning}
+, Eckhardt, Alan Vojtáš, Peter, 2008 International Workshop on Web Information Retrieval Support Systems
+\cite{biblio:EcVoConsideringdatamining2008}
+
+In this paper we deal with the problem of learning
+user preferences from user’s scoring of a small sample
+of objects with labels from a very small linearly
+ordered set. The main task of this process is to use
+these preferences for a top-k query, which delivers the
+user with an ordered list of k highest ranked objects.
+We deal with a problem of many ties in the highest
+score. Two algorithms for learning objective and utility
+functions are presented. We experiment and compare
+them to some classical data-mining methods. We use
+several measures (RMSE and rank correlations …) to
+evaluate efficiency of these methods.
+
+\subsection{Uncertainty Issues and Algorithms in Automating Process Connecting Web and User}
+, Eckhardt, Alan Horváth, T. Marušèák, D. Novotný, R. Vojtáš, Peter,    Uncertainty Reasoning for the Semantic Web I
+\cite{biblio:EcHoUncertaintyIssues2008}
+
+We focus on replacing human processing web resources by automated processing. On an experimental system we identify uncertainty issues making this process difficult for automated processing and try to minimize human intervention. In particular we focus on uncertainty issues in a Web content mining system and a user preference mining system. We conclude with possible future development heading to an extension of OWL with uncertainty features.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusion}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+We have presented a 
+
+
+%\acknowledgments %\footnotesize
+\subsection{Acknowledgments}
+This work was partially supported by the Ministry of Education of the Czech Republic (grant MSM0021620838) and by Czech projects 1ET100300517 and 1ET100300419.
+
+
+\bibliographystyle{plain}
+\bibliography{SemWeb_1ET100300419}
+
+%\end{article}
+\end{document}
+
