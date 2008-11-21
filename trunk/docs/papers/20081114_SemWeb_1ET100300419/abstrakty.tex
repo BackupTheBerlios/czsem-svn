@@ -2,7 +2,7 @@
 
 \usepackage[cp1250]{inputenc}  % or [cp1250], or [latin2], or whatever
                                % suitable for your system
-\usepackage{graphicx}
+
 \usepackage{url}
 
 \begin{document}
@@ -17,7 +17,7 @@
 \maketitle
 
 \begin{abstract}
-??????????? The paper summarizes our research during last two years. We are concentrated on the problem of connecting web and user. This problem consists of two main aspects: user preference modeling and web content mining. Modeling of user preferences helps user to find the most interesting information, products, offers, service, etc. 
+The paper addresses a problem of Connecting Web and User
 \end{abstract}
 
 %\begin{article}
@@ -26,49 +26,11 @@
 \section{Introduction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-This paper summarizes our research during last two years. We are concentrated on the problem of connecting web and user. This problem consists of two main aspects: web content mining and user preference modeling.
-
-Web content mining is supposed to extract structured information from possibly heterogeneous web resources. From known structure of the extracted information we can easily deduce semantics of the information and such information can be further used for precise semantic information querying. More details are presented in section~\ref{sec:webm}.
-
-Modeling of user preferences helps user to find the most interesting information, products, offers, service, etc according to his or her preferences. More details are presented in section~\ref{sec:user}.
-
-We see both problems (web content mining and user preference modeling) very difficult and the results are usually uncertain because they are influenced by human factor. So we see the modeling of uncertainty beneficial to the both problems. More details are presented in section~\ref{sec:uncert}.
-
-The whole situation is presented in the figure~\ref{img:Web2User}
-
-
-
-\begin{figure}
-\centering
-\includegraphics[width=0.9\hsize]{Web2User}
-\caption{Connecting Web and User}
-\label{img:Web2User}
-\end{figure}
-
+The idea of the Semantic Web \dots
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Web Content Mining} \label{sec:webm}
+\section{\textbf{Pracovni} seznam abstraktu}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Web content mining or web information extraction splits pages to dominantly tabular and/or textual. We will discuss our experience with both separately.
-
-\subsection{Dominantly Tabular Pages} \label{sec:webm}
-
-Uncertainty issues connected with information extraction (and annotation) from tabular pages were discussed in [1]. Extraction of textual pages will use techniques described in [6]. Both approaches (and any other approach) generate a level of (un)certainty they have about their annotations.
-
-
-\subsection{Uncertainty Issues and Algorithms in Automating Process Connecting Web and User}
-, Eckhardt, Alan Horváth, T. Marušèák, D. Novotný, R. Vojtáš, Peter,    Uncertainty Reasoning for the Semantic Web I
-\cite{biblio:EcHoUncertaintyIssues2008}
-
-We focus on replacing human processing web resources by automated processing. On an experimental system we identify uncertainty issues making this process difficult for automated processing and try to minimize human intervention. In particular we focus on uncertainty issues in a Web content mining system and a user preference mining system. We conclude with possible future development heading to an extension of OWL with uncertainty features.
-
-\subsection{Uncertainty Issues in Automating Process Connecting Web and User}
-, Eckhardt, Alan Horváth, T. Marušèák, D. Novotný, R. Vojtáš, Peter, URSW '07 Uncertainty Reasoning for the Semantic Web - Volume 3
-\cite{biblio:EcHoUncertaintyIssues2007}
-
-We are interested in replacing human processing of web resources by automated processing. Based on an experimental system we identify uncertainty issues making this process difficult for automated processing. We show these uncertainty issues are connected with Web content mining and user preference mining. We conclude with a discussion of possible future development heading to an extension of web modeling standards with uncertainty features.
-
-
 
 
 \subsection{Dedek, Vojtas: Znalosti2008}
@@ -98,9 +60,36 @@ Semantic computing aims to connect the intention of humans with computational co
 
 In this paper we present basic experiments that we have made in connection with our research in the domain of the Semantic Web. These experiments should demonstrate possibilities of employing ILP technique in the task of acquisition of semantic information from text of Czech Web pages. These experiments are preceded by complex linguistic analysis of the texts and the output of linguistic tools is processed in the ILP procedure.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Modeling of User Preferences} \label{sec:user}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Dedek, Eckhardt, Galambos, Vojtas: URSW 2008} \cite{biblio:DeEcDiscussionUncertainty2008}
+
+In this position paper we discuss the what, who, when, where, why and how of uncertain reasoning based on achievements of URW3XG [2], our experiments and some future plans.  
+What and Why - improving semantic web practice through uncertain reasoning. This vision is described in the URW3XG charter (see [2]), especially the objective is "to identify and describe situations […] for which uncertainty reasoning would significantly increase the potential for extracting useful information; and to identify methodologies that can be applied to these situations and the fundamentals of a standardized representation that could serve as the basis for information exchange necessary for these methodologies to be effectively used." A crucial point in this is uncertainty annotation of web (extending W3C standards [3]). 
+Who and When - will create, maintain and use this annotation. Will this annotation be done by a human creator using an annotation supporting tool for web page creation? Or will it be done by a third party annotation? For this, we will discuss a refinement of URW3XG use cases. Possible use of this enriched web will be for humans and services.
+Where - will be this annotations stored. Our proposal is based on the web crawler Egothor repository [4] (we have crawled data in size of several TB from .cz domain) and an additional semantic repository build on the top using data pile technology [5]. 
+How - to semantically enrich information and how to measure success and/or progress of such enrichment. This problem consists of two parts, namely, a data mining task and an ontology modeling task. Third party annotation of great size can be done only in an automated way and it should be done according to an ontology. 
+
+Our annotation ontology grows out of URW3XG uncertainty ontology and extends some features needed for annotation. Below we show a part of our annotation ontology in Fig. 1. We start here from an assumption that a part of annotation will be done by a web information extraction and that this is the main source of uncertainty.
+
+Web information extraction splits pages to dominantly tabular and/or textual. Uncertainty issues connected with information extraction (and annotation) from tabular pages were discussed in [1]. Extraction of textual pages will use techniques described in [6]. Both approaches (and any other approach) generate a level of (un)certainty they have about their annotations. Also users, human or agents, can review these uncertainties and provide feedback about them.
+Success of this approach can be measured primarily by the advance of semantic web functionalities. This is easier to measure for software agents. More difficult is to design metrics to measure human user satisfaction. All these aspects will be discussed in this presentation.
+
+
+\subsection{Dedek, Eckhardt, Galambos, Vojtas: Datakon 2008}
+\cite{biblio:DeEcSemantickyWeb2008}
+
+Cílem je podat pøehled vývoje zpracování informací na webu s dùrazem na Sémantický web. Prvním klasifikaèním hlediskem je, zda informace na webu jsou urèeny pouze pro lidského konzumenta nebo také pro strojové zpracování (agent, služba). Vize Sémantického webu vidí ve strojovém zpracování webu možnost, jak obsah celého webu zpøístupnit všem. Základním stavebním kamenem Sémantického webu je RDF datový model s metadaty ve formì RDF schématu a OWL ontologií, vše standardizováno konsorciem W3C. Alternativní cesta Web 2.0 pøedkládá chytøejší uživatelská rozhraní a proprietární "mashup" webových dat. Nezanedbatelný je i podíl lidské práce (školené i neškolené) a automatizovaných procesù potøebný pro každou z tìchto alternativ. Extrémní snaha vytvoøit Sémantický web "od nuly" naráží na problém nejednotnosti ontologií, jejich rùzné kvality a potøeby jejich (automatizovaného) mapování. Na závìr pøedstavíme náš projekt sémantizace webu jako procesu, ve kterém klíèovou roli hraje extrakce dat z webu a anotace webových zdrojù.
+
+
+
+
+
+%od Alana
+
+
+
+
+
+
 \subsection{Inductive Models of User Preferences for Semantic Web}
 , DATESO 2007, Eckhardt, Alan
 \cite{biblio:EcInductiveModels2007}
@@ -176,6 +165,11 @@ user preference on particular attribute and second for learning the combination
 function. Methods were integrated into a Fagin-like top-k querying system with
 some new heuristics and tested.
 
+\subsection{Uncertainty Issues in Automating Process Connecting Web and User}
+, Eckhardt, Alan Horváth, T. Marušèák, D. Novotný, R. Vojtáš, Peter, URSW '07 Uncertainty Reasoning for the Semantic Web - Volume 3
+\cite{biblio:EcHoUncertaintyIssues2007}
+
+We are interested in replacing human processing of web resources by automated processing. Based on an experimental system we identify uncertainty issues making this process difficult for automated processing. We show these uncertainty issues are connected with Web content mining and user preference mining. We conclude with a discussion of possible future development heading to an extension of web modeling standards with uncertainty features.
 
 \subsection{Návrh agenta øízeného uživatelskými preferencemi}
 , Eckhardt, Alan, ITAT 2008 Informaèné Technológie - Aplikácie a Teória, Hrebienok, Slovakia, September 2008
@@ -205,58 +199,11 @@ them to some classical data-mining methods. We use
 several measures (RMSE and rank correlations …) to
 evaluate efficiency of these methods.
 
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Modeling of Uncertainty} \label{sec:uncert}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Uncertainty Issues in Automating Process Connecting Web and User}
-, Eckhardt, Alan Horváth, T. Marušèák, D. Novotný, R. Vojtáš, Peter, URSW '07 Uncertainty Reasoning for the Semantic Web - Volume 3
-\cite{biblio:EcHoUncertaintyIssues2007}
-
-We are interested in replacing human processing of web resources by automated processing. Based on an experimental system we identify uncertainty issues making this process difficult for automated processing. We show these uncertainty issues are connected with Web content mining and user preference mining. We conclude with a discussion of possible future development heading to an extension of web modeling standards with uncertainty features.
-
-
-
 \subsection{Uncertainty Issues and Algorithms in Automating Process Connecting Web and User}
 , Eckhardt, Alan Horváth, T. Marušèák, D. Novotný, R. Vojtáš, Peter,    Uncertainty Reasoning for the Semantic Web I
 \cite{biblio:EcHoUncertaintyIssues2008}
 
 We focus on replacing human processing web resources by automated processing. On an experimental system we identify uncertainty issues making this process difficult for automated processing and try to minimize human intervention. In particular we focus on uncertainty issues in a Web content mining system and a user preference mining system. We conclude with possible future development heading to an extension of OWL with uncertainty features.
-
-
-\subsection{Dedek, Eckhardt, Galambos, Vojtas: URSW 2008} \cite{biblio:DeEcDiscussionUncertainty2008}
-
-In this position paper we discuss the what, who, when, where, why and how of uncertain reasoning based on achievements of URW3XG [2], our experiments and some future plans.  
-What and Why - improving semantic web practice through uncertain reasoning. This vision is described in the URW3XG charter (see [2]), especially the objective is "to identify and describe situations […] for which uncertainty reasoning would significantly increase the potential for extracting useful information; and to identify methodologies that can be applied to these situations and the fundamentals of a standardized representation that could serve as the basis for information exchange necessary for these methodologies to be effectively used." A crucial point in this is uncertainty annotation of web (extending W3C standards [3]). 
-Who and When - will create, maintain and use this annotation. Will this annotation be done by a human creator using an annotation supporting tool for web page creation? Or will it be done by a third party annotation? For this, we will discuss a refinement of URW3XG use cases. Possible use of this enriched web will be for humans and services.
-Where - will be this annotations stored. Our proposal is based on the web crawler Egothor repository [4] (we have crawled data in size of several TB from .cz domain) and an additional semantic repository build on the top using data pile technology [5]. 
-How - to semantically enrich information and how to measure success and/or progress of such enrichment. This problem consists of two parts, namely, a data mining task and an ontology modeling task. Third party annotation of great size can be done only in an automated way and it should be done according to an ontology. 
-
-Our annotation ontology grows out of URW3XG uncertainty ontology and extends some features needed for annotation. Below we show a part of our annotation ontology in Fig. 1. We start here from an assumption that a part of annotation will be done by a web information extraction and that this is the main source of uncertainty.
-
-Web information extraction splits pages to dominantly tabular and/or textual. Uncertainty issues connected with information extraction (and annotation) from tabular pages were discussed in [1]. Extraction of textual pages will use techniques described in [6]. Both approaches (and any other approach) generate a level of (un)certainty they have about their annotations. Also users, human or agents, can review these uncertainties and provide feedback about them.
-Success of this approach can be measured primarily by the advance of semantic web functionalities. This is easier to measure for software agents. More difficult is to design metrics to measure human user satisfaction. All these aspects will be discussed in this presentation.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{\textbf{Pracovni} seznam abstraktu}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-\subsection{Dedek, Eckhardt, Galambos, Vojtas: Datakon 2008}
-\cite{biblio:DeEcSemantickyWeb2008}
-
-Cílem je podat pøehled vývoje zpracování informací na webu s dùrazem na Sémantický web. Prvním klasifikaèním hlediskem je, zda informace na webu jsou urèeny pouze pro lidského konzumenta nebo také pro strojové zpracování (agent, služba). Vize Sémantického webu vidí ve strojovém zpracování webu možnost, jak obsah celého webu zpøístupnit všem. Základním stavebním kamenem Sémantického webu je RDF datový model s metadaty ve formì RDF schématu a OWL ontologií, vše standardizováno konsorciem W3C. Alternativní cesta Web 2.0 pøedkládá chytøejší uživatelská rozhraní a proprietární "mashup" webových dat. Nezanedbatelný je i podíl lidské práce (školené i neškolené) a automatizovaných procesù potøebný pro každou z tìchto alternativ. Extrémní snaha vytvoøit Sémantický web "od nuly" naráží na problém nejednotnosti ontologií, jejich rùzné kvality a potøeby jejich (automatizovaného) mapování. Na závìr pøedstavíme náš projekt sémantizace webu jako procesu, ve kterém klíèovou roli hraje extrakce dat z webu a anotace webových zdrojù.
-
-
-
-
-
-%od Alana
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
