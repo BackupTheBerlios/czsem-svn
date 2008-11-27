@@ -17,7 +17,8 @@
 \maketitle
 
 \begin{abstract}
-??????????? The paper summarizes our research during last two years. We are concentrated on the problem of connecting web and user. This problem consists of two main aspects: user preference modelling and web content mining. Modelling of user preferences helps user to find the most interesting information, products, offers, service, etc. 
+The paper summarizes our research during last two years. We are concentrated on the problem of connecting web and user. This problem consists of two main aspects: user preference modelling and web content mining. We see the modelling of uncertainty beneficial to both problems and we have invested indispensable %nezanedbatelný
+effort to uncertainty issues of our solutions. We see the solution of our problem (connecting web and user) in the most recent idea of web semantization, which will be also presented in this paper.
 \end{abstract}
 
 %\begin{article}
@@ -26,7 +27,7 @@
 \section{Introduction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-This paper summarizes our research during last two years. We are concentrated on the problem of connecting web and user. This problem consists of two main aspects: web content mining and user preference modelling.
+This paper summarizes our research during last two years. We are concentrated on the problem of connecting web and user. This problem consists of two main aspects: web content mining and user preference modelling. 
 
 Web content mining is supposed to extract structured information from possibly heterogeneous web resources. From known structure of the extracted information we can easily deduce semantics of the information and such information can be further used for precise semantic information querying. This principle is widely developed in the idea of the Semantic web. We have experimented with web content mining and exploited two different approaches: HTML structural induction and linguistic analysis. More details are presented in section~\ref{sec:webm}.
 
@@ -44,7 +45,7 @@ The whole situation is presented in the figure~\ref{img:Web2User}
 \begin{figure}
 \centering
 \includegraphics[width=0.9\hsize]{Web2User}
-\caption{Connecting Web and User}
+\caption{Connecting web and user.}
 \label{img:Web2User}
 \end{figure}
 
@@ -55,7 +56,7 @@ The whole situation is presented in the figure~\ref{img:Web2User}
 Web content mining or web information extraction splits pages to dominantly tabular and/or textual. We will discuss our experience with both separately.
 
 \subsection{Dominantly Tabular Pages}
-In our works \cite{biblio:EcHoUncertaintyIssues2007,biblio:EcHoUncertaintyIssues2008} we have developed a software web information extraction tool that utilizes repeating structural patterns present on  ``product summary'' HTML web pages. This tool reduces human work need to extract information from such web pages. In the present this tool can be used with advantage, but is still in development and promis better results with future new features (reduction of effort connected with definition of regular expressions and exploitation of ``detail pages'' in internet shop sites). 
+In our works \cite{biblio:EcHoUncertaintyIssues2007,biblio:EcHoUncertaintyIssues2008} we have developed a software web information extraction tool that utilizes repeating structural patterns present on  ``product summary'' HTML web pages. This tool reduces human work need to extract information from such web pages. In the present this tool can be used with advantage, but is still in development and promise better results with future new features (reduction of effort connected with definition of regular expressions and exploitation of ``detail pages'' in internet shop sites). 
 
 \subsection{Dominantly Textual Pages}
 In \cite{biblio:DeVoExtrakceinformaci2008} we have introduced a linguistic-based method for extraction of information from text-based web resources in Czech. We have experimented with several linguistic tools for Czech, namely Tools for machine annotation -- PDT 2.0 and the Czech WordNet. Then in \cite{biblio:KlPrIntelligentInformation2008} we have presented a design of a system which captures text of web-pages, annotates it linguistically by PDT tools, extracts data and stores the data in an ontology. We reported on initial experiments in the domain of reports of traffic accidents. The results showed that this method can e.g. aid summarization of the number of injured people.
@@ -66,9 +67,9 @@ Semantic interpretation of extraction patterns and subsequent semantic interpret
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Modelling of User Preferences} \label{sec:user}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-User preferences became recently a hot topic. The massive use of internet shops and social webs require the presence of a user modelling, which helps users to orient them selfs on a page. There are many different approaches to model user preferences. In \cite{biblio:EcInductiveModels2007} we made overview of the state-of-the-art in the area of acquisition of user preferences and their induction. Main focus was on the models of user preferences and on the induction of these models, but also the process of extracting preferences from the user behaviour were studied. We also presented our contribution to the probabilistic user models in \cite{biblio:EcInductiveModels2007}.
+User preferences became recently a hot topic. The massive use of internet shops and social webs require the presence of a user modelling, which helps users to orient themselves on a page. There are many different approaches to model user preferences. In \cite{biblio:EcInductiveModels2007} we made overview of the state-of-the-art in the area of acquisition of user preferences and their induction. Main focus was on the models of user preferences and on the induction of these models, but also the process of extracting preferences from the user behaviour was studied. We also presented our contribution to the probabilistic user models in \cite{biblio:EcInductiveModels2007}.
 
-We focused on models of user preferences in Semantic web in \cite{biblio:EcVoUzivatelskepreference2007}. We presented a model for querying over RDF data with user preferences and for ordering of results by a user’s aggregation function. This model has theoretical base in a modification of a fuzzy description logic, which is embedable into the two valued description logic which extends OWL. We described first experiments made with Tokaf - an implementation of framework for the flexible querying.
+We focused on models of user preferences in Semantic web in \cite{biblio:EcVoUzivatelskepreference2007}. We presented a model for querying over RDF data with user preferences and for ordering of results by a user’s aggregation function. This model has theoretical base in a modification of fuzzy description logic, which is embeddable into the two valued description logic which extends OWL. We described first experiments made with Tokaf - an implementation of framework for the flexible querying.
 
 Models of user and group preferences in social networks and the Semantic web were discussed in \cite{biblio:EcPoIntegratinguser2007}. We have constructed a model for user and group preference querying over RDF data as well as for ordering of answers by aggregation of particular attribute ranking.
 
@@ -95,33 +96,11 @@ goal of \cite{biblio:EcHoLearningdifferent2007} was to assign a user a preferenc
 particular attributes and to a combination function. To solve the problem of automatic assignment of user model we design two algorithms, one for learning user preference on particular attribute and second for learning the combination function. Methods were integrated into a Fagin-like top-k querying system with some new heuristics and tested.
 
 
-\subsection{Návrh agenta øízeného uživatelskými preferencemi}
-, Eckhardt, Alan, ITAT 2008 Informaèné Technológie - Aplikácie a Teória, Hrebienok, Slovakia, September 2008
-\cite{biblio:EcNavrhagenta2008}
+In connection with the development of the idea of web semantization we proposed a decomposed model: semantic search engine -- user preference agent, which was presented in \cite{biblio:EcNavrhagenta2008} and \cite{biblio:DeEcSemantickyWeb2008}. 
 
-Vize semantickeho webu vykresluje web tak, .ze bude
-pochopitelny pro stroje. Tento .clanek p.ristupuje k semantickemu
-webu z opa.cneho konce - od u.zivatele. Navrhneme softwaroveho
-agenta vyu.z.vaj.c.ho semanticka data z.skana anotac., ktery je
-bude prezentovat u.zivateli podle jeho preferenc.. Tento agent usnadn. u.zivateli hledan. a vyb.er idealn.ho objektu, podle jeho preferenc
-..
 
-\subsection{Considering data-mining techniques in user preference learning}
-, Eckhardt, Alan Vojtáš, Peter, 2008 International Workshop on Web Information Retrieval Support Systems
-\cite{biblio:EcVoConsideringdatamining2008}
-
-In this paper we deal with the problem of learning
-user preferences from user’s scoring of a small sample
-of objects with labels from a very small linearly
-ordered set. The main task of this process is to use
-these preferences for a top-k query, which delivers the
-user with an ordered list of k highest ranked objects.
-We deal with a problem of many ties in the highest
-score. Two algorithms for learning objective and utility
-functions are presented. We experiment and compare
-them to some classical data-mining methods. We use
-several measures (RMSE and rank correlations …) to
-evaluate efficiency of these methods.
+In \cite{biblio:EcVoConsideringdatamining2008} we deal with the problem of learning
+user preferences from user’s scoring of a small sample of objects with labels from a very small linearly ordered set to use these preferences for a top-k query. We merged our terminology with economics and identified fuzzy ranking function to ordering of particular attributes as an \emph{objective function} and our combination function as an \emph{utility function}. One of the main contributions of this last work (\cite{biblio:EcVoConsideringdatamining2008}) was that we have compared our method to some classical data-mining methods. We used several measures (RMSE and rank correlations \dots) to evaluate efficiency of these methods.
 
 
 
@@ -129,66 +108,35 @@ evaluate efficiency of these methods.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Modelling of Uncertainty} \label{sec:uncert}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+We are interested in replacing human processing of web resources by automated processing. Based on an experimental system we identified uncertainty issues making this process difficult for automated processing and tried to minimize human intervention in \cite{biblio:EcHoUncertaintyIssues2007} and \cite{biblio:EcHoUncertaintyIssues2008}. In particular we focus on uncertainty issues in a web content mining system and a user preference mining system.
 
-Uncertainty issues connected with information extraction (and annotation) from tabular pages were discussed in [1]. Extraction of textual pages will use techniques described in [6]. Both approaches (and any other approach) generate a level of (un)certainty they have about their annotations.
+In \cite{biblio:DeEcDiscussionUncertainty2008} we discussed the what, who, when, where, why and how of uncertain reasoning based on achievements of URW3XG\footnote{\url{http://www.w3.org/2005/Incubator/urw3/XGR-urw3/}}, our experiments and some future plans.  
+\begin{description}
+\item[What and Why] -- improving semantic web practice through uncertain reasoning.
+\item[Who and When] -- will create, maintain and use this annotation. Will this annotation be done by a human creator using an annotation supporting tool for web page creation? Or will it be done by a third party annotation? For this, we discussed a refinement of URW3XG use cases. Possible use of this enriched web will be for humans and services.
+\item[Where] -- will be this annotations stored. Our proposal is based on the web crawler Egothor repository\footnote{\url{http://www.egothor.org/}} (we have crawled data in size of several TB from .cz domain) and an additional semantic repository build on the top using data pile technology \cite{biblio:BeObDataIntegration2005}. 
+\item[How] -- to semantically enrich information and how to measure success and/or progress of such enrichment. This problem consists of two parts, namely, a data mining task and an ontology modelling task. Third party annotation of great size can be done only in an automated way and it should be done according to an ontology. 
+\end{description}
 
+In \cite{biblio:DeEcDiscussionUncertainty2008} and \cite{biblio:DeEcSemantickyWeb2008} our annotation ontology grew out of URW3XG uncertainty ontology and extended some features needed for annotation. We started here from an assumption that a part of annotation will be done by a web information extraction and that this is the main source of uncertainty.
 
-\subsection{Uncertainty Issues in Automating Process Connecting Web and User}
-, Eckhardt, Alan Horváth, T. Marušèák, D. Novotný, R. Vojtáš, Peter, URSW '07 Uncertainty Reasoning for the Semantic Web - Volume 3
-\cite{biblio:EcHoUncertaintyIssues2007}
-
-We are interested in replacing human processing of web resources by automated processing. Based on an experimental system we identify uncertainty issues making this process difficult for automated processing. We show these uncertainty issues are connected with Web content mining and user preference mining. We conclude with a discussion of possible future development heading to an extension of web modelling standards with uncertainty features.
-
-
-
-\subsection{Uncertainty Issues and Algorithms in Automating Process Connecting Web and User}
-, Eckhardt, Alan Horváth, T. Marušèák, D. Novotný, R. Vojtáš, Peter,    Uncertainty Reasoning for the Semantic Web I
-\cite{biblio:EcHoUncertaintyIssues2008}
-
-We focus on replacing human processing web resources by automated processing. On an experimental system we identify uncertainty issues making this process difficult for automated processing and try to minimize human intervention. In particular we focus on uncertainty issues in a Web content mining system and a user preference mining system. We conclude with possible future development heading to an extension of OWL with uncertainty features.
-
-
-\subsection{Dedek, Eckhardt, Galambos, Vojtas: URSW 2008} \cite{biblio:DeEcDiscussionUncertainty2008}
-
-In this position paper we discuss the what, who, when, where, why and how of uncertain reasoning based on achievements of URW3XG [2], our experiments and some future plans.  
-What and Why - improving semantic web practice through uncertain reasoning. This vision is described in the URW3XG charter (see [2]), especially the objective is "to identify and describe situations […] for which uncertainty reasoning would significantly increase the potential for extracting useful information; and to identify methodologies that can be applied to these situations and the fundamentals of a standardized representation that could serve as the basis for information exchange necessary for these methodologies to be effectively used." A crucial point in this is uncertainty annotation of web (extending W3C standards [3]). 
-Who and When - will create, maintain and use this annotation. Will this annotation be done by a human creator using an annotation supporting tool for web page creation? Or will it be done by a third party annotation? For this, we will discuss a refinement of URW3XG use cases. Possible use of this enriched web will be for humans and services.
-Where - will be this annotations stored. Our proposal is based on the web crawler Egothor repository [4] (we have crawled data in size of several TB from .cz domain) and an additional semantic repository build on the top using data pile technology [5]. 
-How - to semantically enrich information and how to measure success and/or progress of such enrichment. This problem consists of two parts, namely, a data mining task and an ontology modelling task. Third party annotation of great size can be done only in an automated way and it should be done according to an ontology. 
-
-Our annotation ontology grows out of URW3XG uncertainty ontology and extends some features needed for annotation. Below we show a part of our annotation ontology in Fig. 1. We start here from an assumption that a part of annotation will be done by a web information extraction and that this is the main source of uncertainty.
-
-Web information extraction splits pages to dominantly tabular and/or textual. Uncertainty issues connected with information extraction (and annotation) from tabular pages were discussed in [1]. Extraction of textual pages will use techniques described in [6]. Both approaches (and any other approach) generate a level of (un)certainty they have about their annotations. Also users, human or agents, can review these uncertainties and provide feedback about them.
-Success of this approach can be measured primarily by the advance of semantic web functionalities. This is easier to measure for software agents. More difficult is to design metrics to measure human user satisfaction. All these aspects will be discussed in this presentation.
+Success of this approach can be measured primarily by the advance of semantic web functionalities. This is easier to measure for software agents. More difficult is to design metrics to measure human user satisfaction. All these aspects were discussed in the presentation of \cite{biblio:DeEcDiscussionUncertainty2008}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Web Semantization} \label{sec:semantization}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-\subsection{Dedek, Eckhardt, Galambos, Vojtas: Datakon 2008}
-\cite{biblio:DeEcSemantickyWeb2008}
-
-Cílem je podat pøehled vývoje zpracování informací na webu s dùrazem na Sémantický web. Prvním klasifikaèním hlediskem je, zda informace na webu jsou urèeny pouze pro lidského konzumenta nebo také pro strojové zpracování (agent, služba). Vize Sémantického webu vidí ve strojovém zpracování webu možnost, jak obsah celého webu zpøístupnit všem. Základním stavebním kamenem Sémantického webu je RDF datový model s metadaty ve formì RDF schématu a OWL ontologií, vše standardizováno konsorciem W3C. Alternativní cesta Web 2.0 pøedkládá chytøejší uživatelská rozhraní a proprietární "mashup" webových dat. Nezanedbatelný je i podíl lidské práce (školené i neškolené) a automatizovaných procesù potøebný pro každou z tìchto alternativ. Extrémní snaha vytvoøit Sémantický web "od nuly" naráží na problém nejednotnosti ontologií, jejich rùzné kvality a potøeby jejich (automatizovaného) mapování. Na závìr pøedstavíme náš projekt sémantizace webu jako procesu, ve kterém klíèovou roli hraje extrakce dat z webu a anotace webových zdrojù.
-
-
-
-
-
-%od Alana
-
+Nobody seems to care in the semantic web community about the content of the web of today or of pages published without annotations. By our opinion the content of the web of today is too valuable to be lost for emerging semantic web applications. The problem of \emph{semantization} (enrichment) of current web content as an automated process of third party annotation for making (at least a part, increasing in time) of today web accessible for machine processing and hence enabling intelligent tools for searching and recommending things on the web. Our main idea (presented in \cite{biblio:DeEcSemantickyWeb2008}) is to create a semantic repository of information automatically extracted from the web and corresponding annotated copies of (mainly textual) parts of web pages, and make it available to intelligent agents.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Conclusion}
+%\section{Conclusion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-We have presented a 
+%We have presented a 
 
+\vspace{0.5cm}
+\noindent\textbf{Acknowledgments}
 
-%\acknowledgments %\footnotesize
-\subsection{Acknowledgments}
-This work was partially supported by the Ministry of Education of the Czech Republic (grant MSM0021620838) and by Czech projects 1ET100300517 and 1ET100300419.
+\noindent This work was partially supported by the Ministry of Education of the Czech Republic (grant MSM0021620838) and by Czech projects 1ET100300517 and 1ET100300419.
 
 
 \bibliographystyle{splncs}
