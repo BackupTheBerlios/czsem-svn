@@ -172,9 +172,7 @@ Domain dependent&Does not use similarities&Uses similarities\\ \hline
 
 \textbf{Domain (task) dependent (on demand) annotation} is concerning only pages previously annotated by general ontologies. This makes second annotation faster and easier. An assistance of a human is assumed here for each domain and new ontology. For textual pages repetitions make possible to learn a mapping from structured tectogrammatical instances to an ontology. This domain (task) dependent task can be avoided by a collaborative filtering method, assuming there is enough users' acquaintance. \par
 
-Third important idea is to \textbf{design semantic repository}. It should store all the semantic data %accessed thorough a semantic search engine.
-extracted by extraction tools.
-Of course many different problems (e.g. querying and scalability) are connected with this but they are at least partially solved now days. Let us mention work of our colleges \cite{biblio:DoTySemanticWeb2007} that is available for use.
+Third important idea is to \textbf{design semantic repository}. It should store all the semantic data extracted by extraction tools and accessed thorough a semantic search engine. Of course many different problems (e.g. querying and scalability) are connected with this but they are at least partially solved now days. Let us mention work of our colleges \cite{biblio:DoTySemanticWeb2007} that is available for use.
 
 The semantic repository should also contain some sort of uncertainty annotation besides above mentioned ontologies. The main reason is that annotation process is error prone and we can have in future different alternative annotation tools and aggregate results. This aspect is not further described in the paper but can be found with many details in \cite{biblio:DeEcDiscussionUncertainty2008} and \cite{biblio:EcHoUncertaintyIssues2008}.\par
 
@@ -396,13 +394,13 @@ We tested these rules on the set of 15 positive and 23 negative examples. The re
 In this case we learned a set of rules that identifies relevant sentences -- roots of relevant tectogrammatical trees. We have made some additional experiments (some of them were published in \cite{biblio:DeEcExperimentswith2008}) that seems to lead to our goal. It is still a long way to go, but we understand these results as a proof of concept that ILP can be used for finding different kinds of information present in nodes and structure of linguistic trees. We for example extracted number of injured people from relevant trees when we have modified the training data. And still there is the possibility to design extraction rule manually if the learning method fails.
 
 \section{Conclusions and further work}
-In this paper we have developed the idea of web semantization, which can help to arch over the gap between Web of today and Semantic Web. We have presented a proof of concept that even today it is possible to develop a semantic search engine.% in the scale of *.cz pages.
+In this paper we have developed the idea of web semantization, which can help to arch over the gap between Web of today and Semantic Web. We have presented a proof of concept that even today it is possible to develop a semantic search engine designed for software agents. % in the scale of *.cz pages.
 In particular contributions consists of two sorts of automated third party annotation of existing web resources, the idea of a semantic repository serving as a sample of semantized web with extension of the ontology model for additional annotation (e.g. uncertainty annotation) and a proposal of an intelligent agent.\par
 Future work goes in two directions. First is in the integration of specific parts of the system,  in the automation of the whole process and in the extensive experiments with a larger number of different users. Second is in improving special parts of the system - either making it more precise or making it more automatic (able to train by a less qualified user).
 
 %ACKNOWLEDGMENTS are optional
 \subsection{Acknowledgments}
-This work was partially supported by Czech projects \\1ET100300517, 201/09/0990 GAÈR and MSM-0021620838.
+This work was partially supported by Czech projects 1ET100300517, 201/09/0990 GAÈR and MSM-0021620838.
 %
 % The following two commands are all you need in the
 % initial runs of your .tex file to
