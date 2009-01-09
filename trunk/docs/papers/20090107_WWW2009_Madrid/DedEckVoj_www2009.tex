@@ -32,7 +32,7 @@
 \begin{abstract}
 %Web Semantization is a concept we are developing in our work.
 We understand Web Semantization as an automated process of increasing degree of semantic content on the web. %Part of content of the web is further usable, semantic content (usually annotated) is more suitable for machine processing.
-Our idea is supported by models, methods, prototypes and experiments with a web repository, automated annotation tools producing third party semantic annotations, a semantic repository serving as a sample of semantized web and a proposal of an intelligent software agent. We are working on a proof of concept that even today it is possible to develop a semantic search engine designed for software agents.
+Our idea is supported by models, methods, prototypes and experiments with a web repository, WIE with assisted learning, automated annotation tools producing third party semantic annotations, a semantic repository serving as a sample of semantized web and a proposal of an intelligent software agent. We are working on a proof of concept that even today it is possible to develop a semantic search engine designed for software agents.
 \end{abstract}
 
 \category{H.3.1}{INFORMATION STORAGE AND RETRIEVAL}{Content Analysis and Indexing}
@@ -54,16 +54,15 @@ Our idea is supported by models, methods, prototypes and experiments with a web 
 
 
 %In their Scientific American 2001 article \cite{biblio:2001-Berners-Lee-SemanticWeb}, Tim Berners-Lee, James Hendler and Ora Lassila unveiled a nascent vision of the semantic web: a highly interconnected network of data that could be easily accessed and understood by a desktop or handheld machine. They painted a future of intelligent software agents that would ``answer to a particular question without our having to search for information or pore through results'' (quoted from \cite{biblio:feigenbaum_semantic_2007}).
-Lee Feigenbaum, Ivan Herman, Tonya Hongsermeier, Eric Neumann and Susie Stephens in their Scientific American 2007 article \cite{biblio:feigenbaum_semantic_2007} conclude that ``Grand visions rarely progress exactly as planned, but the Semantic Web is indeed emerging and is making online information more useful as ever''. L. Feigenbaum et al. support their claim with success of semantic web technology in drug discovery and health care (and several other applications). These are mainly corporate applications with data annotated by humans. Ben Adida when bridging clickable and Semantic Web with RDFa (\cite{biblio:AdidaClickable}) assumes also human (assisted) activity - annotations of newly created web resources. \par
+Recently, Lee Feigenbaum, Ivan Herman, Tonya Hongsermeier, Eric Neumann and Susie Stephens in their Scientific American 2007 article \cite{biblio:feigenbaum_semantic_2007} conclude that ``Grand visions rarely progress exactly as planned, but the Semantic Web is indeed emerging and is making online information more useful as ever''. They support their claim with success of semantic web technology in drug discovery and health care (and several other applications). By our opinion, these are mainly corporate applications with data annotated by humans.
 
-But what to do with the content of the web of today or of pages published without annotations? The content of the web of today is too valuable to be lost for emerging semantic web applications. We are looking for a solution how to make it accessible in semantic manner. \par
+Ben Adida when bridging clickable and Semantic Web with RDFa (\cite{biblio:AdidaClickable}) assumes also human (assisted) activity - annotations of newly created web resources. \par
 
-We would like to address the problem of semantization (enrichment) of current web content as an automated process of third party annotation for making at least a part of today's web more suitable for machine processing. It would hence allow intelligent tools to search and recommend things on the web (see \cite{biblio:LeeWebThings}). \par
+What to do with the content of the web of today or of pages published without annotations? The content of the web of today is too valuable to be lost for emerging semantic web applications. We are looking for a solution how to make it accessible in semantic manner. \par
+
+We would like to address the problem of semantization (enrichment) of current web content as an automated process of third party annotation for making at least a part of today's web more suitable for machine processing. It would hence allow intelligent tools to search and recommend things on the web (as advocated by Tim Berners-Lee \cite{biblio:LeeWebThings}). \par
 
 \section{The Idea, prototypes and experiments}
-
-
-{\bf nemuzeme mluvit jen o idei ale take o tom co se uz udelalo, vyskouselo, ...}
 
 Our main idea is to fill a semantic repository with information that is automatically extracted from the web and make it available to software agents. We are working on a proof of concept that this idea is realizable and we give results of several experiments in this direction.
 
@@ -81,7 +80,8 @@ Page classifier selects those parts of web archive which are suitable for furthe
 
 
 %\subsection{Web repository}
-The web repository is a temporal repository of web documents crawled by a crawler. The repository supports document's metadata, e.g. modification and creation dates, domain name, ratio of HTML code/text, content type, language, grammatical sentences etc. It keeps track of all changes in a document and simplifies access to and further processing of Web documents. We are experimenting with the web crawler Egothor\footnote{http://www.egothor.org/} 2.x and it's web repository. We have filled this repository with several terabytes of textual part of Czech web (domain *.cz) and it very simplified access to this data. {\bf je mozne podstatne skratit}
+The web repository is a temporal repository of web documents crawled by a crawler. The repository supports document's metadata, e.g. modification and creation dates, domain name, ratio of HTML code/text, content type, language, grammatical sentences etc. It keeps track of all changes in a document and simplifies access to and further processing of Web documents. We are experimenting with the web crawler Egothor\footnote{http://www.egothor.org/} 2.x and it's web repository. %We have filled this repository with several terabytes of textual part of Czech web (domain *.cz) and it very simplified access to this data. {\bf je mozne podstatne skratit}
+For pages from hidden web we have used RSS feeds.
 
 %The architecture is based on three layers: core that saves documents and computes deltas between revisions to save space; symlink that maps core's document and revision numbers to numbers published to a user; cloud that assigns tags and manages ACL on the tags. This way the system can modify the tags without overloading the main base of raw documents.
 
@@ -90,8 +90,8 @@ The web repository is a temporal repository of web documents crawled by a crawle
 
 %To be able to separate durable grammatical or table pages poses special requirements to search in our web repository.\par
 
-\textbf{(2) The second idea is to split annotation process to two parts}, the first is domain independent intermediate annotation and the second is domain dependent user directed annotation. Semantic enrichment is in fact a data mining task (although a special one) - to add to web documents a piece of knowledge, which is obvious for human perception and hard for a machine. That means to annotate data by concepts from an ontology which is the same as to map instances to ontology. Such a data mining task will be easier to solve when there is a sort of a repetition (modulo some similarity).\par 
-Both should be automated, with some initial human assisted learning. This first part of learning could require assistance of a highly skilled expert; the second (probably faster part) should be doable by an user with average computer literacy. \par
+\textbf{(2) The second idea is to split annotation process into two parts}, the first is domain independent intermediate annotation and the second is domain dependent user directed annotation. Semantic enrichment is in fact a data mining task (although a special one) - to add to web documents a piece of knowledge, which is obvious for human perception and hard for a machine. That means to annotate data by concepts from an ontology which is the same as to map instances to ontology. Such a data mining task will be easier to solve when there is a sort of a repetition (modulo some similarity).\par 
+Both annotation tasks should be automated, with some initial human assisted learning. The first part of learning could require assistance of a highly skilled expert; the second (probably faster part) should be doable by an user with average computer literacy. \par
 
 %The first domain independent annotation will serve as an intermediate annotation supporting further processing. This will run once on the whole suitable data. Hence initial necessary human assistance in training can be done by a highly skilled expert (indeed it can be a longer process).\par
 
@@ -107,11 +107,20 @@ Both should be automated, with some initial human assisted learning. This first 
 
 
 
-\textbf{Domain independent intermediate annotation} can be done with respect to general ontologies. First ontology is the general linguistic PDT tectogrammatical structure \cite{biblio:zkraceno_MiBeAnnotationtectogrammatical2006} which captures semantic meaning of grammatical sentences in Czech. 
+\textbf{Domain independent intermediate annotation} can be done with respect to general ontologies. We distinguish two cases: (1) textual resources and (2) structured resources. For \emph{textual resources} the ontology we use is the general linguistic PDT tectogrammatical structure \cite{biblio:zkraceno_MiBeAnnotationtectogrammatical2006} which captures semantic meaning of grammatical sentences in Czech. 
 %This is the task for computational linguistics; we make use of their achievements which were originally focused on machine translation.
 For example English language can be parsed in many different ways (most often according to some kind of grammar). {\bf Current solution} makes use of a tree structure of the annotations. In this paper we will present our experience with Czech language and tectogrammatical structure that we have used for domain independent intermediate annotation of pages dominantly consisting of grammatical sentences. 
+\newline
+\texttt{\phantom{mmm}\_:sentence dev:text "Nobody was injured.".\\
+\phantom{mmm}\_:sentence pdt:t\_lemma "injured".\\
+\phantom{mmm}\_:sentence pdt:negation true.}
 
-For structured survey or product summary pages (we call them ``tabular pages'') we assume that their structure is often similar and the common structure can help us to detect data regions and data records and possibly also attributes and their values from detailed product pages. Annotation tools will be trained by humans here also -- nevertheless only once for the annotation of the whole repository. {\bf Current solution} uses similarities of DOM structure of pages.
+
+For \emph{structured survey or product summary pages} we assume that their structure is often similar and the common structure can help us to detect data regions and data records and possibly also attributes and their values from detailed product pages. Annotation tools will be trained by humans here also -- nevertheless only once for the annotation of the whole repository. {\bf Current solution} uses similarities of DOM structure of pages. We use ontology which denotes data regions and data records, see below.
+\newline
+\texttt{\phantom{mmm}URL dev:hasDataRegion \_:DReg1.\\
+\phantom{mmm}\_:DReg1 dev:startsAt \emph{nodeInTheDOMofURL}.\\
+\phantom{mmm}\_:DReg1 dev:endsAt \emph{nodeInTheDOMofURL}.}
 
 %We have identified two types of web resources where this can be done. The first are "table pages", containing large number of cells with abbreviated description of a resource and corresponding detailed pages. Here we assume that content of cells is similar and content of detailed pages is also similar. Because of space limitations, we do not describe our approach for these pages.
 
@@ -134,14 +143,34 @@ For structured survey or product summary pages (we call them ``tabular pages'') 
 %\caption{Use of similarity in annotation approaches}
 %\end{figure} 
 
-\textbf{Domain (task) dependent (on demand) annotation} is concerning only pages previously annotated by general ontologies. This makes second annotation faster and easier. An assistance of a human is assumed here for each domain and a new ontology. Repetitions in textual pages make possible to learn a mapping from structured tectogrammatical instances to an ontology. %This domain (task) dependent task can be avoided by a collaborative filtering method, assuming there is enough users' acquaintance. \par
-{\bf Current solution} uses ILP learning over annotations obtained in the first domain independent part. It is demonstrated in Fig.~\ref{img:DedVoj_ILP}. For traffic accident reports, we were able to learn rules for finding sentences reporting on injuries (note that linguistic is need in sentences like 'nobody was injured', simple key word search does not work in this case) {\bf citovat ILP?}
+\textbf{Domain dependent annotation} is concerning only pages previously annotated by general ontologies. This makes second annotation faster and easier. An assistance of a unskilled human is assumed here for each domain and a new ontology.
 
-uvest priklad pravidla nauceneho i statistiky?
+Repetitions in \emph{textual pages} make possible to learn a mapping from structured tectogrammatical instances to an ontology. %This domain (task) dependent task can be avoided by a collaborative filtering method, assuming there is enough users' acquaintance. \par
+{\bf Current solution} uses ILP tool \texttt{PROGOL} over annotations obtained in the first domain independent part. It is demonstrated in Fig.~\ref{img:DedVoj_ILP}. For traffic accident reports, we were able to learn rules for finding sentences reporting on injuries (note that linguistic is need in sentences like 'nobody was injured', simple key word search does not work in this case) 
+\newline
+\texttt{Rule set1:\\
+injured(A):-edge(A,C),edge(C,D),t\_lemma(D,accident).\\
+injured(A):-edge(A,C),t\_lemma(A,injure),neg(C,false).}
+
+See \texttt{Rule set1} as an example of learned rules. Fig.~\ref{fig:results} shows the 4-fold table where rows depict classification by rule set and columns classification by user. Results are promising, nevertheless tagging is done by unskilled user for whom the tagging is usually tedious.
+
+For \emph{structured pages} the domain dependent annotation \textbf{current solution} uses simple ontology in a form of relational schema provided by user. We experiment with several heuristics for learning regular expressions for attribute values.
+
+\begin{figure}
+\label{fig:results}
+\centering
+\begin{tabular}{|c|c|c|} \hline
+ 		&User tag	&$\neg$User	tag\\ \hline
+Rule set1		& 11&1 \\ \hline
+$\neg$Rule set1	& 4 &22\\ \hline
+\end{tabular}
+\caption{Results on the test set}
+\end{figure}
+
 
 \textbf{(3) Next idea is to design a semantic repository}. It should store all the semantic data extracted by extraction tools and accessed through a semantic search engine. 
 %Of course many different problems (e.g. querying and scalability) are connected with this but they are at least partially solved now days. 
-{\bf Current solution} uses the work of our colleges \cite{biblio:DoTySemanticWeb2007} that is available for use.
+{\bf Current solution} uses \cite{biblio:DoTySemanticWeb2007}. It supports RDF storage and SPARQL querying.
 
 %The semantic repository should also contain some sort of uncertainty annotation besides other ontologies. The main reason is that annotation process is error prone and we can have in future different alternative annotation tools and aggregate results. This aspect is not further described in the paper but can be found with many details in \cite{biblio:DeEcDiscussionUncertainty2008}. %and \cite{biblio:EcHoUncertaintyIssues2008}.\par
 
@@ -178,7 +207,10 @@ The process of a user agent searching and making use of semantic search engine i
 %\end{figure}
 
 %ACKNOWLEDGMENTS are optional
-\section{Acknowledgments}
+\section{Conclusion}
+In this paper we have presented our work on web semantization -- models and prototypes making the web to the web of things (\cite{biblio:LeeWebThings}). Preliminary experiments are promising.
+%\section{Acknowledgments}
+
 This work was partially supported by Czech projects\\1ET100300517, 201/09/0990 GACR and MSM-0021620838.
 
 %
