@@ -27,6 +27,8 @@ public class NetgraphServerComunication extends NetgraphProtocolConnection {
 		/** Look for the first tree satisfying the query */          
         public final static char GET_TREE_SUBTYPE_FIRST = 'f';		
 	}
+	
+	public final static int MAX_MASSAGE_LEGTH = 250000;  // max. delka zpravy
 
 	public static class NetgraphConnectionInfo
 	{
@@ -153,8 +155,15 @@ public class NetgraphServerComunication extends NetgraphProtocolConnection {
 		return ua;
 	}
 	
+/**
+ * @param search_path The method {@link #getCurrentDirectory()} can be used, or tab separated list of file paths 
+ * @throws NetgraphProtocolException
+ * @throws IOException
+ */
 	public void setSearchPathAndInitializeGlobalHead(String search_path) throws NetgraphProtocolException, IOException
 	{
+		if (search_path.length() > MAX_MASSAGE_LEGTH-3) throw new NetgraphProtocolException('F', search_path.length());
+		
 		putChar('F');
 //		putChar('f');	//first
 		putChar('o');	//first part only

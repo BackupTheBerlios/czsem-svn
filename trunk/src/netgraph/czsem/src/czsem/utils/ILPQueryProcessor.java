@@ -5,17 +5,17 @@ import java.text.Normalizer.Form;
 
 import cz.cuni.mff.mirovsky.trees.NGTreeHead;
 import cz.cuni.mff.mirovsky.trees.TNode;
-import czsem.apps.ILP;
+import czsem.ILP.ProgolWork1;
 import czsem.net.NetgraphServerComunication.LoadTreeResult;
 import czsem.net.NetgraphServerComunication.LoadTreeResult.SingleMatch;
 import czsem.utils.NetgraphQuery.ResultProcessor;
 
 public class ILPQueryProcessor implements ResultProcessor
 {
-	private ILP ilp_task;
+	private ProgolWork1 ilp_task;
 	private String last_tree_id = ""; 
 	
-	public ILPQueryProcessor(ILP ilp_task)
+	public ILPQueryProcessor(ProgolWork1 ilp_task)
 	{
 		this.ilp_task = ilp_task;
 	}
@@ -49,7 +49,9 @@ public class ILPQueryProcessor implements ResultProcessor
 	public static String VarNormalise(String src)
 	{
 		String norm = ASCIINormalise(src); 
-		norm = norm.replaceAll("[-+^#*()!?,.:`';/{} \\\\\"\\[\\]]", "_");
+//		norm = norm.replaceAll("[-+^#*()!?,.:`';/{} \\\\\"\\[\\]]", "_");
+		norm = norm.replaceAll("[^\\p{Alpha}]", "_");
+		
 		if (! Character.isLetter((norm.charAt(0))))
 		{
 			try

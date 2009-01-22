@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import cz.cuni.mff.mirovsky.trees.NGForest;
 import cz.cuni.mff.mirovsky.trees.NGTreeHead;
-import czsem.net.NetgraphProtocolConnection;
 import czsem.net.NetgraphServerComunication;
 import czsem.net.NetgraphProtocolConnection.NetgraphProtocolException;
 import czsem.net.NetgraphServerComunication.LoadTreeResult;
@@ -18,7 +17,7 @@ public class NetgraphQuery {
 	private boolean matchLemmaVariants = true;
 	private boolean matchLemmaComments = true;
 	 
-	/** @see NetgraphProtocolConnection.loadNextTree */
+	/** @see NetgraphServerComunication.loadNextTree */
 	private char resultTreeSubtype = TreeSubtypeChars.GET_TREE_SUBTYPE_OCCURENCE;
 
 	private NetgraphServerComunication netgraph_comunication;
@@ -44,6 +43,11 @@ public class NetgraphQuery {
 		this.netgraph_comunication = netgraph_comunication;
 	}
 	
+	public void startQueryAll() throws IOException, NetgraphProtocolException
+	{
+		netgraph_comunication.queryAll();
+	}
+
 	public void startTheQuery() throws IOException, NetgraphProtocolException
 	{
 		netgraph_comunication.query(queryString, invertMatch, firstMatchOnly, abovePreviousQuery, matchLemmaVariants, matchLemmaComments);

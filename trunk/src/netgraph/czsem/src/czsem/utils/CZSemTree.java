@@ -193,7 +193,8 @@ public class CZSemTree {
 		String root_id = getFirstNodeAttributeValue(0, id_attr);
 		String deep_ord = getFirstNodeAttributeValue(node_index, deepord_attr);
 				
-		return ILPQueryProcessor.VarNormalise(root_id+ "d" +deep_ord);		
+//		return Maker.makeAtomString(root_id+ "d" +deep_ord);		
+		return root_id+ "d" +deep_ord;		
 	}
 
 

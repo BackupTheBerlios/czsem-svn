@@ -1,4 +1,4 @@
-package czsem.apps;
+package czsem.ILP;
 
 import java.io.PrintStream;
 
@@ -8,14 +8,14 @@ import czsem.utils.ILPQueryProcessor;
 import czsem.utils.NetgraphQuery;
 import czsem.utils.ILPQueryProcessor.MaxTreesException;
 
-public class ILP {
+public class ProgolWork1 {
 	
 	private String query_string;
 	
 	private PrintStream tree_out;
 	private PrintStream query_match_out;
 	
-	public ILP(String query_string, PrintStream tree_out, PrintStream query_match_out)
+	public ProgolWork1(String query_string, PrintStream tree_out, PrintStream query_match_out)
 	{
 		this.tree_out = tree_out;
 		this.query_match_out = query_match_out;
@@ -113,7 +113,7 @@ public class ILP {
 			return;
 		}
 
-		ILP ilp = new ILP("[gram/sempos=*.quant.*]", new PrintStream(args[0]), new PrintStream(args[1]));
+		ProgolWork1 ilp = new ProgolWork1("[gram/sempos=*.quant.*]", new PrintStream(args[0]), new PrintStream(args[1]));
 //		ILP ilp = new ILP("[gram/sempos=*.quant.*]", new PrintStream("backg.pl"), System.err);
 		 
 //		ILP ilp = new ILP("[_name=action_type,gram/sempos=v,t_lemma=zranit|usmrtit|zemřít|zahynout|přežít]([m/tag=??????????N*,_name=a-negation,hide=true,_optional=true],[functor=MANN,_name=injury_manner,_optional=true],[functor=ACT|PAT,t_lemma=kdo|člověk|osoba|muž|žena|dítě|řidič|řidička|spolujezdec|spolujezdkyně,_name=participant,_transitive=true]([functor=RSTR,gram/sempos=n.quant.*|adj.quant.*,_name=quantity,_optional=true]))");
