@@ -26,14 +26,14 @@ public class NetgraphQuery {
 	{
 		void startProcessing() throws Exception;
 		void processSingleTreeResult(LoadTreeResult tree_result) throws Exception;
-		void endProcessing() throws Exception;
+		void endProcessing(LoadTreeResult last_result) throws Exception;
 	}
 	
 	public static class EmptyProcessor implements ResultProcessor 
 	{
-		public void endProcessing() throws Exception {}
+		public void startProcessing() throws Exception {}
 		public void processSingleTreeResult(LoadTreeResult tree_result){}
-		public void startProcessing() throws Exception {}		
+		public void endProcessing(LoadTreeResult last_result) throws Exception {}		
 	}
 
 	
@@ -63,15 +63,18 @@ public class NetgraphQuery {
 	{
 		rp.startProcessing();
 		
+		LoadTreeResult valid_res = null;
+		
 		int num = 0;
 		for (;;num++)
 		{
 			LoadTreeResult res = netgraph_comunication.loadNextTree(resultTreeSubtype);
 			if (res == null) break; 
 			rp.processSingleTreeResult(res);
+			valid_res = res;
 		}
 		
-		rp.endProcessing();		
+		rp.endProcessing(valid_res);		
 		return num;		
 	}
 	

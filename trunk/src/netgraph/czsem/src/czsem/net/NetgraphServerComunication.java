@@ -248,8 +248,10 @@ public class NetgraphServerComunication extends NetgraphProtocolConnection {
 	 */	
 	public LoadTreeResult loadNextTree(char treeSubtype) throws IOException, NetgraphProtocolException
 	{
-		for(;;)	// waiting for server ready
+		for(int sleep_iterator = 0;;sleep_iterator++)	// waiting for server ready
 		{
+			
+			
 			putChar('N');
 			putChar(treeSubtype);
 			sendMessage();
@@ -262,7 +264,8 @@ public class NetgraphServerComunication extends NetgraphProtocolConnection {
 			waitForMessageEnd();
 				
 			if (msg_result == 'E'	//end of matching trees 
-				|| msg_result == 'G') //end of trees in current context/file
+				|| msg_result == 'G'
+				|| sleep_iterator > 5) //end of trees in current context/file
 			{
 				//debug print
 				System.err.println((char) msg_result);
@@ -271,6 +274,7 @@ public class NetgraphServerComunication extends NetgraphProtocolConnection {
 			
 			//debug print
 			System.err.print(".");
+			
 
 			try {
 				Thread.sleep(200);

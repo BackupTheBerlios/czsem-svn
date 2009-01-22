@@ -227,7 +227,7 @@ public class SimpleXMLQueryProcessor implements ResultProcessor {
 		out.writeEndElement();		
 	}
 
-	public void endProcessing() throws XMLStreamException {
+	public void endProcessing(LoadTreeResult last_result) throws XMLStreamException {
 		out.writeEndElement();		
 	}
 

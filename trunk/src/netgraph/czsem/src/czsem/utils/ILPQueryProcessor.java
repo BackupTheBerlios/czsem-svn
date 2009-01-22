@@ -213,7 +213,7 @@ public class ILPQueryProcessor implements ResultProcessor
 	public void startProcessing()
 	{}
 	
-	public void endProcessing()
+	public void endProcessing(LoadTreeResult last_result)
 	{}
 
 	public boolean isNeagtive() {

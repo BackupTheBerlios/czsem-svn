@@ -3,6 +3,8 @@ package czsem.ILP.BackgroundKnowledge;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
+import java.util.HashSet;
+import java.util.Set;
 
 import cz.cuni.mff.mirovsky.trees.NGTreeHead;
 import czsem.net.NetgraphServerComunication;
@@ -15,14 +17,58 @@ import czsem.utils.NetgraphQuery.ResultProcessor;
 public class Maker implements ResultProcessor {
 	private String last_filename;
 	
+	private Set<String>[] attribute_values_bufeer;
 	public static final int[] PRINT_ATTRIBUTES =	{
-		6,
-		20,
-		35,
-		40,
-		42,
-		43,
-		44
+//		0, //atree.rf
+//		1, //compl.rf
+//		2, //coref_gram.rf
+//		3, //coref_special
+//		4, //coref_text.rf
+//		5, //deepord
+		6, //functor
+//		7, //gram/aspect
+//		8, //gram/degcmp
+//		9, //gram/deontmod
+//		10, //gram/dispmod
+//		11, //gram/gender
+//		12, //gram/indeftype
+//		13, //gram/iterativeness
+//		14, //gram/negation
+//		15, //gram/number
+//		16, //gram/numertype
+//		17, //gram/person
+//		18, //gram/politeness
+//		19, //gram/resultative
+		20, //gram/sempos
+//		21, //gram/tense
+//		22, //gram/verbmod
+//		23, //id
+//		24, //is_dsp_root
+//		25, //is_generated
+//		26, //is_member
+//		27, //is_name_of_person
+//		28, //is_parenthesis
+//		29, //is_state
+//		30, //nodetype
+//		31, //quot/set_id
+//		32, //quot/type
+//		33, //sentmod
+//		34, //subfunctor
+		35, //t_lemma
+//		36, //tfa
+		37, //val_frame.rf
+//		38, //sentence
+//		39, //a/ref_type
+		40, //a/afun
+//		41, //a/is_member
+		42, //m/form
+		43, //m/lemma
+		44, //m/tag
+//		45, //w/token
+//		46, //w/no_space_after
+//		47, //a/ord
+//		48, //a/parent_id
+//		49, //hide				
 		};
 
 	
@@ -33,6 +79,16 @@ public class Maker implements ResultProcessor {
 	
 	public Maker()
 	{}
+	
+	@SuppressWarnings("unchecked")
+	protected void initAttributeValuesBufeer()
+	{
+		attribute_values_bufeer = new HashSet[PRINT_ATTRIBUTES.length];
+		
+		for (int i=0; i<attribute_values_bufeer.length; i++) {
+			attribute_values_bufeer[i] = new HashSet<String>();
+		}
+	}
 
 	public Maker(String output_file) throws FileNotFoundException, UnsupportedEncodingException
 	{
@@ -61,12 +117,7 @@ public class Maker implements ResultProcessor {
 		
 		nc.close();		
 	}
-	
-	protected void PrintSingleTree(CZSemTree tree)
-	{
 		
-	}
-	
 	/**
 	 * From Long path name extract filename without extension.
 	 * @param filename
@@ -118,10 +169,26 @@ public class Maker implements ResultProcessor {
 				quoted_arg + "').");				
 	}
 
+	protected void printCaluseQuoted(String name, String quoted_arg)
+	{
+		tree_out.println(
+				makeAtomString(name) + "('" +		
+				quoted_arg + "').");				
+	}
+
 	protected void printAttributesOfNode(LoadTreeResult tree_result, int node_index)
 	{
 		CZSemTree tree = tree_result.tree;
 		NGTreeHead head = tree_result.tree_head;
+		
+/*		
+		for (int aa=0; aa<head.getSize(); aa++)
+		{
+			System.err.print(aa);				
+			System.err.print(", //");				
+			System.err.println(head.getAttributeAt(aa).getName());			
+		}
+*/
 		
 		for (int attr = 0; attr < PRINT_ATTRIBUTES.length; attr++) {
 			String val = tree.getFirstNodeAttributeValue(node_index, PRINT_ATTRIBUTES[attr]);
@@ -131,6 +198,8 @@ public class Maker implements ResultProcessor {
 						head.getAttributeAt(PRINT_ATTRIBUTES[attr]).getName(),
 						tree.getNodeID(node_index),
 						val);
+				
+				attribute_values_bufeer[attr].add(val);
 				
 /*
 				if (PRINT_ATTRIBUTES[attr] == 44) //   m/tag
@@ -237,15 +306,28 @@ public class Maker implements ResultProcessor {
 	}
 	
 	public static void main(String[] args) throws Exception {
-		Maker m = new Maker("trees1.b");
+		Maker m = new Maker("C:\\WorkSpace\\aleph\\trees1.b");
 		m.setSearchPath(makeSearchPath(train_set));
 		m.performOutput();
 	}
 
 	@Override
-	public void startProcessing() throws Exception {last_filename = "";}
+	public void startProcessing() throws Exception {
+		last_filename = "";
+		initAttributeValuesBufeer();		
+	}
+	
 	@Override
-	public void endProcessing() throws Exception {}
+	public void endProcessing(LoadTreeResult last_result) throws Exception {
+		
+		for (int a=0; a< attribute_values_bufeer.length; a++) {
+			String attr_name = last_result.tree_head.getAttributeAt(PRINT_ATTRIBUTES[a]).getName();
+			
+			for (String val : attribute_values_bufeer[a]) {
+				printCaluseQuoted(attr_name, val);			
+			}
+		}
+	}
 
 	public void setSearchPath(String searchPath) {
 		this.searchPath = searchPath;
