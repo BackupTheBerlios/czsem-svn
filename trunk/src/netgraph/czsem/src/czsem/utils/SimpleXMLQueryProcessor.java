@@ -22,8 +22,15 @@ import czsem.utils.NetgraphQuery.ResultProcessor;
 
 
 public class SimpleXMLQueryProcessor implements ResultProcessor {
-	private static class Selector
+	public static class Selector
 	{
+		public int query_tree_index;
+		public int query_node_index;
+		public String node_name;		
+		public String attribute_name;
+		
+		public int attribute_index;
+
 		public Selector(String node_name, String attribute_name, NetgraphQuery nq)
 		{
 			this.node_name = node_name;
@@ -43,15 +50,26 @@ public class SimpleXMLQueryProcessor implements ResultProcessor {
 				}				
 				actual_tree++;
 			}
+			
+			 attribute_index = query_forest.getHead().getIndexOfAttribute(attribute_name);
 		}
 		
-		public int query_tree_index;
-		public int query_node_index;
-		public String node_name;		
-		public String attribute_name;		
+		public String getMatchingValue(CZSemTree tree, SingleMatch tree_match)
+		{
+			return tree.getFirstNodeAttributeValue(
+							tree_match.current_node_index,
+							attribute_index);
+		}
+		
+		public boolean matchAQuery(SingleMatch tree_match)
+		{
+			return 
+				tree_match.query_tree_index == query_tree_index &&
+				tree_match.query_node_index == query_node_index;
+		}
 	}
 
-	private static class AttributeIndexes
+	public static class AttributeIndexes
 	{
 		public static int ID;		
 		public static int NAME;		
@@ -204,19 +222,14 @@ public class SimpleXMLQueryProcessor implements ResultProcessor {
 			
 			// find corresponding node in the result tree			
 			for (SingleMatch tree_match : tree_result.query_match) {
-				if (tree_match.query_tree_index == selector.query_tree_index &&
-						tree_match.query_node_index == selector.query_node_index)
+				if (selector.matchAQuery(tree_match))
 				{
 					//corresponding found - write its value to the output 					
 					out.writeStartElement("Value");
 					out.writeAttribute("variable_name", selector.node_name);
 					out.writeAttribute("attribute_name", selector.attribute_name);
 
-					int attribute_index = nc.getGlobalHead().getIndexOfAttribute(selector.attribute_name);
-					out.writeCharacters(
-							tree_result.tree.getFirstNodeAttributeValue(
-									tree_match.current_node_index,
-									attribute_index));
+					out.writeCharacters(selector.getMatchingValue(tree_result.tree, tree_match));
 
 					out.writeEndElement();			
 				}

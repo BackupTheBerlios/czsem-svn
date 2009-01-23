@@ -1,23 +1,16 @@
-package czsem.ILP.BackgroundKnowledge;
+package czsem.ILP;
 
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
-import java.util.HashSet;
-import java.util.Set;
 
-import cz.cuni.mff.mirovsky.trees.NGTreeHead;
 import czsem.net.NetgraphServerComunication;
 import czsem.net.NetgraphProtocolConnection.SepartorCahrs;
-import czsem.net.NetgraphServerComunication.LoadTreeResult;
-import czsem.utils.CZSemTree;
 import czsem.utils.NetgraphQuery;
+import czsem.utils.SimpleXMLQueryProcessor;
 import czsem.utils.NetgraphQuery.ResultProcessor;
 
-public class Maker implements ResultProcessor {
-	private String last_filename;
-	
-	private Set<String>[] attribute_values_bufeer;
+public abstract class DataMaker implements ResultProcessor {
 	public static final int[] PRINT_ATTRIBUTES =	{
 //		0, //atree.rf
 //		1, //compl.rf
@@ -59,11 +52,11 @@ public class Maker implements ResultProcessor {
 		37, //val_frame.rf
 //		38, //sentence
 //		39, //a/ref_type
-		40, //a/afun
+//		40, //a/afun
 //		41, //a/is_member
-		42, //m/form
-		43, //m/lemma
-		44, //m/tag
+//		42, //m/form
+//		43, //m/lemma
+//		44, //m/tag
 //		45, //w/token
 //		46, //w/no_space_after
 //		47, //a/ord
@@ -73,47 +66,47 @@ public class Maker implements ResultProcessor {
 
 	
 	
-	private PrintStream tree_out = System.out;
+	protected PrintStream tree_out = System.out;
 	private String query = null;
 	private String searchPath = null;
 	
-	public Maker()
+	public DataMaker()
 	{}
 	
-	@SuppressWarnings("unchecked")
-	protected void initAttributeValuesBufeer()
-	{
-		attribute_values_bufeer = new HashSet[PRINT_ATTRIBUTES.length];
-		
-		for (int i=0; i<attribute_values_bufeer.length; i++) {
-			attribute_values_bufeer[i] = new HashSet<String>();
-		}
-	}
-
-	public Maker(String output_file) throws FileNotFoundException, UnsupportedEncodingException
+	public DataMaker(String output_file) throws FileNotFoundException, UnsupportedEncodingException
 	{
 		tree_out = new PrintStream(output_file, "UTF-8");
 	}
 	
 	public void performOutput() throws Exception
 	{
+		performOutput(this);
+	}
+
+	protected NetgraphQuery nq;
+	
+	public void performOutput(ResultProcessor rp) throws Exception
+	{
 		NetgraphServerComunication nc = new NetgraphServerComunication();
 		nc.openConnection("localhost", 2000);
 		nc.login("dedek", "50eb3b47fbee4df59eaef6368261063b");
+		
 		
 		if (getSearchPath() != null)
 			nc.setSearchPathAndInitializeGlobalHead(getSearchPath());
 		else
 			nc.setSearchPathAndInitializeGlobalHead(nc.getCurrentDirectory());
+
+		SimpleXMLQueryProcessor.AttributeIndexes.initAttributeIndexes(nc);
 		
-		NetgraphQuery nq = new NetgraphQuery(query, nc);
+		nq = new NetgraphQuery(query, nc);
 		
 		if (query != null)
 			nq.startTheQuery();
 		else
 			nq.startQueryAll();
 		
-		nq.processResult(this);
+		nq.processResult(rp);
 		
 		nc.close();		
 	}
@@ -161,108 +154,30 @@ public class Maker implements ResultProcessor {
 				makeAtomString(arg2) + ").");				
 	}
 
+	protected static String stripQuotes(String src_token)
+	{
+		return src_token.replaceAll("'", "`");
+	}
+
 	protected void printCaluseQuoted(String name, String arg1, String quoted_arg)
 	{
 		tree_out.println(
 				makeAtomString(name) + "(" +		
 				makeAtomString(arg1) + ",'" +				
-				quoted_arg + "').");				
+				stripQuotes(quoted_arg) + "').");				
 	}
 
 	protected void printCaluseQuoted(String name, String quoted_arg)
 	{
 		tree_out.println(
 				makeAtomString(name) + "('" +		
-				quoted_arg + "').");				
+				stripQuotes(quoted_arg) + "').");				
 	}
 
-	protected void printAttributesOfNode(LoadTreeResult tree_result, int node_index)
-	{
-		CZSemTree tree = tree_result.tree;
-		NGTreeHead head = tree_result.tree_head;
-		
-/*		
-		for (int aa=0; aa<head.getSize(); aa++)
-		{
-			System.err.print(aa);				
-			System.err.print(", //");				
-			System.err.println(head.getAttributeAt(aa).getName());			
-		}
-*/
-		
-		for (int attr = 0; attr < PRINT_ATTRIBUTES.length; attr++) {
-			String val = tree.getFirstNodeAttributeValue(node_index, PRINT_ATTRIBUTES[attr]);
-			if (val != null)
-			{
-				printCaluseQuoted(
-						head.getAttributeAt(PRINT_ATTRIBUTES[attr]).getName(),
-						tree.getNodeID(node_index),
-						val);
-				
-				attribute_values_bufeer[attr].add(val);
-				
-/*
-				if (PRINT_ATTRIBUTES[attr] == 44) //   m/tag
-				{
-//					if (val.charAt(10) == 'N')
-//						ilp_task.getTree_out().println("negation("+ getNodeStr(node_index) +").");
-
-					for (int i = 0; i < 15; i++)
-					{
-						char ch = val.toLowerCase().charAt(i);
-						if (ch != '-')
-							ilp_task.getTree_out().print("m_tag"+ i +"("+tree.getNodeID(node_index)+",'" + ch +"'). const('"+ch+"'). ");			
-					}
-					ilp_task.getTree_out().println();
-				}
-*/
-			}			
-		}					
-	}
-	
-	@Override
-	public void processSingleTreeResult(LoadTreeResult tree_result)
-			throws Exception {
-		
-		tree_out.println("\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-		tree_out.println("% " + tree_result.tree.getSentenceString(tree_result.tree_head));
-		
-		String cur_filename = stripFilename(tree_result.filename); 
-		if (cur_filename.compareTo(last_filename) != 0)
-		{
-			printCaluse("file", cur_filename);
-			last_filename = cur_filename;
-		}
-		printCaluse("tree_root", tree_result.tree.getNodeID(0));		
-		printCaluse("root_in_file", tree_result.tree.getNodeID(0), stripFilename(tree_result.filename));
-
-		
-		for (int i = 0; i < tree_result.tree.getCountOfNodes(); i++)			
-		{
-			tree_out.println("%%%%%%%% NODE " + tree_result.tree.getNodeID(i) + " %%%%%%%%%%%%%%%%%%%");
-			printCaluse("node", tree_result.tree.getNodeID(i));
-			
-			printAttributesOfNode(tree_result, i);
-		} 
-
-		
-		//EDGES
-		for (int i=0; i < tree_result.tree.getEdges().length; i++)
-		{
-			printCaluse("edge", 
-					tree_result.tree.getNodeID(tree_result.tree.getEdges()[i][0]),
-					tree_result.tree.getNodeID(tree_result.tree.getEdges()[i][1]));
-		}
-		
-		
-
-		
-		
-	}
 	
 	public static final String[] train_set = {
 		"jihomoravsky55788",
-/*		"jihomoravsky48793",
+/**/	"jihomoravsky48793",
 		"jihomoravsky49921",
 		"jihomoravsky51460",
 		"jihomoravsky54536",
@@ -284,7 +199,7 @@ public class Maker implements ResultProcessor {
 		"jihomoravsky48880",
 		"jihomoravsky54637",
 		"jihomoravsky51054",
-		"jihomoravsky50885",*/
+		"jihomoravsky50885",/**/
 		"jihomoravsky48749"};
 	
 	public static final String corpus_path = "/cygdrive/c/WorkSpace/czSem/UNIX_copy/netgraph_server/corpus\\hasici\\jihomoravsky/"; 
@@ -305,29 +220,6 @@ public class Maker implements ResultProcessor {
 		return sb.toString();
 	}
 	
-	public static void main(String[] args) throws Exception {
-		Maker m = new Maker("C:\\WorkSpace\\aleph\\trees1.b");
-		m.setSearchPath(makeSearchPath(train_set));
-		m.performOutput();
-	}
-
-	@Override
-	public void startProcessing() throws Exception {
-		last_filename = "";
-		initAttributeValuesBufeer();		
-	}
-	
-	@Override
-	public void endProcessing(LoadTreeResult last_result) throws Exception {
-		
-		for (int a=0; a< attribute_values_bufeer.length; a++) {
-			String attr_name = last_result.tree_head.getAttributeAt(PRINT_ATTRIBUTES[a]).getName();
-			
-			for (String val : attribute_values_bufeer[a]) {
-				printCaluseQuoted(attr_name, val);			
-			}
-		}
-	}
 
 	public void setSearchPath(String searchPath) {
 		this.searchPath = searchPath;
@@ -335,5 +227,13 @@ public class Maker implements ResultProcessor {
 
 	public String getSearchPath() {
 		return searchPath;
+	}
+
+	public String getQueryString() {
+		return query;
+	}
+
+	public void setQueryString(String query) {
+		this.query = query;
 	}
 }
