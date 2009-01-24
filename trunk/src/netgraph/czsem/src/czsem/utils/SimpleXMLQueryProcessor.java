@@ -60,6 +60,20 @@ public class SimpleXMLQueryProcessor implements ResultProcessor {
 							tree_match.current_node_index,
 							attribute_index);
 		}
+
+		public String getFirstMatchingValue(LoadTreeResult tree_result)
+		{
+			// find corresponding node in the result tree			
+			for (SingleMatch tree_match : tree_result.query_match) {
+				if (matchAQuery(tree_match))
+				{
+					return getMatchingValue(tree_result.tree, tree_match);
+				}
+			}
+			
+			return null;
+		}
+		
 		
 		public boolean matchAQuery(SingleMatch tree_match)
 		{

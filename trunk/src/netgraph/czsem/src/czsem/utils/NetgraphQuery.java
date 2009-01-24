@@ -37,6 +37,8 @@ public class NetgraphQuery {
 	}
 
 	
+	public NetgraphQuery(){};
+
 	public NetgraphQuery(String query_string, NetgraphServerComunication netgraph_comunication)
 	{
 		this.queryString = query_string;
@@ -160,7 +162,7 @@ public class NetgraphQuery {
 		return netgraph_comunication;
 	}
 
-	public void setNetgraph_comunication(
+	public void setNetgraphComunication(
 			NetgraphServerComunication netgraph_comunication) {
 		this.netgraph_comunication = netgraph_comunication;
 	}

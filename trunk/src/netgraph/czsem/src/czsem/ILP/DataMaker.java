@@ -67,8 +67,10 @@ public abstract class DataMaker implements ResultProcessor {
 	
 	
 	protected PrintStream tree_out = System.out;
-	private String query = null;
+//	private String query_string = null;
 	private String searchPath = null;
+	protected NetgraphQuery current_query = new NetgraphQuery();
+
 	
 	public DataMaker()
 	{}
@@ -82,8 +84,6 @@ public abstract class DataMaker implements ResultProcessor {
 	{
 		performOutput(this);
 	}
-
-	protected NetgraphQuery nq;
 	
 	public void performOutput(ResultProcessor rp) throws Exception
 	{
@@ -99,14 +99,15 @@ public abstract class DataMaker implements ResultProcessor {
 
 		SimpleXMLQueryProcessor.AttributeIndexes.initAttributeIndexes(nc);
 		
-		nq = new NetgraphQuery(query, nc);
+//		current_query = new NetgraphQuery(getQueryString(), nc);
+		current_query.setNetgraphComunication(nc);
 		
-		if (query != null)
-			nq.startTheQuery();
+		if (getQueryString() != null)
+			current_query.startTheQuery();
 		else
-			nq.startQueryAll();
+			current_query.startQueryAll();
 		
-		nq.processResult(rp);
+		current_query.processResult(rp);
 		
 		nc.close();		
 	}
@@ -230,10 +231,10 @@ public abstract class DataMaker implements ResultProcessor {
 	}
 
 	public String getQueryString() {
-		return query;
+		return current_query.getQueryString();
 	}
 
 	public void setQueryString(String query) {
-		this.query = query;
+		current_query.setQueryString(query);
 	}
 }
