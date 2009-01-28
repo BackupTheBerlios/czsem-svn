@@ -1,0 +1,280 @@
+
+%
+%  $Description: Author guidelines and sample document in LaTeX 2.09$ 
+%
+%  $Author: ienne $
+%  $Date: 1995/09/15 15:20:59 $
+%  $Revision: 1.4 $
+%
+
+\documentclass[conference]{IEEEtran}
+\usepackage{graphicx,times,amsmath} % Add all your packages here
+\usepackage{amsfonts}
+%\usepackage{listings}
+
+\usepackage[cp1250]{inputenc}  % or [cp1250], or [latin2], or whatever
+                               % suitable for your system
+
+
+\usepackage{url}
+
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor IEEEtran}
+
+\IEEEoverridecommandlockouts	% to create the author's affliation portion
+				% using \thanks
+				
+\textwidth 178mm   	% <------ These are the adjustments we made 10/18/2005
+\textheight 239mm	% You may or may not need to adjust these numbes again
+\oddsidemargin -7mm
+\evensidemargin -7mm
+\topmargin -6mm 
+\columnsep 5mm
+
+\begin{document}
+
+\title{\ \\ \LARGE\bf Web Reports Classification with Fuzzy Inductive Logic Programming
+\thanks{Jan Dìdek is with the
+Department of software engineering, 
+Charles University in Prague, Czech Republic 
+(email: jan.dedek@mff.cuni.cz).}
+\thanks{Peter Vojtáš is with the
+Institute of Computer Science,
+Academy of Sciences of the Czech Republic
+(email: vojtas@cs.cas.cz).}
+}
+
+
+\author{Jan Dìdek \and Peter Vojtáš}
+
+
+% If the title is too long for the running head, please provide a
+% shorter version here:
+% (Otherwise leave this command commented out.)
+%\titlerunning{Exploitation of linguistic tools in semantic extraction}
+
+
+% If all authors have the same affiliation do not use the \inst
+% command: 
+%\author{Jan Dìdek\\
+%Department of Software Engineering,\\Faculty of Mathematics and Physics,\\
+%Department of software engineering\\
+%School of Computer Science\\
+%Faculty of Mathematics and Physics\\
+%Charles University in Prague, Czech Republic\\
+%Malostranské nám. 25\\
+%118 00 Praha 1\\
+%Czech Republic\\
+%Tel: +420-221-914-264\\
+%Fax: +420-221-914-323\\
+%Email: jan.dedek@mff.cuni.cz\\
+%\and 
+%Peter Vojtáš\\
+%Institute of Computer Science\\
+%Academy of Sciences of the Czech Republic\\
+%Department of software engineering\\
+%School of Computer Science\\
+%Faculty of Mathematics and Physics\\
+%Charles University in Prague\\
+%Malostranské nám. 25\\
+%118 00 Praha 1\\
+%Czech Republic\\
+%Tel: +420-221-914-239\\
+%Fax: +420-221-914-323\\
+%Email: vojtas@cs.cas.cz}
+
+
+\maketitle              % typesets the title of the contribution
+
+\thispagestyle{empty}
+
+
+
+\begin{abstract}
+The abstract goes here. What you need to do is to insert your abstract
+here. Please try to make it less than 150 words. 
+We suggest that you read this document carefully before you begin preparing
+your manuscript. IEEE does not want conference papers to have 
+keywords so you should remove your keyword list. 
+Also, at this time, IEEE only has some general guidelines about the 
+format for conference papers.
+It is up to each individual conference to decide which format to use.
+In order to have a uniform look for all papers published in the proceedings, 
+we require that every author follow the 
+format of this sample paper.  This sample paper is for latex users. 
+Authors may use the sample paper here to produce their own 
+papers by following the same format as this sample paper.
+\end{abstract}
+
+% no key words
+
+\section{Fuzzy inductive logic programming}
+
+In our application we are facing the challenge of induction and/or mining on several places. First we need an inductive procedure when extracting from web texts attributes of an accident. 
+
+Second we need an inductive procedure when trying to explain degree of seriousness of an accident by attributes of this accident (also called background knowledge).
+
+Both places where induction has to be used have following requirements
+
+
+\begin{itemize}
+	\item data are/can be fuzzy
+	\item background knowledge is multirelational
+	\item classification is fuzzy
+\end{itemize}
+
+Having in mind these requirements we chose Fuzzy inductive logic programming. To make the paper readable we present bellow short description of ILP techniques.
+
+\subsection{Classical ILP}
+
+In our presentation of Inductive Logic Programming (ILP) we follow the book of S. D\v zeroski and N. Lavra\v c \cite{dzeroski2001:relat_dm}. 
+
+Given is a set of examples $E=P\cup N$, where $P$ contains positive and $N$ negative examples, and a background knowledge $B$. The task is to find a hypothesis $H$ such that 
+
+$$
+(\forall e\in P)(B\cup H\models e)
+$$
+and
+$$
+(\forall e\in N)(B\cup H\not\models e).
+$$
+Typically, $E$ consists of ground instances of the target predicate which has to be classified - in our case accidents. $B$ typically consists of several predicates (relational tables) which describe properties of object which have to be classified - in our case properties of accidents. Background knowledge can contain also some rules. Hypothesis $H$ typically consists of logic programming rules, which when added to $B$, explain all positive examples and no negative examples.
+
+Main advantage of ILP is it's multirelational character, namely $B$ can reside in several tables.
+
+\subsection{Fuzzy and GAP induction}
+
+In our presentation of Inductive Logic Programming (ILP) we follow the Paper of T. Horvath and P. Vojtas \cite{biblio:FILP} about fuzzy inductive logic programming.
+
+We use the approach of the fuzzy logic in narrow sense developped by J. Pavelka and P. Hajek. Formulas are of the form $\varphi, x$ ($\varphi$ is syntactically same as in the crisp case) are graded by a truth value $xin [0,1]$.
+A structure ${\mathcal M}$ consist of domain $M$ and relations are interpreted fuzzy (we do not consider function symbols here). Evaluation $\left\|\varphi\right\|_{{\mathcal M}}$ of a formula $\varphi$ uses truth functions of many valued connectives (our logic is extensional and/or truth functional). Satisfaction is defined by
+$$
+{\mathcal M}\models_f (\varphi, x)\ iff\ \left\|\varphi\right\|_{{\mathcal M}}\ge x
+$$
+
+
+Given is a fuzzy set of examples ${\mathcal E}:E\longrightarrow [0,1]$ and a fuzzy background knowledge ${\mathcal B}:B\longrightarrow [0,1]$. The task is to find a fuzzy hypothesis ${\mathcal H}:H\longrightarrow [0,1]$ such that 
+
+$$
+(\forall e,f\in dom(E))(\forall {\mathcal M})({\mathcal M}\models_f B\cup H)
+$$
+we have
+$$
+E(e)>E(f)\Rightarrow \left\|e\right\|_{{\mathcal M}}\ge \left\|f\right\|_{{\mathcal M}}.
+$$
+
+That is, it cannot happen that 
+$$
+E(e)>E(f) \wedge \left\|e\right\|_{{\mathcal M}}< \left\|f\right\|_{{\mathcal M}},
+$$
+or rephrased, if $E$ is rating $e$ higher than $f$, then it can not happen in a model of $B\cup H$ that $e$ is rated worse than $f$.
+
+Typically, ${\mathcal E}$ consists of ground instances of the target predicate which are  classified in truth degrees - in our case degree of seriousness of an accident. $B$ typically consists of several fuzzy predicates (fuzzy relational tables) which describe properties of object which have to be classified - in our case fuzzy properties of accidents - degree od injury, degree of damage, .... Background knowledge can contain also some rules, so far only crisp rules are used. Hypothesis $H$ typically consists of a fuzzy logic program, which when added to $B$, prevents of misclassification (better can not be declared to be worse, nevertheless can be declared as having same degree (for more detailed discussion on this definition of fuzzy ILP we reffer to the paper \cite{biblio:FILP})). Moreover, in practise, we use GAP - Generalized Annotated Programs, so graded formulas wil lbe sometimes understood as annotated (with crisp connectives and more complex annotation of head of rules.)
+
+\subsection{Translation of fuzzyILP task to several classical ILP tasks}
+
+As far as there is no implementation of fuzzy (GAP) ILP, we have to use a classical ILP system. Fortunately a fuzzy ILP task can be translated to several crisp ILP tasks (subject to some rounding and using finite set of truth values).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Solution}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Citace tectogrammatical structure \cite{biblio:MiBeAnnotationtectogrammatical2006}
+
+Citace ILP \cite{biblio:Muggleton94inductivelogic}
+
+Citace Fuzzy ILP \cite{biblio:FILP}
+
+Citace Aleph: \\
+A Learning Engine for Proposing Hypotheses (Aleph  v5\footnote{\url{http://www.comlab.ox.ac.uk/activities/machinelearning/Aleph/}}) 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Results}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\begin{figure}[b]
+\centerline{\includegraphics[width=.7\hsize]{img/attributes_description}}
+\caption{Characteristics of accident attributes.}
+\label{img:attributes_description}
+\end{figure}
+
+
+\begin{figure}[b]
+\centerline{\includegraphics[width=\hsize]{img/ranking_histogram}}
+\caption{Frequency histogram of accidents ranking.}
+\label{img:ranking_histogram}
+\end{figure}
+
+\begin{figure}[b]
+\centerline{\includegraphics[width=0.8\hsize]{img/Evaluation}}
+\caption{Evaluation results}
+\label{img:evaluation}
+\end{figure}
+
+
+
+\begin{figure}[b]
+\centerline{\includegraphics[width=.8\hsize]{img/monot2nomon}}
+\caption{Conversion of results: monotone $\rightarrow$ crisp.}
+\label{img:monot2nomon}
+\end{figure}
+
+\begin{figure}[b]
+\centerline{\includegraphics[width=.8\hsize]{img/nomon2monot}}
+\caption{Conversion of results: crisp $\rightarrow$ monotone.}
+\label{img:nomon2monot}
+\end{figure}
+
+\begin{figure}[b]
+\centerline{\includegraphics[width=.8\hsize]{img/attribute_monotonisation}}
+\caption{Monotonization of attributes (damage $\rightarrow$ damage\_atl).}
+\label{img:attribute_monotonisation}
+\end{figure}
+
+
+
+\begin{figure}[b]
+\centerline{\includegraphics[width=\hsize]{img/rules_nonmonot}}
+\caption{Crisp rules}
+\label{img:rules_nonmonot}
+\end{figure}
+
+\begin{figure}[b]
+\centerline{\includegraphics[width=\hsize]{img/rules_monot}}
+\caption{Monotonised rules}
+\label{img:rules_monot}
+\end{figure}
+
+
+See fig~\ref{img:evaluation}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusion}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+We have presented a proposal of and experiments with a system for semantic computing of information from Czech text on Web pages. Our system relies on linguistic annotation tools from PDT \cite{biblio:PDT20_CD} and the tree querying tool Netgraph \cite{biblio:MiNetgraphA2006}. Our contributions are an experimental chain of tools that enables semantic computing. In the third phase -- data extraction -- we formulate an inductive logic programming task over linguistically annotated data. Finally we describe transformation of these data to an ontology. Our initial experiments verified used methods and tools.
+
+In future work we would like to test our method on another languages and compare our results with similar solutions. Our work is very close to domain dependent information extraction such as relation and event extraction. These tasks were considered as Semantic Evaluation in the first place in the MUC-6 conference 1995 \cite{biblio:MUC6}. Contemporary results of the ACE competition\footnote{\url{http://www.nist.gov/speech/tests/ace/}} show the difficulty of these problems, which are very close to ours.
+
+\section*{Acknowledgment}
+This work was partially supported by Czech projects\\1ET100300517, 201/09/0990 GACR and MSM-0021620838.
+
+
+
+%\bibliographystyle{latex8}
+\bibliographystyle{IEEEtran}
+
+\bibliography{DedekVojtas_FuzzIEEE2009}
+
+
+\end{document}
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 
