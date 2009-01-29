@@ -221,29 +221,56 @@ Citace ILP \cite{biblio:Muggleton94inductivelogic}
 
 Citace Fuzzy ILP \cite{biblio:FILP}
 
-Citace Aleph: \\
-A Learning Engine for Proposing Hypotheses (Aleph  v5\footnote{\url{http://www.comlab.ox.ac.uk/activities/machinelearning/Aleph/}}) 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Setting of our experiment}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The main experiment presented in this paper leads to the seriousness classification of an accident presented on a web report. Our long term goal is extraction of semantic information from web reports. And seriousness classification is one of possible utilization of the extracted semantic information. We use web reports of fire departments of several regions of the Czech Republic. These reports are written in Czech language and can be accessed through the web of General Directorate of the Fire and Rescue Service of the Czech Republic\footnote{\url{http://www.hzscr.cz}}. These reports are rich in information, e.g. where and when an traffic accident occurred, which units helped, how much time it took them to show up on the place of accident, how many people were injured, killed etc.
+
+For the present experiment we have selected a collection of 50 web reports. We have identified several features presented in these reports and manually extracted corresponding values. This will be described in more detail in section \ref{sec:features}. To each report we have also assigned a value of overall ranking of seriousness of presented accident, which is the target of the classification.
+
+\textbf{Máme dvì možnosti -- buï odkázat na naše pøedchozí èlánky o extrakci informací nebo se pokusit sem nìco dát...}
+
+
+There are two objectives to do. Fist is the web information extraction, a long path starting with web crawling and resulting with the extracted structured information. Second is the seriousness classification, which utilizes the extracted information. We have made much work on the first (see e.g. \cite{biblio:DeVoLinguisticextraction2008,biblio:DeVoComputingaggregations2008, biblio:DeEcExperimentswith2008}), in this paper we will concentrate on the second.
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Results}
+\subsection{Experiment description} \label{sec:features}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+For the seriousness classification we have used two inductive logic approaches -- Classical ILP and Fuzzy ILP (as described above). Technically the difference between the approaches consist in different setting of \emph{ILP task}. Both can be done with a classical ILP tool. We have used 
+``\emph{A Learning Engine for Proposing Hypotheses}'' (Aleph  v5\footnote{\url{http://www.comlab.ox.ac.uk/activities/machinelearning/Aleph/}}), which seems very practical to us. It use quite effective method of \emph{inverse entailment} \cite{biblio:InverseEntailment} and keeps all handy features of Prolog system (supports YAP and SWI) in its background.
+
+We have compared results of the two approaches (fuzzy and classical) and we could see that the fuzzy approach made better results than the classical one. See section \ref{sec:results} for details of the results.
 
 
-\begin{figure}[b]
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Features of accidents} \label{sec:features}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
 \centerline{\includegraphics[width=.7\hsize]{img/attributes_description}}
 \caption{Characteristics of accident attributes.}
 \label{img:attributes_description}
 \end{figure}
 
 
-\begin{figure}[b]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Results} \label{sec:results}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\begin{figure}
 \centerline{\includegraphics[width=\hsize]{img/ranking_histogram}}
 \caption{Frequency histogram of accident ranking.}
 \label{img:ranking_histogram}
 \end{figure}
 
-\begin{figure}[b]
+\begin{figure}
 \centerline{\includegraphics[width=0.8\hsize]{img/Evaluation}}
 \caption{Evaluation results}
 \label{img:evaluation}
@@ -251,19 +278,19 @@ A Learning Engine for Proposing Hypotheses (Aleph  v5\footnote{\url{http://www.c
 
 
 
-\begin{figure}[b]
+\begin{figure}
 \centerline{\includegraphics[width=.8\hsize]{img/monot2nomon}}
 \caption{Conversion of results: monotone $\rightarrow$ crisp.}
 \label{img:monot2nomon}
 \end{figure}
 
-\begin{figure}[b]
+\begin{figure}
 \centerline{\includegraphics[width=.8\hsize]{img/nomon2monot}}
 \caption{Conversion of results: crisp $\rightarrow$ monotone.}
 \label{img:nomon2monot}
 \end{figure}
 
-\begin{figure}[b]
+\begin{figure}
 \centerline{\includegraphics[width=.8\hsize]{img/attribute_monotonisation}}
 \caption{Monotonization of attributes (damage $\rightarrow$ damage\_atl).}
 \label{img:attribute_monotonisation}
@@ -271,13 +298,13 @@ A Learning Engine for Proposing Hypotheses (Aleph  v5\footnote{\url{http://www.c
 
 
 
-\begin{figure}[b]
+\begin{figure}
 \centerline{\includegraphics[width=\hsize]{img/rules_nonmonot}}
 \caption{Crisp rules}
 \label{img:rules_nonmonot}
 \end{figure}
 
-\begin{figure}[b]
+\begin{figure}
 \centerline{\includegraphics[width=\hsize]{img/rules_monot}}
 \caption{Monotonised rules}
 \label{img:rules_monot}
