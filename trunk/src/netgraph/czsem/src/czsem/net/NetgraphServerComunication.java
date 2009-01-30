@@ -46,12 +46,12 @@ public class NetgraphServerComunication extends NetgraphProtocolConnection {
 			public SingleMatch(int tree_index, int current_node_index, int query_node_index)
 			{
 				this.query_tree_index = tree_index;
-				this.current_node_index = current_node_index;
+				this.matching_node_index = current_node_index;
 				this.query_node_index = query_node_index;
 			}			
 
 			public int query_tree_index;
-			public int current_node_index;
+			public int matching_node_index;
 			public int query_node_index;
 		}
 		

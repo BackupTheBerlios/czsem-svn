@@ -57,21 +57,26 @@ public class SimpleXMLQueryProcessor implements ResultProcessor {
 		public String getMatchingValue(CZSemTree tree, SingleMatch tree_match)
 		{
 			return tree.getFirstNodeAttributeValue(
-							tree_match.current_node_index,
+							tree_match.matching_node_index,
 							attribute_index);
 		}
 
-		public String getFirstMatchingValue(LoadTreeResult tree_result)
+		public SingleMatch getFirstMatch(LoadTreeResult tree_result)
 		{
 			// find corresponding node in the result tree			
 			for (SingleMatch tree_match : tree_result.query_match) {
 				if (matchAQuery(tree_match))
 				{
-					return getMatchingValue(tree_result.tree, tree_match);
+					return tree_match;
 				}
 			}
 			
 			return null;
+		}
+
+		public String getFirstMatchingValue(LoadTreeResult tree_result)
+		{
+			return getMatchingValue(tree_result.tree, getFirstMatch(tree_result));
 		}
 		
 		

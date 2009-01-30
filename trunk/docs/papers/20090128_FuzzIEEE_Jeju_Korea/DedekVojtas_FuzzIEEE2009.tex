@@ -34,15 +34,16 @@
 
 \begin{document}
 
-\title{\ \\ \LARGE\bf Web Reports Classification with Fuzzy Inductive Logic Programming
+\title{\ \\ \LARGE\bf Fuzzy Classification of Web Reports with Linguistic Text Mining
 \thanks{Jan Dìdek is with the
-Department of software engineering, 
+Department of Software Engineering, 
 Charles University in Prague, Czech Republic 
 (email: jan.dedek@mff.cuni.cz).}
 \thanks{Peter Vojtáš is with the
 Institute of Computer Science,
-Academy of Sciences of the Czech Republic
-(email: vojtas@cs.cas.cz).}
+Czech Academy of Sciences and Department of Software Engineering, 
+Charles University in Prague, Czech Republic
+(email: peter.vojtas@mff.cuni.cz).}
 }
 
 
@@ -92,33 +93,61 @@ Academy of Sciences of the Czech Republic
 
 
 \begin{abstract}
-The abstract goes here. What you need to do is to insert your abstract
-here. Please try to make it less than 150 words. 
-We suggest that you read this document carefully before you begin preparing
-your manuscript. IEEE does not want conference papers to have 
-keywords so you should remove your keyword list. 
-Also, at this time, IEEE only has some general guidelines about the 
-format for conference papers.
-It is up to each individual conference to decide which format to use.
-In order to have a uniform look for all papers published in the proceedings, 
-we require that every author follow the 
-format of this sample paper.  This sample paper is for latex users. 
-Authors may use the sample paper here to produce their own 
-papers by following the same format as this sample paper.
+In this paper we present a fuzzy system which increases automation of fuzzy classification of textual web reports. Our approach is based on usage of third party linguistic analyzer and fuzzy inductive logic programming. Main contributions are formal models, prototype implementation and evaluation of experiments of the whole system. 
 \end{abstract}
 
 % no key words
 
 \section{Introduction}
 
+General intro
+
+{\bf Priklad}
+
+\begin{figure}[hb!]
+\centerline{\includegraphics[width=\hsize]{img/message}}
+\caption{Example of analyzed web report.}
+\label{img:message}
+\end{figure}
+
+Problem
+
+Contribution
+
+Related work
+
+more on text mining, information extraction, fuzzy internet applications, ...
+
+In \cite{biblio:YagerReformat08text} 
+
+Paper is organized as follows ...
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Models, methods, design of the system}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{figure}[hb!]
 \centerline{\includegraphics[width=.7\hsize]{img/schema}}
-\caption{Schema of presented work.}
+\caption{Schema of presented work (text part).}
 \label{img:schema}
 \end{figure}
 
+\subsection{Linguistic Analyser}
 
-\section{Fuzzy inductive logic programming}
+Citace tectogrammatical structure \cite{biblio:MiBeAnnotationtectogrammatical2006}
+
+\begin{figure}[hb!]
+\centerline{\framebox{\includegraphics[width=\hsize]{img/tree}}}
+\caption{Example of linguistic tree of one of analyzed sentences.}
+\label{img:tree}
+\end{figure}
+
+
+
+
+
+\subsection{Classical ILP}
 
 In our application we are facing the challenge of induction and/or mining on several places. First we need an inductive procedure when extracting from web texts attributes of an accident. 
 
@@ -135,9 +164,7 @@ Both places where induction has to be used have following requirements
 
 Having in mind these requirements we chose Fuzzy inductive logic programming. To make the paper readable we present bellow short description of ILP techniques.
 
-\subsection{Classical ILP}
-
-In our presentation of Inductive Logic Programming (ILP) we follow the book of S. D\v zeroski and N. Lavra\v c \cite{dzeroski2001:relat_dm}. 
+In our presentation of Inductive Logic Programming (ILP) we follow the book of S. D\v zeroski and N. Lavra\v c \cite{dzeroski2001:relat_dm}. Citace ILP \cite{biblio:Muggleton94inductivelogic}
 
 Given is a set of examples $E=P\cup N$, where $P$ contains positive and $N$ negative examples, and a background knowledge $B$. The task is to find a hypothesis $H$ such that 
 
@@ -152,9 +179,11 @@ Typically, $E$ consists of ground instances of the target predicate which has to
 
 Main advantage of ILP is it's multirelational character, namely $B$ can reside in several tables.
 
+
+
 \subsection{Fuzzy and GAP induction}
 
-In our presentation of Inductive Logic Programming (ILP) we follow the Paper of T. Horvath and P. Vojtas \cite{biblio:FILP} about fuzzy inductive logic programming.
+In our presentation of Inductive Logic Programming (ILP) we follow the Paper of T. Horvath and P. Vojtas \cite{biblio:FILP} about fuzzy inductive logic programming. Citace Fuzzy ILP \cite{biblio:FILP}
 
 We use the approach of the fuzzy logic in narrow sense developped by J. Pavelka and P. Hajek. Formulas are of the form $\varphi, x$ ($\varphi$ is syntactically same as in the crisp case) are graded by a truth value $xin [0,1]$.
 A structure ${\mathcal M}$ consist of domain $M$ and relations are interpreted fuzzy (we do not consider function symbols here). Evaluation $\left\|\varphi\right\|_{{\mathcal M}}$ of a formula $\varphi$ uses truth functions of many valued connectives (our logic is extensional and/or truth functional). Satisfaction is defined by
@@ -219,19 +248,8 @@ C(y):u(x_1,\dots,x_m)\leftarrow B_1:x_1 \&\dots\& B_n:x_m,
 $$
 is a correct solution to fuzzy ILP task given by ${\mathcal E}$ and ${\mathcal B}$. Our presentation is here a little bit simplified and we freely switch betwee fuzzy and GAP programs, which are know to be equivalent {\bf citace Krajci, Lencses, Vojtas FSS clanek}
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Solution}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Citace tectogrammatical structure \cite{biblio:MiBeAnnotationtectogrammatical2006}
-
-Citace ILP \cite{biblio:Muggleton94inductivelogic}
-
-Citace Fuzzy ILP \cite{biblio:FILP}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Setting of our experiment}
+\section{The system prototype and Setting of our experiment}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The main experiment presented in this paper leads to the seriousness classification of an accident presented on a web report. Our long term goal is extraction of semantic information from web reports. And seriousness classification is one of possible utilization of the extracted semantic information. We use web reports of fire departments of several regions of the Czech Republic. These reports are written in Czech language and can be accessed through the web of General Directorate of the Fire and Rescue Service of the Czech Republic\footnote{\url{http://www.hzscr.cz}}. These reports are rich in information, e.g. where and when an traffic accident occurred, which units helped, how much time it took them to show up on the place of accident, how many people were injured, killed etc.
 
@@ -364,7 +382,7 @@ We have presented a proposal of and experiments with a system for semantic compu
 In future work we would like to test our method on another languages and compare our results with similar solutions. Our work is very close to domain dependent information extraction such as relation and event extraction. These tasks were considered as Semantic Evaluation in the first place in the MUC-6 conference 1995 \cite{biblio:MUC6}. Contemporary results of the ACE competition\footnote{\url{http://www.nist.gov/speech/tests/ace/}} show the difficulty of these problems, which are very close to ours.
 
 \section*{Acknowledgment}
-This work was partially supported by Czech projects\\1ET100300517, 201/09/0990 GACR and MSM-0021620838.
+This work was partially supported by Czech projects IS-1ET100300517, GACR-201/09/H057 and MSM-0021620838.
 
 
 

@@ -144,7 +144,7 @@ public class ILPQueryProcessor implements ResultProcessor
 			//printtSingleTreeResultMatch
 			ilp_task.getQuery_match_out().print(
 					":- contains_num_injured(" +
-					tree_result.tree.getNodeID(tree_match.current_node_index) +
+					tree_result.tree.getNodeID(tree_match.matching_node_index) +
 					").");
 
 			
@@ -152,12 +152,12 @@ public class ILPQueryProcessor implements ResultProcessor
 			ilp_task.getQuery_match_out().print(
 					" % " + ASCIINormalise(
 								tree_result.tree.getFirstNodeAttributeValue(
-									tree_match.current_node_index, 35)) /*t_lemma*/+
+									tree_match.matching_node_index, 35)) /*t_lemma*/+
 					" (");			
 			//print all hidden (analytical) sons
 			for (TNode son : CZSemTree.getNodeSons(
 					tree_result.tree.getNodeByDeepOrd(
-							tree_match.current_node_index)))
+							tree_match.matching_node_index)))
 			{
 				String hide = son.getValue(0, 49 /*hide*/, 0);
 				if (hide!=null && hide.compareTo("hide")==0)

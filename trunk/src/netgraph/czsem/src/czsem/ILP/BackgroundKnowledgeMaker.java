@@ -68,15 +68,28 @@ relevant_node(qT_jihomoravsky48749_txt_001_p2s3d10).
 
 		tree_out.println();			
 		tree_out.println("%:- set(evalfn,posonly).");			
-		tree_out.println();			
+		tree_out.println(":- set(noise,0).");			
+		tree_out.println(":- set(clauselength,20).");			
+		tree_out.println(":- set(i,15).");			
+		tree_out.println();		
+		tree_out.println("% orlemma(N,B,C) :- t_lemma(N,B), t_lemma(C), C\\=B.");
+		tree_out.println("% orlemma(N,B,C) :- t_lemma(N,C), t_lemma(B), C\\=B.");
+		tree_out.println();
+		tree_out.println("optional_double_edge(N1,N2) :- edge(N1,N2).");
+		tree_out.println("optional_double_edge(N1,N2) :- edge(N1,N),edge(N,N2).");
+		tree_out.println();
 		tree_out.println(":- mode(1,tree_root(+node)).");			
 		tree_out.println(":- mode(1,relevant_node(+node)).");			
 		tree_out.println(":- mode(1,root_in_file(+node,-file)).");			
 		tree_out.println(":- mode(*,edge(+node,-node)).");			
 		tree_out.println(":- mode(1,edge(-node,+node)).");			
 		tree_out.println();			
+		tree_out.println(":- mode(*,optional_double_edge(+node,-node)).");			
+		tree_out.println(":- mode(1,optional_double_edge(-node,+node)).");			
+		tree_out.println();			
 		tree_out.println(":- determination(relevant_node/1,edge/2).");			
 		tree_out.println(":- determination(relevant_node/1,root_in_file/2).");			
+		tree_out.println(":- determination(relevant_node/1,optional_double_edge/2).");			
 		tree_out.println();			
 
 		for (int attr = 0; attr < PRINT_ATTRIBUTES.length; attr++) {
