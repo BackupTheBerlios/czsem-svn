@@ -250,11 +250,37 @@ We have compared results of the two approaches (fuzzy and classical) and we coul
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Features of accidents} \label{sec:features}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{figure}
 \centerline{\includegraphics[width=.7\hsize]{img/attributes_description}}
 \caption{Characteristics of accident attributes.}
 \label{img:attributes_description}
 \end{figure}
+
+Figure \ref{img:attributes_description} summarizes all features (or attributes) that we have obtained from accident reports. Except the attribute \verb+type+ (type of an accident -- \verb+fire+, \verb+car_accident+ and \verb+other+) all the attributes are numerical and so monotonizable. In some cases value of some attribute is unknown. We have decided to make evidence of this and keep the values \verb+unknown+ in a knowledge base. Short explanation of each attribute follows.
+
+\verb+size+ is a file size of text part of a report.\\
+	\verb+damage+ is an amount (in CZK -- Czech Crowns) of summarized damage arisen during an accident.\\
+	\verb+dur_minutes+ is time (in minutes) taken to handle an accident.\\
+	\verb+fatalities+ and \verb+injuries+ are numbers of fatalities (and injuries) taken by an accident.\\
+	\verb+cars+ is number of cars damaged during an accident (especially during car accidents).\\
+	\verb+professional_units+ and \verb+amateur_units+ are numbers of fireman units sent for an accident.\\
+	\verb+pipes+ is number of  used fire pipes.\\
+	\verb+lather+, \verb+aqualung+ and \verb+fan+ (ventilator) indicates weather these devices were used.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Seriousness ranking} \label{sec:seriousness}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{figure}
+\centerline{\includegraphics[width=\hsize]{img/ranking_histogram}}
+\caption{Frequency histogram of accident ranking.}
+\label{img:ranking_histogram}
+\end{figure}
+
+Vales of overall seriousness ranking attribute were stated from ``general impression'' from report's texts with respect to the particular attributes (Fig~\ref{img:attributes_description}). Values of seriousness ranking have evolved to 14 distinct values in range form 0.5 to 8. Histogram with frequencies of all the values is on the Figure~\ref{img:ranking_histogram}.
+
+We have divided the values into four approximately equipotent groups (shown on the Fig.~\ref{img:ranking_histogram}) and learned logic rules for each group separately.
 
 
 
@@ -262,13 +288,6 @@ We have compared results of the two approaches (fuzzy and classical) and we coul
 \section{Results} \label{sec:results}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-
-\begin{figure}
-\centerline{\includegraphics[width=\hsize]{img/ranking_histogram}}
-\caption{Frequency histogram of accident ranking.}
-\label{img:ranking_histogram}
-\end{figure}
 
 \begin{figure}
 \centerline{\includegraphics[width=0.8\hsize]{img/Evaluation}}
