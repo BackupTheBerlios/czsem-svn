@@ -109,6 +109,15 @@ papers by following the same format as this sample paper.
 
 % no key words
 
+\section{Introduction}
+
+\begin{figure}[hb!]
+\centerline{\includegraphics[width=.7\hsize]{img/schema}}
+\caption{Schema of presented work.}
+\label{img:schema}
+\end{figure}
+
+
 \section{Fuzzy inductive logic programming}
 
 In our application we are facing the challenge of induction and/or mining on several places. First we need an inductive procedure when extracting from web texts attributes of an accident. 
@@ -236,7 +245,7 @@ There are two objectives to do. Fist is the web information extraction, a long p
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Experiment description} \label{sec:features}
+\subsection{Experiment description} \label{sec:experiment_desc}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 For the seriousness classification we have used two inductive logic approaches -- Classical ILP and Fuzzy ILP (as described above). Technically the difference between the approaches consist in different setting of \emph{ILP task}. Both can be done with a classical ILP tool. We have used 
@@ -319,13 +328,13 @@ We have divided the values into four approximately equipotent groups (shown on t
 
 \begin{figure}
 \centerline{\includegraphics[width=\hsize]{img/rules_nonmonot}}
-\caption{Crisp rules}
+\caption{Crisp hypothesis}
 \label{img:rules_nonmonot}
 \end{figure}
 
 \begin{figure}
 \centerline{\includegraphics[width=\hsize]{img/rules_monot}}
-\caption{Monotonised rules}
+\caption{Monotonised hypothesis}
 \label{img:rules_monot}
 \end{figure}
 
