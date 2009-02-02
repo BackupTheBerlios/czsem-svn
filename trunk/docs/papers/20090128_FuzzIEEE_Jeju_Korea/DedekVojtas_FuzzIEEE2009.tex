@@ -35,14 +35,14 @@
 \begin{document}
 
 \title{\ \\ \LARGE\bf Fuzzy Classification of Web Reports with Linguistic Text Mining
-\thanks{Jan Dìdek is with the
+\thanks{Jan Dìdek is a PhD student at the
 Department of Software Engineering, 
 Charles University in Prague, Czech Republic 
 (email: jan.dedek@mff.cuni.cz).}
 \thanks{Peter Vojtáš is with the
-Institute of Computer Science,
-Czech Academy of Sciences and Department of Software Engineering, 
-Charles University in Prague, Czech Republic
+Department of Software Engineering, 
+Charles University in Prague and Institute of Computer Science,
+Czech Academy of Sciences, Czech Republic
 (email: peter.vojtas@mff.cuni.cz).}
 }
 
@@ -93,16 +93,19 @@ Charles University in Prague, Czech Republic
 
 
 \begin{abstract}
-In this paper we present a fuzzy system which increases automation of fuzzy classification of textual web reports. Our approach is based on usage of third party linguistic analyzer and fuzzy inductive logic programming. Main contributions are formal models, prototype implementation and evaluation of experiments of the whole system. 
+In this paper we present a fuzzy system which increases automation of fuzzy classification of textual web reports. Our approach is based on usage of third party linguistic analyzer, our previous work on web information extraction and fuzzy inductive logic programming. Main contributions are formal models, prototype implementation and evaluation of experiments of the whole system. 
 \end{abstract}
 
 % no key words
 
 \section{Introduction}
 
-General intro
+Big amount of information on the web increases the need of automated precessing. Especially textual information are hard for machine processing and understanding. Crisp methods have their limitations. In this paper we present a fuzzy system which increases automation of fuzzy classification of textual web reports. 
 
-{\bf Priklad}
+
+Our motivating example is an accident message Fig~\ref{img:message}. We would like to have a tool which is able to classify such message with degree of being it a serious accident. 
+
+Our solution is based first on information extraction (see  emphasized information to be extracted) and second on processing this information to get fuzzy classification rules.
 
 \begin{figure}[hb!]
 \centerline{\includegraphics[width=\hsize]{img/message}}
@@ -110,22 +113,26 @@ General intro
 \label{img:message}
 \end{figure}
 
-Problem
+Main contributions of this paper can be stated as follows: 
 
-Contribution
+\begin{itemize}
+	\item  formal models for fuzzy classification of linguistic web reports with linguistic text mining
+	\item  prototype implementation of an Internet application based on our fuzzy system
+	\item evaluation of experiments of the whole system
+\end{itemize}
 
-Related work
 
-more on text mining, information extraction, fuzzy internet applications, ...
 
-In \cite{biblio:YagerReformat08text} 
+Related work. There is a plenty of systems dealing with text mining and text classification, let us mention at least some. In \cite{biblio:ReYaLiOntoText08} authors use ontology modeling to enhance text identification. In \cite{biblio:CAP} authors use preprocessed data from National Automotive Sampling System and test various soft computing methods to modeling severity of injuries (some hybrid methods showed best performance). Methods of Information Retrieval (IR) are very numerous, with extraction mainly based on key word search and similarities. Connecting IR and text mining techniques with web information retrieval can be found in Chapter Opinion mining in the book of Bing Liu \cite{biblio:WebDataMining}. 
 
-Paper is organized as follows ...
+Our paper is organized as follows: In Chapter 2 we develop our models and methods and design the system, focusing on description of the linguistic analyzer, ILP, fuzzy ILP and several translations of fuzzy ILP to crisp ILP. In Chapter 3 we describe the system prototype and settings of our experiments, especially data preparation. In Chapter 4 we describe results of our experiments and provide comparison of used methods. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Models, methods, design of the system}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+General schema of our system is in Fig~\ref{img:schema}. We use our previously developed web information extraction tools based on third party linguistic analyser (dashed arrows). The classification is based on fuzzy ILP and its translation to several crisp ILP tasks. We assume that a small amount of learning data are annotated by a human.
 
 \begin{figure}[hb!]
 \centerline{\includegraphics[width=.7\hsize]{img/schema}}
@@ -133,9 +140,61 @@ Paper is organized as follows ...
 \label{img:schema}
 \end{figure}
 
-\subsection{Linguistic Analyser}
+\subsection{Linguistic Analyzer}
 
-Citace tectogrammatical structure \cite{biblio:MiBeAnnotationtectogrammatical2006}
+In this section we will briefly describe the linguistic tools that
+we have used to produce linguistic annotation of texts. 
+These tools are being developed in the Institute of Formal
+and Applied Linguistics in Prague, Czech Republic. They
+are publicly available – they have been published on a CDROM
+under the title PDT 2.0 \cite{biblio:PDT20_CD} (first five tools) and in
+\cite{biblio:KlTransformationBasedTectogrammatical2006} (Tectogrammatical analysis). These tools are used as a
+processing chain and at the end of the chain they produce
+tectogrammatical \cite{biblio:MiBeAnnotationtectogrammatical2006} dependency trees. 
+
+
+Tool 1. Segmentation and tokenization consists of tokenization
+(dividing the input text into words and punctuation)
+and segmentation (dividing a sequences of tokens
+into sentences).
+
+Tool 2. Morphological analysis assigns all possible lemmas
+and morphological tags to particular word forms (word
+occurrences) in the text.
+
+Tool 3. Morphological tagging consists in selecting a single
+pair lemma-tag from all possible alternatives assigned
+by the morphological analyzer.
+
+Tool 4. Collins’ parser – Czech adaptation. 
+Unlike the usual approaches to the description of
+English syntax, the Czech syntactic descriptions are
+dependency-based, which means, that every edge of
+a syntactic tree captures the relation of dependency
+between a governor and its dependent node. Collins’
+parser gives the most probable parse of a given input
+sentence.
+
+Tool 5. Analytical function assignment assigns a description
+(analytical function – in linguistic sense) to every edge
+in the syntactic (dependency) tree.
+
+Tool 6. Tectogrammatical analysis produces linguistic annotation
+at the tectogrammatical level, sometimes called
+“layer of deep syntax”. Such a tree can be seen on
+the See Fig~\ref{img:tree}. Annotation of a sentence at this layer
+is closer to meaning of the sentence than its syntactic
+annotation and thus information captured at the tectogrammatical
+layer is crucial for machine understanding
+of a natural language \cite{biblio:KlTransformationBasedTectogrammatical2006}.
+
+\subsection{Web Information Extraction}
+
+Having Web resource content analyzed by above linguistic tools, we have data stored in the form of tectogramatic trees. To achieve our objectives we have to extract information from this representation. Here we refer to our previous work \cite{biblio:DeVoLinguisticextraction2008,biblio:DeVoComputingaggregations2008, biblio:DeEcExperimentswith2008}. In these papers a long path of tools starting with web crawling and resulting with the extracted structured information is described. In Fig~\ref{img:tree} we can see nodes of tree were information about damage (8000 CZK) is located. We have used Inductive logic Programming to learn rules which are able to detect such nodes.  In this paper we will concentrate on the usage of such extracted information to be able to classify content. Let us note, that this extraction process requires some human assistance when annotating data.
+
+Note that our method is general and is not limited to Czech and can be used with any structured linguistic representation. 
+
+
 
 \begin{figure}[hb!]
 \centerline{\framebox{\includegraphics[width=\hsize]{img/tree}}}
@@ -158,13 +217,13 @@ Both places where induction has to be used have following requirements
 
 \begin{itemize}
 	\item data are/can be fuzzy
-	\item background knowledge is multirelational
+	\item background knowledge is multirelational (representation of tectogramatical trees)
 	\item classification is fuzzy
 \end{itemize}
 
-Having in mind these requirements we chose Fuzzy inductive logic programming. To make the paper readable we present bellow short description of ILP techniques.
+Having in mind these requirements we chose fuzzy inductive logic programming. To make the paper readable we present bellow short description of ILP techniques.
 
-In our presentation of Inductive Logic Programming (ILP) we follow the book of S. D\v zeroski and N. Lavra\v c \cite{dzeroski2001:relat_dm}. Citace ILP \cite{biblio:Muggleton94inductivelogic}
+In our presentation of Inductive Logic Programming (ILP) we follow \cite{dzeroski2001:relat_dm} and  \cite{biblio:Muggleton94inductivelogic}.
 
 Given is a set of examples $E=P\cup N$, where $P$ contains positive and $N$ negative examples, and a background knowledge $B$. The task is to find a hypothesis $H$ such that 
 
@@ -183,9 +242,9 @@ Main advantage of ILP is it's multirelational character, namely $B$ can reside i
 
 \subsection{Fuzzy and GAP induction}
 
-In our presentation of Inductive Logic Programming (ILP) we follow the Paper of T. Horvath and P. Vojtas \cite{biblio:FILP} about fuzzy inductive logic programming. Citace Fuzzy ILP \cite{biblio:FILP}
+In our presentation of fuzzy Inductive Logic Programming (fILP) we follow the paper of T. Horvath and P. Vojtas \cite{biblio:FILP} about fuzzy inductive logic programming.
 
-We use the approach of the fuzzy logic in narrow sense developped by J. Pavelka and P. Hajek. Formulas are of the form $\varphi, x$ ($\varphi$ is syntactically same as in the crisp case) are graded by a truth value $xin [0,1]$.
+We use the approach of the fuzzy logic in narrow sense developed by J. Pavelka \cite{biblio:Pavelka} and P. Hajek \cite{biblio:Hajek}. Formulas are of the form $\varphi, x$ ($\varphi$ is syntactically same as in the crisp case) are graded by a truth value $x\in [0,1]$.
 A structure ${\mathcal M}$ consist of domain $M$ and relations are interpreted fuzzy (we do not consider function symbols here). Evaluation $\left\|\varphi\right\|_{{\mathcal M}}$ of a formula $\varphi$ uses truth functions of many valued connectives (our logic is extensional and/or truth functional). Satisfaction is defined by
 $$
 {\mathcal M}\models_f (\varphi, x)\ iff\ \left\|\varphi\right\|_{{\mathcal M}}\ge x
@@ -195,42 +254,61 @@ $$
 Given is a fuzzy set of examples ${\mathcal E}:E\longrightarrow [0,1]$ and a fuzzy background knowledge ${\mathcal B}:B\longrightarrow [0,1]$. The task is to find a fuzzy hypothesis ${\mathcal H}:H\longrightarrow [0,1]$ such that 
 
 $$
-(\forall e,f\in dom(E))(\forall {\mathcal M})({\mathcal M}\models_f B\cup H)
+(\forall e,f\in E)(\forall {\mathcal M})({\mathcal M}\models_f {\mathcal B}\cup {\mathcal H})
 $$
 we have
 $$
-E(e)>E(f)\Rightarrow \left\|e\right\|_{{\mathcal M}}\ge \left\|f\right\|_{{\mathcal M}}.
+{\mathcal E}(e)>{\mathcal E}(f)\Rightarrow \left\|e\right\|_{{\mathcal M}}\ge \left\|f\right\|_{{\mathcal M}}.
 $$
 
 That is, it cannot happen that 
 $$
-E(e)>E(f) \wedge \left\|e\right\|_{{\mathcal M}}< \left\|f\right\|_{{\mathcal M}},
+{\mathcal E}(e)>{\mathcal E}(f) \wedge \left\|e\right\|_{{\mathcal M}}< \left\|f\right\|_{{\mathcal M}},
 $$
-or rephrased, if $E$ is rating $e$ higher than $f$, then it can not happen in a model of $B\cup H$ that $e$ is rated worse than $f$.
+or rephrased, if ${\mathcal E}$ is rating $e$ higher than $f$, then it can not happen in a model of ${\mathcal B}\cup {\mathcal H}$ that $e$ is rated worse than $f$.
 
-Typically, ${\mathcal E}$ consists of ground instances of the target predicate which are  classified in truth degrees - in our case degree of seriousness of an accident. $B$ typically consists of several fuzzy predicates (fuzzy relational tables) which describe properties of object which have to be classified - in our case fuzzy properties of accidents - degree od injury, degree of damage, .... Background knowledge can contain also some rules, so far only crisp rules are used. Hypothesis $H$ typically consists of a fuzzy logic program, which when added to $B$, prevents of misclassification (better can not be declared to be worse, nevertheless can be declared as having same degree (for more detailed discussion on this definition of fuzzy ILP we reffer to the paper \cite{biblio:FILP})). Moreover, in practise, we use GAP - Generalized Annotated Programs, so graded formulas wil lbe sometimes understood as annotated (with crisp connectives and more complex annotation of head of rules.)
+Typically, ${\mathcal E}$ consists of ground instances of the target predicate which are  classified in truth degrees - in our case degree of seriousness of an accident. ${\mathcal B}$ typically consists of several fuzzy predicates (fuzzy relational tables) which describe properties of object which have to be classified - in our case fuzzy properties of accidents - degree of injury, degree of damage, .... Background knowledge can contain also some rules, so far only crisp rules are used. Hypothesis ${\mathcal H}$ typically consists of a fuzzy logic program, which when added to ${\mathcal B}$, prevents of misclassification (better can not be declared to be worse, nevertheless can be declared as having same degree (for more detailed discussion on this definition of fuzzy ILP we refer to the paper \cite{biblio:FILP})). Moreover, in practice, we use GAP - Generalized Annotated Programs, so graded formulas will be sometimes understood as annotated (with crisp connectives and more complex annotation of head of rules). This is possible, because in \cite{biblio:KLV} we have shown that (some extension of) fuzzy logic programming is equivalent to (some restriction of) generalized annotated programs. 
 
-\subsection{Translation of fuzzyILP task to several classical ILP tasks}
+\subsection{Translation of fuzzy ILP task to several classical ILP tasks}
 
 As far as there is no implementation of fuzzy (GAP) ILP, we have to use a classical ILP system. Fortunately a fuzzy ILP task can be translated to several crisp ILP tasks (subject to some rounding and using finite set of truth values).
 
-Assume, our fuzzy sets take values for a finite set of truth values $\{0,1\}\subseteq T\subseteq [0,1]$. For each predicate $p(x)$ in $B$ we add an additional attribute for truth value $p(x,t)$. We construct a crisp background knowledge ${\mathcal B}^{mon}_T$ by a process called monotonization, as follows:
+Assume, our fuzzy sets take values for a finite set of truth values $\{0,1\}\subseteq T\subseteq [0,1]$. For each predicate $p(x)$ in $B$ we add an additional attribute for truth value $p(x,t)$. We construct two crisp background knowledge sets  ${\mathcal B}^{raw}_T$ and ${\mathcal B}^{mon}_T$  as follows:
 
-If ${\mathcal B}(p(x))=t\in T$, then for all $t'\in T, t'\le t$ we add $p(x,t')\in {\mathcal B}^{mon}_T$.
+First is a direct coding of the fuzzy value by an additional attribute:
+
+If ${\mathcal B}(p(x))=t\in T$, then for we add $p(x,t')\in {B}^{raw}_T$.
+
+Second is obtained by a process called monotonization:
+
+If ${\mathcal B}(p(x))=t\in T$, then for all $t'\in T, t'\le t$ we add $p(x,t')\in {B}^{mon}_T$.
+
+Also example sets are constructed in two ways.
 
 For all $t\in T$ we create a crisp example set $E_t=P_t\cup N_t$, where
 $$
-e\in P_t \ \ iff \ \ {\mathcal E}(e)\ge t
+e\in P_t \ \ iff \ \ {\mathcal E}(e)= t
 $$
-and $N_t$ is the rest.
+and $N_t$ is the rest of $E$.
 
-For each $t\in T$ we create a crisp ILP task $E_t, {\mathcal B}^{mon}_T$ and get a hypothesis $H_t$ guaranteeing examples of degree at least $t$. Note that variable boundings ib $B$ have no boundings on truth value attribute, which was added to each predicate, and hence there are no variable boundings in $H$ on truth value attribute. To predicate in $E$ we did not add the additional truth value attribute
 
-Let us assume $C$ is the target predicate in the domain of ${\mathcal E}$. We define ${\mathcal H}$ with domain consisting of one GAP rule 
+For all $t\in T$ we create a crisp example set $E_{\ge t}=P_{\ge t}\cup N_{< t}$, where
+$$
+e\in P_{\ge t} \ \ iff \ \ {\mathcal E}(e)\ge t
+$$
+and $N_t$ is the rest of $E$.
+
+These two translation create two ILP tasks, first is purely crisp and second can be understood (and translated back to) fILP.
+
+First \textit{raw ILP task} is for each $t\in T$ given by $E_t$ and $B^{raw}_{T}$, as a result we get a set of hypothesis $H_t$.
+
+Second, for each $t\in T$ we create a crisp ILP task $E_{\ge t}, {B}^{mon}_T$ and get a hypothesis $H_{\ge t}$ guaranteeing examples of degree at least $t$. Note that variable boundings in $B$ have no boundings on truth value attribute, which was added to each predicate, and hence there are no variable boundings in $H_{\ge t}$ on truth value attribute. To predicates in $E$ we did not add the additional truth value attribute
+
+Now we sketch the translation of second ILP task to GAP (fILP) rules. Let us assume $C$ is the target predicate in the domain of ${\mathcal E}$. We define ${\mathcal H}$ with domain consisting of one GAP rule 
 $$
 C(y):u(x_1,\dots,x_m)\leftarrow B_1:x_1 \&\dots\& B_n:x_m,
 $$
-here $B_1:x_1 \&\dots\& B_n:x_m$ is enumaration of all predicates in $B$.
+here $B_1:x_1 \&\dots\& B_n:x_m$ is enumeration of all predicates in $B$.
 
 Assume $B_1(y_1,t_1),\dots,B_n(y_n,t_n)$ are some predicates in $B$ (for simplicity enumerated from 1 to $n\le m$). Then for each rule 
 $$
@@ -246,7 +324,7 @@ We claim, that if all $H_t$ were correctly learned by an crisp ILP system then f
 $$
 C(y):u(x_1,\dots,x_m)\leftarrow B_1:x_1 \&\dots\& B_n:x_m,
 $$
-is a correct solution to fuzzy ILP task given by ${\mathcal E}$ and ${\mathcal B}$. Our presentation is here a little bit simplified and we freely switch betwee fuzzy and GAP programs, which are know to be equivalent {\bf citace Krajci, Lencses, Vojtas FSS clanek}
+is a correct solution to fuzzy ILP task given by ${\mathcal E}$ and ${\mathcal B}$. Our presentation is here a little bit simplified and we freely switch between fuzzy and GAP programs, which are know to be equivalent, see  \cite{biblio:KLV}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The system prototype and Setting of our experiment}
@@ -254,9 +332,6 @@ is a correct solution to fuzzy ILP task given by ${\mathcal E}$ and ${\mathcal B
 The main experiment presented in this paper leads to the seriousness classification of an accident presented on a web report. Our long term goal is extraction of semantic information from web reports. And seriousness classification is one of possible utilization of the extracted semantic information. We use web reports of fire departments of several regions of the Czech Republic. These reports are written in Czech language and can be accessed through the web of General Directorate of the Fire and Rescue Service of the Czech Republic\footnote{\url{http://www.hzscr.cz}}. These reports are rich in information, e.g. where and when an traffic accident occurred, which units helped, how much time it took them to show up on the place of accident, how many people were injured, killed etc.
 
 For the present experiment we have selected a collection of 50 web reports. We have identified several features presented in these reports and manually extracted corresponding values. This will be described in more detail in section \ref{sec:features}. To each report we have also assigned a value of overall ranking of seriousness of presented accident, which is the target of the classification.
-
-\textbf{Máme dvì možnosti -- buï odkázat na naše pøedchozí èlánky o extrakci informací nebo se pokusit sem nìco dát...}
-
 
 There are two objectives to do. Fist is the web information extraction, a long path starting with web crawling and resulting with the extracted structured information. Second is the seriousness classification, which utilizes the extracted information. We have made much work on the first (see e.g. \cite{biblio:DeVoLinguisticextraction2008,biblio:DeVoComputingaggregations2008, biblio:DeEcExperimentswith2008}), in this paper we will concentrate on the second.
 
@@ -278,6 +353,7 @@ We have compared results of the two approaches (fuzzy and classical) and we coul
 \subsection{Features of accidents} \label{sec:features}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
 \begin{figure}
 \centerline{\includegraphics[width=.7\hsize]{img/attributes_description}}
 \caption{Characteristics of accident attributes.}
@@ -285,7 +361,7 @@ We have compared results of the two approaches (fuzzy and classical) and we coul
 \end{figure}
 
 Figure \ref{img:attributes_description} summarizes all features (or attributes) that we have obtained from accident reports. Except the attribute \verb+type+ (type of an accident -- \verb+fire+, \verb+car_accident+ and \verb+other+) all the attributes are numerical and so monotonizable. In some cases value of some attribute is unknown. We have decided to make evidence of this and keep the values \verb+unknown+ in a knowledge base. Short explanation of each attribute follows.
-
+\newline
 \verb+size+ is a file size of text part of a report.\\
 	\verb+damage+ is an amount (in CZK -- Czech Crowns) of summarized damage arisen during an accident.\\
 	\verb+dur_minutes+ is time (in minutes) taken to handle an accident.\\
@@ -299,48 +375,61 @@ Figure \ref{img:attributes_description} summarizes all features (or attributes) 
 \subsection{Seriousness ranking} \label{sec:seriousness}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
 \begin{figure}
 \centerline{\includegraphics[width=\hsize]{img/ranking_histogram}}
 \caption{Frequency histogram of accident ranking.}
 \label{img:ranking_histogram}
 \end{figure}
 
-Vales of overall seriousness ranking attribute were stated from ``general impression'' from report's texts with respect to the particular attributes (Fig~\ref{img:attributes_description}). Values of seriousness ranking have evolved to 14 distinct values in range form 0.5 to 8. Histogram with frequencies of all the values is on the Figure~\ref{img:ranking_histogram}.
+Values of overall seriousness ranking attribute were stated from ``general impression'' from report's texts with respect to the particular attributes (Fig~\ref{img:attributes_description}). Values of seriousness ranking have evolved to 14 distinct values in range form 0.5 to 8. Histogram with frequencies of all the values is on the Figure~\ref{img:ranking_histogram}.
 
 We have divided the values into four approximately equipotent groups (shown on the Fig.~\ref{img:ranking_histogram}) and learned logic rules for each group separately.
 
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Results} \label{sec:results}
+\subsection{Data transformation} \label{sec:data_transformation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+As already described in previous section, we have two possibilities to organize crisp ILP tasks, one with raw data and second with monotonized data. For this we have to translate extracted data. 
 
-\begin{figure}
-\centerline{\includegraphics[width=0.8\hsize]{img/Evaluation}}
-\caption{Evaluation results}
-\label{img:evaluation}
-\end{figure}
-
+For the construction of the $E_t$ example set in our application we encode it in the predicate \texttt{serious\_t}, see Fig~\ref{img:examples_nonmonot}.
 
 
 \begin{figure}
-\centerline{\includegraphics[width=.8\hsize]{img/monot2nomon}}
-\caption{Conversion of results: monotone $\rightarrow$ crisp.}
-\label{img:monot2nomon}
+\centerline{\includegraphics[width=.9\hsize]{img/examples_nonmonot}}
+\caption{Crisp learning examples.}
+\label{img:examples_nonmonot}
 \end{figure}
 
+For the construction of the $E_{\ge t}$ example set in our application we encode it in the predicate 
+\texttt{serious\_atl\_t}, see Fig~\ref{img:examples_monot}.
+
+
+
 \begin{figure}
-\centerline{\includegraphics[width=.8\hsize]{img/nomon2monot}}
-\caption{Conversion of results: crisp $\rightarrow$ monotone.}
-\label{img:nomon2monot}
+\centerline{\includegraphics[width=\hsize]{img/examples_monot}}
+\caption{Monotonised learning examples.}
+\label{img:examples_monot}
 \end{figure}
+
+For the construction of monotonized set of background knowledge $B^{mon}_T$ we use rules, here illustrated on predicates \texttt{damage} and \texttt{damage\_atl}, see Fig~\ref{img:attribute_monotonisation}. Here, first rules deals with \texttt{NULL} values and the second constructs the translation.
+
 
 \begin{figure}
 \centerline{\includegraphics[width=.8\hsize]{img/attribute_monotonisation}}
 \caption{Monotonization of attributes (damage $\rightarrow$ damage\_atl).}
 \label{img:attribute_monotonisation}
 \end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Results} \label{sec:results}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\subsection{Experiments with $E_t$ and $B^{raw}_{T}$}
+
+Results of experiments with $E_t$ and $B^{raw}_{T}$ gave following rule set, see Fig~\ref{img:rules_nonmonot}.
 
 
 
@@ -350,36 +439,64 @@ We have divided the values into four approximately equipotent groups (shown on t
 \label{img:rules_nonmonot}
 \end{figure}
 
+Evaluation of learning is depicted in the red area of Fig~\ref{img:evaluation}.
+
+\subsection{Experiments $E_{\ge t}, {B}^{mon}_T$}
+
+Results of experiments with $E_{\ge t}, {B}^{mon}_T$ gave following rule set, see Fig~\ref{img:rules_monot}.
+
+
+
+
 \begin{figure}
 \centerline{\includegraphics[width=\hsize]{img/rules_monot}}
 \caption{Monotonised hypothesis}
 \label{img:rules_monot}
 \end{figure}
 
+Evaluation of learning is depicted in the green area of Fig~\ref{img:evaluation}.
+
+\subsection{Evaluation and comparison }
+
+We wanted to compare raw and monotonized learning tasks. As they run on different example sets we had translate results of one learning (rules with head \texttt{serious\_t}) to results of second learning (rules with head \texttt{serious\_atl\_t}). Logic programming translation rules are depicted on Fig~\ref{img:nomon2monot} and 
+
+
+
 \begin{figure}
-\centerline{\includegraphics[width=.9\hsize]{img/examples_nonmonot}}
-\caption{Crisp learning examples.}
-\label{img:examples_nonmonot}
+\centerline{\includegraphics[width=.8\hsize]{img/nomon2monot}}
+\caption{Conversion of results: crisp $\rightarrow$ monotone.}
+\label{img:nomon2monot}
 \end{figure}
 
 
+
+
 \begin{figure}
-\centerline{\includegraphics[width=\hsize]{img/examples_monot}}
-\caption{Monotonised learning examples.}
-\label{img:examples_monot}
+\centerline{\includegraphics[width=.8\hsize]{img/monot2nomon}}
+\caption{Conversion of results: monotone $\rightarrow$ crisp.}
+\label{img:monot2nomon}
 \end{figure}
 
+Then the comparison of both learnings is possible, see white areas of Fig~\ref{img:evaluation}.
 
 
-See fig~\ref{img:evaluation}.
 
+\begin{figure}
+\centerline{\includegraphics[width=0.8\hsize]{img/Evaluation}}
+\caption{Evaluation results}
+\label{img:evaluation}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-We have presented a proposal of and experiments with a system for semantic computing of information from Czech text on Web pages. Our system relies on linguistic annotation tools from PDT \cite{biblio:PDT20_CD} and the tree querying tool Netgraph \cite{biblio:MiNetgraphA2006}. Our contributions are an experimental chain of tools that enables semantic computing. In the third phase -- data extraction -- we formulate an inductive logic programming task over linguistically annotated data. Finally we describe transformation of these data to an ontology. Our initial experiments verified used methods and tools.
+In this paper we have presented a fuzzy system which aimed to increase automation of fuzzy classification of textual web reports. Our approach was based on usage of third party linguistic analyzer, our previous work on web information extraction and fuzzy inductive logic programming. Main contributions are formal models, prototype implementation and evaluation of experiments of the whole system. 
 
-In future work we would like to test our method on another languages and compare our results with similar solutions. Our work is very close to domain dependent information extraction such as relation and event extraction. These tasks were considered as Semantic Evaluation in the first place in the MUC-6 conference 1995 \cite{biblio:MUC6}. Contemporary results of the ACE competition\footnote{\url{http://www.nist.gov/speech/tests/ace/}} show the difficulty of these problems, which are very close to ours.
+Experiments have shown better results of fuzzy approach. 
+
+Use of ILP was necessary for multirelational character of extracted data (relational representation of XML like form of PDT2.0 tectogramatical trees). 
+
+System need user assistance: of a skilled user in annotating data for extraction and an unskilled user for classification of a small training example set. This feature is especially important, because in Internet application, we cannot expect an unskilled user to classify a big number of examples 
 
 \section*{Acknowledgment}
 This work was partially supported by Czech projects IS-1ET100300517, GACR-201/09/H057 and MSM-0021620838.
