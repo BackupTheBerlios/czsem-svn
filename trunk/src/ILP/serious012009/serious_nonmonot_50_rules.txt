@@ -1,0 +1,16 @@
+serious_0(A) :-   dur_minutes(A,8).
+serious_0(A) :-   type(A,fire), pipes(A,0).
+serious_0(A) :-   fatalities(A,0), pipes(A,1), lather(A,0).
+serious_1(A) :-   amateur_units(A,1).
+serious_1(A) :-   amateur_units(A,0), pipes(A,2), aqualung(A,1).
+serious_1(A) :-   damage(A,300000).
+serious_1(A) :-   damage(A,unknown), type(A,fire), profesional_units(A,1).
+serious_1(A) :-   dur_minutes(A,unknown), fatalities(A,0), cars(A,1).
+serious_2(A) :-   lather(A,unknown).
+serious_2(A) :-   lather(A,0), aqualung(A,1), fan(A,0).
+serious_2(A) :-   amateur_units(A,2), profesional_units(A,2).
+serious_2(A) :-   dur_minutes(A,unknown), injuries(A,2).
+serious_3(A) :-   fatalities(A,1).
+serious_3(A) :-   fatalities(A,2).
+serious_3(A) :-   injuries(A,2), cars(A,2).
+serious_3(A) :-   pipes(A,4).

@@ -1,0 +1,18 @@
+serious_atleast_0(A).
+serious_atleast_1(A) :-   injuries_atleast(A,1).
+serious_atleast_1(A) :-   lather_atleast(A,1).
+serious_atleast_1(A) :-   pipes_atleast(A,3).
+serious_atleast_1(A) :-   dur_minutes_atleast(A,unknown).
+serious_atleast_1(A) :-   size_atleast(A,764), pipes_atleast(A,1).
+serious_atleast_1(A) :-   damage_atleast(A,8000), amateur_units_atleast(A,3).
+serious_atleast_1(A) :-   type_atleast(A,car_accident).
+serious_atleast_1(A) :-   pipes_atleast(A,unknown), randomized_order_atleast(A,35).
+serious_atleast_2(A) :-   pipes_atleast(A,3), aqualung_atleast(A,1).
+serious_atleast_2(A) :-   type_atleast(A,car_accident), cars_atleast(A,2), profesional_units_atleast(A,2).
+serious_atleast_2(A) :-   injuries_atleast(A,1), profesional_units_atleast(A,3), fan_atleast(A,0).
+serious_atleast_2(A) :-   type_atleast(A,other), aqualung_atleast(A,1).
+serious_atleast_2(A) :-   dur_minutes_atleast(A,59), pipes_atleast(A,3).
+serious_atleast_2(A) :-   injuries_atleast(A,2), cars_atleast(A,2).
+serious_atleast_2(A) :-   fatalities_atleast(A,1).
+serious_atleast_3(A) :-   fatalities_atleast(A,1).
+serious_atleast_3(A) :-   dur_minutes_atleast(A,unknown), pipes_atleast(A,3).

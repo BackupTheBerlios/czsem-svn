@@ -1,0 +1,14 @@
+serious_atleast_0(A) :-   type(A,other), injuries(A,0).
+serious_atleast_0(A) :-   type(A,fire), cars(A,1), lather(A,0).
+serious_atleast_1(A) :-   amateur_units(A,1).
+serious_atleast_1(A) :-   damage(A,unknown), type(A,car_accident), fatalities(A,0).
+serious_atleast_2(A) :-   pipes(A,3).
+serious_atleast_2(A) :-   pipes(A,unknown).
+serious_atleast_3(A) :-   dur_minutes(A,unknown), cars(A,0), fan(A,0).
+serious_atleast_3(A) :-   fatalities(A,1).
+
+serious_atleast_1(id_jihomoravsky51460).
+serious_atleast_1(id_jihomoravsky48793).
+serious_atleast_2(id_jihomoravsky55918).
+serious_atleast_3(id_jihomoravsky56184).
+serious_atleast_3(id_jihomoravsky48880).

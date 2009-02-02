@@ -1,0 +1,30 @@
+%negative
+
+
+
+
+
+% Hodnotu uchránìného tahaèe s nákladem dlažby pak vyèíslil na 300 tisíc korun. 
+% Z toho na dva miliony vyèíslil hodnotu znièeného drtièe a mlýna na zpracování odpadù, a na šest milionù korun hodnotu znièené stavební èásti objektu a uskladnìného materiálu. 
+% Z toho na dva miliony vyèíslil hodnotu znièeného drtièe a mlýna na zpracování odpadù, a na šest milionù korun hodnotu znièené stavební èásti objektu a uskladnìného materiálu. 
+relevant_node(qT_jihomoravsky48793_txt_001_p1s1d10).
+relevant_node(qT_jihomoravsky48793_txt_001_p1s3d8).
+relevant_node(qT_jihomoravsky50788_txt_001_p1s4d4).
+relevant_node(qT_jihomoravsky50788_txt_001_p4s2d16). % šest
+relevant_node(qT_jihomoravsky50788_txt_001_p4s2d4). % dva
+relevant_node(qT_jihomoravsky51460_txt_001_p2s5d2).
+relevant_node(qT_jihomoravsky51460_txt_001_p2s5d20).
+relevant_node(qT_jihomoravsky51460_txt_001_p3s2d10). % 300
+relevant_node(qT_jihomoravsky55788_txt_001_p1s1d0).
+relevant_node(qT_jihomoravsky55788_txt_001_p1s1d1_1).
+relevant_node(qT_jihomoravsky55788_txt_001_p1s1d11).
+relevant_node(qT_jihomoravsky55788_txt_001_p1s1d2).
+relevant_node(qT_jihomoravsky55788_txt_001_p1s1d3_1).
+relevant_node(qT_jihomoravsky55788_txt_001_p1s1d4_2).
+relevant_node(qT_jihomoravsky55788_txt_001_p1s1d5).
+relevant_node(qT_jihomoravsky55788_txt_001_p1s1d7).
+relevant_node(qT_jihomoravsky55788_txt_001_p1s1d8).
+relevant_node(qT_jihomoravsky55918_txt_001_p4s2d6).
+
+relevant_node(qT_jihomoravsky52147_txt_001_p2s1d13). %padesatilitrovy
+relevant_node(qT_jihomoravsky56177_txt_001_p3s2d12). %uvolnìný
