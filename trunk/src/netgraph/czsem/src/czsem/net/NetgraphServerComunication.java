@@ -78,7 +78,7 @@ public class NetgraphServerComunication extends NetgraphProtocolConnection {
 	public final static String CLIENT_VER = "1.91 (12.11.2007)";
     public final static String META_ATTR_QUERY_MATCH = "_querymatch";
 
-	
+	private int time_out = 5;
 	
     private NGTreeHead globalHead = null;
 	
@@ -128,6 +128,14 @@ public class NetgraphServerComunication extends NetgraphProtocolConnection {
 		return nci;
 	}
 	
+	public int getTimeOut() {
+		return time_out;
+	}
+
+	public void setTimeOut(int time_out) {
+		this.time_out = time_out;
+	}
+
 	/**
 	 * Connects and logins to the server.
 	 * @param user - user name
@@ -265,7 +273,7 @@ public class NetgraphServerComunication extends NetgraphProtocolConnection {
 				
 			if (msg_result == 'E'	//end of matching trees 
 				|| msg_result == 'G'
-				|| sleep_iterator > 5) //end of trees in current context/file
+				|| sleep_iterator > getTimeOut()) //end of trees in current context/file
 			{
 				//debug print
 				System.err.println((char) msg_result);
@@ -277,7 +285,7 @@ public class NetgraphServerComunication extends NetgraphProtocolConnection {
 			
 
 			try {
-				Thread.sleep(200);
+				Thread.sleep(300);
 			} catch (InterruptedException e) {}
 		}
 		
