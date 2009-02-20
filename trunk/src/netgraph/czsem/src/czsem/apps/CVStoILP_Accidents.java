@@ -215,12 +215,10 @@ public class CVStoILP_Accidents {
 	
 	public static class MonotonicExampleDetector implements PositiveExampleDetector
 	{
-		@Override
 		public boolean isPositiveExample(int val, int min, int max) {
 			return val >= min;	//monotic 
 		}
 
-		@Override
 		public boolean writeAtleastSuffixInDeterminations() {
 			return true;
 		}		
@@ -228,12 +226,10 @@ public class CVStoILP_Accidents {
 
 	public static class NonMonotonicExampleDetector implements PositiveExampleDetector
 	{
-		@Override
 		public boolean isPositiveExample(int val, int min, int max) {
 			return (val >= min) && (val < max);	//non_monotic 
 		}
 
-		@Override
 		public boolean writeAtleastSuffixInDeterminations() {
 			return false;
 		}		

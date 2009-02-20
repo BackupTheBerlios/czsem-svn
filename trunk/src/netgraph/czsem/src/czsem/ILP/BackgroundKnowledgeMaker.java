@@ -151,7 +151,6 @@ relevant_node(qT_jihomoravsky48749_txt_001_p2s3d10).
 		}					
 	}
 	
-	@Override
 	public void processSingleTreeResult(LoadTreeResult tree_result)
 			throws Exception {
 		
@@ -191,13 +190,11 @@ relevant_node(qT_jihomoravsky48749_txt_001_p2s3d10).
 		m.performOutput();
 	}
 
-	@Override
 	public void startProcessing() throws Exception {
 		last_filename = "";
 		initAttributeValuesBufeer();		
 	}
 	
-	@Override
 	public void endProcessing(LoadTreeResult last_result) throws Exception {
 		
 		for (int a=0; a< attribute_values_bufeer.length; a++) {

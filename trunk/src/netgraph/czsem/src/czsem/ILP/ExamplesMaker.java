@@ -15,10 +15,8 @@ public class ExamplesMaker extends DataMaker {
 
 	public ExamplesMaker() {};
 
-	@Override
 	public void endProcessing(LoadTreeResult last_result) throws Exception {}
 
-	@Override
 	public void processSingleTreeResult(LoadTreeResult tree_result)
 			throws Exception {
 		
@@ -33,7 +31,6 @@ public class ExamplesMaker extends DataMaker {
 						s_damage_lemma.getFirstMatch(tree_result).matching_node_index));
 	}
 
-	@Override
 	public void startProcessing() throws Exception {}
 
 	
