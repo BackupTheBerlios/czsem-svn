@@ -2,6 +2,9 @@ package czsem.gate;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 
 import gate.Annotation;
 import gate.AnnotationSet;
@@ -10,11 +13,13 @@ public class SentenceFSWriter
 {
 	private AnnotationSet annotations;
 	private AnnotationSet dependeces;
+	private List<String> attributes;
 	
 	private PrintStream out = System.out;
 	
-	public SentenceFSWriter(AnnotationSet sentence_annotations, PrintStream out)
+	public SentenceFSWriter(AnnotationSet sentence_annotations, PrintStream out, List<String> attributes)
 	{
+		this.attributes = attributes;
 		this.out = out;		
 		this.annotations = sentence_annotations;
 		dependeces = annotations.get("Dependency");		
@@ -30,6 +35,25 @@ public class SentenceFSWriter
 		return ret;
 	}
 
+	
+	/**
+	 * Adds the feature "ord", which contains the order of given token in a sentence. 
+	 */
+	private void numberSentenceTokens()
+	{		
+		Annotation [] tokens = annotations.get("Token").toArray(new Annotation[0]);		
+					
+		Arrays.sort(tokens, new Comparator<Annotation>() {
+			public int compare(Annotation a1, Annotation a2) {
+				return  a1.getId().compareTo(a2.getId());
+		}});
+		
+		int ord = 0;
+		for (Annotation a : tokens)
+		{
+			a.getFeatures().put("ord", ord++);
+		}
+	}
 	
 	private int findRoot()
 	{
@@ -82,18 +106,32 @@ public class SentenceFSWriter
 		if (node == null) return;
 		
 		out.print('[');
-		out.print(node_id);
-		out.print(',');		
-		out.print(kind_attr);		
-		out.print(',');		
-		out.print(node.getFeatures().get("string"));
+		for (int a=0; ;)
+		{
+			switch (a) {
+			case FSFileWriter.DEPENDECY_INDEX:
+				out.print(kind_attr);						
+				break;
+			case FSFileWriter.ID_INDEX:
+				out.print(node_id);
+				break;
+			default:
+				out.print(node.getFeatures().get(attributes.get(a)));
+				break;
+			}
+			
+			if (++a >= attributes.size()) break;
+			out.print(',');					
+		}
 		out.print(']');
-		
+				
 		printCildren(node_id);
 	}
 
 	public void printTree()
 	{
+		numberSentenceTokens();
+		
 		printNode(findRoot(), "root");
 		
 		out.println();

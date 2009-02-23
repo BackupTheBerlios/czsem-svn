@@ -6,88 +6,76 @@ package czsem.gate;
 import gate.*;
 import gate.corpora.DocumentImpl;
 import gate.creole.AbstractLanguageAnalyser;
+import gate.creole.AbstractResource;
+import gate.creole.ExecutionException;
+import gate.creole.metadata.*;
 import gate.util.GateException;
-import gate.util.Out;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 /**
  * @author dedek
  *
  */
+@CreoleResource(name = "czsem FSExporter", comment = "Exports given corpus to Feature Structure Corpus (FS files)")
 public class FSExporter extends AbstractLanguageAnalyser implements ProcessingResource, LanguageAnalyser
 {
 	private static final long serialVersionUID = -6562545464590354499L;
 	
-	private Document documnet = null;
+	private URL outputDirectory = null;
+	private List<String> additionalAttributes = null;
 
 	public FSExporter() {
 	}
 	
-	public void execute()
+	
+	public void execute() throws ExecutionException
 	{
-		Out.println(document.getAnnotations().size());		
-		System.err.println(document);		
+		StringBuilder sb = new StringBuilder();
+		sb.append(outputDirectory.getFile());
+		sb.append('/');
+		sb.append(((AbstractResource) document).getName());
+		sb.append(".fs");
+		
+		System.out.print("Writing: ");
+		System.out.println(sb.toString());
+		
+		try {
+			FSFileWriter fsw = new FSFileWriter(sb.toString());
+			fsw.PrintAll(document.getAnnotations(), additionalAttributes);
+			fsw.close();
+		} catch (FileNotFoundException e) {
+			throw new ExecutionException(e);
+		}
 	}
 
-	@SuppressWarnings("unchecked")
-	public static int[] decodeEdge(Annotation a)
-	{
-		int [] ret = new int[2];
-		ArrayList<Integer> list = (ArrayList<Integer>) a.getFeatures().get("args");
-		ret[0] = list.get(0);
-		ret[1] = list.get(1);
-		return ret;
-	}
-	
-	public static void printChilderen(AnnotationSet dependeces, int father_id)
-	{
-		System.out.print('{');
-		for (Annotation dep : dependeces)
-		{
-			int [] edge = decodeEdge(dep);
-			if (edge[0] == father_id)
-			{
-				System.out.print(edge[1]);
-				System.out.print(',');
-			}
-		}		
-		System.out.print('}');
+	@RunTime
+	@CreoleParameter(defaultValue="file:/C:/WorkSpace/czSem/UNIX_copy/netgraph_server/corpus/en_pok")
+	public void setOutputDirectory(URL outputDirectory) {
+		this.outputDirectory = outputDirectory;
 	}
 
-	public static int findRoot(AnnotationSet dependeces)
-	{
-		if (dependeces.size() <= 0) return -1;			
-		
-		Annotation a = (Annotation) dependeces.iterator().next();
-		
-		int ret = decodeEdge(a)[0];
-		int new_ret;
-		
-		for (;;) {		
-			new_ret = -1;
-			for (Annotation dep : dependeces)
-			{
-				int [] edge = decodeEdge(dep);
-				if (edge[1] == ret)
-				{
-					new_ret = edge[0];
-					break;				
-				}
-			}
-			
-			if (new_ret == -1) break;
-			
-			ret = new_ret;			
-		} 
-		
-		return ret;	
+	public URL getOutputDirectory() {
+		return outputDirectory;
 	}
-	
+
+	@RunTime
+	@Optional
+	@CreoleParameter(comment="Names of annotation attributes/features propagated to the FS output", defaultValue="category;orth")
+	public void setAdditionalAttributes(List<String> additionalAttributes) {
+		this.additionalAttributes = additionalAttributes;
+	}
+
+	public List<String> getAdditionalAttributes() {
+		return additionalAttributes;
+	}
+
 	
 	public static void main(String[] args) throws IOException, GateException
 	{		
@@ -118,46 +106,8 @@ public class FSExporter extends AbstractLanguageAnalyser implements ProcessingRe
 //		FSFileWriter fsw = new FSFileWriter("C:\\WorkSpace\\czSem\\UNIX_copy\\netgraph_server\\corpus\\en_pok\\narative.fs");
 		FSFileWriter fsw = new FSFileWriter();
 		
-		fsw.PrintAll(as);
+		String [] addit = {"category"};
 		
-
-/*
-			for (Annotation token : sentence_set)
-			{
-				System.out.print(token.getFeatures());
-				System.out.println(' ');
-			}						
-/**				
-			AnnotationSet deps = sentence_set.get("Dependency");
-			int root = findRoot(deps);
-			System.out.print(root);
-			printChilderen(deps, root);
-//			System.out.print(' ');
-//			System.out.print(sentence);
-			System.out.println("------");
-**/			
-		
-/**		
-		for (Annotation annot : doc.getAnnotations().get("Dependency", Factory.newFeatureMap())) {
-			System.out.print(annot.getFeatures());
-			System.out.println(annot.getType());			
-		}
-/**/		
-			      
-
-		
-//		Factory.createResource("", "", "", "");
-		
-//		Object o = PersistenceManager.loadObjectFromFile(new File("C:\\WorkSpace\\GATE\\Store"));
-//		System.out.println(o);		
+		fsw.PrintAll(as, Arrays.asList(addit));
 	}
-
-	public Document getDocumnet() {
-		return documnet;
-	}
-
-	public void setDocumnet(Document documnet) {
-		this.documnet = documnet;
-	}
-
 }
