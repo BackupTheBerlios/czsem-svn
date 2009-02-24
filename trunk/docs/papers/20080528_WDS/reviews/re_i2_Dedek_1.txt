@@ -1,0 +1,73 @@
+Review on the paper by Dedek
+
+The paper refers on the author's information extraction experiment in the
+accident domain.
+
+> 1) Are there new scientific results or ideas or is the review
+comprehensive ?
+
+The paper is innovative in the sense of using the linguistic tools
+originally developed for PDT in a different context, namely that of
+application-oriented information extraction.
+
+> 2) Are the results well described and documented ?
+
+More details about the obtained results should be supplied. First, the
+author only mentions the number of matching sentences and the number of
+values for node number 5. How about other nodes. Second, at least a rough
+estimate of extraction accuracy should be given. Ideally, it should be
+compared to some baseline (such as, for the numbers, extracting all
+numerals from the text...).
+
+> 3) Are the figures clear and readable (when sized for the publication) ?
+
+They are fine.
+
+> 4) Are all references in the article listed in the reference list ?
+
+It seems so.
+
+> 5) Is the abstract comprehensible, accurate, and summarizes the contents
+of the paper ?
+
+Acceptable.
+
+> 6) Does the author give proper credit to related work ?
+
+This is a weaker point. The author should make a solid literature review so
+as to find if they have been (which is quite probable) some analogous
+approaches in using deeper NLP (such as dependency trees) for information
+extraction from English. As the application domain is that of accidents, I
+would also perhaps expect a remark on the Message Understanding Conference,
+where this kind of domains was notoriously addressed.
+
+> 7) Comments and notices.
+
+'Linguistic annotators' - you use the term 'annotators' for automated
+tools, which may be misleading; it is typically used for humans.
+
+An interesting issue is that of semantic interpretation; for example, it is
+likely that a real ontology would containt a taxonomy of person and
+incident concepts, to which the extracted values would have to be mapped
+(i.e. not just carrying over the value of the data property participantType
+etc.).
+
+'domain-specific word-net' - I doubt wordnets in the usual sense can be
+domain-specific, but I may be wrong in that.
+
+In Fig. 2 the last rectangle should perhaps be labelled 'Semantic data' or
+so, as the ontology is not the outcome of the process.
+
+English is readable but could be improved in many places. Note for example
+the lacking articles or improper use of comma before 'that'.
+
+In general, I see the paper as acceptable to a student workshop, with minor
+corrections as noted above.
+
+-------------------------------------------------------------
+Authors' reply:
+
+Thank you very much. I really appreciate these comments.
+Evaluation and comparison of the method are the most important tasks in my future work.
+Giving at least an initial baseline for the results is very good idea.
+Thanks for the remark of MUC. I'm going to study these papers soon.      

@@ -1,0 +1,37 @@
+Review on the paper by Dedek
+
+1) Are there new scientific results or ideas or is the review comprehensive ?
+
+I think they are no really new results or ideas; the contribution of the 
+paper is the adroit combination of existing tools and ideas.
+
+2) Are the results well described and documented ?
+
+Yes, they are, but an evaluation of the (even initial) results is missing.
+
+3) Are the figures clear and readable (when sized for the publication) ?
+
+Yes, they are.
+
+4) Are all references in the article listed in the reference list ?
+
+Yes, they are.
+
+5) Is the abstract comprehensible, accurate, and summarizes the contents of
+the paper ?
+
+Yes, it is.
+
+6) Does the author give proper credit to related work ?
+
+I think so.
+
+7) Comments and notices.
+
+I think in this type of paper a plan of future work should be involved with 
+its reasoning but in the proposed paper it is missing almost completely.
+
+I very appreciated the clarity and fidelity of the paper.
+
+As a non-native speaker, I cannot judge the English of the paper properly 
+but I did not encounter any serious language mistake.
