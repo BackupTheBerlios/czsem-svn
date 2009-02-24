@@ -1,0 +1,154 @@
+Dear Mr. Jan Dedek:
+
+We regret to inform you that your paper  #1569114352 ('Computing aggregations from linguistic web resources') cannot be accepted for publication in the Proceedings of  Second IEEE International Conference on Semantic Computing.
+
+The reviews are below or can be found at http://edas.info/showPaper.php?m=1569114352, using your EDAS login name.
+
+======= Review 1 =======
+
+> *** Originality: How original is the idea of the paper?
+One of a few papers about the topic, maybe the only one on that specific detail... (2)
+
+> *** Usefulness: How useful is the content of the article for the scientific community?
+Only a few of the results might be useful. (1)
+
+> *** Fitness: Do you think that the article fits the conference?
+There will be people interested in this. (2)
+
+> *** Intelligibility: Is the paper easy to understand?
+Mostly understandable but parts of the article are hard to follow. (1)
+
+> *** Language: What about the language?
+Minor revisions suggested. (2)
+
+> *** Final Recommendation: Accept or reject?
+Likely reject. (1)
+
+> *** Reviewer Confidence: How confident do you feel as a reviewer of this particular article?
+Quite confident, I have research experience in a related field. (2)
+
+> *** Content: Briefly describe the content of the paper in about three sentences.
+
+The paper describes work aimed to extract information from a set of "tectogrammatical" (deep syntactic) trees. Complete process from text acquisition to generating semantic representation is described.
+
+> *** Title: Does the title describe the contents of the paper?
+If no, please give author(s) title recommendations.
+
+The phrase "linguistic web resources" in the title is slightly misleading - the work aims to extract information from general web data using linguistic techniques.
+
+> *** Prior Work: Unless the article is quite original, please include references
+to similar work:
+
+
+
+> *** Reason for your Decision: Please specify your main reasons for your acceptance or rejection decision.
+
+One of the most important contributions of the paper, as described in its introduction, and again in Section 2, is an Inductive Logic Programming (ILP) based technique for extracting information from tectogrammatical trees, but the approach is only outlined in the paper, and has not been implemented or tested.
+The paper describes a semi-supervised approach to constructing a query tree for a specific information extraction task (extracting injury statistics from traffic accident reports), but there are no performance measurements, only a few examples of extracted data structures.
+The introductory section mentions experiments with two extraction tasks (bankruptcy reports and traffic accident reports), but no information on the first task is given in the rest of the paper.
+The organization of the paper is fine, but the text is sometimes difficult to follow, there are numerous unusual grammatical constructions, typos and formatting issues.
+The paper contains frequent examples of text in Czech, with translations often missing.
+Overall, the paper addresses a valid problem, suggests some possibly useful approaches and describes interesting work in progress, but, in my opinion, it does not present content ready for publication.
+
+> *** Recommendations: If you think the paper should be accepted, please give the author(s) some recommendations about what you would change for the camera-ready version.
+
+
+
+======= Review 2 =======
+
+> *** Originality: How original is the idea of the paper?
+Yet another paper about the topic... (1)
+
+> *** Usefulness: How useful is the content of the article for the scientific community?
+It does not contain any useful results. (0)
+
+> *** Fitness: Do you think that the article fits the conference?
+Maybe some people might be interested. (1)
+
+> *** Intelligibility: Is the paper easy to understand?
+Mostly understandable but parts of the article are hard to follow. (1)
+
+> *** Language: What about the language?
+Major revisions needed. (1)
+
+> *** Final Recommendation: Accept or reject?
+Definite reject. (0)
+
+> *** Reviewer Confidence: How confident do you feel as a reviewer of this particular article?
+Quite confident, I have research experience in a related field. (2)
+
+> *** Content: Briefly describe the content of the paper in about three sentences.
+
+The paper describes a method to extract information about injuries from Czech fire department reports. To do this the text is downloaded and extracted from the website. It is then parsed and queries are constructed to find the relevant parts.  These are then converted in the desired format. This is information extraction based on deep parsing.
+
+> *** Title: Does the title describe the contents of the paper?
+If no, please give author(s) title recommendations.
+
+sort of; to my mind this is a straightforward information extraction enterprise.
+
+> *** Prior Work: Unless the article is quite original, please include references
+to similar work:
+
+no refs to information extraction literature at all.
+
+> *** Reason for your Decision: Please specify your main reasons for your acceptance or rejection decision.
+
+My feeling is that this paper is premature. The authors claim that the most important part of their work is the ILP procedure used for the data extraction but then they say that this part hs not been implemented, so as far as I understand the results are based on Netgraph which is reported on elsewhere and is not their work. As  far as I understand the paper describes how previously existing tools can be combined and alludes to a new ILP part which is described very sketchy. when the ILP part is fully implemented there might be something to report.
+
+> *** Recommendations: If you think the paper should be accepted, please give the author(s) some recommendations about what you would change for the camera-ready version.
+
+
+
+======= Review 3 =======
+
+> *** Originality: How original is the idea of the paper?
+Yet another paper about the topic... (1)
+
+> *** Usefulness: How useful is the content of the article for the scientific community?
+Only a few of the results might be useful. (1)
+
+> *** Fitness: Do you think that the article fits the conference?
+There will be people interested in this. (2)
+
+> *** Intelligibility: Is the paper easy to understand?
+Mostly understandable but parts of the article are hard to follow. (1)
+
+> *** Language: What about the language?
+Major revisions needed. (1)
+
+> *** Final Recommendation: Accept or reject?
+Likely reject. (1)
+
+> *** Reviewer Confidence: How confident do you feel as a reviewer of this particular article?
+Quite confident, I have research experience in a related field. (2)
+
+> *** Content: Briefly describe the content of the paper in about three sentences.
+
+The paper proposes an approach for extracting events from web resources. The source material (in a restricted domain) was obtained from RSS feeds and fed to a series of NLP tools such as segmenter, tokenizer, morphological tagger, dependency parser and a tectogrammatical annotator, which produces the final tectogrammatical trees. The trees are then searched by formulating a Netgraph query, which is essentially a tree query language. The relevant trees are then mapped into designed templates ("ontology") as the meaning representation. A rule-based method for learning a Netgraph query from a training set of trees is briefly described.
+
+> *** Title: Does the title describe the contents of the paper?
+If no, please give author(s) title recommendations.
+
+The title is too general for the actual content. A more accurate title would be "extracting domain-specific events from linguistic web resources".
+
+> *** Prior Work: Unless the article is quite original, please include references
+to similar work:
+
+More prior work on event extraction should be cited, especially the ones that employ a similar approach (extracting via deep parsing, and template filling); e.g., Yakushiji et al, "Event extraction from biomedical papers using a full parser", 2001 proposed a similar architecture. ACE evaluation also had an event-extraction task in the past years that might provide more references (http://www.nist.gov/speech/tests/ace/).
+
+> *** Reason for your Decision: Please specify your main reasons for your acceptance or rejection decision.
+
+- The proposed approach has been attempted before, and the authors did not provide complete experimental results - precision/recall scores were reported for each NLP tool with very little explanation, and the performance of the template-filling component is unknown, making it difficult to ascertain the overall effectiveness of the system.
+
+- In particular, the meat of this paper (in this reviewer's opinion) is how a Netgraph query can be constructed in an automatic or semi-automatic fashion. The authors very briefly mentioned the possibility of employing ILP techniques but gave very little detail.
+
+- Writing needs significant improvement. The discussion on the tool chain can be reduced since they are pretty well-known (except for the tectogrammatical trees, which needs a bit more background description). There are also quite a few typos and ungrammatical sentences, and some notations seem not necessary (e.g., on p.4-5 the URI U_i and sentences S^i_ are never used in the subsequent text). Additionally the figure ordering seems to be out of place (Fig. 8 was referred to before Fig. 7 etc).
+
+> *** Recommendations: If you think the paper should be accepted, please give the author(s) some recommendations about what you would change for the camera-ready version.
+
+
+
+
+
+Regards,
+Gerald Friedland and Craig Martell, Program Co-Chairs

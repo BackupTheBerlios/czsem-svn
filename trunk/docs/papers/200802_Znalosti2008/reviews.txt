@@ -1,0 +1,115 @@
+Vazeny kolego/kolegyne,
+
+dekujeme Vam za zaslani prispevku
+
+Extrakce informací z textovì orientovaných zdrojù webu
+autoru: Jan Dìdek, Peter Vojtáš
+
+
+byl zarazen do programu konference Znalosti 2008.
+
+Programovy vybor rozhodl o zarazeni prispevku jako posteru do sborniku
+konference. Informujte o vysledku recenzniho rizeni i pripadne
+spoluautory. Seznam prijatych prispevku bude umisten na webu konference
+(http://znalosti2008.fiit.stuba.sk).
+
+         V priloze naleznete komentare recenzentu. Vezmete je prosim do
+uvahy pri priprave finalni verze prispevku urcene pro tisk ve sborniku.
+
+
+      Uzaverka pro dodani finalni verze textu je 11.ledna 2008. Na webu
+konference naleznete instrukce pro zasilani finalni verze. K dispozici
+bude opet webove rozhrani, ktere jste vyuzili pri zasilani nabizene verze.
+
+         Finalni verze musi presne odpovidat stanovenemu stylu. Delka
+referatu nesmi presahovat 4 strany. Upozornuji, ze prispevek dodany
+pozdeji nebo nesplnujici pozadavky na rozsah ci styl nebude do sborniku
+zarazen. Velmi proto doporucuji vyuzit moznosti zaslat finalni verzi v
+predstihu, s tim,  ze redaktori sborniku Vas na nedostatky upozorni a
+umozni vam znovu zaslat opravenou verzi.
+
+         11.leden 2008 je soucasne nejzazsim terminem pro zavaznou
+registraci alespon jednoho z autoru prispevku - registrace je podminkou
+zarazeni prispevku do sborniku.
+
+
+------- Dale prikladam informace o platbach -------
+
+Termin skorej registracie je 15.12.2007. Registrovat sa mozno na stranke
+konferencie http://znalosti2008.fiit.stuba.sk . Ucastnici registrovani
+do 15.12.2007 platia redukovane vlozne 4400Sk (resp. studentske
+redukovane vlozne 2800Sk),
+kde je termin skorej platby 11.1.2008. Platby po 11.1.2008 su vo vyske
+standardneho vlozneho 5000Sk (resp. studentske standardne vlozne
+3200Sk). Ucastnici registrovani po 16.12.2007 platia standarne vlozne
+5000Sk (resp. studentske standardne vlozne 3200Sk).
+
+----------------------------------------------------
+
+
+      V soucasnosti probiha sestavovani predbezneho programu konference
+(vcetne casoveho harmonogramu), ktery bude zverejnen na WWW. O
+zverejneni programu budete vcas informovan(a).
+
+Na konferenci Znalosti 2008 bylo zaslano temer 50 dlouhych prispevku,
+kazdy z nich byl posouzen tremi recenzenty. Programovy vybor na zaklade
+recenzi vybral do hlavniho sborniku konference 25 vybranych prispevku.
+
+
+Dekuji Vam za spolupraci a tesim se na setkani v Bratislave.
+
+Vaclav Snasel,
+predseda programoveho vyboru konference Znalosti 2008
+
+Znalosti 2008
+Recenzní zpráva pro pøíspìvek 67
+Èíslo pøíspìvku:	67
+Název:	Extrakce informací z textovì orientovaných zdrojù webu
+Autor (autoøi):	Jan Dìdek, Peter Vojtáš
+Recenze 1
+Originalita: 	5
+Významnost: 	6
+Technická kvalita: 	5
+Relevance: 	6
+Kvalita prezentace: 	6
+Souhrné hodnocení: 	6
+	
+7: Urèitì pøijmout, vynikající
+6: Pøijmout
+5: Spíše pøijmout, ale nemám námitky proti zamítnutí
+4: Neutrální
+3: Spíše zamítnout, ale nemám námitky proti pøijetí
+2: Zamítnout
+1: Urèitì zamítnout, naprosto nevyhovující
+Poèet posluchaèù zajímajících se o pøíspìvek: 	10
+Odbornost recenzenta v tématu pøíspìvku: 	Vysoká
+Množství požadovaných oprav: 	Nízké
+Poznámky pro autory
+Hlavní poznámky:
+
+ 
+
+Kladné aspekty:
+
+ 
+
+Záporné aspekty:
+
+ 
+
+Další poznámky:
+
+ 
+(v závorce jsou autory udávané
+pøesnosti jednotlivých krokù)
+
+pokud uvadite presnost v procentech pak je velmi problematicke
+temto vysledkum porozumet bez znalosti zakladu z nehoz byly procenta 
+pocitany
+
+
+
+v literature neni nutne uvadet ISBN
+naopak by bylo vhodne doplnit stranty 
+
+Paper Review System, Copyright &copy 1997-2007, The Board of Trustees of Brigham Young University. Data on this page Copyright &copy 2007, Znalosti 2008. All rights reserved.

@@ -1,0 +1,114 @@
+Thank you for your submission to the Uncertainty Reasoning for the Semantic Web workshop (URSW 2008). We have had many excellent submissions to this 2008 edition of the workshop, but only a limited time to allocate to all collaborators. Therefore, we are pleased to let you know that your paper is among the few selected for presentation at the workshop as a position paper.
+In our quest to ensure an outstanding quality level of the workshop proceedings and to make sure we get the most rewarding discussion possible, we strongly encourage you to address all the concerns and suggestions pointed out by the reviewers of your paper. In other words, you are expected to consider the reviews as a major guide when writing your final, camera-ready copy. The reviews to your paper are attached to this message and can be accessed at anytime via the easychair system (http://www.easychair.org/),
+Final papers must be submitted no latter than September 26, 2008, also via the easychair conference system (submit it as an update to your paper).
+On a courtesy note, we would like to remind you about the upcoming deadline for registration at the workshop with the early bird discount. The reduced price registration is available at http://iswc2008.semanticweb.org/registration/ and lasts until September 18, 2008.
+
+We look forward to seeing you in Karlsruhe.
+
+Best regards,
+The URSW 2008 Program Committee
+
+
+
+
+---------------------------------------------
+
+Paper: 13
+Title: Discussion on Uncertainty Ontology for Annotation and Reasoning (a position paper)
+
+
+-------------------- review 1 --------------------
+
+PAPER: 13
+TITLE: Discussion on Uncertainty Ontology for Annotation and Reasoning (a position paper)
+
+OVERALL RATING: -1 (weak reject)
+REVIEWER'S CONFIDENCE: 3 (high)
+----------------------- REVIEW --------------------
+
+Please rate the paper on a scale of 1 (poor) to 5 (outstanding) on each of the following attributes, and provide written comments as appropriate.
+
+1. RELEVANCE - Does the paper clearly address the topic list and technical goals stated of the workshop as stated at http://c4i.gmu.edu/ursw2008?
+3
+
+
+
+2. CONTRIBUTION - Is the contribution of the paper clearly stated? In your view, is this contribution, if achieved, of sufficient merit to warrant presentation at the workshop?
+2 The paper presents a summary of the URW3 XG technical report while the presented ideas are very vague. In my view, even if it is a position paper, it should describe the work proposal with mush more details
+
+3. TECHNICAL MERIT - Is sufficient detail provided that the technical quality of the contribution can be assessed?
+2 The presented idea is too vague and does not allow the reader to clearly understand what the authors propose
+
+
+
+4. WRITING - Is the paper clear and well-written? Does the flow of ideas facilitate the understanding of the subject?
+4 The paper is clearly written. Maybe a short abstract could be added
+
+
+
+5. SCHOLARSHIP - Does the paper cite relevant literature and demonstrate a command of the field?
+4
+
+
+
+6. CONFIDENCE IN THE REVIEW.
+4
+
+
+
+7. DETAILED COMMENTS TO AUTHORS - Please, provide constructive feedback and suggestions to the authors on the strengths and points to be improved.
+
+The paper presents an overview of the necessities for treating uncertainty in the SW context and introduces some important aspects such as how to add "uncertain" meta-data to web resources in a semi-automatic way.
+
+At the beginning, mainly the paper presents a short summary of the URW3 XG technical report. In the final part of the paper, some very initial ideas are presented. However they are too vague and do not allow the reader to clearly understand what the authors propose. Also the figure requires some more comments.
+
+
+-------------------- review 2 --------------------
+
+PAPER: 13
+TITLE: Discussion on Uncertainty Ontology for Annotation and Reasoning (a position paper)
+
+OVERALL RATING: 0 (borderline paper)
+REVIEWER'S CONFIDENCE: 2 (medium)
+RELEVANCE: 3 (fair)
+CONTRIBUTION: 2 (poor)
+TECHNICAL MERIT: 3 (fair)
+WRITING: 3 (fair)
+SCHOLARSHIP: 2 (poor)
+CONFIDENCE IN THE REVIEW: 2 (poor)
+
+----------------------- REVIEW --------------------
+
+Above, please rate the paper on a scale of 1 (poor) to 5 (outstanding). Here, please provide written comments on each of the following attributes as appropriate.
+
+1. RELEVANCE - Does the paper clearly address the topic list and technical goals stated of the workshop as stated at http://c4i.gmu.edu/ursw2008?
+
+The paper addresses a relevant issue.
+There is a little discussion about uncertainty issues, just references to previous (and ongoing) papers.
+
+2. CONTRIBUTION - Is the contribution of the paper clearly stated? In your view, is this contribution, if achieved, of sufficient merit to warrant presentation at the workshop?
+
+Main points are stated, but there is little detail. However, this is acceptable for a position paper.
+
+3. TECHNICAL MERIT - Is sufficient detail provided that the technical quality of the contribution can be assessed?
+
+No. However, there are references to previous work that are useful (and interesting)
+
+4. WRITING - Is the paper clear and well-written? Does the flow of ideas facilitate the understanding of the subject?
+
+Writing is clear and problems well stated.
+
+5. SCHOLARSHIP - Does the paper cite relevant literature and demonstrate a command of the field?
+
+Mainly self references and technical specifications.
+
+
+
+6. CONFIDENCE IN THE REVIEW.
+
+Poor
+
+7. DETAILED COMMENTS TO AUTHORS - Please, provide constructive feedback and suggestions to the authors on the strengths and points to be improved.
+
+A better explanation of the uncertainty annotation ontology could be useful.
+

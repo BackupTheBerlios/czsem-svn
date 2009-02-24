@@ -1,0 +1,60 @@
+Dear Peter Vojtas, Jan Dedek
+
+We are happy to inform you that your paper entitled "Web Information extraction for e-environment", submitted
+to TOWARDS eENVIRONMENT, has been accepted for inclusion in the proceedings. Below,
+you will find attached the reports of the reviewers. Please consider the
+reviewers' comments carefully when preparing the final version of your paper.
+
+The camera-ready copy of your paper is required before
+February, 15, 2009. You must access the http://www.e-envi2009.org/myreview/SubmitPaper.php
+upload interface and enter your id and password:
+
+Paper id: 81
+Password: 35355b.
+
+Please note that any delay may prevent the inclusion of your paper in the
+proceedings. Please follow the instructions found at the TOWARDS eENVIRONMENT site
+in order to prepare your final version.
+
+The TOWARDS eENVIRONMENT site also provides all necessary information for conference
+registration and hotel accommodation.
+
+Best regards,
+
+TOWARDS eENVIRONMENT PC chairs
+
+=====================================
+
+Reviewer: 1
+
+
+Originality : Accept
+Quality : Neutral
+Relevance : Accept
+Presentation : Neutral
+Recommendation : Accept
+
+Summary: We recommend to keep requests on papers of conference, which abstract does not fulfill.
+
+Details:
+
+
+Candidate for the best paper award? : No
+
+=====================================
+
+Reviewer: 2
+
+
+Originality : Neutral
+Quality : Neutral
+Relevance : Neutral
+Presentation : Neutral
+Recommendation : Accept
+
+Summary: We recommend paper with condition to fulfill the formal requests for conference paper.
+
+Details:
+
+
+Candidate for the best paper award? : No

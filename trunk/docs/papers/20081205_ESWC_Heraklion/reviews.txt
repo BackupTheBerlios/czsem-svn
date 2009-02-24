@@ -1,0 +1,174 @@
+Dear Author,
+
+We regret to inform you that your paper has not be accepted for the 6th European Semantic Web Conference (ESWC2009).
+
+The number and title of the paper are reported with the reviews attached at the end of this mail.
+
+We received a total of 244 submissions to the research track and the Programme Committee accepted 45 research papers. Every submission received at least three reviews. Borderline submissions were discussed by the Programme Committee, and when necessary, additional reviews were collected. The papers and the reviewers' evaluations were discussed at a PC meeting by Program Chairs and Vice PC Chairs.
+
+Attached you will find the comments from the reviewers which we hope you will find useful.
+
+Please consider the possibility to submit your paper as a poster.
+
+The submission deadline for posters is March 23, 2009 (11:59 pm Hawaii time), the notification will be on April 20, 2009, and the camera ready version of the accepted posters are due by May 11, 2009.
+
+Sorry to be the bearers of bad news and we hope that you will attend the conference.
+
+Best Regards,
+Lora Aroyo and Paolo Traverso
+(ESWC 2009 Program Chairs)
+
+
+---------------------------------------------
+
+Paper: 156
+Title: Web Semantization
+
+
+-------------------- review 1 --------------------
+
+PAPER: 156
+TITLE: Web Semantization
+
+OVERALL RATING: -2 (reject)
+Is this paper a candidate for Best Paper?: 1 (no)
+Is this paper a candidate for a Poster?: 2 (yes)
+Is the content described in this paper a candidate for a Demo?: 2 (yes)
+
+----------------------- REVIEW --------------------
+
+REVIEW SUMMARY (brief summary that motivates the overall evaluation)
+
+While the idea is overhelming: To extract what is missing and provide
+the basis for the semantic web, the contribution is not reaching the
+wackend expectations.
+
+
+DETAILED REVIEW
+
+May the combination and the implementation provide a contribution to research the introduced concepts are state of the art:
+
+- Repository
+- Domain (task) dependent (on demand) annotation
+- Domain independent intermediate annotation
+- Crawling agents
+
+the well written paper lack to make the contribution to research and
+differences to other approaches clear to the reader.
+
+
+-------------------- review 2 --------------------
+
+PAPER: 156
+TITLE: Web Semantization
+
+OVERALL RATING: 2 (accept)
+Is this paper a candidate for Best Paper?: 2 (unsure)
+Is this paper a candidate for a Poster?: 2 (yes)
+Is the content described in this paper a candidate for a Demo?: 2 (yes)
+
+----------------------- REVIEW --------------------
+
+In your review, please consider various aspects to the review, such as significance, relevance, novelty, technical strength of the research, presentation and language, references, related work, evaluation soundness, presence of a concrete use case, etc.
+
+
+
+REVIEW SUMMARY (brief summary that motivates the overall evaluation)
+-----------------------------------------------------------------------
+
+Semantization of the Web is a novel and important introduced in this paper. This idea
+closes the gap between advertisements or marketing promises of the the semantic web community and the real web.
+
+
+
+DETAILED REVIEW
+---------------
+Web Semantization is considered to be an automated process of increasing degree of
+semantic content on the web automatically extracted from the web and make it available to software agents.
+The paper is well written and easy to capture. It is based on two main ideas and on solid
+computer science background.
+First idea is the idea of a web repository. The repository is currently kept rather
+simplistic. It is however extensible.
+Second idea is to split annotation process to two parts, one domain independent
+intermediate annotation and second domain dependent user directed annotation.
+Linguistic enrichment is based on language facilities such the Czech language and its
+tectogrammaticalstructure. The final step is the semantic enrichment. The content dependent analysis is supported by logic programming techniques.
+
+Linguistic techniques known so far are far richer than given in the paper. It allows to integrate a parser that generates syntax trees for sentences without subsentences and referencing structures.
+The paper has an internal split. The agent section refers to work on fuzzy databases. That is only a part of the agent business.
+
+The paper does not give a survey of approaches developed for text mining.
+
+The notion of semantics is left to the reader. I would prefer a hint which conception of semantics is intended.
+
+
+-------------------- review 3 --------------------
+
+PAPER: 156
+TITLE: Web Semantization
+
+OVERALL RATING: -2 (reject)
+Is this paper a candidate for Best Paper?: 1 (no)
+Is this paper a candidate for a Poster?: 1 (no)
+Is the content described in this paper a candidate for a Demo?: 1 (no)
+
+----------------------- REVIEW --------------------
+
+REVIEW SUMMARY (brief summary that motivates the overall evaluation)
+-----------------------------------------------------------------------
+
+This paper deals with the notion of Web semantisation. They describe it as an automated process of enriching Web content with semantics.
+
+
+
+DETAILED REVIEW
+---------------
+
+From the presentation point of view, the language is correct by can sometimes be improved. However, the paper is very difficult to read, the paper is globally not structured, there is no summary in the end of the introduction allowing to relate between the sections, so they seem to be very independent and make that it is very difficult to follow the idea of the authors from the firs to the last page.
+
+Also, what makes the paper difficult to understand is the lack of a section comparing the present idea to the works of the litterature. Many works can be cited in the field of Web Mining.
+
+From the content point of view, there is no significant theoritical contribution, there are many idea but they is no deep analysis of the problem; there is only a superficial presentation of an already known problem : Web mining (The algorithm presented is for example not explained enough).Also, there no significant implementation result.
+
+
+-------------------- review 4 --------------------
+
+PAPER: 156
+TITLE: Web Semantization
+
+OVERALL RATING: -1 (weak reject)
+Is this paper a candidate for Best Paper?: 1 (no)
+Is this paper a candidate for a Poster?: 1 (no)
+Is the content described in this paper a candidate for a Demo?: 1 (no)
+
+----------------------- REVIEW --------------------
+
+In your review, please consider various aspects to the review, such as significance, relevance, novelty, technical strength of the research, presentation and language, references, related work, evaluation soundness, presence of a concrete use case, etc.
+
+
+
+REVIEW SUMMARY (brief summary that motivates the overall evaluation)
+-----------------------------------------------------------------------
+This work offers an interesting angle on the theme of enriching the Web with semantic metadata, and is compounded by several real-world use cases. However it partially fails to focus on the original work that is presented, which is not paralleled to existing technologies. Also, the English standard is inadequate all through a large part of the document and revising it would require an amount of work too high to guarantee a fully fixed camera-ready version.
+
+
+
+
+
+DETAILED REVIEW
+---------------
+The paper presents a method for mining the Web to extract and store semantic data for reuse in software agents, as well as a proof of concept for the development of a semantic search engine.
+
+In general, the article covers an area of large interest, hence it is inherently compelling. It introduces the even inexperienced reader to the issues and problematics related to a Web that was not born Semantic, and gradually evolves into a description of the actual scientific contribution provided by this work. Also, its value is strengthened by the presence of examples as well as real world experiments and a concrete use case of Inductive Logic Programming applied to Czech text. This example also stands up pretty well for readers who are not familiar with this language.
+
+However, the paper does not clearly draw a line between original research and the state of the art. Many principles and notions are referred to as "ideas", which would lead to believe that they were all developed originally. While this can surely hold for notions like splitting the annotation process in two, it is not exactly applicable to the concept of a Web repository or the transformation of the Web into a Semantic Web. Sections 1 and 2, as well as the abstract itself, appear rather confusing in this matter, despite providing ample reference to existing literature. The lack of a dedicated section to related work adds up to the confusion.
+
+There are several additional concepts authors are urged to further elaborate on: "general ontologies" and "average computer-skilled user" should be explained in more detail for a better understanding of what authors actually mean by these expressions. A short description or an example could suffice for clarification. Also, referring to ordinary language expressions as "grammatical sentences" seems rather inappropriate, as the notion of grammar spans across a range much wider than that of natural language. Finally, it is unclear what a "temporal repository of Web documents" is supposed to be, whether temporary or incrementally updated over time (although the description seems to suggest the latter option).
+
+Additionally, there appears to be strong uncertainty on the side of language: although authors can be commended for their effort in keeping a high vocabulary standard, several wording issues as well as blatant mistakes often surface in the paper. Two independent sentences are sometimes concatenated through a comma when a semicolon, a period or an adverb would be more fitting (e.g. "It is represented as a node in the DOM tree, underneath it there are the similar sub-trees [...]" on page 6). Some expressions range from being uncommon to being plain incorrect, therefore should be rephrased (e.g. "split annotation pocess to two parts", "we have been filled this repository [...] and it very simplified access to this data", "enabling it intelligent tools", "work of our colleges", "now days", "arch over the gap", etc. ). Most prominently, articles are often missing and sometimes misplaced.
+
+The aforementioned issues with English language are spread across the whole first half of the paper, namely on sections 1 through 4, as well as the conclusion. On the other hand, the language standard in the other sections is higher, although there are still a few changes the reviewer would recommend. Use of expressions such as "he or she" is generally discouraged and is better replaced with plurals. Also, "information" should not be used as a countable noun, therefore "two information" should be rephrased.
+
+Figures and code samples are clear, well-placed and appropriate. The only possible exception is the table on Figure 2: from an aesthetic standpoint it is advisable that row and column headers be presented in a different style, such as boldface. Also, the table itself is tautological: according to its description, "we can see an interesting inversion in the use of similarity and repetition", but as a matter of fact the reader cannot really "see" it, as the figure is just a tabular repetition of what is stated in the text. Authors may want to display some concrete data related to similarities, repetitions and their occurrences. Finally, the algorithm on Figure 5 is missing values to be assigned to variables on line 3 and 4 as well as the one to check against on line 10. Authors should check whether the empty set symbol is correctly rendered in their TeX engine.
+
+The paper is titled "Web Semantization". Although the choice for a short, generic title anticipates the soft, gradual approach to the subject-matter for the inexperienced reader, this can be a double-edged sword, as it may lead to expect a full, broad coverage of methods for annotating Web resources, which is not the scope of the document. Authors are advised to elaborate on the title itself, so as to clarify what their original contribution to the subject is, e.g. what is being concretely proposed.

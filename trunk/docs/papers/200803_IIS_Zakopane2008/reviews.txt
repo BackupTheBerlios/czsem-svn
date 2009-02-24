@@ -1,0 +1,86 @@
+Dear Jan Dedek,
+
+thank you for your submission to IIS`08.
+
+Dear Contributor
+
+We deeply appreciate your effort done in preparation of a submission to the international conference Intelligent Information Systems, June 16-18, 2008, Zakopane, Poland.
+We are pleased to inform you that your paper:
+
+TITLE  : Exploitation of linguistic tools in semantic extraction &#8211; a design
+AUTHORS: Jan Dedek, Peter Vojtas
+
+has been accepted for publication and presentation at the Conference.
+Please follow strictly the suggestions of the referee(s). Failing to improve the paper in accordance to referee(s) requests may lead to refraining to publish it in Conference proceedings.
+Please follow strictly instructions for authors as visible on the Web page. Papers should not exceed 10 pages. Papers of poor editorial quality cannot be published.
+IMPORTANT: The final version of the paper must be prepared using LaTeX.
+The conference Latex style file `iisproc.cls` has been recently updated. Please download the zipped archive with the updated files needed to process final version of your paper from the conference web site:
+http://iis.ipipan.waw.pl/2008/for_auth.html
+
+Please do not forget to send us the PS/pdf file AND all latex files. All the files should be send to the conference proceedings editor:
+iis-editor@ipipan.waw.pl  by the April 6, 2008.
+
+Best regards
+
+IIS`08 Organizing Committee
+___________________________________________________________
+Conference Office:
+mail: iis@ipipan.waw.pl
+http://iis.ipipan.waw.pl
+Institute of Computer Science, Polish Academy of Sciences
+ul. Ordona 21, 01-237 Warsaw, Poland
+phone: +48 22 8362841
+fax:   +48 22 8376564
+
+
+
+------------------------ Reviewers Comments -----------------------------
+
+Reviewers Familiarity:               8
+Evaluation of work and contribution: 5
+Significance to theory and practice: 5
+Originality and novelty:             4
+Relevance for IIS`08:               7
+Readability and organization:        6
+Overall recommendation:              6
+
+**(0 = no mark set by reviewer)**
+
+Summary:
+                             The paper present an experiment in which very interesting tools for processing Czech were utilized. However, the experiment itself is presented rather shortly, no interesting problems connected directly to the chosen task are described. The way of creating extraction rules is also no clear enough, in particular on page 6 a learning procedure is mentioned but no details are given.
+As  no evaluation results are given the presented method cannot be compared to other extraction techniques.
+
+Detailed remark: Fig. 2 suggests that the ontology is the final result of the described text processing scheme which is not true.
+
+
+Comments to the author:
+
+
+
+---------------------------------------
+
+
+Reviewers Familiarity:               8
+Evaluation of work and contribution: 6
+Significance to theory and practice: 6
+Originality and novelty:             5
+Relevance for IIS`08:               6
+Readability and organization:        5
+Overall recommendation:              6
+
+**(0 = no mark set by reviewer)**
+
+Summary:
+                             At the beginning of the paper - it is not correct to speak about the Prague School of computational linguistics, it would be more precise to mention directly the respective institution, i.e. UFAL at MFF UK. PDT 2.0 is primarily a data resource, specifically annotated text corpus, the tools exist independently and not all of them provide the output automatically. Unfortunately, most of this is said only later, in Sect. 3.
+Too many conditionals are used and the paper is, in fact, it is just a proposal more than anything else. More practical results would make it really convincing.
+The ideas presented in the paper are interesting but the possible solutions are mainly outlined.
+
+
+Comments to the author:
+             English in the paper would require proofreading by an English native speaker.
+
+
+---------------------------------------
+
+
+============== END OF REVIEWS ===============

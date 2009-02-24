@@ -1,0 +1,49 @@
+Dear authors,
+
+On behalf of the WWW 2009 Posters Track Program Committee, we regret to inform you that your poster listed below has not been accepted for inclusion in the Posters Track at 18th International World Wide Web Conference Program. All submitted posters have gone through a rigorous reviewing process.
+
+We appreciate the effort you made in submitting a proposal, and hope that you will nevertheless join us in Madrid!
+
+Best regards,
+
+Elisa Bertino, Evaggelia Pitoura
+WWW 2009  Program Committee Chairs
+
+
+---------------------------------------------
+
+Paper: 57
+Title: Web Semantization - a process of automated annotation
+
+
+-------------------- review 1 --------------------
+
+PAPER: 57
+TITLE: Web Semantization - a process of automated annotation
+
+OVERALL RATING: 0 (borderline paper)
+----------------------- REVIEW --------------------
+
+I like the idea of associating semantic annotations to web resources. But I think the approach based on a semantic store is not convincing.
+
+
+-------------------- review 2 --------------------
+
+PAPER: 57
+TITLE: Web Semantization - a process of automated annotation
+
+OVERALL RATING: -2 (reject)
+----------------------- REVIEW --------------------
+
+This paper is about a very important issue for the Semantic Web: the automated annotation of information. The main problem with this paper is that the ideas seems rather naive and not new. There are also many small typos that need to be corrected (e.g., the absence of articles is common throughout: "of increasing (the) degree of," "We use (an) ontology," "uses (the) ILP, etc.) and also same expressions that need to be corrected (for example, "web documents crawled by a crawler).
+
+
+-------------------- review 3 --------------------
+
+PAPER: 57
+TITLE: Web Semantization - a process of automated annotation
+
+OVERALL RATING: 0 (borderline paper)
+----------------------- REVIEW --------------------
+
+Interesting work but contributions unlear

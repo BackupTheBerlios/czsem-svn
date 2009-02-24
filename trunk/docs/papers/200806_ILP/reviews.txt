@@ -1,0 +1,70 @@
+Dear  Jan Dedek,  Alan Eckhardt,  Peter Vojtáš
+
+We are happy to inform you that your paper entitled "Experiments with Czech Linguistic Data and ILP" has been accepted for the late breaking papers track of the ILP 2008 conference. Below, you will find the reports of the reviewers. Please consider the reviewers' comments carefully when preparing the final version of your paper.
+
+The camera-ready version of your paper including
+
+- the final pdf
+- all source files needed to generate the pdf
+
+compressed into a single ZIP file must be uploaded before
+
+       August 4
+
+Please access the http://ida.felk.cvut.cz/ilp2008/myreview2//SubmitPaper.php upload interface with your id and password:
+
+Paper id: 17
+Password: 8cbba9
+
+To have your paper included in the conference proceedings, at least one author must register for the conference and present the work.
+
+The conference web site http://ida.felk.cvut.cz/ilp2008 now accepts registrations and hotel booking. Registering early, i.e. until
+
+        July 28
+
+will save you money and allow you to choose from a wider set of available accomodation options.
+
+Looking forward to seeing you in Prague!
+
+ILP 2008 PC Chairs
+
+=====================================
+
+Reviewer: 1
+
+
+  Originality : Weak Reject
+  Relevance : Weak Reject
+  Presentation : Weak Reject
+  Recommendation : Weak Reject
+
+Summary: This paper explains how syntax trees can be represented in Prolog and then applies this representation to learn/extract information from Czech text.
+
+Details: While I think that this paper describes an interesting application of ILP, I have the following issues with it:
+- this seems like a very straightforward application, there does not seem to be anything problematic: simply represent parse trees as Prolog facts, and then run Progol on it.
+- Isn't there a way in Progol to prevent the construction of overfitted clauses (due to the use of ID values)?
+- In the introduction (Figure 2) you describe mappings between rules and an ontology, but in your experiments you only learn simple rules like "injured(A) :- .." What is the connection?
+- When learning the number of injured, you say you "added negative examples with wrong numbers". I am sure I follow that: do you mean you have generated some artificial examples with random numbers, or do you just want to say that e.g. when learning number_injured(A,1) you also added examples where the number is != 1 as negative examples?
+- In your experiments, why do all the experiments always have different numbers of examples? Don't you use the same set sentences throughout?
+
+
+
+=====================================
+
+Reviewer: 2
+
+
+  Originality : Neutral
+  Relevance : Accept
+  Presentation : Accept
+  Recommendation : Weak Accept
+
+Summary: Information extraction rules are learnt from pre-tagged Czech sentences. Progol is used.
+
+Details: Despite the unspectacular results I found the paper interesting to read. It was good to see a dependency formalism used - I suspect such a representation will work well for ILP.
+
+Evidently more data and further experiments are required. It would be good to compare with the IE work of Mooney's group.
+
+
+
+

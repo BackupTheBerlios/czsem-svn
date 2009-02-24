@@ -1,0 +1,174 @@
+Dear Author(s),
+
+We are pleased to inform you that your paper (see details below) submitted to IDC2008 has been **ACCEPTED AS REGULAR paper (10 pages)** for presentation and publication in the Studies in Computational Intelligence Series (Springer-Verlag).
+
+Below, please find the evaluation of your manuscript. You are kindly requested to consider the referees' remarks and statements and to update the final paper according to the review results. Failing to do so might result in rejection of your final paper.
+
+Authors must attend the conference to present their paper. At least one author of the paper must register for the conference and pay a registration fee (registration information will be provided shortly).
+
+IMPORTANT: To ensure that your paper will to be published in the proceedings please follow strictly the following instructions:
+
+1) Your camera-ready paper is due on or before 20th of June 2008. Details on the paper format are already included on the IDC2008 symposium Web site. Please use Latex to prepare your final camera ready paper (svmult document class from the mult.zip archive). Note that a Latex template paper will be available soon on the IDC2008 Web site => please use it.
+
+2) The length of the paper should NOT exceed 10 pages or otherwise it will be excluded from the proceedings.
+
+3) BOTH the Latex sources (including all the necessary files to compile your source: macros, images, etc) and the PDF file should be uploaded as a single ZIP archive no later than 20th of June 2008. This is the necessary condition to publish your work in the proceedings, since we must meet the strict deadlines and instructions of the publisher.
+
+4) Upload your revised camera-ready paper (as described above) via the same system (with the same login and password) which was used for your original submission.
+
+5) You must print, sign, and fax to Costin Badica (fax: +40251438198) by the 20th of June 2008 a copyright form (will be available soon on the conference Web site). Alternatively, you may scan and send the filled-in and signed form to Costin Badica at badica_costin@software.ucv.ro
+
+Non-registration, failure to pay for the fees, or failure to follow the camera-ready manuscript formats instructed above will result in the paper being excluded from the proceedings.
+
+Information on conference venue, accommodation, transportation, conference program, social program, registration and visa will be available on the IDC2008 conference web site.
+
+If you have any questions then please do not hesitate to contact us.
+
+Congratulations for having your paper accepted. We look forward to meeting you in Catania, Italy !
+
+Sincerely yours,
+Giuseppe Mangioni and Costin Badica
+IDC2008 PC chairs
+
+
+
+---------------------------------------------
+
+Paper: 37
+Title: Linguistic extraction for semantic annotation
+
+
+-------------------- review 1 --------------------
+
+PAPER: 37
+TITLE: Linguistic extraction for semantic annotation
+
+OVERALL RATING: 3 (accept)
+Presentation: 4 (good)
+Originality: 3 (fair)
+Technical Accuracy: 4 (good)
+Relevance for Intelligent Computing: 4 (good)
+Relevance for Distributed Computing: 3 (fair)
+Journal Publication Recommendation ?: 1 (no)
+Paper Length: 3 (ok)
+Paper Format: 2 (correct)
+
+----------------------- REVIEW --------------------
+
+Summary of the contribution:
+The authors propose and experiment a system for linguistic extraction and semantic annotation of information from Czech text on Web pages.
+
+
+
+Detailed comments:
+
+The paper describes an application  of some existing tools: PDT (for automatic linguistic annotation of text) and Netgraph (for searching trees) in order to solve a problem for information extraction from Czech text from the Web. The main contributions of the paper consist of an experimental chain of tools which captures text of Web-pages, annotates it linguistically by PDT tools, extract and stores data in an ontology. The experiment in the domain of reports of traffic accidents shows the effectiveness of the proposed approach. The authors have outlined the idea for to extend the system and the references are recent, the majority being after 2006.
+
+
+-------------------- review 2 --------------------
+
+PAPER: 37
+TITLE: Linguistic extraction for semantic annotation
+
+OVERALL RATING: 1 (weak reject)
+Presentation: 2 (poor)
+Originality: 3 (fair)
+Technical Accuracy: 2 (poor)
+Relevance for Intelligent Computing: 5 (excellent)
+Relevance for Distributed Computing: 3 (fair)
+Journal Publication Recommendation ?: 1 (no)
+Paper Length: 3 (ok)
+Paper Format: 2 (correct)
+
+----------------------- REVIEW --------------------
+
+Summary of the contribution:
+
+This paper considers a specific approach of linguistic analysis and semantic search, which is based on the tools developed for the Prague Dependency Treebank (RDT). The title is misleading; no semantic annotation is made (in the proper sense). But tackling "semantic search" is fine, and it is done in distributed environment, which makes the paper relevant for IDC.
+
+Detailed comments:
+
+No "relevant work" of other schools is cited and no comparison of the results is made, having in mind that Information Extraction is popular in at least two other schools: (1) IE in computational linguistic, in the style of MUC (Ralf Grishman has started it in the 80ies with extraction of facts from police reports) and (2) IE in SemWeb-style, where the main target is "ontology acquisition from text".
+
+The IE in MUC-style (summarized recently in [1], for instance) works by extraction of predicate-argument structures which fill in the so-called "scenario". Please note that the predicate-argument structures contain the thematic roles of the verbs as well as other deep cases. And then, no matter what the syntactic formalism is, the semantic dependencies between the sentence units are recorded in a uniform logical manner. One scenario integrates data extracted from several sentences, which are locally connected, and this enables matching of queries to internal semantic representations which capture information from segments. In the present approach, one query is translated to a tree which has to be matched to the tree of one sentence only. Doing semantic interpretation and inferences with the trees shown in the present article is much more difficult, compared to the standard inference procedures with logical forms.
+
+In general the paper has some innovative content to be communicated but it needs major revisions.
+
+
+Specific comments and suggestions:
+
+Reduce to minimum the PDT tags, they are specific and do not help much to the reader who is not familiar with the linguistic extraction paradigm.
+
+Some figures can be improved if the English translations of the Check words are integrated in the trees, so the reader distinguishes easily the word and its grammatical annotation.
+
+Remove the last two sentences before section 4.1 at page 8 (the authors somehow assume that all other syntactic formalisms are implemented by non-professionals). It is arguable weather the tree is the most beneficial structure - it might be good at syntactic level and critical wrt the semantic interpretation
+
+The paper needs proof-reading, e.g:
+-       page 4, section 2, sentence 1 has no verb;
+-       there are numbers 1,2,3,4 inside sections with numbers 1,2,3. etc.
+
+
+[1] Cunnigham, H. Information extraction - an user guide. Research Memo CS-99-07, Computer Science Dept., University of Sheffield, 1999 (http://www.dcs.shef.ac.uk/~hamish/IE).
+
+
+-------------------- review 3 --------------------
+
+PAPER: 37
+TITLE: Linguistic extraction for semantic annotation
+
+OVERALL RATING: 2 (weak accept)
+Presentation: 2 (poor)
+Originality: 3 (fair)
+Technical Accuracy: 4 (good)
+Relevance for Intelligent Computing: 4 (good)
+Relevance for Distributed Computing: 2 (poor)
+Journal Publication Recommendation ?: 1 (no)
+Paper Length: 2 (too long)
+Paper Format: 2 (correct)
+
+----------------------- REVIEW --------------------
+
+Summary of the contribution:
+The paper describes how to use existing methods created by Prague University
+researchers to syntactically annotate text from web pages, to extract and store such
+data in ontology. The proposed solution can be used in many web services providing a
+method to automatically discover and select services.  The main drawback of this
+paper is its structure of presentation. The paper is too long. The introduction can
+be shorter. The main contribution as a subsection should be removed. Main
+contributions as are listed in points can be placed in Summary (conclusion).
+
+
+Detailed comments:
+
+1. Fig. 5 and 6 are too small
+2. Writing style (many cut short sentences and lack of continuity of thoughts in
+many neighboring sentences.
+3. English should be corrected
+
+
+-------------------- review 4 --------------------
+
+PAPER: 37
+TITLE: Linguistic extraction for semantic annotation
+
+OVERALL RATING: 2 (weak accept)
+Presentation: 4 (good)
+Originality: 4 (good)
+Technical Accuracy: 4 (good)
+Relevance for Intelligent Computing: 4 (good)
+Relevance for Distributed Computing: 1 (very poor)
+Journal Publication Recommendation ?: 1 (no)
+Paper Length: 3 (ok)
+Paper Format: 2 (correct)
+
+----------------------- REVIEW --------------------
+
+Summary of the contribution:
+This paper deald with applicatin of linguistic analysis techniques to achieve semantic annotation of texts.
+
+Detailed comments:
+
+The work is interesting and well presented.
+It is not clear how the semantic annotation is performed: nor the semantic language (RDF, OWL?) nor the position of annotation (in-text, out of text), nor the granularity.
+THere is no mention of utilization of any domain ontology, on which the annotations could (should) be referenced. I understand instead that the ontology is created while the annotation is done. This should necessarily be clarified.
+THe eork does not deal with distributed computing.

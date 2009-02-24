@@ -1,0 +1,73 @@
+Dear Jan Dedek,
+
+On behalf of the Program Committee, we are happy to inform you that your paper 144 ("Computing aggregations from linguistic web resources") has been accepted for publication and presentation at ADVCOMP 2008.
+
+The acceptance of your paper is made with the understanding that each accepted paper will be registered and at least one author will attend the conference to present the paper (preferably with PowerPoint slides). 10-14 slide deck is perfect.  Conference rooms will have computers and video projectors.
+
+Registration: Registration starts upon receiving this notification letter. Each accepted paper must be separately registered. The registration form is available on the conference web site: see  "Registration form". Note that a paper will be published on the IEEE Xplore and Conference Proceedings only after the paper is registered, i.e., the registration form is sent in the due time and successfully processed. Please fax the registration form before uploading the paper and the copyright transfer form.
+
+http://www.iaria.org/conferences2008/RegistrationADVCOMP08.html
+
+A number of hotels in the area are listed on the Hotel and Travel page for the conference. Feel free to make your reservation:
+
+http://www.iaria.org/conferences2008/HotelsTravelADVCOMP08.html
+
+All the registration related issues must be addressed to
+
+manuela@vicov.com
+
+The deadline for the submission of registration forms to the organizers is July 5, 2008. This helps to draft the preliminary program and book the services. Otherwise, the paper is considered withdrawn and it will neither appear in the proceedings of the conference nor published on the IEEE Xplore Digital Library.
+
+Camera ready submission and copyright transfer form: For the camera ready submission, please consider the reviewers' comments or guidelines when editing your final version. The Proceedings are published by the IEEE Computer Society Press. Please read carefully the "Manuscript Preparation" on the conference web site when submitting the final version and the copyright transfer form. You can still update the originally and timely submitted camera ready on the IEEE site later on, as shown in "Manuscript Preparation" until July 5, 2008.
+
+http://www.iaria.org/conferences2008/ManuscriptADVCOMP08.html
+
+For any technical submission problem please use the e-mail address of the bottom of the "Manuscript preparation" web page. Please follow the steps properly. The author is supposed to receive a PDF receipt when the file has been successfully attached. If the author does not receive the receipt then something has gone amiss.
+
+We have put together a checklist page in order to make as smooth as possible your paper's publication and conference attendance:
+
+http://www.iaria.org/checklist.html
+
+Thanking once again for your active participation, we are looking forward for your cooperation to successfully finalize the event.
+
+Again,  register first, then, please accurately consider the review comments when finalizing your camera ready version. The chairs and the logistics team will check for the conformance with the reviewers' comments.
+
+Please fill the registration form as soon as possible.
+
+Sincerely yours, Events' Chairs
+
+The reviews are based on the current content of the paper. It is expected, if accepted, the paper will be published with the same content, not shorter, as the quality may decrease significantly. The version uploaded to the editor is subject to verification. Thanks for helping keep the quality high.
+
+Here are your comments from the reviewers. Please take them into consideration as you finalize your paper.
+
+
+
+--------- Comment 1:
+The idea presented in the paper is interesting but there are two issues that lead to the poor score I gave to this paper.
+
+First of all, there is no related work section. Without this, how can the reader appreciate the value of your approach as opposed to the existing ones?
+Second, the existence of a real use-case is indeed important, but at an international conference you should have an example in English. Also the fact that your linguistic algorithms work only for Czech syntax leads to the conclusion that their value for the international community is rather small, and this paper would be more appropriate for a national conference and not an international one
+
+
+
+--------- Comment 2:
+Very well-written paper and highly relevant to conference theme in SEMAPRO,in the area of NLP and semantical computing.
+I have the following suggestions:
+
+1) As you build an ontology and you are using a knowledge discovery mechansim to learn ontologies perhaps you can change your title to:
+"Learning/building ontologies by computing aggregations from linguistic web resources"
+
+2) It would be very nice if you change/extend your name to include your case study such as: "Learning/building ontologies by computing aggregations from linguistic web resources:a case study in Czech public sector/transportation"
+
+3) In page2, as you have suggested a framework already and you have described the steps involved in extraction process, it would be more interesting to use framework instead of "chain of tools" so perhaps you can use "framework" instead of Chain of tools, and use the tools to support your framework.
+
+
+
+--------- Comment 3:
+The authors present an approach to extract information of interest from web sources (e.g. Web pages, RSS feeds, etc.) to compute aggregate information such as the number of bankruptcies filed, the number of accidents reported, etc.
+
+This is an important problem, but the authors fail to motivate why "another" approach is needed. There is extensive research on extracting information of interest from natural language text dating back to the Message Understanding Conference (MUC) that can be applied to this problem. Hence, a comparison to these existing approaches is needed to justify the need for the solution proposed in this paper. In other words, does the proposed approach perform better than existing solutions reported in the literature on the tasks described in the paper.
+
+Furthermore, the experiment that is presented in the paper is not convincing and does not allow the reader to determine how well the proposed approach will work in practice. It does not show how well extraction rules for the described tasks can be learned using ILP. It is important to demonstrate this point given that it is one of the main contributions of the paper.
+
+These concerns should be addressed by the authors before the paper is ready for publication.
