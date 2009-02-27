@@ -246,14 +246,14 @@ This idea is modification of our previous implementation from \cite{biblio:EcHoU
 {\footnotesize\begin{verbatim}
 1 function BFSfindDR(LevelNodes)
 2 begin
-3   NextLevelNodes =  ; 
-4   regions =  ; 
+3   NextLevelNodes = {}; 
+4   regions = {}; 
 5   for each Node in LevelNodes do 
 6   begin 
 7     regions=identDataRegions(normalized(Node.children)); 
 8     NextLevelNodes=NextLevelNodes  U  (Node.Children not in regions);         
 9   end
-10    if NextLevelNodes !=   
+10    if NextLevelNodes != {}  
 11      return regions U BFDfindDR(NextLevelNodes);
 12    else return regions;
 13 end
