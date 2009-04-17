@@ -9,7 +9,7 @@
 
 \begin{document}
 
-\title{Web Semantization}
+\title{Web Semantization -- design and principles}
 
 \author{\IEEEauthorblockN{Jan Dedek\IEEEauthorrefmark{1}\IEEEauthorrefmark{2},
 Alan Eckhardt\IEEEauthorrefmark{1}\IEEEauthorrefmark{2} and
@@ -365,6 +365,17 @@ We tested these rules on the set of 15 positive and 23 negative examples. The re
 
 
 In this case we learned a set of rules that identifies relevant sentences -- roots of relevant tectogrammatical trees. We have made some additional experiments (some of them were published in \cite{biblio:DeEcExperimentswith2008}) that seems to lead to our goal. It is still a long way to go, but we understand these results as a proof of concept that ILP can be used for finding different kinds of information present in nodes and structure of linguistic trees. We for example extracted number of injured people from relevant trees when we have modified the training data. And still there is the possibility to design extraction rule manually if the learning method fails.
+
+
+
+\section{Related work}
+Of course the idea of exploitation of information extraction tools for the creation of the semantic web is not entirely novel. Above all we have to mention the very recognized work of IBM Almaden Research Center: the SemTag \cite{biblio:seekerIBM}. This work demonstrated that automated semantic annotation can be applied in a large scale. In their experiment they annotated about 264 million web pages and generated about 434 millions of semantic tags. They also provided the annotations as a \emph{Semantic Label Bureau} -- a HTTP server providing annotations for web documents of 3rd parties. The architecture and component infrastructure of the Seeker system from \cite{biblio:seekerIBM} is a great inspiration to us. In this paper we are more concentrated on the richness and complexity of semantic annotations and an overview of personalized software user agent making use of the annotations.
+
+Another similar system is the KIM platform\footnote{\url{http://www.ontotext.com/kim}} (lately extended in \cite{biblio:KIMcooc}) -- next good example of large-scale automated semantic annotation system. Similarly to SemTag, the KIM platform is oriented to recognition of named entities and limited amount of key-phrases. These annotations allow very interesting analysis of co-occurrence and ranking of entities together with basic useful semantic search and visualization of semantic data.
+
+Interesting idea of ``the self-annotating web'' was proposed in \cite{biblio:SelfAnnotWeb}. This idea consists in that it uses globally available Web data and structures to semantically annotate--or at least facilitate annotation of--local resources. This idea can be seed as an inversion to ours (because we intend to make the semantic annotations globally available), but in fact the method proposed in \cite{biblio:SelfAnnotWeb} can be integrated to an automated semantic annotation system with many benefits on both sites.
+
+To conclude this section we refer to two survey papers about Web Information Extraction Systems \cite{biblio:Survey_of_Web_Information_Extraction_Systems} and Semantic Annotation Platforms \cite{biblio:SemAnotSurvey}, which describe many other systems that are compatible with the idea of Web Semantization and can be also exploited in the process of gradual semantization of the web. As we mentioned above the domain dependent IE systems needs initial learning for each new task. We take it into account and prose to use the learned systems only for suitable web pages (selected by a prompt classifier).
 
 \section{Conclusions and further work}
 In this paper we have developed the idea of web semantization, which can help to arch over the gap between Web of today and Semantic Web. We have presented a proof of concept that even today it is possible to develop a semantic search engine designed for software agents. % in the scale of *.cz pages.
