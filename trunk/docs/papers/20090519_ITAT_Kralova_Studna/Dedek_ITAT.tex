@@ -7,6 +7,7 @@
 \usepackage{graphicx}
 \usepackage{url}
 
+\hyphenation{temp-late}
 
 \begin{document}
 \begin{twocolumn}
@@ -35,16 +36,28 @@ In this paper we present a survey of web information extraction systems and sema
 \section{Introduction} \label{sec:intro}
 
 
-There exist many extraction tools that can process web pages like this. Most complete recent survey can be found in \cite{biblio:Chang2006} and also in \cite{biblio:WebDataMining}.  We come with similar but also different solution divided into domain dependent and domain independent phases. See below for details.
+There exist many extraction tools that can process web pages and produce structured machine understandable data (or information) that corresponds with the content of a web page. This process is often called Web Information Extraction. Most complete recent survey can be found in \cite{biblio:Chang2006} and also in \cite{biblio:WebDataMining}. 
+
+\subsection{The Semantic Web and its Use}
+
+\begin{figure}[b!]
+\includegraphics[width=\hsize]{img/SemanticWeb}
+\caption{Exploitation of the semantic data (Semanitic Web)}
+\label{img:SemWebUse}
+\end{figure}
+
+The idea of the Semantic Web \cite{biblio:2001-Berners-Lee-SemanticWeb} (World Wide Web dedicated not only to human but also to machine -- software agents) is very well known today. Let us just shortly demonstrate its use with respect to the idea of Web Semantization (see in next section).
+
+The Fig.~\ref{img:SemWebUse} shows a human user using the (semantic) Web in three possible manners: a keyword query, a semantic query and by using a software agent. The difference between the first two manners (keyword and semantic query) can be illustrated with the question: ``Give me a list of the names of E.U. heads of state.'' This example from interesting article \cite{biblio:Horrocks_Onto} by Ian Horrocks shows the big difference between use of a semantic query language instead of keywords. In the semantic case you should be given exactly the list of names you were requesting without having to pore through results of (probably more then one) keyword queries. Of course the user have to know the syntax of the semantic query language or have a special GUI\footnote{Such handy GUI can be found for example in the KIM project \cite{biblio:KIM}.} at hand.
+
+The last and the most important possibility (in the semantic or semantized setting) is to use some (personalized) software agent that is specialized to tasks of some kind like planning a business trip or finding the most optimal choice from all the relevant job offers, flats for rent, cars for sale, etc.
+
+Both the semantic querying and software agents engagement is actually impossible to realize without any kind of adaptation of the web of today in the semantic direction. 
 
 \subsection{Web Semantization}
-\subsection{Use of the Semantic Data}
+The idea of Web Semantization consist in gradual enrichment of the current web content as an automated process of third party annotation for making at least a part of today's web more suitable for machine processing and hence enabling it intelligent tools for searching and recommending things on the web (see \cite{biblio:LeeWebThings}).
 
-\begin{figure}
-\includegraphics[width=\hsize]{img/SemanticWeb}
-\caption{Exploitation of the semantic data}
-\label{img:prologFacts}
-\end{figure}
+The most strait forward idea is to fill a semantic repository with some information that is automatically extracted from the web and make it available to software agents so they could access to the web of today in semantic manner (e.g. through semantic search engine).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
