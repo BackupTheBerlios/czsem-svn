@@ -1,0 +1,226 @@
+Dear Jan Dedek and Peter Vojtas,
+
+we are very pleased to inform you that your paper (S6207),
+entitled
+
+"Fuzzy Classification of Web Reports with Linguistic Text Mining"
+
+has been accepted for the SAIAW Workshop on "Soft approaches to information access on the Web" (SAIAW-WI/IAT' 2009).
+
+
+Enclosed at the bottom of this message, please find
+the review report for your paper. Papers went through a rigorous review process. Each paper was reviewed by at least two program committee members.
+
+Please carefully take into account the enclosed comments by
+the reviewers, and submit your paper by **June 30, 2009**.
+You will be receiving further instructions from the IEEE Computer Society
+Press shortly; the author kit will be sent directly from the IEEE
+Computer Society Press.
+
+In particular, please notice that the length of the paper CANNOT exceed 4 pages in the IEEE-CS format (which will also be distributed by the IEEE
+Computer Society Press). You may purchase 1 or 2 extra pages at a
+cost of AU$110 per extra page. Your submission is required to
+follow all the instructions given in the kit.
+
+
+Please do not forget to register at the same time.
+Thank you very much for your contribution and patience.
+
+Best regards,
+
+Guy De Tre
+Enrique Herrera-Viedma
+Jose Angel Olivas
+Slawomir Zadrozny,
+
+
+=====================================================================
+
+       --========  Review Reports  ========--
+
+The review report from reviewer #1:
+
+*1: Is the paper relevant to Workshop?
+ [_] No
+ [X] Yes
+
+*2: How innovative is the paper?
+ [_] 5 (Very innovative)
+ [X] 4 (Innovative)
+ [_] 3 (Marginally)
+ [_] 2 (Not very much)
+ [_] 1 (Not)
+ [_] 0 (Not at all)
+
+*3: How would you rate the technical quality of the paper?
+ [_] 5 (Very high)
+ [_] 4 (High)
+ [X] 3 (Good)
+ [_] 2 (Needs improvement)
+ [_] 1 (Low)
+ [_] 0 (Very low)
+
+*4: How is the presentation?
+ [_] 5 (Excellent)
+ [_] 4 (Good)
+ [_] 3 (Above average)
+ [X] 2 (Below average)
+ [_] 1 (Fair)
+ [_] 0 (Poor)
+
+*5: Is the paper of interest to Workshop users and practitioners?
+ [X] 3 (Yes)
+ [_] 2 (May be)
+ [_] 1 (No)
+ [_] 0 (Not applicable)
+
+*6: What is your confidence in your review of this paper?
+ [X] 2 (High)
+ [_] 1 (Medium)
+ [_] 0 (Low)
+
+*7: Overall recommendation
+ [_] 5 (Strong Accept: top quality)
+ [X] 4 (Accept: a regular paper)
+ [_] 3 (Weak Accept: could be a poster)
+ [_] 2 (Weak Reject: don't like it, but won't argue to reject it)
+ [_] 1 (Reject: will argue to reject it)
+ [_] 0 (Strong Reject: hopeless)
+
+Detailed comments for the authors:
+An interesting paper, worthy of inclusion in the workshop. As mentioned, there are two aspects to the problem, extraction of information from web pages and subsequent processing of that information - the former is probably more relevant to the workshop but this paper concentrates on the latter topic. The authors use a version of inductive logic programming to create a classifier for accident reports. The use of ILP to handle fuzzy problems is interesting and more widely applicable.
+The key unanswered question is how negation is handled within the fuzzy embedding in ILP - fig 6 uses negation but the authors do not discuss this aspect as far as I can see.
+There are a number of spelling / grammar errors, although the paper is generally understandable. (“weather” in section 3.1. should be “whether”), and the layout is odd on p3 where footnotes appear halfway down the first column
+
+
+
+========================================================
+The review report from reviewer #2:
+
+*1: Is the paper relevant to Workshop?
+ [_] No
+ [X] Yes
+
+*2: How innovative is the paper?
+ [_] 5 (Very innovative)
+ [X] 4 (Innovative)
+ [_] 3 (Marginally)
+ [_] 2 (Not very much)
+ [_] 1 (Not)
+ [_] 0 (Not at all)
+
+*3: How would you rate the technical quality of the paper?
+ [_] 5 (Very high)
+ [X] 4 (High)
+ [_] 3 (Good)
+ [_] 2 (Needs improvement)
+ [_] 1 (Low)
+ [_] 0 (Very low)
+
+*4: How is the presentation?
+ [_] 5 (Excellent)
+ [_] 4 (Good)
+ [X] 3 (Above average)
+ [_] 2 (Below average)
+ [_] 1 (Fair)
+ [_] 0 (Poor)
+
+*5: Is the paper of interest to Workshop users and practitioners?
+ [X] 3 (Yes)
+ [_] 2 (May be)
+ [_] 1 (No)
+ [_] 0 (Not applicable)
+
+*6: What is your confidence in your review of this paper?
+ [X] 2 (High)
+ [_] 1 (Medium)
+ [_] 0 (Low)
+
+*7: Overall recommendation
+ [_] 5 (Strong Accept: top quality)
+ [X] 4 (Accept: a regular paper)
+ [_] 3 (Weak Accept: could be a poster)
+ [_] 2 (Weak Reject: don't like it, but won't argue to reject it)
+ [_] 1 (Reject: will argue to reject it)
+ [_] 0 (Strong Reject: hopeless)
+
+Detailed comments for the authors:
+It is a very interesting paper. I like the idea a lot.
+I understand that it is a short paper – I wish authors put a bit more description of the experiments they conducted.
+In Section 3.2 you have a statement: “We have divided the values into four approximately equipotent groups and learned logic rules for each group separately.” – Those logic rules were learned automatically, right? Please, make it clear.
+
+I think that Figure 7 needs more explanation. The terms like TP, FP, precision, recall, F-measure could not be know to some people. At least make a reference to classification processes and their evaluation measure, maybe some book/paper.
+In Figure 7 you have “fuzzy test set” – any comment what exactly it is. In Section 2.2 you have descriptions how to create example sets Et and E>t (both are named crisp?). Are those sets “generated” for a fuzzy test set? Is a fuzzy test set an original (unprocessed set)? What is a meaning of Pt and Nt in descriptions of Et, and P>t and N>t in E>t? Please, clarify those issues.
+The results presented in Figure 7 – you have a statement: “Then the comparison of both learnings is possible, see white areas of Fig7.” – can you provide more description here? Any meaning for green and red areas there?
+
+Please, do not use colors in your paper (especially Table 7), when printed your paper will be in black and white.
+
+English should be improved.
+
+
+========================================================
+The review report from reviewer #3:
+
+*1: Is the paper relevant to Workshop?
+ [_] No
+ [X] Yes
+
+*2: How innovative is the paper?
+ [_] 5 (Very innovative)
+ [X] 4 (Innovative)
+ [_] 3 (Marginally)
+ [_] 2 (Not very much)
+ [_] 1 (Not)
+ [_] 0 (Not at all)
+
+*3: How would you rate the technical quality of the paper?
+ [_] 5 (Very high)
+ [_] 4 (High)
+ [X] 3 (Good)
+ [_] 2 (Needs improvement)
+ [_] 1 (Low)
+ [_] 0 (Very low)
+
+*4: How is the presentation?
+ [_] 5 (Excellent)
+ [_] 4 (Good)
+ [X] 3 (Above average)
+ [_] 2 (Below average)
+ [_] 1 (Fair)
+ [_] 0 (Poor)
+
+*5: Is the paper of interest to Workshop users and practitioners?
+ [X] 3 (Yes)
+ [_] 2 (May be)
+ [_] 1 (No)
+ [_] 0 (Not applicable)
+
+*6: What is your confidence in your review of this paper?
+ [X] 2 (High)
+ [_] 1 (Medium)
+ [_] 0 (Low)
+
+*7: Overall recommendation
+ [_] 5 (Strong Accept: top quality)
+ [X] 4 (Accept: a regular paper)
+ [_] 3 (Weak Accept: could be a poster)
+ [_] 2 (Weak Reject: don't like it, but won't argue to reject it)
+ [_] 1 (Reject: will argue to reject it)
+ [_] 0 (Strong Reject: hopeless)
+
+Detailed comments for the authors:
+The paper describes a fuzzy system which provides a fuzzy classification of textual web reports. Besides, the work presents a prototype of a tool to improve the classification tasks in textual web reports. The paper is quite interesting and relevant to the workshop, but the authors often take for granted some concepts defined in their previous papers. The paper is well structured, although the English should be improved.
+
+The approach is based on usage of third party linguistic analyzers and the reports are manually extracted. Is it possible to automate these process?
+Please briefly comment on that.
+
+The sections 4 is short and somewhat few technical one. This section benefit of a revision, necessary to discuss the results and to explain better the evaluation results.
+
+Figure 2 is more a Table than a figure and it could be closer to the section 3.1. Figures 7 need notation details.
+
+In the future works, it could be useful to use automatic approaches in order to extract information from web reports. It could be interesting taking in account the work of Liu, Grossman and Zhai (B. Liu and R. Grossman and Y. Zhai, Mining Data Records in Web Pages, Proceedings of the SIGKDD 2003)
+
+
+========================================================
+
+

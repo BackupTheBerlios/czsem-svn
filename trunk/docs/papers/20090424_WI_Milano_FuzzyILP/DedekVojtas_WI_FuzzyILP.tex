@@ -1,5 +1,3 @@
-%\documentstyle[times,art10,twocolumn,latex8]{article}
-
 \documentclass[times, 10pt,twocolumn]{article} 
 \usepackage{latex8}
 \usepackage{times}
@@ -23,17 +21,18 @@
 
 \title{Fuzzy Classification of Web Reports with Linguistic Text Mining}
 
-\author{Jan Dedek\\
-Department of Software Engineering\\
-Charles University in Prague, Czech Republic\\
-email: jan.dedek@mff.cuni.cz
-\and
-Peter Vojtas\\
-Department of Software Engineering\\
-Charles University in Prague, Czech Republic\\
-peter.vojtas@mff.cuni.cz\\
+\author{Jan Dedek and Peter Vojtas\\
+Department of Software Engineering, Charles University\\
+Institute of Computer Science, Czech Academy of Science\\
+Prague, Czech Republic\\
+email: \{jan.dedek, peter.vojtas\}@mff.cuni.cz
+%\and
+%Peter Vojtas\\
+%Department of Software Engineering, Charles University\\
+%Institute of Computer Science, Czech Academy of Science\\
+%Prague, Czech Republic\\
+%peter.vojtas@mff.cuni.cz\\
 }
-
 
 \maketitle              % typesets the title of the contribution
 \thispagestyle{empty}
@@ -246,30 +245,6 @@ C(y):u(x_1,\dots,x_m)\leftarrow B_1:x_1 \&\dots\& B_n:x_m,
 $$
 is a correct solution to fuzzy ILP task given by ${\mathcal E}$ and ${\mathcal B}$. Our presentation is here a little bit simplified and we freely switch between fuzzy and GAP programs, which are know to be equivalent, see  \cite{biblio:KLV}.
 
-
-\begin{figure}
-\centerline{\includegraphics[width=.7\hsize]{img/attributes_description}}
-\caption{Accident attributes.}
-\label{img:attributes_description}
-\end{figure}
-
-\begin{figure}[b!]
-Crisp learning examples\\
-\centerline{\includegraphics[width=.8\hsize]{img/examples_nonmonot}}
-Monotonized learning examples\\
-\centerline{\includegraphics[width=.8\hsize]{img/examples_monot}}
-\caption{Learning examples.}
-\label{img:examples}
-\end{figure}
-
-\begin{figure}[b!]
-damage $\rightarrow$ damage\_atl\\
-\centerline{\includegraphics[width=.8\hsize]{img/attribute_monotonisation}}
-\caption{Monotonization of attributes.}
-\label{img:attribute_monotonization}
-\end{figure}
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The system prototype and our experiment}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -295,6 +270,12 @@ We have compared results of the two approaches (fuzzy and classical) and we coul
 
 
 
+\begin{table}
+\centerline{\includegraphics[width=.7\hsize]{img/attributes_description}}
+\caption{Accident attributes.}
+\label{img:attributes_description}
+\end{table}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Features of accidents} \label{sec:features}
@@ -302,22 +283,44 @@ We have compared results of the two approaches (fuzzy and classical) and we coul
 
 
 
-Figure \ref{img:attributes_description} summarizes all features (or attributes) that we have obtained from accident reports. Except the attribute \verb+type+ (type of an accident -- \verb+fire+, \verb+car_accident+ and \verb+other+) all the attributes are numerical and so monotonizable. In some cases value of some attribute is unknown. We have decided to make evidence of this and keep the values \verb+unknown+ in a knowledge base. Short explanation of each attribute follows.
+Table \ref{img:attributes_description} summarizes all features (or attributes) that we have obtained from accident reports. Except the attribute \verb+type+ (type of an accident -- \verb+fire+, \verb+car_accident+ and \verb+other+) all the attributes are numerical and so monotonizable. In some cases value of some attribute is unknown. We have decided to make evidence of this and keep the values \verb+unknown+ in a knowledge base. Short explanation of each attribute follows.
 \newline
 \verb+size+ is a file size of text part of a report.\\
 	\verb+damage+ is an amount (in CZK -- Czech Crowns) of summarized damage arisen during an accident.\\
-	\verb+dur_minutes+ is time (minutes) taken to handle an accident.\\
+	\verb+dur_minutes+ is time taken to handle an accident.\\
 	\verb+fatalities+ and \verb+injuries+ are numbers of fatalities (and injuries) taken by an accident.\\
 	\verb+cars+ is number of cars damaged during an accident (especially during car accidents).\\
 	\verb+professional_units+ and \verb+amateur_units+ are numbers of fireman units sent for an accident.\\
 	\verb+pipes+ is number of  used fire pipes.\\
-	\verb+lather+, \verb+aqualung+ and \verb+fan+ (ventilator) indicates weather these devices were used.
+	\verb+lather+, \verb+aqualung+ and \verb+fan+ (ventilator) indicates whether these devices were used.
+
+
+
+\begin{figure}[t!]
+Crisp learning examples\\
+\centerline{\includegraphics[width=.8\hsize]{img/examples_nonmonot}}
+Monotonized learning examples\\
+\centerline{\includegraphics[width=.8\hsize]{img/examples_monot}}
+\caption{Learning examples.}
+\label{img:examples}
+\end{figure}
+
+\begin{figure}[t!]
+damage $\rightarrow$ damage\_atl\\
+\centerline{\includegraphics[width=.8\hsize]{img/attribute_monotonisation}}
+\caption{Monotonization of attributes.}
+\label{img:attribute_monotonization}
+\vspace{-0.5cm}
+\end{figure}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Seriousness ranking} \label{sec:seriousness}
+%\subsection{Seriousness ranking} \label{sec:seriousness}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\vspace{0.2cm}
+\noindent \textbf{Seriousness ranking}
 
 %\begin{figure}
 %\centerline{\includegraphics[width=\hsize]{img/ranking_histogram}}
@@ -325,12 +328,12 @@ Figure \ref{img:attributes_description} summarizes all features (or attributes) 
 %\label{img:ranking_histogram}
 %\end{figure}
 
-Values of overall seriousness ranking attribute were stated from ``general impression'' from report's texts with respect to the particular attributes. %(Fig~\ref{img:attributes_description}). 
+\noindent Values of overall seriousness ranking attribute were stated from ``general impression'' from report's texts with respect to the particular attributes. %(Fig~\ref{img:attributes_description}). 
 Values of seriousness ranking have evolved to 14 distinct values in range form 0.5 to 8. 
 %Histogram with frequencies of all the values is on the Figure~\ref{img:ranking_histogram}.
 We have divided the values into four approximately equipotent groups 
 %(shown on the Fig.~\ref{img:ranking_histogram}) 
-and learned logic rules for each group separately.
+and logic rules were learned for each group separately\footnote{We do not have a binary rule which would return an exact value of the rating, but we have one ``true/false'' rule for each of the four categories.}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -379,30 +382,23 @@ For the construction of monotonized set of background knowledge $B^{mon}_T$ we u
 %\end{figure}
 
 
+\vspace{-0.75cm}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Results} \label{sec:results}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
+\vspace{-0.15cm}
 
 The Fig~\ref{img:rules} summarizes sets of obtained rules from two experiments: 
-\\(1) experiments with $E_t$ and $B^{raw}_{T}$
-\\(2) experiments with $E_{\ge t}, {B}^{mon}_T$.
-
+(1) experiments with $E_t$ and $B^{raw}_{T}$ and (2) experiments with $E_{\ge t}, {B}^{mon}_T$.
+The Fig~\ref{img:evaluation} shows the success these rules on the test data (not used during learning). Naturally monotonized hypotheses $H_{\ge t}$ were tested on monotonized examples $E_{\ge t}$ (double-line frame in the Fig~\ref{img:rules}) and similarly for the for the crisp case $H_t, E_t$ (dashed-line frame).
 %Experiments with $E_t$ and $B^{raw}_{T}$ %Results of experiments with $E_t$ and $B^{raw}_{T}$ 
 %gave following rule set, see Fig~\ref{img:rules_nonmonot}.
-
-Evaluation of learning is depicted in the Fig~\ref{img:evaluation}.
-
+%Evaluation of learning is depicted in the Fig~\ref{img:evaluation}.
 %\subsection{Experiments $E_{\ge t}, {B}^{mon}_T$}
-
-
-
 %Evaluation of learning is depicted in the green area of Fig~\ref{img:evaluation}.
-
 %\subsection{Evaluation and comparison }
-
-We wanted to compare raw and monotonized learning tasks. As they run on different example sets we had translate results of one learning (rules with head \texttt{serious\_t}) to results of second learning (rules with head \texttt{serious\_atl\_t}). Logic programming translation rules are depicted on Fig~\ref{img:monot2nomon_and_invert}.
+We wanted to compare raw and monotonized learning tasks. As they run on different example sets we had to translate results of one learning (rules with head \texttt{serious\_t}) to results of second learning (rules with head \texttt{serious\_atl\_t}). Logic programming translation rules are depicted on the Fig~\ref{img:monot2nomon_and_invert}.
+Then the comparison of both learnings is possible, see white areas of Fig~\ref{img:evaluation}.
 
 
 \begin{figure}
@@ -430,7 +426,6 @@ monotone $\rightarrow$ crisp\\
 %\label{img:monot2nomon}
 %\end{figure}
 
-Then the comparison of both learnings is possible, see white areas of Fig~\ref{img:evaluation}.
 
 
 
@@ -443,16 +438,14 @@ Then the comparison of both learnings is possible, see white areas of Fig~\ref{i
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-In this paper we have presented a fuzzy system which provides a fuzzy classification of textual web reports. Our approach was based on usage of third party linguistic analyzer, our previous work on web information extraction and fuzzy inductive logic programming. Main contributions are formal models and prototype implementation of the system and evaluation experiments with the Fuzzy ILP classification method. 
-
-Experiments have shown better results of fuzzy approach. We see the difference in the fact that monotonization leads to the extension of the learning domain.
+In this paper we have presented a fuzzy system which provides a fuzzy classification of textual web reports. Our approach was based on usage of third party linguistic analyzer, our previous work on web information extraction and fuzzy inductive logic programming. Main contributions are formal models and prototype implementation of the system and evaluation experiments with the Fuzzy ILP classification method. Experiments have shown better results of fuzzy approach. We see the difference in the fact that monotonization leads to the extension of the learning domain.
 
 %Use of ILP was necessary for multirelational character of extracted data (relational representation of XML like form of PDT2.0 tectogramatical trees). 
 %
 %System need user assistance: of a skilled user in annotating data for extraction and an unskilled user for classification of a small training example set. This feature is especially important, because in Internet application, we cannot expect an unskilled user to classify a big number of examples 
 
 \section*{Acknowledgment}
-This work was partially supported by Czech projects IS-1ET100300517, GACR-201/09/H057 and MSM-0021620838.
+This work was partially supported by Czech projects: \\IS-1ET100300517, GACR-201/09/H057, GAUK 31009 and MSM-0021620838.
 
 
 
