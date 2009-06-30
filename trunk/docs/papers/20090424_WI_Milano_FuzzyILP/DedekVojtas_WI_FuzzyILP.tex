@@ -1,6 +1,4 @@
-\documentclass[times, 10pt,twocolumn]{article} 
-\usepackage{latex8}
-\usepackage{times}
+\documentclass[10pt, conference, compsocconf]{IEEEtran}
 
 \usepackage{graphicx,times,amsmath} % Add all your packages here
 \usepackage{amsfonts}
@@ -20,19 +18,27 @@
 \begin{document}
 
 \title{Fuzzy Classification of Web Reports with Linguistic Text Mining}
-
-\author{Jan Dedek and Peter Vojtas\\
-Department of Software Engineering, Charles University\\
-Institute of Computer Science, Czech Academy of Science\\
-Prague, Czech Republic\\
-email: \{jan.dedek, peter.vojtas\}@mff.cuni.cz
-%\and
-%Peter Vojtas\\
+%
+%\author{Jan Dedek and Peter Vojtas\\
 %Department of Software Engineering, Charles University\\
 %Institute of Computer Science, Czech Academy of Science\\
 %Prague, Czech Republic\\
-%peter.vojtas@mff.cuni.cz\\
+%email: \{jan.dedek, peter.vojtas\}@mff.cuni.cz
+%%\and
+%%Peter Vojtas\\
+%%Department of Software Engineering, Charles University\\
+%%Institute of Computer Science, Czech Academy of Science\\
+%%Prague, Czech Republic\\
+%%peter.vojtas@mff.cuni.cz\\
+%}
+
+\author{\IEEEauthorblockN{Jan Dedek, Peter Vojtas}
+\IEEEauthorblockA{Department of Software Engineering, Charles University\\
+Institute of Computer Science, Czech Academy of Science\\
+Prague, Czech Republic\\
+\{dedek,vojtas\}@ksi.mff.cuni.cz}
 }
+
 
 \maketitle              % typesets the title of the contribution
 \thispagestyle{empty}
@@ -192,12 +198,17 @@ Here we refer to our previous work %\cite{biblio:DeVoLinguisticextraction2008,bi
 In our presentation of Inductive Logic Programming (ILP) we follow \cite{dzeroski2001:relat_dm} and  \cite{biblio:Muggleton94inductivelogic}, for fuzzy Inductive Logic Programming (fILP) we follow the paper of T. Horvath and P. Vojtas \cite{biblio:FILP} about fuzzy inductive logic programming.
 
 We use the approach of the fuzzy logic in narrow sense developed by J. Pavelka \cite{biblio:Pavelka} and P. Hajek \cite{biblio:Hajek}. Formulas are of the form $\varphi, x$ ($\varphi$ is syntactically same as in the crisp case) are graded by a truth value $x\in [0,1]$.
-A structure ${\mathcal M}$ consist of domain $M$ and relations are interpreted fuzzy (we do not consider function symbols here). Evaluation $\left\|\varphi\right\|_{{\mathcal M}}$ of a formula $\varphi$ uses truth functions of many valued connectives (our logic is extensional and/or truth functional). Satisfaction is defined by ${\mathcal M}\models_f (\varphi, x)\ iff\ \left\|\varphi\right\|_{{\mathcal M}}\ge x$
+A structure ${\mathcal M}$ consist of domain $M$ and relations are interpreted fuzzy (we do not consider function symbols here). Evaluation $\left\|\varphi\right\|_{{\mathcal M}}$ of a formula $\varphi$ uses truth functions of many valued connectives (our logic is extensional and/or truth functional). Satisfaction is defined by 
+$${\mathcal M}\models_f (\varphi, x)\ iff\ \left\|\varphi\right\|_{{\mathcal M}}\ge x$$
 
 Given is a fuzzy set of examples ${\mathcal E}:E\longrightarrow [0,1]$ and a fuzzy background knowledge ${\mathcal B}:B\longrightarrow [0,1]$. The task is to find a fuzzy hypothesis ${\mathcal H}:H\longrightarrow [0,1]$ such that 
 
-$(\forall e,f\in E)(\forall {\mathcal M})({\mathcal M}\models_f {\mathcal B}\cup {\mathcal H})$
-we have\\ ${\mathcal E}(e)>{\mathcal E}(f)\Rightarrow \left\|e\right\|_{{\mathcal M}}\ge \left\|f\right\|_{{\mathcal M}}.$ That is, it cannot happen that ${\mathcal E}(e)>{\mathcal E}(f) \wedge \left\|e\right\|_{{\mathcal M}}< \left\|f\right\|_{{\mathcal M}},$ or rephrased, if ${\mathcal E}$ is rating $e$ higher than $f$, then it can not happen in a model of ${\mathcal B}\cup {\mathcal H}$ that $e$ is rated worse than $f$.
+$$(\forall e,f\in E)(\forall {\mathcal M})({\mathcal M}\models_f {\mathcal B}\cup {\mathcal H})$$
+we have
+$${\mathcal E}(e)>{\mathcal E}(f)\Rightarrow \left\|e\right\|_{{\mathcal M}}\ge \left\|f\right\|_{{\mathcal M}}.$$
+That is, it cannot happen that
+$${\mathcal E}(e)>{\mathcal E}(f) \wedge \left\|e\right\|_{{\mathcal M}}< \left\|f\right\|_{{\mathcal M}},$$
+or rephrased, if ${\mathcal E}$ is rating $e$ higher than $f$, then it can not happen in a model of ${\mathcal B}\cup {\mathcal H}$ that $e$ is rated worse than $f$.
 
 Typically, ${\mathcal E}$ consists of ground instances of the target predicate which are  classified in truth degrees - in our case degree of seriousness of an accident. ${\mathcal B}$ typically consists of several fuzzy predicates (fuzzy relational tables) which describe properties of object which have to be classified - in our case fuzzy properties of accidents - degree of injury, degree of damage, .... 
 %Background knowledge can contain also some rules, so far only crisp rules are used.
@@ -316,11 +327,11 @@ damage $\rightarrow$ damage\_atl\\
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\subsection{Seriousness ranking} \label{sec:seriousness}
+\subsection{Seriousness ranking} \label{sec:seriousness}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\vspace{0.2cm}
-\noindent \textbf{Seriousness ranking}
+%\vspace{0.2cm}
+%\noindent \textbf{Seriousness ranking}
 
 %\begin{figure}
 %\centerline{\includegraphics[width=\hsize]{img/ranking_histogram}}
@@ -364,7 +375,7 @@ For the construction of monotonized set of background knowledge $B^{mon}_T$ we u
 
 
 \begin{figure}
-\centerline{\includegraphics[width=\hsize,height=\hsize]{img/rules}}
+\centerline{\includegraphics[width=\hsize,height=1.2\hsize]{img/rules}}
 \caption{Crisp \& monotonized hypothesis}
 \label{img:rules}
 \end{figure}
@@ -382,23 +393,37 @@ For the construction of monotonized set of background knowledge $B^{mon}_T$ we u
 %\end{figure}
 
 
-\vspace{-0.75cm}
+%\vspace{-0.75cm}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Results} \label{sec:results}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\vspace{-0.15cm}
+%\vspace{-0.15cm}
 
 The Fig~\ref{img:rules} summarizes sets of obtained rules from two experiments: 
-(1) experiments with $E_t$ and $B^{raw}_{T}$ and (2) experiments with $E_{\ge t}, {B}^{mon}_T$.
-The Fig~\ref{img:evaluation} shows the success these rules on the test data (not used during learning). Naturally monotonized hypotheses $H_{\ge t}$ were tested on monotonized examples $E_{\ge t}$ (double-line frame in the Fig~\ref{img:rules}) and similarly for the for the crisp case $H_t, E_t$ (dashed-line frame).
+\begin{enumerate}
+	\item experiments with $E_t$ and $B^{raw}_{T}$ 
+	\item experiments with $E_{\ge t}, {B}^{mon}_T$.
+\end{enumerate}
+In both experiments learning and testing examples and the background knowledge had their origin in the same data (the same accidents) but they differ in the form of the ILP task (crisp and monotonized). The Fig~\ref{img:evaluation} shows the success of these rules on the test data (not used during learning). We have used standard performance measures\footnote{\url{http://en.wikipedia.org/wiki/Precision_and_recall}} often used in information retrieval. There are also exact numbers of \emph{true positives} TP and \emph{false positives} FP from which the performance measures were computed (with respect to the numbers of all testing examples\footnote{These numbers are written in the Fig~\ref{img:evaluation} in small frames under each test set label.}).
+
+Naturally monotonized hypotheses $H_{\ge t}$ were tested on monotonized examples $E_{\ge t}$ (double-line frame in the Fig~\ref{img:rules}) and similarly for the crisp case $H_t, E_t$ (dashed-line frame in the Fig~\ref{img:rules}).
 %Experiments with $E_t$ and $B^{raw}_{T}$ %Results of experiments with $E_t$ and $B^{raw}_{T}$ 
 %gave following rule set, see Fig~\ref{img:rules_nonmonot}.
 %Evaluation of learning is depicted in the Fig~\ref{img:evaluation}.
 %\subsection{Experiments $E_{\ge t}, {B}^{mon}_T$}
 %Evaluation of learning is depicted in the green area of Fig~\ref{img:evaluation}.
 %\subsection{Evaluation and comparison }
-We wanted to compare raw and monotonized learning tasks. As they run on different example sets we had to translate results of one learning (rules with head \texttt{serious\_t}) to results of second learning (rules with head \texttt{serious\_atl\_t}). Logic programming translation rules are depicted on the Fig~\ref{img:monot2nomon_and_invert}.
-Then the comparison of both learnings is possible, see white areas of Fig~\ref{img:evaluation}.
+
+We wanted to compare raw and monotonized learning tasks. As they run on different example sets we had to translate results of one learning (rules with head \texttt{serious\_t}) to results of second learning (rules with head \texttt{serious\_atl\_t}). Logic programming translation rules are depicted on the Fig~\ref{img:monot2nomon_and_invert}. Here the negation ``\texttt{not(serious\_atl\_3(ID))}'' means a standard Prolog \emph{negation as failure}. 
+
+Then the comparison of both learnings is possible, see the numbers in white areas of Fig~\ref{img:evaluation}.
+
+
+\begin{figure}
+\centerline{\includegraphics[width=0.8\hsize]{img/Evaluation}}
+\caption{Evaluation results}
+\label{img:evaluation}
+\end{figure}
 
 
 \begin{figure}
@@ -427,18 +452,14 @@ monotone $\rightarrow$ crisp\\
 %\end{figure}
 
 
-
-
-\begin{figure}
-\centerline{\includegraphics[width=0.8\hsize]{img/Evaluation}}
-\caption{Evaluation results}
-\label{img:evaluation}
-\end{figure}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-In this paper we have presented a fuzzy system which provides a fuzzy classification of textual web reports. Our approach was based on usage of third party linguistic analyzer, our previous work on web information extraction and fuzzy inductive logic programming. Main contributions are formal models and prototype implementation of the system and evaluation experiments with the Fuzzy ILP classification method. Experiments have shown better results of fuzzy approach. We see the difference in the fact that monotonization leads to the extension of the learning domain.
+In this paper we have presented a fuzzy system which provides a fuzzy classification of textual web reports. Our approach was based on usage of third party linguistic analyzer, our previous work on web information extraction and fuzzy inductive logic programming.
+
+Main contributions are formal models and prototype implementation of the system and evaluation experiments with the Fuzzy ILP classification method.
+
+Experiments have shown better results of fuzzy approach. We see the difference in the fact that monotonization leads to the extension of the learning domain.
 
 %Use of ILP was necessary for multirelational character of extracted data (relational representation of XML like form of PDT2.0 tectogramatical trees). 
 %
@@ -449,7 +470,7 @@ This work was partially supported by Czech projects: \\IS-1ET100300517, GACR-201
 
 
 
-\bibliographystyle{latex8}
+\bibliographystyle{IEEEtran}
 \bibliography{DedekVojtas_WI_FuzzyILP}
 
 

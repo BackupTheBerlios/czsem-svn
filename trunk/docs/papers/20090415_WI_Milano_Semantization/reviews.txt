@@ -1,0 +1,210 @@
+Dear Jan Dedek, Alan Eckhardt, and Peter Vojtas,
+
+Thank you for your submission to the 2009 IEEE/WIC/ACM International
+Conference on Web Intelligence.  On behalf of the WI-2009 Program Committee,
+we are very sorry to inform you that your paper (Wr400),
+entitled
+
+"Web Semantization -- design and principles"
+
+has not been accepted to the conference.
+
+IEEE/WIC/ACM WI-2008 is a highly selective conference; only
+16% of the 343 submissions were accepted as
+regular papers and 18% of the submissions were accepted as
+short papers. Papers went through a rigorous review process.
+Most papers were reviewed by three program committee members.
+
+We hope that you still participate in the conference as we are planning an exciting technical program and social program.
+In addition to sessions for presenting accepted papers, we have
+WI invited speakers (and IAT invited speakers), two WI-IAT tutorials,
+22 WI-IAT workshops, one WI-IAT industry/demo session,
+as well as the reception, and banquet. A regular registration will cover
+all the events during 4 conference days.
+
+The conference will take place at the University of
+Milano Bicocca. The hotel reservation information will be
+available shortly at the WI 2009 homepage.
+
+Sincerely yours,
+
+Ricardo Baeza-Yates
+Program Chair
+
+Bettina Berendt, Elisa Bertino & Ee-Peng Lim
+WI-Track Program Co-chairs
+
+-------------------------------------------------
+
+=====================================================================
+
+       --========  Review Reports  ========--
+
+The review report from reviewer #1:
+
+*1: Is the paper relevant to WI?
+ [_] No
+ [X] Yes
+
+*2: How innovative is the paper?
+ [_] 5 (Very innovative)
+ [_] 4 (Innovative)
+ [X] 3 (Marginally)
+ [_] 2 (Not very much)
+ [_] 1 (Not)
+ [_] 0 (Not at all)
+
+*3: How would you rate the technical quality of the paper?
+ [_] 5 (Very high)
+ [_] 4 (High)
+ [_] 3 (Good)
+ [X] 2 (Needs improvement)
+ [_] 1 (Low)
+ [_] 0 (Very low)
+
+*4: How is the presentation?
+ [_] 5 (Excellent)
+ [_] 4 (Good)
+ [_] 3 (Above average)
+ [X] 2 (Below average)
+ [_] 1 (Fair)
+ [_] 0 (Poor)
+
+*5: Is the paper of interest to WI users and practitioners?
+ [_] 3 (Yes)
+ [X] 2 (May be)
+ [_] 1 (No)
+ [_] 0 (Not applicable)
+
+*6: What is your confidence in your review of this paper?
+ [X] 2 (High)
+ [_] 1 (Medium)
+ [_] 0 (Low)
+
+*7: Overall recommendation
+ [_] 5 (Strong Accept: top quality)
+ [_] 4 (Accept: a regular paper)
+ [_] 3 (Weak Accept: could be a poster or a short paper)
+ [X] 2 (Weak Reject: don't like it, but won't argue to reject it)
+ [_] 1 (Reject: will argue to reject it)
+ [_] 0 (Strong Reject: hopeless)
+
+Detailed comments for the authors:
+Reference are incomplete, for instance 7, 8, 16, ...
+
+It is necessary only to include the number of the reference in the concerned
+paragraph, without including all the authors.
+
+Some figures are not clear and they are not explained.
+
+
+
+========================================================
+The review report from reviewer #2:
+
+*1: Is the paper relevant to WI?
+ [_] No
+ [X] Yes
+
+*2: How innovative is the paper?
+ [_] 5 (Very innovative)
+ [_] 4 (Innovative)
+ [X] 3 (Marginally)
+ [_] 2 (Not very much)
+ [_] 1 (Not)
+ [_] 0 (Not at all)
+
+*3: How would you rate the technical quality of the paper?
+ [_] 5 (Very high)
+ [_] 4 (High)
+ [_] 3 (Good)
+ [X] 2 (Needs improvement)
+ [_] 1 (Low)
+ [_] 0 (Very low)
+
+*4: How is the presentation?
+ [_] 5 (Excellent)
+ [_] 4 (Good)
+ [_] 3 (Above average)
+ [X] 2 (Below average)
+ [_] 1 (Fair)
+ [_] 0 (Poor)
+
+*5: Is the paper of interest to WI users and practitioners?
+ [_] 3 (Yes)
+ [X] 2 (May be)
+ [_] 1 (No)
+ [_] 0 (Not applicable)
+
+*6: What is your confidence in your review of this paper?
+ [X] 2 (High)
+ [_] 1 (Medium)
+ [_] 0 (Low)
+
+*7: Overall recommendation
+ [_] 5 (Strong Accept: top quality)
+ [_] 4 (Accept: a regular paper)
+ [_] 3 (Weak Accept: could be a poster or a short paper)
+ [X] 2 (Weak Reject: don't like it, but won't argue to reject it)
+ [_] 1 (Reject: will argue to reject it)
+ [_] 0 (Strong Reject: hopeless)
+
+Detailed comments for the authors:
+The idea of Web Semantization has been proposed before for Semantization of Legacy Web Services and quite a bit of work has been done.
+
+This paper does not provide evidence that the proposed technique makes any advancement w.r.t. the state of the art. In the result evaluation section a comparison with other approaches should be inserted in order to demonstrate the advantages of the proposed technique.
+
+========================================================
+The review report from reviewer #3:
+
+*1: Is the paper relevant to WI?
+ [_] No
+ [X] Yes
+
+*2: How innovative is the paper?
+ [_] 5 (Very innovative)
+ [_] 4 (Innovative)
+ [X] 3 (Marginally)
+ [_] 2 (Not very much)
+ [_] 1 (Not)
+ [_] 0 (Not at all)
+
+*3: How would you rate the technical quality of the paper?
+ [_] 5 (Very high)
+ [_] 4 (High)
+ [X] 3 (Good)
+ [_] 2 (Needs improvement)
+ [_] 1 (Low)
+ [_] 0 (Very low)
+
+*4: How is the presentation?
+ [_] 5 (Excellent)
+ [_] 4 (Good)
+ [X] 3 (Above average)
+ [_] 2 (Below average)
+ [_] 1 (Fair)
+ [_] 0 (Poor)
+
+*5: Is the paper of interest to WI users and practitioners?
+ [_] 3 (Yes)
+ [X] 2 (May be)
+ [_] 1 (No)
+ [_] 0 (Not applicable)
+
+*6: What is your confidence in your review of this paper?
+ [X] 2 (High)
+ [_] 1 (Medium)
+ [_] 0 (Low)
+
+*7: Overall recommendation
+ [_] 5 (Strong Accept: top quality)
+ [_] 4 (Accept: a regular paper)
+ [X] 3 (Weak Accept: could be a poster or a short paper)
+ [_] 2 (Weak Reject: don't like it, but won't argue to reject it)
+ [_] 1 (Reject: will argue to reject it)
+ [_] 0 (Strong Reject: hopeless)
+
+Detailed comments for the authors:
+The paper describes an approach for automatically extracting information from the web using a combination of natural language processing and machine learning techniques. In general the approach is quite relevant and interesting as it provides as means for creating structured knowledge needed for supporting question answering on web contents. The actual work reported, however, seems to be quite preliminary. The experiments are rather examples that the approach might work than actual experiments that show th feasibility on a larger scale.
+
+========================================================
