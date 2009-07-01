@@ -1,0 +1,78 @@
+Vazeni autori,
+
+s radosti vam oznamujeme, ze vas prispevek
+
+   [(*NUMBER*)] (*AUTHORS*):
+   (*TITLE*)
+
+byl PRIJAT do sborniku CEUR. Do camera-ready verze prosim zapracujte pripominky oponentu z prilozenych posudku. Pro pripravu pouzijte konferencni LaTeXovou sablonu dostupnou na strankach konference:
+
+http://www.itat.cz/index.php/Site/InformaciePreAutorov
+
+Finalni verzi vlozte do systemu EasyChair v jednom souboru ve formatu .zip obsahujicim vsechny potrebne zdrojove soubory a pro kontrolu i vygenerovay .pdf
+
+Termin pro zaslani camera-ready verze je 12.7.2009
+
+Z prispevku prijatych do sborniku CEUR bude na konferenci vybran 'Best Paper' odmeneny hodnotnou cenou venovanou nasimi sponzory.
+
+
+Tesime se na setkani na Kralovej studni.
+
+
+Programovy vybor ITAT 09
+
+
+---------------------------------------------
+
+Paper: 9
+Title: Web Information Extraction Systems for Web Semantization
+
+
+-------------------- review 1 --------------------
+
+PAPER: 9
+TITLE: Web Information Extraction Systems for Web Semantization
+
+OVERALL RATING: 2 (local proceedings)
+vìdeckı pøínos pro IT (a u Aplikace nebo Teorie): 3 (èásteènı - napø. work in progress)
+zajímavost a dùleitost tématu pro IT (a u Aplikace nebo Teorie): 3 (zajímavé - øeší IT problém)
+kvalita prezentace - úplnost, pøesnost, srozumitelnost, jazyk: 4 (dobrá)
+celková kvalita èlánku: 3 (prùmìrná)
+
+----------------------- REVIEW --------------------
+
+Main contribution:
+The article presents a well made overview of recent web information extraction systems and their taxonomy. The semantic annotation of web content is sketched as well and two approaches for web information extraction are proposed. The first is based on structural similarity in web pages (e.g. tables in web shops). The second is based on deep linguistic analysis and it should use a rule-based method for extraction of information from text.
+
+Positive aspects:
+The paper deals with a particularly topical problem.
+Rich references.
+The style of writing.
+
+Negative aspects:
+The suggested solutions are not verified, a work in progress is presented.
+The introduced abbreviations should be used consistently.
+Spelling errors (e.g. in 2.2) have to be corrected.
+
+
+-------------------- review 2 --------------------
+
+PAPER: 9
+TITLE: Web Information Extraction Systems for Web Semantization
+
+OVERALL RATING: 3 (CEUR)
+vìdeckı pøínos pro IT (a u Aplikace nebo Teorie): 3 (èásteènı - napø. work in progress)
+zajímavost a dùleitost tématu pro IT (a u Aplikace nebo Teorie): 4 (velmi zajímavé - zmiòuje hot-topic IT problém)
+kvalita prezentace - úplnost, pøesnost, srozumitelnost, jazyk: 4 (dobrá)
+celková kvalita èlánku: 4 (dobrá)
+
+----------------------- REVIEW --------------------
+
+Èlánek je napsanı vhodnou a srozumitelnou formou.
+
+Autor nicménì nezmiòuje, jaké vısledky dosáhl s metodou strukturální podobnosti, kdy lze celkem oprávnìnì pøedpokládat, e stejné struktury nemusejí nutnì ukazovat na stejné domény.
+
+Metoda zaloená na jazykové podobnosti je v tomto ohledu sofistikovanìjší a bude zajímavé jakıch autor dosáhne vısledkù.
+
+
+

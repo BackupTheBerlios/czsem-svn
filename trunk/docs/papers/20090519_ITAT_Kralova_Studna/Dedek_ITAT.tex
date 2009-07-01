@@ -1,6 +1,8 @@
 \documentclass[a4paper]{itat}
 %\usepackage{slovak}
 
+
+
 \usepackage[cp1250]{inputenc}  % or [cp1250], or [latin2], or whatever
                                % suitable for your system
 
@@ -9,9 +11,13 @@
 
 \hyphenation{temp-late}
 
+
 \begin{document}
 \begin{twocolumn}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
 
 
 \title{Web Information Extraction Systems for Web Semantization}
@@ -24,7 +30,8 @@
 \institute{Department of software engineering, Faculty of Mathematics and Physics\\
 Charles University in Prague, Czech Republic\\
 \email{dedek@ksi.mff.cuni.cz}
-}
+\\Institute of Computer Science, Czech Academy of Science\\
+Prague, Czech Republic}
 
 \maketitle              % typeset the title of the contribution
 
@@ -102,7 +109,7 @@ A good example of domain specific information extraction system is SOBA \cite{bi
 \subsection{Form Specific}
 
 Beyond general applicable extraction methods there exist many methods that exploit specific form of the input resource. The linguistic approaches usually process text consisting of natural language sentences. The structure-oriented approaches can be strictly oriented on tables \cite{biblio:tables} or exploit repetitions of structural patterns on the web page \cite{biblio:repetitons} (such algorithm can be only applicable
-to pages that contain more than one data record), and there are also approaches that use the structure of whole site (e.g. site of single web shop with summary pages with products conected with links to pages with details about single product) \cite{biblio:extraction_detail_pages}. 
+to pages that contain more than one data record), and there are also approaches that use the structure of whole site (e.g. site of single web shop with summary pages with products connected with links to pages with details about single product) \cite{biblio:extraction_detail_pages}. 
 
 
 
@@ -129,7 +136,7 @@ There are classical tasks of text preprocessing and linguistic analysis like
 	\item[Coreference Resolution] (or \emph{anaphora resolution}) -- resolving what a pronoun, or a noun phrase refers to. These references often cross boundaries of a single sentence.
 \end{description}
 
-Besides these classical general applicable tasks, there are further well defined tasks, which are more closely related to the information extraction. These tasks are domain dependent. These tasks were widely developed in the MUC-6 conference 1995 \cite{biblio:MUC6} and considered as semantic evaluation in the first place. These information extraction tasks are:
+\noindent Besides these classical general applicable tasks, there are further well defined tasks, which are more closely related to the information extraction. These tasks are domain dependent. These tasks were widely developed in the MUC-6 conference 1995 \cite{biblio:MUC6} and considered as semantic evaluation in the first place. These information extraction tasks are:
 
 \begin{description}
 	\item[Named Entity Recognition:] This task recognizes and classifies named entities such as persons, locations, date or time expression, or measuring units. More complex patterns may also be recognized as structured entities such as addresses.
@@ -219,11 +226,24 @@ In this paper we tried to show the complexity of the problem of web semantizatio
 
 
 \section*{Acknowledgments}
-This work was partially supported by Czech projects 1ET100300517, 201/09/H057 Czech Science Foundation and MSM-0021620838.
-
+This work was partially supported by Czech projects: IS-1ET100300517, GACR-201/09/H057, GAUK 31009 and MSM-0021620838.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\bibliographystyle{plain}
-\bibliography{Dedek_ITAT}
+
+
+
+
+%With BibTeX
+%\bibliographystyle{plain}
+%\bibliography{Dedek_ITAT}
+
+
+
+
+%Without BibTeX
+\input{Dedek_ITAT_bbl}
+
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
