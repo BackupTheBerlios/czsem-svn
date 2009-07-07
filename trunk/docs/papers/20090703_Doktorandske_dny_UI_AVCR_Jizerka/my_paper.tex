@@ -1,0 +1,368 @@
+%%%  edit this file and my_styles.tex  only  !!!
+
+
+%%% coment or uncomment appropriate choice  1=yes, 0=no
+% \setcounter{Anglicky}{0}  %  NO
+\setcounter{Anglicky}{1}   % YES
+
+%
+%  do tohoto souboru nepatri konstrukce 
+%
+%\newtheorem{cosi}{}
+%\newenviroment{cosi}
+%\def\cosi#1{}
+%\def\cosi{}
+%\gdef\cosi
+%
+% vyse uvedene patri do my_styles.tex, a navic je potreba pred cosi pridat Vase jmeno ci
+% neco Vaseho jedinecneho -> zamezi se tak kolizim mezi stejne pouzitymi stringy "cosi" od
+% ruznych prispevku, stejne tak ruznym nezadoucim predefinovanim !!!
+%
+ 
+%
+% pri importu grafickych souboru .eps. .ps. vynechat extenzi. Ono si ji to doplnuje podle
+% druhu kompilatoru  LaTeX nebo pdfLaTeX. V pripade kompilace s pdfLaTeX musi byt k
+% dispozici odpovidajici .pdf nebo .jpg soubor.
+%
+%
+
+\Nazev{Fuzzy Classification of Web Reports with Linguistic Text Mining}    % required
+\RunningTitle{Fuzzy Classification of Web Reports}      % short name for page heading, or 
+                                        % the same as Nazev, required
+
+\Doktorand{Jan D\v{e}dek}               % full name, no abreviations,  required
+\DoktorandPredniTitul{Mgr.}             % required
+\DoktorandZadniTitul{}                  % required, if any
+
+\DokAdresa{\MFFUKMalaStrana}  % required,  \UIAVCR, \KMFJFI,
+                                                   % MUUKKarlin, \MFFUKMalaStrana  
+                                                   % and  \EUROMISE  are available, 
+                                                   % use it regardless of selected language
+
+\DokEmail{jan.dedek@mff.cuni.cz}        % required
+
+\OborStudia{Software engineering}           % required
+
+\Skolitel{Peter Vojt\'{a}\v{s}}                      % required
+\SkolitelPredniTitul{Prof. RNDr.}       % required !!!!!!
+\SkolitelZadniTitul{DrSc.}              % required !!!!!!
+
+\SkoAdresa{\MFFUKMalaStrana} % required,  \UIAVCR, \KMFJFI,
+                                        % MUUKKarlin, \MFFUKMalaStrana  
+                                        % and  \EUROMISE  are available, 
+                                        % use it regardless of selected language
+
+\SkoEmail{peter.vojtas@mff.cuni.cz}      % required
+
+\ThanksGiving{This work was partially supported by Czech projects: IS-1ET100300517, GACR-201/09/H057 and GAUK 31009.}
+% and MSM-0021620838.} 
+                                        % or empty if no support available
+
+\MakeContributionTitle
+
+\begin{multicols}{2}
+
+\begin{abstract}
+In this paper we present a fuzzy system which provides a fuzzy classification of textual web reports. Our approach is based on usage of third party linguistic analyzers, our previous work on web information extraction and fuzzy inductive logic programming. Main contributions are formal models and prototype implementation of the system and evaluation experiments. 
+
+\vspace{.2cm}
+
+The abstract was originally published in paper \cite{Dedek:FuzzWI}. Due to the copyright issues, only the abstract is presented here, extended with additional information that is not included in the original paper.
+\end{abstract}
+
+
+\section{Introduction}
+Please use the files {\tt my\_paper.tex} and {\tt my\_styles.tex} for your contribution to
+the DD ICS Workshop. Please {\bf edit those two files only} but do not try to compile them. 
+Instead the compilation of {\tt sbornik-dd-2007.tex} is correct way to produce your
+contribution. 
+
+Use  {\tt latex} for {\tt DVI} output and  {\tt pdflatex} for {\tt PDF} output.
+
+ 
+ If you need some additional \LaTeX2e styles, please put them into file {\tt
+   my\_styles.tex}. List of default styles included in proceeding can be seen in the
+ beginning of the file {\tt sbornik-dd-2007.tex}.
+If you need specify some special czech input method, edit the file {\tt my\_styles.tex}. 
+
+
+All your paper should be included in the file {\tt my\_paper.tex}. Usage of this file is
+the following:
+
+
+\begin{Verbatim}[fontsize=\relsize{-2}]
+\setcounter{Anglicky}{1}     
+      % 1 -> english, 0 -> czech
+\Nazev{Shortest way to Smaug's cave}
+      % required
+\RunningTitle{Shortest way to ...} 
+      % short name for page heading, or 
+      % the same as Nazev, required
+\Doktorand{Bilbo Baggins}     
+      % full name, no abreviations,  required
+\DoktorandPredniTitul{Mgr.}  
+      % required
+\DoktorandZadniTitul{}     
+      % required, if any
+\DokAdresa{Hole in the ground, The Hill, Hobbito}  
+      % required,  \UIAVCR, \KMFJFI,
+      % \MUUKKarlin, \MFFUKMalaStrana, \MechLiberec  
+      % and  \EUROMISE  are available, 
+      % use it regardless of selected language
+\DokEmail{bilbo@baggins.hill.ho}        
+      % required
+\OborStudia{Smaug's treasure}          
+      % required
+\Skolitel{Gandalf}          
+      % required
+\SkolitelPredniTitul{Prof. RNDr.}   
+      % required !!!!!!!!!!!!!!!!!!!!
+\SkolitelZadniTitul{DrSc.}    
+      % required !!!!!!!!!!!!!!!!!!!!, if any
+\SkoAdresa{unknown place of Wilderland} 
+      % required,  \UIAVCR, \KMFJFI,
+      % \MUUKKarlin, \MFFUKMalaStrana, \MechLiberec  
+      % and  \EUROMISE  are available, 
+      % use it regardless of selected language
+\SkoEmail{gandalf@mysteryland.mys} 
+      % required
+\ThanksGiving{This work was supported by my father, 
+              mother, spouse, dog and cat.} 
+      % or empty if no support available
+\MakeContributionTitle
+
+\begin{abstract}
+      some text of abstract ...
+\end{abstract}
+
+      some text of your paper ...
+
+\begin{thebibliography}{99}
+      some bibliography ...
+\end{thebibliography}
+\end{Verbatim}
+
+
+
+
+Please try to keep your paper as simple as possible from the typographical point of view,
+avoid {\tt $\backslash$newcommand}, {\tt $\backslash$def} or at least do not forget to
+undefine it (note that the preprint will be compiled at once) and do not use any special
+environments.
+
+If you use your own styles or some nonstandard styles please send these styles with your
+contribution together.
+
+
+It is strongly recommended to use cross-reference commands \verb#\ref{}#, \verb#\label{}#,
+\verb#\pageref{}# and \verb#\cite{}#. {\large\bf It is convenient to precede all your labels with the
+name of one author} to prevent multiple definition of the same label in different
+contributions (labels like \verb%\label{1}, \label{2} ... % can cause misreferences). See example:
+
+The next sentence: 
+
+Numbers \ref{BagginsNumberPi} and \ref{BagginsNumberE} on the page
+\pageref{BagginsNumberE} are basic quantities characterizing this instance of universe,
+where
+
+\begin{equation}
+\label{BagginsNumberPi}
+\pi = 3.141 592 653 589 793 238
+\end{equation}
+
+\noindent and
+
+\begin{equation}
+\label{BagginsNumberE}
+e = 2.718 281 828 459 045 235 .
+\end{equation}
+
+is produced by source code:
+
+\begin{Verbatim}[fontsize=\relsize{-2}]
+Numbers \ref{BagginsNumberPhi} and 
+\ref{BagginsNumberE} on the page 
+\pageref{BagginsNumberE} are basic 
+quantities characterizing this 
+instance of universe, where
+\begin{equation}
+\label{BagginsNumberPi} 
+   \phi = 3.141 592 653 589 793 238
+\end{equation}
+\noindent and
+\begin{equation}
+\label{BagginsNumberE} 
+   e = 2.718 281 828 459 045 235 .
+\end{equation}
+\end{Verbatim}
+
+
+Do not use lot of colors for text and for graphic too, if possible. Remember, final print
+will be in BW color scheme.
+
+
+\section{Figures including }
+
+Figures should be included as a postscript file level 2 with {\tt psfig.sty} or {\tt
+  graphicx.sty} package (note that some versions of MS WORD produce
+non compatible postscript files (e.g. converts vector graphics into bitmaps, hence size of
+result files is not acceptable). Check such files with Ghostview postscript interpreter.
+The syntax of including the figure \ref{BagginsSmaug} using style {\tt psfig.sty} is the
+following:
+
+
+\begin{Verbatim}[fontsize=\relsize{-2}]
+\begin{figure}
+\centerline{
+\psfig{file=baggins-dragon,width=5cm,height=4cm}}
+\caption{\label{BagginsSmaug}
+         Smaug certainly looked ...}
+\end{figure}
+\end{Verbatim}
+
+\begin{figure}
+\caption{\label{BagginsSmaug}Smaug certainly looked fast asleep, when Bilbo peeped once more from the
+  entrance. He was just about to step out onto the floor when he caught a sudden thin ray
+  of red from under the dropping lid of Smaug's left eye. He was pretending to sleep! He
+  was watching the tunnel entrance ...}
+\end{figure}
+
+
+The syntax of including the figure \ref{BagginsSmaugsHead} using
+style {\tt graphicx.sty} is the following:
+
+
+\begin{Verbatim}[fontsize=\relsize{-2}]
+\begin{figure}
+\centerline{
+   \includegraphics[scale=1.5, angle=180]
+                   {baggins-sm-head}
+}
+\caption{Detail of Smaug's head}
+\label{BagginsSmaugsHead}
+\end{figure}
+\end{Verbatim}
+
+
+
+\begin{figure}
+\caption{Detail of Smaug's head}
+\label{BagginsSmaugsHead}
+\end{figure}
+
+
+
+We strongly recommend to use names of graphic files {\bf without extension ({\tt .ps}, {\tt
+  .eps}, {\tt .pdf}}) because, default extension of graphic files for {\tt latex} is {\tt
+  .ps} or {\tt .eps} and default extension for {\tt pdflatex} is {\tt .pdf}. Hence, both
+PS and PDF format can be produced (of course, you should attach {\tt .pdf} version of
+your graphics).
+
+\end{multicols}
+
+
+
+
+
+
+In the case that you need insert wide portion of text (like big picture or great table) you
+can close the two column mode, insert desired text and than start two-column mode again. See
+next verbatim section for details:
+
+\begin{Verbatim}[fontsize=\relsize{-2}]
+\end{multicols} % close previous twocolumn mode
+
+..... any text in single column mode ......
+
+\begin{multicols}{2} % start twocolumn mode again
+\end{Verbatim}
+
+Example of one column part:
+
+\medskip
+
+\begin{table}
+\centerline{
+\begin{tabular}{|c|c|c|c|}
+\hline
+\multicolumn{4}{|c|}{Very big table from left to right side and/or from west to east and/or from
+  begin to end, respectively.} \\ \hline \hline
+spring & summer & autumn & winter \\
+mud and sun & hot and shiny & colors and rain & snow and cold \\
+\hline
+\end{tabular}
+}
+\caption{Great table across whole page!}
+\label{BagginsBigTable}
+\end{table}
+
+
+
+\begin{multicols}{2}
+
+\section{K\'odov\'an\'{\i} \v{c}e\v{s}tiny}
+
+V p\v{r}\'{\i}pad\v{e}, \v{z}e V\'a\v{s} p\v{r}\'{\i}sp\v{e}vek bude v
+\v{c}e\v{s}tin\v{e}, na po\v{c}\'atku tohoto souboru nastavte
+\verb%\setcounter{Anglicky}{0}%. Kone\v{c}n\'a verze bude p\v{r}evedena do
+k\'odov\'an\'{\i} UTF-8, umo\v{z}\v{n}uje-li to V\'a\v{s} software, {\bf pou\v{z}ijte
+p\v{r}\'{\i}mo toto k\'odov\'an\'{\i}}. Jinak
+v souboru {\tt my\_styles.tex} zadefinujte k\'odov\'an\'{\i} V\'ami pou\v{z}it\'e
+\v{c}e\v{s}tiny (nejsp\'{\i}\v{s}e WIN-1250, WIN-1252 nebo ISO-8859-2).
+
+\section{URL and email links}
+
+Use predefined function 
+\begin{Verbatim}[fontsize=\relsize{-1}]
+\htmllink{URL or email with protocol}
+         {description in text}
+\end{Verbatim}
+for URL or e-mail adress. Protocol specification should be present. 
+
+Example:
+\begin{Verbatim}[fontsize=\relsize{-2}]
+\htmllink{http://www.cs.cas.cz}
+         {homepage of the ICS}
+\end{Verbatim}
+
+produce the following active html link \htmllink{http://www.cs.cas.cz}{homepage of the ICS}
+
+and 
+
+\begin{Verbatim}[fontsize=\relsize{-2}]
+\htmllink{mailto://hakl@cs.cas.cz}
+         {e-mail to editor}
+\end{Verbatim}
+
+produce active email adress \htmllink{mailto://hakl@cs.cas.cz}{e-mail to editor}.
+
+\section{The references}
+The references \cite{Baggins-Boc:33, Baggins-Zer:08} show the style of the references.
+If you are using BiBTex, use the IEEE bibliography style {\tt ieeetr.bst}.  
+Do not send us your {\tt .bbl} files, please include it into your source file.
+
+
+\bigskip
+
+Please send any comment, question or remark to {\tt hakl@cs.cas.cz}. Your cooperation
+will be appreciated.
+  
+
+\bibliographystyle{ieeetr}
+\bibliography{Dedek_DD_UIAVCR}
+
+
+
+
+\end{multicols}
+
+% Local Variables:
+% TeX-master: "sbornik-dd-2007"
+% TeX-PDF-mode: t 
+% End:
+
+
+
+
+
+
