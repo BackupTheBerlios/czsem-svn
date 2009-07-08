@@ -65,287 +65,114 @@
 \begin{abstract}
 In this paper we present a fuzzy system which provides a fuzzy classification of textual web reports. Our approach is based on usage of third party linguistic analyzers, our previous work on web information extraction and fuzzy inductive logic programming. Main contributions are formal models and prototype implementation of the system and evaluation experiments. 
 
-\vspace{.2cm}
+%\smallskip
+\medskip
+%\bigskip
 
-The abstract was originally published in paper \cite{Dedek:FuzzWI}. Due to the copyright issues, only the abstract is presented here, extended with additional information that is not included in the original paper.
+The abstract was originally published in the paper \cite{Dedek:FuzzWI}. Due to the copyright issues, only the abstract is presented here, extended with some additional information that is not included in the original paper.
 \end{abstract}
 
 
 \section{Introduction}
-Please use the files {\tt my\_paper.tex} and {\tt my\_styles.tex} for your contribution to
-the DD ICS Workshop. Please {\bf edit those two files only} but do not try to compile them. 
-Instead the compilation of {\tt sbornik-dd-2007.tex} is correct way to produce your
-contribution. 
+In this contribution we would like to present our latest work \cite{Dedek:FuzzWI} and extend it with some additional information about the issues that are closely related to the original paper. As the original paper has only four pages, here we present more details about the issues that are closely related to the paper.
 
-Use  {\tt latex} for {\tt DVI} output and  {\tt pdflatex} for {\tt PDF} output.
+The original paper deals with a structured data that could be extracted from web reports. The original paper is closely concentrated on the use of the structured data for a fuzzy classification of the reports. The original paper refers to our previous works where our method for extraction of a structured data form web reports is presented and gives very little details about it. In this contribution we present:
+\begin{itemize}
+	\item more details about our extraction method (see in the section~\ref{dedek:IEMethod}),
+	\item a richer discussion of the related work (in the section~\ref{dedek:related}) and
+	\item the current state of our development and our plans for the future work (in the last section).
+\end{itemize}
 
+\subsection{Motivation}
+Big amount of information on the web increases the need of automated precessing. Especially textual information are hard for machine processing and understanding. Crisp methods have their limitations. In this paper we present a fuzzy system which provides a fuzzy classification of textual web reports. 
+
+Messages of accident reports on the web (Fig~\ref{dedek:message}) are our motivating examples. We would like to have a tool which is able to classify such message with degree of being it a serious accident. 
+
+Our solution is based first on information extraction (see emphasized information to be extracted in the Fig~\ref{dedek:message}) and second on processing this information to get fuzzy classification rules. Details about the fuzzy classification are presented in \cite{Dedek:FuzzWI}, here we will present only some additional information.
+
+\begin{figure}
+\centerline{\includegraphics[width=\hsize]{img/message}}
+\caption{Example of analyzed web report.}
+\label{dedek:message}
+\end{figure}
+
+
+\section{Our Information Extraction Method} \label{dedek:IEMethod}
+\subsection{Linguistic Analysis}
+In this section we will briefly describe the linguistic tools that
+we have used to produce linguistic annotations of texts. 
+These tools are being developed in the Institute of Formal
+and Applied Linguistics in Prague, Czech Republic. They
+are publicly available -- they have been published on a CDROM
+under the title PDT 2.0 \cite{dedek:PDT20_CD} (first five tools) and in
+\cite{dedek:KlTransformationBasedTectogrammatical2006} (Tectogrammatical analysis). These tools are used as a
+processing chain and at the end of the chain they produce
+tectogrammatical \cite{dedek:MiBeAnnotationtectogrammatical2006} dependency trees. 
+
+
+\begin{description}
  
- If you need some additional \LaTeX2e styles, please put them into file {\tt
-   my\_styles.tex}. List of default styles included in proceeding can be seen in the
- beginning of the file {\tt sbornik-dd-2007.tex}.
-If you need specify some special czech input method, edit the file {\tt my\_styles.tex}. 
+	\item[Tool 1.] Segmentation and tokenization consists of tokenization
+(dividing the input text into words and punctuation)
+and segmentation (dividing a sequences of tokens
+into sentences).
 
+	\item[Tool 2.] Morphological analysis assigns all possible lemmas
+and morphological tags to particular word forms (word
+occurrences) in the text.
 
-All your paper should be included in the file {\tt my\_paper.tex}. Usage of this file is
-the following:
+	\item[Tool 3.] Morphological tagging consists in selecting a single
+pair lemma-tag from all possible alternatives assigned
+by the morphological analyzer.
 
+	\item[Tool 4.] Collins' parser -- Czech adaptation. 
+Unlike the usual approaches to the description of
+English syntax, the Czech syntactic descriptions are
+dependency-based, which means, that every edge of
+a syntactic tree captures the relation of dependency
+between a governor and its dependent node. Collins'
+parser gives the most probable parse of a given input
+sentence.
 
-\begin{Verbatim}[fontsize=\relsize{-2}]
-\setcounter{Anglicky}{1}     
-      % 1 -> english, 0 -> czech
-\Nazev{Shortest way to Smaug's cave}
-      % required
-\RunningTitle{Shortest way to ...} 
-      % short name for page heading, or 
-      % the same as Nazev, required
-\Doktorand{Bilbo Baggins}     
-      % full name, no abreviations,  required
-\DoktorandPredniTitul{Mgr.}  
-      % required
-\DoktorandZadniTitul{}     
-      % required, if any
-\DokAdresa{Hole in the ground, The Hill, Hobbito}  
-      % required,  \UIAVCR, \KMFJFI,
-      % \MUUKKarlin, \MFFUKMalaStrana, \MechLiberec  
-      % and  \EUROMISE  are available, 
-      % use it regardless of selected language
-\DokEmail{bilbo@baggins.hill.ho}        
-      % required
-\OborStudia{Smaug's treasure}          
-      % required
-\Skolitel{Gandalf}          
-      % required
-\SkolitelPredniTitul{Prof. RNDr.}   
-      % required !!!!!!!!!!!!!!!!!!!!
-\SkolitelZadniTitul{DrSc.}    
-      % required !!!!!!!!!!!!!!!!!!!!, if any
-\SkoAdresa{unknown place of Wilderland} 
-      % required,  \UIAVCR, \KMFJFI,
-      % \MUUKKarlin, \MFFUKMalaStrana, \MechLiberec  
-      % and  \EUROMISE  are available, 
-      % use it regardless of selected language
-\SkoEmail{gandalf@mysteryland.mys} 
-      % required
-\ThanksGiving{This work was supported by my father, 
-              mother, spouse, dog and cat.} 
-      % or empty if no support available
-\MakeContributionTitle
+	\item[Tool 5.] Analytical function assignment assigns a description
+(analytical function -- in linguistic sense) to every edge
+in the syntactic (dependency) tree.
 
-\begin{abstract}
-      some text of abstract ...
-\end{abstract}
+	\item[Tool 6.] Tectogrammatical analysis produces linguistic annotation
+at the tectogrammatical level, sometimes called
+``layer of deep syntax''. Such a tree can be seen on
+the Fig~\ref{dedek:tree}. Annotation of a sentence at this layer
+is closer to meaning of the sentence than its syntactic
+annotation and thus information captured at the tectogrammatical
+layer is crucial for machine understanding
+of a natural language \cite{dedek:KlTransformationBasedTectogrammatical2006}.
+\end{description}
 
-      some text of your paper ...
+\subsection{Web Information Extraction}
 
-\begin{thebibliography}{99}
-      some bibliography ...
-\end{thebibliography}
-\end{Verbatim}
+Having web resource content analyzed by above linguistic tools, we have data stored in the form of tectogramatical trees. To achieve our objectives we have to extract information from this representation. 
+Here we refer to our previous work \cite{dedek:DeVoLinguisticextraction2008,dedek:DeVoComputingaggregations2008,dedek:DeEcExperimentswith2008}. A long path of tools starting with web crawling and resulting with the extracted structured information is developed in our previous work. 
+In Fig~\ref{dedek:tree} we can see nodes of tree where a piece of information about damage (8000 CZK) is located. We have used Inductive logic Programming to learn rules which are able to detect such nodes. 
+%In this paper we will concentrate on the usage of such extracted information to be able to classify content. 
+The extraction process requires a human assistance when annotating a training data.
 
-
-
-
-Please try to keep your paper as simple as possible from the typographical point of view,
-avoid {\tt $\backslash$newcommand}, {\tt $\backslash$def} or at least do not forget to
-undefine it (note that the preprint will be compiled at once) and do not use any special
-environments.
-
-If you use your own styles or some nonstandard styles please send these styles with your
-contribution together.
-
-
-It is strongly recommended to use cross-reference commands \verb#\ref{}#, \verb#\label{}#,
-\verb#\pageref{}# and \verb#\cite{}#. {\large\bf It is convenient to precede all your labels with the
-name of one author} to prevent multiple definition of the same label in different
-contributions (labels like \verb%\label{1}, \label{2} ... % can cause misreferences). See example:
-
-The next sentence: 
-
-Numbers \ref{BagginsNumberPi} and \ref{BagginsNumberE} on the page
-\pageref{BagginsNumberE} are basic quantities characterizing this instance of universe,
-where
-
-\begin{equation}
-\label{BagginsNumberPi}
-\pi = 3.141 592 653 589 793 238
-\end{equation}
-
-\noindent and
-
-\begin{equation}
-\label{BagginsNumberE}
-e = 2.718 281 828 459 045 235 .
-\end{equation}
-
-is produced by source code:
-
-\begin{Verbatim}[fontsize=\relsize{-2}]
-Numbers \ref{BagginsNumberPhi} and 
-\ref{BagginsNumberE} on the page 
-\pageref{BagginsNumberE} are basic 
-quantities characterizing this 
-instance of universe, where
-\begin{equation}
-\label{BagginsNumberPi} 
-   \phi = 3.141 592 653 589 793 238
-\end{equation}
-\noindent and
-\begin{equation}
-\label{BagginsNumberE} 
-   e = 2.718 281 828 459 045 235 .
-\end{equation}
-\end{Verbatim}
-
-
-Do not use lot of colors for text and for graphic too, if possible. Remember, final print
-will be in BW color scheme.
-
-
-\section{Figures including }
-
-Figures should be included as a postscript file level 2 with {\tt psfig.sty} or {\tt
-  graphicx.sty} package (note that some versions of MS WORD produce
-non compatible postscript files (e.g. converts vector graphics into bitmaps, hence size of
-result files is not acceptable). Check such files with Ghostview postscript interpreter.
-The syntax of including the figure \ref{BagginsSmaug} using style {\tt psfig.sty} is the
-following:
-
-
-\begin{Verbatim}[fontsize=\relsize{-2}]
-\begin{figure}
-\centerline{
-\psfig{file=baggins-dragon,width=5cm,height=4cm}}
-\caption{\label{BagginsSmaug}
-         Smaug certainly looked ...}
-\end{figure}
-\end{Verbatim}
-
-\begin{figure}
-\caption{\label{BagginsSmaug}Smaug certainly looked fast asleep, when Bilbo peeped once more from the
-  entrance. He was just about to step out onto the floor when he caught a sudden thin ray
-  of red from under the dropping lid of Smaug's left eye. He was pretending to sleep! He
-  was watching the tunnel entrance ...}
-\end{figure}
-
-
-The syntax of including the figure \ref{BagginsSmaugsHead} using
-style {\tt graphicx.sty} is the following:
-
-
-\begin{Verbatim}[fontsize=\relsize{-2}]
-\begin{figure}
-\centerline{
-   \includegraphics[scale=1.5, angle=180]
-                   {baggins-sm-head}
-}
-\caption{Detail of Smaug's head}
-\label{BagginsSmaugsHead}
-\end{figure}
-\end{Verbatim}
-
+Note that our method is general and is not limited to Czech and can be used with any structured linguistic representation. 
 
 
 \begin{figure}
-\caption{Detail of Smaug's head}
-\label{BagginsSmaugsHead}
+\centerline{\framebox{\includegraphics[width=\hsize]{img/tree}}}
+\caption{Example of a linguistic tree of one of analyzed sentences.}
+\label{dedek:tree}
 \end{figure}
 
 
 
-We strongly recommend to use names of graphic files {\bf without extension ({\tt .ps}, {\tt
-  .eps}, {\tt .pdf}}) because, default extension of graphic files for {\tt latex} is {\tt
-  .ps} or {\tt .eps} and default extension for {\tt pdflatex} is {\tt .pdf}. Hence, both
-PS and PDF format can be produced (of course, you should attach {\tt .pdf} version of
-your graphics).
+\section{Related Work} \label{dedek:related}
 
-\end{multicols}
+There is a plenty of systems dealing with text mining and text classification, let us mention at least some. In \cite{dedek:ReYaLiOntoText08} authors use ontology modeling to enhance text identification. In \cite{dedek:CAP} authors use preprocessed data from National Automotive Sampling System and test various soft computing methods to modeling severity of injuries (some hybrid methods showed best performance). Methods of Information Retrieval (IR) are very numerous, with extraction mainly based on key word search and similarities. Connecting IR and text mining techniques with web information retrieval can be found in Chapter Opinion mining in the book of Bing Liu \cite{dedek:WebDataMining}. 
 
 
-
-
-
-
-In the case that you need insert wide portion of text (like big picture or great table) you
-can close the two column mode, insert desired text and than start two-column mode again. See
-next verbatim section for details:
-
-\begin{Verbatim}[fontsize=\relsize{-2}]
-\end{multicols} % close previous twocolumn mode
-
-..... any text in single column mode ......
-
-\begin{multicols}{2} % start twocolumn mode again
-\end{Verbatim}
-
-Example of one column part:
-
-\medskip
-
-\begin{table}
-\centerline{
-\begin{tabular}{|c|c|c|c|}
-\hline
-\multicolumn{4}{|c|}{Very big table from left to right side and/or from west to east and/or from
-  begin to end, respectively.} \\ \hline \hline
-spring & summer & autumn & winter \\
-mud and sun & hot and shiny & colors and rain & snow and cold \\
-\hline
-\end{tabular}
-}
-\caption{Great table across whole page!}
-\label{BagginsBigTable}
-\end{table}
-
-
-
-\begin{multicols}{2}
-
-\section{K\'odov\'an\'{\i} \v{c}e\v{s}tiny}
-
-V p\v{r}\'{\i}pad\v{e}, \v{z}e V\'a\v{s} p\v{r}\'{\i}sp\v{e}vek bude v
-\v{c}e\v{s}tin\v{e}, na po\v{c}\'atku tohoto souboru nastavte
-\verb%\setcounter{Anglicky}{0}%. Kone\v{c}n\'a verze bude p\v{r}evedena do
-k\'odov\'an\'{\i} UTF-8, umo\v{z}\v{n}uje-li to V\'a\v{s} software, {\bf pou\v{z}ijte
-p\v{r}\'{\i}mo toto k\'odov\'an\'{\i}}. Jinak
-v souboru {\tt my\_styles.tex} zadefinujte k\'odov\'an\'{\i} V\'ami pou\v{z}it\'e
-\v{c}e\v{s}tiny (nejsp\'{\i}\v{s}e WIN-1250, WIN-1252 nebo ISO-8859-2).
-
-\section{URL and email links}
-
-Use predefined function 
-\begin{Verbatim}[fontsize=\relsize{-1}]
-\htmllink{URL or email with protocol}
-         {description in text}
-\end{Verbatim}
-for URL or e-mail adress. Protocol specification should be present. 
-
-Example:
-\begin{Verbatim}[fontsize=\relsize{-2}]
-\htmllink{http://www.cs.cas.cz}
-         {homepage of the ICS}
-\end{Verbatim}
-
-produce the following active html link \htmllink{http://www.cs.cas.cz}{homepage of the ICS}
-
-and 
-
-\begin{Verbatim}[fontsize=\relsize{-2}]
-\htmllink{mailto://hakl@cs.cas.cz}
-         {e-mail to editor}
-\end{Verbatim}
-
-produce active email adress \htmllink{mailto://hakl@cs.cas.cz}{e-mail to editor}.
-
-\section{The references}
-The references \cite{Baggins-Boc:33, Baggins-Zer:08} show the style of the references.
-If you are using BiBTex, use the IEEE bibliography style {\tt ieeetr.bst}.  
-Do not send us your {\tt .bbl} files, please include it into your source file.
-
-
-\bigskip
-
-Please send any comment, question or remark to {\tt hakl@cs.cas.cz}. Your cooperation
-will be appreciated.
+\section{Conclusion and Future Work}
   
 
 \bibliographystyle{ieeetr}
