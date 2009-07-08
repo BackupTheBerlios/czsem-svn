@@ -91,6 +91,7 @@ Messages of accident reports on the web (Fig~\ref{dedek:message}) are our motiva
 Our solution is based first on information extraction (see emphasized information to be extracted in the Fig~\ref{dedek:message}) and second on processing this information to get fuzzy classification rules. Details about the fuzzy classification are presented in \cite{Dedek:FuzzWI}, here we will present only some additional information.
 
 \begin{figure}
+\medskip
 \centerline{\includegraphics[width=\hsize]{img/message}}
 \caption{Example of analyzed web report.}
 \label{dedek:message}
@@ -160,6 +161,7 @@ Note that our method is general and is not limited to Czech and can be used with
 
 
 \begin{figure}
+\medskip
 \centerline{\framebox{\includegraphics[width=\hsize]{img/tree}}}
 \caption{Example of a linguistic tree of one of analyzed sentences.}
 \label{dedek:tree}
@@ -173,7 +175,17 @@ There is a plenty of systems dealing with text mining and text classification, l
 
 
 \section{Conclusion and Future Work}
-  
+
+Currently we are working on the integration of our method with further linguistic tools and we work on a graphical user interface so the whole system could be distributed as a software package and used by arbitrary users.
+
+We have made first experiments with the TectoMT system \cite{dedek:ZaPtTectoMTHighly2008}, which can replace the older tools from the PDT2.0 CD-ROM mentioned above and currently used in our system. TectoMT can bring us many befits like named entity recognition, better morphology and parsing (made by the McDonalds' parser \cite{dedek:mcdonald}), but the biggest advantage is that we can use the same linguistic formalism (tectogrammatical trees) for English (and probably for other languages in the future).
+
+On the other hand our approach is not limited to the tectogrammatical trees and we have made first experiments with \emph{Stanford typed dependencies} \cite{dedek:staford_dependecies} as an alternative linguistic formalism.
+
+We will probably use The GATE architecture \cite{dedek:GATE} as the platform for integration of our method with other systems and we can use it also as the graphical user interface. The GATE features will also bring a very modular fashion to the final system.
+
+%The Stanford Parser: A statistical parser \cite{dedek:staford_parser}
+
 
 \bibliographystyle{ieeetr}
 \bibliography{Dedek_DD_UIAVCR}
