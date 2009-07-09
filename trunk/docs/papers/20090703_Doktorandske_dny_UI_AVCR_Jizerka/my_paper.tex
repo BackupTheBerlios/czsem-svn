@@ -74,7 +74,7 @@ The abstract was originally published in the paper \cite{Dedek:FuzzWI}. Due to t
 
 
 \section{Introduction}
-In this contribution we would like to present our latest work \cite{Dedek:FuzzWI} and extend it with some additional information about the issues that are closely related to the original paper. As the original paper has only four pages, here we present more details about the issues that are closely related to the paper.
+In this contribution we would like to present our latest work \cite{Dedek:FuzzWI} and extend it with some additional information about the issues that are closely related to the original paper. As the original paper has only four pages, we present more details and references here.
 
 The original paper deals with a structured data that could be extracted from web reports. The original paper is closely concentrated on the use of the structured data for a fuzzy classification of the reports. The original paper refers to our previous works where our method for extraction of a structured data form web reports is presented and gives very little details about it. In this contribution we present:
 \begin{itemize}
@@ -88,7 +88,7 @@ Big amount of information on the web increases the need of automated precessing.
 
 Messages of accident reports on the web (Fig~\ref{dedek:message}) are our motivating examples. We would like to have a tool which is able to classify such message with degree of being it a serious accident. 
 
-Our solution is based first on information extraction (see emphasized information to be extracted in the Fig~\ref{dedek:message}) and second on processing this information to get fuzzy classification rules. Details about the fuzzy classification are presented in \cite{Dedek:FuzzWI}, here we will present only some additional information.
+Our solution is based first on information extraction (see emphasized information to be extracted in the Fig~\ref{dedek:message}) and second on processing this information to get fuzzy classification rules. The description of the the fuzzy classification is presented in \cite{Dedek:FuzzWI}, here we will present only some additional information.
 
 \begin{figure}
 \medskip
@@ -153,7 +153,7 @@ of a natural language \cite{dedek:KlTransformationBasedTectogrammatical2006}.
 
 Having web resource content analyzed by above linguistic tools, we have data stored in the form of tectogramatical trees. To achieve our objectives we have to extract information from this representation. 
 Here we refer to our previous work \cite{dedek:DeVoLinguisticextraction2008,dedek:DeVoComputingaggregations2008,dedek:DeEcExperimentswith2008}. A long path of tools starting with web crawling and resulting with the extracted structured information is developed in our previous work. 
-In Fig~\ref{dedek:tree} we can see nodes of tree where a piece of information about damage (8000 CZK) is located. We have used Inductive logic Programming to learn rules which are able to detect such nodes. 
+In Fig~\ref{dedek:tree} we can see nodes of a tree where a piece of information about damage (8000 CZK) is located. We have used Inductive logic Programming to learn rules which are able to detect such nodes. 
 %In this paper we will concentrate on the usage of such extracted information to be able to classify content. 
 The extraction process requires a human assistance when annotating a training data.
 
@@ -187,8 +187,10 @@ We will probably use The GATE architecture \cite{dedek:GATE} as the platform for
 %The Stanford Parser: A statistical parser \cite{dedek:staford_parser}
 
 
-\bibliographystyle{ieeetr}
-\bibliography{Dedek_DD_UIAVCR}
+%\bibliographystyle{ieeetr}
+%\bibliography{Dedek_DD_UIAVCR}
+
+\input{Dedek_DD_UIAVCR_bbl}
 
 
 
