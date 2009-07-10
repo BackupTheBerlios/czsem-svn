@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <jardesc>
-    <jar path="C:/Program Files/GATE-5.0-beta1/plugins/czsem/czsem.jar"/>
+    <jar path="czsem/GATE_plugins/czsem.jar"/>
     <options buildIfNeeded="true" compress="true" descriptionLocation="/czsem/jar_desc.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
     <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
     <selectedProjects/>
@@ -11,17 +11,20 @@
         </sealing>
     </manifest>
     <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.net{NetgraphProtocolConnection.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.utils{SimpleXMLQueryProcessor.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{FSExporter.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.utils{NetgraphQuery.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.utils{CZSemTree.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.utils{ILPStringList.java"/>
-        <javaElement handleIdentifier="=czsem/src&lt;czsem"/>
-        <javaElement handleIdentifier="=czsem/src&lt;czsem.net{NetgraphProtocolConnection.java"/>
-        <javaElement handleIdentifier="=czsem/src&lt;czsem.gate"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{ILPSerializer.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{SentenceFSWriter.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.net{NetgraphServerComunication.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{FSFileWriter.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{LuceneDocumentImporter.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.apps"/>
-        <javaElement handleIdentifier="=czsem/src&lt;czsem.utils{SimpleXMLQueryProcessor.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.utils{ILPQueryProcessor.java"/>
-        <javaElement handleIdentifier="=czsem/src&lt;czsem.utils{NetgraphQuery.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.gui"/>
     </selectedElements>
 </jardesc>
