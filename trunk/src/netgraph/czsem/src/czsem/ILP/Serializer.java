@@ -1,6 +1,10 @@
 package czsem.ILP;
 
+import java.io.FileNotFoundException;
 import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
+import java.text.CharacterIterator;
+import java.text.StringCharacterIterator;
 import java.util.*;
 
 public class Serializer {
@@ -28,6 +32,19 @@ public class Serializer {
 	private Map<String, Relation> relationList = new HashMap<String, Relation>();
 	private Map<String, Type> typeList = new HashMap<String, Type>();
 	
+	public Serializer(String output_filename) throws FileNotFoundException, UnsupportedEncodingException
+	{
+		output = new PrintStream(output_filename);
+	/**	
+		output = new PrintStream(output_filename, "UTF8");
+		output.println(":- encoding(utf8).");
+	/**/
+	}
+	
+	public Serializer() {
+		// TODO Auto-generated constructor stub
+	}
+
 	private Type getType(String typeName)
 	{
 		return typeList.get(typeName);
@@ -85,10 +102,42 @@ public class Serializer {
 		output.println(").");		
 	}
 
+	public static String encodeValue(String value)
+	{
+		boolean all_digits = true;
+		boolean all_lo_alpha = true;
+
+		StringBuilder sb = new StringBuilder();
+		sb.append('\'');
+		StringCharacterIterator iter = new StringCharacterIterator(value);
+		for (char ch = iter.first(); ch != CharacterIterator.DONE; ch = iter.next())
+		{
+			all_digits = all_digits & Character.isDigit(ch);
+			all_lo_alpha = all_lo_alpha & Character.isLowerCase(ch);
+			
+			switch (ch) {
+			case '\'':
+			case '\\':
+				sb.append('\\');
+			default:
+				sb.append(ch);				
+			}
+		}
+
+		if (all_digits || all_lo_alpha) return "μμ"+value;
+//		if (all_digits || all_lo_alpha) return "μμ"+value;
+		
+		sb.append('\'');
+		return sb.toString();
+	}
+	
 	public void putTypedTuple(Relation rel, String[] values)
 	{		
 		for (int i=0; i<rel.argTypes.length; i++)
+		{
+			values[i] = encodeValue(values[i]); 
 			rel.argTypes[i].addValue(values[i]);
+		}
 		
 		putTuple(rel.name, values);
 	}
@@ -157,6 +206,12 @@ public class Serializer {
 		}
 		
 		output.println(")).");		
+	}
+
+	public void putCommentLn(String comment)
+	{
+		output.print("% ");
+		output.println(comment);
 	}
 	
 	public static void main(String[] argv)
