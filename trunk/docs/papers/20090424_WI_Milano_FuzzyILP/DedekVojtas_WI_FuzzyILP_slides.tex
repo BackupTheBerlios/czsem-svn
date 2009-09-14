@@ -28,19 +28,6 @@
 
 
 \title{Fuzzy Classification of Web Reports with Linguistic Text Mining}
-%
-%\author{Jan Dedek and Peter Vojtas\\
-%Department of Software Engineering, Charles University\\
-%Institute of Computer Science, Czech Academy of Science\\
-%Prague, Czech Republic\\
-%email: \{jan.dedek, peter.vojtas\}@mff.cuni.cz
-%%\and
-%%Peter Vojtas\\
-%%Department of Software Engineering, Charles University\\
-%%Institute of Computer Science, Czech Academy of Science\\
-%%Prague, Czech Republic\\
-%%peter.vojtas@mff.cuni.cz\\
-%}
 
 \author[Dìdek, Vojtáš]
 {Jan Dìdek\inst{1,2} \and Peter Vojtáš\inst{1,2}}
@@ -72,7 +59,7 @@ Institute of Computer Science, Academy of Sciences of the Czech Republic
 
 \section{Introduction}
 
-\subsection{Extraction of Semantic Information.}
+\subsection{Our Information Extraction System}
 
 \begin{frame}{Our work}
 \begin{itemize}
@@ -81,11 +68,6 @@ Institute of Computer Science, Academy of Sciences of the Czech Republic
 			\item In Czech language.
 			\item Coming form web pages.
 		\end{itemize}
-	\item Computing \alert{aggregations}
-		\begin{itemize}
-			\item From extracted semantic data.
-		\end{itemize}
-	\vspace{0.2cm}
 	\item Using of Semantic Web \alert{ontologies}.
 		\begin{itemize}
 			\item RDF, OWL
@@ -97,61 +79,162 @@ Institute of Computer Science, Academy of Sciences of the Czech Republic
 		\end{itemize}
 	\item \alert{Rule based} extraction method.
 		\begin{itemize}
-			\item Extraction rules $\approx$ \alert{tree queries} of Netgraph application
+			\item Extraction rules $\approx$ \alert{tree queries}
+			\item ILP learning of extraction rules
+		\end{itemize}
+	\bigskip
+	\item \textbf{In this presentation}
+		\begin{itemize}
+			\item Experiment with \alert{Fuzzy ILP}
+			\item Accident seriousness classification
+			\item Exploitation of extracted information
 		\end{itemize}
 \end{itemize}
 \end{frame}
 
 
-\begin{frame}{Schema of the wohle system}
+\begin{frame}{Schema of the whole system}
 \begin{columns}
-\column{.5\textwidth}
+\column{.45\textwidth}
 \includegraphics[height=0.9\vsize]{img/schema}
-\column{.5\textwidth}
-\begin{itemize}
-	\item Item1
-	\item Item2
-\end{itemize}
-\vspace{2cm}
-\emph{Sentence:}
-\medskip
-\\Byl by šel dolesa.
-\\He-was would went toforest.
+\column{.55\textwidth}
+\begin{enumerate}
+	\item Web Crawling
+	\item Information Extraction and User Evaluation
+	\item Logic representation
+		\begin{itemize}
+			\item Construction of \alert{background knowledge}
+			\item Construction of \alert{learning examples}
+		\end{itemize}
+	\item ILP Learning
+		\begin{itemize}
+			\item Crisp
+			\item Fuzzy
+		\end{itemize}
+		
+	\bigskip
+	\item Comparison of results
+\end{enumerate}
+
 \end{columns}
 \end{frame}
 
 
 
 \begin{frame}{Example of processed web page}
+\begin{columns}
+\column{.6\textwidth}
 \includegraphics[height=0.9\vsize]{img/DedVoj_article}
+\column{.4\textwidth}
+\begin{itemize}
+	\item Fire and car accidents reports
+\end{itemize}
+\end{columns}
 \end{frame}
 
 \begin{frame}{Example of processed text}
 \centerline{\includegraphics[height=0.5\vsize]{img/message}}
 \bigskip
 \begin{itemize}
-	\item See the last snetence on the \alert{next slide}.
+	\item Information to be extracted is decorated.
+	\item See the last sentence on the \alert{next slide}.
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Example of a linguistic tree}
 \centerline{\includegraphics[height=0.7\vsize]{img/tree}}
+\begin{itemize}
+	\item Our IE method uses \alert{tree queries} (tree patterns)
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Accident attributes}
-\includegraphics[height=0.75\vsize]{img/attributes_description}
-\end{frame}
-
-\begin{frame}{Histogram of ranking attribute}
-\includegraphics[width=\hsize]{img/ranking_histogram}
-\end{frame}
-
-
-
-\begin{frame}{Learning examples}
 \begin{columns}
 \column{.6\textwidth}
+\includegraphics[height=0.75\vsize]{img/attributes_description}
+\column{.4\textwidth}
+\begin{itemize}
+	\item Information that we can/could extract from a report.
+\bigskip
+	\item Not everything is always mentioned.
+\end{itemize}
+\end{columns}
+\end{frame}
 
+
+
+\subsection{Fuzzy ILP}
+
+
+
+\begin{frame}{Classical ILP and Fuzzy ILP principles}
+\begin{itemize}
+	\item Learning examples $E=P\cup N$ (Positive and Negative)
+	\item Background knowledge $B$
+	\item ILP task -- to find hypothesis $H$ such that:
+\end{itemize}
+$$
+(\forall e\in P)(B\cup H\models e) \ \ \&\  \ (\forall n\in N)(B\cup H\not\models n).
+$$
+\vspace{0.5cm}
+\begin{itemize}
+	\item Fuzzy learning examples ${\mathcal E}:E\longrightarrow [0,1]$
+	\item Fuzzy background knowledge ${\mathcal B}:B\longrightarrow [0,1]$
+	\item Fuzzy ILP task -- to find hyp. ${\mathcal H}:H\longrightarrow [0,1]$ such that:
+\end{itemize}
+$$
+(\forall e_1,e_2\in E)(\forall {\mathcal M})({\mathcal M}\models_f {\mathcal B}\cup {\mathcal H}) \ :\ 
+{\mathcal E}(e_1)>{\mathcal E}(e_2)\Rightarrow \left\|e_1\right\|_{{\mathcal M}}\ge \left\|e_2\right\|_{{\mathcal M}}
+$$
+\end{frame}
+
+\begin{frame}{Generalized Annotated Programs}
+\begin{itemize}
+	\item Induction of Generalized Annotated Programs is equivalent\footnote{See in S. Krajci, R. Lencses and P. Vojtas: ``A comparison of fuzzy and annotated logic programming'', Fuzzy Sets and Systems, vol.144, pp.173–192, 2004.} to Fuzzy ILP
+\end{itemize}
+\end{frame}
+
+
+
+\section{Our Experiment}
+\subsection{Experiment Description}
+
+\begin{frame}{Accident attributes}
+\begin{columns}
+\column{.6\textwidth}
+\includegraphics[height=0.75\vsize]{img/attributes_description}
+\column{.4\textwidth}
+\begin{itemize}
+	\item Almost all attributes are \alert{numeric}.
+		\begin{itemize}
+			\item So \alert{monotonic}
+			\item This will be used for ``fuzzyfication''
+		\end{itemize}
+\bigskip
+	\item Artificial target attribute \alert{seriousness ranking}.
+\end{itemize}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}{Histogram of the seriousness ranking attribute}
+\includegraphics[width=0.9\hsize]{img/ranking_histogram}
+\begin{itemize}
+	\item 14 different values, range 0.5 -- 8
+	\item Divided into four approximately \alert{equipotent groups}.
+\end{itemize}
+\end{frame}
+
+
+
+\section{Fuzzy ILP / GAP Implementation}
+\subsection{Monotonization}
+
+
+
+\begin{frame}{Essential difference between learning examples}
+\begin{columns}
+\column{.6\textwidth}
 \setbeamercolor{block title}{bg=BrickRed}
 \begin{block}{Crisp learning examples}
 \centerline{\includegraphics[width=\hsize]{img/examples_nonmonot}}
@@ -162,65 +245,67 @@ Institute of Computer Science, Academy of Sciences of the Czech Republic
 \centerline{\includegraphics[width=\hsize]{img/examples_monot}}
 \end{block}
 \column{.4\textwidth}
+For one evidence (occurrence):
+	\bigskip
 \begin{itemize}
-	\item Item1
-	\item Item2
+	\item Crisp:\\
+	Always \alert{one} positive and \alert{three} negative learning examples
+	\bigskip
+	\item Monotonized:\\
+	\alert{Up to the observed degree} positive,\\the rest negative.
 \end{itemize}
-\vspace{2cm}
-\emph{Sentence:}
-\medskip
-\\Byl by šel dolesa.
-\\He-was would went toforest.
 \end{columns}
 \end{frame}
 
 
 \begin{frame}{Monotonization of attributes}
-\begin{columns}
-\column{.65\textwidth}
-
-\setbeamercolor{block title}{bg=OliveGreen}
+\definecolor{MyBrown}{rgb}{0.5,0.5,0}
+\setbeamercolor{block title}{bg=MyBrown}
 \begin{block}{damage $\rightarrow$ damage\_atl}
-\includegraphics[width=\hsize]{img/attribute_monotonisation}
+\centerline{\includegraphics[width=0.73\hsize]{img/attribute_monotonisation}}
 \end{block}
-\column{.35\textwidth}
+\bigskip
 \begin{itemize}
-	\item Item1
-	\item Item2
+	\item We infer all lower values as sufficient.
+	\item Treatment of unknown values.
+	\item Negation as failure.
 \end{itemize}
-\vspace{2cm}
-\emph{Sentence:}
-\medskip
-\\Byl by šel dolesa.
-\\He-was would went toforest.
-\end{columns}
 \end{frame}
 
+\section{Evaluation and Conclusion}
+\subsection{Learning Results}
 
 \begin{frame}[plain]%{Crisp \& monotonized hypothesis}
 \begin{columns}
 \column{.7\textwidth}
 \centerline{\includegraphics[height=1.1\vsize,width=\hsize]{img/rules}}
 \column{.3\textwidth}
-
-Crisp \& monotonized hypothesis
-
 \begin{itemize}
-	\item Item1
-	\item Item2
+	\item Crisp hypothesis
+\bigskip
+	\item Monotonized hypothesis
 \end{itemize}
 \vspace{2cm}
 \end{columns}
 \end{frame}
 
+\subsection{Evaluation}
 
-\begin{frame}{Evaluation results}
+\begin{frame}{Evaluation and Comparison of Results}
 \centerline{\includegraphics[width=0.75\hsize]{img/Evaluation}}
+\bigskip
+\begin{itemize}
+	\item Rules evaluated on both testing sets.
+		\begin{itemize}
+			\item By use of conversion predicates (next slide)
+		\end{itemize}
+	\item Monotonized rules \alert{better in both cases}.
+\end{itemize}
 \end{frame}
 
 
 
-\begin{frame}{Conversion of results}
+\begin{frame}{Conversion of Results}
 \setbeamercolor{block title}{bg=BrickRed}
 \begin{block}{crisp $\rightarrow$ monotone}
 \centerline{\includegraphics[width=.8\hsize]{img/monot2nomon}}
@@ -232,11 +317,24 @@ Crisp \& monotonized hypothesis
 \end{block}
 \end{frame}
 
+\subsection{Conclusion}
 
+\begin{frame}{Conclusion}
+\begin{itemize}
+	\item We used Fuzzy/GAP ILP in an \alert{experiment}\\ closely connect with WIE.
+	\item Showed basic \alert{principles and implementation}\\ of Fuzzy/GAP ILP.
+	\item Compared results of Fuzzy/GAP ILP and Classical ILP.
+	\item Observed much better results in the Fuzzy case.
+\end{itemize}
+\end{frame}
 \end{document}
 
 % no key words
 
+\section{Introduction}
+\section{Introduction}
+\section{Introduction}
+\section{Introduction}
 \section{Introduction}
 
 %Big amount of information on the web increases the need of automated precessing. Especially textual information are hard for machine processing and understanding. Crisp methods have their limitations. In this paper we present a fuzzy system which provides a fuzzy classification of textual web reports. 
