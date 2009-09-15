@@ -190,7 +190,17 @@ $$
 
 \begin{frame}{Generalized Annotated Programs}
 \begin{itemize}
-	\item Induction of Generalized Annotated Programs is equivalent\footnote{See in S. Krajci, R. Lencses and P. Vojtas: ``A comparison of fuzzy and annotated logic programming'', Fuzzy Sets and Systems, vol.144, pp.173–192, 2004.} to Fuzzy ILP
+	\item Fuzzy ILP is equivalent to Induction of Generalized Annotated Programs\footnote{See in S. Krajci, R. Lencses and P. Vojtas: ``A comparison of fuzzy and annotated logic programming'', Fuzzy Sets and Systems, vol.144, pp.173–192, 2004.}
+	\item For implementation we use GAP or strictly speaking: \emph{Definite Logic Programs with monotonicity axioms} (also equivalent)
+	\item Basic paradigm: deal with \alert{values} as with \alert{degrees}.
+		\begin{itemize}
+			\item We don't have to normalize values, they order is enough.			
+		\end{itemize}
+	\medskip
+	\item For example with monotonicity axioms we can use rule:\\
+\centerline{\texttt{serious(A, 4)} $\leftarrow$ \texttt{fatalities(A, 10).}}
+	\\ and form the fact \texttt{fatalities(id\_123, 1000)} deduce\\
+\centerline{\texttt{serious\_alt(id\_123, 4).}}
 \end{itemize}
 \end{frame}
 
@@ -277,13 +287,17 @@ For one evidence (occurrence):
 
 \begin{frame}[plain]%{Crisp \& monotonized hypothesis}
 \begin{columns}
-\column{.7\textwidth}
+\column{.67\textwidth}
 \centerline{\includegraphics[height=1.1\vsize,width=\hsize]{img/rules}}
-\column{.3\textwidth}
+\column{.33\textwidth}
 \begin{itemize}
 	\item Crisp hypothesis
-\bigskip
-	\item Monotonized hypothesis
+\vspace{3cm}
+	\item Monotonized hypothesis	
+	\begin{itemize}
+		\item Monotonicity axioms
+		\item Monotonized learning examples
+	\end{itemize}
 \end{itemize}
 \vspace{2cm}
 \end{columns}
@@ -325,6 +339,12 @@ For one evidence (occurrence):
 	\item Showed basic \alert{principles and implementation}\\ of Fuzzy/GAP ILP.
 	\item Compared results of Fuzzy/GAP ILP and Classical ILP.
 	\item Observed much better results in the Fuzzy case.
+	\bigskip
+	\item Future work: finer ``approximatization'' of target attribute.
+	\begin{itemize}
+		\item Not only ``four degrees''.
+%		\item Learn the target attribute directly.
+	\end{itemize}
 \end{itemize}
 \end{frame}
 \end{document}
