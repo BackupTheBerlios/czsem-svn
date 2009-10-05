@@ -65,7 +65,7 @@ Institute of Computer Science, Academy of Sciences of the Czech Republic
 \includegraphics[width=\hsize]{img/SemanticWeb}
 \end{frame}
 
-\begin{frame}{Growing of LOD data set 2007--2008}
+\begin{frame}{Growing of Linking Open Data data set 2007--2008}
 \framebox{\includegraphics[width=\hsize]{img/LOD2007}}
 \end{frame}
 
@@ -100,14 +100,35 @@ Christian Bizer: The Web of Linked Data (26/07/2009)
 \centerline{\includegraphics[width=1.15\hsize]{img/extraction_method}}
 \begin{itemize}
 \item{General Applicable}
+\begin{itemize}
+	\item \alert{Instance Resolution Task}
+\begin{itemize}
+	\item 	Bootstraping
+	\item 	Use of search engines
+\end{itemize}
+\end{itemize}
 \item{Domain Specific}
 \item{Form Specific}
 \end{itemize}
 \end{frame}
 
 
-\begin{frame}{A general view of WI systems}
+\subsection{User Initiative and Effort}
+
+
+\begin{frame}{A general view of WI systems -- user perspective}
 \centerline{\includegraphics[width=\hsize]{img/WIE_survey}}
+\end{frame}
+
+
+\begin{frame}{User initiative and effort -- Web Semantization}
+\includegraphics[width=\hsize]{img/extraction_proces_and_user}
+\begin{itemize}
+	\item Not only Information Extraction
+	\item But also Semantic Annotation
+	\item Domain specific knowledge has to be \alert{obtained} in all cases.
+	\item Scalability?
+\end{itemize}
 \end{frame}
 
 
@@ -119,10 +140,33 @@ Christian Bizer: The Web of Linked Data (26/07/2009)
 
 %hodnoceni - tez velmi relevantni k semantickemu webu
 
+\subsection{Information Extraction based on Web Page Structure}
+\begin{frame}{Extraction Based on Structural Similarity (suitable for Web Shops)}
+\includegraphics[width=\hsize]{img/maruscak}
+\end{frame}
+
+\begin{frame}{Extraction Based on Structural Similarity -- extraction method}
+\centerline{\includegraphics[width=0.8\hsize]{img/StructuralSimilarity}}
+\end{frame}
+
 
 \subsection{Information Extraction from Text-based Resources}
 
 %\subsection{Tasks of Information Extraction}
+
+\begin{frame}{Benchmarks for Information Extraction}
+\begin{itemize}
+	\item No common benchmark for \alert{``structured pages'' or Web IE}.
+	\bigskip
+	\item Message Understanding Conference (MUC)
+	\item Automatic Content Extraction (ACE) Evaluation
+	\item Text Analysis Conference (TAC)
+	\medskip
+	\item Text REtrieval Conference (TREC)
+	\item Document Understanding Conferences\\(text summarization)
+\end{itemize}
+\end{frame}
+
 
 \begin{frame}{Classical tasks of text preprocessing and linguistic analysis}
 \begin{description}
@@ -137,43 +181,47 @@ Christian Bizer: The Web of Linked Data (26/07/2009)
 
 \begin{frame}{Classical domain dependent IE tasks}
 \begin{description}
-	\item[Named Entity Recognition:] This task recognizes and classifies named entities such as persons, locations, date or time expression, or measuring units. More complex patterns may also be recognized as structured entities such as addresses.
+	\item[Named Entity Recognition:] This task recognizes and classifies named entities such as \alert{persons, locations, time expression, or measuring units}. %More complex patterns may also be recognized as structured entities such as addresses.
 	\item[Template Element Construction:] Populates templates describing entities with extracted
-roles (or attributes) about one single entity. This task is often performed stepwise sentence by sentence, which results in a huge set of partially filled templates.
-	\item[Template Relation Construction:] As each template describes information about one single entity, this tasks identifies semantic relations between entities.
-	\item[Template Unification:] Merges multiple elementary templates that are filled with information about identical entities.
-	\item[Scenario Template Production:] Fits the results of Template Element Construction and Template Relation Construction into templates describing pre-specified event scenarios (pre-specified ``queries on the extracted data'').
+\alert{roles} (or \alert{attributes}) about one single entity. %This task is often performed stepwise sentence by sentence, which results in a huge set of partially filled templates.
+	\item[Template Relation Construction:] As each template describes information about one single entity, this tasks identifies semantic \alert{relations between entities}.
+	\item[Template Unification:] \alert{Merges} multiple elementary templates filled with \alert{information about identical entities}.
+	\item[Scenario Template Production:] Fits Template Elements and Template Relations into templates describing pre-specified event scenarios (\alert{pre-specified ``queries on the extracted data''}).
 \end{description}
 \end{frame}
 
 
-
-\subsection{Our Solutions}
-\begin{frame}{Extraction Based on Structural Similarity}
-\end{frame}
-\begin{frame}{Linguistic Information Extraction}
-\end{frame}
-
-\section{User View}
-
-%\subsection{Integration of Extraction Tools}
-
-\subsection{User Initiative and Effort}
-
-\begin{frame}{User initiative and effort}
-\includegraphics[width=\hsize]{img/extraction_proces_and_user}
+\begin{frame}{Linguistic IE and Semantic interpretation of extraction rules}
+\centerline{\includegraphics[width=1.16\hsize]{img/DedVoj_semantic_interpretation}}
+\begin{itemize}
+	\item Determines how particular values of attributes are used.
+	\item Gives semantics to extraction rule.
+	\item Gives semantics to extracted data.
+\end{itemize}
 \end{frame}
 
-
+\begin{frame}{Linguistic IE -- ILP Learning of Extraction Rules}
+\includegraphics[width=0.95\hsize]{img/ILP_learning}
+\end{frame}
 
 
 \section{Conclusion and Future Work}
 
-\begin{frame}{Conclusion}
+\begin{frame}{Conclusion and Future Work}
+Conclusion:
 \begin{itemize}
-	\item Future development of WIE tools and work on their adaptability to new domains.
-	\item Integration of WIE tools to the web semantization system.
-	\item Development of the methodology and software to support the extension of the semantization system to a new domain for a non-expert user.
+	\item Partial survey of WIE systems\\(see the paper for references)
+	\begin{itemize}
+		\item Related to \alert{Web Semantization}
+	\end{itemize}
+	\item Problem of \alert{unskilled user} pointed out
+\end{itemize}
+	\vspace{1cm}
+Future Work:
+\begin{itemize}
+	\item Future \alert{development of WIE} tools and work on their adaptability to new domains.
+	\item \alert{Integration} of WIE tools to the web semantization system.
+	\item Development of the methodology and software to support the \alert{extension} of the semantization system \alert{to a new domain for a non-expert user}.
 \end{itemize}
 \end{frame}
 
