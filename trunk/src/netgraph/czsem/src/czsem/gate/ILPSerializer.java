@@ -5,13 +5,12 @@ import gate.*;
 import gate.corpora.DocumentImpl;
 import gate.creole.*;
 import gate.creole.metadata.*;
+import gate.util.Err;
 import gate.util.GateException;
 
 import java.io.*;
 import java.net.URL;
-import java.text.CharacterIterator;
 import java.text.SimpleDateFormat;
-import java.text.StringCharacterIterator;
 import java.util.*;
 
 import czsem.ILP.Serializer;
@@ -60,9 +59,10 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 	}
 */
 	private File working_directory;
-	public String ILP_proj_dir = "C:\\workspace\\czsem\\src\\netgraph\\czsem\\ILP_serial_projects\\";
+	public String ilp_dir_for_projects = "C:\\workspace\\czsem\\src\\netgraph\\czsem\\ILP_serial_projects\\";
+	public String ilp_current_project_dir = null;
 	public String project_name = "serialized_exp";
-	private Serializer ser;		
+//	private Serializer ser_bkg;		
 	
 	public void init_project() throws FileNotFoundException, UnsupportedEncodingException
 	{
@@ -71,55 +71,118 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
         String time_stamp = df.format(rightNow.getTime());
         
         StringBuilder file_strb = new StringBuilder();
-        file_strb.append(ILP_proj_dir);
+        file_strb.append(ilp_dir_for_projects);
         file_strb.append(time_stamp);
 //        file_strb.append("pokkk");
         
-        working_directory = new File(file_strb.toString());
-        working_directory.mkdir();
-    
+        ilp_current_project_dir = file_strb.toString();
+        
+        working_directory = new File(ilp_current_project_dir);
+        working_directory.mkdir();    
+	}
+	
+	protected void serializeAnnotationSet(AnnotationSet annotations) throws FileNotFoundException, UnsupportedEncodingException
+	{
+		//logging
+		Err.println("Anntoation types:");
+		for (String type_name : annotations.getAllTypes()) {
+			Err.println(type_name);
+		}
+		//logging
+		
+		serializeBackgroundKnowlege(annotations);
+		serializeExamples(annotations, true);
+		serializeExamples(annotations, false);
+	}
+		
+		
+	protected static AnnotationSet filterExmaples(AnnotationSet annotations, boolean isPositive)
+	{
+		FeatureMap fmap = Factory.newFeatureMap();
+		fmap.put("isPositive", Boolean.toString(isPositive));
+				
+		return annotations.get("PosNeg", fmap);
+	}
+	
+	protected void serializeExamples(AnnotationSet annotations, boolean isPositive) throws FileNotFoundException, UnsupportedEncodingException
+	{
+        StringBuilder file_strb = new StringBuilder(ilp_current_project_dir);
+		file_strb.append('\\');
+        file_strb.append(project_name);
+        if (isPositive)
+        	file_strb.append(".f");
+        else
+        	file_strb.append(".n");
 
-        file_strb.append('\\');
+        Serializer ser_pos = new Serializer(file_strb.toString());		
+
+        AnnotationSet tokens = annotations.get("Token");
+        
+        for (Annotation annotation : filterExmaples(annotations, isPositive))
+		{
+        	Err.print(annotation);        	
+        	for (Annotation token : tokens.getContained(annotation.getStartNode().getOffset(), annotation.getEndNode().getOffset()))
+        	{
+            	Err.print("     ");
+            	Err.print(token);
+            	ser_pos.putTuple(project_name, new String[]{token.getId().toString()});        		
+        	}
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	protected void serializeBackgroundKnowlege(AnnotationSet annotations) throws FileNotFoundException, UnsupportedEncodingException
+	{
+        StringBuilder file_strb = new StringBuilder(ilp_current_project_dir);
+		file_strb.append('\\');
         file_strb.append(project_name);
         file_strb.append(".b");
 
-		ser = new Serializer(file_strb.toString());		
-	}
-	
-	protected void serializeAnnotationSet(AnnotationSet annotations)
-	{		
+        Serializer ser_bkg = new Serializer(file_strb.toString());		
+
 		
-		Relation annot_type = ser.addBinRelation("annot_type", "annotation", "annot_type");
-		ser.putBinaryMode(annot_type, "1", '+', '#');
+		Relation annot_type = ser_bkg.addBinRelation("annot_type", "annotation", "annot_type");
+		ser_bkg.putBinaryMode(annot_type, "1", '+', '#');
 		
-		Relation dep_edge = ser.addBinRelation("dependency", "annotation", "annotation");
-		ser.putBinaryMode(dep_edge, "*", '+', '-');
-		ser.putBinaryMode(dep_edge, "1", '-', '+');
+		Relation dep_edge = ser_bkg.addBinRelation("dependency", "annotation", "annotation");
+		ser_bkg.putBinaryMode(dep_edge, "*", '+', '-');
+		ser_bkg.putBinaryMode(dep_edge, "1", '-', '+');
 		
-		Relation dep_kind = ser.addBinRelation("dep_kind", "annotation", "dep_kind");
-		ser.putBinaryMode(dep_edge, "1", '+', '#');
+		Relation dep_kind = ser_bkg.addBinRelation("dep_kind", "annotation", "dep_kind");
+		ser_bkg.putBinaryMode(dep_kind, "1", '+', '#');
 		
 		List<String> feat_names = getFeatureNamesToSerialze();
 		Relation [] feat_rels = new Relation[feat_names.size()];
 		
+		
+		Relation pos_neg = ser_bkg.addRealtion(project_name, new String[]{"annotation"});
+		ser_bkg.putMode(pos_neg, "1", new char[] {'+'});
+		ser_bkg.putDetermination(pos_neg, annot_type);
+		ser_bkg.putDetermination(pos_neg, dep_edge);
+		ser_bkg.putDetermination(pos_neg, dep_kind);
+
+		
 		for (int i=0; i<feat_rels.length; i++)
 		{
-			feat_rels[i] = ser.addBinRelation("has_" + feat_names.get(i), "annotation", feat_names.get(i));
-			ser.putBinaryMode(feat_rels[i], "1", '+', '#');
+			feat_rels[i] = ser_bkg.addBinRelation("has_" + feat_names.get(i), "annotation", feat_names.get(i));
+			ser_bkg.putBinaryMode(feat_rels[i], "1", '+', '#');
+
+			ser_bkg.putDetermination(pos_neg, feat_rels[i]);
 		}
+
 		
-		ser.putCommentLn("------ TUPLES ------");
+		ser_bkg.putCommentLn("------ TUPLES ------");
 		
 		for (String ser_type_name : annotationTypesToSerialze) {
 			for (Annotation annotation : annotations.get(ser_type_name))
 			{
-				ser.putBinTuple(annot_type, annotation.getId().toString(), annotation.getType());
+				ser_bkg.putBinTuple(annot_type, annotation.getId().toString(), annotation.getType());
 
 				for (int i=0; i<feat_rels.length; i++)
 				{
 					String feat_val = (String) annotation.getFeatures().get(feat_names.get(i));
 					if (feat_val != null)
-						ser.putBinTuple(feat_rels[i], annotation.getId().toString(), feat_val);
+						ser_bkg.putBinTuple(feat_rels[i], annotation.getId().toString(), feat_val);
 				}
 			}
 			
@@ -129,13 +192,13 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 		for (Annotation annotation : annotations.get("Dependency"))
 		{
 			ArrayList<Integer> args = (ArrayList<Integer>) annotation.getFeatures().get("args");
-			ser.putBinTuple(dep_edge, args.get(0).toString(), args.get(1).toString());				
-			ser.putBinTuple(dep_kind, args.get(1).toString(), (String) annotation.getFeatures().get("kind"));
+			ser_bkg.putBinTuple(dep_edge, args.get(0).toString(), args.get(1).toString());				
+			ser_bkg.putBinTuple(dep_kind, args.get(1).toString(), (String) annotation.getFeatures().get("kind"));
 		}
 		
-		ser.putCommentLn("------ TYPES ------");
+		ser_bkg.putCommentLn("------ TYPES ------");
 /**/
-		ser.outputAllTypes();
+		ser_bkg.outputAllTypes();
 		
 		
 /*
@@ -190,10 +253,11 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 		*/			
 	}
 
+	protected String prolog_path = "C:\\Program Files\\Yap\\bin\\yap.exe";
+	protected String aleph_path = "C:\\Program Files\\aleph\\aleph.pl";
+
 	protected void execILP() throws IOException, InterruptedException
 	{
-		String prolog_path = "C:\\Program Files\\Yap\\bin\\yap.exe";
-		String aleph_path = "C:\\Program Files\\aleph\\aleph.pl";
 		
 		String [] exec_args = {prolog_path, "-l", aleph_path };
 		
@@ -223,6 +287,13 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 		os.print(project_name);
 		os.println(").");
 		os.flush();
+		
+		os.println("induce.");		
+		os.flush();
+		
+		os.println("write_rules(learned_rules).");		
+		os.flush();		
+
 /**/
 		os.println("halt.");
 		os.flush();
@@ -232,6 +303,43 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 		prolog_proc.waitFor();
 //		System.err.println(prolog_proc.exitValue());
 	}
+	
+	protected void testRules() throws IOException, InterruptedException
+	{				
+		System.err.println(prolog_path);		
+		Process prolog_proc = Runtime.getRuntime().exec(prolog_path, null, working_directory);
+//				new String [] {"LANG=cs_CZ.UTF-8"} , working_directory);
+		
+		PrintStream os = new PrintStream(new BufferedOutputStream(prolog_proc.getOutputStream()));
+		BufferedInputStream is = new BufferedInputStream(prolog_proc.getInputStream());
+		BufferedInputStream ierr = new BufferedInputStream(prolog_proc.getErrorStream());
+		
+		new ReaderThread(is, System.out).start();
+		new ReaderThread(ierr, System.err).start();
+				
+		os.println("yap_flag(encoding,X).\n");
+		os.flush();
+		
+		os.print("consult('");
+		os.print(project_name);
+		os.println(".b').");
+		os.flush();
+
+		os.println("consult(learned_rules).");
+		os.flush();
+
+		os.print(project_name);
+		os.println("(X)?");
+		os.flush();
+
+		os.println("halt.");
+		os.flush();
+
+		System.err.println("halt sent..");
+			
+		prolog_proc.waitFor();		
+	}
+	
 	
 	public static void main(String[] args) throws GateException, IOException, InterruptedException
 	{	
@@ -269,9 +377,12 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 
 /**/
 		types.add("Token");
+		types.add("PosNeg");
 		features.add("category");
 		features.add("string");
 		features.add("root");
+		features.add("isPositve");
+		
 /**/		
 		ilp_ser.setAnnotationTypesToSerialze(types);			
 		ilp_ser.setFeatureNamesToSerialze(features);			
@@ -281,6 +392,8 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 		ilp_ser.serializeAnnotationSet(as);
 		
 		ilp_ser.execILP();
+		
+		ilp_ser.testRules();
 
 		
 //		System.out.print(Serializer.encodeValue("01"));
@@ -294,7 +407,7 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 
 	@RunTime
 	@Optional
-	@CreoleParameter(comment="Names of annotation types to be serilaized.", defaultValue="Token")
+	@CreoleParameter(comment="Names of annotation types to be serilaized.", defaultValue="Token;PosNeg")
 	public void setAnnotationTypesToSerialze(List<String> annotationTypesToSerialze) {
 		System.err.println("ILPSer SetAnnotationTypesTo..");
 		this.annotationTypesToSerialze = annotationTypesToSerialze;
@@ -308,7 +421,7 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 
 	@RunTime
 	@Optional
-	@CreoleParameter(comment="Names of annotation features to be serilaized.", defaultValue="category;root;string")
+	@CreoleParameter(comment="Names of annotation features to be serilaized.", defaultValue="category;root;string;isPositve")
 	public void setFeatureNamesToSerialze(List<String> featureNamesToSerialze) {
 		this.featureNamesToSerialze = featureNamesToSerialze;
 	}
