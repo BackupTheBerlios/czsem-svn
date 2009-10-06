@@ -124,7 +124,7 @@ public class Serializer {
 			}
 		}
 
-		if (all_digits || all_lo_alpha) return "μμ"+value;
+		if (all_digits || all_lo_alpha) return value;
 //		if (all_digits || all_lo_alpha) return "μμ"+value;
 		
 		sb.append('\'');
