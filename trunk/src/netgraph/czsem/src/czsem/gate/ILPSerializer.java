@@ -1,3 +1,4 @@
+
 package czsem.gate;
 
 import gate.*;
