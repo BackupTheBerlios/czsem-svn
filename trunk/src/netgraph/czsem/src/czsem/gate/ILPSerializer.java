@@ -7,6 +7,8 @@ import gate.creole.*;
 import gate.creole.metadata.*;
 import gate.util.Err;
 import gate.util.GateException;
+import gate.util.InvalidOffsetException;
+import gate.util.Out;
 
 import java.io.*;
 import java.net.URL;
@@ -90,6 +92,7 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 		}
 		//logging
 		
+		
 		serializeBackgroundKnowlege(annotations);
 		serializeExamples(annotations, true);
 		serializeExamples(annotations, false);
@@ -125,9 +128,24 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
         	{
             	Err.print("     ");
             	Err.print(token);
-            	ser_pos.putTuple(project_name, new String[]{token.getId().toString()});        		
+            	ser_pos.putTuple(project_name, new String[]{renderID(token, annotations)});        		
         	}
 		}
+	}
+	
+	protected static String renderID(Annotation anntotation, AnnotationSet as)
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append("id_");
+		sb.append(as.getDocument().getName());
+		sb.append('_');
+		sb.append(anntotation.getId());
+		return  sb.toString();
+	}
+
+	protected static int parseID(String id_string)
+	{				
+		return Integer.parseInt(id_string.split("_", 3)[2]);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -176,13 +194,13 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 		for (String ser_type_name : annotationTypesToSerialze) {
 			for (Annotation annotation : annotations.get(ser_type_name))
 			{
-				ser_bkg.putBinTuple(annot_type, annotation.getId().toString(), annotation.getType());
+				ser_bkg.putBinTuple(annot_type, renderID(annotation, annotations), annotation.getType());
 
 				for (int i=0; i<feat_rels.length; i++)
 				{
 					String feat_val = (String) annotation.getFeatures().get(feat_names.get(i));
 					if (feat_val != null)
-						ser_bkg.putBinTuple(feat_rels[i], annotation.getId().toString(), feat_val);
+						ser_bkg.putBinTuple(feat_rels[i], renderID(annotation, annotations), feat_val);
 				}
 			}
 			
@@ -304,19 +322,23 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 //		System.err.println(prolog_proc.exitValue());
 	}
 	
-	protected void testRules() throws IOException, InterruptedException
+	protected void applyRules(AnnotationSet as) throws IOException, InterruptedException, InvalidOffsetException
 	{				
 		System.err.println(prolog_path);		
 		Process prolog_proc = Runtime.getRuntime().exec(prolog_path, null, working_directory);
 //				new String [] {"LANG=cs_CZ.UTF-8"} , working_directory);
 		
 		PrintStream os = new PrintStream(new BufferedOutputStream(prolog_proc.getOutputStream()));
-		BufferedInputStream is = new BufferedInputStream(prolog_proc.getInputStream());
+//		BufferedInputStream is = new BufferedInputStream(prolog_proc.getInputStream());
 		BufferedInputStream ierr = new BufferedInputStream(prolog_proc.getErrorStream());
 		
+		BufferedReader is_reader = new BufferedReader(new InputStreamReader(prolog_proc.getInputStream()));
+		
+/**
 		new ReaderThread(is, System.out).start();
+/**/				
 		new ReaderThread(ierr, System.err).start();
-				
+
 		os.println("yap_flag(encoding,X).\n");
 		os.flush();
 		
@@ -328,16 +350,37 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 		os.println("consult(learned_rules).");
 		os.flush();
 
+		os.print("bagof(X,");
 		os.print(project_name);
-		os.println("(X)?");
+		os.println("(X),L),print(L),print('\\n').");
+		os.println();
 		os.flush();
-
+		
+		String ids = is_reader.readLine();
+		FeatureMap fm = Factory.newFeatureMap();
+		for (String s :	ids.substring(1, ids.length()-1) .split(","))
+		{
+			Out.println(s);
+			Annotation a = as.get(parseID(s));
+			as.add(a.getStartNode().getOffset(), a.getEndNode().getOffset(), "FOUND", fm);
+		}
+				
 		os.println("halt.");
 		os.flush();
 
 		System.err.println("halt sent..");
-			
-		prolog_proc.waitFor();		
+
+/**
+		new ReaderThread(is, System.out).start();
+		new ReaderThread(ierr, System.err).start();
+/**/				
+		
+		
+		prolog_proc.waitFor();
+
+		Out.println(as.getDocument().getName());
+		Out.println(as.getDocument().getSourceUrl());
+		Out.println(as.getDocument().getFeatures());
 	}
 	
 	
@@ -389,11 +432,17 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 		
 		ilp_ser.init_project();
 		
+//		as.removeAll(as.get("FOUND"));
 		ilp_ser.serializeAnnotationSet(as);
 		
 		ilp_ser.execILP();
 		
-		ilp_ser.testRules();
+		ilp_ser.applyRules(as);
+		
+		ds.sync(doc);
+				
+		ds.close();
+				
 
 		
 //		System.out.print(Serializer.encodeValue("01"));

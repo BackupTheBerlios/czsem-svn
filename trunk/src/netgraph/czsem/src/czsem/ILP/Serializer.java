@@ -89,6 +89,15 @@ public class Serializer {
 
 	public void putTuple(String relationName, String[] values)
 	{
+		for (int i=0; i<values.length; i++)
+		{
+			values[i] = encodeValue(values[i]); 
+		}
+		putTupleWithoutValueCheck(relationName, values);
+	}
+
+	public void putTupleWithoutValueCheck(String relationName, String[] values)
+	{
 		//TODO jmeno relace a hodnoty musi zacinat malym pismenem?
 		output.print(relationName);
 		
@@ -139,13 +148,13 @@ public class Serializer {
 			rel.argTypes[i].addValue(values[i]);
 		}
 		
-		putTuple(rel.name, values);
+		putTupleWithoutValueCheck(rel.name, values);
 	}
 	
 	protected void putType(Type type)
 	{
 		for (String value : type.values) {
-			putTuple(type.name, new String[]{value});
+			putTupleWithoutValueCheck(type.name, new String[]{value});
 		}
 	}
 	
