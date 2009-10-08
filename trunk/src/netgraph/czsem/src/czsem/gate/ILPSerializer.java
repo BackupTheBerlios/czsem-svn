@@ -133,14 +133,19 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 		}
 	}
 	
-	protected static String renderID(Annotation anntotation, AnnotationSet as)
-	{
+	protected static String renderID(Integer id, AnnotationSet as)
+	{		
 		StringBuilder sb = new StringBuilder();
 		sb.append("id_");
 		sb.append(as.getDocument().getName());
 		sb.append('_');
-		sb.append(anntotation.getId());
+		sb.append(id);
 		return  sb.toString();
+	}
+
+	protected static String renderID(Annotation anntotation, AnnotationSet as)
+	{
+		return renderID(anntotation.getId(), as);
 	}
 
 	protected static int parseID(String id_string)
@@ -210,8 +215,14 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 		for (Annotation annotation : annotations.get("Dependency"))
 		{
 			ArrayList<Integer> args = (ArrayList<Integer>) annotation.getFeatures().get("args");
-			ser_bkg.putBinTuple(dep_edge, args.get(0).toString(), args.get(1).toString());				
-			ser_bkg.putBinTuple(dep_kind, args.get(1).toString(), (String) annotation.getFeatures().get("kind"));
+			
+			ser_bkg.putBinTuple(dep_edge, 
+					renderID(args.get(0), annotations),
+					renderID(args.get(1), annotations));				
+			
+			ser_bkg.putBinTuple(dep_kind, 
+					renderID(args.get(1), annotations),
+					(String) annotation.getFeatures().get("kind"));
 		}
 		
 		ser_bkg.putCommentLn("------ TYPES ------");

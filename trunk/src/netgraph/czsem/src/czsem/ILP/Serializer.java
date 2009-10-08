@@ -113,16 +113,18 @@ public class Serializer {
 
 	public static String encodeValue(String value)
 	{
-		boolean all_digits = true;
-		boolean all_lo_alpha = true;
 
 		StringBuilder sb = new StringBuilder();
 		sb.append('\'');
 		StringCharacterIterator iter = new StringCharacterIterator(value);
+
+		boolean all_digits = true;
+		boolean all_lo_alpha = Character.isLowerCase(iter.first());
+
 		for (char ch = iter.first(); ch != CharacterIterator.DONE; ch = iter.next())
 		{
 			all_digits = all_digits & Character.isDigit(ch);
-			all_lo_alpha = all_lo_alpha & Character.isLowerCase(ch);
+			all_lo_alpha = all_lo_alpha & (Character.isLowerCase(ch) | Character.isDigit(ch) | ch == '_');
 			
 			switch (ch) {
 			case '\'':
@@ -228,8 +230,10 @@ public class Serializer {
 		Serializer ser = new Serializer();
 		
 		Relation rel = ser.addBinRelation("edge", "node", "node");
-		ser.putBinTuple(rel, "node01", "node002");
-		ser.putBinTuple(rel, "node01", "node003");
+		ser.putBinTuple(rel, "node01", "002");
+		ser.putBinTuple(rel, "node01", "345");
+		ser.putBinTuple(rel, "123node", "id_123");
+		ser.putBinTuple(rel, "A123node", "_id_123");
 		ser.outputAllTypes();
 		ser.putDetermination(rel, rel);
 		ser.putBinaryMode(rel, "10", '+', '-');
