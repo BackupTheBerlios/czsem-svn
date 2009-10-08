@@ -17,6 +17,7 @@ import java.util.*;
 
 import czsem.ILP.Serializer;
 import czsem.ILP.Serializer.Relation;
+import czsem.utils.ProjectSetup;
 
 
 @CreoleResource(name = "czsem ILPSerializer", comment = "Exports given corpus to ILP background knowledge")
@@ -42,6 +43,8 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 			} catch (IOException e) {}				
 		}
 	}
+	
+	protected ProjectSetup project_setup = new ProjectSetup();
 
 
 	private static final long serialVersionUID = 6469933231715581382L;
@@ -60,28 +63,6 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 		System.out.print(annotation);
 	}
 */
-	private File working_directory;
-	public String ilp_dir_for_projects = "C:\\workspace\\czsem\\src\\netgraph\\czsem\\ILP_serial_projects\\";
-	public String ilp_current_project_dir = null;
-	public String project_name = "serialized_exp";
-//	private Serializer ser_bkg;		
-	
-	public void init_project() throws FileNotFoundException, UnsupportedEncodingException
-	{
-        Calendar rightNow = Calendar.getInstance();
-        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd_HHmmss");
-        String time_stamp = df.format(rightNow.getTime());
-        
-        StringBuilder file_strb = new StringBuilder();
-        file_strb.append(ilp_dir_for_projects);
-        file_strb.append(time_stamp);
-//        file_strb.append("pokkk");
-        
-        ilp_current_project_dir = file_strb.toString();
-        
-        working_directory = new File(ilp_current_project_dir);
-        working_directory.mkdir();    
-	}
 	
 	protected void serializeAnnotationSet(AnnotationSet annotations) throws FileNotFoundException, UnsupportedEncodingException
 	{
@@ -109,9 +90,8 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 	
 	protected void serializeExamples(AnnotationSet annotations, boolean isPositive) throws FileNotFoundException, UnsupportedEncodingException
 	{
-        StringBuilder file_strb = new StringBuilder(ilp_current_project_dir);
-		file_strb.append('\\');
-        file_strb.append(project_name);
+        StringBuilder file_strb = new StringBuilder(project_setup.current_project_dir);
+        file_strb.append(project_setup.project_name);
         if (isPositive)
         	file_strb.append(".f");
         else
@@ -128,7 +108,8 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
         	{
             	Err.print("     ");
             	Err.print(token);
-            	ser_pos.putTuple(project_name, new String[]{renderID(token, annotations)});        		
+            	ser_pos.putTuple(project_setup.project_name,
+            			new String[]{renderID(token, annotations)});        		
         	}
 		}
 	}
@@ -156,9 +137,8 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 	@SuppressWarnings("unchecked")
 	protected void serializeBackgroundKnowlege(AnnotationSet annotations) throws FileNotFoundException, UnsupportedEncodingException
 	{
-        StringBuilder file_strb = new StringBuilder(ilp_current_project_dir);
-		file_strb.append('\\');
-        file_strb.append(project_name);
+        StringBuilder file_strb = new StringBuilder(project_setup.current_project_dir);
+        file_strb.append(project_setup.project_name);
         file_strb.append(".b");
 
         Serializer ser_bkg = new Serializer(file_strb.toString());		
@@ -178,7 +158,7 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 		Relation [] feat_rels = new Relation[feat_names.size()];
 		
 		
-		Relation pos_neg = ser_bkg.addRealtion(project_name, new String[]{"annotation"});
+		Relation pos_neg = ser_bkg.addRealtion(project_setup.project_name, new String[]{"annotation"});
 		ser_bkg.putMode(pos_neg, "1", new char[] {'+'});
 		ser_bkg.putDetermination(pos_neg, annot_type);
 		ser_bkg.putDetermination(pos_neg, dep_edge);
@@ -293,7 +273,7 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 		System.err.println(prolog_path);
 		System.err.println(aleph_path);
 		
-		Process prolog_proc = Runtime.getRuntime().exec(exec_args, null, working_directory);
+		Process prolog_proc = Runtime.getRuntime().exec(exec_args, null, project_setup.working_directory);
 //				new String [] {"LANG=cs_CZ.UTF-8"} , working_directory);
 		
 		PrintStream os = new PrintStream(new BufferedOutputStream(prolog_proc.getOutputStream()));
@@ -313,7 +293,7 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 /**/		
 /**/		
 		os.print("read_all(");
-		os.print(project_name);
+		os.print(project_setup.project_name);
 		os.println(").");
 		os.flush();
 		
@@ -336,7 +316,7 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 	protected void applyRules(AnnotationSet as) throws IOException, InterruptedException, InvalidOffsetException
 	{				
 		System.err.println(prolog_path);		
-		Process prolog_proc = Runtime.getRuntime().exec(prolog_path, null, working_directory);
+		Process prolog_proc = Runtime.getRuntime().exec(prolog_path, null, project_setup.working_directory);
 //				new String [] {"LANG=cs_CZ.UTF-8"} , working_directory);
 		
 		PrintStream os = new PrintStream(new BufferedOutputStream(prolog_proc.getOutputStream()));
@@ -354,7 +334,7 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 		os.flush();
 		
 		os.print("consult('");
-		os.print(project_name);
+		os.print(project_setup.project_name);
 		os.println(".b').");
 		os.flush();
 
@@ -362,7 +342,7 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 		os.flush();
 
 		os.print("bagof(X,");
-		os.print(project_name);
+		os.print(project_setup.project_name);
 		os.println("(X),L),print(L),print('\\n').");
 		os.println();
 		os.flush();
@@ -441,7 +421,10 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 		ilp_ser.setAnnotationTypesToSerialze(types);			
 		ilp_ser.setFeatureNamesToSerialze(features);			
 		
-		ilp_ser.init_project();
+
+		ilp_ser.project_setup.dir_for_projects = "C:\\workspace\\czsem\\src\\netgraph\\czsem\\ILP_serial_projects\\";
+		ilp_ser.project_setup.project_name = "serialized_exp";
+		ilp_ser.project_setup.init_project();
 		
 //		as.removeAll(as.get("FOUND"));
 		ilp_ser.serializeAnnotationSet(as);

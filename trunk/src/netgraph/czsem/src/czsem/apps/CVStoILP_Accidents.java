@@ -8,7 +8,12 @@ import java.util.Set;
 
 import com.csvreader.CsvReader;
 
+import czsem.ILP.Serializer;
+import czsem.ILP.Serializer.Relation;
+import czsem.utils.ProjectSetup;
+
 public class CVStoILP_Accidents {
+	protected ProjectSetup proproject_setup = new ProjectSetup();
 
 	private PositiveExampleDetector pe_detect;
 	
@@ -38,136 +43,110 @@ public class CVStoILP_Accidents {
 	
 	private PrintStream ilp_out = System.out;
 	
-	public void parse_input(String file_name) throws IOException
+	public void crateBackgroundKnowledge(String input_file_name) throws IOException
 	{
-		CsvReader reader = new CsvReader(file_name, ';');
+		CsvReader reader = new CsvReader(input_file_name, ';');
 
 		reader.readHeaders();
 		
+		StringBuilder sb = new StringBuilder(proproject_setup.current_project_dir);
+		sb.append(proproject_setup.project_name);
+		sb.append(".b");
+		Serializer ilp_ser = new Serializer(sb.toString());
+		
+		Relation [] crisp_relations = new Relation[reader.getHeaderCount()];
+		Relation [] atl_relations = new Relation[reader.getHeaderCount()];
+
+
+		
+//		ilp_ser.putCommentLn("--- M O D E S   and   D E T E R M I N A T I O N S   and   D E F I N I T I O N S ---");
+		ilp_ser.putCommentLn("--- C R I S P     M O D E S ---");
+		
+		for (int i = 0; i < crisp_relations.length; i++) {
+			crisp_relations[i] = ilp_ser.addBinRelation("has_" + reader.getHeader(i), "file_id", reader.getHeader(i));
+			ilp_ser.putBinaryMode(crisp_relations[i], "1", '+', '#');
+		}
+
+		ilp_ser.putCommentLn("");
+		ilp_ser.putCommentLn("--- M O N O T O N I Z E D    M O D E S ---");
+		
+		for (int i = 0; i < crisp_relations.length; i++)
+		{			
+			atl_relations[i] = ilp_ser.addBinRelation(
+					crisp_relations[i].getName() + "_atleast",
+					crisp_relations[i].getArgTypeName(0),
+					crisp_relations[i].getArgTypeName(1));
+			
+			ilp_ser.putBinaryMode(atl_relations[i], "*", '+', '#');
+		}
+		
+		
+		ilp_ser.putCommentLn("");
+		ilp_ser.putCommentLn("--- M O N O T O N I C I T Y       A X I O M S ---");
+
+		for (int i = 0; i < crisp_relations.length; i++) {
+
+			//monotonicity axioms
+			ilp_ser.print(atl_relations[i].getName());
+			ilp_ser.print("(ID,N) :- ");
+			ilp_ser.print(crisp_relations[i].getName());
+			ilp_ser.print("(ID,N), not(integer(N)),!.\n");
+
+			ilp_ser.print(atl_relations[i].getName());
+			ilp_ser.print("(ID,N) :- ");
+			ilp_ser.print(crisp_relations[i].getName());
+			ilp_ser.print("(ID,N2), integer(N2), ");
+			ilp_ser.print(atl_relations[i].getArgTypeName(1));
+			ilp_ser.print("(N), integer(N), N2>=N.\n\n");						
+		}
+
+		
+		
+		ilp_ser.putCommentLn("");
+		ilp_ser.putCommentLn("--- D E T E R M I N A T I O N S ---");
+		
+		Relation atl_ser = ilp_ser.addBinRelation("serious_atl", "file_id", "ranking_class");
+		Relation crisp_ser = ilp_ser.addBinRelation("serious", "file_id", "ranking_class");
+		
+		ilp_ser.putBinaryMode(atl_ser, "*", '+', '#');
+		ilp_ser.putBinaryMode(crisp_ser, "1", '+', '#');
+		ilp_ser.print("\n");
+		
+		
+		for (int i = 0; i < atl_relations.length-2; i++)
+		{						
+			ilp_ser.putDetermination(atl_ser, atl_relations[i]);
+		}
+		ilp_ser.print("\n");
+		for (int i = 0; i < crisp_relations.length-2; i++)
+		{						
+			ilp_ser.putDetermination(crisp_ser, crisp_relations[i]);
+		}
+
+		
+		
+		ilp_ser.putCommentLn("");
+		ilp_ser.putCommentLn("--- T U P L E S ---");
 
 		while (reader.readRecord())
 		{
-			if (attribute_values_bufeer == null)
-					initAttributeValuesBufeer(reader.getColumnCount());
-					
-								
-			ilp_out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-			ilp_out.print("id(id_");
-			ilp_out.print(reader.get("filename"));
-			ilp_out.println(").");
-			
-			
-			for (int i = 0; i < reader.getColumnCount(); i++) {
-
+			ilp_ser.putCommentLn("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+			for (int i = 0; i < crisp_relations.length; i++)
+			{
 				String value = reader.get(i); 
 //				if (value.compareTo("?") == 0) continue;
 				if (value.compareTo("?") == 0) value = "unknown";
 				
-				attribute_values_bufeer[i].add(value);
-
-				ilp_out.print(reader.getHeader(i));
-				ilp_out.print("(id_");
-				ilp_out.print(reader.get("filename"));
-				ilp_out.print(',');
-				ilp_out.print(value);
-				ilp_out.println(").");
-				
-			}
+				ilp_ser.putBinTuple(crisp_relations[i], "id_" + reader.get("filename"), value);
+			}					
 		}
 		
-		ilp_out.println("\n%%%%%%%%% D A T A %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-		for (int i = 0; i < attribute_values_bufeer.length; i++) {
-			for (String value : attribute_values_bufeer[i]) {
-				ilp_out.print(reader.getHeader(i));
-				ilp_out.print("(");
-				ilp_out.print(value);
-				ilp_out.println(").");				
-			}			
-		}
-
-		ilp_out.println("\n%%%%%%%%% M O D E S %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-		//monotinazace
-		for (int i = 0; i < attribute_values_bufeer.length; i++) {
-			ilp_out.print(reader.getHeader(i));
-			ilp_out.print("_atleast(ID,N) :- ");
-			ilp_out.print(reader.getHeader(i));
-			ilp_out.println("(ID,N),not(integer(N)),!.");
-
-			ilp_out.print(reader.getHeader(i));
-			ilp_out.print("_atleast(ID,N) :- ");
-			ilp_out.print(reader.getHeader(i));
-			ilp_out.print("(ID,N2), integer(N2), ");
-			ilp_out.print(reader.getHeader(i));
-			ilp_out.println("(N), integer(N), N2>=N.");
-		}
 		
-		//modes
-		ilp_out.println();
-		for (int i = 0; i < attribute_values_bufeer.length; i++) {
-			ilp_out.print(":- mode(1, ");
-			ilp_out.print(reader.getHeader(i));
-			ilp_out.print("_atleast( +id, #");
-			ilp_out.print(reader.getHeader(i));
-			ilp_out.println(")).");
-		}
-		ilp_out.println();
-		for (int i = 0; i < attribute_values_bufeer.length; i++) {
-			ilp_out.print(":- mode(1, ");
-			ilp_out.print(reader.getHeader(i));
-			ilp_out.print("( +id, #");
-			ilp_out.print(reader.getHeader(i));
-			ilp_out.println(")).");
-		}
-
-		//determinations
-		for (int a=0; a<10; a++)
-		{
-			ilp_out.println();
-			for (int b=0; b<=a; b++)
-			{
-				ilp_out.print("test_serious_atleast_");			
-				ilp_out.print(b);			
-				ilp_out.print("(ID) :- serious_atleast_");			
-				ilp_out.print(a);			
-				ilp_out.println("(ID).");
-			}
-			
-			ilp_out.println();
-			ilp_out.print("serious_only_");
-			ilp_out.print(a);
-			ilp_out.print("(ID) :- serious_atleast_");
-			ilp_out.print(a);
-			ilp_out.print("(ID)");
-			for (int b=a+1; b<10; b++)
-			{
-				ilp_out.print(", not(serious_atleast_");			
-				ilp_out.print(b);			
-				ilp_out.print("(ID))");			
-			}			
-			ilp_out.println('.');
-
-			
-			ilp_out.println();
-			ilp_out.print(":- mode(1, serious_atleast_");				
-			ilp_out.print(a);				
-			ilp_out.println("( +id)).");				
-			for (int i = 0; i < attribute_values_bufeer.length; i++) {
-				if (i == 1) continue; //filename
-//				if (i == 3) continue; //type
-				if (i == 14) continue; // ranking
-				if (i == 1) continue; // randomized_order
-				
-				ilp_out.print(":- determination(serious_atleast_");
-				ilp_out.print(a);
-				ilp_out.print("/1, ");
-				ilp_out.print(reader.getHeader(i));
-				
-				if (pe_detect.writeAtleastSuffixInDeterminations())
-					ilp_out.println("_atleast/2)."); //monotone
-				else
-					ilp_out.println("/2).");	//non-monotone
-			}
-		}
+		
+		ilp_ser.putCommentLn("");
+		ilp_ser.putCommentLn("--- V A L U E S ---");
+		
+		ilp_ser.outputAllTypes();
 
 		reader.close();		
 	}
@@ -244,7 +223,7 @@ public class CVStoILP_Accidents {
 		public int getCount() {return ids.length;}				
 	}
 	
-	public void printExamples(boolean negative, Examples ex)
+	public void printExamples(boolean negative, Examples ex, boolean printAtleastSuffix)
 	{
 		int categories_stat[] = new int[ex.cat_mins.length-1];		
 		for (int c=0; c<categories_stat.length; c++) categories_stat[c] = 0;
@@ -255,10 +234,12 @@ public class CVStoILP_Accidents {
 				if (negative ^ pe_detect.isPositiveExample(ex.rankings[a], ex.cat_mins[r], ex.cat_mins[r+1]))
 				{
 					categories_stat[r]++;
-					ilp_out.print("serious_atleast_");
-					ilp_out.print(r);					
-					ilp_out.print('(');					
+					ilp_out.print("serious");
+					if (printAtleastSuffix) ilp_out.print("_atl");
+					ilp_out.print("(");
 					ilp_out.print(ex.ids[a]);
+					ilp_out.print(',');					
+					ilp_out.print(r);					
 					ilp_out.print(").    %");
 					ilp_out.println(ex.rankings[a]);					
 				}				
@@ -310,11 +291,26 @@ public class CVStoILP_Accidents {
 /***/		
 	
 			
-		ilp_out.println("%%%%%%%%%%%%% P O S I T I V E %%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-		printExamples(false, ex);
+		ilp_out.close();
+
 		
+		StringBuilder sb = new StringBuilder(proproject_setup.current_project_dir);
+		sb.append(proproject_setup.project_name);
+		sb.append(".f");
+		ilp_out = new PrintStream(sb.toString());		
+ 
+		ilp_out.println("%%%%%%%%%%%%% P O S I T I V E %%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+		printExamples(false, ex, pe_detect.writeAtleastSuffixInDeterminations());
+		ilp_out.close();
+		
+
+		sb = new StringBuilder(proproject_setup.current_project_dir);
+		sb.append(proproject_setup.project_name);
+		sb.append(".n");
+		ilp_out = new PrintStream(sb.toString());		
 		ilp_out.println("%%%%%%%%%%%%% N E G A T I V E %%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-		printExamples(true, ex);
+		printExamples(true, ex, pe_detect.writeAtleastSuffixInDeterminations());
+		ilp_out.close();
 	}
 
 	
@@ -328,11 +324,15 @@ public class CVStoILP_Accidents {
 		
 //		CVStoILP_Accidents csv = new CVStoILP_Accidents("C:\\WorkSpace\\Aleph\\ranking.b");
 		CVStoILP_Accidents csv = new CVStoILP_Accidents(new NonMonotonicExampleDetector());
-		csv.parse_input(args[0]);
+		
+		csv.proproject_setup.dir_for_projects = "C:\\workspace\\czsem\\src\\ILP\\serious_corss\\";
+		csv.proproject_setup.project_name = "serious_cross";
+		csv.proproject_setup.init_project();
+		csv.crateBackgroundKnowledge(args[0]);
 		
 //		CVStoILP_Accidents csv2 = new CVStoILP_Accidents("C:\\WorkSpace\\Aleph\\serious.f");
-		CVStoILP_Accidents csv2 = new CVStoILP_Accidents(new MonotonicExampleDetector());
-		csv2.make_examples(args[0]);
+//		CVStoILP_Accidents csv2 = new CVStoILP_Accidents(new MonotonicExampleDetector());
+		csv.make_examples(args[0]);
 	}
 
 

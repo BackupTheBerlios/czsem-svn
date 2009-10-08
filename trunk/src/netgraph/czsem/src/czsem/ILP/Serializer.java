@@ -23,8 +23,20 @@ public class Serializer {
 		private Type[] argTypes;
 		
 		private Relation(String name, Type[] argTypes) {
-			this.name = name;
+			this.setName(name);
 			this.argTypes = argTypes;
+		}
+
+		private void setName(String name) {
+			this.name = name;
+		}
+
+		public String getArgTypeName(int index) {
+			return argTypes[index].name;
+		}		
+
+		public String getName() {
+			return name;
 		}		
 	}
 	
@@ -81,6 +93,27 @@ public class Serializer {
 				new String[] {arg1TypeName, arg2TypeName});
 	}
 
+	public void renderTupleWithWariables(Relation rel)
+	{
+		String suff[] = new String[rel.argTypes.length];
+		for (int i = 0; i < suff.length; i++) {
+			suff[i]="";
+		}
+		
+		renderTupleWithWariables(rel, suff);
+	}
+
+	public void renderTupleWithWariables(Relation rel, String [] suffix)
+	{
+		String values[] = new String[rel.argTypes.length];
+		
+		for (int i=0; i < rel.argTypes.length; i++)
+		{
+			values[i] = rel.argTypes[i].name.toUpperCase()+suffix[i];			
+		}
+		renderInlineTuple(rel.getName(), values);
+	}
+
 	public void putBinTuple(Relation rel, String value1, String value2)
 	{
 		putTypedTuple(rel, 
@@ -93,12 +126,11 @@ public class Serializer {
 		{
 			values[i] = encodeValue(values[i]); 
 		}
-		putTupleWithoutValueCheck(relationName, values);
+		renderTupleWithoutValueCheck(relationName, values);
 	}
 
-	public void putTupleWithoutValueCheck(String relationName, String[] values)
+	public void renderInlineTuple(String relationName, String[] values)
 	{
-		//TODO jmeno relace a hodnoty musi zacinat malym pismenem?
 		output.print(relationName);
 		
 		char sep = '(';
@@ -108,7 +140,13 @@ public class Serializer {
 			output.print(values[i]);
 			sep=',';
 		}		
-		output.println(").");		
+		output.print(")");				
+	}
+
+	public void renderTupleWithoutValueCheck(String relationName, String[] values)
+	{
+		renderInlineTuple(relationName, values);
+		output.println('.');		
 	}
 
 	public static String encodeValue(String value)
@@ -150,13 +188,13 @@ public class Serializer {
 			rel.argTypes[i].addValue(values[i]);
 		}
 		
-		putTupleWithoutValueCheck(rel.name, values);
+		renderTupleWithoutValueCheck(rel.getName(), values);
 	}
 	
 	protected void putType(Type type)
 	{
 		for (String value : type.values) {
-			putTupleWithoutValueCheck(type.name, new String[]{value});
+			renderTupleWithoutValueCheck(type.name, new String[]{value});
 		}
 	}
 	
@@ -172,11 +210,11 @@ public class Serializer {
 		//:- determination(eastbound/1,has_car/2).
 
 		output.print(":- determination(");
-		output.print(targetRealtion.name);
+		output.print(targetRealtion.getName());
 		output.print('/');
 		output.print(targetRealtion.argTypes.length);
 		output.print(',');
-		output.print(backgroundRealtion.name);
+		output.print(backgroundRealtion.getName());
 		output.print('/');
 		output.print(backgroundRealtion.argTypes.length);
 		output.println(").");		
@@ -204,7 +242,7 @@ public class Serializer {
 		output.print(":- mode(");
 		output.print(recallNumber);
 		output.print(',');
-		output.print(rel.name);
+		output.print(rel.getName());
 		
 		char delim = '(';
 		
@@ -217,6 +255,11 @@ public class Serializer {
 		}
 		
 		output.println(")).");		
+	}
+
+	public void print(String what)
+	{
+		output.print(what);		
 	}
 
 	public void putCommentLn(String comment)
