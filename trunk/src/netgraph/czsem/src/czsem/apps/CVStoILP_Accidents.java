@@ -1,6 +1,5 @@
 package czsem.apps;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.HashSet;
@@ -15,7 +14,7 @@ import czsem.utils.ProjectSetup;
 public class CVStoILP_Accidents {
 	protected ProjectSetup proproject_setup = new ProjectSetup();
 
-	private PositiveExampleDetector pe_detect;
+//	private PositiveExampleDetector pe_detect;
 	
 	private Set<String>[] attribute_values_bufeer = null;
 
@@ -29,7 +28,7 @@ public class CVStoILP_Accidents {
 		}
 	}
 
-	
+/**	
 	CVStoILP_Accidents(PositiveExampleDetector pe_detect)
 	{
 		this.pe_detect = pe_detect;
@@ -40,6 +39,7 @@ public class CVStoILP_Accidents {
 		this.pe_detect = pe_detect;
 		ilp_out = new PrintStream(filename);		
 	}
+/**/
 	
 	private PrintStream ilp_out = System.out;
 	
@@ -223,7 +223,7 @@ public class CVStoILP_Accidents {
 		public int getCount() {return ids.length;}				
 	}
 	
-	public void printExamples(boolean negative, Examples ex, boolean printAtleastSuffix)
+	public void printExamples(PositiveExampleDetector pe_detect, boolean negative, Examples ex)
 	{
 		int categories_stat[] = new int[ex.cat_mins.length-1];		
 		for (int c=0; c<categories_stat.length; c++) categories_stat[c] = 0;
@@ -235,7 +235,7 @@ public class CVStoILP_Accidents {
 				{
 					categories_stat[r]++;
 					ilp_out.print("serious");
-					if (printAtleastSuffix) ilp_out.print("_atl");
+					if (pe_detect.writeAtleastSuffixInDeterminations()) ilp_out.print("_atl");
 					ilp_out.print("(");
 					ilp_out.print(ex.ids[a]);
 					ilp_out.print(',');					
@@ -300,7 +300,10 @@ public class CVStoILP_Accidents {
 		ilp_out = new PrintStream(sb.toString());		
  
 		ilp_out.println("%%%%%%%%%%%%% P O S I T I V E %%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-		printExamples(false, ex, pe_detect.writeAtleastSuffixInDeterminations());
+		ilp_out.println("%%%%%%%%%%%%% C R I S P %%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+		printExamples(new NonMonotonicExampleDetector(), false, ex);
+		ilp_out.println("%%%%%%%%%%%%% M O N O T O N I Z E D %%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+		printExamples(new MonotonicExampleDetector(), false, ex);
 		ilp_out.close();
 		
 
@@ -309,7 +312,10 @@ public class CVStoILP_Accidents {
 		sb.append(".n");
 		ilp_out = new PrintStream(sb.toString());		
 		ilp_out.println("%%%%%%%%%%%%% N E G A T I V E %%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-		printExamples(true, ex, pe_detect.writeAtleastSuffixInDeterminations());
+		ilp_out.println("%%%%%%%%%%%%% C R I S P %%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+		printExamples(new NonMonotonicExampleDetector(), true, ex);
+		ilp_out.println("%%%%%%%%%%%%% M O N O T O N I Z E D %%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+		printExamples(new MonotonicExampleDetector(), true, ex);
 		ilp_out.close();
 	}
 
@@ -323,7 +329,8 @@ public class CVStoILP_Accidents {
 		}
 		
 //		CVStoILP_Accidents csv = new CVStoILP_Accidents("C:\\WorkSpace\\Aleph\\ranking.b");
-		CVStoILP_Accidents csv = new CVStoILP_Accidents(new NonMonotonicExampleDetector());
+//		CVStoILP_Accidents csv = new CVStoILP_Accidents(new NonMonotonicExampleDetector());
+		CVStoILP_Accidents csv = new CVStoILP_Accidents();
 		
 		csv.proproject_setup.dir_for_projects = "C:\\workspace\\czsem\\src\\ILP\\serious_corss\\";
 		csv.proproject_setup.project_name = "serious_cross";
