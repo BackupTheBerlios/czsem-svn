@@ -391,8 +391,8 @@ public class CVStoILP_Accidents {
 		
 //		CVStoILP_Accidents csv2 = new CVStoILP_Accidents("C:\\WorkSpace\\Aleph\\serious.f");
 //		CVStoILP_Accidents csv2 = new CVStoILP_Accidents(new MonotonicExampleDetector());
-//		for (int i=0; i<5; i++)
-		for (int i=0; i<1; i++)
+		for (int i=0; i<5; i++)
+//		for (int i=3; i<4; i++)
 		{
 			csv.make_examples(args[0],i*10,10);
 

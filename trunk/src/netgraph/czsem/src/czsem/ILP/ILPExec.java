@@ -4,85 +4,73 @@ import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.CharArrayReader;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.Writer;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
-import java.nio.channels.Selector;
-
-import org.apache.tools.ant.taskdefs.Sleep;
-import org.eclipse.jdt.internal.compiler.ast.ThisReference;
 
 import czsem.utils.ProjectSetup;
 
 public class ILPExec {
 	
-		public static class ReaderThread extends Thread {
+	public static class ReaderThread extends Thread {
+		
 		private Reader is;
 		private Writer os;
+
 		private char [] buf = new char[1000];
 		private BufferedReader buf_read;
-		private Boolean buffer_locked = false;
+
 		private long last_read = Long.MIN_VALUE;
+		private long last_nothing_toread = Long.MIN_VALUE;
 		
 
 		public ReaderThread(Reader is, Writer os) {
 			this.is = is;
-			this.os = os;
+			this.os = os;			
 		}
 		
 		public ReaderThread(Reader is, OutputStream os) {
 			this.is = is;
 			this.os = new PrintWriter(os);
 		}
-/*		
-		
-		public void lockBuffer() throws InterruptedException
-		{
-			synchronized (buffer_locked)
-			{
-				while (System.currentTimeMillis() - last_read < 500) buffer_locked.wait(); 
-				buffer_locked = true;
-			}
 
-			synchronized (buf)
-			{
-				buf_read = new BufferedReader(new CharArrayReader(buf));
-			}
-		}
-
-		public void unlockBuffer()
-		{
-			synchronized (buffer_locked)
-			{
-				buffer_locked = false;
-//				buffer_locked.notify(); 
-			}
-		}
-
-*/
 		public String readLine() throws IOException
 		{
 			return buf_read.readLine();				
 		}
 
-		public void waitUntilNothingToRead()
-		{			
+		public void waitUntilNothingToRead() throws InterruptedException
+		{
+			long timeout = 100;
+			while (System.currentTimeMillis() - last_read < timeout) Thread.sleep(timeout);
+			
+			last_nothing_toread = System.currentTimeMillis();
 		}
 
-		public void startBackupBufferNow()
+		public void waitForInput() throws InterruptedException
 		{			
+//			Thread.sleep(500);
+			
+			synchronized (buf)
+			{
+				while (last_nothing_toread > last_read)	buf.wait(); 
+			}
 		}
 		
 		private int readbuf() throws IOException, InterruptedException
 		{
+			int ret = is.read(buf); 
+			synchronized (buf)
+			{
+				buf_read = new BufferedReader(new CharArrayReader(buf));
 				last_read = System.currentTimeMillis();
-				return is.read(buf);
+				buf.notify();
+				return ret;
+			}
 		}
 		
 		@Override
@@ -200,32 +188,51 @@ public class ILPExec {
 	
 	public void testRules(boolean showCoverage) throws IOException, InterruptedException	
 	{
+		String true_positives; 
+		String false_positives; 
+		String total_positives; 
+		String total_negatives; 
 		
 		String show_flag = "noshow";
 		if (showCoverage) show_flag = "show";
 		
 		cin_reader_thread.waitUntilNothingToRead();
-		cin_reader_thread.startBackupBufferNow();
 		output_writer.print("test('");
 		output_writer.print(testing_examples);
 		output_writer.print(".f',");
 		output_writer.print(show_flag);
 		output_writer.println(",Covered,Total),print(Covered),print('\\n'),print(Total),print('\\n').");
 		output_writer.flush();		
+		cin_reader_thread.waitForInput();
+		true_positives = cin_reader_thread.readLine();
+		total_positives = cin_reader_thread.readLine();
 		output_writer.println();
 		output_writer.flush();
 
-		cin_reader_thread.waitUntilNothingToRead();
-		System.err.println("***"+cin_reader_thread.readLine()+"***");
 
+		cin_reader_thread.waitUntilNothingToRead();
 		output_writer.print("test('");
 		output_writer.print(testing_examples);
 		output_writer.print(".n',");
 		output_writer.print(show_flag);
 		output_writer.println(",Covered,Total),print(Covered),print('\\n'),print(Total),print('\\n').");
 		output_writer.flush();		
+		cin_reader_thread.waitForInput();
+		false_positives = cin_reader_thread.readLine();
+		total_negatives = cin_reader_thread.readLine();
 		output_writer.println();
-		output_writer.flush();		
+		output_writer.flush();
+		
+		PrintWriter test_out = new PrintWriter(new FileOutputStream(working_directory + "/" + getResultsFileName(), true));
+		test_out.print(true_positives); 
+		test_out.print('\t'); 
+		test_out.print(false_positives); 
+		test_out.print('\t'); 
+		test_out.print(total_positives); 
+		test_out.print('\t'); 
+		test_out.print(total_negatives); 
+		test_out.println();
+		test_out.close();
 	}
 
 	public void close() throws InterruptedException
