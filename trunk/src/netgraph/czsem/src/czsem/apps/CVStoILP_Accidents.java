@@ -7,6 +7,7 @@ import java.util.Set;
 
 import com.csvreader.CsvReader;
 
+import czsem.ILP.ILPExec;
 import czsem.ILP.Serializer;
 import czsem.ILP.Serializer.Relation;
 import czsem.utils.ProjectSetup;
@@ -189,11 +190,27 @@ public class CVStoILP_Accidents {
 	public static interface PositiveExampleDetector
 	{
 	 	public boolean writeAtleastSuffixInDeterminations();
-		public boolean isPositiveExample(int val, int min, int max);		
+		public boolean isPositiveExample(int val, int min, int max);
+		public String traintestSuffix();
 	}
 	
-	public static class MonotonicExampleDetector implements PositiveExampleDetector
+	public static abstract class TrainTestExampleDetector implements PositiveExampleDetector
 	{
+		private String train_test_suffix;
+		
+		public TrainTestExampleDetector(String train_test_suffix)
+		{
+			this.train_test_suffix = train_test_suffix;
+		}
+		public String traintestSuffix() {return train_test_suffix;}
+	}
+	
+	public static class MonotonicExampleDetector extends TrainTestExampleDetector
+	{
+		public MonotonicExampleDetector(String trainTestSuffix) {
+			super(trainTestSuffix);
+		}
+
 		public boolean isPositiveExample(int val, int min, int max) {
 			return val >= min;	//monotic 
 		}
@@ -203,8 +220,12 @@ public class CVStoILP_Accidents {
 		}		
 	}
 
-	public static class NonMonotonicExampleDetector implements PositiveExampleDetector
+	public static class NonMonotonicExampleDetector extends TrainTestExampleDetector
 	{
+		public NonMonotonicExampleDetector(String trainTestSuffix) {
+			super(trainTestSuffix);
+		}
+
 		public boolean isPositiveExample(int val, int min, int max) {
 			return (val >= min) && (val < max);	//non_monotic 
 		}
@@ -216,11 +237,25 @@ public class CVStoILP_Accidents {
 	
 	public static class Examples
 	{
-		String ids[] = new String[50];
-		int rankings[] = new int[50];
-		int cat_mins[] = {5,15,30,65,81};
+		private String ids[] = null;//new String[50];
+		private int rankings[] = null;//new int[50];
+		private int cat_mins[] = {5,15,30,65,81};
+		private int last_index = 0;
 		
-		public int getCount() {return ids.length;}				
+		public int getCount() {return ids.length;}
+		public void append(String id, int ranking)
+		{
+			ids[last_index] = id;
+			rankings[last_index] = ranking;
+			last_index++;
+		}
+		
+		Examples(int count)
+		{
+			last_index = 0;
+			ids = new String[count];
+			rankings = new int[count];			
+		}
 	}
 	
 	public void printExamples(PositiveExampleDetector pe_detect, boolean negative, Examples ex)
@@ -236,6 +271,7 @@ public class CVStoILP_Accidents {
 					categories_stat[r]++;
 					ilp_out.print("serious");
 					if (pe_detect.writeAtleastSuffixInDeterminations()) ilp_out.print("_atl");
+					ilp_out.print(pe_detect.traintestSuffix());
 					ilp_out.print("(");
 					ilp_out.print(ex.ids[a]);
 					ilp_out.print(',');					
@@ -266,61 +302,77 @@ public class CVStoILP_Accidents {
 		}				
 	}
 
-	public void make_examples(String file_name) throws IOException
+	public void make_examples(String file_name, int start_index, int length) throws IOException
 	{
 		CsvReader reader = new CsvReader(file_name, ';');
 		
 		reader.readHeaders();
 		
-		Examples ex = new Examples();
+		Examples test = new Examples(length);
+		Examples learn = new Examples(50-length); //TODO: fix hard coded
 
-		int i;
-		for (i=0; reader.readRecord(); i++)
+		//cross validation - select learning and testing set
+		for (int i=0; reader.readRecord(); i++)
 		{
-				ex.ids[i] = "id_" + reader.get("filename");
-//				rankings[i] = (int) (Double.parseDouble(reader.get("ranking")) * 10);
-				ex.rankings[i] = Integer.parseInt(reader.get("ranking"));
+				Examples var_ex = test; 
+				if ((i < start_index) || (i >= start_index+length)) var_ex = learn;
+				var_ex.append("id_" + reader.get("filename"), Integer.parseInt(reader.get("ranking")));
 		}
 		reader.close();
 
-/***		
-		int min = getMinValue(rankings);
-		int max = getMaxValue(rankings);
-		
-		double cat_mins[] = count_cat_mins(min, max, 5);
-/***/		
-	
 			
-		ilp_out.close();
-
-		
+		//prepare files
 		StringBuilder sb = new StringBuilder(proproject_setup.current_project_dir);
 		sb.append(proproject_setup.project_name);
-		sb.append(".f");
-		ilp_out = new PrintStream(sb.toString());		
- 
+		sb.append('_');
+		sb.append(start_index);
+		sb.append('-');
+		sb.append(start_index+length-1);
+
+		//test positive
+		ilp_out = new PrintStream(sb.toString()+"_test.f");		
 		ilp_out.println("%%%%%%%%%%%%% P O S I T I V E %%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 		ilp_out.println("%%%%%%%%%%%%% C R I S P %%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-		printExamples(new NonMonotonicExampleDetector(), false, ex);
+		printExamples(new NonMonotonicExampleDetector("_test"), false, test);
 		ilp_out.println("%%%%%%%%%%%%% M O N O T O N I Z E D %%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-		printExamples(new MonotonicExampleDetector(), false, ex);
+		printExamples(new MonotonicExampleDetector("_test"), false, test);
 		ilp_out.close();
 		
 
-		sb = new StringBuilder(proproject_setup.current_project_dir);
-		sb.append(proproject_setup.project_name);
-		sb.append(".n");
-		ilp_out = new PrintStream(sb.toString());		
+		//test negative
+		ilp_out = new PrintStream(sb.toString()+"_test.n");		
 		ilp_out.println("%%%%%%%%%%%%% N E G A T I V E %%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 		ilp_out.println("%%%%%%%%%%%%% C R I S P %%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-		printExamples(new NonMonotonicExampleDetector(), true, ex);
+		printExamples(new NonMonotonicExampleDetector("_test"), true, test);
 		ilp_out.println("%%%%%%%%%%%%% M O N O T O N I Z E D %%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-		printExamples(new MonotonicExampleDetector(), true, ex);
+		printExamples(new MonotonicExampleDetector("_test"), true, test);
 		ilp_out.close();
-	}
+
+
+		
+		
+		//learn positive
+		ilp_out = new PrintStream(sb.toString()+"_learn.f");				 
+		ilp_out.println("%%%%%%%%%%%%% P O S I T I V E %%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+		ilp_out.println("%%%%%%%%%%%%% C R I S P %%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+		printExamples(new NonMonotonicExampleDetector(""), false, learn);
+		ilp_out.println("%%%%%%%%%%%%% M O N O T O N I Z E D %%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+		printExamples(new MonotonicExampleDetector(""), false, learn);
+		ilp_out.close();
+		
+
+		//learn negative
+		ilp_out = new PrintStream(sb.toString()+"_learn.n");		
+		ilp_out.println("%%%%%%%%%%%%% N E G A T I V E %%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+		ilp_out.println("%%%%%%%%%%%%% C R I S P %%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+		printExamples(new NonMonotonicExampleDetector(""), true, learn);
+		ilp_out.println("%%%%%%%%%%%%% M O N O T O N I Z E D %%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+		printExamples(new MonotonicExampleDetector(""), true, learn);
+		ilp_out.close();
+}
 
 	
-	public static void main(String[] args) throws IOException
+	public static void main(String[] args) throws IOException, InterruptedException
 	{
 		if (args.length < 1)
 		{
@@ -339,7 +391,46 @@ public class CVStoILP_Accidents {
 		
 //		CVStoILP_Accidents csv2 = new CVStoILP_Accidents("C:\\WorkSpace\\Aleph\\serious.f");
 //		CVStoILP_Accidents csv2 = new CVStoILP_Accidents(new MonotonicExampleDetector());
-		csv.make_examples(args[0]);
+//		for (int i=0; i<5; i++)
+		for (int i=0; i<1; i++)
+		{
+			csv.make_examples(args[0],i*10,10);
+
+			ILPExec exec = new ILPExec(csv.proproject_setup);
+			StringBuilder sb = new StringBuilder(csv.proproject_setup.project_name);
+			sb.append('_');
+			sb.append(i*10);
+			sb.append('-');
+			sb.append(i*10 + 9);
+			exec.setLearnigExamples(sb.toString()+"_learn");
+			exec.setTestingExamples(sb.toString()+"_test");
+			exec.setRulesFileName(sb.toString()+"_rules");
+			exec.setResultsFileName(sb.toString()+"_test_results");
+			exec.startILPProcess();
+			exec.startReaderThreads();
+			exec.induceRules();
+			
+			//crisp data, crisp rules
+			exec.addTestRule("serious_test(ID,DEG):-serious(ID,DEG)");
+			exec.testRules(false);
+			exec.retractTestRule("serious_test(ID,DEG):-serious(ID,DEG)");
+
+			//crisp data, monotonic rules
+			exec.addTestRule("serious_test(ID,DEG):-serious_atl(ID,DEG),DEG2 is DEG+1, not(serious_atl(ID,DEG2))");
+			exec.testRules(false);
+			exec.retractTestRule("serious_test(ID,DEG):-serious_atl(ID,DEG),DEG2 is DEG+1, not(serious_atl(ID,DEG2))");
+
+			//monotonic data, crisp rules
+			exec.addTestRule("serious_atl_test(ID,DEG):-serious(ID,DEG2),DEG=<DEG2");
+			exec.testRules(false);
+			exec.retractTestRule("serious_atl_test(ID,DEG):-serious(ID,DEG2),DEG=<DEG2");
+
+			//monotonic data, monotonic rules
+			exec.addTestRule("serious_atl_test(ID,DEG):-serious_atl(ID,DEG)");
+			exec.testRules(false);
+			exec.close();
+		}
+		
 	}
 
 

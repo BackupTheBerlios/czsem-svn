@@ -12,9 +12,10 @@ import gate.util.Out;
 
 import java.io.*;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
+import czsem.ILP.ILPExec.ReaderThread;
+import czsem.ILP.ILPExec;
 import czsem.ILP.Serializer;
 import czsem.ILP.Serializer.Relation;
 import czsem.utils.ProjectSetup;
@@ -24,26 +25,6 @@ import czsem.utils.ProjectSetup;
 public class ILPSerializer extends AbstractLanguageAnalyser implements
 		ProcessingResource, LanguageAnalyser {
 
-	public static class ReaderThread extends Thread {
-		private InputStream is;
-		private OutputStream os;
-		public ReaderThread(InputStream is, OutputStream os) {
-			this.is = is;
-			this.os = os;
-		}
-		
-		@Override
-		public void run() {
-			byte [] buf = new byte[1000];
-			try {
-				for (int i=is.read(buf); i>=0; i=is.read(buf))
-				{
-					os.write(buf, 0, i);
-				}
-			} catch (IOException e) {}				
-		}
-	}
-	
 	protected ProjectSetup project_setup = new ProjectSetup();
 
 
@@ -267,61 +248,25 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 
 	protected void execILP() throws IOException, InterruptedException
 	{
+		ILPExec exec = new ILPExec(project_setup);
 		
-		String [] exec_args = {prolog_path, "-l", aleph_path };
-		
-		System.err.println(prolog_path);
-		System.err.println(aleph_path);
-		
-		Process prolog_proc = Runtime.getRuntime().exec(exec_args, null, project_setup.working_directory);
-//				new String [] {"LANG=cs_CZ.UTF-8"} , working_directory);
-		
-		PrintStream os = new PrintStream(new BufferedOutputStream(prolog_proc.getOutputStream()));
-		BufferedInputStream is = new BufferedInputStream(prolog_proc.getInputStream());
-		BufferedInputStream ierr = new BufferedInputStream(prolog_proc.getErrorStream());
-		
-		new ReaderThread(is, System.out).start();
-		new ReaderThread(ierr, System.err).start();
-		
-		os.println("yap_flag(encoding,X).\n");
-		os.flush();
-/**
-		os.println("yap_flag(encoding,utf8).");
-		os.flush();
-		
-		Thread.sleep(3000);
-/**/		
-/**/		
-		os.print("read_all(");
-		os.print(project_setup.project_name);
-		os.println(").");
-		os.flush();
-		
-		os.println("induce.");		
-		os.flush();
-		
-		os.println("write_rules(learned_rules).");		
-		os.flush();		
-
-/**/
-		os.println("halt.");
-		os.flush();
-
-		System.err.println("halt sent..");
-			
-		prolog_proc.waitFor();
-//		System.err.println(prolog_proc.exitValue());
+		exec.startILPProcess();
+		exec.startReaderThreads();
+		exec.induceRules();
+		exec.close();
 	}
 	
 	protected void applyRules(AnnotationSet as) throws IOException, InterruptedException, InvalidOffsetException
 	{				
+		//now we are NOT using Aleph
+		
 		System.err.println(prolog_path);		
 		Process prolog_proc = Runtime.getRuntime().exec(prolog_path, null, project_setup.working_directory);
 //				new String [] {"LANG=cs_CZ.UTF-8"} , working_directory);
 		
 		PrintStream os = new PrintStream(new BufferedOutputStream(prolog_proc.getOutputStream()));
 //		BufferedInputStream is = new BufferedInputStream(prolog_proc.getInputStream());
-		BufferedInputStream ierr = new BufferedInputStream(prolog_proc.getErrorStream());
+		BufferedReader ierr = new BufferedReader(new InputStreamReader(prolog_proc.getErrorStream()));
 		
 		BufferedReader is_reader = new BufferedReader(new InputStreamReader(prolog_proc.getInputStream()));
 		
