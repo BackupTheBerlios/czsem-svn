@@ -19,7 +19,7 @@
 \maketitle
 
 \begin{abstract}
-Motivací pro tento pøíspìvek je klasifikace zpráv o dopravních a jiných nehodách podle jejich závažnosti. Pro tento úèel jsme použili nový druh klasifikátoru, který je založen na induktivním logickém programování a fuzzy logice. V pøíspìvku nabízíme srovnání tohoto Fuzzy ILP klasifikátoru s dalšími alternativami, jmenovitì s~rozhodovacími stromy J48, s~klasifikátorem SVM a s~vícevrstvým perceptronem. Výsledky tohoto srovnání ukazují, že Fuzzy ILP klasifikátor je na tìchto datech srovnatelný se zmínìnými alternativami.
+Motivací pro tento pøíspìvek je klasifikace zpráv o dopravních a jiných nehodách podle jejich závažnosti. Pro tento úèel jsme použili nový druh klasifikátoru, který je založen na induktivním logickém programování a fuzzy logice. V pøíspìvku nabízíme srovnání tohoto fuzzy ILP klasifikátoru s dalšími alternativami, jmenovitì s~rozhodovacími stromy J48, s~klasifikátorem SVM a s~vícevrstvým perceptronem. Výsledky tohoto srovnání ukazují, že fuzzy ILP klasifikátor je na tìchto datech srovnatelný se zmínìnými alternativami.
 \end{abstract}
 
 {\small {\bf Klíèová slova:} fuzzy, ILP, klasifikace, strojové uèení}
@@ -41,7 +41,7 @@ Data na kterých jsme experiment provedli pocházejí z padesáti hasièských zpráv. 
 
 \section{Fuzzy ILP klasifikátor}
 
-Podrobný popis konstrukce Fuzzy ILP klasifikátoru, který jsme použili, je možné nalézt v èlánku \cite{biblio:DeVoWIIAT2009}. 
+Podrobný popis konstrukce fuzzy ILP klasifikátoru, který jsme použili, je možné nalézt v èlánku \cite{biblio:DeVoWIIAT2009}. 
 %Zpùsob konstrukce klasifikátoru je pøevzatý z èlánku \cite{biblio:FILP}.
 Spojeni ILP s fuzzy logikou spoèívá v	(1) zavedení axiomù monotonie pro numerické atributy  -- napøíklad axiom: 
 \\{\footnotesize\texttt{mrtvých\_alespoò(Nehoda,Poèet) $\leftarrow$ mrtvých(Nehoda,Poèet2),Poèet$\leq$Poèet2}}
@@ -49,7 +49,7 @@ Spojeni ILP s fuzzy logikou spoèívá v	(1) zavedení axiomù monotonie pro numerick
 
 
 \section{Vyhodnocení}
-Pro vyhodnocení úspìšnosti Fuzzy ILP klasifikátoru jsme použili pìtinásobnou køížovou validaci a výsledky porovnali s dalšími ètyømi klasifikátory. Prvním klasifikátorem je prosté ILP bez monotonizace dat (crisp ILP). Pro srovnání jsme použili ještì další tøi známé klasifikátory, které jsou souèástí softwarového balíku Weka\footnote{\url{http://www.cs.waikato.ac.nz/ml/weka/}}. Jmenovitì rozhodovací stromy J48 \cite{biblio:J48}, Support vector machine klasifikátor SMO \cite{biblio:SMO} a vícevrstvý perceptron \cite{biblio:bishop-1995}.
+Pro vyhodnocení úspìšnosti fuzzy ILP klasifikátoru jsme použili pìtinásobnou køížovou validaci a výsledky porovnali s dalšími ètyømi klasifikátory. Prvním klasifikátorem je prosté ILP bez monotonizace dat (crisp ILP). Pro srovnání jsme použili ještì další tøi známé klasifikátory, které jsou souèástí softwarového balíku Weka\footnote{\url{http://www.cs.waikato.ac.nz/ml/weka/}}. Jmenovitì rozhodovací stromy J48 \cite{biblio:J48}, Support vector machine klasifikátor SMO \cite{biblio:SMO} a vícevrstvý perceptron \cite{biblio:bishop-1995}.
 
 
 \image{img:measures}{Úspìšnosti jednotlivých klasifikátorù (prùmìr a smìrodatná odchylka)}{img/measures_table}{0.8\hsize}{2cm}
@@ -101,7 +101,7 @@ Tato práce byla èásteènì podpoøena èeskými projekty GAÈR-201/09/H057, GAUK 31009
 
 \smallskip
 %Evaluace fuzzy ILP klasifikátoru na datech o~dopravních nehodách
-\noindent \textit{Evaluation of Fuzzy ILP classifier on data about car accidents}
+\noindent \textit{Evaluation of fuzzy ILP classifier on data about car accidents}
 
 \smallskip
 
