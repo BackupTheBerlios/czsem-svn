@@ -252,7 +252,7 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 		
 		exec.startILPProcess();
 		exec.startReaderThreads();
-		exec.induceRules();
+		exec.induceAndWriteRules();
 		exec.close();
 	}
 	

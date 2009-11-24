@@ -13,7 +13,7 @@ import czsem.ILP.Serializer.Relation;
 import czsem.utils.ProjectSetup;
 
 public class CVStoILP_Accidents {
-	protected ProjectSetup proproject_setup = new ProjectSetup();
+	protected ProjectSetup project_setup = new ProjectSetup();
 
 //	private PositiveExampleDetector pe_detect;
 	
@@ -50,10 +50,7 @@ public class CVStoILP_Accidents {
 
 		reader.readHeaders();
 		
-		StringBuilder sb = new StringBuilder(proproject_setup.current_project_dir);
-		sb.append(proproject_setup.project_name);
-		sb.append(".b");
-		Serializer ilp_ser = new Serializer(sb.toString());
+		Serializer ilp_ser = new Serializer(project_setup.renderProjectFileName(".b"));
 		
 		Relation [] crisp_relations = new Relation[reader.getHeaderCount()];
 		Relation [] atl_relations = new Relation[reader.getHeaderCount()];
@@ -322,8 +319,8 @@ public class CVStoILP_Accidents {
 
 			
 		//prepare files
-		StringBuilder sb = new StringBuilder(proproject_setup.current_project_dir);
-		sb.append(proproject_setup.project_name);
+		StringBuilder sb = new StringBuilder(project_setup.current_project_dir);
+		sb.append(project_setup.project_name);
 		sb.append('_');
 		sb.append(start_index);
 		sb.append('-');
@@ -384,9 +381,9 @@ public class CVStoILP_Accidents {
 //		CVStoILP_Accidents csv = new CVStoILP_Accidents(new NonMonotonicExampleDetector());
 		CVStoILP_Accidents csv = new CVStoILP_Accidents();
 		
-		csv.proproject_setup.dir_for_projects = "C:\\workspace\\czsem\\src\\ILP\\serious_corss\\";
-		csv.proproject_setup.project_name = "serious_cross";
-		csv.proproject_setup.init_project();
+		csv.project_setup.dir_for_projects = "C:\\workspace\\czsem\\src\\ILP\\serious_corss\\";
+		csv.project_setup.project_name = "serious_cross";
+		csv.project_setup.init_project();
 		csv.crateBackgroundKnowledge(args[0]);
 		
 //		CVStoILP_Accidents csv2 = new CVStoILP_Accidents("C:\\WorkSpace\\Aleph\\serious.f");
@@ -396,8 +393,8 @@ public class CVStoILP_Accidents {
 		{
 			csv.make_examples(args[0],i*10,10);
 
-			ILPExec exec = new ILPExec(csv.proproject_setup);
-			StringBuilder sb = new StringBuilder(csv.proproject_setup.project_name);
+			ILPExec exec = new ILPExec(csv.project_setup);
+			StringBuilder sb = new StringBuilder(csv.project_setup.project_name);
 			sb.append('_');
 			sb.append(i*10);
 			sb.append('-');
@@ -408,7 +405,7 @@ public class CVStoILP_Accidents {
 			exec.setResultsFileName(sb.toString()+"_test_results");
 			exec.startILPProcess();
 			exec.startReaderThreads();
-			exec.induceRules();
+			exec.induceAndWriteRules();
 			
 			//crisp data, crisp rules
 			exec.addTestRule("serious_test(ID,DEG):-serious(ID,DEG)");

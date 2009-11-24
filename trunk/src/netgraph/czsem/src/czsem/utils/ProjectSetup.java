@@ -2,11 +2,15 @@ package czsem.utils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class ProjectSetup {
+public class ProjectSetup implements Serializable {
+
+	private static final long serialVersionUID = 5087105660094979374L;
+	
 	public File working_directory;
 	public String dir_for_projects = "C:\\workspace\\czsem\\src\\netgraph\\czsem\\ILP_serial_projects\\";
 	public String current_project_dir = null;
@@ -30,4 +34,13 @@ public class ProjectSetup {
         working_directory = new File(current_project_dir);
         working_directory.mkdir();    
 	}
+	
+	public String renderProjectFileName(String extension)
+	{
+		StringBuilder sb = new StringBuilder(current_project_dir);
+		sb.append(project_name);
+		sb.append(extension);	
+		return sb.toString();
+	}
+
 }

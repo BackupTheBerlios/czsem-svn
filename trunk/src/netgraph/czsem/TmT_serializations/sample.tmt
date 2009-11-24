@@ -32,6 +32,7 @@
          </a>
          <nodetype>complex</nodetype>
          <t_lemma>vyjet</t_lemma>
+         <functor>PRED</functor>
          <is_member>1</is_member>
          <sentmod>enunc</sentmod>
          <gram>
@@ -57,6 +58,7 @@
            </a>
            <nodetype>complex</nodetype>
            <t_lemma>2.13</t_lemma>
+           <functor>TWHEN</functor>
            <gram>
             <sempos>n.quant.def</sempos>
             <gender>nr</gender>
@@ -71,6 +73,7 @@
              </a>
              <nodetype>complex</nodetype>
              <t_lemma>hodiny</t_lemma>
+             <functor>APP</functor>
              <gram>
               <sempos>n.denot</sempos>
               <gender>fem</gender>
@@ -92,6 +95,7 @@
            </a>
            <nodetype>complex</nodetype>
            <t_lemma>místo</t_lemma>
+           <functor>DIR3</functor>
            <gram>
             <sempos>n.denot</sempos>
             <gender>neut</gender>
@@ -107,6 +111,7 @@
            </a>
            <nodetype>complex</nodetype>
            <t_lemma>hasič</t_lemma>
+           <functor>ACT</functor>
            <gram>
             <sempos>n.denot</sempos>
             <gender>anim</gender>
@@ -121,6 +126,7 @@
              </a>
              <nodetype>complex</nodetype>
              <t_lemma>profesionální</t_lemma>
+             <functor>RSTR</functor>
              <gram>
               <sempos>adj.denot</sempos>
               <degcmp>pos</degcmp>
@@ -138,6 +144,7 @@
              </a>
              <nodetype>complex</nodetype>
              <t_lemma>stanice</t_lemma>
+             <functor>DIR1</functor>
              <gram>
               <sempos>n.denot</sempos>
               <gender>fem</gender>
@@ -155,6 +162,7 @@
                </a>
                <nodetype>complex</nodetype>
                <t_lemma>židlochovice</t_lemma>
+               <functor>LOC</functor>
                <gram>
                 <sempos>n.denot</sempos>
                 <gender>fem</gender>
@@ -179,6 +187,7 @@
          </a>
          <nodetype>complex</nodetype>
          <t_lemma>hasič</t_lemma>
+         <functor>RSTR</functor>
          <is_member>1</is_member>
          <sentmod>enunc</sentmod>
          <gram>
@@ -195,6 +204,7 @@
            </a>
            <nodetype>complex</nodetype>
            <t_lemma>dobrovolný</t_lemma>
+           <functor>RSTR</functor>
            <gram>
             <sempos>adj.denot</sempos>
             <degcmp>pos</degcmp>
@@ -225,6 +235,7 @@
            </a>
            <nodetype>complex</nodetype>
            <t_lemma>židlochovice</t_lemma>
+           <functor>DIR1</functor>
            <is_member>1</is_member>
            <gram>
             <sempos>n.denot</sempos>
@@ -245,6 +256,7 @@
            </a>
            <nodetype>complex</nodetype>
            <t_lemma>žabčice</t_lemma>
+           <functor>DIR1</functor>
            <is_member>1</is_member>
            <gram>
             <sempos>n.denot</sempos>
@@ -265,6 +277,7 @@
            </a>
            <nodetype>complex</nodetype>
            <t_lemma>přísnotice</t_lemma>
+           <functor>DIR1</functor>
            <is_member>1</is_member>
            <gram>
             <sempos>n.denot</sempos>
@@ -287,6 +300,7 @@
          </a>
          <nodetype>complex</nodetype>
          <t_lemma>ohlásit</t_lemma>
+         <functor>PAR</functor>
          <gram>
           <sempos>v</sempos>
           <verbmod>ind</verbmod>
@@ -307,6 +321,7 @@
            </a>
            <nodetype>complex</nodetype>
            <t_lemma>požár</t_lemma>
+           <functor>PAT</functor>
            <gram>
             <sempos>n.denot</sempos>
             <gender>inan</gender>
@@ -322,6 +337,7 @@
            </a>
            <nodetype>complex</nodetype>
            <t_lemma>středisko</t_lemma>
+           <functor>ADDR</functor>
            <gram>
             <sempos>n.denot</sempos>
             <gender>neut</gender>
@@ -336,6 +352,7 @@
              </a>
              <nodetype>complex</nodetype>
              <t_lemma>operační</t_lemma>
+             <functor>RSTR</functor>
              <gram>
               <sempos>adj.denot</sempos>
               <degcmp>pos</degcmp>
@@ -350,6 +367,7 @@
              </a>
              <nodetype>complex</nodetype>
              <t_lemma>hzs</t_lemma>
+             <functor>RSTR</functor>
              <gram>
               <sempos>n.denot</sempos>
               <gender>fem</gender>
@@ -368,6 +386,7 @@
            </a>
            <nodetype>complex</nodetype>
            <t_lemma>dnes</t_lemma>
+           <functor>TWHEN</functor>
            <gram>
             <sempos>adv.denot.ngrad.nneg</sempos>
             <negation>neg0</negation>
@@ -381,7 +400,7 @@
            </a>
            <nodetype>complex</nodetype>
            <t_lemma>,</t_lemma>
-           <functor>PREC</functor>
+           <functor>MANN</functor>
            <gram>
             <sempos>n.denot</sempos>
             <gender>nr</gender>
@@ -952,6 +971,7 @@
          </a>
          <nodetype>complex</nodetype>
          <t_lemma>oheň</t_lemma>
+         <functor>ACT</functor>
          <gram>
           <sempos>n.denot</sempos>
           <gender>inan</gender>
@@ -969,6 +989,7 @@
            </a>
            <nodetype>complex</nodetype>
            <t_lemma>zasáhnout</t_lemma>
+           <functor>RSTR</functor>
            <gram>
             <sempos>v</sempos>
             <verbmod>ind</verbmod>
@@ -993,6 +1014,7 @@
              </coref_gram.rf>
              <nodetype>complex</nodetype>
              <t_lemma>který</t_lemma>
+             <functor>ACT</functor>
              <gram>
               <sempos>n.pron.indef</sempos>
               <gender>inher</gender>
@@ -1009,6 +1031,7 @@
              </a>
              <nodetype>complex</nodetype>
              <t_lemma>elektroinstalace</t_lemma>
+             <functor>PAT</functor>
              <gram>
               <sempos>n.denot</sempos>
               <gender>fem</gender>
@@ -1027,6 +1050,7 @@
              </a>
              <nodetype>complex</nodetype>
              <t_lemma>box</t_lemma>
+             <functor>LOC</functor>
              <gram>
               <sempos>n.denot</sempos>
               <gender>inan</gender>
@@ -1041,6 +1065,7 @@
                </a>
                <nodetype>complex</nodetype>
                <t_lemma>chladící</t_lemma>
+               <functor>RSTR</functor>
                <gram>
                 <sempos>adj.denot</sempos>
                 <degcmp>pos</degcmp>
@@ -1064,6 +1089,7 @@
          </a>
          <nodetype>complex</nodetype>
          <t_lemma>hasič</t_lemma>
+         <functor>ACT</functor>
          <gram>
           <sempos>n.denot</sempos>
           <gender>anim</gender>
@@ -1082,6 +1108,7 @@
          </a>
          <nodetype>complex</nodetype>
          <t_lemma>dostat</t_lemma>
+         <functor>PRED</functor>
          <is_member>1</is_member>
          <sentmod>enunc</sentmod>
          <gram>
@@ -1107,6 +1134,7 @@
            </a>
            <nodetype>complex</nodetype>
            <t_lemma>kontrola</t_lemma>
+           <functor>DIR3</functor>
            <gram>
             <sempos>n.denot</sempos>
             <gender>fem</gender>
@@ -1125,6 +1153,7 @@
            </a>
            <nodetype>complex</nodetype>
            <t_lemma>2.32</t_lemma>
+           <functor>TWHEN</functor>
            <gram>
             <sempos>n.quant.def</sempos>
             <gender>nr</gender>
@@ -1139,6 +1168,7 @@
              </a>
              <nodetype>complex</nodetype>
              <t_lemma>hodiny</t_lemma>
+             <functor>APP</functor>
              <gram>
               <sempos>n.denot</sempos>
               <gender>fem</gender>
@@ -1163,6 +1193,7 @@
          </a>
          <nodetype>complex</nodetype>
          <t_lemma>uhasit</t_lemma>
+         <functor>PRED</functor>
          <is_member>1</is_member>
          <sentmod>enunc</sentmod>
          <gram>
@@ -1185,6 +1216,7 @@
            </a>
            <nodetype>complex</nodetype>
            <t_lemma>minuta</t_lemma>
+           <functor>PAT</functor>
            <gram>
             <sempos>n.denot</sempos>
             <gender>fem</gender>
@@ -1199,6 +1231,7 @@
              </a>
              <nodetype>complex</nodetype>
              <t_lemma>tři</t_lemma>
+             <functor>RSTR</functor>
              <gram>
               <sempos>n.quant.def</sempos>
               <gender>nr</gender>
@@ -1217,6 +1250,7 @@
              </a>
              <nodetype>complex</nodetype>
              <t_lemma>hodina</t_lemma>
+             <functor>TWHEN</functor>
              <gram>
               <sempos>n.denot</sempos>
               <gender>fem</gender>
@@ -1231,6 +1265,7 @@
                </a>
                <nodetype>complex</nodetype>
                <t_lemma>třetí</t_lemma>
+               <functor>RSTR</functor>
                <gram>
                 <sempos>adj.quant.def</sempos>
                 <gender>fem</gender>

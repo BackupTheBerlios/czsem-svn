@@ -138,7 +138,7 @@ public class ILPExec {
 		err_reader_thread.start();
 	}
 	
-	public void induceRules()
+	public void induceAndWriteRules()
 	{		
 		output_writer.println("yap_flag(encoding,X).\n");
 		output_writer.flush();
