@@ -8,21 +8,64 @@ import czsem.ILP.Serializer.Relation;
 import czsem.utils.ProjectSetup;
 
 import weka.classifiers.Classifier;
-import weka.core.Attribute;
+import weka.core.Capabilities;
 import weka.core.Instance;
 import weka.core.Instances;
+import weka.core.Capabilities.Capability;
 
 public class CrispILPClassifier extends Classifier {
 
 	private static final long serialVersionUID = 6391819097164332129L;
+
+	protected Relation [] crisp_relations;
 	
 	protected ProjectSetup project_setup = new ProjectSetup();
 	
+	public Capabilities getCapabilities()
+	{
+		Capabilities result = super.getCapabilities();
+		result.disableAll();
+
+		// attributes
+		result.enable(Capability.NOMINAL_ATTRIBUTES);
+		result.enable(Capability.NUMERIC_ATTRIBUTES);
+		result.enable(Capability.DATE_ATTRIBUTES);
+		result.enable(Capability.MISSING_VALUES);
+
+		// class
+		result.enable(Capability.NUMERIC_CLASS);
+		result.enable(Capability.NOMINAL_CLASS);
+		result.enable(Capability.MISSING_CLASS_VALUES);
+
+		// instances
+		result.setMinimumNumberInstances(3);
+
+		return result;
+	}	
+	
 	@Override
 	public double classifyInstance(Instance instance) throws Exception
-	{
-		System.out.println("****");
-		return 0;
+	{		
+		
+		WekaSerializer test_ser = new WekaSerializer(project_setup.renderProjectFileName(".test"));
+		test_ser.putBkgTuplesForInstance(instance, "id_test", crisp_relations);
+		test_ser.putTestClassClause("id_test", crisp_relations[instance.classIndex()]);
+		test_ser.close();
+		
+		ILPExec test_exec = new ILPExec(project_setup);
+		test_exec.startPrologProcess(test_exec.getRulesFileName());
+//		test_exec.startReaderThreads();
+		test_exec.consultFile(project_setup.project_name + ".test");
+		
+
+		String predicted = test_exec.input_reader.readLine();
+		System.out.println("predicted: "+ predicted);
+		
+		if (predicted.equals("END")) return Instance.missingValue();
+		
+		if (instance.classAttribute().isNumeric()) return Double.parseDouble(predicted);
+		
+		return instance.classAttribute().indexOfValue(predicted);
 	}
 
 	@Override
@@ -37,81 +80,37 @@ public class CrispILPClassifier extends Classifier {
 		System.out.println("xxxx");
 	}
 
-	protected void learnRules() throws IOException
+	protected void learnRules() throws IOException, InterruptedException
 	{
 		ILPExec exec = new ILPExec(project_setup);
 		exec.startILPProcess();
 		exec.startReaderThreads();
 		exec.induceAndWriteRules();
+		exec.close();
 	}
 		
-	protected void putNegativeExamples(Serializer ser, Instance instance, String id, Relation rel)
-	{
-		String value = instance.toString(instance.classIndex());
-//		if (value.compareTo("?") == 0) continue;
-		if (value.compareTo("?") == 0) value = "unknown";
-		
-		Attribute class_atr = instance.classAttribute(); 
-		
-		for (int a=0; a<class_atr.numValues(); a++)
-		{
-			String neg_val;			
-			if (class_atr.isNumeric()) neg_val = Double.toString(instance.value(class_atr));
-			else neg_val = class_atr.value(a);
-			
-			if (neg_val.equals(value)) continue;
-
-			
-			ser.putBinTuple(rel, id, neg_val);
-		}
-		
-		
-		
-		
-	}
-	
-	protected Relation addAttributeRelation(Serializer ser, String attr_name)
-	{
-		return ser.addBinRelation("has_" + attr_name, "id", attr_name);						
-	}
-
-	protected Relation [] addAttributeRelations(Serializer ser, Instance instance)
-	{
-		Relation [] relations = new Relation[instance.numAttributes()];
-
-		for (int i = 0; i < relations.length; i++)
-		{			
-			relations[i] = addAttributeRelation(ser, instance.attribute(i).name());
-		}
-		
-		return relations;
-	}
 	
 	protected void serializeToILP(Instances instances) throws FileNotFoundException, UnsupportedEncodingException
 	{
-		Serializer backg_ser = new Serializer(project_setup.renderProjectFileName(".b"));
-		Serializer pos_ser = new Serializer(project_setup.renderProjectFileName(".f"));
-		Serializer neg_ser = new Serializer(project_setup.renderProjectFileName(".n"));
+		WekaSerializer backg_ser = new WekaSerializer(project_setup.renderProjectFileName(".b"));
+		WekaSerializer pos_ser = new WekaSerializer(project_setup.renderProjectFileName(".f"));
+		WekaSerializer neg_ser = new WekaSerializer(project_setup.renderProjectFileName(".n"));
 		
-		Relation [] crisp_relations = new Relation[instances.numAttributes()];
+		crisp_relations = backg_ser.addAttributeRelations(instances.firstInstance());
+		
+		pos_ser.addAttributeRelation(instances.classAttribute().name());
+		neg_ser.addAttributeRelation(instances.classAttribute().name());
 
 
 		backg_ser.putCommentLn("--- C R I S P     M O D E S ---");
 		for (int i = 0; i < crisp_relations.length; i++)
 		{
-			
-			if (i == instances.classIndex())
-			{
-				pos_ser.addBinRelation("has_" + instances.attribute(i).name(), "file_id", instances.attribute(i).name());				
-				neg_ser.addBinRelation("has_" + instances.attribute(i).name(), "file_id", instances.attribute(i).name());
-			}
-
-			crisp_relations[i] = backg_ser.addBinRelation("has_" + instances.attribute(i).name(), "file_id", instances.attribute(i).name());
 			backg_ser.putBinaryMode(crisp_relations[i], "1", '+', '#');
 
 			//			monot.: "*" instead of "1"
 			//			ilp_ser.putBinaryMode(atl_ser, "*", '+', '#');			
 		}
+		
 		
 		backg_ser.putCommentLn("");
 		backg_ser.putCommentLn("--- D E T E R M I N A T I O N S ---");
@@ -129,21 +128,12 @@ public class CrispILPClassifier extends Classifier {
 		for (int i = 0; i < instances.numInstances(); i++)
 		{
 			backg_ser.putCommentLn("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-			for (int r = 0; r < crisp_relations.length; r++)
-			{
-				
-				String value = instances.instance(i).toString(r);
-//				if (value.compareTo("?") == 0) continue;
-				if (value.compareTo("?") == 0) value = "unknown";
-				
-				if (r == instances.classIndex())
-					// positive example
-					pos_ser.putBinTuple(crisp_relations[r], "id_" + i, value);
-				else
-					backg_ser.putBinTuple(crisp_relations[r], "id_" + i, value);
-			}
+			backg_ser.putBkgTuplesForInstance(instances.instance(i), "id_"+i, crisp_relations);
 			
-			putNegativeExamples(neg_ser, instances.instance(i), "id_" + i,crisp_relations[instances.classIndex()]);
+
+			//E X A M P L E S
+			pos_ser.putBinTuple(crisp_relations[instances.classIndex()], "id_"+i, WekaSerializer.getStringValue(instances.instance(i), instances.classIndex()));
+			neg_ser.putNegativeExamples(instances.instance(i), "id_"+i,crisp_relations[instances.classIndex()]);
 		}
 		
 				

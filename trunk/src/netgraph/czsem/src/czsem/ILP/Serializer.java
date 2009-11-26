@@ -2,14 +2,16 @@ package czsem.ILP;
 
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
 import java.util.*;
 
 public class Serializer {
-	public static class Type
+	public static class Type implements Serializable
 	{
+		private static final long serialVersionUID = 5417325656555778091L;
 		private String name;
 		private Set<String> values = new HashSet<String>();		
 
@@ -17,8 +19,9 @@ public class Serializer {
 		public boolean addValue(String value) {return values.add(value);}
 	}
 	
-	public static class Relation
+	public static class Relation implements Serializable
 	{
+		private static final long serialVersionUID = -8062479896511079162L;
 		private String name;
 		private Type[] argTypes;
 		
@@ -40,7 +43,7 @@ public class Serializer {
 		}		
 	}
 	
-	private PrintStream output = System.out;
+	protected PrintStream output = System.out;
 	private Map<String, Relation> relationList = new HashMap<String, Relation>();
 	private Map<String, Type> typeList = new HashMap<String, Type>();
 	
@@ -111,25 +114,38 @@ public class Serializer {
 		{
 			values[i] = rel.argTypes[i].name.toUpperCase()+suffix[i];			
 		}
-		renderInlineTuple(rel.getName(), values);
+		renderInlineTupleWithoutValueCheck(rel.getName(), values);
 	}
 
-	public void putBinTuple(Relation rel, String value1, String value2)
+	public void putInlineBinTuple(Relation rel, String value1, String value2)
 	{
-		putTypedTuple(rel, 
+		putInlineTypedTuple(rel, 
 				new String[] {value1, value2});
 	}
 
+	
+	public void putBinTuple(Relation rel, String value1, String value2)
+	{
+		putInlineBinTuple(rel, value1, value2);
+		output.println('.');		
+	}
+
 	public void putTuple(String relationName, String[] values)
+	{
+		putInlineTuple(relationName, values);
+		output.println('.');		
+	}
+
+	public void putInlineTuple(String relationName, String[] values)
 	{
 		for (int i=0; i<values.length; i++)
 		{
 			values[i] = encodeValue(values[i]); 
 		}
-		renderTupleWithoutValueCheck(relationName, values);
+		renderInlineTupleWithoutValueCheck(relationName, values);
 	}
 
-	public void renderInlineTuple(String relationName, String[] values)
+	public void renderInlineTupleWithoutValueCheck(String relationName, String[] values)
 	{
 		output.print(relationName);
 		
@@ -142,10 +158,10 @@ public class Serializer {
 		}		
 		output.print(")");				
 	}
-
+	
 	public void renderTupleWithoutValueCheck(String relationName, String[] values)
 	{
-		renderInlineTuple(relationName, values);
+		renderInlineTupleWithoutValueCheck(relationName, values);
 		output.println('.');		
 	}
 
@@ -181,6 +197,12 @@ public class Serializer {
 	}
 	
 	public void putTypedTuple(Relation rel, String[] values)
+	{
+		putInlineTypedTuple(rel, values);
+		output.println('.');		
+	}
+
+	public void putInlineTypedTuple(Relation rel, String[] values)
 	{		
 		for (int i=0; i<rel.argTypes.length; i++)
 		{
@@ -188,7 +210,7 @@ public class Serializer {
 			rel.argTypes[i].addValue(values[i]);
 		}
 		
-		renderTupleWithoutValueCheck(rel.getName(), values);
+		renderInlineTupleWithoutValueCheck(rel.getName(), values);
 	}
 	
 	protected void putType(Type type)
@@ -267,6 +289,12 @@ public class Serializer {
 		output.print("% ");
 		output.println(comment);
 	}
+	
+	public void close()
+	{
+		output.close();
+	}
+
 	
 	public static void main(String[] argv)
 	{

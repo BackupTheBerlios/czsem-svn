@@ -15,7 +15,7 @@ import java.io.Writer;
 import czsem.utils.ProjectSetup;
 
 public class ILPExec {
-	
+
 	public static class ReaderThread extends Thread {
 		
 		private Reader is;
@@ -113,20 +113,24 @@ public class ILPExec {
 	}
 	
 
-	public void startILPProcess() throws IOException
+	public void startPrologProcess(String file_name_to_consult) throws IOException
 	{
-		
-		String [] exec_args = {prolog_path, "-l", aleph_path };
+		String [] exec_args = {prolog_path, "-l", file_name_to_consult};
 		
 		System.err.println(prolog_path);
-		System.err.println(aleph_path);
+		System.err.println(file_name_to_consult);
 		
 		prolog_process = Runtime.getRuntime().exec(exec_args, null, working_directory);
 //				new String [] {"LANG=cs_CZ.UTF-8"} , working_directory);
 		
 		output_writer = new PrintWriter(new BufferedOutputStream(prolog_process.getOutputStream()));
 		input_reader = new BufferedReader(new InputStreamReader(prolog_process.getInputStream()));
-		error_reader = new BufferedReader(new InputStreamReader(prolog_process.getErrorStream()));
+		error_reader = new BufferedReader(new InputStreamReader(prolog_process.getErrorStream()));		
+	}
+
+	public void startILPProcess() throws IOException
+	{
+		startPrologProcess(aleph_path);
 	}
 		
 	public void startReaderThreads()
@@ -176,6 +180,15 @@ public class ILPExec {
 		output_writer.flush();				
 	}
 
+	public void consultFile(String filename)
+	{
+		output_writer.print("consult('");		
+		output_writer.print(filename);		
+		output_writer.println("').");		
+		output_writer.flush();		
+	}
+
+	
 	public void addTestRule(String rule)
 	{
 		output_writer.print("assert((");		
