@@ -133,6 +133,13 @@ public class ILPExec {
 		startPrologProcess(aleph_path);
 	}
 		
+	public void startErrReaderThread()
+	{
+		err_reader_thread = new ReaderThread(error_reader, System.err);
+		err_reader_thread.start();		
+	}
+
+	
 	public void startReaderThreads()
 	{
 		cin_reader_thread = new ReaderThread(input_reader, System.out);

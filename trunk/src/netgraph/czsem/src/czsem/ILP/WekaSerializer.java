@@ -3,7 +3,6 @@ package czsem.ILP;
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 
-import weka.core.Attribute;
 import weka.core.Instance;
 
 public class WekaSerializer extends Serializer {
@@ -13,24 +12,35 @@ public class WekaSerializer extends Serializer {
 		super(output_filename);
 	}
 	
-	protected void putNegativeExamples(Instance instance, String id, Relation rel)
+	public static interface Condition
 	{
-		String value = instance.toString(instance.classIndex());
-//		if (value.compareTo("?") == 0) continue;
-		if (value.equals("?")) value = "unknown";
+		public boolean evaluate(String current_instance_value, String alternative_value_form_attribute_domain);
+	}
+	
+	public static class NegCondition implements Condition
+	{
+		private Condition orig;
 		
-		Attribute class_atr = instance.classAttribute(); 
-		
-		for (int a=0; a<class_atr.numValues(); a++)
-		{
-			String neg_val;			
-			if (class_atr.isNumeric()) neg_val = Double.toString(instance.value(class_atr));
-			else neg_val = class_atr.value(a);
-			
-			if (neg_val.equals(value)) continue;
+		public NegCondition(Condition orig) {this. orig = orig;}
 
+		@Override
+		public boolean evaluate(String currentInstanceValue, String alternativeValueFormAttributeDomain)
+		{			
+			return ! orig.evaluate(currentInstanceValue, alternativeValueFormAttributeDomain);
+		}		
+	}
+	
+	
+	protected void putInstanceExamples(Instance instance, String [] class_values, String id, Relation rel, Condition condition)
+	{
+		String value = getStringValue(instance, instance.classIndex()); 
+				
+		for (int a=0; a<class_values.length; a++)
+		{			
+//			if (class_values[a].equals(value)) continue;
 			
-			putBinTuple(rel, id, neg_val);
+			if (condition.evaluate(value, class_values[a]))
+				putBinTuple(rel, id, class_values[a]);
 		}
 	}
 
