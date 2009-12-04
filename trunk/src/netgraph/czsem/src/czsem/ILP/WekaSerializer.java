@@ -12,6 +12,11 @@ public class WekaSerializer extends Serializer {
 		super(output_filename);
 	}
 	
+	public WekaSerializer(String output_filename, boolean append) throws FileNotFoundException, UnsupportedEncodingException
+	{
+		super(output_filename, append);
+	}
+
 	public static interface Condition
 	{
 		public boolean evaluate(String current_instance_value, String alternative_value_form_attribute_domain);

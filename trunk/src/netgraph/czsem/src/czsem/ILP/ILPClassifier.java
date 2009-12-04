@@ -1,16 +1,13 @@
 package czsem.ILP;
 
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.HashSet;
 import java.util.Set;
 
-import sun.net.www.protocol.http.NegotiateCallbackHandler;
-
-import czsem.ILP.Serializer.Relation;
-import czsem.ILP.WekaSerializer.Condition;
-import czsem.utils.ProjectSetup;
 import weka.classifiers.Classifier;
 import weka.core.Attribute;
 import weka.core.Capabilities;
@@ -18,12 +15,20 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Capabilities.Capability;
 
+import czsem.ILP.Serializer.Relation;
+import czsem.ILP.WekaSerializer.Condition;
+import czsem.utils.ProjectSetup;
+
 public abstract class ILPClassifier extends Classifier
 {
+	private static final long serialVersionUID = 2895303597421297747L;
+
 	protected Relation [] crisp_relations;
 	protected String [] class_values = null;
 	
-	protected ProjectSetup project_setup = new ProjectSetup();
+	protected ProjectSetup project_setup = null;
+	
+	protected int last_test_id = 1000;
 	
 	protected void initClassValues(Instances instances)
 	{
@@ -92,6 +97,8 @@ public abstract class ILPClassifier extends Classifier
 
 	public void buildClassifier(String project_name, Instances instances) throws Exception
 	{
+		last_test_id = 1000;
+		
 		setupProject(project_name);
 		
 		initClassValues(instances);
@@ -126,7 +133,7 @@ public abstract class ILPClassifier extends Classifier
 		
 
 		putModes(backg_ser);
-		putAxioms(backg_ser, instances.classIndex());
+		putLearningAxioms(backg_ser, instances.classIndex());
 		putDeteminations(backg_ser, instances.classIndex());
 		
 		
@@ -176,23 +183,30 @@ public abstract class ILPClassifier extends Classifier
 	public double classifyInstance(Instance instance) throws Exception
 	{		
 		
-		WekaSerializer test_ser = new WekaSerializer(project_setup.renderProjectFileName(".test"));
-		crisp_relations = test_ser.addAttributeRelations(instance);
+		WekaSerializer log_ser = new WekaSerializer(project_setup.renderProjectFileName(".test_log"), true);
 
-		test_ser.putBkgTuplesForInstance(instance, "id_test", crisp_relations);
-		putAxioms(test_ser, instance.classIndex());
+		WekaSerializer test_ser = new WekaSerializer(project_setup.renderProjectFileName(".test"));
+//		crisp_relations = test_ser.addAttributeRelations(instance);
 		
-		test_ser.putTestClassClause("id_test", crisp_relations[instance.classIndex()]);
+		String test_id = "test_id_" + last_test_id++;
+
+		test_ser.putBkgTuplesForInstance(instance, test_id, crisp_relations);
+		log_ser.putBkgTuplesForInstance(instance, test_id, crisp_relations);
+		putTestingAxioms(test_ser, instance.classIndex());
+		
+		test_ser.putTestClassClause(test_id, crisp_relations[instance.classIndex()]);
 		test_ser.close();
 		
 		ILPExec test_exec = new ILPExec(project_setup);
 		test_exec.startPrologProcess(test_exec.getRulesFileName());
 		test_exec.startErrReaderThread();
-		test_exec.consultFile(project_setup.project_name + ".b");
+//		test_exec.consultFile(project_setup.project_name + ".b");
 		test_exec.consultFile(project_setup.project_name + ".test");
 				
 
 		String predicted = test_exec.input_reader.readLine();
+		test_exec.close();
+		
 		System.out.println("predicted: "+ predicted);
 		
 		if (predicted.equals("END")) return Instance.missingValue();
@@ -202,8 +216,39 @@ public abstract class ILPClassifier extends Classifier
 		return instance.classAttribute().indexOfValue(predicted);
 	}
 
+	@Override
+	public String toString()
+	{
+		StringBuilder sb = new StringBuilder(super.toString());
+		sb.append('\n');
+		
+		try
+		{		
+			sb.append(project_setup.renderProjectFileName(""));
+			sb.append('\n');
+		
+			//print rules
+			char [] buf = new char[1000];
+			BufferedReader is = new BufferedReader(new FileReader(ILPExec.renderRulesFilePathName(project_setup)));
+			for (int i=is.read(buf); i>=0; i=is.read(buf))
+			{
+				sb.append(buf, 0, i);
+			}
+			is.close();
+		}
+		catch (Exception e)
+		{
+			sb.append(e.toString());
+		}
+						
+		return sb.toString();
+	}
 
-	protected void putAxioms(WekaSerializer backg_ser, int class_attribute_index) {};
+
+	protected void putTestingAxioms(WekaSerializer testSer, int classIndex) {}
+
+
+	protected void putLearningAxioms(WekaSerializer backg_ser, int class_attribute_index) {};
 	protected abstract Condition getPositiveExmplesCondition();
 	protected abstract void putDeteminations(WekaSerializer backg_ser, int class_index);
 	protected abstract void putModes(WekaSerializer backg_ser);

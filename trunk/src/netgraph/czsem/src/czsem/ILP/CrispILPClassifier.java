@@ -1,21 +1,8 @@
 package czsem.ILP;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.HashSet;
-import java.util.Set;
-
+import weka.core.Instances;
 import czsem.ILP.Serializer.Relation;
 import czsem.ILP.WekaSerializer.Condition;
-import czsem.utils.ProjectSetup;
-
-import weka.classifiers.Classifier;
-import weka.core.Attribute;
-import weka.core.Capabilities;
-import weka.core.Instance;
-import weka.core.Instances;
-import weka.core.Capabilities.Capability;
 
 public class CrispILPClassifier extends ILPClassifier {
 

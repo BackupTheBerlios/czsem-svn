@@ -110,8 +110,17 @@ public class ILPExec {
 		project_name = ps.project_name;
 		learnig_examples = project_name;
 		testing_examples = project_name + "_test";
+		rules_file = renderRulesFileName(ps);
 	}
 	
+	public static String renderRulesFileName(ProjectSetup ps) {
+		return  ps.project_name + ".rules";
+	}
+
+	public static String renderRulesFilePathName(ProjectSetup ps) {
+		return  ps.renderProjectFileName(".rules");
+	}
+
 
 	public void startPrologProcess(String file_name_to_consult) throws IOException
 	{
@@ -291,7 +300,7 @@ public class ILPExec {
 		this.rules_file = rules_file;
 	}
 
-
+	
 	public String getRulesFileName() {
 		return rules_file;
 	}

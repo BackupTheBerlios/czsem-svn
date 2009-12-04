@@ -1,6 +1,7 @@
 package czsem.ILP;
 
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
@@ -46,6 +47,12 @@ public class Serializer {
 	protected PrintStream output = System.out;
 	private Map<String, Relation> relationList = new HashMap<String, Relation>();
 	private Map<String, Type> typeList = new HashMap<String, Type>();
+	
+	public Serializer(String output_filename, boolean append) throws FileNotFoundException, UnsupportedEncodingException
+	{
+		output = new PrintStream(new FileOutputStream(output_filename, append));		
+	}
+
 	
 	public Serializer(String output_filename) throws FileNotFoundException, UnsupportedEncodingException
 	{

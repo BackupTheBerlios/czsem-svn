@@ -5,7 +5,7 @@ import czsem.ILP.WekaSerializer.Condition;
 import weka.core.Instances;
 
 public class FuzzyILPClassifier extends ILPClassifier{
-
+	
 	private static final long serialVersionUID = 4088657170809650508L;
 	private Relation [] atl_relations;
 
@@ -35,13 +35,47 @@ public class FuzzyILPClassifier extends ILPClassifier{
 		}		
 	}
 
+	
 	@Override
-	protected void putAxioms(WekaSerializer ilp_ser, int class_attribute_index)
+	protected void putTestingAxioms(WekaSerializer ilp_ser, int class_attribute_index)
 	{
-		ilp_ser.outputAllTypes();
-		
 		ilp_ser.putCommentLn("");
-		ilp_ser.putCommentLn("--- M O N O T O N I C I T Y       A X I O M S ---");
+		ilp_ser.putCommentLn("--- T E S T I N G     M O N O T O N I C I T Y      A X I O M S ---");
+
+		for (int i = 0; i < crisp_relations.length; i++)
+		{
+			
+			if (i == class_attribute_index) continue;
+
+			//monotonicity axioms
+			ilp_ser.print(atl_relations[i].getName());
+			ilp_ser.print("(ID,N) :- ");
+			ilp_ser.print(crisp_relations[i].getName());
+			ilp_ser.print("(ID,N), not(integer(N)),!.\n");
+
+			ilp_ser.print(atl_relations[i].getName());
+			ilp_ser.print("(ID,N) :- ");
+			ilp_ser.print(crisp_relations[i].getName());
+			ilp_ser.print("(ID,N2), integer(N2),");
+			ilp_ser.print("integer(N), N2>=N.\n\n");
+			
+		}
+		
+		//crisp data, monotonic rules
+		//serious_test(ID,DEG):-serious_atl(ID,DEG),DEG2 is DEG+1, not(serious_atl(ID,DEG2)).
+		ilp_ser.print(crisp_relations[class_attribute_index].getName());
+		ilp_ser.print("(ID,DEG):-");
+		ilp_ser.print(atl_relations[class_attribute_index].getName());
+		ilp_ser.print("(ID,DEG), not((");
+		ilp_ser.print(atl_relations[class_attribute_index].getName());
+		ilp_ser.print("(ID,DEG2),DEG2 > DEG)).\n\n");		
+	}
+
+	@Override
+	protected void putLearningAxioms(WekaSerializer ilp_ser, int class_attribute_index)
+	{
+		ilp_ser.putCommentLn("");
+		ilp_ser.putCommentLn("--- L E A R N I N G     M O N O T O N I C I T Y      A X I O M S ---");
 
 		for (int i = 0; i < crisp_relations.length; i++)
 		{
@@ -62,7 +96,7 @@ public class FuzzyILPClassifier extends ILPClassifier{
 			ilp_ser.print("(N), integer(N), N2>=N.\n\n");
 			
 		}
-		
+/*		
 		//crisp data, monotonic rules
 		//serious_test(ID,DEG):-serious_atl(ID,DEG),DEG2 is DEG+1, not(serious_atl(ID,DEG2)).
 		ilp_ser.print(crisp_relations[class_attribute_index].getName());
@@ -71,7 +105,7 @@ public class FuzzyILPClassifier extends ILPClassifier{
 		ilp_ser.print("(ID,DEG),DEG2 is DEG+1, not(");
 		ilp_ser.print(atl_relations[class_attribute_index].getName());
 		ilp_ser.print("(ID,DEG2)).\n\n");
-
+*/
 	}
 
 	@Override
