@@ -1,0 +1,39 @@
+-------------------- review 1 --------------------
+
+PAPER: 48
+TITLE: Evaluace fuzzy ILP klasifikátoru na datech o dopravních nehodách
+
+
+- Autori popisujú svoju modifikáciu ILP klasifikátora zaloenú na monotonizácii predikátov a ukazujú, e táto úprava priniesla (v porovnaní s pôvodnou verziou) vırazné zlepšenie.
+- Nie je však jasné, preèo autori svoj ILP klasifikátor oznaèujú prívlastkom "fuzzy", veï pravdivostná hodnota monotonizovanıch predikátov je (aspoò pod¾a ukáky) binárna. Ak naráajú na pouitie stupòovania, to (opä aspoò pod¾a ich ukáky) bolo pouité u v pôvodnej ("crisp") verzii predikátu. Odporúèam preto autorom buï lepšie vysvetli slovo "fuzzy", alebo ho nahradi nejakım priliehavejším prívlastkom (mono "monotonizovanı").
+- Môu autori v krátkosti zdôvodni vırazne vyššiu kvalitu metódy J48?
+- Prosím autorov, aby si opravili chyby:
+ - Niektoré riadky preènievajú zarovnanie odseku.
+ - strukturovanıch informaci - má by strukturovanıch informací
+ - objektivní, a daly - èiarka tam nepatrí
+ - je nutné, dát - èiarka tam nepatrí
+ - Data na kterıch - chıba èiarka
+ - provedli pocházejí - chıba èiarka
+ - Spojeni - má by dlhé í
+ - monotanizovanı (2x) - má by monotonizovanı
+ - precission - má by precision
+
+
+-------------------- review 2 --------------------
+
+PAPER: 48
+TITLE: Evaluace fuzzy ILP klasifikátoru na datech o dopravních nehodách
+
+
+Èlánok v podstate hovorí, e ak bude potrebné klasifikova hasièské správy, tak vo¾ba "monot ILP" klasifikátora nie je najhoršou vo¾bou. Otázne je, akı úitok z tejto informácie bude ma èitate¾ - keïe informácia o dátovej mnoine je obmedzená iba na poèet tried a poèet atribútov. Rozhodne by sa zišla detailnejšia charakteristika pouitıch dát.
+
+Z formálnej stránky potrebné odstráni zopár preklepov, inak vyhovuje.
+
+
+-------------------- review 3 --------------------
+
+PAPER: 48
+TITLE: Evaluace fuzzy ILP klasifikátoru na datech o dopravních nehodách
+
+
+Jeliko èlánek nepøináší novou metodu, ale experimentální vısledky existující metody, je zaráející, e vısledky experimentù neprokazují zlepšení oproti existujícím metodám. To vyvolává celou øadou otázek, napø. proè autoøi pracují na metodì, kdy nepøináší prokazatelnì lepší vısledky ne existující metody. Pokud jsou autoøi pøesvìdèení o vıhodách pøístupu, mìli by to v èlánku popsat.

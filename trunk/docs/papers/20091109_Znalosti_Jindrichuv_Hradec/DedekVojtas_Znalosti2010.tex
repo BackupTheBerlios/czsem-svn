@@ -26,26 +26,26 @@ Motivací pro tento pøíspìvek je klasifikace zpráv o dopravních a jiných nehodách
 
 \section{Úvod}
 V našem výzkumu se zabýváme extrakcí informací z webových reportù. Jednou z datových sad, které používáme, jsou záznamy o~hasièských výjezdech publikované na stránkách Hasièských záchranných sborù ÈR\footnote{\url{http://www.hzscr.cz/}}.
-Klasifikace závažnosti nehody pøedstavuje pøímoèaré využití strukturovaných informaci extrahovaných z reportu o ní. V tomto pøíspìvku se nezabýváme tím, jak získat strukturované informace z textového reportu (o tom viz napø. naši práci \cite{biblio:DeVoLinguisticextraction2008}), ale tím, jak na~základì takových informací urèit závažnost dané nehody.
+Klasifikace závažnosti nehody pøedstavuje pøímoèaré využití strukturovaných informací extrahovaných z reportu o ní. V tomto pøíspìvku se nezabýváme tím, jak získat strukturované informace z textového reportu (o tom viz napø. naši práci \cite{biblio:DeVoLinguisticextraction2008}), ale tím, jak na~základì takových informací urèit závažnost dané nehody.
 
 V naší pøedešlé publikaci \cite{biblio:DeVoWIIAT2009} jsme implementovali netypický druh klasifikátoru, který je založen na~induktivním logickém programování a fuzzy logice. Tento klasifikátor jsme použili na stejná data jako v této práci, ale vyhodnocení úspìšnosti tohoto klasifikátoru nebylo úplné. Nedostatky pøedešlé práce shrneme v následujících dvou bodech a v této práci se je pokusíme napravit a podrobnìji vysvìtlit výsledky srovnání.
 
 \begin{description}
-	\item[Køížová validace.] Aby bylo srovnání metod alespoò trochu objektivní, a daly se z~nìj odvodit statisticky relevantní závìry, je nutné spustit test nìkolikrát na rùzných trénovacích a testovacích datech. Køížová validace je ideálním prostøedkem k naplnìní tohoto cíle.
-	\item[Srovnání s alternativami.] Aby ètenáø mohl posoudit, jak kvalitních výsledkù metoda dosahuje, je nutné, dát k dipozici i výsledky alternativních øešení nad shodnými daty.
+	\item[Køížová validace.] Aby bylo srovnání metod alespoò trochu objektivní a daly se z~nìj odvodit statisticky relevantní závìry, je nutné spustit test nìkolikrát na rùzných trénovacích a testovacích datech. Køížová validace je ideálním prostøedkem k naplnìní tohoto cíle.
+	\item[Srovnání s alternativami.] Aby ètenáø mohl posoudit, jak kvalitních výsledkù metoda dosahuje, je nutné dát k dipozici i výsledky alternativních øešení nad shodnými daty.
 \end{description}
 
 \section{Data}
-Data na kterých jsme experiment provedli pocházejí z padesáti hasièských zpráv. U každé zprávy jsme vyhodnotili celkem tøináct ukazatelù, které sloužily jako vstup pro klasifikaci (napø. poèet mrtvých, vyèíslená škoda, doba potøebná na~likvidaci nehody, poèet zasahujících jednotek, atp). Závažnost nehody jsme rozdìlili do ètyø tøíd a stanovovali jsme ji na základì celkového dojmu, který jsme z popisu nehody získali. 
+Data, na kterých jsme experiment provedli, pocházejí z padesáti hasièských zpráv. U každé zprávy jsme vyhodnotili celkem tøináct ukazatelù, které sloužily jako vstup pro klasifikaci (napø. poèet mrtvých, vyèíslená škoda, doba potøebná na~likvidaci nehody, poèet zasahujících jednotek, atp). Závažnost nehody jsme rozdìlili do ètyø tøíd a stanovovali jsme ji na základì celkového dojmu, který jsme z popisu nehody získali. 
 
 
 \section{Fuzzy ILP klasifikátor}
 
 Podrobný popis konstrukce fuzzy ILP klasifikátoru, který jsme použili, je možné nalézt v èlánku \cite{biblio:DeVoWIIAT2009}. 
 %Zpùsob konstrukce klasifikátoru je pøevzatý z èlánku \cite{biblio:FILP}.
-Spojeni ILP s fuzzy logikou spoèívá v	(1) zavedení axiomù monotonie pro numerické atributy  -- napøíklad axiom: 
+Spojení ILP s fuzzy logikou spoèívá v	(1) zavedení axiomù monotonie pro numerické atributy  -- napøíklad axiom: 
 \\{\footnotesize\texttt{mrtvých\_alespoò(Nehoda,Poèet) $\leftarrow$ mrtvých(Nehoda,Poèet2),Poèet$\leq$Poèet2}}
-\\a v takzvaném zmonotonizování uèících pøíkladù. V pøípadì, že cílový atribut klasifikace je monotonní (napø. stupeò závažnosti nehody 1 je menší než stupnì 2 a 3), se mùžeme pokusit nauèit místo crisp predikátu (\texttt{závažná(Nehoda,Stupeò)}) odpovídající monotanizovaný predikát (\texttt{závažná\_alespoò(Nehoda,Stupeò)}). Induktivní procedura má potom více pozitivních uèících pøíkladù a monotanizované predikáty lépe vystihují povahu numerických dat.  Pro porovnání s klasickými klasifikátory je však nutné výsledky monotónních pravidel pøevést zpìt na crip. Fuzzy ILP klasifikátor budeme dále oznaèovat \emph{monot} ILP, naproti tomu \emph{crisp} ILP oznaèuje prosté ILP bez monotonizace dat.
+\\a v takzvaném zmonotonizování uèících pøíkladù. V pøípadì, že cílový atribut klasifikace je monotonní (napø. stupeò závažnosti nehody 1 je menší než stupnì 2 a 3), se mùžeme pokusit nauèit místo crisp predikátu (\texttt{závažná(Nehoda,Stupeò)}) odpovídající monotonizovaný predikát (\texttt{závažná\_alespoò(Nehoda,Stupeò)}). Induktivní procedura má potom více pozitivních uèících pøíkladù a monotonizované predikáty lépe vystihují povahu numerických dat.  Pro porovnání s klasickými klasifikátory je však nutné výsledky monotónních pravidel pøevést zpìt na crip. Fuzzy ILP klasifikátor budeme dále oznaèovat \emph{monot} ILP, naproti tomu \emph{crisp} ILP oznaèuje prosté ILP bez monotonizace dat.
 
 
 \section{Vyhodnocení}
