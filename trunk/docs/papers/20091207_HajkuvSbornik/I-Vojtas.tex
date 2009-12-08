@@ -5,63 +5,86 @@ Abstract. In this essay we are giving an overview of our work on fuzzy rules and
 
 \section{Introduction, motivation, problems.}
 
-     Origins of fuzzy sets is connected to seminal work of L. A. Zadeh [Z]. original motivation was image processing where different grades of shade of image pixel were first practical examples of fuzzy sets (see e.g. picture 1a [p1a]). Fuzzy set theory has developed rapidly with main applications in control (see e.g. pictures 1b and 1c [p1bc], where rules for an inverted pendulum 1b are trained using fuzzy sets ,e.g. 1c). 
+     Origins of fuzzy sets is connected to seminal work of L. A. Zadeh \cite{Z}. original motivation was image processing where different grades of shade of image pixel were first practical examples of fuzzy sets (see e.g. picture \ref{fig:img1}a). Fuzzy set theory has developed rapidly with main applications in control (see e.g. pictures \ref{fig:img1}b and \ref{fig:img1}c, where rules for an inverted pendulum \ref{fig:img1}b are trained using fuzzy sets ,e.g. \ref{fig:img1}c). 
+
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=1.00\textwidth]{img/img1}
+	\label{fig:img1}
+	\caption{(a, b, c)}
+\end{figure}
 
 
 
-
-
-     Another motivation for fuzzy sets was modeling vague concepts like tall, young, etc. Many applications needed formal models. Here is the first contribution of Petr Hajek. In [Ha2] he further develops Zadeh's terms "fuzzy logic in broad or wide and narrow sense." In broad sense the term fuzzy logic has been used as synonymous with fuzzy set theory and its applications. In difference to Zadeh, which understood the emerging narrow sense fuzzy logic as a theory of approximate reasoning based on many valued logic, Hajek claims "… a logician will first study classical logical questions on completeness, decidability, complexity etc. of the symbolic calculi in question and then try to reduce question of Zadeh's agenda to questions of deduction as far as possible.  This is the approach in monograph of Petr Hajek [Ha]. 
-     Petr Hajek introduced fuzzy logic in narrow sense as a mathematical theory of many valued logic. First contribution was done by J. Pavelka in [P] where he used graded statements (propositions), e.g.
-p. 0,5      p'q. 0,7
+     Another motivation for fuzzy sets was modeling vague concepts like tall, young, etc. Many applications needed formal models. Here is the first contribution of Petr Hajek. In \cite{Ha2} he further develops Zadeh's terms "fuzzy logic in broad or wide and narrow sense." In broad sense the term fuzzy logic has been used as synonymous with fuzzy set theory and its applications. In difference to Zadeh, which understood the emerging narrow sense fuzzy logic as a theory of approximate reasoning based on many valued logic, Hajek claims "... a logician will first study classical logical questions on completeness, decidability, complexity etc. of the symbolic calculi in question and then try to reduce question of Zadeh's agenda to questions of deduction as far as possible.  This is the approach in monograph of Petr Hajek \cite{Ha}. 
+     
+     Petr Hajek introduced fuzzy logic in narrow sense as a mathematical theory of many valued logic. First contribution was done by J. Pavelka in \cite{P} where he used graded statements (propositions), e.g.
+\begin{displaymath}
+p. 0,5\ \ \ p \rightarrow q. 0,7
+\end{displaymath}
 to development of an axiomatic system of Lukasiewicz logic. 
-     Basic development by Petr Hajek [H] was interested in axiomatization of 1-tautologies of various fuzzy logics. Just to motivate our view of this approach, let us notice that classical 0-1 tautology 
-                                                                           (1)
-Is no more a tautology even in a 3 valued logic. This has P. Hajek to the study of metamathematics of fuzzy logic, which is more detailed presented in some papers of this volume. This concerns especially introduction and study of so called Basic Logic BL, where (1) is not provable and there are some BL axioms replacing this form of composed implications, e.g.                   
+     
+     Basic development by Petr Hajek \cite{H} was interested in axiomatization of 1-tautologies of various fuzzy logics. Just to motivate our view of this approach, let us notice that classical 0-1 tautology 
+\begin{equation} \label{eq:taut1}
+(\varphi\rightarrow(\psi\rightarrow\chi))\rightarrow((\varphi\rightarrow\psi)\rightarrow(\psi\rightarrow\chi))
+\end{equation}
+is no more a tautology even in a 3 valued logic. This has P. Hajek to the study of metamathematics of fuzzy logic, which is more detailed presented in some papers of this volume. This concerns especially introduction and study of so called Basic Logic BL, where (\ref{eq:taut1}) is not provable and there are some BL axioms replacing this form of composed implications, e.g. 
+\begin{displaymath}
+(\varphi\rightarrow\psi)\rightarrow((\psi\rightarrow\chi)\rightarrow(\varphi\rightarrow\chi))
+\end{displaymath}
+
      For tuning real world applications to data, and moreover online with response in a second, it is hard to follow this way (to work with axiomatic systems). 
-     Nevertheless our main motivation came from attending lectures of Petr Hajek on fuzzy logic [HTUW], where he introduced fuzzy values as a comparative notion of truth (see also [Ha2]). This was quite well in concordance to different representation of preferences in computer science applications. There are various ways of graphical representation of preference, importance, relevance etc. For user feedback we can use colors as in traffic lights (2a), different smiley's (2b), stars (2c) or sliders (2d).
 
+     Nevertheless our main motivation came from attending lectures of Petr Hajek on fuzzy logic \cite{HTUW}, where he introduced fuzzy values as a comparative notion of truth (see also \cite{Ha2}). This was quite well in concordance to different representation of preferences in computer science applications. There are various ways of graphical representation of preference, importance, relevance etc. For user feedback we can use colors as in traffic lights (2a), different smiley's (2b), stars (2c) or sliders (2d).
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=1.00\textwidth]{img/img2}
+	\label{fig:img2}
+	\caption{(a, b, c, d)}
+\end{figure}
  
 
-2a	 
 
+For representation of results we can use Google like graphics (3d) and mnemonics of top-down and let-right reading, enhanced by font size (3b). Another possibility thumbs up/down mnemonic (3c) and understanding colors in geographic maps, the higher terrain the better answer   (\cite{JVKH}).
 
-2b	 
-
-
-2c	 
-2d
-
-For representation of results we can use Google like graphics (3d) and mnemonics of top-down and let-right reading, enhanced by font size (3b). Another possibility thumbs up/down mnemonic (3c) and understanding colors in geographic maps, the higher terrain the better answer   ([JVKH]).
-
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=1.00\textwidth]{img/img3}
+	\label{fig:img3}
+	\caption{(a, b, c, d)}
+\end{figure}
 
  
-3a	Good
-Neutral
-Wrong
-
-
-3b	   
- 
-3c	 
- 
- 
-3d
 
      To resume our starting point, these were computer science motivated problems with a small number of truth values (usually 7+-2), data intensive, with adaptation to different users (although in formal models we often use [0,1] interval).
-Formal models
-For some approaches we have developed formal models.
-Fuzzy logic programming versus fuzzy resolution.
-     In fuzzy logic programming we have to decide whether rules are implications or clauses, where my deduction procedure is resolution based refutation or database querying. We have studied both approaches. 
-     In [FSS] we have developed the implication rules, database querying approach. Having 
-p. 0,5      p'q. 0,7
-and truth function of ' is an implicator I:[0,1] ' [0,1] the result q can be deduced by many valued modus ponens with truth at least CI(0,5; 0,7), where CI is a residual conjunctor to I. For such approach we have proved correctness of fuzzy logic programming (every computed answer is correct) and approximate completeness (every correct answer can be arbitrarily precisely computed). More a fixed point theory was developed too. 
-     In real world situation, both for user feedback and for query results presentation, we need finite valued fuzzy logic. More over a very low finite number of values. This was already used by psychologist Rensis Likert (see [Li]). Moreover, "Often five ordered response levels are used, although many psychometricians advocate using seven or nine levels; a recent empirical study found that a 5- or 7- point scale may produce slightly higher mean scores relative to the highest possible attainable score, compared to those produced from a 10-point scale, and this difference was statistically significant (see [Li])". This is also a common practice when refereeing papers, usually 7 values range from strong accept to strong reject. 
-     This was studied in [KLV], where results of [FSS] where extended for conjunctor which are results of rounding t-norms to a finite scale. Note that rounding a conjunctor C upwards (in x axis to n values, in y axis to m values and in result z axis to k values) gives a conjunctor Cn,mk which need not be associative nor commutative (rounding upwards makes these conjunctors left continuous). Our theory of fuzzy logic programming was extended also to this case. 
-     In practical application it often comes to a situation that user preferences are aggregated from particular objectives, The situation is similar as in light athletic decathlon. Here individual achievements of an athlete are first converted to point (a fuzzy degree usually between 0 and 1000) and then summed up (fuzzy aggregation without normalization). See e.g. results of a race in Götzis on 27.5.2001 where R. Sebrle established  first WR  above 9000 points
+     
+\section{Formal models}
 
- 
-Fig. 1
+For some approaches we have developed formal models.
+
+\section{Fuzzy logic programming versus fuzzy resolution.}
+     In fuzzy logic programming we have to decide whether rules are implications or clauses, where my deduction procedure is resolution based refutation or database querying. We have studied both approaches. 
+     
+     In \cite{FSS} we have developed the implication rules, database querying approach. Having 
+\begin{displaymath}
+p. 0,5\ \ \ p\rightarrow q. 0,7	
+\end{displaymath}
+and truth function of $\rightarrow$ is an implicator $I:[0,1] \rightarrow [0,1]$ the result q can be deduced by many valued modus ponens with truth at least $C_I(0,5;\ 0,7)$, where $C_I$ is a residual conjunctor to I. For such approach we have proved correctness of fuzzy logic programming (every computed answer is correct) and approximate completeness (every correct answer can be arbitrarily precisely computed). More a fixed point theory was developed too. 
+     
+     In real world situation, both for user feedback and for query results presentation, we need finite valued fuzzy logic. More over a very low finite number of values. This was already used by psychologist Rensis Likert (see \cite{Li}). Moreover, "Often five ordered response levels are used, although many psychometricians advocate using seven or nine levels; a recent empirical study found that a 5- or 7- point scale may produce slightly higher mean scores relative to the highest possible attainable score, compared to those produced from a 10-point scale, and this difference was statistically significant (see \cite{Li})". This is also a common practice when refereeing papers, usually 7 values range from strong accept to strong reject. 
+     
+     This was studied in \cite{KLV}, where results of \cite{FSS} where extended for conjunctor which are results of rounding t-norms to a finite scale. Note that rounding a conjunctor C upwards (in x axis to n values, in y axis to m values and in result z axis to k values) gives a conjunctor $C_{n,m}^{k}$ which need not be associative nor commutative (rounding upwards makes these conjunctors left continuous). Our theory of fuzzy logic programming was extended also to this case. 
+     
+     In practical application it often comes to a situation that user preferences are aggregated from particular objectives, The situation is similar as in light athletic decathlon. Here individual achievements of an athlete are first converted to point (a fuzzy degree usually between 0 and 1000) and then summed up (fuzzy aggregation without normalization). See e.g. results of a race in G\"{o}tzis on 27.5.2001 where R. Sebrle established  first WR  above 9000 points (Fig.~\ref{fig:img4}).
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=1.00\textwidth]{img/img4}
+	\label{fig:img4}
+	\caption{Athletic decathlon -- G\"{o}tzis on 27.5.2001}
+\end{figure}
 
 Also in web shops and other user decision making similar phenomena appear. Namely, it can happen that even if having similar objectives one can have different weights for aggregation, or different users can have just opposite directions of preference. 
      For such situations, we have developed a model of fuzzy logic programming where fuzzy aggregations can appear in the body of rule. Such a rule can have form (in graded 
