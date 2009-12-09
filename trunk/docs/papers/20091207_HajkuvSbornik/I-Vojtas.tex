@@ -1,5 +1,6 @@
 \begin{abstract}
-In this essay we are giving an overview of our work with our students on fuzzy rules and similarities originally motivated by Petr H\'{a}jek's teaching and work. Our main starting points are Petr's visions of fuzzy logic in narrow sense and understanding of fuzzy values as a comparative notion of truth. Fuzzy logic in narrow sense is in our work reflected by formal models of fuzzy logic programming and similarities. Comparative notion of truth led us to understand fuzzy values as degree of user preference. As far as mathematical fuzzification of a domain can lead to several possible models, requirements of computer science application needs can help to fix one of them. In this essay we overview our work (originally published with several coauthors) on models of fuzzy logic programming and its connection to generalized annotated programs and similarity reasoning; on fuzzy inductive logic programming; application to user preference learning and querying; applications to web information extraction and web semantization. \end{abstract}
+In this essay we are giving an overview of our work with our students and colleagues on fuzzy rules and similarities originally motivated by Petr H\'{a}jek's teaching and work. Our main starting points are Petr's visions of fuzzy logic in narrow sense and understanding of fuzzy values as a comparative notion of truth. Fuzzy logic in narrow sense is in our work reflected by formal models of fuzzy logic programming and similarities. Comparative notion of truth led us to understand fuzzy values as degree of user preference. As far as mathematical fuzzification of a domain can lead to several possible models, requirements of computer science application can help to prefer one of them. We overview our work (originally published with several coauthors) on models of fuzzy logic programming and its connection to generalized annotated programs and similarity reasoning; on fuzzy inductive logic programming; application to user preference learning and querying; applications to web information extraction and web semantization and conclude with some observations and lessons learned.
+\end{abstract}
 
 
 \section{Introduction, motivation, problems.}
@@ -133,19 +134,18 @@ is a \emph{nontrivial} similarity triple, if all three numbers s(x, y), s(y, z) 
 \\\textbf{Observation.} Assume that similarity s is symmetric and space s is a min-similarity space on A. Then there are no nontrivial similarity triples in a min-similarity space. 
 
      Observation is easy to conclude. By contradiction, assume, there is a nontrivial triple. Using symmetry (and renaming if necessary) this triple can be chosen such that  $s(x, z) < s(x, y) < s(y, z)$. But then $s(x, z) < min(s(x, y), s(y, z))$)), a contradiction with min transitivity.
-     
-\begin{figure}[htbp]
+
+\begin{figure}[!ht]
 	\centering
-	\framebox{D O D E L A T  barevny alphas fig}
+		\includegraphics[width=0.8\hsize]{img/min_similarity}
 	\caption{} \label{fig:alpha}
 \end{figure}
-
-
+     
       Even notice, that min-similarity triples have to have two smaller numbers equal and only one bigger (see Fig.~\ref{fig:alpha}). This shows that min-similarity spaces have hierarchical structure and $\alpha$-cuts form an equivalence (partition) on A. In real world situations this is very often not a case, data are more randomly distributed. A nontrivial similarity triple (Fig.~\ref{fig:triangle}) forces us to consider other t-norms in similarity transitivity than min. If such a triangle is colored in graph terminology we call such a triangle \emph{colorful} if it contains all tree colors. 
 
 \begin{figure}[htbp]
 	\centering
-	\framebox{D O D E L A T  barevny triangle}
+		\includegraphics[width=0.4\hsize]{img/triangle}
 	\caption{} \label{fig:triangle}
 \end{figure}
 
@@ -230,13 +230,16 @@ Web semantization is an idea understanding process of semantization of web resou
 
 \section{Conclusions}
 
-In this paper tribute to Petr H\'{a}jek who brought us to fuzzy logic and modeling, we have tried to give an overview of 
-
-
-
-In this paper a tribute to Petr H\'{a}jek is given, who brought us to fuzzy logic and modeling. We have tried to give an overview of our work in this area and to Petr's influence, especially to consider fuzzy values as a comparative notion of truth which is very well suited for user preference modeling. This work was mainly done with our students J. Dedek, A. Eckhardt, P. Gursky, T. Horvath, S. Krajci, R. Lencses, D. Maruscak, R. Novotny, J. Pribolova and V. Vanekova (which can be hence considered as scientific (fuzzy) grand children of P. H\'{a}jek). We have totally ignored contributions of other authors to these fields of research, references can be found in respective papers. 
+In this paper a tribute to Petr H\'{a}jek is given, who brought us to fuzzy logic and modeling. We have tried to give an overview of our work in this area and to Petr's influence, especially to consider fuzzy values as a comparative notion of truth which is very well suited for user preference modeling. This work was mainly done with our (former) students J. Dedek, A. Eckhardt, P. Gursky, T. Horvath, S. Krajci, R. Lencses (left for industry), D. Maruscak (left for industry), R. Novotny, J. Pribolova (left for industry) and V. Vanekova (which can be hence considered as scientific (fuzzy) grand children of P. Hajek). We have totally ignored contributions of other authors to these fields of research, references can be found in respective papers. 
 
      Concluding we can state that ideas of Petr H\'{a}jek - both on fuzzy logic in narrow sense and on fuzzy as a comparative notion of truth, have brought new insight to many problems, especially to user preference modeling and has led  even to proof of concepts of these ideas based on experimental tools and experiments on real world data. We plan to work in this direction also in the future. 
+     
+          Lessons learned show
+\\\noindent - In the case of applications with signal (analogue, physical) data, typically a fuzzy controller, the state of the system ranges in a continuous range of all possible data. In this case fuzzy rules are built upon fuzzy partitions of domain of regular variables. In the case of applications with human created data (e.g. web data) - state of the system contains only data of existing resources (which usually do not fill a continuum of possibilities). In this case fuzzy rules are built upon (usually one) fuzzy subset of domain of variables which indicate user preference, objective.
+\\\noindent - Fuzzy logic in narrow sense can be developed either in the direction of axiomatization of 1-tautologies, aiming for completeness and complexity issues. Fuzzy logic in narrow sense for data intensive applications usually does not need any logical axioms. There is a difference between systems based on implicative rules (modus ponens deduction and database querying) and disjunctive rules (resolution deduction and refutation). 
+\\\noindent - Learning of implicative rules is easier, based on equivalence of FLP - fuzzy logic programming and GAP - Generalized annotated programs  and understanding learning FLP rules as learning of objectives and utility function in a user preference model as in operational research (see \cite{47}). 
+\\\noindent - several application scenarios led to new requirements on indexing, top-k query answering, user preference learning and web information extraction and new measures of evaluating results / solutions. 
+
 
 \begin{thebibliography}{99}
 \bibitem{KW} Kendall tau rank correlation coefficient, From Wikipedia, the free encyclopedia
@@ -250,14 +253,10 @@ In this paper a tribute to Petr H\'{a}jek is given, who brought us to fuzzy logi
 \bibitem{Ha} Petr H\'{a}jek. Metamathematics of fuzzy logic, Dordrecht: Kluwer. 1998
 \bibitem{Ll} J. W. Lloyd. Foundations of Logic Programming (2nd edition). Springer-Verlag 1987 
 \bibitem{P} Pavelka, J., (1979), "On fuzzy logic I, II, III", Zeitschrift fur Math. Logik und Grundlagen der Math, 25: 45-52, 119-134, 447-464
-\bibitem{FuzzIEEE} Alan Eckhardt, Jaroslav Pokorn\'{y}, Peter Vojt\'{a}\v{s}: A System Recommending Top-k Objects for Multiple Users Preferences. FUZZ-IEEE 2007: 1-6
 
-\bigskip
+\subsection*{List of publication from our school motivated by P. H\'{a}jek.}
 
-\noindent List of publication from our school motivated by P. H\'{a}jek. 
-
-\bigskip
-
+\bibitem{47} A. Eckhardt, P. Vojtáš. Combining various methods of automated user decision and preferences modelling. In MDAI 2009 - The 6th International Conference on Modeling Decisions for Articial Intelligence, volume 5861 of LNCS, pages 172-181. Springer, 2009
 \bibitem{46} Gurský, P. - Pázman, R. - Vojtáš, P. On Supporting Wide Range of Attribute Types for Top-K Search. In Computing and Informatics. Vol. 28, no. 4 (2009), p. 483-513.
 \bibitem{45} Gurský, P. - Horváth, T. - Vojtáš, P. - Jirásek, J. - Krajci, S. - Novotný, R. - Pribolová, J. - Vaneková, V. User Preference Web Search -- Experiments with a System Connecting Web and User. In Computing and Informatics. Vol. 28, no. 4 (2009), p. 515-553. 
 \bibitem{44} Alan Eckhardt, Tomáš Skopal, Peter Vojtáš . On fuzzy vs. metric similarity search in complex databases. In FQAS 2009, LNCS 5822, Springer Verlag 2009, 64-75
@@ -307,16 +306,15 @@ In this paper a tribute to Petr H\'{a}jek is given, who brought us to fuzzy logi
 \end{thebibliography}
 
 
-\bigskip
+\subsection*{Web pages of offspring}
 
-\noindent Web pages 
-
-\bigskip
-
+{\small
 \noindent\url{http://www.ksi.mff.cuni.cz/~dedek/}
 \\\url{http://www.ksi.mff.cuni.cz/~eckhardt/}
-\\\url{http://ics.upjs.sk/~gursky/Sk/Publikacie}
-\\\url{http://ics.upjs.sk/~horvath/index.php/Research/Publications}
-\\\url{http://ics.upjs.sk/~krajci/skola/}
+\\\url{http://ics.upjs.sk/~gursky/} 
+\\\url{http://ics.upjs.sk/~horvath/} 
+\\\url{http://ics.upjs.sk/~krajci/}
 \\\url{http://ics.upjs.sk/~novotnyr/}
-\\\url{http://ics.upjs.sk/~vanekova/index.php/Site/Publikacie}
+\\\url{http://ics.upjs.sk/~vanekova/}
+}
+

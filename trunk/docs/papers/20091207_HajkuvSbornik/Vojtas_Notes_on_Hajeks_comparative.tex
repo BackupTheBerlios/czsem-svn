@@ -5,77 +5,27 @@
 \usepackage[mathscr]{eucal}
 \usepackage[leqno,fleqn]{amsmath}
 
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{graphicx}
 \usepackage{multicol}
 \usepackage{url}
-\usepackage[cp1250]{inputenc}  % or [cp1250], or [latin2], or whatever
-
-
-%\usepackage{makeidx}
-%\usepackage{named}
-%\bibliographystyle{named}
-%\makeindex
-
-\hyphenation{hom-eo-mor-phism}
-
-%%%%%%%%%%%%%%%  Mundici's macros
-\newtheorem{vuoto}[theorem]{}
-\DeclareMathOperator{\McN}{\mathscr M}
-\DeclareMathOperator{\McNm}{\mathscr M([0,1]^{\it m})}
-\DeclareMathOperator{\McNn}{\mathscr M_{\it n}}
-\DeclareMathOperator{\conv}{\rm conv}
-\DeclareMathOperator{\den}{\rm den}
-\DeclareMathOperator{\Mod}{\rm Mod}
-\DeclareMathOperator{\Th}{\rm Th}
-\DeclareMathOperator{\Form}{\rm Form}
-\DeclareMathOperator{\sk}{\rm sk}
-\DeclareMathOperator{\id}{\rm id}
-\DeclareMathOperator{\ver}{\rm vert}
-\DeclareMathOperator{\Zed}{\mathbb{Z}}
-\DeclareMathOperator{\ext}{\rm ext}
-\DeclareMathOperator{\cube}{[0,1]^{\it n}}
-\DeclareMathOperator{\prim}{\rm Prim}
-\DeclareMathOperator{\spec}{\rm Spec}
-\DeclareMathOperator{\maxprim}{\rm MaxPrim}
-\DeclareMathOperator{\maxspec}{\rm MaxSpec}
-\DeclareMathOperator{\apo}{\rm apo}
-\DeclareMathOperator{\apor}{\rm apo_{\mathbb R}}
-\DeclareMathOperator{\MV}{\mathscr MV}
-\DeclareMathOperator{\MVm}{\mathscr MV([0,1]^{\it m})}
-\DeclareMathOperator{\MVn}{\mathscr MV([0,1]^{\it n})}
-\DeclareMathOperator{\sgr}{\rm sgr}
-\DeclareMathOperator{\grp}{\rm grp}
-\DeclareMathOperator{\cl}{\rm cl}
-\DeclareMathOperator{\QP}{\mathbb P}
-%%%%%%%%%%%%% End of Mundici's macros
-
-
-%%%%%%%%%%%%%%%  Vopenka's macros
-\newtheorem{axiom}{Axiom}
-\newtheorem{asser}{Assertion}
-\newtheorem{V-postulate}{Postulate} %%%% redifined, mozna zbytecne
-%%%%%%%%%%%%% End of Vopenka's macros
-
-%%%%%%%%%%%%%%%  's macros
-%%%%%%%%%%%%% End of 's macros
-
+\usepackage[cp1250]{inputenc}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
 \collection
 \begin{document}
 
-\tableofcontents
 
-\setcounter{paper}{5}
-\setcounter{chapter}{5}
-% authors don't need to adjust these counters.
-% It will be done during the ``production stage.
 
-%\paper{From BL to MV}{Daniele Mundici\thanks{Dedicated to Petr H\'ajek on his 70th anniversary}}
-\paper{Fuzzy logic as H\'{a}jek's comparative notion of truth and applications in preference modeling}{Peter Vojt\'{a}\v{s}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paper[Fuzzy logic as H\'{a}jek's comparative notion of truth in preference modeling]{Fuzzy logic as H\'{a}jek's comparative notion of truth and applications in preference modeling}{Peter Vojt\'{a}\v{s}}
 {\input{I-Vojtas}}
-
 \medskip
 \noindent Peter Vojt\'{a}\v{s}
 \\Department of software engineering
@@ -84,109 +34,10 @@
 \\118 00 Prague
 \\Czech Republic
 \\E-mail: \texttt{vojtas@ksi.mff.cuni.cz}
-
-
 \EndPaper
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%       Next Paper    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%\paper{The problem of actualizability of the classical infinity}{Petr Vop\v enka\thanks{Translated by Alena Vencovsk\' a}}
-%
-%%{\input{I-Vopenka1}}
-%
-%
-%\medskip
-%\noindent Petr Vop\v enka\\
-%address line 1\\
-%address line 2\\
-%address line 3\\
-%Email: email address
-%
-%\EndPaper
-%
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%       Next Paper    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%
-%\paper{Prague Set Theory Seminar}{Petr Vop\v enka\thanks{This text is dedicated to Petr H\'ajek on the occasion of his 70th birthday.}}
-%
-%%{\input{I-Vopenka2}}
-%
-%\medskip
-%\noindent Petr Vop\v enka\\
-%address line 1\\
-%address line 2\\
-%address line 3\\
-%Email: email address
-%
-%\EndPaper
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%       Next Paper    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%
-%\paper{Title}{Author}
-%
-%\begin{abstract}
-%Abstract (if required) to be written here.
-%\end{abstract}
-%
-%Main body of paper here.
-%
-%Bibliography in agreed named format.
-%
-%
-%\medskip
-%\noindent author name\\
-%address line 1\\
-%address line 2\\
-%address line 3\\
-%Email: email address
-%
-%\EndPaper
 
 
 \end{document}
 
-%%%%%%%%%%%%%%%%%%% second style
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\documentstyle{book}
-
-%%\usepackage{named,kcp-new}
-%\usepackage{ any other standard packages required }
-
-% declare unique macros here
-
-\bibliographystyle{named}
-
-\collection
-\begin{document}
-\paper[Short Title]{Full Title}{Author(s)}
-
-Full text of paper here.
-
-\begin{thebibliography}
-
-%% Full text of .bbl file should appear here, using the named format:
-%% \bibitem[\protectciteauthoryear{Author(s)}{Year}]{citekey}
-
-\end{thebibliography}
-
-\medskip
-\noindent Author 1\\
-Affiliation (Department, University, Town, Country.)\\
-{\sf email address}\\ [2ex]
-Author 2\\
-Affiliation\\
-{\sf email address}
-\end{document}
