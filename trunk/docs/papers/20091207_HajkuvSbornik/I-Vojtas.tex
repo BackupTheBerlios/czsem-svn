@@ -3,9 +3,9 @@ In this essay we are giving an overview of our work with our students and collea
 \end{abstract}
 
 
-\section{Introduction, motivation, problems.}
+\section{Introduction, motivation, problems}
 
-     Origins of fuzzy sets are connected to seminal work of L. A. Zadeh \cite{Z}. Original motivation was image processing, where different grades of shade of image pixel were first practical examples of fuzzy sets (see e.g. picture \ref{fig:img1}a \cite{p1a}). Fuzzy set theory has developed rapidly with main applications in control (see e.g. pictures \ref{fig:img1}b and \ref{fig:img1}c \cite{p1bc}, where rules for an inverted pendulum \ref{fig:img1}b are trained using fuzzy sets, e.g. \ref{fig:img1}c). In the case of fuzzy controllers, the system can be in a continuum of states which are a combination of values from an interval. That is why fuzzy sets form a partition and rules have to describe the control action for all possible combinations. This is a main difference in comparison with computer science applications.
+     Origins of fuzzy sets are connected to seminal work of Lotfi A. Zadeh \cite{Z}. Original motivation was image processing, where different grades of shade of image pixel were first practical examples of fuzzy sets (see e.g. picture \ref{fig:img1}a \cite{p1a}). Fuzzy set theory has developed rapidly with main applications in control (see e.g. pictures \ref{fig:img1}b and \ref{fig:img1}c \cite{p1bc}, where rules for an inverted pendulum \ref{fig:img1}b are trained using fuzzy sets, e.g. \ref{fig:img1}c). In the case of fuzzy controllers, the system can be in a continuum of states which are a combination of values from an interval. That is why fuzzy sets form a partition and rules have to describe the control action for all possible combinations. This is a main difference in comparison with computer science applications.
 
 
 \begin{figure}[htbp]
@@ -21,7 +21,7 @@ In this essay we are giving an overview of our work with our students and collea
      
      Petr H\'{a}jek introduced fuzzy logic in narrow sense as a mathematical theory of many valued logic. First contribution was done by J. Pavelka in \cite{P} where he used graded statements (propositions), e.g.
 \begin{displaymath}
-p. 0,5\ \ \ p \rightarrow q. 0,7
+p.\, 0.5\ \ \ p \rightarrow q.\, 0.7
 \end{displaymath}
 to development of an axiomatic system of Lukasiewicz logic. 
      
@@ -29,10 +29,10 @@ to development of an axiomatic system of Lukasiewicz logic.
 \begin{equation} \label{eq:taut1}
 (\varphi\rightarrow(\psi\rightarrow\chi))\rightarrow((\varphi\rightarrow\psi)\rightarrow(\psi\rightarrow\chi))
 \end{equation}
-is no more a tautology even in a 3 valued logic. This has led P. H\'{a}jek to the study of metamathematics of fuzzy logic, which is more detailed presented in some papers of this volume. This concerns especially introduction and study of so called Basic Logic BL, where (\ref{eq:taut1}) is not provable and there are some BL axioms replacing this form of composed implications, e.g. 
+is no more a tautology even in a 3 valued logic. This has led P. H\'{a}jek to the study of metamathematics of fuzzy logic, which is detail presented in some papers of this volume. This concerns especially introduction and study of so called Basic Logic BL, where (\ref{eq:taut1}) is not provable and there are some BL axioms replacing this form of composed implications, e.g. 
 \\$(\varphi\rightarrow\psi)\rightarrow((\psi\rightarrow\chi)\rightarrow(\varphi\rightarrow\chi))$.
 
-     For tuning real world applications to data, and moreover online with response in a second, it is hard to follow this way (to look for and work with an axiomatic systems). 
+     For tuning real world applications to data, and moreover online with response in a second, it is hard to follow this way (to look for and work with axiomatic systems). 
 
      Nevertheless our main motivation came from attending lectures of Petr H\'{a}jek on fuzzy logic \cite{HaTUW}, where he introduced fuzzy values as a comparative notion of truth (see also \cite{Ha2}). This was quite well in concordance to different representation of preferences in computer science applications. There are various ways of graphical representation of preference, importance, relevance etc. For user feedback we can use colors as in traffic lights (2a), different smiley's (2b), stars (2c) or sliders (2d, \cite{UPreA}).
 
@@ -45,7 +45,7 @@ is no more a tautology even in a 3 valued logic. This has led P. H\'{a}jek to th
  
 
 
-For representation of results we can use Google like graphics (3d) and mnemonics of top-down and let-right reading, enhanced by font size (3b). Another possibility thumbs up/down mnemonic (3c) and understanding colors in geographic maps, the higher terrain the better answer (3a, \cite{43}).
+For representation of results we can use Google like graphics (3d) and mnemonics of top-down and let-right reading, enhanced by font size (3b). Another possibility is thumbs up/down mnemonic (3c) and understanding colors in geographic maps, the higher terrain the better answer (3a, \cite{43}).
 
 \begin{figure}[htbp]
 	\centering
@@ -63,19 +63,19 @@ For representation of results we can use Google like graphics (3d) and mnemonics
 For some approaches we have developed formal models based on our real world motivation. It is our conviction, that formal models should describe a real world problem and its formal solution should contribute to a real world solution / improvement. 
 
 \subsection{Fuzzy logic programming versus fuzzy resolution}
-     In fuzzy logic programming we have first to decide whether rules are implications or clauses; whether my deduction procedure is resolution based refutation or database querying (in the crisp case these are equivalent, \cite{10}). We have studied both approaches. 
+     In fuzzy logic programming we first have to decide whether rules are implications or clauses; whether my deduction procedure is resolution based refutation or database querying (in the crisp case these are equivalent, \cite{10}). We have studied both approaches. 
      
      In \cite{3} we have developed a model of fuzzy logic programming with implicative rules and database querying. Having 
 \begin{displaymath}
-p. 0,5\ \ \ p\rightarrow q. 0,7	
+p.\,0.5\ \ \ p\rightarrow q.\,0.7	
 \end{displaymath}
 and truth function of $\rightarrow$ is an implicator $I:[0,1]^2 \rightarrow [0,1]$, then the result q can be deduced by many valued modus ponens with truth at least $C_I(0,5;\ 0,7)$, where $C_I$ is a residual conjunctor to I. For such approach we have proved correctness of fuzzy logic programming (every computed answer is correct) and approximate completeness (every correct answer can be arbitrarily precisely computed). More a fixed point theory was developed too. 
      
-     In a real world situation, both for user feedback and for query results presentation, we need finite valued fuzzy logic (more over a very low finite number of values). This was already used by the psychologist Rensis Likert "Often five ordered response levels are used, although many psychometricians advocate using seven or nine levels; a recent empirical study found that a 5- or 7- point scale may produce slightly higher mean scores relative to the highest possible attainable score, compared to those produced from a 10-point scale, and this difference was statistically significant (see \cite{Li})". This is also a common practice when refereeing papers, usually 7 values range from strong accept to strong reject. 
+     In a real world situation, both for user feedback and for query results presentation, we need finite valued fuzzy logic (moreover, a very low finite number of values). This was already used by the psychologist Rensis Likert "Often five ordered response levels are used, although many psychometricians advocate using seven or nine levels; a recent empirical study found that a 5- or 7- point scale may produce slightly higher mean scores relative to the highest possible attainable score, compared to those produced from a 10-point scale, and this difference was statistically significant (see \cite{Li})". This is also a common practice when refereeing papers, usually 7 values range from strong accept to strong reject. 
      
           Small finite valued fuzzy logic programming was studied in \cite{16}, where results of \cite{3} were extended for conjunctors which are results of rounding t-norms to a finite scale. Note that rounding a conjunctor C upwards (in x axis to n values, in y axis to m values and in result z axis to k values) gives a conjunctor $C_{n,m}^{k}$ which need not be associative nor commutative (rounding upwards preserves these conjunctors to be left continuous). Our theory of fuzzy logic programming was extended also to this case. 
      
-     In practical application it often comes to a situation that user preferences are aggregated from particular objectives. Situation is similar as in light athletic decathlon. Here individual achievements of an athlete are first converted to points (a fuzzy degree usually between 0 and 1000) and then summed up (fuzzy aggregation without normalization). See Fig.~\ref{fig:img4} with results of a race in G\"{o}tzis on 27.5.2001 where R. Sebrle established  first WR  above 9000 points.
+     In practical applications it often comes to a situation that user preferences are aggregated from particular objectives. Situation is similar as in light athletic decathlon. Here individual achievements of an athlete are first converted to points (a fuzzy degree usually between 0 and 1000) and then summed up (fuzzy aggregation without normalization). See Fig.~\ref{fig:img4} with results of a race in G\"{o}tzis on 27.5.2001 where R. \v{S}ebrle established  first WR  above 9000 points.
 
 \begin{figure}[htbp]
 	\centering
@@ -85,7 +85,7 @@ and truth function of $\rightarrow$ is an implicator $I:[0,1]^2 \rightarrow [0,1
 \end{figure}
 
 
-Also in web shops and other user decision making similar phenomena appear. Namely, it can happen that even if users have similar objectives one user can have different weights for aggregation, or different users can have just opposite directions of preference. 
+Also in web shops and other user decision making situations similar phenomena appear. Namely, it can happen that even if users have similar objectives one user can have different weights for aggregation, or different users can have just opposite directions of preference. 
 
      For such situations, we have developed a model of fuzzy logic programming where fuzzy aggregations can appear in the body of rule. Such a rule can have form (in graded Prolog notation)
 \begin{displaymath}
@@ -128,7 +128,7 @@ where T is a t-norm (or a conjunctor).
 
 We say that the space $(A,x)$ is a T-similarity space if s is fulfilling T-transitivity.
 
-We say, that a triple
+We say that a triple
 \begin{displaymath}
 s(x,y), s(y,z), s(x,z)
 \end{displaymath}
@@ -145,7 +145,7 @@ We have
 	\caption{} \label{fig:alpha}
 \end{figure}
      
-      Even notice, that min-similarity triples have to have two smaller numbers equal and only one bigger (see Fig.~\ref{fig:alpha}). This shows that min-similarity spaces have hierarchical structure and $\alpha$-cuts form an equivalence (partition) on A. In real world situations this is very often not a case, data are more randomly distributed. A nontrivial similarity triple (Fig.~\ref{fig:triangle}) forces us to consider other t-norms in similarity transitivity than min. If such a triangle is colored in graph terminology we call such a triangle \emph{colorful} if it contains all tree colors. 
+      Even notice, that min-similarity triples have to have two smaller numbers equal and only one bigger (see Fig.~\ref{fig:alpha}). This shows that min-similarity spaces have hierarchical structure and $\alpha$-cuts form an equivalence (partition) on A. In real world situations this is very often not the case, data are more randomly distributed. A nontrivial similarity triple (Fig.~\ref{fig:triangle}) forces us to consider other t-norms in similarity transitivity than min. If such a triangle is colored in graph terminology we call such a triangle \emph{colorful} if it contains all tree colors. 
 
 \begin{figure}[htbp]
 	\centering
@@ -181,7 +181,7 @@ We have
 \end{minipage}
 \end{figure}
 
-     Main motivation for this was learning user preferences from user rating of a set sample set S of objects (see Fig.~\ref{fig:notebook}, stars correspond to mapping $r_u$), where a user interactively evaluates objects by number of stars, without making any comment on item properties. Basis for this is the object attribute representation of data (mapping d in Fig.~\ref{fig:aggregation}), which assigns to each object its data values in the Cartesian product of domains of attributes $\prod_{i=1}^{n}D_{A_{i}}$. The learning task is to find user objectives on particular attributes (fuzzy sets on attribute domains $f_i$) and a fuzzy aggregation function combining these attribute preference degrees. In a formal model we require the whole diagram should commute, in practical setting we require it gives good advice for the user. What is a good advice can be measured in several ways, most appropriate for web search is to get best objects (with highest fuzzy degree) first. For this we use Kendal correlation coefficient
+     Main motivation for this was learning user preferences from user rating of a set sample set S of objects (see Fig.~\ref{fig:notebook}, stars correspond to mapping $r_u$), where a user interactively evaluates objects by number of stars, without making any comment on item properties. Basis for this is the object attribute representation of data (mapping d in Fig.~\ref{fig:aggregation}), which assigns to each object its data values in the Cartesian product of domains of attributes $\prod_{i=1}^{n}D_{A_{i}}$. The learning task is to find user objectives on particular attributes (fuzzy sets on attribute domains $f_i$) and a fuzzy aggregation function combining these attribute preference degrees. In a formal model we require the whole diagram to commute, in practical setting we require it gives good advice for the user. What is a good advice can be measured in several ways, most appropriate for web search is to get best objects (with highest fuzzy degree) first. For this we use Kendal correlation coefficient
 \begin{displaymath}
 \tau = \frac{n_c - n_d}{\frac{1}{2}n(n-1)}
 \end{displaymath} 
@@ -212,7 +212,7 @@ Most of top-k algorithm use ordered approach to data by user preference. But con
 
 \subsection{Web information extraction for web semantization}
 
-Web semantization is an idea understanding process of semantization of web resources by third party annotation (as opposed to semantic web idea where it is assumed that web resource creators will annotate their pages by ontology). Of course annotating web resources by third party is a difficult task. We have tried to make a progress to this task by dividing it to smaller subtasks. First is to consider only tabular product pages and dominantly textual pages. Second idea is to split the task to a domain independent annotation and to domain dependent annotation (here user feedback is necessary, as far we do not have ontology for every domain).
+Web semantization is an idea understanding process of semantization of web resources by third party annotation (as opposed to semantic web idea where it is assumed that web resource creators will annotate their pages by ontology). Of course annotating web resources by third party is a difficult task. We have tried to make a progress in this task by dividing it to smaller subtasks. First is to consider only tabular product pages and dominantly textual pages. Second idea is to split the task to a domain independent annotation and to domain dependent annotation (here user feedback is necessary, so far we do not have ontology for every domain).
 
 \begin{figure}[ht]
 \begin{minipage}[b]{0.4\hsize}
@@ -235,9 +235,9 @@ Web semantization is an idea understanding process of semantization of web resou
 
 \section{Conclusions}
 
-In this paper a tribute to Petr H\'{a}jek is given, who brought us to fuzzy logic and modeling. We have tried to give an overview of our work in this area and to Petr's influence, especially to consider fuzzy values as a comparative notion of truth which is very well suited for user preference modeling. This work was mainly done with our (former) students J. Dedek, A. Eckhardt, P. Gursky, T. Horvath, S. Krajci, R. Lencses (left for industry), D. Maruscak (left for industry), R. Novotny, J. Pribolova (left for industry) and V. Vanekova (which can be hence considered as scientific (fuzzy) grand children of P. Hajek). We have totally ignored contributions of other authors to these fields of research, references to related work can be found in respective papers. 
+In this paper a tribute to Petr H\'{a}jek is given, who brought us to fuzzy logic and modeling. We have tried to give an overview of our work in this area and to Petr's influence, especially to consider fuzzy values as a comparative notion of truth which is very well suited for user preference modeling. This work was mainly done with our (former) students J. D\v{e}dek, A. Eckhardt, P. Gursk\'{y}, T. Horv\'{a}th, S. Kraj\v{c}i, R. Lencses (left for industry), D. Maru\v{s}\v{c}{\'a}k (left for industry), R. Novotn\'{y}, J. Pribolov{\'{a}} (left for industry) and V. Vanekov{\'{a}} (which can be hence considered as scientific (fuzzy) grand children of P. H\'{a}jek). We have totally ignored contributions of other authors to these fields of research, references to related work can be found in respective papers. 
 
-     Concluding we can state that ideas of Petr H\'{a}jek - both on fuzzy logic in narrow sense and on fuzzy as a comparative notion of truth, have brought new insight to many problems, especially to user preference modeling and has led  even to proof of concepts of these ideas based on experimental tools and experiments on real world data.
+     Concluding we can state that ideas of Petr H\'{a}jek - both on fuzzy logic in narrow sense and on fuzzy as a comparative notion of truth, have brought new insight to many problems, especially to user preference modeling and has led  even to proofs of concepts of these ideas based on experimental tools and experiments on real world data.
      
           Lessons learned show:
 \\\noindent - In the case of applications with signal (analogue, physical) data, typically a fuzzy controller, the state of the system ranges in a continuous range of all possible data. In this case fuzzy rules are built upon fuzzy partitions of domain of controller variables. In the case of applications with human created data (e.g. web data) - state of the system contains only data of existing resources (which usually do not fill a continuum of possibilities). In this case fuzzy rules are built upon (usually one) fuzzy subset of domain of variables which indicate user preference, objective.
@@ -249,6 +249,56 @@ In this paper a tribute to Petr H\'{a}jek is given, who brought us to fuzzy logi
 
 \nocite{1}
 \nocite{2}
+\nocite{3}
+\nocite{4}
+\nocite{5}
+\nocite{6}
+\nocite{7}
+\nocite{8}
+\nocite{9}
+\nocite{10}
+
+\nocite{11}
+\nocite{12}
+\nocite{13}
+\nocite{14}
+\nocite{15}
+\nocite{16}
+\nocite{17}
+\nocite{18}
+\nocite{19}
+\nocite{20}
+
+\nocite{21}
+\nocite{22}
+\nocite{23}
+\nocite{24}
+\nocite{25}
+\nocite{26}
+\nocite{27}
+\nocite{28}
+\nocite{29}
+\nocite{30}
+
+\nocite{31}
+\nocite{32}
+\nocite{33}
+\nocite{34}
+\nocite{35}
+\nocite{36}
+\nocite{37}
+\nocite{38}
+\nocite{39}
+\nocite{40}
+
+\nocite{41}
+\nocite{42}
+\nocite{43}
+\nocite{44}
+\nocite{45}
+\nocite{46}
+\nocite{47}
+
 
 \bibliography{Vojtas}
 
