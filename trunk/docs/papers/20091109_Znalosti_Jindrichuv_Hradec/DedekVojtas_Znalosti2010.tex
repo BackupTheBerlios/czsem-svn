@@ -36,15 +36,16 @@ V naší pøedešlé publikaci \cite{biblio:DeVoWIIAT2009} jsme implementovali netypi
 \end{description}
 
 \section{Data}
-Data, na kterých jsme experiment provedli, pocházejí z padesáti hasièských zpráv. U každé zprávy jsme vyhodnotili celkem tøináct ukazatelù, které sloužily jako vstup pro klasifikaci (napø. poèet mrtvých, vyèíslená škoda, doba potøebná na~likvidaci nehody, poèet zasahujících jednotek, atp). Závažnost nehody jsme rozdìlili do ètyø tøíd a stanovovali jsme ji na základì celkového dojmu, který jsme z popisu nehody získali. 
+Data, na kterých jsme experiment provedli, pocházejí z padesáti hasièských zpráv. U každé zprávy jsme vyhodnotili celkem tøináct ukazatelù, které sloužily jako vstup pro klasifikaci (napø. poèet mrtvých, vyèíslená škoda, doba potøebná na~likvidaci nehody, poèet zasahujících jednotek, atp). Závažnost nehody jsme rozdìlili do ètyø tøíd a stanovovali jsme ji na základì celkového dojmu, který jsme z popisu nehody získali. Podrobnìjší popis datové sady je možné nalézt v~èlánku \cite{biblio:DeVoWIIAT2009}. 
+
 
 
 \section{Fuzzy ILP klasifikátor}
 
 Podrobný popis konstrukce fuzzy ILP klasifikátoru, který jsme použili, je možné nalézt v èlánku \cite{biblio:DeVoWIIAT2009}. 
 %Zpùsob konstrukce klasifikátoru je pøevzatý z èlánku \cite{biblio:FILP}.
-Spojení ILP s fuzzy logikou spoèívá v	(1) zavedení axiomù monotonie pro numerické atributy  -- napøíklad axiom: 
-\\{\footnotesize\texttt{mrtvých\_alespoò(Nehoda,Poèet) $\leftarrow$ mrtvých(Nehoda,Poèet2),Poèet$\leq$Poèet2}}
+Spojení ILP s fuzzy logikou spoèívá v~zavedení axiomù monotonie pro numerické atributy  -- napøíklad axiom: 
+\\{\footnotesize\texttt{mrtvých\_alespoò(Nehoda,Poèet) $\leftarrow$ mrtvých(Nehoda,Poèet2),Poèet$\leq$Poèet2.}}
 \\a v takzvaném zmonotonizování uèících pøíkladù. V pøípadì, že cílový atribut klasifikace je monotonní (napø. stupeò závažnosti nehody 1 je menší než stupnì 2 a 3), se mùžeme pokusit nauèit místo crisp predikátu (\texttt{závažná(Nehoda,Stupeò)}) odpovídající monotonizovaný predikát (\texttt{závažná\_alespoò(Nehoda,Stupeò)}). Induktivní procedura má potom více pozitivních uèících pøíkladù a monotonizované predikáty lépe vystihují povahu numerických dat.  Pro porovnání s klasickými klasifikátory je však nutné výsledky monotónních pravidel pøevést zpìt na crip. Fuzzy ILP klasifikátor budeme dále oznaèovat \emph{monot} ILP, naproti tomu \emph{crisp} ILP oznaèuje prosté ILP bez monotonizace dat.
 
 
@@ -75,8 +76,10 @@ Podrobnìjší analýza hodnot f-míry (harmonického prùmìru pøesnosti a úplnosti) v 
 \subsection*{Podìkování}
 Tato práce byla èásteènì podpoøena èeskými projekty GAÈR-201/09/H057, GAUK 31009 a MSM-0021620838.
 
-\bibliographystyle{splncs}
-\bibliography{DedekVojtas_Znalosti2010}  % sigproc.bib is the name of the Bibliography in this case
+%\bibliographystyle{splncs}
+%\bibliography{DedekVojtas_Znalosti2010}  % sigproc.bib is the name of the Bibliography in this case
+
+\input{DedekVojtas_Znalosti2010.bbl}
 
 
 %\begin{thebibliography}{99}

@@ -1,3 +1,12 @@
+\vspace{-1.2cm}
+
+\begin{flushright}
+\textsl{Dedicated to Petr H\'ajek,
+\\on the occasion of his 70th birthday}
+\end{flushright}
+
+\vspace{0.1cm}
+
 \begin{abstract}
 In this essay we are giving an overview of our work with our students and colleagues on fuzzy rules and similarities originally motivated by Petr H\'{a}jek's teaching and work. Our main starting points are Petr's visions of fuzzy logic in narrow sense and understanding of fuzzy values as a comparative notion of truth. Fuzzy logic in narrow sense is in our work reflected by formal models of fuzzy logic programming and similarities. Comparative notion of truth led us to understand fuzzy values as degree of user preference. As far as mathematical fuzzification of a domain can lead to several possible models, requirements of computer science application can help to prefer one of them. We overview our work (originally published with several coauthors) on models of fuzzy logic programming and its connection to generalized annotated programs and similarity reasoning; on fuzzy inductive logic programming; application to user preference learning and querying; applications to web information extraction and web semantization and conclude with some observations and lessons learned.
 \end{abstract}
@@ -63,13 +72,13 @@ For representation of results we can use Google like graphics (3d) and mnemonics
 For some approaches we have developed formal models based on our real world motivation. It is our conviction, that formal models should describe a real world problem and its formal solution should contribute to a real world solution / improvement. 
 
 \subsection{Fuzzy logic programming versus fuzzy resolution}
-     In fuzzy logic programming we first have to decide whether rules are implications or clauses; whether my deduction procedure is resolution based refutation or database querying (in the crisp case these are equivalent, \cite{10}). We have studied both approaches. 
+     In fuzzy logic programming we first have to decide whether rules are implications or clauses; whether my deduction procedure is resolution based refutation or database querying (in the crisp case these are equivalent, \cite{Ll}). We have studied both approaches. 
      
      In \cite{3} we have developed a model of fuzzy logic programming with implicative rules and database querying. Having 
 \begin{displaymath}
 p.\,0.5\ \ \ p\rightarrow q.\,0.7	
 \end{displaymath}
-and truth function of $\rightarrow$ is an implicator $I:[0,1]^2 \rightarrow [0,1]$, then the result q can be deduced by many valued modus ponens with truth at least $C_I(0,5;\ 0,7)$, where $C_I$ is a residual conjunctor to I. For such approach we have proved correctness of fuzzy logic programming (every computed answer is correct) and approximate completeness (every correct answer can be arbitrarily precisely computed). More a fixed point theory was developed too. 
+and truth function of $\rightarrow$ is an implicator $I:[0,1]^2 \rightarrow [0,1]$, then the result q can be deduced by many valued modus ponens with truth at least $C_I(0.5\;,\;0.7)$, where $C_I$ is a residual conjunctor to I. For such approach we have proved correctness of fuzzy logic programming (every computed answer is correct) and approximate completeness (every correct answer can be arbitrarily precisely computed). More a fixed point theory was developed too. 
      
      In a real world situation, both for user feedback and for query results presentation, we need finite valued fuzzy logic (moreover, a very low finite number of values). This was already used by the psychologist Rensis Likert "Often five ordered response levels are used, although many psychometricians advocate using seven or nine levels; a recent empirical study found that a 5- or 7- point scale may produce slightly higher mean scores relative to the highest possible attainable score, compared to those produced from a 10-point scale, and this difference was statistically significant (see \cite{Li})". This is also a common practice when refereeing papers, usually 7 values range from strong accept to strong reject. 
      
@@ -240,12 +249,33 @@ In this paper a tribute to Petr H\'{a}jek is given, who brought us to fuzzy logi
      Concluding we can state that ideas of Petr H\'{a}jek - both on fuzzy logic in narrow sense and on fuzzy as a comparative notion of truth, have brought new insight to many problems, especially to user preference modeling and has led  even to proofs of concepts of these ideas based on experimental tools and experiments on real world data.
      
           Lessons learned show:
-\\\noindent - In the case of applications with signal (analogue, physical) data, typically a fuzzy controller, the state of the system ranges in a continuous range of all possible data. In this case fuzzy rules are built upon fuzzy partitions of domain of controller variables. In the case of applications with human created data (e.g. web data) - state of the system contains only data of existing resources (which usually do not fill a continuum of possibilities). In this case fuzzy rules are built upon (usually one) fuzzy subset of domain of variables which indicate user preference, objective.
-\\\noindent - Fuzzy logic in narrow sense can be developed either in the direction of axiomatization of 1-tautologies, aiming for completeness and complexity issues. Fuzzy logic in narrow sense for data intensive applications usually does not need any logical axioms. There is a difference between systems based on implicative rules (modus ponens deduction and database querying) and disjunctive rules (resolution deduction and refutation). 
-\\\noindent - Learning of implicative rules is easier, based on equivalence of FLP - fuzzy logic programming and GAP - Generalized annotated programs  and understanding learning FLP rules as learning of objectives and utility function in a user preference model as in operational research (see \cite{47}). 
-\\\noindent - several application scenarios led to new requirements on indexing, top-k query answering, user preference learning and web information extraction and new measures of evaluating results / solutions. 
 
-     We plan to work in this direction also in the future. 
+\begin{itemize}
+	\item In the case of applications with signal (analogue, physical) data, typically a fuzzy controller, the state of the system ranges in a continuous range of all possible data. In this case fuzzy rules are built upon fuzzy partitions of domain of controller variables. In the case of applications with human created data (e.g. web data) - state of the system contains only data of existing resources (which usually do not fill a continuum of possibilities). In this case fuzzy rules are built upon (usually one) fuzzy subset of domain of variables which indicate user preference, objective.
+
+	\item Fuzzy logic in narrow sense can be developed either in the direction of axiomatization of 1-tautologies, aiming for completeness and complexity issues. Fuzzy logic in narrow sense for data intensive applications usually does not need any logical axioms. There is a difference between systems based on implicative rules (modus ponens deduction and database querying) and disjunctive rules (resolution deduction and refutation). 
+
+	\item Learning of implicative rules is easier, based on equivalence of FLP - fuzzy logic programming and GAP - Generalized annotated programs  and understanding learning FLP rules as learning of objectives and utility function in a user preference model as in operational research (see \cite{47}). 
+
+	\item several application scenarios led to new requirements on indexing, top-k query answering, user preference learning and web information extraction and new measures of evaluating results / solutions. 
+\end{itemize}
+
+     We plan to work in this direction also in the future.      
+     In the bibliography we include additional publications from our school motivated by P. H\'{a}jek. 
+
+\subsection*{Web pages of offspring}
+
+{\small
+\noindent\url{http://www.ksi.mff.cuni.cz/~dedek/}
+\\\url{http://www.ksi.mff.cuni.cz/~eckhardt/}
+\\\url{http://ics.upjs.sk/~gursky/} 
+\\\url{http://ics.upjs.sk/~horvath/} 
+\\\url{http://ics.upjs.sk/~krajci/}
+\\\url{http://ics.upjs.sk/~novotnyr/}
+\\\url{http://ics.upjs.sk/~vanekova/}
+}
+
+
 
 \nocite{1}
 \nocite{2}
@@ -302,16 +332,4 @@ In this paper a tribute to Petr H\'{a}jek is given, who brought us to fuzzy logi
 
 \bibliography{Vojtas}
 
-
-\subsection*{Web pages of offspring}
-
-{\small
-\noindent\url{http://www.ksi.mff.cuni.cz/~dedek/}
-\\\url{http://www.ksi.mff.cuni.cz/~eckhardt/}
-\\\url{http://ics.upjs.sk/~gursky/} 
-\\\url{http://ics.upjs.sk/~horvath/} 
-\\\url{http://ics.upjs.sk/~krajci/}
-\\\url{http://ics.upjs.sk/~novotnyr/}
-\\\url{http://ics.upjs.sk/~vanekova/}
-}
 
