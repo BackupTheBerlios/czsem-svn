@@ -33,11 +33,15 @@
 %%peter.vojtas@mff.cuni.cz\\
 %}
 
-\author{Jan D\v{e}dek, Peter Vojt\'a\v{s}, Marta Vomlelov\'a}
+%\author{Jan D\v{e}dek, Peter Vojt\'a\v{s}, Marta Vomlelov\'a}
+\author[1]{Jan D\v{e}dek}
+\author[1]{Peter Vojt\'a\v{s}}
+\author[2]{Marta Vomlelov\'a}
 
-\address{Department of Software Engineering, Charles University\\
-Institute of Computer Science, Czech Academy of Science\\
+\address[1]{Department of Software Engineering, Charles University,\\
 Prague, Czech Republic}
+\address[2]{Department of Theoretical Computer Science and Mathematical Logic,\\
+Charles University, Prague, Czech Republic}
 
 \begin{abstract}
 In this paper we present a fuzzy system which provides a fuzzy
@@ -82,9 +86,11 @@ Our solution is based first on information extraction (see emphasized informatio
 
 
 Main contributions of this paper can be stated as follows: 
-\\$\bullet$ formal models for fuzzy classification of information form web reports
-\\$\bullet$ prototype implementation of a fuzzy classification system
-\\$\bullet$ experimental evaluation of the fuzzy classification system
+\begin{itemize}
+	\item formal models for fuzzy classification of information form web reports
+	\item prototype implementation of a fuzzy classification system
+	\item experimental evaluation of the fuzzy classification system
+\end{itemize}
 
 
 \section{Related Work} \label{dedek:related}
@@ -319,7 +325,7 @@ For our experiment we have selected a collection of 50 web reports. We have iden
 For the seriousness classification we have used two inductive logic approaches -- Crisp ILP and Fuzzy ILP (as described above). Technically the difference between the approaches consist in different setting of \emph{ILP task}. Both can be done with a classical ILP tool. We have used 
 ``\emph{A Learning Engine for Proposing Hypotheses}'' (Aleph  v5\footnote{\url{http://www.comlab.ox.ac.uk/activities/machinelearning/Aleph/}}), which seems very practical to us. It uses quite effective method of \emph{inverse entailment} \citep{biblio:InverseEntailment} and keeps all handy features of Prolog system (supports YAP and SWI) in its background.
 
-We have compared results of the two approaches (crisp and fuzzy) and we could see that the fuzzy approach made better results than the classical one. See section \ref{sec:results} for details of the results.
+We have compared results of the crisp and fuzzy ILP approaches with other classification methods and we could see that the fuzzy approach made better results than the classical one and also than many other methods. See section \ref{sec:results} for details of the results.
 
 
 
@@ -342,15 +348,16 @@ We have compared results of the two approaches (crisp and fuzzy) and we could se
 %\end{wraptable}
 
 Table \ref{img:attributes_description} summarizes all features (or attributes) that we have obtained from accident reports. Except the attribute \verb+type+ (type of an accident -- \verb+fire+, \verb+car_accident+ and \verb+other+) all the attributes are numerical and so monotonizable. In some cases value of some attribute is unknown. We have decided to make evidence of this and keep the values \verb+unknown+ in a knowledge base. Short explanation of each attribute follows.
-\newline
-\verb+size+ is a file size of text part of a report.\\
-	\verb+damage+ is an amount (in CZK -- Czech Crowns) of summarized damage arisen during an accident.\\
-	\verb+dur_minutes+ is time taken to handle an accident.\\
-	\verb+fatalities+ and \verb+injuries+ are numbers of fatalities (and injuries) taken by an accident.\\
-	\verb+cars+ is number of cars damaged during an accident (especially during car accidents).\\
-	\verb+professional_units+ and \verb+amateur_units+ are numbers of fireman units sent for an accident.\\
-	\verb+pipes+ is number of  used fire pipes.\\
-	\verb+lather+, \verb+aqualung+ and \verb+fan+ (ventilator) indicates whether these devices were used.
+\begin{itemize}
+	\item \verb+size+ is a file size of text part of a report.
+	\item \verb+damage+ is an amount (in CZK -- Czech Crowns) of summarized damage arisen during an accident.
+	\item \verb+dur_minutes+ is time taken to handle an accident.
+	\item \verb+fatalities+ and \verb+injuries+ are numbers of fatalities (and injuries) taken by an accident.
+	\item \verb+cars+ is number of cars damaged during an accident (especially during car accidents).
+	\item \verb+professional_units+ and \verb+amateur_units+ are numbers of fireman units sent for an accident.
+	\item \verb+pipes+ is number of  used fire pipes.
+	\item \verb+lather+, \verb+aqualung+ and \verb+fan+ (ventilator) indicates whether these devices were used.
+\end{itemize}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -458,18 +465,85 @@ For the construction of monotonized set of background knowledge $B^{mon}_T$ we u
 %\end{figure}
 
 
-%\vspace{-0.75cm}
+\begin{figure}
+\centerline{\includegraphics[width=\hsize]{img/2x10cross}}
+\caption{Evaluation of the methods -- average values}
+\label{img:graph2x10}
+\end{figure}
+
+
+\begin{table}[thb]
+\caption{Evaluation of the methods in 2 times 10-fold cross validation}
+\label{tab:table2x10}
+\scriptsize
+{\centering \begin{tabular}{lr@{\hspace{0cm}}c@{\hspace{0cm}}rr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}c}
+\\
+\hline
+& \multicolumn{3}{c}{Fuzzy}& \multicolumn{4}{c}{Crisp} & \multicolumn{4}{c}{MultPerc} & \multicolumn{4}{c}{SMO} & \multicolumn{4}{c}{J48} & \multicolumn{4}{c}{JRip} & \multicolumn{4}{c}{LBoost} \\
+\hline
+Corr	& 0.61 & $\pm$ & .19 & .22 & $\pm$ & .17 & $\bullet$ & .41 & $\pm$ & .19 & $\bullet$ & .36 & $\pm$ & .24 & $\bullet$ & .41 & $\pm$ & .22 & $\bullet$ & .44 & $\pm$ & .17 & $\bullet$ & .59 & $\pm$ & .26 &        \\
+Incor	& .39 & $\pm$ & .19 & .27 & $\pm$ & .24 &         	& .59 & $\pm$ & .19 & $\circ$ 	& .64 & $\pm$ & .24 & $\circ$ 	& .59 & $\pm$ & .22 & $\circ$ 	& .56 & $\pm$ & .17 & $\circ$ 	& .41 & $\pm$ & .26 &        \\
+Uncl	& .00	& $\pm$ & .00	& .51 & $\pm$ & .29 & $\circ$ 	& .00 & $\pm$ & .00 &         	& .00 & $\pm$ & .00 &         	& .00 & $\pm$ & .00 &         	& .00 & $\pm$ & .00 &         	& .00 & $\pm$ & .00 &        \\
+Prec	& .56 & $\pm$ & .24 & .53 & $\pm$ & .37 &         	& .35 & $\pm$ & .20 & $\bullet$ & .33 & $\pm$ & .26 &         	& .39 & $\pm$ & .22 &         	& .34 & $\pm$ & .21 & $\bullet$ & .56 & $\pm$ & .28 &        \\
+Rec		& .61 & $\pm$ & .19 & .49 & $\pm$ & .32 &         	& .41 & $\pm$ & .19 & $\bullet$ & .36 & $\pm$ & .24 & $\bullet$ & .41 & $\pm$ & .22 & $\bullet$ & .44 & $\pm$ & .17 & $\bullet$ & .59 & $\pm$ & .26 &        \\
+F			& .56 & $\pm$ & .20 & .49 & $\pm$ & .33 &         	& .36 & $\pm$ & .19 & $\bullet$ & .32 & $\pm$ & .24 & $\bullet$ & .39 & $\pm$ & .21 &         	& .36 & $\pm$ & .19 & $\bullet$ & .56 & $\pm$ & .27 &        \\
+\hline
+\multicolumn{21}{c}{$\circ$, $\bullet$ statistically significant improvement or degradation}\\
+\end{tabular} \scriptsize \par}
+\scriptsize
+\smallskip
+Legend:\\
+{\centering
+\begin{tabular}{p{2cm}@{}p{10.5cm}}\\
+Fuzzy \dotfill{}& czsem.ILP.FuzzyILPClassifier '' \\
+Crisp \dotfill{} & czsem.ILP.CrispILPClassifier '' \\
+MultPerc \dotfill{} & functions.MultilayerPerceptron '-L 0.3 -M 0.2 -N 500 -V 0 -S 0 -E 20 -H a' \\
+SMO \dotfill{} & functions.SMO '-C 1.0 -L 0.0010 -P 1.0E-12 -N 0 -V -1 -W 1 -K \textbackslash"functions.supportVector.PolyKernel -C 250007 -E 1.0\textbackslash"' \\
+J48 \dotfill{} & trees.J48 '-C 0.25 -M 2' \\
+JRip \dotfill{} & rules.JRip '-F 3 -N 2.0 -O 2 -S 1' \\
+LBoost \dotfill{} & meta.LogitBoost '-P 100 -F 0 -R 1 -L -1.7976931348623157E308 -H 0.1 -S 1 -I 10 -W trees.DecisionStump' \\
+\\
+Corr \dotfill{} & Percent correct\\
+Inor \dotfill{} & Percent incorrect\\
+Uncl \dotfill{} & Percent unclassified\\
+Prec \dotfill{} & Weighted avg IR precision\\
+Rec \dotfill{} 	& Weighted avg IR recall\\
+F \dotfill{} 		& Weighted avg F measure\\
+\end{tabular}
+}
+\end{table}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Results} \label{sec:results}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\vspace{-0.15cm}
 
 The Fig~\ref{img:rules} summarizes sets of obtained rules from two experiments: 
 \begin{enumerate}
 	\item experiments with $E_t$ and $B^{raw}_{T}$ 
 	\item experiments with $E_{\ge t}, {B}^{mon}_T$.
 \end{enumerate}
-In both experiments learning and testing examples and the background knowledge had their origin in the same data (the same accidents) but they differ in the form of the ILP task (crisp and monotonized). The Fig~\ref{img:evaluation} shows the success of these rules on the test data (not used during learning). We have used standard performance measures\footnote{\url{http://en.wikipedia.org/wiki/Precision_and_recall}} often used in information retrieval. There are also exact numbers of \emph{true positives} TP and \emph{false positives} FP from which the performance measures were computed (with respect to the numbers of all testing examples\footnote{These numbers are written in the Fig~\ref{img:evaluation} in small frames under each test set label.}).
+In both experiments learning and testing examples and the background knowledge had their origin in the same data (the same accidents) but they differ in the form of the ILP task (crisp and monotonized).
+
+We have evaluated these two methods and compared them with other possibilities used in data mining. To make the comparison clear and easy to perform, we have implemented an interface between the ILP methods and the Weka data mining software\footnote{\url{http://www.cs.waikato.ac.nz/ml/weka/}}. The interface makes it possible to use the ILP methods as an ordinary Weka classifier and use them for solving of any\footnote{For the fuzzy ILP method, there is a requirement on the target (class) attribute: it has to be monotonizable (e.g. numeric).} classification task inside the Weka software. So we used the Weka Experimenter and performed following experiment. We selected additional classifiers:
+%Jmenovitì rozhodovací stromy J48 \cite{biblio:J48}, Support vector machine klasifikátor SMO \cite{biblio:SMO} a vícevrstvý perceptron \cite{biblio:bishop-1995}.
+\begin{itemize}
+	\item Multilayer Perceptron \citep{biblio:bishop-1995},
+	\item Support Vector Machine classifier SMO \citep{biblio:SMO},
+	\item J48 decision tree \citep{biblio:J48},
+	\item JRip rules \citep{weka:JRip} and
+	\item Additive logistic regression LogitBoost \citep{biblio:LogitBoost},
+\end{itemize}
+and evaluated all the methods two times by 10-fold cross validation on our data about car and other accidents (section~\ref{sec:experiment_desc}). The obtained results (average values) are described by the graph in the Fig~\ref{img:graph2x10} and in the Table~\ref{tab:table2x10} (with standard deviations and decorated statistically significant values).
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Results2 - stary clanek} \label{sec:results2}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+The Fig~\ref{img:evaluation} shows the success of these rules on the test data (not used during learning). We have used standard performance measures\footnote{\url{http://en.wikipedia.org/wiki/Precision_and_recall}} often used in information retrieval. There are also exact numbers of \emph{true positives} TP and \emph{false positives} FP from which the performance measures were computed (with respect to the numbers of all testing examples\footnote{These numbers are written in the Fig~\ref{img:evaluation} in small frames under each test set label.}).
 
 Naturally monotonized hypotheses $H_{\ge t}$ were tested on monotonized examples $E_{\ge t}$ (double-line frame in the Fig~\ref{img:rules}) and similarly for the crisp case $H_t, E_t$ (dashed-line frame in the Fig~\ref{img:rules}).
 %Experiments with $E_t$ and $B^{raw}_{T}$ %Results of experiments with $E_t$ and $B^{raw}_{T}$ 
@@ -541,7 +615,7 @@ monotone $\rightarrow$ crisp\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-In this paper we have presented a fuzzy system which provides a fuzzy classification of textual web reports. Our approach was based on usage of third party linguistic analyzer, our previous work on web information extraction and fuzzy inductive logic programming.
+In this paper we have presented a fuzzy system which provides a fuzzy classification of textual web reports. Our approach was based on usage of third party linguistic analyzers, our previous work on web information extraction and fuzzy inductive logic programming.
 
 Main contributions are formal models and prototype implementation of the system and evaluation experiments with the Fuzzy ILP classification method.
 
@@ -552,7 +626,7 @@ Experiments have shown better results of fuzzy approach. We see the difference i
 %System need user assistance: of a skilled user in annotating data for extraction and an unskilled user for classification of a small training example set. This feature is especially important, because in Internet application, we cannot expect an unskilled user to classify a big number of examples 
 
 \section*{Acknowledgments}
-This work was partially supported by Czech projects: \\IS-1ET100300517, GACR-201/09/H057, GAUK 31009 and MSM-0021620838.
+This work was partially supported by Czech projects: \\\underline{IS-1ET100300517}, GACR-201/09/H057, GAUK 31009 and MSM-0021620838.
 
 \section*{References}
 
