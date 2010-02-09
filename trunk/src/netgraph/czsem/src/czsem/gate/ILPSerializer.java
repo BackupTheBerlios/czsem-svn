@@ -18,6 +18,7 @@ import czsem.ILP.ILPExec.ReaderThread;
 import czsem.ILP.ILPExec;
 import czsem.ILP.Serializer;
 import czsem.ILP.Serializer.Relation;
+import czsem.utils.Config;
 import czsem.utils.ProjectSetup;
 
 
@@ -367,7 +368,7 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 		ilp_ser.setFeatureNamesToSerialze(features);			
 		
 
-		ilp_ser.project_setup.dir_for_projects = "C:\\workspace\\czsem\\src\\netgraph\\czsem\\ILP_serial_projects\\";
+		ilp_ser.project_setup.dir_for_projects = Config.getConfig().getIlpProjestsPath()+'/';
 		ilp_ser.project_setup.project_name = "serialized_exp";
 		ilp_ser.project_setup.init_project();
 		

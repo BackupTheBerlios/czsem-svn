@@ -17,6 +17,10 @@ public class ProjectSetup implements Serializable {
 	public String project_name = "serialized_exp";
 //	private Serializer ser_bkg;		
 	
+	public ProjectSetup()
+	{
+		dir_for_projects = Config.getConfig().getIlpProjestsPath()+'/';
+	}
 	public void init_project() throws FileNotFoundException, UnsupportedEncodingException
 	{
         Calendar rightNow = Calendar.getInstance();

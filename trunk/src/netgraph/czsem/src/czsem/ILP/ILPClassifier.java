@@ -17,6 +17,7 @@ import weka.core.Capabilities.Capability;
 
 import czsem.ILP.Serializer.Relation;
 import czsem.ILP.WekaSerializer.Condition;
+import czsem.utils.Config;
 import czsem.utils.ProjectSetup;
 
 public abstract class ILPClassifier extends Classifier
@@ -90,7 +91,7 @@ public abstract class ILPClassifier extends Classifier
 	protected void setupProject(String project_name) throws FileNotFoundException, UnsupportedEncodingException
 	{
 		project_setup = new ProjectSetup();
-		project_setup.dir_for_projects = "C:\\workspace\\czsem\\src\\ILP\\serious_corss\\";
+		project_setup.dir_for_projects = Config.getConfig().getIlpProjestsPath()+'/';
 		project_setup.project_name = project_name;
 		project_setup.init_project();		
 	}

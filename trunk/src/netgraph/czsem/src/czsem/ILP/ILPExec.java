@@ -12,6 +12,7 @@ import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.Writer;
 
+import czsem.utils.Config;
 import czsem.utils.ProjectSetup;
 
 public class ILPExec {
@@ -87,8 +88,8 @@ public class ILPExec {
 		}
 	}
 
-	protected String prolog_path = "C:\\Program Files\\Yap\\bin\\yap.exe";
-	protected String aleph_path = "C:\\Program Files\\aleph\\aleph.pl";
+//	protected String prolog_path = "C:\\Program Files\\Yap\\bin\\yap.exe";
+//	protected String aleph_path = "C:\\Program Files\\aleph\\aleph.pl";
 	protected File working_directory;
 	protected String project_name;
 	protected String learnig_examples;
@@ -105,7 +106,7 @@ public class ILPExec {
 	BufferedReader error_reader;
 	
 	public ILPExec(ProjectSetup ps)
-	{
+	{		
 		working_directory = ps.working_directory;
 		project_name = ps.project_name;
 		learnig_examples = project_name;
@@ -124,9 +125,9 @@ public class ILPExec {
 
 	public void startPrologProcess(String file_name_to_consult) throws IOException
 	{
-		String [] exec_args = {prolog_path, "-l", file_name_to_consult};
+		String [] exec_args = {Config.getConfig().getPrologPath(), "-l", file_name_to_consult};
 		
-		System.err.println(prolog_path);
+		System.err.println(Config.getConfig().getPrologPath());
 		System.err.println(file_name_to_consult);
 		
 		prolog_process = Runtime.getRuntime().exec(exec_args, null, working_directory);
@@ -139,7 +140,7 @@ public class ILPExec {
 
 	public void startILPProcess() throws IOException
 	{
-		startPrologProcess(aleph_path);
+		startPrologProcess(Config.getConfig().getAlephPath());
 	}
 		
 	public void startErrReaderThread()

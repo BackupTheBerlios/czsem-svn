@@ -50,9 +50,9 @@ of third party linguistic analyzers, our previous work on web
 information extraction and fuzzy inductive logic programming. Main
 contributions are: comparison of our classifier with other
 alternatives like decision trees, support vector machines, neural
-networks etc, extensive evaluation experiments and introduction of
-combined evaluation measures. Main conclusion is that, even under low
-precision of linguistic annotation, classification is satisfactory.
+networks etc, extensive evaluation experiments and an introduction of
+combined evaluation measures. The main conclusion is that, even under low
+precision of linguistic annotation, the classification is satisfactory.
 \end{abstract}
 
 \begin{keyword}
@@ -69,7 +69,7 @@ fuzzy \sep inductive logic programming
 
 
 \section{Introduction}
-Big amount of information on the web increases the need of automated precessing. Especially textual information are hard for machine processing and understanding. Crisp methods have their limitations. In this paper we present a fuzzy system which provides a fuzzy classification of textual web reports. 
+Big amount of information on the web increases the need of automated processing. Especially textual information are hard for machine processing and understanding. Crisp methods have their limitations. In this paper we present a fuzzy system which provides a fuzzy classification of textual web reports. 
 
 \begin{figure}[hbt!]
 \centerline{\includegraphics[width=0.7\hsize]{img/message}}
@@ -78,18 +78,18 @@ Big amount of information on the web increases the need of automated precessing.
 \end{figure}
 
 
-Messages of accident reports on the web (Fig.~\ref{dedek:message}) are our motivating examples. We would like to have a tool which is able to classify such message with degree of being it a serious accident. 
+Our motivating examples are messages of accident reports on the web (Fig.~\ref{dedek:message}). We would like to have a tool which is able to classify such message by a degree of being it a serious accident. 
 
-Our solution is based first on information extraction (see emphasized information to be extracted in the Fig.~\ref{dedek:message}) and second on processing this information to get fuzzy classification rules.
-
-
+Our solution is based on information extraction (see emphasized information to be extracted in the Fig.~\ref{dedek:message}) and on a machine learning procedure that gets fuzzy classification rules.
 
 
-Main contributions of this paper can be stated as follows: 
+
+
+The main contributions of this paper can be stated as follows: 
 \begin{itemize}
 	\item formal models for fuzzy classification of information form web reports
 	\item prototype implementation of a fuzzy classification system
-	\item experimental evaluation of the fuzzy classification system
+	\item experimental evaluation of the fuzzy classification system.
 \end{itemize}
 
 
@@ -102,7 +102,7 @@ Main contributions of this paper can be stated as follows:
 \label{img:schema}
 \end{wrapfigure}
 
-There is a plenty of systems dealing with text mining and text classification, let us mention at least some. In \citep{dedek:ReYaLiOntoText08} authors use ontology modeling to enhance text identification. In \citep{dedek:CAP} authors use preprocessed data from National Automotive Sampling System and test various soft computing methods to modeling severity of injuries (some hybrid methods showed best performance). Methods of Information Retrieval (IR) are very numerous, with extraction mainly based on key word search and similarities. Connecting IR and text mining techniques with web information retrieval can be found in Chapter Opinion mining in the book of Bing Liu \citep{dedek:WebDataMining}. 
+There is a plenty of systems dealing with text mining and text classification. In \citep{dedek:ReYaLiOntoText08} the authors use ontology modeling to enhance text identification. The authors of \citep{dedek:CAP} use preprocessed data from National Automotive Sampling System and test various soft computing methods to modeling severity of injuries (some hybrid methods showed best performance). Methods of Information Retrieval (IR) are very numerous, with extraction mainly based on key word search and similarities. The Connection of IR and text mining techniques with web information retrieval can be found in Chapter Opinion mining in the book of Bing Liu \citep{dedek:WebDataMining}. 
 
 %
 %Our paper is organized as follows: In Chapter 2 we develop our models and methods and design the system, focusing on description of the linguistic analyzer, ILP, fuzzy ILP and several translations of fuzzy ILP to crisp ILP. In Chapter 3 we describe the system prototype and settings of our experiments, especially data preparation. In Chapter 4 we describe results of our experiments and provide comparison of used methods. 
@@ -120,7 +120,7 @@ There is a plenty of systems dealing with text mining and text classification, l
 %\label{img:schema}
 %\end{floatingfigure}
 
-General schema of our system is in Fig~\ref{img:schema}. We use our previously developed web information extraction tools based on third party linguistic analyzer (the upper two dashed arrows). The classification is based on fuzzy ILP and its translation to several crisp ILP tasks. We assume that a small amount of learning data are annotated by a human.
+The general schema of our system is in Fig~\ref{img:schema}. We use our previously developed web information extraction tools based on third party linguistic analyzer (the upper two dashed arrows). The classification is based on a fuzzy ILP and its translation to several crisp ILP tasks. We assume that a small amount of learning data are annotated by a human.
 
 
 %\begin{figure}[hb!]
@@ -139,7 +139,7 @@ and Applied Linguistics in Prague, Czech Republic. They
 are publicly available -- they have been published on a CDROM
 under the title PDT 2.0 (\cite{dedek:PDT20_CD} -- first five tools) and in
 (\cite{dedek:KlTransformationBasedTectogrammatical2006} -- Tectogrammatical analysis). These tools are used as a
-processing chain and at the end of the chain they produce
+processing chain. At the end of the chain they produce
 tectogrammatical \citep{dedek:MiBeAnnotationtectogrammatical2006} dependency trees. 
 
 
@@ -220,7 +220,7 @@ Both places where induction has to be used have following requirements
 Having in mind these requirements we chose fuzzy inductive logic programming. To make the paper readable we present bellow short description of ILP techniques.
 %
 
-Given is a set of examples $E=P\cup N$, where $P$ contains positive and $N$ negative examples, and a background knowledge $B$. The task is to find a hypothesis $H$ such that 
+A set of examples $E=P\cup N$ is given, where $P$ contains positive and $N$ negative examples, and a background knowledge $B$. The task is to find a hypothesis $H$ such that 
 
 $$
 (\forall e\in P)(B\cup H\models e)
@@ -229,7 +229,7 @@ and
 $$
 (\forall e\in N)(B\cup H\not\models e).
 $$
-Typically, $E$ consists of ground instances of the target predicate which has to be classified - in our case accidents. $B$ typically consists of several predicates (relational tables) which describe properties of object which have to be classified - in our case properties of accidents. Background knowledge can contain also some rules. Hypothesis $H$ typically consists of logic programming rules, which when added to $B$, explain all positive examples and no negative examples.
+Typically, $E$ consists of ground instances of the target predicate which has to be classified - in our case accidents. $B$ typically consists of several predicates (relational tables) which describe properties of object which have to be classified - in our case properties of accidents. Background knowledge can contain also some rules. Hypothesis $H$ typically consists of logic programming rules. $H$ added to $B$ entails all positive examples and no negative examples.
 %
 Main advantage of ILP is it's multirelational character, namely $B$ can reside in several tables.
 
@@ -347,7 +347,7 @@ We have compared results of the crisp and fuzzy ILP approaches with other classi
 %\label{img:attributes_description}
 %\end{wraptable}
 
-Table \ref{img:attributes_description} summarizes all features (or attributes) that we have obtained from accident reports. Except the attribute \verb+type+ (type of an accident -- \verb+fire+, \verb+car_accident+ and \verb+other+) all the attributes are numerical and so monotonizable. In some cases value of some attribute is unknown. We have decided to make evidence of this and keep the values \verb+unknown+ in a knowledge base. Short explanation of each attribute follows.
+Table \ref{img:attributes_description} summarizes all features (or attributes) that we have obtained from accident reports. Except the attribute \verb+type+ (type of an accident -- \verb+fire+, \verb+car_accident+ and \verb+other+) all the attributes are numerical and so monotonizable. There are cases when the value of an attribute is unknown. We have decided to make evidence of this and keep the values \verb+unknown+ in our knowledge base. A brief explanation of each attribute follows.
 \begin{itemize}
 	\item \verb+size+ is a file size of text part of a report.
 	\item \verb+damage+ is an amount (in CZK -- Czech Crowns) of summarized damage arisen during an accident.
@@ -443,7 +443,7 @@ For the construction of the $E_t$ example set in our application we encode it in
 %\label{img:examples_monot}
 %\end{figure}
 %
-For the construction of monotonized set of background knowledge $B^{mon}_T$ we use rules, here illustrated on predicates \texttt{damage} and \texttt{damage\_atl}, see Fig~\ref{img:attribute_monotonization}. Here, first rules deals with \texttt{unknown} values and the second constructs the translation.
+For the construction of monotonized set of background knowledge $B^{mon}_T$ we use rules, here illustrated on predicates \texttt{damage} and \texttt{damage\_atl}, see Fig~\ref{img:attribute_monotonization}. Here, the first rule deals with \texttt{unknown} values and the second constructs the translation.
 
 
 \begin{figure}
@@ -517,14 +517,14 @@ F \dotfill{} 		& Weighted avg F measure\\
 \section{Results} \label{sec:results}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The Fig~\ref{img:rules} summarizes sets of obtained rules from two experiments: 
+The Fig.~\ref{img:rules} summarizes sets of obtained rules from two experiments: 
 \begin{enumerate}
 	\item experiments with $E_t$ and $B^{raw}_{T}$ 
 	\item experiments with $E_{\ge t}, {B}^{mon}_T$.
 \end{enumerate}
 In both experiments learning and testing examples and the background knowledge had their origin in the same data (the same accidents) but they differ in the form of the ILP task (crisp and monotonized).
 
-We have evaluated these two methods and compared them with other possibilities used in data mining. To make the comparison clear and easy to perform, we have implemented an interface between the ILP methods and the Weka data mining software\footnote{\url{http://www.cs.waikato.ac.nz/ml/weka/}}. The interface makes it possible to use the ILP methods as an ordinary Weka classifier and use them for solving of any\footnote{For the fuzzy ILP method, there is a requirement on the target (class) attribute: it has to be monotonizable (e.g. numeric).} classification task inside the Weka software. So we used the Weka Experimenter and performed following experiment. We selected additional classifiers:
+We have evaluated these two methods and compared them with other learning tools used in data mining. To make the comparison clear and easy to perform, we have implemented an interface between the ILP methods and the Weka data mining software\footnote{\url{http://www.cs.waikato.ac.nz/ml/weka/}}. The interface makes it possible to use the ILP methods as an ordinary Weka classifier for any\footnote{For the fuzzy ILP method, there is a requirement on the target (class) attribute: it has to be monotonizable (e.g. numeric).} classification task inside the Weka software. We used the Weka Experimenter and performed experiments with additional classifiers:
 %Jmenovitì rozhodovací stromy J48 \cite{biblio:J48}, Support vector machine klasifikátor SMO \cite{biblio:SMO} a vícevrstvý perceptron \cite{biblio:bishop-1995}.
 \begin{itemize}
 	\item Multilayer Perceptron \citep{biblio:bishop-1995},
@@ -533,7 +533,7 @@ We have evaluated these two methods and compared them with other possibilities u
 	\item JRip rules \citep{weka:JRip} and
 	\item Additive logistic regression LogitBoost \citep{biblio:LogitBoost},
 \end{itemize}
-and evaluated all the methods two times by 10-fold cross validation on our data about car and other accidents (section~\ref{sec:experiment_desc}). The obtained results (average values) are described by the graph in the Fig~\ref{img:graph2x10} and in the Table~\ref{tab:table2x10} (with standard deviations and decorated statistically significant values).
+and evaluated all the methods two times by 10-fold cross validation on our data (section~\ref{sec:experiment_desc}). The obtained results (average values) are described by the graph in the Fig~\ref{img:graph2x10} and in the Table~\ref{tab:table2x10} (with standard deviations and decorated statistically significant values).
 
 
 
@@ -626,12 +626,15 @@ Experiments have shown better results of fuzzy approach. We see the difference i
 %System need user assistance: of a skilled user in annotating data for extraction and an unskilled user for classification of a small training example set. This feature is especially important, because in Internet application, we cannot expect an unskilled user to classify a big number of examples 
 
 \section*{Acknowledgments}
-This work was partially supported by Czech projects: \\\underline{IS-1ET100300517}, GACR-201/09/H057, GAUK 31009 and MSM-0021620838.
+This work was partially supported by Czech projects: GACR P202/10/0761, GACR-201/09/H057, GAUK 31009 and MSM-0021620838.
 
 \section*{References}
 
 \bibliographystyle{elsarticle-harv}
 \bibliography{DedVojVom_SAIAW_FuzzyILP}
+
+
+
 
 
 \end{document}
