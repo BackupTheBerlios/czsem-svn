@@ -17,7 +17,7 @@ public class WekaRun
 		{
 				"java",
 				"-classpath",
-				Config.getConfig().getWekaJarPath() + ';' + Config.getConfig().getMyClassPath(),
+				Config.getConfig().getWekaJarPath() + ":" +	Config.getConfig().getMyClassPath(),
 				"weka.gui.GUIChooser"
 		};		
 		//java -classpath "./weka.jar;." weka.gui.GUIChooser

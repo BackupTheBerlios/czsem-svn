@@ -30,7 +30,7 @@ public class ProjectSetup implements Serializable {
         StringBuilder file_strb = new StringBuilder();
         file_strb.append(dir_for_projects);
         file_strb.append(time_stamp);
-        file_strb.append('\\');
+        file_strb.append('/');
 //        file_strb.append("pokkk");
         
         current_project_dir = file_strb.toString();
