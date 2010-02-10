@@ -120,7 +120,7 @@ There is a plenty of systems dealing with text mining and text classification. I
 %\label{img:schema}
 %\end{floatingfigure}
 
-The general schema of our system is in Fig~\ref{img:schema}. We use our previously developed web information extraction tools based on third party linguistic analyzer (the upper two dashed arrows). The classification is based on a fuzzy ILP and its translation to several crisp ILP tasks. We assume that a small amount of learning data are annotated by a human.
+The general schema of our system is in Fig.~\ref{img:schema}. We use our previously developed web information extraction tools based on third party linguistic analyzer (the upper two dashed arrows). The classification is based on a fuzzy ILP and its translation to several crisp ILP tasks. We assume that a small amount of learning data are annotated by a human.
 
 
 %\begin{figure}[hb!]
@@ -283,7 +283,7 @@ and $N_t$ is the rest of $E$.
 
 These two translation create two ILP tasks, first is purely crisp and second can be understood (and translated back to) fILP.
 
-First \textit{raw ILP task} is for each $t\in T$ given by $E_t$ and $B^{raw}_{T}$, as a result we get a set of hypothesis $H_t$.
+First \textit{raw ILP task} is for each $t\in T$ given by $E_t$ and $B^{raw}_{T}$, as a result we get a set of hypotheses $H_t$.
 
 Second, for each $t\in T$ we create a crisp ILP task $E_{\ge t}, {B}^{mon}_T$ and get a hypothesis $H_{\ge t}$ guaranteeing examples of degree at least $t$. Note that variable boundings in $B$ have no boundings on truth value attribute, which was added to each predicate, and hence there are no variable boundings in $H_{\ge t}$ on truth value attribute. To predicates in $E$ we did not add the additional truth value attribute
 
@@ -325,7 +325,7 @@ For our experiment we have selected a collection of 50 web reports. We have iden
 For the seriousness classification we have used two inductive logic approaches -- Crisp ILP and Fuzzy ILP (as described above). Technically the difference between the approaches consist in different setting of \emph{ILP task}. Both can be done with a classical ILP tool. We have used 
 ``\emph{A Learning Engine for Proposing Hypotheses}'' (Aleph  v5\footnote{\url{http://www.comlab.ox.ac.uk/activities/machinelearning/Aleph/}}), which seems very practical to us. It uses quite effective method of \emph{inverse entailment} \citep{biblio:InverseEntailment} and keeps all handy features of Prolog system (supports YAP and SWI) in its background.
 
-We have compared results of the crisp and fuzzy ILP approaches with other classification methods and we could see that the fuzzy approach made better results than the classical one and also than many other methods. See section \ref{sec:results} for details of the results.
+We have compared results of the Crisp and Fuzzy ILP approaches with other classification methods and we could see that the fuzzy approach made better results than the crisp one and also than many other methods. See section \ref{sec:results} for details of the results.
 
 
 
@@ -373,16 +373,17 @@ Table \ref{img:attributes_description} summarizes all features (or attributes) t
 \label{img:ranking_histogram}
 \end{figure}
 
-\noindent Values of overall seriousness ranking attribute were stated from ``general impression'' from report's texts with respect to the particular attributes. %(Fig~\ref{img:attributes_description}). 
+\noindent Values of overall seriousness ranking attribute were stated from ``general impression'' from report's texts with respect to the particular attributes. %(Fig.~\ref{img:attributes_description}). 
 Values of seriousness ranking have evolved to 14 distinct values in range form 0.5 to 8. 
 Histogram with frequencies of all the values is on the Figure~\ref{img:ranking_histogram}.
 We have divided the values into four approximately equipotent groups 
-%(shown on the Fig.~\ref{img:ranking_histogram}) 
-and logic rules were learned for each group separately\footnote{We do not have a binary rule which would return an exact value of the rating, but we have one ``true/false'' rule for each of the four categories.}.
+(see in the Fig.~\ref{img:ranking_histogram}) 
+and these groups determine the target class attribute in our classification task. 
+%and logic rules were learned for each group separately\footnote{We do not have a binary rule which would return an exact value of the rating, but we have one ``true/false'' rule for each of the four categories.}.
 
 
 
-\begin{figure}[ht]
+\begin{figure}[htb]
 \begin{minipage}[b]{0.5\hsize}
 	Crisp learning examples\\
 	\centerline{\includegraphics[width=\hsize]{img/examples_nonmonot}}
@@ -393,12 +394,18 @@ and logic rules were learned for each group separately\footnote{We do not have a
 \end{minipage}
 \hspace{0.5cm}
 \begin{minipage}[b]{0.5\hsize}
-	damage $\rightarrow$ damage\_atl\\
-	\centerline{\includegraphics[width=\hsize]{img/attribute_monotonisation}}
-	\caption{Monotonization of attributes.}
-	\label{img:attribute_monotonization}
+	\centerline{\includegraphics[width=0.835\hsize]{img/crisp_attributes}}
+	\caption{$B^{raw}_{T}$ -- crisp attributes.}
+	\label{img:crisp_attributes}
 \end{minipage}
 \end{figure}
+
+\begin{figure}[htb]	
+	\centerline{\includegraphics[width=0.53\hsize]{img/attribute_monotonisation}}
+	\caption{Monotonization of attributes (damage\_atl $\leftarrow$ damage)}
+	\label{img:attribute_monotonization}
+\end{figure}
+
 %
 %\begin{figure}[t!]
 %Crisp learning examples\\
@@ -423,12 +430,13 @@ and logic rules were learned for each group separately\footnote{We do not have a
 \subsection{Data transformation} \label{sec:data_transformation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-As already described in previous section, we have two possibilities to organize crisp ILP tasks, one with raw data and second with monotonized data. For this we have to translate extracted data. 
+To use ILP for the classification task we have to translate the input data to the prolog-like logic representation. As already described in previous sections, the transformations for the crisp and for the fuzzy approach are different. Here we will describe the implementation details about the construction of~crisp and fuzzy knowledge bases and example sets.
 
-For the construction of the $E_t$ example set in our application we encode it in the predicate \texttt{serious\_t}, For the construction of the $E_{\ge t}$ example set in our application we encode it in the predicate \texttt{serious\_atl\_t}, see Fig~\ref{img:examples}.
+For the construction of the crisp example set $E_t$ in our application we encode it in the predicate \texttt{serious\_t}, for the construction of the fuzzy (or monotonized) example set $E_{\ge t}$ we encode it in the predicate \texttt{serious\_atl\_t} in our application, see Fig.~\ref{img:examples}.
 
 
 
+For the construction of crisp background knowledge $B^{raw}_{T}$ we use a simple translation of the data to the prolog predicates (illustrated on the Fig.~\ref{img:crisp_attributes}). 
 
 
 %\begin{figure}
@@ -443,13 +451,22 @@ For the construction of the $E_t$ example set in our application we encode it in
 %\label{img:examples_monot}
 %\end{figure}
 %
-For the construction of monotonized set of background knowledge $B^{mon}_T$ we use rules, here illustrated on predicates \texttt{damage} and \texttt{damage\_atl}, see Fig~\ref{img:attribute_monotonization}. Here, the first rule deals with \texttt{unknown} values and the second constructs the translation.
+For the construction of monotonized background knowledge $B^{mon}_T$ we use rules, here illustrated on predicates \texttt{damage} and \texttt{damage\_atl}, see Fig.~\ref{img:attribute_monotonization}. Here, the first rule deals with \texttt{unknown} values and the second constructs the translation.
 
+Once we have the learning examples and the background knowledge, we can run the ILP inductive learning procedure and obtain learned rules (or a hypothesis). According to the kind of the ILP task (crisp or monotonized) we obtain corresponding kind (crisp or monotonized) of rules (see e.g. Fig.~\ref{img:rules}). But these rules cannot be used to solve the classification task directly. 
+
+Fig.~\ref{img:conversion} hows an example of rules for conversion of the result of a monotonized hypothesis to one crisp seriousness category. Here the negation ``\texttt{not(serious\_atl\_3(ID))}'' means a standard Prolog \emph{negation as failure}. 
 
 \begin{figure}
 \centerline{\includegraphics[width=0.6\hsize,height=0.65\hsize]{img/rules}}
-\caption{Crisp \& monotonized hypothesis}
+\caption{Crisp \& monotonized hypotheses}
 \label{img:rules}
+\end{figure}
+
+\begin{figure}
+\centerline{\includegraphics[width=0.52\hsize]{img/conversion}}
+\caption{Conversion rules for monotonized hypotheses (\texttt{serious\_t} $\leftarrow$ \texttt{serious\_atl\_t})}
+\label{img:conversion}
 \end{figure}
 
 %\begin{figure}
@@ -533,7 +550,7 @@ We have evaluated these two methods and compared them with other learning tools 
 	\item JRip rules \citep{weka:JRip} and
 	\item Additive logistic regression LogitBoost \citep{biblio:LogitBoost},
 \end{itemize}
-and evaluated all the methods two times by 10-fold cross validation on our data (section~\ref{sec:experiment_desc}). The obtained results (average values) are described by the graph in the Fig~\ref{img:graph2x10} and in the Table~\ref{tab:table2x10} (with standard deviations and decorated statistically significant values).
+and evaluated all the methods two times by 10-fold cross validation on our data (section~\ref{sec:experiment_desc}). The obtained results (average values) are described by the graph in the Fig.~\ref{img:graph2x10} and in the Table~\ref{tab:table2x10} (with standard deviations and decorated statistically significant values).
 
 
 
@@ -543,19 +560,19 @@ and evaluated all the methods two times by 10-fold cross validation on our data 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-The Fig~\ref{img:evaluation} shows the success of these rules on the test data (not used during learning). We have used standard performance measures\footnote{\url{http://en.wikipedia.org/wiki/Precision_and_recall}} often used in information retrieval. There are also exact numbers of \emph{true positives} TP and \emph{false positives} FP from which the performance measures were computed (with respect to the numbers of all testing examples\footnote{These numbers are written in the Fig~\ref{img:evaluation} in small frames under each test set label.}).
+The Fig.~\ref{img:evaluation} shows the success of these rules on the test data (not used during learning). We have used standard performance measures\footnote{\url{http://en.wikipedia.org/wiki/Precision_and_recall}} often used in information retrieval. There are also exact numbers of \emph{true positives} TP and \emph{false positives} FP from which the performance measures were computed (with respect to the numbers of all testing examples\footnote{These numbers are written in the Fig.~\ref{img:evaluation} in small frames under each test set label.}).
 
-Naturally monotonized hypotheses $H_{\ge t}$ were tested on monotonized examples $E_{\ge t}$ (double-line frame in the Fig~\ref{img:rules}) and similarly for the crisp case $H_t, E_t$ (dashed-line frame in the Fig~\ref{img:rules}).
+Naturally monotonized hypotheses $H_{\ge t}$ were tested on monotonized examples $E_{\ge t}$ (double-line frame in the Fig.~\ref{img:rules}) and similarly for the crisp case $H_t, E_t$ (dashed-line frame in the Fig.~\ref{img:rules}).
 %Experiments with $E_t$ and $B^{raw}_{T}$ %Results of experiments with $E_t$ and $B^{raw}_{T}$ 
-%gave following rule set, see Fig~\ref{img:rules_nonmonot}.
-%Evaluation of learning is depicted in the Fig~\ref{img:evaluation}.
+%gave following rule set, see Fig.~\ref{img:rules_nonmonot}.
+%Evaluation of learning is depicted in the Fig.~\ref{img:evaluation}.
 %\subsection{Experiments $E_{\ge t}, {B}^{mon}_T$}
-%Evaluation of learning is depicted in the green area of Fig~\ref{img:evaluation}.
+%Evaluation of learning is depicted in the green area of Fig.~\ref{img:evaluation}.
 %\subsection{Evaluation and comparison }
 
-We wanted to compare raw and monotonized learning tasks. As they run on different example sets we had to translate results of one learning (rules with head \texttt{serious\_t}) to results of second learning (rules with head \texttt{serious\_atl\_t}). Logic programming translation rules are depicted on the Fig~\ref{img:monot2nomon_and_invert}. Here the negation ``\texttt{not(serious\_atl\_3(ID))}'' means a standard Prolog \emph{negation as failure}. 
+We wanted to compare raw and monotonized learning tasks. As they run on different example sets we had to translate results of one learning (rules with head \texttt{serious\_t}) to results of second learning (rules with head \texttt{serious\_atl\_t}). Logic programming translation rules are depicted on the Fig.~\ref{img:monot2nomon_and_invert}. Here the negation ``\texttt{not(serious\_atl\_3(ID))}'' means a standard Prolog \emph{negation as failure}. 
 
-Then the comparison of both learnings is possible, see the numbers in white areas of Fig~\ref{img:evaluation}.
+Then the comparison of both learnings is possible, see the numbers in white areas of Fig.~\ref{img:evaluation}.
 
 
 \begin{figure}[ht]
