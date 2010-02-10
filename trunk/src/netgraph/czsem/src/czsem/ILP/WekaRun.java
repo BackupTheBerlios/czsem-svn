@@ -11,13 +11,18 @@ public class WekaRun
 
 	public static void main(String[] args) throws IOException, InterruptedException
 	{
+		System.out.println(  );
+
+		
 		Config.loadConfig();
 		
 		String [] cmdarray =
 		{
 				"java",
 				"-classpath",
-				Config.getConfig().getWekaJarPath() + ":" +	Config.getConfig().getMyClassPath(),
+				Config.getConfig().getWekaJarPath() + 
+					System.getProperty( "path.separator" ) +
+					Config.getConfig().getMyClassPath(),
 				"weka.gui.GUIChooser"
 		};		
 		//java -classpath "./weka.jar;." weka.gui.GUIChooser

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="WINDOWS-1250" standalone="no"?>
+<jardesc>
+    <jar path="czsem/FuzzyILP.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/czsem/FuzzyILP.jardesc" exportErrors="false" exportWarnings="false" includeDirectoryEntries="false" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="true" mainClassHandleIdentifier="=czsem/src&lt;czsem.ILP{WekaRun.java[WekaRun" manifestLocation="" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{BackgroundKnowledgeMaker.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{ExamplesMaker.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{WekaSerializer.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.utils{Config.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.utils{SimpleXMLQueryProcessor.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.utils{ProjectSetup.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{ILPExec.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.utils{NetgraphQuery.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{ProgolWork1.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{ILPClassifier.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.utils{CZSemTree.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.utils{ILPStringList.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{Serializer.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{DataMaker.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.utils{ILPQueryProcessor.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{CrispILPClassifier.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{WekaRun.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{FuzzyILPClassifier.java"/>
+    </selectedElements>
+</jardesc>
