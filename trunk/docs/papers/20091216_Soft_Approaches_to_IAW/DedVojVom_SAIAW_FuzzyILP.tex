@@ -48,11 +48,10 @@ In this paper we present a fuzzy system which provides a fuzzy
 classification of textual web reports. Our approach is based on usage
 of third party linguistic analyzers, our previous work on web
 information extraction and fuzzy inductive logic programming. Main
-contributions are: comparison of our classifier with other
+contributions are: formal models, publicly available prototype implementation,
+extensive evaluation experiments and comparison of our classifier with other
 alternatives like decision trees, support vector machines, neural
-networks etc, extensive evaluation experiments and an introduction of
-combined evaluation measures. The main conclusion is that, even under low
-precision of linguistic annotation, the classification is satisfactory.
+networks etc.
 \end{abstract}
 
 \begin{keyword}
@@ -69,19 +68,18 @@ fuzzy \sep inductive logic programming
 
 
 \section{Introduction}
-Big amount of information on the web increases the need of automated processing. Especially textual information are hard for machine processing and understanding. Crisp methods have their limitations. In this paper we present a fuzzy system which provides a fuzzy classification of textual web reports. 
+Big amount of information on the web increases the need of automated processing. Especially machine processing and machine understanding of textual information is very difficult. Crisp methods have their limitations. In this paper we present a fuzzy system which provides a fuzzy classification of textual web reports. 
 
 \begin{figure}[hbt!]
 \centerline{\includegraphics[width=0.7\hsize]{img/message}}
 \caption{Example of analyzed web report.}
-\label{dedek:message}
+\label{img:message}
 \end{figure}
 
 
-Our motivating examples are messages of accident reports on the web (Fig.~\ref{dedek:message}). We would like to have a tool which is able to classify such message by a degree of being it a serious accident. 
+Our motivating examples are messages of accident reports on the web (Fig.~\ref{img:message}). We would like to have a tool which is able to classify such message by a degree of being it a serious accident. 
 
-Our solution is based on information extraction (see emphasized information to be extracted in the Fig.~\ref{dedek:message}) and on a machine learning procedure that gets fuzzy classification rules.
-
+Our solution is based on information extraction (see the emphasized pieces of information that could be extracted form a report in the Fig.~\ref{img:message}) and on a machine learning procedure that provides rules for fuzzy classification of the reports. Our experiments deal with texts in the Czech language but our method is general and can be used with any structured linguistic representation. In this paper we do not provide many details about the information extraction part of the solution. We concentrate on the classification part.
 
 
 
@@ -92,27 +90,28 @@ The main contributions of this paper can be stated as follows:
 	\item experimental evaluation of the fuzzy classification system.
 \end{itemize}
 
+Our paper is organized as follows: In the section~\ref{sec:related} we introduce some works that are closely related to ours. In section~\ref{sec:models} we develop our models and methods and the design of our system, focusing on the description of linguistic analyzers, ILP, fuzzy ILP and several translations of a fuzzy ILP task to crisp ILP. In the section~\ref{sec:prototype_and_experiment} we describe the system prototype implementation, the data and our experiments. In the section~\ref{sec:results} we describe the results of the experiments and compare our methods with other well-known classifiers from machine learning. The section~\ref{sec:conclusion} concludes the paper.
 
-\section{Related Work} \label{dedek:related}
 
-\begin{wrapfigure}[19]{r}{.45\hsize}
-\vspace{-1.5cm}
+
+\section{Related Work} \label{sec:related}
+
+There are plenty of systems dealing with text mining and text classification. In \citep{dedek:ReYaLiOntoText08} the authors use ontology modeling to enhance text identification. The authors of \citep{dedek:CAP} use preprocessed data from National Automotive Sampling System and test various soft computing methods to modeling severity of injuries (some hybrid methods showed best performance). Methods of Information Retrieval (IR) are very numerous, with extraction mainly based on key word search and similarities. The Connection of IR and text mining techniques with web information retrieval can be found in Chapter Opinion mining in the book of Bing Liu \citep{dedek:WebDataMining}. 
+
+%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Models, methods, design of the system} \label{sec:models}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{wrapfigure}[22]{r}{.45\hsize}
+\vspace{-0.5cm}
 \centerline{\includegraphics[width=\hsize]{img/schema}}
 \caption{Schema of our system.}
 \label{img:schema}
 \end{wrapfigure}
-
-There is a plenty of systems dealing with text mining and text classification. In \citep{dedek:ReYaLiOntoText08} the authors use ontology modeling to enhance text identification. The authors of \citep{dedek:CAP} use preprocessed data from National Automotive Sampling System and test various soft computing methods to modeling severity of injuries (some hybrid methods showed best performance). Methods of Information Retrieval (IR) are very numerous, with extraction mainly based on key word search and similarities. The Connection of IR and text mining techniques with web information retrieval can be found in Chapter Opinion mining in the book of Bing Liu \citep{dedek:WebDataMining}. 
-
-%
-%Our paper is organized as follows: In Chapter 2 we develop our models and methods and design the system, focusing on description of the linguistic analyzer, ILP, fuzzy ILP and several translations of fuzzy ILP to crisp ILP. In Chapter 3 we describe the system prototype and settings of our experiments, especially data preparation. In Chapter 4 we describe results of our experiments and provide comparison of used methods. 
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Models, methods, design of the system}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %\begin{floatingfigure}[r]{.45\hsize}
 %\centerline{\includegraphics[width=\hsize]{img/schema}}
@@ -120,7 +119,7 @@ There is a plenty of systems dealing with text mining and text classification. I
 %\label{img:schema}
 %\end{floatingfigure}
 
-The general schema of our system is in Fig.~\ref{img:schema}. We use our previously developed web information extraction tools based on third party linguistic analyzer (the upper two dashed arrows). The classification is based on a fuzzy ILP and its translation to several crisp ILP tasks. We assume that a small amount of learning data are annotated by a human.
+The general schema of our system is in Fig.~\ref{img:schema}. We use our previously developed web information extraction tools based on third party linguistic analyzer (the upper two dashed arrows). The classification is based on a fuzzy ILP and its translation to several crisp ILP tasks. We assume that a small amount of learning data are annotated by a human user.
 
 
 %\begin{figure}[hb!]
@@ -140,7 +139,7 @@ are publicly available -- they have been published on a CDROM
 under the title PDT 2.0 (\cite{dedek:PDT20_CD} -- first five tools) and in
 (\cite{dedek:KlTransformationBasedTectogrammatical2006} -- Tectogrammatical analysis). These tools are used as a
 processing chain. At the end of the chain they produce
-tectogrammatical \citep{dedek:MiBeAnnotationtectogrammatical2006} dependency trees. 
+tectogrammatical \citep{dedek:MiBeAnnotationtectogrammatical2006} dependency trees built up from the text.
 
 
 \begin{description}
@@ -174,7 +173,7 @@ in the syntactic (dependency) tree.
 	\item[Tool 6.] Tectogrammatical analysis produces linguistic annotation
 at the tectogrammatical level, sometimes called
 ``layer of deep syntax''. Such a tree can be seen on
-the Fig.~\ref{dedek:tree}. Annotation of a sentence at this layer
+the Fig.~\ref{img:tree}. Annotation of a sentence at this layer
 is closer to meaning of the sentence than its syntactic
 annotation and thus information captured at the tectogrammatical
 layer is crucial for machine understanding
@@ -186,7 +185,7 @@ of a natural language \citep{dedek:KlTransformationBasedTectogrammatical2006}.
 
 Having web resource content analyzed by above linguistic tools, we have data stored in the form of tectogrammatical trees. To achieve our objectives we have to extract information from this representation. 
 Here we refer to our previous work \citep{dedek:DeVoComputingaggregations2008,dedek:DeVoLinguisticextraction2008,dedek:DeEcExperimentswith2008}. A long path of tools starting with web crawling and resulting with the extracted structured information is developed in our previous work. 
-In Fig.~\ref{dedek:tree} we can see nodes of a tree where a piece of information about damage (8000 CZK) is located. We have used Inductive Logic Programming to learn rules which are able to detect such nodes. 
+In Fig.~\ref{img:tree} we can see nodes of a tree where a piece of information about damage (8000 CZK) is located. We have used Inductive Logic Programming to learn rules which are able to detect such nodes. 
 %In this paper we will concentrate on the usage of such extracted information to be able to classify content. 
 The extraction process requires a human assistance when annotating a training data.
 
@@ -197,7 +196,7 @@ Note that our method is general and is not limited to Czech and can be used with
 \medskip
 \centerline{\framebox{\includegraphics[width=0.7\hsize]{img/tree}}}
 \caption{Example of a linguistic tree of one of analyzed sentences.}
-\label{dedek:tree}
+\label{img:tree}
 \end{figure}
 
 
@@ -305,7 +304,7 @@ $$
 is a correct solution to fuzzy ILP task given by ${\mathcal E}$ and ${\mathcal B}$. Our presentation is here a little bit simplified and we freely switch between fuzzy and GAP programs, which are know to be equivalent, see  \citep{biblio:KLV}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The system prototype and our experiment}
+\section{The system prototype and our experiment} \label{sec:prototype_and_experiment}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The main experiment presented in this paper leads to the seriousness classification of an accident presented on a web report, %Our long term goal is extraction of semantic information from web reports. 
 which is one of possible utilizations of the extracted information. We use web reports of fire departments of several regions of the Czech Republic. These reports are written in Czech language and can be accessed through the web of General Directorate of the Fire and Rescue Service of the Czech Republic\footnote{\url{http://www.hzscr.cz}}. 
@@ -492,8 +491,6 @@ of unclassified instances, see in the next section.) It could be caused by the l
 
 
 \begin{table}[p]
-\caption{Evaluation of the methods in 2 times 10-fold cross validation.}
-\label{tab:table2x10}
 \scriptsize
 {\centering \begin{tabular}{lr@{\hspace{0cm}}c@{\hspace{0cm}}rr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}c}
 \\
@@ -530,6 +527,8 @@ Rec \dotfill{} 	& Weighted avg IR recall\\
 F \dotfill{} 		& Weighted avg F measure\\
 \end{tabular}
 }
+\caption{Evaluation of the methods in 2 times 10-fold cross validation.}
+\label{tab:table2x10}
 \end{table}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -653,7 +652,7 @@ The target value with the highest vote wins.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Conclusion}
+\section{Conclusion} \label{sec:conclusion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 In this paper we have presented a fuzzy system which provides a fuzzy classification of textual web reports. Our approach was based on usage of third party linguistic analyzers, our previous work on web information extraction and fuzzy inductive logic programming.
 
