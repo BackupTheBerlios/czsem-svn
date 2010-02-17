@@ -227,7 +227,7 @@ and
 $$
 (\forall e\in N)(B\cup H\not\models e).
 $$
-Typically, $E$ consists of ground instances of the target predicate, which has to be classified - in our case accidents. $B$ typically consists of several predicates (relational tables), which describe properties of an object, which is to be classified -- in our case properties of an accident. The background knowledge can contain also some rules. A hypothesis $H$ typically consists of logic programming rules. $H$ added to $B$ entails all positive examples and no negative examples.
+Typically, $E$ consists of ground instances of the target predicate, which is to be classified - in our case accidents. $B$ typically consists of several predicates (relational tables), which describe properties of an object, which is to be classified -- in our case properties of an accident. The background knowledge can contain also some rules. A hypothesis $H$ typically consists of logic programming rules. $H$ added to $B$ entails all positive examples and no negative examples.
 %
 Main advantage of ILP is its multirelational character, namely $B$ can reside in several relational tables.
 
@@ -246,17 +246,17 @@ $$
 A fuzzy set of examples ${\mathcal E}:E\longrightarrow [0,1]$ and a fuzzy background knowledge ${\mathcal B}:B\longrightarrow [0,1]$ are given. The task of fILP is to find a fuzzy hypothesis ${\mathcal H}:H\longrightarrow [0,1]$ such that 
 
 $$
-(\forall e,f\in E)(\forall {\mathcal M})({\mathcal M}\models_f {\mathcal B}\cup {\mathcal H})
+(\forall e_1,e_2\in E)(\forall {\mathcal M})({\mathcal M}\models_f {\mathcal B}\cup {\mathcal H})
 $$
 we have
 $$
-{\mathcal E}(e)>{\mathcal E}(f)\Rightarrow \left\|e\right\|_{{\mathcal M}}\ge \left\|f\right\|_{{\mathcal M}}.
+{\mathcal E}(e_1)>{\mathcal E}(e_2)\Rightarrow \left\|e_1\right\|_{{\mathcal M}}\ge \left\|e_2\right\|_{{\mathcal M}}.
 $$
 That is, it cannot happen that
 $$
-{\mathcal E}(e)>{\mathcal E}(f) \wedge \left\|e\right\|_{{\mathcal M}}< \left\|f\right\|_{{\mathcal M}},
+{\mathcal E}(e_1)>{\mathcal E}(e_2) \wedge \left\|e_1\right\|_{{\mathcal M}}< \left\|e_2\right\|_{{\mathcal M}},
 $$
-or rephrased: if ${\mathcal E}$ is rating $e$ higher than $f$, then it cannot happen that $e$ is rated worse than $f$ in a model of ${\mathcal B}\cup {\mathcal H}$.
+or rephrased: if ${\mathcal E}$ is rating $e_1$ higher than $e_2$, then it cannot happen that $e_1$ is rated worse than $e_2$ in a model of ${\mathcal B}\cup {\mathcal H}$.
 
 Typically, ${\mathcal E}$ consists of ground instances of the target predicate, which are classified in truth degrees -- in our case a degree of seriousness of an accident. ${\mathcal B}$ typically consists of several fuzzy predicates (fuzzy relational tables), which describe properties of an object, which is to be classified -- in our case fuzzy properties of an accident -- a degree of injury, a degree of damage, etc. 
 %Background knowledge can contain also some rules, so far only crisp rules are used.
@@ -289,16 +289,20 @@ and $N_t$ is the rest of $E$.
 
 
 
-These two translation create two ILP tasks, the first is purely crisp and the second can be understood (and translated back to) fILP.
+These two translation create two ILP tasks, the first one (\emph{raw}) is purely crisp and the second one (\emph{mon}) can be understood as (and translated back to) fILP.
 
-First \textit{raw ILP task} is for each $t\in T$ given by $E_t$ and $B^{raw}_{T}$, as a result we get a set of hypotheses $H_t$.
+\begin{itemize}
+	\item The \textit{raw ILP task} is given by $B^{raw}_{T}$ and $E_t$ for each $t\in T$.  As a~result it produces a set of hypotheses $H_t$.
 
-Second, for each $t\in T$ we create a crisp ILP task $E_{\ge t}, {B}^{mon}_T$ and get a hypothesis $H_{\ge t}$ guaranteeing examples of degree at least $t$. Note that variable boundings in $B$ have no boundings on truth value attribute, which was added to each predicate, and hence there are no variable boundings in $H_{\ge t}$ on truth value attribute. To predicates in $E$ we did not add the additional truth value attribute
+	\item The \textit{mon ILP task} is given by ${B}^{mon}_T$ and $E_{\ge t}$ for each $t\in T$. As a~result it produces a set of hypotheses $H_{\ge t}$ guaranteeing examples of degree of at least $t$.
+\end{itemize}
 
-Now we sketch the translation of second ILP task to GAP (fILP) rules. Let us assume $C$ is the target predicate in the domain of ${\mathcal E}$. We define ${\mathcal H}$ with domain consisting of one GAP rule $$C(y):u(x_1,\dots,x_m)\leftarrow B_1:x_1 \&\dots\& B_n:x_m,$$
-here $B_1:x_1 \&\dots\& B_n:x_m$ is enumeration of all predicates in $B$.
+Note that variable boundings in $B$ have no boundings on the truth value attribute, which was added to each predicate, and hence there are no variable boundings on the truth value attribute in $H_{\ge t}$. We did not add the additional truth value attribute to the predicates in $E$ 
 
-Assume $B_1(y_1,t_1),\dots,B_n(y_n,t_n)$ are some predicates in $B$ (for simplicity enumerated from 1 to $n\le m$). Then for each rule 
+Now we sketch the translation of the \emph{mon ILP task} to GAP (fILP) rules. Let us assume that $C$ is the target predicate in the domain of ${\mathcal E}$. We define ${\mathcal H}$ with a domain consisting of one GAP rule $$C(y):u(x_1,\dots,x_m)\leftarrow B_1:x_1 \&\dots\& B_n:x_m,$$
+here $B_1:x_1 \&\dots\& B_n:x_m$ is the enumeration of all predicates in $B$.
+
+Assume that $B_1(y_1,t_1),\dots,B_n(y_n,t_n)$ are some of the predicates in $B$ (for simplicity enumerated from 1 to $n, \ n \le m$). Then for each rule 
 $$R=C(y)\Leftarrow B_1(y_1,t_1),\dots,B_n(y_n,t_n)$$
 in $H_t$ we give a constraint in definition of $u$ as follows
 $$
@@ -468,7 +472,7 @@ For the construction of crisp background knowledge $B^{raw}_{T}$ we use a simple
 %
 For the construction of monotonized background knowledge $B^{mon}_T$ we use rules, here illustrated on predicates \texttt{damage} and \texttt{damage\_atl}, see Fig.~\ref{img:attribute_monotonization}. Here, the first rule deals with \texttt{unknown} values and the second constructs the translation. All the negations we use (Fig.~\ref{img:attribute_monotonization} and Fig.~\ref{img:conversion}) are the standard Prolog \emph{negations as failure}.
 
-Once we have the learning examples and the background knowledge, we can run the ILP inductive learning procedure and obtain learned rules (also called a hypothesis). According to the kind of the ILP task (crisp or monotonized) we obtain corresponding kind (crisp or monotonized) of rules (see e.g. Fig.~\ref{img:rules}). But these rules cannot be used directly to solve the classification task. There are common cases when more then one rule is applicable to a single instance, which should be classified. So we have to select which one to use. For monotonized hypotheses we select the maximum from all the possibilities. It is illustrated on the Fig.~\ref{img:conversion}. For crisp hypotheses there is not such clear criterion, so we simply use the fist applicable rule.
+Once we have the learning examples and the background knowledge, we can run the ILP inductive learning procedure and obtain learned rules (also called a hypothesis). According to the kind of the ILP task (crisp or monotonized) we obtain corresponding kind (crisp or monotonized) of rules (see e.g. Fig.~\ref{img:rules}). But these rules cannot be used directly to solve the classification task. There are common cases when more then one rule is applicable to a single instance, which is to be classified. So we have to select which one to use. For monotonized hypotheses we select the maximum from all the possibilities. It is illustrated on the Fig.~\ref{img:conversion}. For crisp hypotheses there is not such clear criterion, so we simply use the fist applicable rule.
 
 On the other hand in the crisp case there are many instances, which cannot be classified because there is no applicable rule. (In our experiment it was about 51\%
 of unclassified instances, see in the next section.) It could be caused by the lack of training data, but the monotonized case does not suffer from this shortage. We can always select the bottom class and -- what is probably more important -- the set of positive training examples is extended by the monotonization. 
