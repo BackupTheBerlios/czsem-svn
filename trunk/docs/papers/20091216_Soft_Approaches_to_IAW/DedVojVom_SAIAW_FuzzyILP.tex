@@ -44,7 +44,7 @@ Prague, Czech Republic}
 Charles University, Prague, Czech Republic}
 
 \begin{abstract}
-In this paper we present a fuzzy system which provides a fuzzy
+In this paper we present a fuzzy system, which provides a fuzzy
 classification of textual web reports. Our approach is based on usage
 of third party linguistic analyzers, our previous work on web
 information extraction and fuzzy inductive logic programming. Main
@@ -68,7 +68,7 @@ fuzzy \sep inductive logic programming
 
 
 \section{Introduction}
-Big amount of information on the web increases the need of automated processing. Especially machine processing and machine understanding of textual information is very difficult. Crisp methods have their limitations. In this paper we present a fuzzy system which provides a fuzzy classification of textual web reports. 
+Big amount of information on the web increases the need of automated processing. Especially machine processing and machine understanding of textual information is very difficult. Crisp methods have their limitations. In this paper we present a fuzzy system, which provides a fuzzy classification of textual web reports. 
 
 \begin{figure}[hbt!]
 \centerline{\includegraphics[width=0.7\hsize]{img/message}}
@@ -77,7 +77,7 @@ Big amount of information on the web increases the need of automated processing.
 \end{figure}
 
 
-Our motivating examples are messages of accident reports on the web (Fig.~\ref{img:message}). We would like to have a tool which is able to classify such message by a degree of being it a serious accident. 
+Our motivating examples are messages of accident reports on the web (Fig.~\ref{img:message}). We would like to have a tool, which is able to classify such message by a degree of being it a serious accident. 
 
 Our solution is based on information extraction (see the emphasized pieces of information that could be extracted form a report in the Fig.~\ref{img:message}) and on a machine learning procedure that provides rules for fuzzy classification of the reports. Our experiments deal with texts in the Czech language but our method is general and can be used with any structured linguistic representation. In this paper we do not provide many details about the information extraction part of the solution. We concentrate on the classification part.
 
@@ -90,7 +90,7 @@ The main contributions of this paper can be stated as follows:
 	\item experimental evaluation of the fuzzy classification system.
 \end{itemize}
 
-Our paper is organized as follows: In the section~\ref{sec:related} we introduce some works that are closely related to ours. In section~\ref{sec:models} we develop our models and methods and the design of our system, focusing on the description of linguistic analyzers, ILP, fuzzy ILP and several translations of a fuzzy ILP task to crisp ILP. In the section~\ref{sec:prototype_and_experiment} we describe the system prototype implementation, the data and our experiments. In the section~\ref{sec:results} we describe the results of the experiments and compare our methods with other well-known classifiers from machine learning. The section~\ref{sec:conclusion} concludes the paper.
+Our paper is organized as follows: In the section~\ref{sec:related} we introduce some works that are closely related to ours. In section~\ref{sec:models} we develop our models and methods and the design of our system, focusing on the description of linguistic analyzers, inductive logic programming (ILP), fuzzy inductive logic programming (fILP) and several translations of a fuzzy ILP task to crisp ILP. In the section~\ref{sec:prototype_and_experiment} we describe the system prototype implementation, the data and our experiments. In the section~\ref{sec:results} we describe the results of the experiments and compare our methods with other well-known classifiers from machine learning. The section~\ref{sec:conclusion} concludes the paper.
 
 
 
@@ -119,7 +119,7 @@ There are plenty of systems dealing with text mining and text classification. In
 %\label{img:schema}
 %\end{floatingfigure}
 
-The general schema of our system is in Fig.~\ref{img:schema}. We use our previously developed web information extraction tools based on third party linguistic analyzer (the upper two dashed arrows). The classification is based on a fuzzy ILP and its translation to several crisp ILP tasks. We assume that a small amount of learning data are annotated by a human user.
+The general schema of our system is in Fig.~\ref{img:schema}. We use our previously developed web information extraction tools based on third party linguistic analyzer (the upper two dashed arrows). The classification is based on a fuzzy ILP and its translation to several crisp ILP tasks. We assume that a small amount of learning data is annotated by a human user.
 
 
 %\begin{figure}[hb!]
@@ -172,22 +172,22 @@ in the syntactic (dependency) tree.
 
 	\item[Tool 6.] Tectogrammatical analysis produces linguistic annotation
 at the tectogrammatical level, sometimes called
-``layer of deep syntax''. Such a tree can be seen on
+``layer of deep syntax''. An example of a tectogrammatical tree can be seen on
 the Fig.~\ref{img:tree}. Annotation of a sentence at this layer
-is closer to meaning of the sentence than its syntactic
+is closer to the meaning of the sentence than its syntactic
 annotation and thus information captured at the tectogrammatical
 layer is crucial for machine understanding
-of a natural language \citep{dedek:KlTransformationBasedTectogrammatical2006}.
+of natural language \citep{dedek:KlTransformationBasedTectogrammatical2006}.
 \end{description}
 
 
 \subsection{Web Information Extraction}
 
-Having web resource content analyzed by above linguistic tools, we have data stored in the form of tectogrammatical trees. To achieve our objectives we have to extract information from this representation. 
-Here we refer to our previous work \citep{dedek:DeVoComputingaggregations2008,dedek:DeVoLinguisticextraction2008,dedek:DeEcExperimentswith2008}. A long path of tools starting with web crawling and resulting with the extracted structured information is developed in our previous work. 
-In Fig.~\ref{img:tree} we can see nodes of a tree where a piece of information about damage (8000 CZK) is located. We have used Inductive Logic Programming to learn rules which are able to detect such nodes. 
+After the content of a web resource is analyzed by the above mentioned linguistic tools, the output linguistic data is stored in the form of tectogrammatical trees. To achieve our objectives we have to extract information from this representation. 
+Here we refer to our previous work \citep{dedek:DeVoComputingaggregations2008,dedek:DeVoLinguisticextraction2008,dedek:DeEcExperimentswith2008}. A long path of tools starting with web crawling and resulting with the extracted structured information has been developed in our previous works. 
+In the Fig.~\ref{img:tree} nodes of the tectogrammatical tree are decorated. A piece of information about the damage of 8000 CZK can be found there (the three nodes on the right). We have used ILP to learn rules, which are able to detect these nodes. 
 %In this paper we will concentrate on the usage of such extracted information to be able to classify content. 
-The extraction process requires a human assistance when annotating a training data.
+The extraction process requires a human assistance when annotating the training data.
 
 Note that our method is general and is not limited to Czech and can be used with any structured linguistic representation. 
 
@@ -203,23 +203,22 @@ Note that our method is general and is not limited to Czech and can be used with
 
 \subsection{Classical ILP}
 
-In our application we are facing the challenge of induction and/or mining on several places. First we need an inductive procedure when extracting from web texts attributes of an accident. 
+In our application we are facing the challenge of induction and/or mining on several places. First we need an inductive procedure when extracting attributes of an accident from web texts. 
 
-Second (the subject of this paper) we need an inductive procedure when trying to explain degree of seriousness of an accident by attributes of this accident (also called background knowledge).
+Second (the subject of this paper) we need an inductive procedure when trying to explain the degree of seriousness of an accident by the attributes of this accident (the attributes form our background knowledge and we will often refer to them as a background knowledge).
 %
-Both places where induction has to be used have following requirements
+The places where induction has to be used have following requirements:
 
 
 \begin{itemize}
-	\item data are/can be fuzzy
-	\item background knowledge is multirelational (representation of tectogrammatical trees)
-	\item classification is fuzzy
+	\item the data and the classification is/can be fuzzy,
+	\item in the case of tectogrammatical trees the background knowledge is multirelational.
 \end{itemize}
 
-Having in mind these requirements we chose fuzzy inductive logic programming. To make the paper readable we present bellow short description of ILP techniques.
+These requirements and our previous experience with fILP led us to chose the fILP as the machine learning inductive technique in our system. To make the paper readable we present a short description of the ILP techniques bellow.
 %
 
-A set of examples $E=P\cup N$ is given, where $P$ contains positive and $N$ negative examples, and a background knowledge $B$. The task is to find a hypothesis $H$ such that 
+A set of examples $E=P\cup N$ is given, where $P$ contains positive and $N$ negative examples, and a background knowledge $B$. The task of ILP is to find a hypothesis $H$ such that 
 
 $$
 (\forall e\in P)(B\cup H\models e)
@@ -228,59 +227,69 @@ and
 $$
 (\forall e\in N)(B\cup H\not\models e).
 $$
-Typically, $E$ consists of ground instances of the target predicate which has to be classified - in our case accidents. $B$ typically consists of several predicates (relational tables) which describe properties of object which have to be classified - in our case properties of accidents. Background knowledge can contain also some rules. Hypothesis $H$ typically consists of logic programming rules. $H$ added to $B$ entails all positive examples and no negative examples.
+Typically, $E$ consists of ground instances of the target predicate, which has to be classified - in our case accidents. $B$ typically consists of several predicates (relational tables), which describe properties of an object, which is to be classified -- in our case properties of an accident. The background knowledge can contain also some rules. A hypothesis $H$ typically consists of logic programming rules. $H$ added to $B$ entails all positive examples and no negative examples.
 %
-Main advantage of ILP is it's multirelational character, namely $B$ can reside in several tables.
+Main advantage of ILP is its multirelational character, namely $B$ can reside in several relational tables.
 
 
 
 \subsection{Fuzzy and GAP induction}
 
-In our presentation of Inductive Logic Programming (ILP) we follow \cite{dzeroski2001:relat_dm} and  \cite{biblio:Muggleton94inductivelogic}, for fuzzy Inductive Logic Programming (fILP) we follow the paper of T. Horv\'ath and P. Vojt\'a\v s \citep{biblio:FILP} about fuzzy inductive logic programming.
+In our presentation of ILP we follow \cite{dzeroski2001:relat_dm} and  \cite{biblio:Muggleton94inductivelogic}, for fILP we follow the paper of T. Horv\'ath and P. Vojt\'a\v s \citep{biblio:FILP} about fuzzy inductive logic programming.
 
-We use the approach of the fuzzy logic in narrow sense developed by J. Pavelka \citep{biblio:Pavelka} and P. H\'ajek \citep{biblio:Hajek}. Formulas are of the form $\varphi, x$ ($\varphi$ is syntactically same as in the crisp case) are graded by a truth value $x\in [0,1]$.
-A structure ${\mathcal M}$ consist of domain $M$ and relations are interpreted fuzzy (we do not consider function symbols here). Evaluation $\left\|\varphi\right\|_{{\mathcal M}}$ of a formula $\varphi$ uses truth functions of many valued connectives (our logic is extensional and/or truth functional). Satisfaction is defined by 
-$${\mathcal M}\models_f (\varphi, x)\ iff\ \left\|\varphi\right\|_{{\mathcal M}}\ge x$$
+We use the approach of the fuzzy logic in narrow sense developed by J.~Pavelka \citep{biblio:Pavelka} and P. H\'ajek \citep{biblio:Hajek}. Formulas are of the form $\varphi, x$ ($\varphi$ is syntactically the same as in the crisp case), they are graded by a truth value $x\in [0,1]$.
+A structure ${\mathcal M}$ consist of a domain $M$ and relations are interpreted fuzzy (we do not consider function symbols here). The evaluation $\left\|\varphi\right\|_{{\mathcal M}}$ of a formula $\varphi$ uses truth functions of many valued connectives (our logic is extensional and/or truth functional). The satisfaction $\models_f$ is defined by
+$$
+{\mathcal M}\models_f (\varphi, x)\ iff\ \left\|\varphi\right\|_{{\mathcal M}}\ge x.
+$$
 
-Given is a fuzzy set of examples ${\mathcal E}:E\longrightarrow [0,1]$ and a fuzzy background knowledge ${\mathcal B}:B\longrightarrow [0,1]$. The task is to find a fuzzy hypothesis ${\mathcal H}:H\longrightarrow [0,1]$ such that 
+A fuzzy set of examples ${\mathcal E}:E\longrightarrow [0,1]$ and a fuzzy background knowledge ${\mathcal B}:B\longrightarrow [0,1]$ are given. The task of fILP is to find a fuzzy hypothesis ${\mathcal H}:H\longrightarrow [0,1]$ such that 
 
-$$(\forall e,f\in E)(\forall {\mathcal M})({\mathcal M}\models_f {\mathcal B}\cup {\mathcal H})$$
+$$
+(\forall e,f\in E)(\forall {\mathcal M})({\mathcal M}\models_f {\mathcal B}\cup {\mathcal H})
+$$
 we have
-$${\mathcal E}(e)>{\mathcal E}(f)\Rightarrow \left\|e\right\|_{{\mathcal M}}\ge \left\|f\right\|_{{\mathcal M}}.$$
+$$
+{\mathcal E}(e)>{\mathcal E}(f)\Rightarrow \left\|e\right\|_{{\mathcal M}}\ge \left\|f\right\|_{{\mathcal M}}.
+$$
 That is, it cannot happen that
-$${\mathcal E}(e)>{\mathcal E}(f) \wedge \left\|e\right\|_{{\mathcal M}}< \left\|f\right\|_{{\mathcal M}},$$
-or rephrased, if ${\mathcal E}$ is rating $e$ higher than $f$, then it can not happen in a model of ${\mathcal B}\cup {\mathcal H}$ that $e$ is rated worse than $f$.
+$$
+{\mathcal E}(e)>{\mathcal E}(f) \wedge \left\|e\right\|_{{\mathcal M}}< \left\|f\right\|_{{\mathcal M}},
+$$
+or rephrased: if ${\mathcal E}$ is rating $e$ higher than $f$, then it cannot happen that $e$ is rated worse than $f$ in a model of ${\mathcal B}\cup {\mathcal H}$.
 
-Typically, ${\mathcal E}$ consists of ground instances of the target predicate which are classified in truth degrees -- in our case degree of seriousness of an accident. ${\mathcal B}$ typically consists of several fuzzy predicates (fuzzy relational tables) which describe properties of object which have to be classified -- in our case fuzzy properties of accidents -- degree of injury, degree of damage, etc. 
+Typically, ${\mathcal E}$ consists of ground instances of the target predicate, which are classified in truth degrees -- in our case a degree of seriousness of an accident. ${\mathcal B}$ typically consists of several fuzzy predicates (fuzzy relational tables), which describe properties of an object, which is to be classified -- in our case fuzzy properties of an accident -- a degree of injury, a degree of damage, etc. 
 %Background knowledge can contain also some rules, so far only crisp rules are used.
-Hypothesis ${\mathcal H}$ typically consists of a fuzzy logic program, which when added to ${\mathcal B}$, prevents of misclassification (better can not be declared to be worse, nevertheless can be declared as having same degree (for more detailed discussion on this definition of fuzzy ILP we refer to the paper \citep{biblio:FILP})). Moreover, in practice, we use GAP -- Generalized Annotated Programs, so graded formulas will be sometimes understood as annotated (with crisp connectives and more complex annotation of head of rules). This is possible, because in \citep{biblio:KLV} we have shown that (some extension of) fuzzy logic programming is equivalent to (some restriction of) generalized annotated programs. 
+A~hypothesis ${\mathcal H}$ typically consists of a fuzzy logic program, which, when added to ${\mathcal B}$, prevents of misclassification (better can not be declared to be worse, nevertheless can be declared as having the same degree --- for more detailed discussion on this definition of fILP we refer to the paper \citep{biblio:FILP}). Moreover, in practice, we use GAP -- Generalized Annotated Programs, so graded formulas will be sometimes understood as annotated (with crisp connectives and with a more complex annotation of the heads of rules). This is possible, because in \citep{biblio:KLV} we have shown that (some extension of) fuzzy logic programming is equivalent to (some restriction of) generalized annotated programs. 
 
 \subsection{Translation of fuzzy ILP task to several classical ILP tasks}
 
-As far as there is no implementation of fuzzy (GAP) ILP, we have to use a classical ILP system. Fortunately a fuzzy ILP task can be translated to several crisp ILP tasks (subject to some rounding and using finite set of truth values).
+As far as there is no implementation of fILP or GAP, we have to use a~classical ILP system. Fortunately any fILP task can be translated to several crisp ILP tasks (subject to some rounding and using a finite set of truth values).
 
-Assume, our fuzzy sets take values for a finite set of truth values $\{0,1\}\subseteq T\subseteq [0,1]$. For each predicate $p(x)$ in $B$ we add an additional attribute for truth value $p(x,t)$. We construct two crisp background knowledge sets  ${\mathcal B}^{raw}_T$ and ${\mathcal B}^{mon}_T$  as follows:
+Assume that our fuzzy sets take values from a finite set of truth values $T: \{0,1\}\subseteq T\subseteq [0,1]$. For each predicate $p(x)$ in $B$ we add an additional attribute $p(x,t)$ to express the truth value. We construct two crisp background knowledge sets ${\mathcal B}^{raw}_T$ and ${\mathcal B}^{mon}_T$  as follows:
 
-First is a direct coding of the fuzzy value by an additional attribute:
+\begin{itemize}
+	\item The first (${\mathcal B}^{raw}_T$) is a direct coding of the fuzzy value by an additional attribute:
+\\If ${\mathcal B}(p(x))=t,\  t \in T$, then we add $p(x,t)$ to  ${B}^{raw}_T$.
+	\item The second (${\mathcal B}^{mon}_T$) is obtained by a process called monotonization:
+\\If ${\mathcal B}(p(x))=t,\  t \in T$, then for all $t'\in T,\  t'\le t$ we add $p(x,t')$ to ${B}^{mon}_T$.
+\end{itemize}
 
-If ${\mathcal B}(p(x))=t\in T$, then for we add $p(x,t')\in {B}^{raw}_T$.
 
-Second is obtained by a process called monotonization:
-
-If ${\mathcal B}(p(x))=t\in T$, then for all $t'\in T, t'\le t$ we add $p(x,t')\in {B}^{mon}_T$.
 
 Also example sets are constructed in two ways.
-
-For all $t\in T$ we create a crisp example set $E_t=P_t\cup N_t$, where 
+\begin{itemize}
+	\item For all $t\in T$ we create a crisp example set $E_t=P_t\cup N_t$, where 
 $$e\in P_t \ \ iff \ \ {\mathcal E}(e)= t$$
 and $N_t$ is the rest of $E$.
-
-
-For all $t\in T$ we create a crisp example set $E_{\ge t}=P_{\ge t}\cup N_{< t}$, where 
+	\item For all $t\in T$ we create a crisp example set $E_{\ge t}=P_{\ge t}\cup N_{< t}$, where 
 $$e\in P_{\ge t} \ \ iff \ \ {\mathcal E}(e)\ge t$$
 and $N_t$ is the rest of $E$.
+\end{itemize}
 
-These two translation create two ILP tasks, first is purely crisp and second can be understood (and translated back to) fILP.
+
+
+These two translation create two ILP tasks, the first is purely crisp and the second can be understood (and translated back to) fILP.
 
 First \textit{raw ILP task} is for each $t\in T$ given by $E_t$ and $B^{raw}_{T}$, as a result we get a set of hypotheses $H_t$.
 
@@ -322,7 +331,7 @@ For our experiment we have selected a collection of 50 web reports. We have iden
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 For the seriousness classification we have used two inductive logic approaches -- Crisp ILP and Fuzzy ILP (as described above). Technically the difference between the approaches consist in different setting of \emph{ILP task}. Both can be done with a classical ILP tool. We have used 
-``\emph{A Learning Engine for Proposing Hypotheses}'' (Aleph  v5\footnote{\url{http://www.comlab.ox.ac.uk/activities/machinelearning/Aleph/}}), which seems very practical to us. It uses quite effective method of \emph{inverse entailment} \citep{biblio:InverseEntailment} and keeps all handy features of Prolog system (supports YAP and SWI) in its background.
+``\emph{A Learning Engine for Proposing Hypotheses}'' (Aleph  v5\footnote{\url{http://www.comlab.ox.ac.uk/activities/machinelearning/Aleph/}}), which seems very practical to us. It uses quite effective method of \emph{inverse entailment} \citep{biblio:InverseEntailment} and keeps all handy features of a Prolog system (supports YAP and SWI) in its background.
 
 We have compared results of the Crisp and Fuzzy ILP approaches with other classification methods and we could see that the fuzzy approach made better results than the crisp one and also than many other methods. See section \ref{sec:results} for details of the results.
 
@@ -378,7 +387,7 @@ Histogram with frequencies of all the values is on the Figure~\ref{img:ranking_h
 We have divided the values into four approximately equipotent groups 
 (see in the Fig.~\ref{img:ranking_histogram}) 
 and these groups determine the target class attribute in our classification task. 
-%and logic rules were learned for each group separately\footnote{We do not have a binary rule which would return an exact value of the rating, but we have one ``true/false'' rule for each of the four categories.}.
+%and logic rules were learned for each group separately\footnote{We do not have a binary rule, which would return an exact value of the rating, but we have one ``true/false'' rule for each of the four categories.}.
 
 
 
@@ -461,7 +470,7 @@ For the construction of monotonized background knowledge $B^{mon}_T$ we use rule
 
 Once we have the learning examples and the background knowledge, we can run the ILP inductive learning procedure and obtain learned rules (also called a hypothesis). According to the kind of the ILP task (crisp or monotonized) we obtain corresponding kind (crisp or monotonized) of rules (see e.g. Fig.~\ref{img:rules}). But these rules cannot be used directly to solve the classification task. There are common cases when more then one rule is applicable to a single instance, which should be classified. So we have to select which one to use. For monotonized hypotheses we select the maximum from all the possibilities. It is illustrated on the Fig.~\ref{img:conversion}. For crisp hypotheses there is not such clear criterion, so we simply use the fist applicable rule.
 
-On the other hand in the crisp case there are many instances which cannot be classified because there is no applicable rule. (In our experiment it was about 51\%
+On the other hand in the crisp case there are many instances, which cannot be classified because there is no applicable rule. (In our experiment it was about 51\%
 of unclassified instances, see in the next section.) It could be caused by the lack of training data, but the monotonized case does not suffer from this shortage. We can always select the bottom class and -- what is probably more important -- the set of positive training examples is extended by the monotonization. 
 
 
@@ -566,7 +575,7 @@ classification.
 In our case, the simple models where decision stamps, i.e. decision trees
 with only one nonleaf node.
 In each iteration, an optimal decision stamp for each target value is
-learned. Then, the training data are reweighted in a way that
+learned. Then, the training dataset is reweighted in a way that
 records badly classified by current model are given higher weight in the
 next iteration.
 A new record is classified as follows: for each target value, predictions
@@ -654,7 +663,7 @@ The target value with the highest vote wins.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion} \label{sec:conclusion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-In this paper we have presented a fuzzy system which provides a fuzzy classification of textual web reports. Our approach was based on usage of third party linguistic analyzers, our previous work on web information extraction and fuzzy inductive logic programming.
+In this paper we have presented a fuzzy system, which provides a fuzzy classification of textual web reports. Our approach was based on usage of third party linguistic analyzers, our previous work on web information extraction and fuzzy inductive logic programming.
 
 Main contributions are formal models and prototype implementation of the system and evaluation experiments with the Fuzzy ILP classification method.
 
