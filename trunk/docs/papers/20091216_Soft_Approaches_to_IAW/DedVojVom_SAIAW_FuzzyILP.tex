@@ -119,7 +119,7 @@ There are plenty of systems dealing with text mining and text classification. In
 %\label{img:schema}
 %\end{floatingfigure}
 
-The general schema of our system is in Fig.~\ref{img:schema}. We use our previously developed web information extraction tools based on third party linguistic analyzer (the upper two dashed arrows). The classification is based on a fuzzy ILP and its translation to several crisp ILP tasks. We assume that a small amount of learning data is annotated by a human user.
+The general schema of our system is in Fig.~\ref{img:schema}. We use our previously developed web information extraction tools based on third party linguistic analyzer (the upper two dashed arrows). The classification is based on fuzzy ILP and its translation to several crisp ILP tasks. We assume that a small amount of learning data is annotated by a human user.
 
 
 %\begin{figure}[hb!]
@@ -262,7 +262,7 @@ Typically, ${\mathcal E}$ consists of ground instances of the target predicate, 
 %Background knowledge can contain also some rules, so far only crisp rules are used.
 A~hypothesis ${\mathcal H}$ typically consists of a fuzzy logic program, which, when added to ${\mathcal B}$, prevents of misclassification (better can not be declared to be worse, nevertheless can be declared as having the same degree --- for more detailed discussion on this definition of fILP we refer to the paper \citep{biblio:FILP}). Moreover, in practice, we use GAP -- Generalized Annotated Programs, so graded formulas will be sometimes understood as annotated (with crisp connectives and with a more complex annotation of the heads of rules). This is possible, because in \citep{biblio:KLV} we have shown that (some extension of) fuzzy logic programming is equivalent to (some restriction of) generalized annotated programs. 
 
-\subsection{Translation of fuzzy ILP task to several classical ILP tasks}
+\subsection{Translation of fuzzy ILP task to several crisp ILP tasks}
 
 As far as there is no implementation of fILP or GAP, we have to use a~classical ILP system. Fortunately any fILP task can be translated to several crisp ILP tasks (subject to some rounding and using a finite set of truth values).
 
@@ -310,11 +310,11 @@ U_R=u(x_1,\dots,x_m)\ge t \hbox{ if }x_1\ge t_1,\dots,x_n\ge t_n.
 $$
 Note that $x_{n+1},\dots,x_m$ have no restrictions.
 
-We claim, that if all $H_t$ were correctly learned by an crisp ILP system then for $u$ the minimal solution of all constraints $U_R$ for all $R\in H_t$, for all $t\in T$, the rule
+We claim, that if all $H_t$ were correctly learned by an crisp ILP system then for the minimal solution $u$ of all constraints $U_R$ the rule
 $$
-C(y):u(x_1,\dots,x_m)\leftarrow B_1:x_1 \&\dots\& B_n:x_m,
+C(y):u(x_1,\dots,x_m)\leftarrow B_1:x_1 \&\dots\& B_n:x_m
 $$
-is a correct solution to fuzzy ILP task given by ${\mathcal E}$ and ${\mathcal B}$. Our presentation is here a little bit simplified and we freely switch between fuzzy and GAP programs, which are know to be equivalent, see  \citep{biblio:KLV}.
+is a correct solution of the fILP task given by ${\mathcal E}$ and ${\mathcal B}$, for all $R\in H_t$ and $t\in T$. Our presentation is here a little bit simplified and we freely switch between fuzzy and GAP programs, which are known to be equivalent, see in~\citep{biblio:KLV}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The system prototype and our experiment} \label{sec:prototype_and_experiment}
@@ -472,7 +472,16 @@ For the construction of crisp background knowledge $B^{raw}_{T}$ we use a simple
 %
 For the construction of monotonized background knowledge $B^{mon}_T$ we use rules, here illustrated on predicates \texttt{damage} and \texttt{damage\_atl}, see Fig.~\ref{img:attribute_monotonization}. Here, the first rule deals with \texttt{unknown} values and the second constructs the translation. All the negations we use (Fig.~\ref{img:attribute_monotonization} and Fig.~\ref{img:conversion}) are the standard Prolog \emph{negations as failure}.
 
+
+\begin{figure}[bht]
+\centerline{\includegraphics[width=0.6\hsize,height=0.65\hsize]{img/rules}}
+\caption{Crisp and monotonized hypotheses.}
+\label{img:rules}
+\end{figure}
+
+
 Once we have the learning examples and the background knowledge, we can run the ILP inductive learning procedure and obtain learned rules (also called a hypothesis). According to the kind of the ILP task (crisp or monotonized) we obtain corresponding kind (crisp or monotonized) of rules (see e.g. Fig.~\ref{img:rules}). But these rules cannot be used directly to solve the classification task. There are common cases when more then one rule is applicable to a single instance, which is to be classified. So we have to select which one to use. For monotonized hypotheses we select the maximum from all the possibilities. It is illustrated on the Fig.~\ref{img:conversion}. For crisp hypotheses there is not such clear criterion, so we simply use the fist applicable rule.
+
 
 On the other hand in the crisp case there are many instances, which cannot be classified because there is no applicable rule. (In our experiment it was about 51\%
 of unclassified instances, see in the next section.) It could be caused by the lack of training data, but the monotonized case does not suffer from this shortage. We can always select the bottom class and -- what is probably more important -- the set of positive training examples is extended by the monotonization. 
@@ -490,11 +499,17 @@ of unclassified instances, see in the next section.) It could be caused by the l
 %\label{img:rules_monot}
 %\end{figure}
 
-\begin{figure}[bht]
-\centerline{\includegraphics[width=0.6\hsize,height=0.65\hsize]{img/rules}}
-\caption{Crisp and monotonized hypotheses.}
-\label{img:rules}
-\end{figure}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Results} \label{sec:results}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
 
 \begin{figure}[p]
 \centerline{\includegraphics[width=\hsize]{img/2x10cross}}
@@ -544,9 +559,6 @@ F \dotfill{} 		& Weighted avg F measure\\
 \label{tab:table2x10}
 \end{table}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Results} \label{sec:results}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 The Fig.~\ref{img:rules} summarizes sets of obtained rules learned from our data: 
 \begin{itemize}
@@ -586,6 +598,12 @@ A new record is classified as follows: for each target value, predictions
 of its decision stamps are summed up.
 The target value with the highest vote wins.
 
+We consider boosting as an enhancement of decision trees. A deep decision
+tree is too dependent on the randomness in the data. It has a high variance.
+Boosting of (tiny) trees fits an additive logistic regression model on them,
+i.e. uses a statistically justifiable way of building a collection of tiny
+trees. This seems to have low variance and keeps high expressiveness (does
+not increase bias dramatically).
 
 
 
