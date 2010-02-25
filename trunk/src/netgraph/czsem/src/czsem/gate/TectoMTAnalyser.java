@@ -17,8 +17,18 @@ import java.net.URL;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
 
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -35,6 +45,43 @@ public class TectoMTAnalyser {
 
         DocumentBuilder builder=DocumentBuilderFactory.newInstance().newDocumentBuilder();
         org.w3c.dom.Document tmt_doc = builder.parse(new File(TmTFilename));
+        
+/***
+        XPath xpath = XPathFactory.newInstance().newXPath();
+
+        XPathExpression exp = xpath.compile("//a");
+
+        NodeList list = 
+        	(NodeList) exp.evaluate(
+        			tmt_doc.getDocumentElement(), XPathConstants.NODESET);
+        
+        TransformerFactory tf = TransformerFactory.newInstance();
+		try {
+	        Transformer tr = tf.newTransformer();
+	        tr.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+	        tr.setOutputProperty(OutputKeys.INDENT, "yes");
+        
+        
+	        for (int i=0; i<list.getLength(); i++)
+	        {
+	        	System.out.print("<<<<<<<<<<<<<<<<<"); System.out.println(i);
+	            DOMSource ds = new DOMSource(list.item(i));
+	            StreamResult sr = new StreamResult(System.out);
+	            tr.transform(ds, sr);
+	        	System.out.print("\n>>>>>>>>>>>>>>>>>"); System.out.println(i);
+	        	
+	        }
+
+		} catch (TransformerConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (TransformerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        
+/***/        
                 
         NodeList sentece_segments = 
         	(NodeList) XPathExperssions.sentece_segments.evaluate(
@@ -46,24 +93,34 @@ public class TectoMTAnalyser {
     	//sentences
         for (int i=0; i<sentece_segments.getLength(); i++)
         {
-        	Node sentece_segment = sentece_segments.item(i);
-        	String sentence_string = (String) XPathExperssions.sentece_text.evaluate(sentece_segment, XPathConstants.STRING);
-        	sentence_sa.nextToken(sentence_string);
-        	as.add(sentence_sa.lastStart(), sentence_sa.lastEnd(), "Sentence", Factory.newFeatureMap());
-        	System.err.println(sentence_string);
+        	try 
+        	{
+	        	Node sentece_segment = sentece_segments.item(i);
+	        	String sentence_string = (String) XPathExperssions.sentece_text.evaluate(sentece_segment, XPathConstants.STRING);
+	        	sentence_sa.nextToken(sentence_string);
+	        	as.add(sentence_sa.lastStart(), sentence_sa.lastEnd(), "Sentence", Factory.newFeatureMap());
+	        	System.err.println(sentence_string);
+	        	
+	        	TMTTreeAnnotator tmt_tree_annot = new TMTTreeAnnotator(doc, sentece_segment);
+	        	
+	        	tmt_tree_annot.initSortedANodesArray();
+	        	
+	        	tmt_tree_annot.ATokensSequnceAnnotation((int) sentence_sa.lastStart());
+	        	
+	        	tmt_tree_annot.addADependencies(
+	        			(Node) XPathExperssions.a_root.evaluate(sentece_segment, XPathConstants.NODE));            
+	
+	        	tmt_tree_annot.addTNodesAndDependencies(
+	        			(Node) XPathExperssions.t_root.evaluate(sentece_segment, XPathConstants.NODE));
+        	}
+        	catch (StringIndexOutOfBoundsException e) 
+        	{
+        		System.err.println(e.getMessage());        		
+        	}
         	
-        	TMTTreeAnnotator tmt_tree_annot = new TMTTreeAnnotator(doc, sentece_segment);
-        	
-        	tmt_tree_annot.initSortedANodesArray();
-        	
-        	tmt_tree_annot.ATokensSequnceAnnotation((int) sentence_sa.lastStart());
-        	
-        	tmt_tree_annot.addADependencies(
-        			(Node) XPathExperssions.a_root.evaluate(sentece_segment, XPathConstants.NODE));            
-
-        	tmt_tree_annot.addTNodesAndDependencies(
-        			(Node) XPathExperssions.t_root.evaluate(sentece_segment, XPathConstants.NODE));            
         }        
+
+/***/	
 	}
 	
 
@@ -85,7 +142,8 @@ public class TectoMTAnalyser {
 		}
 		
 		FeatureMap docFeatures = Factory.newFeatureMap();
-		docFeatures.put(DataStore.LR_ID_FEATURE_NAME, "cesky1___1258555197823___5374");
+//		docFeatures.put(DataStore.LR_ID_FEATURE_NAME, "cesky1___1258555197823___5374");
+		docFeatures.put(DataStore.LR_ID_FEATURE_NAME, "all50_serious_messages_noids_utf8___1267111757247___7332");
 		docFeatures.put(DataStore.DATASTORE_FEATURE_NAME, ds);		
 		docFeatures.put(Document.DOCUMENT_MARKUP_AWARE_PARAMETER_NAME, "false");		
 		DocumentImpl doc = (DocumentImpl) Factory.createResource("gate.corpora.DocumentImpl", docFeatures);
@@ -95,7 +153,9 @@ public class TectoMTAnalyser {
 		
 		XPathExperssions.init();
 		
-		annotateGateDocumentAcordingtoTMTfile(doc, "C:\\workspace\\czsem\\src\\netgraph\\czsem\\TmT_serializations\\sample.tmt");
+//		annotateGateDocumentAcordingtoTMTfile(doc, "C:\\workspace\\czsem\\src\\netgraph\\czsem\\TmT_serializations\\sample.tmt");
+		annotateGateDocumentAcordingtoTMTfile(doc, "C:\\workspace\\czsem\\src\\netgraph\\czsem\\TmT_serializations\\all50_serious_messages_noids_utf8.tmt");
+		
 		
 		ds.sync(doc);		
 		ds.close();		

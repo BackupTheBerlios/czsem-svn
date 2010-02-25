@@ -131,16 +131,40 @@ public class TMTTreeAnnotator
 	}
 
 
-	public Integer addTAnnotation(Node t_node) throws XPathExpressionException
+	public Integer addTAnnotation(Node t_node) throws XPathExpressionException, InvalidOffsetException
 	{
 		String a_lex_node_id = (String) XPathExperssions.lexrf.evaluate(t_node, XPathConstants.STRING);		
 		Integer a_gate_annotation_id = a_nodes_id_index.get(a_lex_node_id);
+
+		FeatureMap fm = loadFeatures(t_node_features, XPathExperssions.t_node_features_paths, t_node);
+		fm.put("lexrf", a_gate_annotation_id);
 		
-		return as.add(
-				as.get(a_gate_annotation_id).getStartNode(),
-				as.get(a_gate_annotation_id).getEndNode(),
-				"tNode",
-				loadFeatures(t_node_features, XPathExperssions.t_node_features_paths, t_node));
+
+		Integer new_annot_id = -1;
+		
+		if (a_gate_annotation_id == null)
+		{
+			 new_annot_id = as.add(new Long(0), new Long(0), "tNode", fm);			
+		}
+		else
+		{
+		
+			 new_annot_id = as.add(
+					as.get(a_gate_annotation_id).getStartNode(),
+					as.get(a_gate_annotation_id).getEndNode(),
+					"tNode", fm);
+		}
+		
+		NodeList a_aux_nodes_ids = (NodeList) XPathExperssions.auxrf.evaluate(t_node, XPathConstants.NODESET);
+		for (int a=0; a<a_aux_nodes_ids.getLength(); a++)
+		{			
+			addDependencyAnnotation(new_annot_id, a_nodes_id_index.get(
+					a_aux_nodes_ids.item(a).getTextContent()), "aux_rf");
+		}
+		
+		
+		
+		return new_annot_id;
 	}
 
 	public void addTNodesAndDependencies(Node child, Integer parent_id) throws XPathExpressionException, InvalidOffsetException

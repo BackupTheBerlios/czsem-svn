@@ -15,6 +15,7 @@ public class XPathExperssions
     public static XPathExpression t_root;
     public static XPathExpression children;
     public static XPathExpression lexrf;
+    public static XPathExpression auxrf;
     
     public static XPathExpression[]  a_token_features_paths;
     public static XPathExpression[]  t_node_features_paths;
@@ -31,6 +32,7 @@ public class XPathExperssions
         t_root = xpath.compile("trees/SCzechT/children/LM");
 		children = xpath.compile("children/LM");
 		lexrf = xpath.compile("a/lex.rf");
+		auxrf = xpath.compile("a/aux.rf/LM");
 		
 		a_token_features_paths = new XPathExpression[TMTTreeAnnotator.a_token_features.length];
         for (int a=0; a<TMTTreeAnnotator.a_token_features.length;a++)
