@@ -41,8 +41,13 @@ public class TectoMTAnalyser {
 	public static void annotateGateDocumentAcordingtoTMTfile(Document doc, String TmTFilename) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, InvalidOffsetException
 	{				
         AnnotationSet as = doc.getAnnotations();
-        as.clear();               
+        as.clear();
+        
+    	SAXTMTAnnotator tmt_tree_annot = new SAXTMTAnnotator();
+    	
+    	tmt_tree_annot.parseAndInit(doc, TmTFilename);
 
+/***
         DocumentBuilder builder=DocumentBuilderFactory.newInstance().newDocumentBuilder();
         org.w3c.dom.Document tmt_doc = builder.parse(new File(TmTFilename));
         
@@ -81,7 +86,7 @@ public class TectoMTAnalyser {
 		}
         
         
-/***/        
+/***        
                 
         NodeList sentece_segments = 
         	(NodeList) XPathExperssions.sentece_segments.evaluate(
@@ -100,7 +105,11 @@ public class TectoMTAnalyser {
 	        	sentence_sa.nextToken(sentence_string);
 	        	as.add(sentence_sa.lastStart(), sentence_sa.lastEnd(), "Sentence", Factory.newFeatureMap());
 	        	System.err.println(sentence_string);
+	        		        	
 	        	
+	        	
+	        	
+
 	        	TMTTreeAnnotator tmt_tree_annot = new TMTTreeAnnotator(doc, sentece_segment);
 	        	
 	        	tmt_tree_annot.initSortedANodesArray();
@@ -112,6 +121,7 @@ public class TectoMTAnalyser {
 	
 	        	tmt_tree_annot.addTNodesAndDependencies(
 	        			(Node) XPathExperssions.t_root.evaluate(sentece_segment, XPathConstants.NODE));
+	        			
         	}
         	catch (StringIndexOutOfBoundsException e) 
         	{
@@ -149,7 +159,7 @@ public class TectoMTAnalyser {
 		DocumentImpl doc = (DocumentImpl) Factory.createResource("gate.corpora.DocumentImpl", docFeatures);
 		
 
-		System.out.println(doc.toXml());
+//		System.out.println(doc.toXml());
 		
 		XPathExperssions.init();
 		

@@ -25,8 +25,14 @@ public class TMTTreeAnnotator
     {
     		"m/form", "m/lemma", "m/tag", "afun", "ord" 	
     };
+
+	public static String[] a_token_sax_features = 
+    {
+    		"form", "lemma", "tag", "afun", "ord" 	
+    };
+
 	
-	public static String[] t_node_features = 
+	public static String[] t_token_features = 
     {
     		"nodetype", "t_lemma", "functor", "deepord", "formeme",
     		"gram/sempos", "gram/degcmp", "gram/negation", "gram/gender", "gram/number",  
@@ -34,6 +40,13 @@ public class TMTTreeAnnotator
     		"gram/dispmod", "gram/iterativeness"
     };
 
+	public static String[] t_token_sax_features = 
+    {
+    		"nodetype", "t_lemma", "functor", "deepord", "formeme",
+    		"sempos", "degcmp", "negation", "gender", "number",  
+    		"verbmod", "deontmod", "tense", "aspect", "resultative",
+    		"dispmod", "iterativeness"
+    };
 	
 	protected Node sentece_segment;
 	protected Document document;
@@ -136,7 +149,7 @@ public class TMTTreeAnnotator
 		String a_lex_node_id = (String) XPathExperssions.lexrf.evaluate(t_node, XPathConstants.STRING);		
 		Integer a_gate_annotation_id = a_nodes_id_index.get(a_lex_node_id);
 
-		FeatureMap fm = loadFeatures(t_node_features, XPathExperssions.t_node_features_paths, t_node);
+		FeatureMap fm = loadFeatures(t_token_features, XPathExperssions.t_node_features_paths, t_node);
 		fm.put("lexrf", a_gate_annotation_id);
 		
 

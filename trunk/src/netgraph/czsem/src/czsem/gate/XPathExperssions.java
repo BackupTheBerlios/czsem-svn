@@ -38,8 +38,8 @@ public class XPathExperssions
         for (int a=0; a<TMTTreeAnnotator.a_token_features.length;a++)
         	a_token_features_paths[a] = xpath.compile(TMTTreeAnnotator.a_token_features[a]);
 
-		t_node_features_paths = new XPathExpression[TMTTreeAnnotator.t_node_features.length];
-        for (int a=0; a<TMTTreeAnnotator.t_node_features.length;a++)
-        	t_node_features_paths[a] = xpath.compile(TMTTreeAnnotator.t_node_features[a]);
+		t_node_features_paths = new XPathExpression[TMTTreeAnnotator.t_token_features.length];
+        for (int a=0; a<TMTTreeAnnotator.t_token_features.length;a++)
+        	t_node_features_paths[a] = xpath.compile(TMTTreeAnnotator.t_token_features[a]);
 	}
 }
