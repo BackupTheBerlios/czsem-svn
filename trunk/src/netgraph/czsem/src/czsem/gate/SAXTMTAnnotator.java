@@ -17,14 +17,46 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import gate.Annotation;
+import gate.AnnotationSet;
 import gate.Document;
+import gate.Factory;
+import gate.FeatureMap;
+import gate.util.InvalidOffsetException;
+import gate.util.Pair;
 
 public class SAXTMTAnnotator extends DefaultHandler
 {
+	public static class Dependency
+	{
+		String [] ids;
+		public Dependency(String parent_id, String child_id)
+		{
+			ids = new String[2];
+			ids[0] = parent_id; //parent
+			ids[1] = child_id; //child
+		}
+		public void print(PrintStream out)
+		{
+			out.print("Depends: ");
+			out.print(ids[1]);
+			out.print(" on ");
+			out.println(ids[0]);
+		}
+	}
+
 	public static class Token
 	{
+		Integer gate_annotation_id;
 		String [] features;
+		String id;
 		
+		public Token(int fetures_num, String id)
+		{
+			this(fetures_num);
+			this.id = id;
+		}
+
 		public Token(int fetures_num)
 		{
 			features = new String[fetures_num] ;
@@ -36,21 +68,45 @@ public class SAXTMTAnnotator extends DefaultHandler
 				out.println(features[i]);				
 			}
 		}
+
+		public int getAOrd()
+		{
+			return Integer.parseInt(features[4]); 
+		}
+
+		public String getAForm()
+		{
+			return features[0]; 
+		}
+
 	}
 	
 	public static class Sentence
 	{
-		String string;
+		String sentence_string;
 		
 		Map<String, Token> a_tokens;
 		Map<String, Token> t_tokens;
+		List<Dependency> aDependencies;
+		List<Dependency> tDependencies;
+		List<Dependency> auxRfDependencies;
 		
 		public Sentence()
 		{
-			a_tokens = new HashMap<String, Token>(20);
-			t_tokens = new HashMap<String, Token>(20);
+			a_tokens = new HashMap<String, Token>(30);
+			t_tokens = new HashMap<String, Token>(30);
+			
+			aDependencies = new ArrayList<Dependency>(30); 
+			tDependencies = new ArrayList<Dependency>(30); 
+			auxRfDependencies = new ArrayList<Dependency>(30); 
 		}
 		
+		public void printDependecies(List<Dependency> dep, PrintStream out)
+		{
+			for (Dependency dependency : dep) {
+				dependency.print(out);
+			}			
+		}
 		public void printTokens(Map<String, Token> tokens, PrintStream out)
 		{
 			for (String key : tokens.keySet())
@@ -64,14 +120,14 @@ public class SAXTMTAnnotator extends DefaultHandler
 	}
 	
 	private Stack<String> parent_ids = new Stack<String>();
-	private String[] actual_fetures;
+	private String[] actual_fetures = dummy_feat;
 	private Map<String, Token> actual_tokens;
 	private Sentence actual_sentence;
 	private Token actual_token;
+	private List<Dependency> actual_dependencies;
 	
-	private char [] last_chars;
-	private int last_char_start;
-	private int last_char_length;
+	private StringBuilder last_characters = null; 
+	private String last_element_qname;
 	
 	private final int setence_stack_level = 2;
 
@@ -84,22 +140,28 @@ public class SAXTMTAnnotator extends DefaultHandler
 	{
 		actual_fetures = TMTTreeAnnotator.t_token_sax_features;		
 		actual_tokens = actual_sentence.t_tokens;		
+		actual_dependencies = actual_sentence.tDependencies;
 	}
 
 	private void setAnalytic()
 	{
 		actual_fetures = TMTTreeAnnotator.a_token_sax_features;		
-		actual_tokens = actual_sentence.a_tokens;		
+		actual_tokens = actual_sentence.a_tokens;
+		actual_dependencies = actual_sentence.aDependencies;
 	}
 
-	private static String [] dummy_str = new String[0]; 
-	private static Map<String, Token> dummy_toc = new HashMap<String, Token>(); 
+	private static String [] dummy_feat = new String[0]; 
+	private static Map<String, Token> dummy_toc = new HashMap<String, Token>();
+	private List<Dependency> dummy_dep = new ArrayList<Dependency>(50);
+
 
 	private void setDummy()
 	{
-		actual_fetures = dummy_str;		
+		actual_fetures = dummy_feat;		
 		actual_tokens = dummy_toc;
 		dummy_toc.clear();
+		actual_dependencies = dummy_dep;
+		dummy_dep.clear();
 	}
 
 
@@ -111,34 +173,45 @@ public class SAXTMTAnnotator extends DefaultHandler
 		
 	}
 	
-	private void newToken(String id)
+	private void newToken(String parent_id, String child_id)
 	{
-		Token toc = new Token(actual_fetures.length);
-		actual_tokens.put(id, toc);
+		Token toc = new Token(actual_fetures.length, child_id);
+		actual_tokens.put(child_id, toc);
 		actual_token = toc;
+		
+		if (parent_ids.size() > setence_stack_level+1)
+		{
+			Dependency dep = new Dependency(parent_id, child_id);
+			actual_dependencies.add(dep);
+		}
 	}
 
 	@Override
 	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException
 	{
+		last_element_qname = qName;
+
 		if (qName.equals("SCzechT"))
 		{
 			setTecto();
+			return;
 		}
 		if (qName.equals("SCzechA"))
 		{
 			setAnalytic();
+			return;
 		}
 		if (qName.equals("SCzechM"))
 		{
 			setDummy();
+			return;
 		}
-
+		
 		if (qName.equals("LM"))
 		{
-			String id = attributes.getValue(0);
-			System.out.println("dependes: " + id + " on " + parent_ids.peek());
-			parent_ids.push(id);
+			String prew_id = parent_ids.peek(); 
+			String new_id = attributes.getValue(0);
+			parent_ids.push(new_id);
 
 			if (parent_ids.size() <= setence_stack_level)
 			{
@@ -146,50 +219,80 @@ public class SAXTMTAnnotator extends DefaultHandler
 				return;
 			}
 			
-			if (id != null)
+			if (new_id != null)
 			{
-				newToken(id);
+				newToken(prew_id, new_id);
 			}
-		}
+		}		
+
+		if (elementoToRead(qName)) last_characters = new StringBuilder();
 	}
 
-	private void testFeatures(String qName, String [] feature_list)
+	private int testFeatures(String qName, String [] feature_list)
 	{
 		for (int i = 0; i < feature_list.length; i++) {
 			if (feature_list[i].equals(qName))
 			{
-				actual_token.features[i] = stringFromLastCahrs();
-				return;
+				return i;
 			}
 		}
-		
+		return -1;
+	}
+
+	private void updateFeatures(String qName, String [] feature_list)
+	{
+		int tf = testFeatures(qName, feature_list);
+		if (tf != -1) actual_token.features[tf] = stringFromLastCahrs();		
 	}
 	
 	private String stringFromLastCahrs()
 	{
-		return new String(last_chars, last_char_start, last_char_length);
+		String ret = last_characters.toString();
+		return  ret;
 	}
 
-	private void testFeatures(String qName)
+	private void updateFeatures(String qName)
 	{
-		testFeatures(qName, actual_fetures);		
+		updateFeatures(qName, actual_fetures);		
 	}
 
 	@Override
 	public void endElement(String uri, String localName, String qName) throws SAXException
 	{
-		if (qName.equals("LM")) parent_ids.pop();		
-		if (qName.equals("czech_source_sentence")) 
-			actual_sentence.string = stringFromLastCahrs();
-		if (parent_ids.size() > setence_stack_level) testFeatures(qName);
+		if (qName.equals("LM"))
+		{
+			String id = parent_ids.pop();
+			if (id == null) //aux.rf
+			{
+				Dependency aux_rf = new Dependency(parent_ids.peek(), stringFromLastCahrs());
+				actual_sentence.auxRfDependencies.add(aux_rf);
+			}
+		}
+		if (qName.equals("czech_source_sentence"))
+		{
+			actual_sentence.sentence_string = stringFromLastCahrs();
+		}
+		if (parent_ids.size() > setence_stack_level)
+		{
+			updateFeatures(qName);
+		}
+	}
+	
+	private boolean elementoToRead(String element_qname)
+	{
+		return
+			element_qname.equals("czech_source_sentence") ||
+			(element_qname.equals("LM") && parent_ids.peek()==null) || //auf.rf
+			(testFeatures(element_qname, actual_fetures) != -1);						
 	}
 	
 	@Override
 	public void characters(char[] ch, int start, int length) throws SAXException
-	{		
-		last_chars = ch;
-		last_char_start = start;
-		last_char_length = length;
+	{
+		if (elementoToRead(last_element_qname))
+		{
+			last_characters.append(ch, start, length);		
+		}
 	}
 
 	
@@ -212,7 +315,7 @@ public class SAXTMTAnnotator extends DefaultHandler
 //	    input.setSystemId("file://" + new File(args[0]).getAbsolutePath());
 	}
 
-	public void parseAndInit(Document doc, String tmTFilename) throws SAXException, IOException
+	public void parseAndInit(String tmTFilename) throws SAXException, IOException
 	{	
 	    org.xml.sax.InputSource input = new InputSource(tmTFilename);
 
@@ -230,13 +333,140 @@ public class SAXTMTAnnotator extends DefaultHandler
 	    // parser.setErrorHandler(handler); // Set error handler
 	    // parser.parse(input); // Parse!
 	    
-	    System.out.println("------------------------------------------------------------");
-	    System.out.println("Sentences: " + sentences.size());
-	    System.out.println("Last Sentence string: " + actual_sentence.string);
-	    System.out.println("Last Sentence aTokens: " + actual_sentence.a_tokens.size());
-	    System.out.println("Last Sentence num tTokens: " + actual_sentence.t_tokens.size());
-	    System.out.println("Last Sentence tTokens: ");
-	    actual_sentence.printTokens(actual_sentence.t_tokens, System.out); 
+	}
+	
+	private SequenceAnnotator seq_anot;
+	private AnnotationSet as;
+
+	private void annotateSentence(Sentence sentence) throws InvalidOffsetException
+	{
+		System.err.println(sentence.sentence_string);
+		
+    	seq_anot.backup();
+    	try {
+	    	seq_anot.nextToken(sentence.sentence_string);
+	    	//"Sentence" annotation
+	    	as.add(seq_anot.lastStart(), seq_anot.lastEnd(), "Sentence", Factory.newFeatureMap());
+    	} catch (IndexOutOfBoundsException e) {
+    		e.printStackTrace();
+		}
+    	seq_anot.restore();
+    	
+    	annotateATokens(sentence.a_tokens);
+    	annotateDenedecies(sentence.aDependencies, sentence.a_tokens, "aDependecy");
+    	
+    	
+	}
+
+	private Token[] sortATokens(Map<String, Token> aTokens)
+	{
+		Token[] ret = new Token[aTokens.values().size()];
+		
+		for (Token token : aTokens.values()) {
+			ret[token.getAOrd()-1] = token;
+		}
+		
+		return ret;
+	}
+
+
+	public static FeatureMap loadFeatures(Token token, String [] feature_names)
+	{
+    	FeatureMap fm = Factory.newFeatureMap();
+    	for (int a=0; a<feature_names.length; a++)
+    	{
+        	String value = token.features[a];
+        	
+    		if (value != null)	fm.put(feature_names[a], value);            		
+    	}
+    	return fm;
+	}
+
+	private void annotateToken(Token token, String [] features, String label) throws InvalidOffsetException
+	{
+    	Integer gate_id = 
+    		as.add(	seq_anot.lastStart(), 
+    				seq_anot.lastEnd(), 
+    				label, 
+    				loadFeatures(token, features));
+		
+    	token.gate_annotation_id = gate_id;		
+	}
+	
+	private void annotateATokens(Map<String, Token> aTokens) throws InvalidOffsetException
+	{
+		Token[] tokens = sortATokens(aTokens);
+		
+		for (int i = 0; i < tokens.length; i++)
+		{
+			System.out.print(tokens[i].getAForm());
+			System.out.print(' ');
+			
+//			try {
+				seq_anot.nextToken(tokens[i].getAForm());
+				annotateToken(tokens[i], TMTTreeAnnotator.a_token_sax_features, "Token");
+//			} catch (IndexOutOfBoundsException e) {
+//				e.printStackTrace();
+//			}
+			
+		}
+		System.out.println();		
+	}
+	
+	public void addDependencyAnnotation(Integer id1, Integer id2, String dependecy_type) throws InvalidOffsetException
+	{
+		Annotation a1 = as.get(id1);
+		Annotation a2 = as.get(id2);
+		
+		Long ix1 = Math.min(a1.getStartNode().getOffset(), a2.getStartNode().getOffset());
+		Long ix2 = Math.max(a1.getEndNode().getOffset(), a2.getEndNode().getOffset());
+
+		FeatureMap fm = Factory.newFeatureMap();
+		ArrayList<Integer> args = new ArrayList<Integer>(2);
+
+		args.add(id1);
+		args.add(id2);
+		fm.put("args", args);			
+
+		as.add(ix1, ix2, dependecy_type, fm);
+	}
+
+	
+	private void annotateDenedecies(List<Dependency> depencies, Map<String, Token> tokens, String dependecy_type) throws InvalidOffsetException
+	{
+		for (Dependency dependency : depencies) {
+			addDependencyAnnotation(
+					tokens.get(dependency.ids[0]).gate_annotation_id,
+					tokens.get(dependency.ids[1]).gate_annotation_id,
+					dependecy_type);
+		}
+		
+	}
+
+	public void annotate(Document doc) throws InvalidOffsetException
+	{
+		seq_anot = new SequenceAnnotator(doc);
+		as = doc.getAnnotations();
+		
+		for (Sentence sentence : sentences)
+		{
+			annotateSentence(sentence);			
+		}
+	}
+
+	public void debug_print(PrintStream out)
+	{
+	    out.println("------------------------------------------------------------");
+	    out.println("Sentences: " + sentences.size());
+	    out.println("Last Sentence string: " + actual_sentence.sentence_string);
+	    out.println("Last Sentence aTokens: " + actual_sentence.a_tokens.size());
+	    out.println("Last Sentence num tTokens: " + actual_sentence.t_tokens.size());
+	    out.println("Last Sentence tTokens: ");
+	    actual_sentence.printTokens(actual_sentence.t_tokens, out); 
+	    out.println("-- tDependencies --");
+	    actual_sentence.printDependecies(actual_sentence.tDependencies, out); 
+	    out.println("-- auf.rf --");
+	    actual_sentence.printDependecies(actual_sentence.auxRfDependencies, out); 		
 	}
 
 	

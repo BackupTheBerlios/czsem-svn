@@ -45,7 +45,9 @@ public class TectoMTAnalyser {
         
     	SAXTMTAnnotator tmt_tree_annot = new SAXTMTAnnotator();
     	
-    	tmt_tree_annot.parseAndInit(doc, TmTFilename);
+    	tmt_tree_annot.parseAndInit(TmTFilename);
+    	tmt_tree_annot.debug_print(System.out);
+    	tmt_tree_annot.annotate(doc);
 
 /***
         DocumentBuilder builder=DocumentBuilderFactory.newInstance().newDocumentBuilder();

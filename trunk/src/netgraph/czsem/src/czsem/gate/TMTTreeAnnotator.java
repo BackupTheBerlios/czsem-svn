@@ -45,7 +45,7 @@ public class TMTTreeAnnotator
     		"nodetype", "t_lemma", "functor", "deepord", "formeme",
     		"sempos", "degcmp", "negation", "gender", "number",  
     		"verbmod", "deontmod", "tense", "aspect", "resultative",
-    		"dispmod", "iterativeness"
+    		"dispmod", "iterativeness", "lex.rf"
     };
 	
 	protected Node sentece_segment;
