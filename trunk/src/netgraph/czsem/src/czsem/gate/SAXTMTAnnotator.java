@@ -1,10 +1,16 @@
 package czsem.gate;
 
+import gate.Annotation;
+import gate.AnnotationSet;
+import gate.Document;
+import gate.Factory;
+import gate.FeatureMap;
+import gate.util.InvalidOffsetException;
+
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
@@ -16,14 +22,6 @@ import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
-
-import gate.Annotation;
-import gate.AnnotationSet;
-import gate.Document;
-import gate.Factory;
-import gate.FeatureMap;
-import gate.util.InvalidOffsetException;
-import gate.util.Pair;
 
 public class SAXTMTAnnotator extends DefaultHandler
 {
@@ -69,6 +67,11 @@ public class SAXTMTAnnotator extends DefaultHandler
 			}
 		}
 
+		public String getTLexRf()
+		{
+			return features[17]; 
+		}
+
 		public int getAOrd()
 		{
 			return Integer.parseInt(features[4]); 
@@ -83,6 +86,7 @@ public class SAXTMTAnnotator extends DefaultHandler
 	
 	public static class Sentence
 	{
+		Integer gate_annotation_id;
 		String sentence_string;
 		
 		Map<String, Token> a_tokens;
@@ -127,7 +131,7 @@ public class SAXTMTAnnotator extends DefaultHandler
 	private List<Dependency> actual_dependencies;
 	
 	private StringBuilder last_characters = null; 
-	private String last_element_qname;
+	private Stack<String> last_element_qname = new Stack<String>();
 	
 	private final int setence_stack_level = 2;
 
@@ -189,7 +193,7 @@ public class SAXTMTAnnotator extends DefaultHandler
 	@Override
 	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException
 	{
-		last_element_qname = qName;
+		last_element_qname.push(qName);
 
 		if (qName.equals("SCzechT"))
 		{
@@ -259,10 +263,13 @@ public class SAXTMTAnnotator extends DefaultHandler
 	@Override
 	public void endElement(String uri, String localName, String qName) throws SAXException
 	{
+		String last_qn = last_element_qname.pop();
+		assert last_qn.equals(qName);
+		
 		if (qName.equals("LM"))
 		{
-			String id = parent_ids.pop();
-			if (id == null) //aux.rf
+			parent_ids.pop();
+			if (last_element_qname.peek().equals("aux.rf")) //aux.rf
 			{
 				Dependency aux_rf = new Dependency(parent_ids.peek(), stringFromLastCahrs());
 				actual_sentence.auxRfDependencies.add(aux_rf);
@@ -280,16 +287,21 @@ public class SAXTMTAnnotator extends DefaultHandler
 	
 	private boolean elementoToRead(String element_qname)
 	{
-		return
+		String peek = last_element_qname.pop();
+		
+		boolean ret = 
 			element_qname.equals("czech_source_sentence") ||
-			(element_qname.equals("LM") && parent_ids.peek()==null) || //auf.rf
-			(testFeatures(element_qname, actual_fetures) != -1);						
+			(element_qname.equals("LM") && last_element_qname.peek().equals("aux.rf")) || //aux.rf
+			(testFeatures(element_qname, actual_fetures) != -1);
+		
+		last_element_qname.push(peek);
+		return ret;
 	}
 	
 	@Override
 	public void characters(char[] ch, int start, int length) throws SAXException
 	{
-		if (elementoToRead(last_element_qname))
+		if (elementoToRead(last_element_qname.peek()))
 		{
 			last_characters.append(ch, start, length);		
 		}
@@ -346,17 +358,22 @@ public class SAXTMTAnnotator extends DefaultHandler
     	try {
 	    	seq_anot.nextToken(sentence.sentence_string);
 	    	//"Sentence" annotation
-	    	as.add(seq_anot.lastStart(), seq_anot.lastEnd(), "Sentence", Factory.newFeatureMap());
+	    	Integer gid = as.add(seq_anot.lastStart(), seq_anot.lastEnd(), "Sentence", Factory.newFeatureMap());
+	    	sentence.gate_annotation_id = gid;
     	} catch (IndexOutOfBoundsException e) {
     		e.printStackTrace();
 		}
     	seq_anot.restore();
     	
-    	annotateATokens(sentence.a_tokens);
+    	annotateATokens(sentence);
     	annotateDenedecies(sentence.aDependencies, sentence.a_tokens, "aDependecy");
+    	annotateTTokens(sentence);
+    	annotateDenedecies(sentence.tDependencies, sentence.t_tokens, "tDependecy");
+    	annotateAuxRfDenedecies(sentence);
     	
     	
 	}
+
 
 	private Token[] sortATokens(Map<String, Token> aTokens)
 	{
@@ -382,20 +399,70 @@ public class SAXTMTAnnotator extends DefaultHandler
     	return fm;
 	}
 
-	private void annotateToken(Token token, String [] features, String label) throws InvalidOffsetException
+	private void annotateTokenSeq(Token token, String [] features, String label) throws InvalidOffsetException
+	{
+		annotateToken(seq_anot.lastStart(), seq_anot.lastEnd(), token, features, label);
+	}
+
+	private void annotateToken(long start_off, long end_off, Token token, String label, FeatureMap fm) throws InvalidOffsetException
 	{
     	Integer gate_id = 
-    		as.add(	seq_anot.lastStart(), 
-    				seq_anot.lastEnd(), 
+    		as.add(	start_off, 
+    				end_off, 
     				label, 
-    				loadFeatures(token, features));
+    				fm);
 		
-    	token.gate_annotation_id = gate_id;		
+    	token.gate_annotation_id = gate_id;				
+	}
+
+	private void annotateToken(long start_off, long end_off, Token token, String [] features, String label) throws InvalidOffsetException
+	{
+		annotateToken(start_off, end_off, token, label, 
+				loadFeatures(token, features));
 	}
 	
-	private void annotateATokens(Map<String, Token> aTokens) throws InvalidOffsetException
+	private void annotateTTokens(Sentence sentence) throws InvalidOffsetException
 	{
-		Token[] tokens = sortATokens(aTokens);
+		for (Token t_token : sentence.t_tokens.values())
+		{
+			Token a_toknen = sentence.a_tokens.get(t_token.getTLexRf());			 
+			
+			FeatureMap fm = loadFeatures(t_token, TMTTreeAnnotator.t_token_sax_features);
+
+			Annotation a;
+			if (a_toknen == null)
+					a = as.get(sentence.gate_annotation_id);
+			else
+			{
+					a = as.get(a_toknen.gate_annotation_id);
+					
+					String old_id = (String) fm.put("lex.rf", a_toknen.gate_annotation_id);
+					assert old_id.equals(t_token.getTLexRf());
+			}
+
+			
+			if (a == null)
+			{
+				a = as.get(sentence.a_tokens.values().iterator().next().gate_annotation_id);
+			}
+			
+			Long start_off = a.getStartNode().getOffset();
+			Long end_off = a.getEndNode().getOffset();								
+					
+			
+
+			
+			annotateToken(
+					start_off, end_off, 
+					t_token, 					
+					"tToken",
+					fm);						
+		}		
+	}
+	
+	private void annotateATokens(Sentence sentence) throws InvalidOffsetException
+	{
+		Token[] tokens = sortATokens(sentence.a_tokens);
 		
 		for (int i = 0; i < tokens.length; i++)
 		{
@@ -404,7 +471,7 @@ public class SAXTMTAnnotator extends DefaultHandler
 			
 //			try {
 				seq_anot.nextToken(tokens[i].getAForm());
-				annotateToken(tokens[i], TMTTreeAnnotator.a_token_sax_features, "Token");
+				annotateTokenSeq(tokens[i], TMTTreeAnnotator.a_token_sax_features, "Token");
 //			} catch (IndexOutOfBoundsException e) {
 //				e.printStackTrace();
 //			}
@@ -431,6 +498,16 @@ public class SAXTMTAnnotator extends DefaultHandler
 		as.add(ix1, ix2, dependecy_type, fm);
 	}
 
+	private void annotateAuxRfDenedecies(Sentence sentence) throws InvalidOffsetException
+	{
+		for (Dependency dependency : sentence.auxRfDependencies) {
+			addDependencyAnnotation(
+					sentence.t_tokens.get(dependency.ids[0]).gate_annotation_id,
+					sentence.a_tokens.get(dependency.ids[1]).gate_annotation_id,
+					"auxRfDependency");
+		}
+		
+	}
 	
 	private void annotateDenedecies(List<Dependency> depencies, Map<String, Token> tokens, String dependecy_type) throws InvalidOffsetException
 	{
@@ -465,7 +542,7 @@ public class SAXTMTAnnotator extends DefaultHandler
 	    actual_sentence.printTokens(actual_sentence.t_tokens, out); 
 	    out.println("-- tDependencies --");
 	    actual_sentence.printDependecies(actual_sentence.tDependencies, out); 
-	    out.println("-- auf.rf --");
+	    out.println("-- aux.rf --");
 	    actual_sentence.printDependecies(actual_sentence.auxRfDependencies, out); 		
 	}
 
