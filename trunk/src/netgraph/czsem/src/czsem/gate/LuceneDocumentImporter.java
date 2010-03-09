@@ -7,20 +7,15 @@ import gate.creole.annic.apache.lucene.index.Term;
 import gate.creole.annic.apache.lucene.search.TermQuery;
 import gate.creole.annic.lucene.LuceneIndexSearcher;
 import gate.creole.metadata.CreoleResource;
-import gate.util.GateException;
 import gate.util.Out;
-
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.io.PrintStream;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
-import org.apache.nutch.metadata.Nutch;
 import org.apache.nutch.searcher.Hit;
 import org.apache.nutch.searcher.HitDetails;
 import org.apache.nutch.searcher.Hits;
@@ -28,8 +23,6 @@ import org.apache.nutch.searcher.NutchBean;
 import org.apache.nutch.searcher.Query;
 import org.apache.nutch.searcher.Summary;
 import org.apache.nutch.util.NutchConfiguration;
-
-import antlr.CharBuffer;
 
 @CreoleResource(name = "czsem LuceneDocumentImporter", comment = "Imports document form lucene repository")
 public class LuceneDocumentImporter extends AbstractLanguageAnalyser implements LanguageAnalyser

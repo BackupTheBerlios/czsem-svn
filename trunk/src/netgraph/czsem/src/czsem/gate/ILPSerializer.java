@@ -14,7 +14,7 @@ import java.io.*;
 import java.net.URL;
 import java.util.*;
 
-import czsem.ILP.ILPExec.ReaderThread;
+import czsem.utils.ProcessExec.ReaderThread;
 import czsem.ILP.ILPExec;
 import czsem.ILP.Serializer;
 import czsem.ILP.Serializer.Relation;

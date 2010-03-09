@@ -205,7 +205,7 @@ public abstract class ILPClassifier extends Classifier
 		test_exec.consultFile(project_setup.project_name + ".test");
 				
 
-		String predicted = test_exec.input_reader.readLine();
+		String predicted = test_exec.readLine();
 		test_exec.close();
 		
 		System.out.println("predicted: "+ predicted);

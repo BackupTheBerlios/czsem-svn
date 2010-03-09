@@ -1,110 +1,22 @@
 package czsem.ILP;
 
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.CharArrayReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.io.Reader;
-import java.io.Writer;
 
 import czsem.utils.Config;
+import czsem.utils.ProcessExec;
 import czsem.utils.ProjectSetup;
 
-public class ILPExec {
+public class ILPExec extends ProcessExec {
 
-	public static class ReaderThread extends Thread {
-		
-		private Reader is;
-		private Writer os;
-
-		private char [] buf = new char[1000];
-		private BufferedReader buf_read;
-
-		private long last_read = Long.MIN_VALUE;
-		private long last_nothing_toread = Long.MIN_VALUE;
-		
-
-		public ReaderThread(Reader is, Writer os) {
-			this.is = is;
-			this.os = os;			
-		}
-		
-		public ReaderThread(Reader is, OutputStream os) {
-			this.is = is;
-			this.os = new PrintWriter(os);
-		}
-
-		public String readLine() throws IOException
-		{
-			return buf_read.readLine();				
-		}
-
-		public void waitUntilNothingToRead() throws InterruptedException
-		{
-			long timeout = 100;
-			while (System.currentTimeMillis() - last_read < timeout) Thread.sleep(timeout);
-			
-			last_nothing_toread = System.currentTimeMillis();
-		}
-
-		public void waitForInput() throws InterruptedException
-		{			
-//			Thread.sleep(500);
-			
-			synchronized (buf)
-			{
-				while (last_nothing_toread > last_read)	buf.wait(); 
-			}
-		}
-		
-		private int readbuf() throws IOException, InterruptedException
-		{
-			int ret = is.read(buf); 
-			synchronized (buf)
-			{
-				buf_read = new BufferedReader(new CharArrayReader(buf));
-				last_read = System.currentTimeMillis();
-				buf.notify();
-				return ret;
-			}
-		}
-		
-		@Override
-		public void run() {
-			try {
-				for (int i=readbuf(); i>=0; i=readbuf())
-				{
-					os.write(buf, 0, i);
-					os.flush();
-				}
-			} 
-			catch (IOException e) {}
-			catch (InterruptedException e) {}			
-		}
-	}
-
-//	protected String prolog_path = "C:\\Program Files\\Yap\\bin\\yap.exe";
-//	protected String aleph_path = "C:\\Program Files\\aleph\\aleph.pl";
 	protected File working_directory;
 	protected String project_name;
 	protected String learnig_examples;
 	protected String testing_examples;
 	private String rules_file = "learned_rules";
 	private String results_file = "test_results";
-	private ReaderThread err_reader_thread;
-	private ReaderThread cin_reader_thread;
-	
-	Process prolog_process;
-
-	PrintWriter output_writer;	
-	BufferedReader input_reader;
-	BufferedReader error_reader;
-	
 	public ILPExec(ProjectSetup ps)
 	{		
 		working_directory = ps.working_directory;
@@ -130,12 +42,16 @@ public class ILPExec {
 		System.err.println(Config.getConfig().getPrologPath());
 		System.err.println(file_name_to_consult);
 		
-		prolog_process = Runtime.getRuntime().exec(exec_args, null, working_directory);
+		exec(exec_args, working_directory);
+		
+/*
+		process = Runtime.getRuntime().exec(exec_args, null, working_directory);
 //				new String [] {"LANG=cs_CZ.UTF-8"} , working_directory);
 		
-		output_writer = new PrintWriter(new BufferedOutputStream(prolog_process.getOutputStream()));
-		input_reader = new BufferedReader(new InputStreamReader(prolog_process.getInputStream()));
-		error_reader = new BufferedReader(new InputStreamReader(prolog_process.getErrorStream()));		
+		output_writer = new PrintWriter(new BufferedOutputStream(process.getOutputStream()));
+		input_reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+		error_reader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+*/				
 	}
 
 	public void startILPProcess() throws IOException
@@ -143,22 +59,6 @@ public class ILPExec {
 		startPrologProcess(Config.getConfig().getAlephPath());
 	}
 		
-	public void startErrReaderThread()
-	{
-		err_reader_thread = new ReaderThread(error_reader, System.err);
-		err_reader_thread.start();		
-	}
-
-	
-	public void startReaderThreads()
-	{
-		cin_reader_thread = new ReaderThread(input_reader, System.out);
-		err_reader_thread = new ReaderThread(error_reader, System.err);
-
-		cin_reader_thread.start();
-		err_reader_thread.start();
-	}
-	
 	public void induceAndWriteRules()
 	{		
 		output_writer.println("yap_flag(encoding,X).\n");
@@ -273,7 +173,7 @@ public class ILPExec {
 
 		System.err.println("halt sent..");
 			
-		prolog_process.waitFor();
+		process.waitFor();
 //		System.err.println(prolog_proc.exitValue());		
 	}
 

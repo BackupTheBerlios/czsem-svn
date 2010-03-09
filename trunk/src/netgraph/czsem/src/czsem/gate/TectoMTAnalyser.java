@@ -10,13 +10,10 @@ import gate.corpora.DocumentImpl;
 import gate.util.GateException;
 import gate.util.InvalidOffsetException;
 
-import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.net.URL;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
@@ -25,6 +22,8 @@ import org.xml.sax.SAXException;
 
 import com.generationjava.io.xml.SimpleXmlWriter;
 import com.generationjava.io.xml.XmlWriter;
+
+import czsem.utils.ProcessExec;
 
 
 public class TectoMTAnalyser {
@@ -49,6 +48,26 @@ public class TectoMTAnalyser {
 		fwr.close();
 	}
 	
+	public static void produceTMTAnalysis(String filename) throws IOException, InterruptedException
+	{
+		String[] cmdarray = 
+		{
+//				/home/dedek/workspace/tectomt/config/init_devel_environ.sh
+
+				"/bin/bash",
+				"/home/dedek/workspace/tectomt/tools/general/brunblocks_env",
+				"-S", "-o", "--scen",
+				"/home/dedek/workspace/tectomt/applications/czeng10/cs_czeng_analysis_dedek.scen",
+				"--", filename
+		};		
+
+
+		ProcessExec tmt_proc = new ProcessExec();			
+		tmt_proc.exec(cmdarray);
+		tmt_proc.startReaderThreads();
+		tmt_proc.waitFor();
+		
+	}
 	
 	public static void annotateGateDocumentAcordingtoTMTfile(Document doc, String TmTFilename) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, InvalidOffsetException
 	{				
@@ -148,7 +167,7 @@ public class TectoMTAnalyser {
 	}
 	
 
-	public static void main(String[] args) throws GateException, ParserConfigurationException, SAXException, IOException, XPathExpressionException
+	public static void main(String[] args) throws GateException, ParserConfigurationException, SAXException, IOException, XPathExpressionException, InterruptedException
 	{
 		Gate.setNetConnected(false);
 	    Gate.setLocalWebServer(false);
@@ -175,7 +194,10 @@ public class TectoMTAnalyser {
 		docFeatures.put(Document.DOCUMENT_MARKUP_AWARE_PARAMETER_NAME, "false");		
 		DocumentImpl doc = (DocumentImpl) Factory.createResource("gate.corpora.DocumentImpl", docFeatures);
 		
+		
+		
 		prepareTMTFile(doc, "TmT_serializations/pok1.xml");
+		produceTMTAnalysis("TmT_serializations/pok1.xml");
 		
 
 //		System.out.println(doc.toXml());
