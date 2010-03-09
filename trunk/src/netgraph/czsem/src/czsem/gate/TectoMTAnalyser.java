@@ -11,7 +11,11 @@ import gate.util.GateException;
 import gate.util.InvalidOffsetException;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.net.URL;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -19,8 +23,31 @@ import javax.xml.xpath.XPathExpressionException;
 
 import org.xml.sax.SAXException;
 
+import com.generationjava.io.xml.SimpleXmlWriter;
+import com.generationjava.io.xml.XmlWriter;
+
 
 public class TectoMTAnalyser {
+	
+	public static void prepareTMTFile(Document doc, String filename) throws IOException 
+	{		
+		Writer fwr = new OutputStreamWriter(new FileOutputStream(filename), "utf-8");
+		XmlWriter xmlwriter = new SimpleXmlWriter(fwr);
+		xmlwriter.writeXmlVersion("1.0", "utf-8");
+		xmlwriter.writeEntity("tmt_document");
+		xmlwriter.writeAttribute("xmlns", "http://ufal.mff.cuni.cz/pdt/pml/");
+		xmlwriter.writeEntity("head");
+		xmlwriter.writeEntity("schema");
+		xmlwriter.writeAttribute("href", "tmt_schema.xml");
+		xmlwriter.endEntity();//schema
+		xmlwriter.endEntity();//head
+		xmlwriter.writeEntity("meta");
+		xmlwriter.writeEntityWithText("czech_source_text", doc.getContent().toString());
+		xmlwriter.endEntity();//meta
+		xmlwriter.endEntity();//tmt_document
+		xmlwriter.close();
+		fwr.close();
+	}
 	
 	
 	public static void annotateGateDocumentAcordingtoTMTfile(Document doc, String TmTFilename) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, InvalidOffsetException
@@ -125,13 +152,14 @@ public class TectoMTAnalyser {
 	{
 		Gate.setNetConnected(false);
 	    Gate.setLocalWebServer(false);
-	    Gate.setGateHome(new File("C:\\Program Files\\GATE-5.0"));
+//	    Gate.setGateHome(new File("C:\\Program Files\\GATE-5.0"));
 
 	    Gate.init();
 	    	    
-	    Gate.getCreoleRegister().registerDirectories(new URL("file:/C:/Program%20Files/GATE-5.0/plugins/Stanford/"));
+//	    Gate.getCreoleRegister().registerDirectories(new URL("file:/C:/Program%20Files/GATE-5.0/plugins/Stanford/"));
 	    				
-		DataStore ds = Factory.openDataStore("gate.persist.SerialDataStore", "file:/C:/Users/dedek/AppData/GATE/data_store/");
+//		DataStore ds = Factory.openDataStore("gate.persist.SerialDataStore", "file:/C:/Users/dedek/AppData/GATE/data_store/");
+		DataStore ds = Factory.openDataStore("gate.persist.SerialDataStore", "file:/home/dedek/workspace/crawlovani/gate_made/store1/");
 		ds.open();
 		
 		for (Object string : ds.getLrIds("gate.corpora.DocumentImpl")) {
@@ -139,22 +167,26 @@ public class TectoMTAnalyser {
 		}
 		
 		FeatureMap docFeatures = Factory.newFeatureMap();
+		
+		docFeatures.put(DataStore.LR_ID_FEATURE_NAME, "cesky na unixu____1268127896084___303");
 //		docFeatures.put(DataStore.LR_ID_FEATURE_NAME, "cesky1___1258555197823___5374");
-		docFeatures.put(DataStore.LR_ID_FEATURE_NAME, "all50_serious_messages_noids_utf8___1267111757247___7332");
+//		docFeatures.put(DataStore.LR_ID_FEATURE_NAME, "all50_serious_messages_noids_utf8___1267111757247___7332");
 		docFeatures.put(DataStore.DATASTORE_FEATURE_NAME, ds);		
 		docFeatures.put(Document.DOCUMENT_MARKUP_AWARE_PARAMETER_NAME, "false");		
 		DocumentImpl doc = (DocumentImpl) Factory.createResource("gate.corpora.DocumentImpl", docFeatures);
 		
+		prepareTMTFile(doc, "TmT_serializations/pok1.xml");
+		
 
 //		System.out.println(doc.toXml());
 		
-		XPathExperssions.init();
+//		XPathExperssions.init();
 		
 //		annotateGateDocumentAcordingtoTMTfile(doc, "C:\\workspace\\czsem\\src\\netgraph\\czsem\\TmT_serializations\\sample.tmt");
-		annotateGateDocumentAcordingtoTMTfile(doc, "C:\\workspace\\czsem\\src\\netgraph\\czsem\\TmT_serializations\\all50_serious_messages_noids_utf8.tmt");
+//		annotateGateDocumentAcordingtoTMTfile(doc, "C:\\workspace\\czsem\\src\\netgraph\\czsem\\TmT_serializations\\all50_serious_messages_noids_utf8.tmt");
 		
 		
-		ds.sync(doc);		
+//		ds.sync(doc);		
 		ds.close();		
 	}
 
