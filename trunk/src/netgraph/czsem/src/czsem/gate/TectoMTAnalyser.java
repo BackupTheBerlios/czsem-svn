@@ -10,6 +10,7 @@ import gate.corpora.DocumentImpl;
 import gate.util.GateException;
 import gate.util.InvalidOffsetException;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -57,8 +58,9 @@ public class TectoMTAnalyser {
 				"/bin/bash",
 				"/home/dedek/workspace/tectomt/tools/general/brunblocks_env",
 				"-S", "-o", "--scen",
-				"/home/dedek/workspace/tectomt/applications/czeng10/cs_czeng_analysis_dedek.scen",
-				"--", filename
+//				"/home/dedek/workspace/tectomt/applications/czeng10/cs_czeng_analysis_dedek_testing.scen",
+//				"/home/dedek/workspace/tectomt/applications/czeng10/cs_czeng_analysis_dedek.scen",
+				"--", new File(filename).getAbsolutePath()
 		};		
 
 
@@ -196,8 +198,9 @@ public class TectoMTAnalyser {
 		
 		
 		
-		prepareTMTFile(doc, "TmT_serializations/pok1.xml");
-		produceTMTAnalysis("TmT_serializations/pok1.xml");
+		prepareTMTFile(doc, "TmT_serializations/pok4.tmt");
+		produceTMTAnalysis( "TmT_serializations/pok4.tmt");
+		annotateGateDocumentAcordingtoTMTfile(doc, "TmT_serializations/pok4.tmt");
 		
 
 //		System.out.println(doc.toXml());
@@ -208,7 +211,7 @@ public class TectoMTAnalyser {
 //		annotateGateDocumentAcordingtoTMTfile(doc, "C:\\workspace\\czsem\\src\\netgraph\\czsem\\TmT_serializations\\all50_serious_messages_noids_utf8.tmt");
 		
 		
-//		ds.sync(doc);		
+		ds.sync(doc);		
 		ds.close();		
 	}
 
