@@ -158,6 +158,7 @@ public class SAXTMTAnnotator extends DefaultHandler
 	private static String [] dummy_feat = new String[0]; 
 	private static Map<String, Token> dummy_toc = new HashMap<String, Token>();
 	private List<Dependency> dummy_dep = new ArrayList<Dependency>(50);
+	private String tmTFilename;
 
 
 	private void setDummy()
@@ -330,7 +331,8 @@ public class SAXTMTAnnotator extends DefaultHandler
 
 	public void parseAndInit(String tmTFilename) throws SAXException, IOException
 	{	
-	    org.xml.sax.InputSource input = new InputSource(new FileInputStream(tmTFilename));
+	    this.tmTFilename = tmTFilename;
+		org.xml.sax.InputSource input = new InputSource(new FileInputStream(tmTFilename));
 
 	    parent_ids.push("TToPP");
 	    // Finally, tell the parser to parse the input and notify the handler
@@ -364,6 +366,9 @@ public class SAXTMTAnnotator extends DefaultHandler
     	} catch (IndexOutOfBoundsException e) {
     		e.printStackTrace();
 		}
+    	
+    	if (sentence.a_tokens.size() <= 0) return;
+    	
     	seq_anot.restore();
     	
     	annotateATokens(sentence);
@@ -535,6 +540,7 @@ public class SAXTMTAnnotator extends DefaultHandler
 	public void debug_print(PrintStream out)
 	{
 	    out.println("------------------------------------------------------------");
+	    out.println(tmTFilename);	    
 	    out.println("Sentences: " + sentences.size());
 	    if (sentences.size() <= 0) return;
 	    out.println("Last Sentence string: " + actual_sentence.sentence_string);

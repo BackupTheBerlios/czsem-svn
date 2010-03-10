@@ -61,6 +61,7 @@ public class TectoMTAnalyser extends AbstractLanguageAnalyser implements Process
 					Out.prln("Analyse !!!");
 					produceTMTAnalysis();
 					Out.prln("Analysed !!");
+					
 					for (TectoMTDocumentAnalyser a : documents_to_anlayse)
 					{
 						a.annotateGateDocumentAcordingtoTMTfile();
@@ -86,7 +87,7 @@ public class TectoMTAnalyser extends AbstractLanguageAnalyser implements Process
 				"-S", "-o"
 				
 //				, "--scen",
-//				"/home/dedek/workspace/tectomt/applications/czeng10/cs_czeng_analysis_dedek_testing.scen",
+//				"scen",
 //				"/home/dedek/workspace/tectomt/applications/czeng10/cs_czeng_analysis_dedek.scen",
 //				"--", new File(filename).getAbsolutePath()
 		};
@@ -231,19 +232,30 @@ public class TectoMTAnalyser extends AbstractLanguageAnalyser implements Process
 		
 		FeatureMap docFeatures = Factory.newFeatureMap();
 		
-		docFeatures.put(DataStore.LR_ID_FEATURE_NAME, "cesky na unixu____1268127896084___303");
+		docFeatures.put(DataStore.LR_ID_FEATURE_NAME, "jihomoravsky49502.txt_0001C___1268231303049___7393");
+//		docFeatures.put(DataStore.LR_ID_FEATURE_NAME, "cesky na unixu____1268127896084___303");
 //		docFeatures.put(DataStore.LR_ID_FEATURE_NAME, "cesky1___1258555197823___5374");
 //		docFeatures.put(DataStore.LR_ID_FEATURE_NAME, "all50_serious_messages_noids_utf8___1267111757247___7332");
 		docFeatures.put(DataStore.DATASTORE_FEATURE_NAME, ds);		
 		docFeatures.put(Document.DOCUMENT_MARKUP_AWARE_PARAMETER_NAME, "false");		
 		DocumentImpl doc = (DocumentImpl) Factory.createResource("gate.corpora.DocumentImpl", docFeatures);
 		
+		TectoMTAnalyser tmt = new TectoMTAnalyser();
+		
 		
 		TectoMTDocumentAnalyser da = new TectoMTDocumentAnalyser(doc);
+		tmt.documents_to_anlayse.add(da);
+		
+		tmt.setScenarioFilePath(new URL("file:/home/dedek/workspace/tectomt/applications/czeng10/cs_czeng_analysis_dedek_testing.scen"));
+
+		String [] blocks = {"SCzechW_to_SCzechM::TextSeg_tokenizer_and_segmenter"};		
+		tmt.setBlocks(Arrays.asList(blocks));
+		tmt.setLoadScenarioFromFile(false);
 		
 		da.prepareTMTFile(new URL("file:/tmp/czsem/src/netgraph/czsem/TmT_serializations"));
-//		da.produceTMTAnalysis();
+		tmt.produceTMTAnalysis();
 		da.annotateGateDocumentAcordingtoTMTfile();
+		
 		
 
 //		System.out.println(doc.toXml());
