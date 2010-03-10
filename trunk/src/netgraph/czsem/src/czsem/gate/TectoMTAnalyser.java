@@ -1,53 +1,67 @@
 package czsem.gate;
 
-import gate.AnnotationSet;
 import gate.DataStore;
 import gate.Document;
 import gate.Factory;
 import gate.FeatureMap;
 import gate.Gate;
+import gate.LanguageAnalyser;
+import gate.ProcessingResource;
 import gate.corpora.DocumentImpl;
+import gate.creole.AbstractLanguageAnalyser;
+import gate.creole.ExecutionException;
+import gate.creole.metadata.CreoleParameter;
+import gate.creole.metadata.CreoleResource;
+import gate.creole.metadata.Optional;
+import gate.creole.metadata.RunTime;
 import gate.util.GateException;
-import gate.util.InvalidOffsetException;
+import gate.util.Out;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.xml.sax.SAXException;
 
-import com.generationjava.io.xml.SimpleXmlWriter;
-import com.generationjava.io.xml.XmlWriter;
-
 import czsem.utils.ProcessExec;
 
+@CreoleResource(name = "czsem TectoMTAnalyser", comment = "Alyses givem corpus by TMT tools")
+public class TectoMTAnalyser extends AbstractLanguageAnalyser implements ProcessingResource, LanguageAnalyser
+{
 
-public class TectoMTAnalyser {
+	private static final long serialVersionUID = -1436830144361327369L;
+
+	private URL scenarioFilePath = null;
+	private URL serializationDirectory = null;
+	private List<String> blocks = null;
 	
-	public static void prepareTMTFile(Document doc, String filename) throws IOException 
-	{		
-		Writer fwr = new OutputStreamWriter(new FileOutputStream(filename), "utf-8");
-		XmlWriter xmlwriter = new SimpleXmlWriter(fwr);
-		xmlwriter.writeXmlVersion("1.0", "utf-8");
-		xmlwriter.writeEntity("tmt_document");
-		xmlwriter.writeAttribute("xmlns", "http://ufal.mff.cuni.cz/pdt/pml/");
-		xmlwriter.writeEntity("head");
-		xmlwriter.writeEntity("schema");
-		xmlwriter.writeAttribute("href", "tmt_schema.xml");
-		xmlwriter.endEntity();//schema
-		xmlwriter.endEntity();//head
-		xmlwriter.writeEntity("meta");
-		xmlwriter.writeEntityWithText("czech_source_text", doc.getContent().toString());
-		xmlwriter.endEntity();//meta
-		xmlwriter.endEntity();//tmt_document
-		xmlwriter.close();
-		fwr.close();
+	private List<TectoMTDocumentAnalyser> documents_to_anlayse= new ArrayList<TectoMTDocumentAnalyser>();
+
+	@Override
+	public void execute() throws ExecutionException
+	{
+		if (documents_to_anlayse.size() < corpus.size())
+		{
+			TectoMTDocumentAnalyser da = new TectoMTDocumentAnalyser(document);
+			try {
+				da.prepareTMTFile(getSerializationDirectory());
+			} catch (IOException e) {
+				throw new ExecutionException(e); 
+			}
+			documents_to_anlayse.add(da);
+			
+			if (documents_to_anlayse.size() == corpus.size())
+			{
+				Out.prln("Analyse !");
+			}
+		}
 	}
+
 	
 	public static void produceTMTAnalysis(String filename) throws IOException, InterruptedException
 	{
@@ -71,22 +85,12 @@ public class TectoMTAnalyser {
 		
 	}
 	
+	/*
 	public static void annotateGateDocumentAcordingtoTMTfile(Document doc, String TmTFilename) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, InvalidOffsetException
 	{				
-        AnnotationSet as = doc.getAnnotations();
-        as.clear();
-        
-    	SAXTMTAnnotator tmt_tree_annot = new SAXTMTAnnotator();
-    	
-    	tmt_tree_annot.parseAndInit(TmTFilename);
-    	tmt_tree_annot.debug_print(System.out);
-    	tmt_tree_annot.annotate(doc);
-
-/***
         DocumentBuilder builder=DocumentBuilderFactory.newInstance().newDocumentBuilder();
         org.w3c.dom.Document tmt_doc = builder.parse(new File(TmTFilename));
         
-/***
         XPath xpath = XPathFactory.newInstance().newXPath();
 
         XPathExpression exp = xpath.compile("//a");
@@ -119,9 +123,7 @@ public class TectoMTAnalyser {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        
-        
-/***        
+                
                 
         NodeList sentece_segments = 
         	(NodeList) XPathExperssions.sentece_segments.evaluate(
@@ -164,9 +166,9 @@ public class TectoMTAnalyser {
         	}
         	
         }        
-
-/***/	
 	}
+	*/	
+
 	
 
 	public static void main(String[] args) throws GateException, ParserConfigurationException, SAXException, IOException, XPathExpressionException, InterruptedException
@@ -197,10 +199,11 @@ public class TectoMTAnalyser {
 		DocumentImpl doc = (DocumentImpl) Factory.createResource("gate.corpora.DocumentImpl", docFeatures);
 		
 		
+		TectoMTDocumentAnalyser da = new TectoMTDocumentAnalyser(doc);
 		
-		prepareTMTFile(doc, "TmT_serializations/pok4.tmt");
-		produceTMTAnalysis( "TmT_serializations/pok4.tmt");
-		annotateGateDocumentAcordingtoTMTfile(doc, "TmT_serializations/pok4.tmt");
+		da.prepareTMTFile(new URL("file:/tmp/czsem/src/netgraph/czsem/TmT_serializations"));
+//		da.produceTMTAnalysis();
+		da.annotateGateDocumentAcordingtoTMTfile();
 		
 
 //		System.out.println(doc.toXml());
@@ -213,6 +216,38 @@ public class TectoMTAnalyser {
 		
 		ds.sync(doc);		
 		ds.close();		
+	}
+
+	@RunTime
+	@CreoleParameter(comment="Directory where temporary TMT files are stored.", defaultValue="file:/tmp/tmt_serilizations")
+	public void setSerializationDirectory(URL serializationDirectory) {
+		this.serializationDirectory = serializationDirectory;
+	}
+
+	public URL getSerializationDirectory() {
+		return serializationDirectory;
+	}
+
+	@RunTime
+	@CreoleParameter(defaultValue="file:/home/dedek/workspace/tectomt/applications/czeng10/cs_czeng_analysis_dedek_testing.scen", disjunction="scenario")
+	public void setScenarioFilePath (URL scenarioFilePath ) {
+		this.scenarioFilePath  = scenarioFilePath ;
+	}
+
+	public URL getScenarioFilePath() {
+		return scenarioFilePath;
+	}
+
+	
+	@RunTime
+	@Optional
+	@CreoleParameter(comment="List of blocks to be used in the analysis", defaultValue="SCzechW_to_SCzechM::Sentence_segmentation;SCzechW_to_SCzechM::Tokenize_joining_numbers", disjunction="scenario")
+	public void setBlocks(List<String> blocks) {
+		this.blocks = blocks;
+	}
+	
+	public List<String> getBlocks() {
+		return blocks;
 	}
 
 
