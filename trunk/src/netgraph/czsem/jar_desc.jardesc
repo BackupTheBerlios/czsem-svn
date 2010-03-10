@@ -19,9 +19,10 @@
         <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{SAXTMTAnnotator.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{ILPExec.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;com.generationjava.io.xml{XmlWriter.java"/>
-        <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{FSExporter.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{TectoMTDocumentAnalyser.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{FSExporter.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.apps{CVStoILP_Accidents.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.utils{ProcessExec.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;com.generationjava.io.xml{EmptyElementXmlWriter.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{TectoMTAnalyser.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{ILPClassifier.java"/>
@@ -41,7 +42,9 @@
         <javaElement handleIdentifier="=czsem/src&lt;czsem.gui{TreeVisualize.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.net{NetgraphProtocolConnection.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{WekaSerializer.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.utils{Config.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.utils{SimpleXMLQueryProcessor.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.utils{ProjectSetup.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.utils{NetgraphQuery.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{ProgolWork1.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;com.generationjava.io.xml{AbstractXmlWriter.java"/>

@@ -7,13 +7,14 @@ import gate.FeatureMap;
 import gate.Gate;
 import gate.LanguageAnalyser;
 import gate.ProcessingResource;
+import gate.Resource;
 import gate.corpora.DocumentImpl;
 import gate.creole.AbstractLanguageAnalyser;
 import gate.creole.ExecutionException;
+import gate.creole.ResourceInstantiationException;
 import gate.creole.metadata.CreoleParameter;
 import gate.creole.metadata.CreoleResource;
 import gate.creole.metadata.Optional;
-import gate.creole.metadata.RunTime;
 import gate.util.GateException;
 import gate.util.Out;
 
@@ -39,6 +40,7 @@ public class TectoMTAnalyser extends AbstractLanguageAnalyser implements Process
 	private URL scenarioFilePath = null;
 	private URL serializationDirectory = null;
 	private List<String> blocks = null;
+	private boolean loadScenarioFromFile = true; 
 	
 	private List<TectoMTDocumentAnalyser> documents_to_anlayse= new ArrayList<TectoMTDocumentAnalyser>();
 
@@ -56,9 +58,9 @@ public class TectoMTAnalyser extends AbstractLanguageAnalyser implements Process
 				
 				if (documents_to_anlayse.size() == corpus.size())
 				{
-					Out.prln("Analyse !");
+					Out.prln("Analyse !!!");
 					produceTMTAnalysis();
-					Out.prln("Analysed !");
+					Out.prln("Analysed !!");
 					for (TectoMTDocumentAnalyser a : documents_to_anlayse)
 					{
 						a.annotateGateDocumentAcordingtoTMTfile();
@@ -92,7 +94,7 @@ public class TectoMTAnalyser extends AbstractLanguageAnalyser implements Process
 		List<String> cmd_list = new ArrayList<String>(Arrays.asList(cmdarray));
 		
 		URL scen = getScenarioFilePath();
-		if (scen != null)
+		if (loadScenarioFromFile)
 		{
 			cmd_list.add("--scen");			
 			cmd_list.add(scen.getFile());			
@@ -108,10 +110,16 @@ public class TectoMTAnalyser extends AbstractLanguageAnalyser implements Process
 		{
 			cmd_list.add(da.getTMTFilePath());			
 		}
+		
+		for (String cmd : cmd_list)
+		{
+			Out.prln(cmd);
+			
+		}
 
 
 		ProcessExec tmt_proc = new ProcessExec();			
-		tmt_proc.exec(cmdarray);
+		tmt_proc.exec(cmd_list.toArray(new String[0]));
 		tmt_proc.startReaderThreads();
 		tmt_proc.waitFor();
 		
@@ -250,7 +258,6 @@ public class TectoMTAnalyser extends AbstractLanguageAnalyser implements Process
 		ds.close();		
 	}
 
-	@RunTime
 	@CreoleParameter(comment="Directory where temporary TMT files are stored.", defaultValue="file:/tmp/czsem/src/netgraph/czsem/TmT_serializations")
 	public void setSerializationDirectory(URL serializationDirectory) {
 		this.serializationDirectory = serializationDirectory;
@@ -260,8 +267,8 @@ public class TectoMTAnalyser extends AbstractLanguageAnalyser implements Process
 		return serializationDirectory;
 	}
 
-	@RunTime
-	@CreoleParameter(defaultValue="file:/home/dedek/workspace/tectomt/applications/czeng10/cs_czeng_analysis_dedek_testing.scen", disjunction="scenario")
+	@Optional
+	@CreoleParameter(defaultValue="file:/home/dedek/workspace/tectomt/applications/czeng10/cs_czeng_analysis_dedek_testing.scen")
 	public void setScenarioFilePath (URL scenarioFilePath ) {
 		this.scenarioFilePath  = scenarioFilePath ;
 	}
@@ -271,15 +278,39 @@ public class TectoMTAnalyser extends AbstractLanguageAnalyser implements Process
 	}
 
 	
-	@RunTime
 	@Optional
-	@CreoleParameter(comment="List of blocks to be used in the analysis", defaultValue="SCzechW_to_SCzechM::Sentence_segmentation;SCzechW_to_SCzechM::Tokenize_joining_numbers", disjunction="scenario")
+	@CreoleParameter(comment="List of blocks to be used in the analysis", defaultValue="SCzechW_to_SCzechM::Sentence_segmentation;SCzechW_to_SCzechM::Tokenize_joining_numbers")
 	public void setBlocks(List<String> blocks) {
 		this.blocks = blocks;
 	}
 	
 	public List<String> getBlocks() {
 		return blocks;
+	}
+
+
+	@Override
+	public void cleanup() {
+		documents_to_anlayse = null;
+		super.cleanup();
+	}
+
+
+	@Override
+	public Resource init() throws ResourceInstantiationException {
+		documents_to_anlayse = new ArrayList<TectoMTDocumentAnalyser>();
+		return super.init();
+	}
+
+
+	public Boolean getLoadScenarioFromFile() {
+		return loadScenarioFromFile;
+	}
+
+
+	@CreoleParameter(defaultValue="true")
+	public void setLoadScenarioFromFile(Boolean loadScenarioFromFile) {
+		this.loadScenarioFromFile = loadScenarioFromFile;
 	}
 
 

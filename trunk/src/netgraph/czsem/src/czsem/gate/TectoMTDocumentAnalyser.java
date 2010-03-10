@@ -16,6 +16,8 @@ import com.generationjava.io.xml.XmlWriter;
 import gate.AnnotationSet;
 import gate.Document;
 import gate.creole.AbstractResource;
+import gate.persist.PersistenceException;
+import gate.security.SecurityException;
 import gate.util.InvalidOffsetException;
 import gate.util.Out;
 
@@ -35,7 +37,7 @@ public class TectoMTDocumentAnalyser
 		sb.append(outputDirectory.getFile());
 		sb.append('/');
 		sb.append(((AbstractResource) doc).getName());
-		sb.append(".fs");
+		sb.append(".tmt");
 		
 		String dest_filename = FSExporter.findAvailableFileName(sb.toString());
 		
@@ -67,9 +69,9 @@ public class TectoMTDocumentAnalyser
 		return dest_filename;
 	}
 
-	public void annotateGateDocumentAcordingtoTMTfile() throws ParserConfigurationException, SAXException, IOException, InvalidOffsetException
+	public void annotateGateDocumentAcordingtoTMTfile() throws ParserConfigurationException, SAXException, IOException, InvalidOffsetException, PersistenceException, SecurityException
 	{
-        AnnotationSet as = doc.getAnnotations();
+		AnnotationSet as = doc.getAnnotations();
         as.clear();
         
     	SAXTMTAnnotator tmt_tree_annot = new SAXTMTAnnotator();
@@ -77,6 +79,7 @@ public class TectoMTDocumentAnalyser
     	tmt_tree_annot.parseAndInit(dest_filename);
     	tmt_tree_annot.debug_print(System.out);
     	tmt_tree_annot.annotate(doc);
+		doc.sync();
 	}
 
 	public String getTMTFilePath() {
