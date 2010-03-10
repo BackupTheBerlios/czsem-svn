@@ -17,10 +17,10 @@ import gate.creole.metadata.RunTime;
 import gate.util.GateException;
 import gate.util.Out;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -45,25 +45,35 @@ public class TectoMTAnalyser extends AbstractLanguageAnalyser implements Process
 	@Override
 	public void execute() throws ExecutionException
 	{
-		if (documents_to_anlayse.size() < corpus.size())
-		{
-			TectoMTDocumentAnalyser da = new TectoMTDocumentAnalyser(document);
-			try {
-				da.prepareTMTFile(getSerializationDirectory());
-			} catch (IOException e) {
-				throw new ExecutionException(e); 
-			}
-			documents_to_anlayse.add(da);
+		try {
+			Out.prln(documents_to_anlayse.size());
 			
-			if (documents_to_anlayse.size() == corpus.size())
+			if (documents_to_anlayse.size() <= corpus.size())
 			{
-				Out.prln("Analyse !");
-			}
+				TectoMTDocumentAnalyser da = new TectoMTDocumentAnalyser(document);
+				da.prepareTMTFile(getSerializationDirectory());
+				documents_to_anlayse.add(da);
+				
+				if (documents_to_anlayse.size() == corpus.size())
+				{
+					Out.prln("Analyse !");
+					produceTMTAnalysis();
+					Out.prln("Analysed !");
+					for (TectoMTDocumentAnalyser a : documents_to_anlayse)
+					{
+						a.annotateGateDocumentAcordingtoTMTfile();
+					}
+					Out.prln("Annotated !");
+					documents_to_anlayse.clear();
+				}
+			} 
+		} catch (Exception e) {
+			throw new ExecutionException(e);
 		}
 	}
 
 	
-	public static void produceTMTAnalysis(String filename) throws IOException, InterruptedException
+	public void produceTMTAnalysis() throws IOException, InterruptedException
 	{
 		String[] cmdarray = 
 		{
@@ -71,11 +81,33 @@ public class TectoMTAnalyser extends AbstractLanguageAnalyser implements Process
 
 				"/bin/bash",
 				"/home/dedek/workspace/tectomt/tools/general/brunblocks_env",
-				"-S", "-o", "--scen",
+				"-S", "-o"
+				
+//				, "--scen",
 //				"/home/dedek/workspace/tectomt/applications/czeng10/cs_czeng_analysis_dedek_testing.scen",
 //				"/home/dedek/workspace/tectomt/applications/czeng10/cs_czeng_analysis_dedek.scen",
-				"--", new File(filename).getAbsolutePath()
-		};		
+//				"--", new File(filename).getAbsolutePath()
+		};
+		
+		List<String> cmd_list = new ArrayList<String>(Arrays.asList(cmdarray));
+		
+		URL scen = getScenarioFilePath();
+		if (scen != null)
+		{
+			cmd_list.add("--scen");			
+			cmd_list.add(scen.getFile());			
+		}
+		else
+		{
+			List<String> blocks = getBlocks();
+			cmd_list.addAll(blocks);
+		}
+		cmd_list.add("--");
+		
+		for (TectoMTDocumentAnalyser da : documents_to_anlayse)
+		{
+			cmd_list.add(da.getTMTFilePath());			
+		}
 
 
 		ProcessExec tmt_proc = new ProcessExec();			
@@ -219,7 +251,7 @@ public class TectoMTAnalyser extends AbstractLanguageAnalyser implements Process
 	}
 
 	@RunTime
-	@CreoleParameter(comment="Directory where temporary TMT files are stored.", defaultValue="file:/tmp/tmt_serilizations")
+	@CreoleParameter(comment="Directory where temporary TMT files are stored.", defaultValue="file:/tmp/czsem/src/netgraph/czsem/TmT_serializations")
 	public void setSerializationDirectory(URL serializationDirectory) {
 		this.serializationDirectory = serializationDirectory;
 	}

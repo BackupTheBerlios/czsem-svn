@@ -79,5 +79,9 @@ public class TectoMTDocumentAnalyser
     	tmt_tree_annot.annotate(doc);
 	}
 
+	public String getTMTFilePath() {
+		return dest_filename;
+	}
+
 
 }

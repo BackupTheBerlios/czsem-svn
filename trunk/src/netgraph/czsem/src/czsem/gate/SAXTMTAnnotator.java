@@ -7,6 +7,7 @@ import gate.Factory;
 import gate.FeatureMap;
 import gate.util.InvalidOffsetException;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -329,7 +330,7 @@ public class SAXTMTAnnotator extends DefaultHandler
 
 	public void parseAndInit(String tmTFilename) throws SAXException, IOException
 	{	
-	    org.xml.sax.InputSource input = new InputSource(tmTFilename);
+	    org.xml.sax.InputSource input = new InputSource(new FileInputStream(tmTFilename));
 
 	    parent_ids.push("TToPP");
 	    // Finally, tell the parser to parse the input and notify the handler
@@ -535,6 +536,7 @@ public class SAXTMTAnnotator extends DefaultHandler
 	{
 	    out.println("------------------------------------------------------------");
 	    out.println("Sentences: " + sentences.size());
+	    if (sentences.size() <= 0) return;
 	    out.println("Last Sentence string: " + actual_sentence.sentence_string);
 	    out.println("Last Sentence aTokens: " + actual_sentence.a_tokens.size());
 	    out.println("Last Sentence num tTokens: " + actual_sentence.t_tokens.size());
