@@ -88,8 +88,11 @@ public class SequenceAnnotator
 					}					
 				}
 				correction = local_mv - local_index - token.length();
-				System.out.print("correction: ");
-				System.out.println(correction);
+				if (correction != 0)
+				{
+					System.out.print("correction: ");
+					System.out.println(correction);					
+				}
 				return local_index;
 			} catch (Throwable e) {/*contine*/} 			
 		}		

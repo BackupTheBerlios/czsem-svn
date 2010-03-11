@@ -64,7 +64,8 @@ public class SAXTMTAnnotator extends DefaultHandler
 		public void print(PrintStream out)
 		{
 			for (int i = 0; i < features.length; i++) {
-				out.println(features[i]);				
+				if (features[i] == null) out.println("null");
+				else out.println(features[i]);				
 			}
 		}
 
@@ -355,6 +356,12 @@ public class SAXTMTAnnotator extends DefaultHandler
 
 	private void annotateSentence(Sentence sentence) throws InvalidOffsetException
 	{
+		if (sentence.sentence_string == null)
+		{
+			System.err.println("Warninig: EMPTY sentece!");
+			return;
+		}
+		
 		System.err.println(sentence.sentence_string);
 		
     	seq_anot.backup();
@@ -529,7 +536,8 @@ public class SAXTMTAnnotator extends DefaultHandler
 	public void annotate(Document doc) throws InvalidOffsetException
 	{
 		seq_anot = new SequenceAnnotator(doc);
-		as = doc.getAnnotations();
+		as = doc.getAnnotations("TectoMT");
+		as.clear();
 		
 		for (Sentence sentence : sentences)
 		{

@@ -13,7 +13,6 @@ import org.xml.sax.SAXException;
 import com.generationjava.io.xml.SimpleXmlWriter;
 import com.generationjava.io.xml.XmlWriter;
 
-import gate.AnnotationSet;
 import gate.Document;
 import gate.creole.AbstractResource;
 import gate.persist.PersistenceException;
@@ -71,9 +70,11 @@ public class TectoMTDocumentAnalyser
 
 	public void annotateGateDocumentAcordingtoTMTfile() throws ParserConfigurationException, SAXException, IOException, InvalidOffsetException, PersistenceException, SecurityException
 	{
-		AnnotationSet as = doc.getAnnotations();
-        as.clear();
-        
+		annotateGateDocumentAcordingtoTMTfile(dest_filename);
+	}
+
+	public void annotateGateDocumentAcordingtoTMTfile(String dest_filename) throws ParserConfigurationException, SAXException, IOException, InvalidOffsetException, PersistenceException, SecurityException
+	{        
     	SAXTMTAnnotator tmt_tree_annot = new SAXTMTAnnotator();
     	
     	tmt_tree_annot.parseAndInit(dest_filename);

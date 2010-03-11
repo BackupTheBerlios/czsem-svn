@@ -21,11 +21,16 @@ public class ProjectSetup implements Serializable {
 	{
 		dir_for_projects = Config.getConfig().getIlpProjestsPath()+'/';
 	}
-	public void init_project() throws FileNotFoundException, UnsupportedEncodingException
+	
+	public static String makeTimeStamp()
 	{
         Calendar rightNow = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd_HHmmss");
-        String time_stamp = df.format(rightNow.getTime());
+        return df.format(rightNow.getTime());		
+	}
+	public void init_project() throws FileNotFoundException, UnsupportedEncodingException
+	{
+        String time_stamp = makeTimeStamp();
         
         StringBuilder file_strb = new StringBuilder();
         file_strb.append(dir_for_projects);

@@ -30,6 +30,7 @@ import javax.xml.xpath.XPathExpressionException;
 import org.xml.sax.SAXException;
 
 import czsem.utils.ProcessExec;
+import czsem.utils.ProjectSetup;
 
 @CreoleResource(name = "czsem TectoMTAnalyser", comment = "Alyses givem corpus by TMT tools")
 public class TectoMTAnalyser extends AbstractLanguageAnalyser implements ProcessingResource, LanguageAnalyser
@@ -58,15 +59,19 @@ public class TectoMTAnalyser extends AbstractLanguageAnalyser implements Process
 				
 				if (documents_to_anlayse.size() == corpus.size())
 				{
-					Out.prln("Analyse !!!");
+					
+					Out.pr("Analyse !!!   ");
+					Out.prln(ProjectSetup.makeTimeStamp());
 					produceTMTAnalysis();
-					Out.prln("Analysed !!");
+					Out.pr("Analysed !!   ");
+					Out.prln(ProjectSetup.makeTimeStamp());
 					
 					for (TectoMTDocumentAnalyser a : documents_to_anlayse)
 					{
 						a.annotateGateDocumentAcordingtoTMTfile();
 					}
-					Out.prln("Annotated !");
+					Out.pr("Annotated !   ");
+					Out.prln(ProjectSetup.makeTimeStamp());
 					documents_to_anlayse.clear();
 				}
 			} 
@@ -232,7 +237,7 @@ public class TectoMTAnalyser extends AbstractLanguageAnalyser implements Process
 		
 		FeatureMap docFeatures = Factory.newFeatureMap();
 		
-		docFeatures.put(DataStore.LR_ID_FEATURE_NAME, "jihomoravsky49502.txt_0001C___1268231303049___7393");
+		docFeatures.put(DataStore.LR_ID_FEATURE_NAME, "jihomoravsky55629.txt_00051___1268301780492___4836");
 //		docFeatures.put(DataStore.LR_ID_FEATURE_NAME, "cesky na unixu____1268127896084___303");
 //		docFeatures.put(DataStore.LR_ID_FEATURE_NAME, "cesky1___1258555197823___5374");
 //		docFeatures.put(DataStore.LR_ID_FEATURE_NAME, "all50_serious_messages_noids_utf8___1267111757247___7332");
@@ -252,9 +257,10 @@ public class TectoMTAnalyser extends AbstractLanguageAnalyser implements Process
 		tmt.setBlocks(Arrays.asList(blocks));
 		tmt.setLoadScenarioFromFile(false);
 		
-		da.prepareTMTFile(new URL("file:/tmp/czsem/src/netgraph/czsem/TmT_serializations"));
-		tmt.produceTMTAnalysis();
-		da.annotateGateDocumentAcordingtoTMTfile();
+//		da.prepareTMTFile(new URL("file:/tmp/czsem/src/netgraph/czsem/TmT_serializations"));
+//		tmt.produceTMTAnalysis();
+//		da.annotateGateDocumentAcordingtoTMTfile();
+		da.annotateGateDocumentAcordingtoTMTfile("/tmp/czsem/src/netgraph/czsem/TmT_serializations/jihomoravsky55629.txt_00051(2).tmt");
 		
 		
 
