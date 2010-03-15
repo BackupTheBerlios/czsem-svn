@@ -1,0 +1,14 @@
+damage
+start
+end
+fatalities
+injuries
+cars
+amateur_units
+profesional_units
+pipes
+lather
+aqualung
+fan
+amateur_unit
+profesional_unit

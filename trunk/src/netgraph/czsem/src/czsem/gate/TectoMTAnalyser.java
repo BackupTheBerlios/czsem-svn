@@ -1,5 +1,6 @@
 package czsem.gate;
 
+import gate.Corpus;
 import gate.DataStore;
 import gate.Document;
 import gate.Factory;
@@ -9,12 +10,14 @@ import gate.LanguageAnalyser;
 import gate.ProcessingResource;
 import gate.Resource;
 import gate.corpora.DocumentImpl;
+import gate.corpora.SerialCorpusImpl;
 import gate.creole.AbstractLanguageAnalyser;
 import gate.creole.ExecutionException;
 import gate.creole.ResourceInstantiationException;
 import gate.creole.metadata.CreoleParameter;
 import gate.creole.metadata.CreoleResource;
 import gate.creole.metadata.Optional;
+import gate.persist.PersistenceException;
 import gate.util.GateException;
 import gate.util.Out;
 
@@ -215,7 +218,17 @@ public class TectoMTAnalyser extends AbstractLanguageAnalyser implements Process
 	}
 	*/	
 
-	
+
+	public static Resource loadResourceFormDatastore(DataStore ds, String calassName, String obj_id) throws ResourceInstantiationException
+	{
+		FeatureMap docFeatures = Factory.newFeatureMap();
+		
+		docFeatures.put(DataStore.LR_ID_FEATURE_NAME, obj_id);
+		docFeatures.put(DataStore.DATASTORE_FEATURE_NAME, ds);		
+
+		return Factory.createResource(calassName, docFeatures);
+	}
+		
 
 	public static void main(String[] args) throws GateException, ParserConfigurationException, SAXException, IOException, XPathExpressionException, InterruptedException
 	{
@@ -227,8 +240,11 @@ public class TectoMTAnalyser extends AbstractLanguageAnalyser implements Process
 	    	    
 //	    Gate.getCreoleRegister().registerDirectories(new URL("file:/C:/Program%20Files/GATE-5.0/plugins/Stanford/"));
 	    				
-//		DataStore ds = Factory.openDataStore("gate.persist.SerialDataStore", "file:/C:/Users/dedek/AppData/GATE/data_store/");
-		DataStore ds = Factory.openDataStore("gate.persist.SerialDataStore", "file:/home/dedek/workspace/crawlovani/gate_made/store1/");
+		DataStore ds = Factory.openDataStore("gate.persist.SerialDataStore", "file:/C:/Users/dedek/AppData/GATE/data_store/");
+		CorpusTester ct = new CorpusTester(ds);
+		ct.testDatastore();
+/*		
+//		DataStore ds = Factory.openDataStore("gate.persist.SerialDataStore", "file:/home/dedek/workspace/crawlovani/gate_made/store1/");
 		ds.open();
 		
 		for (Object string : ds.getLrIds("gate.corpora.DocumentImpl")) {
@@ -273,7 +289,8 @@ public class TectoMTAnalyser extends AbstractLanguageAnalyser implements Process
 		
 		
 		ds.sync(doc);		
-		ds.close();		
+		ds.close();
+		*/		
 	}
 
 	@CreoleParameter(comment="Directory where temporary TMT files are stored.", defaultValue="file:/tmp/czsem/src/netgraph/czsem/TmT_serializations")
