@@ -18,6 +18,11 @@ public class CZSemTree {
 	public static int deepord_attr = 5;
 
 
+	public NGTree getNGTree()
+	{
+		return tree;
+	}
+	
 	public CZSemTree(ShowMessagesAble p_mess) {
 		tree = new NGTree(p_mess);
 	}
@@ -177,6 +182,11 @@ public class CZSemTree {
 		node_array = tree.getNodesArray();
 	}
     
+	public int readTree (NGTreeHead head, String source)
+	{
+		return readTree(head, source.toCharArray(), 0, head.getSize());
+	}
+
 	public int readTree (NGTreeHead head, char[] p_source, int start_position, int p_number_of_attributes)
 	{
 		int ret = tree.readTree(head, p_source, start_position, p_number_of_attributes);

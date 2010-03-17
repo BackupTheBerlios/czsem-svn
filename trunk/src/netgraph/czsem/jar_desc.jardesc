@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="WINDOWS-1250" standalone="no"?>
 <jardesc>
     <jar path="czsem/GATE_plugins/czsem.jar"/>
     <options buildIfNeeded="true" compress="true" descriptionLocation="/czsem/jar_desc.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
@@ -17,6 +17,7 @@
         <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{ExamplesMaker.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;com.generationjava.io.xml{DelegatingXmlWriter.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{SAXTMTAnnotator.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{NetgraphTreeViewer.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{ILPExec.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;com.generationjava.io.xml{XmlWriter.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{FSExporter.java"/>
@@ -24,8 +25,8 @@
         <javaElement handleIdentifier="=czsem/src&lt;czsem.apps{CVStoILP_Accidents.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.utils{ProcessExec.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;com.generationjava.io.xml{EmptyElementXmlWriter.java"/>
-        <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{TectoMTAnalyser.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{ILPClassifier.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{TectoMTAnalyser.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.utils{CZSemTree.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{SentenceFSWriter.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{Serializer.java"/>
