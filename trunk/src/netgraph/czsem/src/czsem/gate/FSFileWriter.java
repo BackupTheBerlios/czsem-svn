@@ -13,6 +13,30 @@ public class FSFileWriter {
 	private PrintStream out = System.out;
 	
 	private ArrayList<String> attributes = null;
+
+	/** The order of elements is the same as in {@link #tokendependency_annotation_types} and {@link #token_annotation_types}. **/
+	public static final String[][] dependency_annotation_types =
+	{
+		{"tDependecy", "auxRfDependency"},
+		{"aDependecy"},		
+		{"Dependency"},
+	};
+	
+	/** The order of elements is the same as in {@link #dependency_annotation_types}. **/
+	public static final String[] tokendependency_annotation_types =
+	{
+		"lex.rf",
+		null, 
+		null
+	};
+
+
+	/** The order of elements is the same as in {@link #dependency_annotation_types}. **/
+	public static final String[] token_annotation_types =
+	{		
+		"tToken",
+		"Token",
+	};
 		
 	public static final String[] default_attributes =
 	{

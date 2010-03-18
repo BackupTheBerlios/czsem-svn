@@ -396,11 +396,13 @@ public boolean supportsCancel()
     
     DataStore ds = TectoMTAnalyser.openDataStore("file:/C:/Users/dedek/AppData/GATE/data_store/");
     ds.open();
-//    CorpusTester.printStoredIds(ds);
+    CorpusTester.printStoredIds(ds);
     
-    Document doc = TectoMTAnalyser.loadDocumentFormDatastore(ds, "english___1268833529545___270");
+    Document doc = TectoMTAnalyser.loadDocumentFormDatastore(ds, "jihomoravsky58029.txt.xml_00A36___1268383940724___4619");
+//    Document doc = TectoMTAnalyser.loadDocumentFormDatastore(ds, "english___1268833529545___270");
+
     
-    Annotation sentece_annot = doc.getAnnotations().get("Sentence").iterator().next();
+    Annotation sentece_annot = doc.getAnnotations("TectoMT").get("Sentence").iterator().next();
     
     System.err.println(sentece_annot.getType());
     
@@ -465,7 +467,7 @@ public boolean supportsCancel()
     frame.pack();
     frame.setVisible(true);
     
-    syntaxTreeViewer1.editAnnotation(sentece_annot, doc.getAnnotations());
+    syntaxTreeViewer1.editAnnotation(sentece_annot, doc.getAnnotations("TectoMT"));
     
     ds.close();
 
