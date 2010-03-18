@@ -219,6 +219,15 @@ public class TectoMTAnalyser extends AbstractLanguageAnalyser implements Process
 	*/	
 
 
+	public static DataStore openDataStore(String storage_url) throws PersistenceException
+	{
+		return Factory.openDataStore("gate.persist.SerialDataStore", storage_url); 
+	}
+
+	public static Document loadDocumentFormDatastore(DataStore ds, String docId) throws ResourceInstantiationException {
+		return (Document) TectoMTAnalyser.loadResourceFormDatastore(ds, "gate.corpora.DocumentImpl", docId);
+	}
+
 	public static Resource loadResourceFormDatastore(DataStore ds, String calassName, String obj_id) throws ResourceInstantiationException
 	{
 		FeatureMap docFeatures = Factory.newFeatureMap();
@@ -240,7 +249,7 @@ public class TectoMTAnalyser extends AbstractLanguageAnalyser implements Process
 	    	    
 //	    Gate.getCreoleRegister().registerDirectories(new URL("file:/C:/Program%20Files/GATE-5.0/plugins/Stanford/"));
 	    				
-		DataStore ds = Factory.openDataStore("gate.persist.SerialDataStore", "file:/C:/Users/dedek/AppData/GATE/data_store/");
+		DataStore ds = openDataStore("file:/C:/Users/dedek/AppData/GATE/data_store/");
 		CorpusTester ct = new CorpusTester(ds);
 		ct.testDatastore();
 /*		
@@ -347,6 +356,7 @@ public class TectoMTAnalyser extends AbstractLanguageAnalyser implements Process
 	public void setLoadScenarioFromFile(Boolean loadScenarioFromFile) {
 		this.loadScenarioFromFile = loadScenarioFromFile;
 	}
+
 
 
 }

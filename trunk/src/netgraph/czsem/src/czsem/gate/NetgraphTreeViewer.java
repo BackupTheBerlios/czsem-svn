@@ -2,6 +2,9 @@ package czsem.gate;
 import java.awt.*;
 import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.net.URL;
 import java.util.*;
 
 import javax.swing.*;
@@ -44,14 +47,19 @@ public class NetgraphTreeViewer extends AbstractVisualResource
 		forestDisplay.getTreeProperties().setShowHiddenNodes(true);
 		forestDisplay.getTreeProperties().setShowNullValues(false);
 		forestDisplay.getTreeProperties().setShowMultipleSets(true);
-		forestDisplay.getTreeProperties().setShowAttrNames(true);
+		forestDisplay.getTreeProperties().setShowAttrNames(false);
 				
 		forestDisplay.repaint();
 	}
 
 	@Override
-	public void editAnnotation(Annotation ann, AnnotationSet set)
+	public void editAnnotation(Annotation annotation, AnnotationSet annotation_set)
 	{
+	    System.err.println(annotation.getType());
+	    
+	    Annotation sentence = annotation;
+
+		
 		NGTree tree = new NGTree(null);
 		NGForest ngf = new NGForest(null);
 		NGTreeHead th = new NGTreeHead(null);
@@ -64,7 +72,18 @@ public class NetgraphTreeViewer extends AbstractVisualResource
 		
 		th.N = th.W = 0;  
 		String str_tree = "[20,9271,root,wrong,JJ,lowercase,word]([6,9243,nsubj,story,NN,lowercase,word]([5,9241,det,the,DT,lowercase,word],[13,9257,dep,offset,VBN,lowercase,word]([14,9259,prep,by,IN,lowercase,word]([17,9265,pobj,rates,NNS,lowercase,word]([16,9263,nn,interest,NN,lowercase,word],[15,9261,amod,falling,VBG,lowercase,word])),[11,9253,aux,have,VBP,lowercase,word],[12,9255,auxpass,been,VBN,lowercase,word],[10,9251,nsubjpass,prices,NNS,lowercase,word]([9,9249,nn,home,NN,lowercase,word],[8,9247,amod,rising,VBG,lowercase,word]),[7,9245,complm,that,IN,lowercase,word])),[0,9232,prep,In,IN,upperInitial,word]([3,9238,pobj,Zone,NNP,upperInitial,word]([2,9236,nn,Zoned,NNP,upperInitial,word],[1,9234,det,the,DT,lowercase,word])),[19,9269,advmod,all,RB,lowercase,word],[24,9278,parataxis,risen,VBN,lowercase,word]([22,9274,nsubj,prices,NNS,lowercase,word],[23,9276,aux,have,VBP,lowercase,word],[26,9282,advmod,much,RB,lowercase,word]([30,9290,dep,become,VBN,lowercase,word]([33,9296,dep,affordable,JJ,lowercase,word]([32,9294,advmod,less,RBR,lowercase,word],[31,9292,advmod,much,RB,lowercase,word]),[29,9288,aux,has,VBZ,lowercase,word],[28,9286,nsubj,housing,NN,lowercase,word],[27,9284,dep,that,IN,lowercase,word]),[25,9280,advmod,so,RB,lowercase,word])),[18,9267,cop,is,VBZ,lowercase,word])";
-		tree.readTree(th, str_tree.toCharArray(), 0, 7);
+		
+		AnnotationSet sentence_set = annotation_set.getContained(
+				sentence.getStartNode().getOffset(), sentence.getEndNode().getOffset());
+		
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		
+		SentenceFSWriter wr = new SentenceFSWriter(sentence_set, new PrintStream(os), Arrays.asList(FSFileWriter.default_attributes));
+		wr.printTree();
+
+		
+//		tree.readTree(th, str_tree.toCharArray(), 0, 7);
+		tree.readTree(th, os.toString().toCharArray(), 0, FSFileWriter.default_attributes.length);
 		ngf.setHead(th);
 		ngf.addTree(tree);
 		ngf.getVybraneAtributy().add(0, "3");
@@ -372,16 +391,32 @@ public boolean supportsCancel()
 //
   public static void main(String[] args) throws Exception {
     Gate.init();
-    final String text = "This is a sentence. That is another one.";
-//    final String text = "\u0915\u0932\u094d\u0907\u0928\u0643\u0637\u0628 \u041a\u0430\u043b\u0438\u043d\u0430 Kalina";
-    final Document doc = Factory.newDocument(text);
+    Gate.getCreoleRegister().registerDirectories(new URL("file:/C:/Program%20Files/GATE-5.1/plugins/Parser_Stanford/"));
+
     
-    Integer an_id = doc.getAnnotations().add(0L, new Long(text.length()), "Sentence", Factory.newFeatureMap());
-   
-    doc.getAnnotations().add(0L, 4L, "Token", Factory.newFeatureMap());
-    doc.getAnnotations().add(5L, 7L, "Token", Factory.newFeatureMap());
-    doc.getAnnotations().add(8L, 9L, "Token", Factory.newFeatureMap());
-    doc.getAnnotations().add(10L, 18L, "Token", Factory.newFeatureMap());
+    DataStore ds = TectoMTAnalyser.openDataStore("file:/C:/Users/dedek/AppData/GATE/data_store/");
+    ds.open();
+//    CorpusTester.printStoredIds(ds);
+    
+    Document doc = TectoMTAnalyser.loadDocumentFormDatastore(ds, "english___1268833529545___270");
+    
+    Annotation sentece_annot = doc.getAnnotations().get("Sentence").iterator().next();
+    
+    System.err.println(sentece_annot.getType());
+    
+    
+    
+    
+//    final String text = "This is a sentence. That is another one.";
+////    final String text = "\u0915\u0932\u094d\u0907\u0928\u0643\u0637\u0628 \u041a\u0430\u043b\u0438\u043d\u0430 Kalina";
+//    doc = Factory.newDocument(text);
+//    
+//    Integer an_id = doc.getAnnotations().add(0L, new Long(text.length()), "Sentence", Factory.newFeatureMap());
+//   
+//    doc.getAnnotations().add(0L, 4L, "Token", Factory.newFeatureMap());
+//    doc.getAnnotations().add(5L, 7L, "Token", Factory.newFeatureMap());
+//    doc.getAnnotations().add(8L, 9L, "Token", Factory.newFeatureMap());
+//    doc.getAnnotations().add(10L, 18L, "Token", Factory.newFeatureMap());
     
 
     // that works too but only use if you have the test file there.
@@ -405,6 +440,7 @@ public boolean supportsCancel()
 
     frame.getContentPane().add(syntaxTreeViewer1, BorderLayout.CENTER);
     // intercept the closing event to shut the application
+/*
     frame.addWindowListener(new WindowAdapter() {
       public void windowClosing(WindowEvent e) {
         AnnotationSet hs = doc.getAnnotations().get("SyntaxTreeNode");
@@ -419,7 +455,7 @@ public boolean supportsCancel()
         //System.exit(0);
       }
     });
-
+*/
     //Put the bean in a scroll pane.
     JScrollPane scroller = new JScrollPane(syntaxTreeViewer1);
     scroller.setPreferredSize(syntaxTreeViewer1.getPreferredSize());
@@ -429,7 +465,9 @@ public boolean supportsCancel()
     frame.pack();
     frame.setVisible(true);
     
-    syntaxTreeViewer1.editAnnotation(doc.getAnnotations().get(an_id), doc.getAnnotations());
+    syntaxTreeViewer1.editAnnotation(sentece_annot, doc.getAnnotations());
+    
+    ds.close();
 
   }// public static void main
 //

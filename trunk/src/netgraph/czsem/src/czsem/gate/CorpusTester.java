@@ -20,6 +20,12 @@ public class CorpusTester
 	public CorpusTester(DataStore ds) {
 		this.ds = ds;
 	}
+	
+	public CorpusTester(String storageURL) throws PersistenceException
+	{
+	    ds = TectoMTAnalyser.openDataStore(storageURL);
+	}
+
 
 	private int addAnntoToMultiset(String key)
 	{
@@ -74,15 +80,22 @@ public class CorpusTester
 			System.err.print("     ");
 			System.err.println(doc_id);
 			
-			testDocument((Document) TectoMTAnalyser.loadResourceFormDatastore(ds, "gate.corpora.DocumentImpl", doc_id));
+			testDocument(TectoMTAnalyser.loadDocumentFormDatastore(ds, doc_id));
 		}		
 	}
 
-	public void testDatastore() throws PersistenceException, ResourceInstantiationException
+	public void open() throws PersistenceException
 	{
-		System.err.println("open");			
 		ds.open();
-		
+	}
+
+	public void close() throws PersistenceException
+	{
+		ds.close();
+	}
+
+	public static void printStoredIds(DataStore ds) throws PersistenceException
+	{
 		for (Object o : ds.getLrTypes())
 		{
 			System.err.println(o);			
@@ -90,7 +103,15 @@ public class CorpusTester
 				System.err.print("     ");
 				System.err.println(string);
 			}
-		}
+		}		
+	}
+
+	public void testDatastore() throws PersistenceException, ResourceInstantiationException
+	{
+		System.err.println("open");			
+		open();
+		
+		printStoredIds(ds);
 		
 		for (Object obj_corpus_id : ds.getLrIds("gate.corpora.SerialCorpusImpl"))
 		{
@@ -99,13 +120,13 @@ public class CorpusTester
 			testCorpus(corpus);			
 		}
 		
-		dumpAnnotMultiset();
+		printAnnotMultiset();
 		
-		ds.close();
+		close();
 		System.err.println("closed");			
 	}
 
-	private void dumpAnnotMultiset()
+	private void printAnnotMultiset()
 	{
 		for (String key: annot_mutiset.keySet())
 		{
