@@ -3,14 +3,14 @@ package czsem.gate;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
+
+import cz.cuni.mff.mirovsky.trees.Attribute;
+import cz.cuni.mff.mirovsky.trees.NGTreeHead;
 
 import gate.Annotation;
 import gate.AnnotationSet;
@@ -80,8 +80,11 @@ public class SentenceFSWriter
 
 		private void printCildren(int father_id)
 		{
+			List<Integer> childern = dependencies.get(father_id);
+			if (childern == null) return;
+
 			char delim = '('; 
-			for (int child_id : dependencies.get(father_id))
+			for (int child_id : childern)
 			{
 				out.print(delim);
 				delim = ',';
@@ -157,10 +160,10 @@ public class SentenceFSWriter
 	
 			
 	private AnnotationSet annotations;
-	private AnnotationSet dependenciesAS;
-	private List<String> attributes;
+	private String [] attributes;
 	
 	private PrintStream out = System.out;
+
 	
 
 	public static Set<String> setFromArray(String[] array)
@@ -185,19 +188,59 @@ public class SentenceFSWriter
 		return attr_set.toArray(new String[0]);		
 	}
 	
-	public SentenceFSWriter(AnnotationSet sentence_annotations, PrintStream out, List<String> attributes)
+	public NGTreeHead createTreeHead()
 	{
-		this.attributes = attributes;
+		NGTreeHead th = new NGTreeHead(null);
+		
+		for (int i = 0; i < attributes.length; i++)
+		{
+			th.addAttribute(new Attribute(attributes[i]));			
+//			ngf.getVybraneAtributy().add(i, Integer.toString(i));
+		}
+		
+		th.N = th.W = 0;  
+
+		return th;
+	}
+	
+	public static String [] arrayConcatenate(String [] first, String [] second)
+	{
+		String [] ret = new String[first.length + second.length];
+		System.arraycopy(first, 0, ret, 0, first.length);
+		System.arraycopy(second, 0, ret, first.length, second.length);
+		return ret;		
+	}
+
+	private void initAttributes(String [] additional_attributes)
+	{
+		attributes = arrayConcatenate(FSFileWriter.default_attributes, additional_attributes);			
+	}
+	
+	public SentenceFSWriter(AnnotationSet sentence_annotations, PrintStream out)
+	{
 		this.out = out;		
 		this.annotations = sentence_annotations;
-//		dependenciesAS = annotations.get("Dependency");
-		
-		String [] attrs = guessAtttributes();
+
+		String[] attrs = guessAtttributes();
 		Arrays.sort(attrs);
 		for (int i = 0; i < attrs.length; i++) {
 			System.err.println(attrs[i]);
-		}
+		}		
 		
+		initAttributes(attrs);
+	}
+
+	public SentenceFSWriter(AnnotationSet sentence_annotations, PrintStream out, List<String> additional_attributes)
+	{
+		this.out = out;		
+		this.annotations = sentence_annotations;
+		
+		initAttributes(additional_attributes.toArray(new String[0]));
+		
+//		dependenciesAS = annotations.get("Dependency");
+		
+
+/*		
 		for (int a=0; a<FSFileWriter.dependency_annotation_types.length; a++)
 		{
 			TreeBuilder tb = new TreeBuilder();
@@ -216,6 +259,7 @@ public class SentenceFSWriter
 			
 			tb.printTree(System.err, attrs, annotations);
 		}
+*/		
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -227,106 +271,32 @@ public class SentenceFSWriter
 		ret[1] = list.get(1);
 		return ret;
 	}
-
 	
 	/**
-	 * Adds the feature "ord", which contains the order of given token in a sentence. 
+	 * @param dependency_annotation_type 
+	 * @see FSFileWriter#dependency_annotation_types
 	 */
-	private void numberSentenceTokens()
-	{		
-		Annotation [] tokens = annotations.get("Token").toArray(new Annotation[0]);
-
-					
-		Arrays.sort(tokens, new Comparator<Annotation>() {
-			public int compare(Annotation a1, Annotation a2) {
-				return  a1.getId().compareTo(a2.getId());
-		}});
-		
-		int ord = 0;
-		for (Annotation a : tokens)
-		{
-			a.getFeatures().put("ord", ord++);
-		}
-	}
-	
-	private int findRoot()
+	public void printTree(int dependency_annotation_type)
 	{
-		if (dependenciesAS.size() <= 0) return -1;			
+//		for (int dependency_annotation_type=0; dependency_annotation_type<FSFileWriter.dependency_annotation_types.length; dependency_annotation_type++)
+//		{
+			TreeBuilder tb = new TreeBuilder();
+			
+			AnnotationSet dependenciesAS = annotations.get(
+					setFromArray(FSFileWriter.dependency_annotation_types[dependency_annotation_type]));
 		
-		Annotation a = (Annotation) dependenciesAS.iterator().next();
-		
-		int ret = decodeEdge(a)[0];
-		int new_ret;
-		
-		for (;;) {		
-			new_ret = -1;
-			for (Annotation dep : dependenciesAS)
+			tb.fillDependecies(dependenciesAS);
+			
+
+			if (FSFileWriter.tokendependency_annotation_types[dependency_annotation_type] != null)
 			{
-				int [] edge = decodeEdge(dep);
-				if (edge[1] == ret)
-				{
-					new_ret = edge[0];
-					break;				
-				}
+				tb.fillTokenDependecies(annotations.get(FSFileWriter.token_annotation_types[dependency_annotation_type]), 
+						FSFileWriter.tokendependency_annotation_types[dependency_annotation_type]);
 			}
 			
-			if (new_ret == -1) break;
-			
-			ret = new_ret;			
-		} 
-		
-		return ret;	
-	}
-	
-	private void printCildren(int father_id)
-	{
-		char delim = '('; 
-		for (Annotation dep : dependenciesAS)
-		{
-			int [] edge = decodeEdge(dep);
-			if (edge[0] == father_id)
-			{
-				out.print(delim);
-				delim = ',';
-				printNode(edge[1], (String) dep.getFeatures().get("kind"));
-			}
-		}			
-		if (delim == ',') out.print(')');
-	}
+			tb.printTree(out, attributes, annotations);
+//		}
 
-	private void printNode(int node_id, String kind_attr)
-	{
-		Annotation node = annotations.get(node_id);		
-		if (node == null) return;
-		
-		out.print('[');
-		for (int a=0; ;)
-		{
-			switch (a) {
-			case FSFileWriter.DEPENDECY_INDEX:
-				out.print(kind_attr);						
-				break;
-			case FSFileWriter.ID_INDEX:
-				out.print(node_id);
-				break;
-			default:
-				out.print(node.getFeatures().get(attributes.get(a)));
-				break;
-			}
-			
-			if (++a >= attributes.size()) break;
-			out.print(',');					
-		}
-		out.print(']');
-				
-		printCildren(node_id);
-	}
-
-	public void printTree()
-	{
-		numberSentenceTokens();
-		
-		printNode(findRoot(), "root");
 		
 		out.println();
 	}

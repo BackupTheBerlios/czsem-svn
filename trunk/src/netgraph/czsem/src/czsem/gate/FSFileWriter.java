@@ -42,9 +42,9 @@ public class FSFileWriter {
 	{
 		"ord",
 		"id",
-		"dependency",		
+//		"dependency",		
 //		"category",		
-		"string"
+//		"string"
 	};
 	
 	public static final int ORD_INDEX = 0;
@@ -98,7 +98,7 @@ public class FSFileWriter {
 					sentence.getStartNode().getOffset(), sentence.getEndNode().getOffset());
 						
 			SentenceFSWriter wr = new SentenceFSWriter(sentence_set, out, attributes);
-			wr.printTree();
+			wr.printTree(0);
 		}		
 	}
 	

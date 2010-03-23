@@ -62,7 +62,7 @@ public class NetgraphTreeViewer extends AbstractVisualResource
 		
 		NGTree tree = new NGTree(null);
 		NGForest ngf = new NGForest(null);
-		NGTreeHead th = new NGTreeHead(null);
+/*		NGTreeHead th = new NGTreeHead(null);
 		
 		for (int i = 0; i < 7; i++)
 		{
@@ -72,21 +72,26 @@ public class NetgraphTreeViewer extends AbstractVisualResource
 		
 		th.N = th.W = 0;  
 		String str_tree = "[20,9271,root,wrong,JJ,lowercase,word]([6,9243,nsubj,story,NN,lowercase,word]([5,9241,det,the,DT,lowercase,word],[13,9257,dep,offset,VBN,lowercase,word]([14,9259,prep,by,IN,lowercase,word]([17,9265,pobj,rates,NNS,lowercase,word]([16,9263,nn,interest,NN,lowercase,word],[15,9261,amod,falling,VBG,lowercase,word])),[11,9253,aux,have,VBP,lowercase,word],[12,9255,auxpass,been,VBN,lowercase,word],[10,9251,nsubjpass,prices,NNS,lowercase,word]([9,9249,nn,home,NN,lowercase,word],[8,9247,amod,rising,VBG,lowercase,word]),[7,9245,complm,that,IN,lowercase,word])),[0,9232,prep,In,IN,upperInitial,word]([3,9238,pobj,Zone,NNP,upperInitial,word]([2,9236,nn,Zoned,NNP,upperInitial,word],[1,9234,det,the,DT,lowercase,word])),[19,9269,advmod,all,RB,lowercase,word],[24,9278,parataxis,risen,VBN,lowercase,word]([22,9274,nsubj,prices,NNS,lowercase,word],[23,9276,aux,have,VBP,lowercase,word],[26,9282,advmod,much,RB,lowercase,word]([30,9290,dep,become,VBN,lowercase,word]([33,9296,dep,affordable,JJ,lowercase,word]([32,9294,advmod,less,RBR,lowercase,word],[31,9292,advmod,much,RB,lowercase,word]),[29,9288,aux,has,VBZ,lowercase,word],[28,9286,nsubj,housing,NN,lowercase,word],[27,9284,dep,that,IN,lowercase,word]),[25,9280,advmod,so,RB,lowercase,word])),[18,9267,cop,is,VBZ,lowercase,word])";
-		
+*/		
 		AnnotationSet sentence_set = annotation_set.getContained(
 				sentence.getStartNode().getOffset(), sentence.getEndNode().getOffset());
 		
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		
-		SentenceFSWriter wr = new SentenceFSWriter(sentence_set, new PrintStream(os), Arrays.asList(FSFileWriter.default_attributes));
-		wr.printTree();
+		SentenceFSWriter wr = new SentenceFSWriter(sentence_set, new PrintStream(os));
+		wr.printTree(1);
+		
+		System.err.println(os.toString());
+		
+		NGTreeHead th = wr.createTreeHead();
 
 		
 //		tree.readTree(th, str_tree.toCharArray(), 0, 7);
-		tree.readTree(th, os.toString().toCharArray(), 0, FSFileWriter.default_attributes.length);
+		tree.readTree(th, os.toString().toCharArray(), 0, th.getSize());
 		ngf.setHead(th);
 		ngf.addTree(tree);
-		ngf.getVybraneAtributy().add(0, "3");
+		ngf.getVybraneAtributy().add(0, "form");
+		ngf.getVybraneAtributy().add(0, "ord");
 
 		
 //		tree.readTree(th, "[_name=action_type,gram/sempos=v,t_lemma=zranit|usmrtit|zemøít|zahynout|pøežít]([m/tag=??????????N*,_name=a-negation,hide=true,_optional=true],[functor=MANN,_name=injury_manner,_optional=true],[functor=ACT|PAT,t_lemma=kdo|èlovìk|osoba|muž|žena|dítì|øidiè|øidièka|spolujezdec|spolujezdkynì,_name=participant,_transitive=true]([functor=RSTR,gram/sempos=n.quant.*|adj.quant.*,_name=quantity,_optional=true]))");
