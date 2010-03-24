@@ -54,50 +54,36 @@ public class NetgraphTreeViewer extends AbstractVisualResource
 
 	@Override
 	public void editAnnotation(Annotation annotation, AnnotationSet annotation_set)
-	{
-	    System.err.println(annotation.getType());
-	    
+	{  
 	    Annotation sentence = annotation;
-
 		
 		NGTree tree = new NGTree(null);
 		NGForest ngf = new NGForest(null);
-/*		NGTreeHead th = new NGTreeHead(null);
-		
-		for (int i = 0; i < 7; i++)
-		{
-			th.addAttribute(new Attribute(Integer.toString(i)));			
-//			ngf.getVybraneAtributy().add(i, Integer.toString(i));
-		}
-		
-		th.N = th.W = 0;  
-		String str_tree = "[20,9271,root,wrong,JJ,lowercase,word]([6,9243,nsubj,story,NN,lowercase,word]([5,9241,det,the,DT,lowercase,word],[13,9257,dep,offset,VBN,lowercase,word]([14,9259,prep,by,IN,lowercase,word]([17,9265,pobj,rates,NNS,lowercase,word]([16,9263,nn,interest,NN,lowercase,word],[15,9261,amod,falling,VBG,lowercase,word])),[11,9253,aux,have,VBP,lowercase,word],[12,9255,auxpass,been,VBN,lowercase,word],[10,9251,nsubjpass,prices,NNS,lowercase,word]([9,9249,nn,home,NN,lowercase,word],[8,9247,amod,rising,VBG,lowercase,word]),[7,9245,complm,that,IN,lowercase,word])),[0,9232,prep,In,IN,upperInitial,word]([3,9238,pobj,Zone,NNP,upperInitial,word]([2,9236,nn,Zoned,NNP,upperInitial,word],[1,9234,det,the,DT,lowercase,word])),[19,9269,advmod,all,RB,lowercase,word],[24,9278,parataxis,risen,VBN,lowercase,word]([22,9274,nsubj,prices,NNS,lowercase,word],[23,9276,aux,have,VBP,lowercase,word],[26,9282,advmod,much,RB,lowercase,word]([30,9290,dep,become,VBN,lowercase,word]([33,9296,dep,affordable,JJ,lowercase,word]([32,9294,advmod,less,RBR,lowercase,word],[31,9292,advmod,much,RB,lowercase,word]),[29,9288,aux,has,VBZ,lowercase,word],[28,9286,nsubj,housing,NN,lowercase,word],[27,9284,dep,that,IN,lowercase,word]),[25,9280,advmod,so,RB,lowercase,word])),[18,9267,cop,is,VBZ,lowercase,word])";
-*/		
+
 		AnnotationSet sentence_set = annotation_set.getContained(
 				sentence.getStartNode().getOffset(), sentence.getEndNode().getOffset());
 		
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		
 		SentenceFSWriter wr = new SentenceFSWriter(sentence_set, new PrintStream(os));
-		wr.printTree(1);
+		wr.printTree(2);
 		
 		System.err.println(os.toString());
 		
-		NGTreeHead th = wr.createTreeHead();
 
 		
-//		tree.readTree(th, str_tree.toCharArray(), 0, 7);
+		NGTreeHead th = wr.createTreeHead();
 		tree.readTree(th, os.toString().toCharArray(), 0, th.getSize());
 		ngf.setHead(th);
 		ngf.addTree(tree);
+		ngf.getVybraneAtributy().add(0, "id");
+		ngf.getVybraneAtributy().add(0, "t_lemma");
 		ngf.getVybraneAtributy().add(0, "form");
-		ngf.getVybraneAtributy().add(0, "ord");
+		ngf.getVybraneAtributy().add(0, "string");
+		ngf.getVybraneAtributy().add(0, FSFileWriter.ORD_FEATURENAME);
 
-		
-//		tree.readTree(th, "[_name=action_type,gram/sempos=v,t_lemma=zranit|usmrtit|zemøít|zahynout|pøežít]([m/tag=??????????N*,_name=a-negation,hide=true,_optional=true],[functor=MANN,_name=injury_manner,_optional=true],[functor=ACT|PAT,t_lemma=kdo|èlovìk|osoba|muž|žena|dítì|øidiè|øidièka|spolujezdec|spolujezdkynì,_name=participant,_transitive=true]([functor=RSTR,gram/sempos=n.quant.*|adj.quant.*,_name=quantity,_optional=true]))");
-		
-		setForest(ngf);
-		
+			
+		setForest(ngf);		
 	}
 	
 @Override
@@ -398,46 +384,7 @@ public boolean supportsCancel()
     Gate.init();
     Gate.getCreoleRegister().registerDirectories(new URL("file:/C:/Program%20Files/GATE-5.1/plugins/Parser_Stanford/"));
 
-    
-    DataStore ds = TectoMTAnalyser.openDataStore("file:/C:/Users/dedek/AppData/GATE/data_store/");
-    ds.open();
-    CorpusTester.printStoredIds(ds);
-    
-    Document doc = TectoMTAnalyser.loadDocumentFormDatastore(ds, "jihomoravsky58029.txt.xml_00A36___1268383940724___4619");
-//    Document doc = TectoMTAnalyser.loadDocumentFormDatastore(ds, "english___1268833529545___270");
-
-    
-    Annotation sentece_annot = doc.getAnnotations("TectoMT").get("Sentence").iterator().next();
-    
-    System.err.println(sentece_annot.getType());
-    
-    
-    
-    
-//    final String text = "This is a sentence. That is another one.";
-////    final String text = "\u0915\u0932\u094d\u0907\u0928\u0643\u0637\u0628 \u041a\u0430\u043b\u0438\u043d\u0430 Kalina";
-//    doc = Factory.newDocument(text);
-//    
-//    Integer an_id = doc.getAnnotations().add(0L, new Long(text.length()), "Sentence", Factory.newFeatureMap());
-//   
-//    doc.getAnnotations().add(0L, 4L, "Token", Factory.newFeatureMap());
-//    doc.getAnnotations().add(5L, 7L, "Token", Factory.newFeatureMap());
-//    doc.getAnnotations().add(8L, 9L, "Token", Factory.newFeatureMap());
-//    doc.getAnnotations().add(10L, 18L, "Token", Factory.newFeatureMap());
-    
-
-    // that works too but only use if you have the test file there.
-    // final Document doc = Factory.newDocument(
-    //                        new URL("file:///z:/temp/weird.txt"), "UTF-8");
-
-
-    final NetgraphTreeViewer syntaxTreeViewer1 =
-      new NetgraphTreeViewer();
-    //syntaxTreeViewer1.setUnicodeSupportEnabled(true);
-    //need to set the document here!!!!
-    
-
-
+    final NetgraphTreeViewer syntaxTreeViewer1 =    new NetgraphTreeViewer();
     JFrame frame = new JFrame();
 
     //INITIALISE THE FRAME, ETC.
@@ -446,23 +393,7 @@ public boolean supportsCancel()
     frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
     frame.getContentPane().add(syntaxTreeViewer1, BorderLayout.CENTER);
-    // intercept the closing event to shut the application
-/*
-    frame.addWindowListener(new WindowAdapter() {
-      public void windowClosing(WindowEvent e) {
-        AnnotationSet hs = doc.getAnnotations().get("SyntaxTreeNode");
-        if (hs != null && hs.size() > 0) {
-          int k = 0;
-          for (Iterator i = hs.iterator(); i.hasNext(); k++) {
-            Out.println("Tree Annot " + k + ": ");
-            Out.println(i.next().toString());
-          }
-        } //if
-        Out.println("Exiting...");
-        //System.exit(0);
-      }
-    });
-*/
+
     //Put the bean in a scroll pane.
     JScrollPane scroller = new JScrollPane(syntaxTreeViewer1);
     scroller.setPreferredSize(syntaxTreeViewer1.getPreferredSize());
@@ -471,8 +402,26 @@ public boolean supportsCancel()
     //DISPLAY FRAME
     frame.pack();
     frame.setVisible(true);
+
     
-    syntaxTreeViewer1.editAnnotation(sentece_annot, doc.getAnnotations("TectoMT"));
+    
+    
+    
+    
+    
+
+    DataStore ds = TectoMTAnalyser.openDataStore("file:/C:/Users/dedek/AppData/GATE/data_store/");
+    ds.open();
+    CorpusTester.printStoredIds(ds);
+    
+//    Document doc = TectoMTAnalyser.loadDocumentFormDatastore(ds, "jihomoravsky58029.txt.xml_00A36___1268383940724___4619");
+//    AnnotationSet as = doc.getAnnotations("TectoMT");
+    Document doc = TectoMTAnalyser.loadDocumentFormDatastore(ds, "english___1268833529545___270");
+    AnnotationSet as = doc.getAnnotations();
+    
+    Annotation sentece_annot = as.get("Sentence").iterator().next();
+    
+    syntaxTreeViewer1.editAnnotation(sentece_annot, as);
     
     ds.close();
 

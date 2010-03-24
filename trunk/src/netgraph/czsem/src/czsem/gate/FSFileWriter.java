@@ -40,17 +40,19 @@ public class FSFileWriter {
 		
 	public static final String[] default_attributes =
 	{
-		"ord",
+//		"ord",
 		"id",
 //		"dependency",		
 //		"category",		
 //		"string"
 	};
 	
-	public static final int ORD_INDEX = 0;
-	public static final int ID_INDEX = 1;
-	public static final int DEPENDECY_INDEX = 2;
-	public static final int STRNG_INDEX = default_attributes.length-1;
+	public static final int ID_INDEX = 0;
+//	public static final int DEPENDECY_INDEX = 2;
+//	public static final int STRNG_INDEX = default_attributes.length-1;
+	public static final String ORD_FEATURENAME = "sentence_order";
+	public static final String STRING_FEATURENAME = "string";
+	public static final String HIDE_FEATURENAME = "hidden";
 
 	
 	public FSFileWriter() {};
@@ -69,9 +71,9 @@ public class FSFileWriter {
 		}
 		
 		out.print("@N ");
-		out.println(default_attributes[ORD_INDEX]);
+		out.println(ORD_FEATURENAME);
 		out.print("@V ");
-		out.println(default_attributes[STRNG_INDEX]);
+		out.println(STRING_FEATURENAME);
 
 
 /*			

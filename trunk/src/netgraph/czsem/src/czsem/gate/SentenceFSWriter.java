@@ -3,6 +3,7 @@ package czsem.gate;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -19,8 +20,17 @@ public class SentenceFSWriter
 {
 	public static class TreeBuilder
 	{
+		private PrintStream out;
+		private AnnotationSet annotations;
+		private String [] attributes;
+
 		private Map<Integer, List<Integer>> dependencies = new HashMap<Integer, List<Integer>>(); 
-		private Map<Integer, Integer> parents = new HashMap<Integer, Integer>(); 		
+		private Map<Integer, Integer> parents = new HashMap<Integer, Integer>();
+		private int root; 		
+
+		public TreeBuilder(AnnotationSet annotations) {
+			this.annotations = annotations;
+		}
 
 		protected void addDpendency(int parent_id, int child_id)
 		{
@@ -63,19 +73,18 @@ public class SentenceFSWriter
 			}							
 		}
 		
-		private int findRoot()
+		public int findRoot()
 		{
 			if (parents.entrySet().isEmpty()) return -1;
 			
-			int ret = -1;
+			root = -1;
 			for (Integer i = parents.entrySet().iterator().next().getValue(); i != null; i = parents.get(i))
 			{
 				System.err.println(i);
-				ret = i;
+				root = i;
 			}
 			
-			return ret;
-			
+			return root;			
 		}
 
 		private void printCildren(int father_id)
@@ -93,35 +102,51 @@ public class SentenceFSWriter
 			if (delim == ',') out.print(')');
 		}
 
+		
+		private void printAttribute(String attr_name, Object attr_value)		
+		{
+			out.print(attr_name);
+			out.print('=');
+			
+			String str_value = attr_value.toString();
+			String functional_chars = "\\=,[]|<>!";
+			
+			for (int i=0; i<str_value.length(); i++)
+			{
+				char ch = str_value.charAt(i);
+				if (functional_chars.indexOf(ch) != -1) out.print('\\');
+				out.print(ch);
+			}
+		}
+		
 		private void printNode(int node_id)
 		{
-			Annotation node = tokens.get(node_id);		
+			Annotation node = annotations.get(node_id);		
 			if (node == null) return;
 			
 			out.print('[');
-			for (int a=0; ;)
+			
+			assert FSFileWriter.ID_INDEX == 0;
+			printAttribute(FSFileWriter.default_attributes[FSFileWriter.ID_INDEX], node_id);
+			out.print(',');
+			
+			for (int a=1; a<attributes.length; a++)
 			{
-				switch (a) {
-//				case FSFileWriter.DEPENDECY_INDEX:
-//					out.print(kind_attr);						
-//					break;
-				case FSFileWriter.ID_INDEX:
-					out.print(node_id);
-					break;
-				default:
-					out.print(node.getFeatures().get(attributes[a]));
-					break;
+				Object f = node.getFeatures().get(attributes[a]);
+				
+				if (f != null)
+				{
+					printAttribute(attributes[a], f);
+					if (a+1<attributes.length) out.print(',');										
 				}
 				
-				if (++a >= attributes.length) break;
-				out.print(',');					
 			}
 			out.print(']');
 					
 			printCildren(node_id);
 		}
 
-		
+/*		
 		public void printNode(int id, String prefix)
 		{
 			out.print(prefix);
@@ -136,31 +161,76 @@ public class SentenceFSWriter
 				printNode(child, prefix+ "   ");				
 			}
 		}
-		
-		PrintStream out;
-		AnnotationSet tokens;
-		String [] attributes;
-
-		public void printTree(PrintStream out, String [] attributes, AnnotationSet tokens)
+*/		
+		public void printTree(PrintStream out, String [] attributes)
 		{
 			this.out = out;
-			this.tokens = tokens;
 			this.attributes = attributes;
 			
 			out.print("Dependencies: ");			
 			out.println(dependencies.keySet().size());
-			
-			int root = findRoot();
+						
 			printNode(root);
 
 		}
+		
+		public static class tokenOrderComprator implements Comparator<Annotation>
+		{
+
+			@Override
+			public int compare(Annotation a1, Annotation a2) {
+				return  a1.getStartNode().getOffset().compareTo(
+						a2.getStartNode().getOffset());
+			}
+			
+		}
+		
+		public void updateSentenceTokens()
+		{
+			List<Annotation> token_id_list = new ArrayList<Annotation>();
+			token_id_list.add(annotations.get(root));
+			
+			for (List<Integer> id_list : dependencies.values()) {
+				for (Integer id : id_list) {
+					token_id_list.add(annotations.get(id));
+				}
+			}
+			
+			Annotation [] token_annots = token_id_list.toArray(new Annotation[0]);
+			
+			numberSentenceTokens(token_annots);
+			hideSentenceTokens(token_annots);									
+		}
+
+		private void hideSentenceTokens(Annotation[] token_annots)
+		{
+			String root_type = annotations.get(root).getType();
+			
+			for (int i = 0; i < token_annots.length; i++)
+			{
+				if (! token_annots[i].getType().equals(root_type))
+				{
+					token_annots[i].getFeatures().put(FSFileWriter.HIDE_FEATURENAME, true);
+				}
+			}			
+		}
+
+		private void numberSentenceTokens(Annotation [] token_annots)
+		{
+			Arrays.sort(token_annots, new tokenOrderComprator());
+			
+			for (int i = 0; i < token_annots.length; i++) {
+				token_annots[i].getFeatures().put(FSFileWriter.ORD_FEATURENAME, i);				
+			}
+		}
+
 
 	}
 	
 	
 			
 	private AnnotationSet annotations;
-	private String [] attributes;
+	private String [] attributes = null;
 	
 	private PrintStream out = System.out;
 
@@ -185,7 +255,14 @@ public class SentenceFSWriter
 			}			
 		}
 		
-		return attr_set.toArray(new String[0]);		
+		String[] attrs = attr_set.toArray(new String[0]);
+		
+		Arrays.sort(attrs);
+		for (int i = 0; i < attrs.length; i++) {
+			System.err.println(attrs[i]);
+		}
+		
+		return attrs;
 	}
 	
 	public NGTreeHead createTreeHead()
@@ -198,7 +275,9 @@ public class SentenceFSWriter
 //			ngf.getVybraneAtributy().add(i, Integer.toString(i));
 		}
 		
-		th.N = th.W = 0;  
+		
+		th.N = th.W = th.getIndexOfAttribute(FSFileWriter.ORD_FEATURENAME);
+		th.H = th.getIndexOfAttribute(FSFileWriter.HIDE_FEATURENAME);
 
 		return th;
 	}
@@ -221,19 +300,16 @@ public class SentenceFSWriter
 		this.out = out;		
 		this.annotations = sentence_annotations;
 
+		/*
 		String[] attrs = guessAtttributes();
-		Arrays.sort(attrs);
-		for (int i = 0; i < attrs.length; i++) {
-			System.err.println(attrs[i]);
-		}		
 		
 		initAttributes(attrs);
+		*/
 	}
 
 	public SentenceFSWriter(AnnotationSet sentence_annotations, PrintStream out, List<String> additional_attributes)
 	{
-		this.out = out;		
-		this.annotations = sentence_annotations;
+		this(sentence_annotations, out);
 		
 		initAttributes(additional_attributes.toArray(new String[0]));
 		
@@ -280,7 +356,7 @@ public class SentenceFSWriter
 	{
 //		for (int dependency_annotation_type=0; dependency_annotation_type<FSFileWriter.dependency_annotation_types.length; dependency_annotation_type++)
 //		{
-			TreeBuilder tb = new TreeBuilder();
+			TreeBuilder tb = new TreeBuilder(annotations);
 			
 			AnnotationSet dependenciesAS = annotations.get(
 					setFromArray(FSFileWriter.dependency_annotation_types[dependency_annotation_type]));
@@ -294,10 +370,18 @@ public class SentenceFSWriter
 						FSFileWriter.tokendependency_annotation_types[dependency_annotation_type]);
 			}
 			
-			tb.printTree(out, attributes, annotations);
+			tb.findRoot();
+			tb.updateSentenceTokens();
+			
+			if (attributes == null) initAttributes(guessAtttributes());
+
+			
+			tb.printTree(out, attributes);
 //		}
 
 		
 		out.println();
 	}
+	
+	
 }
