@@ -1,6 +1,5 @@
 package czsem.gate;
 
-import gate.Corpus;
 import gate.DataStore;
 import gate.Document;
 import gate.Factory;
@@ -9,8 +8,6 @@ import gate.Gate;
 import gate.LanguageAnalyser;
 import gate.ProcessingResource;
 import gate.Resource;
-import gate.corpora.DocumentImpl;
-import gate.corpora.SerialCorpusImpl;
 import gate.creole.AbstractLanguageAnalyser;
 import gate.creole.ExecutionException;
 import gate.creole.ResourceInstantiationException;

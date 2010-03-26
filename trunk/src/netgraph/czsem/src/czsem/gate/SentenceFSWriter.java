@@ -80,7 +80,7 @@ public class SentenceFSWriter
 			root = -1;
 			for (Integer i = parents.entrySet().iterator().next().getValue(); i != null; i = parents.get(i))
 			{
-				System.err.println(i);
+				//System.err.println(i);
 				root = i;
 			}
 			
@@ -258,9 +258,9 @@ public class SentenceFSWriter
 		String[] attrs = attr_set.toArray(new String[0]);
 		
 		Arrays.sort(attrs);
-		for (int i = 0; i < attrs.length; i++) {
-			System.err.println(attrs[i]);
-		}
+//		for (int i = 0; i < attrs.length; i++) {
+//			System.err.println(attrs[i]);
+//		}
 		
 		return attrs;
 	}
@@ -351,8 +351,9 @@ public class SentenceFSWriter
 	/**
 	 * @param dependency_annotation_type 
 	 * @see FSFileWriter#dependency_annotation_types
+	 * @return true - if a tree is printed, false - if the tree cannot be printed with the given dependency_annotation_type 
 	 */
-	public void printTree(int dependency_annotation_type)
+	public boolean printTree(int dependency_annotation_type)
 	{
 //		for (int dependency_annotation_type=0; dependency_annotation_type<FSFileWriter.dependency_annotation_types.length; dependency_annotation_type++)
 //		{
@@ -360,6 +361,8 @@ public class SentenceFSWriter
 			
 			AnnotationSet dependenciesAS = annotations.get(
 					setFromArray(FSFileWriter.dependency_annotation_types[dependency_annotation_type]));
+			
+			if (dependenciesAS.isEmpty()) return false;
 		
 			tb.fillDependecies(dependenciesAS);
 			
@@ -381,6 +384,7 @@ public class SentenceFSWriter
 
 		
 		out.println();
+		return true;
 	}
 	
 	
