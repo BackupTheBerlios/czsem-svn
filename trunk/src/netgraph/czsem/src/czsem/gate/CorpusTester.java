@@ -7,6 +7,7 @@ import java.util.TreeMap;
 import gate.AnnotationSet;
 import gate.DataStore;
 import gate.Document;
+import gate.Factory;
 import gate.corpora.SerialCorpusImpl;
 import gate.creole.ResourceInstantiationException;
 import gate.persist.PersistenceException;
@@ -17,13 +18,14 @@ public class CorpusTester
 	
 	private SortedMap<String, Integer> annot_mutiset = new TreeMap<String, Integer>();
 	
+	
 	public CorpusTester(DataStore ds) {
 		this.ds = ds;
 	}
 	
 	public CorpusTester(String storageURL) throws PersistenceException
 	{
-	    ds = TectoMTAnalyser.openDataStore(storageURL);
+	    ds = openDataStore(storageURL);
 	}
 
 
@@ -80,7 +82,7 @@ public class CorpusTester
 			System.err.print("     ");
 			System.err.println(doc_id);
 			
-			testDocument(TectoMTAnalyser.loadDocumentFormDatastore(ds, doc_id));
+			testDocument(loadDocumentFormDatastore(ds, doc_id));
 		}		
 	}
 
@@ -94,6 +96,16 @@ public class CorpusTester
 		ds.close();
 	}
 
+	public static Document loadDocumentFormDatastore(DataStore ds, String docId) throws ResourceInstantiationException {
+		return (Document) TectoMTAnalyser.loadResourceFormDatastore(ds, "gate.corpora.DocumentImpl", docId);
+	}
+
+	public static DataStore openDataStore(String storage_url) throws PersistenceException
+	{
+		return Factory.openDataStore("gate.persist.SerialDataStore", storage_url); 
+	}
+
+	
 	public static void printStoredIds(DataStore ds) throws PersistenceException
 	{
 		for (Object o : ds.getLrTypes())

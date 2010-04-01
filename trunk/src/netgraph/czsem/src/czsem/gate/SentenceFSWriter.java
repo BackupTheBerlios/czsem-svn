@@ -54,6 +54,7 @@ public class SentenceFSWriter
 		protected void addTokenDpendency(Annotation a, String feature_name)
 		{
 			Integer child = (Integer) a.getFeatures().get(feature_name);
+			if (child == null) return;
 			addDpendency(a.getId(), child);		
 		}; 
 

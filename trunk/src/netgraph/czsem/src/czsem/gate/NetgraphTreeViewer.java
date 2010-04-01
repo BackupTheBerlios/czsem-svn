@@ -101,14 +101,14 @@ public class NetgraphTreeViewer extends AbstractVisualResource implements  Owned
 		});
 		syntaxTreeViewer1.init();
 
-		DataStore ds = TectoMTAnalyser.openDataStore("file:/C:/Users/dedek/AppData/GATE/data_store/");
+		DataStore ds = CorpusTester.openDataStore("file:/C:/Users/dedek/AppData/GATE/data_store/");
 		ds.open();
 		CorpusTester.printStoredIds(ds);
 
 		// Document doc = TectoMTAnalyser.loadDocumentFormDatastore(ds,
 		// "jihomoravsky58029.txt.xml_00A36___1268383940724___4619");
 		// AnnotationSet as = doc.getAnnotations("TectoMT");
-		Document doc = TectoMTAnalyser.loadDocumentFormDatastore(ds, "english___1268833529545___270");
+		Document doc = CorpusTester.loadDocumentFormDatastore(ds, "english___1268833529545___270");
 		AnnotationSet as = doc.getAnnotations();
 
 		Iterator<Annotation> sentences_iterator = as.get("Token").iterator();
@@ -152,7 +152,22 @@ public class NetgraphTreeViewer extends AbstractVisualResource implements  Owned
 			@Override
 			public void mouseReleased(MouseEvent e) {}
 			@Override
-			public void mousePressed(MouseEvent e) {forestDisplay.selectNode(e); repaint();}			
+			public void mousePressed(MouseEvent e)
+			{
+				forestDisplay.selectNode(e);
+				owner.selectAnnotation(new AnnotationData() {					
+					@Override
+					public AnnotationSet getAnnotationSet() {return annotation_set;}					
+					@Override
+					public Annotation getAnnotation()
+					{
+						assert FSFileWriter.ID_INDEX == 0;
+						String id = forestDisplay.getForest().getChosenNode().getValue(0, 0, 0);
+						return annotation_set.get(Integer.parseInt(id)); 
+					}
+				});
+				repaint();
+			}			
 			@Override
 			public void mouseExited(MouseEvent e) {}
 			@Override
