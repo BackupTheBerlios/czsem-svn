@@ -2,9 +2,10 @@ package czsem.gate;
 
 import gate.Corpus;
 import gate.DataStore;
+import gate.Document;
 import gate.Gate;
+import gate.LanguageAnalyser;
 import gate.corpora.SerialCorpusImpl;
-import gate.creole.ExecutionException;
 import gate.creole.ResourceInstantiationException;
 import gate.creole.SerialAnalyserController;
 import gate.event.StatusListener;
@@ -17,6 +18,9 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+
+import czsem.utils.ProjectSetup;
+
 public class GateApplicationRunner {
 	
 	public static class GateApplicationRunnerThread extends Thread implements StatusListener
@@ -28,34 +32,52 @@ public class GateApplicationRunner {
 		}
 
 		private SerialAnalyserController app;
+		private Document doc = null;
+		private LanguageAnalyser pr = null;
+		int files = 0;
 		
 		private void printID()
 		{
 			System.err.print("Thread");
 			System.err.print(getId());			
-			System.err.print(':');
+			System.err.print(": ");
 		}
 		
 		@Override
 		public void run()
 		{
+			pr = (LanguageAnalyser) app.getPRs().iterator().next();
 		    app.addStatusListener(this);
-			
-			try {
+		    			
+		    try {
 				app.execute();
-			} catch (ExecutionException e) {
+			} catch (Throwable e) {
 				printID();
 				e.printStackTrace();
 			}
 			
 			System.err.print("ending: ");
 			printID();
-
+			System.err.print(" files: ");
+			System.err.print(files);
+			System.err.print(" timestamp: ");
+		    System.err.println(ProjectSetup.makeTimeStamp());
 		}
 
 		@Override
 		public void statusChanged(String text)
 		{
+			Document new_doc = pr.getDocument();
+			if (doc != new_doc)
+			{
+				doc = new_doc;
+				System.err.print("************************************");
+				System.err.print(doc.getName());
+				System.err.print(" files: ");
+				System.err.print(files);
+				System.err.println("************************************");
+				files ++;
+			}
 			if (text.length() <= 0) return;
 			
 			printID();
@@ -66,7 +88,29 @@ public class GateApplicationRunner {
 
 	public static void main(String[] args) throws GateException, MalformedURLException, IOException, InterruptedException
 	{
+	    System.err.print("arg num: ");
 	    System.err.println(args.length);
+
+	    System.err.print("args: ");
+	    for (String arg : args)
+	    {
+	    	System.err.print("'");
+	    	System.err.print(arg);
+	    	System.err.print("' ");
+	    }
+	    System.err.println();
+	    
+	    if (args.length < 2)
+	    {
+	    	System.err.println("Usage: arg1 arg2");
+	    	System.err.println("arg1=start index");
+	    	System.err.println("arg2=end index");
+	    	System.err.println("It selects only odd or even files (depending on if the start index is odd or even)");
+	    	return;	    	
+	    }
+	    
+	    int start = Integer.parseInt(args[0]);
+	    int end = Integer.parseInt(args[1]);
 	    
 		Gate.setNetConnected(false);
 	    Gate.setLocalWebServer(false);
@@ -83,46 +127,54 @@ public class GateApplicationRunner {
 		SerialCorpusImpl corpus = (SerialCorpusImpl) TectoMTAnalyser
 		.loadResourceFormDatastore(ds, "gate.corpora.SerialCorpusImpl", "tipster1___1270027809902___3839");
 		
+		String [] corpss = {"working___1270115854868___6134", "working2___1270130407001___3504"};  
+		
+		
+		
+		
+		String corpus_string = corpss[start % 2]; 
+		
+		
+		
+		
 		SerialCorpusImpl corpus1 = (SerialCorpusImpl) TectoMTAnalyser
-		.loadResourceFormDatastore(ds, "gate.corpora.SerialCorpusImpl", "working___1270115854868___6134");
+			.loadResourceFormDatastore(ds, "gate.corpora.SerialCorpusImpl", corpus_string);
 
-		SerialCorpusImpl corpus2 = (SerialCorpusImpl) TectoMTAnalyser
-		.loadResourceFormDatastore(ds, "gate.corpora.SerialCorpusImpl", "working2___1270130407001___3504");
 				
-		corpus1.clear();
-		corpus2.clear();
-		
-		int cid = 0; 
-		for (int index=1087; index<=4000; index+=2)
+		GateApplicationRunnerThread thread = null;
+		while (start < end)
 		{
-			corpus1.add(cid, corpus.get(index));
-			corpus.unloadDocument(index, false);			
-			corpus1.unloadDocument(cid, false);			
-
-			corpus2.add(cid, corpus.get(index+1));
-			corpus.unloadDocument(index+1, false);			
-			corpus2.unloadDocument(cid, false);
+			corpus1.clear();
 			
-			cid ++;
+			int cid = 0; 
+			for (int index=start; index<=end; index+=2)
+			{
+				corpus1.add(cid, corpus.get(index));
+				corpus.unloadDocument(index, false);			
+				corpus1.unloadDocument(cid, false);			
+	
+				cid ++;
+			}
+			
+			corpus1.sync();
+					
+	
+	/**/		
+			
+	//		org.apache.log4j.BasicConfigurator.configure();
+		    	    	    	    
+		    
+		    URL app_url = new URL("file:/C:/Users/dedek/AppData/GATE/tipster_gate_app");
+		    	        
+		    thread = new GateApplicationRunnerThread(app_url, corpus1);
+		    
+		    thread.start();
+		    thread.join();
+		    
+		    start += thread.files*2;
+		    System.err.print("new start: ");
+		    System.err.println(start);
 		}
-		
-		corpus1.sync();
-		corpus2.sync();
-				
-
-/**/		
-		
-//		org.apache.log4j.BasicConfigurator.configure();
-	    	    	    	    
-	    
-	    URL app_url = new URL("file:/C:/Users/dedek/AppData/GATE/tipster_gate_app");
-	    	    
-	    Corpus corp = args.length >= 1 ? corpus2 : corpus1;
-	    
-	    GateApplicationRunnerThread thread = new GateApplicationRunnerThread(app_url, corp);
-	    
-	    thread.start();
-	    thread.join();
 	    	    	    
 /***/	    
 	}
