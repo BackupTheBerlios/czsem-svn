@@ -101,14 +101,14 @@ public class NetgraphTreeViewer extends AbstractVisualResource implements  Owned
 		});
 		syntaxTreeViewer1.init();
 
-		DataStore ds = CorpusTester.openDataStore("file:/C:/Users/dedek/AppData/GATE/data_store/");
+		DataStore ds = GateUtils.openDataStore("file:/C:/Users/dedek/AppData/GATE/data_store/");
 		ds.open();
-		CorpusTester.printStoredIds(ds);
+		GateUtils.printStoredIds(ds);
 
 		// Document doc = TectoMTAnalyser.loadDocumentFormDatastore(ds,
 		// "jihomoravsky58029.txt.xml_00A36___1268383940724___4619");
 		// AnnotationSet as = doc.getAnnotations("TectoMT");
-		Document doc = CorpusTester.loadDocumentFormDatastore(ds, "english___1268833529545___270");
+		Document doc = GateUtils.loadDocumentFormDatastore(ds, "english___1268833529545___270");
 		AnnotationSet as = doc.getAnnotations();
 
 		Iterator<Annotation> sentences_iterator = as.get("Token").iterator();

@@ -1,15 +1,12 @@
 package czsem.gate;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.util.ListIterator;
-
 import gate.DataStore;
-import gate.Document;
 import gate.Gate;
 import gate.corpora.SerialCorpusImpl;
 import gate.util.GateException;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
 
 public class TrecCorpusPopulate {
 
@@ -23,10 +20,10 @@ public class TrecCorpusPopulate {
 	    	    
 //	    Gate.getCreoleRegister().registerDirectories(new URL("file:/C:/Program%20Files/GATE-5.0/plugins/Stanford/"));
 	    				
-		DataStore ds = CorpusTester.openDataStore("file:/C:/Users/dedek/AppData/GATE/tipster1/");
-		CorpusTester.printStoredIds(ds);
+		DataStore ds = GateUtils.openDataStore("file:/C:/Users/dedek/AppData/GATE/tipster1/");
+		GateUtils.printStoredIds(ds);
 		
-		SerialCorpusImpl corpus = (SerialCorpusImpl) TectoMTAnalyser
+		SerialCorpusImpl corpus = (SerialCorpusImpl) GateUtils
 			.loadResourceFormDatastore(ds, "gate.corpora.SerialCorpusImpl", "tipster1___1270027809902___3839");
 		
 		int a = 0;

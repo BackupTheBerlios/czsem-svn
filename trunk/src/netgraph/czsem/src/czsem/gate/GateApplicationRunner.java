@@ -54,6 +54,14 @@ public class GateApplicationRunner {
 			} catch (Throwable e) {
 				printID();
 				e.printStackTrace();
+				
+				//do garbage collection!
+				System.err.print("free memory: ");
+				System.err.println(Runtime.getRuntime().freeMemory());
+				app = null;
+				System.gc();
+				System.err.print("free memory: ");
+				System.err.println(Runtime.getRuntime().freeMemory());
 			}
 			
 			System.err.print("ending: ");
@@ -123,8 +131,8 @@ public class GateApplicationRunner {
 	    		    new File(Gate.getPluginsHome(), "Parser_Stanford").toURI().toURL() 
 	    		  ); 
 	    
-		DataStore ds = CorpusTester.openDataStore("file:/C:/Users/dedek/AppData/GATE/tipster1/");
-		SerialCorpusImpl corpus = (SerialCorpusImpl) TectoMTAnalyser
+		DataStore ds = GateUtils.openDataStore("file:/C:/Users/dedek/AppData/GATE/tipster1/");
+		SerialCorpusImpl corpus = (SerialCorpusImpl) GateUtils
 		.loadResourceFormDatastore(ds, "gate.corpora.SerialCorpusImpl", "tipster1___1270027809902___3839");
 		
 		String [] corpss = {"working___1270115854868___6134", "working2___1270130407001___3504"};  
@@ -137,7 +145,7 @@ public class GateApplicationRunner {
 		
 		
 		
-		SerialCorpusImpl corpus1 = (SerialCorpusImpl) TectoMTAnalyser
+		SerialCorpusImpl corpus1 = (SerialCorpusImpl) GateUtils
 			.loadResourceFormDatastore(ds, "gate.corpora.SerialCorpusImpl", corpus_string);
 
 				

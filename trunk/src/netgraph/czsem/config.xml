@@ -2,19 +2,19 @@
 <java version="1.6.0_16" class="java.beans.XMLDecoder"> 
  <object class="czsem.utils.Config"> 
   <void property="alephPath"> 
-   <string>$aleph</string> 
+   <string>C:\Program Files\aleph\aleph.pl</string> 
   </void> 
   <void property="ilpProjestsPath"> 
-   <string>$projects/ILP_serial_projects</string> 
+   <string>C:\workspace\czsem\src\netgraph\czsem\ILP_serial_projects</string> 
   </void> 
   <void property="myClassPath"> 
-   <string>$INSTALL_PATH/FuzzyILP.jar</string> 
+   <string>C:\workspace\czsem\src\netgraph\czsem\bin</string> 
   </void> 
   <void property="prologPath"> 
-   <string>$prolog</string> 
+   <string>C:\Program Files\Yap\bin\yap.exe</string> 
   </void> 
   <void property="wekaJarPath"> 
-   <string>$weka</string> 
+   <string>C:\Program Files\Weka-3-6\weka.jar</string> 
   </void> 
  </object> 
 </java> 

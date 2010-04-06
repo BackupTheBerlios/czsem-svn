@@ -16,7 +16,7 @@ public class Config
 	{
 		Config ps = new Config();
 		ps.setMyWinValues();
-		ps.setInstallDefaults();
+//		ps.setInstallDefaults();
 		ps.saveToFile(config_filename);
 		
 /*
