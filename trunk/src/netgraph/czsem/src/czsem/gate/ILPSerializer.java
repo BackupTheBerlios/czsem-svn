@@ -33,6 +33,7 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 	
 	private List<String> annotationTypesToSerialze = null;
 	private List<String> featureNamesToSerialze = null;
+	private List<String> dependecyAnnotationTypes = null;
 
 	
 /*

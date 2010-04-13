@@ -1,0 +1,20 @@
+Phase:phase1
+Input: Dependency   
+Options: control = all
+
+Rule: extract_dep
+Priority: 20
+(
+{Dependency}
+): dep_tmp
+-->
+{
+	gate.AnnotationSet b_as = (gate.AnnotationSet) bindings.get("dep_tmp");
+	gate.Annotation dep_an = b_as.iterator().next();
+	Object dep_kind = dep_an.getFeatures().get("kind");
+	List<Integer> args = (List<Integer>) dep_an.getFeatures().get("args");
+		
+	gate.Annotation token_an = inputAS.get(args.get(1));
+	gate.FeatureMap fm = token_an.getFeatures();
+	fm.put("depency_type", dep_kind);
+}
