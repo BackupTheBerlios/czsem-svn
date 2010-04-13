@@ -1,5 +1,8 @@
 package czsem.gate;
 
+import java.util.ArrayList;
+
+import gate.Annotation;
 import gate.DataStore;
 import gate.Document;
 import gate.Factory;
@@ -10,6 +13,28 @@ import gate.persist.PersistenceException;
 
 public class GateUtils
 {
+	@SuppressWarnings("unchecked")
+	public static int[] decodeEdge(Annotation a)
+	{
+		int [] ret = new int[2];
+		ArrayList<Integer> list = (ArrayList<Integer>) a.getFeatures().get("args");
+		ret[0] = list.get(0);
+		ret[1] = list.get(1);
+		return ret;
+	}
+	
+	public static FeatureMap createDependencyArgsFeatureMap(Integer id1, Integer id2)
+	{
+		FeatureMap fm = Factory.newFeatureMap();
+		ArrayList<Integer> args = new ArrayList<Integer>(2);
+
+		args.add(id1);
+		args.add(id2);
+		fm.put("args", args);
+		
+		return fm;
+	}
+
 	public static Document loadDocumentFormDatastore(DataStore ds, String docId) throws ResourceInstantiationException {
 		return (Document) loadResourceFormDatastore(ds, "gate.corpora.DocumentImpl", docId);
 	}

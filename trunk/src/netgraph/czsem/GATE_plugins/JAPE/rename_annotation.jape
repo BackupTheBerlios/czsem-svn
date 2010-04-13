@@ -1,0 +1,29 @@
+Phase:phase1
+Input: aDependecy tDependecy   
+Options: control = all
+
+Rule: rename_a_dep
+Priority: 20
+(
+{tDependecy}
+): anot_tmp
+-->
+{
+	gate.AnnotationSet binding_as = (gate.AnnotationSet) bindings.get("anot_tmp");
+	gate.Annotation annot = binding_as.iterator().next();
+	FeatureMap fm = annot.getFeatures();
+	outputAS.add(annot.getStartNode(), annot.getEndNode(), "tDependency", fm);			
+}
+
+Rule: rename_t_dep
+Priority: 20
+(
+{aDependecy}
+): anot_tmp
+-->
+{
+	gate.AnnotationSet binding_as = (gate.AnnotationSet) bindings.get("anot_tmp");
+	gate.Annotation annot = binding_as.iterator().next();
+	FeatureMap fm = annot.getFeatures();
+	outputAS.add(annot.getStartNode(), annot.getEndNode(), "aDependency", fm);			
+}

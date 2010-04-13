@@ -54,6 +54,10 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 		for (String type_name : annotations.getAllTypes()) {
 			Err.println(type_name);
 		}
+		Err.println("Dependecy anntoation types:");
+		for (String type_name : dependecyAnnotationTypes) {
+			Err.println(type_name);
+		}
 		//logging
 		
 		
@@ -117,7 +121,6 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 		return Integer.parseInt(id_string.split("_", 3)[2]);
 	}
 
-	@SuppressWarnings("unchecked")
 	protected void serializeBackgroundKnowlege(AnnotationSet annotations) throws FileNotFoundException, UnsupportedEncodingException
 	{
         StringBuilder file_strb = new StringBuilder(project_setup.current_project_dir);
@@ -133,10 +136,7 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 		Relation dep_edge = ser_bkg.addBinRelation("dependency", "annotation", "annotation");
 		ser_bkg.putBinaryMode(dep_edge, "*", '+', '-');
 		ser_bkg.putBinaryMode(dep_edge, "1", '-', '+');
-		
-		Relation dep_kind = ser_bkg.addBinRelation("dep_kind", "annotation", "dep_kind");
-		ser_bkg.putBinaryMode(dep_kind, "1", '+', '#');
-		
+				
 		List<String> feat_names = getFeatureNamesToSerialze();
 		Relation [] feat_rels = new Relation[feat_names.size()];
 		
@@ -145,7 +145,6 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 		ser_bkg.putMode(pos_neg, "1", new char[] {'+'});
 		ser_bkg.putDetermination(pos_neg, annot_type);
 		ser_bkg.putDetermination(pos_neg, dep_edge);
-		ser_bkg.putDetermination(pos_neg, dep_kind);
 
 		
 		for (int i=0; i<feat_rels.length; i++)
@@ -156,7 +155,6 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 			ser_bkg.putDetermination(pos_neg, feat_rels[i]);
 		}
 
-		
 		ser_bkg.putCommentLn("------ TUPLES ------");
 		
 		for (String ser_type_name : annotationTypesToSerialze) {
@@ -175,17 +173,16 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 		}
 		
 /**/	//Dependencies
-		for (Annotation annotation : annotations.get("Dependency"))
+		for (String depeency_type: dependecyAnnotationTypes)
 		{
-			ArrayList<Integer> args = (ArrayList<Integer>) annotation.getFeatures().get("args");
-			
-			ser_bkg.putBinTuple(dep_edge, 
-					renderID(args.get(0), annotations),
-					renderID(args.get(1), annotations));				
-			
-			ser_bkg.putBinTuple(dep_kind, 
-					renderID(args.get(1), annotations),
-					(String) annotation.getFeatures().get("kind"));
+			for (Annotation annotation : annotations.get(depeency_type))
+			{
+				int[] args = GateUtils.decodeEdge(annotation);
+				
+				ser_bkg.putBinTuple(dep_edge, 
+						renderID(args[0], annotations),
+						renderID(args[1], annotations));								
+			}
 		}
 		
 		ser_bkg.putCommentLn("------ TYPES ------");
@@ -204,35 +201,7 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 		}		
 /**/
 	}
-
-	@Override
-	public Resource init() throws ResourceInstantiationException {
-		System.err.println("ILPSer Init");
 		
-		return super.init();
-	}
-	
-	@Override
-	public void reInit() throws ResourceInstantiationException {
-		System.err.println("ILPSer Reinit");
-		
-		super.reInit();
-	}
-	
-	@Override
-	public void setCorpus(Corpus corpus) {
-		System.err.println("ILPSer SetCorpus");
-
-		super.setCorpus(corpus);
-	}
-	
-	@Override
-	public void setDocument(Document document) {
-		System.err.println("ILPSer SetDocument");
-		// TODO Auto-generated method stub
-		super.setDocument(document);
-	}
-	
 	public void execute() throws ExecutionException
 	{	
 		System.err.println("ILPSer Execute");
@@ -397,7 +366,7 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 
 	@RunTime
 	@Optional
-	@CreoleParameter(comment="Names of annotation types to be serilaized.", defaultValue="Token;PosNeg")
+	@CreoleParameter(comment="Names of annotation types to be serilaized.", defaultValue="Token;tToken;PosNeg")
 	public void setAnnotationTypesToSerialze(List<String> annotationTypesToSerialze) {
 		System.err.println("ILPSer SetAnnotationTypesTo..");
 		this.annotationTypesToSerialze = annotationTypesToSerialze;
@@ -414,6 +383,19 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 	@CreoleParameter(comment="Names of annotation features to be serilaized.", defaultValue="category;root;string;isPositve")
 	public void setFeatureNamesToSerialze(List<String> featureNamesToSerialze) {
 		this.featureNamesToSerialze = featureNamesToSerialze;
+	}
+
+
+	public List<String> getDependecyAnnotationTypes() {
+		return dependecyAnnotationTypes;
+	}
+
+
+	@RunTime
+	@Optional
+	@CreoleParameter(comment="Names of dependency annotation types to be serilaized.", defaultValue="Dependency;aDependency;tDependency")
+	public void setDependecyAnnotationTypes(List<String> dependecyAnnotationTypes) {
+		this.dependecyAnnotationTypes = dependecyAnnotationTypes;
 	}
 
 }

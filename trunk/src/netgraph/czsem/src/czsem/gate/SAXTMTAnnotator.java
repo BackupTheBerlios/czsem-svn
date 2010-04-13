@@ -379,9 +379,9 @@ public class SAXTMTAnnotator extends DefaultHandler
     	seq_anot.restore();
     	
     	annotateATokens(sentence);
-    	annotateDenedecies(sentence.aDependencies, sentence.a_tokens, "aDependecy");
+    	annotateDenedecies(sentence.aDependencies, sentence.a_tokens, "aDependency");
     	annotateTTokens(sentence);
-    	annotateDenedecies(sentence.tDependencies, sentence.t_tokens, "tDependecy");
+    	annotateDenedecies(sentence.tDependencies, sentence.t_tokens, "tDependency");
     	annotateAuxRfDenedecies(sentence);
     	
     	
@@ -501,14 +501,7 @@ public class SAXTMTAnnotator extends DefaultHandler
 		Long ix1 = Math.min(a1.getStartNode().getOffset(), a2.getStartNode().getOffset());
 		Long ix2 = Math.max(a1.getEndNode().getOffset(), a2.getEndNode().getOffset());
 
-		FeatureMap fm = Factory.newFeatureMap();
-		ArrayList<Integer> args = new ArrayList<Integer>(2);
-
-		args.add(id1);
-		args.add(id2);
-		fm.put("args", args);			
-
-		as.add(ix1, ix2, dependecy_type, fm);
+		as.add(ix1, ix2, dependecy_type, GateUtils.createDependencyArgsFeatureMap(id1, id2));
 	}
 
 	private void annotateAuxRfDenedecies(Sentence sentence) throws InvalidOffsetException

@@ -17,8 +17,8 @@ public class FSFileWriter {
 	/** The order of elements is the same as in {@link #tokendependency_annotation_types} and {@link #token_annotation_types}. **/
 	public static final String[][] dependency_annotation_types =
 	{
-		{"tDependecy", "auxRfDependency"},
-		{"aDependecy"},		
+		{"tDependency", "auxRfDependency"},
+		{"aDependency"},		
 		{"Dependency"},
 	};
 	

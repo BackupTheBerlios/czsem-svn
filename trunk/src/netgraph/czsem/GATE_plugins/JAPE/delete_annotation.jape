@@ -1,0 +1,15 @@
+Phase:phase1
+Input: aDependecy tDependecy   
+Options: control = all
+
+Rule: delete_annot
+Priority: 20
+(
+{!XxX}
+): anot_tmp
+-->
+{
+	gate.AnnotationSet binding_as = (gate.AnnotationSet) bindings.get("anot_tmp");
+	gate.Annotation annot = binding_as.iterator().next();
+	inputAS.remove(annot);			
+}

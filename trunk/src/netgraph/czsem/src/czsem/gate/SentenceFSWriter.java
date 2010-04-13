@@ -47,7 +47,7 @@ public class SentenceFSWriter
 
 		protected void addDpendency(Annotation a)
 		{
-			int[] dep = decodeEdge(a);
+			int[] dep = GateUtils.decodeEdge(a);
 			addDpendency(dep[0], dep[1]);
 		}; 
 		
@@ -338,17 +338,7 @@ public class SentenceFSWriter
 		}
 */		
 	}
-	
-	@SuppressWarnings("unchecked")
-	public static int[] decodeEdge(Annotation a)
-	{
-		int [] ret = new int[2];
-		ArrayList<Integer> list = (ArrayList<Integer>) a.getFeatures().get("args");
-		ret[0] = list.get(0);
-		ret[1] = list.get(1);
-		return ret;
-	}
-	
+		
 	/**
 	 * @param dependency_annotation_type 
 	 * @see FSFileWriter#dependency_annotation_types
