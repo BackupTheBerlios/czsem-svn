@@ -5,6 +5,7 @@ import gate.*;
 import gate.corpora.DocumentImpl;
 import gate.creole.*;
 import gate.creole.metadata.*;
+import gate.creole.ml.MLEngine;
 import gate.util.Err;
 import gate.util.GateException;
 import gate.util.InvalidOffsetException;
@@ -108,6 +109,9 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 		sb.append(as.getDocument().getName());
 		sb.append('_');
 		sb.append(id);
+		
+		assert parseID(sb.toString()) == id;
+		
 		return  sb.toString();
 	}
 
@@ -118,12 +122,15 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 
 	protected static int parseID(String id_string)
 	{				
-		return Integer.parseInt(id_string.split("_", 3)[2]);
+		String[] split = id_string.split("_");
+		return Integer.parseInt(split[split.length-1]);
 	}
 
 	protected void serializeBackgroundKnowlege(AnnotationSet annotations) throws FileNotFoundException, UnsupportedEncodingException
 	{
-        StringBuilder file_strb = new StringBuilder(project_setup.current_project_dir);
+        MLEngine e;
+		
+		StringBuilder file_strb = new StringBuilder(project_setup.current_project_dir);
         file_strb.append(project_setup.project_name);
         file_strb.append(".b");
 
