@@ -3,6 +3,7 @@ package czsem.gate;
 import java.util.ArrayList;
 
 import gate.Annotation;
+import gate.Corpus;
 import gate.DataStore;
 import gate.Document;
 import gate.Factory;
@@ -37,6 +38,10 @@ public class GateUtils
 
 	public static Document loadDocumentFormDatastore(DataStore ds, String docId) throws ResourceInstantiationException {
 		return (Document) loadResourceFormDatastore(ds, "gate.corpora.DocumentImpl", docId);
+	}
+
+	public static Corpus loadCorpusFormDatastore(DataStore ds, String copusId) throws ResourceInstantiationException {
+		return (Corpus) loadResourceFormDatastore(ds, "gate.corpora.SerialCorpusImpl", copusId);
 	}
 
 	public static DataStore openDataStore(String storage_url) throws PersistenceException
