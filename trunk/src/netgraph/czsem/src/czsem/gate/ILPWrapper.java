@@ -4,24 +4,31 @@ import java.util.List;
 
 import org.jdom.Element;
 
+import gate.LanguageAnalyser;
 import gate.ProcessingResource;
 import gate.creole.ExecutionException;
 import gate.creole.ml.AdvancedMLEngine;
 import gate.creole.ml.DatasetDefintion;
+import gate.creole.ml.Attribute;
 import gate.util.GateException;
 
-public class ILPWrapper implements AdvancedMLEngine {
+public class ILPWrapper implements AdvancedMLEngine
+{
+	protected int idIndex;
+	protected int classIndex;
+	protected String className;
 
 	@Override
 	public boolean supportsBatchMode() {
 		return true;
 	}
-
-	int a =0;
+	 
 
 	@Override
 	public void addTrainingInstance(List attributes) throws ExecutionException {
-		System.err.println(attributes);
+		System.err.print(pr.getDocument().getName());
+		System.err.print("___");
+		System.err.println(attributes.get(idIndex));
 	}
 
 	@Override
@@ -53,10 +60,24 @@ public class ILPWrapper implements AdvancedMLEngine {
 
 	}
 
+	protected DatasetDefintion datasetDefinition = null;
+	
 	@Override
 	public void setDatasetDefinition(DatasetDefintion definition) {
-		// TODO Auto-generated method stub
-
+		this.datasetDefinition = definition ;
+		
+		List<Attribute> attrs = datasetDefinition.getAttributes();
+		
+		for (int i=0; i<attrs.size(); i++)
+		{
+			if (attrs.get(i).getName().equals("id"))
+			{
+				idIndex = i;
+				break;
+			}
+		}
+		classIndex = datasetDefinition.getClassIndex();
+		className = datasetDefinition.getClassAttribute().getName();
 	}
 
 	@Override
@@ -65,12 +86,12 @@ public class ILPWrapper implements AdvancedMLEngine {
 
 	}
 	
-	protected ProcessingResource pr = null;
+	protected LanguageAnalyser pr = null;
 
 	@Override
 	public void setOwnerPR(ProcessingResource pr)
 	{
-		this.pr = pr;
+		this.pr = (LanguageAnalyser) pr;
 	}
 
 }

@@ -2,28 +2,21 @@ package czsem.gate;
 
 import gate.Corpus;
 import gate.DataStore;
-import gate.Document;
 import gate.Factory;
 import gate.FeatureMap;
 import gate.Gate;
 import gate.ProcessingResource;
-import gate.Resource;
 import gate.creole.SerialAnalyserController;
 import gate.util.GateException;
 import gate.util.profile.Profiler;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.List;
 
-import org.apache.commons.logging.impl.Log4JLogger;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.springframework.util.Log4jConfigurer;
-
-import czsem.utils.Config;
 
 public class TrainTestGateOnCzech {
 
@@ -42,7 +35,7 @@ public class TrainTestGateOnCzech {
 	
 	    DataStore ds = GateUtils.openDataStore("file:/C:/Users/dedek/AppData/GATE/indexed_store/store/");
 	    
-	    Document doc = GateUtils.loadDocumentFormDatastore(ds, "jihomoravsky47460.txt.xml_00045___1268665562431___957");
+//	    Document doc = GateUtils.loadDocumentFormDatastore(ds, "jihomoravsky47460.txt.xml_00045___1268665562431___957");
 	    
 	    Corpus corpus = GateUtils.loadCorpusFormDatastore(ds, "50msg_index___1268665232288___6956");
 	    
@@ -67,7 +60,6 @@ public class TrainTestGateOnCzech {
 	    Logger logger = Logger.getLogger(Profiler.class);
 	    logger.setLevel(Level.OFF);
 
-	    
 	    controller.execute();
 	    
 	    
