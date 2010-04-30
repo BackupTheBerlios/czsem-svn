@@ -45,7 +45,7 @@ public class Serializer {
 	}
 	
 	protected PrintStream output = System.out;
-	private Map<String, Relation> relationList = new HashMap<String, Relation>();
+	private Map<String, Relation> relationMap = new HashMap<String, Relation>();
 	private Map<String, Type> typeList = new HashMap<String, Type>();
 	
 	public Serializer(String output_filename, boolean append) throws FileNotFoundException, UnsupportedEncodingException
@@ -81,7 +81,7 @@ public class Serializer {
 	
 	public Relation addRealtion(String relationName, String[] typeNames)
 	{
-		Relation ret = relationList.get(relationName); 
+		Relation ret = relationMap.get(relationName); 
 		if (ret != null) return ret;
 		
 		Type [] types = new Type[typeNames.length];
@@ -93,7 +93,7 @@ public class Serializer {
 		}
 		
 		ret = new Relation(relationName, types);
-		relationList.put(relationName, ret);
+		relationMap.put(relationName, ret);
 		return ret;
 	}
 	

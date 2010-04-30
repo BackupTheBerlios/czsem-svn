@@ -1,43 +1,37 @@
 
 package czsem.gate;
 
-import gate.*;
-import gate.corpora.DocumentImpl;
-import gate.creole.*;
-import gate.creole.metadata.*;
-import gate.creole.ml.MLEngine;
-import gate.util.Err;
-import gate.util.GateException;
-import gate.util.InvalidOffsetException;
-import gate.util.Out;
-
-import java.io.*;
-import java.net.URL;
-import java.util.*;
-
-import czsem.utils.ProcessExec.ReaderThread;
-import czsem.ILP.ILPExec;
-import czsem.ILP.Serializer;
-import czsem.ILP.Serializer.Relation;
-import czsem.utils.Config;
-import czsem.utils.ProjectSetup;
+import czsem.ILP.LinguisticSerializer;
+import gate.Annotation;
+import gate.AnnotationSet;
+import gate.Document;
+import gate.creole.AbstractLanguageAnalyser;
+import gate.creole.metadata.CreoleResource;
 
 
 @CreoleResource(name = "czsem ILPSerializer", comment = "Exports given corpus to ILP background knowledge")
-public class ILPSerializer extends AbstractLanguageAnalyser implements
-		ProcessingResource, LanguageAnalyser {
+public class ILPSerializer extends AbstractLanguageAnalyser
+{
+	public ILPSerializer(String projectDir, String projectName)
+	{
+		lingSer = new LinguisticSerializer(projectDir, projectName);
+	}
 
+	private static final long serialVersionUID = 6469933231715581382L;
+	
+	protected LinguisticSerializer lingSer;
+/*
+	
 	protected ProjectSetup project_setup = new ProjectSetup();
 
 
-	private static final long serialVersionUID = 6469933231715581382L;
 	
 	private List<String> annotationTypesToSerialze = null;
 	private List<String> featureNamesToSerialze = null;
 	private List<String> dependecyAnnotationTypes = null;
 
 	
-/*
+
 	protected void serializeDependency(Annotation dep_annot)
 	{
 		ArrayList<Integer> args = (ArrayList<Integer>) annotation.getFeatures().get("args");
@@ -46,7 +40,7 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 		ser.putBinTuple(dep_kind, args.get(1).toString(), (String) annotation.getFeatures().get("kind"));
 		System.out.print(annotation);
 	}
-*/
+
 	
 	protected void serializeAnnotationSet(AnnotationSet annotations) throws FileNotFoundException, UnsupportedEncodingException
 	{
@@ -127,9 +121,7 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 	}
 
 	protected void serializeBackgroundKnowlege(AnnotationSet annotations) throws FileNotFoundException, UnsupportedEncodingException
-	{
-        MLEngine e;
-		
+	{		
 		StringBuilder file_strb = new StringBuilder(project_setup.current_project_dir);
         file_strb.append(project_setup.project_name);
         file_strb.append(".b");
@@ -179,7 +171,7 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 			
 		}
 		
-/**/	//Dependencies
+	//Dependencies
 		for (String depeency_type: dependecyAnnotationTypes)
 		{
 			for (Annotation annotation : annotations.get(depeency_type))
@@ -193,11 +185,11 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 		}
 		
 		ser_bkg.putCommentLn("------ TYPES ------");
-/**/
+
 		ser_bkg.outputAllTypes();
 		
 		
-/*
+
 		for (Annotation sentence : annotations.get("Sentence"))
 		{
 			AnnotationSet sentence_set = annotations.getContained(
@@ -206,19 +198,19 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 			SentenceFSWriter wr = new SentenceFSWriter(sentence_set, out, attributes);
 			wr.printTree();
 		}		
-/**/
+/*
 	}
 		
 	public void execute() throws ExecutionException
 	{	
 		System.err.println("ILPSer Execute");
-		/*
+		
 		try {
 			serializeAnnotationSet(document.getAnnotations());
 		} catch (FileNotFoundException e) {
 			throw new ExecutionException(e);
 		}	
-		*/			
+					
 	}
 
 	protected String prolog_path = "C:\\Program Files\\Yap\\bin\\yap.exe";
@@ -248,9 +240,9 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 		
 		BufferedReader is_reader = new BufferedReader(new InputStreamReader(prolog_proc.getInputStream()));
 		
-/**
+*//**
 		new ReaderThread(is, System.out).start();
-/**/				
+/**//*				
 		new ReaderThread(ierr, System.err).start();
 
 		os.println("yap_flag(encoding,X).\n");
@@ -284,10 +276,11 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 
 		System.err.println("halt sent..");
 
-/**
+*//**
 		new ReaderThread(is, System.out).start();
 		new ReaderThread(ierr, System.err).start();
-/**/				
+/
+ * @param asName **//*				
 		
 		
 		prolog_proc.waitFor();
@@ -332,7 +325,7 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 		ArrayList<String> types = new ArrayList<String>();
 		ArrayList<String> features = new ArrayList<String>();
 
-/**/
+
 		types.add("Token");
 		types.add("PosNeg");
 		features.add("category");
@@ -340,7 +333,7 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 		features.add("root");
 		features.add("isPositve");
 		
-/**/		
+		
 		ilp_ser.setAnnotationTypesToSerialze(types);			
 		ilp_ser.setFeatureNamesToSerialze(features);			
 		
@@ -405,4 +398,52 @@ public class ILPSerializer extends AbstractLanguageAnalyser implements
 		this.dependecyAnnotationTypes = dependecyAnnotationTypes;
 	}
 
+*/
+
+
+	protected static String renderID(Integer id, String docName)
+	{		
+		StringBuilder sb = new StringBuilder();
+		sb.append("id_");
+		sb.append(docName);
+		sb.append('_');
+		sb.append(id);
+		
+		assert parseID(sb.toString()) == id;
+		
+		return  sb.toString();
+	}
+
+	protected static String renderID(Annotation anntotation, AnnotationSet as)
+	{
+		return renderID(anntotation.getId(), as.getDocument().getName());
+	}
+
+	protected static int parseID(String id_string)
+	{				
+		String[] split = id_string.split("_");
+		return Integer.parseInt(split[split.length-1]);
+	}
+
+	public void serializeDocument(Document document, String asName)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public void Train() {
+		// TODO Auto-generated method stub		
+		System.out.println("ILPSerializer.Train()");		
+	}
+
+	public void serializeTrainingInstance(String instanceGateId, String docName, String instanceTypeName, boolean isPositive)
+	{
+		Integer instanceIntid = new Integer(instanceGateId);
+		String instance_id = renderID(instanceIntid, docName);
+		
+		if (isPositive)
+			lingSer.putPositiveExample(instance_id, instanceTypeName);
+		else
+			lingSer.putNegativeExample(instance_id, instanceTypeName);				
+	}
 }

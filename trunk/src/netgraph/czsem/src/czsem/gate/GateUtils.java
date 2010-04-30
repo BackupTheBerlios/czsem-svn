@@ -1,6 +1,8 @@
 package czsem.gate;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import gate.Annotation;
 import gate.Corpus;
@@ -70,6 +72,42 @@ public class GateUtils
 		docFeatures.put(DataStore.DATASTORE_FEATURE_NAME, ds);		
 
 		return Factory.createResource(calassName, docFeatures);
+	}
+	
+	public static class CorpusDocumentCounter
+	{
+		protected Corpus copus;
+		protected Set<String> seenDocuments;
+		protected int numDocs; 
+
+		public CorpusDocumentCounter(Corpus corpus) {
+			this.copus = corpus;
+			numDocs = corpus.size();
+			
+			seenDocuments = new HashSet<String>(numDocs);
+		}
+		
+		public boolean isLastDocument()
+		{
+			return numDocs <= seenDocuments.size();			
+		}
+
+		/**
+		 * @return false if the document is already present in the collection  
+		 */
+		public boolean addDocument(Document doc)
+		{
+			return addDocument(doc.getName());
+		}
+
+		/**
+		 * @return false if the document is already present in the collection  
+		 */
+		public boolean addDocument(String name) {
+			return seenDocuments.add(name);
+		}
+
+		
 	}
 
 }
