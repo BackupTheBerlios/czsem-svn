@@ -19,7 +19,7 @@ public class LinguisticSerializer
 
 	public LinguisticSerializer(String projectDir, String projectName) throws FileNotFoundException, UnsupportedEncodingException
 	{
-		String path_name_perfix = projectDir + projectName;
+		String path_name_perfix = projectDir + "/" +projectName;
 		
 		ser_bkg = new Serializer(path_name_perfix + ".b");
 		ser_pos = new Serializer(path_name_perfix + ".f");
@@ -60,20 +60,28 @@ public class LinguisticSerializer
 	};
 	
 	
-	public void putDependency(int dependencyIndex, String parentId, String childId)
+	public void putTreeDependency(int dependencyIndex, String parentId, String childId)
 	{
-		ser_bkg.putBinTuple(featRels.get(dependencyIndex), parentId, childId);
+		ser_bkg.putBinTuple(treeDepRels.get(dependencyIndex), parentId, childId);
 	};
 	
+	public void putOneToOneDependency(int dependencyIndex, String parentId, String childId)
+	{
+		ser_bkg.putBinTuple(one2oneDepRels.get(dependencyIndex), parentId, childId);
+	};
 	
 	public void putFeature(int featureIndex, String annotationId, String featureValue)
 	{
 		ser_bkg.putBinTuple(featRels.get(featureIndex), annotationId, featureValue);
 	};
 	
-	public void putDeterminations()
+	public void putDeterminations(String relationName, String relationArgTypeName)
 	{
-		Relation target = null;
+		Relation target = ser_bkg.addRealtion(relationName, new String[]{relationArgTypeName});
+		ser_bkg.putMode(target, "1", new char[] {'+'});
+
+
+		ser_bkg.putCommentLn("-------------------- Determinations --------------------");
 		
 		for (Relation rel : featRels)
 		{
@@ -89,6 +97,7 @@ public class LinguisticSerializer
 		{
 			ser_bkg.putDetermination(target, rel);			
 		}
+		ser_bkg.putCommentLn("-------------------- Determinations END --------------------");
 		
 	}
 
@@ -100,6 +109,17 @@ public class LinguisticSerializer
 	public void putNegativeExample(String instanceId, String instanceTypeName)
 	{
     	ser_neg.putTuple(instanceTypeName, new String[]{instanceId});        				
+	}
+
+
+	public void flushAndClose()
+	{
+		ser_bkg.putCommentLn("-------------------- outputAllTypes --------------------");
+		ser_bkg.outputAllTypes();
+		ser_bkg.close();
+		
+		ser_pos.close();
+		ser_neg.close();		
 	}
 
 }

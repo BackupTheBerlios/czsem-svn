@@ -81,14 +81,17 @@ public class Serializer {
 	
 	public Relation addRealtion(String relationName, String[] typeNames)
 	{
+		relationName = encodeRelationName(relationName);
+		
 		Relation ret = relationMap.get(relationName); 
 		if (ret != null) return ret;
 		
 		Type [] types = new Type[typeNames.length];
 		
 		for (int i=0; i<typeNames.length; i++) {
-			Type type = getType(typeNames[i]);
-			if (type == null) type = addType(typeNames[i]);
+			String typename = encodeRelationName(typeNames[i]);
+			Type type = getType(typename);
+			if (type == null) type = addType(typename);
 			types[i] = type;
 		}
 		
@@ -172,6 +175,17 @@ public class Serializer {
 		output.println('.');		
 	}
 
+	public static String encodeRelationName(String relationName)
+	{
+		char ch = relationName.charAt(0);
+		if (Character.isUpperCase(ch))
+		{
+			return Character.toLowerCase(ch) + relationName.substring(1);
+		}
+		
+		return relationName;
+	}
+	
 	public static String encodeValue(String value)
 	{
 
@@ -187,12 +201,20 @@ public class Serializer {
 			all_digits = all_digits & Character.isDigit(ch);
 			all_lo_alpha = all_lo_alpha & (Character.isLowerCase(ch) | Character.isDigit(ch) | ch == '_');
 			
-			switch (ch) {
-			case '\'':
-			case '\\':
-				sb.append('\\');
-			default:
-				sb.append(ch);				
+			if (ch > 127 )
+			{
+				sb.append((int) ch);
+				all_lo_alpha = false;
+			}
+			else
+			{						
+				switch (ch) {
+				case '\'':
+				case '\\':
+					sb.append('\\');
+				default:
+					sb.append(ch);				
+				}
 			}
 		}
 
@@ -309,13 +331,13 @@ public class Serializer {
 		
 		Relation rel = ser.addBinRelation("edge", "node", "node");
 		ser.putBinTuple(rel, "node01", "002");
-		ser.putBinTuple(rel, "node01", "345");
+		ser.putBinTuple(rel, "node01", "345š");
 		ser.putBinTuple(rel, "123node", "id_123");
 		ser.putBinTuple(rel, "A123node", "_id_123");
 		ser.outputAllTypes();
 		ser.putDetermination(rel, rel);
 		ser.putBinaryMode(rel, "10", '+', '-');
-		ser.putBinaryMode(rel, "*", '+', '#');
+		ser.putBinaryMode(rel, "*", '+', '#');		
 	}
 
 }

@@ -1,20 +1,20 @@
 package czsem.gate;
 
+import gate.Document;
+import gate.ProcessingResource;
+import gate.creole.ExecutionException;
+import gate.creole.ml.AdvancedMLEngine;
+import gate.creole.ml.Attribute;
+import gate.creole.ml.DatasetDefintion;
+import gate.creole.ml.MachineLearningPR;
+import gate.util.GateException;
+
 import java.io.File;
 import java.util.List;
 
 import org.jdom.Element;
 
 import czsem.gate.GateUtils.CorpusDocumentCounter;
-
-import gate.Document;
-import gate.ProcessingResource;
-import gate.creole.ExecutionException;
-import gate.creole.ml.AdvancedMLEngine;
-import gate.creole.ml.DatasetDefintion;
-import gate.creole.ml.Attribute;
-import gate.creole.ml.MachineLearningPR;
-import gate.util.GateException;
 
 public class ILPWrapper implements AdvancedMLEngine
 {
@@ -60,7 +60,11 @@ public class ILPWrapper implements AdvancedMLEngine
 				className,
 				Boolean.parseBoolean(attributes.get(classIndex)));
 		
-		if (docCounter.isLastDocument() && isLastInstance(attributes)) ilpSer.Train();
+		if (docCounter.isLastDocument() && isLastInstance(attributes))
+		{
+			ilpSer.flushAndClose();
+			ilpSer.Train();
+		}
 	}
 
 
@@ -90,11 +94,16 @@ public class ILPWrapper implements AdvancedMLEngine
 	@Override
 	public void init() throws GateException
 	{
-		String configFileURI = options.getDocument().getBaseURI();
+		String configFileURI = pr.getConfigFileURL().getPath();
 		File configFile = new File(configFileURI);
 		String name_ext = configFile.getName();
 		String name = name_ext.substring(0, name_ext.indexOf('.')); 
-		ilpSer = new ILPSerializer(configFile.getParent(), name);
+		try {
+			ilpSer = new ILPSerializer(configFile.getParent(), name);
+			ilpSer.initTarget(className, datasetDefinition.getInstanceType());
+		} catch (Throwable e) {
+			throw new GateException(e);
+		}
 		
 		docCounter = null;
 	}
@@ -112,7 +121,7 @@ public class ILPWrapper implements AdvancedMLEngine
 			if (attrs.get(i).getName().equals("last")) lastAttrIndex = i;
 		}
 		classIndex = datasetDefinition.getClassIndex();
-		className = datasetDefinition.getClassAttribute().getName();
+		className = datasetDefinition.getClassAttribute().getName();		
 	}
 
 

@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.Stack;
 
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import org.xml.sax.Attributes;
@@ -140,7 +141,7 @@ public class SAXTMTAnnotator extends DefaultHandler
 	
 	private List<Sentence> sentences = new ArrayList<Sentence>();
 	
-	private javax.xml.parsers.SAXParser sax_parser;
+	private SAXParser sax_parser;
 	
 	private void setTecto()
 	{

@@ -1,10 +1,15 @@
 
 package czsem.gate;
 
+import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+
 import czsem.ILP.LinguisticSerializer;
 import gate.Annotation;
 import gate.AnnotationSet;
 import gate.Document;
+import gate.FeatureMap;
 import gate.creole.AbstractLanguageAnalyser;
 import gate.creole.metadata.CreoleResource;
 
@@ -12,14 +17,180 @@ import gate.creole.metadata.CreoleResource;
 @CreoleResource(name = "czsem ILPSerializer", comment = "Exports given corpus to ILP background knowledge")
 public class ILPSerializer extends AbstractLanguageAnalyser
 {
-	public ILPSerializer(String projectDir, String projectName)
-	{
-		lingSer = new LinguisticSerializer(projectDir, projectName);
-	}
-
 	private static final long serialVersionUID = 6469933231715581382L;
 	
 	protected LinguisticSerializer lingSer;
+	
+	protected String docName;
+	protected AnnotationSet as;
+	
+	protected String [] tokens =
+	{
+		"Token",
+		"tToken"
+	};
+
+	protected String [][] token_features = 
+	{
+			{"form", "lemma", "tag", "afun", "ord"},
+			{"nodetype", "t_lemma", "functor", "deepord", "formeme", "sempos", "gender", "negation", "number",
+			"degcmp", "verbmod", "deontmod", "tense", "aspect", "resultative",	"dispmod", "iterativeness"}
+	};
+
+	protected String [] tree_dependecies =
+	{
+		"Dependency",
+		"aDependency",
+		"tDependency",
+		"auxRfDependency"
+	};
+
+	protected String [][] tree_dependecy_args =
+	{
+			{"Token", "Token"},			
+			{"Token", "Token"},			
+			{"tToken", "tToken"},			
+			{"tToken", "Token"},			
+	};
+
+	protected String [] one2one_dependecies =
+	{
+		"lex.rf"	
+	};
+
+	protected String [][] one2one_dependecy_args =
+	{
+			{"tToken", "Token"}
+	};
+
+	public ILPSerializer(String projectDir, String projectName) throws FileNotFoundException, UnsupportedEncodingException
+	{
+		lingSer = new LinguisticSerializer(projectDir, projectName);		
+	}
+	
+	protected void createFeatureTypes()
+	{
+		int cumulative_features = 0;
+		for (int t=0; t<tokens.length; t++)
+		{
+			for (int f=0; f<token_features[t].length; f++)
+			{
+				lingSer.createFeatureType(cumulative_features++, tokens[t], token_features[t][f]);
+			}
+		}				
+	}
+	protected void createTreeDependencyTypes()
+	{
+		for (int d=0; d<tree_dependecies.length; d++)
+		{
+			lingSer.createTreeDependencyType(
+					d,
+					tree_dependecies[d],
+					tree_dependecy_args[d][0],
+					tree_dependecy_args[d][1]);
+		}
+		
+	}
+	protected void one2oneTreeDependencyTypes()
+	{
+		for (int d=0; d<one2one_dependecies.length; d++)
+		{
+			lingSer.createOneToOneDependencyType(
+					d,
+					one2one_dependecies[d],
+					one2one_dependecy_args[d][0],
+					one2one_dependecy_args[d][1]);
+		}		
+	}
+	
+	protected void serializeToneks()
+	{
+		int token_features_offset = 0;
+		for (int t=0; t<tokens.length; t++)
+		{
+			AnnotationSet tocs = as.get(tokens[t]);			
+			for (Annotation token : tocs)
+			{
+				FeatureMap feats = token.getFeatures();
+				for (int f=0; f<token_features[t].length; f++)
+				{
+					Object feat_val = feats.get(token_features[t][f]);
+					
+					if (feat_val != null)
+					{
+						lingSer.putFeature(
+								token_features_offset + f,
+								renderID(token.getId()),
+								feat_val.toString());
+						
+					}					
+				}
+			}
+			
+			token_features_offset+= token_features[t].length;			
+		}					
+	}
+
+	@SuppressWarnings("unchecked")
+	protected void serializeTreeDependency(int dependencyIndex, Annotation dep_annot)
+	{
+		ArrayList<Integer> args = (ArrayList<Integer>) dep_annot.getFeatures().get("args");
+
+		lingSer.putTreeDependency(
+				dependencyIndex,
+				renderID(args.get(0)),
+				renderID(args.get(1)));
+	}
+	
+	protected void serializeOne2OneDependency(int dependencyIndex, Annotation parent)
+	{
+		Object child = parent.getFeatures().get(one2one_dependecies[dependencyIndex]);
+		
+		if (child != null)
+		{
+			lingSer.putOneToOneDependency(
+					dependencyIndex, 
+					renderID(parent.getId()),
+					renderID((Integer) child));					
+		}		
+	}
+
+
+	protected void serializeTreeDependencies()
+	{
+		for (int d=0; d<tree_dependecies.length; d++)
+		{
+			AnnotationSet deps = as.get(tree_dependecies[d]);
+			for (Annotation dep : deps)
+			{
+				serializeTreeDependency(d, dep);				
+			}			
+		}		
+	}
+	
+	protected void serializeOne2OneDependencies()
+	{
+		for (int d=0; d<one2one_dependecies.length; d++)
+		{
+			AnnotationSet parents = as.get(one2one_dependecy_args[d][0]);
+			for (Annotation parent : parents)
+			{
+				serializeOne2OneDependency(d, parent);
+			}			
+		}				
+	}
+
+
+	public void serializeDocument(Document document, String asName)
+	{
+		docName = document.getName();
+		as = document.getAnnotations(asName);
+		
+		serializeToneks();
+		serializeTreeDependencies();
+		serializeOne2OneDependencies();				
+	}
+
 /*
 	
 	protected ProjectSetup project_setup = new ProjectSetup();
@@ -400,6 +571,10 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 
 */
 
+	protected String renderID(Integer id)
+	{
+		return renderID(id, docName);
+	}
 
 	protected static String renderID(Integer id, String docName)
 	{		
@@ -425,11 +600,6 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 		return Integer.parseInt(split[split.length-1]);
 	}
 
-	public void serializeDocument(Document document, String asName)
-	{
-		// TODO Auto-generated method stub
-		
-	}
 	
 	public void Train() {
 		// TODO Auto-generated method stub		
@@ -445,5 +615,19 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 			lingSer.putPositiveExample(instance_id, instanceTypeName);
 		else
 			lingSer.putNegativeExample(instance_id, instanceTypeName);				
+	}
+
+	public void flushAndClose()
+	{
+		lingSer.flushAndClose();		
+	}
+
+	public void initTarget(String className, String classTypeName)
+	{
+		createFeatureTypes();
+		createTreeDependencyTypes();
+		one2oneTreeDependencyTypes();
+		
+		lingSer.putDeterminations(className, classTypeName);				
 	}
 }

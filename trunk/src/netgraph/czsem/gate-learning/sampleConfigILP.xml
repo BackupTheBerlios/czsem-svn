@@ -18,6 +18,12 @@
       <POSITION>0</POSITION>  
     </ATTRIBUTE>   
 
+    <ATTRIBUTE>  
+      <NAME>last</NAME>  
+      <TYPE>Token</TYPE>  
+      <POSITION>1</POSITION>  
+    </ATTRIBUTE>   
+
   </DATASET>  
 
  
