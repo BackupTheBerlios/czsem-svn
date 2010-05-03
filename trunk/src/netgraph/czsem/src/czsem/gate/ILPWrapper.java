@@ -100,7 +100,7 @@ public class ILPWrapper implements AdvancedMLEngine
 		String name = name_ext.substring(0, name_ext.indexOf('.')); 
 		try {
 			ilpSer = new ILPSerializer(configFile.getParent(), name);
-			ilpSer.initTarget(className, datasetDefinition.getInstanceType());
+			ilpSer.setupAndInit(className, datasetDefinition.getInstanceType(), options.getChild("serializer"));
 		} catch (Throwable e) {
 			throw new GateException(e);
 		}

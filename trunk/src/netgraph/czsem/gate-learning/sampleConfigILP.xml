@@ -30,9 +30,50 @@
   <ENGINE>  
     <WRAPPER>czsem.gate.ILPWrapper</WRAPPER>
     <BATCH-MODE-CLASSIFICATION />
-    <OPTIONS>  
-        <CLASSIFIER OPTIONS="-S -C 0.25 -B -M 2">weka.classifiers.trees.J48</CLASSIFIER>  
-        <CONFIDENCE-THRESHOLD>0.85</CONFIDENCE-THRESHOLD>  
+    <OPTIONS>
+        <serializer>
+            <tokens>
+                <token typename="Token">
+                    <features>  
+                        <feature>form</feature>  
+                        <feature>lemma</feature>  
+                        <feature>tag</feature>  
+                        <feature>afun</feature>  
+                        <feature>ord</feature>  
+                    </features>  
+                </token>  
+                <token typename="tToken">  
+                    <features>  
+                        <feature>nodetype</feature>
+                        <feature>t_lemma</feature>
+                        <feature>functor</feature>
+                        <feature>deepord</feature>
+                        <feature>formeme</feature>
+                        <feature>sempos</feature>
+                        <feature>gender</feature>
+                        <feature>negation</feature>
+                        <feature>number</feature>
+                        <feature>degcmp</feature>
+                        <feature>verbmod</feature>
+                        <feature>deontmod</feature>
+                        <feature>tense</feature>
+                        <feature>aspect</feature>
+                        <feature>resultative</feature>
+                        <feature>dispmod</feature>
+                        <feature>iterativeness</feature>
+                    </features>  
+                </token>  
+            </tokens>
+            <tree_dependecies>
+                <dependecy typename="Dependency" parent_typename="Token" child_typename="Token"/>
+                <dependecy typename="aDependency" parent_typename="Token" child_typename="Token"/>
+                <dependecy typename="tDependency" parent_typename="tToken" child_typename="tToken"/>
+                <dependecy typename="auxRfDependency" parent_typename="tToken" child_typename="Token"/>
+            </tree_dependecies>
+            <one2one_dependecies>
+                <dependecy typename="lex.rf" parent_typename="tToken" child_typename="Token"/>
+            </one2one_dependecies>
+        </serializer>  
     </OPTIONS>  
   </ENGINE>  
 </ML-CONFIG>

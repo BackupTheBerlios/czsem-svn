@@ -1,5 +1,6 @@
 package czsem.ILP;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -19,7 +20,9 @@ public class LinguisticSerializer
 
 	public LinguisticSerializer(String projectDir, String projectName) throws FileNotFoundException, UnsupportedEncodingException
 	{
-		String path_name_perfix = projectDir + "/" +projectName;
+		new File(projectDir + "/savedFiles").mkdir();
+		
+		String path_name_perfix = projectDir + "/savedFiles/" +projectName;
 		
 		ser_bkg = new Serializer(path_name_perfix + ".b");
 		ser_pos = new Serializer(path_name_perfix + ".f");

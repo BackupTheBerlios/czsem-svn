@@ -4,6 +4,9 @@ package czsem.gate;
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.List;
+
+import org.jdom.Element;
 
 import czsem.ILP.LinguisticSerializer;
 import gate.Annotation;
@@ -26,41 +29,41 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 	
 	protected String [] tokens =
 	{
-		"Token",
-		"tToken"
+//		"Token",
+//		"tToken"
 	};
 
 	protected String [][] token_features = 
 	{
-			{"form", "lemma", "tag", "afun", "ord"},
-			{"nodetype", "t_lemma", "functor", "deepord", "formeme", "sempos", "gender", "negation", "number",
-			"degcmp", "verbmod", "deontmod", "tense", "aspect", "resultative",	"dispmod", "iterativeness"}
+//			{"form", "lemma", "tag", "afun", "ord"},
+//			{"nodetype", "t_lemma", "functor", "deepord", "formeme", "sempos", "gender", "negation", "number",
+//			"degcmp", "verbmod", "deontmod", "tense", "aspect", "resultative",	"dispmod", "iterativeness"}
 	};
-
+	
 	protected String [] tree_dependecies =
 	{
-		"Dependency",
-		"aDependency",
-		"tDependency",
-		"auxRfDependency"
+//		"Dependency",
+//		"aDependency",
+//		"tDependency",
+//		"auxRfDependency"
 	};
 
 	protected String [][] tree_dependecy_args =
 	{
-			{"Token", "Token"},			
-			{"Token", "Token"},			
-			{"tToken", "tToken"},			
-			{"tToken", "Token"},			
+//			{"Token", "Token"},			
+//			{"Token", "Token"},			
+//			{"tToken", "tToken"},			
+//			{"tToken", "Token"},			
 	};
 
 	protected String [] one2one_dependecies =
 	{
-		"lex.rf"	
+//		"lex.rf"	
 	};
 
 	protected String [][] one2one_dependecy_args =
 	{
-			{"tToken", "Token"}
+//			{"tToken", "Token"}
 	};
 
 	public ILPSerializer(String projectDir, String projectName) throws FileNotFoundException, UnsupportedEncodingException
@@ -622,12 +625,55 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 		lingSer.flushAndClose();		
 	}
 
-	public void initTarget(String className, String classTypeName)
+	public void setupAndInit(String className, String classTypeName, Element serializerOtionsElem)
 	{
+		parseOptions(serializerOtionsElem);
+		
 		createFeatureTypes();
 		createTreeDependencyTypes();
 		one2oneTreeDependencyTypes();
 		
 		lingSer.putDeterminations(className, classTypeName);				
+	}
+
+	@SuppressWarnings("unchecked")
+	protected void parseOptions(Element serializerOtionsElem)
+	{
+		List<Element> tokens = serializerOtionsElem.getChild("tokens").getChildren("token");
+		this.tokens = new String[tokens.size()];
+		this.token_features = new String[tokens.size()][];
+		for (int t=0; t<tokens.size(); t++)
+		{
+			Element token = tokens.get(t);
+			this.tokens[t] = token.getAttributeValue("typename");
+			List<Element> token_features = token.getChild("features").getChildren("feature");
+			this.token_features[t] = new String[token_features.size()];
+			for (int f = 0; f < token_features.size(); f++)
+			{
+				this.token_features[t][f] = token_features.get(f).getValue();				
+			}
+		}
+		
+		List<Element> tree_dependecies = serializerOtionsElem.getChild("tree_dependecies").getChildren("dependecy");
+		this.tree_dependecies = new String[tree_dependecies.size()];
+		this.tree_dependecy_args = new String[tree_dependecies.size()][];
+		for (int tree_dep = 0; tree_dep < tree_dependecies.size(); tree_dep++)
+		{
+			this.tree_dependecies[tree_dep] = tree_dependecies.get(tree_dep).getAttributeValue("typename");
+			this.tree_dependecy_args[tree_dep] = new String[2];
+			this.tree_dependecy_args[tree_dep][0] = tree_dependecies.get(tree_dep).getAttributeValue("parent_typename");
+			this.tree_dependecy_args[tree_dep][1] = tree_dependecies.get(tree_dep).getAttributeValue("child_typename");			
+		}
+		
+		List<Element> one2one_dependecies = serializerOtionsElem.getChild("one2one_dependecies").getChildren("dependecy");		
+		this.one2one_dependecies = new String[one2one_dependecies.size()];
+		this.one2one_dependecy_args = new String[one2one_dependecies.size()][];
+		for (int one_dep = 0; one_dep < one2one_dependecies.size(); one_dep++)
+		{
+			this.one2one_dependecies[one_dep] = tree_dependecies.get(one_dep).getAttributeValue("typename");
+			this.one2one_dependecy_args[one_dep] = new String[2];
+			this.one2one_dependecy_args[one_dep][0] = tree_dependecies.get(one_dep).getAttributeValue("parent_typename");
+			this.one2one_dependecy_args[one_dep][1] = tree_dependecies.get(one_dep).getAttributeValue("child_typename");			
+		}		
 	}
 }
