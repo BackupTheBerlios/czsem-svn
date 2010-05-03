@@ -10,6 +10,7 @@ import gate.creole.ml.MachineLearningPR;
 import gate.util.GateException;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import org.jdom.Element;
@@ -38,15 +39,19 @@ public class ILPWrapper implements AdvancedMLEngine
 	@SuppressWarnings("unchecked")
 	@Override
 	public void addTrainingInstance(List attributes) throws ExecutionException {				
-		serializeTrainingInstance(attributes);
+		try {
+			serializeTrainingInstance(attributes);
+		} catch (Throwable e) {
+			throw new ExecutionException(e);
+		}
 	}
 
-	protected boolean isLastInstance(List<String> attributes)
+	protected boolean isLastInstanceInDocument(List<String> attributes)
 	{
 		return attributes.get(lastAttrIndex) == null;
 	}
 	
-	private void serializeTrainingInstance(List<String> attributes)
+	private void serializeTrainingInstance(List<String> attributes) throws IOException, InterruptedException
 	{
 		Document doc = pr.getDocument();
 		
@@ -60,18 +65,18 @@ public class ILPWrapper implements AdvancedMLEngine
 				className,
 				Boolean.parseBoolean(attributes.get(classIndex)));
 		
-		if (docCounter.isLastDocument() && isLastInstance(attributes))
+		if (docCounter.isLastDocument() && isLastInstanceInDocument(attributes))
 		{
 			ilpSer.flushAndClose();
-			ilpSer.Train();
+			ilpSer.train();
 		}
 	}
 
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List batchClassifyInstances(List instances)
-			throws ExecutionException {
+	public List batchClassifyInstances(List instances) throws ExecutionException
+	{
 		// TODO Auto-generated method stub		
 		System.out.println("ILPWrapper.batchClassifyInstances()");
 		return null;

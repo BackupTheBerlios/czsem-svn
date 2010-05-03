@@ -2,6 +2,7 @@
 package czsem.gate;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
@@ -604,9 +605,9 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 	}
 
 	
-	public void Train() {
-		// TODO Auto-generated method stub		
-		System.out.println("ILPSerializer.Train()");		
+	public void train() throws IOException, InterruptedException
+	{
+		lingSer.train();
 	}
 
 	public void serializeTrainingInstance(String instanceGateId, String docName, String instanceTypeName, boolean isPositive)

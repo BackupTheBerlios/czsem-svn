@@ -56,9 +56,9 @@ public class Serializer {
 	
 	public Serializer(String output_filename) throws FileNotFoundException, UnsupportedEncodingException
 	{
-		output = new PrintStream(output_filename);
+//		output = new PrintStream(output_filename);
+		output = new PrintStream(output_filename, "ISO8859_1");
 	/**	
-		output = new PrintStream(output_filename, "UTF8");
 		output.println(":- encoding(utf8).");
 	/**/
 	}

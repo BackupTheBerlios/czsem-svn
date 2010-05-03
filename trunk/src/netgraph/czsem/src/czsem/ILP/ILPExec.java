@@ -17,12 +17,18 @@ public class ILPExec extends ProcessExec {
 	protected String testing_examples;
 	private String rules_file = "learned_rules";
 	private String results_file = "test_results";
-	public ILPExec(ProjectSetup ps)
-	{		
-		working_directory = ps.working_directory;
-		project_name = ps.project_name;
+
+	public ILPExec(File working_directory, String project_name)
+	{
+		this.working_directory = working_directory;
+		this.project_name = project_name;
 		learnig_examples = project_name;
 		testing_examples = project_name + "_test";
+	}
+	
+	public ILPExec(ProjectSetup ps)
+	{
+		this(ps.working_directory, ps.project_name);
 		rules_file = renderRulesFileName(ps);
 	}
 	
@@ -70,6 +76,8 @@ public class ILPExec extends ProcessExec {
 		Thread.sleep(3000);
 /**/		
 /**/		
+		output_writer.println("set(verbosity,1).");		
+
 		output_writer.print("read_all('");
 		output_writer.print(project_name);
 		output_writer.print("','");
@@ -83,6 +91,7 @@ public class ILPExec extends ProcessExec {
 		output_writer.print("write_rules('");		
 		output_writer.print(getRulesFileName());		
 		output_writer.println("').");		
+
 		output_writer.flush();		
 
 	}
@@ -214,6 +223,33 @@ public class ILPExec extends ProcessExec {
 
 	public String getResultsFileName() {
 		return results_file;
+	}
+
+	
+	/**
+	 * @return "true" or "false"
+	 * @throws IOException
+	 */
+	public String applyRules(String testExpession) throws IOException
+	{
+		output_writer.print("if(");
+		output_writer.print(testExpession);
+		output_writer.println(",print(true),print(false)),print('\\n').");
+		output_writer.flush();
+		
+		return input_reader.readLine();
+	}
+
+	public void initBeforeApplyRules() throws IOException
+	{
+		startPrologProcess(getRulesFileName());
+		startErrReaderThread();
+		
+		output_writer.print("consult('");
+		output_writer.print(project_name);
+		output_writer.println(".b').");
+		output_writer.flush();
+		
 	}
 
 	/*

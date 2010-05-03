@@ -2,6 +2,7 @@ package czsem.ILP;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,17 +11,23 @@ import czsem.ILP.Serializer.Relation;
 
 public class LinguisticSerializer 
 {
-	Serializer ser_bkg;
-	Serializer ser_pos;
-	Serializer ser_neg;
+	protected Serializer ser_bkg;
+	protected Serializer ser_pos;
+	protected Serializer ser_neg;
 	
-	List<Relation> featRels;
-	List<Relation> treeDepRels;
-	List<Relation> one2oneDepRels;
-
+	protected List<Relation> featRels;
+	protected List<Relation> treeDepRels;
+	protected List<Relation> one2oneDepRels;
+	
+	protected File workingDirectory;
+	protected String projectName;
+	
 	public LinguisticSerializer(String projectDir, String projectName) throws FileNotFoundException, UnsupportedEncodingException
 	{
-		new File(projectDir + "/savedFiles").mkdir();
+		workingDirectory = new File(projectDir + "/savedFiles");
+		workingDirectory.mkdir();
+		
+		this.projectName = projectName;
 		
 		String path_name_perfix = projectDir + "/savedFiles/" +projectName;
 		
@@ -57,7 +64,7 @@ public class LinguisticSerializer
 
 	public void createFeatureType(int index, String annotationType, String featureName)
 	{
-		Relation rel = ser_bkg.addBinRelation("has_" + featureName, annotationType, featureName);
+		Relation rel = ser_bkg.addBinRelation("has_" + featureName, annotationType, featureName+'T');
 		featRels.add(index, rel);
 		ser_bkg.putBinaryMode(rel, "1", '+', '#');
 	};
@@ -123,6 +130,26 @@ public class LinguisticSerializer
 		
 		ser_pos.close();
 		ser_neg.close();		
+	}
+
+
+	public void train() throws IOException, InterruptedException
+	{
+		ILPExec ilp_exec = new ILPExec(workingDirectory, projectName);
+		ilp_exec.startILPProcess();
+		ilp_exec.startReaderThreads();
+		ilp_exec.induceAndWriteRules();
+		ilp_exec.close();
+		
+		
+		
+		//TODO:
+		ILPExec test = new ILPExec(workingDirectory, projectName);
+		test.initBeforeApplyRules();
+		
+		System.out.println(test.applyRules("injuries('id_jihomoravsky48461.txt.xml_00046_804')"));
+		System.out.println(test.applyRules("injuries('id_jihomoravsky48461.txt.xml_00046_805')"));
+		test.close();
 	}
 
 }
