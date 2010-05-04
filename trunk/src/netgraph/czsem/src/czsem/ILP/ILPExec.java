@@ -3,6 +3,7 @@ package czsem.ILP;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 
 import czsem.utils.Config;
@@ -45,8 +46,8 @@ public class ILPExec extends ProcessExec {
 	{
 		String [] exec_args = {Config.getConfig().getPrologPath(), "-l", file_name_to_consult};
 		
-		System.err.println(Config.getConfig().getPrologPath());
-		System.err.println(file_name_to_consult);
+//		System.err.println(Config.getConfig().getPrologPath());
+//		System.err.println(file_name_to_consult);
 		
 		exec(exec_args, working_directory);
 		
@@ -180,7 +181,7 @@ public class ILPExec extends ProcessExec {
 		output_writer.println("halt.");
 		output_writer.flush();
 
-		System.err.println("halt sent..");
+//		System.err.println("Waiting for ILP...");
 			
 		process.waitFor();
 //		System.err.println(prolog_proc.exitValue());		
@@ -240,10 +241,10 @@ public class ILPExec extends ProcessExec {
 		return input_reader.readLine();
 	}
 
-	public void initBeforeApplyRules() throws IOException
+	public void initBeforeApplyRules(OutputStream err_output) throws IOException
 	{
 		startPrologProcess(getRulesFileName());
-		startErrReaderThread();
+		startErrReaderThread(err_output);
 		
 		output_writer.print("consult('");
 		output_writer.print(project_name);

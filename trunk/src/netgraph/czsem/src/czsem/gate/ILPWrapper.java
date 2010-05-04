@@ -78,8 +78,9 @@ public class ILPWrapper implements AdvancedMLEngine
 		Document doc = pr.getDocument();
 		String docName = doc.getName();
 
-		ilpSer.setBackgroundFileName(docName);
+		ilpSer.setBackgroundSerializerFileName(docName);
 		ilpSer.serializeDocument(doc, pr.getInputASName());
+		ilpSer.closeBackgroundSerializer();
 	
 		
 		String [] instancesGateIds = new String[instances.size()];
@@ -95,9 +96,6 @@ public class ILPWrapper implements AdvancedMLEngine
 	@Override
 	public List batchClassifyInstances(List instances) throws ExecutionException
 	{
-		
-		
-		
 		try
 		{
 			return Arrays.asList(classifyInstances(instances));
@@ -106,21 +104,6 @@ public class ILPWrapper implements AdvancedMLEngine
 		{
 			throw new ExecutionException(t);
 		}
-		
-
-		
-		
-		
-		
-//		System.out.println("ILPWrapper.batchClassifyInstances()");
-//		System.out.println(pr.getDocument().getName());
-//		System.out.println(instances.size());
-//		
-//		String[] ret = new String[instances.size()];
-//		for (int i = 0; i < ret.length; i++) {
-//			ret[i] = "true";
-//		}
-//		return Arrays.asList(ret);
 	}
 
 	@SuppressWarnings("unchecked")

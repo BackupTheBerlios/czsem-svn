@@ -94,17 +94,26 @@ public class ProcessExec {
 	public ProcessExec() {
 	}
 
-	public void startErrReaderThread() {
-		err_reader_thread = new ReaderThread(error_reader, System.err);
+	public void startErrReaderThread()
+	{
+		startErrReaderThread(System.err);		
+	}
+
+	public void startErrReaderThread(OutputStream output) {
+		err_reader_thread = new ReaderThread(error_reader, output);
 		err_reader_thread.start();		
 	}
 
-	public void startReaderThreads() {
-		cin_reader_thread = new ReaderThread(input_reader, System.out);
-		err_reader_thread = new ReaderThread(error_reader, System.err);
+	public void startReaderThreads(OutputStream std_output, OutputStream err_output) {		
+		cin_reader_thread = new ReaderThread(input_reader, std_output);
+		err_reader_thread = new ReaderThread(error_reader, err_output);
 	
 		cin_reader_thread.start();
 		err_reader_thread.start();
+	}
+
+	public void startReaderThreads() {
+		startReaderThreads(System.out, System.err);
 	}
 
 	protected void initBuffers()

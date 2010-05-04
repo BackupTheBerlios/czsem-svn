@@ -2,13 +2,14 @@ package czsem.ILP;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import czsem.ILP.Serializer.Relation;
+import czsem.utils.ProjectSetup;
 
 public class LinguisticSerializer 
 {
@@ -154,15 +155,24 @@ public class LinguisticSerializer
 
 	public void train() throws IOException, InterruptedException
 	{
+		String path_prefix = workingDirectory.getAbsolutePath() + "/train_" + ProjectSetup.makeTimeStamp();
+		
 		ILPExec ilp_exec = new ILPExec(workingDirectory, projectName);
 		ilp_exec.startILPProcess();
-		ilp_exec.startReaderThreads();
+		ilp_exec.startReaderThreads(
+				new FileOutputStream(path_prefix+"_std.log"),
+				new FileOutputStream(path_prefix+"_err.log"));
 		ilp_exec.induceAndWriteRules();
 		ilp_exec.close();
 	}
 
 
-	public void setBackgroundFileName(String fileName) throws FileNotFoundException, UnsupportedEncodingException
+	public void closeBackgroundSerializer()
+	{
+		ser_bkg.close();
+	}
+
+	public void setBackgroundSerializerFileName(String fileName) throws FileNotFoundException, UnsupportedEncodingException
 	{		
 		ser_bkg.setOutput(workingDirectory.getAbsolutePath() + '/' + fileName);		
 	}
@@ -172,7 +182,12 @@ public class LinguisticSerializer
 	{
 		String [] ret = new String[instancesIds.length];
 		ILPExec test = new ILPExec(workingDirectory, backgroundFileName);
-		test.initBeforeApplyRules();
+		test.initBeforeApplyRules(
+				new FileOutputStream(
+						workingDirectory.getAbsolutePath() + 
+						"classify_" + 
+						ProjectSetup.makeTimeStamp() + 
+						"_err.log"));
 		
 		for (int i = 0; i < instancesIds.length; i++)
 		{
@@ -185,10 +200,7 @@ public class LinguisticSerializer
 			ret[i] = test.applyRules(testExpession.toString());			
 		}
 				
-		test.close();
-		
-		System.out.println(Arrays.asList(ret));
-		
+		test.close();				
 		return ret;
 	}
 

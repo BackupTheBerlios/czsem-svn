@@ -687,9 +687,9 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 		}		
 	}
 
-	public void setBackgroundFileName(String fileName) throws FileNotFoundException, UnsupportedEncodingException
+	public void setBackgroundSerializerFileName(String fileName) throws FileNotFoundException, UnsupportedEncodingException
 	{
-		lingSer.setBackgroundFileName(fileName);		
+		lingSer.setBackgroundSerializerFileName(fileName);		
 	}
 
 	public String[] classifyInstances(String[] instancesGateIds, String targetRelationName) throws IOException, InterruptedException
@@ -699,5 +699,9 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 		}
 		
 		return lingSer.classifyInstances(instancesGateIds, docName, targetRelationName);
+	}
+
+	public void closeBackgroundSerializer() {
+		lingSer.closeBackgroundSerializer();
 	}
 }
