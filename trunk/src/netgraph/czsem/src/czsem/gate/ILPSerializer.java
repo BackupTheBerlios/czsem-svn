@@ -575,6 +575,11 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 
 */
 
+	protected String renderID(String id)
+	{
+		return renderID(new Integer(id));
+	}
+
 	protected String renderID(Integer id)
 	{
 		return renderID(id, docName);
@@ -612,8 +617,7 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 
 	public void serializeTrainingInstance(String instanceGateId, String docName, String instanceTypeName, boolean isPositive)
 	{
-		Integer instanceIntid = new Integer(instanceGateId);
-		String instance_id = renderID(instanceIntid, docName);
+		String instance_id = renderID(instanceGateId);
 		
 		if (isPositive)
 			lingSer.putPositiveExample(instance_id, instanceTypeName);
@@ -626,7 +630,7 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 		lingSer.flushAndClose();		
 	}
 
-	public void setupAndInit(String className, String classTypeName, Element serializerOtionsElem)
+	public void initSerializer(Element serializerOtionsElem)
 	{
 		parseOptions(serializerOtionsElem);
 		
@@ -634,6 +638,11 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 		createTreeDependencyTypes();
 		one2oneTreeDependencyTypes();
 		
+	}
+	
+	public void initLearning(String className, String classTypeName)
+	{		
+		lingSer.putModes();
 		lingSer.putDeterminations(className, classTypeName);				
 	}
 
@@ -676,5 +685,19 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 			this.one2one_dependecy_args[one_dep][0] = tree_dependecies.get(one_dep).getAttributeValue("parent_typename");
 			this.one2one_dependecy_args[one_dep][1] = tree_dependecies.get(one_dep).getAttributeValue("child_typename");			
 		}		
+	}
+
+	public void setBackgroundFileName(String fileName) throws FileNotFoundException, UnsupportedEncodingException
+	{
+		lingSer.setBackgroundFileName(fileName);		
+	}
+
+	public String[] classifyInstances(String[] instancesGateIds, String targetRelationName) throws IOException, InterruptedException
+	{
+		for (int i = 0; i < instancesGateIds.length; i++) {
+			instancesGateIds[i] = renderID(instancesGateIds[i]);
+		}
+		
+		return lingSer.classifyInstances(instancesGateIds, docName, targetRelationName);
 	}
 }

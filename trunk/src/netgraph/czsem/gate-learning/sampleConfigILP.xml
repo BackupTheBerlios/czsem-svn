@@ -5,8 +5,8 @@
   
     <ATTRIBUTE>  
       <CLASS/>    
-      <NAME>injuries</NAME>  
-      <TYPE>injuries</TYPE>  
+      <NAME>damage</NAME>  
+      <TYPE>damage</TYPE>  
       <POSITION>0</POSITION>
     </ATTRIBUTE>  
    

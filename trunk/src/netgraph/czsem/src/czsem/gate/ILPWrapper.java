@@ -11,6 +11,7 @@ import gate.util.GateException;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import org.jdom.Element;
@@ -51,7 +52,7 @@ public class ILPWrapper implements AdvancedMLEngine
 		return attributes.get(lastAttrIndex) == null;
 	}
 	
-	private void serializeTrainingInstance(List<String> attributes) throws IOException, InterruptedException
+	protected void serializeTrainingInstance(List<String> attributes) throws IOException, InterruptedException
 	{
 		Document doc = pr.getDocument();
 		
@@ -72,22 +73,60 @@ public class ILPWrapper implements AdvancedMLEngine
 		}
 	}
 
+	public String [] classifyInstances(List<List<String>> instances) throws IOException, InterruptedException
+	{
+		Document doc = pr.getDocument();
+		String docName = doc.getName();
+
+		ilpSer.setBackgroundFileName(docName);
+		ilpSer.serializeDocument(doc, pr.getInputASName());
+	
+		
+		String [] instancesGateIds = new String[instances.size()];
+		for (int i = 0; i < instancesGateIds.length; i++)
+		{
+			instancesGateIds[i] = instances.get(i).get(idIndex);			
+		}
+		
+		return ilpSer.classifyInstances(instancesGateIds, className);
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List batchClassifyInstances(List instances) throws ExecutionException
 	{
-		// TODO Auto-generated method stub		
-		System.out.println("ILPWrapper.batchClassifyInstances()");
-		return null;
+		
+		
+		
+		try
+		{
+			return Arrays.asList(classifyInstances(instances));
+		} 
+		catch (Throwable t)
+		{
+			throw new ExecutionException(t);
+		}
+		
+
+		
+		
+		
+		
+//		System.out.println("ILPWrapper.batchClassifyInstances()");
+//		System.out.println(pr.getDocument().getName());
+//		System.out.println(instances.size());
+//		
+//		String[] ret = new String[instances.size()];
+//		for (int i = 0; i < ret.length; i++) {
+//			ret[i] = "true";
+//		}
+//		return Arrays.asList(ret);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public Object classifyInstance(List attributes) throws ExecutionException {
-		// TODO Auto-generated method stub		
-		System.out.println("ILPWrapper.classifyInstance()");
-		return null;
+		throw new ExecutionException(new NoSuchMethodException("Use batchClassifyInstances instead!"));
 	}
 
 	@Override
@@ -103,10 +142,17 @@ public class ILPWrapper implements AdvancedMLEngine
 		File configFile = new File(configFileURI);
 		String name_ext = configFile.getName();
 		String name = name_ext.substring(0, name_ext.indexOf('.')); 
-		try {
+		try
+		{
 			ilpSer = new ILPSerializer(configFile.getParent(), name);
-			ilpSer.setupAndInit(className, datasetDefinition.getInstanceType(), options.getChild("serializer"));
-		} catch (Throwable e) {
+			ilpSer.initSerializer(options.getChild("serializer"));
+			
+			if (pr.getTraining())
+			{
+				ilpSer.initLearning(className, datasetDefinition.getInstanceType());
+			}
+		}
+		catch (Throwable e) {
 			throw new GateException(e);
 		}
 		

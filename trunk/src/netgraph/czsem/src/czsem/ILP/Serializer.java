@@ -56,15 +56,20 @@ public class Serializer {
 	
 	public Serializer(String output_filename) throws FileNotFoundException, UnsupportedEncodingException
 	{
-//		output = new PrintStream(output_filename);
-		output = new PrintStream(output_filename, "ISO8859_1");
-	/**	
-		output.println(":- encoding(utf8).");
-	/**/
+		setOutput(output_filename);
 	}
 	
 	public Serializer() {
 		// TODO Auto-generated constructor stub
+	}
+	
+	public void setOutput(String output_filename) throws FileNotFoundException, UnsupportedEncodingException
+	{
+//		output = new PrintStream(output_filename);
+		output = new PrintStream(output_filename, "ISO8859_1");
+	/**	
+		output.println(":- encoding(utf8).");
+	/**/		
 	}
 
 	private Type getType(String typeName)

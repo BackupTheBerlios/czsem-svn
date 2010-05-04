@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import czsem.ILP.Serializer.Relation;
@@ -45,15 +46,11 @@ public class LinguisticSerializer
 	{
 		Relation rel = createDependencyType(index, dependencyName, parentType, childType);
 		treeDepRels.add(index, rel);
-		ser_bkg.putBinaryMode(rel, "*", '+', '-');
-		ser_bkg.putBinaryMode(rel, "1", '-', '+');		
 	};
 	public void createOneToOneDependencyType(int index, String dependencyName, String parentType, String childType)
 	{
 		Relation rel = createDependencyType(index, dependencyName, parentType, childType);
 		one2oneDepRels.add(index, rel);
-		ser_bkg.putBinaryMode(rel, "1", '+', '-');
-		ser_bkg.putBinaryMode(rel, "1", '-', '+');
 	};
 	
 	protected Relation createDependencyType(int index, String dependencyName, String parentType, String childType)
@@ -66,7 +63,6 @@ public class LinguisticSerializer
 	{
 		Relation rel = ser_bkg.addBinRelation("has_" + featureName, annotationType, featureName+'T');
 		featRels.add(index, rel);
-		ser_bkg.putBinaryMode(rel, "1", '+', '#');
 	};
 	
 	
@@ -85,9 +81,32 @@ public class LinguisticSerializer
 		ser_bkg.putBinTuple(featRels.get(featureIndex), annotationId, featureValue);
 	};
 	
-	public void putDeterminations(String relationName, String relationArgTypeName)
+	public void putModes()
 	{
-		Relation target = ser_bkg.addRealtion(relationName, new String[]{relationArgTypeName});
+		ser_bkg.putCommentLn("-------------------- Modes --------------------");
+		
+		for (Relation rel : featRels)
+		{
+			ser_bkg.putBinaryMode(rel, "1", '+', '#');
+		}
+		
+		for (Relation rel : one2oneDepRels)
+		{
+			ser_bkg.putBinaryMode(rel, "1", '+', '-');
+			ser_bkg.putBinaryMode(rel, "1", '-', '+');
+		}
+
+		for (Relation rel : treeDepRels)
+		{
+			ser_bkg.putBinaryMode(rel, "*", '+', '-');
+			ser_bkg.putBinaryMode(rel, "1", '-', '+');		
+		}
+		ser_bkg.putCommentLn("-------------------- Modes END --------------------");		
+	}
+
+	public void putDeterminations(String targetRelationName, String targetRelationArgTypeName)
+	{
+		Relation target = ser_bkg.addRealtion(targetRelationName, new String[]{targetRelationArgTypeName});
 		ser_bkg.putMode(target, "1", new char[] {'+'});
 
 
@@ -140,16 +159,37 @@ public class LinguisticSerializer
 		ilp_exec.startReaderThreads();
 		ilp_exec.induceAndWriteRules();
 		ilp_exec.close();
-		
-		
-		
-		//TODO:
-		ILPExec test = new ILPExec(workingDirectory, projectName);
+	}
+
+
+	public void setBackgroundFileName(String fileName) throws FileNotFoundException, UnsupportedEncodingException
+	{		
+		ser_bkg.setOutput(workingDirectory.getAbsolutePath() + '/' + fileName);		
+	}
+
+
+	public String[] classifyInstances(String[] instancesIds, String backgroundFileName, String targetRelationName) throws IOException, InterruptedException
+	{
+		String [] ret = new String[instancesIds.length];
+		ILPExec test = new ILPExec(workingDirectory, backgroundFileName);
 		test.initBeforeApplyRules();
 		
-		System.out.println(test.applyRules("injuries('id_jihomoravsky48461.txt.xml_00046_804')"));
-		System.out.println(test.applyRules("injuries('id_jihomoravsky48461.txt.xml_00046_805')"));
+		for (int i = 0; i < instancesIds.length; i++)
+		{
+			StringBuilder testExpession = new StringBuilder();
+			testExpession.append(Serializer.encodeRelationName(targetRelationName));
+			testExpession.append("('");
+			testExpession.append(instancesIds[i]);
+			testExpession.append("')");
+			
+			ret[i] = test.applyRules(testExpession.toString());			
+		}
+				
 		test.close();
+		
+		System.out.println(Arrays.asList(ret));
+		
+		return ret;
 	}
 
 }

@@ -37,8 +37,8 @@ public class TrainTestGateOnCzech {
 	    
 //	    Document doc = GateUtils.loadDocumentFormDatastore(ds, "jihomoravsky47460.txt.xml_00045___1268665562431___957");
 	    
-	    Corpus corpus = GateUtils.loadCorpusFormDatastore(ds, "Corpus for jihomoravsky48461.txt.xml_00046___1272881652267___7395");
-//	    Corpus corpus = GateUtils.loadCorpusFormDatastore(ds, "50msg_index___1268665232288___6956");
+//	    Corpus corpus = GateUtils.loadCorpusFormDatastore(ds, "Corpus for jihomoravsky48461.txt.xml_00046___1272881652267___7395");
+	    Corpus corpus = GateUtils.loadCorpusFormDatastore(ds, "50msg_index___1268665232288___6956");
 	    
 	    
 	    	    
@@ -46,6 +46,7 @@ public class TrainTestGateOnCzech {
 		FeatureMap fm = Factory.newFeatureMap();
 		fm.put("configFileURL", new File("gate-learning/sampleConfigILP.xml").toURI().toURL());
 		fm.put("inputASName", "Learning");
+		fm.put("training", false);
 		
 	    ProcessingResource learning = (ProcessingResource) 
 	    	Factory.createResource("gate.creole.ml.MachineLearningPR", fm);

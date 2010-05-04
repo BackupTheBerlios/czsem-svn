@@ -247,7 +247,7 @@ public class ILPExec extends ProcessExec {
 		
 		output_writer.print("consult('");
 		output_writer.print(project_name);
-		output_writer.println(".b').");
+		output_writer.println("').");
 		output_writer.flush();
 		
 	}
