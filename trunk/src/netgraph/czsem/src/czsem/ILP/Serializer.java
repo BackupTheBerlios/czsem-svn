@@ -191,6 +191,19 @@ public class Serializer {
 		return relationName;
 	}
 	
+	public static boolean isNumber(String value)
+	{
+		try 
+		{
+			Double.parseDouble(value);
+		}
+		catch (NumberFormatException e)
+		{
+			return false;
+		}
+		return true;
+	}
+
 	public static String encodeValue(String value)
 	{
 
@@ -203,7 +216,7 @@ public class Serializer {
 
 		for (char ch = iter.first(); ch != CharacterIterator.DONE; ch = iter.next())
 		{
-			all_digits = all_digits & Character.isDigit(ch);
+			all_digits = all_digits & (Character.isDigit(ch) || ch == '.');
 			all_lo_alpha = all_lo_alpha & (Character.isLowerCase(ch) | Character.isDigit(ch) | ch == '_');
 			
 			if (ch > 127 )
@@ -223,7 +236,7 @@ public class Serializer {
 			}
 		}
 
-		if (all_digits || all_lo_alpha) return value;
+		if ((all_digits && isNumber(value)) || all_lo_alpha) return value;
 //		if (all_digits || all_lo_alpha) return "μμ"+value;
 		
 		sb.append('\'');
@@ -294,7 +307,6 @@ public class Serializer {
 	 */
 	public void putMode(Relation rel, String recallNumber, char [] argumentModes)
 	{
-		//:- mode(1,plus(+integer,+integer,-integer)).
 		output.print(":- mode(");
 		output.print(recallNumber);
 		output.print(',');
@@ -332,10 +344,12 @@ public class Serializer {
 	
 	public static void main(String[] argv)
 	{
+		System.err.println(isNumber("0.10.2"));
+		
 		Serializer ser = new Serializer();
 		
 		Relation rel = ser.addBinRelation("edge", "node", "node");
-		ser.putBinTuple(rel, "node01", "002");
+		ser.putBinTuple(rel, "node01", "002.2");
 		ser.putBinTuple(rel, "node01", "345");
 		ser.putBinTuple(rel, "123node", "id_123");
 		ser.putBinTuple(rel, "A123node", "_id_123");

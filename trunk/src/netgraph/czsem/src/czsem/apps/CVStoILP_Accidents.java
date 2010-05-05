@@ -88,14 +88,14 @@ public class CVStoILP_Accidents {
 			ilp_ser.print(atl_relations[i].getName());
 			ilp_ser.print("(ID,N) :- ");
 			ilp_ser.print(crisp_relations[i].getName());
-			ilp_ser.print("(ID,N), not(integer(N)),!.\n");
+			ilp_ser.print("(ID,N), not(number(N)),!.\n");
 
 			ilp_ser.print(atl_relations[i].getName());
 			ilp_ser.print("(ID,N) :- ");
 			ilp_ser.print(crisp_relations[i].getName());
-			ilp_ser.print("(ID,N2), integer(N2), ");
+			ilp_ser.print("(ID,N2), number(N2), ");
 			ilp_ser.print(atl_relations[i].getArgTypeName(1));
-			ilp_ser.print("(N), integer(N), N2>=N.\n\n");						
+			ilp_ser.print("(N), number(N), N2>=N.\n\n");						
 		}
 
 		

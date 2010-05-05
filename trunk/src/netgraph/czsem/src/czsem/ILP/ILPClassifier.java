@@ -2,6 +2,7 @@ package czsem.ILP;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -83,7 +84,9 @@ public abstract class ILPClassifier extends Classifier
 	{
 		ILPExec exec = new ILPExec(project_setup);
 		exec.startILPProcess();
-		exec.startReaderThreads();
+		exec.startReaderThreads(
+				new FileOutputStream(project_setup.working_directory.getAbsoluteFile() + "/learning_std.log"),
+				new FileOutputStream(project_setup.working_directory.getAbsoluteFile() + "/learning_err.log"));
 		exec.induceAndWriteRules();
 		exec.close();
 	}
@@ -200,7 +203,8 @@ public abstract class ILPClassifier extends Classifier
 		
 		ILPExec test_exec = new ILPExec(project_setup);
 		test_exec.startPrologProcess(test_exec.getRulesFileName());
-		test_exec.startErrReaderThread();
+		test_exec.startErrReaderThread(
+				new FileOutputStream(project_setup.working_directory.getAbsoluteFile() + "run_test.log"));
 //		test_exec.consultFile(project_setup.project_name + ".b");
 		test_exec.consultFile(project_setup.project_name + ".test");
 				
@@ -208,7 +212,7 @@ public abstract class ILPClassifier extends Classifier
 		String predicted = test_exec.readLine();
 		test_exec.close();
 		
-		System.out.println("predicted: "+ predicted);
+//		System.out.println("predicted: "+ predicted);
 		
 		if (predicted.equals("END")) return Instance.missingValue();
 		
