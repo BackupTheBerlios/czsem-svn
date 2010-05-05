@@ -1,9 +1,9 @@
 package czsem.ILP;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.PrintWriter;
 
 import czsem.utils.Config;
@@ -25,6 +25,8 @@ public class ILPExec extends ProcessExec {
 		this.project_name = project_name;
 		learnig_examples = project_name;
 		testing_examples = project_name + "_test";
+		
+		new File(working_directory.getAbsolutePath() + "/log").mkdir();
 	}
 	
 	public ILPExec(ProjectSetup ps)
@@ -40,6 +42,35 @@ public class ILPExec extends ProcessExec {
 	public static String renderRulesFilePathName(ProjectSetup ps) {
 		return  ps.renderProjectFileName(".rules");
 	}
+		
+	protected String makeLogPathPrefix(String log_name)
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append(working_directory.getAbsolutePath());
+		sb.append("/log/");
+		sb.append(log_name);
+		sb.append('_');
+		sb.append(ProjectSetup.makeTimeStamp());
+		sb.append('_');
+		return 	sb.toString();	
+	}
+
+	public void startErrReaderThread(String log_name) throws FileNotFoundException
+	{
+		String path_prefix = makeLogPathPrefix(log_name);		
+		startErrReaderThread(
+				new FileOutputStream(path_prefix + "err.log"));				
+	}
+
+	public void startReaderThreads(String log_name) throws FileNotFoundException
+	{
+		
+		String path_prefix = makeLogPathPrefix(log_name);		
+		startReaderThreads(
+				new FileOutputStream(path_prefix + "std.log"),
+				new FileOutputStream(path_prefix + "err.log"));	
+	}
+
 
 
 	public void startPrologProcess(String file_name_to_consult) throws IOException
@@ -241,16 +272,11 @@ public class ILPExec extends ProcessExec {
 		return input_reader.readLine();
 	}
 
-	public void initBeforeApplyRules(OutputStream err_output) throws IOException
+	public void initBeforeApplyRules(String errLogName) throws IOException
 	{
 		startPrologProcess(getRulesFileName());
-		startErrReaderThread(err_output);
-		
-		output_writer.print("consult('");
-		output_writer.print(project_name);
-		output_writer.println("').");
-		output_writer.flush();
-		
+		startErrReaderThread(errLogName);
+		consultFile(project_name);				
 	}
 
 	/*

@@ -20,6 +20,7 @@
         <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{ILPExec.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.utils{NetgraphQuery.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{ProgolWork1.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.utils{ProcessExec.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{ILPClassifier.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.utils{CZSemTree.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.utils{ILPStringList.java"/>
@@ -27,7 +28,7 @@
         <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{DataMaker.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.utils{ILPQueryProcessor.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{CrispILPClassifier.java"/>
-        <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{WekaRun.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{FuzzyILPClassifier.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{WekaRun.java"/>
     </selectedElements>
 </jardesc>

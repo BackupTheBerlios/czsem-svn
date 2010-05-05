@@ -2,6 +2,7 @@ package czsem.utils;
 
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -11,6 +12,7 @@ public class Config
 {
 	private static Config config = null;
 	private static final String config_filename = "config.xml";
+	public static ClassLoader classLoader = null; 
 	
 	public static void main(String[] args) throws IOException
 	{
@@ -37,6 +39,7 @@ public class Config
 			try {
 				loadConfig();
 			} catch (IOException e) {
+				System.err.println(new File(".").getAbsolutePath());
 				e.printStackTrace();
 			}
 		return config;
@@ -83,12 +86,12 @@ public class Config
 
 	public static Config loadFromFile(String filename) throws IOException
 	{
-		  FileInputStream os = new FileInputStream(filename);
-		  XMLDecoder decoder = new XMLDecoder(os);
-		  Config c = (Config)decoder.readObject();
-		  decoder.close();
-		  os.close();
-		  return c;
+		FileInputStream os = new FileInputStream(filename);
+		XMLDecoder decoder = new XMLDecoder(os, null, null, classLoader);
+		Config c = (Config)decoder.readObject();
+		decoder.close();
+		os.close();
+		return c;
 	}
 	
 	public String getWekaJarPath() {

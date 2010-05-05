@@ -2,7 +2,6 @@ package czsem.ILP;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -15,7 +14,6 @@ import weka.core.Capabilities;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Capabilities.Capability;
-
 import czsem.ILP.Serializer.Relation;
 import czsem.ILP.WekaSerializer.Condition;
 import czsem.utils.Config;
@@ -84,9 +82,7 @@ public abstract class ILPClassifier extends Classifier
 	{
 		ILPExec exec = new ILPExec(project_setup);
 		exec.startILPProcess();
-		exec.startReaderThreads(
-				new FileOutputStream(project_setup.working_directory.getAbsoluteFile() + "/learning_std.log"),
-				new FileOutputStream(project_setup.working_directory.getAbsoluteFile() + "/learning_err.log"));
+		exec.startReaderThreads("learning");
 		exec.induceAndWriteRules();
 		exec.close();
 	}
@@ -203,8 +199,7 @@ public abstract class ILPClassifier extends Classifier
 		
 		ILPExec test_exec = new ILPExec(project_setup);
 		test_exec.startPrologProcess(test_exec.getRulesFileName());
-		test_exec.startErrReaderThread(
-				new FileOutputStream(project_setup.working_directory.getAbsoluteFile() + "run_test.log"));
+		test_exec.startErrReaderThread("run_test");
 //		test_exec.consultFile(project_setup.project_name + ".b");
 		test_exec.consultFile(project_setup.project_name + ".test");
 				

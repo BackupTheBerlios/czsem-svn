@@ -45,8 +45,8 @@ public class TrainTestGateOnCzech {
 //		ILPSerializer ilp_ser = (ILPSerializer) Factory.createResource("czsem.gate.ILPSerializer", Factory.newFeatureMap()); 
 		FeatureMap fm = Factory.newFeatureMap();
 		fm.put("configFileURL", new File("gate-learning/sampleConfigILP.xml").toURI().toURL());
-		fm.put("inputASName", "Learning");
-		fm.put("training", false);
+		fm.put("inputASName", "TectoMT");
+		fm.put("training", true);
 		
 	    ProcessingResource learning = (ProcessingResource) 
 	    	Factory.createResource("gate.creole.ml.MachineLearningPR", fm);

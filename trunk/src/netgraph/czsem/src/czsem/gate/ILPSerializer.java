@@ -95,7 +95,7 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 		}
 		
 	}
-	protected void one2oneTreeDependencyTypes()
+	protected void createOne2oneTreeDependencyTypes()
 	{
 		for (int d=0; d<one2one_dependecies.length; d++)
 		{
@@ -636,7 +636,7 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 		
 		createFeatureTypes();
 		createTreeDependencyTypes();
-		one2oneTreeDependencyTypes();
+		createOne2oneTreeDependencyTypes();
 		
 	}
 	
@@ -680,10 +680,10 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 		this.one2one_dependecy_args = new String[one2one_dependecies.size()][];
 		for (int one_dep = 0; one_dep < one2one_dependecies.size(); one_dep++)
 		{
-			this.one2one_dependecies[one_dep] = tree_dependecies.get(one_dep).getAttributeValue("typename");
+			this.one2one_dependecies[one_dep] = one2one_dependecies.get(one_dep).getAttributeValue("typename");
 			this.one2one_dependecy_args[one_dep] = new String[2];
-			this.one2one_dependecy_args[one_dep][0] = tree_dependecies.get(one_dep).getAttributeValue("parent_typename");
-			this.one2one_dependecy_args[one_dep][1] = tree_dependecies.get(one_dep).getAttributeValue("child_typename");			
+			this.one2one_dependecy_args[one_dep][0] = one2one_dependecies.get(one_dep).getAttributeValue("parent_typename");
+			this.one2one_dependecy_args[one_dep][1] = one2one_dependecies.get(one_dep).getAttributeValue("child_typename");			
 		}		
 	}
 

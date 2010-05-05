@@ -182,6 +182,8 @@ public class Serializer {
 
 	public static String encodeRelationName(String relationName)
 	{
+		relationName = relationName.replace('.', '_');
+		
 		char ch = relationName.charAt(0);
 		if (Character.isUpperCase(ch))
 		{

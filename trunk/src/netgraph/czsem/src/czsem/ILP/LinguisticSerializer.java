@@ -2,14 +2,12 @@ package czsem.ILP;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
 import czsem.ILP.Serializer.Relation;
-import czsem.utils.ProjectSetup;
 
 public class LinguisticSerializer 
 {
@@ -155,13 +153,9 @@ public class LinguisticSerializer
 
 	public void train() throws IOException, InterruptedException
 	{
-		String path_prefix = workingDirectory.getAbsolutePath() + "/train_" + ProjectSetup.makeTimeStamp();
-		
 		ILPExec ilp_exec = new ILPExec(workingDirectory, projectName);
 		ilp_exec.startILPProcess();
-		ilp_exec.startReaderThreads(
-				new FileOutputStream(path_prefix+"_std.log"),
-				new FileOutputStream(path_prefix+"_err.log"));
+		ilp_exec.startReaderThreads("train");
 		ilp_exec.induceAndWriteRules();
 		ilp_exec.close();
 	}
@@ -182,12 +176,7 @@ public class LinguisticSerializer
 	{
 		String [] ret = new String[instancesIds.length];
 		ILPExec test = new ILPExec(workingDirectory, backgroundFileName);
-		test.initBeforeApplyRules(
-				new FileOutputStream(
-						workingDirectory.getAbsolutePath() + 
-						"classify_" + 
-						ProjectSetup.makeTimeStamp() + 
-						"_err.log"));
+		test.initBeforeApplyRules("classify");
 		
 		for (int i = 0; i < instancesIds.length; i++)
 		{
