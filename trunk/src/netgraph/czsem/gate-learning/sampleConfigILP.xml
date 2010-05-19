@@ -8,6 +8,7 @@
       <NAME>damage</NAME>  
       <TYPE>damage</TYPE>  
       <POSITION>0</POSITION>
+      <SEMTYPE>NOMINAL</SEMTYPE>
     </ATTRIBUTE>  
    
    
@@ -16,12 +17,14 @@
       <TYPE>Token</TYPE>  
       <FEATURE>ann_id</FEATURE>  
       <POSITION>0</POSITION>  
+      <SEMTYPE>NOMINAL</SEMTYPE>
     </ATTRIBUTE>   
 
     <ATTRIBUTE>  
       <NAME>last</NAME>  
       <TYPE>Token</TYPE>  
       <POSITION>1</POSITION>  
+      <SEMTYPE>NOMINAL</SEMTYPE>
     </ATTRIBUTE>   
 
   </DATASET>  
@@ -31,6 +34,43 @@
     <WRAPPER>czsem.gate.ILPWrapper</WRAPPER>
     <BATCH-MODE-CLASSIFICATION />
     <OPTIONS>
+        <ilp>
+            <learning_settings>
+              :- set(evalfn,posonly).
+              :- set(noise,0).
+              :- set(clauselength,20).
+              :- set(i,15).
+              
+              % orlemma(N,B,C) :- t_lemma(N,B), t_lemma(C), C\=B.
+              % orlemma(N,B,C) :- t_lemma(N,C), t_lemma(B), C\=B.
+              
+              optional_double_edge(N1,N2) :- edge(N1,N2).
+              optional_double_edge(N1,N2) :- edge(N1,N),edge(N,N2).
+              
+              :- mode(1,tree_root(+node)).
+              :- mode(1,relevant_node(+node)).
+              :- mode(1,root_in_file(+node,-file)).
+              :- mode(*,edge(+node,-node)).
+              :- mode(1,edge(-node,+node)).
+              
+              :- mode(*,optional_double_edge(+node,-node)).
+              :- mode(1,optional_double_edge(-node,+node)).
+              
+              :- determination(relevant_node/1,edge/2).
+              :- determination(relevant_node/1,root_in_file/2).
+              %:- determination(relevant_node/1,optional_double_edge/2).
+              
+              :- mode(1,functor(+node,#functor)).
+              :- determination(relevant_node/1,functor/2).
+              :- mode(1,gram_sempos(+node,#gram_sempos)).
+              :- determination(relevant_node/1,gram_sempos/2).
+              :- mode(1,t_lemma(+node,#t_lemma)).
+              :- determination(relevant_node/1,t_lemma/2).
+              :- mode(1,val_frame_rf(+node,#val_frame_rf)).
+              :- determination(relevant_node/1,val_frame_rf/2).
+            </learning_settings>
+        </ilp>
+
         <serializer>
             <tokens>
                 <token typename="Token">
