@@ -36,38 +36,42 @@
     <OPTIONS>
         <ilp>
             <learning_settings>
-              :- set(evalfn,posonly).
-              :- set(noise,0).
-              :- set(clauselength,20).
-              :- set(i,15).
+              %set(evalfn,posonly).
+              set(noise,500), setting(noise,N).
+
+
+              set(clauselength,100), setting(clauselength,C).
+
+              set(i,30), setting(i,I).
+
               
               % orlemma(N,B,C) :- t_lemma(N,B), t_lemma(C), C\=B.
               % orlemma(N,B,C) :- t_lemma(N,C), t_lemma(B), C\=B.
               
-              optional_double_edge(N1,N2) :- edge(N1,N2).
-              optional_double_edge(N1,N2) :- edge(N1,N),edge(N,N2).
+              %optional_double_edge(N1,N2) :- edge(N1,N2).
+              %optional_double_edge(N1,N2) :- edge(N1,N),edge(N,N2).
               
-              :- mode(1,tree_root(+node)).
-              :- mode(1,relevant_node(+node)).
-              :- mode(1,root_in_file(+node,-file)).
-              :- mode(*,edge(+node,-node)).
-              :- mode(1,edge(-node,+node)).
+              %:- mode(1,tree_root(+node)).
+              %:- mode(1,relevant_node(+node)).
+              %:- mode(1,root_in_file(+node,-file)).
+              %:- mode(*,edge(+node,-node)).
+              %:- mode(1,edge(-node,+node)).
               
-              :- mode(*,optional_double_edge(+node,-node)).
-              :- mode(1,optional_double_edge(-node,+node)).
+              %:- mode(*,optional_double_edge(+node,-node)).
+              %:- mode(1,optional_double_edge(-node,+node)).
               
-              :- determination(relevant_node/1,edge/2).
-              :- determination(relevant_node/1,root_in_file/2).
+              %:- determination(relevant_node/1,edge/2).
+              %:- determination(relevant_node/1,root_in_file/2).
               %:- determination(relevant_node/1,optional_double_edge/2).
               
-              :- mode(1,functor(+node,#functor)).
-              :- determination(relevant_node/1,functor/2).
-              :- mode(1,gram_sempos(+node,#gram_sempos)).
-              :- determination(relevant_node/1,gram_sempos/2).
-              :- mode(1,t_lemma(+node,#t_lemma)).
-              :- determination(relevant_node/1,t_lemma/2).
-              :- mode(1,val_frame_rf(+node,#val_frame_rf)).
-              :- determination(relevant_node/1,val_frame_rf/2).
+              %:- mode(1,functor(+node,#functor)).
+              %:- determination(relevant_node/1,functor/2).
+              %:- mode(1,gram_sempos(+node,#gram_sempos)).
+              %:- determination(relevant_node/1,gram_sempos/2).
+              %:- mode(1,t_lemma(+node,#t_lemma)).
+              %:- determination(relevant_node/1,t_lemma/2).
+              %:- mode(1,val_frame_rf(+node,#val_frame_rf)).
+              %:- determination(relevant_node/1,val_frame_rf/2).
             </learning_settings>
         </ilp>
 
@@ -106,7 +110,7 @@
             </tokens>
             <tree_dependecies>
                 <dependecy typename="Dependency" parent_typename="Token" child_typename="Token"/>
-                <dependecy typename="aDependency" parent_typename="Token" child_typename="Token"/>
+<!--                <dependecy typename="aDependency" parent_typename="Token" child_typename="Token"/> -->
                 <dependecy typename="tDependency" parent_typename="tToken" child_typename="tToken"/>
                 <dependecy typename="auxRfDependency" parent_typename="tToken" child_typename="Token"/>
             </tree_dependecies>

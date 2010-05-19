@@ -610,9 +610,9 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 	}
 
 	
-	public void train() throws IOException, InterruptedException
+	public void train(String learningSettings) throws IOException, InterruptedException
 	{
-		lingSer.train();
+		lingSer.train(learningSettings);
 	}
 
 	public void serializeTrainingInstance(String instanceGateId, String docName, String instanceTypeName, boolean isPositive)

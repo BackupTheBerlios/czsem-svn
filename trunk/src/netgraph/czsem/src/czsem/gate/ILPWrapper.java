@@ -71,7 +71,7 @@ public class ILPWrapper implements AdvancedMLEngine
 		if (docCounter.isLastDocument() && isLastInstanceInDocument(attributes))
 		{
 			ilpSer.flushAndClose();
-			ilpSer.train();
+			ilpSer.train(options.getChild("ilp").getChildText("learning_settings"));
 		}
 	}
 

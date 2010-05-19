@@ -151,11 +151,12 @@ public class LinguisticSerializer
 	}
 
 
-	public void train() throws IOException, InterruptedException
+	public void train(String learningSettings) throws IOException, InterruptedException
 	{
 		ILPExec ilp_exec = new ILPExec(workingDirectory, projectName);
 		ilp_exec.startILPProcess();
 		ilp_exec.startReaderThreads("train");
+		ilp_exec.writeString(learningSettings);
 		ilp_exec.induceAndWriteRules();
 		ilp_exec.close();
 	}
