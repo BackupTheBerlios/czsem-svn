@@ -100,15 +100,24 @@ public class TrainTestGateOnCzech {
 			                     gate.AnnotationSet inputAS, gate.AnnotationSet outputAS, 
 			                     gate.creole.ontology.Ontology ontology)
 	{		
-		
+		gate.AnnotationSet binding_as = (gate.AnnotationSet) bindings.get("anot_tmp");
+		gate.Annotation annot = binding_as.iterator().next();
+		String typename = annot.getType();
+		String new_typename = typename.replaceFirst("Dependecy", "Dependency");
+		FeatureMap fm = annot.getFeatures();
+		outputAS.add(annot.getStartNode(), annot.getEndNode(), new_typename, fm);
+		inputAS.remove(annot);
+/*
 		gate.AnnotationSet b_as = (gate.AnnotationSet) bindings.get("dep_tmp");
 		gate.Annotation dep_an = b_as.iterator().next();
+		
 		Object dep_kind = dep_an.getFeatures().get("kind");
 		List<Integer> args = (List<Integer>) dep_an.getFeatures().get("args");
 			
 		gate.Annotation token_an = inputAS.get(args.get(1));
 		gate.FeatureMap fm = token_an.getFeatures();
-		fm.put("depency_type", dep_kind);		
+		fm.put("depency_type", dep_kind);
+		*/		
 	}
 
 }

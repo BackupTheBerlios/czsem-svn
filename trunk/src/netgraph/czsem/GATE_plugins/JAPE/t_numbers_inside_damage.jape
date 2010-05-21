@@ -1,0 +1,14 @@
+Phase:phase1
+Input: tToken damage   
+Options: control = appelt
+
+Rule: number_inside_damage
+Priority: 20
+(
+{tToken within damage, tToken.sempos=="n.quant.def", 
+	tToken.functor!="RSTR", 
+	tToken.functor!="APP", 
+	tToken.functor!="MAT"}
+):token_tmp
+-->
+:token_tmp.damageNumber = {}

@@ -97,8 +97,10 @@ public class LinguisticSerializer
 
 		for (Relation rel : treeDepRels)
 		{
-			ser_bkg.putBinaryMode(rel, "*", '+', '-');
-			ser_bkg.putBinaryMode(rel, "1", '-', '+');		
+			ser_bkg.putBinaryMode(rel, "1", '+', '-');
+			ser_bkg.putBinaryMode(rel, "*", '-', '+');		
+//			ser_bkg.putBinaryMode(rel, "1", '+', '+');		
+//			ser_bkg.putBinaryMode(rel, "1", '-', '-');		
 		}
 		ser_bkg.putCommentLn("-------------------- Modes END --------------------");		
 	}

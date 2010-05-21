@@ -62,8 +62,12 @@ public class NetgraphTreeViewer extends AbstractVisualResource implements  Owned
 	private AnnotationSet annotation_set;
 
 	
+	public static void main(String[] args) throws Exception
+	{
+		gate.Main.main(args);		
+	}
 	
-	public static void main(String[] args) throws Exception {
+	public static void main2(String[] args) throws Exception {
 		Gate.init();
 		Gate.getCreoleRegister()
 			.registerDirectories(new URL("file:/C:/Program%20Files/GATE-5.1/plugins/Parser_Stanford/"));
@@ -127,7 +131,20 @@ public class NetgraphTreeViewer extends AbstractVisualResource implements  Owned
 	  
 	  
 	
-	
+	protected void fireSelectedAnnotation()
+	{
+		owner.selectAnnotation(new AnnotationData() {					
+			@Override
+			public AnnotationSet getAnnotationSet() {return annotation_set;}					
+			@Override
+			public Annotation getAnnotation()
+			{
+				assert FSFileWriter.ID_INDEX == 0;
+				String id = forestDisplay.getForest().getChosenNode().getValue(0, 0, 0);
+				return annotation_set.get(Integer.parseInt(id)); 
+			}
+		});		
+	}
 	
 	public void initComponents()
 	{    //make the dialog
@@ -155,17 +172,7 @@ public class NetgraphTreeViewer extends AbstractVisualResource implements  Owned
 			public void mousePressed(MouseEvent e)
 			{
 				forestDisplay.selectNode(e);
-				owner.selectAnnotation(new AnnotationData() {					
-					@Override
-					public AnnotationSet getAnnotationSet() {return annotation_set;}					
-					@Override
-					public Annotation getAnnotation()
-					{
-						assert FSFileWriter.ID_INDEX == 0;
-						String id = forestDisplay.getForest().getChosenNode().getValue(0, 0, 0);
-						return annotation_set.get(Integer.parseInt(id)); 
-					}
-				});
+				fireSelectedAnnotation();
 				repaint();
 			}			
 			@Override
@@ -239,9 +246,11 @@ public class NetgraphTreeViewer extends AbstractVisualResource implements  Owned
 	@Override
 	public void editAnnotation(Annotation annotation, AnnotationSet annotation_set)
 	{
+		if (annotation == null) return;		
 		this.annotation = annotation;
 		this.annotation_set = annotation_set;
-		
+		if (! canDisplayAnnotationType(annotation.getType())) return;
+				
 		Annotation sentence = annotation; 
 
 		if (! annotation.getType().equals("Sentence"))
@@ -271,7 +280,11 @@ public class NetgraphTreeViewer extends AbstractVisualResource implements  Owned
 			if (printed = wr.printTree(a)) break;
 		}
 		
-		if (!printed ) return;
+		if (!printed )
+		{
+			this.setVisible(false);
+			return;
+		}
 		
 //		System.err.println(annotation.getId());
 				
@@ -288,12 +301,25 @@ public class NetgraphTreeViewer extends AbstractVisualResource implements  Owned
 			
 		setForest(ngf);
 		
-		placeDialog(0,0);        
+		placeDialog(0,0);
+		
+		fireSelectedAnnotation();
+		
+//		System.out.println(tree.toFSString(false, th));
 	}
 
 	  
   
-public boolean canDisplayAnnotationType(String annotationType){return true;}  
+@Override
+public boolean canDisplayAnnotationType(String annotationType)
+{
+	if (annotationType.equals("Token")) return true;
+	if (annotationType.equals("tToken")) return true;
+	if (annotationType.equals("Sentence")) return true;
+	
+	return false;
+}  
+
 @Override
 public boolean editingFinished() {
 	return true;
@@ -315,7 +341,7 @@ public void okAction() throws GateException {}
 @Override
 public void cancelAction() throws GateException {}
 @Override
-public boolean supportsCancel() {return false;}
+public boolean supportsCancel() {return true;}
 @Override
 public Resource init() throws ResourceInstantiationException {
 	super.init();
@@ -329,6 +355,7 @@ public void setOwner(AnnotationEditorOwner owner) {this.owner = owner;}
 @Override
 public void placeDialog(int start, int end)
 {
+    dialog.pack();        
 	dialog.setVisible(true);
 }
 @Override

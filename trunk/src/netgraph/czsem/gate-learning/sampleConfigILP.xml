@@ -36,13 +36,22 @@
     <OPTIONS>
         <ilp>
             <learning_settings>
+set(noise,0), setting(noise,Noise).
+
+set(depth,100), setting(depth,Depth).
+
+set(clauselength,50), setting(clauselength,Clauselength).
+
+set(i,20), setting(i,I).
+
+set(nodes,50000), setting(nodes,Nodes).
+
+set(search,df), setting(search,Search).
+
+ 
+
+
               %set(evalfn,posonly).
-              set(noise,500), setting(noise,N).
-
-
-              set(clauselength,100), setting(clauselength,C).
-
-              set(i,30), setting(i,I).
 
               
               % orlemma(N,B,C) :- t_lemma(N,B), t_lemma(C), C\=B.
@@ -78,24 +87,27 @@
         <serializer>
             <tokens>
                 <token typename="Token">
-                    <features>  
+                    <features>
                         <feature>form</feature>  
+<!--                      
                         <feature>lemma</feature>  
                         <feature>tag</feature>  
                         <feature>afun</feature>  
-                        <feature>ord</feature>  
+                        <feature>ord</feature>
+-->                          
                     </features>  
                 </token>  
                 <token typename="tToken">  
                     <features>  
-                        <feature>nodetype</feature>
+<!--
                         <feature>t_lemma</feature>
                         <feature>functor</feature>
+                        <feature>sempos</feature>
+                        <feature>negation</feature>
+                        <feature>nodetype</feature>
                         <feature>deepord</feature>
                         <feature>formeme</feature>
-                        <feature>sempos</feature>
                         <feature>gender</feature>
-                        <feature>negation</feature>
                         <feature>number</feature>
                         <feature>degcmp</feature>
                         <feature>verbmod</feature>
@@ -105,17 +117,23 @@
                         <feature>resultative</feature>
                         <feature>dispmod</feature>
                         <feature>iterativeness</feature>
+-->                        
                     </features>  
                 </token>  
             </tokens>
             <tree_dependecies>
                 <dependecy typename="Dependency" parent_typename="Token" child_typename="Token"/>
-<!--                <dependecy typename="aDependency" parent_typename="Token" child_typename="Token"/> -->
+                <dependecy typename="aDependency" parent_typename="Token" child_typename="Token"/>
+<!--
                 <dependecy typename="tDependency" parent_typename="tToken" child_typename="tToken"/>
                 <dependecy typename="auxRfDependency" parent_typename="tToken" child_typename="Token"/>
+-->                
             </tree_dependecies>
             <one2one_dependecies>
+<!--
+
                 <dependecy typename="lex.rf" parent_typename="tToken" child_typename="Token"/>
+-->                
             </one2one_dependecies>
         </serializer>  
     </OPTIONS>  

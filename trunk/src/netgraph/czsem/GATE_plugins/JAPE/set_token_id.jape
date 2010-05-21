@@ -1,0 +1,18 @@
+Phase:phase1
+Input: Token tToken   
+Options: control = all
+
+Rule: set_id
+Priority: 20
+(
+{Token}|{tToken}
+): token_tmp
+-->
+{
+	gate.AnnotationSet binding_as = (gate.AnnotationSet) bindings.get("token_tmp");
+	gate.Annotation annot = binding_as.iterator().next();
+//	System.out.println(annot.getId());
+	FeatureMap fm = annot.getFeatures();
+	fm.put("ann_id", annot.getId().toString());
+}
+
