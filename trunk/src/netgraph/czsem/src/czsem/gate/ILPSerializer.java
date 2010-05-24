@@ -610,9 +610,9 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 	}
 
 	
-	public void train(String learningSettings) throws IOException, InterruptedException
+	public void train() throws IOException, InterruptedException
 	{
-		lingSer.train(learningSettings);
+		lingSer.train();
 	}
 
 	public void serializeTrainingInstance(String instanceGateId, String docName, String instanceTypeName, boolean isPositive)
@@ -622,7 +622,10 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 		if (isPositive)
 			lingSer.putPositiveExample(instance_id, instanceTypeName);
 		else
-			lingSer.putNegativeExample(instance_id, instanceTypeName);				
+		{
+//			if (Math.random() > 0.5)
+				lingSer.putNegativeExample(instance_id, instanceTypeName);
+		}
 	}
 
 	public void flushAndClose()
@@ -640,8 +643,9 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 		
 	}
 	
-	public void initLearning(String className, String classTypeName)
+	public void initLearning(String className, String classTypeName, String learning_settings)
 	{		
+		lingSer.putLearningSettings(learning_settings);
 		lingSer.putModes();
 		lingSer.putDeterminations(className, classTypeName);				
 	}

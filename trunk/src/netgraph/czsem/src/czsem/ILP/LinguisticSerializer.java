@@ -97,8 +97,8 @@ public class LinguisticSerializer
 
 		for (Relation rel : treeDepRels)
 		{
-			ser_bkg.putBinaryMode(rel, "1", '+', '-');
-			ser_bkg.putBinaryMode(rel, "*", '-', '+');		
+			ser_bkg.putBinaryMode(rel, "*", '+', '-');
+			ser_bkg.putBinaryMode(rel, "1", '-', '+');		
 //			ser_bkg.putBinaryMode(rel, "1", '+', '+');		
 //			ser_bkg.putBinaryMode(rel, "1", '-', '-');		
 		}
@@ -153,12 +153,11 @@ public class LinguisticSerializer
 	}
 
 
-	public void train(String learningSettings) throws IOException, InterruptedException
+	public void train() throws IOException, InterruptedException
 	{
 		ILPExec ilp_exec = new ILPExec(workingDirectory, projectName);
 		ilp_exec.startILPProcess();
 		ilp_exec.startReaderThreads("train");
-		ilp_exec.writeString(learningSettings);
 		ilp_exec.induceAndWriteRules();
 		ilp_exec.close();
 	}
@@ -194,6 +193,14 @@ public class LinguisticSerializer
 				
 		test.close();				
 		return ret;
+	}
+
+
+	public void putLearningSettings(String learningSettings)
+	{
+		ser_bkg.putCommentLn("-------------------- learningSettings --------------------");
+		ser_bkg.print(learningSettings);
+		ser_bkg.print("\n");
 	}
 
 }

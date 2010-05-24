@@ -12,7 +12,6 @@ import gate.util.profile.Profiler;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;

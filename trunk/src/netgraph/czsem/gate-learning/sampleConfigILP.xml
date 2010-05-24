@@ -5,8 +5,8 @@
   
     <ATTRIBUTE>  
       <CLASS/>    
-      <NAME>damage</NAME>  
-      <TYPE>damage</TYPE>  
+      <NAME>damageNumber</NAME>  
+      <TYPE>damageNumber</TYPE>  
       <POSITION>0</POSITION>
       <SEMTYPE>NOMINAL</SEMTYPE>
     </ATTRIBUTE>  
@@ -36,51 +36,10 @@
     <OPTIONS>
         <ilp>
             <learning_settings>
-set(noise,0), setting(noise,Noise).
-
-set(depth,100), setting(depth,Depth).
-
-set(clauselength,50), setting(clauselength,Clauselength).
-
-set(i,20), setting(i,I).
-
-set(nodes,50000), setting(nodes,Nodes).
-
-set(search,df), setting(search,Search).
-
- 
-
-
-              %set(evalfn,posonly).
-
-              
-              % orlemma(N,B,C) :- t_lemma(N,B), t_lemma(C), C\=B.
-              % orlemma(N,B,C) :- t_lemma(N,C), t_lemma(B), C\=B.
-              
-              %optional_double_edge(N1,N2) :- edge(N1,N2).
-              %optional_double_edge(N1,N2) :- edge(N1,N),edge(N,N2).
-              
-              %:- mode(1,tree_root(+node)).
-              %:- mode(1,relevant_node(+node)).
-              %:- mode(1,root_in_file(+node,-file)).
-              %:- mode(*,edge(+node,-node)).
-              %:- mode(1,edge(-node,+node)).
-              
-              %:- mode(*,optional_double_edge(+node,-node)).
-              %:- mode(1,optional_double_edge(-node,+node)).
-              
-              %:- determination(relevant_node/1,edge/2).
-              %:- determination(relevant_node/1,root_in_file/2).
-              %:- determination(relevant_node/1,optional_double_edge/2).
-              
-              %:- mode(1,functor(+node,#functor)).
-              %:- determination(relevant_node/1,functor/2).
-              %:- mode(1,gram_sempos(+node,#gram_sempos)).
-              %:- determination(relevant_node/1,gram_sempos/2).
-              %:- mode(1,t_lemma(+node,#t_lemma)).
-              %:- determination(relevant_node/1,t_lemma/2).
-              %:- mode(1,val_frame_rf(+node,#val_frame_rf)).
-              %:- determination(relevant_node/1,val_frame_rf/2).
+				:-set(noise,0).
+				:-set(depth,100).
+				:-set(clauselength,50).
+				:-set(i,20).
             </learning_settings>
         </ilp>
 
@@ -88,8 +47,8 @@ set(search,df), setting(search,Search).
             <tokens>
                 <token typename="Token">
                     <features>
-                        <feature>form</feature>  
 <!--                      
+                        <feature>form</feature>  
                         <feature>lemma</feature>  
                         <feature>tag</feature>  
                         <feature>afun</feature>  
@@ -99,13 +58,11 @@ set(search,df), setting(search,Search).
                 </token>  
                 <token typename="tToken">  
                     <features>  
-<!--
                         <feature>t_lemma</feature>
                         <feature>functor</feature>
                         <feature>sempos</feature>
                         <feature>negation</feature>
                         <feature>nodetype</feature>
-                        <feature>deepord</feature>
                         <feature>formeme</feature>
                         <feature>gender</feature>
                         <feature>number</feature>
@@ -117,22 +74,24 @@ set(search,df), setting(search,Search).
                         <feature>resultative</feature>
                         <feature>dispmod</feature>
                         <feature>iterativeness</feature>
+<!--
+                        <feature>deepord</feature>
 -->                        
                     </features>  
                 </token>  
             </tokens>
             <tree_dependecies>
+                <dependecy typename="tDependency" parent_typename="tToken" child_typename="tToken"/>
+<!--
                 <dependecy typename="Dependency" parent_typename="Token" child_typename="Token"/>
                 <dependecy typename="aDependency" parent_typename="Token" child_typename="Token"/>
-<!--
-                <dependecy typename="tDependency" parent_typename="tToken" child_typename="tToken"/>
                 <dependecy typename="auxRfDependency" parent_typename="tToken" child_typename="Token"/>
 -->                
             </tree_dependecies>
             <one2one_dependecies>
-<!--
 
                 <dependecy typename="lex.rf" parent_typename="tToken" child_typename="Token"/>
+<!--
 -->                
             </one2one_dependecies>
         </serializer>  

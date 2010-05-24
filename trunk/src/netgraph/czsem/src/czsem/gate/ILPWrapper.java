@@ -71,7 +71,8 @@ public class ILPWrapper implements AdvancedMLEngine
 		if (docCounter.isLastDocument() && isLastInstanceInDocument(attributes))
 		{
 			ilpSer.flushAndClose();
-			ilpSer.train(options.getChild("ilp").getChildText("learning_settings"));
+			ilpSer.train();
+//			ilpSer.train(options.getChild("ilp").getChildText("learning_settings"));
 		}
 	}
 
@@ -136,7 +137,10 @@ public class ILPWrapper implements AdvancedMLEngine
 			
 			if (pr.getTraining())
 			{
-				ilpSer.initLearning(className, datasetDefinition.getInstanceType());
+				ilpSer.initLearning(
+						className,
+						datasetDefinition.getInstanceType(),
+						options.getChild("ilp").getChildText("learning_settings"));
 			}
 		}
 		catch (Throwable e) {
