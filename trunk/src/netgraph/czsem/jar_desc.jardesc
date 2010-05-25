@@ -20,8 +20,8 @@
         <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{NetgraphTreeViewer.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{ILPExec.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;com.generationjava.io.xml{XmlWriter.java"/>
-        <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{TectoMTDocumentAnalyser.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{FSExporter.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{TectoMTDocumentAnalyser.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.apps{CVStoILP_Accidents.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.utils{ProcessExec.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;com.generationjava.io.xml{EmptyElementXmlWriter.java"/>
@@ -55,6 +55,7 @@
         <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{ILPSerializer.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{DataMaker.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;com.generationjava.io.xml{PrettyPrinterXmlWriter.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{CrossValidation.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{FSFileWriter.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{GateUtils.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;com.generationjava.io.xml{SimpleXmlWriter.java"/>
