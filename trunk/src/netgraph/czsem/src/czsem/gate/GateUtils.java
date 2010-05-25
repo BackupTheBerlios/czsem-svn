@@ -1,15 +1,18 @@
 package czsem.gate;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 import gate.Annotation;
+import gate.Controller;
 import gate.Corpus;
 import gate.DataStore;
 import gate.Document;
 import gate.Factory;
 import gate.FeatureMap;
+import gate.ProcessingResource;
 import gate.Resource;
 import gate.creole.ResourceInstantiationException;
 import gate.persist.PersistenceException;
@@ -108,6 +111,25 @@ public class GateUtils
 		}
 
 		
+	}
+	
+	public static void safeDeepReInitPR_or_Controller(ProcessingResource processingResource) throws ResourceInstantiationException
+	{
+		if (processingResource instanceof Controller)
+			deepReInitController((Controller) processingResource);
+		else
+			processingResource.reInit();
+	}
+
+	@SuppressWarnings("unchecked")
+	public static void deepReInitController(Controller contoler) throws ResourceInstantiationException
+	{
+		Collection<ProcessingResource> prs = contoler.getPRs();
+		for (ProcessingResource processingResource : prs)
+		{
+			safeDeepReInitPR_or_Controller(processingResource);
+			//processingResource.reInit();			
+		}		
 	}
 
 }

@@ -36,10 +36,11 @@
     <OPTIONS>
         <ilp>
             <learning_settings>
-				:-set(noise,0).
-				:-set(depth,100).
-				:-set(clauselength,50).
-				:-set(i,20).
+				:- set(verbosity,0).
+				:- set(noise,0).
+				:- set(depth,100).
+				:- set(clauselength,50).
+				:- set(i,20).
             </learning_settings>
         </ilp>
 

@@ -5,6 +5,9 @@ import java.net.MalformedURLException;
 import java.util.Arrays;
 import java.util.Random;
 
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
+
 import gate.Corpus;
 import gate.DataStore;
 import gate.Document;
@@ -29,6 +32,8 @@ import gate.util.GateException;
 public class CrossValidation extends AbstractProcessingResource
 {	
 	private static final long serialVersionUID = 3407156606160786711L;
+	static Logger logger = Logger.getLogger(CrossValidation.class);
+
 	protected LanguageAnalyser trainingPR;
 	protected LanguageAnalyser testingPR;
 	protected Corpus corpus;
@@ -73,10 +78,8 @@ public class CrossValidation extends AbstractProcessingResource
 		for (int i = 0; i < numberOfFolds; i++)
 		{
 			int fold_size = reamining_documents/reamining_folds;
-			
-			System.err.println(fold_size);
-			
 			int to = from + fold_size;
+			logger.info(String.format("creating FOLD %3d: size: %4d from: %4d to: %4d", i, fold_size, from, to));
 			corpusFolds[i] = MakeFold(from, to);
 			from = to;
 			reamining_documents -= fold_size;
@@ -88,7 +91,8 @@ public class CrossValidation extends AbstractProcessingResource
 
 	
 	/** if (i >= test_from && i < test_to) then "test" else "train" **/
-	private Corpus[] MakeFold(int test_from, int test_to) throws ResourceInstantiationException
+	@SuppressWarnings("unchecked")
+	protected Corpus[] MakeFold(int test_from, int test_to) throws ResourceInstantiationException
 	{
 		Corpus[] ret = new Corpus[2];
 		ret[0] = Factory.newCorpus(null); 
@@ -97,9 +101,15 @@ public class CrossValidation extends AbstractProcessingResource
 		for (int i = 0; i < documentEvidence.length; i++)
 		{
 			if (i >= test_from && i < test_to)
+			{
 				ret[0].add(documentEvidence[i].doc);
-			else 
-				ret[1].add(documentEvidence[i].doc);			
+				logger.info(String.format("TEST doc %3d name: '%s'", i, documentEvidence[i].doc.getName()));
+			}
+			else
+			{
+				ret[1].add(documentEvidence[i].doc);
+				logger.info(String.format("TRAIN doc %3d name: '%s'", i, documentEvidence[i].doc.getName()));
+			}
 		}
 				 
 		return ret;
@@ -152,24 +162,24 @@ public class CrossValidation extends AbstractProcessingResource
 
 			SerialAnalyserController testing_controller = (SerialAnalyserController)	    	   
     			Factory.createResource("gate.creole.SerialAnalyserController");	    
-			training_controller.add(testingPR);			    
-
+			testing_controller.add(testingPR);
+			
 			for (int i = 0; i < numberOfFolds; i++)
 			{
-				System.err.print("training fold ");
-				System.err.println(i);
-				trainingPR.reInit();
+				GateUtils.safeDeepReInitPR_or_Controller(training_controller);
 			    training_controller.setCorpus(corpusFolds[i][1]);			    	    	    
 			    training_controller.execute();
+			    if (isInterrupted()) return;
 			    
-				System.err.print("evaluation on fold ");
-				System.err.println(i);
-			    testingPR.reInit();
+				GateUtils.safeDeepReInitPR_or_Controller(testing_controller);
 			    testing_controller.setCorpus(corpusFolds[i][0]);
 			    testing_controller.execute();				
+			    if (isInterrupted()) return;
 			}
 			
 			syncAllDocuments();
+			Factory.deleteResource(training_controller);
+			Factory.deleteResource(testing_controller);
 
 		} catch (Throwable t)
 		{
@@ -186,6 +196,15 @@ public class CrossValidation extends AbstractProcessingResource
 	}
 
 	
+	@Override
+	public void cleanup()
+	{
+		corpusFolds = null;
+		documentEvidence = null;
+		super.cleanup();
+	}
+
+
 	
 	
 	
@@ -196,6 +215,8 @@ public class CrossValidation extends AbstractProcessingResource
 	
 	public static void main(String[] args) throws GateException, MalformedURLException
 	{
+		BasicConfigurator.configure();
+
 		Gate.init();
 	    Gate.getCreoleRegister().registerDirectories(new File("GATE_plugins").toURI().toURL());
 	    Gate.getCreoleRegister().registerDirectories( 
@@ -224,7 +245,7 @@ public class CrossValidation extends AbstractProcessingResource
 
 		fm = Factory.newFeatureMap();
 		fm.put("corpus", corpus);
-		fm.put("numberOfFolds", 4);		
+		fm.put("numberOfFolds", 3);		
 		fm.put("trainingPR", learning);		
 		fm.put("testingPR", testing);		
 	    ProcessingResource cross = (ProcessingResource) 
