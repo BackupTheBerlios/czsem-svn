@@ -1,0 +1,422 @@
+<gate.util.persistence.GateApplication>
+  <urlList class="gate.util.persistence.CollectionPersistence">
+    <localList>
+      <gate.util.persistence.PersistenceManager-URLHolder>
+        <urlString>$gatehome$plugins/Tools</urlString>
+      </gate.util.persistence.PersistenceManager-URLHolder>
+      <gate.util.persistence.PersistenceManager-URLHolder>
+        <urlString>$gatehome$plugins/Machine_Learning</urlString>
+      </gate.util.persistence.PersistenceManager-URLHolder>
+      <gate.util.persistence.PersistenceManager-URLHolder>
+        <urlString>$gatehome$plugins/ANNIE</urlString>
+      </gate.util.persistence.PersistenceManager-URLHolder>
+      <gate.util.persistence.PersistenceManager-URLHolder>
+        <urlString>$relpath$../GATE_plugins</urlString>
+      </gate.util.persistence.PersistenceManager-URLHolder>
+    </localList>
+    <collectionType>java.util.ArrayList</collectionType>
+  </urlList>
+  <application class="gate.util.persistence.ControllerPersistence">
+    <prList class="gate.util.persistence.CollectionPersistence">
+      <localList>
+        <gate.util.persistence.SerialAnalyserControllerPersistence>
+          <prList class="gate.util.persistence.CollectionPersistence">
+            <localList>
+              <gate.util.persistence.PRPersistence>
+                <runtimeParams class="gate.util.persistence.MapPersistence">
+                  <mapType>gate.util.SimpleFeatureMapImpl</mapType>
+                  <localMap>
+                    <entry>
+                      <string>setsToKeep</string>
+                      <gate.util.persistence.CollectionPersistence>
+                        <localList>
+                          <string>accident</string>
+                          <string>TectoMT</string>
+                        </localList>
+                        <collectionType>java.util.ArrayList</collectionType>
+                      </gate.util.persistence.CollectionPersistence>
+                    </entry>
+                    <entry>
+                      <string>document</string>
+                      <null/>
+                    </entry>
+                    <entry>
+                      <string>annotationTypes</string>
+                      <null/>
+                    </entry>
+                    <entry>
+                      <string>corpus</string>
+                      <null/>
+                    </entry>
+                    <entry>
+                      <string>keepOriginalMarkupsAS</string>
+                      <boolean>true</boolean>
+                    </entry>
+                    <entry>
+                      <string>setsToRemove</string>
+                      <null/>
+                    </entry>
+                  </localMap>
+                </runtimeParams>
+                <resourceType>gate.creole.annotdelete.AnnotationDeletePR</resourceType>
+                <resourceName>default set rest</resourceName>
+                <initParams class="gate.util.persistence.MapPersistence">
+                  <mapType>gate.util.SimpleFeatureMapImpl</mapType>
+                  <localMap/>
+                </initParams>
+                <features class="gate.util.persistence.MapPersistence">
+                  <mapType>gate.util.SimpleFeatureMapImpl</mapType>
+                  <localMap/>
+                </features>
+              </gate.util.persistence.PRPersistence>
+              <gate.util.persistence.PRPersistence>
+                <runtimeParams class="gate.util.persistence.MapPersistence">
+                  <mapType>gate.util.SimpleFeatureMapImpl</mapType>
+                  <localMap>
+                    <entry>
+                      <string>setsToKeep</string>
+                      <gate.util.persistence.CollectionPersistence>
+                        <localList/>
+                        <collectionType>java.util.ArrayList</collectionType>
+                      </gate.util.persistence.CollectionPersistence>
+                    </entry>
+                    <entry>
+                      <string>document</string>
+                      <null/>
+                    </entry>
+                    <entry>
+                      <string>annotationTypes</string>
+                      <gate.util.persistence.CollectionPersistence>
+                        <localList>
+                          <string>damageNumber</string>
+                          <string>damage</string>
+                        </localList>
+                        <collectionType>java.util.ArrayList</collectionType>
+                      </gate.util.persistence.CollectionPersistence>
+                    </entry>
+                    <entry>
+                      <string>corpus</string>
+                      <null/>
+                    </entry>
+                    <entry>
+                      <string>keepOriginalMarkupsAS</string>
+                      <boolean>true</boolean>
+                    </entry>
+                    <entry>
+                      <string>setsToRemove</string>
+                      <gate.util.persistence.CollectionPersistence>
+                        <localList>
+                          <string>TectoMT</string>
+                        </localList>
+                        <collectionType>java.util.ArrayList</collectionType>
+                      </gate.util.persistence.CollectionPersistence>
+                    </entry>
+                  </localMap>
+                </runtimeParams>
+                <resourceType>gate.creole.annotdelete.AnnotationDeletePR</resourceType>
+                <resourceName>test reset</resourceName>
+                <initParams class="gate.util.persistence.MapPersistence">
+                  <mapType>gate.util.SimpleFeatureMapImpl</mapType>
+                  <localMap/>
+                </initParams>
+                <features class="gate.util.persistence.MapPersistence">
+                  <mapType>gate.util.SimpleFeatureMapImpl</mapType>
+                  <localMap/>
+                </features>
+              </gate.util.persistence.PRPersistence>
+              <gate.util.persistence.LanguageAnalyserPersistence>
+                <runtimeParams class="gate.util.persistence.MapPersistence">
+                  <mapType>gate.util.SimpleFeatureMapImpl</mapType>
+                  <localMap>
+                    <entry>
+                      <string>training</string>
+                      <boolean>false</boolean>
+                    </entry>
+                    <entry>
+                      <string>document</string>
+                      <null/>
+                    </entry>
+                    <entry>
+                      <string>inputASName</string>
+                      <string>TectoMT</string>
+                    </entry>
+                  </localMap>
+                </runtimeParams>
+                <resourceType>gate.creole.ml.MachineLearningPR</resourceType>
+                <resourceName>ML - test</resourceName>
+                <initParams class="gate.util.persistence.MapPersistence">
+                  <mapType>gate.util.SimpleFeatureMapImpl</mapType>
+                  <localMap>
+                    <entry>
+                      <string>configFileURL</string>
+                      <gate.util.persistence.PersistenceManager-URLHolder>
+                        <urlString>$relpath$sampleConfigILP.xml</urlString>
+                      </gate.util.persistence.PersistenceManager-URLHolder>
+                    </entry>
+                  </localMap>
+                </initParams>
+                <features class="gate.util.persistence.MapPersistence">
+                  <mapType>gate.util.SimpleFeatureMapImpl</mapType>
+                  <localMap/>
+                </features>
+              </gate.util.persistence.LanguageAnalyserPersistence>
+              <gate.util.persistence.PRPersistence>
+                <runtimeParams class="gate.util.persistence.MapPersistence">
+                  <mapType>gate.util.SimpleFeatureMapImpl</mapType>
+                  <localMap>
+                    <entry>
+                      <string>textTagName</string>
+                      <string></string>
+                    </entry>
+                    <entry>
+                      <string>transferAllUnlessFound</string>
+                      <boolean>true</boolean>
+                    </entry>
+                    <entry>
+                      <string>document</string>
+                      <null/>
+                    </entry>
+                    <entry>
+                      <string>tagASName</string>
+                      <null/>
+                    </entry>
+                    <entry>
+                      <string>annotationTypes</string>
+                      <gate.util.persistence.CollectionPersistence>
+                        <localList>
+                          <string>damageNumber</string>
+                          <string>damage</string>
+                        </localList>
+                        <collectionType>java.util.ArrayList</collectionType>
+                      </gate.util.persistence.CollectionPersistence>
+                    </entry>
+                    <entry>
+                      <string>copyAnnotations</string>
+                      <boolean>false</boolean>
+                    </entry>
+                    <entry>
+                      <string>inputASName</string>
+                      <string>TectoMT</string>
+                    </entry>
+                    <entry>
+                      <string>outputASName</string>
+                      <string></string>
+                    </entry>
+                  </localMap>
+                </runtimeParams>
+                <resourceType>gate.creole.annotransfer.AnnotationSetTransfer</resourceType>
+                <resourceName>test output transfer</resourceName>
+                <initParams class="gate.util.persistence.MapPersistence">
+                  <mapType>gate.util.SimpleFeatureMapImpl</mapType>
+                  <localMap/>
+                </initParams>
+                <features class="gate.util.persistence.MapPersistence">
+                  <mapType>gate.util.SimpleFeatureMapImpl</mapType>
+                  <localMap/>
+                </features>
+              </gate.util.persistence.PRPersistence>
+            </localList>
+            <collectionType>java.util.ArrayList</collectionType>
+          </prList>
+          <resourceType>gate.creole.SerialAnalyserController</resourceType>
+          <resourceName>test</resourceName>
+          <initParams class="gate.util.persistence.MapPersistence">
+            <mapType>gate.util.SimpleFeatureMapImpl</mapType>
+            <localMap/>
+          </initParams>
+          <features class="gate.util.persistence.MapPersistence">
+            <mapType>gate.util.SimpleFeatureMapImpl</mapType>
+            <localMap/>
+          </features>
+        </gate.util.persistence.SerialAnalyserControllerPersistence>
+        <gate.util.persistence.SerialAnalyserControllerPersistence>
+          <corpus class="gate.util.persistence.CorpusPersistence">
+            <dsData class="gate.util.persistence.DSPersistence">
+              <className>gate.persist.SerialDataStore</className>
+              <storageUrlString>file:/C:/Users/dedek/AppData/GATE/indexed_store/store/</storageUrlString>
+            </dsData>
+            <persistenceID class="string">50msg_index___1268665232288___6956</persistenceID>
+            <resourceType>gate.corpora.SerialCorpusImpl</resourceType>
+            <resourceName>50msg_index</resourceName>
+            <initParams class="gate.util.persistence.MapPersistence">
+              <mapType>gate.util.SimpleFeatureMapImpl</mapType>
+              <localMap/>
+            </initParams>
+          </corpus>
+          <prList class="gate.util.persistence.CollectionPersistence">
+            <localList>
+              <gate.util.persistence.PRPersistence>
+                <runtimeParams class="gate.util.persistence.MapPersistence">
+                  <mapType>gate.util.SimpleFeatureMapImpl</mapType>
+                  <localMap>
+                    <entry>
+                      <string>setsToKeep</string>
+                      <gate.util.persistence.CollectionPersistence>
+                        <localList/>
+                        <collectionType>java.util.ArrayList</collectionType>
+                      </gate.util.persistence.CollectionPersistence>
+                    </entry>
+                    <entry>
+                      <string>document</string>
+                      <null/>
+                    </entry>
+                    <entry>
+                      <string>annotationTypes</string>
+                      <gate.util.persistence.CollectionPersistence>
+                        <localList>
+                          <string>damageNumber</string>
+                          <string>damage</string>
+                        </localList>
+                        <collectionType>java.util.ArrayList</collectionType>
+                      </gate.util.persistence.CollectionPersistence>
+                    </entry>
+                    <entry>
+                      <string>corpus</string>
+                      <null/>
+                    </entry>
+                    <entry>
+                      <string>keepOriginalMarkupsAS</string>
+                      <boolean>true</boolean>
+                    </entry>
+                    <entry>
+                      <string>setsToRemove</string>
+                      <gate.util.persistence.CollectionPersistence>
+                        <localList>
+                          <string>TectoMT</string>
+                        </localList>
+                        <collectionType>java.util.ArrayList</collectionType>
+                      </gate.util.persistence.CollectionPersistence>
+                    </entry>
+                  </localMap>
+                </runtimeParams>
+                <resourceType>gate.creole.annotdelete.AnnotationDeletePR</resourceType>
+                <resourceName>train reset</resourceName>
+                <initParams class="gate.util.persistence.MapPersistence">
+                  <mapType>gate.util.SimpleFeatureMapImpl</mapType>
+                  <localMap/>
+                </initParams>
+                <features class="gate.util.persistence.MapPersistence">
+                  <mapType>gate.util.SimpleFeatureMapImpl</mapType>
+                  <localMap/>
+                </features>
+              </gate.util.persistence.PRPersistence>
+              <gate.util.persistence.PRPersistence>
+                <runtimeParams class="gate.util.persistence.MapPersistence">
+                  <mapType>gate.util.SimpleFeatureMapImpl</mapType>
+                  <localMap>
+                    <entry>
+                      <string>textTagName</string>
+                      <null/>
+                    </entry>
+                    <entry>
+                      <string>transferAllUnlessFound</string>
+                      <boolean>true</boolean>
+                    </entry>
+                    <entry>
+                      <string>document</string>
+                      <null/>
+                    </entry>
+                    <entry>
+                      <string>tagASName</string>
+                      <null/>
+                    </entry>
+                    <entry>
+                      <string>annotationTypes</string>
+                      <gate.util.persistence.CollectionPersistence>
+                        <localList>
+                          <string>damageNumber</string>
+                          <string>damage</string>
+                        </localList>
+                        <collectionType>java.util.Arrays$ArrayList</collectionType>
+                      </gate.util.persistence.CollectionPersistence>
+                    </entry>
+                    <entry>
+                      <string>copyAnnotations</string>
+                      <boolean>true</boolean>
+                    </entry>
+                    <entry>
+                      <string>inputASName</string>
+                      <string>accident</string>
+                    </entry>
+                    <entry>
+                      <string>outputASName</string>
+                      <string>TectoMT</string>
+                    </entry>
+                  </localMap>
+                </runtimeParams>
+                <resourceType>gate.creole.annotransfer.AnnotationSetTransfer</resourceType>
+                <resourceName>train input transfer</resourceName>
+                <initParams class="gate.util.persistence.MapPersistence">
+                  <mapType>gate.util.SimpleFeatureMapImpl</mapType>
+                  <localMap/>
+                </initParams>
+                <features class="gate.util.persistence.MapPersistence">
+                  <mapType>gate.util.SimpleFeatureMapImpl</mapType>
+                  <localMap/>
+                </features>
+              </gate.util.persistence.PRPersistence>
+              <gate.util.persistence.LanguageAnalyserPersistence>
+                <runtimeParams class="gate.util.persistence.MapPersistence">
+                  <mapType>gate.util.SimpleFeatureMapImpl</mapType>
+                  <localMap>
+                    <entry>
+                      <string>training</string>
+                      <boolean>true</boolean>
+                    </entry>
+                    <entry>
+                      <string>document</string>
+                      <null/>
+                    </entry>
+                    <entry>
+                      <string>inputASName</string>
+                      <string>TectoMT</string>
+                    </entry>
+                  </localMap>
+                </runtimeParams>
+                <resourceType>gate.creole.ml.MachineLearningPR</resourceType>
+                <resourceName>ML - train</resourceName>
+                <initParams class="gate.util.persistence.MapPersistence">
+                  <mapType>gate.util.SimpleFeatureMapImpl</mapType>
+                  <localMap>
+                    <entry>
+                      <string>configFileURL</string>
+                      <gate.util.persistence.PersistenceManager-URLHolder>
+                        <urlString>$relpath$sampleConfigILP.xml</urlString>
+                      </gate.util.persistence.PersistenceManager-URLHolder>
+                    </entry>
+                  </localMap>
+                </initParams>
+                <features class="gate.util.persistence.MapPersistence">
+                  <mapType>gate.util.SimpleFeatureMapImpl</mapType>
+                  <localMap/>
+                </features>
+              </gate.util.persistence.LanguageAnalyserPersistence>
+            </localList>
+            <collectionType>java.util.ArrayList</collectionType>
+          </prList>
+          <resourceType>gate.creole.SerialAnalyserController</resourceType>
+          <resourceName>train</resourceName>
+          <initParams class="gate.util.persistence.MapPersistence">
+            <mapType>gate.util.SimpleFeatureMapImpl</mapType>
+            <localMap/>
+          </initParams>
+          <features class="gate.util.persistence.MapPersistence">
+            <mapType>gate.util.SimpleFeatureMapImpl</mapType>
+            <localMap/>
+          </features>
+        </gate.util.persistence.SerialAnalyserControllerPersistence>
+      </localList>
+      <collectionType>java.util.ArrayList</collectionType>
+    </prList>
+    <resourceType>gate.creole.SerialController</resourceType>
+    <resourceName>cross</resourceName>
+    <initParams class="gate.util.persistence.MapPersistence">
+      <mapType>gate.util.SimpleFeatureMapImpl</mapType>
+      <localMap/>
+    </initParams>
+    <features class="gate.util.persistence.MapPersistence">
+      <mapType>gate.util.SimpleFeatureMapImpl</mapType>
+      <localMap/>
+    </features>
+  </application>
+</gate.util.persistence.GateApplication>
