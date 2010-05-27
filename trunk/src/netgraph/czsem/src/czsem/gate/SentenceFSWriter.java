@@ -47,7 +47,7 @@ public class SentenceFSWriter
 
 		protected void addDpendency(Annotation a)
 		{
-			int[] dep = GateUtils.decodeEdge(a);
+			Integer[] dep = GateUtils.decodeEdge(a);
 			addDpendency(dep[0], dep[1]);
 		}; 
 		

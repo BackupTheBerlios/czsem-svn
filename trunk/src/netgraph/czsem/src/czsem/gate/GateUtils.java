@@ -20,9 +20,9 @@ import gate.persist.PersistenceException;
 public class GateUtils
 {
 	@SuppressWarnings("unchecked")
-	public static int[] decodeEdge(Annotation a)
+	public static Integer[] decodeEdge(Annotation a)
 	{
-		int [] ret = new int[2];
+		Integer [] ret = new Integer[2];
 		ArrayList<Integer> list = (ArrayList<Integer>) a.getFeatures().get("args");
 		ret[0] = list.get(0);
 		ret[1] = list.get(1);
