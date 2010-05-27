@@ -1,0 +1,11 @@
+Phase:phase1
+Input: tToken   
+Options: control = appelt
+
+Rule: extract_numerals
+Priority: 20
+(
+{tToken.sempos=~"quant"}
+):token_tmp
+-->
+:token_tmp.Numeral = {rule="extract_numerals"}
