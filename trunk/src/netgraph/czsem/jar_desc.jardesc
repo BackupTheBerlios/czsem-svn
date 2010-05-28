@@ -56,10 +56,12 @@
         <javaElement handleIdentifier="=czsem/src&lt;czsem.gui{TreeVisualize.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.net{NetgraphProtocolConnection.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{WekaSerializer.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{AnnotationDependencyAbstractMarker.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.utils{ILPStringList.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{AnnotationDependencySubtreeMarker.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{DataMaker.java"/>
-        <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{SubsequentAnnotationMerge.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{CrossValidation.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{SubsequentAnnotationMerge.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{FSFileWriter.java"/>
     </selectedElements>
 </jardesc>

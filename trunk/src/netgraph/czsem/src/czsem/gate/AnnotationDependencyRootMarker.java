@@ -1,162 +1,23 @@
 package czsem.gate;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Queue;
-import java.util.Set;
-
 import gate.Annotation;
 import gate.AnnotationSet;
 import gate.Factory;
 import gate.FeatureMap;
-import gate.creole.AbstractLanguageAnalyser;
 import gate.creole.ExecutionException;
-import gate.creole.metadata.CreoleParameter;
 import gate.creole.metadata.CreoleResource;
-import gate.creole.metadata.Optional;
-import gate.creole.metadata.RunTime;
+
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Queue;
 
 @CreoleResource(name = "czsem AnnotationDependencyRootMarker", comment = "Finds a nearest common father annotation for all 'tokens' inside a given annotation.")
-public class AnnotationDependencyRootMarker extends AbstractLanguageAnalyser
+public class AnnotationDependencyRootMarker extends AnnotationDependencyAbstractMarker
 {
 	private static final long serialVersionUID = 8357007815773883611L;
 	
-	protected String inputASName = null;
-	protected AnnotationSet inputAS = null;
-	protected AnnotationSet inputTokensAS = null;
-	protected AnnotationSet inputDependenciesAS = null;
-	protected String outputASName = null;
-	protected AnnotationSet outputAS = null;
-	protected List<String> inputAnnotationTypeNames;
-	protected String tokenAnnotationTypeName;
-	protected String dependencyAnnotationTypeName;
-	protected TreeIndex treeIndex;
-
-	public String getInputASName() {
-		return inputASName;
-	}
-	@Optional
-	@RunTime
-	@CreoleParameter
-	public void setInputASName(String inputASName) {
-		this.inputASName = inputASName;
-	}
-	public String getOutputASName() {
-		return outputASName;
-	}
-	@Optional
-	@RunTime
-	@CreoleParameter
-	public void setOutputASName(String outputASName) {
-		this.outputASName = outputASName;
-	}
-	public List<String> getInputAnnotationTypeNames() {
-		return inputAnnotationTypeNames;
-	}
-	@RunTime
-	@CreoleParameter(defaultValue="damage")
-	public void setInputAnnotationTypeNames(List<String> inputAnnotationTypeNames) {
-		this.inputAnnotationTypeNames = inputAnnotationTypeNames;
-	}
-	public String getTokenAnnotationTypeName() {
-		return tokenAnnotationTypeName;
-	}
-	@RunTime
-	@CreoleParameter(defaultValue="Token")
-	public void setTokenAnnotationTypeName(String tokenAnnotationTypeName) {
-		this.tokenAnnotationTypeName = tokenAnnotationTypeName;
-	}
-	public String getDependencyAnnotationTypeName() {
-		return dependencyAnnotationTypeName;
-	}
-	@RunTime
-	@CreoleParameter(defaultValue="aDependency")
-	public void setDependencyAnnotationTypeName(String dependencyAnnotationTypeName) {
-		this.dependencyAnnotationTypeName = dependencyAnnotationTypeName;
-	}
-	@Override
-	public void execute() throws ExecutionException
-	{
-		inputAS = document.getAnnotations(inputASName);
-		inputTokensAS = inputAS.get(tokenAnnotationTypeName);
-		inputDependenciesAS = inputAS.get(dependencyAnnotationTypeName);
-		treeIndex = new TreeIndex(inputDependenciesAS);
-		outputAS = document.getAnnotations(outputASName);
-		AnnotationSet inputAnnotations = inputAS.get(new HashSet<String>(inputAnnotationTypeNames));
-		for (Annotation annotation : inputAnnotations)
-		{			
-			markAnnotationDependencyRoot(annotation);			
-		}
-	}
-	protected void markAnnotationDependencyRoot(Annotation annotation)
-	{
-		AnnotationSet tokens = inputTokensAS.getContained(
-				annotation.getStartNode().getOffset(),
-				annotation.getEndNode().getOffset());
-		
-		if (tokens.isEmpty()) return;
-				
-		
-		Annotation root_token = findRootBFS(new ArrayList<Annotation>(tokens));		
-		
-		FeatureMap fm = Factory.newFeatureMap();
-		fm.put("root_id", root_token.getId());
-		fm.put("root_type", root_token.getType());
-		
-		outputAS.add(
-				root_token.getStartNode(),
-				root_token.getEndNode(),
-				annotation.getType()+"_root",
-				features);
-		
-	}
-	
-	protected static class TreeIndex
-	{
-		private Map<Integer, Integer> parentIndex;
-		private Map<Integer, Set<Integer>> childIndex;
-		
-		public Integer getParent(Integer child)
-		{
-			return parentIndex.get(child);
-		}
-
-		public Iterable<Integer> getChildren(Integer parent)
-		{
-			return childIndex.get(parent);
-		}
-		
-		protected void addDependency(Integer[] dep)
-		{
-			addDependency(dep[0], dep[1]);
-		}
-
-		protected void addDependency(Integer parent, Integer child)
-		{
-			parentIndex.put(child, parent);
-			Set<Integer> children = childIndex.get(parent);
-			if (children == null) children = new HashSet<Integer>();
-			children.add(child);
-			childIndex.put(parent, children);
-		}
-		
-		public TreeIndex (AnnotationSet dependencyAnnotatons)
-		{
-			parentIndex = new HashMap<Integer, Integer>();
-			childIndex = new HashMap<Integer, Set<Integer>>();
-			
-			for (Annotation dependencyAnnotation : dependencyAnnotatons)
-			{
-				addDependency(GateUtils.decodeEdge(dependencyAnnotation));				
-			}
-						
-		}
-	}
 	
 	protected static class DependencyBFSnode
 	{
@@ -233,6 +94,44 @@ public class AnnotationDependencyRootMarker extends AbstractLanguageAnalyser
 		
 		return inputTokensAS.get(confirmed_root.annotationID);
 	}
+	
+	@Override
+	public void execute() throws ExecutionException
+	{
+		initBeforeExecute();
+		
+		AnnotationSet inputAnnotations = inputAS.get(new HashSet<String>(inputAnnotationTypeNames));
+		for (Annotation annotation : inputAnnotations)
+		{			
+			markAnnotationDependencyRoot(annotation);			
+		}
+	}
+	
+	protected void markAnnotationDependencyRoot(Annotation annotation)
+	{
+		AnnotationSet tokens = inputTokensAS.getContained(
+				annotation.getStartNode().getOffset(),
+				annotation.getEndNode().getOffset());
+		
+		if (tokens.isEmpty()) return;
+				
+		
+		Annotation root_token = findRootBFS(new ArrayList<Annotation>(tokens));		
+		
+		FeatureMap fm = Factory.newFeatureMap();
+		fm.put("root_id", root_token.getId());
+		fm.put("root_type", root_token.getType());
+		fm.put("orig_id", annotation.getId());
+		fm.put("orig_type", annotation.getType());
+		
+		outputAS.add(
+				root_token.getStartNode(),
+				root_token.getEndNode(),
+				annotation.getType()+"_root",
+				fm);
+		
+	}
+
 
 /*
 	public static void main(String[] args) throws Exception
