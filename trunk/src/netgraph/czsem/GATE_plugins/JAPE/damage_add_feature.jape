@@ -1,0 +1,11 @@
+Phase:phase1
+Input: damage   
+Options: control = appelt
+
+Rule: damage_add_learninig_feature
+Priority: 20
+(
+{damage}
+):damage_tmp
+-->
+:damage_tmp.damage = {rule="damage_add_learninig_feature"}

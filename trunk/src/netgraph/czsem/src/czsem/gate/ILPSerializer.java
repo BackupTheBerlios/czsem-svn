@@ -617,6 +617,12 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 
 	public void serializeTrainingInstance(String instanceGateId, String docName, String instanceTypeName, boolean isPositive)
 	{
+		if (instanceGateId == null) 
+			throw new NullPointerException(
+					String.format(
+							"Instance ID is null. docName: '%s', instanceTypeName: '%s'",
+							docName, instanceTypeName));
+		
 		String instance_id = renderID(instanceGateId);
 		
 		if (isPositive)
