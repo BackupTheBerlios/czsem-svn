@@ -98,7 +98,12 @@ public class TrainTestGateOnCzech {
 			                     gate.AnnotationSet annotations, 
 			                     gate.AnnotationSet inputAS, gate.AnnotationSet outputAS, 
 			                     gate.creole.ontology.Ontology ontology)
-	{		
+	{
+		gate.AnnotationSet binding_as = (gate.AnnotationSet) bindings.get("anot_tmp");
+		gate.Annotation annot = binding_as.iterator().next();
+		annot.getFeatures().put("rule", "damage_add_learninig_feature");			
+
+/*		
 		gate.AnnotationSet binding_as = (gate.AnnotationSet) bindings.get("anot_tmp");
 		gate.Annotation annot = binding_as.iterator().next();
 		String typename = annot.getType();

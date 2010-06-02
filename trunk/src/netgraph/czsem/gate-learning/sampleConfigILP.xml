@@ -36,7 +36,7 @@
     <OPTIONS>
         <ilp>
             <learning_settings>
-				:- set(verbosity,0).
+				:- set(verbosity,1).
 				:- set(noise,0).
 				:- set(depth,100).
 				:- set(clauselength,50).

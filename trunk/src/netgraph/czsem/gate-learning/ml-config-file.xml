@@ -43,6 +43,13 @@
        <FEATURE>majorType</FEATURE>  
        <POSITION>0</POSITION>
      </ATTRIBUTE> 
+     <ATTRIBUTE>  
+       <NAME>Num</NAME>  
+       <SEMTYPE>NOMINAL</SEMTYPE>  
+       <TYPE>Numeral</TYPE>  
+       <FEATURE>rule</FEATURE>  
+       <POSITION>0</POSITION>
+     </ATTRIBUTE> 
     <ATTRIBUTELIST>  
        <NAME>Root</NAME>  
        <SEMTYPE>NOMINAL</SEMTYPE>  

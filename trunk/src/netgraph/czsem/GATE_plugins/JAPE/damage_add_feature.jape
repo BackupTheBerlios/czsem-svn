@@ -8,4 +8,8 @@ Priority: 20
 {damage}
 ):damage_tmp
 -->
-:damage_tmp.damage = {rule="damage_add_learninig_feature"}
+{
+	gate.AnnotationSet binding_as = (gate.AnnotationSet) bindings.get("damage_tmp");
+	gate.Annotation annot = binding_as.iterator().next();
+	annot.getFeatures().put("rule", "damage_add_learninig_feature");			
+}
