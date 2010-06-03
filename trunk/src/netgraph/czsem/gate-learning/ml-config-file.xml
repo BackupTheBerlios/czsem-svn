@@ -58,9 +58,9 @@
        <RANGE from="-1" to="1"/>  
     </ATTRIBUTELIST>  
      <ATTRIBUTE>
-       <NAME>damage</NAME>
+       <NAME>injuries</NAME>
        <SEMTYPE>NOMINAL</SEMTYPE>
-       <TYPE>damage</TYPE>
+       <TYPE>injuries</TYPE>
        <FEATURE>rule</FEATURE> 
        <POSITION>0</POSITION>
        <CLASS/>

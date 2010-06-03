@@ -1,5 +1,7 @@
 package czsem.gate;
 
+import java.io.File;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -12,10 +14,12 @@ import gate.DataStore;
 import gate.Document;
 import gate.Factory;
 import gate.FeatureMap;
+import gate.Gate;
 import gate.ProcessingResource;
 import gate.Resource;
 import gate.creole.ResourceInstantiationException;
 import gate.persist.PersistenceException;
+import gate.util.GateException;
 
 public class GateUtils
 {
@@ -130,6 +134,18 @@ public class GateUtils
 			safeDeepReInitPR_or_Controller(processingResource);
 			//processingResource.reInit();			
 		}		
+	}
+
+	public static void registerPluginDirectory(File pluginDirectory) throws MalformedURLException, GateException
+	{
+	    Gate.getCreoleRegister().registerDirectories( 
+	    		pluginDirectory.toURI().toURL());		
+	}
+
+	public static void registerPluginDirectory(String pluginDirectoryName) throws MalformedURLException, GateException
+	{
+		registerPluginDirectory(
+    		    new File(Gate.getPluginsHome(), pluginDirectoryName));		
 	}
 
 }

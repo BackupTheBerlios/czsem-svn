@@ -1,0 +1,15 @@
+Phase:phase1
+Input: damage   
+Options: control = all
+
+Rule: add_learninig_feature
+Priority: 20
+(
+{damage} | {injuries}
+):tmp
+-->
+{
+	gate.AnnotationSet binding_as = (gate.AnnotationSet) bindings.get("tmp");
+	gate.Annotation annot = binding_as.iterator().next();
+	annot.getFeatures().put("rule", "add_learninig_feature");			
+}
