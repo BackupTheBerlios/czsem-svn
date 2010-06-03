@@ -24,6 +24,7 @@ import org.apache.log4j.Logger;
 public class TrainTestGateOnCzech {
 	
 	public static final String learninigAnnotType = "injuries";
+	public static final boolean rootSubtreeLearninig = false;
 	protected static ProcessingResource tectoMTReset;
 
 	public static SerialAnalyserController constructTestController() throws ResourceInstantiationException, MalformedURLException
@@ -62,28 +63,43 @@ public class TrainTestGateOnCzech {
 		
 
 		
-		
-		//Subtree for ILP results
-		fm = Factory.newFeatureMap();
-		fm.put("inputASName", "TectoMT");
-		fm.put("outputASName", "ILP");
-		fm.put("inputAnnotationTypeNames", Arrays.asList(new String [] {learninigAnnotType + "_root"}));
-		ProcessingResource subtreeForILPresults = (ProcessingResource) 
-			Factory.createResource("czsem.gate.AnnotationDependencySubtreeMarker", fm);
-		test_controller.add(subtreeForILPresults);
+		if (rootSubtreeLearninig)
+		{
+			//Subtree for ILP results
+			fm = Factory.newFeatureMap();
+			fm.put("inputASName", "TectoMT");
+			fm.put("outputASName", "ILP");
+			fm.put("inputAnnotationTypeNames", Arrays.asList(new String [] {learninigAnnotType + "_root"}));
+			ProcessingResource subtreeForILPresults = (ProcessingResource) 
+				Factory.createResource("czsem.gate.AnnotationDependencySubtreeMarker", fm);
+			test_controller.add(subtreeForILPresults);
 
+			
+			
+			//ILP Output Transfer
+			fm = Factory.newFeatureMap();
+			fm.put("inputASName", "TectoMT");
+			fm.put("outputASName", "ILP");
+			fm.put("annotationTypes", Arrays.asList(new String [] {learninigAnnotType + "_root"}));		
+			fm.put("copyAnnotations", false);		
+			ProcessingResource ILPoutputTransfer = (ProcessingResource) 
+				Factory.createResource("gate.creole.annotransfer.AnnotationSetTransfer", fm);
+			test_controller.add(ILPoutputTransfer);
+						
+		}
+		else
+		{
+			//Subsequent annotation merge
+			fm = Factory.newFeatureMap();
+			fm.put("inputASName", "TectoMT");
+			fm.put("outputASName", "ILP");
+			fm.put("annotationTypeName", learninigAnnotType);
+			fm.put("deleteOriginalAnnotations", true);
+			ProcessingResource mergeILPresults = (ProcessingResource) 
+				Factory.createResource("czsem.gate.SubsequentAnnotationMerge", fm);
+			test_controller.add(mergeILPresults);			
+		}
 
-		//ILP Output Transfer
-		fm = Factory.newFeatureMap();
-		fm.put("inputASName", "TectoMT");
-		fm.put("outputASName", "ILP");
-		fm.put("annotationTypes", Arrays.asList(new String [] {learninigAnnotType + "_root"}));
-		fm.put("copyAnnotations", false);		
-		ProcessingResource ILPoutputTransfer = (ProcessingResource) 
-			Factory.createResource("gate.creole.annotransfer.AnnotationSetTransfer", fm);
-		test_controller.add(ILPoutputTransfer);
-		
-		
 		
 		//Paum Application
 		fm = Factory.newFeatureMap();
@@ -94,7 +110,6 @@ public class TrainTestGateOnCzech {
 		ProcessingResource paumApplication = (ProcessingResource) 
 			Factory.createResource("gate.learning.LearningAPIMain", fm);
 		test_controller.add(paumApplication);
-
 
 		
 		return test_controller;
@@ -132,15 +147,18 @@ public class TrainTestGateOnCzech {
 		train_controller.add(trainingTransfer);
 		
 		
+		if (rootSubtreeLearninig)
+		{
 		
-		//Training roots
-		fm = Factory.newFeatureMap();
-		fm.put("inputASName", "TectoMT");
-		fm.put("outputASName", "TectoMT");
-		fm.put("inputAnnotationTypeNames", Arrays.asList(new String [] {learninigAnnotType}));
-		ProcessingResource trainingRoots = (ProcessingResource) 
-			Factory.createResource("czsem.gate.AnnotationDependencyRootMarker", fm);
-		train_controller.add(trainingRoots);
+			//Training roots
+			fm = Factory.newFeatureMap();
+			fm.put("inputASName", "TectoMT");
+			fm.put("outputASName", "TectoMT");
+			fm.put("inputAnnotationTypeNames", Arrays.asList(new String [] {learninigAnnotType}));
+			ProcessingResource trainingRoots = (ProcessingResource) 
+				Factory.createResource("czsem.gate.AnnotationDependencyRootMarker", fm);
+			train_controller.add(trainingRoots);
+		}
 		
 		
 		//ILP train

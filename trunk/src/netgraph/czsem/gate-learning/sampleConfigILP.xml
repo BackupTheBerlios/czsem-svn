@@ -5,8 +5,8 @@
   
     <ATTRIBUTE>  
       <CLASS/>    
-      <NAME>injuries_root</NAME>  
-      <TYPE>injuries_root</TYPE>  
+      <NAME>injuries</NAME>  
+      <TYPE>injuries</TYPE>  
       <POSITION>0</POSITION>
       <SEMTYPE>NOMINAL</SEMTYPE>
     </ATTRIBUTE>  

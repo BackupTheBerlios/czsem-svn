@@ -1,5 +1,5 @@
 Phase:phase1
-Input: damage   
+Input: damage injuries   
 Options: control = all
 
 Rule: add_learninig_feature
