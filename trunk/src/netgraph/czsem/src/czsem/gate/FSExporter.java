@@ -36,9 +36,7 @@ public class FSExporter extends AbstractLanguageAnalyser implements ProcessingRe
 	private boolean detectAdditionalAributes = true;
 	private int number_of_tokens_to_scann = 20;
 
-	public FSExporter() {
-	}
-			
+	private String inputASName = null;
 	
 	protected List<String> detectAdditionalAttributes()
 	{
@@ -83,12 +81,23 @@ public class FSExporter extends AbstractLanguageAnalyser implements ProcessingRe
 			List<String> addAttr = 
 				detectAdditionalAributes ? detectAdditionalAttributes() : additionalAttributes;
 			
-			fsw.PrintAll(document.getAnnotations(), addAttr);
+			fsw.PrintAll(document.getAnnotations(inputASName), addAttr);
 			fsw.close();
 		} catch (FileNotFoundException e) {
 			throw new ExecutionException(e);
 		}
 	}
+	
+	public String getInputASName() {
+		return inputASName ;
+	}
+	@Optional
+	@RunTime
+	@CreoleParameter
+	public void setInputASName(String inputASName) {
+		this.inputASName = inputASName;
+	}
+
 
 	@RunTime
 	@CreoleParameter(defaultValue="file:/C:/WorkSpace/czSem/UNIX_copy/netgraph_server/corpus/en_pok")

@@ -53,10 +53,7 @@ public class FSFileWriter {
 	public static final String ORD_FEATURENAME = "sentence_order";
 	public static final String STRING_FEATURENAME = "string";
 	public static final String HIDE_FEATURENAME = "hidden";
-
 	
-	public FSFileWriter() {};
-
 	public FSFileWriter(String filename) throws FileNotFoundException
 	{
 		out = new PrintStream(filename);

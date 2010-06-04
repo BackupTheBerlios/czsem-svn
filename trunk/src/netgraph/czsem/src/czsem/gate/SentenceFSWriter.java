@@ -12,26 +12,30 @@ import java.util.Set;
 
 import cz.cuni.mff.mirovsky.trees.Attribute;
 import cz.cuni.mff.mirovsky.trees.NGTreeHead;
+import czsem.utils.TreeIndex;
 
 import gate.Annotation;
 import gate.AnnotationSet;
 
 public class SentenceFSWriter
 {
-	public static class TreeBuilder
+	public static class TreeBuilder extends TreeIndex
 	{
 		private PrintStream out;
 		private AnnotationSet annotations;
 		private String [] attributes;
 
+/*
 		private Map<Integer, List<Integer>> dependencies = new HashMap<Integer, List<Integer>>(); 
 		private Map<Integer, Integer> parents = new HashMap<Integer, Integer>();
-		private int root; 		
+*/
+		private int root_id; 		
 
 		public TreeBuilder(AnnotationSet annotations) {
 			this.annotations = annotations;
 		}
 
+/*
 		protected void addDpendency(int parent_id, int child_id)
 		{
 			List<Integer> children = dependencies.get(parent_id);
@@ -44,53 +48,15 @@ public class SentenceFSWriter
 			children.add(child_id);
 			parents.put(child_id, parent_id);
 		}
+*/
+		
 
-		protected void addDpendency(Annotation a)
-		{
-			Integer[] dep = GateUtils.decodeEdge(a);
-			addDpendency(dep[0], dep[1]);
-		}; 
 		
-		protected void addTokenDpendency(Annotation a, String feature_name)
-		{
-			Integer child = (Integer) a.getFeatures().get(feature_name);
-			if (child == null) return;
-			addDpendency(a.getId(), child);		
-		}; 
-
-		protected void fillDependecies(AnnotationSet dependenciesAS)
-		{
-			for (Annotation dep : dependenciesAS)
-			{
-				addDpendency(dep);
-			}							
-		}
 		
-		protected void fillTokenDependecies(AnnotationSet tokenAS, String feature_name)
-		{
-			for (Annotation toc : tokenAS)
-			{
-				addTokenDpendency(toc, feature_name);
-			}							
-		}
-		
-		public int findRoot()
-		{
-			if (parents.entrySet().isEmpty()) return -1;
-			
-			root = -1;
-			for (Integer i = parents.entrySet().iterator().next().getValue(); i != null; i = parents.get(i))
-			{
-				//System.err.println(i);
-				root = i;
-			}
-			
-			return root;			
-		}
 
 		private void printCildren(int father_id)
 		{
-			List<Integer> childern = dependencies.get(father_id);
+			Iterable<Integer> childern = getChildren(father_id);
 			if (childern == null) return;
 
 			char delim = '('; 
@@ -168,10 +134,11 @@ public class SentenceFSWriter
 			this.out = out;
 			this.attributes = attributes;
 			
-			out.print("Dependencies: ");			
-			out.println(dependencies.keySet().size());
+//			out.print("Dependencies: ");			
+//			out.println(dependencies.keySet().size());
 						
-			printNode(root);
+			root_id = findRoot();
+			printNode(root_id);
 
 		}
 		
@@ -188,14 +155,9 @@ public class SentenceFSWriter
 		
 		public void updateSentenceTokens()
 		{
-			List<Annotation> token_id_list = new ArrayList<Annotation>();
-			token_id_list.add(annotations.get(root));
+			List<Annotation> token_id_list = getAllCildrenAnnotations(annotations);
+			token_id_list.add(annotations.get(root_id));
 			
-			for (List<Integer> id_list : dependencies.values()) {
-				for (Integer id : id_list) {
-					token_id_list.add(annotations.get(id));
-				}
-			}
 			
 			Annotation [] token_annots = token_id_list.toArray(new Annotation[0]);
 			
@@ -205,7 +167,7 @@ public class SentenceFSWriter
 
 		private void hideSentenceTokens(Annotation[] token_annots)
 		{
-			String root_type = annotations.get(root).getType();
+			String root_type = annotations.get(root_id).getType();
 			
 			for (int i = 0; i < token_annots.length; i++)
 			{
@@ -348,13 +310,12 @@ public class SentenceFSWriter
 	{
 //		for (int dependency_annotation_type=0; dependency_annotation_type<FSFileWriter.dependency_annotation_types.length; dependency_annotation_type++)
 //		{
-			TreeBuilder tb = new TreeBuilder(annotations);
 			
 			AnnotationSet dependenciesAS = annotations.get(
 					setFromArray(FSFileWriter.dependency_annotation_types[dependency_annotation_type]));
 			
-			if (dependenciesAS.isEmpty()) return false;
-		
+			if (dependenciesAS.isEmpty()) return false;		
+			TreeBuilder tb = new TreeBuilder(annotations);
 			tb.fillDependecies(dependenciesAS);
 			
 

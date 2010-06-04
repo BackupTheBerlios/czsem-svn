@@ -25,6 +25,8 @@ public class TrainTestGateOnCzech {
 	
 	public static final String learninigAnnotType = "injuries";
 	public static final boolean rootSubtreeLearninig = false;
+	public static final boolean runPaum = false;
+	public static final boolean runILP = true;
 	protected static ProcessingResource tectoMTReset;
 
 	public static SerialAnalyserController constructTestController() throws ResourceInstantiationException, MalformedURLException
@@ -52,64 +54,70 @@ public class TrainTestGateOnCzech {
 		
 		
 		
-		//ILP Apply
-		fm = Factory.newFeatureMap();
-		fm.put("configFileURL", new File("gate-learning/sampleConfigILP.xml").toURI().toURL());
-		fm.put("inputASName", "TectoMT");
-		fm.put("training", false);		
-		ProcessingResource ilpApply = (ProcessingResource) 
-			Factory.createResource("gate.creole.ml.MachineLearningPR", fm);
-		test_controller.add(ilpApply);
-		
-
-		
-		if (rootSubtreeLearninig)
+		if (runILP)
 		{
-			//Subtree for ILP results
+			//ILP Apply
 			fm = Factory.newFeatureMap();
+			fm.put("configFileURL", new File("gate-learning/sampleConfigILP.xml").toURI().toURL());
 			fm.put("inputASName", "TectoMT");
-			fm.put("outputASName", "ILP");
-			fm.put("inputAnnotationTypeNames", Arrays.asList(new String [] {learninigAnnotType + "_root"}));
-			ProcessingResource subtreeForILPresults = (ProcessingResource) 
-				Factory.createResource("czsem.gate.AnnotationDependencySubtreeMarker", fm);
-			test_controller.add(subtreeForILPresults);
-
+			fm.put("training", false);		
+			ProcessingResource ilpApply = (ProcessingResource) 
+				Factory.createResource("gate.creole.ml.MachineLearningPR", fm);
+			test_controller.add(ilpApply);
 			
+	
 			
-			//ILP Output Transfer
-			fm = Factory.newFeatureMap();
-			fm.put("inputASName", "TectoMT");
-			fm.put("outputASName", "ILP");
-			fm.put("annotationTypes", Arrays.asList(new String [] {learninigAnnotType + "_root"}));		
-			fm.put("copyAnnotations", false);		
-			ProcessingResource ILPoutputTransfer = (ProcessingResource) 
-				Factory.createResource("gate.creole.annotransfer.AnnotationSetTransfer", fm);
-			test_controller.add(ILPoutputTransfer);
-						
-		}
-		else
-		{
-			//Subsequent annotation merge
-			fm = Factory.newFeatureMap();
-			fm.put("inputASName", "TectoMT");
-			fm.put("outputASName", "ILP");
-			fm.put("annotationTypeName", learninigAnnotType);
-			fm.put("deleteOriginalAnnotations", true);
-			ProcessingResource mergeILPresults = (ProcessingResource) 
-				Factory.createResource("czsem.gate.SubsequentAnnotationMerge", fm);
-			test_controller.add(mergeILPresults);			
+			if (rootSubtreeLearninig)
+			{
+				//Subtree for ILP results
+				fm = Factory.newFeatureMap();
+				fm.put("inputASName", "TectoMT");
+				fm.put("outputASName", "ILP");
+				fm.put("inputAnnotationTypeNames", Arrays.asList(new String [] {learninigAnnotType + "_root"}));
+				ProcessingResource subtreeForILPresults = (ProcessingResource) 
+					Factory.createResource("czsem.gate.AnnotationDependencySubtreeMarker", fm);
+				test_controller.add(subtreeForILPresults);
+	
+				
+				
+				//ILP Output Transfer
+				fm = Factory.newFeatureMap();
+				fm.put("inputASName", "TectoMT");
+				fm.put("outputASName", "ILP");
+				fm.put("annotationTypes", Arrays.asList(new String [] {learninigAnnotType + "_root"}));		
+				fm.put("copyAnnotations", false);		
+				ProcessingResource ILPoutputTransfer = (ProcessingResource) 
+					Factory.createResource("gate.creole.annotransfer.AnnotationSetTransfer", fm);
+				test_controller.add(ILPoutputTransfer);
+							
+			}
+			else
+			{
+				//Subsequent annotation merge
+				fm = Factory.newFeatureMap();
+				fm.put("inputASName", "TectoMT");
+				fm.put("outputASName", "ILP");
+				fm.put("annotationTypeName", learninigAnnotType);
+				fm.put("deleteOriginalAnnotations", true);
+				ProcessingResource mergeILPresults = (ProcessingResource) 
+					Factory.createResource("czsem.gate.SubsequentAnnotationMerge", fm);
+				test_controller.add(mergeILPresults);			
+			}
 		}
 
 		
-		//Paum Application
-		fm = Factory.newFeatureMap();
-		fm.put("configFileURL", new File("gate-learning/ml-config-file.xml").toURI().toURL());
-		fm.put("inputASName", "TectoMT");
-		fm.put("outputASName", "Paum");
-		fm.put("learningMode", "APPLICATION");		
-		ProcessingResource paumApplication = (ProcessingResource) 
-			Factory.createResource("gate.learning.LearningAPIMain", fm);
-		test_controller.add(paumApplication);
+		if (runPaum)
+		{
+			//Paum Application
+			fm = Factory.newFeatureMap();
+			fm.put("configFileURL", new File("gate-learning/ml-config-file.xml").toURI().toURL());
+			fm.put("inputASName", "TectoMT");
+			fm.put("outputASName", "Paum");
+			fm.put("learningMode", "APPLICATION");		
+			ProcessingResource paumApplication = (ProcessingResource) 
+				Factory.createResource("gate.learning.LearningAPIMain", fm);
+			test_controller.add(paumApplication);
+		}
 
 		
 		return test_controller;
@@ -161,26 +169,32 @@ public class TrainTestGateOnCzech {
 		}
 		
 		
-		//ILP train
-		fm = Factory.newFeatureMap();
-		fm.put("configFileURL", new File("gate-learning/sampleConfigILP.xml").toURI().toURL());
-		fm.put("inputASName", "TectoMT");
-		fm.put("training", true);		
-		ProcessingResource ilpTrain = (ProcessingResource) 
-			Factory.createResource("gate.creole.ml.MachineLearningPR", fm);
-		train_controller.add(ilpTrain);
+		if (runILP)
+		{
+			//ILP train
+			fm = Factory.newFeatureMap();
+			fm.put("configFileURL", new File("gate-learning/sampleConfigILP.xml").toURI().toURL());
+			fm.put("inputASName", "TectoMT");
+			fm.put("training", true);		
+			ProcessingResource ilpTrain = (ProcessingResource) 
+				Factory.createResource("gate.creole.ml.MachineLearningPR", fm);
+			train_controller.add(ilpTrain);
+		}
 		
 		
 		
-		//Paum train
-		fm = Factory.newFeatureMap();
-		fm.put("configFileURL", new File("gate-learning/ml-config-file.xml").toURI().toURL());
-		fm.put("inputASName", "TectoMT");
-		fm.put("outputASName", "Paum");
-		fm.put("learningMode", "TRAINING");		
-		ProcessingResource paumTrain = (ProcessingResource) 
-			Factory.createResource("gate.learning.LearningAPIMain", fm);
-		train_controller.add(paumTrain);
+		if (runPaum)
+		{
+			//Paum train
+			fm = Factory.newFeatureMap();
+			fm.put("configFileURL", new File("gate-learning/ml-config-file.xml").toURI().toURL());
+			fm.put("inputASName", "TectoMT");
+			fm.put("outputASName", "Paum");
+			fm.put("learningMode", "TRAINING");		
+			ProcessingResource paumTrain = (ProcessingResource) 
+				Factory.createResource("gate.learning.LearningAPIMain", fm);
+			train_controller.add(paumTrain);
+		}
 
 		
 		return train_controller;				
@@ -209,8 +223,12 @@ public class TrainTestGateOnCzech {
 	    Corpus corpus = GateUtils.loadCorpusFormDatastore(ds, "ISWC___1274943456887___5663");
 	    
 	    SerialAnalyserController train_controller = constructTrainController();
-	    SerialAnalyserController test_controller = constructTestController();
+//	    SerialAnalyserController test_controller = constructTestController();
 	    
+	    train_controller.setCorpus(corpus);
+	    train_controller.execute();
+	    
+/*
 		FeatureMap fm = Factory.newFeatureMap();
 		fm.put("corpus", corpus);
 		fm.put("numberOfFolds", 10);
@@ -222,7 +240,7 @@ public class TrainTestGateOnCzech {
 		SerialController run = (SerialController) Factory.createResource("gate.creole.SerialController");
 		run.add(crossValid);
 		run.execute();
-
+*/
 	    
 	    
 		
