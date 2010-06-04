@@ -38,7 +38,7 @@ public class TectoMTDocumentAnalyser
 		sb.append(((AbstractResource) doc).getName());
 		sb.append(".tmt");
 		
-		String dest_filename = FSExporter.findAvailableFileName(sb.toString());
+		String dest_filename = GateUtils.findAvailableFileName(sb.toString());
 		
 		return dest_filename;	
 	}

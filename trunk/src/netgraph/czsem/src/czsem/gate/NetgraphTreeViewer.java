@@ -76,8 +76,9 @@ public class NetgraphTreeViewer extends AbstractVisualResource implements  Owned
 			@Override
 			public Annotation getAnnotation()
 			{
-				assert FSFileWriter.ID_INDEX == 0;
-				String id = forestDisplay.getForest().getChosenNode().getValue(0, 0, 0);
+				NGForest forest = forestDisplay.getForest();
+				int id_index = forest.getHead().getIndexOfAttribute(FSFileWriter.ID_FEATURENAME);				
+				String id = forest.getChosenNode().getValue(0, id_index, 0);
 				return annotation_set.get(Integer.parseInt(id)); 
 			}
 		});		
@@ -254,7 +255,8 @@ public class NetgraphTreeViewer extends AbstractVisualResource implements  Owned
 		tree.readTree(th, os.toString().toCharArray(), 0, th.getSize());
 		
 		CZSemTree czstree = new CZSemTree(tree);
-		int deep_ord = czstree.findFirstNodeByAttributeValue(FSFileWriter.ID_INDEX, annotation.getId().toString());
+		int id_index = th.getIndexOfAttribute(FSFileWriter.ID_FEATURENAME);				
+		int deep_ord = czstree.findFirstNodeByAttributeValue(id_index, annotation.getId().toString());
 		tree.setMatchingNodes(Integer.toString(deep_ord));
 		tree.setChosenNodeByDepthOrder(deep_ord+1);
 		

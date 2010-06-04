@@ -3,23 +3,19 @@
  */
 package czsem.gate;
 
-import gate.*;
-import gate.corpora.DocumentImpl;
+import gate.LanguageAnalyser;
+import gate.ProcessingResource;
 import gate.creole.AbstractLanguageAnalyser;
 import gate.creole.AbstractResource;
 import gate.creole.ExecutionException;
-import gate.creole.metadata.*;
-import gate.util.GateException;
+import gate.creole.metadata.CreoleParameter;
+import gate.creole.metadata.CreoleResource;
+import gate.creole.metadata.Optional;
+import gate.creole.metadata.RunTime;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
 
 
 /**
@@ -32,12 +28,13 @@ public class FSExporter extends AbstractLanguageAnalyser implements ProcessingRe
 	private static final long serialVersionUID = -6562545464590354499L;
 	
 	private URL outputDirectory = null;
-	private List<String> additionalAttributes = null;
-	private boolean detectAdditionalAributes = true;
-	private int number_of_tokens_to_scann = 20;
+//	private List<String> additionalAttributes = null;
+//	private boolean detectAdditionalAributes = true;
+//	private int number_of_tokens_to_scann = 20;
 
 	private String inputASName = null;
 	
+/*
 	protected List<String> detectAdditionalAttributes()
 	{
 		AnnotationSet as = document.getAnnotations().get(TOKEN_ANNOTATION_TYPE);
@@ -62,7 +59,7 @@ public class FSExporter extends AbstractLanguageAnalyser implements ProcessingRe
 		
 		return Arrays.asList(addAttr.toArray(new String[0]));
 	}
-	
+*/	
 	public void execute() throws ExecutionException
 	{
 		StringBuilder sb = new StringBuilder();
@@ -71,19 +68,17 @@ public class FSExporter extends AbstractLanguageAnalyser implements ProcessingRe
 		sb.append(((AbstractResource) document).getName());
 		sb.append(".fs");
 		
-		String dest_filename = findAvailableFileName(sb.toString());
+		String dest_filename = GateUtils.findAvailableFileName(sb.toString());
 		
 		System.out.print("Writing: ");
 		System.out.println(dest_filename);
 		
 		try {
 			FSFileWriter fsw = new FSFileWriter(dest_filename);
-			List<String> addAttr = 
-				detectAdditionalAributes ? detectAdditionalAttributes() : additionalAttributes;
 			
-			fsw.PrintAll(document.getAnnotations(inputASName), addAttr);
+			fsw.PrintAll(document.getAnnotations(inputASName));
 			fsw.close();
-		} catch (FileNotFoundException e) {
+		} catch (Exception e) {
 			throw new ExecutionException(e);
 		}
 	}
@@ -108,7 +103,7 @@ public class FSExporter extends AbstractLanguageAnalyser implements ProcessingRe
 	public URL getOutputDirectory() {
 		return outputDirectory;
 	}
-
+/*
 	@RunTime
 	@Optional
 	@CreoleParameter(comment="Names of annotation attributes/features propagated to the FS output", defaultValue="category;orth")
@@ -129,58 +124,11 @@ public class FSExporter extends AbstractLanguageAnalyser implements ProcessingRe
 	public Boolean getDetectAdditionalAributes() {
 		return detectAdditionalAributes;
 	}
-
+*/
 
 
 	
-	public static String findAvailableFileName(String destFileURI)
-	{
-	    String destFileName = destFileURI.substring(0,destFileURI.lastIndexOf("."));
-	    String destFileExt = destFileURI.substring(destFileURI.lastIndexOf(".")+1);
-	    int count = 1;      
-	    File f;
-	    while ((f=new File(destFileURI)).exists())
-	    {
-	        destFileURI=destFileName+"("+(count++)+")"+"."+destFileExt;
-	    }            
-	    String fName = f.getName();
-	    String fPath = f.getParent();
-	    // Now we need to check if given file name is valid for file system, and if it isn't we need to convert it to valid form
-	    if (!(testIfFileNameIsValid(destFileURI))) {
-	        List<String> forbiddenCharsPatterns = new ArrayList<String>();
-	        forbiddenCharsPatterns.add("[:]+"); // Mac OS, but it looks that also Windows XP
-	        forbiddenCharsPatterns.add("[\\*\"/\\\\\\[\\]\\:\\;\\|\\=\\,]+");  // Windows
-	        forbiddenCharsPatterns.add("[^\\w\\d\\.]+");  // last chance... only latin letters and digits
-	        for (String pattern:forbiddenCharsPatterns) {
-	            String nameToTest = fName;
-	            nameToTest = nameToTest.replaceAll(pattern, "_");
-	            destFileURI=fPath+"/"+nameToTest;
-	            count=1;
-	            destFileName = destFileURI.substring(0,destFileURI.lastIndexOf("."));
-	            destFileExt = destFileURI.substring(destFileURI.lastIndexOf(".")+1);
-	            while ((f=new File(destFileURI)).exists()) {
-	                destFileURI=destFileName+"("+(count++)+")"+"."+destFileExt;
-	                }
-	                if (testIfFileNameIsValid(destFileURI)) break;
-	        }
-	    }         
-	    return destFileURI;
-	}
-	
-	private static boolean testIfFileNameIsValid(String destFileURI) {
-	    boolean valid = false;
-	    try {
-	        File candidate = new File(destFileURI);                
-//	        String canonicalPath = candidate.getCanonicalPath();                
-	        boolean b = candidate.createNewFile();
-	        if (b) {
-	            candidate.delete();
-	        }
-	        valid = true;
-	    } catch (IOException ioEx) { }
-	    return valid;
-	}
-
+/*
 	public static void main(String[] args) throws IOException, GateException
 	{		
 		Gate.setNetConnected(false);
@@ -215,7 +163,7 @@ public class FSExporter extends AbstractLanguageAnalyser implements ProcessingRe
 		
 		
 		fsw.PrintAll(as, Arrays.asList(addit));
-*/
+/
 		
 		FSExporter fsex = new FSExporter();
 		fsex.setDocument(doc);
@@ -225,5 +173,5 @@ public class FSExporter extends AbstractLanguageAnalyser implements ProcessingRe
 		fsex.execute();
 		
 	}
-
+*/
 }

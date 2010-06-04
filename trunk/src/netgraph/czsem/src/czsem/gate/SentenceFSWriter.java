@@ -1,58 +1,35 @@
 package czsem.gate;
 
-import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import cz.cuni.mff.mirovsky.trees.Attribute;
-import cz.cuni.mff.mirovsky.trees.NGTreeHead;
-import czsem.utils.TreeIndex;
-
 import gate.Annotation;
 import gate.AnnotationSet;
 
+import java.io.PrintStream;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+
+import cz.cuni.mff.mirovsky.trees.NGTreeHead;
+import czsem.utils.TreeIndex;
+
 public class SentenceFSWriter
 {
+	private AnnotationSet annotations;
+	private String [] attributes = null;
+	
+	private PrintStream out = System.out;
+
 	public static class TreeBuilder extends TreeIndex
 	{
 		private PrintStream out;
 		private AnnotationSet annotations;
 		private String [] attributes;
 
-/*
-		private Map<Integer, List<Integer>> dependencies = new HashMap<Integer, List<Integer>>(); 
-		private Map<Integer, Integer> parents = new HashMap<Integer, Integer>();
-*/
 		private int root_id; 		
 
 		public TreeBuilder(AnnotationSet annotations) {
 			this.annotations = annotations;
 		}
 
-/*
-		protected void addDpendency(int parent_id, int child_id)
-		{
-			List<Integer> children = dependencies.get(parent_id);
-			if (children == null)
-			{
-				children = new ArrayList<Integer>(6);
-				dependencies.put(parent_id, children);
-			}
-			
-			children.add(child_id);
-			parents.put(child_id, parent_id);
-		}
-*/
-		
-
-		
-		
 
 		private void printCildren(int father_id)
 		{
@@ -92,15 +69,14 @@ public class SentenceFSWriter
 			if (node == null) return;
 			
 			out.print('[');
-			
-			assert FSFileWriter.ID_INDEX == 0;
-			printAttribute(FSFileWriter.default_attributes[FSFileWriter.ID_INDEX], node_id);
-			out.print(',');
-			
-			for (int a=1; a<attributes.length; a++)
+						
+			for (int a=0; a<attributes.length; a++)
 			{
 				Object f = node.getFeatures().get(attributes[a]);
-				
+
+				//print ID
+				if (attributes[a].equals(FSFileWriter.ID_FEATURENAME)) f = node_id;
+								
 				if (f != null)
 				{
 					printAttribute(attributes[a], f);
@@ -138,6 +114,9 @@ public class SentenceFSWriter
 //			out.println(dependencies.keySet().size());
 						
 			root_id = findRoot();
+			
+			updateSentenceTokens();
+
 			printNode(root_id);
 
 		}
@@ -190,78 +169,15 @@ public class SentenceFSWriter
 
 	}
 	
-	
-			
-	private AnnotationSet annotations;
-	private String [] attributes = null;
-	
-	private PrintStream out = System.out;
-
-	
-
-	public static Set<String> setFromArray(String[] array)
-	{		
-		return new HashSet<String>(Arrays.asList(array));
-	}
-	
-	protected String[] guessAtttributes()
-	{		
-		AnnotationSet tokens = annotations.get(setFromArray(FSFileWriter.token_annotation_types));
-		
-		Set<String> attr_set = new HashSet<String>();  
-		
-		for (Annotation token : tokens)
-		{
-			for (Object feature : token.getFeatures().keySet())
-			{
-				attr_set.add((String) feature);				
-			}			
-		}
-		
-		String[] attrs = attr_set.toArray(new String[0]);
-		
-		Arrays.sort(attrs);
-//		for (int i = 0; i < attrs.length; i++) {
-//			System.err.println(attrs[i]);
-//		}
-		
-		return attrs;
-	}
-	
-	public NGTreeHead createTreeHead()
-	{
-		NGTreeHead th = new NGTreeHead(null);
-		
-		for (int i = 0; i < attributes.length; i++)
-		{
-			th.addAttribute(new Attribute(attributes[i]));			
-//			ngf.getVybraneAtributy().add(i, Integer.toString(i));
-		}
-		
-		
-		th.N = th.W = th.getIndexOfAttribute(FSFileWriter.ORD_FEATURENAME);
-		th.H = th.getIndexOfAttribute(FSFileWriter.HIDE_FEATURENAME);
-
-		return th;
-	}
-	
-	public static String [] arrayConcatenate(String [] first, String [] second)
-	{
-		String [] ret = new String[first.length + second.length];
-		System.arraycopy(first, 0, ret, 0, first.length);
-		System.arraycopy(second, 0, ret, first.length, second.length);
-		return ret;		
-	}
-
+/*	
 	private void initAttributes(String [] additional_attributes)
 	{
-		attributes = arrayConcatenate(FSFileWriter.default_attributes, additional_attributes);			
+		attributes = GateUtils.arrayConcatenate(FSFileWriter.default_attributes, additional_attributes);			
 	}
-	
+*/	
 	public SentenceFSWriter(AnnotationSet sentence_annotations, PrintStream out)
 	{
-		this.out = out;		
-		this.annotations = sentence_annotations;
+		this(sentence_annotations, out, FSFileWriter.guessAtttributes(sentence_annotations));
 
 		/*
 		String[] attrs = guessAtttributes();
@@ -270,11 +186,13 @@ public class SentenceFSWriter
 		*/
 	}
 
-	public SentenceFSWriter(AnnotationSet sentence_annotations, PrintStream out, List<String> additional_attributes)
+	public SentenceFSWriter(AnnotationSet sentence_annotations, PrintStream out, String [] attributes)
 	{
-		this(sentence_annotations, out);
+		this.out = out;		
+		this.annotations = sentence_annotations;
+		this.attributes = attributes;
 		
-		initAttributes(additional_attributes.toArray(new String[0]));
+//		initAttributes(additional_attributes.toArray(new String[0]));
 		
 //		dependenciesAS = annotations.get("Dependency");
 		
@@ -312,7 +230,8 @@ public class SentenceFSWriter
 //		{
 			
 			AnnotationSet dependenciesAS = annotations.get(
-					setFromArray(FSFileWriter.dependency_annotation_types[dependency_annotation_type]));
+					GateUtils.setFromArray(
+							FSFileWriter.dependency_annotation_types[dependency_annotation_type]));
 			
 			if (dependenciesAS.isEmpty()) return false;		
 			TreeBuilder tb = new TreeBuilder(annotations);
@@ -325,10 +244,8 @@ public class SentenceFSWriter
 						FSFileWriter.tokendependency_annotation_types[dependency_annotation_type]);
 			}
 			
-			tb.findRoot();
-			tb.updateSentenceTokens();
 			
-			if (attributes == null) initAttributes(guessAtttributes());
+//			if (attributes == null) initAttributes(guessAtttributes());
 
 			
 			tb.printTree(out, attributes);
@@ -337,6 +254,11 @@ public class SentenceFSWriter
 		
 		out.println();
 		return true;
+	}
+
+	public NGTreeHead createTreeHead()
+	{
+		return FSFileWriter.createTreeHead(attributes);
 	}
 	
 	

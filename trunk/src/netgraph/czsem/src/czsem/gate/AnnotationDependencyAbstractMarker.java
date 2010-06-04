@@ -1,17 +1,12 @@
 package czsem.gate;
 
-import gate.Annotation;
 import gate.AnnotationSet;
 import gate.creole.AbstractLanguageAnalyser;
 import gate.creole.metadata.CreoleParameter;
 import gate.creole.metadata.Optional;
 import gate.creole.metadata.RunTime;
 
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import czsem.utils.TreeIndex;
 
