@@ -13,8 +13,6 @@ import gate.creole.metadata.CreoleResource;
 import gate.creole.metadata.Optional;
 import gate.creole.metadata.RunTime;
 
-import java.io.FileNotFoundException;
-import java.io.UnsupportedEncodingException;
 import java.net.URL;
 
 

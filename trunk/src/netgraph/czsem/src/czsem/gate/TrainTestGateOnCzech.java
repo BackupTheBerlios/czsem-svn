@@ -23,10 +23,13 @@ import org.apache.log4j.Logger;
 	
 public class TrainTestGateOnCzech {
 	
-	public static final String learninigAnnotType = "injuries";
-	public static final boolean rootSubtreeLearninig = false;
-	public static final boolean runPaum = false;
+//	public static final String learninigAnnotType = "injuries";
+	public static final String learninigAnnotType = "damage";
+	public static final boolean rootSubtreeLearninig = true;
+	public static final boolean runPaum = true;
 	public static final boolean runILP = true;
+	
+	
 	protected static ProcessingResource tectoMTReset;
 
 	public static SerialAnalyserController constructTestController() throws ResourceInstantiationException, MalformedURLException
@@ -223,12 +226,13 @@ public class TrainTestGateOnCzech {
 	    Corpus corpus = GateUtils.loadCorpusFormDatastore(ds, "ISWC___1274943456887___5663");
 	    
 	    SerialAnalyserController train_controller = constructTrainController();
-//	    SerialAnalyserController test_controller = constructTestController();
-	    
+	    SerialAnalyserController test_controller = constructTestController();
+
+/*	    
 	    train_controller.setCorpus(corpus);
 	    train_controller.execute();
 	    
-/*
+/**/
 		FeatureMap fm = Factory.newFeatureMap();
 		fm.put("corpus", corpus);
 		fm.put("numberOfFolds", 10);
@@ -240,7 +244,7 @@ public class TrainTestGateOnCzech {
 		SerialController run = (SerialController) Factory.createResource("gate.creole.SerialController");
 		run.add(crossValid);
 		run.execute();
-*/
+/**/
 	    
 	    
 		
