@@ -50,12 +50,26 @@
        <FEATURE>rule</FEATURE>  
        <POSITION>0</POSITION>
      </ATTRIBUTE> 
+     <ATTRIBUTE>  
+       <NAME>Afun</NAME>  
+       <SEMTYPE>NOMINAL</SEMTYPE>  
+       <TYPE>Token</TYPE>  
+       <FEATURE>afun</FEATURE>  
+       <POSITION>0</POSITION>
+     </ATTRIBUTE> 
     <ATTRIBUTELIST>  
        <NAME>Root</NAME>  
        <SEMTYPE>NOMINAL</SEMTYPE>  
        <TYPE>Token</TYPE>  
        <FEATURE>lemma</FEATURE> 
-       <RANGE from="-1" to="1"/>  
+       <RANGE from="-2" to="2"/>  
+    </ATTRIBUTELIST>  
+    <ATTRIBUTELIST>  
+       <NAME>Tag</NAME>  
+       <SEMTYPE>NOMINAL</SEMTYPE>  
+       <TYPE>Token</TYPE>  
+       <FEATURE>tag</FEATURE> 
+       <RANGE from="-2" to="2"/>  
     </ATTRIBUTELIST>  
      <ATTRIBUTE>
        <NAME>damage</NAME>
