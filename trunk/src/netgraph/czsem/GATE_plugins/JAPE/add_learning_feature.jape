@@ -1,11 +1,11 @@
 Phase:phase1
-Input: damage injuries   
+Input: damage injuries fatalities   
 Options: control = all
 
 Rule: add_learninig_feature
 Priority: 20
 (
-{damage} | {injuries}
+{damage} | {injuries} | {fatalities}
 ):tmp
 -->
 {

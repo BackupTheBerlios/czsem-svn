@@ -1,7 +1,7 @@
 <?xml version="1.0"?>  
 <ML-CONFIG>  
   <VERBOSITY level="1"/>
-  <SURROUND value="true"/>  
+  <SURROUND value="false"/>  
   <PARAMETER name="thresholdProbabilityEntity" value="0.2"/>  
   <PARAMETER name="thresholdProbabilityBoundary" value="0.4"/>  
 <!--
@@ -50,13 +50,15 @@
        <FEATURE>rule</FEATURE>  
        <POSITION>0</POSITION>
      </ATTRIBUTE> 
+<!--
+-->      
      <ATTRIBUTE>  
        <NAME>Afun</NAME>  
        <SEMTYPE>NOMINAL</SEMTYPE>  
        <TYPE>Token</TYPE>  
        <FEATURE>afun</FEATURE>  
        <POSITION>0</POSITION>
-     </ATTRIBUTE> 
+     </ATTRIBUTE>
     <ATTRIBUTELIST>  
        <NAME>Root</NAME>  
        <SEMTYPE>NOMINAL</SEMTYPE>  
@@ -72,9 +74,9 @@
        <RANGE from="-2" to="2"/>  
     </ATTRIBUTELIST>  
      <ATTRIBUTE>
-       <NAME>damage</NAME>
        <SEMTYPE>NOMINAL</SEMTYPE>
-       <TYPE>damage</TYPE>
+       <NAME>fatalities</NAME>
+       <TYPE>fatalities</TYPE>
        <FEATURE>rule</FEATURE> 
        <POSITION>0</POSITION>
        <CLASS/>

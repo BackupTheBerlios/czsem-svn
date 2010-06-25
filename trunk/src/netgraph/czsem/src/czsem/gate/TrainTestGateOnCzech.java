@@ -23,10 +23,10 @@ import org.apache.log4j.Logger;
 	
 public class TrainTestGateOnCzech {
 	
-	public static final String learninigAnnotType = "injuries";
+	public static final String learninigAnnotType = "fatalities";
 //	public static final String learninigAnnotType = "damage";
 	public static final boolean rootSubtreeLearninig = false;
-	public static final boolean runPaum = false;
+	public static final boolean runPaum = true;
 	public static final boolean runILP = true;
 	
 	
@@ -223,19 +223,20 @@ public class TrainTestGateOnCzech {
 		    	
 	    DataStore ds = GateUtils.openDataStore("file:/C:/Users/dedek/AppData/GATE/ISWC");
 	    
-	    Corpus corpus = GateUtils.loadCorpusFormDatastore(ds, "ISWC___1274943456887___5663");
+//	    Corpus corpus = GateUtils.loadCorpusFormDatastore(ds, "ISWC___1274943456887___5663");
+	    Corpus corpus = GateUtils.loadCorpusFormDatastore(ds, "fatalities___1277473852041___7082");
 	    
 	    SerialAnalyserController train_controller = constructTrainController();
-/**	    SerialAnalyserController test_controller = constructTestController(); /**/
+/**/    SerialAnalyserController test_controller = constructTestController(); /**/
 
-/**/	    
+/**	    
 	    train_controller.setCorpus(corpus);
 	    train_controller.execute();
 	    
-/**
+/**/
 		FeatureMap fm = Factory.newFeatureMap();
 		fm.put("corpus", corpus);
-		fm.put("numberOfFolds", 10);
+		fm.put("numberOfFolds", 9);
 		fm.put("trainingPR", train_controller);
 		fm.put("testingPR", test_controller);
 		ProcessingResource crossValid = (ProcessingResource) 
