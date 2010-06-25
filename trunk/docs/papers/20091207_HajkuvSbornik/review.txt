@@ -1,0 +1,21 @@
+> -----------------------------------------------------------------------
+>
+> Notes on "Fuzzy as Hájek's comparative notion of truth
+> for preference modeling" by P. Vojtáš
+>
+> This article describes some applications of fuzzy logic done by Peter
+> Vojtáš and his collaborators and
+> inspired by the work of Petr Hájek. I think that it is
+> worth publishing as an important reminder that very
+> interesting applications can build on Hájek's framework. But, it
+> certainly requires some additional
+> work. Its formal level is quite bad - typos, missing references
+> (e.g. [FSS], [KLV], etc.) strange list of publication of the author
+> etc. I propose to modify the title somehow, e.g. to "Fuzzy logic as
+> Hájek"s comparative notion of truth and applications in preference
+> modeling." I also propose to present less number of applications,
+> but in more detail. Maybe the section on fuzzy similarity can be
+> omitted or shortened and other sections can be expanded.
+>
+>
+> --------------------------------------------------------------------------

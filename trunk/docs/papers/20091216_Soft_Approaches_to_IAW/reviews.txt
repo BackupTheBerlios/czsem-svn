@@ -1,0 +1,68 @@
+Ms. Ref. No.:  IPM78
+Title: Fuzzy Classification of Web Reports with Mining from Texts with Linguistic Annotations
+Information Processing & Management
+
+Dear Mr. Jan Dedek,
+
+Your paper, "Fuzzy Classification of Web Reports with Mining from Texts with Linguistic Annotations" has been reviewed. The reviewers felt that the work is interesting and important, but feel that major revisions are needed to make it publishable. We encourage you to revise the manuscript and resubmit it for reconsideration within the next six months. Please note that submitting a revision of your manuscript does not guarantee eventual acceptance and that your revision will be subject to re-review before a decision is taken. For your guidance, reviewers' comments are appended below.
+
+Reviewer #1: The paper introduces a study for a classification of textual documents by exploiting inductive logic programming and fuzzy inductive logic programming. Specifically, the study focuses on the definition of an inductive procedure applied to explain the degree of seriousness of accidents.  The approach seems interesting and sound, even though some remarks arise.
+1) It is not clear why the classification is fuzzy, when it seems just the approach is fuzzy. Please details this point.
+2) The work achieves an initial linguistic analysis based on a previous work of the authors (not detailed in this paper). The example of information extraction  reported in Figure 1 should be in English, in order to allow the reader to completely appreciate the approach.
+3) Maybe more formalism in the theoretical background would be welcome.
+4) Please explain better the equivalence between the fuzzy ILP and crisp ILP, for instance, giving an example during the construction of the crisp background knowledge sets (see pag. 7).
+5) Details how the weighted "average" IR recall, precision and F-measure are computed.
+6) Many typing errors appear in the paper (for instance,  the word "form" often appears instead of "from"). A complete English revision is strongly recommended.
+
+
+
+
+Reviewer #2:
+Paper must be grammatically reviewed by an English native speaker because several typos can be found in the text, authors make an inappropriate use of articles, etc. Additionally, authors abuse of first person narrative. Passive voice should be used instead.
+
+Introduction is clearly insufficient and does not provide a clear idea of the aims of the paper. For example, authors do not specify their definition of "accident", so it can be misleading (actually, accident types are limited to fire, car crashes and a too broad and generic 'others' category).
+
+Experimental results show that the proposed methodology doesn't provide a significant improvement when it's compared to LogitBoost (at least with the test set of documents used in this experiment). So the relevance of this methodology is, at least, questionable.
+
+Finally, bibliography lacks of relevant documents referring to similar works and we can find instead many authors' self citations.
+
+
+
+Reviewer #3: This is an interesting paper. The authors presented a formal model for using fuzzy inductive logic programming to learn fuzzy classification rules. They also showed a prototype implementation of their ideas to the task of classification of Web textual reports on traffic accidents. Comparisions are also presented against several major Machine Learning methods and the proposed system mostly performed better on the authors data set.
+
+While the presented work is quite promising and interesting, some issues need to be addressed before the paper can be accepted for publication.
+
+(1) The paper's title is mis-leading. The current title, "Fuzzy classification of web reports with mining from texts with linguistic annotations", does not reflct truly the contents and focus of the paper. Although the paper contains a brief description of the linguistic tools developed by the authors or third party, the main thrust of the paper is on learning fuzzy classification rules by fuzzy ILP using its connection with crisp ILP. In fact the data used for learning is manually
+constructed according to the paper. The authors also wrote: "In this experiment we have not used an information extracted by our automated information extraction tools. In this paper we are concentrated on the classication and the actual source of the information is not so important. The integration step is still waiting to be done."  If indeed the "actual source of information is not important", paper title should be changed by removing the  "web reports with mining from texts..." part and put emphasis on fuzzy ILP in the title. Alternatively the authors can keep the current paper title, but they should carry out the integration step and actually use the results of text mining as inputs to the fuzzy rule learning system.
+
+(2) The experiments reported in the paper are quite limited in using only one small data set with  50 examples. I would suggest that the authors conduct experiments with larger data sets (e.g., with at least several hundread examples)
+in order to validate the effectiveness of the proposed system.
+
+Moreover, in addition to classification accuracy of various learning methods, it would be helpful to report the computational efficiencies of these methods.
+
+The paper's English and organization are generally quite good. However occasionally there are typos. For example, in page 8, thr 4th and 5th lines from the bottom,  and in the 6th line in Page 9, B_n should be  changed to B_m.
+
+
+
+
+Let me know, if you decide NOT to revise and re-submit the paper, otherwise I will just wait for your revisions.
+
+If you decide to revise please do two things: 1. submit a revision following the instructions below, and 2. submit a Revision Note to include a list of changes you made, explanations, if any, and possible rebuttal against points raised by reviewer(s).
+
+The revised copy will have the same IPM number as the original submission with automatically appended R1 for fist revision, R2 for second revision and so on. As well as submitting a clean revision you may also in addition wish to submit a second, or marked, revision where changes, additions and deletions are marked as provided by word processing software.
+
+To submit a revision, please go to http://ees.elsevier.com/ipm/ and login as an Author.
+
+Your username is: dedekj
+
+If you need to retrieve password details, please go to:
+http://ees.elsevier.com/ipm/automail_query.asp
+
+On your Main Menu page is a folder entitled "Submissions Needing Revision". You will find your submission record there.
+
+Yours sincerely,
+
+Fabio Crestani
+Editor-in-Chief
+
+For further assistance, please visit our customer support site at http://epsupport.elsevier.com. Here you can search for solutions on a range of topics, find answers to frequently asked questions and learn more about EES via interactive tutorials. You will also find our 24/7 support contact details should you need any further assistance from one of our customer support representatives.
