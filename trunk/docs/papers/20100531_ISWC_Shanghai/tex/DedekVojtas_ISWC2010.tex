@@ -82,12 +82,9 @@ contain at least 70 and at most 150 words. It should be written using the
 
 
 \section{Introduction}
-a.	The Semantic Web and Information Extraction
-\\b.	Information Extraction and Machine Learning
-Problem of feature selection, deep linguistic analysis is not used very often or has to be at lo level.
-\\c.	Linguistics: Phrase structure and dependency structure
-\\d.	Similarity of RDF and dependency linguistics
-\\e.	Our contributions and benefits of using the combination of tools
+Automated semantic annotation (SA) is considered to be one of the most important elements in the evolution of the Semantic Web. Besides that, SA can provide great help in a process of data integration and it could also be a basis for intelligent search and navigation.
+
+In this paper we present a method for classical and semantic information extraction and annotation which is based on deep linguistic analysis and Inductive Logic Programming (ILP). This approach is quite novel because it directly combines deep linguistic parsing with machine learning (ML). This combination and the use of ILP as ML engine have following benefits: Manual selection of learning features is not needed. We just offer full linguistic information that we have to ILP and ILP is capable to select the relevant parts itself. Learned extraction rules from ILP can be easily visualized, understood and adapted by human.
 
 
 
@@ -315,8 +312,11 @@ In Figure~\ref{fig:rules} we present some example of the rules learned from the 
 
 
 \section{Conclusion and future work}
-a.	Application? - accident seriousness ranking, environment protection, economy
-\\b.	From our experiments can be seen that ILP is capable to find complex and meaningful rules that cover the intended information. But in terms of the performance measures the results are not better than those from propositional learner.
+From our experiments can be seen that ILP is capable to find complex and meaningful rules that cover the intended information. But in terms of the performance measures the results are not better than those from a propositional learner.
+
+Our method is still missing an intelligent semantic interpretation procedure and it should be evaluated on bigger datasets (e.g. MUC, ACE, TAC, CoNLL) and other languages. We also do not provide a method for relation extraction so far. In the present solution we deal with relations implicitly. The method has to be adapted for explicit learning of relation in the form of "subject predicate object".
+
+Our method could also provide a comparison of linguistic formalisms and tools because on the same data we could run our method using different linguistic analyzers and compare the results.
 
 
 
