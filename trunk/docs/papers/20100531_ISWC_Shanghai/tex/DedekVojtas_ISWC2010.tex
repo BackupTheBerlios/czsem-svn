@@ -117,23 +117,23 @@ or do some kind of similarity search based on the syntactic structure
 \cite{Etzioni08informationExtraction},
 %[Wang: Recognizing Textual Entailment Using Sentence Similarity based on Dependency Tree Skeletons]
 \cite{Wang:SimilarityTreeSkeletons}
-or the syntactic structure plays only very limited role in the process of feature selection for propositional learners %[Mooney: Extracting Relations from Text: From Word Sequences to Dependency Paths].
+or the syntactic structure plays very specific role in the process of feature selection for propositional learners %[Mooney: Extracting Relations from Text: From Word Sequences to Dependency Paths].
 \cite{Bunescu:DependencyPaths}.
 
 %\subsection{Classical propositional learning (Information extraction - GATE)}
-There is also a long row of information extraction approaches that use classical propositional learners like SVN on a set of features selected from the text. We do not cite them here. We just cite \cite{Yaoyong09a} - using machine learning facilities in GATE. This is the software component (Machine Learning PR) to that we have compared our solution.
+There is also a long row of information extraction approaches that use classical propositional learners like SVM on a set of features selected from the text. We do not cite them here. We just refer to \cite{Yaoyong09a} - using machine learning facilities in GATE. This is the software component (Machine Learning PR) to that we have compared our solution.
 
 %\subsection{Semantic annotation - GATE}
-Last category of related works goes in the direction of semantics and ontologies. As far as we do not develop this topic in this paper, we just refer to the ontology features in GATE \cite{Bon04b}, which can be easily used to populate an ontology with the extracted data. We discus this topic later in Section~\ref{sec:SemanticInterpretation}.
+Last category of related works goes in the direction of semantics and ontologies. Because we do not develop this topic in this paper, we just refer to the ontology features in GATE \cite{Bon04b}, which can be easily used to populate an ontology with the extracted data. We discus this topic later in Section~\ref{sec:SemanticInterpretation}.
 
 
 
 
-\section{Exploited methods - ILP and linguistics}
+\section{Exploited methods - linguistics and ILP}
 In our solution we have exploited several tools and formalisms. These can be divided into two groups: linguistics and (inductive) logic programming. First we describe the linguistic tools and formalisms the rest will follow.
 
 \subsection{GATE}
-GATE\footnote{\url{http://gate.ac.uk/}} is probably the most spread tool for text processing. In our solution the capabilities of document and annotation management, utility resources for annotation processing , JAPE grammar rules, machine learning facilities and performance evaluation tools are the most helpful features of GATE that we have used.
+GATE\footnote{\url{http://gate.ac.uk/}} is probably the most spread tool for text processing. In our solution the capabilities of document and annotation management, utility resources for annotation processing, JAPE grammar rules \cite{Cunningham00jape:a}, machine learning facilities and performance evaluation tools are the most helpful features of GATE that we have used.
 
 \subsection{PDT and TectoMT}
 As we have started with our native language - Czech, we had to make tools for processing Czech available in GATE. We have implemented a wrapper for the TectoMT system\footnote{\url{http://ufal.mff.cuni.cz/tectomt/}} \cite{dedek:ZaPtTectoMTHighly2008} to GATE. TectoMT is a Czech project that contains many linguistic analysers for different languages including Czech and English. We have used mainly the morphological analyzers (including POS tagger), syntactic parser and deep syntactic (tectogrammatical) parser. All the tools are based on the dependency based linguistic theory and formalism of the Prague Dependency Treebank project \cite{dedek:PDT20_CD}. So far our solution does not include any coreference and discourse analysis.
@@ -164,9 +164,11 @@ From our experiments (Section~\ref{sec:evaluation}) can be seen that ILP is capa
 
 \section{Implementation}
 Here we just briefly describe implementation of our system. The system consists of several modules, all integrated in GATE as processing resources.
-\subsection{TectoMT Wrapper}
+
+\subsection{TectoMT wrapper}
 First is the TectoMT wrapper, which takes the text of a GATE document, sends it to TectoMT linguistic analyzers, parses the results and converts the results to the form of GATE annotations.
-\subsection{ILP Wrapper}
+
+\subsection{ILP wrapper}
 After an annotator have annotated several documents with desired target annotations, machine learning takes place. 
 This consists of two steps: 
 \begin{enumerate}
@@ -176,13 +178,14 @@ This consists of two steps:
 In both steps the linguistic analysis has to be done before and in both steps a background knowledge (a logical database of facts) is constructed from linguistic structures of documents that are to be processed. We call the process of background knowledge construction as "ILP serialization". Although this topic is quite interesting we do not present details here because of space limitations.
 %; more details are presented below \textbf{(??Sect. 1??)}.
 
-After the ILP serialization is done, in the learning case positive and negative examples are constructed from target annotations and the machine learning ILP inductive procedure is executed to obtain extraction rules.
+After the ILP serialization is done, in the learning case, positive and negative examples are constructed from target annotations and the machine learning ILP inductive procedure is executed to obtain extraction rules.
+
 In the application case a Prolog system is used to check if the extraction rules entail any of target annotation candidates.
 %Learning / application
 %1.	serialization -> learning in ILP
 %2.	serialization -> application in ILP
 
-The learning examples and annotation candidates are usually constructed from all document tokens (and we did so in the present solution), but it can be optionally changed to any other textual unit, for example only numerals or tectogrammatical nodes (words with lexical meaning) can be selected. This can be done easily with help of "Machine Learning PR" (LM PR) from GATE\footnote{Machine Learning PR is an old GATE interface for ML and it is almost obsolete but in contrast to the new "Batch Learning PR" the LM PR is easy to extend for a new ML engine.}
+The learning examples and annotation candidates are usually constructed from all document tokens (and we did so in the present solution), but it can be optionally changed to any other textual unit, for example only numerals or tectogrammatical nodes (words with lexical meaning) can be selected. This can be done easily with help of "Machine Learning PR" (LM PR) from GATE\footnote{Machine Learning PR is an old GATE interface for ML and it is almost obsolete but in contrast to the new "Batch Learning PR" the LM PR is easy to extend for a new ML engine.}.
 
 ML PR provides an interface for exchange of features (including target class) between annotated texts and propositional learners in both directions - during learning as well as during application. We have used ML PR and developed our "ILP Wrapper" for it. The implementation was a little complicated because complex linguistic structures cannot be easily passed as propositional features, so in our solution we use the ML PR interface only for exchange of the class attribute and annotation id and we access the linguistic structures directly in a document.
 
@@ -190,7 +193,7 @@ ML PR provides an interface for exchange of features (including target class) be
 %ILP serialization, annotation / tree node intersection 
 
 \subsection{Root/subtree preprocessing/postprocessing}
-Sometimes annotations span over more then one token. This situation complicates the process of machine learning and it is often called as "chunk learning". Ether we have to split the single annotation to multiple learning instances and after application we have to merge them back together, or we can change the learning task from learning annotated tokens to learning borders of annotation (start tokens and end tokens). The later approach is implemented in GATE in Batch Learning PR in the "SURROUND" mode.
+Sometimes annotations span over more then one token. This situation complicates the process of machine learning and this situation is often called as "chunk learning". Either we have to split a single annotation to multiple learning instances and after application we have to merge them back together, or we can change the learning task from learning annotated tokens to learning borders of annotations (start tokens and end tokens). The later approach is implemented in GATE in Batch Learning PR in the "SURROUND" mode.
 
 We have used another approach to solve this issue. Our approach is based on syntactic structure of a sentence and we call it "root/subtree preprocessing/postprocessing". The idea is based on the observation that tokens of a multi-token annotation usually have a common parent node in a syntactic tree. So we can
 \begin{enumerate}
@@ -202,12 +205,12 @@ We call the first point as "root preprocessing" and the last point as "subtree p
 
 \subsection{Semantic interpretation}
 \label{sec:SemanticInterpretation}
-Information extraction can solve the task "how to get documents annotated", but as we aim on the semantic annotation, there is a second step of "semantic interpretation" that has to be done. In this step we have to interpret the annotations in terms of a standard ontology. On a very gross level this can be done easily. Thanks to GATE ontology tools we can convert all the annotations to ontology instances with a quite simple JAPE \cite{Cunningham00jape:a} rule, which takes the content of an annotation and saves it as a label of a new instance or as a value of some property of a shared instance. For example in our case of fire accidents, there will be a new instance of an accident class for each document and the annotations would be attached to this instance as values of its properties. So from all annotations of the same type instances of the same ontology class or values of the same property would be constructed. This is very gross level of semantic interpretation but it still can be useful. It is similar to the GoodRelation \cite{DBLP:conf/ekaw/Hepp08} design principle of "incremental enrichment"\footnote{\url{http://www.ebusiness-unibw.org/wiki/Modeling_Product_Models#Recipe:_.22Incremental_Enrichment.22}}:
+Information extraction can solve the task "how to get documents annotated", but as we aim on the semantic annotation, there is a second step of "semantic interpretation" that has to be done. In this step we have to interpret the annotations in terms of a standard ontology. On a very gross level this can be done easily. Thanks to GATE ontology tools \cite{Bon04b} we can convert all the annotations to ontology instances with a quite simple JAPE \cite{Cunningham00jape:a} rule, which takes the content of an annotation and saves it as a label of a new instance or as a value of some property of a shared instance. For example in our case of fire accidents, there will be a new instance of an accident class for each document and the annotations would be attached to this instance as values of its properties. Thus from all annotations of the same type, instances of the same ontology class or values of the same property would be constructed. This is very inaccurate form of semantic interpretation but it still can be useful. It is similar to the GoodRelation \cite{DBLP:conf/ekaw/Hepp08} design principle of "incremental enrichment"\footnote{\url{http://www.ebusiness-unibw.org/wiki/Modeling_Product_Models#Recipe:_.22Incremental_Enrichment.22}}:
 %\begin{quote}
 ``...you can still publish the data, even if not yet perfect. The Web will do the rest -- new tools and people.''	
 %\end{quote}
 
-But of course we are not satisfied with this "gross level" of semantics and we plan to develop the semantic interpretation step further as a sophisticated annotation $\rightarrow$ ontology transformation process as proposed in one of our previous works \cite{biblio:DeVoComputingaggregations2008}.
+But of course we are not satisfied with this fashion of semantic interpretation and we plan to develop the semantic interpretation step further as a sophisticated ``annotation $\rightarrow$ ontology'' transformation process as we have proposed in one of our previous works \cite{biblio:DeVoComputingaggregations2008}.
 
 \subsection{How to download}
 So far we do not provide our solution as a ready-made installable tool. But a middle experienced Java programmer can build it from source codes in our SVN repository\footnote{Follow the instructions at \url{http://czsem.berlios.de/}}.
@@ -220,7 +223,7 @@ So far we do not provide our solution as a ready-made installable tool. But a mi
 
 %\subsection{Dataset}
 We have evaluated our state of the art solution on a small dataset that we use for development. It is a collection of 50 Czech texts that are reporting on some accidents (car accidents and other actions of fire rescue services). These reports come from the web of Fire rescue service of Czech Republic\footnote{\url{http://www.hzscr.cz/hasicien/}}. The labeled corpus is publically available on the web of our project\footnote{\url{http://czsem.berlios.de/}}.
-The corpus is structured such that each document represents one event (accident) and several attributes of the accident are marked in text. For the evaluation we selected two attributes of different kind. The first one is "damage" - the amount (in CZK - Czech Crowns) of summarized damage arisen during a reported accident. The second one is "injuries", which marks mentions of people injured during an accident. These two attributes differ. Injuries annotations always cover only a single token while damage usually consists of two or three tokens - one or two numerals express the amount and one extra token is for currency.
+The corpus is structured such that each document represents one event (accident) and several attributes of the accident are marked in text. For the evaluation we selected two attributes of different kind. The first one is "damage" - an amount (in CZK - Czech Crowns) of summarized damage arisen during a reported accident. The second one is "injuries", which marks mentions of people injured during an accident. These two attributes differ. Injuries annotations always cover only a single token while damage usually consists of two or three tokens - one or two numerals express the amount and one extra token is for currency.
 
 %These two attributes differ in two directions:
 %\begin{enumerate}
@@ -237,30 +240,30 @@ To compare our solution with other alternatives we took the Paum propositional l
 %We used the 10-fold cross validation in the evaluation. Thanks to this technique the evaluation is simple. After processing all the folds each document is processed with some of the ten learned models such that the particular document was not used in learning of that model, so all documents are unseen by the model applied on them. At the end we just compare the gold standard annotations with the learned ones in all documents.
 
 %\subsection{Results}
-Results of 10-fold cross validation are summarized in Table~\ref{tab:EvaluationResults}. We used standard information retrieval performance measures precision, recall and $F_1$ measure and also theirs lenient variants (overlapping annotations are counted as correct or matching).
+Results of 10-fold cross validation are summarized in Table~\ref{tab:EvaluationResults}. We used standard information retrieval performance measures: precision, recall and $F_1$ measure and also theirs lenient variants (overlapping annotations are counted as correct or matching).
 
 \begin{table}[t]
 	\centering
 			
 \begin{tabular}{|l||r|r|r|r|r|r|r|}
 \hline
-\textbf{task/method} & \textbf{matching} & \textbf{missing} & \textbf{excessive} & \textbf{overlap} & \textbf{prec.} & \textbf{recall} & \textbf{F1.0}\\
+\textbf{task/method} & \textbf{matching} & \textbf{missing} & \textbf{excessive} & \textbf{overlap} & \textbf{prec.}\% & \textbf{recall}\% & \textbf{F1.0}\%\\
 \hline
 \hline
-\textbf{damage/ILP} & 14 & 0 & 7 & 6 & 51.85\% & 70.00\% & 59.57\%\\
+\textbf{damage/ILP} & 14 & 0 & 7 & 6 & 51.85 & 70.00 & 59.57\\
 \hline
-\multicolumn{5}{|l|}{\textbf{damage/ILP - the same results, lenient measures}} & 74.07\% & 100.00\% & 85.11\%\\
+\multicolumn{5}{|l|}{\textbf{damage/ILP - the same results, lenient measures}} & 74.07 & 100.00 & 85.11\\
 \hline
-\textbf{dam./ILP-roots} & 16 & 4 & 2 & 0 & 88.89\% & 80.00\% & 84.21\%\\
+\textbf{dam./ILP-roots} & 16 & 4 & 2 & 0 & 88.89 & 80.00 & 84.21\\
 \hline
-\textbf{damage/Paum} & 20 & 0 & 6 & 0 & 76.92\% & 100.00\% & 86.96\%\\
+\textbf{damage/Paum} & 20 & 0 & 6 & 0 & 76.92 & 100.00 & 86.96\\
 \hline
 \hline
-\textbf{injuries/ILP} & 15 & 18 & 11 & 0 & 57.69\% & 45.45\% & 50.85\%\\
+\textbf{injuries/ILP} & 15 & 18 & 11 & 0 & 57.69 & 45.45 & 50.85\\
 \hline
-\textbf{injuries/Paum} & 25 & 8 & 54 & 0 & 31.65\% & 75.76\% & 44.64\%\\
+\textbf{injuries/Paum} & 25 & 8 & 54 & 0 & 31.65 & 75.76 & 44.64\\
 \hline
-\textbf{inj./Paum-afun} & 24 & 9 & 38 & 0 & 38.71\% & 72.73\% & 50.53\%\\
+\textbf{inj./Paum-afun} & 24 & 9 & 38 & 0 & 38.71 & 72.73 & 50.53\\
 \hline
 \end{tabular}
 						
@@ -268,7 +271,7 @@ Results of 10-fold cross validation are summarized in Table~\ref{tab:EvaluationR
 	\label{tab:EvaluationResults}
 \end{table}
 
-In the first task ("damage") the methods obtained much higher scores then in the second ("injuries") as the second task was more difficult. In the first task also the root/subtree preprocessing/postprocessing improved results of ILP such that afterwards, annotation borders were all placed precisely. The ILP method had better precision and worse recall than the Paum learner but the $F_1$ score was very similar in both cases.
+In the first task ("damage") the methods obtained much higher scores then in the second ("injuries") because the second task is more difficult. In the first task also the root/subtree preprocessing/postprocessing improved results of ILP such that afterwards, annotation borders were all placed precisely. The ILP method had better precision and worse recall than the Paum learner but the $F_1$ score was very similar in both cases.
 
 %\subsection{Examples of learned rules}
 
