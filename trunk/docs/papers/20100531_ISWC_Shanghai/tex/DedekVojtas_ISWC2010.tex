@@ -74,7 +74,7 @@ Prague, Czech Republic
 
 
 \begin{abstract}
-In this paper we present a method for semantic annotation of texts, which is based on deep linguistic analysis and Inductive Logic Programming. The combination of used tools have following benefits: Manual selection of learning features is not needed. We just offer learning procedure full linguistic information that we have and it is capable to select the relevant parts itself. Learned extraction rules can be easily visualized, understood and adapted by human.
+In this paper we present a method for semantic annotation of texts, which is based on deep linguistic analysis (DLA) and Inductive Logic Programming (ILP). The combination of DLA and ILP have following benefits: Manual selection of learning features is not needed. We just offer learning procedure full linguistic information that we have and it is capable to select the relevant parts itself. Learned extraction rules can be easily visualized, understood and adapted by human.
 Description, implementation and initial evaluation of the method are the main contributions of the paper.
 \keywords{Semantic Annotation, Dependency Linguistics, Inductive Logic Programming, Information Extraction, Machine Learning}
 \end{abstract}
@@ -83,7 +83,7 @@ Description, implementation and initial evaluation of the method are the main co
 \section{Introduction}
 Automated semantic annotation (SA) is considered to be one of the most important elements in the evolution of the Semantic Web. Besides that, SA can provide great help in a process of data and information integration and it could also be a basis for intelligent search and navigation.
 
-In this paper we present a method for classical and semantic information extraction and annotation of texts, which is based on deep linguistic analysis and Inductive Logic Programming (ILP). This approach is quite novel because it directly combines deep linguistic parsing with machine learning (ML). This combination and the use of ILP as ML engine have following benefits: Manual selection of learning features is not needed. We just offer ILP full linguistic information that we have and ILP is capable to select the relevant parts itself. Learned extraction rules from ILP can be easily visualized, understood and adapted by human.
+In this paper we present main results and reflections of our ongoing PhD project, a method for classical and semantic information extraction and annotation of texts, which is based on deep linguistic analysis and Inductive Logic Programming (ILP). This approach is quite novel because it directly combines deep linguistic parsing with machine learning (ML). This combination and the use of ILP as ML engine have following benefits: Manual selection of learning features is not needed. We just offer learning procedure full linguistic information that we have and it is capable to select the relevant parts itself. Learned extraction rules from ILP can be easily visualized, understood and adapted by human.
 
 Description, implementation and initial evaluation of the method are the main contributions of the paper.
 
@@ -119,7 +119,7 @@ or the syntactic structure plays very specific role in the process of feature se
 \cite{Bunescu:DependencyPaths}.
 
 %\subsection{Classical propositional learning (Information extraction - GATE)}
-There is also a long row of information extraction approaches that use classical propositional learners like SVM on a set of features selected from the text. We do not cite them here. We just refer to \cite{Yaoyong09a} - using machine learning facilities in GATE. This is the software component (Machine Learning PR) to that we have compared our solution.
+There is also a long row of information extraction approaches that use classical propositional learners like SVM on a set of features selected from the text. We do not cite them here. We just refer to \cite{Yaoyong09a} -- using machine learning facilities in GATE. This is the software component (Machine Learning PR) to that we have compared our solution.
 
 %\subsection{Semantic annotation - GATE}
 Last category of related works goes in the direction of semantics and ontologies. Because we do not develop this topic in this paper, we just refer to the ontology features in GATE \cite{Bon04b}, which can be easily used to populate an ontology with the extracted data. We discus this topic later in Section~\ref{sec:SemanticInterpretation}.
@@ -127,14 +127,14 @@ Last category of related works goes in the direction of semantics and ontologies
 
 
 
-\section{Exploited methods - linguistics and ILP}
+\section{Exploited methods -- linguistics and ILP}
 In our solution we have exploited several tools and formalisms. These can be divided into two groups: linguistics and (inductive) logic programming. First we describe the linguistic tools and formalisms the rest will follow.
 
 \subsection{GATE}
-GATE\footnote{\url{http://gate.ac.uk/}} is probably the most spread tool for text processing. In our solution the capabilities of document and annotation management, utility resources for annotation processing, JAPE grammar rules \cite{Cunningham00jape:a}, machine learning facilities and performance evaluation tools are the most helpful features of GATE that we have used.
+GATE\footnote{\url{http://gate.ac.uk/}} \cite{dedek:GATE_course} is probably the most spread tool for text processing. In our solution the capabilities of document and annotation management, utility resources for annotation processing, JAPE grammar rules \cite{Cunningham00jape:a}, machine learning facilities and performance evaluation tools are the most helpful features of GATE that we have used.
 
 \subsection{PDT and TectoMT}
-As we have started with our native language - Czech (a language with rich morphology and free word order), we had to make tools for processing Czech available in GATE. We have implemented a wrapper for the TectoMT system\footnote{\url{http://ufal.mff.cuni.cz/tectomt/}} \cite{dedek:ZaPtTectoMTHighly2008} to GATE. TectoMT is a Czech project that contains many linguistic analyzers for different languages including Czech and English. We have used mainly the morphological analyzers (including POS tagger), syntactic parser and deep syntactic (tectogrammatical) parser. All the tools are based on the dependency based linguistic theory and formalism of the Prague Dependency Treebank project \cite{dedek:PDT20_CD}. So far our solution does not include any coreference and discourse analysis.
+As we have started with our native language -- Czech (a language with rich morphology and free word order), we had to make tools for processing Czech available in GATE. We have implemented a wrapper for the TectoMT system\footnote{\url{http://ufal.mff.cuni.cz/tectomt/}} \cite{dedek:ZaPtTectoMTHighly2008} to GATE. TectoMT is a Czech project that contains many linguistic analyzers for different languages including Czech and English. We have used mainly the morphological analyzers (including POS tagger), syntactic parser and deep syntactic (tectogrammatical) parser. All the tools are based on the dependency based linguistic theory and formalism of the Prague Dependency Treebank project \cite{dedek:PDT20_CD}. So far our solution does not include any coreference and discourse analysis.
 
 %\textbf{Rozepsat PDT - mozna v uvodu?}
 
@@ -147,7 +147,7 @@ As we have started with our native language - Czech (a language with rich morpho
 Inductive Logic Programming (ILP) \cite{dedek:MuggletonILP} is a machine learning technique based on logic programming. Given an encoding of the known background knowledge (in our case linguistic structure of all sentences) and a set of examples represented as a logical database of facts (in our case tokens annotated with the target annotation type are positive examples and the remaining tokens negative ones), an ILP system will derive a hypothesised logic program (in our case extraction rules) which entails all the positive and none of the negative examples.
 
 %\subsection{ILP tool}
-As an ILP tool we have used "A Learning Engine for Proposing Hypotheses" (Aleph v5)\footnote{\url{http://www.comlab.ox.ac.uk/activities/machinelearning/Aleph/}}, which we consider very practical. It uses quite effective method of inverse entailment \cite{biblio:InverseEntailment} and keeps all handy features of a Prolog system (we have used YAP Prolog\footnote{\url{http://www.dcc.fc.up.pt/~vsc/Yap/}}) in its background.
+As an ILP tool we have used ``A Learning Engine for Proposing Hypotheses'' (Aleph v5)\footnote{\url{http://www.comlab.ox.ac.uk/activities/machinelearning/Aleph/}}, which we consider very practical. It uses quite effective method of inverse entailment \cite{biblio:InverseEntailment} and keeps all handy features of a Prolog system (we have used YAP Prolog\footnote{\url{http://www.dcc.fc.up.pt/~vsc/Yap/}}) in its background.
 
 
 From our experiments (Section~\ref{sec:evaluation}) can be seen that ILP is capable to find complex and meaningful rules that cover the intended information.
@@ -163,17 +163,17 @@ From our experiments (Section~\ref{sec:evaluation}) can be seen that ILP is capa
 \section{Implementation}
 Here we just briefly describe implementation of our system. The system consists of several modules, all integrated in GATE as processing resources.
 
-\subsection{TectoMT wrapper}
+\subsection{TectoMT wrapper (linguistic anlysis)}
 First is the TectoMT wrapper, which takes the text of a GATE document, sends it to TectoMT linguistic analyzers, parses the results and converts the results to the form of GATE annotations.
 
-\subsection{ILP wrapper}
+\subsection{ILP wrapper (machine learninig)}
 After an annotator have annotated several documents with desired target annotations, machine learning takes place. 
 This consists of two steps: 
 \begin{enumerate}
 	\item learning of extraction rules from the target annotations and
 	\item application of the extraction rules on new documents.
 \end{enumerate}
-In both steps the linguistic analysis has to be done before and in both steps a background knowledge (a logical database of facts) is constructed from linguistic structures of documents that are to be processed. We call the process of background knowledge construction as "ILP serialization". Although this topic is quite interesting we do not present details here because of space limitations.
+In both steps the linguistic analysis has to be done before and in both steps a background knowledge (a logical database of facts) is constructed from linguistic structures of documents that are to be processed. We call the process of background knowledge construction as \emph{ILP serialization}. Although this topic is quite interesting we do not present details here because of space limitations.
 %; more details are presented below \textbf{(??Sect. 1??)}.
 
 After the ILP serialization is done, in the learning case, positive and negative examples are constructed from target annotations and the machine learning ILP inductive procedure is executed to obtain extraction rules.
@@ -183,27 +183,27 @@ In the application case a Prolog system is used to check if the extraction rules
 %1.	serialization -> learning in ILP
 %2.	serialization -> application in ILP
 
-The learning examples and annotation candidates are usually constructed from all document tokens (and we did so in the present solution), but it can be optionally changed to any other textual unit, for example only numerals or tectogrammatical nodes (words with lexical meaning) can be selected. This can be done easily with help of "Machine Learning PR" (LM PR) from GATE\footnote{Machine Learning PR is an old GATE interface for ML and it is almost obsolete but in contrast to the new "Batch Learning PR" the LM PR is easy to extend for a new ML engine.}.
+The learning examples and annotation candidates are usually constructed from all document tokens (and we did so in the present solution), but it can be optionally changed to any other textual unit, for example only numerals or tectogrammatical nodes (words with lexical meaning) can be selected. This can be done easily with help of \emph{Machine Learning PR} (LM PR) from GATE\footnote{\emph{Machine Learning PR} is an old GATE interface for ML and it is almost obsolete but in contrast to the new \emph{Batch Learning PR} the LM PR is easy to extend for a new ML engine.}.
 
-ML PR provides an interface for exchange of features (including target class) between annotated texts and propositional learners in both directions - during learning as well as during application. We have used ML PR and developed our "ILP Wrapper" for it. The implementation was a little complicated because complex linguistic structures cannot be easily passed as propositional features, so in our solution we use the ML PR interface only for exchange of the class attribute and annotation id and we access the linguistic structures directly in a document.
+ML PR provides an interface for exchange of features (including target class) between annotated texts and propositional learners in both directions -- during learning as well as during application. We have used ML PR and developed our \emph{ILP Wrapper} for it. The implementation was a little complicated because complex linguistic structures cannot be easily passed as propositional features, so in our solution we use the ML PR interface only for exchange of the class attribute and annotation id and we access the linguistic structures directly in a document.
 
 %ILP tool presunuto do Exploited methods
 %ILP serialization, annotation / tree node intersection 
 
 \subsection{Root/subtree preprocessing/postprocessing}
-Sometimes annotations span over more then one token. This situation complicates the process of machine learning and this situation is often called as "chunk learning". Either we have to split a single annotation to multiple learning instances and after application we have to merge them back together, or we can change the learning task from learning annotated tokens to learning borders of annotations (start tokens and end tokens). The later approach is implemented in GATE in Batch Learning PR in the "SURROUND" mode.
+Sometimes annotations span over more then one token. This situation complicates the process of machine learning and this situation is often called as ``chunk learning''. Either we have to split a single annotation to multiple learning instances and after application we have to merge them back together, or we can change the learning task from learning annotated tokens to learning borders of annotations (start tokens and end tokens). The later approach is implemented in GATE in Batch Learning PR in the `SURROUND' mode.
 
-We have used another approach to solve this issue. Our approach is based on syntactic structure of a sentence and we call it "root/subtree preprocessing/postprocessing". The idea is based on the observation that tokens of a multi-token annotation usually have a common parent node in a syntactic tree. So we can
+We have used another approach to solve this issue. Our approach is based on syntactic structure of a sentence and we call it ``root/subtree preprocessing/postprocessing''. The idea is based on the observation that tokens of a multi-token annotation usually have a common parent node in a syntactic tree. So we can
 \begin{enumerate}
 	\item extract the parent nodes (in dependency linguistics this node is also a token and it is usually one of the tokens inside the annotation), 
 	\item learn extraction rules for parent nodes only and 
 	\item span annotations over the whole subtrees of root tokens found during the application of extraction rules.
 \end{enumerate}
-We call the first point as "root preprocessing" and the last point as "subtree postprocessing". We have successfully used this technique for the "damage" task of our evaluation corpus (See Section~\ref{sec:evaluation} for details.)
+We call the first point as \emph{root preprocessing} and the last point as \emph{subtree postprocessing}. We have successfully used this technique for the `damage' task of our evaluation corpus (See Section~\ref{sec:evaluation} for details.)
 
 \subsection{Semantic interpretation}
 \label{sec:SemanticInterpretation}
-Information extraction can solve the task "how to get documents annotated", but as we aim on the semantic annotation, there is a second step of "semantic interpretation" that has to be done. In this step we have to interpret the annotations in terms of a standard ontology. On a very gross level this can be done easily. Thanks to GATE ontology tools \cite{Bon04b} we can convert all the annotations to ontology instances with a quite simple JAPE \cite{Cunningham00jape:a} rule, which takes the content of an annotation and saves it as a label of a new instance or as a value of some property of a shared instance. For example in our case of traffic and fire accidents, there will be a new instance of an accident class for each document and the annotations would be attached to this instance as values of its properties. Thus from all annotations of the same type, instances of the same ontology class or values of the same property would be constructed. This is very inaccurate form of semantic interpretation but it still can be useful. It is similar to the GoodRelation \cite{DBLP:conf/ekaw/Hepp08} design principle of "incremental enrichment"\footnote{\url{http://www.ebusiness-unibw.org/wiki/Modeling_Product_Models#Recipe:_.22Incremental_Enrichment.22}}:
+Information extraction can solve the task ``how to get documents annotated'', but as we aim on the semantic annotation, there is a second step of ``semantic interpretation'' that has to be done. In this step we have to interpret the annotations in terms of a standard ontology. On a very gross level this can be done easily. Thanks to GATE ontology tools \cite{Bon04b} we can convert all the annotations to ontology instances with a quite simple JAPE \cite{Cunningham00jape:a} rule, which takes the content of an annotation and saves it as a label of a new instance or as a value of some property of a shared instance. For example in our case of traffic and fire accidents, there will be a new instance of an accident class for each document and the annotations would be attached to this instance as values of its properties. Thus from all annotations of the same type, instances of the same ontology class or values of the same property would be constructed. This is very inaccurate form of semantic interpretation but it still can be useful. It is similar to the GoodRelation \cite{DBLP:conf/ekaw/Hepp08} design principle of \emph{incremental enrichment}\footnote{\url{http://www.ebusiness-unibw.org/wiki/Modeling_Product_Models#Recipe:_.22Incremental_Enrichment.22}}:
 %\begin{quote}
 ``...you can still publish the data, even if not yet perfect. The Web will do the rest -- new tools and people.''	
 %\end{quote}
@@ -221,7 +221,7 @@ So far we do not provide our solution as a ready-made installable tool. But a mi
 
 %\subsection{Dataset}
 We have evaluated our state of the art solution on a small dataset that we use for development. It is a collection of 50 Czech texts that are reporting on some accidents (car accidents and other actions of fire rescue services). These reports come from the web of Fire rescue service of Czech Republic\footnote{\url{http://www.hzscr.cz/hasicien/}}. The labeled corpus is publically available on the web of our project\footnote{\url{http://czsem.berlios.de/}}.
-The corpus is structured such that each document represents one event (accident) and several attributes of the accident are marked in text. For the evaluation we selected two attributes of different kind. The first one is "damage" - an amount (in CZK - Czech Crowns) of summarized damage arisen during a reported accident. The second one is "injuries", which marks mentions of people injured during an accident. These two attributes differ. Injuries annotations always cover only a single token while damage usually consists of two or three tokens - one or two numerals express the amount and one extra token is for currency.
+The corpus is structured such that each document represents one event (accident) and several attributes of the accident are marked in text. For the evaluation we selected two attributes of different kind. The first one is `damage' -- an amount (in CZK - Czech Crowns) of summarized damage arisen during a reported accident. The second one is `injuries', which marks mentions of people injured during an accident. These two attributes differ. Injuries annotations always cover only a single token while damage usually consists of two or three tokens -- one or two numerals express the amount and one extra token is for currency.
 
 %These two attributes differ in two directions:
 %\begin{enumerate}
@@ -230,7 +230,7 @@ The corpus is structured such that each document represents one event (accident)
 %\end{enumerate}
 
 %\subsection{Comparison with Paum classifier}
-To compare our solution with other alternatives we took the Paum propositional learner from GATE \cite{Li:Paum}. The quality of propositional learning from texts is strongly dependent on selection of right features. We obtained quite good results with features of a window of two preceding and two following token lemmas and morphological tags. The precision was further improved by adding the feature of "analytical function" from syntactic parser.
+To compare our solution with other alternatives we took the Paum propositional learner from GATE \cite{Li:Paum}. The quality of propositional learning from texts is strongly dependent on selection of right features. We obtained quite good results with features of a window of two preceding and two following token lemmas and morphological tags. The precision was further improved by adding the feature of \emph{analytical function} from syntactic parser (see in the last row of Table~\ref{tab:EvaluationResults}).
 
 %Bu we did not want to invest much time to this and the feature setting of the Paum learner was quite simple (a window of two preceding and following token lemmas and morphological tags). We admit that looking for better features could further improve the results of the Paum learner.
 
@@ -269,11 +269,11 @@ Results of 10-fold cross validation are summarized in Table~\ref{tab:EvaluationR
 	\label{tab:EvaluationResults}
 \end{table}
 
-In the first task ("damage") the methods obtained much higher scores then in the second ("injuries") because the second task is more difficult. In the first task also the root/subtree preprocessing/postprocessing improved results of ILP such that afterwards, annotation borders were all placed precisely. The ILP method had better precision and worse recall than the Paum learner but the $F_1$ score was very similar in both cases.
+In the first task (`damage') the methods obtained much higher scores then in the second (`injuries') because the second task is more difficult. In the first task also the root/subtree preprocessing/postprocessing improved results of ILP such that afterwards, annotation borders were all placed precisely. The ILP method had better precision and worse recall than the Paum learner but the $F_1$ score was very similar in both cases.
 
 %\subsection{Examples of learned rules}
 
-In Figure~\ref{fig:rules} we present some example of the rules learned from the whole dataset.
+In Figure~\ref{fig:rules} we present some examples of the rules learned from the whole dataset. The rules demonstrate a connection of a target token with other parts of a sentence through linguistic syntax structures. For example the first rule connects a root numeral (\emph{n.quant.def}) of `damage' with a mention of `investigator' that stated the mount. In the last rule only positive occurrence of the verb `injure' is allowed.
 
 \begin{figure}
 	\scriptsize
@@ -315,369 +315,14 @@ In Figure~\ref{fig:rules} we present some example of the rules learned from the 
 \section{Conclusion and future work}
 From our experiments can be seen that ILP is capable to find complex and meaningful rules that cover the intended information. But in terms of the performance measures the results are not better than those from a propositional learner. This is quite surprising observation because Czech is a language with free word order and we would expect much better results of the dependency approach than the position based approach, which was used by the propositional learner.
 
-Our method is still missing an intelligent semantic interpretation procedure and it should be evaluated on bigger datasets (e.g. MUC, ACE, TAC, CoNLL) and other languages. We also do not provide a method for relation extraction so far. In the present solution we deal with relations implicitly. The method has to be adapted for explicit learning of relation in the form of "subject predicate object".
+Our method is still missing an intelligent semantic interpretation procedure and it should be evaluated on bigger datasets (e.g. MUC, ACE, TAC, CoNLL) and other languages. We also do not provide a method for relation extraction so far. In the present solution we deal with relations implicitly. The method has to be adapted for explicit learning of relation in the form of ``subject predicate object''.
 
 Our method can also provide a comparison of linguistic formalisms and tools because on the same data we could run our method using different linguistic analyzers and compare the results.
 
 
 
-%\section{Introduction}
-%
-%You are strongly encouraged to use \LaTeXe{} for the
-%preparation of your camera-ready manuscript together with the
-%corresponding Springer class file \verb+llncs.cls+. Only if you use
-%\LaTeXe{} can hyperlinks be generated in the online version
-%of your manuscript.
-%
-%The \LaTeX{} source of this instruction file for \LaTeX{} users may be
-%used as a template. This is
-%located in the ``authors'' subdirectory in
-%\url{ftp://ftp.springer.de/pub/tex/latex/llncs/latex2e/instruct/} and
-%entitled \texttt{typeinst.tex}. There is a separate package for Word 
-%users. Kindly send the final and checked source
-%and PDF files of your paper to the Contact Volume Editor. This is
-%usually one of the organizers of the conference. You should make sure
-%that the \LaTeX{} and the PDF files are identical and correct and that
-%only one version of your paper is sent. It is not possible to update
-%files at a later stage. Please note that we do not need the printed
-%paper.
-%
-%We would like to draw your attention to the fact that it is not possible
-%to modify a paper in any way, once it has been published. This applies
-%to both the printed book and the online version of the publication.
-%Every detail, including the order of the names of the authors, should
-%be checked before the paper is sent to the Volume Editors.
-%
-%\subsection{Checking the PDF File}
-%
-%Kindly assure that the Contact Volume Editor is given the name and email
-%address of the contact author for your paper. The Contact Volume Editor
-%uses these details to compile a list for our production department at
-%SPS in India. Once the files have been worked upon, SPS sends a copy of
-%the final pdf of each paper to its contact author. The contact author is
-%asked to check through the final pdf to make sure that no errors have
-%crept in during the transfer or preparation of the files. This should
-%not be seen as an opportunity to update or copyedit the papers, which is
-%not possible due to time constraints. Only errors introduced during the
-%preparation of the files will be corrected.
-%
-%This round of checking takes place about two weeks after the files have
-%been sent to the Editorial by the Contact Volume Editor, i.e., roughly
-%seven weeks before the start of the conference for conference
-%proceedings, or seven weeks before the volume leaves the printer's, for
-%post-proceedings. If SPS does not receive a reply from a particular
-%contact author, within the timeframe given, then it is presumed that the
-%author has found no errors in the paper. The tight publication schedule
-%of LNCS does not allow SPS to send reminders or search for alternative
-%email addresses on the Internet.
-%
-%In some cases, it is the Contact Volume Editor that checks all the final
-%pdfs. In such cases, the authors are not involved in the checking phase.
-%
-%\subsection{Additional Information Required by the Volume Editor}
-%
-%If you have more than one surname, please make sure that the Volume Editor
-%knows how you are to be listed in the author index.
-%
-%\subsection{Copyright Forms}
-%
-%The copyright form may be downloaded from the ``For Authors"
-%(Information for LNCS Authors) section of the LNCS Website:
-%\texttt{www.springer.com/lncs}. Please send your signed copyright form
-%to the Contact Volume Editor, either as a scanned pdf or by fax or by
-%courier. One author may sign on behalf of all of the other authors of a
-%particular paper. Digital signatures are acceptable.
-%
-%\section{Paper Preparation}
-%
-%Springer provides you with a complete integrated \LaTeX{} document class
-%(\texttt{llncs.cls}) for multi-author books such as those in the LNCS
-%series. Papers not complying with the LNCS style will be reformatted.
-%This can lead to an increase in the overall number of pages. We would
-%therefore urge you not to squash your paper.
-%
-%Please always cancel any superfluous definitions that are
-%not actually used in your text. If you do not, these may conflict with
-%the definitions of the macro package, causing changes in the structure
-%of the text and leading to numerous mistakes in the proofs.
-%
-%If you wonder what \LaTeX{} is and where it can be obtained, see the
-%``\textit{LaTeX project site}'' (\url{http://www.latex-project.org})
-%and especially the webpage ``\textit{How to get it}''
-%(\url{http://www.latex-project.org/ftp.html}) respectively.
-%
-%When you use \LaTeX\ together with our document class file,
-%\texttt{llncs.cls},
-%your text is typeset automatically in Computer Modern Roman (CM) fonts.
-%Please do
-%\emph{not} change the preset fonts. If you have to use fonts other
-%than the preset fonts, kindly submit these with your files.
-%
-%Please use the commands \verb+\label+ and \verb+\ref+ for
-%cross-references and the commands \verb+\bibitem+ and \verb+\cite+ for
-%references to the bibliography, to enable us to create hyperlinks at
-%these places.
-%
-%For preparing your figures electronically and integrating them into
-%your source file we recommend using the standard \LaTeX{} \verb+graphics+ or
-%\verb+graphicx+ package. These provide the \verb+\includegraphics+ command.
-%In general, please refrain from using the \verb+\special+ command.
-%
-%Remember to submit any further style files and
-%fonts you have used together with your source files.
-%
-%\subsubsection{Headings.}
-%
-%Headings should be capitalized
-%(i.e., nouns, verbs, and all other words
-%except articles, prepositions, and conjunctions should be set with an
-%initial capital) and should,
-%with the exception of the title, be aligned to the left.
-%Words joined by a hyphen are subject to a special rule. If the first
-%word can stand alone, the second word should be capitalized.
-%
-%Here are some examples of headings: ``Criteria to Disprove
-%Context-Freeness of Collage Language", ``On Correcting the Intrusion of
-%Tracing Non-deterministic Programs by Software", ``A User-Friendly and
-%Extendable Data Distribution System", ``Multi-flip Networks:
-%Parallelizing GenSAT", ``Self-determinations of Man".
-%
-%\subsubsection{Lemmas, Propositions, and Theorems.}
-%
-%The numbers accorded to lemmas, propositions, and theorems, etc. should
-%appear in consecutive order, starting with Lemma 1, and not, for
-%example, with Lemma 11.
-%
-%\subsection{Figures}
-%
-%For \LaTeX\ users, we recommend using the \emph{graphics} or \emph{graphicx}
-%package and the \verb+\includegraphics+ command.
-%
-%Please check that the lines in line drawings are not
-%interrupted and are of a constant width. Grids and details within the
-%figures must be clearly legible and may not be written one on top of
-%the other. Line drawings should have a resolution of at least 800 dpi
-%(preferably 1200 dpi). The lettering in figures should have a height of
-%2~mm (10-point type). Figures should be numbered and should have a
-%caption which should always be positioned \emph{under} the figures, in
-%contrast to the caption belonging to a table, which should always appear
-%\emph{above} the table; this is simply achieved as matter of sequence in
-%your source.
-%
-%Please center the figures or your tabular material by using the \verb+\centering+
-%declaration. Short captions are centered by default between the margins
-%and typeset in 9-point type (Fig.~\ref{fig:example} shows an example).
-%The distance between text and figure is preset to be about 8~mm, the
-%distance between figure and caption about 6~mm.
-%
-%To ensure that the reproduction of your illustrations is of a reasonable
-%quality, we advise against the use of shading. The contrast should be as
-%pronounced as possible.
-%
-%If screenshots are necessary, please make sure that you are happy with
-%the print quality before you send the files.
-%\begin{figure}
-%\centering
-%\includegraphics[height=6.2cm]{eijkel2}
-%\caption{One kernel at $x_s$ (\emph{dotted kernel}) or two kernels at
-%$x_i$ and $x_j$ (\textit{left and right}) lead to the same summed estimate
-%at $x_s$. This shows a figure consisting of different types of
-%lines. Elements of the figure described in the caption should be set in
-%italics, in parentheses, as shown in this sample caption.}
-%\label{fig:example}
-%\end{figure}
-%
-%Please define figures (and tables) as floating objects. Please avoid
-%using optional location parameters like ``\verb+[h]+" for ``here".
-%
-%\paragraph{Remark 1.}
-%
-%In the printed volumes, illustrations are generally black and white
-%(halftones), and only in exceptional cases, and if the author is
-%prepared to cover the extra cost for color reproduction, are colored
-%pictures accepted. Colored pictures are welcome in the electronic
-%version free of charge. If you send colored figures that are to be
-%printed in black and white, please make sure that they really are
-%legible in black and white. Some colors as well as the contrast of
-%converted colors show up very poorly when printed in black and white.
-%
-%\subsection{Formulas}
-%
-%Displayed equations or formulas are centered and set on a separate
-%line (with an extra line or halfline space above and below). Displayed
-%expressions should be numbered for reference. The numbers should be
-%consecutive within each section or within the contribution,
-%with numbers enclosed in parentheses and set on the right margin --
-%which is the default if you use the \emph{equation} environment, e.g.,
-%\begin{equation}
-%  \psi (u) = \int_{o}^{T} \left[\frac{1}{2}
-%  \left(\Lambda_{o}^{-1} u,u\right) + N^{\ast} (-u)\right] dt \;  .
-%\end{equation}
-%
-%Equations should be punctuated in the same way as ordinary
-%text but with a small space before the end punctuation mark.
-%
-%\subsection{Footnotes}
-%
-%The superscript numeral used to refer to a footnote appears in the text
-%either directly after the word to be discussed or -- in relation to a
-%phrase or a sentence -- following the punctuation sign (comma,
-%semicolon, or period). Footnotes should appear at the bottom of
-%the
-%normal text area, with a line of about 2~cm set
-%immediately above them.\footnote{The footnote numeral is set flush left
-%and the text follows with the usual word spacing.}
-%
-%\subsection{Program Code}
-%
-%Program listings or program commands in the text are normally set in
-%typewriter font, e.g., CMTT10 or Courier.
-%
-%\medskip
-%
-%\noindent
-%{\it Example of a Computer Program}
-%\begin{verbatim}
-%program Inflation (Output)
-%  {Assuming annual inflation rates of 7%, 8%, and 10%,...
-%   years};
-%   const
-%     MaxYears = 10;
-%   var
-%     Year: 0..MaxYears;
-%     Factor1, Factor2, Factor3: Real;
-%   begin
-%     Year := 0;
-%     Factor1 := 1.0; Factor2 := 1.0; Factor3 := 1.0;
-%     WriteLn('Year  7% 8% 10%'); WriteLn;
-%     repeat
-%       Year := Year + 1;
-%       Factor1 := Factor1 * 1.07;
-%       Factor2 := Factor2 * 1.08;
-%       Factor3 := Factor3 * 1.10;
-%       WriteLn(Year:5,Factor1:7:3,Factor2:7:3,Factor3:7:3)
-%     until Year = MaxYears
-%end.
-%\end{verbatim}
-%%
-%\noindent
-%{\small (Example from Jensen K., Wirth N. (1991) Pascal user manual and
-%report. Springer, New York)}
-%
-%\subsection{Citations}
-%
-%For citations in the text please use
-%square brackets and consecutive numbers: \cite{jour}, \cite{lncschap},
-%\cite{proceeding1} -- provided automatically
-%by \LaTeX 's \verb|\cite| \dots\verb|\bibitem| mechanism.
-%
-%\subsection{Page Numbering and Running Heads}
-%
-%There is no need to include page numbers. If your paper title is too
-%long to serve as a running head, it will be shortened. Your suggestion
-%as to how to shorten it would be most welcome.
-%
-%\section{LNCS Online}
-%
-%The online version of the volume will be available in LNCS Online.
-%Members of institutes subscribing to the Lecture Notes in Computer
-%Science series have access to all the pdfs of all the online
-%publications. Non-subscribers can only read as far as the abstracts. If
-%they try to go beyond this point, they are automatically asked, whether
-%they would like to order the pdf, and are given instructions as to how
-%to do so.
-%
-%Please note that, if your email address is given in your paper,
-%it will also be included in the meta data of the online version.
-%
-%\section{BibTeX Entries}
-%
-%The correct BibTeX entries for the Lecture Notes in Computer Science
-%volumes can be found at the following Website shortly after the
-%publication of the book:
-%\url{http://www.informatik.uni-trier.de/~ley/db/journals/lncs.html}
-%
-%\subsubsection*{Acknowledgments.} The heading should be treated as a
-%subsubsection heading and should not be assigned a number.
-%
-%\section{The References Section}\label{references}
-%
-%In order to permit cross referencing within LNCS-Online, and eventually
-%between different publishers and their online databases, LNCS will,
-%from now on, be standardizing the format of the references. This new
-%feature will increase the visibility of publications and facilitate
-%academic research considerably. Please base your references on the
-%examples below. References that don't adhere to this style will be
-%reformatted by Springer. You should therefore check your references
-%thoroughly when you receive the final pdf of your paper.
-%The reference section must be complete. You may not omit references.
-%Instructions as to where to find a fuller version of the references are
-%not permissible.
-%
-%We only accept references written using the latin alphabet. If the title
-%of the book you are referring to is in Russian or Chinese, then please write
-%(in Russian) or (in Chinese) at the end of the transcript or translation
-%of the title.
-%
-%The following section shows a sample reference list with entries for
-%journal articles \cite{jour}, an LNCS chapter \cite{lncschap}, a book
-%\cite{book}, proceedings without editors \cite{proceeding1} and
-%\cite{proceeding2}, as well as a URL \cite{url}.
-%Please note that proceedings published in LNCS are not cited with their
-%full titles, but with their acronyms!
-%
-%\begin{thebibliography}{4}
-%
-%\bibitem{jour} Smith, T.F., Waterman, M.S.: Identification of Common Molecular
-%Subsequences. J. Mol. Biol. 147, 195--197 (1981)
-%
-%\bibitem{lncschap} May, P., Ehrlich, H.C., Steinke, T.: ZIB Structure Prediction Pipeline:
-%Composing a Complex Biological Workflow through Web Services. In: Nagel,
-%W.E., Walter, W.V., Lehner, W. (eds.) Euro-Par 2006. LNCS, vol. 4128,
-%pp. 1148--1158. Springer, Heidelberg (2006)
-%
-%\bibitem{book} Foster, I., Kesselman, C.: The Grid: Blueprint for a New Computing
-%Infrastructure. Morgan Kaufmann, San Francisco (1999)
-%
-%\bibitem{proceeding1} Czajkowski, K., Fitzgerald, S., Foster, I., Kesselman, C.: Grid
-%Information Services for Distributed Resource Sharing. In: 10th IEEE
-%International Symposium on High Performance Distributed Computing, pp.
-%181--184. IEEE Press, New York (2001)
-%
-%\bibitem{proceeding2} Foster, I., Kesselman, C., Nick, J., Tuecke, S.: The Physiology of the
-%Grid: an Open Grid Services Architecture for Distributed Systems
-%Integration. Technical report, Global Grid Forum (2002)
-%
-%\bibitem{url} National Center for Biotechnology Information, \url{http://www.ncbi.nlm.nih.gov}
-%
-%\end{thebibliography}
-%
-%
-%\section*{Appendix: Springer-Author Discount}
-%
-%LNCS authors are entitled to a 33.3\% discount off all Springer
-%publications. Before placing an order, the author should send an email, 
-%giving full details of his or her Springer publication,
-%to \url{orders-HD-individuals@springer.com} to obtain a so-called token. This token is a
-%number, which must be entered when placing an order via the Internet, in
-%order to obtain the discount.
-%
-%\section{Checklist of Items to be Sent to Volume Editors}
-%Here is a checklist of everything the volume editor requires from you:
-%
-%
-%\begin{itemize}
-%\settowidth{\leftmargin}{{\Large$\square$}}\advance\leftmargin\labelsep
-%\itemsep8pt\relax
-%\renewcommand\labelitemi{{\lower1.5pt\hbox{\Large$\square$}}}
-%
-%\item The final \LaTeX{} source files
-%\item A final PDF file
-%\item A copyright form, signed by one author on behalf of all of the
-%authors of the paper.
-%\item A readme giving the name and email address of the
-%corresponding author.
-%\end{itemize}
+
+
 
 \bibliographystyle{splncs03}
 \bibliography{DedekVojtas_ISWC2010}
