@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 
 import czsem.utils.Config;
@@ -277,6 +278,10 @@ public class ILPExec extends ProcessExec {
 		startPrologProcess(getRulesFileName());
 		startErrReaderThread(errLogName);
 		consultFile(project_name);				
+	}
+
+	public OutputStream getOutputStream() {
+		return process.getOutputStream();
 	}
 
 	/*

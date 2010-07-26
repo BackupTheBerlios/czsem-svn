@@ -2,6 +2,7 @@ package czsem.ILP;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
@@ -61,6 +62,11 @@ public class Serializer {
 	
 	public Serializer() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public Serializer(OutputStream output) throws UnsupportedEncodingException
+	{
+		this.output = new PrintStream(output, false, "ISO8859_1");
 	}
 	
 	public void setOutput(String output_filename) throws FileNotFoundException, UnsupportedEncodingException

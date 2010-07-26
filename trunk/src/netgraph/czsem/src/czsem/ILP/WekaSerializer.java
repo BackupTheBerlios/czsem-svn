@@ -1,6 +1,7 @@
 package czsem.ILP;
 
 import java.io.FileNotFoundException;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 
 import weka.core.Instance;
@@ -15,6 +16,11 @@ public class WekaSerializer extends Serializer {
 	public WekaSerializer(String output_filename, boolean append) throws FileNotFoundException, UnsupportedEncodingException
 	{
 		super(output_filename, append);
+	}
+
+	public WekaSerializer(OutputStream outputStream) throws UnsupportedEncodingException
+	{
+		super(outputStream);
 	}
 
 	public static interface Condition
@@ -58,6 +64,25 @@ public class WekaSerializer extends Serializer {
 		return value;		
 	}
 	
+	protected void assertBkgTuplesForInstance(Instance instance, String id, Relation [] relations)
+	{
+		for (int r = 0; r < relations.length; r++)
+		{				
+			if (r == instance.classIndex()) continue;
+			
+			output.print("assert((");		
+			
+			putInlineBinTuple(relations[r], id, getStringValue(instance, r));						
+			
+			output.println(")).");		
+			output.flush();		
+			output.println();
+			output.flush();		
+
+		}		
+	}
+
+	
 	protected void putBkgTuplesForInstance(Instance instance, String id, Relation [] relations)
 	{
 		for (int r = 0; r < relations.length; r++)
@@ -94,11 +119,13 @@ public class WekaSerializer extends Serializer {
 		return relations;
 	}
 	
-	protected void putTestClassClause(String test_id, Relation rel)
+	protected void putTestClassPredicate(String test_id, Relation rel)
 	{
-		output.print(":-");
+//		output.print(":-");
 		renderInlineTupleWithoutValueCheck(rel.getName(), new String[] {test_id, "X"});
-		output.println(",print(X),print('\\n').");
-		output.println(":-print('END\\n').");
+		output.println(",print(X),print('\\n'),!.");
+		output.println("print('END\\n').");
+		output.flush();
+				
 	}
 }

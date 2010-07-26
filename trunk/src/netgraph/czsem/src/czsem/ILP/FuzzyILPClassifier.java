@@ -4,7 +4,8 @@ import czsem.ILP.Serializer.Relation;
 import czsem.ILP.WekaSerializer.Condition;
 import weka.core.Instances;
 
-public class FuzzyILPClassifier extends ILPClassifier{
+public class FuzzyILPClassifier extends ILPClassifier
+{
 	
 	private static final long serialVersionUID = 4088657170809650508L;
 	private Relation [] atl_relations;

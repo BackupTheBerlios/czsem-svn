@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,7 +20,7 @@ import czsem.ILP.WekaSerializer.Condition;
 import czsem.utils.Config;
 import czsem.utils.ProjectSetup;
 
-public abstract class ILPClassifier extends Classifier
+public abstract class ILPClassifier extends Classifier implements Serializable
 {
 	private static final long serialVersionUID = 2895303597421297747L;
 
@@ -29,6 +30,8 @@ public abstract class ILPClassifier extends Classifier
 	protected ProjectSetup project_setup = null;
 	
 	protected int last_test_id = 1000;
+	
+	protected transient ILPExec testing_ILP_proecess = null;
 	
 	protected void initClassValues(Instances instances)
 	{
@@ -179,33 +182,32 @@ public abstract class ILPClassifier extends Classifier
 		}				
 	}
 	
+	protected void startILPProcess(int class_index) throws IOException
+	{
+		WekaSerializer test_ser = new WekaSerializer(project_setup.renderProjectFileName(".test"));
+		putTestingAxioms(test_ser, class_index);
+		
+		testing_ILP_proecess = new ILPExec(project_setup);
+		testing_ILP_proecess.startPrologProcess(testing_ILP_proecess.getRulesFileName());
+		testing_ILP_proecess.startErrReaderThread("run_test");
+		testing_ILP_proecess.consultFile(project_setup.project_name + ".test");
+
+		
+	}
+	
 	@Override
 	public double classifyInstance(Instance instance) throws Exception
-	{		
-		
-		WekaSerializer log_ser = new WekaSerializer(project_setup.renderProjectFileName(".test_log"), true);
-
-		WekaSerializer test_ser = new WekaSerializer(project_setup.renderProjectFileName(".test"));
-//		crisp_relations = test_ser.addAttributeRelations(instance);
-		
+	{
+		if (testing_ILP_proecess == null) startILPProcess(instance.classIndex());
+				
 		String test_id = "test_id_" + last_test_id++;
 
-		test_ser.putBkgTuplesForInstance(instance, test_id, crisp_relations);
-		log_ser.putBkgTuplesForInstance(instance, test_id, crisp_relations);
-		putTestingAxioms(test_ser, instance.classIndex());
+		WekaSerializer test_ser = new WekaSerializer(testing_ILP_proecess.getOutputStream());
+		test_ser.assertBkgTuplesForInstance(instance, test_id, crisp_relations);
 		
-		test_ser.putTestClassClause(test_id, crisp_relations[instance.classIndex()]);
-		test_ser.close();
-		
-		ILPExec test_exec = new ILPExec(project_setup);
-		test_exec.startPrologProcess(test_exec.getRulesFileName());
-		test_exec.startErrReaderThread("run_test");
-//		test_exec.consultFile(project_setup.project_name + ".b");
-		test_exec.consultFile(project_setup.project_name + ".test");
-				
-
-		String predicted = test_exec.readLine();
-		test_exec.close();
+		test_ser.putTestClassPredicate(test_id, crisp_relations[instance.classIndex()]);
+						
+		String predicted = testing_ILP_proecess.readLine();
 		
 //		System.out.println("predicted: "+ predicted);
 		
@@ -253,4 +255,32 @@ public abstract class ILPClassifier extends Classifier
 	protected abstract void putDeteminations(WekaSerializer backg_ser, int class_index);
 	protected abstract void putModes(WekaSerializer backg_ser);
 	protected abstract Relation getTargetCalssRelation(int class_attribute_index);
+
+
+	@Override
+	public void buildClassifier(Instances data) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		// TODO Auto-generated method stub
+		return super.clone();
+	}
+
+
+	@Override
+	protected void finalize() throws Throwable
+	{
+		if (testing_ILP_proecess != null) testing_ILP_proecess.close();
+	}
+	
+	 
+	 public static void main(String[] args)	
+	 {		
+		 weka.gui.GUIChooser.main(args);	
+	 }
+
 }
