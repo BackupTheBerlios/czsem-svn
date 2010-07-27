@@ -25,14 +25,17 @@ public abstract class ILPClassifier extends Classifier implements Serializable
 	private static final long serialVersionUID = 2895303597421297747L;
 
 	protected Relation [] crisp_relations;
+	
+	/** used for positive examples generation **/
 	protected String [] class_values = null;
 	
 	protected ProjectSetup project_setup = null;
 	
-	protected int last_test_id = 1000;
+	protected int last_test_id = 10000;
 	
 	protected transient ILPExec testing_ILP_proecess = null;
 	
+	/** Initializes class_values array, which is alter used for positive examples generation. **/
 	protected void initClassValues(Instances instances)
 	{
 		Attribute class_attr = instances.classAttribute(); 
@@ -98,19 +101,6 @@ public abstract class ILPClassifier extends Classifier implements Serializable
 		project_setup.init_project();		
 	}
 
-	public void buildClassifier(String project_name, Instances instances) throws Exception
-	{
-		last_test_id = 1000;
-		
-		setupProject(project_name);
-		
-		initClassValues(instances);
-		
-		serializeToILP(instances);
-		
-		learnRules();
-	}
-
 	protected void putCripsModes(Serializer backg_ser)
 	{
 		backg_ser.putCommentLn("--- C R I S P     M O D E S ---");
@@ -135,6 +125,18 @@ public abstract class ILPClassifier extends Classifier implements Serializable
 		neg_ser.addAttributeRelation(instances.classAttribute().name());
 		
 
+/*
+		String learningSettings =
+			":- set(verbosity,0).\n" +
+			":- set(noise,0).\n" +
+			":- set(depth,300).\n" +
+			":- set(clauselength,100).\n" +
+			":- set(i,40).\n";
+/**/
+		String learningSettings =
+			":- set(verbosity,0).\n";
+		
+		backg_ser.putLearningSettings(learningSettings);
 		putModes(backg_ser);
 		putLearningAxioms(backg_ser, instances.classIndex());
 		putDeteminations(backg_ser, instances.classIndex());
@@ -258,10 +260,21 @@ public abstract class ILPClassifier extends Classifier implements Serializable
 
 
 	@Override
-	public void buildClassifier(Instances data) throws Exception {
-		// TODO Auto-generated method stub
+	public abstract void buildClassifier(Instances data) throws Exception;
+
+	public void buildClassifier(String project_name, Instances instances) throws Exception
+	{
+		last_test_id =  (int) Math.pow(10, ((int) Math.log10(instances.numInstances())) +1)   ;
 		
+		setupProject(project_name);
+		
+		initClassValues(instances);
+		
+		serializeToILP(instances);
+		
+		learnRules();
 	}
+
 
 
 	@Override

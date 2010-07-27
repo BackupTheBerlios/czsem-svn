@@ -198,9 +198,7 @@ public class LinguisticSerializer
 
 	public void putLearningSettings(String learningSettings)
 	{
-		ser_bkg.putCommentLn("-------------------- learningSettings --------------------");
-		ser_bkg.print(learningSettings);
-		ser_bkg.print("\n");
+		ser_bkg.putLearningSettings(learningSettings);
 	}
 
 }

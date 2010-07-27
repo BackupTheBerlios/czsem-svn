@@ -109,7 +109,7 @@ public class ILPExec extends ProcessExec {
 		Thread.sleep(3000);
 /**/		
 /**/		
-		output_writer.println("set(verbosity,1).");		
+//		output_writer.println("set(verbosity,1).");		
 
 		output_writer.print("read_all('");
 		output_writer.print(project_name);

@@ -349,6 +349,12 @@ public class Serializer {
 		output.close();
 	}
 
+	public void putLearningSettings(String learningSettings)
+	{
+		putCommentLn("-------------------- learningSettings --------------------");
+		print(learningSettings);
+		print("\n");
+	}
 	
 	public static void main(String[] argv)
 	{
