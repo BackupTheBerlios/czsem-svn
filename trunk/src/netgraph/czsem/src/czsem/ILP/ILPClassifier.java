@@ -4,8 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
+import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,13 +14,14 @@ import weka.core.Attribute;
 import weka.core.Capabilities;
 import weka.core.Instance;
 import weka.core.Instances;
+import weka.core.Option;
 import weka.core.Capabilities.Capability;
 import czsem.ILP.Serializer.Relation;
 import czsem.ILP.WekaSerializer.Condition;
 import czsem.utils.Config;
 import czsem.utils.ProjectSetup;
 
-public abstract class ILPClassifier extends Classifier implements Serializable
+public abstract class ILPClassifier extends Classifier
 {
 	private static final long serialVersionUID = 2895303597421297747L;
 
@@ -35,6 +36,20 @@ public abstract class ILPClassifier extends Classifier implements Serializable
 	
 	protected transient ILPExec testing_ILP_proecess = null;
 	
+	protected final String options[] = 
+	{
+			":- set(noise,0).",//0 
+			":- set(i,2).",//1 
+			":- set(depth,10).",//2 
+			":- set(clauselength,4).",//3 
+			":- set(search,bf).",//4 
+			"",//5 
+			"",//6 
+			"",//7 
+			"",//8 
+			":- set(verbosity,0).",//9 
+	};
+			
 	/** Initializes class_values array, which is alter used for positive examples generation. **/
 	protected void initClassValues(Instances instances)
 	{
@@ -80,6 +95,7 @@ public abstract class ILPClassifier extends Classifier implements Serializable
 
 		// instances
 		result.setMinimumNumberInstances(3);
+		result.setOwner(this);
 
 		return result;
 	}	
@@ -124,19 +140,15 @@ public abstract class ILPClassifier extends Classifier implements Serializable
 		pos_ser.addAttributeRelation(instances.classAttribute().name());
 		neg_ser.addAttributeRelation(instances.classAttribute().name());
 		
-
-/*
-		String learningSettings =
-			":- set(verbosity,0).\n" +
-			":- set(noise,0).\n" +
-			":- set(depth,300).\n" +
-			":- set(clauselength,100).\n" +
-			":- set(i,40).\n";
-/**/
-		String learningSettings =
-			":- set(verbosity,0).\n";
 		
-		backg_ser.putLearningSettings(learningSettings);
+		StringBuilder learn_set_sb = new StringBuilder();
+		for (int i = 0; i < options.length; i++)
+		{
+			learn_set_sb.append(options[i]);
+			learn_set_sb.append('\n');			
+		}
+		
+		backg_ser.putLearningSettings(learn_set_sb.toString());
 		putModes(backg_ser);
 		putLearningAxioms(backg_ser, instances.classIndex());
 		putDeteminations(backg_ser, instances.classIndex());
@@ -278,22 +290,101 @@ public abstract class ILPClassifier extends Classifier implements Serializable
 
 
 	@Override
-	protected Object clone() throws CloneNotSupportedException {
-		// TODO Auto-generated method stub
-		return super.clone();
-	}
-
-
-	@Override
 	protected void finalize() throws Throwable
 	{
 		if (testing_ILP_proecess != null) testing_ILP_proecess.close();
 	}
 	
-	 
-	 public static void main(String[] args)	
-	 {		
-		 weka.gui.GUIChooser.main(args);	
-	 }
+	
+
+	@Override
+	public String[] getOptions()
+	{
+		String [] ret = new String [11];
+		for (int i = 1; i < ret.length; i++)
+		{
+			ret[i] = options[i-1];			
+		}
+		ret[0] = "-O";
+		return ret;
+	}
+
+	@Override
+	public void setOptions(String[] new_options) throws Exception
+	{
+		for (int i = 0; i < options.length; i++) {
+			options[i] = "";
+		}
+
+		if (new_options.length < 2) 
+		{
+			return;
+		}
+	    
+		assert new_options[0].equals("-O");
+
+		for (int i = 1; i < new_options.length; i++) {
+			options[i-1] = new_options[i];
+		}
+	}
+
+	@Override
+	public Enumeration<Option> listOptions()
+	{			
+		return new Enumeration<Option>() {
+			@Override
+			public Option nextElement() {				
+				return new Option(
+						"Arbitratry options for ILP learner. e.g.: ':-set(noise,3).'",
+						"O", 10, "-O <options>");
+			}			
+			boolean more = true; 
+			@Override
+			public boolean hasMoreElements() {
+				boolean ret = more;
+				more = false;
+				return ret;
+			}
+		};
+	}
+	
+	public String opt0TipText() { return "Arbitratry options for ILP learner. e.g.: ':-set(noise,3).'"; }
+	public String opt1TipText() { return "Arbitratry options for ILP learner. e.g.: ':-set(noise,3).'"; }
+	public String opt2TipText() { return "Arbitratry options for ILP learner. e.g.: ':-set(noise,3).'"; }
+	public String opt3TipText() { return "Arbitratry options for ILP learner. e.g.: ':-set(noise,3).'"; }
+	public String opt4TipText() { return "Arbitratry options for ILP learner. e.g.: ':-set(noise,3).'"; }
+	public String opt5TipText() { return "Arbitratry options for ILP learner. e.g.: ':-set(noise,3).'"; }
+	public String opt6TipText() { return "Arbitratry options for ILP learner. e.g.: ':-set(noise,3).'"; }
+	public String opt7TipText() { return "Arbitratry options for ILP learner. e.g.: ':-set(noise,3).'"; }
+	public String opt8TipText() { return "Arbitratry options for ILP learner. e.g.: ':-set(noise,3).'"; }
+	public String opt9TipText() { return "Arbitratry options for ILP learner. e.g.: ':-set(noise,3).'"; }
+
+	public String getOpt0() { return options[0]; }
+	public String getOpt1() { return options[1]; }
+	public String getOpt2() { return options[2]; }
+	public String getOpt3() { return options[3]; }
+	public String getOpt4() { return options[4]; }
+	public String getOpt5() { return options[5]; }
+	public String getOpt6() { return options[6]; }
+	public String getOpt7() { return options[7]; }
+	public String getOpt8() { return options[8]; }
+	public String getOpt9() { return options[9]; }
+	
+	public void   setOpt0(String new_val) { options[0] = new_val; }
+	public void   setOpt1(String new_val) { options[1] = new_val; }
+	public void   setOpt2(String new_val) { options[2] = new_val; }
+	public void   setOpt3(String new_val) { options[3] = new_val; }
+	public void   setOpt4(String new_val) { options[4] = new_val; }
+	public void   setOpt5(String new_val) { options[5] = new_val; }
+	public void   setOpt6(String new_val) { options[6] = new_val; }
+	public void   setOpt7(String new_val) { options[7] = new_val; }
+	public void   setOpt8(String new_val) { options[8] = new_val; }
+	public void   setOpt9(String new_val) { options[9] = new_val; }
+
+	
+	public static void main(String[] args)	
+	{		
+		weka.gui.GUIChooser.main(args);	
+	}
 
 }

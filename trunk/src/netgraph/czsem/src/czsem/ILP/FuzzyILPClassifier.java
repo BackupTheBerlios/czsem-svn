@@ -1,12 +1,11 @@
 package czsem.ILP;
 
+import weka.core.Instances;
 import czsem.ILP.Serializer.Relation;
 import czsem.ILP.WekaSerializer.Condition;
-import weka.core.Instances;
 
 public class FuzzyILPClassifier extends ILPClassifier
 {
-	
 	private static final long serialVersionUID = 4088657170809650508L;
 	private Relation [] atl_relations;
 
@@ -136,4 +135,5 @@ public class FuzzyILPClassifier extends ILPClassifier
 	protected Relation getTargetCalssRelation(int class_attribute_index) {
 		return atl_relations[class_attribute_index];
 	}
+	
 }
