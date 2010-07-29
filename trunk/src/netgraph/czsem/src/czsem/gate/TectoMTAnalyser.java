@@ -122,7 +122,7 @@ public class TectoMTAnalyser extends AbstractLanguageAnalyser implements Process
 
 		ProcessExec tmt_proc = new ProcessExec();			
 		tmt_proc.exec(cmd_list.toArray(new String[0]));
-		tmt_proc.startReaderThreads();
+		tmt_proc.startSysReaderThreads();
 		tmt_proc.waitFor();
 		
 	}

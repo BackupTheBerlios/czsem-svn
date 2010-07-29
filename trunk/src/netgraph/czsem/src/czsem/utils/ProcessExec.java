@@ -70,19 +70,38 @@ public class ProcessExec {
 				}
 			}
 			
+			protected void writeBuf(char[] buffer, int chars_to_write) throws IOException
+			{
+				os.write(buffer, 0, chars_to_write);
+				os.flush();
+			}
+			
 			@Override
 			public void run() {
 				try {
 					for (int i=readbuf(); i>=0; i=readbuf())
 					{
-						os.write(buf, 0, i);
-						os.flush();
+						writeBuf(buf, i);
 					}
 				} 
 				catch (IOException e) {}
 				catch (InterruptedException e) {}			
 			}
+
 		}
+
+	public static class NullReaderThread extends ReaderThread
+	{
+
+		public NullReaderThread(Reader is) {
+			super(is, (Writer) null);
+		}
+
+		@Override
+		protected void writeBuf(char[] buffer, int i) throws IOException 
+		{}		
+	}
+
 
 	private ReaderThread err_reader_thread;
 	protected ReaderThread cin_reader_thread;
@@ -99,6 +118,11 @@ public class ProcessExec {
 		startErrReaderThread(System.err);		
 	}
 
+	public void startNullErrReaderThread() {
+		err_reader_thread = new NullReaderThread(error_reader);
+		err_reader_thread.start();		
+	}
+
 	public void startErrReaderThread(OutputStream output) {
 		err_reader_thread = new ReaderThread(error_reader, output);
 		err_reader_thread.start();		
@@ -112,7 +136,15 @@ public class ProcessExec {
 		err_reader_thread.start();
 	}
 
-	public void startReaderThreads() {
+	public void startNullReaderThreads() {		
+		cin_reader_thread = new NullReaderThread(input_reader);
+		err_reader_thread = new NullReaderThread(error_reader);
+	
+		cin_reader_thread.start();
+		err_reader_thread.start();
+	}
+
+	public void startSysReaderThreads() {
 		startReaderThreads(System.out, System.err);
 	}
 

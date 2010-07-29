@@ -43,11 +43,17 @@ public abstract class ILPClassifier extends Classifier
 			":- set(depth,10).",//2 
 			":- set(clauselength,4).",//3 
 			":- set(search,bf).",//4 
-			"",//5 
-			"",//6 
+			":- set(evalfn,coverage).",//5 
+			":- set(samplesize,0).",//6 
 			"",//7 
 			"",//8 
-			":- set(verbosity,0).",//9 
+			"",//9 
+			"",//10 
+			"",//11 
+			"",//12 
+			"",//13 
+			"",//14 
+			":- set(verbosity,0).",//15 
 	};
 			
 	/** Initializes class_values array, which is alter used for positive examples generation. **/
@@ -104,7 +110,12 @@ public abstract class ILPClassifier extends Classifier
 	{
 		ILPExec exec = new ILPExec(project_setup);
 		exec.startILPProcess();
-		exec.startReaderThreads("learning");
+		
+		if (getDebug())
+			exec.startReaderThreads("learning");
+		else
+			exec.startNullReaderThreads();			
+		
 		exec.induceAndWriteRules();
 		exec.close();
 	}
@@ -203,10 +214,13 @@ public abstract class ILPClassifier extends Classifier
 		
 		testing_ILP_proecess = new ILPExec(project_setup);
 		testing_ILP_proecess.startPrologProcess(testing_ILP_proecess.getRulesFileName());
-		testing_ILP_proecess.startErrReaderThread("run_test");
-		testing_ILP_proecess.consultFile(project_setup.project_name + ".test");
-
 		
+		if (getDebug())
+			testing_ILP_proecess.startErrReaderThread("run_test");
+		else
+			testing_ILP_proecess.startNullErrReaderThread();			
+		
+		testing_ILP_proecess.consultFile(project_setup.project_name + ".test");
 	}
 	
 	@Override
@@ -300,7 +314,7 @@ public abstract class ILPClassifier extends Classifier
 	@Override
 	public String[] getOptions()
 	{
-		String [] ret = new String [11];
+		String [] ret = new String [options.length+1];
 		for (int i = 1; i < ret.length; i++)
 		{
 			ret[i] = options[i-1];			
@@ -336,7 +350,7 @@ public abstract class ILPClassifier extends Classifier
 			public Option nextElement() {				
 				return new Option(
 						"Arbitratry options for ILP learner. e.g.: ':-set(noise,3).'",
-						"O", 10, "-O <options>");
+						"O", options.length, "-O <options>");
 			}			
 			boolean more = true; 
 			@Override
@@ -348,38 +362,56 @@ public abstract class ILPClassifier extends Classifier
 		};
 	}
 	
-	public String opt0TipText() { return "Arbitratry options for ILP learner. e.g.: ':-set(noise,3).'"; }
-	public String opt1TipText() { return "Arbitratry options for ILP learner. e.g.: ':-set(noise,3).'"; }
-	public String opt2TipText() { return "Arbitratry options for ILP learner. e.g.: ':-set(noise,3).'"; }
-	public String opt3TipText() { return "Arbitratry options for ILP learner. e.g.: ':-set(noise,3).'"; }
-	public String opt4TipText() { return "Arbitratry options for ILP learner. e.g.: ':-set(noise,3).'"; }
-	public String opt5TipText() { return "Arbitratry options for ILP learner. e.g.: ':-set(noise,3).'"; }
-	public String opt6TipText() { return "Arbitratry options for ILP learner. e.g.: ':-set(noise,3).'"; }
-	public String opt7TipText() { return "Arbitratry options for ILP learner. e.g.: ':-set(noise,3).'"; }
-	public String opt8TipText() { return "Arbitratry options for ILP learner. e.g.: ':-set(noise,3).'"; }
-	public String opt9TipText() { return "Arbitratry options for ILP learner. e.g.: ':-set(noise,3).'"; }
+	public String opt00TipText() { return "Arbitratry options for ILP learner. e.g.: ':-set(noise,3).'"; }
+	public String opt01TipText() { return "Arbitratry options for ILP learner. e.g.: ':-set(noise,3).'"; }
+	public String opt02TipText() { return "Arbitratry options for ILP learner. e.g.: ':-set(noise,3).'"; }
+	public String opt03TipText() { return "Arbitratry options for ILP learner. e.g.: ':-set(noise,3).'"; }
+	public String opt04TipText() { return "Arbitratry options for ILP learner. e.g.: ':-set(noise,3).'"; }
+	public String opt05TipText() { return "Arbitratry options for ILP learner. e.g.: ':-set(noise,3).'"; }
+	public String opt06TipText() { return "Arbitratry options for ILP learner. e.g.: ':-set(noise,3).'"; }
+	public String opt07TipText() { return "Arbitratry options for ILP learner. e.g.: ':-set(noise,3).'"; }
+	public String opt08TipText() { return "Arbitratry options for ILP learner. e.g.: ':-set(noise,3).'"; }
+	public String opt09TipText() { return "Arbitratry options for ILP learner. e.g.: ':-set(noise,3).'"; }
+	public String opt10TipText() { return "Arbitratry options for ILP learner. e.g.: ':-set(noise,3).'"; }
+	public String opt11TipText() { return "Arbitratry options for ILP learner. e.g.: ':-set(noise,3).'"; }
+	public String opt12TipText() { return "Arbitratry options for ILP learner. e.g.: ':-set(noise,3).'"; }
+	public String opt13TipText() { return "Arbitratry options for ILP learner. e.g.: ':-set(noise,3).'"; }
+	public String opt14TipText() { return "Arbitratry options for ILP learner. e.g.: ':-set(noise,3).'"; }
+	public String opt15TipText() { return "Arbitratry options for ILP learner. e.g.: ':-set(noise,3).'"; }
 
-	public String getOpt0() { return options[0]; }
-	public String getOpt1() { return options[1]; }
-	public String getOpt2() { return options[2]; }
-	public String getOpt3() { return options[3]; }
-	public String getOpt4() { return options[4]; }
-	public String getOpt5() { return options[5]; }
-	public String getOpt6() { return options[6]; }
-	public String getOpt7() { return options[7]; }
-	public String getOpt8() { return options[8]; }
-	public String getOpt9() { return options[9]; }
+	public String getOpt00() { return options[0]; }
+	public String getOpt01() { return options[1]; }
+	public String getOpt02() { return options[2]; }
+	public String getOpt03() { return options[3]; }
+	public String getOpt04() { return options[4]; }
+	public String getOpt05() { return options[5]; }
+	public String getOpt06() { return options[6]; }
+	public String getOpt07() { return options[7]; }
+	public String getOpt08() { return options[8]; }
+	public String getOpt09() { return options[9]; }
+	public String getOpt10() { return options[10]; }
+	public String getOpt11() { return options[11]; }
+	public String getOpt12() { return options[12]; }
+	public String getOpt13() { return options[13]; }
+	public String getOpt14() { return options[14]; }
+	public String getOpt15() { return options[15]; }
 	
-	public void   setOpt0(String new_val) { options[0] = new_val; }
-	public void   setOpt1(String new_val) { options[1] = new_val; }
-	public void   setOpt2(String new_val) { options[2] = new_val; }
-	public void   setOpt3(String new_val) { options[3] = new_val; }
-	public void   setOpt4(String new_val) { options[4] = new_val; }
-	public void   setOpt5(String new_val) { options[5] = new_val; }
-	public void   setOpt6(String new_val) { options[6] = new_val; }
-	public void   setOpt7(String new_val) { options[7] = new_val; }
-	public void   setOpt8(String new_val) { options[8] = new_val; }
-	public void   setOpt9(String new_val) { options[9] = new_val; }
+	public void   setOpt00(String new_val) { options[0] = new_val; }
+	public void   setOpt01(String new_val) { options[1] = new_val; }
+	public void   setOpt02(String new_val) { options[2] = new_val; }
+	public void   setOpt03(String new_val) { options[3] = new_val; }
+	public void   setOpt04(String new_val) { options[4] = new_val; }
+	public void   setOpt05(String new_val) { options[5] = new_val; }
+	public void   setOpt06(String new_val) { options[6] = new_val; }
+	public void   setOpt07(String new_val) { options[7] = new_val; }
+	public void   setOpt08(String new_val) { options[8] = new_val; }
+	public void   setOpt09(String new_val) { options[9] = new_val; }
+	public void   setOpt10(String new_val) { options[10] = new_val; }
+	public void   setOpt11(String new_val) { options[11] = new_val; }
+	public void   setOpt12(String new_val) { options[12] = new_val; }
+	public void   setOpt13(String new_val) { options[13] = new_val; }
+	public void   setOpt14(String new_val) { options[14] = new_val; }
+	public void   setOpt15(String new_val) { options[15] = new_val; }
 
 	
 	public static void main(String[] args)	

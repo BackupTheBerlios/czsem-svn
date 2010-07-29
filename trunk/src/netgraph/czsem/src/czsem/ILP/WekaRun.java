@@ -27,7 +27,7 @@ public class WekaRun
 		//java -classpath "./weka.jar;." weka.gui.GUIChooser
 		ProcessExec proc = new ProcessExec();
 		proc.exec(cmdarray);
-		proc.startReaderThreads();
+		proc.startSysReaderThreads();
 					
 		
 //		BufferedReader is = new BufferedReader(new InputStreamReader(proc.getInputStream())); 
