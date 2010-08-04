@@ -27,6 +27,8 @@ import org.xml.sax.helpers.DefaultHandler;
 
 public class SAXTMTAnnotator extends DefaultHandler
 {
+	private String language = "english";
+	
 	public static class Dependency
 	{
 		String [] ids;
@@ -199,17 +201,17 @@ public class SAXTMTAnnotator extends DefaultHandler
 	{
 		last_element_qname.push(qName);
 
-		if (qName.equals("SCzechT"))
+		if (qName.equalsIgnoreCase('S'+language+'T'))
 		{
 			setTecto();
 			return;
 		}
-		if (qName.equals("SCzechA"))
+		if (qName.equalsIgnoreCase('S'+language+'A'))
 		{
 			setAnalytic();
 			return;
 		}
-		if (qName.equals("SCzechM"))
+		if (qName.equalsIgnoreCase('S'+language+'M'))
 		{
 			setDummy();
 			return;
@@ -279,7 +281,7 @@ public class SAXTMTAnnotator extends DefaultHandler
 				actual_sentence.auxRfDependencies.add(aux_rf);
 			}
 		}
-		if (qName.equals("czech_source_sentence"))
+		if (qName.equalsIgnoreCase(language+"_source_sentence"))
 		{
 			actual_sentence.sentence_string = stringFromLastCahrs();
 		}
@@ -294,7 +296,7 @@ public class SAXTMTAnnotator extends DefaultHandler
 		String peek = last_element_qname.pop();
 		
 		boolean ret = 
-			element_qname.equals("czech_source_sentence") ||
+			element_qname.equalsIgnoreCase(language+"_source_sentence") ||
 			(element_qname.equals("LM") && last_element_qname.peek().equals("aux.rf")) || //aux.rf
 			(testFeatures(element_qname, actual_fetures) != -1);
 		
@@ -312,8 +314,10 @@ public class SAXTMTAnnotator extends DefaultHandler
 	}
 
 	
-	public SAXTMTAnnotator() throws ParserConfigurationException, SAXException
+	public SAXTMTAnnotator(String language) throws ParserConfigurationException, SAXException
 	{
+		this.language = language;
+		
 		// Create a JAXP "parser factory" for creating SAX parsers
 	    javax.xml.parsers.SAXParserFactory spf = SAXParserFactory.newInstance();
 

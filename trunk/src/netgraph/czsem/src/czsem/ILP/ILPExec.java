@@ -67,9 +67,7 @@ public class ILPExec extends ProcessExec {
 	{
 		
 		String path_prefix = makeLogPathPrefix(log_name);		
-		startReaderThreads(
-				new FileOutputStream(path_prefix + "std.log"),
-				new FileOutputStream(path_prefix + "err.log"));	
+		startReaderThreads(path_prefix);
 	}
 
 

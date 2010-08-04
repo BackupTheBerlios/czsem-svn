@@ -1,9 +1,11 @@
 package czsem.gate;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -24,16 +26,18 @@ public class TectoMTDocumentAnalyser
 {
 	private Document doc;
 	private String dest_filename;
+	private String language = "english";
 	
-	TectoMTDocumentAnalyser(Document doc)
+	TectoMTDocumentAnalyser(Document doc, String language)
 	{
+		this.language = language;
 		this.doc = doc;
 	}
 	
-	protected String prepareTMTFileName(URL outputDirectory)
+	protected String prepareTMTFileName(URL outputDirectory) throws IOException, URISyntaxException
 	{
 		StringBuilder sb = new StringBuilder();
-		sb.append(outputDirectory.getFile());
+		sb.append(new File(outputDirectory.toURI()).getCanonicalPath());
 		sb.append('/');
 		sb.append(((AbstractResource) doc).getName());
 		sb.append(".tmt");
@@ -43,7 +47,7 @@ public class TectoMTDocumentAnalyser
 		return dest_filename;	
 	}
 
-	public String prepareTMTFile(URL outputDirectory) throws IOException 
+	public String prepareTMTFile(URL outputDirectory, String languageDependentElementLabel) throws IOException, URISyntaxException 
 	{
 		dest_filename = prepareTMTFileName(outputDirectory);
 		Out.prln(dest_filename);				
@@ -59,7 +63,7 @@ public class TectoMTDocumentAnalyser
 		xmlwriter.endEntity();//schema
 		xmlwriter.endEntity();//head
 		xmlwriter.writeEntity("meta");
-		xmlwriter.writeEntityWithText("czech_source_text", doc.getContent().toString());
+		xmlwriter.writeEntityWithText(languageDependentElementLabel, doc.getContent().toString());
 		xmlwriter.endEntity();//meta
 		xmlwriter.endEntity();//tmt_document
 		xmlwriter.close();
@@ -75,7 +79,7 @@ public class TectoMTDocumentAnalyser
 
 	public void annotateGateDocumentAcordingtoTMTfile(String dest_filename) throws ParserConfigurationException, SAXException, IOException, InvalidOffsetException, PersistenceException, SecurityException
 	{        
-    	SAXTMTAnnotator tmt_tree_annot = new SAXTMTAnnotator();
+    	SAXTMTAnnotator tmt_tree_annot = new SAXTMTAnnotator(language);
     	
     	tmt_tree_annot.parseAndInit(dest_filename);
     	tmt_tree_annot.debug_print(System.out);

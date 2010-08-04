@@ -4,6 +4,8 @@ import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.CharArrayReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -135,6 +137,15 @@ public class ProcessExec {
 		cin_reader_thread.start();
 		err_reader_thread.start();
 	}
+	
+	public void startReaderThreads(String log_filename_prefix) throws FileNotFoundException
+	{
+		
+		startReaderThreads(
+				new FileOutputStream(log_filename_prefix + "std.log"),
+				new FileOutputStream(log_filename_prefix + "err.log"));	
+	}
+
 
 	public void startNullReaderThreads() {		
 		cin_reader_thread = new NullReaderThread(input_reader);
@@ -164,6 +175,12 @@ public class ProcessExec {
 	public void exec(String[] exec_args, File working_directory) throws IOException
 	{
 		process = Runtime.getRuntime().exec(exec_args, null, working_directory);
+		initBuffers();
+	}
+
+	public void exec(String[] exec_args, String[] envp) throws IOException
+	{		
+		process = Runtime.getRuntime().exec(exec_args, envp);
 		initBuffers();
 	}
 
