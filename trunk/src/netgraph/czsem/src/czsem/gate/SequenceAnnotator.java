@@ -84,13 +84,20 @@ public class SequenceAnnotator
 					
 					if (loc_ch != toc_ch)
 					{
-						if (token_index > 0) //otherwise move start
+						//quotation correction
+						if (loc_ch == '"' && (toc_ch == '\'' || toc_ch == '`'))
 						{
-							if (Character.isWhitespace(loc_ch)) token_index--;
-							else
-							if (Character.isWhitespace(toc_ch)) local_index--;
-							else 
-							throw new Throwable();
+							if (token_index+1<token.length() && token.charAt(token_index+1)==toc_ch)
+								token_index++;
+						}
+						else
+							if (token_index > 0) //otherwise move start
+							{
+								if (Character.isWhitespace(loc_ch)) token_index--;
+								else
+									if (Character.isWhitespace(toc_ch)) local_index--;
+									else
+										throw new Throwable();
 						}
 						else throw new Throwable();
 					}					
@@ -105,23 +112,5 @@ public class SequenceAnnotator
 			} catch (Throwable e) {/*contine*/} 			
 		}		
 	}		
-
-	public static void main(String[] args)
-	{
-		
-		SequenceAnnotator sa = new SequenceAnnotator("Hallo this\nstrange world !", 0);
-
-		sa.backup();
-		
-		System.err.println("1");
-		try {sa.nextToken("xxx");} catch(StringIndexOutOfBoundsException e) {System.err.println(e.getMessage());}
-		System.err.println("2");
-		sa.restore();
-		sa.nextToken("Hallo this");
-		System.err.println("3");
-		sa.restore();
-		
-		
-	}
 
 }

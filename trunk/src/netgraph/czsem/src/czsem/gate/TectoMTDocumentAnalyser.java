@@ -92,6 +92,8 @@ public class TectoMTDocumentAnalyser
 		List<Sentence> sentences = parser.parse(dest_filename);
 		TMTAnnotator tmt_tree_annot = new TMTAnnotator(sentences);
 		tmt_tree_annot.debug_print(System.out);
+    	tmt_tree_annot.annotate(doc);
+		doc.sync();
 /*
 		TMTAnnotator tmt_tree_annot = new TMTAnnotator(language);
     	

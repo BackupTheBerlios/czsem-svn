@@ -149,7 +149,9 @@ public class TMTAnnotator
 			return;
 		}
 		
+		System.out.flush();
 		System.err.println(sentence.sentence_string);
+		System.err.flush();
 		
     	seq_anot.backup();
     	try {
@@ -364,124 +366,3 @@ public class TMTAnnotator
 
 	
 }
-
-
-/*
-
-@Override
-public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException
-{
-	last_element_qname.push(qName);
-
-	if (qName.equalsIgnoreCase('S'+language+'T'))
-	{
-		setTecto();
-		return;
-	}
-	if (qName.equalsIgnoreCase('S'+language+'A'))
-	{
-		setAnalytic();
-		return;
-	}
-	if (qName.equalsIgnoreCase('S'+language+'M'))
-	{
-		setDummy();
-		return;
-	}
-	
-	if (qName.equals("LM"))
-	{
-		String prew_id = parent_ids.peek(); 
-		String new_id = attributes.getValue(0);
-		parent_ids.push(new_id);
-
-		if (parent_ids.size() <= setence_stack_level)
-		{
-			newSentence();
-			return;
-		}
-		
-		if (new_id != null)
-		{
-			newToken(prew_id, new_id);
-		}
-	}		
-
-	if (elementoToRead(qName)) last_characters = new StringBuilder();
-}
-
-private int testFeatures(String qName, String [] feature_list)
-{
-	for (int i = 0; i < feature_list.length; i++) {
-		if (feature_list[i].equals(qName))
-		{
-			return i;
-		}
-	}
-	return -1;
-}
-
-private void updateFeatures(String qName, String [] feature_list)
-{
-	int tf = testFeatures(qName, feature_list);
-	if (tf != -1) actual_token.features[tf] = stringFromLastCahrs();		
-}
-
-private String stringFromLastCahrs()
-{
-	String ret = last_characters.toString();
-	return  ret;
-}
-
-private void updateFeatures(String qName)
-{
-	updateFeatures(qName, actual_fetures);		
-}
-
-@Override
-public void endElement(String uri, String localName, String qName) throws SAXException
-{
-	String last_qn = last_element_qname.pop();
-	assert last_qn.equals(qName);
-	
-	if (qName.equals("LM"))
-	{
-		parent_ids.pop();
-		if (last_element_qname.peek().equals("aux.rf")) //aux.rf
-		{
-			Dependency aux_rf = new Dependency(parent_ids.peek(), stringFromLastCahrs());
-			actual_sentence.auxRfDependencies.add(aux_rf);
-		}
-	}
-	if (qName.equalsIgnoreCase(language+"_source_sentence"))
-	{
-		actual_sentence.sentence_string = stringFromLastCahrs();
-	}
-	if (parent_ids.size() > setence_stack_level)
-	{
-		updateFeatures(qName);
-	}
-}
-
-private boolean elementoToRead(String element_qname)
-{
-	String peek = last_element_qname.pop();
-	
-	boolean ret = 
-		element_qname.equalsIgnoreCase(language+"_source_sentence") ||
-		(element_qname.equals("LM") && last_element_qname.peek().equals("aux.rf")) || //aux.rf
-		(testFeatures(element_qname, actual_fetures) != -1);
-	
-	last_element_qname.push(peek);
-	return ret;
-}
-
-@Override
-public void characters(char[] ch, int start, int length) throws SAXException
-{
-	if (elementoToRead(last_element_qname.peek()))
-	{
-		last_characters.append(ch, start, length);		
-	}
-}
-*/

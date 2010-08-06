@@ -12,10 +12,12 @@
     </manifest>
     <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
         <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{SequenceAnnotator.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{TMTAnnotator.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{ILPExec.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.apps{CVStoILP_Accidents.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;com.generationjava.io.xml{EmptyElementXmlWriter.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{ILPClassifier.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{CorpusTester.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{SentenceFSWriter.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;com.generationjava.io.xml{XmlUtils.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{ILPWrapper.java"/>
@@ -25,21 +27,23 @@
         <javaElement handleIdentifier="=czsem/src&lt;czsem.utils{Config.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{LinguisticSerializer.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.utils{SimpleXMLQueryProcessor.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{TrecCorpusPopulate.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.utils{ProjectSetup.java"/>
-        <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{ProgolWork1.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.utils{NetgraphQuery.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{ProgolWork1.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;com.generationjava.io.xml{AbstractXmlWriter.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{ILPSerializer.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;com.generationjava.io.xml{PrettyPrinterXmlWriter.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{GateUtils.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.utils{TreeIndex.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;com.generationjava.io.xml{SimpleXmlWriter.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{SequenceAnnotatorTest.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.apps{ILPDatasetMaker.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{BackgroundKnowledgeMaker.java"/>
-        <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{SAXTMTAnnotator.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;com.generationjava.io.xml{DelegatingXmlWriter.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{ExamplesMaker.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{NetgraphTreeViewer.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{GateApplicationRunner.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{TectoMTDocumentAnalyser.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{FSExporter.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;com.generationjava.io.xml{XmlWriter.java"/>
@@ -52,17 +56,19 @@
         <javaElement handleIdentifier="=czsem/src&lt;com.generationjava.io.xml{FormattingXmlWriter.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{XPathExperssions.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{AnnotationDependencyRootMarker.java"/>
-        <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{FuzzyILPClassifier.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{WekaRun.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{FuzzyILPClassifier.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.gui{TreeVisualize.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.net{NetgraphProtocolConnection.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{WekaSerializer.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{AnnotationDependencyAbstractMarker.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{SAXTMTParser.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.utils{ILPStringList.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{AnnotationDependencySubtreeMarker.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.ILP{DataMaker.java"/>
-        <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{SubsequentAnnotationMerge.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{CrossValidation.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{SubsequentAnnotationMerge.java"/>
         <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{FSFileWriter.java"/>
+        <javaElement handleIdentifier="=czsem/src&lt;czsem.gate{TrainTestGateOnCzech.java"/>
     </selectedElements>
 </jardesc>

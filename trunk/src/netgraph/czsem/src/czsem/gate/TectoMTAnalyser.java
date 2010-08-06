@@ -1,6 +1,5 @@
 package czsem.gate;
 
-import gate.Corpus;
 import gate.DataStore;
 import gate.Document;
 import gate.Gate;
@@ -161,7 +160,6 @@ public class TectoMTAnalyser extends AbstractLanguageAnalyser implements Process
 			
 		}
 
-
 		ProcessExec tmt_proc = new ProcessExec();
 		tmt_proc.exec(cmd_list.toArray(new String[0]), tredEnvp);
 		tmt_proc.startReaderThreads("TMT_GATE_");
@@ -169,166 +167,22 @@ public class TectoMTAnalyser extends AbstractLanguageAnalyser implements Process
 		
 	}
 	
-	/*
-	public static void annotateGateDocumentAcordingtoTMTfile(Document doc, String TmTFilename) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, InvalidOffsetException
-	{				
-        DocumentBuilder builder=DocumentBuilderFactory.newInstance().newDocumentBuilder();
-        org.w3c.dom.Document tmt_doc = builder.parse(new File(TmTFilename));
-        
-        XPath xpath = XPathFactory.newInstance().newXPath();
-
-        XPathExpression exp = xpath.compile("//a");
-
-        NodeList list = 
-        	(NodeList) exp.evaluate(
-        			tmt_doc.getDocumentElement(), XPathConstants.NODESET);
-        
-        TransformerFactory tf = TransformerFactory.newInstance();
-		try {
-	        Transformer tr = tf.newTransformer();
-	        tr.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
-	        tr.setOutputProperty(OutputKeys.INDENT, "yes");
-        
-        
-	        for (int i=0; i<list.getLength(); i++)
-	        {
-	        	System.out.print("<<<<<<<<<<<<<<<<<"); System.out.println(i);
-	            DOMSource ds = new DOMSource(list.item(i));
-	            StreamResult sr = new StreamResult(System.out);
-	            tr.transform(ds, sr);
-	        	System.out.print("\n>>>>>>>>>>>>>>>>>"); System.out.println(i);
-	        	
-	        }
-
-		} catch (TransformerConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (TransformerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-                
-                
-        NodeList sentece_segments = 
-        	(NodeList) XPathExperssions.sentece_segments.evaluate(
-        			tmt_doc.getDocumentElement(), XPathConstants.NODESET);
-
-        SequenceAnnotator sentence_sa = new SequenceAnnotator(doc);
-
-                
-    	//sentences
-        for (int i=0; i<sentece_segments.getLength(); i++)
-        {
-        	try 
-        	{
-	        	Node sentece_segment = sentece_segments.item(i);
-	        	String sentence_string = (String) XPathExperssions.sentece_text.evaluate(sentece_segment, XPathConstants.STRING);
-	        	sentence_sa.nextToken(sentence_string);
-	        	as.add(sentence_sa.lastStart(), sentence_sa.lastEnd(), "Sentence", Factory.newFeatureMap());
-	        	System.err.println(sentence_string);
-	        		        	
-	        	
-	        	
-	        	
-
-	        	TMTTreeAnnotator tmt_tree_annot = new TMTTreeAnnotator(doc, sentece_segment);
-	        	
-	        	tmt_tree_annot.initSortedANodesArray();
-	        	
-	        	tmt_tree_annot.ATokensSequnceAnnotation((int) sentence_sa.lastStart());
-	        	
-	        	tmt_tree_annot.addADependencies(
-	        			(Node) XPathExperssions.a_root.evaluate(sentece_segment, XPathConstants.NODE));            
-	
-	        	tmt_tree_annot.addTNodesAndDependencies(
-	        			(Node) XPathExperssions.t_root.evaluate(sentece_segment, XPathConstants.NODE));
-	        			
-        	}
-        	catch (StringIndexOutOfBoundsException e) 
-        	{
-        		System.err.println(e.getMessage());        		
-        	}
-        	
-        }        
-	}
-	*/	
-		
-
 	public static void main(String[] args) throws GateException, ParserConfigurationException, SAXException, IOException, XPathExpressionException, InterruptedException
-	{
+	{		
+		gate.Main.main(args);
 		
-//		gate.Main.main(args);
-/**/		
+		//testAnnotation();
+	}
+	
+	public static void testAnnotation() throws GateException, ParserConfigurationException, SAXException, IOException
+	{
 		Gate.init();
 	    GateUtils.registerPluginDirectory("Parser_Stanford");
 	    DataStore ds = GateUtils.openDataStore("file:/C:/Users/dedek/AppData/GATE/data_store");
 	    Document doc = GateUtils.loadDocumentFormDatastore(ds, "sample.txt_00026___1280755921102___8929");
 	    	    
 		TectoMTDocumentAnalyser da = new TectoMTDocumentAnalyser(doc, "english", "TmT_serializations/sample.txt_00026.tmt");
-		da.annotateGateDocumentAcordingtoTMTfile();
-
-		
-		
-/*		
-
-		Gate.setNetConnected(false);
-	    Gate.setLocalWebServer(false);
-//	    Gate.setGateHome(new File("C:\\Program Files\\GATE-5.0"));
-
-	    Gate.init();
-	    	    
-//	    Gate.getCreoleRegister().registerDirectories(new URL("file:/C:/Program%20Files/GATE-5.0/plugins/Stanford/"));
-	    				
-		DataStore ds = GateUtils.openDataStore("file:/C:/Users/dedek/AppData/GATE/data_store/");
-		CorpusTester ct = new CorpusTester(ds);
-		ct.testDatastore();
-//		DataStore ds = Factory.openDataStore("gate.persist.SerialDataStore", "file:/home/dedek/workspace/crawlovani/gate_made/store1/");
-		ds.open();
-		
-		for (Object string : ds.getLrIds("gate.corpora.DocumentImpl")) {
-			System.err.println(string);
-		}
-		
-		FeatureMap docFeatures = Factory.newFeatureMap();
-		
-		docFeatures.put(DataStore.LR_ID_FEATURE_NAME, "jihomoravsky55629.txt_00051___1268301780492___4836");
-//		docFeatures.put(DataStore.LR_ID_FEATURE_NAME, "cesky na unixu____1268127896084___303");
-//		docFeatures.put(DataStore.LR_ID_FEATURE_NAME, "cesky1___1258555197823___5374");
-//		docFeatures.put(DataStore.LR_ID_FEATURE_NAME, "all50_serious_messages_noids_utf8___1267111757247___7332");
-		docFeatures.put(DataStore.DATASTORE_FEATURE_NAME, ds);		
-		docFeatures.put(Document.DOCUMENT_MARKUP_AWARE_PARAMETER_NAME, "false");		
-		DocumentImpl doc = (DocumentImpl) Factory.createResource("gate.corpora.DocumentImpl", docFeatures);
-		
-		TectoMTAnalyser tmt = new TectoMTAnalyser();
-		
-		
-		TectoMTDocumentAnalyser da = new TectoMTDocumentAnalyser(doc);
-		tmt.documents_to_anlayse.add(da);
-		
-		tmt.setScenarioFilePath(new URL("file:/home/dedek/workspace/tectomt/applications/czeng10/cs_czeng_analysis_dedek_testing.scen"));
-
-		String [] blocks = {"SCzechW_to_SCzechM::TextSeg_tokenizer_and_segmenter"};		
-		tmt.setBlocks(Arrays.asList(blocks));
-		tmt.setLoadScenarioFromFile(false);
-		
-//		da.prepareTMTFile(new URL("file:/tmp/czsem/src/netgraph/czsem/TmT_serializations"));
-//		tmt.produceTMTAnalysis();
-//		da.annotateGateDocumentAcordingtoTMTfile();
-		da.annotateGateDocumentAcordingtoTMTfile("/tmp/czsem/src/netgraph/czsem/TmT_serializations/jihomoravsky55629.txt_00051(2).tmt");
-		
-		
-
-//		System.out.println(doc.toXml());
-		
-//		XPathExperssions.init();
-		
-//		annotateGateDocumentAcordingtoTMTfile(doc, "C:\\workspace\\czsem\\src\\netgraph\\czsem\\TmT_serializations\\sample.tmt");
-//		annotateGateDocumentAcordingtoTMTfile(doc, "C:\\workspace\\czsem\\src\\netgraph\\czsem\\TmT_serializations\\all50_serious_messages_noids_utf8.tmt");
-		
-		
-		ds.sync(doc);		
-		ds.close();
-		*/		
+		da.annotateGateDocumentAcordingtoTMTfile();				
 	}
 
 	@CreoleParameter(comment="Directory where temporary TMT files are stored.", defaultValue="file:/tmp/czsem/src/netgraph/czsem/TmT_serializations")
@@ -396,7 +250,5 @@ public class TectoMTAnalyser extends AbstractLanguageAnalyser implements Process
 	public void setLanguage(String language) {
 		this.language = language;
 	}
-
-
 
 }
