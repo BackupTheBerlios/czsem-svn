@@ -1,14 +1,6 @@
 package czsem.gate;
 
-import java.io.IOException;
-
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathExpressionException;
-
-import org.xml.sax.SAXException;
-
 import gate.Document;
-import gate.util.GateException;
 
 public class SequenceAnnotator
 {

@@ -25,11 +25,6 @@ public class TMTTreeAnnotator
     		"m/form", "m/lemma", "m/tag", "afun", "ord" 	
     };
 
-	public static String[] a_token_sax_features = 
-    {
-    		"form", "lemma", "tag", "afun", "ord" 	
-    };
-
 	
 	public static String[] t_token_features = 
     {
@@ -39,13 +34,6 @@ public class TMTTreeAnnotator
     		"gram/dispmod", "gram/iterativeness"
     };
 
-	public static String[] t_token_sax_features = 
-    {
-    		"nodetype", "t_lemma", "functor", "deepord", "formeme",
-    		"sempos", "degcmp", "negation", "gender", "number",  
-    		"verbmod", "deontmod", "tense", "aspect", "resultative",
-    		"dispmod", "iterativeness", "lex.rf"
-    };
 	
 	protected Node sentece_segment;
 	protected Document document;

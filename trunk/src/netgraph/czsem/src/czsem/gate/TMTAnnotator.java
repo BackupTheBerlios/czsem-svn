@@ -7,28 +7,20 @@ import gate.Factory;
 import gate.FeatureMap;
 import gate.util.InvalidOffsetException;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Stack;
 
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
 
-import org.xml.sax.Attributes;
-import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
 
-public class SAXTMTAnnotator extends DefaultHandler
+public class TMTAnnotator 
 {
-	private String language = "english";
-	
 	public static class Dependency
 	{
 		String [] ids;
@@ -128,233 +120,23 @@ public class SAXTMTAnnotator extends DefaultHandler
 		
 	}
 	
-	private Stack<String> parent_ids = new Stack<String>();
-	private String[] actual_fetures = dummy_feat;
-	private Map<String, Token> actual_tokens;
-	private Sentence actual_sentence;
-	private Token actual_token;
-	private List<Dependency> actual_dependencies;
 	
-	private StringBuilder last_characters = null; 
-	private Stack<String> last_element_qname = new Stack<String>();
 	
-	private final int setence_stack_level = 2;
 
-	
-	private List<Sentence> sentences = new ArrayList<Sentence>();
-	
-	private SAXParser sax_parser;
-	
-	private void setTecto()
-	{
-		actual_fetures = TMTTreeAnnotator.t_token_sax_features;		
-		actual_tokens = actual_sentence.t_tokens;		
-		actual_dependencies = actual_sentence.tDependencies;
-	}
+//	private String tmTFilename;
 
-	private void setAnalytic()
-	{
-		actual_fetures = TMTTreeAnnotator.a_token_sax_features;		
-		actual_tokens = actual_sentence.a_tokens;
-		actual_dependencies = actual_sentence.aDependencies;
-	}
-
-	private static String [] dummy_feat = new String[0]; 
-	private static Map<String, Token> dummy_toc = new HashMap<String, Token>();
-	private List<Dependency> dummy_dep = new ArrayList<Dependency>(50);
-	private String tmTFilename;
+	private List<Sentence> sentences;
 
 
-	private void setDummy()
-	{
-		actual_fetures = dummy_feat;		
-		actual_tokens = dummy_toc;
-		dummy_toc.clear();
-		actual_dependencies = dummy_dep;
-		dummy_dep.clear();
-	}
 
 
-	private void newSentence()
-	{
-		Sentence sent = new Sentence();
-		sentences.add(sent);
-		actual_sentence = sent;
-		
-	}
-	
-	private void newToken(String parent_id, String child_id)
-	{
-		Token toc = new Token(actual_fetures.length, child_id);
-		actual_tokens.put(child_id, toc);
-		actual_token = toc;
-		
-		if (parent_ids.size() > setence_stack_level+1)
-		{
-			Dependency dep = new Dependency(parent_id, child_id);
-			actual_dependencies.add(dep);
-		}
-	}
-
-	@Override
-	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException
-	{
-		last_element_qname.push(qName);
-
-		if (qName.equalsIgnoreCase('S'+language+'T'))
-		{
-			setTecto();
-			return;
-		}
-		if (qName.equalsIgnoreCase('S'+language+'A'))
-		{
-			setAnalytic();
-			return;
-		}
-		if (qName.equalsIgnoreCase('S'+language+'M'))
-		{
-			setDummy();
-			return;
-		}
-		
-		if (qName.equals("LM"))
-		{
-			String prew_id = parent_ids.peek(); 
-			String new_id = attributes.getValue(0);
-			parent_ids.push(new_id);
-
-			if (parent_ids.size() <= setence_stack_level)
-			{
-				newSentence();
-				return;
-			}
-			
-			if (new_id != null)
-			{
-				newToken(prew_id, new_id);
-			}
-		}		
-
-		if (elementoToRead(qName)) last_characters = new StringBuilder();
-	}
-
-	private int testFeatures(String qName, String [] feature_list)
-	{
-		for (int i = 0; i < feature_list.length; i++) {
-			if (feature_list[i].equals(qName))
-			{
-				return i;
-			}
-		}
-		return -1;
-	}
-
-	private void updateFeatures(String qName, String [] feature_list)
-	{
-		int tf = testFeatures(qName, feature_list);
-		if (tf != -1) actual_token.features[tf] = stringFromLastCahrs();		
-	}
-	
-	private String stringFromLastCahrs()
-	{
-		String ret = last_characters.toString();
-		return  ret;
-	}
-
-	private void updateFeatures(String qName)
-	{
-		updateFeatures(qName, actual_fetures);		
-	}
-
-	@Override
-	public void endElement(String uri, String localName, String qName) throws SAXException
-	{
-		String last_qn = last_element_qname.pop();
-		assert last_qn.equals(qName);
-		
-		if (qName.equals("LM"))
-		{
-			parent_ids.pop();
-			if (last_element_qname.peek().equals("aux.rf")) //aux.rf
-			{
-				Dependency aux_rf = new Dependency(parent_ids.peek(), stringFromLastCahrs());
-				actual_sentence.auxRfDependencies.add(aux_rf);
-			}
-		}
-		if (qName.equalsIgnoreCase(language+"_source_sentence"))
-		{
-			actual_sentence.sentence_string = stringFromLastCahrs();
-		}
-		if (parent_ids.size() > setence_stack_level)
-		{
-			updateFeatures(qName);
-		}
-	}
-	
-	private boolean elementoToRead(String element_qname)
-	{
-		String peek = last_element_qname.pop();
-		
-		boolean ret = 
-			element_qname.equalsIgnoreCase(language+"_source_sentence") ||
-			(element_qname.equals("LM") && last_element_qname.peek().equals("aux.rf")) || //aux.rf
-			(testFeatures(element_qname, actual_fetures) != -1);
-		
-		last_element_qname.push(peek);
-		return ret;
-	}
-	
-	@Override
-	public void characters(char[] ch, int start, int length) throws SAXException
-	{
-		if (elementoToRead(last_element_qname.peek()))
-		{
-			last_characters.append(ch, start, length);		
-		}
-	}
 
 	
-	public SAXTMTAnnotator(String language) throws ParserConfigurationException, SAXException
+	public TMTAnnotator(List<Sentence> sentences) throws ParserConfigurationException, SAXException
 	{
-		this.language = language;
-		
-		// Create a JAXP "parser factory" for creating SAX parsers
-	    javax.xml.parsers.SAXParserFactory spf = SAXParserFactory.newInstance();
-
-	    // Configure the parser factory for the type of parsers we require
-	    spf.setValidating(false); // No validation required
-
-	    // Now use the parser factory to create a SAXParser object
-	    // Note that SAXParser is a JAXP class, not a SAX class
-	    sax_parser = spf.newSAXParser();
-
-	    // Create a SAX input source for the file argument
-
-	    // Give the InputSource an absolute URL for the file, so that
-	    // it can resolve relative URLs in a <!DOCTYPE> declaration, e.g.
-//	    input.setSystemId("file://" + new File(args[0]).getAbsolutePath());
+		this.sentences = sentences;		
 	}
 
-	public void parseAndInit(String tmTFilename) throws SAXException, IOException
-	{	
-	    this.tmTFilename = tmTFilename;
-		org.xml.sax.InputSource input = new InputSource(new FileInputStream(tmTFilename));
-
-	    parent_ids.push("TToPP");
-	    // Finally, tell the parser to parse the input and notify the handler
-	    sax_parser.parse(input, this);
-
-	    // Instead of using the SAXParser.parse() method, which is part of the
-	    // JAXP API, we could also use the SAX1 API directly. Note the
-	    // difference between the JAXP class javax.xml.parsers.SAXParser and
-	    // the SAX1 class org.xml.sax.Parser
-	    //
-	    // org.xml.sax.Parser parser = sp.getParser(); // Get the SAX parser
-	    // parser.setDocumentHandler(handler); // Set main handler
-	    // parser.setErrorHandler(handler); // Set error handler
-	    // parser.parse(input); // Parse!
-	    
-	}
 	
 	private SequenceAnnotator seq_anot;
 	private AnnotationSet as;
@@ -395,12 +177,16 @@ public class SAXTMTAnnotator extends DefaultHandler
 
 	private Token[] sortATokens(Map<String, Token> aTokens)
 	{
-		Token[] ret = new Token[aTokens.values().size()];
 		
-		for (Token token : aTokens.values()) {
-			ret[token.getAOrd()-1] = token;
-		}
+		Token[] ret = aTokens.values().toArray(new Token[0]);
 		
+		Arrays.sort(ret, new Comparator<Token>() {
+			@Override
+			public int compare(Token o1, Token o2) {
+				return ((Integer)o1.getAOrd()).compareTo(o2.getAOrd());
+			}
+		});
+				
 		return ret;
 	}
 
@@ -445,7 +231,7 @@ public class SAXTMTAnnotator extends DefaultHandler
 		{
 			Token a_toknen = sentence.a_tokens.get(t_token.getTLexRf());			 
 			
-			FeatureMap fm = loadFeatures(t_token, TMTTreeAnnotator.t_token_sax_features);
+			FeatureMap fm = loadFeatures(t_token, SAXTMTParser.Constants.t_token_sax_features);
 
 			Annotation a;
 			if (a_toknen == null)
@@ -480,6 +266,8 @@ public class SAXTMTAnnotator extends DefaultHandler
 	
 	private void annotateATokens(Sentence sentence) throws InvalidOffsetException
 	{
+//		sentence.printTokens(sentence.a_tokens, System.out);
+//		System.out.println(sentence.a_tokens.size());
 		Token[] tokens = sortATokens(sentence.a_tokens);
 		
 		for (int i = 0; i < tokens.length; i++)
@@ -489,7 +277,7 @@ public class SAXTMTAnnotator extends DefaultHandler
 			
 //			try {
 				seq_anot.nextToken(tokens[i].getAForm());
-				annotateTokenSeq(tokens[i], TMTTreeAnnotator.a_token_sax_features, "Token");
+				annotateTokenSeq(tokens[i], SAXTMTParser.Constants.a_token_sax_features, "Token");
 //			} catch (IndexOutOfBoundsException e) {
 //				e.printStackTrace();
 //			}
@@ -546,19 +334,154 @@ public class SAXTMTAnnotator extends DefaultHandler
 	public void debug_print(PrintStream out)
 	{
 	    out.println("------------------------------------------------------------");
-	    out.println(tmTFilename);	    
+//	    out.println(tmTFilename);	    
 	    out.println("Sentences: " + sentences.size());
 	    if (sentences.size() <= 0) return;
-	    out.println("Last Sentence string: " + actual_sentence.sentence_string);
-	    out.println("Last Sentence aTokens: " + actual_sentence.a_tokens.size());
-	    out.println("Last Sentence num tTokens: " + actual_sentence.t_tokens.size());
+	    out.println("First Sentence string: " + sentences.get(0).sentence_string);
+	    out.println("First Sentence aTokens: " + sentences.get(0).a_tokens.size());
+	    out.println("First Sentence num tTokens: " + sentences.get(0).t_tokens.size());
+	    int last_s = sentences.size()-1;
+	    Sentence last_sentence = sentences.get(last_s);
+	    out.println("Last Sentence string: " + last_sentence.sentence_string);
+	    out.println("Last Sentence aTokens forms: ");
+		Token[] tokens = sortATokens(last_sentence.a_tokens);
+		for (int i = 0; i < tokens.length; i++) {
+			out.print(tokens[i].getAForm());
+			out.print(' ');
+		}
+		out.println();
+/**/
+	    out.println("Last Sentence aTokens: " + last_sentence.a_tokens.size());
+	    out.println("Last Sentence num tTokens: " + last_sentence.t_tokens.size());
 	    out.println("Last Sentence tTokens: ");
-	    actual_sentence.printTokens(actual_sentence.t_tokens, out); 
+	    last_sentence.printTokens(last_sentence.t_tokens, out); 
 	    out.println("-- tDependencies --");
-	    actual_sentence.printDependecies(actual_sentence.tDependencies, out); 
+	    last_sentence.printDependecies(last_sentence.tDependencies, out); 
 	    out.println("-- aux.rf --");
-	    actual_sentence.printDependecies(actual_sentence.auxRfDependencies, out); 		
+	    last_sentence.printDependecies(last_sentence.auxRfDependencies, out);
+/**/	     		
 	}
 
 	
 }
+
+
+/*
+
+@Override
+public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException
+{
+	last_element_qname.push(qName);
+
+	if (qName.equalsIgnoreCase('S'+language+'T'))
+	{
+		setTecto();
+		return;
+	}
+	if (qName.equalsIgnoreCase('S'+language+'A'))
+	{
+		setAnalytic();
+		return;
+	}
+	if (qName.equalsIgnoreCase('S'+language+'M'))
+	{
+		setDummy();
+		return;
+	}
+	
+	if (qName.equals("LM"))
+	{
+		String prew_id = parent_ids.peek(); 
+		String new_id = attributes.getValue(0);
+		parent_ids.push(new_id);
+
+		if (parent_ids.size() <= setence_stack_level)
+		{
+			newSentence();
+			return;
+		}
+		
+		if (new_id != null)
+		{
+			newToken(prew_id, new_id);
+		}
+	}		
+
+	if (elementoToRead(qName)) last_characters = new StringBuilder();
+}
+
+private int testFeatures(String qName, String [] feature_list)
+{
+	for (int i = 0; i < feature_list.length; i++) {
+		if (feature_list[i].equals(qName))
+		{
+			return i;
+		}
+	}
+	return -1;
+}
+
+private void updateFeatures(String qName, String [] feature_list)
+{
+	int tf = testFeatures(qName, feature_list);
+	if (tf != -1) actual_token.features[tf] = stringFromLastCahrs();		
+}
+
+private String stringFromLastCahrs()
+{
+	String ret = last_characters.toString();
+	return  ret;
+}
+
+private void updateFeatures(String qName)
+{
+	updateFeatures(qName, actual_fetures);		
+}
+
+@Override
+public void endElement(String uri, String localName, String qName) throws SAXException
+{
+	String last_qn = last_element_qname.pop();
+	assert last_qn.equals(qName);
+	
+	if (qName.equals("LM"))
+	{
+		parent_ids.pop();
+		if (last_element_qname.peek().equals("aux.rf")) //aux.rf
+		{
+			Dependency aux_rf = new Dependency(parent_ids.peek(), stringFromLastCahrs());
+			actual_sentence.auxRfDependencies.add(aux_rf);
+		}
+	}
+	if (qName.equalsIgnoreCase(language+"_source_sentence"))
+	{
+		actual_sentence.sentence_string = stringFromLastCahrs();
+	}
+	if (parent_ids.size() > setence_stack_level)
+	{
+		updateFeatures(qName);
+	}
+}
+
+private boolean elementoToRead(String element_qname)
+{
+	String peek = last_element_qname.pop();
+	
+	boolean ret = 
+		element_qname.equalsIgnoreCase(language+"_source_sentence") ||
+		(element_qname.equals("LM") && last_element_qname.peek().equals("aux.rf")) || //aux.rf
+		(testFeatures(element_qname, actual_fetures) != -1);
+	
+	last_element_qname.push(peek);
+	return ret;
+}
+
+@Override
+public void characters(char[] ch, int start, int length) throws SAXException
+{
+	if (elementoToRead(last_element_qname.peek()))
+	{
+		last_characters.append(ch, start, length);		
+	}
+}
+*/

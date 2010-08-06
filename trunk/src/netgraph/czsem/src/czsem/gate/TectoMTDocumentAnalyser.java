@@ -7,6 +7,7 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -14,6 +15,8 @@ import org.xml.sax.SAXException;
 
 import com.generationjava.io.xml.SimpleXmlWriter;
 import com.generationjava.io.xml.XmlWriter;
+
+import czsem.gate.TMTAnnotator.Sentence;
 
 import gate.Document;
 import gate.creole.AbstractResource;
@@ -30,8 +33,14 @@ public class TectoMTDocumentAnalyser
 	
 	TectoMTDocumentAnalyser(Document doc, String language)
 	{
+		this(doc, language, null);
+	}
+
+	TectoMTDocumentAnalyser(Document doc, String language, String dest_filename)
+	{
 		this.language = language;
 		this.doc = doc;
+		this.dest_filename = dest_filename; 
 	}
 	
 	protected String prepareTMTFileName(URL outputDirectory) throws IOException, URISyntaxException
@@ -78,13 +87,19 @@ public class TectoMTDocumentAnalyser
 	}
 
 	public void annotateGateDocumentAcordingtoTMTfile(String dest_filename) throws ParserConfigurationException, SAXException, IOException, InvalidOffsetException, PersistenceException, SecurityException
-	{        
-    	SAXTMTAnnotator tmt_tree_annot = new SAXTMTAnnotator(language);
+	{
+		SAXTMTParser parser = new SAXTMTParser(language);
+		List<Sentence> sentences = parser.parse(dest_filename);
+		TMTAnnotator tmt_tree_annot = new TMTAnnotator(sentences);
+		tmt_tree_annot.debug_print(System.out);
+/*
+		TMTAnnotator tmt_tree_annot = new TMTAnnotator(language);
     	
     	tmt_tree_annot.parseAndInit(dest_filename);
     	tmt_tree_annot.debug_print(System.out);
     	tmt_tree_annot.annotate(doc);
 		doc.sync();
+*/		
 	}
 
 	public String getTMTFilePath() {

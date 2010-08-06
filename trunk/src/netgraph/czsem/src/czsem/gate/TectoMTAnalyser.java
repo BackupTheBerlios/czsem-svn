@@ -1,6 +1,8 @@
 package czsem.gate;
 
+import gate.Corpus;
 import gate.DataStore;
+import gate.Document;
 import gate.Gate;
 import gate.LanguageAnalyser;
 import gate.ProcessingResource;
@@ -25,8 +27,6 @@ import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 
-import org.apache.commons.logging.impl.Log4JLogger;
-import org.springframework.util.Log4jConfigurer;
 import org.xml.sax.SAXException;
 
 import czsem.utils.ProcessExec;
@@ -256,7 +256,19 @@ public class TectoMTAnalyser extends AbstractLanguageAnalyser implements Process
 
 	public static void main(String[] args) throws GateException, ParserConfigurationException, SAXException, IOException, XPathExpressionException, InterruptedException
 	{
-		gate.Main.main(args);		
+		
+//		gate.Main.main(args);
+/**/		
+		Gate.init();
+	    GateUtils.registerPluginDirectory("Parser_Stanford");
+	    DataStore ds = GateUtils.openDataStore("file:/C:/Users/dedek/AppData/GATE/data_store");
+	    Document doc = GateUtils.loadDocumentFormDatastore(ds, "sample.txt_00026___1280755921102___8929");
+	    	    
+		TectoMTDocumentAnalyser da = new TectoMTDocumentAnalyser(doc, "english", "TmT_serializations/sample.txt_00026.tmt");
+		da.annotateGateDocumentAcordingtoTMTfile();
+
+		
+		
 /*		
 
 		Gate.setNetConnected(false);
