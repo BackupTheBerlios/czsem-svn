@@ -72,12 +72,13 @@ public class WekaSerializer extends Serializer {
 			
 			output.print("assert((");		
 			
-			putInlineBinTuple(relations[r], id, getStringValue(instance, r));						
+			putInlineBinTuple(relations[r], id, getStringValue(instance, r));
+//			System.err.printf("assert((%s(%s,%s))).\n", relations[r].getName(), id, getStringValue(instance, r));
 			
 			output.println(")).");		
 			output.flush();		
-			output.println();
-			output.flush();		
+//			output.println();
+//			output.flush();		
 
 		}		
 	}
@@ -125,6 +126,7 @@ public class WekaSerializer extends Serializer {
 		renderInlineTupleWithoutValueCheck(rel.getName(), new String[] {test_id, "X"});
 		output.println(",print(X),print('\\n'),!.");
 		output.println("print('END\\n').");
+		output.println(); //acknowledge the first solution
 		output.flush();
 				
 	}

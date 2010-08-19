@@ -207,7 +207,7 @@ public abstract class ILPClassifier extends Classifier
 		}				
 	}
 	
-	protected void startILPProcess(int class_index) throws IOException
+	protected void startTestingILPProcess(int class_index) throws IOException
 	{
 		WekaSerializer test_ser = new WekaSerializer(project_setup.renderProjectFileName(".test"));
 		putTestingAxioms(test_ser, class_index);
@@ -216,7 +216,11 @@ public abstract class ILPClassifier extends Classifier
 		testing_ILP_proecess.startPrologProcess(testing_ILP_proecess.getRulesFileName());
 		
 		if (getDebug())
+		{
+			System.out.print("ILPClassifier.startTestingILPProcess(): ");
+			System.err.println("loading test ILP process");			
 			testing_ILP_proecess.startErrReaderThread("run_test");
+		}
 		else
 			testing_ILP_proecess.startNullErrReaderThread();			
 		
@@ -225,10 +229,11 @@ public abstract class ILPClassifier extends Classifier
 	
 	@Override
 	public double classifyInstance(Instance instance) throws Exception
-	{
-		if (testing_ILP_proecess == null) startILPProcess(instance.classIndex());
+	{		
+		if (testing_ILP_proecess == null) startTestingILPProcess(instance.classIndex());
 				
-		String test_id = "test_id_" + last_test_id++;
+		String test_id = "test_id_" + last_test_id;
+//		System.err.println(test_id);
 
 		WekaSerializer test_ser = new WekaSerializer(testing_ILP_proecess.getOutputStream());
 		test_ser.assertBkgTuplesForInstance(instance, test_id, crisp_relations);
@@ -237,7 +242,19 @@ public abstract class ILPClassifier extends Classifier
 						
 		String predicted = testing_ILP_proecess.readLine();
 		
-//		System.out.println("predicted: "+ predicted);
+/*begin testing*		
+		System.err.println("NEW predicted: "+ predicted);
+		String old_prediciton = __classifyInstance_old(instance);
+		if (! predicted.equals(old_prediciton))
+		{
+			System.err.printf("Old prediciton is different! old: %s <> new: %s\n");
+		}
+		System.err.println("------------------------------------");
+/*end testing*/		
+		last_test_id++;
+
+		
+
 		
 		if (predicted.equals("END")) return Instance.missingValue();
 		
@@ -245,10 +262,57 @@ public abstract class ILPClassifier extends Classifier
 		
 		return instance.classAttribute().indexOfValue(predicted);
 	}
+	
+	public String __classifyInstance_old(Instance instance) throws Exception
+	{		
+		
+		WekaSerializer log_ser = new WekaSerializer(project_setup.renderProjectFileName("_old.test_log"), true);
+
+		WekaSerializer test_ser = new WekaSerializer(project_setup.renderProjectFileName("_old.test"));
+//		crisp_relations = test_ser.addAttributeRelations(instance);
+		
+		String test_id = "old_test_id_" + last_test_id;
+
+		test_ser.putBkgTuplesForInstance(instance, test_id, crisp_relations);
+		log_ser.putBkgTuplesForInstance(instance, test_id, crisp_relations);
+		putTestingAxioms(test_ser, instance.classIndex());
+		
+		test_ser.print(":-");
+		test_ser.putTestClassPredicate(test_id, crisp_relations[instance.classIndex()]);
+		test_ser.close();
+		
+		ILPExec test_exec = new ILPExec(project_setup);
+		test_exec.startPrologProcess(test_exec.getRulesFileName());
+		test_exec.startErrReaderThread("run_old_test");
+//		test_exec.consultFile(project_setup.project_name + ".b");
+		test_exec.consultFile(project_setup.project_name + "_old.test");
+				
+
+		String predicted = test_exec.readLine();
+		test_exec.close();
+
+		System.err.println("OLD predicted: "+ predicted);
+		
+		return predicted;
+		
+/*		
+		
+		
+		if (predicted.equals("END")) return Instance.missingValue();
+		
+		if (instance.classAttribute().isNumeric()) return Double.parseDouble(predicted);
+		
+		return instance.classAttribute().indexOfValue(predicted);
+*/		
+	}
+
+
 
 	@Override
 	public String toString()
 	{
+		if (project_setup == null) return super.toString();
+		
 		StringBuilder sb = new StringBuilder(super.toString());
 		sb.append('\n');
 		

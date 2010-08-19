@@ -20,7 +20,7 @@ public class ProcessExec {
 			private Reader is;
 			private Writer os;
 	
-			private char [] buf = new char[1000];
+			private char [] buf = new char[10000];
 			private BufferedReader buf_read;
 	
 			private long last_read = Long.MIN_VALUE;
@@ -33,8 +33,7 @@ public class ProcessExec {
 			}
 			
 			public ReaderThread(Reader is, OutputStream os) {
-				this.is = is;
-				this.os = new PrintWriter(os);
+				this(is, new PrintWriter(os));
 			}
 	
 			public String readLine() throws IOException
@@ -81,9 +80,24 @@ public class ProcessExec {
 			@Override
 			public void run() {
 				try {
+/*
+					int runcnt = 0;
+					int sum = 0;
+/**/					
 					for (int i=readbuf(); i>=0; i=readbuf())
 					{
+/*
+						sum += i;
+						runcnt++;
+						int mod = 100;
+						if (runcnt % mod == 1)
+						{
+							System.out.println(sum / mod);
+							sum = 0;
+						}
+/**/						
 						writeBuf(buf, i);
+//						Thread.sleep(0);
 					}
 				} 
 				catch (IOException e) {}
