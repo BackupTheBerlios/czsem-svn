@@ -19,7 +19,7 @@
 \begin{frontmatter}
 
 
-\title{Fuzzy Classification of Web Reports with Mining from Texts with Linguistic Annotations}
+\title{Fuzzy ILP Classification of Web Reports after Linguistic Text Mining}
 %
 %\author{Jan Dedek and Peter Vojtas\\
 %Department of Software Engineering, Charles University\\
@@ -48,14 +48,7 @@ Prague, Czech Republic}
 Charles University, Prague, Czech Republic}
 
 \begin{abstract}
-In this paper we present a fuzzy system, which provides a fuzzy
-classification of textual web reports. Our approach is based on usage
-of third party linguistic analyzers, our previous work on web
-information extraction and fuzzy inductive logic programming. Main
-contributions are: formal models, prototype implementation,
-extensive evaluation experiments and comparison of our classifier with other
-alternatives like decision trees, support vector machines, neural
-networks etc.
+In this paper we study the problem of classification of textual web reports. We are specifically focused on the issue when structured information extracted from the reports is used for the classification. We present an experimental classification system, which is based on usage of third party linguistic analyzers, our previous work on web information extraction and fuzzy inductive logic programming (fuzzy ILP). A detailed study of so called `Fuzzy ILP Classifier' is the main contribution of the paper. The study includes formal models, prototype implementation, extensive evaluation experiments and comparison of the classier with other alternatives like decision trees, support vector machines, neural networks, etc.
 \end{abstract}
 
 \begin{keyword}
@@ -76,44 +69,59 @@ Machine Learning
 \end{frontmatter}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
-Big amount of information on the web increases the need of automated processing. Especially machine processing and machine understanding of textual information is very difficult. Crisp methods have their limitations. In this paper we present a fuzzy system, which provides a fuzzy classification of textual web reports. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{figure}[hbt!]
+Big amount of information on the web increases the need of automated processing. Especially machine processing and machine understanding of textual information is very difficult. In this paper we study the problem of classification of textual web reports. We are specifically focused on the issue when structured information extracted from the reports is used for the classification. We present an experimental classification system, which is based on usage of third party linguistic analyzers, our previous work on web information extraction and fuzzy inductive logic programming (fuzzy ILP).
+
+\begin{figure}[thb]
 \centerline{\includegraphics[width=0.7\hsize]{img/message}}
 \caption{Example of analyzed web report.}
 \label{img:message}
 \end{figure}
 
 
-Our motivating examples are messages of accident reports on the web (Fig.~\ref{img:message}). We would like to have a tool, which is able to classify such message by a degree of being it a serious accident. 
+The paper is based on a case study of seriousness classification of accident reports. Fig.~\ref{img:message} presents such an example of a message of an accident report from the web. We would like to have a tool, which is able to classify such message by a degree of being it a serious accident.
 
-Our solution is based on information extraction (see the emphasized pieces of information that could be extracted from a report in the Fig.~\ref{img:message}) and on a machine learning procedure that provides rules for fuzzy classification of the reports. Our experiments deal with texts in the Czech language but our method is general and can be used with any structured linguistic representation. In this paper we do not provide many details about the information extraction part of the solution. We concentrate on the classification part.
+Our solution is based on information extraction (see emphasized pieces of information that could be extracted from a report in Fig.~\ref{img:message}) and on a fuzzy-based machine learning procedure that provides rules for classification of the reports.
 
+Our experiments deal with texts in the Czech language but our method is general and it can be used with any structured linguistic representation. In this paper we do not provide many details about the information extraction part of the solution. We concentrate on the classification part and present a detailed study of the fuzzy ILP classification method (so called `Fuzzy ILP Classifier'). 
 
-
-The main contributions of this paper can be stated as follows: 
+In our application we are facing the challenge of induction and/or mining on several places. First we need an inductive procedure when extracting attributes of an accident from web reports texts. Second (the subject of this paper) we need an inductive procedure when trying to explain the degree of seriousness of an accident by the attributes of the accident. On both places ILP is used as the inductive procedure.
 \begin{itemize}
-	\item formal models for fuzzy classification of information from web reports
-	\item prototype implementation and %of a fuzzy classification system
-	\item experimental evaluation of our fuzzy classification system.
+	\item During the information extraction phase we exploit the fact that ILP can work directly with multirelational data e.g. deep syntactic (tectogrammatical) trees built form sentences of processed text.
+	\item During the classification phase we are experimentally using the Fuzzy ILP Classifier, because it performs quite well on our dataset (see in Section~\ref{sec:eval}) and it is naturally capable to handle fuzzy data, which occurs when the information extraction engine returns also confidence probability values along with the extracted data. But in this paper we do not describe this situation and only the approach is fuzzy in the present demonstration.
 \end{itemize}
 
-Our paper is organized as follows: In the section~\ref{sec:related} we introduce some works that are closely related to ours. In section~\ref{sec:models} we develop our models and methods and the design of our system, focusing on the description of linguistic analyzers, inductive logic programming (ILP), fuzzy inductive logic programming (fuzzy ILP) and several translations of a fuzzy ILP task to crisp ILP. In the section~\ref{sec:prototype_and_experiment} we describe the system prototype implementation, the data and our evaluation experiment. In the section~\ref{sec:results} we present the results of~the~experiment and compare our methods with other classifiers, which are well-known in machine learning. The section~\ref{sec:conclusion} concludes the paper.
+The main contributions of this paper are formal models, prototype implementation and experimental evaluation of the Fuzzy ILP Classifier.
+\medskip
+
+The paper is organized as follows: In Section~\ref{sec:related} we introduce some closely related works. In Section~\ref{sec:system} design of the experimental system is presented, including short description of the information extraction method and linguistic analyzers. Section~\ref{sec:case} provides details about our case study, which is later used for illustration. Section~\ref{sec:ILP} presents formal models of the system (including ILP, fuzzy ILP and several translations of a fuzzy ILP task to classical ILP) followed by a description of implementation of the models in the system. In Section~\ref{sec:results} we present main results of the work, we evaluate and compare the methods with other well-known classifiers. Section~\ref{sec:conclusion} concludes the paper.
+
+ 
 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Related Work} \label{sec:related}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 There are plenty of systems dealing with text mining and text classification. In \citep{dedek:ReYaLiOntoText08} the authors use ontology modeling to enhance text identification. The authors of \citep{dedek:CAP} use preprocessed data from National Automotive Sampling System and test various soft computing methods to modeling severity of injuries (some hybrid methods showed best performance). Methods of Information Retrieval (IR) are very numerous, with extraction mainly based on key word search and similarities. The Connection of IR and text mining techniques with web information retrieval can be found in Chapter Opinion mining in the book of Bing Liu \citep{dedek:WebDataMining}. 
 
-%
+The Fuzzy ILP Classifier can be seen as an ordinary classifier for data with the monotonicity constraint (the target class attribute has to be monotonizable -- a natural ordering has to exist for the target class attribute). There are several other approaches addressing the classification problems with the monotonicity constraint.
+
+The CART-like algorithm for decision tree construction does not guarantee to provide a monotone tree even on a monotone dataset. The algorithm can be modified \citep{dedek:mon_trees} to provide a monotone tree on the dataset by adding the corner elements of a node with an appropriate class label to the existing data whenever necessary.
+
+An interesting approach is presented in \citep{dedek:mon_transf} first, the dataset is ``corrected'' to be monotone (a minimal number of target class labels is changed to get a monotone dataset), then a learning algorithm is applied -- linear programming boosting in the cited paper.
+
+Several other approaches to monotone classification have been presented -- instance based learning \citep{dedek:ibl}, rough sets \citep{dedek:rough_sets} and others.
+
 
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Models, methods, design of the system} \label{sec:models}
+\section{Design of the system} \label{sec:system}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{wrapfigure}[22]{r}{.45\hsize}
 \vspace{-0.5cm}
@@ -128,18 +136,14 @@ There are plenty of systems dealing with text mining and text classification. In
 %\label{img:schema}
 %\end{floatingfigure}
 
-A general schema of our experimental system is shown on the Fig.~\ref{img:schema}. We use our previously developed web information extraction tools based on third party linguistic analyzers (the upper two dashed arrows, this is not a subject of this paper). We extract some structured information from the web and the extracted information is then translated to an ILP knowledge base and along with an user rating it is used for the classification. (We assume that a small amount of learning data is annotated by a human user.) The classification is based on ILP and it could be \emph{fuzzy} or \emph{crisp} (see in next sections).
-
-
-%\begin{figure}[hb!]
-%\centerline{\includegraphics[width=.7\hsize,height=\hsize]{img/schema}}
-%\caption{Schema of the whole system.}
-%\label{img:schema}
-%\end{figure}
+A general schema of our experimental system is shown on Fig.~\ref{img:schema}. We use our previously developed web information extraction tools based on third party linguistic analyzers (the upper two dashed arrows; this is not a subject of this paper). We extract some structured information from the web and the extracted information is then translated to an ILP knowledge base and along with a user rating it is used for the classification. (We assume that a small amount of learning data is annotated by a human user.) The classification is based on ILP and it could be \emph{fuzzy} or \emph{crisp} (crisp denotes a strait forward application of ILP and fuzzy is for the fuzzy method, see in next sections.)
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Linguistic Analysis}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 In this section we will briefly describe the linguistic tools that
 we have used to produce linguistic annotations of texts. 
 These tools are being developed in the Institute of Formal
@@ -190,7 +194,9 @@ of natural language \citep{dedek:KlTransformationBasedTectogrammatical2006}.
 \end{description}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Web Information Extraction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 After the content of a web resource is analyzed by the above mentioned linguistic tools, the output linguistic data is stored in the form of tectogrammatical trees. To achieve our objectives we have to extract information from this representation. 
 Here we refer to our previous work \citep{dedek:DeVoComputingaggregations2008,dedek:DeVoLinguisticextraction2008,dedek:DeEcExperimentswith2008}. A long path of tools starting with web crawling and resulting with the extracted structured information has been developed in our previous works. 
@@ -210,9 +216,111 @@ Note that our method is general and is not limited to Czech and can be used with
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The case study -- accident seriousness classification} \label{sec:case}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+The main experiment presented in this paper leads to the seriousness classification of an accident presented on a web report, %Our long term goal is extraction of semantic information from web reports. 
+which is one of possible utilizations of the extracted information. We use web reports of fire departments of several regions of the Czech Republic. These reports are written Czech and can be accessed through the web of the General Directorate of the Fire and Rescue Service of the Czech Republic\footnote{\url{http://www.hzscr.cz}}. 
+%These reports are rich in information, e.g. where and when an traffic accident occurred, which units helped, how much time it took them to show up on the place of accident, how many people were injured, killed etc.
+
+For our experiment we have selected a collection of 50 web reports. We have identified several features presented in these reports and manually extracted corresponding values. This will be described in more detail in the section \ref{sec:features}. To each report we have also assigned a value of overall ranking of seriousness of the presented accident, which is the target of the classification. The whole dataset can be downloaded from our Fuzzy ILP classifier's web page\footnote{\url{http://www.ksi.mff.cuni.cz/~dedek/fuzzyILP/}}.
+
+In this experiment we have not used an information extracted by our automated information extraction tools. In this paper we are concentrated on~the classification and the actual source of the information is not so important. The integration step is still waiting to be done.
+
+%There are two objectives to do. Fist is the web information extraction, a long path starting with web crawling and resulting with the extracted structured information. Second is the seriousness classification, which utilizes the extracted information. We have made much work on the first (see e.g. %\citep{biblio:DeVoLinguisticextraction2008,biblio:DeVoComputingaggregations2008, biblio:DeEcExperimentswith2008}), in this paper we will concentrate on the second.
+%\citep{biblio:DeEcExperimentswith2008}), in this paper we will concentrate on the second.
+
+
+
+
+\begin{table}
+\centerline{\includegraphics[width=.5\hsize]{img/attributes_description}}
+\caption{Accident attributes.}
+\label{img:attributes_description}
+\end{table}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Features of accidents} \label{sec:features}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%\begin{wraptable}{r}{.5\hsize}
+%\centerline{\includegraphics[width=\hsize]{img/attributes_description}}
+%\caption{Accident attributes.}
+%\label{img:attributes_description}
+%\end{wraptable}
+
+The table~\ref{img:attributes_description} summarizes all features (or attributes) that we have obtained from accident reports. Except the attribute \verb+type+ (type of an accident -- \verb+fire+, \verb+car_accident+ and \verb+other+) all the attributes are numerical and so monotonizable. There are cases when the value of an attribute is unknown. We have decided to make evidence of this and keep the values \verb+unknown+ in our knowledge base. A brief explanation of each attribute follows.
+\begin{itemize}
+	\item \verb+size+ is the file size of the text of the particular report.
+	\item \verb+damage+ is the amount (in CZK -- Czech Crowns) of the summarized damage arisen during the reported accident.
+	\item \verb+dur_minutes+ is the time taken to handle the accident.
+	\item \verb+fatalities+ and \verb+injuries+ are the numbers of fatalities and injuries taken by the accident.
+	\item \verb+cars+ is the number of cars damaged during the accident (important during car accidents).
+	\item \verb+professional_units+ and \verb+amateur_units+ are the numbers of the fireman units sent for the accident.
+	\item \verb+pipes+ is the number of used fire pipes.
+	\item \verb+lather+, \verb+aqualung+ and \verb+fan+ (ventilator) indicates whether these devices were used.
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Seriousness ranking} \label{sec:seriousness}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\vspace{0.2cm}
+%\noindent \textbf{Seriousness ranking}
+
+\begin{figure}
+\centerline{\includegraphics[width=0.7\hsize]{img/ranking_histogram}}
+\caption{Frequencies of the seriousness ranking.}
+\label{img:ranking_histogram}
+\end{figure}
+
+Values of the overall seriousness ranking attribute were stated from ``a general impression'' from texts of the reports texts with respect to particular attributes. %(Fig.~\ref{img:attributes_description}). 
+The values have evolved to 14 distinct values in the range from 0.5 to 8. 
+A histogram with frequencies of all the values is on the Figure~\ref{img:ranking_histogram}.
+We have divided the values into four approximately equipotent groups 
+(see in the Fig.~\ref{img:ranking_histogram}) 
+and these groups determine the target class attribute in our classification task. 
+%and logic rules were learned for each group separately\footnote{We do not have a binary rule, which would return an exact value of the rating, but we have one ``true/false'' rule for each of the four categories.}.
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{ILP Models and methods} \label{sec:ILP}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
 To make the paper readable we present a short description of the ILP techniques bellow.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Classical ILP}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 In our presentation of ILP we follow \cite{dzeroski2001:relat_dm} and  \cite{biblio:Muggleton94inductivelogic}.
 
 %In our application we are facing the challenge of induction and/or mining on several places. First we need an inductive procedure when extracting attributes of an accident from web reports texts. 
@@ -250,7 +358,11 @@ Main advantage of ILP is its multirelational character, namely $B$ can reside in
 
 
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Fuzzy and GAP induction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 In our presentation of fuzzy ILP we follow the paper of T. Horv\'ath and P. Vojt\'a\v s \citep{biblio:FILP} about fuzzy inductive logic programming.
 We use the approach of the fuzzy logic in narrow sense developed by J.~Pavelka \citep{biblio:Pavelka} and P. H\'ajek \citep{biblio:Hajek}. Formulas are of the form $\varphi, x$ ($\varphi$ is syntactically the same as in the classical case), they are graded by a truth value $x\in [0,1]$.
@@ -282,7 +394,11 @@ A~hypothesis ${\mathcal H}$ typically consists of a fuzzy logic program, which, 
 
 Moreover, in practice, we use GAP -- Generalized Annotated Programs, so graded formulas will be sometimes understood as annotated (with classical connectives and with a more complex annotation of the heads of rules). This is possible, because in \citep{biblio:KLV} we have shown that (some extension of) fuzzy logic programming is equivalent to (some restriction of) generalized annotated programs. 
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Translation of fuzzy ILP task to several classical ILP tasks}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 As far as there is no implementation of fuzzy ILP or GAP, we have to use a~classical ILP system. Fortunately any fuzzy ILP task can be translated to several classical ILP tasks (subject to some rounding and using a finite set of truth values).
 
@@ -350,84 +466,15 @@ is a correct solution of the fuzzy ILP task given by ${\mathcal E}$ and ${\mathc
 \end{theorem}
 Our presentation is here a little bit simplified and we freely switch between fuzzy and GAP programs, which are known to be equivalent, see in~\citep{biblio:KLV}.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The system prototype and our experiment} \label{sec:prototype_and_experiment}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The main experiment presented in this paper leads to the seriousness classification of an accident presented on a web report, %Our long term goal is extraction of semantic information from web reports. 
-which is one of possible utilizations of the extracted information. We use web reports of fire departments of several regions of the Czech Republic. These reports are written Czech and can be accessed through the web of the General Directorate of the Fire and Rescue Service of the Czech Republic\footnote{\url{http://www.hzscr.cz}}. 
-%These reports are rich in information, e.g. where and when an traffic accident occurred, which units helped, how much time it took them to show up on the place of accident, how many people were injured, killed etc.
-
-For our experiment we have selected a collection of 50 web reports. We have identified several features presented in these reports and manually extracted corresponding values. This will be described in more detail in the section \ref{sec:features}. To each report we have also assigned a value of overall ranking of seriousness of the presented accident, which is the target of the classification. The whole dataset can be downloaded from our Fuzzy ILP classifier's web page\footnote{\url{http://www.ksi.mff.cuni.cz/~dedek/fuzzyILP/}}.
-
-In this experiment we have not used an information extracted by our automated information extraction tools. In this paper we are concentrated on~the classification and the actual source of the information is not so important. The integration step is still waiting to be done.
-
-%There are two objectives to do. Fist is the web information extraction, a long path starting with web crawling and resulting with the extracted structured information. Second is the seriousness classification, which utilizes the extracted information. We have made much work on the first (see e.g. %\citep{biblio:DeVoLinguisticextraction2008,biblio:DeVoComputingaggregations2008, biblio:DeEcExperimentswith2008}), in this paper we will concentrate on the second.
-%\citep{biblio:DeEcExperimentswith2008}), in this paper we will concentrate on the second.
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Experiment description} \label{sec:experiment_desc}
+\subsection{Implementation} \label{sec:implementation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-For the seriousness classification we have used two inductive logic approaches -- Crisp ILP and Fuzzy ILP (as described above). Technically the difference between the approaches consists in different setting of the \emph{ILP task}. Both can be done with a classical ILP tool. We have used 
+In our experimental system we are using two inductive logic approaches -- Crisp ILP and Fuzzy ILP (as described above). Technically the difference between the approaches consists in different setting of the \emph{ILP task}. Both can be done with a classical ILP tool. We have used 
 ``\emph{A Learning Engine for Proposing Hypotheses}'' (Aleph  v5\footnote{\url{http://www.comlab.ox.ac.uk/activities/machinelearning/Aleph/}}), which we consider very practical. It uses quite effective method of \emph{inverse entailment} \citep{biblio:InverseEntailment} and keeps all handy features of a Prolog system (it is supported by YAP and SWI Prolog) in its background.
 
 We have compared results of the Crisp and Fuzzy ILP approaches with other classification methods and in our experiment the fuzzy approach made better results than the crisp one and also than many other methods. See the section \ref{sec:results} for the details.
-
-
-
-\begin{table}
-\centerline{\includegraphics[width=.5\hsize]{img/attributes_description}}
-\caption{Accident attributes.}
-\label{img:attributes_description}
-\end{table}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Features of accidents} \label{sec:features}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-%\begin{wraptable}{r}{.5\hsize}
-%\centerline{\includegraphics[width=\hsize]{img/attributes_description}}
-%\caption{Accident attributes.}
-%\label{img:attributes_description}
-%\end{wraptable}
-
-The table~\ref{img:attributes_description} summarizes all features (or attributes) that we have obtained from accident reports. Except the attribute \verb+type+ (type of an accident -- \verb+fire+, \verb+car_accident+ and \verb+other+) all the attributes are numerical and so monotonizable. There are cases when the value of an attribute is unknown. We have decided to make evidence of this and keep the values \verb+unknown+ in our knowledge base. A brief explanation of each attribute follows.
-\begin{itemize}
-	\item \verb+size+ is the file size of the text of the particular report.
-	\item \verb+damage+ is the amount (in CZK -- Czech Crowns) of the summarized damage arisen during the reported accident.
-	\item \verb+dur_minutes+ is the time taken to handle the accident.
-	\item \verb+fatalities+ and \verb+injuries+ are the numbers of fatalities and injuries taken by the accident.
-	\item \verb+cars+ is the number of cars damaged during the accident (important during car accidents).
-	\item \verb+professional_units+ and \verb+amateur_units+ are the numbers of the fireman units sent for the accident.
-	\item \verb+pipes+ is the number of used fire pipes.
-	\item \verb+lather+, \verb+aqualung+ and \verb+fan+ (ventilator) indicates whether these devices were used.
-\end{itemize}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Seriousness ranking} \label{sec:seriousness}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%\vspace{0.2cm}
-%\noindent \textbf{Seriousness ranking}
-
-\begin{figure}
-\centerline{\includegraphics[width=0.7\hsize]{img/ranking_histogram}}
-\caption{Frequencies of the seriousness ranking.}
-\label{img:ranking_histogram}
-\end{figure}
-
-Values of the overall seriousness ranking attribute were stated from ``a general impression'' from texts of the reports texts with respect to particular attributes. %(Fig.~\ref{img:attributes_description}). 
-The values have evolved to 14 distinct values in the range from 0.5 to 8. 
-A histogram with frequencies of all the values is on the Figure~\ref{img:ranking_histogram}.
-We have divided the values into four approximately equipotent groups 
-(see in the Fig.~\ref{img:ranking_histogram}) 
-and these groups determine the target class attribute in our classification task. 
-%and logic rules were learned for each group separately\footnote{We do not have a binary rule, which would return an exact value of the rating, but we have one ``true/false'' rule for each of the four categories.}.
 
 
 
@@ -481,9 +528,6 @@ and these groups determine the target class attribute in our classification task
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Data transformation} \label{sec:data_transformation}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 To use ILP for the classification task we have to translate the input data to the Prolog-like logic representation. As already described in previous sections, the transformations in the crisp and in the fuzzy case are different. Here we will describe the implementation details of the construction of~the~crisp and fuzzy knowledge bases and example sets.
 
@@ -516,7 +560,35 @@ All the negations we use (Fig.~\ref{img:attribute_monotonization} and Fig.~\ref{
 
 
 \begin{figure}[bht]
-\centerline{\includegraphics[width=0.6\hsize,height=0.65\hsize]{img/rules}}
+%\centerline{\includegraphics[width=0.6\hsize,height=0.65\hsize]{img/rules}}
+\scriptsize
+
+   \verb@serious_0(A) :- fatalities(A,0), injuries(A,0), cars(A,1), amateur_units(A,0), lather(A,0).@
+\\ \verb@serious_0(A) :- fatalities(A,0), cars(A,0), amateur_units(A,0), professional_units(A,1).@
+\\ \verb@serious_1(A) :- amateur_units(A,1).@
+\\ \verb@serious_1(A) :- damage(A,300000).@
+\\ \verb@serious_1(A) :- type(A,fire), amateur_units(A,0), pipes(A,2).@
+\\ \verb@serious_1(A) :- type(A,car_accident),dur_minutes(A,unknown),fatalities(A,0),injuries(A,1).@
+\\ \verb@serious_2(A) :- lather(A,unknown).@
+\\ \verb@serious_2(A) :- cars(A,0), lather(A,0), aqualung(A,1), fan(A,0).@
+\\ \verb@serious_2(A) :- amateur_units(A,2).@
+\\ \verb@serious_3(A) :- fatalities(A,2).@
+\\ \verb@serious_3(A) :- type(A,fire), dur_minutes(A,unknown), cars(A,0), fan(A,0).@
+\\ \verb@serious_3(A) :- injuries(A,2), cars(A,2).@
+\\ \verb@serious_3(A) :- fatalities(A,1).@
+\\
+\\ \verb@serious_atl_0(A).@
+\\ \verb@serious_atl_1(A) :- injuries_atl(A,1).@
+\\ \verb@serious_atl_1(A) :- dur_minutes_atl(A,21), pipes_atl(A,1), aqualung_atl(A,0).@
+\\ \verb@serious_atl_1(A) :- damage_atl(A,8000), amateur_units_atl(A,3).@
+\\ \verb@serious_atl_1(A) :- dur_minutes_atl(A,197).@
+\\ \verb@serious_atl_1(A) :- dur_minutes_atl(A,unknown).@
+\\ \verb@serious_atl_2(A) :- dur_minutes_atl(A,50), pipes_atl(A,3).@
+\\ \verb@serious_atl_2(A) :- size_atl(A,1364), injuries_atl(A,1).@
+\\ \verb@serious_atl_2(A) :- fatalities_atl(A,1).@
+\\ \verb@serious_atl_2(A) :- size_atl(A,1106), professional_units_atl(A,3).@
+\\ \verb@serious_atl_3(A) :- fatalities_atl(A,1).@
+\\ \verb@serious_atl_3(A) :- damage_atl(A,1500000).@
 \caption{Crisp and monotonized hypotheses.}
 \label{img:rules}
 \end{figure}
@@ -561,7 +633,7 @@ In both cases the learning examples and the background knowledge have the origin
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Evaluation}
+\subsection{Evaluation} \label{sec:eval}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{figure}[p]
@@ -659,7 +731,7 @@ not increase bias dramatically).
 
 \begin{table}
 \scriptsize
-{\centering \begin{tabular}{l|r@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.3cm}}r@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}l@{\hspace{0cm}}r@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0cm}}cc@{\hspace{0.25cm}}c@{\hspace{0.15cm}}}
+{\centering \begin{tabular}{l|r@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.3cm}}r@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}l@{\hspace{0cm}}r@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0cm}}c@{\hspace{0.25cm}}c@{\hspace{0.20cm}}c@{\hspace{0.10cm}}}
 & \multicolumn{3}{c}{Fuzzy}& \multicolumn{4}{c}{Crisp} & \multicolumn{4}{c}{MultPerc} & \multicolumn{4}{c}{SMO} & \multicolumn{4}{c}{J48} & \multicolumn{4}{c}{JRip} & \multicolumn{4}{c}{LBoost} & train & test\\
 \hline
 car & .39 & $\pm$ & .03 & .36 & $\pm$ & .03 & $\bullet$ & .53 & $\pm$ & .02 & $\circ$ & .57 & $\pm$ & .01 & $\circ$ & .50 & $\pm$ & .02 & $\circ$ & .51 & $\pm$ & .03 & $\circ$ & .54 & $\pm$ & .02 & $\circ$ & 173 & 1554\\
@@ -671,6 +743,8 @@ cmc & .79 & $\pm$ & .02 & .77 & $\pm$ & .03 & $\bullet$ & .89 & $\pm$ & .02 & $\
 tae & .50 & $\pm$ & .12 & .39 & $\pm$ & .11 & $\bullet$ & .59 & $\pm$ & .11 & $\circ$ & .55 & $\pm$ & .12 & $\circ$ & .50 & $\pm$ & .12 &  & .37 & $\pm$ & .11 & $\bullet$ & .55 & $\pm$ & .11 & $\circ$ & 135 & 15\\
 \hline
 pop & .66 & $\pm$ & .09 & .54 & $\pm$ & .17 & $\bullet$ & .57 & $\pm$ & .13 & $\bullet$ & .70 & $\pm$ & .06 & $\circ$ & .70 & $\pm$ & .07 & $\circ$ & .70 & $\pm$ & .06 & $\circ$ & .66 & $\pm$ & .10 &  & 80 & 9\\
+\hline
+nurs & .79 & $\pm$ & .04 & .68 & $\pm$ & .06 & $\bullet$ & .81 & $\pm$ & .04 & $\circ$ & .73 & $\pm$ & .04 & $\bullet$ & .80 & $\pm$ & .04 & $\circ$ & .79 & $\pm$ & .06 &  & .83 & $\pm$ & .02 & $\circ$ & 52 & 12907\\
 \hline
 
 \multicolumn{23}{c}{$\circ$, $\bullet$ statistically significant improvement or degradation}\\
@@ -688,6 +762,7 @@ wine \dotfill{} & red wine dataset \url{http://archive.ics.uci.edu/ml/datasets/W
 cmc \dotfill{} & \url{http://archive.ics.uci.edu/ml/datasets/Contraceptive+Method+Choice}\\
 tae \dotfill{} & \url{http://archive.ics.uci.edu/ml/datasets/Teaching+Assistant+Evaluation}\\
 pop \dotfill{} & \url{http://archive.ics.uci.edu/ml/datasets/Post-Operative+Patient}\\
+nurs \dotfill{} & \url{http://archive.ics.uci.edu/ml/datasets/Nursery}\\
 \end{tabular}
 }
 
