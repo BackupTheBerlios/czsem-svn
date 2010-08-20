@@ -199,7 +199,9 @@ of natural language \citep{dedek:KlTransformationBasedTectogrammatical2006}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 After the content of a web resource is analyzed by the above mentioned linguistic tools, the output linguistic data is stored in the form of tectogrammatical trees. To achieve our objectives we have to extract information from this representation. 
-Here we refer to our previous work \citep{dedek:DeVoComputingaggregations2008,dedek:DeVoLinguisticextraction2008,dedek:DeEcExperimentswith2008}. A long path of tools starting with web crawling and resulting with the extracted structured information has been developed in our previous works. 
+Here we refer to our previous work %\citep{dedek:DeVoComputingaggregations2008,dedek:DeVoLinguisticextraction2008,dedek:DeEcExperimentswith2008}.
+\citep{dedek:DeVoComputingaggregations2008,dedek:DeEcExperimentswith2008}.
+ A long path of tools starting with web crawling and resulting with the extracted structured information has been developed in our previous works. 
 In the Fig.~\ref{img:tree} nodes of the tectogrammatical tree are decorated. A piece of information about the damage of 8000 CZK can be found there (the three nodes on the right). We have used ILP to learn rules, which are able to detect these nodes. 
 %In this paper we will concentrate on the usage of such extracted information to be able to classify content. 
 The extraction process requires a human assistance when annotating the training data.
@@ -656,7 +658,7 @@ Prec	& .56 & $\pm$ & .24 & .53 & $\pm$ & .37 &         	& .35 & $\pm$ & .20 & $\
 Rec		& .61 & $\pm$ & .19 & .49 & $\pm$ & .32 &         	& .41 & $\pm$ & .19 & $\bullet$ & .36 & $\pm$ & .24 & $\bullet$ & .41 & $\pm$ & .22 & $\bullet$ & .44 & $\pm$ & .17 & $\bullet$ & .59 & $\pm$ & .26 &        \\
 F			& .56 & $\pm$ & .20 & .49 & $\pm$ & .33 &         	& .36 & $\pm$ & .19 & $\bullet$ & .32 & $\pm$ & .24 & $\bullet$ & .39 & $\pm$ & .21 &         	& .36 & $\pm$ & .19 & $\bullet$ & .56 & $\pm$ & .27 &        \\
 \hline
-\multicolumn{21}{c}{$\circ$, $\bullet$ statistically significant improvement or degradation}\\
+\multicolumn{21}{c}{$\circ$, $\bullet$ statistically significant increase or decrease}\\
 \end{tabular} \scriptsize \par}
 \scriptsize
 \smallskip
@@ -674,9 +676,9 @@ LBoost \dotfill{} & meta.LogitBoost '-P 100 -F 0 -R 1 -L -1.7976931348623157E308
 Corr \dotfill{} & Percent correct\\
 Inor \dotfill{} & Percent incorrect\\
 Uncl \dotfill{} & Percent unclassified\\
-Prec \dotfill{} & Weighted avg IR precision\\
-Rec \dotfill{} 	& Weighted avg IR recall\\
-F \dotfill{} 		& Weighted avg F measure\\
+Prec \dotfill{} & IR precision, weighted average from all classes\\
+Rec \dotfill{} 	& IR recall, weighted average from all classes\\
+F \dotfill{} 		& F measure, weighted average from all classes\\
 \end{tabular}
 }
 \caption{Evaluation of the methods in 2 times 10-fold cross validation.}
@@ -702,34 +704,35 @@ The obtained results (average values) are described by the graph on the Fig.~\re
 
 There is no clear winner in our experiment. But the Fuzzy ILP classifier proved better results than majority of the methods on our data and the results are statistically significant in many cases. Very good results obtained also the LogitBoost. 
 
-The LogitBoost algorithm is described in the publication of \cite{biblio:LogitBoost}.
-The basic idea of the boosting algorithm is to learn several simple models
-on reweighted data and combine their opinions to get the resulting
-classification.
-In our case, the simple models where decision stamps, i.e. decision trees
-with only one nonleaf node.
-In each iteration, an optimal decision stamp for each target value is
-learned. Then, the training dataset is reweighted in a way that
-records badly classified by current model are given higher weight in the
-next iteration.
-A new record is classified as follows: for each target value, predictions
-of its decision stamps are summed up.
-The target value with the highest vote wins.
-
-We consider boosting as an enhancement of decision trees. A deep decision
-tree is too dependent on the randomness in the data. It has a high variance.
-Boosting of (tiny) trees fits an additive logistic regression model on them,
-i.e. uses a statistically justifiable way of building a collection of tiny
-trees. This seems to have low variance and keeps high expressiveness (does
-not increase bias dramatically).
-
+%The LogitBoost algorithm is described in the publication of \cite{biblio:LogitBoost}.
+%The basic idea of the boosting algorithm is to learn several simple models
+%on reweighted data and combine their opinions to get the resulting
+%classification.
+%In our case, the simple models where decision stamps, i.e. decision trees
+%with only one nonleaf node.
+%In each iteration, an optimal decision stamp for each target value is
+%learned. Then, the training dataset is reweighted in a way that
+%records badly classified by current model are given higher weight in the
+%next iteration.
+%A new record is classified as follows: for each target value, predictions
+%of its decision stamps are summed up.
+%The target value with the highest vote wins.
+%
+%We consider boosting as an enhancement of decision trees. A deep decision
+%tree is too dependent on the randomness in the data. It has a high variance.
+%Boosting of (tiny) trees fits an additive logistic regression model on them,
+%i.e. uses a statistically justifiable way of building a collection of tiny
+%trees. This seems to have low variance and keeps high expressiveness (does
+%not increase bias dramatically).
+%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% U C I
+\subsubsection*{UCI datasets}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\begin{table}
+
+\begin{table}[th!]
 \scriptsize
 {\centering \begin{tabular}{l|r@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.3cm}}r@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}l@{\hspace{0cm}}r@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0cm}}c@{\hspace{0.25cm}}c@{\hspace{0.20cm}}c@{\hspace{0.10cm}}}
 & \multicolumn{3}{c}{Fuzzy}& \multicolumn{4}{c}{Crisp} & \multicolumn{4}{c}{MultPerc} & \multicolumn{4}{c}{SMO} & \multicolumn{4}{c}{J48} & \multicolumn{4}{c}{JRip} & \multicolumn{4}{c}{LBoost} & train & test\\
@@ -746,7 +749,6 @@ pop & .66 & $\pm$ & .09 & .54 & $\pm$ & .17 & $\bullet$ & .57 & $\pm$ & .13 & $\
 \hline
 nurs & .79 & $\pm$ & .04 & .68 & $\pm$ & .06 & $\bullet$ & .81 & $\pm$ & .04 & $\circ$ & .73 & $\pm$ & .04 & $\bullet$ & .80 & $\pm$ & .04 & $\circ$ & .79 & $\pm$ & .06 &  & .83 & $\pm$ & .02 & $\circ$ & 52 & 12907\\
 \hline
-
 \multicolumn{23}{c}{$\circ$, $\bullet$ statistically significant improvement or degradation}\\
 \end{tabular} \scriptsize \par}
 \scriptsize
@@ -766,24 +768,36 @@ nurs \dotfill{} & \url{http://archive.ics.uci.edu/ml/datasets/Nursery}\\
 \end{tabular}
 }
 
+
 \smallskip
 
+
 Learning parameters for both ILP methods:\\set(noise,20). set(i,3). set(clauselength,13). set(search,heuristic). set(evalfn,wracc). set(samplesize,3).
-\caption{Evaluation of the methods in 2 times 10-fold cross validation.}
+\caption{Evaluation of the methods on UCI datasets, \textbf{percent correct}, average values form 100 repetitions.}
 \label{tab:UCItable}
 \end{table}
 
 
+The Fuzzy ILP classifier performed quite well on our dataset, but the next question is: How is it with other data, with more learning instances and what about the time complexity? To answer these questions we have done another experiment. We have selected several datasets form the University of California, Irvine, Repository of Machine Learning Databases (UCI) \citep{dedek:UCI} and evaluated all the methods against them. 
+
+
+
+The list of selected datasets can be found in the legend of Table~\ref{tab:UCItable}. All the dataset are monotonizable (the target attribute can be naturally ordered), so the fuzzy classifier could take advantage of that. Learning settings are the same as before (Table~\ref{tab:table2x10}) except settings of both ILP classifiers, which on majority of the datasets performed a little bit better with modified settings (see in the legend of Table~\ref{tab:UCItable}). 
+
+Table~\ref{tab:UCItable} compares the numbers of correctly classified instances on all the datasets. Last two columns show numbers of training and testing instances. The numbers of training instances are quite low; this is because the ILP classifiers are probably not capable to fully exploit higher numbers of training instances and the difference between ILP classifiers and the others would be even a bit bigger. This is demonstrated on Fig.~\ref{img:corect_growing_learninig_instances} (for `nursery' dataset only). It can be seen that when the number of training instances was under about 40, the fuzzy classifier performed better than some of the others (SMO, JRip and Multilayer Perceptron), but from about 60 training instances the ILP classifiers performed worst on the `nursery' dataset.
+
+
 \begin{figure}
-\centerline{\includegraphics[width=\hsize]{img/corect_growing_learninig_instances}}
-\caption{Number of correctly classified instances - number of learning examples.}
+\centerline{\includegraphics[width=0.9\hsize]{img/corect_growing_learninig_instances}}
+\caption{x-axis: number of training instances, y-axis: percent of correctly classified instances, average values form 10 repetitions, `nursery' dataset.}
 \label{img:corect_growing_learninig_instances}
 \end{figure}
 
+Fig.~\ref{img:learning_speed} demonstrates time complexity of the classifiers in the same experiment as in Fig.~\ref{img:corect_growing_learninig_instances}. Despite the fact that Fuzzy ILP classifier was several times slower than the Crisp ILP classifier and even more than the others it is still computable on current processors (e.g. P9600, 2.66 GHz that we have used) and the curve of time complexity did not grow any rapidly during the experiment. Because ILP is a heuristic and iterative method the time complexity can be quite directly managed by the setting of learning parameters.
 
 \begin{figure}
 \centerline{\includegraphics[width=\hsize]{img/learning_speed}}
-\caption{Learning time - number of learning examples.}
+\caption{x-axis: number of training instances, y-axis: training time in seconds, average values form 10 repetitions, `nursery' dataset.}
 \label{img:learning_speed}
 \end{figure}
 
