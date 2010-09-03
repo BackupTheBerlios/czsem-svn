@@ -1,0 +1,55 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>czsem</groupId>
+  <artifactId>czsem</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <dependencies>
+  	<dependency>
+  		<groupId>xmlwriter</groupId>
+  		<artifactId>xmlwriter</artifactId>
+  		<version>2.2.2</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>pdfbox</groupId>
+  		<artifactId>pdfbox</artifactId>
+  		<version>0.7.3</version>
+  		<type>jar</type>
+  		<scope>compile</scope>
+  	</dependency>
+  	<dependency>
+  		<groupId>gate</groupId>
+  		<artifactId>gate</artifactId>
+  		<version>5.2.1</version>
+  		<type>pom</type>
+  		<scope>compile</scope>
+  		<exclusions>
+  			<exclusion>
+  				<artifactId>jwnl</artifactId>
+  				<groupId>net.didion</groupId>
+  			</exclusion>
+  			<exclusion>
+  				<artifactId>lookup</artifactId>
+  				<groupId>nl.mpi</groupId>
+  			</exclusion>
+  		</exclusions>
+  	</dependency>
+  </dependencies>
+  <dependencyManagement>
+  	<dependencies>
+  	</dependencies>
+  </dependencyManagement>
+  <repositories>
+	  <repository>  
+	  <id>gate-ontototext</id>  
+	  <url>http://maven.ontotext.com/archiva/repository/public</url>  
+	  <snapshots>  
+	    <!-- set this to true to use snapshot builds of GATE -->  
+	    <enabled>false</enabled>  
+	  </snapshots>  
+	  <releases>  
+	    <enabled>true</enabled>  
+	    <checksumPolicy>fail</checksumPolicy>  
+	  </releases>  
+	</repository>
+</repositories> 
+</project>

@@ -210,9 +210,12 @@ public class TrainTestGateOnCzech {
 	    logger.setLevel(Level.OFF);
 	    logger = Logger.getLogger(SerialController.class);
 	    logger.setLevel(Level.OFF);
+	    logger = Logger.getLogger(Gate.class);
+	    logger.setLevel(Level.OFF);
 
 		
-		Gate.init();
+	    Gate.setGateHome(new File("C:\\Program Files\\GATE-5.2.1"));
+	    Gate.init();
 	    GateUtils.registerPluginDirectory("Parser_Stanford");
 	    GateUtils.registerPluginDirectory("Machine_Learning");
 	    GateUtils.registerPluginDirectory("ANNIE");
@@ -278,7 +281,7 @@ public class TrainTestGateOnCzech {
 	}
 	
 
-	@SuppressWarnings({ "unchecked" })
+	@SuppressWarnings("rawtypes")
 	public static void jape_pok (gate.Document doc, java.util.Map bindings, 
 			                     gate.AnnotationSet annotations, 
 			                     gate.AnnotationSet inputAS, gate.AnnotationSet outputAS, 

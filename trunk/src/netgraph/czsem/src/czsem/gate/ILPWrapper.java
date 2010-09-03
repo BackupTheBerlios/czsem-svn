@@ -41,7 +41,7 @@ public class ILPWrapper implements AdvancedMLEngine
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public void addTrainingInstance(List attributes) throws ExecutionException {				
+	public void addTrainingInstance(@SuppressWarnings("rawtypes") List attributes) throws ExecutionException {				
 		try {
 			serializeTrainingInstance(attributes);
 		} catch (Throwable e) {
@@ -95,7 +95,7 @@ public class ILPWrapper implements AdvancedMLEngine
 		return ilpSer.classifyInstances(instancesGateIds, className);
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public List batchClassifyInstances(List instances) throws ExecutionException
 	{
@@ -109,7 +109,7 @@ public class ILPWrapper implements AdvancedMLEngine
 		}
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	@Override
 	public Object classifyInstance(List attributes) throws ExecutionException {
 		throw new ExecutionException(new NoSuchMethodException("Use batchClassifyInstances instead!"));

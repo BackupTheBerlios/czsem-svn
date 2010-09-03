@@ -48,7 +48,7 @@ Prague, Czech Republic}
 Charles University, Prague, Czech Republic}
 
 \begin{abstract}
-In this paper we study the problem of classification of textual web reports. We are specifically focused on the issue when structured information extracted from the reports is used for the classification. We present an experimental classification system, which is based on usage of third party linguistic analyzers, our previous work on web information extraction and fuzzy inductive logic programming (fuzzy ILP). A detailed study of so called `Fuzzy ILP Classifier' is the main contribution of the paper. The study includes formal models, prototype implementation, extensive evaluation experiments and comparison of the classier with other alternatives like decision trees, support vector machines, neural networks, etc.
+In this paper we study the problem of classification of textual web reports. We are specifically focused on situations in which structured information extracted from the reports is used for classification. We present an experimental classification system based on usage of third party linguistic analyzers, our previous work on web information extraction, and fuzzy inductive logic programming (fuzzy ILP). A detailed study of the so-called `Fuzzy ILP Classifier' is the main contribution of the paper. The study includes formal models, prototype implementation, extensive evaluation experiments and comparison of the classifier with other alternatives like decision trees, support vector machines, neural networks, etc.
 \end{abstract}
 
 \begin{keyword}
@@ -73,7 +73,7 @@ Machine Learning
 \section{Introduction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Big amount of information on the web increases the need of automated processing. Especially machine processing and machine understanding of textual information is very difficult. In this paper we study the problem of classification of textual web reports. We are specifically focused on the issue when structured information extracted from the reports is used for the classification. We present an experimental classification system, which is based on usage of third party linguistic analyzers, our previous work on web information extraction and fuzzy inductive logic programming (fuzzy ILP).
+The vast amount of information on the web increases the need of automated processing. Machine processing and machine understanding of textual information is especially difficult. In this paper we study the problem of classification of textual web reports. We are specifically focused on the situations in which structured information extracted from the reports is used for such classification. We present an experimental classification system based on usage of third party linguistic analyzers, our previous work on web information extraction and fuzzy inductive logic programming (fuzzy ILP).
 
 \begin{figure}[thb]
 \centerline{\includegraphics[width=0.7\hsize]{img/message}}
@@ -82,22 +82,22 @@ Big amount of information on the web increases the need of automated processing.
 \end{figure}
 
 
-The paper is based on a case study of seriousness classification of accident reports. Fig.~\ref{img:message} presents such an example of a message of an accident report from the web. We would like to have a tool, which is able to classify such message by a degree of being it a serious accident.
+The paper is based on a case study of seriousness classification of accident reports. Fig.~\ref{img:message} presents an example of an accident report from a message on the web. We would like to have a tool that is able to classify the accident's degree of seriousness in such a message.
 
 Our solution is based on information extraction (see emphasized pieces of information that could be extracted from a report in Fig.~\ref{img:message}) and on a fuzzy-based machine learning procedure that provides rules for classification of the reports.
 
-Our experiments deal with texts in the Czech language but our method is general and it can be used with any structured linguistic representation. In this paper we do not provide many details about the information extraction part of the solution. We concentrate on the classification part and present a detailed study of the fuzzy ILP classification method (so called `Fuzzy ILP Classifier'). 
+Our experiments deal with texts in the Czech language but our method is general and it can be used with any structured linguistic representation. In this paper we do not provide many details about the information extraction part of the solution. We concentrate on the classification part and present a detailed study of the fuzzy ILP classification method (so-called `Fuzzy ILP Classifier'). 
 
-In our application we are facing the challenge of induction and/or mining on several places. First we need an inductive procedure when extracting attributes of an accident from text. Second (the subject of this paper) we need an inductive procedure when trying to explain the degree of seriousness of an accident by the attributes of the accident. On both places ILP is used as the inductive procedure.
+In our application we are facing the challenge of induction and/or mining in several places. First we need an inductive procedure when extracting attributes of an accident from text. Second (the subject of this paper) we need an inductive procedure when trying to explain an accident's degree of seriousness by its attributes. ILP is used as the inductive procedure in both of these places.
 \begin{itemize}
-	\item During the information extraction phase we exploit the fact that ILP can work directly with multirelational data e.g. deep syntactic (tectogrammatical) trees built from sentences of processed text.
-	\item During the classification phase we are experimentally using the Fuzzy ILP Classifier, because it performs quite well on our dataset (see in Section~\ref{sec:eval}) and because it is naturally capable to handle fuzzy data, which occurs when the information extraction engine returns also confidence probability values along with extracted data. But in this paper we do not describe this situation and only the approach is fuzzy in the present demonstration.
+	\item During the information extraction phase, we exploit the fact that ILP can work directly with multirelational data, e.g., deep syntactic (tectogrammatical) trees built from sentences of the processed text.
+	\item During the classification phase, we are experimentally using the Fuzzy ILP Classifier because it performs quite well on our dataset (see Section~\ref{sec:eval}) and it is naturally capable of handling fuzzy data, which occurs when the information extraction engine returns confidence probability values along with extracted data. But in this paper we do not describe this situation; so only the approach is fuzzy in the present demonstration.
 \end{itemize}
 
 The main \emph{contributions} of this paper are \emph{formal models}, prototype \emph{implementation} and experimental \emph{evaluation} of the Fuzzy ILP Classifier.
 \medskip
 
-The paper is organized as follows: In Section~\ref{sec:related} we introduce some closely related works. In Section~\ref{sec:system} design of the experimental system is presented, including a short description of the information extraction method and linguistic analyzers. Section~\ref{sec:case} provides details about our case study, which is later used in examples. Section~\ref{sec:ILP} presents formal models of the system (including ILP, fuzzy ILP and several translations of a fuzzy ILP task to classical ILP) followed by a description of implementation of the models in the system. In Section~\ref{sec:results} we present main results of the work, we evaluate and compare the methods with other well-known classifiers. Section~\ref{sec:conclusion} concludes the paper.
+The paper is organized as follows: In Section~\ref{sec:related} we introduce some closely related works. Design of the experimental system is presented in Section~\ref{sec:system}, including a short description of the information extraction method and linguistic analyzers. Section~\ref{sec:case} provides details about our case study, which is later used in examples. Formal models of the system (including ILP, fuzzy ILP and several translations of a fuzzy ILP task to classical ILP) are presented in Section~\ref{sec:ILP}, followed by a description of implementation of the models in the system. In Section~\ref{sec:results} we present the main results of the work, and then we evaluate and compare the methods with other well-known classifiers. Section~\ref{sec:conclusion} concludes the paper.
 
  
 
@@ -106,15 +106,15 @@ The paper is organized as follows: In Section~\ref{sec:related} we introduce som
 \section{Related Work} \label{sec:related}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-There are plenty of systems dealing with text mining and text classification. In \citep{dedek:ReYaLiOntoText08} the authors use ontology modeling to enhance text identification. The authors of \citep{dedek:CAP} use preprocessed data from National Automotive Sampling System and test various soft computing methods to modeling severity of injuries (some hybrid methods showed best performance). Methods of Information Retrieval (IR) are very numerous, with extraction mainly based on key word search and similarities. The Connection of IR and text mining techniques with web information retrieval can be found in Chapter Opinion mining in the book of Bing Liu \citep{dedek:WebDataMining}. 
+There are plenty of systems dealing with text mining and text classification. In \citep{dedek:ReYaLiOntoText08} the authors use ontology modeling to enhance text identification. The authors of \citep{dedek:CAP} use preprocessed data from National Automotive Sampling System and test various soft computing methods to model severity of injuries (some hybrid methods showed best performance). Methods of Information Retrieval (IR) are numerous, with extraction mainly based on key word search and similarities. The Connection of IR and text mining techniques with web information retrieval can be found in the chapter ``Opinion Mining’’ in the book of Bing Liu \citep{dedek:WebDataMining}. 
 
 The Fuzzy ILP Classifier can be seen as an ordinary classifier for data with the monotonicity constraint (the target class attribute has to be monotonizable -- a natural ordering has to exist for the target class attribute). There are several other approaches addressing the classification problems with the monotonicity constraint.
 
-The CART-like algorithm for decision tree construction does not guarantee to provide a monotone tree even on a monotone dataset. The algorithm can be modified \citep{dedek:mon_trees} to provide a monotone tree on the dataset by adding the corner elements of a node with an appropriate class label to the existing data whenever necessary.
+The CART-like algorithm for decision tree construction does not guarantee a resulting monotone tree even on a monotone dataset. The algorithm can be modified \citep{dedek:mon_trees} to provide a monotone tree on the dataset by adding the corner elements of a node with an appropriate class label to the existing data whenever necessary.
 
-An interesting approach is presented in \citep{dedek:mon_transf} first, the dataset is ``corrected'' to be monotone (a minimal number of target class labels is changed to get a monotone dataset), then a learning algorithm is applied -- linear programming boosting in the cited paper.
+An interesting approach is presented in \citep{dedek:mon_transf}: first, the dataset is ``corrected'' to be monotone (a minimal number of target class labels is changed to get a monotone dataset), then a learning algorithm (linear programming boosting in the cited paper) is applied.
 
-Several other approaches to monotone classification have been presented -- instance based learning \citep{dedek:ibl}, rough sets \citep{dedek:rough_sets} and others.
+Several other approaches to monotone classification have been presented, including instance based learning \citep{dedek:ibl} and rough sets \citep{dedek:rough_sets}.
 
 
 
@@ -136,7 +136,7 @@ Several other approaches to monotone classification have been presented -- insta
 %\label{img:schema}
 %\end{floatingfigure}
 
-A general schema of our experimental system is shown on Fig.~\ref{img:schema}. We use our previously developed web information extraction tools based on third party linguistic analyzers (the upper two dashed arrows; this is not a subject of this paper). We extract some structured information from the web and the extracted information is then translated to an ILP knowledge base and along with a user rating it is used for the classification. (We assume that a small amount of learning data is annotated by a human user.) The classification is based on ILP and it could be \emph{fuzzy} or \emph{crisp} (crisp denotes a strait forward application of ILP and fuzzy is for the fuzzy method, see in next sections.)
+A general schema of our experimental system is shown in Fig.~\ref{img:schema}. We use our previously developed web information extraction tools based on third party linguistic analyzers (the upper two dashed arrows; this is not a subject of this paper). We extract some structured information from the web and the extracted information is then translated to an ILP knowledge base and, along with a user rating, it is used for the classification. (We assume that a small amount of learning data is annotated by a human user.) The classification is based on ILP and it could be \emph{fuzzy} or \emph{crisp} (crisp denotes a straightforward application of ILP and fuzzy is for the fuzzy method, see the next sections.)
 
 
 
@@ -149,7 +149,7 @@ we have used to produce linguistic annotations of texts.
 These tools are being developed in the Institute of Formal
 and Applied Linguistics in Prague, Czech Republic. They
 are publicly available -- they have been published on a CDROM
-under the title PDT 2.0 (\cite{dedek:PDT20_CD} -- first five tools) and in
+under the title PDT 2.0 (\cite{dedek:PDT20_CD} -- the first five tools) and in
 (\cite{dedek:KlTransformationBasedTectogrammatical2006} -- Tectogrammatical analysis). These tools are used as a
 processing chain. At the end of the chain they produce
 tectogrammatical \citep{dedek:MiBeAnnotationtectogrammatical2006} dependency trees built up from the text.
@@ -159,7 +159,7 @@ tectogrammatical \citep{dedek:MiBeAnnotationtectogrammatical2006} dependency tre
  
 	\item[Tool 1.] Segmentation and tokenization consists of tokenization
 (dividing the input text into words and punctuation)
-and segmentation (dividing a sequences of tokens
+and segmentation (dividing a sequence of tokens
 into sentences).
 
 	\item[Tool 2.] Morphological analysis assigns all possible lemmas
@@ -173,22 +173,22 @@ by the morphological analyzer.
 	\item[Tool 4.] Collins' parser -- Czech adaptation. 
 Unlike the usual approaches to the description of
 English syntax, the Czech syntactic descriptions are
-dependency-based, which means, that every edge of
+dependency-based, which means that every edge of
 a syntactic tree captures the relation of dependency
 between a governor and its dependent node. Collins'
 parser gives the most probable parse of a given input
 sentence.
 
 	\item[Tool 5.] Analytical function assignment assigns a description
-(analytical function -- in linguistic sense) to every edge
+(analytical function, in linguistic sense) to every edge
 in the syntactic (dependency) tree.
 
 	\item[Tool 6.] Tectogrammatical analysis produces linguistic annotation
 at the tectogrammatical level, sometimes called
-``layer of deep syntax''. An example of a tectogrammatical tree can be seen on
-the Fig.~\ref{img:tree}. Annotation of a sentence at this layer
+``layer of deep syntax''. An example of a tectogrammatical tree can be seen in
+Fig.~\ref{img:tree}. Annotation of a sentence at this layer
 is closer to the meaning of the sentence than its syntactic
-annotation and thus information captured at the tectogrammatical
+annotation; thus, information captured at the tectogrammatical
 layer is crucial for machine understanding
 of natural language \citep{dedek:KlTransformationBasedTectogrammatical2006}.
 \end{description}
@@ -198,21 +198,21 @@ of natural language \citep{dedek:KlTransformationBasedTectogrammatical2006}.
 \subsection{Web Information Extraction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-After the content of a web resource is analyzed by the above mentioned linguistic tools, the output linguistic data is obtained in the form of tectogrammatical trees. To achieve our objectives we have to extract information from this representation. 
+After the content of a web resource is analyzed by the above-mentioned linguistic tools, the output linguistic data is obtained in the form of tectogrammatical trees. To achieve our objectives we have to extract information from this representation. 
 Here we refer to our previous work %\citep{dedek:DeVoComputingaggregations2008,dedek:DeVoLinguisticextraction2008,dedek:DeEcExperimentswith2008}.
 \citep{dedek:DeVoComputingaggregations2008,dedek:DeEcExperimentswith2008}.
- A long path of tools starting with web crawling and resulting with the extracted structured information has been developed in our previous works. 
-In the Fig.~\ref{img:tree} nodes of the tectogrammatical tree are decorated. A piece of information about the damage of 8000 CZK can be found there (the three nodes on the right). We have used ILP to learn rules, which are able to detect these nodes. 
+ A long path of tools, starting with web crawling and resulting in the extracted structured information, has been developed in our previous works. 
+In Fig.~\ref{img:tree}, nodes of the tectogrammatical tree are decorated. A piece of information about the damage of 8000 CZK can be found there (the three nodes on the right). We have used ILP to learn rules that are able to detect these nodes. 
 %In this paper we will concentrate on the usage of such extracted information to be able to classify content. 
-The extraction process requires a human assistance when annotating the training data.
+The extraction process requires human assistance when annotating the training data.
 
-Note that our method is general and is not limited to Czech and can be used with any structured linguistic representation. 
+Note that our method is general and is not limited to Czech. It can be used with any structured linguistic representation. 
 
 
 \begin{figure}
 \medskip
 \centerline{\framebox{\includegraphics[width=0.7\hsize]{img/tree}}}
-\caption{Example of a linguistic tree of one of analyzed sentences.}
+\caption{Example of a linguistic tree of one analyzed sentence.}
 \label{img:tree}
 \end{figure}
 
@@ -235,14 +235,14 @@ Note that our method is general and is not limited to Czech and can be used with
 
 
 
-The main experiment presented in this paper leads to the seriousness classification of an accident presented on a web report. %Our long term goal is extraction of semantic information from web reports. 
+The main experiment presented in this paper leads to the seriousness classification of an accident presented in a web report. %Our long term goal is extraction of semantic information from web reports. 
 %which is one of possible utilizations of the extracted information. 
-We use web reports of fire departments of several regions of the Czech Republic. These reports are written Czech and can be accessed through the web of the General Directorate of the Fire and Rescue Service of the Czech Republic\footnote{\url{http://www.hzscr.cz}}. 
+We use online fire department reports from several regions of the Czech Republic. These reports are written in Czech and can be accessed through the web of the General Directorate of the Fire and Rescue Service of the Czech Republic\footnote{\url{http://www.hzscr.cz}}. 
 %These reports are rich in information, e.g. where and when an traffic accident occurred, which units helped, how much time it took them to show up on the place of accident, how many people were injured, killed etc.
 
-For our experiment we have selected a collection of 50 web reports. We have identified several features presented in these reports and manually extracted corresponding values. This will be described in more detail in the section \ref{sec:features}. To each report we have also assigned a value of overall ranking of seriousness of the presented accident, which is the target of the classification. The whole dataset can be downloaded from our Fuzzy ILP classifier's web page\footnote{\url{http://www.ksi.mff.cuni.cz/~dedek/fuzzyILP/}}.
+For our experiment we have selected a collection of 50 web reports. We have identified several features presented in these reports and manually extracted the corresponding values. This will be described in more detail in Section \ref{sec:features}. To each report we have also assigned a value of overall ranking of seriousness of the presented accident, which is the target of the classification. The whole dataset can be downloaded from our Fuzzy ILP classifier's web page\footnote{\url{http://www.ksi.mff.cuni.cz/~dedek/fuzzyILP/}}.
 
-In this experiment we have not used an information extracted by our automated information extraction tools. In this paper we are concentrated on~the classification and the actual source of the information is not so important. The integration step is still waiting to be done.
+In this experiment we have not used any information extracted by our automated information extraction tools. Instead, we concentrate on~the classification; the actual source of the information is not so important. The integration step still lies ahead.
 
 %There are two objectives to do. Fist is the web information extraction, a long path starting with web crawling and resulting with the extracted structured information. Second is the seriousness classification, which utilizes the extracted information. We have made much work on the first (see e.g. %\citep{biblio:DeVoLinguisticextraction2008,biblio:DeVoComputingaggregations2008, biblio:DeEcExperimentswith2008}), in this paper we will concentrate on the second.
 %\citep{biblio:DeEcExperimentswith2008}), in this paper we will concentrate on the second.
@@ -268,22 +268,22 @@ In this experiment we have not used an information extracted by our automated in
 %\label{img:attributes_description}
 %\end{wraptable}
 
-Table~\ref{img:attributes_description} summarizes all features (or attributes) that we have obtained from accident reports. Except the attribute \verb+type+ (type of an accident -- \verb+fire+, \verb+car_accident+ and \verb+other+) all the attributes are numerical and so \emph{monotonizable} (see in next sections). There are cases when the value of an attribute is unknown. We have decided to make evidence of this and keep the values \verb+unknown+ in the knowledge base. A brief explanation of each attribute follows.
+Table~\ref{img:attributes_description} summarizes all features (or attributes) that we have obtained from accident reports. Except for the attribute \verb+type+ (type of an accident -- \verb+fire+, \verb+car_accident+ and \verb+other+), all the attributes are numerical and therefore \emph{monotonizable} (see the next sections). There are cases in which the value of an attribute is unknown. We have decided to make evidence of this and keep the values \verb+unknown+ in the knowledge base. A brief explanation of each attribute follows.
 \begin{itemize}
 	\item \verb+size+ is size of text of a particular report.
 	\item \verb+damage+ is an amount (in CZK -- Czech Crowns) of summarized damage arisen during a reported accident.
 	\item \verb+dur_minutes+ is time taken to handle an accident.
-	\item \verb+fatalities+ and \verb+injuries+ are numbers of fatalities and injuries taken by an accident.
-	\item \verb+cars+ is a number of cars damaged during an accident (mostly during car accidents).
+	\item \verb+fatalities+ and \verb+injuries+ are numbers of fatalities and injuries sustained in an accident.
+	\item \verb+cars+ is the number of cars damaged during an accident (mostly during car accidents).
 	\item \verb+professional_units+ and \verb+amateur_units+ are numbers of fireman units sent for a particular accident.
-	\item \verb+pipes+ is a number of used fire pipes.
+	\item \verb+pipes+ is a number of used fire hoses.
 	\item \verb+lather+, \verb+aqualung+ and \verb+fan+ (ventilator) indicates whether these devices were used.
 \end{itemize}
 
-Majority of the accidents is of the type \verb+fire+ (52\%)
+A majority of accidents are of the type \verb+fire+ (52\%)
 and \verb+car_accident+ (30\%),
 the rest (type \verb+other+, 18\%)
-deals with some ecological disasters, chemical accidents, etc.
+deals with ecological disasters, chemical accidents, etc.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Seriousness ranking} \label{sec:seriousness}
@@ -298,11 +298,11 @@ deals with some ecological disasters, chemical accidents, etc.
 \label{img:ranking_histogram}
 \end{figure}
 
-Values of the overall seriousness ranking attribute were stated from ``a general impression'' from the texts with respect to particular attributes. %(Fig.~\ref{img:attributes_description}). 
+Values of the overall seriousness ranking attribute were stated from ``a general impression'' made by the texts with respect to particular attributes. %(Fig.~\ref{img:attributes_description}). 
 The values have evolved to 14 distinct values in the range from 0.5 to 8. 
-A histogram with frequencies of all the values is on the Figure~\ref{img:ranking_histogram}.
+A histogram with frequencies of all these values is in Figure~\ref{img:ranking_histogram}.
 We have divided the values into four approximately equipotent groups 
-(see in the Fig.~\ref{img:ranking_histogram}) 
+(see in Fig.~\ref{img:ranking_histogram}) 
 and these groups determine the target class attribute of the classification task. 
 %and logic rules were learned for each group separately\footnote{We do not have a binary rule, which would return an exact value of the rating, but we have one ``true/false'' rule for each of the four categories.}.
 
@@ -322,7 +322,7 @@ and these groups determine the target class attribute of the classification task
 
 
 
-To make the paper readable we present a short description of the ILP techniques bellow.
+To make the paper easier to read, we present a short description of the ILP techniques below.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Classical ILP}
@@ -349,7 +349,7 @@ In our presentation of ILP we follow \cite{dzeroski2001:relat_dm} and  \cite{bib
 \newtheorem{theorem}{Theorem}
 
 \begin{definition}[Classical ILP task]
-Given is a set of examples $E=P\cup N$, where $P$ contains positive and $N$ negative examples, and background knowledge $B$. The task of ILP is to find a hypothesis $H$ such that 
+A set of examples $E=P\cup N$, where $P$ contains positive and $N$ negative examples, and background knowledge denoted by $B$ are given. The task of ILP is to find a hypothesis $H$ such that 
 
 $$
 (\forall e\in P)(B\cup H\models e)
@@ -359,9 +359,9 @@ $$
 (\forall e\in N)(B\cup H\not\models e).
 $$
 \end{definition}
-Typically, $E$ consists of ground instances of the target predicate, in our case accident seriousness (see examples in Fig.~\ref{img:examples}). $B$ typically consists of several predicates (relational tables), which describe properties of an object, in our case properties of an accident (see examples in Fig.~\ref{img:crisp_attributes}). The background knowledge can contain also some rules. A hypothesis $H$ typically consists of logic programming rules (see examples in Fig.~\ref{img:rules}). $H$ added to $B$ entails all positive examples and no negative examples.
+Typically, $E$ consists of ground instances of the target predicate, in our case accident seriousness (see examples in Fig.~\ref{img:examples}). $B$ typically consists of several predicates (relational tables), which describe properties of an object, in our case properties of an accident (see examples in Fig.~\ref{img:crisp_attributes}). The background knowledge can also contain some rules. A hypothesis $H$ typically consists of logic programming rules (see examples in Fig.~\ref{img:rules}). $H$ added to $B$ entails all positive examples and no negative examples.
 %
-Main advantage of ILP is its multirelational character, namely $B$ can reside in several relational tables.
+The main advantage of ILP is its multirelational character, namely, $B$ can reside in several relational tables.
 
 
 
@@ -372,14 +372,14 @@ Main advantage of ILP is its multirelational character, namely $B$ can reside in
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 In our presentation of fuzzy ILP we follow the paper of T. Horv\'ath and P. Vojt\'a\v s \citep{biblio:FILP} about fuzzy inductive logic programming.
-We use the approach of the fuzzy logic in narrow sense developed by J.~Pavelka \citep{biblio:Pavelka} and P. H\'ajek \citep{biblio:Hajek}. Formulas are of the form $\varphi, x$ ($\varphi$ is syntactically the same as in the classical case), they are graded by a truth value $x\in [0,1]$.
-A structure ${\mathcal M}$ consist of a domain $M$ and relations are interpreted fuzzy (we do not consider function symbols here). The evaluation $\left\|\varphi\right\|_{{\mathcal M}}$ of a formula $\varphi$ uses truth functions of many valued connectives (our logic is extensional and/or truth functional). The satisfaction $\models_f$ is defined by
+We use the approach of the fuzzy logic in a narrow sense, developed by J.~Pavelka \citep{biblio:Pavelka} and P. H\'ajek \citep{biblio:Hajek}. Formulas are of the form $\varphi, x$ ($\varphi$ is syntactically the same as in the classical case), they are graded by a truth value $x\in [0,1]$.
+A structure ${\mathcal M}$ consists of a domain $M$ and relations are interpreted as fuzzy (we do not consider function symbols here). The evaluation $\left\|\varphi\right\|_{{\mathcal M}}$ of a formula $\varphi$ uses truth functions of many-valued connectives (our logic is extensional and/or truth functional). The satisfaction $\models_f$ is defined by
 $$
 {\mathcal M}\models_f (\varphi, x)\ iff\ \left\|\varphi\right\|_{{\mathcal M}}\ge x.
 $$
 
 \begin{definition}[Fuzzy ILP task]
-Given are a fuzzy set of examples ${\mathcal E}:E\longrightarrow [0,1]$ and a fuzzy background knowledge ${\mathcal B}:B\longrightarrow [0,1]$. The task of fuzzy ILP is to find a fuzzy hypothesis ${\mathcal H}:H\longrightarrow [0,1]$ such that 
+A fuzzy set of examples ${\mathcal E}:E\longrightarrow [0,1]$ and a fuzzy background knowledge ${\mathcal B}:B\longrightarrow [0,1]$ are given. The task of fuzzy ILP is to find a fuzzy hypothesis ${\mathcal H}:H\longrightarrow [0,1]$ such that 
 
 $$
 (\forall e_1,e_2\in E)(\forall {\mathcal M})({\mathcal M}\models_f {\mathcal B}\cup {\mathcal H})
@@ -395,11 +395,11 @@ $$
 or rephrased: if ${\mathcal E}$ is rating $e_1$ higher than $e_2$, then it cannot happen that $e_1$ is rated worse than $e_2$ in a model of ${\mathcal B}\cup {\mathcal H}$.
 \end{definition}
 
-Typically, ${\mathcal E}$ consists of ground instances of the target predicate, which are classified in truth degrees -- in our case a degree of seriousness of an accident. ${\mathcal B}$ typically consists of several fuzzy predicates (fuzzy relational tables), which describe properties of an object, in our case fuzzy properties of an accident -- a degree of injury, a degree of damage, etc. 
+Typically, ${\mathcal E}$ consists of ground instances of the target predicate, which are classified in truth degrees, in our case degrees of seriousness of an accident. ${\mathcal B}$ typically consists of several fuzzy predicates (fuzzy relational tables), which describe properties of an object, in our case fuzzy properties of an accident -- a degree of injury, a degree of damage, etc. 
 %Background knowledge can contain also some rules, so far only crisp rules are used.
-A~hypothesis ${\mathcal H}$ typically consists of a fuzzy logic program, which, when added to ${\mathcal B}$, prevents of misclassification (better can not be declared to be worse, nevertheless can be declared as having the same degree --- for more detailed discussion on this definition of fuzzy ILP we refer to the paper \citep{biblio:FILP}).
+A~hypothesis ${\mathcal H}$ typically consists of a fuzzy logic program, which, when added to ${\mathcal B}$, prevents misclassification (what is better cannot be declared to be worse, nevertheless it can be declared as having the same degree -- for more detailed discussion on this definition of fuzzy ILP we refer to the paper \citep{biblio:FILP}).
 
-Moreover, in practice, we use GAP -- Generalized Annotated Programs, so graded formulas will be sometimes understood as annotated (with classical connectives and with a more complex annotation of the heads of rules). This is possible, because in \citep{biblio:KLV} we have shown that (some extension of) fuzzy logic programming is equivalent to (some restriction of) generalized annotated programs. 
+Moreover, we use GAP -- Generalized Annotated Programs -- in practice, so graded formulas will sometimes be understood as annotated (with classical connectives and with a more complex annotation of the heads of rules). This is possible because in \citep{biblio:KLV} we have shown that (some extension of) fuzzy logic programming is equivalent to (some restriction of) generalized annotated programs. 
 
 
 
@@ -407,25 +407,25 @@ Moreover, in practice, we use GAP -- Generalized Annotated Programs, so graded f
 \subsection{Translation of fuzzy ILP task to several classical ILP tasks}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-As far as there is no implementation of fuzzy ILP or GAP, we have to use a~classical ILP system. Fortunately any fuzzy ILP task can be translated to several classical ILP tasks (subject to some rounding and using a finite set of truth values).
+As far as there is no implementation of fuzzy ILP or GAP, we have to use a~classical ILP system. Fortunately, any fuzzy ILP task can be translated to several classical ILP tasks (subject to some rounding and using a finite set of truth values).
 
-In following text assume that all fuzzy sets take truth values only from a finite set of truth values $T: \{0,1\}\subseteq T\subseteq [0,1]$.
+In the following text, assume that all fuzzy sets take truth values only from a finite set of truth values $T: \{0,1\}\subseteq T\subseteq [0,1]$.
 
 \begin{definition}[Transformation of background knowledge]
-Given is a fuzzy background knowledge ${\mathcal B}:B\longrightarrow [0,1]$. For each predicate $p(x)$ in $B$ we add an additional attribute $t$ to express the truth value, thus we have created a new predicate $p(x,t)$. We construct two classical background knowledge sets $B^{raw}_T$ and $B^{mon}_T$  as follows:
+A fuzzy background knowledge ${\mathcal B}:B\longrightarrow [0,1]$ is given. For each predicate $p(x)$ in $B$ we insert an additional attribute $t$ to express the truth value, thus we have created a new predicate $p(x,t)$. We construct two classical background knowledge sets $B^{raw}_T$ and $B^{mon}_T$  as follows:
 
 \begin{itemize}
 	\item The first ($B^{raw}_T$) is a direct coding of a fuzzy value by an additional attribute:
 \\If ${\mathcal B}(p(x))=t,\  t \in T$, then we add $p(x,t)$ to  ${B}^{raw}_T$.
 	\item The second ($B^{mon}_T$) is obtained by a process called monotonization:
 \\If ${\mathcal B}(p(x))=t,\  t \in T$, then for all $t'\in T,\  t'\le t$ we add $p(x,t')$ to ${B}^{mon}_T$.
-This correspond to natural meaning of truth values $t$.
+This corresponds to the natural meaning of truth values $t$.
 \end{itemize}
 \end{definition}
 
 
 
-Also example sets are constructed in two ways.
+Additionally, example sets are constructed in two ways.
 \begin{definition}[Transformation of examples]
 Given is a fuzzy set of examples ${\mathcal E}:E\longrightarrow [0,1]$. For all $t\in T$ we construct two classical sets of examples $E_t$ and $E_{\ge t}$  as follows:
 \begin{itemize}
@@ -443,46 +443,46 @@ and $N_t$ is the rest of $E$.
 These two translations create two classical ILP tasks for each truth value $t\in T$, the first one (\emph{raw}) is crisp and the second one (\emph{mon}) can be understood as (and translated back to) fuzzy ILP.
 
 \begin{itemize}
-	\item The \textit{raw ILP task} is given by $B^{raw}_{T}$ and $E_t$ for each $t\in T$.  As a~result it produces a set of hypotheses $H_t$.
+	\item The \textit{raw ILP task} is given by $B^{raw}_{T}$ and $E_t$ for each $t\in T$.  As a~result, it produces a set of hypotheses $H_t$.
 
-	\item The \textit{mon ILP task} is given by ${B}^{mon}_T$ and $E_{\ge t}$ for each $t\in T$. As a~result it produces a set of hypotheses $H_{\ge t}$ guaranteeing examples of a degree of at least $t$.
+	\item The \textit{mon ILP task} is given by ${B}^{mon}_T$ and $E_{\ge t}$ for each $t\in T$. As a~result, it produces a set of hypotheses $H_{\ge t}$ guaranteeing examples of a degree of at least $t$.
 \end{itemize}
 
-Note that among variable boundings in $B$ there are no boundings on the truth value attribute, which was added to each predicate, and hence there are no variable boundings on the truth value attribute in $H_{\ge t}$. We did not add an additional truth value attribute to the predicates in $E$. 
+Note that among variable boundings in $B$ there are no boundings on the truth value attribute which was added to each predicate; hence, there are no variable boundings on the truth value attribute in $H_{\ge t}$. We did not add an additional truth value attribute to the predicates in $E$. 
 
 Now we sketch the translation of the \emph{mon ILP task} to GAP (fuzzy ILP) rules. 
 
 \begin{theorem}[Translation of the \emph{mon ILP task}]
-Given is a fuzzy ILP (or equivalent GAP) task given by ${\mathcal E}$ and ${\mathcal B}$. Let us assume that $C$ is the target predicate in the domain of ${\mathcal E}$ and for each $t \in T$ $H_{\ge t}$ is a correctly learned solution of the corresponding \textit{mon ILP task} according to the definitions above. We define ${\mathcal H}$ consisting of one GAP rule:
+A fuzzy ILP (or equivalent GAP) task is given by ${\mathcal E}$ and ${\mathcal B}$. Let us assume that $C$ is the target predicate in the domain of ${\mathcal E}$ and for each $t \in T$, $H_{\ge t}$ is a correctly learned solution of the corresponding \textit{mon ILP task} according to the definitions introduced above. We define ${\mathcal H}$ consisting of one GAP rule:
 $$C(y):u(x_1,\dots,x_m)\leftarrow B_1:x_1 \&\dots\& B_m:x_m,$$
 here $B_1:x_1 \&\dots\& B_m:x_m$ is the enumeration of all predicates in $B$.
 
 Assume that $B_1(y_1,t_1),\dots,B_n(y_n,t_n)$ are some of the predicates in $B$ (for simplicity enumerated from 1 to $n, \ n \le m$). Then for each rule 
 $$R=C(y)\Leftarrow B_1(y_1,t_1),\dots,B_n(y_n,t_n)$$
-in $H_{\ge t}$ we give a constraint in definition of $u$ as follows:
+in $H_{\ge t}$ we give a constraint in the definition of $u$ as follows:
 $$
 U_R=u(x_1,\dots,x_m)\ge t \hbox{ if }x_1\ge t_1,\dots,x_n\ge t_n.
 $$
 Note that $x_{n+1},\dots,x_m$ have no restrictions.
 
-We claim, that if all $H_{\ge t}$ were correctly learned by a classical ILP system then for the minimal solution $u$ of all constraints $U_R$ the rule
+We claim that if all $H_{\ge t}$ were correctly learned by a classical ILP system, then, for the minimal solution $u$ of all constraints $U_R$, the rule
 $$
 C(y):u(x_1,\dots,x_m)\leftarrow B_1:x_1 \&\dots\& B_m:x_m
 $$
 is a correct solution of the fuzzy ILP task given by ${\mathcal E}$ and ${\mathcal B}$, for all $R\in H_t$ and $t\in T$. 
 \end{theorem}
 
-Our presentation is here a little bit simplified and we freely switch between fuzzy and GAP programs, which are known to be equivalent, see in~\citep{biblio:KLV}.
+Our presentation is slightly simplified here and we freely switch between fuzzy and GAP programs, which are known to be equivalent, see in~\citep{biblio:KLV}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Implementation} \label{sec:implementation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In our experimental system we are using two inductive logic approaches: crisp and fuzzy (as described above). Technically the difference between the approaches consists in different setting of the \emph{ILP task}. Both can be done with a classical ILP tool. We have used 
-``\emph{A Learning Engine for Proposing Hypotheses}'' (Aleph  v5\footnote{\url{http://www.comlab.ox.ac.uk/activities/machinelearning/Aleph/}}), which we consider very practical. It uses quite effective method of \emph{inverse entailment} \citep{biblio:InverseEntailment} and keeps all handy features of a Prolog system (it is supported by YAP and SWI Prolog) in its background.
+In our experimental system we use two inductive logic approaches: crisp and fuzzy (as described above). Technically, the difference between the approaches consists in a different setting of the \emph{ILP task}. Both can be done with a classical ILP tool. We have used 
+``\emph{A Learning Engine for Proposing Hypotheses}'' (Aleph  v5\footnote{\url{http://www.comlab.ox.ac.uk/activities/machinelearning/Aleph/}}), which we consider very practical. It uses the quite effective method of \emph{inverse entailment} \citep{biblio:InverseEntailment} and keeps all handy features of a Prolog system (it is supported by YAP and SWI Prolog) in its background.
 
-We have compared results of the crisp and fuzzy approach with other classification methods and in our experiment the fuzzy approach made better results than the crisp one and also than many other methods. See the section \ref{sec:results} for the details.
+We have compared results of the crisp and fuzzy approaches with other classification methods and, in our experiment, the fuzzy approach produced better results than many other methods, including the crisp one. See Section~\ref{sec:results} for details.
 
 
 
@@ -537,15 +537,15 @@ We have compared results of the crisp and fuzzy approach with other classificati
 
 
 
-To use ILP for the classification task we have to translate the input data to the Prolog-like logic representation, as it was already described in previous sections. Here we will describe implementation details about construction of~crisp and fuzzy knowledge bases and example sets.
+To use ILP for a classification task we have to translate the input data to the Prolog-like logic representation, as it was already described in previous sections. Here we will describe implementation details of constructing crisp and fuzzy knowledge bases and example sets.
 
-In construction of a crisp example set $E_t$ the target predicate is denoted as \texttt{serious\_t}. The letter \texttt{t} stands for the actual seriousness degree. We use multiple unary predicates \texttt{serious\_0}, \texttt{serious\_1}, etc., instead of one binary predicate \texttt{serious(ID,Degree)}. These two cases are equivalent and we have decided to use the unary one because a visual distinction of the multiple ILP tasks is then clearer.
+In construction of a crisp example set $E_t$, the target predicate is denoted as \texttt{serious\_t}. The letter \texttt{t} stands for the actual seriousness degree. We use multiple unary predicates \texttt{serious\_0}, \texttt{serious\_1}, etc., instead of one binary predicate \texttt{serious(ID,Degree)}. These two cases are equivalent and we have decided to use the unary option because a visual distinction between the multiple ILP tasks is then clearer.
 
-In construction of a fuzzy (or monotonized) example set $E_{\ge t}$ the target predicate is denoted as \texttt{serious\_atl\_t}, see examples in Fig.~\ref{img:examples}.
+In construction of a fuzzy (or monotonized) example set $E_{\ge t}$, the target predicate is denoted as \texttt{serious\_atl\_t}, see examples in Fig.~\ref{img:examples}.
 
 
 
-In construction of a crisp background knowledge $B^{raw}_{T}$ we use a~simple translation of the attribute names to the names of predicates and fill them with actual values. It is illustrated on Fig.~\ref{img:crisp_attributes}). 
+In construction of a crisp background knowledge $B^{raw}_{T}$, we use a~simple translation of the attribute names to the names of predicates and fill them with actual values. It is illustrated in Fig.~\ref{img:crisp_attributes}). 
 
 
 %\begin{figure}
@@ -560,7 +560,7 @@ In construction of a crisp background knowledge $B^{raw}_{T}$ we use a~simple tr
 %\label{img:examples_monot}
 %\end{figure}
 %
-In construction of a monotonized background knowledge $B^{mon}_T$ we reuse the crisp background knowledge and add monotonization rules. An~example for predicate \texttt{damage} is shown on Fig.~\ref{img:attribute_monotonization}.
+In construction of a monotonized background knowledge $B^{mon}_T$ we reuse the crisp background knowledge and add monotonization rules. An~example for predicate \texttt{damage} is shown in Fig.~\ref{img:attribute_monotonization}.
 %on predicates \texttt{damage} and \texttt{damage\_atl}.
 The first rule deals with \texttt{unknown} values and the second does the monotonization. 
 
@@ -602,10 +602,10 @@ Negations used in Fig.~\ref{img:attribute_monotonization} and Fig.~\ref{img:conv
 \end{figure}
 
 
-Once we have learning examples and background knowledge, we can run the ILP inductive procedure and obtain learned rules (a learned hypothesis). According to the kind of the ILP task (crisp or monotonized) we obtain corresponding kind (crisp or monotonized) of rules (see e.g. in Fig.~\ref{img:rules}). But these rules cannot be used directly to solve the classification task. There are common cases when more then one rule is applicable to a single instance. So we have to select which one to use. For the monotonized hypothesis we select the one with the biggest return value. It is illustrated in Fig.~\ref{img:conversion}. For the crisp hypothesis there is not such clear criterion, so we simply use the fist applicable rule.
+Once we have learning examples and background knowledge, we can run the ILP inductive procedure and obtain learned rules (a learned hypothesis). According to the kind of the ILP task (crisp or monotonized), we obtain the corresponding kind (crisp or monotonized) of rules (see e.g. in Fig.~\ref{img:rules}). But these rules cannot be used directly to solve the classification task. There are common cases when more than one rule is applicable to a single instance. So we have to select which one to use. For the monotonized hypothesis we select the one with the biggest return value. It is illustrated in Fig.~\ref{img:conversion}. Such clear criterion does not exist for the crisp hypothesis, so we simply use the first applicable rule.
 
 
-In the crisp case there are often many instances, which cannot be classified because there is no applicable rule. (In our experiment there was about 51\%
+In the crisp case there are often many instances which cannot be classified because there is no applicable rule. (In our experiment there was about 51\%
 of unclassified instances, see in the next section.) It could be caused by the lack of training data, but the monotonized approach does not suffer from this shortage. We can always select the bottom value.
 
 Another advantage of the monotonized approach is that the set of positive training examples is extended by monotonization. 
@@ -632,14 +632,14 @@ Another advantage of the monotonized approach is that the set of positive traini
 \section{Results} \label{sec:results}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The Fig.~\ref{img:rules} summarizes obtained hypotheses learned from our data: 
+Fig.~\ref{img:rules} summarizes obtained hypotheses learned from our data: 
 \begin{itemize}
 	\item a crisp hypothesis learned from $E_t$ and $B^{raw}_{T}$ and
 	\item a monotonized hypothesis learned from $E_{\ge t}$ and ${B}^{mon}_T$.
 \end{itemize}
 
 
-In both cases learning examples and background knowledge have the origin in the same data (the same accidents). The hypotheses differ in the form of the ILP task (crisp and monotonized). The crisp hypothesis uses only the crisp predicates, the monotonized hypothesis uses only the monotonized predicates.
+In both cases, learning examples and background knowledge have the origin in the same data (the same accidents). The hypotheses differ in the form of the ILP task (crisp and monotonized). The crisp hypothesis uses only the crisp predicates, and the monotonized hypothesis uses only the monotonized predicates.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -694,12 +694,11 @@ F \dotfill{} 		& F measure, weighted average from all classes\\
 \end{table}
 
 
-We have evaluated both ILP methods and compared them with other machine learning procedures used in data mining. To make the comparison clear and easy to perform, we have implemented an interface between the ILP methods and the Weka data mining software\footnote{\url{http://www.cs.waikato.ac.nz/ml/weka/}} \citep{biblio:Weka}. This interface makes it possible to use the ILP methods as an ordinary Weka classifier for any\footnote{For the fuzzy ILP method, there is a requirement on the target (class) attribute: it has to be monotonizable (e.g. numeric).} classification task inside the Weka software. Our implementation is publicly available. The data, source codes and a platform independent installer of the Crisp and Fuzzy ILP classifiers for Weka can be downloaded from our Fuzzy ILP classifier's web page\footnote{\url{http://www.ksi.mff.cuni.cz/~dedek/fuzzyILP/}}. This makes our experiment repeatable according to the
+We have evaluated both ILP methods and compared them with other machine learning procedures used in data mining. To make the comparison clear and easy to perform, we have implemented an interface between the ILP methods and the Weka data mining software\footnote{\url{http://www.cs.waikato.ac.nz/ml/weka/}} \citep{biblio:Weka}. This interface makes it possible to use the ILP methods as an ordinary Weka classifier for any\footnote{For the fuzzy ILP method, there is a requirement on the target (class) attribute: it has to be monotonizable (e.g. numeric).} classification task inside the Weka software. Our implementation is publicly available. The data, source codes and a platform-independent installer of the Crisp and Fuzzy ILP classifiers for Weka can be downloaded from our Fuzzy ILP classifier's web page\footnote{\url{http://www.ksi.mff.cuni.cz/~dedek/fuzzyILP/}}. This makes our experiment repeatable according to the
 SIGMOD Experimental Repeatability Requirements \citep{biblio:SIGMODrepeatability}.
 
 
 For our experiment we used the Weka Experimenter and performed an experiment in which the Crisp and Fuzzy ILP classifiers were compared with five additional classifiers:
-%Jmenovitì rozhodovací stromy J48 \cite{biblio:J48}, Support vector machine klasifikátor SMO \cite{biblio:SMO} a vícevrstvý perceptron \cite{biblio:bishop-1995}.
 \begin{itemize}
 	\item Multilayer Perceptron \citep{biblio:bishop-1995},
 	\item Support Vector Machine classifier SMO \citep{biblio:SMO},
@@ -708,9 +707,9 @@ For our experiment we used the Weka Experimenter and performed an experiment in 
 	\item Additive logistic regression LogitBoost \citep{biblio:LogitBoost}.
 \end{itemize}
 We have evaluated all the methods two times by 10-fold cross validation. %(section~\ref{sec:experiment_desc}).
-The obtained results (average values) are described by the graph on Fig.~\ref{img:graph2x10} and in Table~\ref{tab:table2x10} (with standard deviations and decorated statistically significant values).
+The obtained results (average values) are described by the graph in Fig.~\ref{img:graph2x10} and in Table~\ref{tab:table2x10} (with standard deviations and marked statistically significant values).
 
-There is no clear winner in our experiment. But the Fuzzy ILP classifier proved better results than majority of the methods on our data and the results are statistically significant in many cases. Very good results obtained also LogitBoost. 
+There is no clear winner in our experiment. But the Fuzzy ILP classifier proved better results than a majority of the methods on our data and the results are statistically significant in many cases. Very good results were also obtained using LogitBoost. 
 
 %The LogitBoost algorithm is described in the publication of \cite{biblio:LogitBoost}.
 %The basic idea of the boosting algorithm is to learn several simple models
@@ -719,7 +718,7 @@ There is no clear winner in our experiment. But the Fuzzy ILP classifier proved 
 %In our case, the simple models where decision stamps, i.e. decision trees
 %with only one nonleaf node.
 %In each iteration, an optimal decision stamp for each target value is
-%learned. Then, the training dataset is reweighted in a way that
+%learned. Then, the training dataset is re-weighted in a way that
 %records badly classified by current model are given higher weight in the
 %next iteration.
 %A new record is classified as follows: for each target value, predictions
@@ -786,13 +785,13 @@ Learning parameters for both ILP methods:\\set(noise,20). set(i,3). set(clausele
 \end{table}
 
 
-The Fuzzy ILP classifier performed quite well on our dataset, but the next question is: How is it with other data, with more learning instances and what about the time complexity? To answer these questions we have done another experiment. We have selected several datasets from the University of California, Irvine, Repository of Machine Learning Databases (UCI) \citep{dedek:UCI} and evaluated all the methods against them. 
+The Fuzzy ILP classifier performed quite well on our dataset, but the next question is: How is it with other data, with more learning instances, and what about the time complexity? To answer these questions we performed another experiment. We selected several datasets from the University of California, Irvine, Repository of Machine Learning Databases (UCI) \citep{dedek:UCI} and evaluated all the methods against them. 
 
 
 
-The list of selected datasets can be found in the legend of Table~\ref{tab:UCItable}. All the dataset are monotonizable (the target attribute can be naturally ordered), so the fuzzy classifier could take advantage of that. Learning settings are the same as before (Table~\ref{tab:table2x10}) except settings of both ILP classifiers, which on majority of the datasets performed a little bit better with modified settings (see in the legend of Table~\ref{tab:UCItable}). 
+The list of selected datasets can be found in the legend of Table~\ref{tab:UCItable}. All the datasets are monotonizable (the target attribute can be naturally ordered), so the fuzzy classifier could take advantage of that. Learning settings are the same as before (Table~\ref{tab:table2x10}) except for settings of both ILP classifiers, which  performed a little bit better with modified settings on a majority of the datasets (see in the legend of Table~\ref{tab:UCItable}). 
 
-Table~\ref{tab:UCItable} compares the numbers of correctly classified instances on all the datasets. Last two columns show numbers of training and testing instances. The numbers of training instances are quite low; this is because the ILP classifiers are probably not capable to fully exploit higher numbers of training instances and the difference between ILP classifiers and the others would be even a bit bigger. This is demonstrated on Fig.~\ref{img:corect_growing_learninig_instances} (for `nursery' dataset only). It can be seen that when the number of training instances was under about 40, the fuzzy classifier performed better than some of the others (SMO, JRip and Multilayer Perceptron), but from about 60 training instances further both ILP classifiers performed worse than the others.
+Table~\ref{tab:UCItable} compares the numbers of correctly classified instances on all the datasets. The last two columns show numbers of training and testing instances. The numbers of training instances are quite low; this is because the ILP classifiers are probably not capable of fully exploiting higher numbers of training instances and the difference between ILP classifiers and the others would be even a bit higher. This is demonstrated in Fig.~\ref{img:corect_growing_learninig_instances} (for `nursery' dataset only). It can be seen that when the number of training instances was under about 40, the fuzzy classifier performed better than some of the others (SMO, JRip and Multilayer Perceptron), but from about 60 training instances further both ILP classifiers performed worse than the others.
 
 
 \begin{figure}
@@ -801,7 +800,7 @@ Table~\ref{tab:UCItable} compares the numbers of correctly classified instances 
 \label{img:corect_growing_learninig_instances}
 \end{figure}
 
-Fig.~\ref{img:learning_speed} demonstrates time complexity of the classifiers in the same experiment as in Fig.~\ref{img:corect_growing_learninig_instances}. Despite the fact that the Fuzzy ILP classifier was several times slower than the Crisp ILP classifier and even more than the others it is still computable on current processors (e.g. P9600, 2.66 GHz that we have used) and the curve of time complexity did not grow any rapidly during the experiment. Because ILP is a heuristic and iterative method the time complexity can be quite directly managed by the setting of learning parameters.
+Fig.~\ref{img:learning_speed} demonstrates time complexity of the classifiers in the same experiment as in Fig.~\ref{img:corect_growing_learninig_instances}. Despite the fact that the Fuzzy ILP classifier was several times slower than the Crisp ILP classifier and even more than the others, it is still computable on current processors (e.g. P9600, 2.66 GHz, which we used) and the curve of time complexity did not grow rapidly during the experiment. Because ILP is a heuristic and iterative method, the time complexity can be quite directly managed by the setting of learning parameters.
 
 \begin{figure}
 \centerline{\includegraphics[width=\hsize]{img/learning_speed}}
@@ -887,12 +886,12 @@ Fig.~\ref{img:learning_speed} demonstrates time complexity of the classifiers in
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion} \label{sec:conclusion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-In this paper we have presented a fuzzy system, which provides a fuzzy classification of textual web reports. Our approach is based on usage of third party linguistic analyzers, our previous work on web information extraction and fuzzy inductive logic programming.
+In this paper we have presented a fuzzy system, which provides a fuzzy classification of textual web reports. Our approach is based on usage of third party linguistic analyzers, our previous work on web information extraction, and fuzzy inductive logic programming.
 
-Main contributions are formal models, prototype implementation of the presented methods and an evaluation experiment. Our data and our implementation is publicly available on the Web. The first experiment evaluated performance of the presented methods and compared them with other machine learning procedures used in data mining on our data. The Fuzzy ILP classifier proved better results than majority of the methods. The results are statistically significant in many cases. 
+The main contributions are formal models, prototype implementation of the presented methods and an evaluation experiment. Our data and our implementation are publicly available on the Web. The first experiment evaluated performance of the presented methods and compared them with other machine learning procedures used in data mining on our data. The Fuzzy ILP classifier proved better results than a majority of the methods. The results are statistically significant in many cases. 
 We see the advantage of the Fuzzy ILP classifier in the fact that monotonization leads to the extension of the learning domain and it utilizes the fact that the domain is or can be monotonically ordered.
 
-In the second experiment we have evaluated all the methods on other datasets with more training instances and we have also experimentally measured the time complexity of the methods. This experiment have shown that the fuzzy method is suitable mainly in situations with a small amount of training instances and in the case when the target attribute mostly respect natural order of the remaining attributes. But this did not stand for any of the secondly used datasets and it is probably not very common. When comparing the fuzzy approach with the crisp one, the fuzzy approach always performed better in terms of correctness of the classification but it was many times slower than all the methods in terms of time complexity.
+In the second experiment, we evaluated all the methods on other datasets with more training instances and we also experimentally measured the time complexity of the methods. This experiment has shown that the fuzzy method is suitable mainly in situations with a small amount of training instances and in cases when the target attribute mostly respects the natural order of the remaining attributes. But this did not hold true for any of the later-used datasets. When comparing the fuzzy approach with the crisp one, the fuzzy approach always performed better in terms of correctness of the classification, but it was many times slower than all the methods in terms of time complexity.
 
 
 
@@ -922,3 +921,4 @@ This work was partially supported by Czech projects: GACR P202/10/0761, GACR-201
 %%% mode: latex
 %%% TeX-master: t
 %%% End: 
+
