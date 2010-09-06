@@ -74,7 +74,7 @@ Prague, Czech Republic
 
 
 \begin{abstract}
-In this paper we present a method for semantic annotation of texts, which is based on deep linguistic analysis (DLA) and Inductive Logic Programming (ILP). The combination of DLA and ILP have following benefits: Manual selection of learning features is not needed. We just offer learning procedure full linguistic information that we have and it is capable to select the relevant parts itself. Learned extraction rules can be easily visualized, understood and adapted by human.
+In this paper we present a method for semantic annotation of texts, which is based on deep linguistic analysis (DLA) and Inductive Logic Programming (ILP). The combination of DLA and ILP have following benefits: Manual selection of learning features is not needed. The learning procedure has full available linguistic information at its disposal and it is capable to select the relevant parts itself. Learned extraction rules can be easily visualized, understood and adapted by human.
 Description, implementation and initial evaluation of the method are the main contributions of the paper.
 \keywords{Semantic Annotation, Dependency Linguistics, Inductive Logic Programming, Information Extraction, Machine Learning}
 \end{abstract}
@@ -92,7 +92,7 @@ Description, implementation and initial evaluation of the method are the main co
 
 \section{Related work}
 %\subsection{ILP users}
-There are many users of ILP in the linguistic an information extraction area.
+There are many users of ILP in the linguistic and information extraction area.
 %For example in \cite{stasinos:phd} ILP was used for shallow parsing and phonotactics.
 In \cite{Ramakrishnan:UsingILPforFeatures} ILP was used to construct good features for propositional learners like SVM to do information extraction. This approach seems to be very powerful but also much more complicated than ours. Authors of \cite{Junker99learningfor} summarized some basic principles of using ILP for learning from text without any linguistic preprocessing. One of the most related approaches to ours can be found in \cite{aitken02:_learn_infor_extrac_rules}. The authors use ILP for extraction of information about chemical compounds and other concepts related to global warming and they try to express the extracted information in terms of ontology. They use only part of speech analysis and named entity recognition in the preprocessing step. But their inductive procedure uses also additional domain knowledge for the extraction. This could be also employed in our approach.
 

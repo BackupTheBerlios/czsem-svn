@@ -24,12 +24,12 @@
   		<scope>compile</scope>
   		<exclusions>
   			<exclusion>
-  				<artifactId>jwnl</artifactId>
-  				<groupId>net.didion</groupId>
-  			</exclusion>
-  			<exclusion>
   				<artifactId>lookup</artifactId>
   				<groupId>nl.mpi</groupId>
+  			</exclusion>
+  			<exclusion>
+  				<artifactId>jwnl</artifactId>
+  				<groupId>net.didion</groupId>
   			</exclusion>
   		</exclusions>
   	</dependency>
@@ -51,5 +51,28 @@
 	    <checksumPolicy>fail</checksumPolicy>  
 	  </releases>  
 	</repository>
-</repositories> 
+	<repository>
+		<releases>
+			<updatePolicy>never</updatePolicy>
+		</releases>
+		<snapshots>
+			<updatePolicy>daily</updatePolicy>
+		</snapshots>
+		<id>unkn</id>
+		<name>unk</name>
+		<url>http://wwmm.ch.cam.ac.uk/maven2/</url>
+	</repository>
+	<repository>
+		<releases>
+			<updatePolicy>always</updatePolicy>
+			<checksumPolicy>warn</checksumPolicy>
+		</releases>
+		<snapshots>
+			<updatePolicy>never</updatePolicy>
+			<checksumPolicy>fail</checksumPolicy>
+		</snapshots>
+		<id>openrdf</id>
+		<url>http://repository.aduna-software.org/maven2</url>
+	</repository>	
+  </repositories> 
 </project>

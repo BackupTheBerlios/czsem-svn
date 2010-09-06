@@ -1,0 +1,92 @@
+---------------------------- REVIEW 1 --------------------------
+PAPER: 219
+TITLE: Towards Semantic Annotation Supported by Dependency Linguistics and ILP
+
+OVERALL RATING: 2 (accept)
+
+As you do your reviewing, please consider the reviewing criteria for this kind of submission from the combined call (at http://iswc2010.semanticweb.org/node/2).
+This paper tries to combine Inductive Logic Programming with deep linguistic analysis for semantic annotation.
+The contributions are: 1) Manual selection of learning features is not needed.2) It is found that the results of ILP are not better than those from a propositional learner.
+The suggestions are : 1) Other machine learning algorithms may have better results, such as HMM, ME, PILP, or PCFG. 2) Multi-token phrases recognition/annotation may be solve by chunking algorithms, especially for NP and VP chunking. 3) Larger datasets are strongly needed for evaluation algorithms.
+
+
+
+---------------------------- REVIEW 2 --------------------------
+PAPER: 219
+TITLE: Towards Semantic Annotation Supported by Dependency Linguistics and ILP
+
+OVERALL RATING: 1 (weak accept)
+
+This paper introduces a method for semantic annotation of unstructured text based on DLA and ILP. The ideas are interesting but there are two main problems: the writing of the paper needs much work, and the results presented are rather confusing. Better presentation of the research would improve this paper considerably, and is worth taking time over.
+
+Some more detailed points:
+- The English needs much work - at times it is rather confusing as a result. Pay attention also to typos, e.g. "an" instead of "and" on page 1.
+
+- It's hard to parse the phrase "offer learning procedure full linguistic information". Consider rewriting this.
+
+- It is unclear in the introduction what the "semantic" part of this work is.
+
+- In the introduction, it would be better to talk about the main contributions of your work to the state of the art in the field, rather than the main contribution of the paper with respect to your work.
+
+- In section 2, you say that ILP is a more complicated approach than yours. You need to expand on this. A complicated approach in itself doesn't mean it's a bad thing, but you suggest that it is.
+
+- Section 2 displays a good set of references, but you need to go a step further and explain WHY your system is better than the others. In fact, you imply the opposite, because your approach seems very simplistic compared to the others. You only compare your approach with one other in the evaluation, so it's hard to tell if this is really the case.
+
+- In section 2, you mention GATE, but you should state explicitly here that you also use GATE in your approach - this isn't obvious.
+
+- In section 3, you use the wrong reference for GATE. There are dozens of papers about GATE, why refer to the training course, which isn't a publication? The best paper to cite is the ACL reference (mentioned explicitly on the GATE publications page as the one to use for general reference to GATE).
+
+- "spread" should be "widespread" in Section 3.1, or better still, something like "most widely used".
+
+- In section 3.2, you should explain what you use for pre-processing. Do you use the GATE tools (tokeniser, sentence splitter etc)?
+
+- In section 4.2, I would clarify that "annotator" means a human, as this term is sometimes used to mean an automatic tool as well.
+
+- Section 4.4, "on a very gross level" - this is not the right word. I think you mean "coarse".
+
+- I have some issues with the display of results in table 1. You need to show clear comparison between ILP and PAUM for each type (strict/lenient, where you've added extra features, and so on). It is very unclear at the moment, and hard to understand the significance.
+
+- For the results to have any usefulness, you need to evaluate more than two features and more than one event type. You could easily have just picked two features that outperform the other method, otherwise.
+
+- In the discussion, can you suggest reasons why you get better Precision but lower Recall?
+Can you suggest improvements? Currently, your results are not an improvement on the other method evaluated, so you need to at least show some evidence that you might ultimately get better results, or some reason why your system is better in other ways. Otherwise, you are not really advancing the state of the art.
+
+- The conclusion states that you don't have a method for traditional annotation, but in the inntroduction, you claim that you do. Please clarify.
+
+
+
+---------------------------- REVIEW 3 --------------------------
+PAPER: 219
+TITLE: Towards Semantic Annotation Supported by Dependency Linguistics and ILP
+
+OVERALL RATING: -1 (weak reject)
+
+The paper presents a preliminary report on research that combines deep linguistic analysis (DLA) with inductive logic programming (ILP). The system will parse sentences into a dependency tree structure and then use ILP to learn which structures represent which semantic annotations. A number of manually created semantic annotations is provided as a training set.
+
+
+This is an interesting approach, because it allows for the automatic creation of rules (based on a training corpus) that could extract further semantic annotations from unknown corpora. My concern here is that the rules found using ILP will not be general enough to be applicable to much more than the training (annotation) examples in the annotated training corpus.
+
+The authors should have spent a few sentences on ILP serialization. It is not clear what is actually done. Examples are sorely missed, eg for section 4.2-- hard to understand details of the two steps otherwise! (Similarly, readability/explanations suffer significant due to lack of examples).
+
+"But of course we are not satisfied with this fashion of semantic interpretation
+and we plan to develop the semantic interpretation step further as a sophisticated
+"annotation -> ontology" transformation process that we have proposed in one
+of our previous works [7]." This kind of writing left me wanting lot more!
+
+"The precision was further improved by adding the feature
+of analytical function from syntactic parser (see in the last row of Table 1)."
+This is unclear-- I did not see discussion/description of analytical function to help me understand this.
+
+
+[Minor: would like to see relationship with "Scalable Deep Linguistic Processing: Mind the Lexical Gap" http://www.cs.mu.oz.au/~tim/pubs/paclic2007.pdf ]
+
+Evaluation:
+I would like to see some examples of extracted semantic annotations in addition to the precision/recall table.
+What makes the "Injury" dataset more difficult to process?
+I would like to see a discussion about why the authors think the Paum learner had less precision, but more recall than their system. The authors should go beyond the explanation in the conclusion.
+
+There are many grammatical errors in the paper. It should be carefully proofread for the camera-ready version.
+
+Overall, the report is not well written and inconclusive. Despite the interesting approach I am not able to recommend this right now given the lack of clarity/readability/concrete outcomes/evaluation.
+
+
