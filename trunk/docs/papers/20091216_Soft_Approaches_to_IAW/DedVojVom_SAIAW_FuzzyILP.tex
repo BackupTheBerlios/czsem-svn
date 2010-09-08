@@ -454,24 +454,38 @@ Now we sketch the translation of the \emph{mon ILP task} to GAP (fuzzy ILP) rule
 
 \begin{theorem}[Translation of the \emph{mon ILP task}]
 A fuzzy ILP (or equivalent GAP) task is given by ${\mathcal E}$ and ${\mathcal B}$. Let us assume that $C$ is the target predicate in the domain of ${\mathcal E}$ and for each $t \in T$, $H_{\ge t}$ is a correctly learned solution of the corresponding \textit{mon ILP task} according to the definitions introduced above. We define ${\mathcal H}$ consisting of one GAP rule:
-$$C(y):u(x_1,\dots,x_m)\leftarrow B_1:x_1 \&\dots\& B_m:x_m,$$
+$$C(y):u(x_1,\dots,x_m)\leftarrow B_1(y):x_1\; \&\dots\& \;B_m(y):x_m,$$
 here $B_1:x_1 \&\dots\& B_m:x_m$ is the enumeration of all predicates in $B$.
 
 Assume that $B_1(y_1,t_1),\dots,B_n(y_n,t_n)$ are some of the predicates in $B$ (for simplicity enumerated from 1 to $n, \ n \le m$). Then for each rule 
-$$R=C(y)\Leftarrow B_1(y_1,t_1),\dots,B_n(y_n,t_n)$$
-in $H_{\ge t}$ we give a constraint in the definition of $u$ as follows:
+$$
+R=C_{\ge t}(y)\Leftarrow B_1(y,t_1),\dots,B_n(y,t_n)
+$$
+in $H_{\ge t}$ ($C_{\ge t}$ is the monotonized target predicate) we give a constraint in the definition of $u$ as follows:
 $$
 U_R=u(x_1,\dots,x_m)\ge t \hbox{ if }x_1\ge t_1,\dots,x_n\ge t_n.
 $$
-Note that $x_{n+1},\dots,x_m$ have no restrictions.
+Note that all $x_i$ and $y$ are variables, $t_i$ and $t$ are constants and $x_{n+1},\dots,x_m$ have no restrictions.
+We learn the function $u$ as a ``monotone'' completion of rules with a content annotation. 
 
 We claim that if all $H_{\ge t}$ were correctly learned by a classical ILP system, then, for the minimal solution $u$ of all constraints $U_R$, the rule
 $$
-C(y):u(x_1,\dots,x_m)\leftarrow B_1:x_1 \&\dots\& B_m:x_m
+C(y):u(x_1,\dots,x_m)\leftarrow B_1(y):x_1\; \&\dots\& \;B_m(y):x_m
 $$
-is a correct solution of the fuzzy ILP task given by ${\mathcal E}$ and ${\mathcal B}$, for all $R\in H_t$ and $t\in T$. 
+is a correct solution of the fuzzy ILP task given by ${\mathcal E}$ and ${\mathcal B}$, for all $R\in H_{\ge t}$ and $t\in T$. 
 \end{theorem}
 
+In our case \verb@serious(Accident_ID)@ is the fuzzy or GAP target predicate $C$. Let for example $t=3$ and $H_{\ge t}$ is the same as in Fig.~\ref{img:rules} (the last two rows correspond with $H_{\ge 3}$). Then \verb@serious_atl_3(Accident_ID)@ is the monotonized target predicate $C_{\ge t}$ and $B_1$, $B_2$ and $u$ are realized as follows:\\
+\hspace*{1cm}$B_1(y,t_1)$ \dots \verb@fatalities_atl(Accident_ID, 1)@,\\
+\hspace*{1cm}$B_2(y,t_2)$ \dots \verb@damage_atl(Accident_ID, 1500000)@,\\
+$u$ is an arbitrary function of $m$ arguments ($m$ is the number of all predicates used in background knowledge) for which following restrictions hold true:\\
+for $t=3$:\\
+\hspace*{1cm}$u(x_1,\dots,x_m) \ge 3 \ \hbox{ if }x_1\ge 1$\\
+\hspace*{1cm}$u(x_1,\dots,x_m) \ge 3 \ \hbox{ if }x_2\ge 1500000$\\
+and similar restrictions for $t=1,2$.
+
+
+\bigskip
 Our presentation is slightly simplified here and we freely switch between fuzzy and GAP programs, which are known to be equivalent, see in~\citep{biblio:KLV}.
 
 
