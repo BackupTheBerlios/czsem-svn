@@ -46,20 +46,19 @@
 % their surnames. This ensures that the names appear correctly in
 % the running heads and the author index.
 %
-\author{Jan D\v{e}dek
+\author{Jan D\v{e}dek}
 %\thanks{Please note that the LNCS Editorial assumes that all authors have used
 %the western naming convention, with given names preceding surnames. This determines
 %the structure of the names in the running heads and the author index.}%
-\and Peter Vojt\'{a}\v{s}}
 %
-\authorrunning{Jan D\v{e}dek and Peter Vojt\'{a}\v{s}}
+\authorrunning{Jan D\v{e}dek}
 % (feature abused for this document to repeat the title also on left hand pages)
 
 % the affiliations are given next; don't give your e-mail address
 % unless you accept that it will be published
 \institute{Department of Software Engineering, Charles University,\\
 Prague, Czech Republic
-\\\url{{dedek, vojtas}@ksi.mff.cuni.cz}}
+\\\url{dedek@ksi.mff.cuni.cz}}
 
 %
 % NB: a more complex sample for affiliations and the mapping to the
@@ -74,18 +73,19 @@ Prague, Czech Republic
 
 
 \begin{abstract}
-In this paper we present a method for semantic annotation of texts, which is based on deep linguistic analysis (DLA) and Inductive Logic Programming (ILP). The combination of DLA and ILP have following benefits: Manual selection of learning features is not needed. The learning procedure has full available linguistic information at its disposal and it is capable to select the relevant parts itself. Learned extraction rules can be easily visualized, understood and adapted by human.
-Description, implementation and initial evaluation of the method are the main contributions of the paper.
+In this paper we present a method for semantic annotation of texts, which is based on deep linguistic analysis (DLA) and Inductive Logic Programming (ILP). The combination of DLA and ILP have following benefits: Manual selection of learning features is not needed. The learning procedure has full available linguistic information at its disposal and it is capable to select relevant parts itself. Learned extraction rules can be easily visualized, understood and adapted by human.
+A description, implementation and initial evaluation of the method are the main contributions of the paper.
 \keywords{Semantic Annotation, Dependency Linguistics, Inductive Logic Programming, Information Extraction, Machine Learning}
 \end{abstract}
 
 
 \section{Introduction}
-Automated semantic annotation (SA) is considered to be one of the most important elements in the evolution of the Semantic Web. Besides that, SA can provide great help in a process of data and information integration and it could also be a basis for intelligent search and navigation.
+Automated semantic annotation (SA) is considered to be one of the most important elements in the evolution of the Semantic Web. Besides that, SA can provide great help in the process of data and information integration and it could also be a basis for intelligent search and navigation.
 
-In this paper we present main results and reflections of our ongoing PhD project, a method for classical and semantic information extraction and annotation of texts, which is based on deep linguistic analysis and Inductive Logic Programming (ILP). This approach is quite novel because it directly combines deep linguistic parsing with machine learning (ML). This combination and the use of ILP as ML engine have following benefits: Manual selection of learning features is not needed. We just offer learning procedure full linguistic information that we have and it is capable to select the relevant parts itself. Learned extraction rules from ILP can be easily visualized, understood and adapted by human.
+In this paper we present main results and reflections of our ongoing PhD project, a method for classical and semantic information extraction and annotation of texts, which is based on deep linguistic analysis and Inductive Logic Programming (ILP). This approach is quite novel because it directly combines deep linguistic parsing with machine learning (ML). This combination and the use of ILP as ML engine have following benefits: Manual selection of learning features is not needed. 
+The learning procedure has full available linguistic information at its disposal and it is capable to select relevant parts itself. Extraction rules learned by ILP can be easily visualized, understood and adapted by human.
 
-Description, implementation and initial evaluation of the method are the main contributions of the paper.
+A description, implementation and initial evaluation of the method are the main contributions of the paper.
 
 
 
@@ -94,7 +94,7 @@ Description, implementation and initial evaluation of the method are the main co
 %\subsection{ILP users}
 There are many users of ILP in the linguistic and information extraction area.
 %For example in \cite{stasinos:phd} ILP was used for shallow parsing and phonotactics.
-In \cite{Ramakrishnan:UsingILPforFeatures} ILP was used to construct good features for propositional learners like SVM to do information extraction. This approach seems to be very powerful but also much more complicated than ours. Authors of \cite{Junker99learningfor} summarized some basic principles of using ILP for learning from text without any linguistic preprocessing. One of the most related approaches to ours can be found in \cite{aitken02:_learn_infor_extrac_rules}. The authors use ILP for extraction of information about chemical compounds and other concepts related to global warming and they try to express the extracted information in terms of ontology. They use only part of speech analysis and named entity recognition in the preprocessing step. But their inductive procedure uses also additional domain knowledge for the extraction. This could be also employed in our approach.
+Authors of \cite{Junker99learningfor} summarized some basic principles of using ILP for learning from text without any linguistic preprocessing. One of the most related approaches to ours can be found in \cite{aitken02:_learn_infor_extrac_rules}. The authors use ILP for extraction of information about chemical compounds and other concepts related to global warming and they try to express the extracted information in terms of ontology. They use only part of speech analysis and named entity recognition in the preprocessing step. But their inductive procedure uses also additional domain knowledge for the extraction. In \cite{Ramakrishnan:UsingILPforFeatures} ILP was used to construct good features for propositional learners like SVM to do information extraction. It was discovered that this approach is a little bit more successful than a direct use of ILP but it is also more complicated. The later two approaches could be also employed in our solution.
 
 %\subsection{Deep parsing users}
 %As stated in 
@@ -131,10 +131,10 @@ Last category of related works goes in the direction of semantics and ontologies
 In our solution we have exploited several tools and formalisms. These can be divided into two groups: linguistics and (inductive) logic programming. First we describe the linguistic tools and formalisms, the rest will follow.
 
 \subsection{GATE}
-GATE\footnote{\url{http://gate.ac.uk/}} \cite{dedek:GATE_course} is probably the most spread tool for text processing. In our solution the capabilities of document and annotation management, utility resources for annotation processing, JAPE grammar rules \cite{Cunningham00jape:a}, machine learning facilities and performance evaluation tools are the most helpful features of GATE that we have used.
+GATE\footnote{\url{http://gate.ac.uk/}} \cite{dedek:GATE_ACL2002} is probably the most widely used tool for text processing. In our solution the capabilities of document and annotation management, utility resources for annotation processing, JAPE grammar rules \cite{Cunningham00jape:a}, machine learning facilities and performance evaluation tools are the most helpful features of GATE that we have used.
 
 \subsection{PDT and TectoMT}
-As we have started with our native language -- Czech (a language with rich morphology and free word order), we had to make tools for processing Czech available in GATE. We have implemented a wrapper for the TectoMT system\footnote{\url{http://ufal.mff.cuni.cz/tectomt/}} \cite{dedek:ZaPtTectoMTHighly2008} to GATE. TectoMT is a Czech project that contains many linguistic analyzers for different languages including Czech and English. We have used mainly the morphological analyzers (including POS tagger), syntactic parser and deep syntactic (tectogrammatical) parser. All the tools are based on the dependency based linguistic theory and formalism of the Prague Dependency Treebank project \cite{dedek:PDT20_CD}. So far our solution does not include any coreference and discourse analysis.
+As we have started with our native language -- Czech (a language with rich morphology and free word order), we had to make tools for processing Czech available in GATE. We have implemented a wrapper for the TectoMT system\footnote{\url{http://ufal.mff.cuni.cz/tectomt/}} \cite{dedek:ZaPtTectoMTHighly2008} to GATE. TectoMT is a Czech project that contains many linguistic analyzers for different languages including Czech and English. We have used a majority of applicable tools from TectoMT: a tokeniser, a sentence splitter, morphological analyzers (including POS tagger), a syntactic parser and the deep syntactic (tectogrammatical) parser. All the tools are based on the dependency based linguistic theory and formalism of the Prague Dependency Treebank project \cite{dedek:PDT20_CD}. So far our solution does not include any coreference and discourse analysis.
 
 %\textbf{Rozepsat PDT - mozna v uvodu?}
 
@@ -167,13 +167,13 @@ Here we just briefly describe implementation of our system. The system consists 
 First is the TectoMT wrapper, which takes the text of a GATE document, sends it to TectoMT linguistic analyzers, parses the results and converts the results to the form of GATE annotations.
 
 \subsection{ILP wrapper (machine learninig)}
-After an annotator have annotated several documents with desired target annotations, machine learning takes place. 
+After a human annotator have annotated several documents with desired target annotations, machine learning takes place. 
 This consists of two steps: 
 \begin{enumerate}
 	\item learning of extraction rules from the target annotations and
 	\item application of the extraction rules on new documents.
 \end{enumerate}
-In both steps the linguistic analysis has to be done before and in both steps a background knowledge (a logical database of facts) is constructed from linguistic structures of documents that are to be processed. We call the process of background knowledge construction as \emph{ILP serialization}. Although this topic is quite interesting we do not present details here because of space limitations.
+In both steps the linguistic analysis has to be done before and in both steps background knowledge (a logical database of facts) is constructed from linguistic structures of documents that are beeing processed. We call the process of background knowledge construction as \emph{ILP serialization}. Although this topic is quite interesting we do not present details here because of space limitations.
 %; more details are presented below \textbf{(??Sect. 1??)}.
 
 After the ILP serialization is done, in the learning case, positive and negative examples are constructed from target annotations and the machine learning ILP inductive procedure is executed to obtain extraction rules.
@@ -203,7 +203,7 @@ We call the first point as \emph{root preprocessing} and the last point as \emph
 
 \subsection{Semantic interpretation}
 \label{sec:SemanticInterpretation}
-Information extraction can solve the task ``how to get documents annotated'', but as we aim on the semantic annotation, there is a second step of ``semantic interpretation'' that has to be done. In this step we have to interpret the annotations in terms of a standard ontology. On a very gross level this can be done easily. Thanks to GATE ontology tools \cite{Bon04b} we can convert all the annotations to ontology instances with a quite simple JAPE \cite{Cunningham00jape:a} rule, which takes the content of an annotation and saves it as a label of a new instance or as a value of some property of a shared instance. For example in our case of traffic and fire accidents, there will be a new instance of an accident class for each document and the annotations would be attached to this instance as values of its properties. Thus from all annotations of the same type, instances of the same ontology class or values of the same property would be constructed. This is very inaccurate form of semantic interpretation but it still can be useful. It is similar to the GoodRelation \cite{DBLP:conf/ekaw/Hepp08} design principle of \emph{incremental enrichment}\footnote{\url{http://www.ebusiness-unibw.org/wiki/Modeling_Product_Models#Recipe:_.22Incremental_Enrichment.22}}:
+Information extraction can solve the task ``how to get documents annotated'', but as we aim on the semantic annotation, there is a second step of ``semantic interpretation'' that has to be done. In this step we have to interpret the annotations in terms of a standard ontology. On a very coarse level this can be done easily. Thanks to GATE ontology tools \cite{Bon04b} we can convert all the annotations to ontology instances with a quite simple JAPE \cite{Cunningham00jape:a} rule, which takes the content of an annotation and saves it as a label of a new instance or as a value of some property of a shared instance. For example in our case of traffic and fire accidents, there will be a new instance of an accident class for each document and the annotations would be attached to this instance as values of its properties. Thus from all annotations of the same type, instances of the same ontology class or values of the same property would be constructed. This is very inaccurate form of semantic interpretation but it still can be useful. It is similar to the GoodRelation \cite{DBLP:conf/ekaw/Hepp08} design principle of \emph{incremental enrichment}\footnote{\url{http://www.ebusiness-unibw.org/wiki/Modeling_Product_Models#Recipe:_.22Incremental_Enrichment.22}}:
 %\begin{quote}
 ``...you can still publish the data, even if not yet perfect. The Web will do the rest -- new tools and people.''	
 %\end{quote}
@@ -230,7 +230,7 @@ The corpus is structured such that each document represents one event (accident)
 %\end{enumerate}
 
 %\subsection{Comparison with Paum classifier}
-To compare our solution with other alternatives we took the Paum propositional learner from GATE \cite{Li:Paum}. The quality of propositional learning from texts is strongly dependent on selection of right features. We obtained quite good results with features of a window of two preceding and two following token lemmas and morphological tags. The precision was further improved by adding the feature of \emph{analytical function} from syntactic parser (see in the last row of Table~\ref{tab:EvaluationResults}).
+To compare our solution with other alternatives we took the Paum propositional learner from GATE \cite{Li:Paum}. The quality of propositional learning from texts is strongly dependent on selection of right features. We obtained quite good results with features of a window of two preceding and two following token lemmas and morphological tags. The precision was further improved by adding the feature of \emph{analytical function} from syntactic parser (see the last row of Table~\ref{tab:EvaluationResults}).
 
 %Bu we did not want to invest much time to this and the feature setting of the Paum learner was quite simple (a window of two preceding and following token lemmas and morphological tags). We admit that looking for better features could further improve the results of the Paum learner.
 
@@ -250,7 +250,7 @@ Results of 10-fold cross validation are summarized in Table~\ref{tab:EvaluationR
 \hline
 \textbf{damage/ILP} & 14 & 0 & 7 & 6 & 51.85 & 70.00 & 59.57\\
 \hline
-\multicolumn{5}{|l|}{\textbf{damage/ILP - the same results, lenient measures}} & 74.07 & 100.00 & 85.11\\
+\multicolumn{5}{|l|}{\textbf{damage/ILP -- lenient measures}} & 74.07 & 100.00 & 85.11\\
 \hline
 \textbf{dam./ILP-roots} & 16 & 4 & 2 & 0 & 88.89 & 80.00 & 84.21\\
 \hline
@@ -320,6 +320,10 @@ Our method is still missing an intelligent semantic interpretation procedure and
 Our method can also provide a comparison of linguistic formalisms and tools because on the same data we could run our method using different linguistic analyzers and compare the results.
 
 
+\bigskip
+\noindent\textbf{Acknowledgments}\\
+This work was partially supported by Czech projects: GACR P202/10/0761, GACR-201/09/H057, GAUK 31009 and MSM-0021620838.
+The author would like to thank his supervisor Peter Vojt\'{a}\v{s} for the guidance of the PhD thesis.
 
 
 
