@@ -90,7 +90,7 @@ A description, implementation and initial evaluation of the method are the main 
 
 
 
-\section{Related work}
+\section{Related Work}
 %\subsection{ILP users}
 There are many users of ILP in the linguistic and information extraction area.
 %For example in \cite{stasinos:phd} ILP was used for shallow parsing and phonotactics.
@@ -127,7 +127,7 @@ Last category of related works goes in the direction of semantics and ontologies
 
 
 
-\section{Exploited methods -- linguistics and ILP}
+\section{Exploited Methods -- Linguistics and ILP}
 In our solution we have exploited several tools and formalisms. These can be divided into two groups: linguistics and (inductive) logic programming. First we describe the linguistic tools and formalisms, the rest will follow.
 
 \subsection{GATE}
@@ -144,7 +144,7 @@ As we have started with our native language -- Czech (a language with rich morph
 
 
 \subsection{Inductive Logic Programming}
-Inductive Logic Programming (ILP) \cite{dedek:MuggletonILP} is a machine learning technique based on logic programming. Given an encoding of the known background knowledge (in our case linguistic structure of all sentences) and a set of examples represented as a logical database of facts (in our case tokens annotated with the target annotation type are positive examples and the remaining tokens negative ones), an ILP system will derive a hypothesised logic program (in our case extraction rules) which entails all the positive and none of the negative examples.
+Inductive Logic Programming (ILP) \cite{dedek:MuggletonILP} is a machine learning technique based on logic programming. Given an encoding of the known background knowledge (in our case linguistic structure of all sentences) and a set of examples represented as a logical database of facts (in our case tokens annotated with the target annotation type are positive examples and the remaining tokens negative ones), an ILP system will derive a hypothesized logic program (in our case extraction rules) which entails all the positive and none of the negative examples.
 
 %\subsection{ILP tool}
 As an ILP tool we have used ``A Learning Engine for Proposing Hypotheses'' (Aleph v5)\footnote{\url{http://www.comlab.ox.ac.uk/activities/machinelearning/Aleph/}}, which we consider very practical. It uses quite effective method of inverse entailment \cite{biblio:InverseEntailment} and keeps all handy features of a Prolog system (we have used YAP Prolog\footnote{\url{http://www.dcc.fc.up.pt/~vsc/Yap/}}) in its background.
@@ -163,10 +163,10 @@ From our experiments (Section~\ref{sec:evaluation}) can be seen that ILP is capa
 \section{Implementation}
 Here we just briefly describe implementation of our system. The system consists of several modules, all integrated in GATE as processing resources.
 
-\subsection{TectoMT wrapper (linguistic anlysis)}
+\subsection{TectoMT Wrapper (Linguistic Analysis)}
 First is the TectoMT wrapper, which takes the text of a GATE document, sends it to TectoMT linguistic analyzers, parses the results and converts the results to the form of GATE annotations.
 
-\subsection{ILP wrapper (machine learninig)}
+\subsection{ILP Wrapper (Machine Learning)}
 After a human annotator have annotated several documents with desired target annotations, machine learning takes place. 
 This consists of two steps: 
 \begin{enumerate}
@@ -190,7 +190,7 @@ ML PR provides an interface for exchange of features (including target class) be
 %ILP tool presunuto do Exploited methods
 %ILP serialization, annotation / tree node intersection 
 
-\subsection{Root/subtree preprocessing/postprocessing}
+\subsection{Root/Subtree Preprocessing/Postprocessing}
 Sometimes annotations span over more than one token. This situation complicates the process of machine learning and this situation is often called as ``chunk learning''. Either we have to split a single annotation to multiple learning instances and after application we have to merge them back together, or we can change the learning task from learning annotated tokens to learning borders of annotations (start tokens and end tokens). The later approach is implemented in GATE in \emph{Batch Learning PR} in the `SURROUND' mode.
 
 We have used another approach to solve this issue. Our approach is based on syntactic structure of a sentence and we call it ``root/subtree preprocessing/postprocessing''. The idea is based on the observation that tokens of a multi-token annotation usually have a common parent node in a syntactic tree. So we can
@@ -201,7 +201,7 @@ We have used another approach to solve this issue. Our approach is based on synt
 \end{enumerate}
 We call the first point as \emph{root preprocessing} and the last point as \emph{subtree postprocessing}. We have successfully used this technique for the `damage' task of our evaluation corpus (See Section~\ref{sec:evaluation} for details.)
 
-\subsection{Semantic interpretation}
+\subsection{Semantic Interpretation}
 \label{sec:SemanticInterpretation}
 Information extraction can solve the task ``how to get documents annotated'', but as we aim on the semantic annotation, there is a second step of ``semantic interpretation'' that has to be done. In this step we have to interpret the annotations in terms of a standard ontology. On a very coarse level this can be done easily. Thanks to GATE ontology tools \cite{Bon04b} we can convert all the annotations to ontology instances with a quite simple JAPE \cite{Cunningham00jape:a} rule, which takes the content of an annotation and saves it as a label of a new instance or as a value of some property of a shared instance. For example in our case of traffic and fire accidents, there will be a new instance of an accident class for each document and the annotations would be attached to this instance as values of its properties. Thus from all annotations of the same type, instances of the same ontology class or values of the same property would be constructed. This is very inaccurate form of semantic interpretation but still it can be useful. It is similar to the GoodRelation \cite{DBLP:conf/ekaw/Hepp08} design principle of \emph{incremental enrichment}\footnote{\url{http://www.ebusiness-unibw.org/wiki/Modeling_Product_Models#Recipe:_.22Incremental_Enrichment.22}}:
 %\begin{quote}
@@ -210,7 +210,7 @@ Information extraction can solve the task ``how to get documents annotated'', bu
 
 But of course we are not satisfied with this fashion of semantic interpretation and we plan to further develop the semantic interpretation step as a sophisticated ``annotation $\rightarrow$ ontology'' transformation process that we have proposed in one of our previous works \cite{biblio:DeVoComputingaggregations2008}.
 
-\subsection{How to download}
+\subsection{How to Download}
 So far we do not provide our solution as a ready-made installable tool. But a middle experienced Java programmer can build it from source codes in our SVN repository\footnote{Follow the instructions at \url{http://czsem.berlios.de/}}.
 
 
@@ -267,7 +267,7 @@ Results of a 10-fold cross validation are summarized in Table~\ref{tab:Evaluatio
 						
 	\caption{Evaluation results }
 	\label{tab:EvaluationResults}
-	\vspace{-0.5cm}
+	\vspace{-0.80cm}
 \end{table}
 
 In the first task (`damage') the methods obtained much higher scores then in the second (`injuries') because the second task is more difficult. In the first task also the root/subtree preprocessing/postprocessing improved results of ILP such that afterwards, annotation borders were all placed precisely. The ILP method had better precision and worse recall than the Paum learner but the $F_1$ score was very similar in both cases.
@@ -313,7 +313,7 @@ In Figure~\ref{fig:rules} we present some examples of the rules learned from the
 
 
 
-\section{Conclusion and future work}
+\section{Conclusion and Future Work}
 From our experiments can be seen that ILP is capable to find complex and meaningful rules that cover the intended information. But in terms of the performance measures the results are not better than those from a propositional learner. This is quite surprising observation because Czech is a language with free word order and we would expect much better results of the dependency approach than those of the position based approach, which was used by the propositional learner.
 
 Our method is still missing an intelligent semantic interpretation procedure and it should be evaluated on bigger datasets (e.g. MUC, ACE, TAC, CoNLL) and other languages. So far we also do not provide a method for classical relation extraction (like e.g. in \cite{Bunescu:DependencyPaths}). In the present solution we deal with relations implicitly. The method has to be adapted for explicit learning of relations in the form of ``subject predicate object''.
