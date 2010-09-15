@@ -31,12 +31,12 @@ public class TectoMTDocumentAnalyser
 	private String dest_filename;
 	private String language = "english";
 	
-	TectoMTDocumentAnalyser(Document doc, String language)
+	public TectoMTDocumentAnalyser(Document doc, String language)
 	{
 		this(doc, language, null);
 	}
 
-	TectoMTDocumentAnalyser(Document doc, String language, String dest_filename)
+	public TectoMTDocumentAnalyser(Document doc, String language, String dest_filename)
 	{
 		this.language = language;
 		this.doc = doc;

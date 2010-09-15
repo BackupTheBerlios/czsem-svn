@@ -1,4 +1,4 @@
-package czsem.gate;
+package czsem.gate.plugins;
 
 import gate.DataStore;
 import gate.Document;
@@ -28,6 +28,8 @@ import javax.xml.xpath.XPathExpressionException;
 
 import org.xml.sax.SAXException;
 
+import czsem.gate.GateUtils;
+import czsem.gate.TectoMTDocumentAnalyser;
 import czsem.utils.ProcessExec;
 import czsem.utils.ProjectSetup;
 

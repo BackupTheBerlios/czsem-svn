@@ -1,7 +1,7 @@
 /**
  * 
  */
-package czsem.gate;
+package czsem.gate.plugins;
 
 import gate.LanguageAnalyser;
 import gate.ProcessingResource;
@@ -14,6 +14,9 @@ import gate.creole.metadata.Optional;
 import gate.creole.metadata.RunTime;
 
 import java.net.URL;
+
+import czsem.gate.FSFileWriter;
+import czsem.gate.GateUtils;
 
 
 /**

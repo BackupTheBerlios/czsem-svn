@@ -1,6 +1,8 @@
-package czsem.gate;
+package czsem.gate.plugins;
 
 import java.util.HashSet;
+
+import czsem.gate.AnnotationDependencyAbstractMarker;
 
 import gate.Annotation;
 import gate.AnnotationSet;

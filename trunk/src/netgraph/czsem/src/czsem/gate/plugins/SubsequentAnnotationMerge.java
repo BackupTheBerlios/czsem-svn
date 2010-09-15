@@ -1,4 +1,4 @@
-package czsem.gate;
+package czsem.gate.plugins;
 
 import java.util.List;
 

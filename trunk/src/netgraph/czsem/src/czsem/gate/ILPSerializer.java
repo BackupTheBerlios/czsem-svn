@@ -15,10 +15,9 @@ import gate.AnnotationSet;
 import gate.Document;
 import gate.FeatureMap;
 import gate.creole.AbstractLanguageAnalyser;
-import gate.creole.metadata.CreoleResource;
 
 
-@CreoleResource(name = "czsem ILPSerializer", comment = "Exports given corpus to ILP background knowledge")
+/** Exports given corpus to ILP background knowledge **/
 public class ILPSerializer extends AbstractLanguageAnalyser
 {
 	private static final long serialVersionUID = 6469933231715581382L;

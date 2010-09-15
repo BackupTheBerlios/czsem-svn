@@ -1,4 +1,4 @@
-package czsem.gate;
+package czsem.gate.plugins;
 import gate.Annotation;
 import gate.AnnotationSet;
 import gate.DataStore;
@@ -49,6 +49,9 @@ import cz.cuni.mff.mirovsky.trees.NGForestDisplay;
 import cz.cuni.mff.mirovsky.trees.NGTree;
 import cz.cuni.mff.mirovsky.trees.NGTreeHead;
 import cz.cuni.mff.mirovsky.trees.TNode;
+import czsem.gate.FSFileWriter;
+import czsem.gate.GateUtils;
+import czsem.gate.SentenceFSWriter;
 import czsem.utils.CZSemTree;
 
 

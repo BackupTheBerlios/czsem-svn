@@ -1,4 +1,4 @@
-package czsem.gate;
+package czsem.gate.plugins;
 
 import gate.Annotation;
 import gate.AnnotationSet;
@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Queue;
+
+import czsem.gate.AnnotationDependencyAbstractMarker;
 
 @CreoleResource(name = "czsem AnnotationDependencyRootMarker", comment = "Finds a nearest common father annotation for all 'tokens' inside a given annotation.")
 public class AnnotationDependencyRootMarker extends AnnotationDependencyAbstractMarker
