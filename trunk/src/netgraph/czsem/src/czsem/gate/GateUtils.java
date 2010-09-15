@@ -152,9 +152,14 @@ public class GateUtils
 	}
 	
 
+	public static Set<String> setFromList(List<String> list)
+	{		
+		return new HashSet<String>(list);
+	}
+
 	public static Set<String> setFromArray(String[] array)
 	{		
-		return new HashSet<String>(Arrays.asList(array));
+		return setFromList(Arrays.asList(array));
 	}
 	
 	public static String [] arrayConcatenate(String [] first, String [] second)

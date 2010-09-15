@@ -13,10 +13,10 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Queue;
 
-import czsem.gate.AnnotationDependencyAbstractMarker;
+import czsem.gate.AbstractAnnotationDependencyMarker;
 
 @CreoleResource(name = "czsem AnnotationDependencyRootMarker", comment = "Finds a nearest common father annotation for all 'tokens' inside a given annotation.")
-public class AnnotationDependencyRootMarker extends AnnotationDependencyAbstractMarker
+public class AnnotationDependencyRootMarker extends AbstractAnnotationDependencyMarker
 {
 	private static final long serialVersionUID = 8357007815773883611L;
 	

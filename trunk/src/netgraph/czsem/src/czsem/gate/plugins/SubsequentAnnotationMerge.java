@@ -1,49 +1,28 @@
 package czsem.gate.plugins;
 
-import java.util.List;
-
 import gate.Annotation;
 import gate.AnnotationSet;
 import gate.Factory;
 import gate.FeatureMap;
 import gate.Node;
-import gate.creole.AbstractLanguageAnalyser;
 import gate.creole.ExecutionException;
 import gate.creole.metadata.CreoleParameter;
 import gate.creole.metadata.CreoleResource;
-import gate.creole.metadata.Optional;
 import gate.creole.metadata.RunTime;
 
+import java.util.List;
+
+import czsem.gate.AbstractLanguageAnalyserWithInputOutputAS;
+
 @CreoleResource(name = "czsem SubsequentAnnotationMerge", comment = "Merges annotations that follow in a row to one single annotation.")
-public class SubsequentAnnotationMerge extends AbstractLanguageAnalyser 
+public class SubsequentAnnotationMerge extends AbstractLanguageAnalyserWithInputOutputAS 
 {
 	private static final long serialVersionUID = -3136012330465966425L;
 	
-	protected String inputASName = null;
-	protected String outputASName = null;
 	protected String annotationTypeName;
 	protected int maxDistanceBetweenAnnotations;
 	protected boolean deleteOriginalAnnotations;
 	
-	public String getInputASName() {
-		return inputASName;
-	}
-
-	@Optional
-	@RunTime
-	@CreoleParameter
-	public void setInputASName(String inputASName) {
-		this.inputASName = inputASName;
-	}
-	public String getOutputASName() {
-		return outputASName;
-	}
-	@Optional
-	@RunTime
-	@CreoleParameter(defaultValue="Merged")
-	public void setOutputASName(String outputASName) {
-		this.outputASName = outputASName;
-	}
 	public String getAnnotationTypeName() {
 		return annotationTypeName;
 	}
@@ -74,8 +53,7 @@ public class SubsequentAnnotationMerge extends AbstractLanguageAnalyser
 	@Override
 	public void execute() throws ExecutionException
 	{
-		AnnotationSet inputAS = document.getAnnotations(inputASName);
-		AnnotationSet outputAS = document.getAnnotations(outputASName);
+		initBeforeExecute();
 		AnnotationSet annotations = inputAS.get(annotationTypeName);		  
 		List<Annotation> orderedAnnotations = gate.Utils.inDocumentOrder(annotations);
 		

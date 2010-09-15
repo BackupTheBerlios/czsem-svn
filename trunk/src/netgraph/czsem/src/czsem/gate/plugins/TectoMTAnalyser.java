@@ -3,10 +3,7 @@ package czsem.gate.plugins;
 import gate.DataStore;
 import gate.Document;
 import gate.Gate;
-import gate.LanguageAnalyser;
-import gate.ProcessingResource;
 import gate.Resource;
-import gate.creole.AbstractLanguageAnalyser;
 import gate.creole.ExecutionException;
 import gate.creole.ResourceInstantiationException;
 import gate.creole.metadata.CreoleParameter;
@@ -28,13 +25,14 @@ import javax.xml.xpath.XPathExpressionException;
 
 import org.xml.sax.SAXException;
 
+import czsem.gate.AbstractLanguageAnalyserWithInputOutputAS;
 import czsem.gate.GateUtils;
 import czsem.gate.TectoMTDocumentAnalyser;
 import czsem.utils.ProcessExec;
 import czsem.utils.ProjectSetup;
 
 @CreoleResource(name = "czsem TectoMTAnalyser", comment = "Alyses givem corpus by TMT tools")
-public class TectoMTAnalyser extends AbstractLanguageAnalyser implements ProcessingResource, LanguageAnalyser
+public class TectoMTAnalyser extends AbstractLanguageAnalyserWithInputOutputAS
 {
 
 	private static final long serialVersionUID = -1436830144361327369L;

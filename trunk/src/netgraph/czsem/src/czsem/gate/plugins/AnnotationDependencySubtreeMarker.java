@@ -2,7 +2,7 @@ package czsem.gate.plugins;
 
 import java.util.HashSet;
 
-import czsem.gate.AnnotationDependencyAbstractMarker;
+import czsem.gate.AbstractAnnotationDependencyMarker;
 
 import gate.Annotation;
 import gate.AnnotationSet;
@@ -13,7 +13,7 @@ import gate.creole.metadata.CreoleResource;
 import gate.util.InvalidOffsetException;
 
 @CreoleResource(name = "czsem AnnotationDependencySubtreeMarker", comment = "Marks the whole subtree for the union of all 'tokens' inside a given annotation.")
-public class AnnotationDependencySubtreeMarker extends AnnotationDependencyAbstractMarker
+public class AnnotationDependencySubtreeMarker extends AbstractAnnotationDependencyMarker
 {
 	private static final long serialVersionUID = 671833725416131750L;
 
