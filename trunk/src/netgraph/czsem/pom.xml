@@ -1,5 +1,8 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<!--
+https://svn.ci.uchicago.edu/svn/sidgrid/branches/MPIELAN/3.3.0/src/java/mpi/eudico/client/im/spi/lookup/LookupDescriptor.java
+-->
   <modelVersion>4.0.0</modelVersion>
   <groupId>czsem</groupId>
   <artifactId>czsem</artifactId>
@@ -25,10 +28,6 @@
   		<scope>compile</scope>
   		<exclusions>
   			<exclusion>
-  				<artifactId>lookup</artifactId>
-  				<groupId>nl.mpi</groupId>
-  			</exclusion>
-  			<exclusion>
   				<artifactId>jwnl</artifactId>
   				<groupId>net.didion</groupId>
   			</exclusion>
@@ -38,6 +37,20 @@
   		<groupId>net.sourceforge.javacsv</groupId>
   		<artifactId>javacsv</artifactId>
   		<version>2.0</version>
+  		<type>jar</type>
+  		<scope>compile</scope>
+  	</dependency>
+  	<dependency>
+  		<groupId>ufal</groupId>
+  		<artifactId>netgraph</artifactId>
+  		<version>1.94</version>
+  		<type>jar</type>
+  		<scope>compile</scope>
+  	</dependency>
+  	<dependency>
+  		<groupId>weka</groupId>
+  		<artifactId>weka</artifactId>
+  		<version>3.6.1</version>
   		<type>jar</type>
   		<scope>compile</scope>
   	</dependency>
@@ -86,5 +99,15 @@
 		<id>openrdf</id>
 		<url>http://repository.aduna-software.org/maven2</url>
 	</repository>	
+	<repository>
+		<releases>
+			<checksumPolicy>warn</checksumPolicy>
+		</releases>
+		<snapshots>
+			<enabled>false</enabled>
+		</snapshots>
+		<id>ucc</id>
+		<url>https://maven.ch.cam.ac.uk/content/groups/ucc/</url>
+	</repository>
   </repositories> 
 </project>
