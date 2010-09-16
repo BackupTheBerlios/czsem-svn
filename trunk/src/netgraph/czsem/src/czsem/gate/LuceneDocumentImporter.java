@@ -1,5 +1,5 @@
 package czsem.gate;
-
+/*
 import gate.LanguageAnalyser;
 import gate.creole.AbstractLanguageAnalyser;
 import gate.creole.ExecutionException;
@@ -90,14 +90,13 @@ public class LuceneDocumentImporter extends AbstractLanguageAnalyser implements 
 			}
 		      
 		      out.println("\n\n");
-/*
+
 		      out.print("title: ");
 		      out.println(title);
 		      out.print("url: ");
 		      out.println(url);
 		      out.println("\t" + summary.toString());
 		      out.println("\n\t" + summary.toHtml(false));
-*/		      
 			
 		}
 		
@@ -113,3 +112,4 @@ public class LuceneDocumentImporter extends AbstractLanguageAnalyser implements 
 
 
 }
+*/

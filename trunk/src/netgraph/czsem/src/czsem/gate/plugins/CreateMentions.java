@@ -21,7 +21,12 @@ public class CreateMentions extends AbstractLanguageAnalyserWithInputAnnotTypes
 	{
 		initBeforeExecute();
 		
-		AnnotationSet annotations = inputAS.get(GateUtils.setFromList(inputAnnotationTypeNames));
+		AnnotationSet annotations = null;
+		if (inputAnnotationTypeNames == null || inputAnnotationTypeNames.size() == 0)
+			annotations = inputAS.get();
+		else
+			annotations = inputAS.get(GateUtils.setFromList(inputAnnotationTypeNames));
+		
 		for (Annotation annotation : annotations)
 		{
 			FeatureMap fm = Factory.newFeatureMap();

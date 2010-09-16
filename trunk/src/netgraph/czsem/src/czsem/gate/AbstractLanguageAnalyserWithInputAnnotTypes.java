@@ -17,7 +17,7 @@ public abstract class AbstractLanguageAnalyserWithInputAnnotTypes extends	Abstra
 	}
 
 	@RunTime
-	@CreoleParameter(defaultValue = "damage")
+	@CreoleParameter(defaultValue = "acquired")
 	public void setInputAnnotationTypeNames(List<String> inputAnnotationTypeNames) {
 		this.inputAnnotationTypeNames = inputAnnotationTypeNames;
 	}

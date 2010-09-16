@@ -7,7 +7,6 @@ import gate.Gate;
 import gate.Resource;
 import gate.creole.AbstractVisualResource;
 import gate.creole.ResourceInstantiationException;
-import gate.creole.metadata.CreoleResource;
 import gate.gui.MainFrame;
 import gate.gui.annedit.AnnotationData;
 import gate.gui.annedit.AnnotationEditorOwner;
@@ -55,7 +54,7 @@ import czsem.gate.SentenceFSWriter;
 import czsem.utils.CZSemTree;
 
 
-@CreoleResource(name = "Netgraph TreeViewer")
+//@CreoleResource(name = "Netgraph TreeViewer")
 public class NetgraphTreeViewer extends AbstractVisualResource implements  OwnedAnnotationEditor 
 {
 

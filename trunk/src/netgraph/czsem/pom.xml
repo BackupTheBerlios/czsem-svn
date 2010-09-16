@@ -6,7 +6,9 @@ https://svn.ci.uchicago.edu/svn/sidgrid/branches/MPIELAN/3.3.0/src/java/mpi/eudi
   <modelVersion>4.0.0</modelVersion>
   <groupId>czsem</groupId>
   <artifactId>czsem</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>  
+  <version>1.0.1-SNAPSHOT</version>
+  <url>http://czsem.berlios.de/</url>  
   <dependencies>
   	<dependency>
   		<groupId>xmlwriter</groupId>
@@ -23,7 +25,7 @@ https://svn.ci.uchicago.edu/svn/sidgrid/branches/MPIELAN/3.3.0/src/java/mpi/eudi
   	<dependency>
   		<groupId>gate</groupId>
   		<artifactId>gate</artifactId>
-  		<version>5.2.1</version>
+  		<version>6.0-SNAPSHOT</version>
   		<type>pom</type>
   		<scope>compile</scope>
   		<exclusions>
@@ -62,6 +64,18 @@ https://svn.ci.uchicago.edu/svn/sidgrid/branches/MPIELAN/3.3.0/src/java/mpi/eudi
   <build>
   	<sourceDirectory>src</sourceDirectory>
   	<outputDirectory>bin</outputDirectory>
+	<plugins>
+	  <plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-compiler-plugin</artifactId>
+		<configuration>
+			<fork>true</fork>
+			<source>1.5</source>
+			<target>1.5</target>
+			<encoding>cp1250</encoding>
+		</configuration>
+	  </plugin>
+	</plugins>  	
   </build>
   <repositories>
 	  <repository>  

@@ -9,6 +9,9 @@ import gate.ProcessingResource;
 import gate.creole.ResourceInstantiationException;
 import gate.creole.SerialAnalyserController;
 import gate.creole.SerialController;
+import gate.creole.annotdelete.AnnotationDeletePR;
+import gate.creole.annotransfer.AnnotationSetTransfer;
+import gate.creole.ml.MachineLearningPR;
 import gate.util.GateException;
 import gate.util.profile.Profiler;
 
@@ -20,6 +23,11 @@ import java.util.Arrays;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+
+import czsem.gate.plugins.AnnotationDependencyRootMarker;
+import czsem.gate.plugins.AnnotationDependencySubtreeMarker;
+import czsem.gate.plugins.CrossValidation;
+import czsem.gate.plugins.SubsequentAnnotationMerge;
 	
 public class TrainTestGateOnCzech {
 	
@@ -35,7 +43,7 @@ public class TrainTestGateOnCzech {
 	public static SerialAnalyserController constructTestController() throws ResourceInstantiationException, MalformedURLException
 	{
 		SerialAnalyserController test_controller = (SerialAnalyserController)	    	   
-			Factory.createResource("gate.creole.SerialAnalyserController");
+			Factory.createResource(SerialAnalyserController.class.getCanonicalName());
 		
 		FeatureMap fm;
 
@@ -51,7 +59,7 @@ public class TrainTestGateOnCzech {
 		fm = Factory.newFeatureMap();
 		fm.put("setsToRemove", Arrays.asList(new String [] {"ILP", "Paum"}));
 		ProcessingResource resetPaumAndILP = (ProcessingResource) 
-			Factory.createResource("gate.creole.annotdelete.AnnotationDeletePR", fm);
+			Factory.createResource(AnnotationDeletePR.class.getCanonicalName(), fm);
 		test_controller.add(resetPaumAndILP);
 		
 		
@@ -65,7 +73,7 @@ public class TrainTestGateOnCzech {
 			fm.put("inputASName", "TectoMT");
 			fm.put("training", false);		
 			ProcessingResource ilpApply = (ProcessingResource) 
-				Factory.createResource("gate.creole.ml.MachineLearningPR", fm);
+				Factory.createResource(MachineLearningPR.class.getCanonicalName(), fm);
 			test_controller.add(ilpApply);
 			
 	
@@ -78,7 +86,7 @@ public class TrainTestGateOnCzech {
 				fm.put("outputASName", "ILP");
 				fm.put("inputAnnotationTypeNames", Arrays.asList(new String [] {learninigAnnotType + "_root"}));
 				ProcessingResource subtreeForILPresults = (ProcessingResource) 
-					Factory.createResource("czsem.gate.AnnotationDependencySubtreeMarker", fm);
+					Factory.createResource(AnnotationDependencySubtreeMarker.class.getCanonicalName(), fm);
 				test_controller.add(subtreeForILPresults);
 	
 				
@@ -90,7 +98,7 @@ public class TrainTestGateOnCzech {
 				fm.put("annotationTypes", Arrays.asList(new String [] {learninigAnnotType + "_root"}));		
 				fm.put("copyAnnotations", false);		
 				ProcessingResource ILPoutputTransfer = (ProcessingResource) 
-					Factory.createResource("gate.creole.annotransfer.AnnotationSetTransfer", fm);
+					Factory.createResource(AnnotationSetTransfer.class.getCanonicalName(), fm);
 				test_controller.add(ILPoutputTransfer);
 							
 			}
@@ -103,7 +111,7 @@ public class TrainTestGateOnCzech {
 				fm.put("annotationTypeName", learninigAnnotType);
 				fm.put("deleteOriginalAnnotations", true);
 				ProcessingResource mergeILPresults = (ProcessingResource) 
-					Factory.createResource("czsem.gate.SubsequentAnnotationMerge", fm);
+					Factory.createResource(SubsequentAnnotationMerge.class.getCanonicalName(), fm);
 				test_controller.add(mergeILPresults);			
 			}
 		}
@@ -130,7 +138,7 @@ public class TrainTestGateOnCzech {
 	public static SerialAnalyserController constructTrainController() throws ResourceInstantiationException, MalformedURLException
 	{
 		SerialAnalyserController train_controller = (SerialAnalyserController)	    	   
-			Factory.createResource("gate.creole.SerialAnalyserController");
+			Factory.createResource(SerialAnalyserController.class.getCanonicalName());
 		
 		FeatureMap fm;
 		
@@ -142,7 +150,7 @@ public class TrainTestGateOnCzech {
 				learninigAnnotType, learninigAnnotType + "_root"}));
 		fm.put("setsToRemove", Arrays.asList(new String [] {"TectoMT"}));
 		tectoMTReset = (ProcessingResource) 
-			Factory.createResource("gate.creole.annotdelete.AnnotationDeletePR", fm);
+			Factory.createResource(AnnotationDeletePR.class.getCanonicalName(), fm);
 		train_controller.add(tectoMTReset);
 		
 		
@@ -154,7 +162,7 @@ public class TrainTestGateOnCzech {
 		fm.put("annotationTypes", Arrays.asList(new String [] {learninigAnnotType}));
 		fm.put("copyAnnotations", true);		
 		ProcessingResource trainingTransfer = (ProcessingResource) 
-			Factory.createResource("gate.creole.annotransfer.AnnotationSetTransfer", fm);
+			Factory.createResource(AnnotationSetTransfer.class.getCanonicalName(), fm);
 		train_controller.add(trainingTransfer);
 		
 		
@@ -167,7 +175,7 @@ public class TrainTestGateOnCzech {
 			fm.put("outputASName", "TectoMT");
 			fm.put("inputAnnotationTypeNames", Arrays.asList(new String [] {learninigAnnotType}));
 			ProcessingResource trainingRoots = (ProcessingResource) 
-				Factory.createResource("czsem.gate.AnnotationDependencyRootMarker", fm);
+				Factory.createResource(AnnotationDependencyRootMarker.class.getCanonicalName(), fm);
 			train_controller.add(trainingRoots);
 		}
 		
@@ -180,7 +188,7 @@ public class TrainTestGateOnCzech {
 			fm.put("inputASName", "TectoMT");
 			fm.put("training", true);		
 			ProcessingResource ilpTrain = (ProcessingResource) 
-				Factory.createResource("gate.creole.ml.MachineLearningPR", fm);
+				Factory.createResource(MachineLearningPR.class.getCanonicalName(), fm);
 			train_controller.add(ilpTrain);
 		}
 		
@@ -243,9 +251,9 @@ public class TrainTestGateOnCzech {
 		fm.put("trainingPR", train_controller);
 		fm.put("testingPR", test_controller);
 		ProcessingResource crossValid = (ProcessingResource) 
-			Factory.createResource("czsem.gate.CrossValidation", fm);
+			Factory.createResource(CrossValidation.class.getCanonicalName(), fm);
 		
-		SerialController run = (SerialController) Factory.createResource("gate.creole.SerialController");
+		SerialController run = (SerialController) Factory.createResource(SerialController.class.getCanonicalName());
 		run.add(crossValid);
 		run.execute();
 /**/
