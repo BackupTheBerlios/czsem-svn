@@ -123,5 +123,12 @@ https://svn.ci.uchicago.edu/svn/sidgrid/branches/MPIELAN/3.3.0/src/java/mpi/eudi
 		<id>ucc</id>
 		<url>https://maven.ch.cam.ac.uk/content/groups/ucc/</url>
 	</repository>
+	<repository>
+		<snapshots>
+			<enabled>false</enabled>
+		</snapshots>
+		<id>opennlp</id>
+		<url>http://opennlp.sourceforge.net/maven2/opennlp/</url>
+	</repository>
   </repositories> 
 </project>
