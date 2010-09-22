@@ -50,6 +50,9 @@ public class Config
 	public String prologPath;
 	public String ilpProjestsPath;
 	public String myClassPath;
+	public String tmtRoot;
+	public String tredRoot;
+
 		
 	public void setInstallDefaults()
 	{
@@ -67,6 +70,8 @@ public class Config
 		setPrologPath("C:\\Program Files\\Yap\\bin\\yap.exe");
 		setWekaJarPath("C:\\Program Files\\Weka-3-6\\weka.jar");
 		setMyClassPath("C:\\workspace\\czsem\\src\\netgraph\\czsem\\bin");
+		setTmtRoot("C:\\workspace\\tectomt");
+		setTredRoot("C:\\tred");
 	}
 
 	public void saveToFile(String filename) throws IOException
@@ -133,4 +138,21 @@ public class Config
 	public void setMyClassPath(String myClassPath) {
 		this.myClassPath = myClassPath;
 	}
+	
+	public String getTmtRoot() {
+		return tmtRoot;
+	}
+
+	public void setTmtRoot(String tmtRoot) {
+		this.tmtRoot = tmtRoot;
+	}
+
+	public String getTredRoot() {
+		return tredRoot;
+	}
+
+	public void setTredRoot(String tredRoot) {
+		this.tredRoot = tredRoot;
+	}
+
 }

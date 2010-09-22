@@ -198,8 +198,8 @@ public class ProcessExec {
 		initBuffers();
 	}
 
-	public void waitFor() throws InterruptedException {
-		process.waitFor();		
+	public int waitFor() throws InterruptedException {
+		return process.waitFor();		
 	}
 	
 	public String readLine() throws IOException

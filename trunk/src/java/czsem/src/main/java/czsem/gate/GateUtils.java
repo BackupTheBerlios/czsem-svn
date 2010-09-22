@@ -182,6 +182,7 @@ public class GateUtils
 	    }            
 	    String fName = f.getName();
 	    String fPath = f.getParent();
+	    destFileURI = destFileURI.replaceAll(" ", "_");
 	    // Now we need to check if given file name is valid for file system, and if it isn't we need to convert it to valid form
 	    if (!(testIfFileNameIsValid(destFileURI))) {
 	        List<String> forbiddenCharsPatterns = new ArrayList<String>();

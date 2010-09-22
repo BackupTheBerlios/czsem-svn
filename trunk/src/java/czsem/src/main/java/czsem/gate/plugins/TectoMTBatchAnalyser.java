@@ -7,9 +7,7 @@ import gate.creole.ResourceInstantiationException;
 import gate.creole.metadata.CreoleParameter;
 import gate.creole.metadata.CreoleResource;
 import gate.creole.metadata.Optional;
-import gate.util.GateException;
 import gate.util.InvalidOffsetException;
-import gate.util.Out;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,8 +18,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathExpressionException;
 
+import org.apache.log4j.Logger;
 import org.xml.sax.SAXException;
 
 import czsem.gate.AbstractLanguageAnalyserWithInputOutputAS;
@@ -29,61 +27,40 @@ import czsem.gate.SAXTMTParser;
 import czsem.gate.TMTAnnotator;
 import czsem.gate.TMTAnnotator.Sentence;
 import czsem.gate.TMTDocumentHelper;
+import czsem.utils.Config;
 import czsem.utils.ProcessExec;
-import czsem.utils.ProjectSetup;
 
 @CreoleResource(name = "czsem TectoMTAnalyser", comment = "Alyses givem corpus by TMT tools")
 public class TectoMTBatchAnalyser extends AbstractLanguageAnalyserWithInputOutputAS
 {
 
 	private static final long serialVersionUID = -1436830144361327369L;
+	static Logger logger = Logger.getLogger(TectoMTBatchAnalyser.class);
+
 
 	private URL scenarioFilePath = null;
 	private URL serializationDirectory = null;
 	private List<String> blocks = null;
 	private boolean loadScenarioFromFile = true;
 	private String language = "english";
-	
-	private final String TMT_root = "C:/workspace/tectomt";
-	private final String tredRoot = "C:/tred";
-	private final String tredEnvp [] =
-	{
-			"PERLLIB="+TMT_root+"/libs/core" +System.getProperty( "path.separator" )+
-			TMT_root+"/libs/blocks" +System.getProperty( "path.separator" )+
-			TMT_root+"/libs/other",
-			"TRED_DIR="+tredRoot,
-			"TMT_ROOT="+TMT_root,
-			"JAVA_HOME="+System.getProperty("java.home"),
-			"Path="+System.getenv("Path"),
-/*		    'conll_mcd_order2.model'      => '2600m',    # tested on sol1, sol2 (64bit)
-		    'conll_mcd_order2_0.01.model' => '540m',     # tested on sol2 (64bit) , cygwin (32bit win), java-1.6.0(64bit)
-		    'conll_mcd_order2_0.03.model' => '540m',     # load block tested on cygwin notebook (32bit win), java-1.6.0(64bit)
-		    'conll_mcd_order2_0.1.model'  => '540m',     # load block tested on cygwin notebook (32bit win), java-1.6.0(64bit)
-			"TMT_PARAM_MCD_EN_MODEL=conll_mcd_order2_0.01.model", */
-			"TMT_SHARED="+TMT_root+"/share",
-			"CYGWIN=nodosfilewarning"
-
-
-	};
-	
+		
 	private List<TMTDocumentHelper> documents_to_anlayse= new ArrayList<TMTDocumentHelper>();
 
 	protected void executeBatch() throws ParserConfigurationException, SAXException, IOException, InterruptedException, URISyntaxException, InvalidOffsetException
 	{
-		Out.pr("Analyse !!!   ");
-		Out.prln(ProjectSetup.makeTimeStamp());
-		executeTMTAnalysis();
-		Out.pr("Analysed !!   ");
-		Out.prln(ProjectSetup.makeTimeStamp());
-		
-				
+		logger.info("Executing external TMT analysis");
+		int ret = executeTMTAnalysis();
+		logger.info(
+				String.format("External TMT analysis ended, return code: %d (%s!!!)",
+						ret, ret == 0 ? "Success" : "Error"));
+
+						
 		for (TMTDocumentHelper d : documents_to_anlayse)
 		{
 			annotateGateDocumentAcordingtoTMTfile(d.getDocument(), d.getTMTFilePath());
 		}
 		
-		Out.pr("Annotated !   ");
-		Out.prln(ProjectSetup.makeTimeStamp());
+		logger.debug("All documents annotated");
 		documents_to_anlayse.clear();		
 	}
 	
@@ -108,35 +85,42 @@ public class TectoMTBatchAnalyser extends AbstractLanguageAnalyserWithInputOutpu
 	}
 
 	
-	protected void executeTMTAnalysis() throws IOException, InterruptedException, URISyntaxException
+	protected int executeTMTAnalysis() throws IOException, InterruptedException, URISyntaxException
 	{
+		Config cfg = Config.getConfig();
+		String tredEnvp [] =
+		{
+				"PERLLIB="+cfg.getTmtRoot()+"/libs/core" +System.getProperty( "path.separator" )+
+				cfg.getTmtRoot()+"/libs/blocks" +System.getProperty( "path.separator" )+
+				cfg.getTmtRoot()+"/libs/other",
+				"TRED_DIR="+cfg.getTredRoot(),
+				"TMT_ROOT="+cfg.getTmtRoot(),
+				"JAVA_HOME="+System.getProperty("java.home"),
+				"Path="+System.getenv("Path"),
+	/*		    'conll_mcd_order2.model'      => '2600m',    # tested on sol1, sol2 (64bit)
+			    'conll_mcd_order2_0.01.model' => '540m',     # tested on sol2 (64bit) , cygwin (32bit win), java-1.6.0(64bit)
+			    'conll_mcd_order2_0.03.model' => '540m',     # load block tested on cygwin notebook (32bit win), java-1.6.0(64bit)
+			    'conll_mcd_order2_0.1.model'  => '540m',     # load block tested on cygwin notebook (32bit win), java-1.6.0(64bit)
+				"TMT_PARAM_MCD_EN_MODEL=conll_mcd_order2_0.01.model", */
+				"TMT_SHARED="+cfg.getTmtRoot()+"/share",
+				"CYGWIN=nodosfilewarning"
+		};
+
+		
 		String[] cmdarray = 
 		{
 				"perl",
-				tredRoot + "/btred",
+				cfg.getTredRoot() + "/btred",
 				"-q",
 				"-c",
-				TMT_root + "/config/.tredrc",
+				cfg.getTmtRoot() + "/config/.tredrc",
 				"-Z",
-				TMT_root + "/pml_schemas/:"+tredRoot+"/resources/:",
+				cfg.getTmtRoot() + "/pml_schemas/" +System.getProperty( "path.separator" )
+					+cfg.getTredRoot()+"/resources/"+System.getProperty( "path.separator" ),
 				"-0",
 				"-m",
-				TMT_root+ "/tools/general/runblocks.btred",
+				cfg.getTmtRoot()+ "/tools/general/runblocks.btred",
 				"-S", "-o"
-				
-				
-				
-//				/home/dedek/workspace/tectomt/config/init_devel_environ.sh
-
-//				"/bin/bash",
-//				"/home/dedek/workspace/tectomt/tools/general/brunblocks_env",
-//				tectoMTRoot + "/brunblocks",
-//				"-S", "-o"
-				
-//				, "--scen",
-//				"scen",
-//				"/home/dedek/workspace/tectomt/applications/czeng10/cs_czeng_analysis_dedek.scen",
-//				"--", new File(filename).getAbsolutePath()
 		};
 		
 		List<String> cmd_list = new ArrayList<String>(Arrays.asList(cmdarray));
@@ -156,20 +140,20 @@ public class TectoMTBatchAnalyser extends AbstractLanguageAnalyserWithInputOutpu
 		
 		for (TMTDocumentHelper da : documents_to_anlayse)
 		{
-			cmd_list.add(da.getTMTFilePath());			
+			cmd_list.add(new File(da.getTMTFilePath()).getCanonicalPath());			
 		}
 		
+		logger.debug("-------------START list of commentds to execute------------------------");
 		for (String cmd : cmd_list)
 		{
-			Out.prln(cmd);
-			
+			logger.debug(cmd);
 		}
+		logger.debug("-------------END list of commentds to execute------------------------");
 
 		ProcessExec tmt_proc = new ProcessExec();
 		tmt_proc.exec(cmd_list.toArray(new String[0]), tredEnvp);
 		tmt_proc.startReaderThreads("TMT_GATE_");
-		tmt_proc.waitFor();
-		
+		return tmt_proc.waitFor();		
 	}
 	
 	protected void annotateGateDocumentAcordingtoTMTfile(Document doc, String tmt_filepath) throws ParserConfigurationException, SAXException, IOException, InvalidOffsetException
@@ -180,26 +164,10 @@ public class TectoMTBatchAnalyser extends AbstractLanguageAnalyserWithInputOutpu
 //		tmt_tree_annot.debug_print(System.out);
     	tmt_tree_annot.annotate(doc, outputASName);
 //		doc.sync();
-/*
-		TMTAnnotator tmt_tree_annot = new TMTAnnotator(language);
-    	
-    	tmt_tree_annot.parseAndInit(dest_filename);
-    	tmt_tree_annot.debug_print(System.out);
-    	tmt_tree_annot.annotate(doc);
-		doc.sync();
-*/		
-	}
-
-	
-	public static void main(String[] args) throws GateException, ParserConfigurationException, SAXException, IOException, XPathExpressionException, InterruptedException
-	{		
-		gate.Main.main(args);
-		
-		//testAnnotation();
 	}
 	
 
-	@CreoleParameter(comment="Directory where temporary TMT files are stored.", defaultValue="file:/tmp/czsem/src/netgraph/czsem/TmT_serializations")
+	@CreoleParameter(comment="Directory where temporary TMT files are stored.", defaultValue="file:TmT_serializations")
 	public void setSerializationDirectory(URL serializationDirectory) {
 		this.serializationDirectory = serializationDirectory;
 	}
