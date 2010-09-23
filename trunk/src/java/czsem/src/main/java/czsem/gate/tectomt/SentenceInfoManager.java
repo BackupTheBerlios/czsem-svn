@@ -14,7 +14,7 @@ import org.apache.commons.lang.NotImplementedException;
 
 import czsem.gate.tectomt.TMTAnnotation.SeqAnnotation;
 
-public class Sentence extends SeqAnnotation
+public class SentenceInfoManager extends SeqAnnotation
 {
 	public static abstract class Layer
 	{		
@@ -24,7 +24,6 @@ public class Sentence extends SeqAnnotation
 			dependencies = new ArrayList<Dependency>(30); 
 		}
 
-		/** Maps token IDs to token information.*/
 		protected List<Token> tokens;
 		protected List<Dependency> dependencies;
 		
@@ -39,16 +38,15 @@ public class Sentence extends SeqAnnotation
 
 	private String sentence_string;
 	private Layer [] layers;
+	/** Maps token IDs to token information.*/
 	private Map<String,Token> token_index = new HashMap<String, Token>(100);
 	private Layer actual_layer = null;
 	private Stack<Token> actual_token_stack = new Stack<Token>();;
-	List<Dependency> auxRfDependencies;
-	List<Dependency> mRfDependencies;
+	private List<Dependency> auxRfDependencies;
 
-	public Sentence()
+	public SentenceInfoManager()
 	{		
 		auxRfDependencies = new ArrayList<Dependency>(30);
-		mRfDependencies = new ArrayList<Dependency>(30);
 		layers = new Layer[4];
 		
 		layers[Layer.TECTO] = new Layer()
@@ -129,7 +127,7 @@ public class Sentence extends SeqAnnotation
 		actual_token_stack.clear();
 	}
 	
-	public void tryCloseActualToken(String token_id)
+	public void tryToCloseActualToken(String token_id)
 	{	
 		if (actual_token_stack.peek().tmt_id == token_id)
 		actual_token_stack.pop();
@@ -170,8 +168,4 @@ public class Sentence extends SeqAnnotation
 			token.print(out);
 		}
 	}
-
-	
-	
-
 }

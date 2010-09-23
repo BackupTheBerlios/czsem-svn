@@ -128,13 +128,13 @@ public class TectoMTBatchAnalyserTest extends TestCase
 		validateAsType(as, "Token", 19, 3);		
 	}
 	
-	protected void validateAsType(AnnotationSet as, String an_type, int num_annots, int num_features)
+	protected void validateAsType(AnnotationSet as, String an_type, int num_annots, Integer num_features)
 	{
 		AnnotationSet at = as.get(an_type);
 		assertEquals(num_annots, at.size());
 		for (Annotation a : at) {
 			FeatureMap fm = a.getFeatures();
-			assertEquals(num_features, fm.size());
+			if (num_features != null) assertEquals(num_features, (Integer) fm.size());
 			for (Object key : fm.keySet()) {
 				Object value = fm.get(key);
 				assertNotNull(value);
@@ -145,7 +145,7 @@ public class TectoMTBatchAnalyserTest extends TestCase
 
 	}
 
-	public void _testExecuteEnglishMorphology() throws ResourceInstantiationException, ExecutionException
+	public void testExecuteEnglishMorphology() throws ResourceInstantiationException, ExecutionException
 	{
 		String [] blocks = {
 				"SEnglishW_to_SEnglishM::Sentence_segmentation",
@@ -155,14 +155,25 @@ public class TectoMTBatchAnalyserTest extends TestCase
 				"SEnglishW_to_SEnglishM::Lemmatize_mtree"
 				};
 		
+		
+		executeTmtOnCorpus("english", blocks, corpus_english_short);
+		
+		AnnotationSet as = english_short_doc.getAnnotations();
+		
+		assertEquals(20, as.size());
+		
+		validateAsType(as, "Token", 19, 3);
+		FeatureMap fm = as.get((long) english_sentences[0].indexOf("says")).iterator().next().getFeatures();
+		assertEquals(fm.get("form"), "says");
+		assertEquals(fm.get("lemma"), "say");
+		assertEquals(fm.get("tag"), "VBZ");
+		assertEquals(fm.get("afun"), null);
+		assertEquals(fm.get("ord"), null);
 
-		
-		
-		executeTmtOnCorpus("english", blocks, corpus_english_short);				
 	}
 
 		
-	public void _testExecuteEnglishSentenceSegmentation() throws GateException, MalformedURLException
+	public void testExecuteEnglishSentenceSegmentation() throws GateException, MalformedURLException
 	{		
 		
 		String [] blocks = {"SEnglishW_to_SEnglishM::Sentence_segmentation"};

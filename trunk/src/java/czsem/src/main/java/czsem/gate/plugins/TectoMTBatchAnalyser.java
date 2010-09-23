@@ -25,7 +25,7 @@ import org.xml.sax.SAXException;
 import czsem.gate.AbstractLanguageAnalyserWithInputOutputAS;
 import czsem.gate.GateUtils;
 import czsem.gate.tectomt.Annotator;
-import czsem.gate.tectomt.Sentence;
+import czsem.gate.tectomt.SentenceInfoManager;
 import czsem.gate.tectomt.TMTDocumentHelper;
 import czsem.gate.tectomt.TMTSAXParser;
 import czsem.utils.Config;
@@ -159,11 +159,9 @@ public class TectoMTBatchAnalyser extends AbstractLanguageAnalyserWithInputOutpu
 	protected void annotateGateDocumentAcordingtoTMTfile(Document doc, String tmt_filepath) throws ParserConfigurationException, SAXException, IOException, InvalidOffsetException
 	{
 		TMTSAXParser parser = new TMTSAXParser(language);
-		List<Sentence> sentences = parser.parse(tmt_filepath);
+		List<SentenceInfoManager> sentences = parser.parse(tmt_filepath);
 		Annotator tmt_annot = new Annotator(sentences);
-//		tmt_annot.debug_print(System.out);
     	tmt_annot.annotate(doc, outputASName);
-//		doc.sync();
 	}
 	
 

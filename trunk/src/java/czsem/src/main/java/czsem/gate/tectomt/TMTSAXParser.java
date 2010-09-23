@@ -15,7 +15,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import czsem.gate.tectomt.Sentence.Layer;
+import czsem.gate.tectomt.SentenceInfoManager.Layer;
 
 public class TMTSAXParser extends DefaultHandler
 {
@@ -35,56 +35,23 @@ public class TMTSAXParser extends DefaultHandler
 	}
 	
 	private Stack<Context> context_stack = new Stack<Context>();
-//	private Stack<String> id_all_stack = new Stack<String>();
 	private Stack<String> id_valid_stack = new Stack<String>();
 	
 	private StringBuilder last_characters = null; 
 
 
-//	private String[] actual_fetures = Constants.dummy_feat;
-//	private Map<String, Token> actual_tokens;
-	private Sentence actual_sentence;
-//	private Token actual_token;
-//	private List<Dependency> actual_dependencies;
-//	private List<Dependency> dummy_dep = new ArrayList<Dependency>(50);	
+	private SentenceInfoManager actual_sentence;
 	
-	private List<Sentence> sentences = new ArrayList<Sentence>();
+	private List<SentenceInfoManager> sentences = new ArrayList<SentenceInfoManager>();
 	
 	private SAXParser sax_parser;
 	
 	public static class Constants
 	{
-/*
-		private static String [] dummy_feat = new String[0]; 
-		private static Map<String, Token> dummy_toc = new HashMap<String, Token>();
-		
-		public static final String[] t_token_sax_features = 
-	    {
-	    		"nodetype", "t_lemma", "functor", "deepord", "formeme",
-	    		"sempos", "degcmp", "negation", "gender", "number",  
-	    		"verbmod", "deontmod", "tense", "aspect", "resultative",
-	    		"dispmod", "iterativeness", "lex.rf"
-	    };
-		
-		public final static String[] a_token_sax_features = 
-	    {
-	    		"form", "lemma", "tag", "afun", "ord" 	
-	    };
-*/		
 		public static final int DOC_DEPTH_SENTENCES = 4; 
 		public static final int DOC_DEPTH_TREES = 5; 
 		public static final int DOC_DEPTH_TREE_ROOTS = 6; 
 	}
-	/*
-	
-	public interface ProcessingLayerInterface
-	{
-		String[] getFeatures();
-		Map<String, Token> getTokens();
-		List<Dependency> getDependencies();
-	}
-*/	
-
 	
 	public TMTSAXParser (String language) throws ParserConfigurationException, SAXException
 	{
@@ -96,7 +63,7 @@ public class TMTSAXParser extends DefaultHandler
 
 	}
 	
-	public List<Sentence> parse(String tmTFilename) throws SAXException, IOException
+	public List<SentenceInfoManager> parse(String tmTFilename) throws SAXException, IOException
 	{
 		init();
 		
@@ -116,36 +83,11 @@ public class TMTSAXParser extends DefaultHandler
 		id_valid_stack.clear();
 		context_stack.clear();
 		sentences.clear();
-//		setDummy();		
 	}
 		
-/*
-	private void setDummy()
-	{
-		actual_fetures = Constants.dummy_feat;		
-		actual_tokens = Constants.dummy_toc;
-		Constants.dummy_toc.clear();
-		actual_dependencies = dummy_dep;
-		dummy_dep.clear();
-	}
-	
-	private void setTecto()
-	{
-		actual_fetures = Constants.t_token_sax_features;		
-		actual_tokens = actual_sentence.t_tokens;		
-		actual_dependencies = actual_sentence.tDependencies;
-	}
-
-	private void setAnalytic()
-	{
-		actual_fetures = Constants.a_token_sax_features;		
-		actual_tokens = actual_sentence.a_tokens;
-		actual_dependencies = actual_sentence.aDependencies;
-	}
-*/	
 	private void newSentence()
 	{
-		Sentence sent = new Sentence();
+		SentenceInfoManager sent = new SentenceInfoManager();
 		sentences.add(sent);
 		actual_sentence = sent;
 		
@@ -153,18 +95,7 @@ public class TMTSAXParser extends DefaultHandler
 	
 	private void newToken(String parent_id, String child_id)
 	{
-		actual_sentence.newToken(parent_id, child_id, context_stack.size() > Constants.DOC_DEPTH_TREE_ROOTS+1);
-		
-/*		Token toc = new Token(actual_fetures.length, child_id);
-		actual_tokens.put(child_id, toc);
-		actual_token = toc;
-		
-		if (qname_stack.size() > Constants.DOC_DEPTH_TREE_ROOTS+1)
-		{
-			Dependency dep = new Dependency(parent_id, child_id);
-			actual_dependencies.add(dep);
-		}
-*/		
+		actual_sentence.newToken(parent_id, child_id, context_stack.size() > Constants.DOC_DEPTH_TREE_ROOTS+1);		
 	}
 	
 	@Override
@@ -182,9 +113,7 @@ public class TMTSAXParser extends DefaultHandler
 		
 		context_stack.peek().children++;
 
-
-		
-		
+				
 		if (current_qname.equalsIgnoreCase(language+"_source_sentence"))
 		{
 			actual_sentence.setString(stringFromLastCahrs());
@@ -202,7 +131,7 @@ public class TMTSAXParser extends DefaultHandler
 		if (context_stack.size() >= Constants.DOC_DEPTH_TREE_ROOTS)
 		{
 			updateFeatures(current_qname, actual_sentence.getActualTokenFeatureList());
-			actual_sentence.tryCloseActualToken(id);
+			actual_sentence.tryToCloseActualToken(id);
 		}
 		
 	}
@@ -212,8 +141,6 @@ public class TMTSAXParser extends DefaultHandler
 		int feature_index = fetureIndexFromFeatureName(qName, feature_list);
 		if (feature_index != -1) actual_sentence.updateActualTokenFeature(feature_index, stringFromLastCahrs());		
 	}
-
-
 
 	
 	@Override
@@ -302,8 +229,7 @@ public class TMTSAXParser extends DefaultHandler
 			(current_qname.equals("aux.rf") && context_stack.peek().children == 0) || //aux.rf
 			(current_qname.equals("LM") && prewious_qname().equals("m.rf")) || //m.rf
 			(current_qname.equals("m.rf") && context_stack.peek().children == 0) || //m.rf
-			(
-					(actual_token_featurelist != null) &&
+			(		actual_token_featurelist != null &&
 					fetureIndexFromFeatureName(current_qname, actual_token_featurelist) != -1);
 		
 	}

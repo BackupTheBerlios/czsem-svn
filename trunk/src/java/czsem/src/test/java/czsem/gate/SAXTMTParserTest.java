@@ -18,8 +18,8 @@ import org.xml.sax.SAXException;
 
 import czsem.gate.tectomt.Annotator;
 import czsem.gate.tectomt.Dependency;
-import czsem.gate.tectomt.Sentence;
-import czsem.gate.tectomt.Sentence.Layer;
+import czsem.gate.tectomt.SentenceInfoManager;
+import czsem.gate.tectomt.SentenceInfoManager.Layer;
 import czsem.gate.tectomt.TMTSAXParser;
 import czsem.gate.tectomt.Token;
 
@@ -29,10 +29,10 @@ public class SAXTMTParserTest extends TestCase
 	public void testParseEglishMorpho() throws SAXException, IOException, URISyntaxException, ParserConfigurationException
 	{
 		TMTSAXParser parser = new TMTSAXParser("english");
-		List<Sentence> sentences = parser.parse(GateUtils.URLToFilePath(getClass().getResource("/english_morphology.tmt")));
+		List<SentenceInfoManager> sentences = parser.parse(GateUtils.URLToFilePath(getClass().getResource("/english_morphology.tmt")));
 		assertEquals(sentences.size(), 1);
 		
-		Sentence s1 = sentences.get(0);
+		SentenceInfoManager s1 = sentences.get(0);
 		assertEquals(s1.getString(), "The BBC's Bethany Bell in Jerusalem says many people face shortages of food, medicine and fuel.");
 		Token[] mTokens = s1.getTokens(Layer.MORPHO);
 		assertEquals(mTokens.length, 19);
@@ -50,10 +50,10 @@ public class SAXTMTParserTest extends TestCase
 	public void testParseEglishFull() throws ParserConfigurationException, SAXException, IOException, URISyntaxException
 	{
 		TMTSAXParser parser = new TMTSAXParser("english");
-		List<Sentence> sentences = parser.parse(GateUtils.URLToFilePath(getClass().getResource("/english_full.tmt")));
+		List<SentenceInfoManager> sentences = parser.parse(GateUtils.URLToFilePath(getClass().getResource("/english_full.tmt")));
 		assertEquals(sentences.size(), 10);
 		
-		Sentence s1 = sentences.get(0);
+		SentenceInfoManager s1 = sentences.get(0);
 		assertEquals(s1.getString(), "The BBC's Bethany Bell in Jerusalem says many people face shortages of food, medicine and fuel.");
 		Token[] mTokens = s1.getTokens(Layer.MORPHO);
 		assertEquals(mTokens.length, 19);

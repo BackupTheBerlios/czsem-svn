@@ -13,7 +13,7 @@ import java.util.List;
 import org.apache.commons.lang.NotImplementedException;
 
 import czsem.gate.plugins.AnnotationDependencySubtreeMarker.SubtreeMarkInfo;
-import czsem.gate.tectomt.Sentence.Layer;
+import czsem.gate.tectomt.SentenceInfoManager.Layer;
 import czsem.gate.tectomt.TMTAnnotation.SeqAnnotation;
 
 public abstract class Token extends SeqAnnotation 
@@ -57,7 +57,7 @@ public abstract class Token extends SeqAnnotation
 		public String getString() {return getAForm();}
 
 		@Override
-		public void annotate(AnnotationSet as, Sentence sentence) throws InvalidOffsetException
+		public void annotate(AnnotationSet as, SentenceInfoManager sentence) throws InvalidOffsetException
 		{
 			assert mRfDependecies.size() == 1;
 			String mt_id = mRfDependecies.get(0);
@@ -94,7 +94,7 @@ public abstract class Token extends SeqAnnotation
 		public void annotate(AnnotationSet as, SequenceAnnotator seq_anot) { throw new NotImplementedException();}
 
 		@Override
-		public void annotate(AnnotationSet as, Sentence sentence) throws InvalidOffsetException
+		public void annotate(AnnotationSet as, SentenceInfoManager sentence) throws InvalidOffsetException
 		{
 			Token a_toknen = sentence.findToken(getTLexRf());
 			
@@ -143,7 +143,7 @@ public abstract class Token extends SeqAnnotation
 		public String getString() {return getAForm();}
 
 		@Override
-		public void annotate(AnnotationSet as, Sentence sentence) throws InvalidOffsetException
+		public void annotate(AnnotationSet as, SentenceInfoManager sentence) throws InvalidOffsetException
 		{
 			
 			SubtreeMarkInfo info = new SubtreeMarkInfo();

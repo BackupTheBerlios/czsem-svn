@@ -17,7 +17,7 @@ public abstract class Dependency extends TMTAnnotation
 	public FeatureMap getFeatures() {return fm;}
 
 	@Override
-	public void annotate(AnnotationSet as, Sentence sentence) throws InvalidOffsetException
+	public void annotate(AnnotationSet as, SentenceInfoManager sentence) throws InvalidOffsetException
 	{
 		Integer gate_parent_id = sentence.findToken(parent_id).gate_annotation_id;
 		Integer gate_child_id = sentence.findToken(child_id).gate_annotation_id;

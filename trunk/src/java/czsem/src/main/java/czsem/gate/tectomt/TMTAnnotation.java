@@ -27,7 +27,7 @@ public abstract class TMTAnnotation
 		}
 
 		@Override
-		public void annotate(AnnotationSet as, Sentence sentence) throws InvalidOffsetException {
+		public void annotate(AnnotationSet as, SentenceInfoManager sentence) throws InvalidOffsetException {
 			throw new NotImplementedException();
 		}
 		
@@ -38,7 +38,7 @@ public abstract class TMTAnnotation
 	protected Integer gate_annotation_id;
 	public abstract String getAnnotationType();
 	public abstract FeatureMap getFeatures();
-	public abstract void annotate(AnnotationSet as, Sentence sentence) throws InvalidOffsetException;
+	public abstract void annotate(AnnotationSet as, SentenceInfoManager sentence) throws InvalidOffsetException;
 	
 	protected void annotate(AnnotationSet as, long startOffset, long endOffset) throws InvalidOffsetException
 	{

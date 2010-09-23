@@ -5,6 +5,7 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
+@Deprecated
 public class XPathExperssions
 {
     public static XPathExpression sentece_segments; 

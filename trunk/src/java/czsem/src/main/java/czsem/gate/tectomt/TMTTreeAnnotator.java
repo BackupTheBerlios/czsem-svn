@@ -20,6 +20,7 @@ import org.w3c.dom.NodeList;
 
 import czsem.gate.GateUtils;
 
+@Deprecated
 public class TMTTreeAnnotator
 {
 	public static String[] a_token_features = 
@@ -74,7 +75,7 @@ public class TMTTreeAnnotator
     	return fm;
 	}
 	
-//TODO: optimize - share SequnceAnnotator 
+//todo: optimize - share SequnceAnnotator 
 	public void ATokensSequnceAnnotation(int start_index) throws XPathExpressionException, InvalidOffsetException
 	{
         SequenceAnnotator token_sa = new SequenceAnnotator(document, start_index);    	

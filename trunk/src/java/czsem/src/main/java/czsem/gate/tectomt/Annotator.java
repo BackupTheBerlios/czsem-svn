@@ -14,75 +14,21 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.apache.log4j.Logger;
 import org.xml.sax.SAXException;
 
-import czsem.gate.tectomt.Sentence.Layer;
+import czsem.gate.tectomt.SentenceInfoManager.Layer;
 
 public class Annotator 
 {
-	static Logger logger = Logger.getLogger(Annotator.class);
-
-/*	
+	private static Logger logger = Logger.getLogger(Annotator.class);
+	private List<SentenceInfoManager> sentences;		
+	private SequenceAnnotator seq_anot;
+	private AnnotationSet as;
 	
-	public static class Sentence
-	{
-		Integer gate_annotation_id;
-		String sentence_string;
-		
-		Map<String, Token> a_tokens;
-		Map<String, Token> t_tokens;
-		List<Dependency> aDependencies;
-		List<Dependency> tDependencies;
-		List<Dependency> auxRfDependencies;
-		
-		public Sentence()
-		{
-			a_tokens = new HashMap<String, Token>(30);
-			t_tokens = new HashMap<String, Token>(30);
-			
-			aDependencies = new ArrayList<Dependency>(30); 
-			tDependencies = new ArrayList<Dependency>(30); 
-			auxRfDependencies = new ArrayList<Dependency>(30); 
-		}
-		
-		public void printDependecies(List<Dependency> dep, PrintStream out)
-		{
-			for (Dependency dependency : dep) {
-				dependency.print(out);
-			}			
-		}
-		public void printTokens(Map<String, Token> tokens, PrintStream out)
-		{
-			for (String key : tokens.keySet())
-			{
-				out.println("### " + key + " ###");
-				tokens.get(key).print(out);
-			}
-		}
-
-		
-	}
-	
-	
-*/	
-
-//	private String tmTFilename;
-
-	private List<Sentence> sentences;
-
-
-
-
-
-	
-	public Annotator(List<Sentence> sentences) throws ParserConfigurationException, SAXException
+	public Annotator(List<SentenceInfoManager> sentences) throws ParserConfigurationException, SAXException
 	{
 		this.sentences = sentences;		
 	}
 
-	
-	private SequenceAnnotator seq_anot;
-	private AnnotationSet as;
-
-	private void annotateSentence(Sentence sentence) throws InvalidOffsetException
+	private void annotateSentence(SentenceInfoManager sentence) throws InvalidOffsetException
 	{
 		logger.debug(sentence.getString());
 				
@@ -92,9 +38,7 @@ public class Annotator
     	} catch (IndexOutOfBoundsException e) {
     		logger.error(sentence, e);
 		}
-    	
-//    	if (sentence.a_tokens.size() <= 0) return;
-    	
+    	    	
     	seq_anot.restore();
     	
     	annotateTokensSeq(sentence.getTokens(Layer.MORPHO));
@@ -123,7 +67,7 @@ public class Annotator
 	}
 
 
-	private void annotateTokens(Sentence sentence, Token[] tokens) throws InvalidOffsetException
+	private void annotateTokens(SentenceInfoManager sentence, Token[] tokens) throws InvalidOffsetException
 	{
 		for (Token token : tokens)
 		{
@@ -139,7 +83,7 @@ public class Annotator
 		}
 	}
 		
-	private void annotateDenedecies(Sentence sentence, List<Dependency> depencies) throws InvalidOffsetException
+	private void annotateDenedecies(SentenceInfoManager sentence, List<Dependency> depencies) throws InvalidOffsetException
 	{
 		for (Dependency dependency : depencies) {
 			dependency.annotate(as, sentence);
@@ -151,9 +95,8 @@ public class Annotator
 	{
 		seq_anot = new SequenceAnnotator(doc);
 		as = doc.getAnnotations(outputASName);
-//		as.clear();
 		
-		for (Sentence sentence : sentences)
+		for (SentenceInfoManager sentence : sentences)
 		{
 			annotateSentence(sentence);			
 		}
@@ -177,7 +120,7 @@ public class Annotator
 	    out.println("First Sentence aTokens: " + sentences.get(0).getTokens(Layer.ANALAYTICAL).length);
 	    out.println("First Sentence num tTokens: " + sentences.get(0).getTokens(Layer.TECTO).length);
 	    int last_s = sentences.size()-1;
-	    Sentence last_sentence = sentences.get(last_s);
+	    SentenceInfoManager last_sentence = sentences.get(last_s);
 	    out.println("Last Sentence string: " + last_sentence.getString());
 	    out.println("Last Sentence aTokens forms: ");
 		Token[] tokens = sortTokensAccordingAOrd(last_sentence.getTokens(Layer.ANALAYTICAL));
