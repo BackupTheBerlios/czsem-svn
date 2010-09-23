@@ -1,11 +1,9 @@
-package czsem.gate;
+package czsem.gate.tectomt;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Stack;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -17,27 +15,38 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import czsem.gate.TMTAnnotator.Dependency;
-import czsem.gate.TMTAnnotator.Sentence;
-import czsem.gate.TMTAnnotator.Token;
+import czsem.gate.tectomt.Sentence.Layer;
 
-public class SAXTMTParser extends DefaultHandler
+public class TMTSAXParser extends DefaultHandler
 {
 	private String language = "english";
 	
-	private Stack<String> qname_stack = new Stack<String>();
-	private Stack<String> id_all_stack = new Stack<String>();
+	public static class Context
+	{
+		String qname;
+		String id;
+		int children;
+
+		public Context(String qname, String id) {
+			this.qname = qname;
+			this.id = id;
+			children = 0;
+		}
+	}
+	
+	private Stack<Context> context_stack = new Stack<Context>();
+//	private Stack<String> id_all_stack = new Stack<String>();
 	private Stack<String> id_valid_stack = new Stack<String>();
 	
 	private StringBuilder last_characters = null; 
 
 
-	private String[] actual_fetures = Constants.dummy_feat;
-	private Map<String, Token> actual_tokens;
+//	private String[] actual_fetures = Constants.dummy_feat;
+//	private Map<String, Token> actual_tokens;
 	private Sentence actual_sentence;
-	private Token actual_token;
-	private List<Dependency> actual_dependencies;
-	private List<Dependency> dummy_dep = new ArrayList<Dependency>(50);	
+//	private Token actual_token;
+//	private List<Dependency> actual_dependencies;
+//	private List<Dependency> dummy_dep = new ArrayList<Dependency>(50);	
 	
 	private List<Sentence> sentences = new ArrayList<Sentence>();
 	
@@ -45,6 +54,7 @@ public class SAXTMTParser extends DefaultHandler
 	
 	public static class Constants
 	{
+/*
 		private static String [] dummy_feat = new String[0]; 
 		private static Map<String, Token> dummy_toc = new HashMap<String, Token>();
 		
@@ -60,13 +70,23 @@ public class SAXTMTParser extends DefaultHandler
 	    {
 	    		"form", "lemma", "tag", "afun", "ord" 	
 	    };
-		
+*/		
 		public static final int DOC_DEPTH_SENTENCES = 4; 
 		public static final int DOC_DEPTH_TREES = 5; 
 		public static final int DOC_DEPTH_TREE_ROOTS = 6; 
 	}
+	/*
 	
-	public SAXTMTParser (String language) throws ParserConfigurationException, SAXException
+	public interface ProcessingLayerInterface
+	{
+		String[] getFeatures();
+		Map<String, Token> getTokens();
+		List<Dependency> getDependencies();
+	}
+*/	
+
+	
+	public TMTSAXParser (String language) throws ParserConfigurationException, SAXException
 	{
 		this.language = language;
 		
@@ -82,7 +102,10 @@ public class SAXTMTParser extends DefaultHandler
 		
 		InputSource input = new InputSource(new FileInputStream(tmTFilename));
 	    id_valid_stack.push("TToPP");
+	    
 	    sax_parser.parse(input, this);
+	    
+	    assert(id_valid_stack.peek().equals("TToPP"));
 
 		
 		return sentences;		
@@ -90,14 +113,13 @@ public class SAXTMTParser extends DefaultHandler
 	
 	protected void init()
 	{
-		id_all_stack.clear();
 		id_valid_stack.clear();
-		qname_stack.clear();
+		context_stack.clear();
 		sentences.clear();
-		setDummy();		
+//		setDummy();		
 	}
-	
-	
+		
+/*
 	private void setDummy()
 	{
 		actual_fetures = Constants.dummy_feat;		
@@ -120,7 +142,7 @@ public class SAXTMTParser extends DefaultHandler
 		actual_tokens = actual_sentence.a_tokens;
 		actual_dependencies = actual_sentence.aDependencies;
 	}
-	
+*/	
 	private void newSentence()
 	{
 		Sentence sent = new Sentence();
@@ -131,7 +153,9 @@ public class SAXTMTParser extends DefaultHandler
 	
 	private void newToken(String parent_id, String child_id)
 	{
-		Token toc = new Token(actual_fetures.length, child_id);
+		actual_sentence.newToken(parent_id, child_id, context_stack.size() > Constants.DOC_DEPTH_TREE_ROOTS+1);
+		
+/*		Token toc = new Token(actual_fetures.length, child_id);
 		actual_tokens.put(child_id, toc);
 		actual_token = toc;
 		
@@ -140,37 +164,53 @@ public class SAXTMTParser extends DefaultHandler
 			Dependency dep = new Dependency(parent_id, child_id);
 			actual_dependencies.add(dep);
 		}
+*/		
 	}
 	
 	@Override
 	public void endElement(String uri, String localName, String qName) throws SAXException
 	{
-		String current_qname = qname_stack.pop();
+		Context current_context = context_stack.pop();
+		String current_qname = current_context.qname;
 		assert current_qname.equals(qName);
-		String prewious_qname = qname_stack.empty() ? null : qname_stack.peek();
+		String prewious_qname = context_stack.empty() ? null : context_stack.peek().qname;
 		
-		String id = id_all_stack.pop();
+		String id = current_context.id;
 		if (id != null) id_valid_stack.pop();
+		
+		if (context_stack.size() < Constants.DOC_DEPTH_SENTENCES-1) return;
+		
+		context_stack.peek().children++;
 
+
+		
+		
 		if (current_qname.equalsIgnoreCase(language+"_source_sentence"))
 		{
-			actual_sentence.sentence_string = stringFromLastCahrs();
+			actual_sentence.setString(stringFromLastCahrs());
 		}		
-		if (current_qname.equals("LM") && prewious_qname.equals("aux.rf"))
+		if ((current_qname.equals("LM") && prewious_qname.equals("aux.rf"))||
+			(current_qname.equals("aux.rf") && current_context.children == 0))
 		{
-			Dependency aux_rf = new Dependency(id_valid_stack.peek(), stringFromLastCahrs());
-			actual_sentence.auxRfDependencies.add(aux_rf);
+			actual_sentence.newAuxRfDependency(id_valid_stack.peek(), stringFromLastCahrs());
 		}
-		if (qname_stack.size() > Constants.DOC_DEPTH_TREE_ROOTS)
+		if ((current_qname.equals("LM") && prewious_qname.equals("m.rf"))||
+				(current_qname.equals("m.rf") && current_context.children == 0))
+			{
+				actual_sentence.addMRfDependency(stringFromLastCahrs());
+			}
+		if (context_stack.size() >= Constants.DOC_DEPTH_TREE_ROOTS)
 		{
-			updateFeatures(current_qname, actual_fetures);
+			updateFeatures(current_qname, actual_sentence.getActualTokenFeatureList());
+			actual_sentence.tryCloseActualToken(id);
 		}
+		
 	}
 	
 	private void updateFeatures(String qName, String [] feature_list)
 	{
-		int tf = testFeatures(qName, feature_list);
-		if (tf != -1) actual_token.features[tf] = stringFromLastCahrs();		
+		int feature_index = fetureIndexFromFeatureName(qName, feature_list);
+		if (feature_index != -1) actual_sentence.updateActualTokenFeature(feature_index, stringFromLastCahrs());		
 	}
 
 
@@ -183,13 +223,16 @@ public class SAXTMTParser extends DefaultHandler
 		String prew_id = id_valid_stack.peek(); 
 		
 		if (new_id != null) id_valid_stack.push(new_id);
-		id_all_stack.push(new_id);
-		qname_stack.push(qName);
+		context_stack.push(new Context(qName, new_id));
 		
 		//System.err.printf("%3d %s\n", qname_stack.size(), qName);
 						
-		switch (qname_stack.size())
-		{		
+		switch (context_stack.size())
+		{
+			case 1:
+			case 2:
+			case 3:	return;
+			
 			case Constants.DOC_DEPTH_SENTENCES:
 				if (qName.equalsIgnoreCase(language+"_source_sentence"))
 				{
@@ -200,17 +243,26 @@ public class SAXTMTParser extends DefaultHandler
 			case Constants.DOC_DEPTH_TREES:
 				if (qName.equalsIgnoreCase('S'+language+'T'))
 				{
-					setTecto();
+					actual_sentence.setActualLayer(Layer.TECTO);
 					return;
 				}
 				if (qName.equalsIgnoreCase('S'+language+'A'))
 				{
-					setAnalytic();
+					actual_sentence.setActualLayer(Layer.ANALAYTICAL);
 					return;
 				}
-//				if (qName.equalsIgnoreCase('S'+language+'M'))
+				if (qName.equalsIgnoreCase('S'+language+'M'))
+				{
+					actual_sentence.setActualLayer(Layer.MORPHO);
+					return;					
+				}
+				if (qName.equalsIgnoreCase('S'+language+'N'))
+				{
+					actual_sentence.setActualLayer(Layer.NAMES);
+					return;					
+				}
 //				System.err.println(qName);
-				setDummy();
+//				actual_sentence.setActualLayer(Layer.DUMMY);
 				return;
 
 			default:
@@ -238,24 +290,33 @@ public class SAXTMTParser extends DefaultHandler
 	
 	private boolean shouldReadContentOfCurrentElement()
 	{
-		String current_qname = qname_stack.peek();
+		if (context_stack.size() < Constants.DOC_DEPTH_SENTENCES) return false;
+		String[] actual_token_featurelist = actual_sentence.getActualTokenFeatureList();		
+		String current_qname = context_stack.peek().qname;
+		
+
 		
 		return
 			current_qname.equalsIgnoreCase(language+"_source_sentence") ||
 			(current_qname.equals("LM") && prewious_qname().equals("aux.rf")) || //aux.rf
-			(testFeatures(current_qname, actual_fetures) != -1);
+			(current_qname.equals("aux.rf") && context_stack.peek().children == 0) || //aux.rf
+			(current_qname.equals("LM") && prewious_qname().equals("m.rf")) || //m.rf
+			(current_qname.equals("m.rf") && context_stack.peek().children == 0) || //m.rf
+			(
+					(actual_token_featurelist != null) &&
+					fetureIndexFromFeatureName(current_qname, actual_token_featurelist) != -1);
 		
 	}
 
 	private String prewious_qname()
 	{
-		String current_qname = qname_stack.pop();
-		String prewious_qname = qname_stack.peek();
-		qname_stack.push(current_qname);
+		Context current_qname = context_stack.pop();
+		String prewious_qname = context_stack.peek().qname;
+		context_stack.push(current_qname);
 		return prewious_qname;
 	}
 
-	private int testFeatures(String qName, String [] feature_list)
+	private int fetureIndexFromFeatureName(String qName, String [] feature_list)
 	{
 		for (int i = 0; i < feature_list.length; i++) {
 			if (feature_list[i].equals(qName))

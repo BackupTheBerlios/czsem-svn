@@ -33,11 +33,11 @@ public class AnnotationDependencySubtreeMarker extends AbstractAnnotationDepende
 		}
 	}
 
-	protected static class SubtreeMarkInfo
+	public static class SubtreeMarkInfo
 	{
 		FeatureMap fm;
-		long start_offset;
-		long end_offset;		
+		public long start_offset;
+		public long end_offset;		
 		
 		
 		public SubtreeMarkInfo(FeatureMap fm, long startOffset, long endOffset) {

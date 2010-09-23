@@ -3,6 +3,8 @@ package czsem.gate;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -217,6 +219,11 @@ public class GateUtils
 	        valid = true;
 	    } catch (IOException ioEx) { }
 	    return valid;
+	}
+	
+	public static String URLToFilePath(URL url) throws IOException, URISyntaxException
+	{
+		return new File(url.toURI()).getCanonicalPath();		
 	}
 
 }

@@ -1,4 +1,4 @@
-package czsem.gate;
+package czsem.gate.tectomt;
 
 import gate.Annotation;
 import gate.AnnotationSet;
@@ -17,6 +17,8 @@ import javax.xml.xpath.XPathExpressionException;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import czsem.gate.GateUtils;
 
 public class TMTTreeAnnotator
 {

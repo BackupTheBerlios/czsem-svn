@@ -1,9 +1,8 @@
-package czsem.gate;
+package czsem.gate.tectomt;
 
 import gate.Document;
 import gate.creole.AbstractResource;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -13,6 +12,8 @@ import java.net.URL;
 
 import com.generationjava.io.xml.SimpleXmlWriter;
 import com.generationjava.io.xml.XmlWriter;
+
+import czsem.gate.GateUtils;
 
 public class TMTDocumentHelper
 {
@@ -29,7 +30,7 @@ public class TMTDocumentHelper
 	protected String findTMTFileName(URL outputDirectory) throws IOException, URISyntaxException
 	{
 		StringBuilder sb = new StringBuilder();
-		sb.append(new File(outputDirectory.toURI()).getCanonicalPath());
+		sb.append(GateUtils.URLToFilePath(outputDirectory));
 		sb.append('/');
 		sb.append(((AbstractResource) gate_doc).getName());
 		sb.append(".tmt");

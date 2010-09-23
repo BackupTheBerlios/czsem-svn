@@ -1,5 +1,6 @@
 package czsem.gate;
 
+import czsem.gate.tectomt.SequenceAnnotator;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;

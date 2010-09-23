@@ -1,4 +1,4 @@
-package czsem.gate;
+package czsem.gate.tectomt;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpression;

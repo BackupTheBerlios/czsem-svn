@@ -23,10 +23,11 @@ import org.apache.log4j.Logger;
 import org.xml.sax.SAXException;
 
 import czsem.gate.AbstractLanguageAnalyserWithInputOutputAS;
-import czsem.gate.SAXTMTParser;
-import czsem.gate.TMTAnnotator;
-import czsem.gate.TMTAnnotator.Sentence;
-import czsem.gate.TMTDocumentHelper;
+import czsem.gate.GateUtils;
+import czsem.gate.tectomt.Annotator;
+import czsem.gate.tectomt.Sentence;
+import czsem.gate.tectomt.TMTDocumentHelper;
+import czsem.gate.tectomt.TMTSAXParser;
 import czsem.utils.Config;
 import czsem.utils.ProcessExec;
 
@@ -58,8 +59,7 @@ public class TectoMTBatchAnalyser extends AbstractLanguageAnalyserWithInputOutpu
 		for (TMTDocumentHelper d : documents_to_anlayse)
 		{
 			annotateGateDocumentAcordingtoTMTfile(d.getDocument(), d.getTMTFilePath());
-		}
-		
+		}		
 		logger.debug("All documents annotated");
 		documents_to_anlayse.clear();		
 	}
@@ -129,7 +129,7 @@ public class TectoMTBatchAnalyser extends AbstractLanguageAnalyserWithInputOutpu
 		if (loadScenarioFromFile)
 		{
 			cmd_list.add("--scen");			
-			cmd_list.add(new File(scen.toURI()).getCanonicalPath());			
+			cmd_list.add(GateUtils.URLToFilePath(scen));			
 		}
 		else
 		{
@@ -158,11 +158,11 @@ public class TectoMTBatchAnalyser extends AbstractLanguageAnalyserWithInputOutpu
 	
 	protected void annotateGateDocumentAcordingtoTMTfile(Document doc, String tmt_filepath) throws ParserConfigurationException, SAXException, IOException, InvalidOffsetException
 	{
-		SAXTMTParser parser = new SAXTMTParser(language);
+		TMTSAXParser parser = new TMTSAXParser(language);
 		List<Sentence> sentences = parser.parse(tmt_filepath);
-		TMTAnnotator tmt_tree_annot = new TMTAnnotator(sentences);
-//		tmt_tree_annot.debug_print(System.out);
-    	tmt_tree_annot.annotate(doc, outputASName);
+		Annotator tmt_annot = new Annotator(sentences);
+//		tmt_annot.debug_print(System.out);
+    	tmt_annot.annotate(doc, outputASName);
 //		doc.sync();
 	}
 	

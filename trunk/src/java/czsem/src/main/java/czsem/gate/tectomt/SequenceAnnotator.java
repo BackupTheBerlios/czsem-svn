@@ -1,4 +1,4 @@
-package czsem.gate;
+package czsem.gate.tectomt;
 
 import gate.Document;
 
@@ -43,7 +43,7 @@ public class SequenceAnnotator
 	}
 	
 	
-	public void nextToken(String token)
+	public void nextToken(String token) throws StringIndexOutOfBoundsException
 	{
 		correction=0;
 		int new_index = indexOf(token);
@@ -65,6 +65,7 @@ public class SequenceAnnotator
 		last_length = token.length() + correction;
 		last_start_index = new_index + last_length; 
 	}
+	
 	private int indexOf(String token) {
 //		int new_index = string_content.indexOf(token, last_index);
 		int token_index, local_index;
