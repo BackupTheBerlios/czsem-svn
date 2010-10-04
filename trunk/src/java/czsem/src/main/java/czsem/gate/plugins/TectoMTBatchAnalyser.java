@@ -53,7 +53,7 @@ public class TectoMTBatchAnalyser extends AbstractLanguageAnalyserWithInputOutpu
 		int ret = executeTMTAnalysis();
 		logger.info(
 				String.format("External TMT analysis ended, return code: %d (%s!!!)",
-						ret, ret == 0 ? "Success" : "Error"));
+						ret, ret == 0 ? "Success" : "Error - see TMT_GATE_err.log"));
 
 						
 		for (TMTDocumentHelper d : documents_to_anlayse)
@@ -94,7 +94,7 @@ public class TectoMTBatchAnalyser extends AbstractLanguageAnalyserWithInputOutpu
 				cfg.getTmtRoot()+"/libs/blocks" +System.getProperty( "path.separator" )+
 				cfg.getTmtRoot()+"/libs/other",
 				"TRED_DIR="+cfg.getTredRoot(),
-				"TMT_ROOT="+cfg.getTmtRoot(),
+				"TMT_ROOT="+cfg.getTmtRoot()+"/",
 				"JAVA_HOME="+System.getProperty("java.home"),
 				"Path="+System.getenv("Path"),
 	/*		    'conll_mcd_order2.model'      => '2600m',    # tested on sol1, sol2 (64bit)

@@ -38,11 +38,20 @@ public class TectoMTBatchAnalyserTest extends TestCase
 		"The BBC's Bethany Bell in Jerusalem says many people face shortages of food, medicine and fuel.",
 		"Chancellor Alistair Darling says the new longer-term agreement will guarantee earnings growth for 5.5 million workers and will allow departments to plan more effectively."
 	};
+
+	String [] czech_sentences =
+	{
+		"Požár byl operačnímu středisku HZS ohlášen dnes ve 2.13 hodin, na místo vyjeli profesionální hasiči ze stanice v Židlochovicích a dobrovolní hasiči z Židlochovic, Žabčic a Přísnotic.",
+		"Oheň, který zasáhl elektroinstalaci u chladícího boxu, hasiči dostali pod kontrolu ve 2.32 hodin a uhasili tři minuty po třetí hodině.",
+		"Příčinou vzniku požáru byla technická závada, škodu vyšetřovatel předběžně vyčíslil na osm tisíc korun."
+	};
 	
+	Corpus corpus_czech_short;
 	Corpus corpus_english_short;
 	Corpus corpus_english_long;
 	Corpus corpus_english_full;
 	
+	Document czech_short_doc;
 	Document english_short_doc;
 	Document english_long_doc;
 	Document english_full_doc;
@@ -56,13 +65,16 @@ public class TectoMTBatchAnalyserTest extends TestCase
 		Gate.init();
 	    GateUtils.registerPluginDirectory(new File("czsem_GATE_plugins"));
 	    
+	    corpus_czech_short = Factory.newCorpus("corpus_czech_short");
 	    corpus_english_short = Factory.newCorpus("corpus_english_short");
 	    corpus_english_long = Factory.newCorpus("corpus_english_long");
 	    corpus_english_full = Factory.newCorpus("corpus_english_full");
 	    
+	    czech_short_doc = Factory.newDocument(czech_sentences[0]);
 	    english_short_doc = Factory.newDocument(english_sentences[0]);
 	    english_long_doc = Factory.newDocument(english_sentences[0] + " " + english_sentences[1]);
 	    english_full_doc = Factory.newDocument(getClass().getResource("/english_full.txt"));
+	    corpus_czech_short.add(czech_short_doc);
 	    corpus_english_short.add(english_short_doc);
 	    corpus_english_long.add(english_long_doc);
 	    corpus_english_full.add(english_full_doc);
@@ -145,6 +157,52 @@ public class TectoMTBatchAnalyserTest extends TestCase
 
 	}
 
+	public void testExecuteCzechMorphology() throws ResourceInstantiationException, ExecutionException
+	{
+		String [] blocks = {
+				"SCzechW_to_SCzechM::TextSeg_tokenizer_and_segmenter",
+				"SCzechW_to_SCzechM::Tokenize_joining_numbers",
+				"SCzechW_to_SCzechM::TagMorce"
+				};
+
+		executeTmtOnCorpus("czech", blocks, corpus_czech_short);
+
+		AnnotationSet as = czech_short_doc.getAnnotations();
+		
+		assertEquals(31, as.size());
+		validateAsType(as, "Token", 30, 3);
+		
+		FeatureMap fm = as.get((long) czech_sentences[0].indexOf("ohlášen")).iterator().next().getFeatures();
+		assertEquals("ohlášen",  fm.get("form"));
+		assertEquals("ohlásit",  fm.get("lemma"));
+		assertEquals("VsYS---XX-AP---", fm.get("tag"));
+		assertEquals(fm.get("afun"), null);
+		assertEquals(fm.get("ord"), null);
+
+		
+	}
+	
+	public void testExecuteEnglishSentenceSegmentation() throws GateException, MalformedURLException
+	{		
+		
+		String [] blocks = {"SEnglishW_to_SEnglishM::Sentence_segmentation"};
+
+		
+		
+		executeTmtOnCorpus("english", blocks, corpus_english_long);		
+		
+		AnnotationSet sents = english_long_doc.getAnnotations().get("Sentence");
+		assertEquals(sents.size(), 2);
+		Iterator<Annotation> siter = sents.iterator();
+		Annotation s1 = siter.next();
+		assertEquals((long) s1.getStartNode().getOffset(), 0);
+		assertEquals((long) s1.getEndNode().getOffset(), 95);
+		Annotation s2 = siter.next();
+		assertEquals((long) s2.getStartNode().getOffset(), 96);
+		assertEquals((long) s2.getEndNode().getOffset(), 266);
+	}
+
+
 	public void testExecuteEnglishMorphology() throws ResourceInstantiationException, ExecutionException
 	{
 		String [] blocks = {
@@ -172,27 +230,7 @@ public class TectoMTBatchAnalyserTest extends TestCase
 
 	}
 
-		
-	public void testExecuteEnglishSentenceSegmentation() throws GateException, MalformedURLException
-	{		
-		
-		String [] blocks = {"SEnglishW_to_SEnglishM::Sentence_segmentation"};
-
-		
-		
-		executeTmtOnCorpus("english", blocks, corpus_english_long);		
-		
-		AnnotationSet sents = english_long_doc.getAnnotations().get("Sentence");
-		assertEquals(sents.size(), 2);
-		Iterator<Annotation> siter = sents.iterator();
-		Annotation s1 = siter.next();
-		assertEquals((long) s1.getStartNode().getOffset(), 0);
-		assertEquals((long) s1.getEndNode().getOffset(), 95);
-		Annotation s2 = siter.next();
-		assertEquals((long) s2.getStartNode().getOffset(), 96);
-		assertEquals((long) s2.getEndNode().getOffset(), 266);
-	}
-	
+			
 	public static Test suite(){
 		return new TestSuite(TectoMTBatchAnalyserTest.class);
 	}
