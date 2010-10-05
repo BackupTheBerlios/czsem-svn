@@ -92,6 +92,7 @@ public class SAXTMTParserTest extends TestCase
 		assertEquals(tfm.get("t_lemma"), "say");
 		assertEquals(tfm.get("formeme"), "v:fin");
 		assertEquals(tfm.get("functor"), "PRED");
+		assertEquals(tfm.get("lex.rf"), "SEnglishA-s1w8");
 		assertEquals(s1.findToken(tTokens[0].getTLexRf()), aTokens[7]); 
 		
 		List<Dependency> tDependencies = s1.getDependencies(Layer.TECTO);

@@ -9,6 +9,7 @@ import gate.FeatureMap;
 import gate.Gate;
 import gate.ProcessingResource;
 import gate.Resource;
+import gate.TextualDocument;
 import gate.creole.ExecutionException;
 import gate.creole.ResourceInstantiationException;
 import gate.creole.SerialAnalyserController;
@@ -16,7 +17,9 @@ import gate.util.GateException;
 import gate.util.InvalidOffsetException;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.util.Arrays;
@@ -24,11 +27,12 @@ import java.util.Iterator;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.xml.sax.SAXException;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+
+import org.xml.sax.SAXException;
+
 import czsem.gate.GateUtils;
 
 public class TectoMTBatchAnalyserTest extends TestCase
@@ -121,6 +125,14 @@ public class TectoMTBatchAnalyserTest extends TestCase
 		validateAsType(as, "auxRfDependency", 77, 1);
 		validateAsType(as, "tToken", 169, (Integer) null);
 		
+		FeatureMap tfm = as.get("tToken").get((long) 0).iterator().next().getFeatures();
+		assertEquals(8, tfm.size());
+		assertEquals("BBC", tfm.get("t_lemma"));
+		assertEquals("n:poss", tfm.get("formeme"));
+		assertEquals("APP", tfm.get("functor"));
+		assertEquals(3, tfm.get("lex.rf"));
+
+		
 	}
 	
 	public void testAnnotateGateDocumentAcordingtoTMTfileMorpho() throws URISyntaxException, InvalidOffsetException, ParserConfigurationException, SAXException, IOException
@@ -177,10 +189,68 @@ public class TectoMTBatchAnalyserTest extends TestCase
 		assertEquals("ohlásit",  fm.get("lemma"));
 		assertEquals("VsYS---XX-AP---", fm.get("tag"));
 		assertEquals(fm.get("afun"), null);
+		assertEquals(fm.get("ord"), null);		
+	}
+	
+	public void testExecuteCzechFull() throws ResourceInstantiationException, ExecutionException, FileNotFoundException
+	{
+		String [] blocks = {
+				"SCzechW_to_SCzechM::TextSeg_tokenizer_and_segmenter",
+				"SCzechW_to_SCzechM::Tokenize_joining_numbers",
+				"SCzechW_to_SCzechM::TagMorce",
+//				"SCzechM_to_SCzechN::SVM_ne_recognizer",
+//				"SCzechM_to_SCzechN::Embed_instances",
+//				"SCzechM_to_SCzechN::Geo_ne_recognizer",
+//				"SCzechM_to_SCzechN::Embed_instances",
+				"SCzechM_to_SCzechA::McD_parser_local TMT_PARAM_MCD_CZ_MODEL=pdt20_train_autTag_golden_latin2_pruned_0.02.model",
+				"SCzechM_to_SCzechA::Fix_atree_after_McD",
+				"SCzechM_to_SCzechA::Fix_is_member",
+
+				"SCzechA_to_SCzechT::Mark_edges_to_collapse",
+				"SxxA_to_SxxT::Build_ttree                    LANGUAGE=Czech",
+				"SCzechA_to_SCzechT::Rehang_unary_coord_conj",
+				"SxxA_to_SxxT::Fill_is_member                 LANGUAGE=Czech",
+				
+//				"SCzechA_to_SCzechT::Mark_auxiliary_nodes",
+//				"SCzechA_to_SCzechT::Build_ttree",
+//				"SCzechA_to_SCzechT::Fill_is_member",
+//				"SCzechA_to_SCzechT::Rehang_unary_coord_conj",
+				"SCzechA_to_SCzechT::Assign_coap_functors",
+//				"SCzechA_to_SCzechT::Fix_is_member",
+				"SCzechA_to_SCzechT::Distrib_coord_aux",
+				"SCzechA_to_SCzechT::Mark_clause_heads",
+				"SCzechA_to_SCzechT::Mark_relclause_heads",
+				"SCzechA_to_SCzechT::Mark_relclause_coref",
+				"SCzechA_to_SCzechT::Fix_tlemmas",
+				"SCzechA_to_SCzechT::Recompute_deepord",
+				"SCzechA_to_SCzechT::Assign_nodetype",
+				"SCzechA_to_SCzechT::Assign_grammatemes",
+				"SCzechA_to_SCzechT::Detect_formeme",
+				"SCzechA_to_SCzechT::Add_PersPron",
+				"SCzechA_to_SCzechT::Mark_reflpron_coref",
+				"SCzechA_to_SCzechT::TBLa2t_phaseFd",
+				"XAnylang1X_to_XAnylang2X::Normalize_ordering LAYER=SCzechT"
+/**/		};
+
+		executeTmtOnCorpus("czech", blocks, corpus_czech_short);
+
+		AnnotationSet as = czech_short_doc.getAnnotations();
+		
+		new PrintStream("test_out.xml").print(gate.corpora.DocumentXmlUtils.toXml((TextualDocument) czech_short_doc));
+		
+		assertEquals(110, as.size());
+		validateAsType(as, "Token", 30, 3);
+		
+		FeatureMap fm = as.get((long) czech_sentences[0].indexOf("ohlášen")).iterator().next().getFeatures();
+		assertEquals("ohlášen",  fm.get("form"));
+		assertEquals("ohlásit",  fm.get("lemma"));
+		assertEquals("VsYS---XX-AP---", fm.get("tag"));
+		assertEquals(fm.get("afun"), null);
 		assertEquals(fm.get("ord"), null);
 
 		
 	}
+
 	
 	public void testExecuteEnglishSentenceSegmentation() throws GateException, MalformedURLException
 	{		

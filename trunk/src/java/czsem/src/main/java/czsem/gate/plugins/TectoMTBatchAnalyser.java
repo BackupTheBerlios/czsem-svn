@@ -96,6 +96,7 @@ public class TectoMTBatchAnalyser extends AbstractLanguageAnalyserWithInputOutpu
 				"TRED_DIR="+cfg.getTredRoot(),
 				"TMT_ROOT="+cfg.getTmtRoot()+"/",
 				"JAVA_HOME="+System.getProperty("java.home"),
+				"SystemRoot="+System.getenv("SystemRoot"),
 				"Path="+System.getenv("Path"),
 	/*		    'conll_mcd_order2.model'      => '2600m',    # tested on sol1, sol2 (64bit)
 			    'conll_mcd_order2_0.01.model' => '540m',     # tested on sol2 (64bit) , cygwin (32bit win), java-1.6.0(64bit)

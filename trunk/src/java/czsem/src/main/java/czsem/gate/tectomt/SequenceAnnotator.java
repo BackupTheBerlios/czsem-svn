@@ -1,9 +1,12 @@
 package czsem.gate.tectomt;
 
+import org.apache.log4j.Logger;
+
 import gate.Document;
 
 public class SequenceAnnotator
 {
+	static Logger logger = Logger.getLogger(SequenceAnnotator.class);
 	private String string_content;
 	private int last_start_index;
 	private int last_length=0;
@@ -53,13 +56,11 @@ public class SequenceAnnotator
 		
 		if (new_index - last_start_index > 5)
 		{
-			System.err.println("WARNING big space in annotations dedtected!");
-			System.err.print("last_index:");
-			System.err.print(last_start_index);
-			System.err.print(" new_index:");
-			System.err.print(new_index);
-			System.err.print(" diff:");
-			System.err.println(new_index-last_start_index);
+			logger.warn(
+					String.format(
+							"Big space in annotations dedtected! "+
+							"last_index: %d, new_index: %d, diff: %d",
+							last_start_index, new_index, new_index-last_start_index));
 		}
 		
 		last_length = token.length() + correction;
@@ -106,8 +107,7 @@ public class SequenceAnnotator
 				correction = local_index - local_start_index - token.length();
 				if (correction != 0)
 				{
-					System.out.print("correction: ");
-					System.out.println(correction);					
+					logger.debug("correction: " + correction);
 				}
 				return local_start_index;
 			} catch (Throwable e) {/*contine*/} 			

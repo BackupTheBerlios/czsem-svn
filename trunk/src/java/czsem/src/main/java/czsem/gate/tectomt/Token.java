@@ -71,6 +71,8 @@ public abstract class Token extends SeqAnnotation
 	
 	public static class tToken extends Token
 	{
+		protected Integer gate_lexref = null;
+		
 		protected static final String[] feature_list = 
 	    {
 	    		"nodetype", "t_lemma", "functor", "deepord", "formeme",
@@ -97,9 +99,7 @@ public abstract class Token extends SeqAnnotation
 		public void annotate(AnnotationSet as, SentenceInfoManager sentence) throws InvalidOffsetException
 		{
 			Token a_toknen = sentence.findToken(getTLexRf());
-			
-			FeatureMap fm = getFeatures();
-			
+									
 			Annotation a;
 			if (a_toknen == null)
 					a = as.get(sentence.gate_annotation_id);
@@ -107,8 +107,7 @@ public abstract class Token extends SeqAnnotation
 			{
 					a = as.get(a_toknen.gate_annotation_id);
 					
-					String old_id = (String) fm.put("lex.rf", a_toknen.gate_annotation_id);
-					assert old_id.equals(getTLexRf());
+					gate_lexref = a_toknen.gate_annotation_id;
 			}
 
 			
@@ -121,6 +120,16 @@ public abstract class Token extends SeqAnnotation
 			Long end_off = a.getEndNode().getOffset();
 			
 			annotate(as, start_off, end_off);			
+		}
+
+		@Override
+		public FeatureMap getFeatures() {
+			FeatureMap fm = super.getFeatures();
+//			if (gate_lexref < 1) System.err.println(gate_lexref);
+//			if (gate_lexref > 830) System.err.println(gate_lexref);
+			String old_id = (String) fm.put("lex.rf", gate_lexref);
+			assert old_id.equals(getTLexRf());
+			return fm;
 		}
 	};
 	
