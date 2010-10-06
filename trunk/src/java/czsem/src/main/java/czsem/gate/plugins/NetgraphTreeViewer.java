@@ -52,6 +52,7 @@ import czsem.gate.FSFileWriter;
 import czsem.gate.GateUtils;
 import czsem.gate.SentenceFSWriter;
 import czsem.utils.CZSemTree;
+import czsem.utils.Config;
 
 
 //@CreoleResource(name = "Netgraph TreeViewer")
@@ -461,6 +462,7 @@ public class NetgraphTreeViewer extends AbstractVisualResource implements  Owned
 	
 	public static void main(String[] args) throws Exception
 	{
+		Config.setGateHome();
 		gate.Main.main(args);		
 	}
 	

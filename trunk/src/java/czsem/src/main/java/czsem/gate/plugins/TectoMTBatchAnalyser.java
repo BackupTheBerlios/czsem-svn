@@ -31,7 +31,7 @@ import czsem.gate.tectomt.TMTSAXParser;
 import czsem.utils.Config;
 import czsem.utils.ProcessExec;
 
-@CreoleResource(name = "czsem TectoMTAnalyser", comment = "Alyses givem corpus by TMT tools")
+@CreoleResource(name = "czsem TectoMTBatchAnalyser", comment = "Alyses givem corpus by TMT tools")
 public class TectoMTBatchAnalyser extends AbstractLanguageAnalyserWithInputOutputAS
 {
 
@@ -40,7 +40,6 @@ public class TectoMTBatchAnalyser extends AbstractLanguageAnalyserWithInputOutpu
 
 
 	private URL scenarioFilePath = null;
-	private URL serializationDirectory = null;
 	private List<String> blocks = null;
 	private boolean loadScenarioFromFile = true;
 	private String language = "english";
@@ -72,7 +71,8 @@ public class TectoMTBatchAnalyser extends AbstractLanguageAnalyserWithInputOutpu
 			if (documents_to_anlayse.size() <= corpus.size())
 			{
 				documents_to_anlayse.add(
-						new TMTDocumentHelper(document, getLanguage(), getSerializationDirectory()));
+						new TMTDocumentHelper(document, getLanguage(),
+								Config.getConfig().getTmtSerializationDirectoryURL()));
 				
 				if (documents_to_anlayse.size() == corpus.size())
 				{
@@ -165,15 +165,6 @@ public class TectoMTBatchAnalyser extends AbstractLanguageAnalyserWithInputOutpu
     	tmt_annot.annotate(doc, outputASName);
 	}
 	
-
-	@CreoleParameter(comment="Directory where temporary TMT files are stored.", defaultValue="file:TmT_serializations")
-	public void setSerializationDirectory(URL serializationDirectory) {
-		this.serializationDirectory = serializationDirectory;
-	}
-
-	public URL getSerializationDirectory() {
-		return serializationDirectory;
-	}
 
 	@Optional
 	@CreoleParameter(defaultValue="file:/home/dedek/workspace/tectomt/applications/czeng10/cs_czeng_analysis_dedek_testing.scen")

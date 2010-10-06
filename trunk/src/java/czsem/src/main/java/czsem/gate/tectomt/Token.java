@@ -127,8 +127,11 @@ public abstract class Token extends SeqAnnotation
 			FeatureMap fm = super.getFeatures();
 //			if (gate_lexref < 1) System.err.println(gate_lexref);
 //			if (gate_lexref > 830) System.err.println(gate_lexref);
-			String old_id = (String) fm.put("lex.rf", gate_lexref);
-			assert old_id.equals(getTLexRf());
+			if (gate_lexref != null)
+			{
+				String old_id = (String) fm.put("lex.rf", gate_lexref);
+				assert old_id.equals(getTLexRf());
+			}
 			return fm;
 		}
 	};

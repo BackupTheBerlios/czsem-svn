@@ -1,7 +1,8 @@
 <?xml version="1.0"?>  
 <CREOLE-DIRECTORY>
-<!--   
   <JAR>lib/netgraph_client_application.jar</JAR>
+  <JAR>lib/xmlwriter-2.2.2.jar</JAR>
+<!--   
   <JAR>lib/learningapi.jar</JAR>
  -->  
   <JAR SCAN="true">../target/czsem-1.0.2-SNAPSHOT.jar</JAR>

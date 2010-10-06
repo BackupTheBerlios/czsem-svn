@@ -34,6 +34,7 @@ import junit.framework.TestSuite;
 import org.xml.sax.SAXException;
 
 import czsem.gate.GateUtils;
+import czsem.utils.Config;
 
 public class TectoMTBatchAnalyserTest extends TestCase
 {
@@ -63,11 +64,14 @@ public class TectoMTBatchAnalyserTest extends TestCase
 
 
 	@SuppressWarnings("unchecked")
-	@Override
-	protected void setUp() throws Exception
+	public TectoMTBatchAnalyserTest() throws Exception
 	{
-		Gate.init();
-	    GateUtils.registerPluginDirectory(new File("czsem_GATE_plugins"));
+	    if (! Gate.isInitialised())
+	    {
+			Config.setGateHome();
+			Gate.init();
+		    GateUtils.registerPluginDirectory(new File("czsem_GATE_plugins"));
+	    }
 	    
 	    corpus_czech_short = Factory.newCorpus("corpus_czech_short");
 	    corpus_english_short = Factory.newCorpus("corpus_english_short");
@@ -239,14 +243,18 @@ public class TectoMTBatchAnalyserTest extends TestCase
 		new PrintStream("test_out.xml").print(gate.corpora.DocumentXmlUtils.toXml((TextualDocument) czech_short_doc));
 		
 		assertEquals(110, as.size());
-		validateAsType(as, "Token", 30, 3);
+		validateAsType(as, "Token", 30, 5);
+		validateAsType(as, "aDependency", 28, 1);
+		validateAsType(as, "tToken", 22, null);
+		validateAsType(as, "tDependency", 21, 1);
+		validateAsType(as, "auxRfDependency", 8, 1);
 		
-		FeatureMap fm = as.get((long) czech_sentences[0].indexOf("ohlášen")).iterator().next().getFeatures();
+		FeatureMap fm = as.get("Token").get((long) czech_sentences[0].indexOf("ohlášen")).iterator().next().getFeatures();
 		assertEquals("ohlášen",  fm.get("form"));
 		assertEquals("ohlásit",  fm.get("lemma"));
 		assertEquals("VsYS---XX-AP---", fm.get("tag"));
-		assertEquals(fm.get("afun"), null);
-		assertEquals(fm.get("ord"), null);
+		assertEquals("Pred", fm.get("afun"));
+		assertEquals("6", fm.get("ord"));
 
 		
 	}

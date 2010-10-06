@@ -19,6 +19,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 
+import czsem.utils.Config;
 import czsem.utils.ProjectSetup;
 
 public class GateApplicationRunner {
@@ -124,7 +125,7 @@ public class GateApplicationRunner {
 	    Gate.setLocalWebServer(false);
 //	    Gate.setGateHome(new File("C:\\Program Files\\GATE-5.0"));
 
-	    Gate.setGateHome(new File("C:/Program Files/GATE-5.1"));
+	    Config.setGateHome();
 	    Gate.init();
     
 	    Gate.getCreoleRegister().registerDirectories( 

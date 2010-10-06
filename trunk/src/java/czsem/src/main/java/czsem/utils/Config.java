@@ -1,11 +1,15 @@
 package czsem.utils;
 
+import gate.Gate;
+
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 
 public class Config
@@ -45,13 +49,15 @@ public class Config
 		return config;
 	}
 	
-	public String wekaJarPath;
-	public String alephPath;
-	public String prologPath;
-	public String ilpProjestsPath;
-	public String myClassPath;
-	public String tmtRoot;
-	public String tredRoot;
+	private String wekaJarPath;
+	private String alephPath;
+	private String prologPath;
+	private String ilpSerialProjestsPath;
+	private String myClassPath;
+	private String tmtRoot;
+	private String tredRoot;
+	private String gateHome;
+	private String tmtSerializationDirectory;
 
 		
 	public void setInstallDefaults()
@@ -72,6 +78,8 @@ public class Config
 		setMyClassPath("C:\\workspace\\czsem\\src\\netgraph\\czsem\\bin");
 		setTmtRoot("C:\\workspace\\tectomt");
 		setTredRoot("C:\\tred");
+		setGateHome("C:\\Program Files\\GATE-5.2.1");
+		setTmtSerializationDirectory("C:\\workspace\\czsem\\src\\java\\czsem\\czsem_GATE_plugins\\TmT_serializations");
 	}
 
 	public void saveToFile(String filename) throws IOException
@@ -124,11 +132,11 @@ public class Config
 	}
 
 	public String getIlpProjestsPath() {
-		return ilpProjestsPath;
+		return ilpSerialProjestsPath;
 	}
 
 	public void setIlpProjestsPath(String ilpProjestsPath) {
-		this.ilpProjestsPath = ilpProjestsPath;
+		this.ilpSerialProjestsPath = ilpProjestsPath;
 	}
 
 	public String getMyClassPath() {
@@ -153,6 +161,36 @@ public class Config
 
 	public void setTredRoot(String tredRoot) {
 		this.tredRoot = tredRoot;
+	}
+
+
+	public void setGateHome(String gateHome) {
+		this.gateHome = gateHome;
+	}
+
+
+	public String getGateHome() {
+		return gateHome;
+	}
+
+	public static void setGateHome()
+	{		
+		Gate.setGateHome(new File(getConfig().getGateHome()));
+	}
+
+
+	public void setTmtSerializationDirectory(String tmtSerializationDirectory) {
+		this.tmtSerializationDirectory = tmtSerializationDirectory;
+	}
+
+
+	public URL getTmtSerializationDirectoryURL() throws MalformedURLException
+	{
+		return new File(getTmtSerializationDirectory()).toURI().toURL();
+	}
+
+	public String getTmtSerializationDirectory() {
+		return tmtSerializationDirectory;
 	}
 
 }

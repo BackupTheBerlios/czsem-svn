@@ -59,5 +59,12 @@
     	<artifactId>pdfbox</artifactId>
     	<version>0.7.3</version>
     </dependency>
+    <dependency>
+    	<groupId>gate</groupId>
+    	<artifactId>gate_bin</artifactId>
+    	<version>5.2.1</version>
+    	<type>jar</type>
+    	<scope>compile</scope>
+    </dependency>
   </dependencies>
 </project>

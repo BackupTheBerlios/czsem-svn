@@ -29,6 +29,7 @@ import czsem.gate.plugins.AnnotationDependencyRootMarker;
 import czsem.gate.plugins.AnnotationDependencySubtreeMarker;
 import czsem.gate.plugins.CrossValidation;
 import czsem.gate.plugins.SubsequentAnnotationMerge;
+import czsem.utils.Config;
 	
 public class TrainTestGateOnCzech {
 	
@@ -235,7 +236,7 @@ public class TrainTestGateOnCzech {
 	    logger.setLevel(Level.OFF);
 
 		
-	    Gate.setGateHome(new File("C:\\Program Files\\GATE-5.2.1"));
+	    Config.setGateHome();
 	    Gate.init();
 	    GateUtils.registerPluginDirectory("Parser_Stanford");
 	    GateUtils.registerPluginDirectory("Machine_Learning");
