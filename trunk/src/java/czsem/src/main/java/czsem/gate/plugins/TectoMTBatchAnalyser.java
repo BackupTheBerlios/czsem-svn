@@ -11,6 +11,7 @@ import gate.util.InvalidOffsetException;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ import czsem.gate.tectomt.TMTDocumentHelper;
 import czsem.gate.tectomt.TMTSAXParser;
 import czsem.utils.Config;
 import czsem.utils.ProcessExec;
+import czsem.utils.ProjectSetup;
 
 @CreoleResource(name = "czsem TectoMTBatchAnalyser", comment = "Alyses givem corpus by TMT tools")
 public class TectoMTBatchAnalyser extends AbstractLanguageAnalyserWithInputOutputAS
@@ -137,12 +139,20 @@ public class TectoMTBatchAnalyser extends AbstractLanguageAnalyserWithInputOutpu
 			List<String> blocks = getBlocks();
 			cmd_list.addAll(blocks);
 		}
+		
+		String file_list_path = cfg.getTmtSerializationDirectory() +
+			"/gate_tmt_filelist_" + ProjectSetup.makeTimeStamp();
+		PrintStream file_list_ostream = new PrintStream(file_list_path);
+		
 		cmd_list.add("--");
+		cmd_list.add("-l");
+		cmd_list.add(file_list_path);
 		
 		for (TMTDocumentHelper da : documents_to_anlayse)
 		{
-			cmd_list.add(new File(da.getTMTFilePath()).getCanonicalPath());			
+			file_list_ostream.println(new File(da.getTMTFilePath()).getCanonicalPath());
 		}
+		file_list_ostream.close();
 		
 		logger.debug("-------------START list of commentds to execute------------------------");
 		for (String cmd : cmd_list)
@@ -153,6 +163,7 @@ public class TectoMTBatchAnalyser extends AbstractLanguageAnalyserWithInputOutpu
 
 		ProcessExec tmt_proc = new ProcessExec();
 		tmt_proc.exec(cmd_list.toArray(new String[0]), tredEnvp);
+		//TODO: Config.getConfig().getLogDirectory(); 
 		tmt_proc.startReaderThreads("TMT_GATE_");
 		return tmt_proc.waitFor();		
 	}
@@ -167,7 +178,7 @@ public class TectoMTBatchAnalyser extends AbstractLanguageAnalyserWithInputOutpu
 	
 
 	@Optional
-	@CreoleParameter(defaultValue="file:/home/dedek/workspace/tectomt/applications/czeng10/cs_czeng_analysis_dedek_testing.scen")
+	@CreoleParameter(defaultValue="file:tmt_analysis_scenarios/english_full_blocks.scen")
 	public void setScenarioFilePath (URL scenarioFilePath ) {
 		this.scenarioFilePath  = scenarioFilePath ;
 	}

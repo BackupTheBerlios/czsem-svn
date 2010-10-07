@@ -15,8 +15,8 @@ import java.net.URL;
 public class Config
 {
 	private static Config config = null;
+	public static ClassLoader classLoader = null;
 	private static final String config_filename = "czsem_config.xml";
-	public static ClassLoader classLoader = null; 
 	
 	public static void main(String[] args) throws IOException
 	{
@@ -32,11 +32,18 @@ public class Config
 	}
 
 	
+	public static void loadConfig(ClassLoader classLoader) throws IOException
+	{
+		config = loadFromFile(config_filename, classLoader);
+	}
+
 	public static void loadConfig() throws IOException
 	{
-		config = loadFromFile(config_filename);
+		if (Gate.isInitialised() && Config.classLoader == null)
+			Config.classLoader = Gate.getClassLoader();
+		loadConfig(classLoader);
 	}
-	
+		
 	public static Config getConfig()
 	{
 		if (config == null)
@@ -97,7 +104,7 @@ public class Config
 		  fos.close();
 	}
 
-	public static Config loadFromFile(String filename) throws IOException
+	public static Config loadFromFile(String filename, ClassLoader classLoader) throws IOException
 	{
 		FileInputStream os = new FileInputStream(filename);
 		XMLDecoder decoder = new XMLDecoder(os, null, null, classLoader);

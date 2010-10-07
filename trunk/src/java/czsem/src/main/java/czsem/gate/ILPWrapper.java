@@ -1,7 +1,6 @@
 package czsem.gate;
 
 import gate.Document;
-import gate.Gate;
 import gate.ProcessingResource;
 import gate.creole.ExecutionException;
 import gate.creole.ml.AdvancedMLEngine;
@@ -18,7 +17,6 @@ import java.util.List;
 import org.jdom.Element;
 
 import czsem.gate.GateUtils.CorpusDocumentCounter;
-import czsem.utils.Config;
 
 public class ILPWrapper implements AdvancedMLEngine
 {
@@ -123,9 +121,7 @@ public class ILPWrapper implements AdvancedMLEngine
 
 	@Override
 	public void init() throws GateException
-	{
-		if (Gate.isInitialised()) Config.classLoader = Gate.getClassLoader();
-		
+	{		
 		String configFileURI = pr.getConfigFileURL().getPath();
 		File configFile = new File(configFileURI);
 		String name_ext = configFile.getName();

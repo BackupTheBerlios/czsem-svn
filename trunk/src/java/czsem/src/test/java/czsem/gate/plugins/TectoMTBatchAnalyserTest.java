@@ -66,6 +66,12 @@ public class TectoMTBatchAnalyserTest extends TestCase
 	@SuppressWarnings("unchecked")
 	public TectoMTBatchAnalyserTest() throws Exception
 	{
+/**		
+		String dir = "czsem_GATE_plugins/tmt_analysis_scenarios/";
+		writeTMTscenario(czech_full_blocks, dir+"czech_full_blocks.scen");
+		writeTMTscenario(english_full_blocks, dir+"english_full_blocks.scen");
+/**/		
+		
 	    if (! Gate.isInitialised())
 	    {
 			Config.setGateHome();
@@ -196,47 +202,48 @@ public class TectoMTBatchAnalyserTest extends TestCase
 		assertEquals(fm.get("ord"), null);		
 	}
 	
-	public void testExecuteCzechFull() throws ResourceInstantiationException, ExecutionException, FileNotFoundException
-	{
-		String [] blocks = {
-				"SCzechW_to_SCzechM::TextSeg_tokenizer_and_segmenter",
-				"SCzechW_to_SCzechM::Tokenize_joining_numbers",
-				"SCzechW_to_SCzechM::TagMorce",
-//				"SCzechM_to_SCzechN::SVM_ne_recognizer",
-//				"SCzechM_to_SCzechN::Embed_instances",
-//				"SCzechM_to_SCzechN::Geo_ne_recognizer",
-//				"SCzechM_to_SCzechN::Embed_instances",
-				"SCzechM_to_SCzechA::McD_parser_local TMT_PARAM_MCD_CZ_MODEL=pdt20_train_autTag_golden_latin2_pruned_0.02.model",
-				"SCzechM_to_SCzechA::Fix_atree_after_McD",
-				"SCzechM_to_SCzechA::Fix_is_member",
+	public static final String [] czech_full_blocks = {
+			"SCzechW_to_SCzechM::TextSeg_tokenizer_and_segmenter",
+			"SCzechW_to_SCzechM::Tokenize_joining_numbers",
+			"SCzechW_to_SCzechM::TagMorce",
+//			"SCzechM_to_SCzechN::SVM_ne_recognizer",
+//			"SCzechM_to_SCzechN::Embed_instances",
+//			"SCzechM_to_SCzechN::Geo_ne_recognizer",
+//			"SCzechM_to_SCzechN::Embed_instances",
+			"SCzechM_to_SCzechA::McD_parser_local TMT_PARAM_MCD_CZ_MODEL=pdt20_train_autTag_golden_latin2_pruned_0.02.model",
+			"SCzechM_to_SCzechA::Fix_atree_after_McD",
+			"SCzechM_to_SCzechA::Fix_is_member",
 
-				"SCzechA_to_SCzechT::Mark_edges_to_collapse",
-				"SxxA_to_SxxT::Build_ttree                    LANGUAGE=Czech",
-				"SCzechA_to_SCzechT::Rehang_unary_coord_conj",
-				"SxxA_to_SxxT::Fill_is_member                 LANGUAGE=Czech",
-				
-//				"SCzechA_to_SCzechT::Mark_auxiliary_nodes",
-//				"SCzechA_to_SCzechT::Build_ttree",
-//				"SCzechA_to_SCzechT::Fill_is_member",
-//				"SCzechA_to_SCzechT::Rehang_unary_coord_conj",
-				"SCzechA_to_SCzechT::Assign_coap_functors",
-//				"SCzechA_to_SCzechT::Fix_is_member",
-				"SCzechA_to_SCzechT::Distrib_coord_aux",
-				"SCzechA_to_SCzechT::Mark_clause_heads",
-				"SCzechA_to_SCzechT::Mark_relclause_heads",
-				"SCzechA_to_SCzechT::Mark_relclause_coref",
-				"SCzechA_to_SCzechT::Fix_tlemmas",
-				"SCzechA_to_SCzechT::Recompute_deepord",
-				"SCzechA_to_SCzechT::Assign_nodetype",
-				"SCzechA_to_SCzechT::Assign_grammatemes",
-				"SCzechA_to_SCzechT::Detect_formeme",
-				"SCzechA_to_SCzechT::Add_PersPron",
-				"SCzechA_to_SCzechT::Mark_reflpron_coref",
-				"SCzechA_to_SCzechT::TBLa2t_phaseFd",
-				"XAnylang1X_to_XAnylang2X::Normalize_ordering LAYER=SCzechT"
+			"SCzechA_to_SCzechT::Mark_edges_to_collapse",
+			"SxxA_to_SxxT::Build_ttree                    LANGUAGE=Czech",
+			"SCzechA_to_SCzechT::Rehang_unary_coord_conj",
+			"SxxA_to_SxxT::Fill_is_member                 LANGUAGE=Czech",
+			
+//			"SCzechA_to_SCzechT::Mark_auxiliary_nodes",
+//			"SCzechA_to_SCzechT::Build_ttree",
+//			"SCzechA_to_SCzechT::Fill_is_member",
+//			"SCzechA_to_SCzechT::Rehang_unary_coord_conj",
+			"SCzechA_to_SCzechT::Assign_coap_functors",
+//			"SCzechA_to_SCzechT::Fix_is_member",
+			"SCzechA_to_SCzechT::Distrib_coord_aux",
+			"SCzechA_to_SCzechT::Mark_clause_heads",
+			"SCzechA_to_SCzechT::Mark_relclause_heads",
+			"SCzechA_to_SCzechT::Mark_relclause_coref",
+			"SCzechA_to_SCzechT::Fix_tlemmas",
+			"SCzechA_to_SCzechT::Recompute_deepord",
+			"SCzechA_to_SCzechT::Assign_nodetype",
+			"SCzechA_to_SCzechT::Assign_grammatemes",
+			"SCzechA_to_SCzechT::Detect_formeme",
+			"SCzechA_to_SCzechT::Add_PersPron",
+			"SCzechA_to_SCzechT::Mark_reflpron_coref",
+			"SCzechA_to_SCzechT::TBLa2t_phaseFd",
+			"XAnylang1X_to_XAnylang2X::Normalize_ordering LAYER=SCzechT"
 /**/		};
 
-		executeTmtOnCorpus("czech", blocks, corpus_czech_short);
+	public void testExecuteCzechFull() throws ResourceInstantiationException, ExecutionException, FileNotFoundException
+	{
+
+		executeTmtOnCorpus("czech", czech_full_blocks, corpus_czech_short);
 
 		AnnotationSet as = czech_short_doc.getAnnotations();
 		
@@ -286,6 +293,7 @@ public class TectoMTBatchAnalyserTest extends TestCase
 		String [] blocks = {
 				"SEnglishW_to_SEnglishM::Sentence_segmentation",
 				"SEnglishW_to_SEnglishM::Penn_style_tokenization",
+				
 				"SEnglishW_to_SEnglishM::TagMorce",
 				"SEnglishW_to_SEnglishM::Fix_mtags",
 				"SEnglishW_to_SEnglishM::Lemmatize_mtree"
@@ -308,7 +316,78 @@ public class TectoMTBatchAnalyserTest extends TestCase
 
 	}
 
-			
+
+	public static final String [] english_full_blocks = {
+			"SEnglishW_to_SEnglishM::Sentence_segmentation",
+			"SEnglishW_to_SEnglishM::Tokenization",
+			"SEnglishW_to_SEnglishM::Normalize_forms",
+			"SEnglishW_to_SEnglishM::Fix_tokenization",
+			"SEnglishM_to_SEnglishN::Stanford_named_entities TMT_PARAM_NER_EN_MODEL=ner-eng-ie.crf-3-all2008.ser.gz",
+			"SEnglishW_to_SEnglishM::TagMorce",
+			"SEnglishW_to_SEnglishM::Fix_mtags",
+			"SEnglishW_to_SEnglishM::Lemmatize_mtree",
+			"SxxM_to_SxxA::Clone_atree LANGUAGE=English",
+//		    'conll_mcd_order2.model'      => '2600m',    # tested on sol1, sol2 (64bit)
+//		    'conll_mcd_order2_0.01.model' => '540m',     # tested on sol2 (64bit) , cygwin (32bit win), java-1.6.0(64bit)
+//		    'conll_mcd_order2_0.03.model' => '540m',     # load block tested on cygwin notebook (32bit win), java-1.6.0(64bit)
+//		    'conll_mcd_order2_0.1.model'  => '540m',     # load block tested on cygwin notebook (32bit win), java-1.6.0(64bit)
+			"SEnglishM_to_SEnglishA::McD_parser TMT_PARAM_MCD_EN_MODEL=conll_mcd_order2_0.01.model",
+			"SEnglishM_to_SEnglishA::Fill_is_member_from_deprel",
+			"SEnglishM_to_SEnglishA::Fix_tags_after_parse",
+			"SEnglishM_to_SEnglishA::McD_parser TMT_PARAM_MCD_EN_MODEL=conll_mcd_order2_0.01.model REPARSE=1",
+			"SEnglishM_to_SEnglishA::Fill_is_member_from_deprel",
+			"SEnglishM_to_SEnglishA::Fix_McD_topology",
+			"SEnglishM_to_SEnglishA::Fix_is_member",
+			"SEnglishM_to_SEnglishA::Fix_atree",
+			"SEnglishM_to_SEnglishA::Fix_multiword_prep_and_conj",
+			"SEnglishM_to_SEnglishA::Fix_dicendi_verbs",
+			"SEnglishM_to_SEnglishA::Fill_afun_AuxCP_Coord",
+			"SEnglishM_to_SEnglishA::Fill_afun",
+			"SEnglishA_to_SEnglishT::Mark_edges_to_collapse",
+			"SEnglishA_to_SEnglishT::Mark_edges_to_collapse_neg",
+			"SxxA_to_SxxT::Build_ttree                    LANGUAGE=English",
+			"SxxA_to_SxxT::Fill_is_member                 LANGUAGE=English",
+			"SEnglishA_to_SEnglishT::Move_aux_from_coord_to_members",
+			"SEnglishA_to_SEnglishT::Mark_named_entities TMT_PARAM_NER_EN_MODEL=ner-eng-ie.crf-3-all2008.ser.gz",
+			"SEnglishA_to_SEnglishT::Fix_tlemmas",
+			"SEnglishA_to_SEnglishT::Assign_coap_functors",
+			"SEnglishA_to_SEnglishT::Fix_is_member",
+			"SEnglishA_to_SEnglishT::Mark_clause_heads",
+			"SEnglishA_to_SEnglishT::Mark_passives",
+			"SEnglishA_to_SEnglishT::Assign_functors",
+			"SEnglishA_to_SEnglishT::Mark_infin",
+			"SEnglishA_to_SEnglishT::Mark_relclause_heads",
+			"SEnglishA_to_SEnglishT::Mark_relclause_coref",
+			"SEnglishA_to_SEnglishT::Mark_dsp_root",
+			"SEnglishA_to_SEnglishT::Mark_parentheses",
+			"SEnglishA_to_SEnglishT::Recompute_deepord",
+			"SEnglishA_to_SEnglishT::Assign_nodetype",
+			"SEnglishA_to_SEnglishT::Assign_grammatemes",
+			"SEnglishA_to_SEnglishT::Detect_formeme",
+			"SEnglishA_to_SEnglishT::Detect_voice",
+			"SEnglishA_to_SEnglishT::Fill_is_name_of_person",
+			"SEnglishA_to_SEnglishT::TBLa2t_phaseFx"
+		};
+
+	public void testExecuteEnglishFull() throws ResourceInstantiationException, ExecutionException
+	{
+		
+		executeTmtOnCorpus("english", english_full_blocks, corpus_english_short);
+		
+		AnnotationSet as = english_short_doc.getAnnotations();
+		
+		assertEquals(72, as.size());		
+	}
+
+	public static void writeTMTscenario(String [] scenario, String file_path) throws FileNotFoundException
+	{
+		PrintStream s = new PrintStream(file_path);
+		for (int i = 0; i < scenario.length; i++)
+		{
+			s.println(scenario[i]);			
+		}		
+	}
+	
 	public static Test suite(){
 		return new TestSuite(TectoMTBatchAnalyserTest.class);
 	}
