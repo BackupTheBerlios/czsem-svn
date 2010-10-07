@@ -46,13 +46,36 @@ public class SequenceAnnotator
 	}
 	
 	
+	public static class CannotAnnotateCharacterSequence extends StringIndexOutOfBoundsException
+	{
+		private static final long serialVersionUID = -6540653583278823750L;						
+		protected String token;
+		protected String annotator_content;
+		protected int last_start_index;
+
+		public CannotAnnotateCharacterSequence(String token, String annotator_content, int last_start_index)
+		{
+			super(annotator_content.substring(last_start_index, last_start_index + token.length()));
+			this.token = token;
+			this.annotator_content = annotator_content;
+			this.last_start_index = last_start_index;
+		}
+
+		@Override
+		public String getMessage() {
+			return String.format(
+					"Cannot annotate original character sequence \"%1.30s...\" with annotation \"%1.30s...\".",
+					annotator_content.substring(last_start_index), token);
+		}
+	}
+	
 	public void nextToken(String token) throws StringIndexOutOfBoundsException
 	{
 		correction=0;
 		int new_index = indexOf(token);
 //		int new_index = string_content.indexOf(token, last_index);
 		if (new_index == -1) 
-			throw new StringIndexOutOfBoundsException(string_content.substring(last_start_index, last_start_index + token.length()));
+			throw new CannotAnnotateCharacterSequence(token, string_content, last_start_index);
 		
 		if (new_index - last_start_index > 5)
 		{
@@ -87,7 +110,7 @@ public class SequenceAnnotator
 					if (loc_ch != toc_ch)
 					{
 						//quotation correction
-						if (loc_ch == '"' && (toc_ch == '\'' || toc_ch == '`'))
+						if ((loc_ch == '"' || loc_ch == '\'')&& (toc_ch == '\'' || toc_ch == '`'))
 						{
 							if (token_index+1<token.length() && token.charAt(token_index+1)==toc_ch)
 								token_index++;

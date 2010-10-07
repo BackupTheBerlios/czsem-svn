@@ -125,6 +125,23 @@ public class SequenceAnnotatorTest extends TestCase
 		assertEquals(sa.lastStart(), 123);
 		assertEquals(sa.lastEnd(), 124);
 	}
+	
+	public void testNextToken6()
+	{
+		String s = 	"Honeywell said HIS 's Federal Systems Division is now a";
+		SequenceAnnotator sa = new SequenceAnnotator(s, 0);
+		sa.nextToken("Honeywell");
+		assertEquals(0, sa.lastStart());
+		sa.nextToken("said");
+		assertEquals(10, sa.lastStart());
+		sa.nextToken("HIS`");
+		assertEquals(15, sa.lastStart());
+		sa.nextToken("s");
+		assertEquals(20, sa.lastStart());
+		sa.nextToken("Federal");
+		assertEquals(22, sa.lastStart());
+	}
+
 
 	public static Test suite(){
 		return new TestSuite(SequenceAnnotatorTest.class);

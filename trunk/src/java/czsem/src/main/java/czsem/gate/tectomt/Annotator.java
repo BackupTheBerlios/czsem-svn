@@ -33,11 +33,8 @@ public class Annotator
 		logger.debug(sentence.getString());
 				
     	seq_anot.backup();
-    	try {
-    		sentence.annotate(as, seq_anot);
-    	} catch (IndexOutOfBoundsException e) {
-    		logger.error(sentence, e);
-		}
+
+    	sentence.annotate(as, seq_anot);
     	    	
     	seq_anot.restore();
     	

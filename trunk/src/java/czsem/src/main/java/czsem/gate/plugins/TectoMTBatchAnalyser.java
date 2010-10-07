@@ -1,5 +1,6 @@
 package czsem.gate.plugins;
 
+import gate.Corpus;
 import gate.Document;
 import gate.Resource;
 import gate.creole.ExecutionException;
@@ -7,6 +8,8 @@ import gate.creole.ResourceInstantiationException;
 import gate.creole.metadata.CreoleParameter;
 import gate.creole.metadata.CreoleResource;
 import gate.creole.metadata.Optional;
+import gate.persist.PersistenceException;
+import gate.security.SecurityException;
 import gate.util.InvalidOffsetException;
 
 import java.io.File;
@@ -48,7 +51,7 @@ public class TectoMTBatchAnalyser extends AbstractLanguageAnalyserWithInputOutpu
 		
 	private List<TMTDocumentHelper> documents_to_anlayse= new ArrayList<TMTDocumentHelper>();
 
-	protected void executeBatch() throws ParserConfigurationException, SAXException, IOException, InterruptedException, URISyntaxException, InvalidOffsetException
+	protected void executeBatch() throws ParserConfigurationException, SAXException, IOException, InterruptedException, URISyntaxException, InvalidOffsetException, PersistenceException, SecurityException
 	{
 		logger.info("Executing external TMT analysis");
 		int ret = executeTMTAnalysis();
@@ -57,9 +60,16 @@ public class TectoMTBatchAnalyser extends AbstractLanguageAnalyserWithInputOutpu
 						ret, ret == 0 ? "Success" : "Error - see TMT_GATE_err.log"));
 
 						
+		Corpus corpus = getCorpus();
 		for (TMTDocumentHelper d : documents_to_anlayse)
 		{
-			annotateGateDocumentAcordingtoTMTfile(d.getDocument(), d.getTMTFilePath());
+			Document doc = d.getDocument();
+			annotateGateDocumentAcordingtoTMTfile(doc , d.getTMTFilePath());
+			int doc_index = corpus.indexOf(doc);
+			if (! corpus.isDocumentLoaded(doc_index))
+			{
+				doc.sync();
+			}
 		}		
 		logger.debug("All documents annotated");
 		documents_to_anlayse.clear();		

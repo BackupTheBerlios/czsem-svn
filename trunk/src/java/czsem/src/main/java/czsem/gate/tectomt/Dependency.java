@@ -26,6 +26,8 @@ public abstract class Dependency extends TMTAnnotation
 		Annotation a1 = as.get(gate_parent_id);
 		Annotation a2 = as.get(gate_child_id);
 		
+		if (a1 == null || a2 == null) return;
+		
 		Long ix1 = Math.min(a1.getStartNode().getOffset(), a2.getStartNode().getOffset());
 		Long ix2 = Math.max(a1.getEndNode().getOffset(), a2.getEndNode().getOffset());
 		

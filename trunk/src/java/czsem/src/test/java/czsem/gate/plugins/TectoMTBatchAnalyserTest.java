@@ -10,6 +10,7 @@ import gate.Gate;
 import gate.ProcessingResource;
 import gate.Resource;
 import gate.TextualDocument;
+import gate.corpora.DocumentXmlUtils;
 import gate.creole.ExecutionException;
 import gate.creole.ResourceInstantiationException;
 import gate.creole.SerialAnalyserController;
@@ -22,6 +23,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.Iterator;
 
@@ -38,6 +40,9 @@ import czsem.utils.Config;
 
 public class TectoMTBatchAnalyserTest extends TestCase
 {
+	Corpus corpus = null;
+	Document document = null;	
+	
 	String [] english_sentences =
 	{
 		"The BBC's Bethany Bell in Jerusalem says many people face shortages of food, medicine and fuel.",
@@ -50,23 +55,40 @@ public class TectoMTBatchAnalyserTest extends TestCase
 		"Oheň, který zasáhl elektroinstalaci u chladícího boxu, hasiči dostali pod kontrolu ve 2.32 hodin a uhasili tři minuty po třetí hodině.",
 		"Příčinou vzniku požáru byla technická závada, škodu vyšetřovatel předběžně vyčíslil na osm tisíc korun."
 	};
+		
 	
-	Corpus corpus_czech_short;
-	Corpus corpus_english_short;
-	Corpus corpus_english_long;
-	Corpus corpus_english_full;
-	
-	Document czech_short_doc;
-	Document english_short_doc;
-	Document english_long_doc;
-	Document english_full_doc;
-
-
-
 	@SuppressWarnings("unchecked")
+	protected Corpus gateCorpusFromDoc(Document doc) throws ResourceInstantiationException
+	{
+		Corpus corpus = Factory.newCorpus(null);
+		corpus.add(doc);
+	    return corpus;		
+	}
+
+	protected void initCorpusAndDocFromFile(URL file_url) throws ResourceInstantiationException
+	{
+		document = Factory.newDocument(file_url);
+		corpus = gateCorpusFromDoc(document);		
+	}
+
+	protected void initCorpusAndDocFromSentences(String [] sentences, int num) throws ResourceInstantiationException
+	{
+		StringBuilder sb= new StringBuilder();
+	    for (int i = 0; i < num; i++)
+	    {
+	    	sb.append(sentences[i]);
+			sb.append(' ');
+		}
+	    
+		document = Factory.newDocument(sb.toString());
+		corpus = gateCorpusFromDoc(document);
+	}
+
+
+
 	public TectoMTBatchAnalyserTest() throws Exception
 	{
-/**		
+/*		
 		String dir = "czsem_GATE_plugins/tmt_analysis_scenarios/";
 		writeTMTscenario(czech_full_blocks, dir+"czech_full_blocks.scen");
 		writeTMTscenario(english_full_blocks, dir+"english_full_blocks.scen");
@@ -78,24 +100,9 @@ public class TectoMTBatchAnalyserTest extends TestCase
 			Gate.init();
 		    GateUtils.registerPluginDirectory(new File("czsem_GATE_plugins"));
 	    }
-	    
-	    corpus_czech_short = Factory.newCorpus("corpus_czech_short");
-	    corpus_english_short = Factory.newCorpus("corpus_english_short");
-	    corpus_english_long = Factory.newCorpus("corpus_english_long");
-	    corpus_english_full = Factory.newCorpus("corpus_english_full");
-	    
-	    czech_short_doc = Factory.newDocument(czech_sentences[0]);
-	    english_short_doc = Factory.newDocument(english_sentences[0]);
-	    english_long_doc = Factory.newDocument(english_sentences[0] + " " + english_sentences[1]);
-	    english_full_doc = Factory.newDocument(getClass().getResource("/english_full.txt"));
-	    corpus_czech_short.add(czech_short_doc);
-	    corpus_english_short.add(english_short_doc);
-	    corpus_english_long.add(english_long_doc);
-	    corpus_english_full.add(english_full_doc);
-	   
 	}
 	
-	protected void executeTmtOnCorpus(String language, String [] blocks, Corpus corpus) throws ResourceInstantiationException, ExecutionException
+	protected void executeTmtOnCurrentCorpus(String language, String [] blocks) throws ResourceInstantiationException, ExecutionException
 	{
 		FeatureMap fm = Factory.newFeatureMap();
 		fm.put("loadScenarioFromFile", "false");
@@ -112,17 +119,44 @@ public class TectoMTBatchAnalyserTest extends TestCase
 		controller.execute();		
 	}
 
-	public void testAnnotateGateDocumentAcordingtoTMTfileFull() throws InvalidOffsetException, ParserConfigurationException, SAXException, IOException, URISyntaxException
+	public void testAnnotateGateDocumentAcordingtoTMTfileAcquisitions10473() throws ResourceInstantiationException, InvalidOffsetException, ParserConfigurationException, SAXException, IOException, URISyntaxException
 	{
-		english_full_doc.getAnnotations().clear();
-		AnnotationSet as = english_full_doc.getAnnotations();
+		initCorpusAndDocFromFile(getClass().getResource("/Acquisitions10473.xml"));
+
+		assertEquals(2644, (long) document.getContent().size());
+		
+		document.getAnnotations().clear();
+		AnnotationSet as = document.getAnnotations();
 		assertEquals(as.size(), 0);
-		assertEquals(1302, (long) english_full_doc.getContent().size());
+		AnnotationSet as_orig = document.getAnnotations("Original markups");
+		assertEquals(37, as_orig.size());
+		
+		
+		
+		TectoMTBatchAnalyser tmt_ba = new TectoMTBatchAnalyser();
+		tmt_ba.setLanguage("english");
+		tmt_ba.annotateGateDocumentAcordingtoTMTfile(
+				document,
+				GateUtils.URLToFilePath(getClass().getResource("/Acquisitions10473.tmt")));
+		
+		//saveDocumentToFile("test_out.xml");
+		assertEquals(1702, as.size());
+		
+	}
+
+	public void testAnnotateGateDocumentAcordingtoTMTfileFull() throws InvalidOffsetException, ParserConfigurationException, SAXException, IOException, URISyntaxException, ResourceInstantiationException
+	{
+		initCorpusAndDocFromFile(getClass().getResource("/english_full.txt"));
+		
+		document.getAnnotations().clear();
+		AnnotationSet as = document.getAnnotations();
+		assertEquals(as.size(), 0);
+		assertEquals(1302, (long) document.getContent().size());
 
 		TectoMTBatchAnalyser tmt_ba = new TectoMTBatchAnalyser();
 		tmt_ba.setLanguage("english");
 		tmt_ba.annotateGateDocumentAcordingtoTMTfile(
-				english_full_doc,
+				document,
 				GateUtils.URLToFilePath(getClass().getResource("/english_full.tmt")));
 		assertEquals(as.size(), 913);
 		
@@ -145,16 +179,17 @@ public class TectoMTBatchAnalyserTest extends TestCase
 		
 	}
 	
-	public void testAnnotateGateDocumentAcordingtoTMTfileMorpho() throws URISyntaxException, InvalidOffsetException, ParserConfigurationException, SAXException, IOException
+	public void testAnnotateGateDocumentAcordingtoTMTfileMorpho() throws URISyntaxException, InvalidOffsetException, ParserConfigurationException, SAXException, IOException, ResourceInstantiationException
 	{
-		english_short_doc.getAnnotations().clear();
-		AnnotationSet as = english_short_doc.getAnnotations();
+		initCorpusAndDocFromSentences(english_sentences, 1);
+		document.getAnnotations().clear();
+		AnnotationSet as = document.getAnnotations();
 		assertEquals(as.size(), 0);
 		
 		TectoMTBatchAnalyser tmt_ba = new TectoMTBatchAnalyser();
 		tmt_ba.setLanguage("english");
 		tmt_ba.annotateGateDocumentAcordingtoTMTfile(
-				english_short_doc,
+				document,
 				GateUtils.URLToFilePath(getClass().getResource("/english_morphology.tmt")));
 		
 		
@@ -187,9 +222,10 @@ public class TectoMTBatchAnalyserTest extends TestCase
 				"SCzechW_to_SCzechM::TagMorce"
 				};
 
-		executeTmtOnCorpus("czech", blocks, corpus_czech_short);
+		initCorpusAndDocFromSentences(czech_sentences, 1);
+		executeTmtOnCurrentCorpus("czech", blocks);
 
-		AnnotationSet as = czech_short_doc.getAnnotations();
+		AnnotationSet as = document.getAnnotations();
 		
 		assertEquals(31, as.size());
 		validateAsType(as, "Token", 30, 3);
@@ -240,14 +276,24 @@ public class TectoMTBatchAnalyserTest extends TestCase
 			"XAnylang1X_to_XAnylang2X::Normalize_ordering LAYER=SCzechT"
 /**/		};
 
+	protected void saveDocumentToFile(String filename) throws FileNotFoundException
+	{
+		new PrintStream(filename)
+		.print(
+				DocumentXmlUtils.toXml(
+						(TextualDocument) document));		
+	}
+	
 	public void testExecuteCzechFull() throws ResourceInstantiationException, ExecutionException, FileNotFoundException
 	{
 
-		executeTmtOnCorpus("czech", czech_full_blocks, corpus_czech_short);
+		initCorpusAndDocFromSentences(czech_sentences, 1);
+		executeTmtOnCurrentCorpus("czech", czech_full_blocks);
 
-		AnnotationSet as = czech_short_doc.getAnnotations();
+		AnnotationSet as = document.getAnnotations();
 		
-		new PrintStream("test_out.xml").print(gate.corpora.DocumentXmlUtils.toXml((TextualDocument) czech_short_doc));
+		//saveDocumentToFile("test_out.xml");
+		
 		
 		assertEquals(110, as.size());
 		validateAsType(as, "Token", 30, 5);
@@ -274,9 +320,10 @@ public class TectoMTBatchAnalyserTest extends TestCase
 
 		
 		
-		executeTmtOnCorpus("english", blocks, corpus_english_long);		
+		initCorpusAndDocFromSentences(english_sentences, 2);
+		executeTmtOnCurrentCorpus("english", blocks);		
 		
-		AnnotationSet sents = english_long_doc.getAnnotations().get("Sentence");
+		AnnotationSet sents = document.getAnnotations().get("Sentence");
 		assertEquals(sents.size(), 2);
 		Iterator<Annotation> siter = sents.iterator();
 		Annotation s1 = siter.next();
@@ -300,9 +347,10 @@ public class TectoMTBatchAnalyserTest extends TestCase
 				};
 		
 		
-		executeTmtOnCorpus("english", blocks, corpus_english_short);
+		initCorpusAndDocFromSentences(english_sentences, 1);
+		executeTmtOnCurrentCorpus("english", blocks);
 		
-		AnnotationSet as = english_short_doc.getAnnotations();
+		AnnotationSet as = document.getAnnotations();
 		
 		assertEquals(20, as.size());
 		
@@ -315,7 +363,6 @@ public class TectoMTBatchAnalyserTest extends TestCase
 		assertEquals(fm.get("ord"), null);
 
 	}
-
 
 	public static final String [] english_full_blocks = {
 			"SEnglishW_to_SEnglishM::Sentence_segmentation",
@@ -372,12 +419,28 @@ public class TectoMTBatchAnalyserTest extends TestCase
 	public void testExecuteEnglishFull() throws ResourceInstantiationException, ExecutionException
 	{
 		
-		executeTmtOnCorpus("english", english_full_blocks, corpus_english_short);
+		initCorpusAndDocFromSentences(english_sentences, 1);
+		executeTmtOnCurrentCorpus("english", english_full_blocks);
 		
-		AnnotationSet as = english_short_doc.getAnnotations();
+		AnnotationSet as = document.getAnnotations();
 		
 		assertEquals(72, as.size());		
 	}
+	
+	public void testExecuteEnglishFullAcquisitions10473() throws ResourceInstantiationException, ExecutionException, FileNotFoundException
+	{
+		initCorpusAndDocFromFile(getClass().getResource("/Acquisitions10473.xml"));
+		executeTmtOnCurrentCorpus("english", english_full_blocks);
+
+		AnnotationSet as = document.getAnnotations();		
+		assertEquals(1702, as.size());
+		
+		saveDocumentToFile("test_out.xml");
+
+
+		
+	}
+
 
 	public static void writeTMTscenario(String [] scenario, String file_path) throws FileNotFoundException
 	{

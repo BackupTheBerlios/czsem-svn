@@ -63,7 +63,11 @@ public abstract class Token extends SeqAnnotation
 			String mt_id = mRfDependecies.get(0);
 			Token mt = sentence.findToken(mt_id);
 			gate_annotation_id = mt.gate_annotation_id;
-			FeatureMap fm = as.get(gate_annotation_id).getFeatures();
+			
+			FeatureMap fm;			
+			if (gate_annotation_id == null) fm = Factory.newFeatureMap();
+			else fm	= as.get(gate_annotation_id).getFeatures();
+			
 			fm.putAll(getFeatures());
 		}
 	}

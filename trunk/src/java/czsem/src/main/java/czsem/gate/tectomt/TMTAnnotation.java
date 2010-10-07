@@ -1,6 +1,9 @@
 package czsem.gate.tectomt;
 
 import org.apache.commons.lang.NotImplementedException;
+import org.apache.log4j.Logger;
+
+import czsem.gate.tectomt.SequenceAnnotator.CannotAnnotateCharacterSequence;
 
 import gate.AnnotationSet;
 import gate.FeatureMap;
@@ -12,8 +15,18 @@ public abstract class TMTAnnotation
 	{
 		protected String tmt_id;
 		public abstract String getString();
+		static Logger logger = Logger.getLogger(SeqAnnotation.class);
 		
 		public void annotate(AnnotationSet as, SequenceAnnotator seq_anot) throws InvalidOffsetException
+		{
+			try {
+				annotateUnsafe(as, seq_anot);
+			} catch (CannotAnnotateCharacterSequence e) {
+	    		logger.error(this, e);
+			}
+		}
+
+		public void annotateUnsafe(AnnotationSet as, SequenceAnnotator seq_anot) throws InvalidOffsetException
 		{
 			String str = getString();
 			if (str == null)
