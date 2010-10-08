@@ -6,10 +6,13 @@ import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Iterator;
+import java.util.Set;
 
 
 public class Config
@@ -17,24 +20,49 @@ public class Config
 	private static Config config = null;
 	public static ClassLoader classLoader = null;
 	private static final String config_filename = "czsem_config.xml";
+	private static final String czsem_plugin_dir_name = "czsem_GATE_plugins";
 	
 	public static void main(String[] args) throws IOException
 	{
+		System.err.println(getConfig().getGateHome());
+
+/*
 		Config ps = new Config();
 		ps.setMyWinValues();
 //		ps.setInstallDefaults();
 		ps.saveToFile(config_filename);
 		
-/*
 		Config ps2 = new Config();
 		ps2 = loadFromFile("config1.xml");
-*/				
+/**/				
 	}
 
 	
+	protected static URL findCzesemPluginDirectoryURL()
+	{
+		@SuppressWarnings("unchecked")
+		Set<URL> dirs = Gate.getCreoleRegister().getDirectories();
+		for (Iterator<URL> iterator = dirs.iterator(); iterator.hasNext();)
+		{
+			URL url = iterator.next();
+			if (url.toString().endsWith(czsem_plugin_dir_name))
+				return url;
+		}
+		return null;		
+	}
+	
 	public static void loadConfig(ClassLoader classLoader) throws IOException
 	{
-		config = loadFromFile(config_filename, classLoader);
+		try
+		{
+			config = loadFromFile(config_filename, classLoader);
+		} catch (FileNotFoundException e)
+		{
+			if (Gate.isInitialised())
+			{
+				config = loadFromFile(config_filename, classLoader);
+			}
+		}
 	}
 
 	public static void loadConfig() throws IOException
