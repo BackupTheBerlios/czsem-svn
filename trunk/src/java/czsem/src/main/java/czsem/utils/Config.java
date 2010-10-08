@@ -26,6 +26,19 @@ public class Config
 	private static final String config_filename = "czsem_config.xml";
 	private static final String czsem_plugin_dir_name = "czsem_GATE_plugins";
 	
+	private String wekaJarPath;
+	private String alephPath;
+	private String prologPath;
+	private String ilpSerialProjestsPath;
+	private String wekaRunFuzzyILPClassPath;
+	private String tmtRoot;
+	private String tredRoot;
+	private String gateHome;
+	private String tmtSerializationDirectoryPath;
+	private String logFileDirectoryPath;
+
+
+	
 	public static void main(String[] args) throws IOException, GateException, URISyntaxException
 	{
 		/*
@@ -41,7 +54,7 @@ public class Config
 		Config ps = new Config();
 		ps.setMyWinValues();
 //		ps.setInstallDefaults();
-		ps.saveToFile(config_filename);
+		ps.saveToFile(czsem_plugin_dir_name+ '/' +config_filename);
 		
 /*				
 		Config ps2 = new Config();
@@ -82,7 +95,7 @@ public class Config
 			{
 				URL url = findCzesemPluginDirectoryURL();
 				config = loadFromFile(
-						GateUtils.URLToFilePath(url) + config_filename, classLoader);
+						GateUtils.URLToFilePath(url)+ '/' +config_filename, classLoader);
 			}
 			else throw e; 
 		}
@@ -111,38 +124,29 @@ public class Config
 */			
 		return config;
 	}
-	
-	private String wekaJarPath;
-	private String alephPath;
-	private String prologPath;
-	private String ilpSerialProjestsPath;
-	private String myClassPath;
-	private String tmtRoot;
-	private String tredRoot;
-	private String gateHome;
-	private String tmtSerializationDirectory;
-
-		
+			
 	public void setInstallDefaults()
 	{
 		setAlephPath("$aleph");
 		setIlpProjestsPath("$projects/ILP_serial_projects");
 		setPrologPath("$prolog");
 		setWekaJarPath("$weka");
-		setMyClassPath("$INSTALL_PATH/FuzzyILP.jar");
+		setWekaRunFuzzyILPClassPath("$INSTALL_PATH/FuzzyILP.jar");
 	}
 
 	public void setMyWinValues()
 	{
 		setAlephPath("C:\\Program Files\\aleph\\aleph.pl");
-		setIlpProjestsPath("C:\\workspace\\czsem\\src\\netgraph\\czsem\\ILP_serial_projects");
 		setPrologPath("C:\\Program Files\\Yap\\bin\\yap.exe");
 		setWekaJarPath("C:\\Program Files\\Weka-3-6\\weka.jar");
-		setMyClassPath("C:\\workspace\\czsem\\src\\netgraph\\czsem\\bin");
+		setWekaRunFuzzyILPClassPath("C:\\workspace\\czsem\\src\\java\\czsem\\target\\classes");
 		setTmtRoot("C:\\workspace\\tectomt");
 		setTredRoot("C:\\tred");
 		setGateHome("C:\\Program Files\\GATE-5.2.1");
-		setTmtSerializationDirectory("C:\\workspace\\czsem\\src\\java\\czsem\\czsem_GATE_plugins\\TmT_serializations");
+		setTmtSerializationDirectoryPath(
+								"C:\\workspace\\czsem\\src\\java\\czsem\\czsem_GATE_plugins\\TmT_serializations");
+		setLogFileDirectoryPath("C:\\workspace\\czsem\\src\\java\\czsem\\czsem_GATE_plugins\\log");
+		setIlpProjestsPath(		"C:\\workspace\\czsem\\src\\java\\czsem\\ILP_serializations");
 	}
 
 	public void saveToFile(String filename) throws IOException
@@ -202,12 +206,12 @@ public class Config
 		this.ilpSerialProjestsPath = ilpProjestsPath;
 	}
 
-	public String getMyClassPath() {
-		return myClassPath;
+	public String getWekaRunFuzzyILPClassPath() {
+		return wekaRunFuzzyILPClassPath;
 	}
 
-	public void setMyClassPath(String myClassPath) {
-		this.myClassPath = myClassPath;
+	public void setWekaRunFuzzyILPClassPath(String myClassPath) {
+		this.wekaRunFuzzyILPClassPath = myClassPath;
 	}
 	
 	public String getTmtRoot() {
@@ -242,18 +246,28 @@ public class Config
 	}
 
 
-	public void setTmtSerializationDirectory(String tmtSerializationDirectory) {
-		this.tmtSerializationDirectory = tmtSerializationDirectory;
+	public void setTmtSerializationDirectoryPath(String tmtSerializationDirectoryPath) {
+		this.tmtSerializationDirectoryPath = tmtSerializationDirectoryPath;
 	}
 
 
 	public URL getTmtSerializationDirectoryURL() throws MalformedURLException
 	{
-		return new File(getTmtSerializationDirectory()).toURI().toURL();
+		return new File(getTmtSerializationDirectoryPath()).toURI().toURL();
 	}
 
-	public String getTmtSerializationDirectory() {
-		return tmtSerializationDirectory;
+	public String getTmtSerializationDirectoryPath() {
+		return tmtSerializationDirectoryPath;
+	}
+
+
+	public void setLogFileDirectoryPath(String logFileDirectoryPath) {
+		this.logFileDirectoryPath = logFileDirectoryPath;
+	}
+
+
+	public String getLogFileDirectoryPath() {
+		return logFileDirectoryPath;
 	}
 
 }

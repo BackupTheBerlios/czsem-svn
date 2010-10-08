@@ -150,7 +150,7 @@ public class TectoMTBatchAnalyser extends AbstractLanguageAnalyserWithInputOutpu
 			cmd_list.addAll(blocks);
 		}
 		
-		String file_list_path = cfg.getTmtSerializationDirectory() +
+		String file_list_path = cfg.getTmtSerializationDirectoryPath() +
 			"/gate_tmt_filelist_" + ProjectSetup.makeTimeStamp();
 		PrintStream file_list_ostream = new PrintStream(file_list_path);
 		
@@ -173,8 +173,7 @@ public class TectoMTBatchAnalyser extends AbstractLanguageAnalyserWithInputOutpu
 
 		ProcessExec tmt_proc = new ProcessExec();
 		tmt_proc.exec(cmd_list.toArray(new String[0]), tredEnvp);
-		//TODO: Config.getConfig().getLogDirectory(); 
-		tmt_proc.startReaderThreads("TMT_GATE_");
+		tmt_proc.startReaderThreads(Config.getConfig().getLogFileDirectoryPath() + "/TMT_GATE_");
 		return tmt_proc.waitFor();		
 	}
 	

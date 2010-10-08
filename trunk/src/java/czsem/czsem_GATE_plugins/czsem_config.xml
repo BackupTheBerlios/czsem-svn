@@ -8,10 +8,10 @@
    <string>C:\Program Files\GATE-5.2.1</string> 
   </void> 
   <void property="ilpProjestsPath"> 
-   <string>C:\workspace\czsem\src\netgraph\czsem\ILP_serial_projects</string> 
+   <string>C:\workspace\czsem\src\java\czsem\ILP_serializations</string> 
   </void> 
-  <void property="myClassPath"> 
-   <string>C:\workspace\czsem\src\netgraph\czsem\bin</string> 
+  <void property="logFileDirectoryPath"> 
+   <string>C:\workspace\czsem\src\java\czsem\czsem_GATE_plugins\log</string> 
   </void> 
   <void property="prologPath"> 
    <string>C:\Program Files\Yap\bin\yap.exe</string> 
@@ -19,7 +19,7 @@
   <void property="tmtRoot"> 
    <string>C:\workspace\tectomt</string> 
   </void> 
-  <void property="tmtSerializationDirectory"> 
+  <void property="tmtSerializationDirectoryPath"> 
    <string>C:\workspace\czsem\src\java\czsem\czsem_GATE_plugins\TmT_serializations</string> 
   </void> 
   <void property="tredRoot"> 
@@ -27,6 +27,9 @@
   </void> 
   <void property="wekaJarPath"> 
    <string>C:\Program Files\Weka-3-6\weka.jar</string> 
+  </void> 
+  <void property="wekaRunFuzzyILPClassPath"> 
+   <string>C:\workspace\czsem\src\java\czsem\target\classes</string> 
   </void> 
  </object> 
 </java> 
