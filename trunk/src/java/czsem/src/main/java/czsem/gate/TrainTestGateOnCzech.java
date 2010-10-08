@@ -18,6 +18,7 @@ import gate.util.profile.Profiler;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Arrays;
 
@@ -223,7 +224,7 @@ public class TrainTestGateOnCzech {
 		return train_controller;				
 	}
 
-	public static void main(String[] main_args) throws GateException, IOException, InterruptedException
+	public static void main(String[] main_args) throws GateException, IOException, InterruptedException, URISyntaxException
 	{
 		init();
 		
@@ -236,7 +237,7 @@ public class TrainTestGateOnCzech {
 	    logger.setLevel(Level.OFF);
 
 		
-	    Config.setGateHome();
+	    Config.getConfig().setGateHome();
 	    Gate.init();
 	    GateUtils.registerPluginDirectory("Parser_Stanford");
 	    GateUtils.registerPluginDirectory("Machine_Learning");

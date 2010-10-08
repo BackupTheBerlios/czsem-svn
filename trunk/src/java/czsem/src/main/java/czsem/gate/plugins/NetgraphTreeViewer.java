@@ -462,7 +462,7 @@ public class NetgraphTreeViewer extends AbstractVisualResource implements  Owned
 	
 	public static void main(String[] args) throws Exception
 	{
-		Config.setGateHome();
+		Config.getConfig().setGateHome();
 		gate.Main.main(args);		
 	}
 	

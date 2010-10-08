@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.URISyntaxException;
 
 import czsem.utils.Config;
 import czsem.utils.ProcessExec;
@@ -72,7 +73,7 @@ public class ILPExec extends ProcessExec {
 
 
 
-	public void startPrologProcess(String file_name_to_consult) throws IOException
+	public void startPrologProcess(String file_name_to_consult) throws IOException, URISyntaxException
 	{
 		String [] exec_args = {Config.getConfig().getPrologPath(), "-l", file_name_to_consult};
 		
@@ -91,7 +92,7 @@ public class ILPExec extends ProcessExec {
 */				
 	}
 
-	public void startILPProcess() throws IOException
+	public void startILPProcess() throws IOException, URISyntaxException
 	{
 		startPrologProcess(Config.getConfig().getAlephPath());
 	}
@@ -271,7 +272,7 @@ public class ILPExec extends ProcessExec {
 		return input_reader.readLine();
 	}
 
-	public void initBeforeApplyRules(String errLogName) throws IOException
+	public void initBeforeApplyRules(String errLogName) throws IOException, URISyntaxException
 	{
 		startPrologProcess(getRulesFileName());
 		startErrReaderThread(errLogName);

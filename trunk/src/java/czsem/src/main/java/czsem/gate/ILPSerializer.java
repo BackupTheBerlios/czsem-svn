@@ -4,6 +4,7 @@ package czsem.gate;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -609,7 +610,7 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 	}
 
 	
-	public void train() throws IOException, InterruptedException
+	public void train() throws IOException, InterruptedException, URISyntaxException
 	{
 		lingSer.train();
 	}
@@ -698,7 +699,7 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 		lingSer.setBackgroundSerializerFileName(fileName);		
 	}
 
-	public String[] classifyInstances(String[] instancesGateIds, String targetRelationName) throws IOException, InterruptedException
+	public String[] classifyInstances(String[] instancesGateIds, String targetRelationName) throws IOException, InterruptedException, URISyntaxException
 	{
 		for (int i = 0; i < instancesGateIds.length; i++) {
 			instancesGateIds[i] = renderID(instancesGateIds[i]);

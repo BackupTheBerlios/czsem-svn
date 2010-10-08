@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URISyntaxException;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Set;
@@ -106,7 +107,7 @@ public abstract class ILPClassifier extends Classifier
 		return result;
 	}	
 	
-	protected void learnRules() throws IOException, InterruptedException
+	protected void learnRules() throws IOException, InterruptedException, URISyntaxException
 	{
 		ILPExec exec = new ILPExec(project_setup);
 		exec.startILPProcess();
@@ -120,7 +121,7 @@ public abstract class ILPClassifier extends Classifier
 		exec.close();
 	}
 
-	protected void setupProject(String project_name) throws FileNotFoundException, UnsupportedEncodingException
+	protected void setupProject(String project_name) throws URISyntaxException, IOException
 	{
 		project_setup = new ProjectSetup();
 		project_setup.dir_for_projects = Config.getConfig().getIlpProjestsPath()+'/';
@@ -207,7 +208,7 @@ public abstract class ILPClassifier extends Classifier
 		}				
 	}
 	
-	protected void startTestingILPProcess(int class_index) throws IOException
+	protected void startTestingILPProcess(int class_index) throws IOException, URISyntaxException
 	{
 		WekaSerializer test_ser = new WekaSerializer(project_setup.renderProjectFileName(".test"));
 		putTestingAxioms(test_ser, class_index);

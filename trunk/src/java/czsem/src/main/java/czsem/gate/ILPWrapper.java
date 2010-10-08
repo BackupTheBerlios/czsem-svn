@@ -11,6 +11,7 @@ import gate.util.GateException;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -52,7 +53,7 @@ public class ILPWrapper implements AdvancedMLEngine
 		return attributes.get(lastAttrIndex) == null;
 	}
 	
-	protected void serializeTrainingInstance(List<String> attributes) throws IOException, InterruptedException
+	protected void serializeTrainingInstance(List<String> attributes) throws IOException, InterruptedException, URISyntaxException
 	{
 		Document doc = pr.getDocument();
 		
@@ -74,7 +75,7 @@ public class ILPWrapper implements AdvancedMLEngine
 		}
 	}
 
-	public String [] classifyInstances(List<List<String>> instances) throws IOException, InterruptedException
+	public String [] classifyInstances(List<List<String>> instances) throws IOException, InterruptedException, URISyntaxException
 	{
 		Document doc = pr.getDocument();
 		String docName = doc.getName();

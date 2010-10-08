@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -153,7 +154,7 @@ public class LinguisticSerializer
 	}
 
 
-	public void train() throws IOException, InterruptedException
+	public void train() throws IOException, InterruptedException, URISyntaxException
 	{
 		ILPExec ilp_exec = new ILPExec(workingDirectory, projectName);
 		ilp_exec.startILPProcess();
@@ -174,7 +175,7 @@ public class LinguisticSerializer
 	}
 
 
-	public String[] classifyInstances(String[] instancesIds, String backgroundFileName, String targetRelationName) throws IOException, InterruptedException
+	public String[] classifyInstances(String[] instancesIds, String backgroundFileName, String targetRelationName) throws IOException, InterruptedException, URISyntaxException
 	{
 		String [] ret = new String[instancesIds.length];
 		ILPExec test = new ILPExec(workingDirectory, backgroundFileName);

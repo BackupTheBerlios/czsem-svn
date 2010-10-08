@@ -2,6 +2,7 @@ package czsem.apps;
 
 import java.io.IOException;
 import java.io.PrintStream;
+import java.net.URISyntaxException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,11 +14,16 @@ import czsem.ILP.Serializer.Relation;
 import czsem.utils.ProjectSetup;
 
 public class CVStoILP_Accidents {
-	protected ProjectSetup project_setup = new ProjectSetup();
+	protected ProjectSetup project_setup = null;
 
 //	private PositiveExampleDetector pe_detect;
 	
 	private Set<String>[] attribute_values_bufeer = null;
+	
+	public CVStoILP_Accidents() throws URISyntaxException, IOException
+	{
+		project_setup = new ProjectSetup();		
+	}
 
 	@SuppressWarnings("unchecked")
 	protected void initAttributeValuesBufeer(int length)
@@ -369,7 +375,7 @@ public class CVStoILP_Accidents {
 }
 
 	
-	public static void main(String[] args) throws IOException, InterruptedException
+	public static void main(String[] args) throws IOException, InterruptedException, URISyntaxException
 	{
 		if (args.length < 1)
 		{

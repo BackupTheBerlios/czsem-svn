@@ -1,6 +1,7 @@
 package czsem.ILP;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 import czsem.utils.Config;
 import czsem.utils.ProcessExec;
@@ -8,7 +9,7 @@ import czsem.utils.ProcessExec;
 public class WekaRun
 {
 
-	public static void main(String[] args) throws IOException, InterruptedException
+	public static void main(String[] args) throws IOException, InterruptedException, URISyntaxException
 	{
 		System.out.println(  );
 

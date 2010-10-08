@@ -1,6 +1,7 @@
 package czsem.utils;
 
 import gate.Gate;
+import gate.util.GateException;
 
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
@@ -10,9 +11,12 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.Set;
+
+import czsem.gate.GateUtils;
 
 
 public class Config
@@ -22,16 +26,24 @@ public class Config
 	private static final String config_filename = "czsem_config.xml";
 	private static final String czsem_plugin_dir_name = "czsem_GATE_plugins";
 	
-	public static void main(String[] args) throws IOException
+	public static void main(String[] args) throws IOException, GateException, URISyntaxException
 	{
-		System.err.println(getConfig().getGateHome());
+		/*
+		Config cfg = new Config();
+		cfg.setMyWinValues();
+		cfg.setGateHome();
+		Gate.init();
+	    GateUtils.registerPluginDirectory(new File("czsem_GATE_plugins"));
+	    System.err.println(getConfig().getGateHome());
+		*/
 
-/*
+/**/
 		Config ps = new Config();
 		ps.setMyWinValues();
 //		ps.setInstallDefaults();
 		ps.saveToFile(config_filename);
 		
+/*				
 		Config ps2 = new Config();
 		ps2 = loadFromFile("config1.xml");
 /**/				
@@ -45,35 +57,50 @@ public class Config
 		for (Iterator<URL> iterator = dirs.iterator(); iterator.hasNext();)
 		{
 			URL url = iterator.next();
-			if (url.toString().endsWith(czsem_plugin_dir_name))
+			if (url.toString().endsWith(czsem_plugin_dir_name + '/'))
 				return url;
 		}
 		return null;		
 	}
 	
-	public static void loadConfig(ClassLoader classLoader) throws IOException
+	public static void loadConfig(ClassLoader classLoader) throws IOException, URISyntaxException
 	{
 		try
 		{
-			config = loadFromFile(config_filename, classLoader);
-		} catch (FileNotFoundException e)
+			try
+			{
+				config = loadFromFile(czsem_plugin_dir_name+ '/' +config_filename, classLoader);
+			} 
+			catch (FileNotFoundException e)
+			{
+				config = loadFromFile(config_filename, classLoader);				
+			}
+		} 
+		catch (FileNotFoundException e)
 		{
 			if (Gate.isInitialised())
 			{
-				config = loadFromFile(config_filename, classLoader);
+				URL url = findCzesemPluginDirectoryURL();
+				config = loadFromFile(
+						GateUtils.URLToFilePath(url) + config_filename, classLoader);
 			}
+			else throw e; 
 		}
 	}
 
-	public static void loadConfig() throws IOException
+	public static void loadConfig() throws IOException, URISyntaxException
 	{
 		if (Gate.isInitialised() && Config.classLoader == null)
 			Config.classLoader = Gate.getClassLoader();
+		
 		loadConfig(classLoader);
 	}
 		
-	public static Config getConfig()
+	public static Config getConfig() throws URISyntaxException, IOException
 	{
+		if (config == null) loadConfig();
+
+/*
 		if (config == null)
 			try {
 				loadConfig();
@@ -81,6 +108,7 @@ public class Config
 				System.err.println(new File(".").getAbsolutePath());
 				e.printStackTrace();
 			}
+*/			
 		return config;
 	}
 	
@@ -208,9 +236,9 @@ public class Config
 		return gateHome;
 	}
 
-	public static void setGateHome()
+	public void setGateHome()
 	{		
-		Gate.setGateHome(new File(getConfig().getGateHome()));
+		Gate.setGateHome(new File(getGateHome()));
 	}
 
 

@@ -16,6 +16,7 @@ import gate.util.persistence.PersistenceManager;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 
@@ -95,7 +96,7 @@ public class GateApplicationRunner {
 		
 	}
 
-	public static void main(String[] args) throws GateException, MalformedURLException, IOException, InterruptedException
+	public static void main(String[] args) throws GateException, MalformedURLException, IOException, InterruptedException, URISyntaxException
 	{
 	    System.err.print("arg num: ");
 	    System.err.println(args.length);
@@ -125,7 +126,7 @@ public class GateApplicationRunner {
 	    Gate.setLocalWebServer(false);
 //	    Gate.setGateHome(new File("C:\\Program Files\\GATE-5.0"));
 
-	    Config.setGateHome();
+	    Config.getConfig().setGateHome();
 	    Gate.init();
     
 	    Gate.getCreoleRegister().registerDirectories( 

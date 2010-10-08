@@ -96,7 +96,7 @@ public class TectoMTBatchAnalyserTest extends TestCase
 		
 	    if (! Gate.isInitialised())
 	    {
-			Config.setGateHome();
+			Config.getConfig().setGateHome();
 			Gate.init();
 		    GateUtils.registerPluginDirectory(new File("czsem_GATE_plugins"));
 	    }
