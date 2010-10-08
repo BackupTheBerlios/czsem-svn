@@ -628,7 +628,7 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 		if (isPositive)
 			lingSer.putPositiveExample(instance_id, instanceTypeName);
 		else
-				lingSer.putNegativeExample(instance_id, instanceTypeName);
+			lingSer.putNegativeExample(instance_id, instanceTypeName);
 	}
 
 	public void flushAndClose()

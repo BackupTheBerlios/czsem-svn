@@ -61,15 +61,16 @@ public class TectoMTBatchAnalyser extends AbstractLanguageAnalyserWithInputOutpu
 
 						
 		Corpus corpus = getCorpus();
-		for (TMTDocumentHelper d : documents_to_anlayse)
+		for (TMTDocumentHelper dh : documents_to_anlayse)
 		{
-			Document doc = d.getDocument();
-			annotateGateDocumentAcordingtoTMTfile(doc , d.getTMTFilePath());
+			Document doc = dh.getDocument();
+			annotateGateDocumentAcordingtoTMTfile(doc , dh.getTMTFilePath());
 			int doc_index = corpus.indexOf(doc);
 			if (! corpus.isDocumentLoaded(doc_index))
 			{
 				doc.sync();
 			}
+			dh = null; //saving memory
 		}		
 		logger.debug("All documents annotated");
 		documents_to_anlayse.clear();		

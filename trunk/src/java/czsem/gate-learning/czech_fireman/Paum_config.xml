@@ -1,7 +1,7 @@
 <?xml version="1.0"?>  
 <ML-CONFIG>  
   <VERBOSITY level="1"/>
-  <SURROUND value="false"/>  
+  <SURROUND value="true"/>  
   <PARAMETER name="thresholdProbabilityEntity" value="0.2"/>  
   <PARAMETER name="thresholdProbabilityBoundary" value="0.4"/>  
 <!--
@@ -75,8 +75,8 @@
     </ATTRIBUTELIST>  
      <ATTRIBUTE>
        <SEMTYPE>NOMINAL</SEMTYPE>
-       <NAME>fatalities</NAME>
-       <TYPE>fatalities</TYPE>
+       <NAME>damage</NAME>
+       <TYPE>damage</TYPE>
        <FEATURE>rule</FEATURE> 
        <POSITION>0</POSITION>
        <CLASS/>

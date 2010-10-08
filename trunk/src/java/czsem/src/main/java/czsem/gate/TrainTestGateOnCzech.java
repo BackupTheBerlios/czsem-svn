@@ -1,266 +1,199 @@
 package czsem.gate;
 
-import gate.Corpus;
-import gate.DataStore;
-import gate.Factory;
-import gate.FeatureMap;
-import gate.Gate;
-import gate.ProcessingResource;
-import gate.creole.ResourceInstantiationException;
-import gate.creole.SerialAnalyserController;
-import gate.creole.SerialController;
 import gate.creole.annotdelete.AnnotationDeletePR;
 import gate.creole.annotransfer.AnnotationSetTransfer;
 import gate.creole.ml.MachineLearningPR;
+import gate.learning.LearningAPIMain;
 import gate.util.GateException;
-import gate.util.profile.Profiler;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.JDOMException;
+import org.jdom.input.SAXBuilder;
 
+import czsem.gate.MachineLearningExperimenter.ExperimentSetup;
+import czsem.gate.MachineLearningExperimenter.PRSetup;
 import czsem.gate.plugins.AnnotationDependencyRootMarker;
 import czsem.gate.plugins.AnnotationDependencySubtreeMarker;
-import czsem.gate.plugins.CrossValidation;
 import czsem.gate.plugins.SubsequentAnnotationMerge;
-import czsem.utils.Config;
 	
-public class TrainTestGateOnCzech {
+public class TrainTestGateOnCzech implements ExperimentSetup
+{
 	
-	public static final String learninigAnnotType = "fatalities";
+	/*!!!!!!!!! Don't forget to change the XML configuration files  !!!!!!!!!*/
+	public static String learninigAnnotType = null;
+//	public static final String learninigAnnotType = "injuries";
 //	public static final String learninigAnnotType = "damage";
-	public static final boolean rootSubtreeLearninig = false;
+	public static final boolean rootSubtreeLearninig = true;
 	public static final boolean runPaum = true;
 	public static final boolean runILP = true;
 	
+	static Logger logger = Logger.getLogger(TrainTestGateOnCzech.class);
+ 
 	
-	protected static ProcessingResource tectoMTReset;
-	protected static URL ILP_config_file;
-	protected static URL Paum_config_file;
 	
-	protected static void init() throws MalformedURLException
+	protected URL ILP_config_file;
+	protected URL Paum_config_file;
+	
+	protected static String readLearninigAnnotType(URL config_doc_url) throws JDOMException, IOException
+	{
+		SAXBuilder parser = new SAXBuilder();
+		Document ilp_dom = parser.build(config_doc_url);
+		
+		@SuppressWarnings("unchecked")
+		List<Element> ch = ilp_dom.getRootElement().getChild("DATASET").getChildren("ATTRIBUTE");
+		for (Element element : ch)
+		{
+			if (element.getChild("CLASS") != null)
+			{
+				return element.getChildText("TYPE");				
+			}
+			
+		}
+		return null;		
+	}
+	
+	public TrainTestGateOnCzech() throws JDOMException, IOException
 	{
 		ILP_config_file = new File("gate-learning/czech_fireman/ILP_config.xml").toURI().toURL();
 		Paum_config_file = new File("gate-learning/czech_fireman/Paum_config.xml").toURI().toURL();
 		
+		String paum_at = learninigAnnotType = readLearninigAnnotType(Paum_config_file);
+		String ilp_at = readLearninigAnnotType(ILP_config_file);
+		if (rootSubtreeLearninig) paum_at += "_root";
+		if (! paum_at.equals(ilp_at))
+		{
+			logger.warn(String.format(
+					"Learninig annotation types do not match! Paum: %s, ILP: %s",
+					paum_at, ilp_at));
+		}
+		
+		
 	}
 	
-
-	public static SerialAnalyserController constructTestController() throws ResourceInstantiationException, MalformedURLException
+	@Override
+	public List<PRSetup> getTestControllerSetup()
 	{
-		SerialAnalyserController test_controller = (SerialAnalyserController)	    	   
-			Factory.createResource(SerialAnalyserController.class.getCanonicalName());
-		
-		FeatureMap fm;
-
-
+		List<PRSetup> prs = new ArrayList<PRSetup>();
 		
 		//TectoMT reset
-		test_controller.add(tectoMTReset);
-
-		
-		
-		
+		prs.add(new PRSetup(AnnotationDeletePR.class)
+			.putFeatureList("annotationTypes", learninigAnnotType, learninigAnnotType + "_root")
+			.putFeatureList("setsToRemove", "TectoMT"));		
 		//Reset Paum & ILP
-		fm = Factory.newFeatureMap();
-		fm.put("setsToRemove", Arrays.asList(new String [] {"ILP", "Paum"}));
-		ProcessingResource resetPaumAndILP = (ProcessingResource) 
-			Factory.createResource(AnnotationDeletePR.class.getCanonicalName(), fm);
-		test_controller.add(resetPaumAndILP);
-		
-		
-		
-		
+		prs.add(new PRSetup(AnnotationDeletePR.class)
+			.putFeatureList("setsToRemove", "ILP", "Paum"));		
 		if (runILP)
 		{
 			//ILP Apply
-			fm = Factory.newFeatureMap();
-			fm.put("configFileURL", ILP_config_file);
-			fm.put("inputASName", "TectoMT");
-			fm.put("training", false);		
-			ProcessingResource ilpApply = (ProcessingResource) 
-				Factory.createResource(MachineLearningPR.class.getCanonicalName(), fm);
-			test_controller.add(ilpApply);
-			
-	
-			
+			prs.add(new PRSetup(MachineLearningPR.class)
+				.putFeature("configFileURL", ILP_config_file)
+				.putFeature("inputASName", "TectoMT")
+				.putFeature("training", false));
 			if (rootSubtreeLearninig)
 			{
 				//Subtree for ILP results
-				fm = Factory.newFeatureMap();
-				fm.put("inputASName", "TectoMT");
-				fm.put("outputASName", "ILP");
-				fm.put("inputAnnotationTypeNames", Arrays.asList(new String [] {learninigAnnotType + "_root"}));
-				ProcessingResource subtreeForILPresults = (ProcessingResource) 
-					Factory.createResource(AnnotationDependencySubtreeMarker.class.getCanonicalName(), fm);
-				test_controller.add(subtreeForILPresults);
-	
-				
-				
+				prs.add(new PRSetup(AnnotationDependencySubtreeMarker.class)
+					.putFeature("inputASName", "TectoMT")
+					.putFeature("outputASName", "ILP")
+					.putFeatureList("inputAnnotationTypeNames", learninigAnnotType + "_root"));
 				//ILP Output Transfer
-				fm = Factory.newFeatureMap();
-				fm.put("inputASName", "TectoMT");
-				fm.put("outputASName", "ILP");
-				fm.put("annotationTypes", Arrays.asList(new String [] {learninigAnnotType + "_root"}));		
-				fm.put("copyAnnotations", false);		
-				ProcessingResource ILPoutputTransfer = (ProcessingResource) 
-					Factory.createResource(AnnotationSetTransfer.class.getCanonicalName(), fm);
-				test_controller.add(ILPoutputTransfer);
-							
-			}
-			else
+				prs.add(new PRSetup(AnnotationSetTransfer.class)
+					.putFeature("inputASName", "TectoMT")
+					.putFeature("outputASName", "ILP")
+					.putFeature("copyAnnotations", false)
+					.putFeatureList("annotationTypes", learninigAnnotType + "_root"));
+			} else
 			{
 				//Subsequent annotation merge
-				fm = Factory.newFeatureMap();
-				fm.put("inputASName", "TectoMT");
-				fm.put("outputASName", "ILP");
-				fm.put("annotationTypeName", learninigAnnotType);
-				fm.put("deleteOriginalAnnotations", true);
-				ProcessingResource mergeILPresults = (ProcessingResource) 
-					Factory.createResource(SubsequentAnnotationMerge.class.getCanonicalName(), fm);
-				test_controller.add(mergeILPresults);			
+				prs.add(new PRSetup(SubsequentAnnotationMerge.class)
+					.putFeature("inputASName", "TectoMT")
+					.putFeature("outputASName", "ILP")
+					.putFeature("annotationTypeName", learninigAnnotType)
+					.putFeature("deleteOriginalAnnotations", true));
 			}
 		}
-
-		
 		if (runPaum)
 		{
 			//Paum Application
-			fm = Factory.newFeatureMap();
-			fm.put("configFileURL", Paum_config_file);
-			fm.put("inputASName", "TectoMT");
-			fm.put("outputASName", "Paum");
-			fm.put("learningMode", "APPLICATION");		
-			ProcessingResource paumApplication = (ProcessingResource) 
-				Factory.createResource("gate.learning.LearningAPIMain", fm);
-			test_controller.add(paumApplication);
+			prs.add(new PRSetup(LearningAPIMain.class)
+				.putFeature("configFileURL", Paum_config_file)
+				.putFeature("inputASName", "TectoMT")
+				.putFeature("outputASName", "Paum")
+				.putFeature("learningMode", "APPLICATION"));
 		}
-
-		
-		return test_controller;
+		return prs;
 	}
 
 	
-	public static SerialAnalyserController constructTrainController() throws ResourceInstantiationException, MalformedURLException
+	@Override
+	public List<PRSetup> getTrainControllerSetup()
 	{
-		SerialAnalyserController train_controller = (SerialAnalyserController)	    	   
-			Factory.createResource(SerialAnalyserController.class.getCanonicalName());
-		
-		FeatureMap fm;
-		
-		
+		List<PRSetup> prs = new ArrayList<PRSetup>();
 		
 		//TectoMT reset
-		fm = Factory.newFeatureMap();
-		fm.put("annotationTypes", Arrays.asList(new String [] {
-				learninigAnnotType, learninigAnnotType + "_root"}));
-		fm.put("setsToRemove", Arrays.asList(new String [] {"TectoMT"}));
-		tectoMTReset = (ProcessingResource) 
-			Factory.createResource(AnnotationDeletePR.class.getCanonicalName(), fm);
-		train_controller.add(tectoMTReset);
-		
-		
-		
+		prs.add(new PRSetup(AnnotationDeletePR.class)
+			.putFeatureList("annotationTypes", learninigAnnotType, learninigAnnotType + "_root")
+			.putFeatureList("setsToRemove", "TectoMT"));
 		//Training transfer
-		fm = Factory.newFeatureMap();
-		fm.put("inputASName", "accident");
-		fm.put("outputASName", "TectoMT");
-		fm.put("annotationTypes", Arrays.asList(new String [] {learninigAnnotType}));
-		fm.put("copyAnnotations", true);		
-		ProcessingResource trainingTransfer = (ProcessingResource) 
-			Factory.createResource(AnnotationSetTransfer.class.getCanonicalName(), fm);
-		train_controller.add(trainingTransfer);
-		
-		
+		prs.add(new PRSetup(AnnotationSetTransfer.class)
+			.putFeature("inputASName", "accident")
+			.putFeature("outputASName", "TectoMT")
+			.putFeature("copyAnnotations", true)
+			.putFeatureList("annotationTypes", learninigAnnotType));
 		if (rootSubtreeLearninig)
 		{
-		
 			//Training roots
-			fm = Factory.newFeatureMap();
-			fm.put("inputASName", "TectoMT");
-			fm.put("outputASName", "TectoMT");
-			fm.put("inputAnnotationTypeNames", Arrays.asList(new String [] {learninigAnnotType}));
-			ProcessingResource trainingRoots = (ProcessingResource) 
-				Factory.createResource(AnnotationDependencyRootMarker.class.getCanonicalName(), fm);
-			train_controller.add(trainingRoots);
+			prs.add(new PRSetup(AnnotationDependencyRootMarker.class)
+				.putFeature("inputASName", "TectoMT")
+				.putFeature("outputASName", "TectoMT")
+				.putFeatureList("inputAnnotationTypeNames", learninigAnnotType));
 		}
-		
-		
 		if (runILP)
 		{
 			//ILP train
-			fm = Factory.newFeatureMap();
-			fm.put("configFileURL", ILP_config_file);
-			fm.put("inputASName", "TectoMT");
-			fm.put("training", true);		
-			ProcessingResource ilpTrain = (ProcessingResource) 
-				Factory.createResource(MachineLearningPR.class.getCanonicalName(), fm);
-			train_controller.add(ilpTrain);
+			prs.add(new PRSetup(MachineLearningPR.class)
+				.putFeature("inputASName", "TectoMT")
+				.putFeature("configFileURL", ILP_config_file)
+				.putFeature("training", true));
 		}
-		
-		
-		
 		if (runPaum)
 		{
 			//Paum train
-			fm = Factory.newFeatureMap();
-			fm.put("configFileURL", Paum_config_file);
-			fm.put("inputASName", "TectoMT");
-			fm.put("outputASName", "Paum");
-			fm.put("learningMode", "TRAINING");		
-			ProcessingResource paumTrain = (ProcessingResource) 
-				Factory.createResource("gate.learning.LearningAPIMain", fm);
-			train_controller.add(paumTrain);
+			prs.add(new PRSetup(LearningAPIMain.class)
+				.putFeature("inputASName", "TectoMT")
+				.putFeature("outputASName", "Paum")
+				.putFeature("configFileURL", Paum_config_file)
+				.putFeature("learningMode", "TRAINING"));
 		}
-
-		
-		return train_controller;				
+		return prs;
 	}
 
-	public static void main(String[] main_args) throws GateException, IOException, InterruptedException, URISyntaxException
-	{
-		init();
-		
-		BasicConfigurator.configure();
-	    Logger logger = Logger.getLogger(Profiler.class);
-	    logger.setLevel(Level.OFF);
-	    logger = Logger.getLogger(SerialController.class);
-	    logger.setLevel(Level.OFF);
-	    logger = Logger.getLogger(Gate.class);
-	    logger.setLevel(Level.OFF);
 
+
+
+
+	public static void main(String[] main_args) throws GateException, IOException, InterruptedException, URISyntaxException, JDOMException
+	{
+//		init();
 		
-	    Config.getConfig().setGateHome();
-	    Gate.init();
-	    GateUtils.registerPluginDirectory("Parser_Stanford");
-	    GateUtils.registerPluginDirectory("Machine_Learning");
-	    GateUtils.registerPluginDirectory("ANNIE");
-	    GateUtils.registerPluginDirectory("Tools");
-	    GateUtils.registerPluginDirectory("Learning");
-	    
-	    GateUtils.registerPluginDirectory(new File("czsem_GATE_plugins"));
-		    	
-	    DataStore ds = GateUtils.openDataStore("file:/C:/Users/dedek/AppData/GATE/ISWC");
-	    
-//	    Corpus corpus = GateUtils.loadCorpusFormDatastore(ds, "ISWC___1274943456887___5663");
-	    Corpus corpus = GateUtils.loadCorpusFormDatastore(ds, "fatalities___1277473852041___7082");
-	    
-	    SerialAnalyserController train_controller = constructTrainController();
-/**/    SerialAnalyserController test_controller = constructTestController(); /**/
 
 /**	    
 	    train_controller.setCorpus(corpus);
 	    train_controller.execute();
 	    
 /**/
-		FeatureMap fm = Factory.newFeatureMap();
+		
+/*
+FeatureMap fm = Factory.newFeatureMap();
 		fm.put("corpus", corpus);
 		fm.put("numberOfFolds", 9);
 		fm.put("trainingPR", train_controller);
@@ -334,5 +267,5 @@ public class TrainTestGateOnCzech {
 		fm.put("depency_type", dep_kind);
 		*/		
 	}
-
 }
+
