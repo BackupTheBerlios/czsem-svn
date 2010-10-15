@@ -1,0 +1,756 @@
+
+mention(acquired,A) :-
+   lex_rf(B,A), has_formeme(B,'n:attr'), tDependency(B,C), has_t_lemma(C,division), 
+   has_functor(C,'APP').
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,division), has_functor(B,'APP'), tDependency(B,C), 
+   has_functor(C,'PAT').
+mention(acquired,'id_8472.xml_004CF_494').
+mention(acquired,'id_8472.xml_004CF_495').
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,retail), tDependency(B,C), tDependency(C,D), 
+   has_functor(D,'PAT').
+mention(acquired,A) :-
+   lex_rf(B,A), has_formeme(B,'n:attr'), tDependency(B,C), has_t_lemma(C,'Inc'), 
+   tDependency(C,D), has_t_lemma(D,stake).
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'Inc'), has_formeme(B,'n:in+X').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,21), tDependency(B,C), has_formeme(C,'n:obj'), 
+   tDependency(D,C), has_functor(D,'APP').
+mention(acquired,A) :-
+   lex_rf(B,A), has_formeme(B,'n:attr'), tDependency(B,C), tDependency(C,D), 
+   has_t_lemma(D,unit), has_formeme(D,'n:obj').
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), has_t_lemma(C,unit), has_formeme(C,'n:obj'), 
+   tDependency(D,B), has_functor(D,'RSTR').
+mention(acquired,A) :-
+   lex_rf(B,A), has_formeme(B,'n:attr'), has_number(B,24), tDependency(B,C), 
+   has_formeme(C,'n:obj'), has_number(C,sg).
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,12), tDependency(B,C), tDependency(C,D), 
+   tDependency(E,D), has_t_lemma(E,withdraw).
+mention(acquired,'id_20321.xml_003D1_319').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,34), tDependency(B,C), has_t_lemma(C,subsidiary), 
+   has_formeme(C,'n:obj').
+mention(acquired,'id_7964.xml_004C0_418').
+mention(acquired,'id_7964.xml_004C0_421').
+mention(acquired,'id_7964.xml_004C0_422').
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'Inc'), tDependency(B,C), has_formeme(C,'n:obj'), 
+   tDependency(D,C), has_t_lemma(D,'#PersPron').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,25), tDependency(B,C), has_t_lemma(C,'Sidney').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,19), tDependency(B,C), has_formeme(C,'n:of+X'), 
+   tDependency(C,D), has_functor(D,'PAT').
+mention(acquired,A) :-
+   lex_rf(B,A), has_functor(B,'APP'), tDependency(C,B), has_t_lemma(C,'South').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,21), tDependency(B,C), has_functor(C,'PAT'), 
+   has_formeme(C,'n:obj'), has_number(C,21).
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'Inc'), has_functor(B,'PAT'), tDependency(B,C), 
+   has_t_lemma(C,purchase).
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), has_number(C,25), tDependency(C,D), 
+   tDependency(D,E), has_t_lemma(E,sell).
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,25), tDependency(B,C), has_functor(C,'PAT'), 
+   has_number(C,sg), tDependency(D,B).
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,28), tDependency(B,C), tDependency(C,D), 
+   tDependency(D,E), has_t_lemma(E,sell).
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,26), tDependency(B,C), tDependency(C,D), 
+   has_t_lemma(D,and), tDependency(E,D), has_t_lemma(E,'Inc').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,26), tDependency(B,C), tDependency(D,C), 
+   has_t_lemma(D,'Inc'), has_formeme(D,'n:obj').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,26), tDependency(B,C), has_functor(C,'PAT'), 
+   tDependency(D,B), tDependency(E,D).
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), has_t_lemma(C,'Corp'), has_functor(C,'APP'), 
+   tDependency(C,D), has_functor(D,'PAT'), has_formeme(D,'n:obj').
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'Corp'), has_formeme(B,'n:of+X'), tDependency(B,C), 
+   has_functor(C,'PAT').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,31), tDependency(B,C), has_t_lemma(C,'Bank').
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'Bank'), has_functor(B,'PAT'), tDependency(B,C), 
+   tDependency(C,D), has_formeme(D,'v:fin').
+mention(acquired,'id_2193.xml_003EE_492').
+mention(acquired,'id_2193.xml_003EE_493').
+mention(acquired,'id_2193.xml_003EE_494').
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'.'), tDependency(B,C), tDependency(D,C), 
+   has_t_lemma(D,group), has_functor(D,'ADDR').
+mention(acquired,'id_2193.xml_003EE_496').
+mention(acquired,A) :-
+   lex_rf(B,A), has_functor(B,'RSTR'), has_number(B,27), tDependency(B,C), 
+   has_functor(C,'PAT'), has_number(C,27).
+mention(acquired,A) :-
+   lex_rf(B,A), has_functor(B,'PAT'), has_number(B,27), tDependency(C,B), 
+   has_number(C,27).
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,29), tDependency(B,C), has_number(C,29), 
+   tDependency(C,D), has_number(D,sg).
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,29), tDependency(B,C), has_t_lemma(C,stake).
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'.'), tDependency(B,C), tDependency(D,C), 
+   has_t_lemma(D,'Airline').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,sg), tDependency(B,C), has_t_lemma(C,say), 
+   tDependency(D,C), has_t_lemma(D,'Airline').
+mention(acquired,'id_16379.xml_0035E_546').
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), has_formeme(C,'n:attr'), has_number(C,27).
+mention(acquired,'id_16379.xml_0035E_549').
+mention(acquired,A) :-
+   lex_rf(B,A), has_functor(B,'RSTR'), has_number(B,sg), tDependency(B,C), 
+   has_t_lemma(C,plant).
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,plant), tDependency(B,C), has_formeme(C,'v:to+inf'), 
+   tDependency(C,D), tDependency(D,E).
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,13), tDependency(B,C), tDependency(C,D), 
+   has_functor(D,'CONJ'), tDependency(E,D), has_number(E,8).
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,31), tDependency(B,C), tDependency(C,D), 
+   has_formeme(D,'n:for+X').
+mention(acquired,'id_16796.xml_00374_513').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,32), tDependency(B,C), has_formeme(C,'n:of+X'), 
+   tDependency(C,D), has_functor(D,'PAT').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,32), tDependency(B,C), has_formeme(C,'n:obj'), 
+   tDependency(C,D), has_formeme(D,'v:fin').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,31), tDependency(B,C), tDependency(C,D), 
+   has_functor(D,'PAT'), tDependency(E,D), has_formeme(E,'n:attr').
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'Corp'), has_formeme(B,'n:for+X').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,22), tDependency(B,C), has_formeme(C,'n:of+X'), 
+   tDependency(C,D), has_functor(D,'PAT'), has_formeme(D,'n:obj').
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'Inc'), has_formeme(B,'n:of+X'), tDependency(B,C), 
+   has_t_lemma(C,acquisition).
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,10), tDependency(B,C), has_functor(C,'ACT'), 
+   has_formeme(C,'n:obj').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,10), tDependency(B,C), tDependency(D,C), 
+   has_number(D,14).
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,18), tDependency(B,C), has_t_lemma(C,subsidiary), 
+   has_formeme(C,'n:subj').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,25), tDependency(B,C), has_number(C,25), 
+   tDependency(C,D), has_functor(D,'PAT'), has_sempos(D,'n.denot').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,16), tDependency(B,C), tDependency(D,C), 
+   tDependency(E,D), has_t_lemma(E,26).
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'Co'), tDependency(C,B), tDependency(D,C), 
+   has_t_lemma(D,26).
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,37), tDependency(B,C), has_sempos(C,'n.denot'), 
+   tDependency(C,D), tDependency(D,E), has_negation(E,neg0).
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'Inc'), has_number(B,26), tDependency(B,C), 
+   tDependency(C,D), has_functor(D,'PAT').
+mention(acquired,A) :-
+   lex_rf(B,A), has_formeme(B,'n:attr'), tDependency(B,C), has_t_lemma(C,'Division'), 
+   has_functor(C,'PAT'), has_formeme(C,'n:of+X').
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'Division'), has_functor(B,'PAT'), has_formeme(B,'n:of+X').
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), has_formeme(C,'n:of+X'), tDependency(C,D), 
+   has_t_lemma(D,control), tDependency(D,E), has_verbmod(E,ind).
+mention(acquired,'id_21382.xml_003E8_962').
+mention(acquired,'id_21382.xml_003E8_963').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,16), tDependency(B,C), tDependency(D,C), 
+   has_t_lemma(D,'Technology').
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'Inc'), tDependency(C,B), has_t_lemma(C,'Technology').
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'National'), tDependency(B,C), has_functor(C,'RSTR').
+mention(acquired,'id_8849.xml_004E2_379').
+mention(acquired,'id_8849.xml_004E2_380').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,25), tDependency(B,C), tDependency(C,D), 
+   has_t_lemma(D,acquire), has_tense(D,nil).
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'Inc'), has_functor(B,'ACT'), has_formeme(B,'n:obj'), 
+   tDependency(B,C), has_t_lemma(C,acquire).
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,sg), tDependency(B,C), has_t_lemma(C,asset), 
+   tDependency(C,D), has_functor(D,'PAT').
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), has_functor(C,'PAT'), has_number(C,33), 
+   tDependency(D,B), has_formeme(D,'n:attr').
+mention(acquired,'id_982.xml_00507_690').
+mention(acquired,'id_4201.xml_0043F_500').
+mention(acquired,'id_4201.xml_0043F_501').
+mention(acquired,'id_4201.xml_0043F_502').
+mention(acquired,A) :-
+   lex_rf(B,A), has_formeme(B,'n:attr'), tDependency(B,C), has_t_lemma(C,'Inc'), 
+   has_formeme(C,'n:obj'), has_number(C,17).
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'Inc'), has_number(B,17), tDependency(B,C), 
+   tDependency(C,D), tDependency(D,E).
+mention(acquired,A) :-
+   lex_rf(B,A), has_functor(B,'RSTR'), has_number(B,56).
+mention(acquired,'id_11579.xml_002EE_698').
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), has_t_lemma(C,'Inc'), has_functor(C,'RSTR'), 
+   tDependency(C,D), has_t_lemma(D,subsidiary).
+mention(acquired,A) :-
+   lex_rf(B,A), has_sempos(B,'n.denot'), tDependency(B,C), has_t_lemma(C,stock), 
+   tDependency(D,C), has_t_lemma(D,'Corp').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,36), tDependency(B,C), has_number(C,36), 
+   tDependency(C,D), tDependency(D,E), has_number(E,pl).
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,36), tDependency(B,C), tDependency(C,D), 
+   has_number(D,pl), tDependency(E,B).
+mention(acquired,'id_8998.xml_004EB_364').
+mention(acquired,'id_8998.xml_004EB_365').
+mention(acquired,A) :-
+   lex_rf(B,A), has_formeme(B,'n:attr'), tDependency(B,C), has_t_lemma(C,business), 
+   has_functor(C,'RESTR').
+mention(acquired,'id_2737.xml_0040B_319').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,24), tDependency(B,C), tDependency(C,D), 
+   tDependency(D,E), has_functor(E,'EFF'), has_tense(E,ant).
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'Corp'), has_functor(B,'LOC').
+mention(acquired,'id_12699.xml_00310_1026').
+mention(acquired,'id_12699.xml_00310_1027').
+mention(acquired,'id_12699.xml_00310_1028').
+mention(acquired,'id_12699.xml_00310_1029').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,22), tDependency(B,C), has_t_lemma(C,'Inc'), 
+   has_formeme(C,'n:obj').
+mention(acquired,'id_8544.xml_004D2_307').
+mention(acquired,'id_376.xml_00431_206').
+mention(acquired,A) :-
+   lex_rf(B,A), has_functor(B,'PAT'), has_number(B,30), tDependency(B,C), 
+   tDependency(C,D), has_formeme(D,'n:obj').
+mention(acquired,A) :-
+   lex_rf(B,A), has_functor(B,'PAT'), has_number(B,20), tDependency(B,C), 
+   tDependency(D,C), has_number(D,sg), tDependency(E,D).
+mention(acquired,'id_16663.xml_00371_391').
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), has_t_lemma(C,'Inc'), tDependency(C,D), 
+   has_functor(D,'CONJ'), tDependency(D,E), has_number(E,pl).
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'Inc'), tDependency(B,C), has_functor(C,'CONJ'), 
+   tDependency(C,D), has_number(D,pl).
+mention(acquired,A) :-
+   lex_rf(B,A), has_formeme(B,'n:attr'), has_number(B,35), tDependency(B,C), 
+   tDependency(C,D), tDependency(E,D), has_functor(E,'APP').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,10), tDependency(B,C), tDependency(D,C), 
+   has_t_lemma(D,'Petroleum').
+mention(acquired,'id_4510.xml_0044A_532').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,37), tDependency(B,C), tDependency(C,D), 
+   has_tense(D,sim).
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,27), tDependency(B,C), has_number(C,sg), 
+   tDependency(C,D), tDependency(D,E), has_number(E,sg).
+mention(acquired,A) :-
+   lex_rf(B,A), has_functor(B,'APP'), has_number(B,35), tDependency(C,B), 
+   has_number(C,35).
+mention(acquired,'id_9661.xml_00503_310').
+mention(acquired,'id_9661.xml_00503_311').
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), tDependency(D,C), has_t_lemma(D,'Housing').
+mention(acquired,'id_12386.xml_00305_274').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,11), tDependency(B,C), has_t_lemma(C,'Ltd'), 
+   has_formeme(C,'n:obj').
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'Ltd'), has_formeme(B,'n:obj').
+mention(acquired,'id_2434.xml_003F9_252').
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), tDependency(C,D), tDependency(E,D), 
+   has_t_lemma(E,aggregate), has_functor(E,'PAT').
+mention(acquired,'id_2434.xml_003F9_254').
+mention(acquired,'id_2434.xml_003F9_255').
+mention(acquired,'id_21041.xml_003DC_245').
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), has_t_lemma(C,perform), has_functor(C,'RSTR').
+mention(acquired,'id_21041.xml_003DC_247').
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), tDependency(D,C), has_t_lemma(D,'tank-trailer').
+mention(acquired,'id_21041.xml_003DC_251').
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), has_t_lemma(C,'Inc'), tDependency(C,D), 
+   has_t_lemma(D,stock).
+mention(acquired,'id_8748.xml_004DB_449').
+mention(acquired,A) :-
+   lex_rf(B,A), has_formeme(B,'n:attr'), tDependency(B,C), has_t_lemma(C,refinery), 
+   has_functor(C,'MAT').
+mention(acquired,'id_4315.xml_00443_1031').
+mention(acquired,'id_4315.xml_00443_1033').
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'Harper'), tDependency(B,C), tDependency(D,C), 
+   has_t_lemma(D,'Inc').
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(C,B), has_t_lemma(C,'Inc'), tDependency(D,C), 
+   has_t_lemma(D,'Row').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,42), tDependency(B,C), has_number(C,42), 
+   tDependency(C,D), tDependency(D,E), has_functor(E,'PAT').
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), has_t_lemma(C,and), tDependency(C,D), 
+   has_t_lemma(D,'Association').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,42), tDependency(B,C), has_formeme(C,'n:obj').
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'Taft'), tDependency(B,C), has_t_lemma(C,'Co').
+mention(acquired,'id_2638.xml_00405_744').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,14), tDependency(B,C), has_t_lemma(C,'Reynolds').
+mention(acquired,'id_3607.xml_0042C_596').
+mention(acquired,A) :-
+   lex_rf(B,A), has_sempos(B,'n.denot'), tDependency(B,C), has_formeme(C,'n:obj'), 
+   tDependency(D,C), has_t_lemma(D,'City').
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), tDependency(C,D), has_formeme(D,'n:obj'), 
+   tDependency(E,D), has_t_lemma(E,'City').
+mention(acquired,'id_3607.xml_0042C_599').
+mention(acquired,'id_19006.xml_003B1_3431').
+mention(acquired,'id_19006.xml_003B1_3432').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,27), tDependency(B,C), has_t_lemma(C,'Inc'), 
+   tDependency(C,D), has_functor(D,'PAT').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,11), tDependency(B,C), tDependency(D,C), 
+   tDependency(E,D), has_t_lemma(E,24).
+mention(acquired,'id_8781.xml_004DE_306').
+mention(acquired,A) :-
+   lex_rf(B,A), has_functor(B,'RSTR'), has_number(B,32), tDependency(B,C), 
+   has_formeme(C,'n:of+X'), tDependency(C,D), has_number(D,pl).
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), tDependency(C,D), has_sempos(D,'n.denot'), 
+   tDependency(E,B), has_t_lemma(E,'Savings').
+mention(acquired,'id_3295.xml_00425_304').
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), tDependency(C,D), has_t_lemma(D,and), 
+   tDependency(D,E), has_t_lemma(E,complete).
+mention(acquired,'id_3295.xml_00425_306').
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), has_t_lemma(C,'Inc'), has_functor(C,'APP'), 
+   tDependency(C,D), has_formeme(D,'n:of+X').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,33), tDependency(B,C), tDependency(C,D), 
+   has_functor(D,'PAT'), has_number(D,pl).
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'Hughes'), tDependency(B,C), tDependency(D,C), 
+   has_t_lemma(D,'Tool').
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'Tool').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,13), tDependency(B,C), tDependency(D,C), 
+   has_functor(D,'COMPL').
+mention(acquired,A) :-
+   lex_rf(B,A), has_functor(B,'RSTR'), tDependency(B,C), has_t_lemma(C,'LONDON'), 
+   has_functor(C,'PAT'), has_formeme(C,'n:of+X').
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), has_t_lemma(C,shareholder), has_functor(C,'MAT'), 
+   tDependency(C,D), tDependency(D,E), has_functor(E,'PRED').
+mention(acquired,A) :-
+   lex_rf(B,A), has_formeme(B,'n:of+X'), has_number(B,34), tDependency(C,B).
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), tDependency(C,D), has_number(D,14), 
+   tDependency(E,D), tDependency(F,E), has_number(F,27).
+mention(acquired,'id_12093.xml_002FB_702').
+mention(acquired,A) :-
+   lex_rf(B,A), has_formeme(B,'n:attr'), tDependency(B,C), tDependency(C,D), 
+   has_t_lemma(D,'Bank'), tDependency(D,E), has_t_lemma(E,and).
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), has_t_lemma(C,'Bank'), tDependency(C,D), 
+   has_sempos(D,'n.denot'), tDependency(D,E), has_formeme(E,'n:obj').
+mention(acquired,'id_12093.xml_002FB_713').
+mention(acquired,'id_12093.xml_002FB_714').
+mention(acquired,'id_12093.xml_002FB_722').
+mention(acquired,A) :-
+   lex_rf(B,A), has_functor(B,'RSTR'), tDependency(B,C), has_t_lemma(C,'Bancorp'), 
+   has_functor(C,'PAT').
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'Bancorp'), has_functor(B,'PAT').
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), has_t_lemma(C,'Inc'), has_functor(C,'ACT'), 
+   tDependency(D,C), has_number(D,24).
+mention(acquired,'id_9539.xml_004FD_458').
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), has_t_lemma(C,'Inc'), has_formeme(C,'n:of+X'), 
+   tDependency(C,D), has_t_lemma(D,acquisition).
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,38), tDependency(B,C), tDependency(D,C), 
+   has_t_lemma(D,'Corp').
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), has_t_lemma(C,'Co'), tDependency(C,D), 
+   tDependency(E,D), has_t_lemma(E,'#PersPron'), has_functor(E,'APP').
+mention(acquired,'id_16872.xml_00376_771').
+mention(acquired,'id_369.xml_0042F_439').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,13), tDependency(B,C), tDependency(C,D), 
+   tDependency(E,D), has_t_lemma(E,begin).
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'Inc'), tDependency(B,C), tDependency(D,C), 
+   has_t_lemma(D,begin).
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,41), tDependency(B,C), tDependency(C,D), 
+   has_t_lemma(D,asset).
+mention(acquired,'id_5094.xml_00460_481').
+mention(acquired,'id_5667.xml_00470_601').
+mention(acquired,'id_5667.xml_00470_602').
+mention(acquired,'id_5667.xml_00470_603').
+mention(acquired,'id_8396.xml_004CA_405').
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'International'), tDependency(B,C), tDependency(C,D), 
+   tDependency(D,E), has_functor(E,'PAT').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,23), tDependency(B,C), has_functor(C,'PAT'), 
+   has_formeme(C,'n:of+X').
+mention(acquired,'id_18859.xml_003AB_457').
+mention(acquired,A) :-
+   lex_rf(B,A), has_formeme(B,'n:attr'), tDependency(B,C), has_t_lemma(C,'Bank'), 
+   has_number(C,26).
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), has_t_lemma(C,'Inc'), tDependency(C,D), 
+   has_t_lemma(D,say), tDependency(D,E).
+mention(acquired,'id_16443.xml_00361_1978').
+mention(acquired,'id_5286.xml_00464_862').
+mention(acquired,'id_5286.xml_00464_863').
+mention(acquired,'id_5286.xml_00464_864').
+mention(acquired,A) :-
+   lex_rf(B,A), has_functor(B,'RSTR'), has_number(B,30), tDependency(B,C), 
+   tDependency(C,D), tDependency(E,D), has_formeme(E,'n:poss').
+mention(acquired,'id_6085.xml_0047F_515').
+mention(acquired,'id_6085.xml_0047F_516').
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'Biopool'), tDependency(B,C), has_t_lemma(C,'AB').
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'AB'), tDependency(B,C), has_nodetype(C,complex).
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,26), tDependency(B,C), has_number(C,sg), 
+   tDependency(D,C), has_t_lemma(D,'#PersPron').
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'AB`').
+mention(acquired,A) :-
+   lex_rf(B,A), has_formeme(B,'n:of+X'), tDependency(B,C), has_t_lemma(C,and), 
+   tDependency(C,D), has_t_lemma(D,sale).
+mention(acquired,'id_9081.xml_004EE_387').
+mention(acquired,A) :-
+   lex_rf(B,A), has_formeme(B,'n:attr'), tDependency(B,C), has_t_lemma(C,'Division'), 
+   tDependency(C,D), has_t_lemma(D,sell).
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'Division'), tDependency(B,C), tDependency(C,D), 
+   has_functor(D,'PAT').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,17), tDependency(B,C), has_t_lemma(C,'Bank').
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'Bank'), tDependency(C,B), tDependency(D,C), 
+   tDependency(E,D), has_functor(E,'RSTR').
+mention(acquired,'id_8428.xml_004CC_320').
+mention(acquired,'id_8428.xml_004CC_321').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,14), tDependency(B,C), tDependency(D,C), 
+   has_t_lemma(D,'International').
+mention(acquired,'id_19912.xml_003CB_332').
+mention(acquired,A) :-
+   lex_rf(B,A), has_sempos(B,'n.denot'), tDependency(B,C), has_formeme(C,'n:for+X'), 
+   tDependency(C,D), has_functor(D,'REG').
+mention(acquired,A) :-
+   lex_rf(B,A), has_formeme(B,'n:attr'), tDependency(B,C), has_functor(C,'APP'), 
+   tDependency(D,C), has_t_lemma(D,'City').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,12), tDependency(B,C), tDependency(D,C), 
+   has_t_lemma(D,'TENDER').
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'Ltd'), tDependency(C,B), has_t_lemma(C,'Monier').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,18), tDependency(B,C), has_t_lemma(C,'Co'), 
+   has_functor(C,'PAT').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,18), tDependency(B,C), tDependency(D,C), 
+   has_formeme(D,'n:from+X').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,14), tDependency(B,C), tDependency(D,C), 
+   has_t_lemma(D,'Industry').
+mention(acquired,'id_10867.xml_002CC_1133').
+mention(acquired,'id_12339.xml_00301_820').
+mention(acquired,'id_12339.xml_00301_821').
+mention(acquired,'id_12339.xml_00301_822').
+mention(acquired,A) :-
+   lex_rf(B,A), has_functor(B,'RSTR'), has_number(B,23), tDependency(B,C), 
+   has_formeme(C,'n:obj'), tDependency(C,D), has_functor(D,'PAT').
+mention(acquired,A) :-
+   lex_rf(B,A), has_formeme(B,'n:obj'), tDependency(B,C), has_t_lemma(C,sell), 
+   tDependency(D,B), has_number(D,23).
+mention(acquired,A) :-
+   lex_rf(B,A), has_functor(B,'LOC'), tDependency(B,C), has_t_lemma(C,interest), 
+   tDependency(C,D), has_t_lemma(D,purchase).
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), has_t_lemma(C,station), has_functor(C,'PAT').
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,station), has_functor(B,'PAT').
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), has_t_lemma(C,'FM').
+mention(acquired,'id_21469.xml_003EC_599').
+mention(acquired,'id_21469.xml_003EC_600').
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), has_functor(C,'APP'), tDependency(C,D), 
+   has_t_lemma(D,share), tDependency(D,E), has_t_lemma(E,or).
+mention(acquired,'id_379.xml_00432_265').
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), tDependency(D,C), has_t_lemma(D,cellular).
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'Co'), has_formeme(B,'n:obj'), tDependency(B,C), 
+   has_t_lemma(C,and).
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), tDependency(C,D), tDependency(E,D), 
+   tDependency(F,E), has_t_lemma(F,'Axle').
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(C,B), has_t_lemma(C,'Railway').
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), has_t_lemma(C,corp).
+mention(acquired,'id_2344.xml_003F7_258').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,39), tDependency(B,C), tDependency(C,D), 
+   has_functor(D,'PAT'), has_sempos(D,'n.denot').
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'Co'), tDependency(B,C), has_functor(C,'PAT'), 
+   has_sempos(C,'n.denot'), tDependency(C,D), has_t_lemma(D,and).
+mention(acquired,A) :-
+   lex_rf(B,A), has_functor(B,'RSTR'), tDependency(B,C), has_t_lemma(C,unit), 
+   tDependency(D,C), has_t_lemma(D,software).
+mention(acquired,'id_4955.xml_0045D_277').
+mention(acquired,'id_6731.xml_0049A_215').
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(C,B), has_t_lemma(C,'City'), has_number(C,sg).
+mention(acquired,'id_2927.xml_00411_249').
+mention(acquired,'id_2927.xml_00411_250').
+mention(acquired,'id_2927.xml_00411_252').
+mention(acquired,'id_2927.xml_00411_254').
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), has_functor(C,'APP'), has_number(C,26), 
+   tDependency(C,D), tDependency(D,E), has_formeme(E,'n:obj').
+mention(acquired,'id_2927.xml_00411_256').
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), has_t_lemma(C,'Inc'), has_formeme(C,'n:of+X'), 
+   tDependency(C,D), has_t_lemma(D,share).
+mention(acquired,'id_2652.xml_00407_1005').
+mention(acquired,'id_706.xml_004AB_523').
+mention(acquired,'id_706.xml_004AB_524').
+mention(acquired,'id_20834.xml_003D8_365').
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), has_t_lemma(C,'Co`').
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'Co`').
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(C,B), has_formeme(C,'n:attr'), has_number(C,30), 
+   tDependency(D,C).
+mention(acquired,'id_6616.xml_00491_240').
+mention(acquired,'id_6616.xml_00491_242').
+mention(acquired,'id_6616.xml_00491_243').
+mention(acquired,'id_6616.xml_00491_244').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,13), tDependency(B,C), tDependency(C,D), 
+   has_t_lemma(D,announce).
+mention(acquired,'id_10042.xml_002B9_334').
+mention(acquired,'id_8795.xml_004DF_283').
+mention(acquired,'id_8795.xml_004DF_284').
+mention(acquired,'id_8795.xml_004DF_285').
+mention(acquired,'id_8795.xml_004DF_286').
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'Inc'), tDependency(B,C), has_formeme(C,'n:of+X'), 
+   tDependency(C,D), tDependency(D,E), has_nodetype(E,coap).
+mention(acquired,A) :-
+   lex_rf(B,A), has_negation(B,neg0), tDependency(B,C), tDependency(D,C), 
+   has_t_lemma(D,manufacture), has_formeme(D,'v:attr').
+mention(acquired,A) :-
+   lex_rf(B,A), has_sempos(B,'n.denot'), tDependency(B,C), has_t_lemma(C,company), 
+   has_functor(C,'LOC').
+mention(acquired,A) :-
+   lex_rf(B,A), has_functor(B,'RSTR'), tDependency(B,C), tDependency(D,C), 
+   has_t_lemma(D,corn).
+mention(acquired,'id_9156.xml_004F1_825').
+mention(acquired,'id_4277.xml_00442_736').
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'Corp'), has_number(B,12), tDependency(B,C), 
+   tDependency(D,C), has_t_lemma(D,'YORK').
+mention(acquired,'id_9644.xml_00502_173').
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'Metrobanc').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,21), tDependency(C,B), tDependency(D,C), 
+   has_number(D,pl).
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), has_t_lemma(C,business), tDependency(C,D), 
+   tDependency(D,E), has_t_lemma(E,acquire).
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), tDependency(C,D), has_t_lemma(D,make), 
+   tDependency(E,C), has_t_lemma(E,'.'), has_functor(E,'PAT').
+mention(acquired,'id_18667.xml_003A8_830').
+mention(acquired,A) :-
+   lex_rf(B,A), has_formeme(B,'n:attr'), tDependency(B,C), has_t_lemma(C,'Plc'), 
+   has_number(C,21).
+mention(acquired,'id_18667.xml_003A8_832').
+mention(acquired,'id_16398.xml_0035F_1041').
+mention(acquired,'id_16398.xml_0035F_1042').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,38), tDependency(B,C), has_t_lemma(C,'Corp').
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), has_t_lemma(C,rights), tDependency(C,D), 
+   has_t_lemma(D,include).
+mention(acquired,'id_12191.xml_002FE_568').
+mention(acquired,'id_12191.xml_002FE_569').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,sg), tDependency(B,C), has_t_lemma(C,facility), 
+   has_formeme(C,'n:to+X').
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), has_t_lemma(C,and), tDependency(D,C), 
+   has_t_lemma(D,maintenance).
+mention(acquired,'id_12191.xml_002FE_573').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,33), tDependency(B,C), has_t_lemma(C,division).
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,16), tDependency(B,C), has_t_lemma(C,'Inc'), 
+   tDependency(D,C), has_t_lemma(D,'April').
+mention(acquired,'id_15501.xml_00347_1041').
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), has_t_lemma(C,'Inc`'), has_functor(C,'DIR1').
+mention(acquired,'id_2637.xml_00404_262').
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'Corp'), has_functor(B,'PAT'), has_formeme(B,'n:of+X'), 
+   tDependency(B,C), tDependency(C,D), has_number(D,sg).
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), has_t_lemma(C,system), has_functor(C,'ACT'), 
+   has_formeme(C,'n:obj').
+mention(acquired,'id_14099.xml_00334_468').
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), has_t_lemma(C,'Luverne').
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'Luverne').
+mention(acquired,'id_21040.xml_003DB_517').
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'Inc'), tDependency(B,C), has_t_lemma(C,share).
+mention(acquired,'id_15404.xml_00345_773').
+mention(acquired,'id_15404.xml_00345_774').
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), has_t_lemma(C,'Plc'), has_functor(C,'LOC').
+mention(acquired,'id_12538.xml_0030C_353').
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'FCS').
+mention(acquired,'id_13043.xml_00323_436').
+mention(acquired,'id_13043.xml_00323_449').
+mention(acquired,'id_4605.xml_0044D_326').
+mention(acquired,'id_4605.xml_0044D_327').
+mention(acquired,'id_19751.xml_003C6_893').
+mention(acquired,'id_19751.xml_003C6_894').
+mention(acquired,'id_21278.xml_003E3_274').
+mention(acquired,'id_21278.xml_003E3_275').
+mention(acquired,'id_3120.xml_00418_321').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,sg), tDependency(B,C), has_t_lemma(C,center).
+mention(acquired,'id_5477.xml_0046D_203').
+mention(acquired,A) :-
+   lex_rf(B,A), has_formeme(B,'n:attr'), tDependency(B,C), has_t_lemma(C,'Division'), 
+   tDependency(C,D), tDependency(D,E), has_functor(E,'PAT').
+mention(acquired,'id_17488.xml_00384_1471').
+mention(acquired,'id_17488.xml_00384_1768').
+mention(acquired,'id_9432.xml_004F9_344').
+mention(acquired,A) :-
+   lex_rf(B,A), has_formeme(B,'n:attr'), tDependency(B,C), has_t_lemma(C,store), 
+   has_formeme(C,'n:obj').
+mention(acquired,'id_13090.xml_00326_685').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,8), tDependency(B,C), has_t_lemma(C,'Tower').
+mention(acquired,'id_14582.xml_00337_480').
+mention(acquired,A) :-
+   lex_rf(B,A), tDependency(B,C), has_t_lemma(C,'Bus').
+mention(acquired,'id_7315.xml_004B3_387').
+mention(acquired,'id_7315.xml_004B3_388').
+mention(acquired,'id_7315.xml_004B3_389').
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'Charmglow').
+mention(acquired,'id_12492.xml_00307_578').
+mention(acquired,'id_12492.xml_00307_579').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,16), tDependency(B,C), tDependency(D,C), 
+   has_t_lemma(D,'Business').
+mention(acquired,'id_19368.xml_003B9_816').
+mention(acquired,'id_4033.xml_00438_303').
+mention(acquired,'id_4033.xml_00438_304').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,22), tDependency(B,C), has_t_lemma(C,'Corp'), 
+   has_functor(C,'APP').
+mention(acquired,'id_8359.xml_004C7_637').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,9), tDependency(B,C), has_t_lemma(C,'Inc'), 
+   tDependency(C,D), tDependency(E,D), has_t_lemma(E,and).
+mention(acquired,'id_6188.xml_00483_195').
+mention(acquired,'id_467.xml_00453_248').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,14), tDependency(B,C), tDependency(C,D), 
+   tDependency(E,D), has_t_lemma(E,have).
+mention(acquired,'id_1771.xml_0038C_1654').
+mention(acquired,'id_15479.xml_00346_729').
+mention(acquired,'id_5854.xml_00475_251').
+mention(acquired,A) :-
+   lex_rf(B,A), has_t_lemma(B,'KMG').
+mention(acquired,'id_11362.xml_002E3_705').
+mention(acquired,'id_11362.xml_002E3_706').
+mention(acquired,'id_11362.xml_002E3_720').
+mention(acquired,'id_11362.xml_002E3_721').
+mention(acquired,'id_5670.xml_00471_672').
+mention(acquired,'id_12900.xml_00319_601').
+mention(acquired,'id_12900.xml_00319_602').
+mention(acquired,'id_17595.xml_00387_710').
+mention(acquired,'id_17595.xml_00387_711').
+mention(acquired,'id_17595.xml_00387_712').
+mention(acquired,A) :-
+   lex_rf(B,A), has_functor(B,'RSTR'), tDependency(B,C), has_t_lemma(C,portfolio).
+mention(acquired,'id_4850.xml_0045A_303').
+mention(acquired,'id_11744.xml_002F1_610').
+mention(acquired,'id_14900.xml_0033C_1373').
+mention(acquired,'id_5465.xml_0046B_476').
+mention(acquired,'id_5465.xml_0046B_477').
+mention(acquired,'id_19679.xml_003C1_851').
+mention(acquired,'id_19679.xml_003C1_852').
+mention(acquired,'id_128.xml_00314_390').
+mention(acquired,'id_128.xml_00314_391').
+mention(acquired,'id_128.xml_00314_401').
+mention(acquired,'id_128.xml_00314_402').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,26), tDependency(B,C), has_t_lemma(C,'Corp'), 
+   has_functor(C,'PAT').
+mention(acquired,'id_4161.xml_0043C_266').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,36), tDependency(B,C), has_t_lemma(C,'Store').
+mention(acquired,'id_9338.xml_004F7_301').
+mention(acquired,'id_9338.xml_004F7_302').
+mention(acquired,'id_9338.xml_004F7_317').
+mention(acquired,'id_17323.xml_00382_761').
+mention(acquired,'id_2365.xml_003F8_325').
+mention(acquired,'id_2365.xml_003F8_327').
+mention(acquired,'id_2365.xml_003F8_328').
+mention(acquired,'id_2365.xml_003F8_329').
+mention(acquired,A) :-
+   lex_rf(B,A), has_number(B,36), tDependency(B,C), has_t_lemma(C,'Bank').
+mention(acquired,'id_2365.xml_003F8_336').
+mention(acquired,'id_9102.xml_004EF_488').
+mention(acquired,'id_9102.xml_004EF_489').
+mention(acquired,'id_8571.xml_004D4_384').

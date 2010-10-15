@@ -10,6 +10,7 @@ import gate.creole.ExecutionException;
 import gate.creole.ResourceInstantiationException;
 import gate.creole.SerialAnalyserController;
 import gate.creole.SerialController;
+import gate.persist.PersistenceException;
 import gate.util.GateException;
 import gate.util.profile.Profiler;
 
@@ -29,10 +30,24 @@ import czsem.utils.Config;
 
 public class MachineLearningExperimenter
 {
-	public interface ExperimentSetup
+	public static abstract class ExperimentSetup
 	{
-		List<PRSetup> getTrainControllerSetup();
-		List<PRSetup> getTestControllerSetup();
+		protected String dataStore;
+		protected String copusId;
+		
+		public ExperimentSetup(String dataStore, String copusId) {
+			this.dataStore = dataStore;
+			this.copusId = copusId;
+		}
+
+		abstract List<PRSetup> getTrainControllerSetup() throws JDOMException, IOException;
+		abstract List<PRSetup> getTestControllerSetup();
+		Corpus getCorpus() throws PersistenceException, ResourceInstantiationException
+		{
+		    DataStore ds = GateUtils.openDataStore(dataStore);
+		    Corpus corpus = GateUtils.loadCorpusFormDatastore(ds, copusId);			
+		    return corpus; 
+		}
 	}
 	
 	public static class PRSetup
@@ -53,7 +68,10 @@ public class MachineLearningExperimenter
 		}
 		public PRSetup putFeatureList(Object key, String ... strig_list)
 		{
-			fm.put(key, Arrays.asList(strig_list));
+			if (strig_list == null)
+				fm.put(key, null);
+			else
+				fm.put(key, Arrays.asList(strig_list));
 			return this;
 		}
 
@@ -78,13 +96,13 @@ public class MachineLearningExperimenter
 		return controller;		
 	}
 	
-	public static void runExperiment(ExperimentSetup setup, Corpus corpus, int number_of_folds) throws ResourceInstantiationException, ExecutionException
+	public static void runExperiment(ExperimentSetup setup, int number_of_folds) throws ResourceInstantiationException, ExecutionException, PersistenceException, JDOMException, IOException
 	{
 	    SerialAnalyserController train_controller = buildGatePipeline(setup.getTrainControllerSetup());
 	    SerialAnalyserController test_controller = buildGatePipeline(setup.getTestControllerSetup());
 	    
 		new PRSetup(CrossValidation.class)
-			.putFeature("corpus", corpus)
+			.putFeature("corpus", setup.getCorpus())
 			.putFeature("numberOfFolds", number_of_folds)
 			.putFeature("trainingPR", train_controller)
 			.putFeature("testingPR", test_controller).createPR().execute();
@@ -111,12 +129,11 @@ public class MachineLearningExperimenter
 	    GateUtils.registerPluginDirectory("Learning");
 	    
 	    GateUtils.registerPluginDirectory(new File("czsem_GATE_plugins"));
-		    	
-	    DataStore ds = GateUtils.openDataStore("file:/C:/Users/dedek/AppData/GATE/ISWC");
-	    
-	    Corpus corpus = GateUtils.loadCorpusFormDatastore(ds, "ISWC___1274943456887___5663");
+		    		    
+//	    Corpus corpus = GateUtils.loadCorpusFormDatastore(ds, "ISWC___1274943456887___5663");
 //	    Corpus corpus = GateUtils.loadCorpusFormDatastore(ds, "fatalities___1277473852041___7082");
 	    
-	    runExperiment(new TrainTestGateOnCzech(), corpus, 2);	    
+	    runExperiment(new TrainTestAcquisitions(), 2);	    
+//	    runExperiment(new TrainTestGateOnCzech(), 2);	    
 	}
 }

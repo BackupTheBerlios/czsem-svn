@@ -163,7 +163,7 @@ public class Serializer {
 		{
 			values[i] = encodeValue(values[i]); 
 		}
-		renderInlineTupleWithoutValueCheck(relationName, values);
+		renderInlineTupleWithoutValueCheck(encodeValue(relationName), values);
 	}
 
 	public void renderInlineTupleWithoutValueCheck(String relationName, String[] values)
@@ -245,7 +245,7 @@ public class Serializer {
 		}
 
 		if ((all_digits && isNumber(value)) || all_lo_alpha) return value;
-//		if (all_digits || all_lo_alpha) return "ìì"+value;
+//		if (all_digits || all_lo_alpha) return "ï¿½ï¿½"+value;
 		
 		sb.append('\'');
 		return sb.toString();
@@ -364,7 +364,7 @@ public class Serializer {
 		
 		Relation rel = ser.addBinRelation("edge", "node", "node");
 		ser.putBinTuple(rel, "node01", "002.2");
-		ser.putBinTuple(rel, "node01", "345š");
+		ser.putBinTuple(rel, "node01", "345ï¿½");
 		ser.putBinTuple(rel, "123node", "id_123");
 		ser.putBinTuple(rel, "A123node", "_id_123");
 		ser.outputAllTypes();

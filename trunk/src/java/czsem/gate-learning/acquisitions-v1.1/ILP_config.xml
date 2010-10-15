@@ -5,8 +5,9 @@
   
     <ATTRIBUTE>  
       <CLASS/>    
-      <NAME>fatalities</NAME>  
-      <TYPE>fatalities</TYPE>  
+      <NAME>Mention</NAME>  
+      <TYPE>Mention</TYPE>  
+      <FEATURE>class</FEATURE>  
 <!--  <TYPE>damage_root</TYPE> -->  
       <POSITION>0</POSITION>
       <SEMTYPE>NOMINAL</SEMTYPE>
@@ -46,6 +47,17 @@
         </ilp>
 
         <serializer>
+	        <class_attribute_values>
+		        <value>acquired</value>
+<!-- 
+		        <value>acqabr</value>
+				<value>purchaser</value>
+				<value>purchabr</value>
+				<value>seller</value>
+				<value>sellerabr</value>
+				<value>dlramt</value>
+ -->				
+	        </class_attribute_values>	        
             <tokens>
                 <token typename="Token">
                     <features>

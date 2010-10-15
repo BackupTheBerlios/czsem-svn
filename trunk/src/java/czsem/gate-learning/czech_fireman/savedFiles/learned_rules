@@ -1,0 +1,3 @@
+damage_root(A) :-
+   lex_rf(B,A), tDependency(B,C), has_t_lemma(C,tis237c), has_functor(C,'RSTR').
+damage_root('id_jihomoravsky56761.txt.xml_00060_405').

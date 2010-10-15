@@ -5,10 +5,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.jdom.Element;
+import org.jdom.JDOMException;
+import org.jdom.input.SAXBuilder;
 
 import czsem.ILP.LinguisticSerializer;
 import gate.Annotation;
@@ -22,11 +26,14 @@ import gate.creole.AbstractLanguageAnalyser;
 public class ILPSerializer extends AbstractLanguageAnalyser
 {
 	private static final long serialVersionUID = 6469933231715581382L;
+	static Logger logger = Logger.getLogger(ILPSerializer.class);
 	
 	protected LinguisticSerializer lingSer;
 	
 	protected String docName;
 	protected AnnotationSet as;
+
+	protected String [] class_attribute_values;
 	
 	protected String [] tokens =
 	{
@@ -179,7 +186,15 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 			AnnotationSet parents = as.get(one2one_dependecy_args[d][0]);
 			for (Annotation parent : parents)
 			{
-				serializeOne2OneDependency(d, parent);
+				try
+				{
+					serializeOne2OneDependency(d, parent);
+				}
+				catch (ClassCastException e)
+				{
+					logger.error(one2one_dependecies[d], e);
+				}
+				
 			}			
 		}				
 	}
@@ -615,7 +630,7 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 		lingSer.train();
 	}
 
-	public void serializeTrainingInstance(String instanceGateId, String docName, String instanceTypeName, boolean isPositive)
+	public void serializeTrainingInstance(String instanceGateId, String docName, String instanceTypeName, String class_attribute_vlaue)
 	{
 		if (instanceGateId == null) 
 			throw new NullPointerException(
@@ -624,11 +639,15 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 							docName, instanceTypeName));
 		
 		String instance_id = renderID(instanceGateId);
-		
-		if (isPositive)
-			lingSer.putPositiveExample(instance_id, instanceTypeName);
-		else
-			lingSer.putNegativeExample(instance_id, instanceTypeName);
+					
+		for (int i = 0; i < class_attribute_values.length; i++)
+		{
+			if (class_attribute_values[i].equals(class_attribute_vlaue))
+				lingSer.putPositiveExample(instance_id, instanceTypeName, class_attribute_values[i]);
+			else
+				lingSer.putNegativeExample(instance_id, instanceTypeName, class_attribute_values[i]);
+			
+		}
 	}
 
 	public void flushAndClose()
@@ -653,9 +672,35 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 		lingSer.putDeterminations(className, classTypeName);				
 	}
 
+	
+	public static String [] parseClassAttributeValuesFromSettingsFile(URL config_doc_url) throws JDOMException, IOException
+	{
+		SAXBuilder parser = new SAXBuilder();
+		org.jdom.Document ilp_dom = parser.build(config_doc_url);
+		
+		Element serializerOtionsElem = ilp_dom.getRootElement().getChild("ENGINE").getChild("OPTIONS").getChild("serializer");
+
+		return parseClassAttributeValuesFromSerializerOptions(serializerOtionsElem);
+	}
+
+	@SuppressWarnings("unchecked")
+	public static String [] parseClassAttributeValuesFromSerializerOptions(Element serializerOtionsElem)
+	{
+		List<Element> class_attribute_values = serializerOtionsElem.getChild("class_attribute_values").getChildren("value");
+		String [] ret = new String[class_attribute_values.size()];
+		for (int v = 0; v < class_attribute_values.size(); v++)
+		{
+			ret[v] = class_attribute_values.get(v).getText();			
+		}
+
+		return ret;		
+	}
+
 	@SuppressWarnings("unchecked")
 	protected void parseOptions(Element serializerOtionsElem)
-	{
+	{		
+		class_attribute_values = parseClassAttributeValuesFromSerializerOptions(serializerOtionsElem);
+
 		List<Element> tokens = serializerOtionsElem.getChild("tokens").getChildren("token");
 		this.tokens = new String[tokens.size()];
 		this.token_features = new String[tokens.size()][];

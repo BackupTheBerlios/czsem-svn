@@ -25,7 +25,7 @@ import czsem.gate.plugins.AnnotationDependencyRootMarker;
 import czsem.gate.plugins.AnnotationDependencySubtreeMarker;
 import czsem.gate.plugins.SubsequentAnnotationMerge;
 	
-public class TrainTestGateOnCzech implements ExperimentSetup
+public class TrainTestGateOnCzech extends ExperimentSetup
 {
 	
 	/*!!!!!!!!! Don't forget to change the XML configuration files  !!!!!!!!!*/
@@ -63,6 +63,9 @@ public class TrainTestGateOnCzech implements ExperimentSetup
 	
 	public TrainTestGateOnCzech() throws JDOMException, IOException
 	{
+		super(	"file:/C:/Users/dedek/AppData/GATE/ISWC",
+				"ISWC___1274943456887___5663");
+		
 		ILP_config_file = new File("gate-learning/czech_fireman/ILP_config.xml").toURI().toURL();
 		Paum_config_file = new File("gate-learning/czech_fireman/Paum_config.xml").toURI().toURL();
 		

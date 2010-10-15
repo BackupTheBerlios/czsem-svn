@@ -108,8 +108,8 @@ public class LinguisticSerializer
 
 	public void putDeterminations(String targetRelationName, String targetRelationArgTypeName)
 	{
-		Relation target = ser_bkg.addRealtion(targetRelationName, new String[]{targetRelationArgTypeName});
-		ser_bkg.putMode(target, "1", new char[] {'+'});
+		Relation target = ser_bkg.addRealtion(targetRelationName, new String[]{"class_attribute_value", targetRelationArgTypeName});
+		ser_bkg.putMode(target, "1", new char[] {'#','+'});
 
 
 		ser_bkg.putCommentLn("-------------------- Determinations --------------------");
@@ -133,13 +133,13 @@ public class LinguisticSerializer
 	}
 
 
-	public void putPositiveExample(String instanceId, String instanceTypeName)
+	public void putPositiveExample(String instanceId, String instanceTypeName, String class_attribute_vlaue)
 	{
-    	ser_pos.putTuple(instanceTypeName, new String[]{instanceId});        		
+    	ser_pos.putTuple(instanceTypeName, new String[]{class_attribute_vlaue, instanceId});        		
 	};
-	public void putNegativeExample(String instanceId, String instanceTypeName)
+	public void putNegativeExample(String instanceId, String instanceTypeName, String class_attribute_vlaue)
 	{
-    	ser_neg.putTuple(instanceTypeName, new String[]{instanceId});        				
+    	ser_neg.putTuple(instanceTypeName, new String[]{class_attribute_vlaue, instanceId});        				
 	}
 
 

@@ -65,7 +65,7 @@ public class ILPWrapper implements AdvancedMLEngine
 				attributes.get(idIndex),
 				pr.getDocument().getName(),
 				className,
-				Boolean.parseBoolean(attributes.get(classIndex)));
+				attributes.get(classIndex));
 		
 		if (docCounter.isLastDocument() && isLastInstanceInDocument(attributes))
 		{
@@ -160,7 +160,8 @@ public class ILPWrapper implements AdvancedMLEngine
 			if (attrs.get(i).getName().equals("last")) lastAttrIndex = i;
 		}
 		classIndex = datasetDefinition.getClassIndex();
-		className = datasetDefinition.getClassAttribute().getName();		
+		String raw_name = datasetDefinition.getClassAttribute().getName();
+		className = Character.toLowerCase(raw_name.charAt(0)) + raw_name.substring(1);
 	}
 
 
