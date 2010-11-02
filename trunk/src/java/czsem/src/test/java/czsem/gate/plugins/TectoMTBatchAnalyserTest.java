@@ -441,6 +441,26 @@ public class TectoMTBatchAnalyserTest extends TestCase
 		
 	}
 
+	
+	public void testExecuteEnglishFullFilms() throws ResourceInstantiationException, ExecutionException, FileNotFoundException
+	{
+		String [] film_s = 
+		{
+				"James Bond is back and he is alive and well. Any questions about Daniel Craig's worthiness are thrown out almost immediately as we are handed a film filled to the brim with exquisite action and explosive emotion. I squirmed in my seat with delight as I have not done since I was a child. What \"Batman Begins\" did for that franchise, \"Casino Royale\" does, and more, for Bond. For a while it seemed that he might not be able to well exist outside the confines of the cold war, but here we are given an entirely modern Bond with enough nods to the original that we can't be too upset. Maybe it's because this is the last novel yet to be filmed in the traditional Bond manner and it is Ian Fleming who has stolen our hearts not this incarnation of the super spy. However I like to think that someone actually just got their act together and concentrated on the film itself as opposed to who they could get the most product placement money out of. Congratulations. James Bond will live on for at least one more generation, and maybe forever. Great set pieces and one of the best chase sequences not involving cars ever put on screen, blended with beautiful locations and even more lovely women add up to the perfect cocktail with the twisting story line acting as the lemon peel in the martini, holding it all together. Many will come out saying that this is the best Bond film ever and I can not rightly say they are wrong at this point. Only time will tell that tale. However every fan can be assured that this ranks amongst the very upper crust of Bond movies, and Craig is no Lazenby. He lends a harsh wit and a thuggish charm to the character and by the end he's no longer the new guy, he is Bond, James Bond. A masterpiece of popular film-making and the movie we have been waiting for all year. See it early and often as it is sure not to diminish upon reviewing."
+		};
+		
+		initCorpusAndDocFromSentences(film_s, 1);
+		executeTmtOnCurrentCorpus("english", english_full_blocks);
+
+		
+		saveDocumentToFile("test_film_out.xml");
+
+		AnnotationSet as = document.getAnnotations();		
+		assertEquals(1364, as.size());
+
+		
+	}
+
 
 	public static void writeTMTscenario(String [] scenario, String file_path) throws FileNotFoundException
 	{
