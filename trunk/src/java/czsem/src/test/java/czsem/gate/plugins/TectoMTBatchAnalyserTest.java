@@ -3,6 +3,7 @@ package czsem.gate.plugins;
 import gate.Annotation;
 import gate.AnnotationSet;
 import gate.Corpus;
+import gate.DataStore;
 import gate.Document;
 import gate.Factory;
 import gate.FeatureMap;
@@ -14,6 +15,7 @@ import gate.corpora.DocumentXmlUtils;
 import gate.creole.ExecutionException;
 import gate.creole.ResourceInstantiationException;
 import gate.creole.SerialAnalyserController;
+import gate.persist.PersistenceException;
 import gate.util.GateException;
 import gate.util.InvalidOffsetException;
 
@@ -282,6 +284,13 @@ public class TectoMTBatchAnalyserTest extends TestCase
 		.print(
 				DocumentXmlUtils.toXml(
 						(TextualDocument) document));		
+	}
+	
+	public void testExecuteCzechFullAllIncidents() throws PersistenceException, ResourceInstantiationException, ExecutionException
+	{
+	    DataStore ds = GateUtils.openDataStore("file:/C:/Users/dedek/AppData/GATE/ISWC");			
+		corpus = GateUtils.loadCorpusFormDatastore(ds, "ISWC___1274943456887___5663");
+		executeTmtOnCurrentCorpus("czech", czech_full_blocks);				
 	}
 	
 	public void testExecuteCzechFull() throws ResourceInstantiationException, ExecutionException, FileNotFoundException
