@@ -36,6 +36,7 @@ public class Config
 	private String gateHome;
 	private String tmtSerializationDirectoryPath;
 	private String logFileDirectoryPath;
+	private String czsemPluginDir;
 
 
 	
@@ -171,9 +172,14 @@ public class Config
 		Config c = (Config)decoder.readObject();
 		decoder.close();
 		os.close();
+		c.czsemPluginDir = new File(new File(filename).getParent()).getCanonicalPath();
 		return c;
 	}
 	
+	public String getCzsemPluginDir() {
+		return czsemPluginDir;
+	}
+
 	public String getWekaJarPath() {
 		return wekaJarPath;
 	}

@@ -410,7 +410,7 @@ public class CVStoILP_Accidents {
 			exec.setRulesFileName(sb.toString()+"_rules");
 			exec.setResultsFileName(sb.toString()+"_test_results");
 			exec.startILPProcess();
-			exec.startSysReaderThreads();
+			exec.startStdoutReaderThreads();
 			exec.induceAndWriteRules();
 			
 			//crisp data, crisp rules

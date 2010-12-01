@@ -169,7 +169,7 @@ public class ProcessExec {
 		err_reader_thread.start();
 	}
 
-	public void startSysReaderThreads() {
+	public void startStdoutReaderThreads() {
 		startReaderThreads(System.out, System.err);
 	}
 
