@@ -28,11 +28,22 @@ public class RulesSerializer extends ILPExec
 		startPrologProcess(Config.getConfig().getCzsemPluginDir() + prolog_serialzation_script);
 //		startReaderThreads("RulesSerializer");
 		startStdoutReaderThreads();
-		consultFile(getRulesFileName());				
+		
+		callRuleSrialization(getRulesFileName(), xml_rules_file_name);
 
 		
 	}
 	
+	private void callRuleSrialization(String rulesFileName,	String xmlRulesFileName)
+	{
+		output_writer.print("serialize_rule_file('");		
+		output_writer.print(rulesFileName);		
+		output_writer.print("','");		
+		output_writer.print(xmlRulesFileName);		
+		output_writer.println("').");		
+		output_writer.flush();				
+	}
+
 	public static void main(String[] args) throws IOException, URISyntaxException, InterruptedException
 	{
 		RulesSerializer rs = new RulesSerializer(new File("gate-learning/acquisitions-v1.1/savedFiles"), "RulesSerializer");
