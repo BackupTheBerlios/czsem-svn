@@ -96,6 +96,15 @@ public class MachineLearningExperimenter
 		return controller;		
 	}
 	
+	public static void trainOnly(ExperimentSetup setup) throws ResourceInstantiationException, JDOMException, IOException, PersistenceException, ExecutionException
+	{
+	    SerialAnalyserController train_controller = buildGatePipeline(setup.getTrainControllerSetup());
+	    
+	    train_controller.setCorpus(setup.getCorpus());			    	    	    
+	    train_controller.execute();
+		
+	}
+
 	public static void runExperiment(ExperimentSetup setup, int number_of_folds) throws ResourceInstantiationException, ExecutionException, PersistenceException, JDOMException, IOException
 	{
 	    SerialAnalyserController train_controller = buildGatePipeline(setup.getTrainControllerSetup());
@@ -133,7 +142,8 @@ public class MachineLearningExperimenter
 //	    Corpus corpus = GateUtils.loadCorpusFormDatastore(ds, "ISWC___1274943456887___5663");
 //	    Corpus corpus = GateUtils.loadCorpusFormDatastore(ds, "fatalities___1277473852041___7082");
 	    
-	    runExperiment(new TrainTestAcquisitions(), 2);	    
+//	    runExperiment(new TrainTestAcquisitions(), 2);	    
 //	    runExperiment(new TrainTestGateOnCzech(), 2);	    
+	    trainOnly(new TrainTestGateOnCzech(false, true));
 	}
 }

@@ -98,18 +98,9 @@ public class ILPExec extends ProcessExec {
 	}
 		
 	public void induceAndWriteRules()
-	{		
-		output_writer.println("yap_flag(encoding,X).\n");
-		output_writer.flush();
-/**
-		os.println("yap_flag(encoding,utf8).");
-		os.flush();
+	{
+		setUtf8Encoding();
 		
-		Thread.sleep(3000);
-/**/		
-/**/		
-//		output_writer.println("set(verbosity,1).");		
-
 		output_writer.print("read_all('");
 		output_writer.print(project_name);
 		output_writer.print("','");
@@ -281,6 +272,11 @@ public class ILPExec extends ProcessExec {
 
 	public OutputStream getOutputStream() {
 		return process.getOutputStream();
+	}
+	
+
+	public void setUtf8Encoding() {
+		output_writer.println("set_prolog_flag(encoding,utf8).");		
 	}
 
 	/*

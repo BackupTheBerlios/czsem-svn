@@ -15,12 +15,15 @@ import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.jdom.Element;
 
 import czsem.gate.GateUtils.CorpusDocumentCounter;
 
 public class ILPWrapper implements AdvancedMLEngine
 {
+	static Logger logger = Logger.getLogger(ILPWrapper.class); 
+	
 	protected int idIndex;
 	protected int lastAttrIndex;
 	protected int classIndex;
@@ -70,6 +73,8 @@ public class ILPWrapper implements AdvancedMLEngine
 		if (docCounter.isLastDocument() && isLastInstanceInDocument(attributes))
 		{
 			ilpSer.flushAndClose();
+			logger.info(String.format("ILP training on %d documents...", docCounter.numDocs));
+			logger.info("Learning instace types: " + ilpSer.instanceClassTypes.toFormatedString(", "));
 			ilpSer.train();
 //			ilpSer.train(options.getChild("ilp").getChildText("learning_settings"));
 		}

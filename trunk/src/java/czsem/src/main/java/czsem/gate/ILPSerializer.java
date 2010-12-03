@@ -15,6 +15,7 @@ import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 
 import czsem.ILP.LinguisticSerializer;
+import czsem.utils.MultiSet;
 import gate.Annotation;
 import gate.AnnotationSet;
 import gate.Document;
@@ -34,6 +35,9 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 	protected AnnotationSet as;
 
 	protected String [] class_attribute_values;
+	
+	protected MultiSet<String> instanceClassTypes = new MultiSet<String>();
+
 	
 	protected String [] tokens =
 	{
@@ -258,8 +262,10 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 							"Instance ID is null. docName: '%s', instanceTypeName: '%s'",
 							docName, instanceTypeName));
 		
-		String instance_id = renderID(instanceGateId);
-					
+		instanceClassTypes.add(class_attribute_vlaue);
+		
+		String instance_id = renderID(instanceGateId);				
+							
 		for (int i = 0; i < class_attribute_values.length; i++)
 		{
 			if (class_attribute_values[i].equals(class_attribute_vlaue))

@@ -61,7 +61,7 @@ public class LinguisticSerializer
 
 	public void createFeatureType(int index, String annotationType, String featureName)
 	{
-		Relation rel = ser_bkg.addBinRelation("has_" + featureName, annotationType, featureName+'T');
+		Relation rel = ser_bkg.addBinRelation(/*"has_" + */featureName, annotationType, featureName+'T');
 		featRels.add(index, rel);
 	};
 	
@@ -132,10 +132,10 @@ public class LinguisticSerializer
 		
 	}
 
-
+	
 	public void putPositiveExample(String instanceId, String instanceTypeName, String class_attribute_vlaue)
 	{
-    	ser_pos.putTuple(instanceTypeName, new String[]{class_attribute_vlaue, instanceId});        		
+		ser_pos.putTuple(instanceTypeName, new String[]{class_attribute_vlaue, instanceId});        		
 	};
 	public void putNegativeExample(String instanceId, String instanceTypeName, String class_attribute_vlaue)
 	{

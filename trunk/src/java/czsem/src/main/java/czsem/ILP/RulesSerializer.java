@@ -9,13 +9,11 @@ import czsem.utils.ProjectSetup;
 
 public class RulesSerializer extends ILPExec
 {
-	protected String xml_rules_file_name;
+	private String output_rules_file_name;
 	protected String prolog_serialzation_script = "/rule_xml_serializer.yap";
 	
 	protected void setDefaults()
-	{
-		xml_rules_file_name = getRulesFileName() + ".xml"; 		
-	}
+	{}
 	
 	public RulesSerializer(File working_directory, String project_name)
 	{super(working_directory, project_name); setDefaults();}
@@ -23,33 +21,56 @@ public class RulesSerializer extends ILPExec
 	public RulesSerializer(ProjectSetup ps)
 	{super(ps); setDefaults();}
 
-	public void serializeToXml() throws IOException, URISyntaxException
+	public void serializeToSwrlx(String [] objectProperties) throws IOException, URISyntaxException
 	{
 		startPrologProcess(Config.getConfig().getCzsemPluginDir() + prolog_serialzation_script);
 //		startReaderThreads("RulesSerializer");
 		startStdoutReaderThreads();
 		
-		callRuleSrialization(getRulesFileName(), xml_rules_file_name);
+		callRuleSrialization(getRulesFileName(), getOutputRulesFileName(), objectProperties);
 
 		
 	}
 	
-	private void callRuleSrialization(String rulesFileName,	String xmlRulesFileName)
+	private void callRuleSrialization(String rulesFileName,	String xmlRulesFileName, String[] objectProperties)
 	{
 		output_writer.print("serialize_rule_file('");		
 		output_writer.print(rulesFileName);		
 		output_writer.print("','");		
 		output_writer.print(xmlRulesFileName);		
-		output_writer.println("').");		
+		output_writer.print("','");		
+		output_writer.print('/');		
+		output_writer.print(xmlRulesFileName);		
+		output_writer.print("',[");
+		
+		for (int i = 0; i < objectProperties.length; i++)
+		{
+			output_writer.print(objectProperties[i]);
+			if (i < objectProperties.length-1)
+				output_writer.print(',');
+		} 
+		
+		output_writer.println("]).");		
 		output_writer.flush();				
 	}
 
 	public static void main(String[] args) throws IOException, URISyntaxException, InterruptedException
 	{
-		RulesSerializer rs = new RulesSerializer(new File("gate-learning/acquisitions-v1.1/savedFiles"), "RulesSerializer");
-		rs.serializeToXml();
+		RulesSerializer rs = new RulesSerializer(new File("gate-learning"), "RulesSerializer");
+		rs.setRulesFileName("acquisitions-v1.1/rules/learned_rules");
+		rs.setOutputRulesFileName("acquisitions-v1.1/rules/learned_rules_test1.owl");
+		String[] object_props = {"lex_rf", "tDependency"};
+		rs.serializeToSwrlx(object_props);
 		rs.close();
 
+	}
+
+	public void setOutputRulesFileName(String output_rules_file_name) {
+		this.output_rules_file_name = output_rules_file_name;
+	}
+
+	public String getOutputRulesFileName() {
+		return output_rules_file_name;
 	}
 
 }

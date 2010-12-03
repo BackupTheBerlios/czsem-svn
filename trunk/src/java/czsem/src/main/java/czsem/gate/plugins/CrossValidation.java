@@ -162,21 +162,23 @@ public class CrossValidation extends AbstractProcessingResource
 		try {
 
 			SerialAnalyserController training_controller = (SerialAnalyserController)	    	   
-	    		Factory.createResource("gate.creole.SerialAnalyserController");	    
+	    		Factory.createResource(SerialAnalyserController.class.getCanonicalName());	    
 			training_controller.add(trainingPR);			    
 
 			SerialAnalyserController testing_controller = (SerialAnalyserController)	    	   
-    			Factory.createResource("gate.creole.SerialAnalyserController");	    
+    			Factory.createResource(SerialAnalyserController.class.getCanonicalName());	    
 			testing_controller.add(testingPR);
 			
 			for (int i = 0; i < numberOfFolds; i++)
 			{
+				//training
 				logger.info(String.format("training fold %3d", i));
 				GateUtils.safeDeepReInitPR_or_Controller(training_controller);
 			    training_controller.setCorpus(corpusFolds[i][1]);			    	    	    
 			    training_controller.execute();
 			    if (isInterrupted()) return;
 			    
+				//testing
 				logger.info(String.format("testing fold %3d", i));
 				GateUtils.safeDeepReInitPR_or_Controller(testing_controller);
 			    testing_controller.setCorpus(corpusFolds[i][0]);

@@ -5,8 +5,9 @@
   
     <ATTRIBUTE>  
       <CLASS/>    
-      <NAME>damage_root</NAME>
-      <TYPE>damage_root</TYPE>  
+      <NAME>Mention_root</NAME>  
+      <TYPE>Mention_root</TYPE>  
+      <FEATURE>class</FEATURE>  
 <!--    <TYPE>injuries</TYPE>  
   		<TYPE>damage_root</TYPE> -->  
       <POSITION>0</POSITION>
@@ -47,6 +48,14 @@
         </ilp>
 
         <serializer>
+            <class_attribute_values>
+		        <value>damage</value>
+<!-- 
+		        <value>fatalities</value>
+				<value>injuries</value>
+ -->				
+	        </class_attribute_values>	        
+            
             <tokens>
                 <token typename="Token">
                     <features>

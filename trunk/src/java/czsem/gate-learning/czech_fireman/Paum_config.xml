@@ -75,9 +75,9 @@
     </ATTRIBUTELIST>  
      <ATTRIBUTE>
        <SEMTYPE>NOMINAL</SEMTYPE>
-       <NAME>damage</NAME>
-       <TYPE>damage</TYPE>
-       <FEATURE>rule</FEATURE> 
+       <NAME>Mention</NAME>
+       <TYPE>Mention</TYPE>
+       <FEATURE>class</FEATURE> 
        <POSITION>0</POSITION>
        <CLASS/>
      </ATTRIBUTE>

@@ -207,6 +207,11 @@ public class ProcessExec {
 		return input_reader.readLine();
 	}
 
+	public void format(String format, Object ... args)
+	{
+		output_writer.format(format, args);		
+	}
+
 	public void writeString(String text) throws IOException
 	{
 		output_writer.write(text);

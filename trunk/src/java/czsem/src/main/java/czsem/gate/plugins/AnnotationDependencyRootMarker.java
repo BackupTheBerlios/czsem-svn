@@ -121,6 +121,7 @@ public class AnnotationDependencyRootMarker extends AbstractAnnotationDependency
 		Annotation root_token = findRootBFS(new ArrayList<Annotation>(tokens));		
 		
 		FeatureMap fm = Factory.newFeatureMap();
+		fm.putAll(annotation.getFeatures());
 		fm.put("root_id", root_token.getId());
 		fm.put("root_type", root_token.getType());
 		fm.put("orig_id", annotation.getId());

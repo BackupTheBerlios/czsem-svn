@@ -17,24 +17,22 @@ import org.apache.log4j.Logger;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
-import org.jdom.input.SAXBuilder;
 
 import czsem.gate.MachineLearningExperimenter.ExperimentSetup;
 import czsem.gate.MachineLearningExperimenter.PRSetup;
 import czsem.gate.plugins.AnnotationDependencyRootMarker;
 import czsem.gate.plugins.AnnotationDependencySubtreeMarker;
 import czsem.gate.plugins.SubsequentAnnotationMerge;
+import czsem.utils.JDomUtils;
 	
 public class TrainTestGateOnCzech extends ExperimentSetup
 {
 	
-	/*!!!!!!!!! Don't forget to change the XML configuration files  !!!!!!!!!*/
-	public static String learninigAnnotType = null;
-//	public static final String learninigAnnotType = "injuries";
-//	public static final String learninigAnnotType = "damage";
-	public static final boolean rootSubtreeLearninig = true;
-	public static final boolean runPaum = true;
-	public static final boolean runILP = true;
+	protected String learninigAnnotType = null;
+	protected boolean rootSubtreeLearninig = true;
+
+	protected boolean runPaum = true;
+	protected boolean runILP = true;
 	
 	static Logger logger = Logger.getLogger(TrainTestGateOnCzech.class);
  
@@ -43,13 +41,18 @@ public class TrainTestGateOnCzech extends ExperimentSetup
 	protected URL ILP_config_file;
 	protected URL Paum_config_file;
 	
-	protected static String readLearninigAnnotType(URL config_doc_url) throws JDOMException, IOException
+/*
+	protected static boolean readRootSubtree(Document config_dom)
 	{
-		SAXBuilder parser = new SAXBuilder();
-		Document ilp_dom = parser.build(config_doc_url);
+		String str = config_dom.getRootElement().getChild("ENGINE").getChild("OPTIONS").getChildText("root_subtree");
+		return Boolean.parseBoolean(str);
 		
+	}
+*/
+	protected static String readLearninigAnnotType(Document config_dom)
+	{
 		@SuppressWarnings("unchecked")
-		List<Element> ch = ilp_dom.getRootElement().getChild("DATASET").getChildren("ATTRIBUTE");
+		List<Element> ch = config_dom .getRootElement().getChild("DATASET").getChildren("ATTRIBUTE");
 		for (Element element : ch)
 		{
 			if (element.getChild("CLASS") != null)
@@ -58,9 +61,24 @@ public class TrainTestGateOnCzech extends ExperimentSetup
 			}
 			
 		}
-		return null;		
+		return null;				
+	}
+
+	protected static String readLearninigAnnotType(URL config_doc_url) throws JDOMException, IOException
+	{		
+		Document config_dom = JDomUtils.getJdomDoc(config_doc_url);
+		return readLearninigAnnotType(config_dom);
 	}
 	
+
+	public TrainTestGateOnCzech(boolean runPaum, boolean runILP) throws JDOMException, IOException
+	{
+		this();
+		this.runPaum = runPaum;
+		this.runILP = runILP;
+	}
+
+
 	public TrainTestGateOnCzech() throws JDOMException, IOException
 	{
 		super(	"file:/C:/Users/dedek/AppData/GATE/ISWC",
@@ -71,6 +89,9 @@ public class TrainTestGateOnCzech extends ExperimentSetup
 		
 		String paum_at = learninigAnnotType = readLearninigAnnotType(Paum_config_file);
 		String ilp_at = readLearninigAnnotType(ILP_config_file);
+		
+		rootSubtreeLearninig = ilp_at.endsWith("_root");
+
 		if (rootSubtreeLearninig) paum_at += "_root";
 		if (! paum_at.equals(ilp_at))
 		{

@@ -221,9 +221,14 @@ public class GateUtils
 	    return valid;
 	}
 	
+	public static File URLToFile(URL url) throws IOException, URISyntaxException
+	{
+		return new File(url.toURI());		
+	}
+
 	public static String URLToFilePath(URL url) throws IOException, URISyntaxException
 	{
-		return new File(url.toURI()).getCanonicalPath();		
+		return URLToFile(url).getCanonicalPath();		
 	}
 
 }

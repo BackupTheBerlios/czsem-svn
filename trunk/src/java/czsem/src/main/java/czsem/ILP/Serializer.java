@@ -64,15 +64,18 @@ public class Serializer {
 		// TODO Auto-generated constructor stub
 	}
 
+//	public static final String deafult_encoding = "ISO8859_1";
+	public static final String deafult_encoding = "utf-8";
+	
 	public Serializer(OutputStream output) throws UnsupportedEncodingException
 	{
-		this.output = new PrintStream(output, false, "ISO8859_1");
+		this.output = new PrintStream(output, false, deafult_encoding);
 	}
 	
 	public void setOutput(String output_filename) throws FileNotFoundException, UnsupportedEncodingException
 	{
 //		output = new PrintStream(output_filename);
-		output = new PrintStream(output_filename, "ISO8859_1");
+		output = new PrintStream(output_filename, deafult_encoding);
 	/**	
 		output.println(":- encoding(utf8).");
 	/**/		
@@ -188,14 +191,18 @@ public class Serializer {
 
 	public static String encodeRelationName(String relationName)
 	{
-		relationName = relationName.replace('.', '_');
+		if (	relationName.indexOf('.') != -1 || 
+				Character.isUpperCase(relationName.charAt(0)))
+		{
+			return String.format("'%s'", relationName);
+		}
 		
-		char ch = relationName.charAt(0);
+/*		char ch = relationName.charAt(0);
 		if (Character.isUpperCase(ch))
 		{
 			return Character.toLowerCase(ch) + relationName.substring(1);
 		}
-		
+*/		
 		return relationName;
 	}
 	
@@ -248,7 +255,8 @@ public class Serializer {
 //		if (all_digits || all_lo_alpha) return "��"+value;
 		
 		sb.append('\'');
-		return sb.toString();
+//		return sb.toString();
+		return String.format("'%s'", value);
 	}
 	
 	public void putTypedTuple(Relation rel, String[] values)
