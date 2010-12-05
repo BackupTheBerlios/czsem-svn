@@ -7,13 +7,11 @@ serialize_rule_file(RuleFileName, OutputFileName, OutputURISuffix, ObjectPropert
 	assert(objectProperties(ObjectProperties)),
 	open(OutputFileName, 'write', Stream),
 	set_output(Stream),
-	
-	write('<?xml version=\'1.0\'?>\n'),
+	write('<?xml version="1.0" encoding="UTF-8"?>\n'),
 	write('<!DOCTYPE Ontology [ <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >\n'),
 	write(' <!ENTITY pml "http://ufal.mff.cuni.cz/pdt/pml/" > ]>\n'),
 		
 	write('<Ontology xmlns="http://www.w3.org/2002/07/owl#"\n'),	
-%	write(' xml:base="http://www.semanticweb.org/ontologies/2010/11/Ontology1291305970086.owl"\n'),
 	format(' ontologyIRI="http://czsem.berlios.de/ontologies~a">\n',[OutputURISuffix]),
 		
 	consult(RuleFileName),
@@ -54,13 +52,13 @@ serialize_term(','(A,B)):- serialize_term(A), write('\n'), serialize_term(B),!.
 
 serialize_term(T):- functor(T,F,N), objectProperties(OProps), member(F, OProps),!,	
 	write('<ObjectPropertyAtom>'),
-	format('<ObjectProperty IRI="&pml;~k"/>\n', [F]),
+	format('<ObjectProperty IRI="&pml;~a"/>\n', [F]),
 	serialize_arg(T, 0, N),		
 	write('</ObjectPropertyAtom>').
 
 serialize_term(T):- functor(T,F,N),	
 	write('<DataPropertyAtom>'),
-	format('<DataProperty IRI="&pml;~k"/>\n', [F]),
+	format('<DataProperty IRI="&pml;~a"/>\n', [F]),
 	serialize_arg(T, 0, N),		
 	write('</DataPropertyAtom>').
 

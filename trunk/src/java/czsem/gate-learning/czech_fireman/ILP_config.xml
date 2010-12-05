@@ -39,6 +39,7 @@
     <OPTIONS>
         <ilp>
             <learning_settings>
+				:- set(verbosity,1).
 				:- set(verbosity,0).
 				:- set(noise,0).
 				:- set(depth,300).

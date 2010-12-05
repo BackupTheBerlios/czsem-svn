@@ -27,6 +27,8 @@ public class RulesSerializer extends ILPExec
 //		startReaderThreads("RulesSerializer");
 		startStdoutReaderThreads();
 		
+		setUtf8Encoding();
+		
 		callRuleSrialization(getRulesFileName(), getOutputRulesFileName(), objectProperties);
 
 		
@@ -57,9 +59,10 @@ public class RulesSerializer extends ILPExec
 	public static void main(String[] args) throws IOException, URISyntaxException, InterruptedException
 	{
 		RulesSerializer rs = new RulesSerializer(new File("gate-learning"), "RulesSerializer");
-		rs.setRulesFileName("acquisitions-v1.1/rules/learned_rules");
-		rs.setOutputRulesFileName("acquisitions-v1.1/rules/learned_rules_test1.owl");
-		String[] object_props = {"lex_rf", "tDependency"};
+//		rs.setRulesFileName("acquisitions-v1.1/rules/learned_rules");
+		rs.setRulesFileName("czech_fireman/savedFiles/learned_rules");
+		rs.setOutputRulesFileName("czech_fireman/rules/learned_rules_test1.owl");
+		String[] object_props = {"'lex.rf'", "tDependency"};
 		rs.serializeToSwrlx(object_props);
 		rs.close();
 
