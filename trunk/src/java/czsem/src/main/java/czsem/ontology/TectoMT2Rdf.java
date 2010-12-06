@@ -50,9 +50,14 @@ public class TectoMT2Rdf
 			}
 		});
 		
-		for(String file : file_list)
+		for (int i = 0; i < file_list.length; i++)
 		{
-			logger.info("Transforming file: " + inputDir + "/" + file);
+			String file = file_list[i];
+			logger.info(
+					String.format("Transforming file %d/%d: %s",
+					i+1, file_list.length,
+					inputDir + "/" + file));
+					 
 			transformFile(inputDir + "/" + file, outputDir + "/" + file + ".owl");
 		}
 	}

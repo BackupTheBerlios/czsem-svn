@@ -17,33 +17,24 @@
 	
 <xsl:param name="filename_param"/>
 
+<xsl:variable name="input_filename">
+	<xsl:choose>
+		<xsl:when test="$filename_param">
+			<xsl:value-of select="$filename_param"/>
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:value-of select="/node()/@filename"/>
+		</xsl:otherwise>
+	</xsl:choose>
+</xsl:variable>
+
+<xsl:variable name="filename" select="concat('http://czsem.berlios.de/ontologies/czech_fireman/tmt_files/', $input_filename)"/>
+
 
 <xsl:template match="/">
-	<xsl:variable name="input_filename">
-		<xsl:choose>
-			<xsl:when test="$filename_param">
-				<xsl:value-of select="$filename_param"/>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:value-of select="/node()/@filename"/>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:variable>
-
-	<xsl:variable name="filename" select="concat('http://czsem.berlios.de/ontologies/czech_fireman/tmt_files/', $input_filename)"/>
-
-<!-- 
-	<param><xsl:value-of select="$filename_param"/></param>
-	<input><xsl:value-of select="$input_filename"/></input>
-	<res><xsl:value-of select="$filename"/></res>
- -->	
 	
 	<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 	         xmlns:pml="http://ufal.mff.cuni.cz/pdt/pml/">
-	    
-	    <xsl:attribute name="xml:base">
-	    	<xsl:value-of select="concat($filename, '#')"/>	    
-	    </xsl:attribute>
 	    
 	    <Ontology xmlns="http://www.w3.org/2002/07/owl#" rdf:about="{$filename}"/>
 		
@@ -97,7 +88,7 @@
 
 <xsl:template name="paste_value_of_node_URI">
 	<xsl:param name="node_id" select="@id"/>
-	<xsl:value-of select="concat('node/', $node_id)"/>
+	<xsl:value-of select="concat($filename,'#node/', $node_id)"/>
 <!-- <xsl:value-of select="concat('file:', /node()/@filename, '/node/', $node_id)"/>  -->	
 </xsl:template>
 
@@ -147,34 +138,4 @@
 			</xsl:for-each>								
 	</pml:Node>
 </xsl:template>
-
-<!--
-<xsl:template name="copy_attributes">
-	 <xsl:element name="has{name(.)}"><xsl:value-of select="."/></xsl:element>
-</xsl:template>
-
-
-<xsl:template match="pml:childrens[@id]|pml:LMs[@id]">
-	<xsl:variable name="ch_id" select="@id"/>	
-	<xsl:variable name="ch_uri" select="concat('&pml;nodes/',$ch_id)"/>
-	<pml:Node rdf:about="{$ch_uri}">
-	<xsl:choose>
-		<xsl:when test="../@id">
-			<xsl:variable name="parent_id" select="../@id"/>	
-			<xsl:variable name="parent_uri" select="concat('&pml;nodes/',$parent_id)"/>
-			<pml:hasParent rdf:resource="{$parent_uri}"/>
-		</xsl:when>
-		<xsl:otherwise>
-			<xsl:if test="../../@id">
-				<xsl:variable name="parent_id" select="../../@id"/>	
-				<xsl:variable name="parent_uri" select="concat('&pml;nodes/',$parent_id)"/>
-				<pml:hasParent rdf:resource="{$parent_uri}"/>
-			</xsl:if>
-		</xsl:otherwise>
-	</xsl:choose>	
-	</pml:Node>
-</xsl:template>
-
--->
-
 </xsl:stylesheet>
