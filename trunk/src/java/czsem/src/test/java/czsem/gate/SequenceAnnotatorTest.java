@@ -142,6 +142,50 @@ public class SequenceAnnotatorTest extends TestCase
 		assertEquals(22, sa.lastStart());
 	}
 
+	public void testNextTokenAngleBrackets()
+	{
+		String s = 	
+ "FIRST WISCONSIN <FWB > TO BUY MINNESOTA BANK"
++"    MILWAUKEE, Wis., March 26 - First Wisconsin Corp said it"
++"plans to acquire Shelard Bancshares Inc for about 25 mln dlrs"
++"in cash, its first acquisition of a Minnesota -based bank ."
++"    First Wisconsin said Shelard is the holding company for two"
++"banks with total assets of 168 mln dlrs."
++"    First Wisconsin , which had assets at yearend of 7.1 billion"
++"dlrs, said the Shelard purchase price is about 12 times the"
++"1986 earnings of the bank."
++"    It said the two Shelard banks have a total of five offices"
++"in the Minneapolis-St. Paul area."
++" Reuter";
+
+		SequenceAnnotator sa = new SequenceAnnotator(s, 0);
+		sa.nextToken("FIRST WISCONSIN TO BUY MINNESOTA BANK MILWAUKEE, Wis., March 26- First Wisconsin Corp said it plans to acquire Shelard Bancshares Inc for about 25 mln dlrs in cash, its first acquisition of a Minnesota -based bank.");
+		assertEquals(0, sa.lastStart());
+		sa.nextToken("First Wisconsin said Shelard is the holding company for two banks with total assets of 168 mln dlrs.");
+		assertEquals(228, sa.lastStart());
+		sa.nextToken("First Wisconsin, which had assets at yearend of 7.1 billion dlrs, said the Shelard purchase price is about 12 times the 1986 earnings of the bank.");
+		assertEquals(331, sa.lastStart());
+	}
+
+
+	public void testNextTokenAngleBrackets2()
+	{
+		String s = "FIRST WISCONSIN <FWB > TO BUY MINNESOTA BANK";
+
+		SequenceAnnotator sa = new SequenceAnnotator(s, 0);
+		sa.nextToken("FIRST");
+		assertEquals(0, sa.lastStart());
+		sa.nextToken("WISCONSIN");
+		assertEquals(6, sa.lastStart());
+		assertEquals(15, sa.lastEnd());
+		sa.nextToken("TO");
+		assertEquals(23, sa.lastStart());
+		assertEquals(25, sa.lastEnd());
+		sa.nextToken("BUY");
+		assertEquals(26, sa.lastStart());		
+	}
+	
+	
 
 	public static Test suite(){
 		return new TestSuite(SequenceAnnotatorTest.class);

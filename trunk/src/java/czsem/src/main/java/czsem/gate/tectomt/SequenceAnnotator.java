@@ -109,6 +109,18 @@ public class SequenceAnnotator
 					
 					if (loc_ch != toc_ch)
 					{
+						if (loc_ch == '<')
+						{
+							 int found_index = string_content.indexOf('>', local_index);
+							 if (found_index != -1)
+							 {
+								 local_index = found_index;
+								 token_index--;
+								 
+							 }
+							
+						}
+						else
 						//quotation correction
 						if ((loc_ch == '"' || loc_ch == '\'')&& (toc_ch == '\'' || toc_ch == '`'))
 						{

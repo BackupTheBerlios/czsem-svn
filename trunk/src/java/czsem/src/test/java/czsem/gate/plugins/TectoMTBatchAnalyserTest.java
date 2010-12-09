@@ -28,6 +28,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -177,8 +178,56 @@ public class TectoMTBatchAnalyserTest extends TestCase
 		assertEquals("n:poss", tfm.get("formeme"));
 		assertEquals("APP", tfm.get("functor"));
 		assertEquals(3, tfm.get("lex.rf"));
-
 		
+		
+		FeatureMap fm1 = Factory.newFeatureMap();
+		fm1.put("t_lemma", "face");
+		fm1.put("tense", "sim");
+		AnnotationSet aParent = as.get("tToken", fm1);
+		assertEquals(1, aParent.size());
+
+		FeatureMap fm2 = Factory.newFeatureMap();
+		fm2.put("t_lemma", "shortage");
+		AnnotationSet aChild = as.get("tToken", fm2);
+		assertEquals(1, aChild.size());
+
+		Integer parentId = aParent.iterator().next().getId();
+		Integer childId = aChild.iterator().next().getId();
+		
+		AnnotationSet tds = as.get("tDependency");
+		Iterator<Annotation> tds_iter = tds.iterator();
+		int arg_cnt = 0;
+		boolean found = false;
+		while (tds_iter.hasNext())
+		{
+			Annotation atd = tds_iter.next();
+			@SuppressWarnings("unchecked")
+			List<Integer> atdArgs = (List<Integer>) atd.getFeatures().get("args");
+			if (atdArgs.get(0).equals(parentId))
+			{
+				arg_cnt++;
+				if (atdArgs.get(1).equals(childId)) found = true;
+				
+			}
+		}
+		
+		assertEquals(2, arg_cnt);
+		assertTrue(found);
+		
+		Integer lexrf = (Integer) as.get(parentId).getFeatures().get("lex.rf");
+		assertEquals("Token", as.get(lexrf).getType());
+		
+		
+		
+		AnnotationSet auxrf = as.get("auxRfDependency");
+		@SuppressWarnings("unchecked")
+		List<Integer> lexrfArgs = (List<Integer>) auxrf.iterator().next().getFeatures().get("args");
+		Integer lexParentID = lexrfArgs.get(0);
+		Integer lexChildID = lexrfArgs.get(1);
+		
+		assertEquals("tToken", as.get(lexParentID).getType());
+		assertEquals("Token", as.get(lexChildID).getType());
+
 	}
 	
 	public void testAnnotateGateDocumentAcordingtoTMTfileMorpho() throws URISyntaxException, InvalidOffsetException, ParserConfigurationException, SAXException, IOException, ResourceInstantiationException
@@ -286,7 +335,7 @@ public class TectoMTBatchAnalyserTest extends TestCase
 						(TextualDocument) document));		
 	}
 	
-	public void testExecuteCzechFullAllIncidents() throws PersistenceException, ResourceInstantiationException, ExecutionException
+	public void _testExecuteCzechFullAllIncidents() throws PersistenceException, ResourceInstantiationException, ExecutionException
 	{
 	    DataStore ds = GateUtils.openDataStore("file:/C:/Users/dedek/AppData/GATE/ISWC");			
 		corpus = GateUtils.loadCorpusFormDatastore(ds, "ISWC___1274943456887___5663");

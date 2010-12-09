@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Queue;
+import java.util.Set;
+
+import org.apache.log4j.Logger;
 
 import czsem.gate.AbstractAnnotationDependencyMarker;
 
@@ -19,6 +22,7 @@ import czsem.gate.AbstractAnnotationDependencyMarker;
 public class AnnotationDependencyRootMarker extends AbstractAnnotationDependencyMarker
 {
 	private static final long serialVersionUID = 8357007815773883611L;
+	static Logger logger = Logger.getLogger(AnnotationDependencyRootMarker.class);
 	
 	
 	protected static class DependencyBFSnode
@@ -52,6 +56,30 @@ public class AnnotationDependencyRootMarker extends AbstractAnnotationDependency
 			this.distance = distance;
 		}
 	}
+
+	protected static class SearchQueue
+	{
+		protected Queue<DependencyBFSnode> queueBFS= new ArrayDeque<DependencyBFSnode>();
+		protected Set<Integer> visited_ids = new HashSet<Integer>();
+		
+		public void add(DependencyBFSnode node)
+		{
+			if (visited_ids.contains(node.annotationID)) return;
+			
+			queueBFS.add(node);
+			visited_ids.add(node.annotationID);			
+		}
+
+		public boolean isEmpty() {
+			return queueBFS.isEmpty();
+		}
+
+		public DependencyBFSnode remove() {
+			return queueBFS.remove();
+		}		
+	}
+
+	
 	
 	protected Annotation findRootBFS(Collection<Annotation> tokens_to_find)
 	{		
@@ -59,7 +87,7 @@ public class AnnotationDependencyRootMarker extends AbstractAnnotationDependency
 		tokens_to_find.remove(token);
 		DependencyBFSnode confirmed_root = new DependencyBFSnode(token.getId(), 0, 0);
 				
-		Queue<DependencyBFSnode> queueBFS= new ArrayDeque<DependencyBFSnode>();
+		SearchQueue queueBFS = new SearchQueue(); 
 		
 		queueBFS.add(confirmed_root);
 		
@@ -92,6 +120,7 @@ public class AnnotationDependencyRootMarker extends AbstractAnnotationDependency
 					queueBFS.add(currentBFSnode.down(childID));
 				}
 			}
+			
 		}
 		
 		return inputTokensAS.get(confirmed_root.annotationID);
@@ -100,12 +129,14 @@ public class AnnotationDependencyRootMarker extends AbstractAnnotationDependency
 	@Override
 	public void execute() throws ExecutionException
 	{
+//		logger.debug("RootMarker: " + document.getName());
 		initBeforeExecute();
 		
 		AnnotationSet inputAnnotations = inputAS.get(new HashSet<String>(inputAnnotationTypeNames));
 		for (Annotation annotation : inputAnnotations)
 		{			
-			markAnnotationDependencyRoot(annotation);			
+//			logger.debug(String.format("ann root: %s, id: %d", annotation.getType(), annotation.getId()));
+			markAnnotationDependencyRoot(annotation);
 		}
 	}
 	

@@ -55,7 +55,7 @@ public class SentenceInfoManager extends SeqAnnotation
 			public Token newToken(String tmt_id) {return new Token.tToken(tmt_id);}
 			@Override
 			public Dependency newDependency(String parent_id, String child_id) {
-				return new Dependency(child_id, parent_id) {
+				return new Dependency(parent_id, child_id) {
 					@Override
 					public String getAnnotationType() {return "tDependency";}
 				};
@@ -66,7 +66,7 @@ public class SentenceInfoManager extends SeqAnnotation
 			@Override
 			public Token newToken(String tmt_id) {return new Token.aToken(tmt_id);}
 			public Dependency newDependency(String parent_id, String child_id) {
-				return new Dependency(child_id, parent_id) {
+				return new Dependency(parent_id, child_id) {
 					@Override
 					public String getAnnotationType() {return "aDependency";}
 				};

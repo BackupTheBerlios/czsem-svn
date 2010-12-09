@@ -1,4 +1,4 @@
-package czsem.gate;
+package czsem.gate.learning;
 
 import gate.Corpus;
 import gate.DataStore;
@@ -16,57 +16,121 @@ import gate.util.profile.Profiler;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.util.Arrays;
+import java.util.Enumeration;
 import java.util.List;
 
+import org.apache.log4j.Appender;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.jdom.JDOMException;
 
+import czsem.gate.GateUtils;
+import czsem.gate.plugins.AnnotationDependencyRootMarker;
 import czsem.gate.plugins.CrossValidation;
+import czsem.gate.learning.MLEngine.ILPEngine;
 import czsem.utils.Config;
 
 public class MachineLearningExperimenter
 {
-	public static abstract class ExperimentSetup
+	static Logger logger = Logger.getLogger(MachineLearningExperimenter.class);
+
+	public interface TrainTest
+	{
+		List<PRSetup> getTrainControllerSetup() throws JDOMException, IOException;
+		List<PRSetup> getTestControllerSetup() throws JDOMException, IOException;
+	}
+	
+	public static abstract class ExperimentSetup implements TrainTest
 	{
 		protected String dataStore;
 		protected String copusId;
+		protected MLEngine[] engines;
+		protected String learninigAnnotType;
 		
-		public ExperimentSetup(String dataStore, String copusId) {
+		public ExperimentSetup(String dataStore, String copusId, MLEngine ... engines) {
 			this.dataStore = dataStore;
 			this.copusId = copusId;
+			this.engines = engines;
+		}
+		
+		protected void initEngines(String config_directory) throws MalformedURLException, JDOMException, IOException
+		{
+			learninigAnnotType = null;
+			for (int i = 0; i < engines.length; i++)
+			{
+				engines[i].init(config_directory);
+				
+				//check if LearninigAnnotType matches among ML engines 
+				String curLearninigAnnotType = engines[i].getLearninigAnnotType();				
+				if (learninigAnnotType == null) learninigAnnotType = curLearninigAnnotType;
+				else if (learninigAnnotType.equals(curLearninigAnnotType))
+				{
+					logger.warn(String.format(
+							"Learninig annotation types do not match! %s: %s, %s: %s",
+							engines[i].getClass().getName(),
+							curLearninigAnnotType,
+							engines[i-1].getClass().getName(),
+							learninigAnnotType));
+					
+					learninigAnnotType = curLearninigAnnotType;					
+				}
+			}			
+		}
+		
+		protected List<PRSetup> addTrainMLEngines(List<PRSetup> prs) throws JDOMException, IOException
+		{
+			for (int i = 0; i < engines.length; i++)
+			{
+				prs.addAll(engines[i].getTrainControllerSetup());				
+			}
+			return prs;
 		}
 
-		abstract List<PRSetup> getTrainControllerSetup() throws JDOMException, IOException;
-		abstract List<PRSetup> getTestControllerSetup();
-		Corpus getCorpus() throws PersistenceException, ResourceInstantiationException
+		protected List<PRSetup> addTestMLEngines(List<PRSetup> prs) throws JDOMException, IOException
+		{
+			for (int i = 0; i < engines.length; i++)
+			{
+				prs.addAll(engines[i].getTestControllerSetup());				
+			}
+			return prs;
+		}
+
+		
+		public Corpus getCorpus() throws PersistenceException, ResourceInstantiationException
 		{
 		    DataStore ds = GateUtils.openDataStore(dataStore);
 		    Corpus corpus = GateUtils.loadCorpusFormDatastore(ds, copusId);			
 		    return corpus; 
-		}
+		}		
 	}
 	
-	public static class PRSetup
+	public interface PRSetup
+	{
+		public ProcessingResource createPR() throws ResourceInstantiationException;		
+	}
+	
+
+	public static class SinglePRSetup implements PRSetup 
 	{
 		private Class<?> pr_class;
 		FeatureMap fm;
 
-		public PRSetup(Class<?> cl)
+		public SinglePRSetup(Class<?> cl)
 		{
 			pr_class = cl;
 			fm = Factory.newFeatureMap();
 		}
 				
-		public PRSetup putFeature(Object key, Object value)
+		public SinglePRSetup putFeature(Object key, Object value)
 		{
 			fm.put(key, value);
 			return this;
 		}
-		public PRSetup putFeatureList(Object key, String ... strig_list)
+		public SinglePRSetup putFeatureList(Object key, String ... strig_list)
 		{
 			if (strig_list == null)
 				fm.put(key, null);
@@ -104,13 +168,14 @@ public class MachineLearningExperimenter
 	    train_controller.execute();
 		
 	}
+	
 
 	public static void runExperiment(ExperimentSetup setup, int number_of_folds) throws ResourceInstantiationException, ExecutionException, PersistenceException, JDOMException, IOException
 	{
 	    SerialAnalyserController train_controller = buildGatePipeline(setup.getTrainControllerSetup());
 	    SerialAnalyserController test_controller = buildGatePipeline(setup.getTestControllerSetup());
 	    
-		new PRSetup(CrossValidation.class)
+		new SinglePRSetup(CrossValidation.class)
 			.putFeature("corpus", setup.getCorpus())
 			.putFeature("numberOfFolds", number_of_folds)
 			.putFeature("trainingPR", train_controller)
@@ -121,12 +186,28 @@ public class MachineLearningExperimenter
 	public static void main(String [] args) throws GateException, URISyntaxException, IOException, JDOMException
 	{
 		BasicConfigurator.configure();
-	    Logger logger = Logger.getLogger(Profiler.class);
+	    Logger logger = Logger.getRootLogger();
+	    logger.setLevel(Level.ALL);
+
+	    @SuppressWarnings("unchecked")
+		Enumeration<Appender> apps = logger.getAllAppenders();
+	    while (apps.hasMoreElements())
+	    {
+	    	Appender app = apps.nextElement();
+	    	if (app.getName() == null)
+	    	{
+	    		logger.removeAppender(app);
+	    	}
+	    }
+
+	    logger = Logger.getLogger(Profiler.class);
 	    logger.setLevel(Level.OFF);
 	    logger = Logger.getLogger(SerialController.class);
 	    logger.setLevel(Level.OFF);
 	    logger = Logger.getLogger(Gate.class);
 	    logger.setLevel(Level.OFF);
+	    logger = Logger.getLogger(AnnotationDependencyRootMarker.class);
+	    logger.setLevel(Level.ALL);
 
 		
 	    Config.getConfig().setGateHome();
@@ -144,6 +225,8 @@ public class MachineLearningExperimenter
 	    
 //	    runExperiment(new TrainTestAcquisitions(), 2);	    
 //	    runExperiment(new TrainTestGateOnCzech(), 2);	    
-	    trainOnly(new TrainTestGateOnCzech(false, true));
+//	    trainOnly(new TrainTestGateOnCzech(false, true));
+//	    trainOnly(new TrainTestAcquisitions(new ILPEngine()));
+	    trainOnly(new TrainTestCzechFireman(new ILPEngine()));
 	}
 }

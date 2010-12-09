@@ -45,6 +45,7 @@
 				:- set(depth,300).
 				:- set(clauselength,100).
 				:- set(i,40).
+				:- set(samplesize,0).
             </learning_settings>
         </ilp>
 

@@ -243,5 +243,17 @@ public class TectoMTBatchAnalyser extends AbstractLanguageAnalyserWithInputOutpu
 	public void setLanguage(String language) {
 		this.language = language;
 	}
+	
+
+	public static void main(String [] args) throws Exception
+	{
+/*
+		TectoMTBatchAnalyserTest t = new TectoMTBatchAnalyserTest();
+				
+	    DataStore ds = GateUtils.openDataStore("file:/C:/Users/dedek/AppData/GATE/Acquisitions-v1.1");			
+		t.corpus = GateUtils.loadCorpusFormDatastore(ds, "Acquisitions-v1.1___1284475684516___2218");
+		t.executeTmtOnCurrentCorpus("english", TectoMTBatchAnalyserTest.english_full_blocks);				
+*/		
+	}
 
 }

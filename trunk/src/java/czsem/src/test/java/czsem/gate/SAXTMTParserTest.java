@@ -82,7 +82,7 @@ public class SAXTMTParserTest extends TestCase
 		
 		AssertPrinter apr = new AssertPrinter();
 		aDependencies.get(0).print(apr.getPrStr());
-		apr.assertPrinted("Depends: SEnglishA-s1w8 on SEnglishA-s1w5");
+		apr.assertPrinted("Depends: SEnglishA-s1w5 on SEnglishA-s1w8");
 		
 		Token[] tTokens = s1.getTokens(Layer.TECTO);
 		assertEquals(tTokens.length, 13);
@@ -98,7 +98,7 @@ public class SAXTMTParserTest extends TestCase
 		List<Dependency> tDependencies = s1.getDependencies(Layer.TECTO);
 		assertEquals(tDependencies.size(), 12);
 		tDependencies.get(0).print(apr.getPrStr());
-		apr.assertPrinted("Depends: SEnglishT-s1w8 on SEnglishT-s1w5");
+		apr.assertPrinted("Depends: SEnglishT-s1w5 on SEnglishT-s1w8");
 
 		Token[] nTokens = s1.getTokens(Layer.NAMES);
 		assertEquals(nTokens.length, 3);

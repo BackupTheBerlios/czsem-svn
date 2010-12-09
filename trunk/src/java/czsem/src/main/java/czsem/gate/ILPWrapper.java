@@ -61,8 +61,11 @@ public class ILPWrapper implements AdvancedMLEngine
 		Document doc = pr.getDocument();
 		
 		if (docCounter == null) docCounter = new CorpusDocumentCounter(pr.getCorpus());
-		if (docCounter.addDocument(doc)) 
+		if (docCounter.addDocument(doc))
+		{
 			ilpSer.serializeDocument(doc, pr.getInputASName());
+//			logger.debug("SerializeDocument: " + doc.getName());
+		}
 				
 		ilpSer.serializeTrainingInstance(
 				attributes.get(idIndex),

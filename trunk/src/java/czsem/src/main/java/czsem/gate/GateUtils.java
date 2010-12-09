@@ -38,13 +38,13 @@ public class GateUtils
 		return ret;
 	}
 	
-	public static FeatureMap createDependencyArgsFeatureMap(Integer id1, Integer id2)
+	public static FeatureMap createDependencyArgsFeatureMap(Integer parent_id, Integer child_id)
 	{
 		FeatureMap fm = Factory.newFeatureMap();
 		ArrayList<Integer> args = new ArrayList<Integer>(2);
 
-		args.add(id1);
-		args.add(id2);
+		args.add(parent_id);
+		args.add(child_id);
 		fm.put("args", args);
 		
 		return fm;
