@@ -15,6 +15,7 @@ import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 
+import czsem.gate.ILPSerializer;
 import czsem.gate.learning.MachineLearningExperimenter.PRSetup;
 import czsem.gate.learning.MachineLearningExperimenter.SinglePRSetup;
 import czsem.gate.learning.MachineLearningExperimenter.TrainTest;
@@ -28,6 +29,7 @@ public abstract class MLEngine implements TrainTest
 	protected URL config_file;
 	protected String learninigAnnotType;
 	protected boolean rootSubtreeLearninig;
+	protected String[] inputAnnotationTypeNames;
 	
 	
 	public static class PaumEngine extends MLEngine
@@ -154,6 +156,9 @@ public abstract class MLEngine implements TrainTest
 		this.config_file = config_file;
 		String readAnnotType = readLearninigAnnotType(config_file);
 		
+		inputAnnotationTypeNames = 
+			ILPSerializer.parseClassAttributeValuesFromSettingsFile(config_file);
+		
 		if (readAnnotType.endsWith("_root"))
 		{
 			rootSubtreeLearninig = true;
@@ -190,6 +195,10 @@ public abstract class MLEngine implements TrainTest
 
 	public String getLearninigAnnotType() {
 		return learninigAnnotType;
+	}
+
+	public String[] getInputAnnotationTypeNames() {
+		return inputAnnotationTypeNames;		
 	}
 
 }

@@ -15,28 +15,25 @@
 	xmlns:pml="http://ufal.mff.cuni.cz/pdt/pml/"		
 	version="1.0">
 	
-<xsl:param name="filename_param"/>
+<xsl:param name="ontology_uri_param"/>
 
-<xsl:variable name="input_filename">
+<xsl:variable name="ontology_uri">
 	<xsl:choose>
-		<xsl:when test="$filename_param">
-			<xsl:value-of select="$filename_param"/>
+		<xsl:when test="$ontology_uri_param">
+			<xsl:value-of select="$ontology_uri_param"/>
 		</xsl:when>
 		<xsl:otherwise>
-			<xsl:value-of select="/node()/@filename"/>
+			<xsl:value-of select="/node()/@ontology_uri"/>
 		</xsl:otherwise>
 	</xsl:choose>
 </xsl:variable>
-
-<xsl:variable name="filename" select="concat('http://czsem.berlios.de/ontologies/czech_fireman/tmt_files/', $input_filename)"/>
-
 
 <xsl:template match="/">
 	
 	<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 	         xmlns:pml="http://ufal.mff.cuni.cz/pdt/pml/">
 	    
-	    <Ontology xmlns="http://www.w3.org/2002/07/owl#" rdf:about="{$filename}"/>
+	    <Ontology xmlns="http://www.w3.org/2002/07/owl#" rdf:about="{$ontology_uri}"/>
 		
 		<xsl:apply-templates select="//pml:children[@id]|//pml:LM[@id]|//pml:trees/node()[@id]"/>         
 	</rdf:RDF>
@@ -88,8 +85,7 @@
 
 <xsl:template name="paste_value_of_node_URI">
 	<xsl:param name="node_id" select="@id"/>
-	<xsl:value-of select="concat($filename,'#node/', $node_id)"/>
-<!-- <xsl:value-of select="concat('file:', /node()/@filename, '/node/', $node_id)"/>  -->	
+	<xsl:value-of select="concat($ontology_uri,'#node_', $node_id)"/>
 </xsl:template>
 
 <xsl:template name="paste_node_URI_attr">

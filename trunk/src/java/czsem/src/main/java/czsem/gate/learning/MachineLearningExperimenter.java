@@ -50,6 +50,7 @@ public class MachineLearningExperimenter
 		protected String copusId;
 		protected MLEngine[] engines;
 		protected String learninigAnnotType;
+		protected String[] inputAnnotationTypeNames;
 		
 		public ExperimentSetup(String dataStore, String copusId, MLEngine ... engines) {
 			this.dataStore = dataStore;
@@ -60,14 +61,16 @@ public class MachineLearningExperimenter
 		protected void initEngines(String config_directory) throws MalformedURLException, JDOMException, IOException
 		{
 			learninigAnnotType = null;
+			inputAnnotationTypeNames = null;
 			for (int i = 0; i < engines.length; i++)
 			{
 				engines[i].init(config_directory);
 				
 				//check if LearninigAnnotType matches among ML engines 
-				String curLearninigAnnotType = engines[i].getLearninigAnnotType();				
+				String curLearninigAnnotType = engines[i].getLearninigAnnotType();
+				
 				if (learninigAnnotType == null) learninigAnnotType = curLearninigAnnotType;
-				else if (learninigAnnotType.equals(curLearninigAnnotType))
+				else if (! learninigAnnotType.equals(curLearninigAnnotType))
 				{
 					logger.warn(String.format(
 							"Learninig annotation types do not match! %s: %s, %s: %s",
@@ -78,6 +81,10 @@ public class MachineLearningExperimenter
 					
 					learninigAnnotType = curLearninigAnnotType;					
 				}
+				
+				String[] curInputAnnotationTypeNames = engines[i].getInputAnnotationTypeNames();
+				if (inputAnnotationTypeNames == null && curInputAnnotationTypeNames != null)
+					inputAnnotationTypeNames = curInputAnnotationTypeNames; 					
 			}			
 		}
 		
@@ -226,7 +233,7 @@ public class MachineLearningExperimenter
 //	    runExperiment(new TrainTestAcquisitions(), 2);	    
 //	    runExperiment(new TrainTestGateOnCzech(), 2);	    
 //	    trainOnly(new TrainTestGateOnCzech(false, true));
-//	    trainOnly(new TrainTestAcquisitions(new ILPEngine()));
-	    trainOnly(new TrainTestCzechFireman(new ILPEngine()));
+	    trainOnly(new TrainTestAcquisitions(new ILPEngine()));
+//	    trainOnly(new TrainTestCzechFireman(new ILPEngine()));
 	}
 }

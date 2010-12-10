@@ -11,6 +11,7 @@ public class RulesSerializer extends ILPExec
 {
 	private String output_rules_file_name;
 	protected String prolog_serialzation_script = "/rule_xml_serializer.yap";
+	protected String ontologyURI = null;
 	
 	protected void setDefaults()
 	{}
@@ -20,29 +21,32 @@ public class RulesSerializer extends ILPExec
 
 	public RulesSerializer(ProjectSetup ps)
 	{super(ps); setDefaults();}
-
+	
 	public void serializeToSwrlx(String [] objectProperties) throws IOException, URISyntaxException
 	{
 		startPrologProcess(Config.getConfig().getCzsemPluginDir() + prolog_serialzation_script);
-//		startReaderThreads("RulesSerializer");
-		startStdoutReaderThreads();
+		startReaderThreads("RulesSerializer");
+//		startStdoutReaderThreads();
 		
 		setUtf8Encoding();
 		
-		callRuleSrialization(getRulesFileName(), getOutputRulesFileName(), objectProperties);
+		callRuleSrialization(getRulesFileName(), getOutputRulesFileName(), getOntologyURI(), objectProperties);
 
 		
 	}
 	
-	private void callRuleSrialization(String rulesFileName,	String xmlRulesFileName, String[] objectProperties)
+	private void callRuleSrialization(
+			String inputRulesFileName, 
+			String outputRulesFileName, 
+			String ontologyURI, 
+			String[] objectProperties)
 	{
 		output_writer.print("serialize_rule_file('");		
-		output_writer.print(rulesFileName);		
+		output_writer.print(inputRulesFileName);		
 		output_writer.print("','");		
-		output_writer.print(xmlRulesFileName);		
+		output_writer.print(outputRulesFileName);		
 		output_writer.print("','");		
-		output_writer.print('/');		
-		output_writer.print(xmlRulesFileName);		
+		output_writer.print(ontologyURI);	 //http://czsem.berlios.de/ontologies	
 		output_writer.print("',[");
 		
 		for (int i = 0; i < objectProperties.length; i++)
@@ -58,10 +62,11 @@ public class RulesSerializer extends ILPExec
 
 	public static void main(String[] args) throws IOException, URISyntaxException, InterruptedException
 	{
-		RulesSerializer rs = new RulesSerializer(new File("gate-learning"), "RulesSerializer");
+		RulesSerializer rs = new RulesSerializer(new File("gate-learning/czech_fireman/savedFiles"), "RulesSerializer");
 //		rs.setRulesFileName("acquisitions-v1.1/rules/learned_rules");
-		rs.setRulesFileName("czech_fireman/savedFiles/learned_rules");
-		rs.setOutputRulesFileName("czech_fireman/rules/learned_rules_test1.owl");
+		rs.setRulesFileName("learned_rules");
+		rs.setOutputRulesFileName("../rules/learned_rules_test1.owl");
+		rs.setOntologyURIFromOutpuRulesFileNameAndWorkingDir();
 		String[] object_props = {"'lex.rf'", "tDependency"};
 		rs.serializeToSwrlx(object_props);
 		rs.close();
@@ -75,5 +80,27 @@ public class RulesSerializer extends ILPExec
 	public String getOutputRulesFileName() {
 		return output_rules_file_name;
 	}
+	
+	public void setOntologyURI(String uri)
+	{
+		ontologyURI = uri;		
+	}
+
+	public void setOntologyURIFromOutpuRulesFileNameAndWorkingDir()
+	{
+		String dir_name = working_directory.getAbsoluteFile().getParentFile().getName();
+		ontologyURI = 
+			"http://czsem.berlios.de/ontologies/" + 
+			dir_name + 
+			"/rules/" + 
+			new File(getOutputRulesFileName()).getName();		
+	}
+
+
+	public String getOntologyURI()
+	{
+		return ontologyURI ;
+	}
+
 
 }

@@ -18,11 +18,13 @@ public class TectoMT2Rdf
 {
 	static Logger logger = Logger.getLogger(TectoMT2Rdf.class);
 	
-	private Transformer transformer;
+	protected Transformer transformer;
+	protected String ontologyURIBase;
 
-	public TectoMT2Rdf() throws TransformerConfigurationException
+	public TectoMT2Rdf(String ontologyURIBase) throws TransformerConfigurationException
 	{
-	    TransformerFactory tFactory = TransformerFactory.newInstance();
+		this.ontologyURIBase = ontologyURIBase;
+		TransformerFactory tFactory = TransformerFactory.newInstance();
 	    	   
 	    transformer = tFactory.newTransformer(
 	    		new StreamSource(getClass().getResourceAsStream("tmt2rdf.xsl")));
@@ -32,7 +34,8 @@ public class TectoMT2Rdf
 	
 	public static void main(String[] args) throws FileNotFoundException, TransformerException
 	{
-		TectoMT2Rdf tmt2rdf = new TectoMT2Rdf();
+//		TectoMT2Rdf tmt2rdf = new TectoMT2Rdf("http://czsem.berlios.de/ontologies/czech_fireman/tmt_files/");
+		TectoMT2Rdf tmt2rdf = new TectoMT2Rdf("http://czsem.berlios.de/ontologies/acquisitions-v1.1/tmt_files/");
 		tmt2rdf.transformDirectory(
 				"czsem_GATE_plugins/TmT_serializations", 
 				"czsem_GATE_plugins/TmT_serializations/owl");
@@ -69,7 +72,8 @@ public class TectoMT2Rdf
 
 	public void transformFile(String inputFileName, String outputFileName) throws FileNotFoundException, TransformerException
 	{
-		transformer.setParameter("filename_param", new File(outputFileName).getName());
+		transformer.setParameter("ontology_uri_param", ontologyURIBase + new File(outputFileName).getName());
+		
 		transformer.transform(
 	    		new StreamSource(inputFileName),
 	    		new StreamResult(new FileOutputStream(outputFileName)));		

@@ -161,6 +161,30 @@ public class LinguisticSerializer
 		ilp_exec.startReaderThreads("train");
 		ilp_exec.induceAndWriteRules();
 		ilp_exec.close();
+		
+	
+		RulesSerializer rs = new RulesSerializer(workingDirectory, "RulesSerializer");
+		rs.setOutputRulesFileName("../rules/" + projectName + "_rules.owl");
+		rs.setOntologyURIFromOutpuRulesFileNameAndWorkingDir();
+
+//		String[] object_props = {"'lex.rf'", "tDependency"};
+		String[] object_props = new String[treeDepRels.size() + one2oneDepRels.size()];
+		for (int a=0; a<treeDepRels.size(); a++)
+		{
+			object_props[a] = treeDepRels.get(a).getName();			
+		}
+
+		for (int a=0; a<one2oneDepRels.size(); a++)
+		{
+			object_props[treeDepRels.size() + a] = one2oneDepRels.get(a).getName();			
+		}
+		
+		
+		rs.serializeToSwrlx(object_props);
+		rs.close();
+
+		
+		
 	}
 
 

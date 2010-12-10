@@ -40,7 +40,7 @@
             <learning_settings>
 				:- set(verbosity,1).
 				:- set(verbosity,0).
-				:- set(noise,0).
+				:- set(noise,10).
 				:- set(depth,200).
 				:- set(clauselength,15).
 %				:- set(i,40).

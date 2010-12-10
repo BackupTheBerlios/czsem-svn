@@ -1,9 +1,6 @@
 :-use_module(library(lists)).
 
-serialize_rule_file(RuleFileName, OutputFileName, ObjectProperties) :- 
-	serialize_rule_file(RuleFileName, OutputFileName, OutputFileName, ObjectProperties).
-
-serialize_rule_file(RuleFileName, OutputFileName, OutputURISuffix, ObjectProperties) :-
+serialize_rule_file(RuleFileName, OutputFileName, OntologyURI, ObjectProperties) :-
 	assert(objectProperties(ObjectProperties)),
 	open(OutputFileName, 'write', Stream),
 	set_output(Stream),
@@ -12,7 +9,7 @@ serialize_rule_file(RuleFileName, OutputFileName, OutputURISuffix, ObjectPropert
 	write(' <!ENTITY pml "http://ufal.mff.cuni.cz/pdt/pml/" > ]>\n'),
 		
 	write('<Ontology xmlns="http://www.w3.org/2002/07/owl#"\n'),	
-	format(' ontologyIRI="http://czsem.berlios.de/ontologies~a">\n',[OutputURISuffix]),
+	format(' ontologyIRI="~a">\n',[OntologyURI]),
 		
 	consult(RuleFileName),
 

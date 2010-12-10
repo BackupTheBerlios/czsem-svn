@@ -109,6 +109,7 @@ public class SequenceAnnotator
 					
 					if (loc_ch != toc_ch)
 					{
+						//Angle Brackets skipped by TectoMT
 						if (loc_ch == '<')
 						{
 							 int found_index = string_content.indexOf('>', local_index);

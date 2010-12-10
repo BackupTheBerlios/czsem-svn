@@ -2,16 +2,15 @@ package czsem.gate.learning;
 
 import gate.creole.annotdelete.AnnotationDeletePR;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.jdom.JDOMException;
 
-import czsem.gate.ILPSerializer;
-import czsem.gate.learning.MLEngine.ILPEngine;
-import czsem.gate.learning.MachineLearningExperimenter.*;
+import czsem.gate.learning.MachineLearningExperimenter.ExperimentSetup;
+import czsem.gate.learning.MachineLearningExperimenter.PRSetup;
+import czsem.gate.learning.MachineLearningExperimenter.SinglePRSetup;
 import czsem.gate.plugins.CreateMentions;
 
 public class TrainTestAcquisitions extends ExperimentSetup
@@ -40,9 +39,9 @@ public class TrainTestAcquisitions extends ExperimentSetup
 			.putFeature("inputASName", "Key")
 			.putFeature("outputASName", "TectoMT")
 //			.putFeatureList("inputAnnotationTypeNames", new String [0]));
-			.putFeatureList("inputAnnotationTypeNames", 
-					ILPSerializer.parseClassAttributeValuesFromSettingsFile(
-							new File(config_directory + '/' + new ILPEngine().getConfigFilenaMame()).toURI().toURL()))); 			
+			.putFeatureList("inputAnnotationTypeNames", inputAnnotationTypeNames));
+//					ILPSerializer.parseClassAttributeValuesFromSettingsFile(
+//							new File(config_directory + '/' + new ILPEngine().getConfigFilenaMame()).toURI().toURL()))); 			
 //					"acquired", "acqabr", "purchaser", "purchabr", "seller", "sellerabr", "dlramt"));
 		
 		return addTrainMLEngines(prs);
