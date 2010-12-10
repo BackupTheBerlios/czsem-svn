@@ -1,0 +1,101 @@
+
+%%%%%%%%%%%%%%%%%%%%%%% file typeinst.tex %%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% This is the LaTeX source for the instructions to authors using
+% the LaTeX document class 'llncs.cls' for contributions to
+% the Lecture Notes in Computer Sciences series.
+% http://www.springer.com/lncs       Springer Heidelberg 2006/05/04
+%
+% It may be used as a template for your own input - copy it
+% to a new file with a new name and use it as the basis
+% for your article.
+%
+% NB: the document class 'llncs' has its own and detailed documentation, see
+% ftp://ftp.springer.de/data/pubftp/pub/tex/latex/llncs/latex2e/llncsdoc.pdf
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\documentclass[runningheads,a4paper]{llncs}
+
+\usepackage{amssymb}
+\setcounter{tocdepth}{3}
+\usepackage{graphicx}
+
+\usepackage{url}
+\urldef{\mailsa}\path|{alfred.hofmann, ursula.barth, ingrid.haas, frank.holzwarth,|
+\urldef{\mailsb}\path|anna.kramer, leonie.kunz, christine.reiss, nicole.sator,|
+\urldef{\mailsc}\path|erika.siebert-cole, peter.strasser, lncs}@springer.com|    
+\newcommand{\keywords}[1]{\par\addvspace\baselineskip
+\noindent\keywordname\enspace\ignorespaces#1}
+
+\begin{document}
+
+\mainmatter  % start of an individual contribution
+
+% first the title is needed
+\title{Semantic Annotation Semantically: Using a~Sharable Extraction Ontology and a Reasoner}
+
+% a short form should be given in case it is too long for the running head
+\titlerunning{Semantic Annotation Semantically}
+%\titlerunning{Towards Semantic Annotation Supported by Dependency Linguistics and ILP}
+
+% the name(s) of the author(s) follow(s) next
+%
+% NB: Chinese authors should write their first names(s) in front of
+% their surnames. This ensures that the names appear correctly in
+% the running heads and the author index.
+%
+\author{Jan D\v{e}dek \and Peter Vojt\'{a}\v{s}}
+%\thanks{Please note that the LNCS Editorial assumes that all authors have used
+%the western naming convention, with given names preceding surnames. This determines
+%the structure of the names in the running heads and the author index.}%
+%
+\authorrunning{Jan D\v{e}dek \and Peter Vojt\'{a}\v{s}}
+% (feature abused for this document to repeat the title also on left hand pages)
+
+% the affiliations are given next; don't give your e-mail address
+% unless you accept that it will be published
+\institute{Department of Software Engineering, Charles University,\\
+Prague, Czech Republic
+\\\url{{dedek,vojtas}@ksi.mff.cuni.cz}}
+
+%
+% NB: a more complex sample for affiliations and the mapping to the
+% corresponding authors can be found in the file "llncs.dem"
+% (search for the string "\mainmatter" where a contribution starts).
+% "llncs.dem" accompanies the document class "llncs.cls".
+%
+
+\toctitle{Semantic Annotation Semantically: Using a Sharable Extraction Ontology and a Reasoner}
+\tocauthor{Jan D\v{e}dek and Peter Vojt\'{a}\v{s}}
+\maketitle
+
+
+\begin{abstract}
+In this paper we present a method for semantic annotation of texts, which is based on a deep linguistic analysis (DLA) and Inductive Logic Programming xxxxxxxxxxxxxxxxxxxxxxxx
+
+A description, implementation and initial evaluation of the method are the main contributions of the paper.
+\keywords{Semantic Annotation, Dependency Linguistics, Inductive Logic Programming, Information Extraction, Machine Learning}
+\end{abstract}
+
+
+\section{Introduction}
+
+
+
+\section{Related Work}
+
+\section{Conclusion and Future Work}
+
+\bigskip
+\noindent\textbf{Acknowledgments}\\
+This work was partially supported by Czech projects: GACR P202/10/0761, GACR-201/09/H057, GAUK 31009 and MSM-0021620838.
+The author would like to thank his supervisor Peter Vojt\'{a}\v{s} for the guidance of the PhD thesis.
+
+
+
+
+\bibliographystyle{splncs03}
+\bibliography{DedekVojtas_ESWC2010_semantically}
+\end{document}
