@@ -111,6 +111,10 @@ public class ILPExec extends ProcessExec {
 		output_writer.println("induce.");		
 		output_writer.flush();
 		
+		
+		output_writer.println("prolog_flag(user_error, E),  set_output(E), show(theory).\n");		
+		output_writer.println("open('theory.log', write, S),  set_output(S), show(theory), close(S).\n");		
+
 		output_writer.print("write_rules('");		
 		output_writer.print(getRulesFileName());		
 		output_writer.println("').");		

@@ -252,11 +252,12 @@ public class Serializer {
 		}
 
 		if ((all_digits && isNumber(value)) || all_lo_alpha) return value;
-//		if (all_digits || all_lo_alpha) return "��"+value;
 		
 		sb.append('\'');
 //		return sb.toString();
-		return String.format("'%s'", value);
+		if (value.matches("'.*'")) 
+			value = value.substring(1, value.length()-1); 		
+		return String.format("'%s'", value.replace("'", "\\'"));
 	}
 	
 	public void putTypedTuple(Relation rel, String[] values)

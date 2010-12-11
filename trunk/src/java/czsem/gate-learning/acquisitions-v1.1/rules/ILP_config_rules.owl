@@ -13,694 +13,22 @@
 <Variable IRI="urn:swrl#b"/>
 <Literal>Inc</Literal>
 </DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;formeme"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>n:obj</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;number"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>17</Literal>
-</DataPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;t_lemma"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>Inc</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;number"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>31</Literal>
-</DataPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;t_lemma"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>Corp</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;functor"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>PAT</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;formeme"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>n:of+X</Literal>
-</DataPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;t_lemma"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>Ltd</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;number"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>19</Literal>
-</DataPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;t_lemma"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>Ltd</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;functor"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>LOC</Literal>
-</DataPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;t_lemma"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>Association</Literal>
-</DataPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;t_lemma"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>Inc</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;number"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>25</Literal>
-</DataPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;functor"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>PAT</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;formeme"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>n:of+X</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;number"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>32</Literal>
-</DataPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;t_lemma"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>Ltd</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;number"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>26</Literal>
-</DataPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;t_lemma"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>Inc</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;number"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>28</Literal>
-</DataPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;t_lemma"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>Bank</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;functor"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>PAT</Literal>
-</DataPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;t_lemma"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>Ltd</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;formeme"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>n:obj</Literal>
-</DataPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;t_lemma"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>Co</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;formeme"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>n:obj</Literal>
-</DataPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;t_lemma"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>station</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;functor"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>PAT</Literal>
-</DataPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;t_lemma"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>Hotel</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;functor"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>PAT</Literal>
-</DataPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;functor"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>PAT</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;number"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>27</Literal>
-</DataPropertyAtom>
 <ObjectPropertyAtom><ObjectProperty IRI="&pml;tDependency"/>
-<Variable IRI="urn:swrl#b"/>
 <Variable IRI="urn:swrl#c"/>
+<Variable IRI="urn:swrl#b"/>
 </ObjectPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;t_lemma"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>Inc</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;number"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>26</Literal>
-</DataPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;t_lemma"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>Division</Literal>
-</DataPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;t_lemma"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>Inc</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;functor"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>ACT</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;formeme"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>n:obj</Literal>
-</DataPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;t_lemma"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>Inc</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;number"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>32</Literal>
-</DataPropertyAtom>
 <ObjectPropertyAtom><ObjectProperty IRI="&pml;tDependency"/>
-<Variable IRI="urn:swrl#b"/>
 <Variable IRI="urn:swrl#c"/>
+<Variable IRI="urn:swrl#d"/>
 </ObjectPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;t_lemma"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>Inc</Literal>
-</DataPropertyAtom>
 <DataPropertyAtom><DataProperty IRI="&pml;formeme"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>n:of+X</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;number"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>24</Literal>
-</DataPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;t_lemma"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>Property</Literal>
-</DataPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;t_lemma"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>Inc</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;formeme"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>n:subj</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;number"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>8</Literal>
-</DataPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;t_lemma"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>plant</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;formeme"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>n:obj</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;number"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>sg</Literal>
-</DataPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;t_lemma"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>center</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;functor"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>PAT</Literal>
-</DataPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;functor"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>PAT</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;sempos"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>n.denot</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;number"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>34</Literal>
-</DataPropertyAtom>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;tDependency"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#c"/>
-</ObjectPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;t_lemma"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>Inc</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;number"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>44</Literal>
-</DataPropertyAtom>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;tDependency"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#c"/>
-</ObjectPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;t_lemma"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>Bank</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;functor"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>ACT</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;formeme"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>n:obj</Literal>
-</DataPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;t_lemma"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>Corp</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;formeme"/>
-<Variable IRI="urn:swrl#b"/>
+<Variable IRI="urn:swrl#d"/>
 <Literal>n:in+X</Literal>
 </DataPropertyAtom>
+<ObjectPropertyAtom><ObjectProperty IRI="&pml;tDependency"/>
+<Variable IRI="urn:swrl#e"/>
+<Variable IRI="urn:swrl#c"/>
+</ObjectPropertyAtom>
 </Body>
 <Head>
 <DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
@@ -719,10 +47,92 @@
 <DataPropertyAtom><DataProperty IRI="&pml;t_lemma"/>
 <Variable IRI="urn:swrl#b"/>
 <Literal>Inc</Literal>
+</DataPropertyAtom>
+<DataPropertyAtom><DataProperty IRI="&pml;functor"/>
+<Variable IRI="urn:swrl#b"/>
+<Literal>PAT</Literal>
+</DataPropertyAtom>
+<ObjectPropertyAtom><ObjectProperty IRI="&pml;tDependency"/>
+<Variable IRI="urn:swrl#c"/>
+<Variable IRI="urn:swrl#b"/>
+</ObjectPropertyAtom>
+<ObjectPropertyAtom><ObjectProperty IRI="&pml;tDependency"/>
+<Variable IRI="urn:swrl#d"/>
+<Variable IRI="urn:swrl#c"/>
+</ObjectPropertyAtom>
+<DataPropertyAtom><DataProperty IRI="&pml;nodetype"/>
+<Variable IRI="urn:swrl#d"/>
+<Literal>complex</Literal>
+</DataPropertyAtom>
+</Body>
+<Head>
+<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
+<Literal>acquired</Literal>
+<Variable IRI="urn:swrl#a"/>
+</DataPropertyAtom>
+</Head>
+</DLSafeRule>
+
+<DLSafeRule>
+<Body>
+<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
+<Variable IRI="urn:swrl#b"/>
+<Variable IRI="urn:swrl#a"/>
+</ObjectPropertyAtom>
+<DataPropertyAtom><DataProperty IRI="&pml;t_lemma"/>
+<Variable IRI="urn:swrl#b"/>
+<Literal>Inc</Literal>
+</DataPropertyAtom>
+<ObjectPropertyAtom><ObjectProperty IRI="&pml;tDependency"/>
+<Variable IRI="urn:swrl#c"/>
+<Variable IRI="urn:swrl#b"/>
+</ObjectPropertyAtom>
+<DataPropertyAtom><DataProperty IRI="&pml;t_lemma"/>
+<Variable IRI="urn:swrl#c"/>
+<Literal>stock</Literal>
+</DataPropertyAtom>
+<ObjectPropertyAtom><ObjectProperty IRI="&pml;tDependency"/>
+<Variable IRI="urn:swrl#c"/>
+<Variable IRI="urn:swrl#d"/>
+</ObjectPropertyAtom>
+<ObjectPropertyAtom><ObjectProperty IRI="&pml;tDependency"/>
+<Variable IRI="urn:swrl#d"/>
+<Variable IRI="urn:swrl#e"/>
+</ObjectPropertyAtom>
+</Body>
+<Head>
+<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
+<Literal>acquired</Literal>
+<Variable IRI="urn:swrl#a"/>
+</DataPropertyAtom>
+</Head>
+</DLSafeRule>
+
+<DLSafeRule>
+<Body>
+<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
+<Variable IRI="urn:swrl#b"/>
+<Variable IRI="urn:swrl#a"/>
+</ObjectPropertyAtom>
+<DataPropertyAtom><DataProperty IRI="&pml;t_lemma"/>
+<Variable IRI="urn:swrl#b"/>
+<Literal>Corp</Literal>
 </DataPropertyAtom>
 <DataPropertyAtom><DataProperty IRI="&pml;formeme"/>
 <Variable IRI="urn:swrl#b"/>
-<Literal>n:in+X</Literal>
+<Literal>n:of+X</Literal>
+</DataPropertyAtom>
+<ObjectPropertyAtom><ObjectProperty IRI="&pml;tDependency"/>
+<Variable IRI="urn:swrl#c"/>
+<Variable IRI="urn:swrl#b"/>
+</ObjectPropertyAtom>
+<ObjectPropertyAtom><ObjectProperty IRI="&pml;tDependency"/>
+<Variable IRI="urn:swrl#d"/>
+<Variable IRI="urn:swrl#c"/>
+</ObjectPropertyAtom>
+<DataPropertyAtom><DataProperty IRI="&pml;negation"/>
+<Variable IRI="urn:swrl#d"/>
+<Literal>neg0</Literal>
 </DataPropertyAtom>
 </Body>
 <Head>
@@ -741,330 +151,46 @@
 </ObjectPropertyAtom>
 <DataPropertyAtom><DataProperty IRI="&pml;t_lemma"/>
 <Variable IRI="urn:swrl#b"/>
-<Literal>Inc</Literal>
+<Literal>Ltd</Literal>
 </DataPropertyAtom>
+<ObjectPropertyAtom><ObjectProperty IRI="&pml;tDependency"/>
+<Variable IRI="urn:swrl#c"/>
+<Variable IRI="urn:swrl#b"/>
+</ObjectPropertyAtom>
+<DataPropertyAtom><DataProperty IRI="&pml;functor"/>
+<Variable IRI="urn:swrl#c"/>
+<Literal>PAT</Literal>
+</DataPropertyAtom>
+<DataPropertyAtom><DataProperty IRI="&pml;formeme"/>
+<Variable IRI="urn:swrl#c"/>
+<Literal>n:obj</Literal>
+</DataPropertyAtom>
+</Body>
+<Head>
+<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
+<Literal>acquired</Literal>
+<Variable IRI="urn:swrl#a"/>
+</DataPropertyAtom>
+</Head>
+</DLSafeRule>
+
+<DLSafeRule>
+<Body>
+<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
+<Variable IRI="urn:swrl#b"/>
+<Variable IRI="urn:swrl#a"/>
+</ObjectPropertyAtom>
 <DataPropertyAtom><DataProperty IRI="&pml;functor"/>
 <Variable IRI="urn:swrl#b"/>
 <Literal>ACT</Literal>
 </DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;formeme"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>n:obj2</Literal>
-</DataPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;functor"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>BEN</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;number"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>25</Literal>
-</DataPropertyAtom>
 <ObjectPropertyAtom><ObjectProperty IRI="&pml;tDependency"/>
 <Variable IRI="urn:swrl#b"/>
 <Variable IRI="urn:swrl#c"/>
 </ObjectPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
 <DataPropertyAtom><DataProperty IRI="&pml;t_lemma"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>Corp</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;functor"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>EFF</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;formeme"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>n:for+X</Literal>
-</DataPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;t_lemma"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>Plc</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;functor"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>LOC</Literal>
-</DataPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;t_lemma"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>Fund</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;formeme"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>n:of+X</Literal>
-</DataPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;t_lemma"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>Corp</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;formeme"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>n:of+X</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;number"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>38</Literal>
-</DataPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;functor"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>PAT</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;number"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>20</Literal>
-</DataPropertyAtom>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;tDependency"/>
-<Variable IRI="urn:swrl#b"/>
 <Variable IRI="urn:swrl#c"/>
-</ObjectPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;functor"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>PAT</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;formeme"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>n:of+X</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;number"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>22</Literal>
-</DataPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;t_lemma"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>restaurant</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;formeme"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>n:obj</Literal>
-</DataPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;t_lemma"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>Advocate</Literal>
-</DataPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;t_lemma"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>Waterman</Literal>
-</DataPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;t_lemma"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>Inc</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;formeme"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>n:obj</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;number"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>22</Literal>
-</DataPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;t_lemma"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>Inc</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;functor"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>RSTR</Literal>
-</DataPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;number"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>34</Literal>
-</DataPropertyAtom>
-</Body>
-<Head>
-<DataPropertyAtom><DataProperty IRI="&pml;mention_root"/>
-<Literal>acquired</Literal>
-<Variable IRI="urn:swrl#a"/>
-</DataPropertyAtom>
-</Head>
-</DLSafeRule>
-
-<DLSafeRule>
-<Body>
-<ObjectPropertyAtom><ObjectProperty IRI="&pml;lex.rf"/>
-<Variable IRI="urn:swrl#b"/>
-<Variable IRI="urn:swrl#a"/>
-</ObjectPropertyAtom>
-<DataPropertyAtom><DataProperty IRI="&pml;t_lemma"/>
-<Variable IRI="urn:swrl#b"/>
-<Literal>Metrobanc</Literal>
+<Literal>cable</Literal>
 </DataPropertyAtom>
 </Body>
 <Head>

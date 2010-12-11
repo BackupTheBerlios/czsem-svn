@@ -13,17 +13,18 @@ import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
-import org.semanticweb.owlapi.reasoner.ConsoleProgressMonitor;
 import org.semanticweb.owlapi.reasoner.IllegalConfigurationException;
 import org.semanticweb.owlapi.reasoner.Node;
 import org.semanticweb.owlapi.reasoner.NodeSet;
+import org.semanticweb.owlapi.reasoner.NullReasonerProgressMonitor;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.reasoner.OWLReasonerConfiguration;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
+import org.semanticweb.owlapi.reasoner.ReasonerProgressMonitor;
 import org.semanticweb.owlapi.reasoner.SimpleConfiguration;
 import org.semanticweb.owlapi.util.OWLOntologyMerger;
 
-import com.clarkparsia.pellet.owlapiv3.PelletReasonerFactory;
+import uk.ac.manchester.cs.factplusplus.owlapiv3.FaCTPlusPlusReasonerFactory;
 
 
 public class Pml2GateReasoning
@@ -71,12 +72,14 @@ public class Pml2GateReasoning
 	
 	public OWLReasoner attachReasoner() throws IllegalConfigurationException, OWLOntologyCreationException
 	{
-		return attachReasoner(PelletReasonerFactory.getInstance());
+//		return attachReasoner(PelletReasonerFactory.getInstance()); //Pellet
+//		return attachReasoner(new Reasoner.ReasonerFactory()); //HermiT
+		return attachReasoner(new FaCTPlusPlusReasonerFactory()); //FaCTpp
 	}
 	
 	public OWLReasoner attachReasoner(OWLReasonerFactory reasonerFactory) throws IllegalConfigurationException, OWLOntologyCreationException
 	{
-        ConsoleProgressMonitor progressMonitor = new ConsoleProgressMonitor();
+		ReasonerProgressMonitor progressMonitor = new NullReasonerProgressMonitor();
         OWLReasonerConfiguration config = new SimpleConfiguration(progressMonitor);
         return reasoner = reasonerFactory.createReasoner(getMergedOntology(null), config);        
 	}
@@ -86,17 +89,24 @@ public class Pml2GateReasoning
 		reasoner.precomputeInferences();
 	}
 	
-	public void printClassInstances(IRI className)
+	/**
+	 * @return number of all matching instances
+	 */
+	public int printClassInstances(IRI className)
 	{
 		OWLDataFactory fac = manager.getOWLDataFactory();
         OWLClass cls = fac.getOWLClass(className);
 
         NodeSet<OWLNamedIndividual> instances = reasoner.getInstances(cls, false);
 
+        int count = 0;
         for (Node<OWLNamedIndividual> instace : instances)
         {
-            System.out.println(instace.getRepresentativeElement().getIRI());        	  			
-		}		
+            System.out.println(instace.getRepresentativeElement().getIRI());
+            count ++;
+		}
+        
+        return count;        
 	}
 
 	public static void processDirectory(String directory_path, String rules_fiel_path) throws OWLOntologyCreationException
@@ -109,11 +119,12 @@ public class Pml2GateReasoning
 			}
 		});
 		
+		int instance_count = 0;
 		for (int i = 0; i < file_list.length; i++)
 		{
 			String file = file_list[i];
 			logger.info(
-					String.format("Reasonog on file %d/%d: %s",
+					String.format("Reasoning on file %d/%d: %s",
 					i+1, file_list.length,
 					file));
 					 
@@ -122,14 +133,15 @@ public class Pml2GateReasoning
 			
 			r.attachReasoner();
 			
-			r.printClassInstances(IRI.create("http://czsem.berlios.de/ontologies/PMT2GATE_ontology_utils.owl#MentionRoot"));
-	
+			instance_count += r.printClassInstances(IRI.create("http://czsem.berlios.de/ontologies/PMT2GATE_ontology_utils.owl#MentionRoot"));	
 		}
+		
+		System.out.format("total number of instances: %d", instance_count);
 	}
 
 	public static void main(String[] args) throws OWLOntologyCreationException
 	{
-		processDirectory("czsem_GATE_plugins/TmT_serializations/owl", "gate-learning/acquisitions-v1.1/rules/ILP_config_rules.owl");
+		processDirectory("czsem_GATE_plugins/TmT_serializations/owl", "gate-learning/acquisitions-v1.1/rules/ILP_config_rules_noise30.owl");
 		
 		/*
 		Pml2GateReasoning r = new Pml2GateReasoning(new File("gate-learning/czech_fireman/rules/learned_rules_test1.owl"));

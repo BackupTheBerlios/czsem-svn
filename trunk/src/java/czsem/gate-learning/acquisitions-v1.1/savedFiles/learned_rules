@@ -1,509 +1,451 @@
-mention_root(acquired,'id_10025.xml_002B8_1562').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'Inc'), tDependency(C,B), tDependency(C,D), 
+   formeme(D,'n:in+X'), tDependency(E,C).
 mention_root(acquired,'id_10042.xml_002B9_653').
 mention_root(acquired,A) :-
-   'lex.rf'(B,A), t_lemma(B,'Inc'), formeme(B,'n:obj'), number(B,17).
+   'lex.rf'(B,A), t_lemma(B,'Inc'), functor(B,'PAT'), tDependency(C,B), 
+   tDependency(D,C), nodetype(D,complex).
 mention_root(acquired,A) :-
-   'lex.rf'(B,A), t_lemma(B,'Inc'), number(B,31).
+   'lex.rf'(B,A), t_lemma(B,'Inc'), tDependency(C,B), t_lemma(C,stock), 
+   tDependency(C,D), tDependency(D,E).
 mention_root(acquired,A) :-
-   'lex.rf'(B,A), t_lemma(B,'Corp'), functor(B,'PAT'), formeme(B,'n:of+X').
+   'lex.rf'(B,A), t_lemma(B,'Corp'), formeme(B,'n:of+X'), tDependency(C,B), 
+   tDependency(D,C), negation(D,neg0).
 mention_root(acquired,A) :-
-   'lex.rf'(B,A), t_lemma(B,'Ltd'), number(B,19).
-mention_root(acquired,'id_1032.xml_002BE_1157').
+   'lex.rf'(B,A), t_lemma(B,'Ltd'), tDependency(C,B), functor(C,'PAT'), 
+   formeme(C,'n:obj').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), functor(B,'ACT'), tDependency(B,C), t_lemma(C,cable).
 mention_root(acquired,'id_10348.xml_002C0_1519').
 mention_root(acquired,A) :-
-   'lex.rf'(B,A), t_lemma(B,'Ltd'), functor(B,'LOC').
-mention_root(acquired,'id_10473.xml_002C2_6187').
-mention_root(acquired,'id_10473.xml_002C2_7723').
+   'lex.rf'(B,A), t_lemma(B,'Systems'), tDependency(C,B), number(C,sg), 
+   tDependency(D,C), sempos(D,'n.denot').
 mention_root(acquired,A) :-
-   'lex.rf'(B,A), t_lemma(B,'Association').
+   'lex.rf'(B,A), t_lemma(B,'Association'), tDependency(B,C), tDependency(C,D).
 mention_root(acquired,A) :-
-   'lex.rf'(B,A), t_lemma(B,'Inc'), number(B,25).
+   'lex.rf'(B,A), t_lemma(B,'Inc'), tDependency(C,B), formeme(C,'n:obj'), 
+   tDependency(C,D), functor(D,'APP').
 mention_root(acquired,'id_10674.xml_002C5_2892').
 mention_root(acquired,'id_10721.xml_002C8_2170').
 mention_root(acquired,A) :-
-   'lex.rf'(B,A), functor(B,'PAT'), formeme(B,'n:of+X'), number(B,32).
+   'lex.rf'(B,A), t_lemma(B,'Inc'), functor(B,'ACT'), formeme(B,'n:obj'), 
+   tDependency(C,B), tense(C,nil).
 mention_root(acquired,A) :-
-   'lex.rf'(B,A), t_lemma(B,'Ltd'), number(B,26).
+   'lex.rf'(B,A), t_lemma(B,'Bancorp'), functor(B,'PAT').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'Ltd'), tDependency(B,C), t_lemma(C,'Petroleum').
 mention_root(acquired,'id_10816.xml_002CB_2264').
-mention_root(acquired,'id_10867.xml_002CC_2249').
-mention_root(acquired,'id_10872.xml_002CD_1487').
-mention_root(acquired,'id_10883.xml_002CE_1410').
-mention_root(acquired,'id_10899.xml_002CF_758').
-mention_root(acquired,'id_10908.xml_002D0_1425').
-mention_root(acquired,'id_10928.xml_002D1_1600').
 mention_root(acquired,A) :-
-   'lex.rf'(B,A), t_lemma(B,'Inc'), number(B,28).
-mention_root(acquired,'id_10969.xml_002D3_1861').
-mention_root(acquired,'id_1099.xml_002D4_1742').
-mention_root(acquired,'id_10994.xml_002D5_1841').
+   'lex.rf'(B,A), t_lemma(B,'Ltd'), tDependency(B,C), t_lemma(C,'Industry').
 mention_root(acquired,A) :-
-   'lex.rf'(B,A), t_lemma(B,'Bank'), functor(B,'PAT').
-mention_root(acquired,'id_11051.xml_002D7_852').
+   'lex.rf'(B,A), t_lemma(B,'Corp'), tDependency(C,B), tDependency(D,C), 
+   t_lemma(D,or).
 mention_root(acquired,A) :-
-   'lex.rf'(B,A), t_lemma(B,'Ltd'), formeme(B,'n:obj').
+   'lex.rf'(B,A), t_lemma(B,plant), formeme(B,'n:obj'), number(B,sg), 
+   tDependency(C,B), sempos(C,v).
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'Corp'), tDependency(C,B), functor(C,'PAT'), 
+   tDependency(C,D), t_lemma(D,'#PersPron').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'International'), tDependency(B,C), t_lemma(C,'Allegheny').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), tDependency(B,C), t_lemma(C,'Pacific'), tDependency(B,D), 
+   formeme(D,'n:of+X').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'Bank'), functor(B,'PAT'), tDependency(C,B), 
+   tDependency(D,C), formeme(D,'v:fin').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,business), tDependency(B,C), number(C,30).
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'Ltd'), tDependency(C,B), t_lemma(C,acquire).
 mention_root(acquired,A) :-
    'lex.rf'(B,A), t_lemma(B,'Co'), formeme(B,'n:obj').
 mention_root(acquired,A) :-
-   'lex.rf'(B,A), t_lemma(B,station), functor(B,'PAT').
+   'lex.rf'(B,A), t_lemma(B,station), functor(B,'PAT'), tDependency(C,B), 
+   nodetype(C,complex).
 mention_root(acquired,'id_11161.xml_002DC_3092').
 mention_root(acquired,'id_11161.xml_002DC_3233').
 mention_root(acquired,A) :-
    'lex.rf'(B,A), t_lemma(B,'Hotel'), functor(B,'PAT').
 mention_root(acquired,A) :-
-   'lex.rf'(B,A), functor(B,'PAT'), number(B,27), tDependency(B,C).
-mention_root(acquired,'id_11362.xml_002E3_1417').
-mention_root(acquired,'id_11362.xml_002E3_1432').
+   'lex.rf'(B,A), tDependency(B,C), t_lemma(C,'KMG').
 mention_root(acquired,A) :-
-   'lex.rf'(B,A), t_lemma(B,'Inc'), number(B,26).
+   'lex.rf'(B,A), t_lemma(B,'Division'), tDependency(B,C), tDependency(D,B), 
+   tDependency(E,D).
 mention_root(acquired,A) :-
-   'lex.rf'(B,A), t_lemma(B,'Division').
-mention_root(acquired,'id_11468.xml_002E6_1761').
+   'lex.rf'(B,A), functor(B,'APP'), number(B,26), tDependency(C,B), 
+   functor(C,'ACT'), number(C,sg).
 mention_root(acquired,A) :-
-   'lex.rf'(B,A), t_lemma(B,'Inc'), functor(B,'ACT'), formeme(B,'n:obj').
-mention_root(acquired,'id_11539.xml_002EB_2417').
-mention_root(acquired,A) :-
-   'lex.rf'(B,A), t_lemma(B,'Inc'), number(B,32), tDependency(B,C).
+   'lex.rf'(B,A), t_lemma(B,'Inc'), formeme(B,'n:of+X'), tDependency(C,B), 
+   t_lemma(C,and).
 mention_root(acquired,'id_11539.xml_002EB_2423').
-mention_root(acquired,A) :-
-   'lex.rf'(B,A), t_lemma(B,'Inc'), formeme(B,'n:of+X'), number(B,24).
 mention_root(acquired,'id_11579.xml_002EE_1338').
-mention_root(acquired,'id_11744.xml_002F1_1182').
-mention_root(acquired,'id_11923.xml_002F3_641').
-mention_root(acquired,'id_11982.xml_002F5_1534').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'Corp'), tDependency(B,C), t_lemma(C,'Cyclops').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), number(B,18), tDependency(C,B), tDependency(C,D), 
+   formeme(D,'n:from+X').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,branch), tDependency(C,B), formeme(C,'v:to+inf').
 mention_root(acquired,'id_11996.xml_002F6_1062').
-mention_root(acquired,'id_11997.xml_002F7_1560').
-mention_root(acquired,'id_12093.xml_002FB_1289').
-mention_root(acquired,'id_12093.xml_002FB_1293').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'Service'), tDependency(B,C), t_lemma(C,'.').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), functor(B,'PAT'), formeme(B,'n:of+X'), number(B,27).
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), formeme(B,'n:attr'), tDependency(B,C), t_lemma(C,'National').
 mention_root(acquired,'id_1217.xml_002FC_910').
-mention_root(acquired,'id_12173.xml_002FD_1880').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,property), tDependency(C,B), formeme(C,'v:fin').
 mention_root(acquired,'id_12191.xml_002FE_1107').
 mention_root(acquired,'id_12344.xml_00302_1458').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), functor(B,'RSTR'), number(B,32), tDependency(B,C).
 mention_root(acquired,'id_12386.xml_00305_534').
 mention_root(acquired,A) :-
    'lex.rf'(B,A), t_lemma(B,'Property').
 mention_root(acquired,A) :-
    'lex.rf'(B,A), t_lemma(B,'Inc'), formeme(B,'n:subj'), number(B,8).
 mention_root(acquired,'id_12512.xml_00309_1255').
-mention_root(acquired,'id_12538.xml_0030C_659').
-mention_root(acquired,'id_12620.xml_0030D_1320').
-mention_root(acquired,'id_12646.xml_0030E_795').
-mention_root(acquired,'id_12699.xml_00310_2034').
-mention_root(acquired,'id_128.xml_00314_788').
-mention_root(acquired,'id_128.xml_00314_799').
-mention_root(acquired,'id_12822.xml_00315_1661').
-mention_root(acquired,'id_12822.xml_00315_1682').
-mention_root(acquired,'id_12852.xml_00316_751').
-mention_root(acquired,'id_12858.xml_00317_2233').
 mention_root(acquired,A) :-
-   'lex.rf'(B,A), t_lemma(B,plant), formeme(B,'n:obj'), number(B,sg).
+   'lex.rf'(B,A), tDependency(B,C), t_lemma(C,'Vernitron'), functor(C,'RSTR').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'Store'), tDependency(B,C).
+mention_root(acquired,'id_128.xml_00314_788').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), number(B,12), tDependency(C,B), t_lemma(C,say), 
+   tDependency(C,D), t_lemma(D,-).
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'Inc'), number(B,26), tDependency(C,B), 
+   tDependency(D,C), formeme(D,'n:obj').
 mention_root(acquired,'id_12900.xml_00319_1059').
 mention_root(acquired,'id_12933.xml_0031B_708').
 mention_root(acquired,A) :-
    'lex.rf'(B,A), t_lemma(B,center), functor(B,'PAT').
 mention_root(acquired,'id_13005.xml_00321_1485').
 mention_root(acquired,'id_13043.xml_00323_885').
-mention_root(acquired,'id_13043.xml_00323_898').
-mention_root(acquired,'id_13060.xml_00324_1514').
-mention_root(acquired,'id_13077.xml_00325_1581').
-mention_root(acquired,'id_13090.xml_00326_1346').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'Laboratory').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'Inc'), tDependency(B,C), t_lemma(C,'Service').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), functor(B,'PAT'), number(B,24), tDependency(C,B), 
+   tDependency(D,C), tense(D,ant).
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,store), formeme(B,'n:obj'), tDependency(B,C), 
+   negation(C,neg0).
 mention_root(acquired,'id_13168.xml_00328_2241').
 mention_root(acquired,'id_13175.xml_00329_820').
 mention_root(acquired,A) :-
-   'lex.rf'(B,A), functor(B,'PAT'), sempos(B,'n.denot'), number(B,34), 
-   tDependency(B,C).
+   'lex.rf'(B,A), functor(B,'PAT'), number(B,34), tDependency(B,C), 
+   functor(C,'RSTR').
 mention_root(acquired,A) :-
-   'lex.rf'(B,A), t_lemma(B,'Inc'), number(B,44), tDependency(B,C).
+   'lex.rf'(B,A), tDependency(B,C), t_lemma(C,'System'), tDependency(D,B), 
+   tDependency(E,D), sempos(E,'n.denot').
 mention_root(acquired,A) :-
    'lex.rf'(B,A), t_lemma(B,'Bank'), functor(B,'ACT'), formeme(B,'n:obj').
-mention_root(acquired,A) :-
-   'lex.rf'(B,A), t_lemma(B,'Corp'), formeme(B,'n:in+X').
 mention_root(acquired,'id_13790.xml_00332_4256').
-mention_root(acquired,'id_14099.xml_00334_905').
-mention_root(acquired,A) :-
-   'lex.rf'(B,A), t_lemma(B,'Inc'), formeme(B,'n:in+X').
 mention_root(acquired,'id_14582.xml_00337_855').
-mention_root(acquired,'id_14619.xml_00339_1431').
-mention_root(acquired,'id_14679.xml_0033A_2666').
-mention_root(acquired,'id_14888.xml_0033B_3708').
-mention_root(acquired,'id_14888.xml_0033B_4480').
-mention_root(acquired,'id_14949.xml_0033E_1977').
-mention_root(acquired,'id_15004.xml_0033F_937').
-mention_root(acquired,'id_15024.xml_00340_1076').
-mention_root(acquired,'id_15031.xml_00341_2621').
-mention_root(acquired,'id_15031.xml_00341_2655').
 mention_root(acquired,A) :-
-   'lex.rf'(B,A), t_lemma(B,'Inc'), functor(B,'ACT'), formeme(B,'n:obj2').
+   'lex.rf'(B,A), t_lemma(B,'Inc'), functor(B,'APP'), tDependency(C,B), 
+   number(C,pl).
+mention_root(acquired,'id_14619.xml_00339_1431').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), tDependency(B,C), t_lemma(C,american), tDependency(D,B), 
+   functor(D,'CONJ').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'Corp'), tDependency(B,C), t_lemma(C,maker).
+mention_root(acquired,'id_14888.xml_0033B_4480').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'Ltd'), tDependency(B,C), t_lemma(C,'Monier').
+mention_root(acquired,'id_14949.xml_0033E_1977').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), tDependency(B,C), t_lemma(C,-), tDependency(B,D), 
+   t_lemma(D,'Oil').
+mention_root(acquired,'id_15024.xml_00340_1076').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), tDependency(B,C), t_lemma(C,'Agency').
 mention_root(acquired,'id_15031.xml_00341_2687').
-mention_root(acquired,'id_15031.xml_00341_2700').
-mention_root(acquired,'id_15031.xml_00341_2726').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), sempos(B,'n.denot'), tDependency(B,C), t_lemma(C,'Beach').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), tDependency(C,B), tDependency(C,D), t_lemma(D,office), 
+   formeme(D,'n:obj2').
 mention_root(acquired,'id_15210.xml_00343_1387').
 mention_root(acquired,'id_15404.xml_00345_1516').
-mention_root(acquired,'id_15479.xml_00346_1422').
-mention_root(acquired,'id_15479.xml_00346_1425').
-mention_root(acquired,'id_15501.xml_00347_2053').
-mention_root(acquired,'id_15575.xml_0034A_1290').
-mention_root(acquired,'id_1584.xml_0034E_1059').
-mention_root(acquired,'id_15918.xml_00350_1002').
-mention_root(acquired,'id_15995.xml_00352_1151').
-mention_root(acquired,'id_15995.xml_00352_1153').
-mention_root(acquired,'id_16007.xml_00353_1324').
-mention_root(acquired,'id_16029.xml_00355_1866').
 mention_root(acquired,A) :-
-   'lex.rf'(B,A), functor(B,'BEN'), number(B,25), tDependency(B,C).
+   'lex.rf'(B,A), t_lemma(B,'Corp'), tDependency(C,B), tDependency(C,D), 
+   number(D,36), tDependency(D,E).
+mention_root(acquired,'id_15501.xml_00347_2053').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), tDependency(B,C), t_lemma(C,'South'), tDependency(D,B), 
+   formeme(D,'n:obj').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,operation), tDependency(C,B), tDependency(D,C), 
+   t_lemma(D,agreement).
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), tDependency(C,B), tDependency(C,D), t_lemma(D,'KOAQ-FM').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), formeme(B,'n:in+X'), tDependency(B,C), tDependency(D,B), 
+   t_lemma(D,interest), formeme(D,'n:of+X').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'Corp'), tDependency(C,B), number(C,sg), 
+   tDependency(C,D), functor(D,'EFF').
 mention_root(acquired,'id_16233.xml_0035B_2338').
-mention_root(acquired,'id_16398.xml_0035F_2043').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'Corp'), number(B,25), tDependency(C,B), 
+   tDependency(C,D), functor(D,'EFF').
 mention_root(acquired,'id_16419.xml_00360_1162').
 mention_root(acquired,'id_16443.xml_00361_3911').
-mention_root(acquired,'id_16465.xml_00363_918').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'Inc'), formeme(B,'n:with+X'), tDependency(C,B), 
+   tDependency(C,D), functor(D,'ACT').
 mention_root(acquired,'id_16475.xml_00364_2716').
 mention_root(acquired,'id_16475.xml_00364_2724').
-mention_root(acquired,'id_16483.xml_00365_3129').
 mention_root(acquired,'id_16555.xml_00368_2116').
-mention_root(acquired,'id_16577.xml_00369_4185').
-mention_root(acquired,'id_16583.xml_0036A_820').
-mention_root(acquired,'id_1659.xml_0036B_617').
-mention_root(acquired,'id_16591.xml_0036C_1446').
-mention_root(acquired,'id_16597.xml_0036D_1712').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,division), formeme(B,'n:of+X'), tDependency(C,B), 
+   formeme(C,'n:obj').
 mention_root(acquired,'id_16652.xml_0036E_751').
 mention_root(acquired,A) :-
-   'lex.rf'(B,A), t_lemma(B,'Corp'), functor(B,'EFF'), formeme(B,'n:for+X').
-mention_root(acquired,'id_1666.xml_00370_1202').
-mention_root(acquired,'id_16663.xml_00371_761').
-mention_root(acquired,'id_16695.xml_00372_956').
-mention_root(acquired,'id_16695.xml_00372_969').
-mention_root(acquired,'id_16833.xml_00375_5292').
-mention_root(acquired,'id_16872.xml_00376_1507').
-mention_root(acquired,'id_16874.xml_00377_1304').
+   'lex.rf'(B,A), number(B,20), tDependency(B,C), formeme(C,'n:of+X'), 
+   tDependency(C,D).
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), tDependency(B,C), t_lemma(C,'Automation'), functor(C,'RSTR').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'Bank'), tDependency(C,B), t_lemma(C,and).
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'Co'), formeme(B,'n:in+X'), tDependency(B,C).
 mention_root(acquired,'id_17004.xml_0037A_5024').
 mention_root(acquired,'id_17110.xml_0037C_1686').
 mention_root(acquired,'id_17151.xml_0037D_1641').
-mention_root(acquired,'id_17168.xml_0037E_1159').
-mention_root(acquired,'id_17178.xml_0037F_1726').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), number(B,sg), tDependency(B,C), t_lemma(C,'privately-held'), 
+   tDependency(D,B), functor(D,'PAT').
 mention_root(acquired,'id_1729.xml_00380_3653').
-mention_root(acquired,'id_17317.xml_00381_904').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), tDependency(B,C), t_lemma(C,'Engineering'), tDependency(D,B), 
+   functor(D,'PAT').
 mention_root(acquired,'id_17323.xml_00382_1491').
 mention_root(acquired,'id_17333.xml_00383_1774').
-mention_root(acquired,'id_17488.xml_00384_2548').
-mention_root(acquired,'id_17488.xml_00384_2550').
-mention_root(acquired,'id_17488.xml_00384_2736').
-mention_root(acquired,'id_17488.xml_00384_2738').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), tDependency(C,B), t_lemma(C,and), tDependency(C,D), 
+   t_lemma(D,'Yale').
 mention_root(acquired,'id_17488.xml_00384_3035').
 mention_root(acquired,'id_17518.xml_00385_685').
-mention_root(acquired,'id_17576.xml_00386_1730').
 mention_root(acquired,'id_17595.xml_00387_1388').
-mention_root(acquired,'id_17651.xml_00388_1067').
-mention_root(acquired,'id_17659.xml_00389_722').
-mention_root(acquired,'id_17688.xml_0038A_1020').
-mention_root(acquired,'id_17694.xml_0038B_1357').
-mention_root(acquired,'id_1771.xml_0038C_3268').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), tDependency(B,C), tDependency(C,D), t_lemma(D,'NO'), 
+   tDependency(E,B).
 mention_root(acquired,'id_17743.xml_0038E_978').
-mention_root(acquired,'id_17770.xml_0038F_2002').
-mention_root(acquired,'id_17798.xml_00390_810').
-mention_root(acquired,'id_17810.xml_00391_1171').
-mention_root(acquired,'id_17810.xml_00391_1183').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'Charmglow').
 mention_root(acquired,'id_17835.xml_00392_750').
-mention_root(acquired,'id_17837.xml_00393_2762').
-mention_root(acquired,'id_17847.xml_00394_762').
-mention_root(acquired,'id_17847.xml_00394_772').
-mention_root(acquired,'id_17853.xml_00395_696').
-mention_root(acquired,'id_17876.xml_00396_5759').
 mention_root(acquired,'id_17973.xml_0039A_1270').
 mention_root(acquired,'id_17981.xml_0039B_699').
-mention_root(acquired,'id_1801.xml_0039D_1089').
-mention_root(acquired,'id_18038.xml_0039E_607').
-mention_root(acquired,'id_18111.xml_0039F_1156').
-mention_root(acquired,'id_18188.xml_003A0_1125').
-mention_root(acquired,'id_18223.xml_003A1_1431').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), tDependency(B,C), t_lemma(C,steel), tDependency(B,D), 
+   functor(D,'APP').
 mention_root(acquired,'id_18229.xml_003A2_2677').
-mention_root(acquired,'id_1847.xml_003A5_1601').
-mention_root(acquired,'id_18590.xml_003A7_1278').
 mention_root(acquired,'id_18667.xml_003A8_1646').
-mention_root(acquired,'id_18682.xml_003A9_1688').
-mention_root(acquired,'id_18783.xml_003AA_1364').
 mention_root(acquired,'id_18859.xml_003AB_889').
 mention_root(acquired,'id_18863.xml_003AD_848').
-mention_root(acquired,'id_18963.xml_003B0_1346').
-mention_root(acquired,'id_19006.xml_003B1_6774').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), functor(B,'PAT'), number(B,26), tDependency(C,B), 
+   tDependency(D,C), formeme(D,'n:obj').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), tDependency(B,C), t_lemma(C,'Railway'), tDependency(D,B), 
+   t_lemma(D,and).
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'Corp'), tDependency(C,B), tDependency(C,D), 
+   t_lemma(D,president).
 mention_root(acquired,'id_19137.xml_003B3_857').
 mention_root(acquired,'id_19270.xml_003B5_1758').
 mention_root(acquired,'id_19297.xml_003B6_951').
-mention_root(acquired,'id_19343.xml_003B7_1270').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'Industry'), tDependency(C,B), formeme(C,'n:obj'), 
+   number(C,sg).
 mention_root(acquired,'id_19368.xml_003B9_1613').
-mention_root(acquired,'id_19464.xml_003BB_1308').
-mention_root(acquired,'id_19649.xml_003BF_1525').
-mention_root(acquired,'id_19663.xml_003C0_1567').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'Inc'), number(B,14), tDependency(B,C), 
+   t_lemma(C,'June').
 mention_root(acquired,'id_19679.xml_003C1_2694').
-mention_root(acquired,'id_19683.xml_003C3_4034').
 mention_root(acquired,'id_19719.xml_003C5_897').
 mention_root(acquired,'id_19751.xml_003C6_2997').
-mention_root(acquired,'id_19751.xml_003C6_3024').
-mention_root(acquired,'id_19767.xml_003C7_2107').
 mention_root(acquired,'id_19874.xml_003C9_701').
 mention_root(acquired,'id_19912.xml_003CB_1036').
-mention_root(acquired,'id_19983.xml_003CC_1285').
 mention_root(acquired,A) :-
-   'lex.rf'(B,A), t_lemma(B,'Plc'), functor(B,'LOC').
+   'lex.rf'(B,A), tDependency(B,C), number(C,41), tDependency(D,B), 
+   functor(D,'DIR1').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'Plc'), functor(B,'LOC'), tDependency(C,B), 
+   nodetype(C,complex).
 mention_root(acquired,'id_2013.xml_003CF_1574').
-mention_root(acquired,'id_2013.xml_003CF_1598').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), tDependency(C,B), t_lemma(C,'Fund`').
 mention_root(acquired,A) :-
    'lex.rf'(B,A), t_lemma(B,'Fund'), formeme(B,'n:of+X').
-mention_root(acquired,'id_2013.xml_003CF_1974').
 mention_root(acquired,A) :-
-   'lex.rf'(B,A), t_lemma(B,'Corp'), formeme(B,'n:of+X'), number(B,38).
-mention_root(acquired,'id_20321.xml_003D1_969').
-mention_root(acquired,'id_20725.xml_003D3_1045').
+   'lex.rf'(B,A), t_lemma(B,'Inc'), formeme(B,'n:subj'), tDependency(B,C), 
+   t_lemma(C,'World').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,portfolio), tDependency(B,C), functor(C,'APP').
 mention_root(acquired,'id_20734.xml_003D4_709').
-mention_root(acquired,'id_20775.xml_003D6_1082').
-mention_root(acquired,'id_20824.xml_003D7_1960').
 mention_root(acquired,'id_21040.xml_003DB_1580').
-mention_root(acquired,'id_21041.xml_003DC_718').
 mention_root(acquired,'id_21046.xml_003DD_2268').
 mention_root(acquired,'id_21073.xml_003DE_1244').
 mention_root(acquired,'id_21129.xml_003DF_1121').
-mention_root(acquired,A) :-
-   'lex.rf'(B,A), functor(B,'PAT'), number(B,20), tDependency(B,C).
 mention_root(acquired,'id_21278.xml_003E3_829').
 mention_root(acquired,'id_21319.xml_003E4_1897').
-mention_root(acquired,'id_21357.xml_003E5_5208').
-mention_root(acquired,'id_21357.xml_003E5_6234').
-mention_root(acquired,'id_21376.xml_003E7_2598').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), tDependency(C,B), t_lemma(C,'Co`'), functor(C,'APP').
 mention_root(acquired,'id_21382.xml_003E8_2489').
 mention_root(acquired,'id_21408.xml_003E9_1532').
 mention_root(acquired,'id_21469.xml_003EC_1959').
-mention_root(acquired,'id_2159.xml_003ED_1017').
 mention_root(acquired,'id_2193.xml_003EE_1194').
 mention_root(acquired,'id_2251.xml_003F2_4900').
-mention_root(acquired,'id_2271.xml_003F3_1942').
-mention_root(acquired,'id_2301.xml_003F4_715').
-mention_root(acquired,'id_2322.xml_003F5_498').
-mention_root(acquired,'id_2325.xml_003F6_750').
 mention_root(acquired,'id_2344.xml_003F7_759').
 mention_root(acquired,'id_2344.xml_003F7_781').
 mention_root(acquired,'id_2365.xml_003F8_974').
-mention_root(acquired,'id_2365.xml_003F8_980').
 mention_root(acquired,'id_2434.xml_003F9_709').
 mention_root(acquired,'id_2532.xml_003FA_898').
-mention_root(acquired,'id_2546.xml_003FB_2777').
-mention_root(acquired,'id_2551.xml_003FC_969').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'Inc'), tDependency(C,B), tDependency(C,D), 
+   functor(D,'BEN'), number(D,sg).
 mention_root(acquired,'id_2570.xml_003FD_1333').
 mention_root(acquired,'id_2577.xml_003FF_582').
-mention_root(acquired,'id_2596.xml_00401_3222').
-mention_root(acquired,'id_2604.xml_00402_593').
-mention_root(acquired,'id_2609.xml_00403_1107').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), tDependency(B,C), t_lemma(C,'Southwest'), functor(C,'RSTR').
 mention_root(acquired,'id_2637.xml_00404_729').
-mention_root(acquired,'id_2638.xml_00405_2311').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'Co'), tDependency(B,C), t_lemma(C,'Taft').
 mention_root(acquired,'id_2647.xml_00406_1346').
-mention_root(acquired,'id_2652.xml_00407_3206').
-mention_root(acquired,'id_2660.xml_00408_792').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), sempos(B,'n.denot'), tDependency(C,B), t_lemma(C,'AB`').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,division), functor(B,'PAT'), tDependency(C,B), 
+   t_lemma(C,sell).
 mention_root(acquired,'id_2714.xml_0040A_842').
 mention_root(acquired,'id_2737.xml_0040B_908').
-mention_root(acquired,'id_2813.xml_0040C_1232').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'Co'), tDependency(C,B), tDependency(C,D), 
+   sempos(D,'n.quant.def').
 mention_root(acquired,'id_2818.xml_0040D_1405').
 mention_root(acquired,'id_2884.xml_0040E_786').
 mention_root(acquired,'id_2897.xml_0040F_986').
 mention_root(acquired,'id_2927.xml_00411_708').
-mention_root(acquired,'id_3023.xml_00415_5777').
-mention_root(acquired,'id_3120.xml_00418_908').
-mention_root(acquired,'id_3129.xml_00419_1146').
+mention_root(acquired,'id_304.xml_00417_2016').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), functor(B,'PAT'), formeme(B,'n:obj'), tDependency(B,C), 
+   t_lemma(C,product), functor(C,'RSTR').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'Plc'), tDependency(B,C), t_lemma(C,'Norcros').
 mention_root(acquired,'id_3176.xml_0041C_1146').
-mention_root(acquired,'id_3184.xml_0041D_771').
-mention_root(acquired,'id_3198.xml_0041E_2680').
-mention_root(acquired,'id_3229.xml_0041F_735').
-mention_root(acquired,'id_3239.xml_00420_1121').
-mention_root(acquired,'id_3241.xml_00421_1213').
-mention_root(acquired,'id_3264.xml_00423_1044').
 mention_root(acquired,'id_3266.xml_00424_957').
 mention_root(acquired,A) :-
-   'lex.rf'(B,A), functor(B,'PAT'), formeme(B,'n:of+X'), number(B,22).
-mention_root(acquired,'id_3295.xml_00425_902').
-mention_root(acquired,'id_3356.xml_00427_1027').
+   'lex.rf'(B,A), functor(B,'PAT'), tDependency(B,C), formeme(C,'n:poss'), 
+   number(C,22).
 mention_root(acquired,'id_3384.xml_00428_1229').
-mention_root(acquired,'id_3413.xml_00429_2898').
-mention_root(acquired,'id_3417.xml_0042A_879').
-mention_root(acquired,'id_3596.xml_0042B_1264').
-mention_root(acquired,'id_3607.xml_0042C_1759').
-mention_root(acquired,'id_3673.xml_0042E_978').
-mention_root(acquired,'id_3673.xml_0042E_986').
 mention_root(acquired,'id_369.xml_0042F_1321').
 mention_root(acquired,'id_369.xml_0042F_1334').
-mention_root(acquired,'id_3707.xml_00430_855').
 mention_root(acquired,'id_376.xml_00431_557').
 mention_root(acquired,'id_3910.xml_00435_1244').
 mention_root(acquired,'id_3961.xml_00436_801').
 mention_root(acquired,'id_3984.xml_00437_3935').
-mention_root(acquired,'id_4033.xml_00438_971').
 mention_root(acquired,'id_4145.xml_0043A_1495').
 mention_root(acquired,'id_4153.xml_0043B_1535').
 mention_root(acquired,'id_4167.xml_0043D_1103').
-mention_root(acquired,'id_4182.xml_0043E_1640').
-mention_root(acquired,'id_4201.xml_0043F_1482').
 mention_root(acquired,'id_4237.xml_00441_719').
 mention_root(acquired,'id_4277.xml_00442_2335').
 mention_root(acquired,'id_4315.xml_00443_3229').
 mention_root(acquired,'id_4323.xml_00444_941').
-mention_root(acquired,'id_4408.xml_00446_1065').
-mention_root(acquired,'id_4408.xml_00446_1178').
-mention_root(acquired,'id_4408.xml_00446_1236').
-mention_root(acquired,'id_4408.xml_00446_1300').
-mention_root(acquired,'id_442.xml_00447_915').
-mention_root(acquired,'id_447.xml_00448_822').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'AB'), tDependency(B,C), t_lemma(C,'Biopool').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'Corp'), formeme(B,'n:of+X'), tDependency(C,B), 
+   formeme(C,'n:for+X').
 mention_root(acquired,'id_4510.xml_0044A_1585').
-mention_root(acquired,'id_4536.xml_0044B_1057').
 mention_root(acquired,'id_4605.xml_0044D_954').
-mention_root(acquired,'id_4606.xml_0044E_758').
 mention_root(acquired,'id_4622.xml_00450_1652').
-mention_root(acquired,'id_4622.xml_00450_1667').
-mention_root(acquired,'id_467.xml_00453_730').
-mention_root(acquired,'id_474.xml_00454_1105').
-mention_root(acquired,'id_4772.xml_00455_2588').
 mention_root(acquired,'id_4798.xml_00456_951').
 mention_root(acquired,A) :-
    'lex.rf'(B,A), t_lemma(B,restaurant), formeme(B,'n:obj').
-mention_root(acquired,'id_4850.xml_0045A_861').
 mention_root(acquired,'id_4910.xml_0045C_1356').
 mention_root(acquired,'id_4955.xml_0045D_803').
-mention_root(acquired,'id_505.xml_0045F_1298').
-mention_root(acquired,'id_5094.xml_00460_1401').
-mention_root(acquired,'id_5097.xml_00461_868').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'AG'), tDependency(C,B), functor(C,'PAT'), 
+   sempos(C,'n.denot').
 mention_root(acquired,'id_5112.xml_00462_686').
-mention_root(acquired,'id_5121.xml_00463_956').
-mention_root(acquired,'id_5286.xml_00464_2840').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), tDependency(B,C), t_lemma(C,'Inc'), tDependency(C,D), 
+   t_lemma(D,'Row').
 mention_root(acquired,'id_532.xml_00468_1015').
 mention_root(acquired,'id_5411.xml_00469_1581').
 mention_root(acquired,'id_5465.xml_0046B_1436').
-mention_root(acquired,'id_553.xml_0046E_802').
 mention_root(acquired,'id_5667.xml_00470_1867').
-mention_root(acquired,'id_5670.xml_00471_1448').
-mention_root(acquired,'id_5672.xml_00472_1274').
+mention_root(acquired,'id_5672.xml_00472_1140').
 mention_root(acquired,A) :-
    'lex.rf'(B,A), t_lemma(B,'Advocate').
 mention_root(acquired,'id_5854.xml_00475_677').
 mention_root(acquired,A) :-
    'lex.rf'(B,A), t_lemma(B,'Waterman').
-mention_root(acquired,'id_5934.xml_00478_1113').
 mention_root(acquired,'id_5937.xml_00479_648').
-mention_root(acquired,'id_5986.xml_0047B_1485').
 mention_root(acquired,'id_6027.xml_0047C_884').
-mention_root(acquired,'id_6027.xml_0047C_897').
-mention_root(acquired,'id_6027.xml_0047C_1005').
-mention_root(acquired,'id_6034.xml_0047D_1889').
-mention_root(acquired,'id_6085.xml_0047F_1628').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'Corp'), tDependency(B,C), t_lemma(C,'America').
 mention_root(acquired,'id_6096.xml_00480_1026').
 mention_root(acquired,'id_6103.xml_00481_891').
-mention_root(acquired,'id_6188.xml_00483_567').
-mention_root(acquired,'id_6217.xml_00484_3254').
-mention_root(acquired,'id_6223.xml_00485_948').
 mention_root(acquired,'id_6276.xml_00486_576').
 mention_root(acquired,'id_6361.xml_00488_1657').
-mention_root(acquired,'id_6373.xml_00489_2236').
-mention_root(acquired,'id_6402.xml_0048A_2791').
-mention_root(acquired,'id_6422.xml_0048B_910').
-mention_root(acquired,'id_6441.xml_0048C_784').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'CORP'), tDependency(C,B), t_lemma(C,'LONDON').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'Inc'), tDependency(C,B), formeme(C,'n:subj'), 
+   tDependency(C,D), sempos(D,'n.quant.def').
 mention_root(acquired,'id_6477.xml_0048D_943').
-mention_root(acquired,'id_6477.xml_0048D_969').
-mention_root(acquired,'id_6497.xml_0048E_979').
 mention_root(acquired,'id_6497.xml_0048E_1250').
-mention_root(acquired,'id_6499.xml_0048F_378').
-mention_root(acquired,'id_6538.xml_00490_614').
-mention_root(acquired,'id_6616.xml_00491_680').
-mention_root(acquired,'id_6659.xml_00492_613').
 mention_root(acquired,'id_6682.xml_00493_848').
 mention_root(acquired,'id_6689.xml_00494_3323').
-mention_root(acquired,'id_6695.xml_00496_537').
-mention_root(acquired,'id_6702.xml_00498_754').
-mention_root(acquired,'id_6719.xml_00499_2896').
-mention_root(acquired,'id_6731.xml_0049A_617').
 mention_root(acquired,'id_6767.xml_0049B_813').
-mention_root(acquired,'id_6789.xml_0049C_1043').
-mention_root(acquired,'id_6815.xml_0049E_2697').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'GenCorp'), tDependency(C,B), tDependency(C,D), 
+   t_lemma(D,'Inc').
 mention_root(acquired,'id_6817.xml_0049F_1055').
-mention_root(acquired,'id_6819.xml_004A1_1849').
-mention_root(acquired,'id_6853.xml_004A2_703').
-mention_root(acquired,'id_6873.xml_004A4_595').
 mention_root(acquired,'id_6874.xml_004A5_995').
 mention_root(acquired,'id_6886.xml_004A6_858').
 mention_root(acquired,'id_6928.xml_004A7_3966').
 mention_root(acquired,'id_7041.xml_004AA_2167').
-mention_root(acquired,'id_706.xml_004AB_1619').
-mention_root(acquired,'id_7110.xml_004AD_1190').
-mention_root(acquired,'id_7130.xml_004AE_2393').
-mention_root(acquired,'id_7136.xml_004AF_1241').
-mention_root(acquired,'id_7220.xml_004B1_856').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), number(B,15), tDependency(C,B), tDependency(C,D), 
+   tense(D,post).
 mention_root(acquired,'id_7315.xml_004B3_1142').
 mention_root(acquired,'id_735.xml_004B4_866').
-mention_root(acquired,'id_7433.xml_004B5_733').
-mention_root(acquired,'id_745.xml_004B6_510').
-mention_root(acquired,'id_7469.xml_004B7_1025').
-mention_root(acquired,'id_762.xml_004B8_1077').
-mention_root(acquired,'id_7644.xml_004B9_2163').
-mention_root(acquired,'id_7672.xml_004BA_1115').
-mention_root(acquired,'id_768.xml_004BB_3099').
 mention_root(acquired,A) :-
-   'lex.rf'(B,A), t_lemma(B,'Inc'), formeme(B,'n:obj'), number(B,22).
-mention_root(acquired,'id_7796.xml_004BF_1915').
-mention_root(acquired,'id_7964.xml_004C0_1263').
-mention_root(acquired,'id_8115.xml_004C2_6814').
-mention_root(acquired,'id_820.xml_004C3_1080').
-mention_root(acquired,'id_8327.xml_004C4_889').
-mention_root(acquired,'id_8355.xml_004C6_995').
-mention_root(acquired,'id_8359.xml_004C7_1973').
+   'lex.rf'(B,A), number(B,26), tDependency(C,B), functor(C,'PAT'), 
+   tDependency(C,D), number(D,30).
+mention_root(acquired,'id_768.xml_004BB_3099').
 mention_root(acquired,'id_8367.xml_004C8_683').
 mention_root(acquired,'id_8370.xml_004C9_752').
-mention_root(acquired,'id_8370.xml_004C9_759').
 mention_root(acquired,'id_8396.xml_004CA_1213').
-mention_root(acquired,'id_8428.xml_004CC_926').
-mention_root(acquired,'id_8472.xml_004CF_1549').
-mention_root(acquired,'id_8496.xml_004D0_1302').
-mention_root(acquired,'id_8518.xml_004D1_1726').
 mention_root(acquired,'id_8567.xml_004D3_1070').
 mention_root(acquired,'id_8567.xml_004D3_1092').
 mention_root(acquired,'id_8567.xml_004D3_1250').
 mention_root(acquired,'id_8571.xml_004D4_1133').
 mention_root(acquired,A) :-
    'lex.rf'(B,A), t_lemma(B,'Inc'), functor(B,'RSTR'), number(B,34).
-mention_root(acquired,'id_8685.xml_004D7_1164').
-mention_root(acquired,'id_8690.xml_004D8_997').
 mention_root(acquired,'id_8748.xml_004DB_1302').
+mention_root(acquired,'id_8780.xml_004DD_2017').
 mention_root(acquired,'id_8781.xml_004DE_924').
-mention_root(acquired,'id_8795.xml_004DF_803').
 mention_root(acquired,'id_8795.xml_004DF_805').
 mention_root(acquired,'id_8830.xml_004E1_656').
-mention_root(acquired,'id_8849.xml_004E2_1186').
 mention_root(acquired,'id_8877.xml_004E5_1216').
 mention_root(acquired,'id_8909.xml_004E6_978').
 mention_root(acquired,'id_8909.xml_004E6_983').
-mention_root(acquired,'id_8947.xml_004E7_717').
-mention_root(acquired,'id_8962.xml_004E8_1631').
 mention_root(acquired,'id_8974.xml_004E9_3789').
 mention_root(acquired,'id_8974.xml_004E9_5072').
-mention_root(acquired,'id_8996.xml_004EA_529').
 mention_root(acquired,'id_8998.xml_004EB_1138').
-mention_root(acquired,'id_9081.xml_004EE_1180').
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,and), tDependency(B,C), t_lemma(C,'W'), 
+   tDependency(D,B), sempos(D,'n.denot').
 mention_root(acquired,'id_9102.xml_004EF_952').
 mention_root(acquired,'id_9102.xml_004EF_1114').
-mention_root(acquired,'id_9108.xml_004F0_1162').
-mention_root(acquired,'id_9156.xml_004F1_2679').
-mention_root(acquired,'id_932.xml_004F4_1337').
-mention_root(acquired,'id_9338.xml_004F7_857').
-mention_root(acquired,'id_9338.xml_004F7_872').
-mention_root(acquired,'id_9338.xml_004F7_878').
-mention_root(acquired,'id_9443.xml_004FB_1636').
-mention_root(acquired,'id_9510.xml_004FC_736').
-mention_root(acquired,'id_9539.xml_004FD_1442').
-mention_root(acquired,'id_9544.xml_004FE_2505').
-mention_root(acquired,'id_9557.xml_004FF_978').
-mention_root(acquired,'id_9570.xml_00500_564').
-mention_root(acquired,'id_963.xml_00501_1165').
-mention_root(acquired,'id_9644.xml_00502_543').
-mention_root(acquired,A) :-
-   'lex.rf'(B,A), t_lemma(B,'Metrobanc').
-mention_root(acquired,'id_9661.xml_00503_942').
-mention_root(acquired,'id_9677.xml_00504_813').
-mention_root(acquired,'id_9733.xml_00505_6821').
-mention_root(acquired,'id_9809.xml_00506_712').
-mention_root(acquired,'id_982.xml_00507_2253').
-mention_root(acquired,'id_9833.xml_00508_1672').
-mention_root(acquired,'id_9858.xml_00509_941').
-mention_root(acquired,'id_9891.xml_0050B_1246').
-mention_root(acquired,'id_9893.xml_0050C_888').
-mention_root(acquired,'id_9971.xml_0050F_1668').

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import czsem.ILP.Serializer.Relation;
+import czsem.utils.ProjectSetup;
 
 public class LinguisticSerializer 
 {
@@ -164,7 +165,7 @@ public class LinguisticSerializer
 		
 	
 		RulesSerializer rs = new RulesSerializer(workingDirectory, "RulesSerializer");
-		rs.setOutputRulesFileName("../rules/" + projectName + "_rules.owl");
+		rs.setOutputRulesFileName("../rules/" + projectName + ProjectSetup.makeTimeStamp() +"_rules.owl");
 		rs.setOntologyURIFromOutpuRulesFileNameAndWorkingDir();
 
 //		String[] object_props = {"'lex.rf'", "tDependency"};
