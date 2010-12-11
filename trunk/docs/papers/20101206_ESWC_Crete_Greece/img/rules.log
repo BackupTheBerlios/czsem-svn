@@ -1,0 +1,80 @@
+[Rule 1] [Pos cover = 23 Neg cover = 6] 17
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'Inc'), tDependency(C,B), tDependency(C,D), 
+   formeme(D,'n:in+X'), tDependency(E,C).
+
+lex.rf(?b, ?a), t_lemma(?b, "Inc"), tDependency(?c, ?b), tDependency(?c, ?d), formeme(?d, "n:in+X"), tDependency(?c, ?e) -> mention_root(?a, "acquired")   
+
+
+[Rule 11] [Pos cover = 25 Neg cover = 6] 19
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'Inc'), tDependency(C,B), formeme(C,'n:obj'), 
+   tDependency(C,D), functor(D,'APP').
+   
+lex.rf(?b, ?a), t_lemma(?b, "Inc"), tDependency(?c, ?b), formeme(?c, "n:obj"), tDependency(?c, ?d), functor(?d, "APP") -> mention_root(?a, "acquired")   
+
+
+[Rule 75] [Pos cover = 14 Neg cover = 1]   13
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'Inc'), functor(B,'APP'), tDependency(C,B), 
+   number(C,pl).
+
+lex.rf(?b, ?a), t_lemma(?b, "Inc"), functor(?b, "APP"), tDependency(?c, ?b), number(?c, "pl") -> mention_root(?a, "acquired")   
+
+
+------------------------------------------------------------------------------
+
+
+    [rule-1:
+            ( urn:swrl#b http://ufal.mff.cuni.cz/pdt/pml/lex.rf urn:swrl#a )
+            ( urn:swrl#c http://ufal.mff.cuni.cz/pdt/pml/tDependency urn:swrl#b )
+            ( urn:swrl#b http://ufal.mff.cuni.cz/pdt/pml/functor 'APP' )
+            ( urn:swrl#c http://ufal.mff.cuni.cz/pdt/pml/number 'pl' )
+            ( urn:swrl#b http://ufal.mff.cuni.cz/pdt/pml/t_lemma 'Inc' )
+         ->
+            ( urn:swrl#a http://ufal.mff.cuni.cz/pdt/pml/mention_root 'acquired' )
+        ]
+        
+------------------------------------------------------------------------------
+        
+@prefix pre: <http://jena.hpl.hp.com/prefix#>.
+@include <RDFS>.
+
+[rule1: (?f pre:father ?a) (?u pre:brother ?f) -> (?u pre:uncle ?a)]
+        
+
+
+------------------------------------------------------------------------------
+
+
+[Rule 33] [Pos cover = 15 Neg cover = 4]   11
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'Division'), tDependency(B,C), tDependency(D,B), 
+   tDependency(E,D).
+
+[Rule 21] [Pos cover = 11 Neg cover = 1]    10
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'Corp'), tDependency(C,B), functor(C,'PAT'), 
+   tDependency(C,D), t_lemma(D,'#PersPron').
+
+
+[Rule 3] [Pos cover = 31 Neg cover = 21]  10
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'Inc'), functor(B,'PAT'), tDependency(C,B), 
+   tDependency(D,C), nodetype(D,complex).
+
+
+[Rule 5] [Pos cover = 14 Neg cover = 6] 8
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'Corp'), formeme(B,'n:of+X'), tDependency(C,B), 
+   tDependency(D,C), negation(D,neg0).
+
+[Rule 14] [Pos cover = 10 Neg cover = 2]   8
+mention_root(acquired,A) :-
+   'lex.rf'(B,A), t_lemma(B,'Inc'), functor(B,'ACT'), formeme(B,'n:obj'), 
+   tDependency(C,B), tense(C,nil).
+
+
+
+
+

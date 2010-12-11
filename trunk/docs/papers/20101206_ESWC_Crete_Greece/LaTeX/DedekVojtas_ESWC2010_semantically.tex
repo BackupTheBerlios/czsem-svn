@@ -21,6 +21,7 @@
 \usepackage{amssymb}
 \setcounter{tocdepth}{3}
 \usepackage{graphicx}
+%\usepackage{listings}
 
 \usepackage{url}
 \urldef{\mailsa}\path|{alfred.hofmann, ursula.barth, ingrid.haas, frank.holzwarth,|
@@ -34,11 +35,10 @@
 \mainmatter  % start of an individual contribution
 
 % first the title is needed
-\title{Semantic Annotation Semantically: Using a~Sharable Extraction Ontology and a Reasoner}
+\title{Semantic Annotation Semantically: Using a~Shareable Extraction Ontology and a Reasoner}
 
 % a short form should be given in case it is too long for the running head
 \titlerunning{Semantic Annotation Semantically}
-%\titlerunning{Towards Semantic Annotation Supported by Dependency Linguistics and ILP}
 
 % the name(s) of the author(s) follow(s) next
 %
@@ -67,8 +67,8 @@ Prague, Czech Republic
 % "llncs.dem" accompanies the document class "llncs.cls".
 %
 
-\toctitle{Semantic Annotation Semantically: Using a Sharable Extraction Ontology and a Reasoner}
-\tocauthor{Jan D\v{e}dek and Peter Vojt\'{a}\v{s}}
+%\toctitle{Semantic Annotation Semantically: Using a Shareable Extraction Ontology and a Reasoner}
+%\tocauthor{Jan D\v{e}dek and Peter Vojt\'{a}\v{s}}
 \maketitle
 
 
@@ -82,11 +82,160 @@ A description, implementation and initial evaluation of the method are the main 
 
 \section{Introduction}
 
+Dedek ISWC:
+\cite{biblio:DedekISWC2010}
+
+\begin{figure}
+\centerline{\includegraphics[width=\hsize]{img/semantic_rules_app_schema}}
+\caption{Semantic annotation driven by an extraction ontology and a reasoner -- schema of the process.}
+\label{img:rules_app_schema}
+\end{figure}
+
+
+\cite{so17864}:
+\begin{quote}
+An ontology is a formal specification of a shared conceptualization.	
+\end{quote}
+
+
+\cite{Studer1998161}:
+\begin{quote}
+An ontology is a formal, explicit specification of a shared conceptualization.
+\end{quote}
 
 
 \section{Related Work}
+\subsection{Servey}
+\cite{citeulike:7291004}
+\subsection{Embley}
+2004: \cite{Embley:2004:TSU:1012294.1012295} 
+2002: \cite{DBLP:conf/er/EmbleyTL02} 
+\subsection{Labsk\'{y}}
+\cite{springerlink:10.1007/978-3-642-01891-6_5}
 
-\section{Conclusion and Future Work}
+
+\section{Experiment}
+\subsection{Linguistics}
+
+PDT: \cite{dedek:PDT20_CD}
+
+TectoMT: \cite{dedek:ZaPtTectoMTHighly2008}
+
+
+
+\begin{figure}
+\centerline{\includegraphics[width=0.5\hsize]{img/tree}}
+\caption{Tectogrammatical tree of the sentence: ``Hutton is offering 35 dlrs cash per share for 83 pct of the shares.''}
+\label{img:tree}
+\end{figure}
+
+
+
+
+
+\subsection{Data}
+
+We use data contained in the ``Corporate Acquisition Events'' corpus
+described in \cite{lewis1992representation}. More precisely we use the \emph{Acquisitions v1.1} version\footnote{This version of the corpus comes form the Dot.kom (Designing infOrmation extracTion for KnOwledge Management) project's resources: \url{http://nlp.shef.ac.uk/dot.kom/resources.html}} of the corpus.
+This is a collection of 600 news articles describing acquisition
+events taken from the Reuters dataset. News articles are tagged to identify fields
+related to acquisition events. These fields include `purchaser' , `acquired', and
+`seller' companies along with their abbreviated names (`purchabr', `acqabr' and
+`sellerabr') Some news articles also mention the field `deal amount'. Together,
+these seven fields define the set of target elements for information extraction
+task: we will refer to these fields as “roles” in the rest of the document.
+
+\subsection{Success of such rules}
+\cite{DBLP:conf/ilp/RamakrishnanJBS07}
+
+\subsection{Examples of rules}
+
+\begin{figure}
+\small
+[Rule 1] [Pos cover = 23 Neg cover = 6]\\
+\verb@mention_root(acquired,A) :-@\\
+\verb@   'lex.rf'(B,A), t_lemma(B,'Inc'), tDependency(C,B), tDependency(C,D),@\\
+\verb@   formeme(D,'n:in+X'), tDependency(E,C).@
+\smallskip\newline
+[Rule 11] [Pos cover = 25 Neg cover = 6]\\
+\verb@mention_root(acquired,A) :-@\\
+\verb@   'lex.rf'(B,A), t_lemma(B,'Inc'), tDependency(C,B), formeme(C,'n:obj'), @\\
+\verb@   tDependency(C,D), functor(D,'APP').@
+\smallskip\newline
+[Rule 75] [Pos cover = 14 Neg cover = 1]\\
+\verb@mention_root(acquired,A) :-@\\
+\verb@   'lex.rf'(B,A), t_lemma(B,'Inc'), functor(B,'APP'), tDependency(C,B), @\\
+\verb@   number(C,pl).@
+	\caption{Examples of extraction rules in the native Prolog format.}
+	\label{fig:rules_prolog}
+\end{figure}
+
+
+\begin{figure}
+\small
+[Rule 1]\\
+\verb@lex.rf(?b, ?a), t_lemma(?b, "Inc"), tDependency(?c, ?b),@\\
+\verb@tDependency(?c, ?d), formeme(?d, "n:in+X"), tDependency(?c, ?e)@\\
+\verb@      -> mention_root(?a, "acquired")@
+\smallskip\newline
+[Rule 11]\\
+\verb@lex.rf(?b, ?a), t_lemma(?b, "Inc"), tDependency(?c, ?b),@\\
+\verb@formeme(?c, "n:obj"), tDependency(?c, ?d), functor(?d, "APP")@\\
+\verb@      -> mention_root(?a, "acquired")@   
+\smallskip\newline
+[Rule 75]\\
+\verb@lex.rf(?b, ?a), t_lemma(?b, "Inc"), functor(?b, "APP"),@\\
+\verb@tDependency(?c, ?b), number(?c, "pl")@\\
+\verb@      -> mention_root(?a, "acquired")@   
+	\caption{Examples of extraction rules in Prot\'{e}g\'{e} 4 -- Rules View's format}
+	\label{fig:rules_protege}
+\end{figure}
+
+\begin{figure}
+\centerline{\includegraphics[width=0.87\hsize]{img/rules_owl_xml}}
+\caption{Rule 75 in the OWL/XML syntax for Rules in OWL 2 \cite{GHPP09a}.}
+\label{img:rules_xml}
+\end{figure}
+
+
+%\lstinputlisting[language=XML]{img/rule.owl.xml}
+
+
+
+%[Rule 1] [Pos cover = 23 Neg cover = 6] 17
+%mention_root(acquired,A) :-
+%   'lex.rf'(B,A), t_lemma(B,'Inc'), tDependency(C,B), tDependency(C,D), 
+%   formeme(D,'n:in+X'), tDependency(E,C).
+%
+%lex.rf(?b, ?a), t_lemma(?b, "Inc"), tDependency(?c, ?b), tDependency(?c, ?d), formeme(?d, "n:in+X"), tDependency(?c, ?e) -> mention_root(?a, "acquired")   
+%
+%
+%[Rule 11] [Pos cover = 25 Neg cover = 6] 19
+%mention_root(acquired,A) :-
+%   'lex.rf'(B,A), t_lemma(B,'Inc'), tDependency(C,B), formeme(C,'n:obj'), 
+%   tDependency(C,D), functor(D,'APP').
+%   
+%lex.rf(?b, ?a), t_lemma(?b, "Inc"), tDependency(?c, ?b), formeme(?c, "n:obj"), tDependency(?c, ?d), functor(?d, "APP") -> mention_root(?a, "acquired")   
+%
+%
+%[Rule 75] [Pos cover = 14 Neg cover = 1]   13
+%mention_root(acquired,A) :-
+%   'lex.rf'(B,A), t_lemma(B,'Inc'), functor(B,'APP'), tDependency(C,B), 
+%   number(C,pl).
+%
+%lex.rf(?b, ?a), t_lemma(?b, "Inc"), functor(?b, "APP"), tDependency(?c, ?b), number(?c, "pl") -> mention_root(?a, "acquired")   
+
+
+\section{Repeatability}
+
+Our implementation is publicly available. The data, source codes and a platform-independent installer of the Crisp and Fuzzy ILP classifiers for Weka can be downloaded from our Fuzzy ILP classifier's web page\footnote{\url{http://www.ksi.mff.cuni.cz/~dedek/fuzzyILP/}}. This makes our experiment repeatable according to the
+SIGMOD Experimental Repeatability Requirements \cite{biblio:SIGMODrepeatability}.
+
+\section{Future Work}
+
+Annotated document ontology $\rightarrow$ fact ontology
+
+\section{Conclusion}
 
 \bigskip
 \noindent\textbf{Acknowledgments}\\
