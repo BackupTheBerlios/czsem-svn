@@ -197,6 +197,26 @@ task: we will refer to these fields as “roles” in the rest of the document.
 \label{img:rules_xml}
 \end{figure}
 
+\begin{figure}
+\small
+\begin{verbatim}
+@prefix pml: <http://ufal.mff.cuni.cz/pdt/pml/>.
+[rule-75:  
+        ( ?b pml:lex.rf ?a )
+        ( ?c pml:tDependency ?b )
+        ( ?b pml:functor 'APP' )
+        ( ?c pml:number 'pl' )
+        ( ?b pml:t_lemma 'Inc' )
+     -> 
+        ( ?a pml:mention_root 'acquired' )
+]
+\end{verbatim}
+
+\caption{Rule 75 in the Jena rules syntax.}
+\label{img:rules_jena}
+\end{figure}
+
+
 
 %\lstinputlisting[language=XML]{img/rule.owl.xml}
 
@@ -224,6 +244,64 @@ task: we will refer to these fields as “roles” in the rest of the document.
 %   number(C,pl).
 %
 %lex.rf(?b, ?a), t_lemma(?b, "Inc"), functor(?b, "APP"), tDependency(?c, ?b), number(?c, "pl") -> mention_root(?a, "acquired")   
+
+
+
+\subsection{Results}
+
+
+
+
+\begin{table}
+\begin{tabular}{|r||r|r|c|r|c|}
+\hline
+dataset & domain & language & number of files & dataset size & number of rules\\
+\hline
+\hline
+czech\_fireman & accidents & Czech & 50 & 16 MB & 2\\
+\hline
+acquisitions-v1.1 & finance & English & 600 & 126 MB & 113\\
+\hline
+\end{tabular}
+\caption{Description of datasets that we have used.}
+\label{tab:datasets}
+\end{table}
+
+
+\begin{table}
+\begin{center}
+\begin{tabular}{|r||r|r||r|r|}
+\hline
+reasoner & \textbf{czech\_fireman} & stdev & \textbf{acquisitions-v1.1} & stdev\\
+\hline
+\hline
+Jena & 161 s & 0.226 & 1259 s & 3.579\\
+\hline
+HermiT & 219 s & 1.636 & $\gg$ 1 hour & \\
+\hline
+Pellet & 11 s & 0.062 & 503 s & 4.145\\
+\hline
+FaCT++ & \multicolumn{4}{|c|}{Does not support rules.}\\
+\hline
+\end{tabular}
+\end{center}
+\caption{Time performance of tested reasoners on both datasets. Time is measured in seconds. Average values from 6 measurements. Experiment environment: Intel Core I7-920 CPU 2.67GHz, 3GB of RAM, Java SE 1.6.0\_03}
+\label{tab:results}
+\end{table}
+
+
+\url{http://jena.sourceforge.net}
+
+
+\url{http://hermit-reasoner.com}
+
+
+\url{http://clarkparsia.com/pellet}
+
+
+\url{http://code.google.com/p/factplusplus}
+
+
 
 
 \section{Repeatability}
