@@ -277,18 +277,22 @@ reasoner & \textbf{czech\_fireman} & stdev & \textbf{acquisitions-v1.1} & stdev\
 \hline
 Jena & 161 s & 0.226 & 1259 s & 3.579\\
 \hline
-HermiT & 219 s & 1.636 & $\gg$ 1 hour & \\
+HermiT & 219 s & 1.636 & $\gg$ 13 hours & \\
 \hline
 Pellet & 11 s & 0.062 & 503 s & 4.145\\
 \hline
-FaCT++ & \multicolumn{4}{|c|}{Does not support rules.}\\
+FaCT++ & \multicolumn{4}{|c|}{Did not work with rules in our setting.}\\
 \hline
 \end{tabular}
 \end{center}
-\caption{Time performance of tested reasoners on both datasets. Time is measured in seconds. Average values from 6 measurements. Experiment environment: Intel Core I7-920 CPU 2.67GHz, 3GB of RAM, Java SE 1.6.0\_03}
+\caption{Time performance of tested reasoners on both datasets. Time is measured in seconds. Average values from 6 measurements. Experiment environment: Intel Core I7-920 CPU 2.67GHz, 3GB of RAM, Java SE 1.6.0\_03, Windows XP.}
 \label{tab:results}
 \end{table}
 
+
+\subsection{HermiT experiment}
+
+After 13 hours of reasoning only 30 files (of 600) were processed.
 
 \url{http://jena.sourceforge.net}
 
