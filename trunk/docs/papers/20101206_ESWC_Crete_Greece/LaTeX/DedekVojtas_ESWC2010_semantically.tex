@@ -73,7 +73,10 @@ Prague, Czech Republic
 
 
 \begin{abstract}
-Information extraction (IE) and automated semantic annotation of text are usually done by complex tools and all these tools use some kind of a model that represents the actual task and its solution. The model is usually represented as a set of some kind of extraction rules (e.g. regular expressions), gazetteer lists or it is based on some statistical measurements and probability assertions. In the environment of the Semantic Web it is essential that information is shareable and some ontology based IE tools keep the model in so called extraction ontologies. In practice the extraction ontologies are usually strongly dependent on a particular extraction/annotation tool and cannot be used separately. In this paper we present an extension of the idea of extraction ontologies. The extraction ontologies should not be dependent on the particular extraction/annotation tool. In our solution the extraction/annotation process can be done separately by an ordinary reasoner. We also present a proof of a concept for the idea: a case study with a linguistically based IE engine that exports its extraction rules to an extraction ontology and we demonstrate how this extraction ontology can be applied to a document by a reasoner. The paper also contains an evaluation experiment with several OWL reasoners.
+Information extraction (IE) and automated semantic annotation of text are usually done by complex tools. These tools use some kind of a model that represents the actual task and its solution. The model is usually represented as a set of extraction rules (e.g. regular expressions), gazetteer lists, or it is based on some statistical measurements and probability assertions. In the environment of the Semantic Web it is essential that information is shareable and some ontology based IE tools keep the model in so called extraction ontologies. In practice the extraction ontologies are usually strongly dependent on a particular extraction/annotation tool and cannot be used separately. In this paper we present an extension of the idea of extraction ontologies. 
+According to the presented concept the extraction ontologies should not be dependent on the particular extraction/annotation tool. In our solution the extraction/annotation process can be done separately by an ordinary reasoner. 
+
+We also present a proof of a concept for the idea: a case study with a linguistically based IE engine that exports its extraction rules to an extraction ontology and we demonstrate how this extraction ontology can be applied to a document by a reasoner. The paper also contains an evaluation experiment with several OWL reasoners.
 \keywords{Extraction Ontology, Reasoning, Information Extraction, Semantic Annotation}
 \end{abstract}
 
@@ -113,7 +116,7 @@ In Section~\ref{sec:experiment} we present an experiment with several OWL reason
 Ontology-based Information Extraction (OBIE) \cite{citeulike:7291004} or Ontology-driven Information Extraction \cite{Yildiz:2007:OMO:1793154.1793216} has recently emerged as a subfield of information extraction. Also Web Information Extraction \cite{DBLP:journals/tkde/ChangKGS06} is a closely related discipline. Many extraction and annotation tools can be found in the above mentioned surveys \cite{citeulike:7291004,DBLP:journals/tkde/ChangKGS06} and many of the tools also use an ontology as an output format, but almost all of them store their extraction models in proprietary formats and the models are accessible only by the corresponding tool.
 
 In the literature we have found only two approaches that use extraction ontologies. The former one was published by D. Embley \cite{DBLP:conf/er/EmbleyTL02,Embley:2004:TSU:1012294.1012295}
-and the later one IE system Ex \footnote{\url{http://eso.vse.cz/~labsky/ex/}} published by M. Labsk\'{y} \cite{springerlink:10.1007/978-3-642-01891-6_5}. 
+and the later one -- IE system Ex\footnote{\url{http://eso.vse.cz/~labsky/ex/}} was developped by M. Labsk\'{y} \cite{springerlink:10.1007/978-3-642-01891-6_5}. 
 But in both cases the extraction ontologies are dependent on the particular tool and they are kept in XML files with a proprietary structure.
 
 
@@ -121,7 +124,9 @@ Also authors of \cite{citeulike:7291004} (a recent survey of OBIE systems) do no
 \begin{enumerate}
 	\item Extraction rules are known to contain errors (because they are never 100\% accurate), and objections can be raised on their inclusion in ontologies in terms of formality and accuracy.
 
-	\item It is hard to argue that linguistic extraction rules should be considered a part of an ontology while information extractors based on other IE techniques (such as SVM, HMM, CRF, etc. classifiers used to identify instances of a class when classification is used as the IE technique) should be kept out of it: all IE techniques perform the same task with comparable effectiveness (generally successful but not 100\% accurate). But the techniques advocated for the inclusion of linguistic rules in ontologies cannot accommodate such IE techniques. They assert that either all information extractors (that use different IE techniques) should be included in the ontologies or none should be included.
+	\item It is hard to argue that linguistic extraction rules should be considered a part of an ontology while information extractors based on other IE techniques (such as SVM, HMM, CRF, etc. classifiers used to identify instances of a class when classification is used as the IE technique) should be kept out of it: all IE techniques perform the same task with comparable effectiveness (generally successful but not 100\% accurate). But the techniques advocated for the inclusion of linguistic rules in ontologies cannot accommodate such IE techniques.
+	
+The authors then conclude that either all information extractors (that use different IE techniques) should be included in the ontologies or none should be included.
 \end{enumerate}
 
 
@@ -131,7 +136,7 @@ Concerning the first argument, we have to take into account that extraction onto
 Concerning the second argument, we agree that it is not always possible to save an extraction model to an ontology. But on the other hand we think that there are cases when shareable extraction ontologies can be useful. And maybe in the future; if this idea proves its usefulness; new standard ways how to encode models to an ontology will appear.
 
 
-Also the most widely agreed definitions of an ontology emphasize the shared aspect of ontologies. 
+Also the most widely agreed definitions of an ontology emphasize the shared aspect of ontologies: 
 \begin{quote}
 An ontology is a formal specification of a shared conceptualization.	\cite{so17864}
 \end{quote}
@@ -140,7 +145,7 @@ An ontology is a formal specification of a shared conceptualization.	\cite{so178
 An ontology is a formal, explicit specification of a shared conceptualization. \cite{Studer1998161}
 \end{quote}
 
-Of course the word `shareable' has different meaning form `shared'. Something that is shareable is not necessarily shared, but on the other hand something that is shared should be shareable. We do not think that shareable extraction ontologies will contain shared knowledge about how to extract data form documents in certain domain. This is for example not true for all extraction models artificially leaned from a training corpus. Here shareable simply means that the extraction rules can be shred amongst software agents and can be used separately form the original tool. In time it will turn out if such extraction ontologies are useful or not. But for sure they bring something new that was not possible before.
+Of course the word `shareable' has different meaning from `shared'. Something that is shareable is not necessarily shared, but on the other hand something that is shared should be shareable. We do not think that shareable extraction ontologies will contain shared knowledge about how to extract data from documents in certain domain. This is for example not true for all extraction models artificially leaned from a training corpus. Here shareable simply means that the extraction rules can be shred amongst software agents and can be used separately from the original tool. In time it will turn out if such extraction ontologies are useful or not. But for sure they bring something new that was not possible before.
 
 
 
@@ -153,14 +158,14 @@ In this section we will describe the main idea of the paper and we will illustra
 
 \subsection{Document Ontologies} \label{sec:doc_ont}
 
-The main idea of this paper assumes that extraction ontologies will be shareable and they can be applied on a document outside of the original extraction/annotation tool. We further assume that the extraction ontologies will be applied by ordinary reasoners. This assumption implies that both extraction ontologies and documents have to be in a reasoner readable format. In the case of contemporary OWL reasoners there are standard reasoner-readable languages: OWL and RDF in a rich variety of possible serializations (XML, Turtle, N-Triples, etc.) Besides that there exists standard ways like GRDDL\footnote{\url{http://www.w3.org/TR/grddl/}} or RDFa\footnote{\url{http://www.w3.org/TR/xhtml-rdfa-primer/}} how to transform an ordinary document to a RDF document. We call the output of such transformation a `document ontology'. A document ontology should contain all relevant data of a document and preferably the document could be reconstructed from the document ontology on demand.
+The main idea of this paper assumes that extraction ontologies will be shareable and they can be applied on a document outside of the original extraction/annotation tool. And we assert that the extraction ontologies can be applied by ordinary reasoners. This assumption implies that both extraction ontologies and documents have to be in a reasoner readable format. In the case of contemporary OWL reasoners there are standard reasoner-readable languages: OWL and RDF in a rich variety of possible serializations (XML, Turtle, N-Triples, etc.) Besides that there exists standard ways like GRDDL\footnote{\url{http://www.w3.org/TR/grddl/}} or RDFa\footnote{\url{http://www.w3.org/TR/xhtml-rdfa-primer/}} how to transform an ordinary document to a RDF document. We call the output of such transformation a `document ontology'. A document ontology should contain all relevant data of a document and preferably the document could be reconstructed from the document ontology on demand.
 
-When a reasoner is applying an extraction ontology to a document, it has only ``to annotate'' the corresponding document ontology. Here ``to annotate'' means to add new knowledge -- new class membership or property assertions. In fact it means just to do the inference tasks prescribed by the extraction ontology on the document ontology. 
+When a reasoner is applying an extraction ontology to a document, it only has ``to annotate'' the corresponding document ontology, not the document itself. Here ``to annotate'' means to add new knowledge -- new class membership or property assertions. In fact it means just to do the inference tasks prescribed by the extraction ontology on the document ontology. 
 
 
 \subsection{Implementation}
 
-In this section we will present details abut the case study.  We have used our IE engine \cite{biblio:DedekISWC2010} based on deep linguistic parsing and Inductive Logic Programming. It is a complex system implemented with a great help of the GATE system\footnote{\url{http://gate.ac.uk/}} \cite{dedek:GATE_ACL2002} and it also uses many other third party tools including several linguistic tools a Prolog system. Installation and making the system operate is not simple. This case study should demonstrate that the extraction rules produced by the system are not dependent on the system in the sense described above.
+In this section we will present details about the case study.  We have used our IE engine \cite{biblio:DedekISWC2010} based on deep linguistic parsing and Inductive Logic Programming. It is a complex system implemented with a great help of the GATE system\footnote{\url{http://gate.ac.uk/}} \cite{dedek:GATE_ACL2002} and it also uses many other third party tools including several linguistic tools and a Prolog system. Installation and making the system operate is not simple. This case study should demonstrate that the extraction rules produced by the system are not dependent on the system in the sense described above.
 
 
 
@@ -178,11 +183,11 @@ Nodes roughly correspond with words of a sentence, edges represent linguistic de
 
 Our IE engine needs a linguistic preprocessing (deep linguistic parsing) of documents on its input. Deep linguistic parsing brings a very complex structure to the text and the structure serves as a footing for construction and application of extraction rules. 
 
-We usually use TectoMT system\footnote{\url{http://ufal.mff.cuni.cz/tectomt/}} \cite{dedek:ZaPtTectoMTHighly2008} to do the linguistic preprocessing. TectoMT is a Czech project that contains many linguistic analyzers for different languages including Czech and English. We are using a majority of applicable tools from TectoMT: a tokeniser, a sentence splitter, morphological analyzers (including POS tagger), a syntactic parser and the deep syntactic (tectogrammatical) parser. All the tools are based on the dependency based linguistic theory and formalism of the Prague Dependency Treebank project \footnote{\url{http://ufal.mff.cuni.cz/pdt2.0/}} \cite{dedek:PDT20_CD}.
+We usually use TectoMT system\footnote{\url{http://ufal.mff.cuni.cz/tectomt/}} \cite{dedek:ZaPtTectoMTHighly2008} to do the linguistic preprocessing. TectoMT is a Czech project that contains many linguistic analyzers for different languages including Czech and English. We are using a majority of applicable tools from TectoMT: a tokeniser, a sentence splitter, morphological analyzers (including POS tagger), a syntactic parser and the deep syntactic (tectogrammatical) parser. All the tools are based on the dependency based linguistic theory and formalism of the Prague Dependency Treebank project\footnote{\url{http://ufal.mff.cuni.cz/pdt2.0/}} \cite{dedek:PDT20_CD}.
 
 The output linguistic annotations of the TectoMT system are stored (along with the text of the source document) in XML files in so called Prague Markup Language\footnote{\url{http://ufal.mff.cuni.cz/jazz/PML/}} (PML). PML is a very complex language (or XML schema) that is able to express many linguistic elements and features present in text. For the IE engine a tree dependency structure of words in sentences is the most useful one because the edges of the structure guide the extraction rules. An example of such (tectogrammatical) tree structure is in Fig.~\ref{img:tree}.
 
-In this case study PML files made form source documents by TectoMT are transformed to RDF document ontology by a quite simple GRDDL/XSLT\footnote{\url{http://www.w3.org/TR/xslt}} transformation. Such document ontology contains the whole variety of PML in RDF format.
+In this case study PML files made from source documents by TectoMT are transformed to RDF document ontology by a quite simple GRDDL/XSLT\footnote{\url{http://www.w3.org/TR/xslt}} transformation. Such document ontology contains the whole variety of PML in RDF format.
 
 
 
@@ -192,7 +197,7 @@ In this case study PML files made form source documents by TectoMT are transform
 
 \subsubsection{Rule Transformations}
 
-Extraction rules produced by the IE engine are natively kept in a Prolog format; examples can be seen in Fig.~\ref{img:rules_prolog}. The engine is capable to export them to the OWL/XML\footnote{\url{http://www.w3.org/TR/owl-xmlsyntax/}} syntax for rules in OWL 2 \cite{GHPP09a} (see in Fig.~\ref{img:rules_xml}). Such rules can be parsed by OWL API\footnote{\url{http://owlapi.sourceforge.net/}} 3.1. Fig.~\ref{img:rules_protege} shows the example rules in Prot\'{e}g\'{e}\footnote{\url{http://protege.stanford.edu/}} 4 -- Rules View's format. And the last rule example can be seen in Fig.~\ref{img:rules_jena}, which shows a rule in the Jena rules format \footnote{\url{http://jena.sourceforge.net/inference/#RULEsyntax}}. Conversion to Jena rules was necessary because it is the only format that Jena can parse, see details about our use of Jena in Section\ref{sec:experiment}. The Jena rules were obtained using following process: OWL/XML $\rightarrow$ RDF/SWRL\footnote{\url{http://www.w3.org/Submission/SWRL/}} conversion using OWL API and RDF/SWRL $\rightarrow$ Jena rules conversion using SweetRules\footnote{\url{http://sweetrules.semwebcentral.org/}}.
+Extraction rules produced by the IE engine are natively kept in a Prolog format; examples can be seen in Fig.~\ref{img:rules_prolog}. The engine is capable to export them to the OWL/XML\footnote{\url{http://www.w3.org/TR/owl-xmlsyntax/}} syntax for rules in OWL 2 \cite{GHPP09a} (see in Fig.~\ref{img:rules_xml}). Such rules can be parsed by OWL API\footnote{\url{http://owlapi.sourceforge.net/}} 3.1. Fig.~\ref{img:rules_protege} shows the example rules in Prot\'{e}g\'{e}\footnote{\url{http://protege.stanford.edu/}} 4 -- Rules View's format. And the last rule example can be seen in Fig.~\ref{img:rules_jena}, it shows a rule in the Jena rules format\footnote{\url{http://jena.sourceforge.net/inference/#RULEsyntax}}. Conversion to Jena rules was necessary because it is the only format that Jena can parse, see details about our use of Jena in Section~\ref{sec:experiment}. The Jena rules were obtained using following transformation process: OWL/XML $\rightarrow$ RDF/SWRL\footnote{\url{http://www.w3.org/Submission/SWRL/}} conversion using OWL API and RDF/SWRL $\rightarrow$ Jena rules conversion using SweetRules\footnote{\url{http://sweetrules.semwebcentral.org/}}.
 
 
 
@@ -291,9 +296,9 @@ All the resources (including source codes of the case study and the experiment) 
 
 In this section we present an experiment that should serve as a proof of a concept that the proposed idea of independent extraction ontologies is working. We have selected several reasoners (namely Jena, HermiT, Pellet and FaCT++) and tested them on two slightly different datasets from two different domains and languages (see Table~\ref{tab:datasets}). This should at least partially demonstrate the universality of the proposed approach.
 
-In both cases the task is to find all instances (corresponding to words in a document) that should be uncovered by the extraction rules. The extraction rules are saved in single extraction ontology for each dataset. The datasets are divided into individual document ontologies (owl files) corresponding to the individual documents of a source IE dataset (see below). During an experiment the individual document ontologies are processed separately (one ontology in a step) by a selected reasoner. The total time taken to process all document ontologies of a dataset is the measured result of the experiment. 
+In both cases the task is to find all instances (corresponding to words in a document) that should be uncovered by the extraction rules. The extraction rules are saved in single extraction ontology for each dataset. The datasets are divided into individual document ontologies (owl files) corresponding to the individual documents. During the experiment the individual document ontologies are processed separately (one ontology in a step) by a selected reasoner. The total time taken to process all document ontologies of a dataset is the measured result of the reasoner for the dataset.
 
-The actual reasoning task is more difficult than a simple retrieval of all facts entailed by the extraction rules. Such simple retrieval task took only a few seconds for the Acquisitions v1.1 dataset (including parsing) in the native Prolog environment that the IE engine uses. There were several more inferences needed in the reasoning task because the schema of the input files was a little bit different form the schema used in rules. The mapping of the schemas was captured in another ontology that was included in the reasoning task. The mapping ontology is a part of the publically available project ontologies \footnote{See ``Data $\rightarrow$ ontologies'' link on the project page \url{http://czsem.berlios.de/}} and a potentially interested reader can find the complete mapping there.
+The actual reasoning tasks are more difficult than a simple retrieval of all facts entailed by the extraction rules. Such simple retrieval task took only a few seconds for the Acquisitions v1.1 dataset (including parsing) in the native Prolog environment that the IE engine uses. There were several more inferences needed in the reasoning tasks because the schema of the input files was a little bit different from the schema used in rules. The mapping of the schemas was captured in another ontology that was included in the reasoning. The mapping ontology is a part of the publically available project ontologies\footnote{See ``Data $\rightarrow$ ontologies'' link on the project page\url{http://czsem.berlios.de/}} and a potentially interested reader can find the complete mapping ontology there.
 
 
 \subsection{Datasets}
@@ -328,13 +333,15 @@ The corpus is structured such that each document represents one event (accident)
 
 \subsubsection{Acquisitions v1.1}  
 
-The second dataset is called ``Corporate Acquisition Events'' corpus and it is
-described in \cite{lewis1992representation}. More precisely we use the \emph{Acquisitions v1.1} version\footnote{This version of the corpus comes form the Dot.kom (Designing infOrmation extracTion for KnOwledge Management) project's resources: \url{http://nlp.shef.ac.uk/dot.kom/resources.html}} of the corpus.
+The second dataset is called ``Corporate Acquisition Events'' and it is
+described in \cite{lewis1992representation}. More precisely we use the \emph{Acquisitions v1.1} version\footnote{This version of the corpus comes from the Dot.kom (Designing infOrmation extracTion for KnOwledge Management) project's resources: \url{http://nlp.shef.ac.uk/dot.kom/resources.html}} of the corpus.
 This is a collection of 600 news articles describing acquisition
 events taken from the Reuters dataset. News articles are tagged to identify fields
 related to acquisition events. These fields include `purchaser' , `acquired', and
 `seller' companies along with their abbreviated names (`purchabr', `acqabr' and
 `sellerabr') Some news articles also mention the field `deal amount'.
+
+
 For the experiment we selected only the `acquired' task.
 
 
@@ -348,9 +355,9 @@ Jena\footnote{\url{http://jena.sourceforge.net}}
 ,HermiT\footnote{\url{http://hermit-reasoner.com}}
 ,Pellet\footnote{\url{http://clarkparsia.com/pellet}}
 and FaCT++\footnote{\url{http://code.google.com/p/factplusplus}}
-) and measured the time they needed to complete a particular task. The time also includes time spend on parsing the input. HermiT, Pellet and FaCT++ were called through OWLAPI-3.1, so the same parser was used for them. Jena reasoner was used in its native environment and used the Jena parser.
+) and measured the time they needed to process a particular dataset. The time also includes time spend on parsing the input. HermiT, Pellet and FaCT++ were called through OWLAPI-3.1, so the same parser was used for them. Jena reasoner was used in its native environment and used the Jena parser.
 
-In the early beginning of the experiment we had to exclude the FaCT++ reasoner form all tasks. It tuned out that FaCT++ probably does not work with rules in our setting (We called FaCT++ through OWLAPI-3.1) because it does not returned any result instances.  All the remaining reasoners strictly agreed on the results and returned the same sets of instances.
+In the early beginning of the experiment we had to exclude the FaCT++ reasoner from both tests. It tuned out that FaCT++ probably does not work with rules in our setting (We called FaCT++ through OWLAPI-3.1) because it does not returned any result instances.  All the remaining reasoners strictly agreed on the results and returned the same sets of instances.
 
 Also HermiT was not fully evaluated on the Acquisitions v1.1 dataset because it was too slow. The reasoner spent 13 hours of running to process only 30 of 600 files of the dataset. And we did not find it useful to let it continue.
 
@@ -402,9 +409,9 @@ FaCT++ & \multicolumn{4}{|c|}{Did not work with rules in our setting.}\\
 \label{tab:results}
 \end{table}
 
-Table\ref{tab:results} summarizes results of the experiment. The standard deviations are relatively small when compared to the differences between the average times.  So there is no doubt about the order of the tested reasoners. Pellet performed the best and HermiT was the slowest amongst the tested and usable reasoners in this experiment.
+Table~\ref{tab:results} summarizes results of the experiment. The standard deviations are relatively small when compared to the differences between the average times.  So there is no doubt about the order of the tested reasoners. Pellet performed the best and HermiT was the slowest amongst the tested and usable reasoners in this experiment.
 
-From the results we can conclude that similar tasks can be satisfactorily solved by contemporary reasoners because three of four tested reasoners were working in the presented tasks and two reasoners finished in operational time.
+From the results we can conclude that similar tasks can be satisfactorily solved by contemporary OWL reasoners because three of four tested reasoners were working correctly and two reasoners finished in operational time.
 
 
 
@@ -420,17 +427,17 @@ Our implementation is publicly available -- source codes and the datasets can be
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-In this paper (Section~\ref{sec:doc_ont}) we have described a method how to apply an extraction ontology to a document ontology and obtain so called ``annotated'' document ontology. To have an ``annotated'' document ontology is almost the same as to have an annotated document. An annotated document is useful (easier navigation, faster reading and lookup of information, possibility of structured queries on collections of such documents, etc.) but if we are interested in the actual information present in the document, if we want to know the facts that are in a document asserted about the real word things then an annotated document is not sufficient and the conversion of an annotated document to the real world facts is no simple.
+In this paper (Section~\ref{sec:doc_ont}) we have described a method how to apply an extraction ontology to a document ontology and obtain so called ``annotated'' document ontology. To have an ``annotated'' document ontology is almost the same as to have an annotated document. An annotated document is useful (easier navigation, faster reading and lookup of information, possibility of structured queries on collections of such documents, etc.) but if we are interested in the actual information present in the document, if we want to know the facts that are in a document asserted about the real word things then an annotated document is not sufficient and the conversion of an annotated document to the real world facts is not simple.
 There are obvious issues concerning data integration and duplicity of information. For example when in a document two mentions of people are annotated as `injured', what is the number of injured people in the corresponding accident? Are the two annotations in fact linked to the same person or not?
 
-In the beginning of our work on the idea of shareable extraction ontologies we planned to develop it further, we wanted to cover also the step form annotated document ontologies to the real world facts. The extraction process would then end up with so called ``fact ontologies''. But two main obstacles prevent us to do that.
+In the beginning of our work on the idea of shareable extraction ontologies we planned to develop it further, we wanted to cover also the step from annotated document ontologies to the real world facts. The extraction process would then end up with so called ``fact ontologies''. But two main obstacles prevent us to do that.
 
 \begin{enumerate}
 	\item Our IE engine is not yet capable to solve these data integration and duplicity of information issues. The real world facts would be quite imprecise then.
 	\item There are also technology problems of creating new facts (individuals) during reasoning.
 \end{enumerate}
 
-Because of the decidability and finality constraints of the Description Logic Reasoning task it is not possible to create new individuals during the reasoning process. There is no standard way how to do it. But there are some proprietary solutions like \verb@swrlx:createOWLThing@\footnote{\url{http://protege.cim3.net/cgi-bin/wiki.pl?action=browse&id=SWRLExtensionsBuiltIns}} form the Prot\'{e}g\'{e} project and \verb@makeTemp(?x)@ or \verb@makeInstance(?x, ?p, ?v)@\footnote{\url{http://jena.sourceforge.net/inference/#RULEbuiltins}} from the Jena project.
+Because of the decidability and finality constraints of the Description Logic Reasoning task it is not possible to create new individuals during the reasoning process. There is no standard way how to do it. But there are some proprietary solutions like \verb@swrlx:createOWLThing@\footnote{\url{http://protege.cim3.net/cgi-bin/wiki.pl?action=browse&id=SWRLExtensionsBuiltIns}} from the Prot\'{e}g\'{e} project and \verb@makeTemp(?x)@ or \verb@makeInstance(?x, ?p, ?v)@\footnote{\url{http://jena.sourceforge.net/inference/#RULEbuiltins}} from the Jena project.
 And these solutions can be used in the future work. 
 
 
@@ -444,8 +451,8 @@ In the end of the paper we would like to summarize the main contributions of the
 	\item In the beginning of the paper we pointed out the draw back of so called extraction ontologies -- in most cases they are dependent on a particular extraction/annotation tool and they cannot be used separately.	
 	\item We extended the concept of extraction ontologies by adding the shareable aspect and we introduced a new principle of making extraction ontologies independent of the original tool: the possibility of application of an extraction ontology to a document by an ordinary reasoner.
 	\item In Section~\ref{sec:case} we presented a case study that shows that the idea of shareable extraction ontologies is realizable. We presented implementation of an IE tool that exports its extraction rules to an extraction ontology and we demonstrated how this extraction ontology can be applied to a document by a reasoner.
-	\item More over in Section~\ref{sec:experiment} an experiment with several OWL reasoners was presented. The experiment evaluated the performance of contemporary OWL reasoners on tasks of application of extraction ontologies.  
-	\item A new publically available benchmark for OWL reasoning was created together with the experiment. Other reasoner can be tested this way.
+	\item More over in Section~\ref{sec:experiment} an experiment with several OWL reasoners was presented. The experiment evaluated the performance of contemporary OWL reasoners on IE tasks: application of extraction ontologies.  
+	\item A new publically available benchmark for OWL reasoning was created together with the experiment. Other reasoners can be tested this way.
 \end{itemize}
    
 
