@@ -1,0 +1,21 @@
+<?xml version="1.0"?>  
+<CREOLE-DIRECTORY>
+<CREOLE>  
+  <RESOURCE>  
+    <NAME>Netgraph Tree Viewer</NAME>  
+    <JAR>czsem-1.0.2-SNAPSHOT.jar</JAR>  
+    <CLASS>czsem.gate.plugins.NetgraphTreeViewer</CLASS>  
+    <COMMENT>comment</COMMENT>  
+    <HELPURL>http://czsem.berlios.de/</HELPURL>  
+  </RESOURCE>  
+</CREOLE>  
+
+  <JAR>lib/netgraph_client_application.jar</JAR>
+  <JAR>lib/xmlwriter-2.2.2.jar</JAR>
+<!--   
+  <JAR>lib/learningapi.jar</JAR>
+  <JAR SCAN="false">czsem-1.0.2-SNAPSHOT.jar</JAR>
+ -->  
+
+  <!-- <JAR>lib/stanford-parser.jar</JAR> -->
+</CREOLE-DIRECTORY> 
