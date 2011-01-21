@@ -88,7 +88,7 @@ Our solution is based on information extraction (see emphasized pieces of inform
 
 Our experiments deal with texts in the Czech language but our method is general and it can be used with any structured linguistic representation. In this paper we do not provide many details about the information extraction part of the solution. We concentrate on the classification part and present a detailed study of the fuzzy ILP classification method (so-called `Fuzzy ILP Classifier'). 
 
-In our application we are facing the challenge of induction and/or mining in several places. First we need an inductive procedure when extracting attributes of an accident from text. Second (the subject of this paper) we need an inductive procedure when trying to explain an accident's degree of seriousness by its attributes. ILP is used as the inductive procedure in both of these places.
+In our application we are facing the challenge of induction and/or mining on several occasions. First we need an inductive procedure when extracting attributes of an accident from text. Second (the subject of this paper) we need an inductive procedure when trying to explain an accident's degree of seriousness by its attributes. ILP is used as the inductive procedure in both of these places.
 \begin{itemize}
 	\item During the information extraction phase, we exploit the fact that ILP can work directly with multirelational data, e.g., deep syntactic (tectogrammatical) trees built from sentences of the processed text.
 	\item During the classification phase, we are experimentally using the Fuzzy ILP Classifier because it performs quite well on our dataset (see Section~\ref{sec:eval}) and it is naturally capable of handling fuzzy data, which occurs when the information extraction engine returns confidence probability values along with extracted data. But in this paper we do not describe this situation; so only the approach is fuzzy in the present demonstration.
@@ -136,7 +136,7 @@ Several other approaches to monotone classification have been presented, includi
 %\label{img:schema}
 %\end{floatingfigure}
 
-A general schema of our experimental system is shown in Fig.~\ref{img:schema}. We use our previously developed web information extraction tools based on third party linguistic analyzers (the upper two dashed arrows; this is not a subject of this paper). We extract some structured information from the web and the extracted information is then translated to an ILP knowledge base and, along with a user rating, it is used for the classification. (We assume that a small amount of learning data is annotated by a human user.) The classification is based on ILP and it could be \emph{fuzzy} or \emph{crisp} (crisp denotes a straightforward application of ILP and fuzzy is for the fuzzy method, see the next sections.)
+A general schema of our experimental system is shown in Fig.~\ref{img:schema}. We use our previously developed web information extraction tools based on third party linguistic analyzers (the upper two dashed arrows; this is not a subject of this paper). We extract some structured information from the web and the extracted information is then translated to an ILP knowledge base and, along with a user rating, it is used for the classification (we assume that a small amount of learning data is annotated by a human user). The classification is based on ILP and it could be \emph{fuzzy} or \emph{crisp}. Crisp denotes a straightforward application of ILP and fuzzy stands for the fuzzy method (subject of the paper), see in the next sections.
 
 
 
@@ -152,15 +152,12 @@ are publicly available -- they have been published on a CDROM
 under the title PDT 2.0 (\cite{dedek:PDT20_CD} -- the first five tools) and in
 (\cite{dedek:KlTransformationBasedTectogrammatical2006} -- Tectogrammatical analysis). These tools are used as a
 processing chain. At the end of the chain they produce
-tectogrammatical \citep{dedek:MiBeAnnotationtectogrammatical2006} dependency trees built up from the text.
+tectogrammatical dependency trees \citep{dedek:MiBeAnnotationtectogrammatical2006} built up from the text.
 
 
 \begin{description}
  
-	\item[Tool 1.] Segmentation and tokenization consists of tokenization
-(dividing the input text into words and punctuation)
-and segmentation (dividing a sequence of tokens
-into sentences).
+	\item[Tool 1.] Segmentation and tokenization consists of dividing the input text into words and punctuation (tokenization) and dividing a sequence of tokens into sentences (segmentation).
 
 	\item[Tool 2.] Morphological analysis assigns all possible lemmas
 and morphological tags to particular word forms (word
@@ -270,12 +267,12 @@ In this experiment we have not used any information extracted by our automated i
 
 Table~\ref{img:attributes_description} summarizes all features (or attributes) that we have obtained from accident reports. Except for the attribute \verb+type+ (type of an accident -- \verb+fire+, \verb+car_accident+ and \verb+other+), all the attributes are numerical and therefore \emph{monotonizable} (see the next sections). There are cases in which the value of an attribute is unknown. We have decided to make evidence of this and keep the values \verb+unknown+ in the knowledge base. A brief explanation of each attribute follows.
 \begin{itemize}
-	\item \verb+size+ is size of text of a particular report.
+	\item \verb+size+ is length of text of a particular report.
 	\item \verb+damage+ is an amount (in CZK -- Czech Crowns) of summarized damage arisen during a reported accident.
 	\item \verb+dur_minutes+ is time taken to handle an accident.
-	\item \verb+fatalities+ and \verb+injuries+ are numbers of fatalities and injuries sustained in an accident.
-	\item \verb+cars+ is the number of cars damaged during an accident (mostly during car accidents).
-	\item \verb+professional_units+ and \verb+amateur_units+ are numbers of fireman units sent for a particular accident.
+	\item \verb+fatalities+ and \verb+injuries+ are numbers of deaths and wound people sustained in an accident.
+	\item \verb+cars+ is the number of vehicles damaged during an accident (mostly during car accidents).
+	\item \verb+professional_units+ and \verb+amateur_units+ are numbers of fireman and volunteer units sent for a particular accident.
 	\item \verb+pipes+ is a number of used fire hoses.
 	\item \verb+lather+, \verb+aqualung+ and \verb+fan+ (ventilator) indicates whether these devices were used.
 \end{itemize}
@@ -619,8 +616,8 @@ Negations used in Fig.~\ref{img:attribute_monotonization} and Fig.~\ref{img:conv
 Once we have learning examples and background knowledge, we can run the ILP inductive procedure and obtain learned rules (a learned hypothesis). According to the kind of the ILP task (crisp or monotonized), we obtain the corresponding kind (crisp or monotonized) of rules (see e.g. in Fig.~\ref{img:rules}). But these rules cannot be used directly to solve the classification task. There are common cases when more than one rule is applicable to a single instance. So we have to select which one to use. For the monotonized hypothesis we select the one with the biggest return value. It is illustrated in Fig.~\ref{img:conversion}. Such clear criterion does not exist for the crisp hypothesis, so we simply use the first applicable rule.
 
 
-In the crisp case there are often many instances which cannot be classified because there is no applicable rule. (In our experiment there was about 51\%
-of unclassified instances, see in the next section.) It could be caused by the lack of training data, but the monotonized approach does not suffer from this shortage. We can always select the bottom value.
+In the crisp case there are often many instances which cannot be classified because there is no applicable rule. In our experiment there was about a 51\%
+of unclassified instances (see in the next section). It could be caused by the lack of training data, but the monotonized approach does not suffer from this shortage. We can always select the bottom value.
 
 Another advantage of the monotonized approach is that the set of positive training examples is extended by monotonization. 
 
