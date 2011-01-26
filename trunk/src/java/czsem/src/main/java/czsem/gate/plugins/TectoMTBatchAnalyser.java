@@ -5,9 +5,7 @@ import gate.Document;
 import gate.Resource;
 import gate.creole.ExecutionException;
 import gate.creole.ResourceInstantiationException;
-import gate.creole.metadata.CreoleParameter;
 import gate.creole.metadata.CreoleResource;
-import gate.creole.metadata.Optional;
 import gate.persist.PersistenceException;
 import gate.security.SecurityException;
 import gate.util.InvalidOffsetException;
@@ -16,9 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -26,28 +22,19 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.apache.log4j.Logger;
 import org.xml.sax.SAXException;
 
-import czsem.gate.AbstractLanguageAnalyserWithInputOutputAS;
-import czsem.gate.GateUtils;
-import czsem.gate.tectomt.Annotator;
-import czsem.gate.tectomt.SentenceInfoManager;
 import czsem.gate.tectomt.TMTDocumentHelper;
-import czsem.gate.tectomt.TMTSAXParser;
 import czsem.utils.Config;
 import czsem.utils.ProcessExec;
 import czsem.utils.ProjectSetup;
 
 @CreoleResource(name = "czsem TectoMTBatchAnalyser", comment = "Alyses givem corpus by TMT tools")
-public class TectoMTBatchAnalyser extends AbstractLanguageAnalyserWithInputOutputAS
+public class TectoMTBatchAnalyser extends TectoMTAbstractAnalyser
 {
 
 	private static final long serialVersionUID = -1436830144361327369L;
 	static Logger logger = Logger.getLogger(TectoMTBatchAnalyser.class);
 
 
-	private URL scenarioFilePath = null;
-	private List<String> blocks = null;
-	private boolean loadScenarioFromFile = true;
-	private String language = "english";
 		
 	private List<TMTDocumentHelper> documents_to_anlayse= new ArrayList<TMTDocumentHelper>();
 
@@ -101,69 +88,20 @@ public class TectoMTBatchAnalyser extends AbstractLanguageAnalyserWithInputOutpu
 	protected int executeTMTAnalysis() throws IOException, InterruptedException, URISyntaxException
 	{
 		Config cfg = Config.getConfig();
-		String tredEnvp [] =
-		{
-				"PERLLIB="+cfg.getTmtRoot()+"/libs/core" +System.getProperty( "path.separator" )+
-				cfg.getTmtRoot()+"/libs/blocks" +System.getProperty( "path.separator" )+
-				cfg.getTmtRoot()+"/libs/other",
-				"TRED_DIR="+cfg.getTredRoot(),
-				"TMT_ROOT="+cfg.getTmtRoot()+"/",
-				"JAVA_HOME="+System.getProperty("java.home"),
-				"SystemRoot="+System.getenv("SystemRoot"),
-				"Path="+System.getenv("Path"),
-	/*		    'conll_mcd_order2.model'      => '2600m',    # tested on sol1, sol2 (64bit)
-			    'conll_mcd_order2_0.01.model' => '540m',     # tested on sol2 (64bit) , cygwin (32bit win), java-1.6.0(64bit)
-			    'conll_mcd_order2_0.03.model' => '540m',     # load block tested on cygwin notebook (32bit win), java-1.6.0(64bit)
-			    'conll_mcd_order2_0.1.model'  => '540m',     # load block tested on cygwin notebook (32bit win), java-1.6.0(64bit)
-				"TMT_PARAM_MCD_EN_MODEL=conll_mcd_order2_0.01.model", */
-				"TMT_SHARED="+cfg.getTmtRoot()+"/share",
-				"CYGWIN=nodosfilewarning"
-		};
 
-		
-		String[] cmdarray = 
-		{
-				"perl",
-				cfg.getTredRoot() + "/btred",
-				"-q",
-				"-c",
-				cfg.getTmtRoot() + "/config/.tredrc",
-				"-Z",
-				cfg.getTmtRoot() + "/pml_schemas/" +System.getProperty( "path.separator" )
-					+cfg.getTredRoot()+"/resources/"+System.getProperty( "path.separator" ),
-				"-0",
-				"-m",
-				cfg.getTmtRoot()+ "/tools/general/runblocks.btred",
-				"-S", "-o"
-		};
-		
-		List<String> cmd_list = new ArrayList<String>(Arrays.asList(cmdarray));
-		
-		URL scen = getScenarioFilePath();
-		if (loadScenarioFromFile)
-		{
-			cmd_list.add("--scen");			
-			cmd_list.add(GateUtils.URLToFilePath(scen));			
-		}
-		else
-		{
-			List<String> blocks = getBlocks();
-			cmd_list.addAll(blocks);
-		}
-		
 		String file_list_path = cfg.getTmtSerializationDirectoryPath() +
-			"/gate_tmt_filelist_" + ProjectSetup.makeTimeStamp();
+		"/gate_tmt_filelist_" + ProjectSetup.makeTimeStamp();
 		PrintStream file_list_ostream = new PrintStream(file_list_path);
-		
-		cmd_list.add("--");
-		cmd_list.add("-l");
-		cmd_list.add(file_list_path);
 		
 		for (TMTDocumentHelper da : documents_to_anlayse)
 		{
 			file_list_ostream.println(new File(da.getTMTFilePath()).getCanonicalPath());
 		}
 		file_list_ostream.close();
+		
+		List<String> cmd_list = buildTredCmdArray(); 
+		cmd_list.add("-l");
+		cmd_list.add(file_list_path);
 		
 		logger.debug("-------------START list of commentds to execute------------------------");
 		for (String cmd : cmd_list)
@@ -173,40 +111,11 @@ public class TectoMTBatchAnalyser extends AbstractLanguageAnalyserWithInputOutpu
 		logger.debug("-------------END list of commentds to execute------------------------");
 
 		ProcessExec tmt_proc = new ProcessExec();
-		tmt_proc.exec(cmd_list.toArray(new String[0]), tredEnvp);
+		tmt_proc.exec(cmd_list.toArray(new String[0]), getTredEnvp());
 		tmt_proc.startReaderThreads(Config.getConfig().getLogFileDirectoryPath() + "/TMT_GATE_");
 		return tmt_proc.waitFor();		
 	}
 	
-	protected void annotateGateDocumentAcordingtoTMTfile(Document doc, String tmt_filepath) throws ParserConfigurationException, SAXException, IOException, InvalidOffsetException
-	{
-		TMTSAXParser parser = new TMTSAXParser(language);
-		List<SentenceInfoManager> sentences = parser.parse(tmt_filepath);
-		Annotator tmt_annot = new Annotator(sentences);
-    	tmt_annot.annotate(doc, outputASName);
-	}
-	
-
-	@Optional
-	@CreoleParameter(defaultValue="file:tmt_analysis_scenarios/english_full_blocks.scen")
-	public void setScenarioFilePath (URL scenarioFilePath ) {
-		this.scenarioFilePath  = scenarioFilePath ;
-	}
-
-	public URL getScenarioFilePath() {
-		return scenarioFilePath;
-	}
-
-	
-	@Optional
-	@CreoleParameter(comment="List of blocks to be used in the analysis", defaultValue="SCzechW_to_SCzechM::Sentence_segmentation;SCzechW_to_SCzechM::Tokenize_joining_numbers")
-	public void setBlocks(List<String> blocks) {
-		this.blocks = blocks;
-	}
-	
-	public List<String> getBlocks() {
-		return blocks;
-	}
 
 
 	@Override
@@ -223,26 +132,6 @@ public class TectoMTBatchAnalyser extends AbstractLanguageAnalyserWithInputOutpu
 	}
 
 
-	public Boolean getLoadScenarioFromFile() {
-		return loadScenarioFromFile;
-	}
-
-
-	@CreoleParameter(defaultValue="true")
-	public void setLoadScenarioFromFile(Boolean loadScenarioFromFile) {
-		this.loadScenarioFromFile = loadScenarioFromFile;
-	}
-
-
-	public String getLanguage() {
-		return language;
-	}
-
-
-	@CreoleParameter(defaultValue="english") //czech
-	public void setLanguage(String language) {
-		this.language = language;
-	}
 	
 
 	public static void main(String [] args) throws Exception

@@ -118,6 +118,11 @@ public class GateUtils
 		public boolean addDocument(String name) {
 			return seenDocuments.add(name);
 		}
+		
+		public Set<String> getDocumentSet()		
+		{
+			return seenDocuments;
+		}
 
 		
 	}

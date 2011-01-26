@@ -22,7 +22,8 @@ public abstract class TMTAnnotation
 			try {
 				annotateUnsafe(as, seq_anot);
 			} catch (CannotAnnotateCharacterSequence e) {
-	    		logger.error(this, e);
+				logger.error(String.format("SeqAnnotation error in document: %s", as.getDocument().getName()));
+				logger.error(this, e);
 			}
 		}
 

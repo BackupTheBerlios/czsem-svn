@@ -13,6 +13,8 @@ import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.Writer;
 
+import org.apache.log4j.Logger;
+
 public class ProcessExec {
 
 	public static class ReaderThread extends Thread {
@@ -215,5 +217,18 @@ public class ProcessExec {
 	public void writeString(String text) throws IOException
 	{
 		output_writer.write(text);
+	}
+
+	public boolean isRunning()
+	{
+		try 
+		{		
+			Integer exit = process.exitValue();
+			Logger.getLogger(getClass()).debug(exit);
+			return false;
+		} catch (IllegalThreadStateException e)
+		{
+			return true;
+		}
 	}
 }

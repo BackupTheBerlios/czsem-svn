@@ -143,7 +143,7 @@ public class TectoMTBatchAnalyserTest extends TestCase
 				GateUtils.URLToFilePath(getClass().getResource("/Acquisitions10473.tmt")));
 		
 		//saveDocumentToFile("test_out.xml");
-		assertEquals(1702, as.size());
+		assertEquals(1703, as.size());
 		
 	}
 
@@ -491,7 +491,7 @@ public class TectoMTBatchAnalyserTest extends TestCase
 		executeTmtOnCurrentCorpus("english", english_full_blocks);
 
 		AnnotationSet as = document.getAnnotations();		
-		assertEquals(1702, as.size());
+		assertEquals(1703, as.size());
 		
 		saveDocumentToFile("test_out.xml");
 
