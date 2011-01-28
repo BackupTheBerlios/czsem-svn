@@ -100,13 +100,13 @@ public class TectoMTAbstractAnalyser extends AbstractLanguageAnalyserWithInputOu
 		return tredEnvp;
 	}
 
-	protected String getBrunBlocks() throws URISyntaxException, IOException
+	protected String getBrunBlocksScriptFile() throws URISyntaxException, IOException
 	{
 		Config cfg = Config.getConfig();
 		return cfg.getTmtRoot()+ "/tools/general/runblocks.btred";		
 	}
 	
-	protected List<String> buildTredCmdArray() throws IOException, URISyntaxException
+	protected List<String> buildTredCmdArray(String[] additional_args) throws IOException, URISyntaxException
 	{
 		Config cfg = Config.getConfig();	
 		String[] cmdarray = 
@@ -121,11 +121,13 @@ public class TectoMTAbstractAnalyser extends AbstractLanguageAnalyserWithInputOu
 					+cfg.getTredRoot()+"/resources/"+System.getProperty( "path.separator" ),
 				"-0",
 				"-m",
-				getBrunBlocks(),
+				getBrunBlocksScriptFile(),
 				"-S", "-o"
 		};
 		
 		List<String> cmd_list = new ArrayList<String>(Arrays.asList(cmdarray));
+		
+		if (additional_args != null) cmd_list.addAll(Arrays.asList(additional_args));
 		
 		URL scen = getScenarioFilePath();
 		if (getLoadScenarioFromFile())

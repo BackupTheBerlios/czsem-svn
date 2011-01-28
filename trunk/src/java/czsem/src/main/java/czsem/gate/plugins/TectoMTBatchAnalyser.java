@@ -99,7 +99,7 @@ public class TectoMTBatchAnalyser extends TectoMTAbstractAnalyser
 		}
 		file_list_ostream.close();
 		
-		List<String> cmd_list = buildTredCmdArray(); 
+		List<String> cmd_list = buildTredCmdArray(null); 
 		cmd_list.add("-l");
 		cmd_list.add(file_list_path);
 		

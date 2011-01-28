@@ -17,6 +17,14 @@ use Frontier::Daemon;
 
 my $scenario;
 
+my $port_number = 9090;
+
+#the first argument must be server port number
+
+$port_number = $ARGV[0];
+shift(@ARGV); 
+
+
 if ($ARGV[0] eq '--scen') {
     if (@ARGV < 2) {
         die "Error: --scen must be followed by a scenario file name\n";
@@ -40,6 +48,16 @@ sub analyzeFile
     return "succes"; 
 }
 
+sub handshake
+{
+    my ( $param ) = @_;
+    
+    print STDERR "ok".$param."ok";
+    
+    return "ok".$param."ok";
+}
+
+
 sub terminate
 {
     exit;
@@ -50,11 +68,12 @@ sub start_server
 {
     my $methods;
     $methods = {
+      'tectoMT.handshake' => \&handshake,
       'tectoMT.analyzeFile' => \&analyzeFile,
       'tectoMT.terminate' => \&terminate };
     
     my $server;
-    $server = Frontier::Daemon->new(LocalPort => 8080, methods => $methods)
+    $server = Frontier::Daemon->new(LocalPort => $port_number, methods => $methods)
         or die "Couldn't start HTTP server: $!";
 }
 

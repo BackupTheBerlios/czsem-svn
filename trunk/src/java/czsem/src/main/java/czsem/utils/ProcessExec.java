@@ -123,7 +123,7 @@ public class ProcessExec {
 
 	private ReaderThread err_reader_thread;
 	protected ReaderThread cin_reader_thread;
-	protected Process process;
+	protected Process process = null;
 	protected PrintWriter output_writer;
 	protected BufferedReader input_reader;
 	protected BufferedReader error_reader;
@@ -223,6 +223,7 @@ public class ProcessExec {
 	{
 		try 
 		{		
+			if (process == null) return false;
 			Integer exit = process.exitValue();
 			Logger.getLogger(getClass()).debug(exit);
 			return false;
@@ -230,5 +231,9 @@ public class ProcessExec {
 		{
 			return true;
 		}
+	}
+
+	public void destroy() {
+		process.destroy();		
 	}
 }

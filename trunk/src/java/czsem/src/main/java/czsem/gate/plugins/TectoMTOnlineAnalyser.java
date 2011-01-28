@@ -1,18 +1,28 @@
 package czsem.gate.plugins;
 
+import gate.Resource;
+import gate.creole.ResourceInstantiationException;
+import gate.creole.metadata.CreoleParameter;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Vector;
 
 import org.apache.log4j.Logger;
+import org.apache.xmlrpc.AsyncCallback;
 import org.apache.xmlrpc.XmlRpcClientLite;
 import org.apache.xmlrpc.XmlRpcException;
 
 import czsem.utils.Config;
 import czsem.utils.ProcessExec;
+import czsem.utils.FirstOfTwoTasksTerminatesTheSecond;
+import czsem.utils.FirstOfTwoTasksTerminatesTheSecond.Task;
 
 public class TectoMTOnlineAnalyser extends TectoMTAbstractAnalyser
 {
@@ -21,8 +31,13 @@ public class TectoMTOnlineAnalyser extends TectoMTAbstractAnalyser
 	static Logger logger = Logger.getLogger(TectoMTOnlineAnalyser.class);
 	protected ProcessExec tmtProcess = null;
 	
+	protected int serverPortNumber = 9090;
+	private int serverTimeOut = 0;
+	
+	protected TectMTServerConnection serverConnection = null;
+	
 	@Override
-	protected String getBrunBlocks() throws URISyntaxException, IOException
+	protected String getBrunBlocksScriptFile() throws URISyntaxException, IOException
 	{
 		Config cfg = Config.getConfig();
 //		return cfg.getTmtRoot()+ "/tools/general/runblocks.btred";
@@ -38,38 +53,191 @@ public class TectoMTOnlineAnalyser extends TectoMTAbstractAnalyser
 	}
 	
 	
-	protected void startTMTAnalysisServer() throws IOException, InterruptedException, URISyntaxException
-	{		
-		List<String> cmd_list = buildTredCmdArray();			
+	protected void startTMTAnalysisServer() throws Exception
+	{				 
+		Calendar cal_start = Calendar.getInstance();
+		String [] port = {getServerPortNumber().toString()};
+		
+		List<String> cmd_list = buildTredCmdArray(port);			
 		
 		tmtProcess = new ProcessExec();
 		tmtProcess.exec(cmd_list.toArray(new String[0]), getTredEnvp());
 		tmtProcess.startReaderThreads(Config.getConfig().getLogFileDirectoryPath() + "/TMT_GATE_");
+		
+		for (int i = 0; i < 30; i++)
+		{
+			if (isServerRunning())
+			{
+				logger.debug(String.format("waited %d ms", i*100));
+				break;				
+			}
+			Thread.sleep(100);
+		}
+		if (! isServerRunning())
+		{
+			throw new ResourceInstantiationException("Filed to start TectoMT server, see 'czsem_GATE_plugins/log/TMT_GATE_err.log'.");			
+		}		
+
+		serverConnection = new TectMTServerConnection(getServerPortNumber());
+		
+		
+		doHandShake();
+		
+		long time_dif = Calendar.getInstance().getTime().getTime() - cal_start.getTime().getTime() ;        		
+		logger.info(String.format("TectoMT server initialization took %d:%d.%d",
+				time_dif/(1000*60), (time_dif/(1000))%1000, time_dif%1000));
+
+	}
+
+		
+	public enum HandShakeResult
+	{
+		HandShakeOK,
+		HandShakeKO,
+		ProcessTrminated,
+		TimeOut
 	}
 	
-	
+	protected void doHandShake() throws Exception
+	{
+		
+		Task<HandShakeResult> taskHandShake = new Task<HandShakeResult>() {
+			@Override
+			public HandShakeResult run() throws InterruptedException, XmlRpcException, IOException {
+				return 
+					serverConnection.handShake()
+						? HandShakeResult.HandShakeOK
+						: HandShakeResult.HandShakeKO; 
+			}
+		};
+		Task<HandShakeResult> taskWaitProc = new Task<HandShakeResult>() {
+			@Override
+			public HandShakeResult run() throws InterruptedException, XmlRpcException, IOException {
+				tmtProcess.waitFor();
+				return HandShakeResult.ProcessTrminated;
+			}
+		};
+		
+		FirstOfTwoTasksTerminatesTheSecond<HandShakeResult> tt
+			= new FirstOfTwoTasksTerminatesTheSecond<HandShakeResult>(
+					taskHandShake, taskWaitProc);  
+
+		HandShakeResult result = tt.executeWithTimeout(1000 * getServerTimeOut());
+
+		if (result == null) result = HandShakeResult.TimeOut;
+		
+		if (result != HandShakeResult.HandShakeOK)			
+		{
+			if (isServerRunning()) tmtProcess.destroy();
+			switch (result) {
+			case HandShakeKO:
+				throw new ResourceInstantiationException("Handshake with TectoMT server failed, see 'czsem_GATE_plugins/log/TMT_GATE_err.log'.");			
+			case ProcessTrminated:
+				throw new ResourceInstantiationException("Error during run of TectoMT server, see 'czsem_GATE_plugins/log/TMT_GATE_err.log'.");			
+			case TimeOut:
+				throw new ResourceInstantiationException("TectoMT server run out of time dutring start up, see 'czsem_GATE_plugins/log/TMT_GATE_err.log'.");			
+			}		
+			
+		}
+
+	}
+
+
+
 	public static class TectMTServerConnection
 	{
-		private XmlRpcClientLite client;
+		private XmlRpcClientLite client = null;
 		
 		public TectMTServerConnection(int port) throws MalformedURLException
 		{
-			client = new XmlRpcClientLite("localhost", port);			
+			client = new XmlRpcClientLite("localhost", port);
+			client.setMaxThreads(1);
 		}
 		
+		public boolean handShake() throws XmlRpcException, IOException, InterruptedException
+		{
+			String hash = Integer.toString(this.hashCode());
+			String res = (String) executeMethodAsyncWithTimeOut(0, "tectoMT.handshake", hash);
+//			String res = (String) executeMethod("tectoMT.handshake", hash);
+//			System.err.println(hash);
+//			System.err.println(res);
+			return res != null && res.equals("ok"+hash+"ok");
+		}
+		
+		
+		protected static class MyAsyncCallback implements AsyncCallback
+		{
+			private Boolean done = false;
+			private Object ret = null;
+			
+			@Override
+			public synchronized void handleResult(Object result, URL url, String method) {
+					ret = result;
+					done = true;
+//					System.err.println("nb");
+					notify();
+//					System.err.println("ne");
+			}
+			@Override
+			public synchronized void handleError(Exception exception, URL url, String method) {
+//					System.err.println("err");
+					exception.printStackTrace();
+					done = true;										
+					notify();
+			}
+			/**
+			 * @param timeout if == 0 then waits without any timeout
+			 */
+			public synchronized Object waitForRet(int timeout) throws InterruptedException
+			{
+//					System.err.println("waits");						
+					if (! done)
+					{
+						if (timeout == 0) wait();
+						else wait(timeout);
+					}
+//					System.err.println("waite");
+					return ret;
+			}			
+		}
+		
+		
+		/**
+		 * @param timeout if == 0 then waits without any timeout
+		 */
+		protected Object executeMethodAsyncWithTimeOut(int timeout, String methodName, Object ... args) throws InterruptedException
+		{
+			Vector<Object> params = new Vector<Object>(args.length);
+			params.addAll(Arrays.asList(args));
+			
+			MyAsyncCallback cb = new MyAsyncCallback();
+			client.executeAsync(methodName, params, cb);				
+			
+			return cb.waitForRet(timeout);			
+		}
+
+		protected Object executeMethod(String methodName, Object ... args) throws XmlRpcException, IOException
+		{
+			Vector<Object> params = new Vector<Object>(args.length);
+			params.addAll(Arrays.asList(args));
+			
+			return client.execute(methodName, params);			
+		}
+
 		public void analyseFile(String file_path) throws XmlRpcException, IOException
 		{
-			Vector<String> params = new Vector<String>(1);
-	        params.addElement(file_path);
-	        String result = (String) client.execute("tectoMT.analyzeFile", params);
+	        String result = (String) executeMethod("tectoMT.analyzeFile", file_path);
 	        assert (result.equals("succes"));			
 		}
 
 		public void terminate()
 		{
 			try {
-				client.execute("tectoMT.terminate", new Vector<String>(0));
-			} catch (Exception e) {System.err.println("server terminated");}
+				executeMethod("tectoMT.terminate");
+			} catch (Exception e)
+			{
+				Logger.getLogger(getClass()).info("TectoMT server terminated");
+			}
 		}
 		
 	}
@@ -85,8 +253,39 @@ public class TectoMTOnlineAnalyser extends TectoMTAbstractAnalyser
 	}
 
 
+	public Integer getServerPortNumber() {
+		return serverPortNumber;
+	}
+
+	@CreoleParameter(defaultValue="9090")
+	public void setServerPortNumber(Integer serverPortNumber) {
+		this.serverPortNumber = serverPortNumber;
+	}
+
+	@Override
+	public void cleanup() {
+		serverConnection.terminate();
+		super.cleanup();
+	}
 	
-	public static void main(String [] rgs) throws IOException, InterruptedException, URISyntaxException, XmlRpcException
+	protected void analyseFile(String file_path) throws XmlRpcException, IOException
+	{
+		serverConnection.analyseFile(file_path);		
+	}
+
+
+	@Override
+	public Resource init() throws ResourceInstantiationException
+	{
+		try {
+			startTMTAnalysisServer();
+		} catch (Exception e) {
+			throw new ResourceInstantiationException(e);
+		}
+		return super.init();
+	}
+	
+	public static void main(String [] rgs) throws Exception
 	{
 		System.err.println("start");
 		TectoMTOnlineAnalyser ta = new TectoMTOnlineAnalyser();
@@ -96,12 +295,12 @@ public class TectoMTOnlineAnalyser extends TectoMTAbstractAnalyser
 
 		ta.startTMTAnalysisServer();
 		
-		TectMTServerConnection con = new TectMTServerConnection(8080);
+//		TectMTServerConnection con = new TectMTServerConnection(8080);
 		
-		con.analyseFile("czsem_GATE_plugins/TmT_serializations/1032.xml_0001A.tmt~");
-		con.analyseFile("czsem_GATE_plugins/TmT_serializations/10784.xml_00025.tmt~");
-		con.analyseFile("czsem_GATE_plugins/TmT_serializations/9809.xml_00262.tmt");
-		con.terminate();
+		ta.analyseFile("czsem_GATE_plugins/TmT_serializations/1032.xml_0001A.tmt~");
+		ta.analyseFile("czsem_GATE_plugins/TmT_serializations/10784.xml_00025.tmt~");
+		ta.analyseFile("czsem_GATE_plugins/TmT_serializations/9809.xml_00262.tmt");
+		ta.cleanup();
 
 		
 /*		ta.startTMTAnalysisServer();
@@ -129,6 +328,15 @@ public class TectoMTOnlineAnalyser extends TectoMTAbstractAnalyser
         System.err.println("end");
 		
 		
+	}
+
+	@CreoleParameter(defaultValue="0", comment="in seconds, 0 means no timeout is used - wait infinitely.")
+	public void setServerTimeOut(Integer serverTimeOut) {
+		this.serverTimeOut = serverTimeOut;
+	}
+
+	public Integer getServerTimeOut() {
+		return serverTimeOut;
 	}
 
 }
