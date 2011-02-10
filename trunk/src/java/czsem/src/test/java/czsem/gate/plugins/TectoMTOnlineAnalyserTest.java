@@ -1,6 +1,8 @@
 package czsem.gate.plugins;
 
+import gate.AnnotationSet;
 import gate.Corpus;
+import gate.Document;
 import gate.Factory;
 import gate.FeatureMap;
 import gate.Gate;
@@ -13,6 +15,7 @@ import gate.util.GateException;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
@@ -36,6 +39,23 @@ public class TectoMTOnlineAnalyserTest extends TestCase
 		
 		return Arrays.asList(blocks);
 	}
+	
+	@SuppressWarnings("unchecked")
+	protected Corpus corpusFromSentences(String [] sentences) throws ResourceInstantiationException
+	{
+		Corpus corpus = Factory.newCorpus(null);
+
+		
+	    for (int i = 0; i < sentences.length; i++)
+	    {
+			Document document = Factory.newDocument(sentences[i]);
+		    corpus.add(document);
+		}
+
+	    
+		return corpus;
+	}
+
 	
 	
 	public TectoMTOnlineAnalyserTest() throws URISyntaxException, IOException, GateException
@@ -98,5 +118,44 @@ public class TectoMTOnlineAnalyserTest extends TestCase
 		assertFalse(ta.isServerRunning());
 
 	}
+	
+	public void testExecuteCzechSentenceSegmentation() throws GateException, MalformedURLException
+	{		
+		
+		String [] blocks = 
+		{
+			"SCzechW_to_SCzechM::TextSeg_tokenizer_and_segmenter",
+			"SCzechW_to_SCzechM::Tokenize_joining_numbers"};
+
+
+		
+		
+		Corpus corpus = corpusFromSentences(TectoMTBatchAnalyserTest.czech_sentences);
+		executeTmtOnCorpus("czech", blocks, corpus);		
+		
+		for (int i = 0; i < corpus.size(); i++)
+		{
+			Document doc = (Document) corpus.get(i);
+			
+			AnnotationSet as = doc.getAnnotations();
+			AnnotationSet sents = as.get("Sentence");
+			assertTrue(doc.getName(), sents.size() >= 1);
+			AnnotationSet toc = as.get("Token");
+			assertTrue(doc.getName(), toc.size() >= TectoMTBatchAnalyserTest.czech_sentences[i].length() / 7);
+			
+		}
+		/*
+		AnnotationSet sents = document.getAnnotations().get("Sentence");
+		assertEquals(sents.size(), 2);
+		Iterator<Annotation> siter = sents.iterator();
+		Annotation s1 = siter.next();
+		assertEquals((long) s1.getStartNode().getOffset(), 0);
+		assertEquals((long) s1.getEndNode().getOffset(), 95);
+		Annotation s2 = siter.next();
+		assertEquals((long) s2.getStartNode().getOffset(), 96);
+		assertEquals((long) s2.getEndNode().getOffset(), 266);
+		*/
+	}
+
 
 }

@@ -1,14 +1,16 @@
 package czsem.gate.plugins;
 
+import gate.Document;
 import gate.Resource;
+import gate.creole.ExecutionException;
 import gate.creole.ResourceInstantiationException;
 import gate.creole.metadata.CreoleParameter;
+import gate.creole.metadata.CreoleResource;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
@@ -19,11 +21,13 @@ import org.apache.xmlrpc.AsyncCallback;
 import org.apache.xmlrpc.XmlRpcClientLite;
 import org.apache.xmlrpc.XmlRpcException;
 
+import czsem.gate.tectomt.TMTDocumentHelper;
 import czsem.utils.Config;
 import czsem.utils.ProcessExec;
 import czsem.utils.FirstOfTwoTasksTerminatesTheSecond;
 import czsem.utils.FirstOfTwoTasksTerminatesTheSecond.Task;
 
+@CreoleResource(name = "czsem TectoMTOnlineAnalyser", comment = "Alyses givem corpus by TMT tools")
 public class TectoMTOnlineAnalyser extends TectoMTAbstractAnalyser
 {
 	private static final long serialVersionUID = 2036059373106358909L;
@@ -337,6 +341,21 @@ public class TectoMTOnlineAnalyser extends TectoMTAbstractAnalyser
 
 	public Integer getServerTimeOut() {
 		return serverTimeOut;
+	}
+
+	@Override
+	public void execute() throws ExecutionException
+	{
+		Document doc = getDocument();
+		try {
+			TMTDocumentHelper dh = new TMTDocumentHelper(doc, getLanguage(), 
+					Config.getConfig().getTmtSerializationDirectoryURL());
+			analyseFile(dh.getTMTFilePath());
+			annotateGateDocumentAcordingtoTMTfile(doc, dh.getTMTFilePath());
+		} catch (Exception e)
+		{
+			throw new ExecutionException(e);
+		}
 	}
 
 }

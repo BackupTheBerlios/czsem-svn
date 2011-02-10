@@ -26,10 +26,82 @@ import czsem.utils.JDomUtils;
 
 public abstract class MLEngine implements TrainTest
 {
+	public static class LearningSetup
+	{
+		protected String learninigAnnotType;
+		protected String classFetureName;
+		protected boolean rootSubtreeLearninig;
+		protected String[] inputAnnotationTypeNames;
+		
+		protected static String readLearninigAnnotType(Document config_dom)
+		{
+			@SuppressWarnings("unchecked")
+			List<Element> ch = config_dom .getRootElement().getChild("DATASET").getChildren("ATTRIBUTE");
+			for (Element element : ch)
+			{
+				if (element.getChild("CLASS") != null)
+				{
+					return element.getChildText("TYPE");				
+				}
+				
+			}
+			return null;				
+		}
+		
+		protected static String readLearninigAnnotType(URL config_doc_url) throws JDOMException, IOException
+		{		
+			Document config_dom = JDomUtils.getJdomDoc(config_doc_url);
+			return readLearninigAnnotType(config_dom);
+		}
+
+		
+		public LearningSetup(URL config_file) throws JDOMException, IOException
+		{
+			String readAnnotType = readLearninigAnnotType(config_file);
+			
+			inputAnnotationTypeNames = 
+				ILPSerializer.parseClassAttributeValuesFromSettingsFile(config_file);
+			
+			if (readAnnotType.endsWith("_root"))
+			{
+				rootSubtreeLearninig = true;
+				learninigAnnotType = readAnnotType.substring(0, readAnnotType.length() - 5);				
+			}
+			else
+			{
+				rootSubtreeLearninig = false;
+				learninigAnnotType = readAnnotType;
+			}
+		}
+		public String getLearninigAnnotType() {
+			return learninigAnnotType;
+		}
+		public String getClassFetureName() {
+			return classFetureName;
+		}
+		public boolean getRootSubtreeLearninig() {
+			return rootSubtreeLearninig;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			// TODO Auto-generated method stub
+			return super.equals(obj);
+		}
+
+		@Override
+		public String toString() {
+			// TODO Auto-generated method stub
+			return super.toString();
+		}
+
+		public String[] getInputAnnotationTypeNames() {
+			return inputAnnotationTypeNames;
+		}		
+	}
+	
+	protected LearningSetup learningSetup;
 	protected URL config_file;
-	protected String learninigAnnotType;
-	protected boolean rootSubtreeLearninig;
-	protected String[] inputAnnotationTypeNames;
 	
 	
 	public static class PaumEngine extends MLEngine
@@ -80,13 +152,13 @@ public abstract class MLEngine implements TrainTest
 		{
 			List<PRSetup> prs = new ArrayList<PRSetup>(2);
 			
-			if (rootSubtreeLearninig)
+			if (learningSetup.getRootSubtreeLearninig())
 			{			
 				//Training roots
 				prs.add(new SinglePRSetup(AnnotationDependencyRootMarker.class)
 					.putFeature("inputASName", "TectoMT")
 					.putFeature("outputASName", "TectoMT")
-					.putFeatureList("inputAnnotationTypeNames", learninigAnnotType));
+					.putFeatureList("inputAnnotationTypeNames", learningSetup.getLearninigAnnotType()));
 			}
 			
 			prs.add(new SinglePRSetup(MachineLearningPR.class)
@@ -109,26 +181,26 @@ public abstract class MLEngine implements TrainTest
 				.putFeature("configFileURL", config_file)
 				.putFeature("inputASName", "TectoMT")
 				.putFeature("training", false));
-			if (rootSubtreeLearninig)
+			if (learningSetup.getRootSubtreeLearninig())
 			{
 				//Subtree for ILP results
 				prs.add(new SinglePRSetup(AnnotationDependencySubtreeMarker.class)
 					.putFeature("inputASName", "TectoMT")
 					.putFeature("outputASName", "ILP")
-					.putFeatureList("inputAnnotationTypeNames", learninigAnnotType + "_root"));
+					.putFeatureList("inputAnnotationTypeNames", learningSetup.getLearninigAnnotType() + "_root"));
 				//ILP Output Transfer
 				prs.add(new SinglePRSetup(AnnotationSetTransfer.class)
 					.putFeature("inputASName", "TectoMT")
 					.putFeature("outputASName", "ILP")
 					.putFeature("copyAnnotations", false)
-					.putFeatureList("annotationTypes", learninigAnnotType + "_root"));
+					.putFeatureList("annotationTypes", learningSetup.getLearninigAnnotType() + "_root"));
 			} else
 			{
 				//Subsequent annotation merge
 				prs.add(new SinglePRSetup(SubsequentAnnotationMerge.class)
 					.putFeature("inputASName", "TectoMT")
 					.putFeature("outputASName", "ILP")
-					.putFeature("annotationTypeName", learninigAnnotType)
+					.putFeature("annotationTypeName", learningSetup.getLearninigAnnotType())
 					.putFeature("deleteOriginalAnnotations", true));
 			}
 			
@@ -154,52 +226,23 @@ public abstract class MLEngine implements TrainTest
 	protected void init(URL config_file) throws JDOMException, IOException
 	{
 		this.config_file = config_file;
-		String readAnnotType = readLearninigAnnotType(config_file);
-		
-		inputAnnotationTypeNames = 
-			ILPSerializer.parseClassAttributeValuesFromSettingsFile(config_file);
-		
-		if (readAnnotType.endsWith("_root"))
-		{
-			rootSubtreeLearninig = true;
-			learninigAnnotType = readAnnotType.substring(0, readAnnotType.length() - 5);				
-		}
-		else
-		{
-			rootSubtreeLearninig = false;
-			learninigAnnotType = readAnnotType;
-		}
-
-	}
-	
-	protected static String readLearninigAnnotType(Document config_dom)
-	{
-		@SuppressWarnings("unchecked")
-		List<Element> ch = config_dom .getRootElement().getChild("DATASET").getChildren("ATTRIBUTE");
-		for (Element element : ch)
-		{
-			if (element.getChild("CLASS") != null)
-			{
-				return element.getChildText("TYPE");				
-			}
-			
-		}
-		return null;				
-	}
-	
-	protected static String readLearninigAnnotType(URL config_doc_url) throws JDOMException, IOException
-	{		
-		Document config_dom = JDomUtils.getJdomDoc(config_doc_url);
-		return readLearninigAnnotType(config_dom);
+		learningSetup = new LearningSetup(config_file);
 	}
 
+	public LearningSetup getLearninigSetup() {
+		return learningSetup;
+	}
+
+/**/	
+/*
 	public String getLearninigAnnotType() {
-		return learninigAnnotType;
+		return llearninigAnnotType;
 	}
 
+/*
 	public String[] getInputAnnotationTypeNames() {
 		return inputAnnotationTypeNames;		
 	}
-
+*/
 }
 

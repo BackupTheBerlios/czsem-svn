@@ -46,13 +46,13 @@ public class TectoMTBatchAnalyserTest extends TestCase
 	Corpus corpus = null;
 	Document document = null;	
 	
-	String [] english_sentences =
+	public static String [] english_sentences =
 	{
 		"The BBC's Bethany Bell in Jerusalem says many people face shortages of food, medicine and fuel.",
 		"Chancellor Alistair Darling says the new longer-term agreement will guarantee earnings growth for 5.5 million workers and will allow departments to plan more effectively."
 	};
 
-	String [] czech_sentences =
+	public static String [] czech_sentences =
 	{
 		"Požár byl operačnímu středisku HZS ohlášen dnes ve 2.13 hodin, na místo vyjeli profesionální hasiči ze stanice v Židlochovicích a dobrovolní hasiči z Židlochovic, Žabčic a Přísnotic.",
 		"Oheň, který zasáhl elektroinstalaci u chladícího boxu, hasiči dostali pod kontrolu ve 2.32 hodin a uhasili tři minuty po třetí hodině.",

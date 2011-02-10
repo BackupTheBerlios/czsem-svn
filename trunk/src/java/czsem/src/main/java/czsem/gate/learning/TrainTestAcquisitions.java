@@ -39,7 +39,7 @@ public class TrainTestAcquisitions extends ExperimentSetup
 			.putFeature("inputASName", "Key")
 			.putFeature("outputASName", "TectoMT")
 //			.putFeatureList("inputAnnotationTypeNames", new String [0]));
-			.putFeatureList("inputAnnotationTypeNames", inputAnnotationTypeNames));
+			.putFeatureList("inputAnnotationTypeNames", learningSetup.getInputAnnotationTypeNames()));
 //					ILPSerializer.parseClassAttributeValuesFromSettingsFile(
 //							new File(config_directory + '/' + new ILPEngine().getConfigFilenaMame()).toURI().toURL()))); 			
 //					"acquired", "acqabr", "purchaser", "purchabr", "seller", "sellerabr", "dlramt"));
@@ -54,7 +54,9 @@ public class TrainTestAcquisitions extends ExperimentSetup
 		
 		//TectoMT reset
 		prs.add(new SinglePRSetup(AnnotationDeletePR.class)
-			.putFeatureList("annotationTypes", learninigAnnotType, learninigAnnotType + "_root")
+			.putFeatureList("annotationTypes", 
+					learningSetup.getLearninigAnnotType(), 
+					learningSetup.getLearninigAnnotType() + "_root")
 			.putFeatureList("setsToRemove", "TectoMT"));		
 		//Reset Paum & ILP
 		prs.add(new SinglePRSetup(AnnotationDeletePR.class)

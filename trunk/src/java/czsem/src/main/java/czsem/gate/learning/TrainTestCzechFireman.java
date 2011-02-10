@@ -35,7 +35,9 @@ public class TrainTestCzechFireman extends ExperimentSetup
 		
 		//TectoMT reset
 		prs.add(new SinglePRSetup(AnnotationDeletePR.class)
-			.putFeatureList("annotationTypes", learninigAnnotType, learninigAnnotType + "_root")
+			.putFeatureList("annotationTypes", 
+					learningSetup.getLearninigAnnotType(), 
+					learningSetup.getLearninigAnnotType() + "_root")
 			.putFeatureList("setsToRemove", "TectoMT"));		
 		//Reset Paum & ILP
 		prs.add(new SinglePRSetup(AnnotationDeletePR.class)
@@ -51,14 +53,16 @@ public class TrainTestCzechFireman extends ExperimentSetup
 		
 		//TectoMT reset
 		prs.add(new SinglePRSetup(AnnotationDeletePR.class)
-			.putFeatureList("annotationTypes", learninigAnnotType, learninigAnnotType + "_root")
+			.putFeatureList("annotationTypes", 
+				learningSetup.getLearninigAnnotType(), 
+				learningSetup.getLearninigAnnotType() + "_root")
 			.putFeatureList("setsToRemove", "TectoMT"));
 		//Training transfer
 		prs.add(new SinglePRSetup(AnnotationSetTransfer.class)
 			.putFeature("inputASName", "accident")
 			.putFeature("outputASName", "TectoMT")
 			.putFeature("copyAnnotations", true)
-			.putFeatureList("annotationTypes", learninigAnnotType));
+			.putFeatureList("annotationTypes", learningSetup.getLearninigAnnotType()));
 
 		return addTrainMLEngines(prs);
 	}

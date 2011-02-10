@@ -11,6 +11,9 @@ import gate.creole.ResourceInstantiationException;
 import gate.creole.SerialAnalyserController;
 import gate.creole.SerialController;
 import gate.persist.PersistenceException;
+import gate.qa.QualityAssurancePR;
+import gate.util.AnnotationDiffer;
+import gate.util.ClassificationMeasures;
 import gate.util.GateException;
 import gate.util.profile.Profiler;
 
@@ -20,7 +23,10 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.Enumeration;
+import java.util.HashSet;
 import java.util.List;
+
+import javax.print.attribute.HashAttributeSet;
 
 import org.apache.log4j.Appender;
 import org.apache.log4j.BasicConfigurator;
@@ -32,6 +38,7 @@ import czsem.gate.GateUtils;
 import czsem.gate.plugins.AnnotationDependencyRootMarker;
 import czsem.gate.plugins.CrossValidation;
 import czsem.gate.learning.MLEngine.ILPEngine;
+import czsem.gate.learning.MLEngine.LearningSetup;
 import czsem.utils.Config;
 
 public class MachineLearningExperimenter
@@ -49,8 +56,7 @@ public class MachineLearningExperimenter
 		protected String dataStore;
 		protected String copusId;
 		protected MLEngine[] engines;
-		protected String learninigAnnotType;
-		protected String[] inputAnnotationTypeNames;
+		protected LearningSetup learningSetup;
 		
 		public ExperimentSetup(String dataStore, String copusId, MLEngine ... engines) {
 			this.dataStore = dataStore;
@@ -60,31 +66,26 @@ public class MachineLearningExperimenter
 		
 		protected void initEngines(String config_directory) throws MalformedURLException, JDOMException, IOException
 		{
-			learninigAnnotType = null;
-			inputAnnotationTypeNames = null;
+			learningSetup = null;
 			for (int i = 0; i < engines.length; i++)
 			{
 				engines[i].init(config_directory);
 				
 				//check if LearninigAnnotType matches among ML engines 
-				String curLearninigAnnotType = engines[i].getLearninigAnnotType();
+				LearningSetup curLearninigSetup = engines[i].getLearninigSetup();
 				
-				if (learninigAnnotType == null) learninigAnnotType = curLearninigAnnotType;
-				else if (! learninigAnnotType.equals(curLearninigAnnotType))
+				if (learningSetup == null) learningSetup = curLearninigSetup;
+				else if (! learningSetup.equals(curLearninigSetup))
 				{
 					logger.warn(String.format(
-							"Learninig annotation types do not match! %s: %s, %s: %s",
+							"Learninig setups do not match! %s: %s, %s: %s",
 							engines[i].getClass().getName(),
-							curLearninigAnnotType,
+							curLearninigSetup.toString(),
 							engines[i-1].getClass().getName(),
-							learninigAnnotType));
+							learningSetup.toString()));
 					
-					learninigAnnotType = curLearninigAnnotType;					
-				}
-				
-				String[] curInputAnnotationTypeNames = engines[i].getInputAnnotationTypeNames();
-				if (inputAnnotationTypeNames == null && curInputAnnotationTypeNames != null)
-					inputAnnotationTypeNames = curInputAnnotationTypeNames; 					
+					learningSetup = curLearninigSetup;					
+				}				
 			}			
 		}
 		
@@ -187,9 +188,22 @@ public class MachineLearningExperimenter
 			.putFeature("numberOfFolds", number_of_folds)
 			.putFeature("trainingPR", train_controller)
 			.putFeature("testingPR", test_controller).createPR().execute();
+		
+		measureResults(setup.learningSetup);
 
 	}
 	
+	protected static void measureResults(LearningSetup learningSetup)
+	{
+		QualityAssurancePR pr;
+		
+//		pr.
+		AnnotationDiffer differ = new AnnotationDiffer();
+		differ.setSignificantFeaturesSet(new HashSet<String>(0));
+		ClassificationMeasures classificationMeasures = new ClassificationMeasures();  
+		
+	}
+
 	public static void main(String [] args) throws GateException, URISyntaxException, IOException, JDOMException
 	{
 		BasicConfigurator.configure();
@@ -231,9 +245,9 @@ public class MachineLearningExperimenter
 //	    Corpus corpus = GateUtils.loadCorpusFormDatastore(ds, "fatalities___1277473852041___7082");
 	    
 //	    runExperiment(new TrainTestAcquisitions(), 2);	    
-//	    runExperiment(new TrainTestGateOnCzech(), 2);	    
+	    runExperiment(new TrainTestCzechFireman(new ILPEngine()), 2);	    
 //	    trainOnly(new TrainTestGateOnCzech(false, true));
-	    trainOnly(new TrainTestAcquisitions(new ILPEngine()));
+//	    trainOnly(new TrainTestAcquisitions(new ILPEngine()));
 //	    trainOnly(new TrainTestCzechFireman(new ILPEngine()));
 	}
 }

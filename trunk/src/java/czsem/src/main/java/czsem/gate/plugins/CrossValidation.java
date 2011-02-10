@@ -183,7 +183,7 @@ public class CrossValidation extends AbstractProcessingResource
 				GateUtils.safeDeepReInitPR_or_Controller(testing_controller);
 			    testing_controller.setCorpus(corpusFolds[i][0]);
 			    testing_controller.execute();				
-			    if (isInterrupted()) return;
+			    if (isInterrupted()) return;			    
 			}
 			
 			syncAllDocuments();
