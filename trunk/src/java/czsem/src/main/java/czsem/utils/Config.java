@@ -37,6 +37,7 @@ public class Config
 	private String tmtSerializationDirectoryPath;
 	private String logFileDirectoryPath;
 	private String czsemPluginDir;
+	private String learnigConfigDirectoryForGate;
 
 
 	
@@ -148,6 +149,7 @@ public class Config
 								"C:\\workspace\\czsem\\src\\java\\czsem\\czsem_GATE_plugins\\TmT_serializations");
 		setLogFileDirectoryPath("C:\\workspace\\czsem\\src\\java\\czsem\\czsem_GATE_plugins\\log");
 		setIlpProjestsPath(		"C:\\workspace\\czsem\\src\\java\\czsem\\ILP_serializations");
+		setLearnigConfigDirectoryForGate(	"C:\\workspace\\czsem\\src\\java\\czsem\\gate-learning");
 	}
 
 	public void saveToFile(String filename) throws IOException
@@ -274,6 +276,16 @@ public class Config
 
 	public String getLogFileDirectoryPath() {
 		return logFileDirectoryPath;
+	}
+
+
+	public void setLearnigConfigDirectoryForGate(String learnigConfigDirectoryForGate) {
+		this.learnigConfigDirectoryForGate = learnigConfigDirectoryForGate;
+	}
+
+
+	public String getLearnigConfigDirectoryForGate() {
+		return learnigConfigDirectoryForGate;
 	}
 
 }
