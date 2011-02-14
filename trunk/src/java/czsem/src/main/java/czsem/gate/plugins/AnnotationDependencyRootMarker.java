@@ -158,10 +158,17 @@ public class AnnotationDependencyRootMarker extends AbstractAnnotationDependency
 		fm.put("orig_id", annotation.getId());
 		fm.put("orig_type", annotation.getType());
 		
+		String orig_type_name = annotation.getType();
+		
+		String new_type_name = orig_type_name.endsWith("_subtree")	?
+								orig_type_name.substring(0, orig_type_name.length() - 8)
+								: orig_type_name + "_root";
+
+		
 		outputAS.add(
 				root_token.getStartNode(),
 				root_token.getEndNode(),
-				annotation.getType()+"_root",
+				new_type_name,
 				fm);
 		
 	}
