@@ -1,7 +1,12 @@
-mention_root(damage,A) :-
+mention(damage,A) :-
+   'lex.rf'(B,A), functor(B,'TOWH'), tDependency(C,B), tDependency(C,D), 
+   tDependency(D,E), t_lemma(E,'způsobený').
+mention(damage,A) :-
+   'lex.rf'(B,A), t_lemma(B,100), number(B,sg).
+mention(damage,'id_jihomoravsky51047.txt.xml_0002A_555').
+mention(damage,'id_jihomoravsky51460.txt.xml_0002D_899').
+mention(damage,'id_jihomoravsky51719.txt.xml_00031_603').
+mention(damage,'id_jihomoravsky54536.txt.xml_00038_915').
+mention(damage,A) :-
    'lex.rf'(B,A), sempos(B,'n.quant.def'), tDependency(C,B), tDependency(C,D), 
-   t_lemma(D,'vyšetřovatel').
-mention_root(damage,'id_jihomoravsky50887.txt.xml_00043_411').
-mention_root(damage,A) :-
-   'lex.rf'(B,A), sempos(B,'n.quant.def'), number(B,sg), tDependency(C,B), 
-   tDependency(C,D), t_lemma(D,'škoda').
+   tDependency(D,E), t_lemma(E,'předběžný').

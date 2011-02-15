@@ -11,20 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import czsem.gate.learning.MachineLearningExperiment.TrainTest;
-import czsem.gate.learning.MachineLearningExperimenter.PRSetup;
-import czsem.gate.learning.MachineLearningExperimenter.SinglePRSetup;
 
 public abstract class MLEngine implements TrainTest
 {
-	private String outputAS;
-	protected String configFileName;
-
-	public MLEngine(String outputAS, String configFileName)
-	{
-		this.setOutputAS(outputAS);
-		this.configFileName = configFileName;
-	}
-
 	public static class MLEngineConfig
 	{
 		public String experimentLearningConfigsDirectory; 
@@ -36,6 +25,15 @@ public abstract class MLEngine implements TrainTest
 		public List<String> originalLearnigAnnotationTypes;
 	}
 		
+	private String outputAS;
+	protected String configFileName;
+
+	public MLEngine(String outputAS, String configFileName)
+	{
+		this.setOutputAS(outputAS);
+		this.configFileName = configFileName;
+	}
+
 	protected URL getConfigURL(String experimentDirectory) throws MalformedURLException
 	{
 		
@@ -65,7 +63,7 @@ public abstract class MLEngine implements TrainTest
 			List<PRSetup> prs = new ArrayList<PRSetup>();
 
 			//Paum train
-			prs.add(new SinglePRSetup(LearningAPIMain.class)
+			prs.add(new PRSetup.SinglePRSetup(LearningAPIMain.class)
 				.putFeature("inputASName", config.inputAS)
 				.putFeature("outputASName", config.outputAS)
 				.putFeature("configFileURL", getConfigURL(config.experimentLearningConfigsDirectory))
@@ -80,7 +78,7 @@ public abstract class MLEngine implements TrainTest
 			List<PRSetup> prs = new ArrayList<PRSetup>();
 
 			//Paum Application
-			prs.add(new SinglePRSetup(LearningAPIMain.class)
+			prs.add(new PRSetup.SinglePRSetup(LearningAPIMain.class)
 				.putFeature("configFileURL", getConfigURL(config.experimentLearningConfigsDirectory))
 				.putFeature("inputASName", config.inputAS)
 				.putFeature("outputASName", config.outputAS)
@@ -103,7 +101,7 @@ public abstract class MLEngine implements TrainTest
 		{
 			List<PRSetup> prs = new ArrayList<PRSetup>();
 						
-			prs.add(new SinglePRSetup(MachineLearningPR.class)
+			prs.add(new PRSetup.SinglePRSetup(MachineLearningPR.class)
 				.putFeature("inputASName", config.inputAS)
 				.putFeature("configFileURL", getConfigURL(config.experimentLearningConfigsDirectory))
 				.putFeature("training", true));
@@ -118,14 +116,14 @@ public abstract class MLEngine implements TrainTest
 			List<PRSetup> prs = new ArrayList<PRSetup>();
 
 			//ILP Apply
-			prs.add(new SinglePRSetup(MachineLearningPR.class)
+			prs.add(new PRSetup.SinglePRSetup(MachineLearningPR.class)
 				.putFeature("configFileURL", getConfigURL(config.experimentLearningConfigsDirectory))
 				.putFeature("inputASName", config.inputAS)
 				.putFeature("training", false));
 			
 			if (! config.inputAS.equals(config.outputAS))
 			{
-				prs.add(new SinglePRSetup(AnnotationSetTransfer.class)
+				prs.add(new PRSetup.SinglePRSetup(AnnotationSetTransfer.class)
 					.putFeature("inputASName", config.inputAS)
 					.putFeature("outputASName", config.outputAS)
 					.putFeature("copyAnnotations", false)
@@ -136,8 +134,4 @@ public abstract class MLEngine implements TrainTest
 		}
 		
 	}
-
-
-		
-
 }

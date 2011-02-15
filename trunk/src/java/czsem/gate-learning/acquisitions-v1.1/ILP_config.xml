@@ -5,8 +5,8 @@
   
     <ATTRIBUTE>  
       <CLASS/>    
-      <NAME>Mention_root</NAME>  
-      <TYPE>Mention_root</TYPE>  
+      <NAME>Mention</NAME>  
+      <TYPE>Mention</TYPE>  
       <FEATURE>class</FEATURE>  
 <!--  <TYPE>damage_root</TYPE> -->  
       <POSITION>0</POSITION>

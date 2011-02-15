@@ -144,7 +144,7 @@ public class Config
 		setWekaRunFuzzyILPClassPath("C:\\workspace\\czsem\\src\\java\\czsem\\target\\classes");
 		setTmtRoot("C:\\workspace\\tectomt");
 		setTredRoot("C:\\tred");
-		setGateHome("C:\\Program Files\\GATE-5.2.1");
+		setGateHome("C:\\Program Files\\gate\\GATE-6.0");
 		setTmtSerializationDirectoryPath(
 								"C:\\workspace\\czsem\\src\\java\\czsem\\czsem_GATE_plugins\\TmT_serializations");
 		setLogFileDirectoryPath("C:\\workspace\\czsem\\src\\java\\czsem\\czsem_GATE_plugins\\log");

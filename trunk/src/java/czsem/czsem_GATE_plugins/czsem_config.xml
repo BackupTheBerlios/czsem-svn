@@ -5,7 +5,7 @@
    <string>C:\Program Files\aleph\aleph.pl</string> 
   </void> 
   <void property="gateHome"> 
-   <string>C:\Program Files\GATE-5.2.1</string> 
+   <string>C:\Program Files\gate\GATE-6.0</string> 
   </void> 
   <void property="ilpProjestsPath"> 
    <string>C:\workspace\czsem\src\java\czsem\ILP_serializations</string> 

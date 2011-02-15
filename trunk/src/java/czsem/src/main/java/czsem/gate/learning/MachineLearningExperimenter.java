@@ -1,32 +1,14 @@
 package czsem.gate.learning;
 
-import gate.Corpus;
-import gate.DataStore;
-import gate.Factory;
-import gate.FeatureMap;
 import gate.Gate;
-import gate.ProcessingResource;
-import gate.creole.ExecutionException;
-import gate.creole.ResourceInstantiationException;
-import gate.creole.SerialAnalyserController;
 import gate.creole.SerialController;
-import gate.persist.PersistenceException;
-import gate.qa.QualityAssurancePR;
-import gate.util.AnnotationDiffer;
-import gate.util.ClassificationMeasures;
 import gate.util.GateException;
 import gate.util.profile.Profiler;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URISyntaxException;
-import java.util.Arrays;
 import java.util.Enumeration;
-import java.util.HashSet;
-import java.util.List;
-
-import javax.print.attribute.HashAttributeSet;
 
 import org.apache.log4j.Appender;
 import org.apache.log4j.BasicConfigurator;
@@ -35,14 +17,16 @@ import org.apache.log4j.Logger;
 import org.jdom.JDOMException;
 
 import czsem.gate.GateUtils;
-import czsem.gate.plugins.AnnotationDependencyRootMarker;
-import czsem.gate.plugins.CrossValidation;
+import czsem.gate.learning.DataSet.CzechFireman;
 import czsem.gate.learning.MLEngine.ILPEngine;
-import czsem.gate.learning.MLEngine.LearningSetup;
+import czsem.gate.learning.MLEngineEncapsulate.CreateTemporaryMentionsRootSubtree;
+import czsem.gate.learning.MLEngineEncapsulate.CreateTemporaryMentions;
+import czsem.gate.plugins.AnnotationDependencyRootMarker;
 import czsem.utils.Config;
 
 public class MachineLearningExperimenter
 {
+/*	
 	static Logger logger = Logger.getLogger(MachineLearningExperimenter.class);
 
 	public interface TrainTest
@@ -50,15 +34,14 @@ public class MachineLearningExperimenter
 		List<PRSetup> getTrainControllerSetup() throws JDOMException, IOException;
 		List<PRSetup> getTestControllerSetup() throws JDOMException, IOException;
 	}
-	
 	public static abstract class ExperimentSetup implements TrainTest
 	{
 		protected String dataStore;
 		protected String copusId;
-		protected MLEngine[] engines;
+		protected MLEngineOld[] engines;
 		protected LearningSetup learningSetup;
 		
-		public ExperimentSetup(String dataStore, String copusId, MLEngine ... engines) {
+		public ExperimentSetup(String dataStore, String copusId, MLEngineOld ... engines) {
 			this.dataStore = dataStore;
 			this.copusId = copusId;
 			this.engines = engines;
@@ -116,57 +99,7 @@ public class MachineLearningExperimenter
 		}		
 	}
 	
-	public interface PRSetup
-	{
-		public ProcessingResource createPR() throws ResourceInstantiationException;		
-	}
 	
-
-	public static class SinglePRSetup implements PRSetup 
-	{
-		private Class<?> pr_class;
-		FeatureMap fm;
-
-		public SinglePRSetup(Class<?> cl)
-		{
-			pr_class = cl;
-			fm = Factory.newFeatureMap();
-		}
-				
-		public SinglePRSetup putFeature(Object key, Object value)
-		{
-			fm.put(key, value);
-			return this;
-		}
-		public SinglePRSetup putFeatureList(Object key, String ... strig_list)
-		{
-			if (strig_list == null)
-				fm.put(key, null);
-			else
-				fm.put(key, Arrays.asList(strig_list));
-			return this;
-		}
-
-		public ProcessingResource createPR() throws ResourceInstantiationException
-		{
-			return(ProcessingResource) Factory.createResource(pr_class.getCanonicalName(), fm);			
-		}				
-	}
-	
-	public static SerialAnalyserController buildGatePipeline(List<PRSetup> prs) throws ResourceInstantiationException
-	{
-		SerialAnalyserController controller = (SerialAnalyserController)	    	   
-			Factory.createResource(SerialAnalyserController.class.getCanonicalName());
-
-		
-		for (int i = 0; i < prs.size(); i++)
-		{
-			controller.add(prs.get(i).createPR());			
-		}
-		
-		
-		return controller;		
-	}
 	
 	public static void trainOnly(ExperimentSetup setup) throws ResourceInstantiationException, JDOMException, IOException, PersistenceException, ExecutionException
 	{
@@ -180,30 +113,42 @@ public class MachineLearningExperimenter
 
 	public static void runExperiment(ExperimentSetup setup, int number_of_folds) throws ResourceInstantiationException, ExecutionException, PersistenceException, JDOMException, IOException
 	{
-	    SerialAnalyserController train_controller = buildGatePipeline(setup.getTrainControllerSetup());
-	    SerialAnalyserController test_controller = buildGatePipeline(setup.getTestControllerSetup());
-	    
-		new SinglePRSetup(CrossValidation.class)
-			.putFeature("corpus", setup.getCorpus())
-			.putFeature("numberOfFolds", number_of_folds)
-			.putFeature("trainingPR", train_controller)
-			.putFeature("testingPR", test_controller).createPR().execute();
 		
-		measureResults(setup.learningSetup);
+		measureResults(setup.learningSetup, setup.getCorpus());
 
 	}
-	
-	protected static void measureResults(LearningSetup learningSetup)
+/**	
+	protected static void measureResults(LearningSetup learningSetup, Corpus corpus) throws ResourceInstantiationException, ExecutionException
 	{
-		QualityAssurancePR pr;
+		/*
+	private String keyASName;
+	private String responseASName;
+	private String annotationType;
+	private List<String> featureNames;
+		 *//*
 		
+		
+		PRSetup [] pr = {
+			new SinglePRSetup(LearningEvaluator.class)
+				.putFeature("keyASName", learningSetup.getKeyASName())
+				.putFeature("responseASName", learningSetup.getResponseASName())
+				.putFeature("annotationType", learningSetup.getLearninigAnnotType())
+				.putFeatureList("featureNames", learningSetup.getClassFetureName())
+		};
+
+		SerialAnalyserController pl = buildGatePipeline(Arrays.asList(pr));
+		pl.setCorpus(corpus);
+		
+		pl.execute();
+		
+/*		
 //		pr.
 		AnnotationDiffer differ = new AnnotationDiffer();
 		differ.setSignificantFeaturesSet(new HashSet<String>(0));
 		ClassificationMeasures classificationMeasures = new ClassificationMeasures();  
-		
+*//*		
 	}
-
+*/
 	public static void main(String [] args) throws GateException, URISyntaxException, IOException, JDOMException
 	{
 		BasicConfigurator.configure();
@@ -245,9 +190,48 @@ public class MachineLearningExperimenter
 //	    Corpus corpus = GateUtils.loadCorpusFormDatastore(ds, "fatalities___1277473852041___7082");
 	    
 //	    runExperiment(new TrainTestAcquisitions(), 2);	    
-	    runExperiment(new TrainTestCzechFireman(new ILPEngine()), 2);	    
-//	    trainOnly(new TrainTestGateOnCzech(false, true));
+//	    runExperiment(new TrainTestCzechFireman(new ILPEngine()), 2);
+	    new MachineLearningExperiment(
+	    		new CzechFireman(),
+	    		new CreateTemporaryMentionsRootSubtree(new ILPEngine())
+	    ).trainOnly();
+
+	    //TODO: MachineLearningExperiment::getMLEngineConfig .... originalLearnigAnnotationTypes
+	    
+	    //	    trainOnly(new TrainTestGateOnCzech(false, true));
 //	    trainOnly(new TrainTestAcquisitions(new ILPEngine()));
 //	    trainOnly(new TrainTestCzechFireman(new ILPEngine()));
 	}
+	
+	@SuppressWarnings("rawtypes")
+	public static void jape_pok (gate.Document doc, java.util.Map bindings, 
+			                     gate.AnnotationSet annotations, 
+			                     gate.AnnotationSet inputAS, gate.AnnotationSet outputAS, 
+			                     gate.creole.ontology.Ontology ontology)
+	{
+		gate.AnnotationSet binding_as = (gate.AnnotationSet) bindings.get("anot_tmp");
+		gate.Annotation annot = binding_as.iterator().next();
+		annot.getFeatures().put("rule", "damage_add_learninig_feature");			
+
+/*		
+		gate.AnnotationSet binding_as = (gate.AnnotationSet) bindings.get("anot_tmp");
+		gate.Annotation annot = binding_as.iterator().next();
+		String typename = annot.getType();
+		String new_typename = typename.replaceFirst("Dependecy", "Dependency");
+		FeatureMap fm = annot.getFeatures();
+		outputAS.add(annot.getStartNode(), annot.getEndNode(), new_typename, fm);
+		inputAS.remove(annot);
+/*
+		gate.AnnotationSet b_as = (gate.AnnotationSet) bindings.get("dep_tmp");
+		gate.Annotation dep_an = b_as.iterator().next();
+		
+		Object dep_kind = dep_an.getFeatures().get("kind");
+		List<Integer> args = (List<Integer>) dep_an.getFeatures().get("args");
+			
+		gate.Annotation token_an = inputAS.get(args.get(1));
+		gate.FeatureMap fm = token_an.getFeatures();
+		fm.put("depency_type", dep_kind);
+		*/		
+	}
+
 }
