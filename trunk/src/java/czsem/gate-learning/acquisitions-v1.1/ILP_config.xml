@@ -48,17 +48,17 @@
         </ilp>
 
         <serializer>
+<!-- 
 	        <class_attribute_values>
 		        <value>acquired</value>
-<!-- 
 		        <value>acqabr</value>
 				<value>purchaser</value>
 				<value>purchabr</value>
 				<value>seller</value>
 				<value>sellerabr</value>
 				<value>dlramt</value>
- -->				
 	        </class_attribute_values>	        
+ -->				
             <tokens>
                 <token typename="Token">
                     <features>

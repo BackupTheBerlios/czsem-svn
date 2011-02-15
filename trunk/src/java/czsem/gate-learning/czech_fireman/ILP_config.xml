@@ -50,13 +50,13 @@
         </ilp>
 
         <serializer>
+<!-- 
             <class_attribute_values>
 		        <value>damage</value>
-<!-- 
 		        <value>fatalities</value>
 				<value>injuries</value>
- -->				
 	        </class_attribute_values>	        
+ -->				
             
             <tokens>
                 <token typename="Token">
