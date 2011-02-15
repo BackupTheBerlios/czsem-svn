@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -83,7 +84,7 @@ public class ILPWrapper implements AdvancedMLEngine
 		}
 	}
 
-	public String [] classifyInstances(List<List<String>> instances) throws IOException, InterruptedException, URISyntaxException
+	public Collection<String>[] classifyInstances(List<List<String>> instances) throws IOException, InterruptedException, URISyntaxException
 	{
 		Document doc = pr.getDocument();
 		String docName = doc.getName();

@@ -1,26 +1,25 @@
 
 package czsem.gate;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.log4j.Logger;
-import org.jdom.Element;
-import org.jdom.JDOMException;
-import org.jdom.input.SAXBuilder;
-
-import czsem.ILP.LinguisticSerializer;
-import czsem.utils.MultiSet;
 import gate.Annotation;
 import gate.AnnotationSet;
 import gate.Document;
 import gate.FeatureMap;
 import gate.creole.AbstractLanguageAnalyser;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+import org.jdom.Element;
+
+import czsem.ILP.LinguisticSerializer;
+import czsem.utils.MultiSet;
 
 
 /** Exports given corpus to ILP background knowledge **/
@@ -34,7 +33,7 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 	protected String docName;
 	protected AnnotationSet as;
 
-	protected String [] class_attribute_values;
+//	protected String [] class_attribute_values;
 	
 	protected MultiSet<String> instanceClassTypes = new MultiSet<String>();
 
@@ -264,16 +263,9 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 		
 		instanceClassTypes.add(class_attribute_vlaue);
 		
-		String instance_id = renderID(instanceGateId);				
-							
-		for (int i = 0; i < class_attribute_values.length; i++)
-		{
-			if (class_attribute_values[i].equals(class_attribute_vlaue))
-				lingSer.putPositiveExample(instance_id, instanceTypeName, class_attribute_values[i]);
-			else
-				lingSer.putNegativeExample(instance_id, instanceTypeName, class_attribute_values[i]);
-			
-		}
+		String instance_id = renderID(instanceGateId);
+		
+		lingSer.putExample(instance_id, instanceTypeName, class_attribute_vlaue);									
 	}
 
 	public void flushAndClose()
@@ -298,7 +290,7 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 		lingSer.putDeterminations(className, classTypeName);				
 	}
 
-	
+/*	
 	public static String [] parseClassAttributeValuesFromSettingsFile(URL config_doc_url) throws JDOMException, IOException
 	{
 		SAXBuilder parser = new SAXBuilder();
@@ -321,11 +313,11 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 
 		return ret;		
 	}
-
+/**/
 	@SuppressWarnings("unchecked")
 	protected void parseOptions(Element serializerOtionsElem)
 	{		
-		class_attribute_values = parseClassAttributeValuesFromSerializerOptions(serializerOtionsElem);
+//		class_attribute_values = parseClassAttributeValuesFromSerializerOptions(serializerOtionsElem);
 
 		List<Element> tokens = serializerOtionsElem.getChild("tokens").getChildren("token");
 		this.tokens = new String[tokens.size()];
@@ -370,7 +362,7 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 		lingSer.setBackgroundSerializerFileName(fileName);		
 	}
 
-	public String[] classifyInstances(String[] instancesGateIds, String targetRelationName) throws IOException, InterruptedException, URISyntaxException
+	public Collection<String>[] classifyInstances(String[] instancesGateIds, String targetRelationName) throws IOException, InterruptedException, URISyntaxException
 	{
 		for (int i = 0; i < instancesGateIds.length; i++) {
 			instancesGateIds[i] = renderID(instancesGateIds[i]);

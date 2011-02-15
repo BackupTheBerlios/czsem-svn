@@ -13,6 +13,7 @@ import gate.creole.metadata.CreoleResource;
 import gate.creole.metadata.RunTime;
 import czsem.gate.AbstractLanguageAnalyserWithInputAnnotTypes;
 import czsem.gate.GateUtils;
+import czsem.utils.Config;
 
 // 
 @CreoleResource(name = "czsem CreateMentions", comment = "Creates annotations of a type �Mention� and puts class labels (original annotation types) to the feature �class�.")
@@ -69,7 +70,7 @@ public class CreateMentionsPR extends AbstractLanguageAnalyserWithInputAnnotType
 			fm.putAll(annotation.getFeatures());
 			String cls = (String) fm.get("class");
 			fm.put("class", annotation.getType());
-			fm.put("origID", annotation.getId());
+			fm.put("origMentID", annotation.getId());
 			outputAS.add(annotation.getStartNode(), annotation.getEndNode(), cls, fm);
 			
 			
@@ -90,7 +91,7 @@ public class CreateMentionsPR extends AbstractLanguageAnalyserWithInputAnnotType
 		{
 			FeatureMap fm = Factory.newFeatureMap();
 			fm.put("class", annotation.getType());
-			fm.put("origID", annotation.getId());
+			fm.put("origMentID", annotation.getId());
 			outputAS.add(annotation.getStartNode(), annotation.getEndNode(), getMentionAnntotationTypeName(), fm);
 			
 			
@@ -117,6 +118,11 @@ public class CreateMentionsPR extends AbstractLanguageAnalyserWithInputAnnotType
 		return inverseFunction;
 	}
 	
-	
+	public static void main(String[] args) throws Exception
+	{
+		Config.getConfig().setGateHome();
+		gate.Main.main(args);		
+	}
+
 
 }

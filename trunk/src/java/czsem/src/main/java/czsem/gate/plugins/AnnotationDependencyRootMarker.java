@@ -153,10 +153,10 @@ public class AnnotationDependencyRootMarker extends AbstractAnnotationDependency
 		
 		FeatureMap fm = Factory.newFeatureMap();
 		fm.putAll(annotation.getFeatures());
-		fm.put("root_id", root_token.getId());
-		fm.put("root_type", root_token.getType());
-		fm.put("orig_id", annotation.getId());
-		fm.put("orig_type", annotation.getType());
+		fm.put("rootID", root_token.getId());
+		fm.put("rootType", root_token.getType());
+		fm.put("origRootID", annotation.getId());
+		fm.put("origRootType", annotation.getType());
 		
 		String orig_type_name = annotation.getType();
 		

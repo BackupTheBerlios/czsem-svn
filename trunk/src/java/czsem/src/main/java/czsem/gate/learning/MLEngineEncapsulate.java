@@ -115,6 +115,8 @@ public class MLEngineEncapsulate implements TrainTest
 
 			return ret;
 		}
+		
+		
 
 		@Override
 		public List<PRSetup> getTestControllerSetup(MLEngineConfig config) throws MalformedURLException
@@ -143,6 +145,11 @@ public class MLEngineEncapsulate implements TrainTest
 			ret.add(new PRSetup.SinglePRSetup(AnnotationDeletePR.class)
 				.putFeatureList("annotationTypes", config.learnigAnnotationType)
 				.putFeatureList("setsToRemove", config.inputAS));		
+
+			//delete output Mentions
+			ret.add(new PRSetup.SinglePRSetup(AnnotationDeletePR.class)
+				.putFeatureList("annotationTypes", config.learnigAnnotationType + "_subtree")
+				.putFeatureList("setsToRemove", config.outputAS));		
 
 			
 			return ret;

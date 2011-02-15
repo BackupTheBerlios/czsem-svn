@@ -1,12 +1,16 @@
 package czsem.ILP;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import czsem.ILP.Serializer.Relation;
 import czsem.utils.ProjectSetup;
@@ -23,6 +27,21 @@ public class LinguisticSerializer
 	
 	protected File workingDirectory;
 	protected String projectName;
+	protected List<Example> examples;
+	protected Set<String> exampleClassValues;
+	
+	protected static class Example
+	{
+		public Example(String instance_id, String instanceTypeName,	String class_attribute_value)
+		{
+			this.instance_id = instance_id;
+			this.instanceTypeName = instanceTypeName;
+			this.class_attribute_value = class_attribute_value;
+		}
+		public String instance_id;
+		public String instanceTypeName;
+		public String class_attribute_value;		
+	}
 	
 	public LinguisticSerializer(String projectDir, String projectName) throws FileNotFoundException, UnsupportedEncodingException
 	{
@@ -40,6 +59,8 @@ public class LinguisticSerializer
 		featRels = new ArrayList<Relation>();
 		treeDepRels = new ArrayList<Relation>(5);
 		one2oneDepRels = new ArrayList<Relation>(3);
+		examples = new ArrayList<Example>();
+		exampleClassValues = new HashSet<String>();
 	}
 
 	
@@ -134,18 +155,65 @@ public class LinguisticSerializer
 	}
 
 	
+	public void putExample(String instance_id, String instanceTypeName,	String class_attribute_vlaue)
+	{
+		examples.add(new Example(instance_id, instanceTypeName, class_attribute_vlaue));
+		exampleClassValues.add(class_attribute_vlaue);
+		
+	}
+
+	protected void flushExamples()
+	{
+		exampleClassValues.remove(null);
+		
+		for (Example ex : examples)
+		{
+			for (String cls_val : exampleClassValues)
+			{
+				if (cls_val.equals(ex.class_attribute_value))
+					putPositiveExample(ex.instance_id, ex.instanceTypeName, cls_val);
+				else
+					putNegativeExample(ex.instance_id, ex.instanceTypeName, cls_val);
+			}
+			
+		}
+		
+	}
+
+	public static void putExampleInlineWithoutClassValueCheck(Serializer ser, String instanceId, String instanceTypeName, String class_attribute_vlaue)
+	{
+		
+		ser.renderInlineTupleWithoutValueCheck(
+				Serializer.encodeValue(instanceTypeName),
+				new String[]{
+					class_attribute_vlaue, 
+					Serializer.encodeValue(instanceId)});        				
+	}
+
+	public static void putExample(Serializer ser, String instanceId, String instanceTypeName, String class_attribute_vlaue)
+	{
+		putExampleInlineWithoutClassValueCheck(
+				ser,
+				instanceId,
+				instanceTypeName,
+				Serializer.encodeValue(class_attribute_vlaue));
+		ser.print(".\n");
+	}
+	
 	public void putPositiveExample(String instanceId, String instanceTypeName, String class_attribute_vlaue)
 	{
-		ser_pos.putTuple(instanceTypeName, new String[]{class_attribute_vlaue, instanceId});        		
+		putExample(ser_pos, instanceId, instanceTypeName, class_attribute_vlaue);
 	};
 	public void putNegativeExample(String instanceId, String instanceTypeName, String class_attribute_vlaue)
 	{
-    	ser_neg.putTuple(instanceTypeName, new String[]{class_attribute_vlaue, instanceId});        				
+		putExample(ser_neg, instanceId, instanceTypeName, class_attribute_vlaue);
 	}
 
 
 	public void flushAndClose()
 	{
+		flushExamples();
+		
 		ser_bkg.putCommentLn("-------------------- outputAllTypes --------------------");
 		ser_bkg.outputAllTypes();
 		ser_bkg.close();
@@ -200,21 +268,29 @@ public class LinguisticSerializer
 	}
 
 
-	public String[] classifyInstances(String[] instancesIds, String backgroundFileName, String targetRelationName) throws IOException, InterruptedException, URISyntaxException
+	public Collection<String>[] classifyInstances(String[] instancesIds, String backgroundFileName, String targetRelationName) throws IOException, InterruptedException, URISyntaxException
 	{
-		String [] ret = new String[instancesIds.length];
+		@SuppressWarnings("unchecked")
+		Collection<String> [] ret = new HashSet[instancesIds.length];
+		
 		ILPExec test = new ILPExec(workingDirectory, backgroundFileName);
 		test.initBeforeApplyRules("classify");
 		
 		for (int i = 0; i < instancesIds.length; i++)
 		{
-			StringBuilder testExpession = new StringBuilder();
-			testExpession.append(Serializer.encodeRelationName(targetRelationName));
-			testExpession.append("('");
-			testExpession.append(instancesIds[i]);
-			testExpession.append("')");
+			ByteArrayOutputStream str_ser = new ByteArrayOutputStream();
+			putExampleInlineWithoutClassValueCheck(
+					new Serializer(str_ser),
+					instancesIds[i],
+					Serializer.encodeRelationName(targetRelationName),
+					"ClassValueVar");
 			
-			ret[i] = test.applyRules(testExpession.toString());			
+			
+			List<String> inst = test.applyRulesReadVarOrFalse(str_ser.toString("utf8"), "ClassValueVar");
+			
+			//make class values unique
+			ret[i] = new HashSet<String>(inst);
+//			ret[i] = test.applyRulesTrueFalse(testExpession.toString());
 		}
 				
 		test.close();				

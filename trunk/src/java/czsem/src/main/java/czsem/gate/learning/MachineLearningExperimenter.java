@@ -18,9 +18,8 @@ import org.jdom.JDOMException;
 
 import czsem.gate.GateUtils;
 import czsem.gate.learning.DataSet.CzechFireman;
-import czsem.gate.learning.MLEngine.ILPEngine;
-import czsem.gate.learning.MLEngineEncapsulate.CreateTemporaryMentionsRootSubtree;
-import czsem.gate.learning.MLEngineEncapsulate.CreateTemporaryMentions;
+import czsem.gate.learning.MLEngine.*;
+import czsem.gate.learning.MLEngineEncapsulate.*;
 import czsem.gate.plugins.AnnotationDependencyRootMarker;
 import czsem.utils.Config;
 
@@ -192,9 +191,10 @@ public class MachineLearningExperimenter
 //	    runExperiment(new TrainTestAcquisitions(), 2);	    
 //	    runExperiment(new TrainTestCzechFireman(new ILPEngine()), 2);
 	    new MachineLearningExperiment(
-	    		new CzechFireman(),
+	    		new CzechFireman("damage"),
 	    		new CreateTemporaryMentionsRootSubtree(new ILPEngine())
-	    ).trainOnly();
+//	    		new ILPEngine()
+	    ).crossValidation(2);
 
 	    //TODO: MachineLearningExperiment::getMLEngineConfig .... originalLearnigAnnotationTypes
 	    

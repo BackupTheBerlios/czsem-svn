@@ -85,9 +85,7 @@ public class MachineLearningExperiment
 		ret.outputAS = engine.getOutputAS();
 		ret.learnigAnnotationType = learninigAnnotType;
 		ret.keyAS = dataSet.keyAS;
-
-		//TODO:
-		ret.originalLearnigAnnotationTypes = null; 
+		ret.originalLearnigAnnotationTypes = Arrays.asList(dataSet.learnigAnnotationTypes); 
 		return ret;
 	}
 
@@ -118,6 +116,15 @@ public class MachineLearningExperiment
 	    train_controller.setCorpus(dataSet.getCorpus());			    	    	    
 	    train_controller.execute();
 	}
+	
+	public void testOnly() throws ResourceInstantiationException, JDOMException, IOException, PersistenceException, ExecutionException
+	{
+	    SerialAnalyserController train_controller = PRSetup.buildGatePipeline(getTestControllerSetup());
+	    
+	    train_controller.setCorpus(dataSet.getCorpus());			    	    	    
+	    train_controller.execute();
+	}
+
 	
 	public void crossValidation(int numOfFolds) throws ExecutionException, ResourceInstantiationException, PersistenceException, JDOMException, IOException
 	{

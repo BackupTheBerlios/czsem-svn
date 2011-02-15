@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 
 import czsem.utils.Config;
 import czsem.utils.ProcessExec;
@@ -257,7 +259,7 @@ public class ILPExec extends ProcessExec {
 	 * @return "true" or "false"
 	 * @throws IOException
 	 */
-	public String applyRules(String testExpession) throws IOException
+	public String applyRulesTrueFalse(String testExpession) throws IOException
 	{
 		output_writer.print("if(");
 		output_writer.print(testExpession);
@@ -266,6 +268,38 @@ public class ILPExec extends ProcessExec {
 		
 		return input_reader.readLine();
 	}
+	
+	/**
+	 * @return all possible variable values
+	 * @throws IOException
+	 */
+	public List<String> applyRulesReadVarOrFalse(String testExpession, String variableName) throws IOException
+	{
+		output_writer.print("(");
+		output_writer.print(testExpession);
+		output_writer.print(",print(");
+		output_writer.print(variableName);
+		output_writer.print("),print('\\n')");
+		output_writer.print(";");
+		output_writer.print("print('nulll\\n')");
+		output_writer.println("),fail.");
+		output_writer.flush();
+		
+		List<String> ret = new ArrayList<String>(0);
+		
+		for (;;)
+		{
+			String ln = input_reader.readLine();
+			
+			if (ln.equals("nulll")) break;
+			
+			ret.add(ln);			
+		}
+
+				
+		return ret;
+	}
+
 
 	public void initBeforeApplyRules(String errLogName) throws IOException, URISyntaxException
 	{
@@ -282,6 +316,7 @@ public class ILPExec extends ProcessExec {
 	public void setUtf8Encoding() {
 		output_writer.println("set_prolog_flag(encoding,utf8).");		
 	}
+
 
 	/*
 	public static void main(String[] args) throws InterruptedException, IOException

@@ -46,6 +46,11 @@ public class AnnotationDependencySubtreeMarker extends AbstractAnnotationDepende
 			end_offset = endOffset;
 		}
 
+		public SubtreeMarkInfo(FeatureMap fm)
+		{
+			this();
+			this.fm.putAll(fm);
+		}
 
 		public SubtreeMarkInfo()
 		{
@@ -80,14 +85,14 @@ public class AnnotationDependencySubtreeMarker extends AbstractAnnotationDepende
 		
 		if (tokens.isEmpty()) return;
 		
-		SubtreeMarkInfo info = new SubtreeMarkInfo();
+		SubtreeMarkInfo info = new SubtreeMarkInfo(annotation.getFeatures());
 		for (Annotation token : tokens)
 		{
 			info.mergeWith(markAnnotationDependencySubtreeForSingleToken(token.getId()));			
 		}
 		
-		info.fm.put("orig_id", annotation.getId());
-		info.fm.put("orig_type", annotation.getType());
+		info.fm.put("origSubTrID", annotation.getId());
+		info.fm.put("origSubTrType", annotation.getType());
 		
 		String orig_type_name = annotation.getType();
 		

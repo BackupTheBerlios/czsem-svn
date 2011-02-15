@@ -13,12 +13,13 @@ import czsem.utils.Config;
 
 public class DataSet
 {
-	public DataSet(String dataStore, String copusId, String keyAS, String tectoMTAS, String learnigConfigDirectory) throws URISyntaxException, IOException {
+	public DataSet(String dataStore, String copusId, String keyAS, String tectoMTAS, String learnigConfigDirectory, String [] learnigAnnotationTypes) throws URISyntaxException, IOException {
 		this.dataStore = dataStore;
 		this.copusId = copusId;
 		this.keyAS = keyAS;
 		this.tectoMTAS = tectoMTAS;
 		this.learnigConfigDirectory = Config.getConfig().getLearnigConfigDirectoryForGate() + "/" + learnigConfigDirectory;
+		this.learnigAnnotationTypes = learnigAnnotationTypes;
 	}
 
 	protected String dataStore;
@@ -26,6 +27,7 @@ public class DataSet
 	protected String keyAS;
 	protected String tectoMTAS;
 	protected String learnigConfigDirectory;
+	protected String [] learnigAnnotationTypes;
 	
 	protected Corpus getCorpus() throws PersistenceException, ResourceInstantiationException
 	{
@@ -37,27 +39,29 @@ public class DataSet
 	
 	public static class CzechFireman extends DataSet
 	{
-		public CzechFireman() throws URISyntaxException, IOException
+		public CzechFireman(String ... learnigAnnotationTypes) throws URISyntaxException, IOException
 		{
 			super(
 					"file:/C:/Users/dedek/AppData/GATE/ISWC",
 					"ISWC___1274943456887___5663",
 					"accident",
 					"TectoMT",
-					"czech_fireman");
+					"czech_fireman",
+					learnigAnnotationTypes);
 		}		
 	}
 
 	public static class Acquisitions extends DataSet
 	{
-		public Acquisitions() throws URISyntaxException, IOException
+		public Acquisitions(String ... learnigAnnotationTypes) throws URISyntaxException, IOException
 		{
 			super(
 					"file:/C:/Users/dedek/AppData/GATE/Acquisitions-v1.1",
 					"Acquisitions-v1.1___1284475684516___2218",
 					"Key",
 					"TectoMT",
-					"acquisitions-v1.1");
+					"acquisitions-v1.1",
+					learnigAnnotationTypes);
 		}		
 	}
 
