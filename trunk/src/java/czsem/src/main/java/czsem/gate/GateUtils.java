@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 import gate.Annotation;
@@ -127,6 +129,22 @@ public class GateUtils
 		
 	}
 	
+	public static class Evidence<EvidenceElement> implements Comparable<Evidence<EvidenceElement>>
+	{
+		public Evidence(EvidenceElement doc, int random) {
+			this.element = doc;
+			this.random = random;
+		}
+		public EvidenceElement element;
+		int random;
+		
+		@Override
+		public int compareTo(Evidence<EvidenceElement> o)
+		{
+			return new Integer(random).compareTo(o.random);
+		}
+	}
+
 	public static void safeDeepReInitPR_or_Controller(ProcessingResource processingResource) throws ResourceInstantiationException
 	{
 		if (processingResource instanceof Controller)
@@ -234,6 +252,47 @@ public class GateUtils
 	public static String URLToFilePath(URL url) throws IOException, URISyntaxException
 	{
 		return URLToFile(url).getCanonicalPath();		
+	}
+	
+	public static <ElementType> Evidence<ElementType>[] createRandomPermutation(Collection<ElementType> collection)
+	{
+		Random rand = new Random();
+		
+		@SuppressWarnings("unchecked")
+		Evidence<ElementType>[] ret = new Evidence[collection.size()];
+		
+		int i = 0;
+		for (Iterator<ElementType> iterator = collection.iterator(); iterator.hasNext();i++)
+		{
+			ElementType element = iterator.next();
+			ret[i] = new Evidence<ElementType>(element, rand.nextInt());						
+		}
+				
+		Arrays.sort(ret);
+		
+		return ret;
+	}
+
+	
+	public static int [] createRandomPermutation(int length)
+	{
+		Integer [] input = new Integer[length];
+		int [] ret = new int[length];
+		for (int i = 0; i < input.length; i++) {
+			input[i]=i;
+		}
+		
+		Evidence<Integer>[] perm = createRandomPermutation(Arrays.asList(input));
+		for (int i = 0; i < input.length; i++) {
+			ret[i]=perm[i].element;
+		}
+		
+		return ret;		
+	}
+	
+	public static void main(String [] args)
+	{
+		System.err.println(Arrays.toString(createRandomPermutation(10)));
 	}
 
 }

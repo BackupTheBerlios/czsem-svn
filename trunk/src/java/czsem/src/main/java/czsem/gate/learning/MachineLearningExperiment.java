@@ -16,6 +16,7 @@ import org.jdom.JDOMException;
 
 import czsem.gate.learning.MLEngine.MLEngineConfig;
 import czsem.gate.plugins.CrossValidation;
+import czsem.gate.plugins.LearningEvaluator;
 
 
 public class MachineLearningExperiment
@@ -40,7 +41,7 @@ public class MachineLearningExperiment
 		this.dataSet = dataSet;
 		this.engines = engines;
 		
-		inputLearninigAS = dataSet.tectoMTAS;
+		inputLearninigAS = dataSet.getTectoMTAS();
 	}
 
 	
@@ -71,12 +72,12 @@ public class MachineLearningExperiment
 	protected MLEngineConfig getMLEngineConfig(MachineLearningExperiment.TrainTest engine)
 	{
 		MLEngineConfig ret = new MLEngineConfig();
-		ret.experimentLearningConfigsDirectory = dataSet.learnigConfigDirectory;
+		ret.experimentLearningConfigsDirectory = dataSet.getLearnigConfigDirectory();
 		ret.inputAS = inputLearninigAS;
 		ret.outputAS = engine.getDefaultOutputAS();
 		ret.learnigAnnotationType = engine.getDefaultLearningAnnotationType();
-		ret.keyAS = dataSet.keyAS;
-		ret.originalLearnigAnnotationTypes = Arrays.asList(dataSet.learnigAnnotationTypes); 
+		ret.keyAS = dataSet.getKeyAS();
+		ret.originalLearnigAnnotationTypes = Arrays.asList(dataSet.getLearnigAnnotationTypes()); 
 		return ret;
 	}
 
@@ -138,6 +139,8 @@ public class MachineLearningExperiment
 			.putFeature("numberOfFolds", numOfFolds)
 			.putFeature("trainingPR", train_controller)
 			.putFeature("testingPR", test_controller).createPR().execute();
+		
+		LearningEvaluator.CentralResultsRepository.repository.logAll();
 	}
 
 

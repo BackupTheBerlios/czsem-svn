@@ -1,4 +1,0 @@
-mention(damage,A) :-
-   'lex.rf'(B,A), sempos(B,'n.quant.def'), number(B,sg), tDependency(C,B), 
-   tDependency(C,D), t_lemma(D,'škoda').
-mention(damage,'id_jihomoravsky51054.txt.xml_0002B_962').

@@ -35,7 +35,7 @@
        <FEATURE>kind</FEATURE>  
        <RANGE from="-4" to="4"/>  
      </ATTRIBUTELIST>
--->      
+
      <ATTRIBUTE>  
        <NAME>Gaz</NAME>  
        <SEMTYPE>NOMINAL</SEMTYPE>  
@@ -43,7 +43,7 @@
        <FEATURE>majorType</FEATURE>  
        <POSITION>0</POSITION>
      </ATTRIBUTE> 
-<!--
+
      <ATTRIBUTE>  
        <NAME>Num</NAME>  
        <SEMTYPE>NOMINAL</SEMTYPE>  
@@ -63,9 +63,10 @@
        <NAME>Root</NAME>  
        <SEMTYPE>NOMINAL</SEMTYPE>  
        <TYPE>Token</TYPE>  
-       <FEATURE>string</FEATURE> 
+       <FEATURE>lemma</FEATURE> 
        <RANGE from="-2" to="2"/>  
     </ATTRIBUTELIST>
+<!-- 
     <ATTRIBUTELIST>  
        <NAME>Organization</NAME>  
        <SEMTYPE>NOMINAL</SEMTYPE>  
@@ -73,11 +74,12 @@
        <FEATURE>orgType</FEATURE> 
        <RANGE from="-1" to="1"/>  
     </ATTRIBUTELIST>
+ -->
     <ATTRIBUTELIST>  
        <NAME>Tag</NAME>  
        <SEMTYPE>NOMINAL</SEMTYPE>  
        <TYPE>Token</TYPE>  
-       <FEATURE>category</FEATURE> 
+       <FEATURE>tag</FEATURE> 
        <RANGE from="-2" to="2"/>  
     </ATTRIBUTELIST>  
      <ATTRIBUTE>

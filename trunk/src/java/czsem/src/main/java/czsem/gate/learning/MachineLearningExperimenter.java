@@ -18,7 +18,8 @@ import org.apache.log4j.Logger;
 import org.jdom.JDOMException;
 
 import czsem.gate.GateUtils;
-import czsem.gate.learning.DataSet.CzechFireman;
+import czsem.gate.learning.DataSet.*;
+import czsem.gate.learning.DataSet.DataSetImpl.*;
 import czsem.gate.learning.MLEngine.*;
 import czsem.gate.learning.MLEngineEncapsulate.*;
 import czsem.gate.plugins.AnnotationDependencyRootMarker;
@@ -198,13 +199,15 @@ public class MachineLearningExperimenter
 	    LogService.minVerbosityLevel = 0;
 	    
 	    new MachineLearningExperiment(
-	    		new CzechFireman("damage"),
+	    		new DataSetReduce(new Acquisitions("acquired"), 0.1),
+//	    		new CzechFireman("damage"),
 //	    		new MLEvaluate(new CreateTemporaryMentions(new ILPEngine()))
-	    		new MLEvaluate(new CreateTemporaryMentionsRootSubtree(new ILPEngine())),
+//	    		new MLEvaluate(new CreateTemporaryMentionsRootSubtree(new ILPEngine())),
 	    		new MLEvaluate(new CreatePersistentMentions(new PaumEngine()))
 //	    		new ILPEngine()
 	    ).crossValidation(2);
 
+	    
 	    
 	    //	    trainOnly(new TrainTestGateOnCzech(false, true));
 //	    trainOnly(new TrainTestAcquisitions(new ILPEngine()));

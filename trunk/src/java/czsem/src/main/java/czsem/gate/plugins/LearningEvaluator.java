@@ -14,9 +14,11 @@ import gate.util.AnnotationDiffer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 
@@ -28,6 +30,36 @@ import org.apache.log4j.Logger;
 @CreoleResource(name = "czsem LearningEvaluator", comment = "Measures performance between two AS, similar to QualityAssurancePR")
 public class LearningEvaluator extends AbstractLanguageAnalyser
 {		
+	public static class CentralResultsRepository
+	{
+		public static CentralResultsRepository repository = new CentralResultsRepository();
+		
+		private Map<LearningEvaluator, List<DocumentDiff>> repository_map = new HashMap<LearningEvaluator, List<DocumentDiff>>();
+		
+		public void clear()
+		{
+			repository_map.clear();
+		}
+
+		public void Add(LearningEvaluator eval, DocumentDiff diff)
+		{
+			List<DocumentDiff> prev = repository_map.get(eval);
+			if (prev == null) prev = new ArrayList<LearningEvaluator.DocumentDiff>();
+			prev.add(diff);
+			repository_map.put(eval, prev);
+		}
+
+		public void logAll()
+		{
+			Logger.getLogger(getClass()).info("---complete repository statistics---");
+			for (LearningEvaluator eval : repository_map.keySet())
+			{
+				eval.logStatistics(repository_map.get(eval));				
+			}
+		}
+		
+	}
+	
 	protected class DocumentDiff
 	{
 		public DocumentDiff(String documentName) {
@@ -86,10 +118,11 @@ public class LearningEvaluator extends AbstractLanguageAnalyser
 		diff.diff = calculateDocumentDiff(document);
 		
 		documentDifs.add(diff);
+		CentralResultsRepository.repository.Add(this, diff);
 		
 		if (documentDifs.size() == corpus.size())
 		{
-			printStatistics();
+			logStatistics(documentDifs);
 		}
 				
 	}
@@ -108,12 +141,12 @@ public class LearningEvaluator extends AbstractLanguageAnalyser
 			);
 	}
 	
-	protected void printStatistics()
-	{
+	protected void logStatistics(List<DocumentDiff> docDifs)
+	{				
 		ArrayList<AnnotationDiffer> overall = new ArrayList<AnnotationDiffer>
-			(annotationTypes.size() * documentDifs.size());
+			(annotationTypes.size() * docDifs.size());
 		
-		for (DocumentDiff diff : documentDifs)
+		for (DocumentDiff diff : docDifs)
 		{
 			overall.addAll(Arrays.asList(diff.diff));			
 		}

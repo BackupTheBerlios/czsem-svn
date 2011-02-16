@@ -22,9 +22,7 @@ import gate.util.GateException;
 
 import java.io.File;
 import java.net.MalformedURLException;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.Random;
 
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
@@ -44,35 +42,14 @@ public class CrossValidation extends AbstractProcessingResource
 	
 	/**	two dimensional - corpusFolds[fold][0] small (testing), corpusFolds[fold][1] remaining large (training) */
 	protected Corpus [][] corpusFolds;
-	protected DocumentEvidence documentEvidence [];
+	protected GateUtils.Evidence<Document> documentEvidence [];
 	
-	protected static class DocumentEvidence implements Comparable<DocumentEvidence>
-	{
-		public DocumentEvidence(Document doc, int random) {
-			this.doc = doc;
-			this.random = random;
-		}
-		Document doc;
-		int random;
-		
-		@Override
-		public int compareTo(DocumentEvidence o)
-		{
-			return new Integer(random).compareTo(o.random);
-		}
-	}
-			
+	
+	@SuppressWarnings("unchecked")
 	@Override
 	public Resource init() throws ResourceInstantiationException
 	{
-		Random rand = new Random();
-		documentEvidence = new DocumentEvidence [corpus.size()]; 
-		for (int i = 0; i < documentEvidence.length; i++)
-		{
-			documentEvidence[i] = new DocumentEvidence((Document) corpus.get(i), rand.nextInt());			
-		}
-		
-		Arrays.sort(documentEvidence);
+		documentEvidence = GateUtils.createRandomPermutation(corpus);
 		
 		corpusFolds = new Corpus[numberOfFolds][];
 		int reamining_documents = corpus.size();
@@ -105,13 +82,13 @@ public class CrossValidation extends AbstractProcessingResource
 		{
 			if (i >= test_from && i < test_to)
 			{
-				ret[0].add(documentEvidence[i].doc);
-				logger.debug(String.format("TEST doc %3d name: '%s'", i, documentEvidence[i].doc.getName()));
+				ret[0].add(documentEvidence[i].element);
+				logger.debug(String.format("TEST doc %3d name: '%s'", i, documentEvidence[i].element.getName()));
 			}
 			else
 			{
-				ret[1].add(documentEvidence[i].doc);
-				logger.debug(String.format("TRAIN doc %3d name: '%s'", i, documentEvidence[i].doc.getName()));
+				ret[1].add(documentEvidence[i].element);
+				logger.debug(String.format("TRAIN doc %3d name: '%s'", i, documentEvidence[i].element.getName()));
 			}
 		}
 				 
@@ -203,7 +180,7 @@ public class CrossValidation extends AbstractProcessingResource
 	{
 		for (int i = 0; i < documentEvidence.length; i++)
 		{
-			documentEvidence[i].doc.sync();			
+			documentEvidence[i].element.sync();			
 		}
 	}
 
