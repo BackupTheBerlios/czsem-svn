@@ -24,10 +24,10 @@ public class MachineLearningExperiment
 	{
 		List<PRSetup> getTrainControllerSetup(MLEngine.MLEngineConfig config) throws MalformedURLException;
 		List<PRSetup> getTestControllerSetup(MLEngine.MLEngineConfig config) throws MalformedURLException;
-		String getOutputAS();
+		String getDefaultOutputAS();
+		String getDefaultLearningAnnotationType();
 	}
 
-	protected String learninigAnnotType = "Mention";
 	
 	/** Usually TectoMT, loaded form dataSet.tectoMTAS **/
 	protected String inputLearninigAS;
@@ -48,10 +48,6 @@ public class MachineLearningExperiment
 	{
 		List<PRSetup> prs = new ArrayList<PRSetup>();
 		
-		//TectoMT reset
-		prs.add(new PRSetup.SinglePRSetup(AnnotationDeletePR.class)
-			.putFeatureList("annotationTypes", learninigAnnotType)
-			.putFeatureList("setsToRemove", inputLearninigAS));		
 
 		return addTrainMLEngines(prs);
 	}
@@ -60,15 +56,10 @@ public class MachineLearningExperiment
 	{
 		List<PRSetup> prs = new ArrayList<PRSetup>();
 		
-		//TectoMT reset
-		prs.add(new PRSetup.SinglePRSetup(AnnotationDeletePR.class)
-			.putFeatureList("annotationTypes", learninigAnnotType)
-			.putFeatureList("setsToRemove", inputLearninigAS));		
-
 		//Reset engines outASs		
 		String [] outAS = new String[engines.length];
 		for (int i = 0; i < outAS.length; i++) {
-			outAS[i] = engines[i].getOutputAS();
+			outAS[i] = engines[i].getDefaultOutputAS();
 		}
 		prs.add(new PRSetup.SinglePRSetup(AnnotationDeletePR.class)
 			.putFeature("setsToRemove", Arrays.asList(outAS)));		
@@ -82,8 +73,8 @@ public class MachineLearningExperiment
 		MLEngineConfig ret = new MLEngineConfig();
 		ret.experimentLearningConfigsDirectory = dataSet.learnigConfigDirectory;
 		ret.inputAS = inputLearninigAS;
-		ret.outputAS = engine.getOutputAS();
-		ret.learnigAnnotationType = learninigAnnotType;
+		ret.outputAS = engine.getDefaultOutputAS();
+		ret.learnigAnnotationType = engine.getDefaultLearningAnnotationType();
 		ret.keyAS = dataSet.keyAS;
 		ret.originalLearnigAnnotationTypes = Arrays.asList(dataSet.learnigAnnotationTypes); 
 		return ret;
@@ -94,6 +85,11 @@ public class MachineLearningExperiment
 	{
 		for (int i = 0; i < engines.length; i++)
 		{
+			//TectoMT reset
+			prs.add(new PRSetup.SinglePRSetup(AnnotationDeletePR.class)
+				.putFeatureList("annotationTypes", engines[i].getDefaultLearningAnnotationType())
+				.putFeatureList("setsToRemove", inputLearninigAS));		
+
 			prs.addAll(engines[i].getTrainControllerSetup(getMLEngineConfig(engines[i])));				
 		}
 		return prs;
@@ -103,6 +99,12 @@ public class MachineLearningExperiment
 	{
 		for (int i = 0; i < engines.length; i++)
 		{
+			//TectoMT reset
+			prs.add(new PRSetup.SinglePRSetup(AnnotationDeletePR.class)
+				.putFeatureList("annotationTypes", engines[i].getDefaultLearningAnnotationType())
+				.putFeatureList("setsToRemove", inputLearninigAS));		
+
+			
 			prs.addAll(engines[i].getTestControllerSetup(getMLEngineConfig(engines[i])));				
 		}
 		return prs;

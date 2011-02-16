@@ -1,6 +1,6 @@
 <?xml version="1.0"?>  
 <ML-CONFIG>  
-  <VERBOSITY level="1"/>
+  <VERBOSITY level="0"/>
   <SURROUND value="true"/>  
   <PARAMETER name="thresholdProbabilityEntity" value="0.2"/>  
   <PARAMETER name="thresholdProbabilityBoundary" value="0.4"/>  
@@ -82,8 +82,8 @@
     </ATTRIBUTELIST>  
      <ATTRIBUTE>
        <SEMTYPE>NOMINAL</SEMTYPE>
-       <NAME>Mention</NAME>
-       <TYPE>Mention</TYPE>
+       <NAME>MentionPaum</NAME>
+       <TYPE>MentionPaum</TYPE>
        <FEATURE>class</FEATURE> 
        <POSITION>0</POSITION>
        <CLASS/>

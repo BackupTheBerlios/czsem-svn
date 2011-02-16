@@ -46,8 +46,13 @@ public abstract class MLEngine implements TrainTest
 	}
 	
 	@Override
-	public String getOutputAS() {
+	public String getDefaultOutputAS() {
 		return outputAS;
+	}
+
+	@Override
+	public String getDefaultLearningAnnotationType() {
+		return "Mention";
 	}
 
 	public static class PaumEngine extends MLEngine
@@ -85,6 +90,11 @@ public abstract class MLEngine implements TrainTest
 				.putFeature("learningMode", "APPLICATION"));
 
 			return prs;
+		}
+
+		@Override
+		public String getDefaultLearningAnnotationType() {
+			return "MentionPaum";
 		}
 		
 	}

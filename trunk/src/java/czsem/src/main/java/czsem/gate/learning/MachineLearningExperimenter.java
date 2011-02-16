@@ -2,6 +2,7 @@ package czsem.gate.learning;
 
 import gate.Gate;
 import gate.creole.SerialController;
+import gate.learning.LogService;
 import gate.util.GateException;
 import gate.util.profile.Profiler;
 
@@ -21,6 +22,7 @@ import czsem.gate.learning.DataSet.CzechFireman;
 import czsem.gate.learning.MLEngine.*;
 import czsem.gate.learning.MLEngineEncapsulate.*;
 import czsem.gate.plugins.AnnotationDependencyRootMarker;
+import czsem.gate.plugins.CrossValidation;
 import czsem.utils.Config;
 
 public class MachineLearningExperimenter
@@ -173,6 +175,8 @@ public class MachineLearningExperimenter
 	    logger.setLevel(Level.OFF);
 	    logger = Logger.getLogger(AnnotationDependencyRootMarker.class);
 	    logger.setLevel(Level.ALL);
+	    logger = Logger.getLogger(CrossValidation.class);
+	    logger.setLevel(Level.INFO);
 
 		
 	    Config.getConfig().setGateHome();
@@ -190,13 +194,17 @@ public class MachineLearningExperimenter
 	    
 //	    runExperiment(new TrainTestAcquisitions(), 2);	    
 //	    runExperiment(new TrainTestCzechFireman(new ILPEngine()), 2);
+	    
+	    LogService.minVerbosityLevel = 0;
+	    
 	    new MachineLearningExperiment(
 	    		new CzechFireman("damage"),
-	    		new CreateTemporaryMentionsRootSubtree(new ILPEngine())
+//	    		new MLEvaluate(new CreateTemporaryMentions(new ILPEngine()))
+	    		new MLEvaluate(new CreateTemporaryMentionsRootSubtree(new ILPEngine())),
+	    		new MLEvaluate(new CreatePersistentMentions(new PaumEngine()))
 //	    		new ILPEngine()
 	    ).crossValidation(2);
 
-	    //TODO: MachineLearningExperiment::getMLEngineConfig .... originalLearnigAnnotationTypes
 	    
 	    //	    trainOnly(new TrainTestGateOnCzech(false, true));
 //	    trainOnly(new TrainTestAcquisitions(new ILPEngine()));

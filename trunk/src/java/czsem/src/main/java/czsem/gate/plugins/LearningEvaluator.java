@@ -16,6 +16,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
+
+import org.apache.log4j.Logger;
 
 /**
  * Mostly copied form {@link QualityAssurancePR}, slightly modified. 
@@ -91,6 +94,20 @@ public class LearningEvaluator extends AbstractLanguageAnalyser
 				
 	}
 
+	public static String getStatisticsStr(AnnotationDiffer diff)
+	{
+		return String.format("match:%3d  miss:%3d  spur:%3d  overlap:%3d  prec: %f  rec: %f  f1: %f  lenientf1: %f",
+				diff.getCorrectMatches(),
+				diff.getMissing(),
+				diff.getSpurious(),
+				diff.getPartiallyCorrectMatches(),
+				diff.getPrecisionStrict(),
+				diff.getRecallStrict(),
+				diff.getFMeasureStrict(1),
+				diff.getFMeasureLenient(1)
+			);
+	}
+	
 	protected void printStatistics()
 	{
 		ArrayList<AnnotationDiffer> overall = new ArrayList<AnnotationDiffer>
@@ -104,17 +121,16 @@ public class LearningEvaluator extends AbstractLanguageAnalyser
 		
 		AnnotationDiffer overall_differ = new AnnotationDiffer(overall);
 		
-		System.err.format("--overall ranking--\n prec: %f  rec: %f  f1: %f",
-				overall_differ.getPrecisionStrict(),
-				overall_differ.getRecallStrict(),
-				overall_differ.getFMeasureStrict(1));
+		Logger logger = Logger.getLogger(getClass());
 		
+		logger.info(String.format("%5s overall: %s", responseASName, getStatisticsStr(overall_differ)));
 	}
 
 	@Override
 	public Resource init() throws ResourceInstantiationException
 	{
 		documentDifs = new ArrayList<DocumentDiff>();
+		Locale.setDefault(Locale.ENGLISH);
 		return super.init();
 	}
 
@@ -152,8 +168,11 @@ public class LearningEvaluator extends AbstractLanguageAnalyser
 		return featureNames;
 	}
 
+	/**
+	 * @see {@link AnnotationDiffer#setSignificantFeaturesSet(java.util.Set)}
+	 */
 	@RunTime
-	@CreoleParameter
+	@CreoleParameter(defaultValue="")
 	public void setFeatureNames(List<String> featureNames) {
 		this.featureNames = featureNames;
 	}
