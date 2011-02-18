@@ -79,7 +79,7 @@ public class SequenceAnnotator
 		
 		if (new_index - last_start_index > 5)
 		{
-			logger.warn(
+			logger.debug(
 					String.format(
 							"Big space in annotations dedtected! "+
 							"last_index: %d, new_index: %d, diff: %d",
@@ -90,7 +90,11 @@ public class SequenceAnnotator
 		last_start_index = new_index + last_length; 
 	}
 	
-	private int indexOf(String token) {
+	private class MoveLocalStartIndexContinueLoopException extends Throwable
+	{private static final long serialVersionUID = 1L;};	
+	
+	private int indexOf(String token)
+	{
 //		int new_index = string_content.indexOf(token, last_index);
 		int token_index, local_index;
 
@@ -109,6 +113,17 @@ public class SequenceAnnotator
 					
 					if (loc_ch != toc_ch)
 					{
+						//multiple hyphens
+						if (
+								(loc_ch == '-') &&
+								Character.isWhitespace(toc_ch) &&
+								(local_index > 0) &&
+								(string_content.charAt(local_index-1) == '-'))
+						{
+//							local_index++;
+							continue;
+						}
+
 						//Angle Brackets skipped by TectoMT
 						if (loc_ch == '<')
 						{
@@ -119,35 +134,47 @@ public class SequenceAnnotator
 								 token_index--;
 								 
 							 }
-							
+							 continue;
 						}
-						else
+
 						//quotation correction
 						if ((loc_ch == '"' || loc_ch == '\'')&& (toc_ch == '\'' || toc_ch == '`'))
 						{
 							if (token_index+1<token.length() && token.charAt(token_index+1)==toc_ch)
 								token_index++;
+							continue;
 						}
-						else
-							if (token_index > 0) //otherwise move start
-							{
-								if (Character.isWhitespace(loc_ch)) token_index--;
-								else
-									if (Character.isWhitespace(toc_ch)) local_index--;
-									else
-										throw new Throwable();
+
+						if (token_index > 0) //otherwise move start
+						{
+							if (Character.isWhitespace(loc_ch))	{
+								token_index--;
+								continue;
+							}
+							
+							if (Character.isWhitespace(toc_ch))	{
+								local_index--;
+								continue;
+							}
+														
+							throw new MoveLocalStartIndexContinueLoopException();
 						}
-						else throw new Throwable();
+						
+						throw new MoveLocalStartIndexContinueLoopException();
 					}					
-				}
+				}//checks strings loop
+				
 				correction = local_index - local_start_index - token.length();
 				if (correction != 0)
 				{
 					logger.debug("correction: " + correction);
 				}
 				return local_start_index;
-			} catch (Throwable e) {/*contine*/} 			
-		}		
-	}		
+				
+			} catch (MoveLocalStartIndexContinueLoopException e) {/*contine*/} 			
+		
+		} //local_start_index loop		
+	
+	}//method indexOf	
 
 }

@@ -141,6 +141,32 @@ public class SequenceAnnotatorTest extends TestCase
 		sa.nextToken("Federal");
 		assertEquals(22, sa.lastStart());
 	}
+	
+	public void testNextToken7()
+	{
+		String s = 	"\n    The partnership has earlier offered 100 dlrs per share for"+
+					"\nGenCorp -- a tire, broadcasting, plastics and aerospace"+
+					"\nconglommerate.";
+		SequenceAnnotator sa = new SequenceAnnotator(s, 0);
+		sa.nextToken("The partnership has earlier offered 100 dlrs per share for GenCorp- a tire, broadcasting, plastics and aerospace conglommerate.");
+		assertEquals(5, sa.lastStart());
+		assertEquals(134, sa.lastEnd());
+	}
+
+	public void testNextToken8()
+	{
+		String s = 	
+			"\n    It added that it has also considered--but not yet"+
+			"\ndecided--to buy additional Atcor shares, either in the open"+
+			"\nmarket, in private transactions, through a tender offer or"+
+			"\notherwise.";
+			
+		SequenceAnnotator sa = new SequenceAnnotator(s, 0);
+		sa.nextToken("It added that it has also considered- but not yet decided- to buy additional Atcor shares, either in the open market, in private transactions, through a tender offer or otherwise.");
+		assertEquals(5, sa.lastStart());
+		assertEquals(184, sa.lastEnd());
+	}
+
 
 	public void testNextTokenAngleBrackets()
 	{
