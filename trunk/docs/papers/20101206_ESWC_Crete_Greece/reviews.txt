@@ -1,0 +1,103 @@
+
+
+---------------------------- REVIEW 1 --------------------------
+PAPER: 11
+TITLE: Semantic Annotation Semantically: Using a Sharable Extraction Ontology and a Reasoner
+
+OVERALL RATING: 2 (accept)
+HOW WELL DOES IT FIT TO THE TRACK: 5 (excellent)
+METHODICAL SOUNDNESS: 4 (good)
+NOVELTY: 4 (good)
+QUALITY AND SCOPE OF THE EVALUATION: 4 (good)
+Best Paper Award: 2 (Yes)
+
+
+The contribution of the paper is an extraction ontology which is not bound to a particular IE tool but can be run on
+different standard reasoners (Jena, FACT++, HermiT and Pellet were tested). The work is interesting from both NLP
+and semantic web viewpoints.
+
+Experiments investigated two datasets one in Czech and a standard dataset in English based on part of the Reuters
+collection. The output of the process is a "document ontology", i.e. an semantic representation of the facts in the
+document, rather than an annotated document.
+
+The writing has some glitches (examples below) but is understandable.
+
+Section 1 "In the begging" -> "In the beginning"
+
+Section2 "artificially leaned from a training corpus" ->artfiicially learned from a training corpus"
+
+Fig 1 "The node `Hutton' is docarated as a named entity" - what does "docorated" mean?
+
+Conclusions "More over" -> "Moreover"
+
+
+
+---------------------------- REVIEW 2 --------------------------
+PAPER: 11
+TITLE: Semantic Annotation Semantically: Using a Sharable Extraction Ontology and a Reasoner
+
+OVERALL RATING: -2 (reject)
+HOW WELL DOES IT FIT TO THE TRACK: 4 (good)
+METHODICAL SOUNDNESS: 2 (poor)
+NOVELTY: 3 (fair)
+QUALITY AND SCOPE OF THE EVALUATION: 2 (poor)
+Best Paper Award: 1 (No)
+
+
+The paper tries to combine the field of ontology-based information extraction and rule-based reasoning. The motivational part appeals for tool-independent extraction ontologies. Having this introduction, one would expect a proposal of a universal extraction format (although specific for the extraction limited to simple rules on dependency parsed text).  However, the presented "case-study" simply transforms the original Prolog extraction rules to various other (tool-specific) rule formats and applies the existing engines/reasoners to identify words that correspond to particular variables in the rules.
+Moreover, the presented experiment clearly shows, that the use of the standard reasoners for information extraction tasks is infeasible - even the toy example (the 1st experiment) takes 11s for the best performing reasoner.
+
+The discussion on the extraction ontologies confuses format proprietarity with the declarative character of rules. Furthermore, no real argument against the second issue quoted from [13] is given. The paper befogs the fact that the presented approach presents a very limited view on the IE task - no direct way to overcome the errors of the parser, no quantitative ML classification, no visual/text structure cues etc.
+
+It is not necessary to repeat standard definitions of ontology and "to meditate" on the semiotics: "word `shareable' has different meaning from `shared'. Some thing that is shareable is not necessarily shared, but on the other hand something that is shared should be shareable.". Also, some statements are difficult to understand (e.g., GRDDL and RDFa to transform ordinary document to a RDF document?). It is questionable whether the RDF representation of the parsed document should be called "a document ontology". There should be either a correct analysis of the FaCT++ failure or the tool should not be mentioned at all.
+
+There are many typos in the text:
+extraction models artificially leaned from a training corpus
+shareable simply means that the extraction rules can be shred amongst software agents
+pagehttp://czsem.berlios.de/
+It tuned out
+
+
+
+---------------------------- REVIEW 3 --------------------------
+PAPER: 11
+TITLE: Semantic Annotation Semantically: Using a Sharable Extraction Ontology and a Reasoner
+
+OVERALL RATING: 1 (weak accept)
+HOW WELL DOES IT FIT TO THE TRACK: 5 (excellent)
+METHODICAL SOUNDNESS: 3 (fair)
+NOVELTY: 4 (good)
+QUALITY AND SCOPE OF THE EVALUATION: 3 (fair)
+Best Paper Award: 1 (No)
+
+
+The authors propose representing information extraction rules using
+standard semantic web rule languages. This is certainly a novel idea however
+I am not so sure if it is a good idea! In particular, SW reasoners are
+still often quite inefficient and using them to do information extraction may
+just result in poor performance. However, efficiency problems can be solved
+and in the context of linked data providing shareable descriptions of information
+extraction rules may be valuable.
+
+The paper is generally well-written and the methodology for converting documents to
+RDF and applying rules seems reasonable.
+
+The evaluation is sound, although the authors should have commented more on the
+performance of the system, even the fastest system took 8.5 mins to process 113 rules
+over 126MB, I suspect this is significantly longer than a bespoke system would require!
+
+I also wonder if the authors have considered using SPARQL construct queries as a basis for
+their rule system (as it may not have as serious a perfomance issue). I do not agree with
+the authors that this paper could set up a new "research community", but it is an
+interesting idea.
+
+Corrections:
+p1. begging -> beginning
+p2. the only possibility how to -> the only way to
+p3. Also Web Information... -> Furthermore, Web Information...
+p4. RDFa how to transform -> RDFa to transform
+p10. web of out project -> website of our project
+
+
+
+
