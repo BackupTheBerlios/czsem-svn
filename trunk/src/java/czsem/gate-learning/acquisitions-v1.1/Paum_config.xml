@@ -66,15 +66,12 @@
        <FEATURE>lemma</FEATURE> 
        <RANGE from="-2" to="2"/>  
     </ATTRIBUTELIST>
-<!-- 
-    <ATTRIBUTELIST>  
-       <NAME>Organization</NAME>  
+    <ATTRIBUTE>  
+       <NAME>NamedEntity</NAME>  
        <SEMTYPE>NOMINAL</SEMTYPE>  
-       <TYPE>Organization</TYPE>  
-       <FEATURE>orgType</FEATURE> 
-       <RANGE from="-1" to="1"/>  
-    </ATTRIBUTELIST>
- -->
+       <TYPE>NamedEntity</TYPE>  
+       <FEATURE>ne_type</FEATURE> 
+    </ATTRIBUTE>
     <ATTRIBUTELIST>  
        <NAME>Tag</NAME>  
        <SEMTYPE>NOMINAL</SEMTYPE>  
