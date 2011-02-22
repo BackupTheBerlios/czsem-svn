@@ -2,6 +2,7 @@ package czsem.gate.plugins;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 import gate.Annotation;
 import gate.AnnotationSet;
@@ -10,6 +11,7 @@ import gate.FeatureMap;
 import gate.creole.ExecutionException;
 import gate.creole.metadata.CreoleParameter;
 import gate.creole.metadata.CreoleResource;
+import gate.creole.metadata.Optional;
 import gate.creole.metadata.RunTime;
 import czsem.gate.AbstractLanguageAnalyserWithInputAnnotTypes;
 import czsem.gate.GateUtils;
@@ -24,6 +26,8 @@ public class CreateMentionsPR extends AbstractLanguageAnalyserWithInputAnnotType
 	
 	private String mentionAnntotationTypeName = "Mention";
 	private boolean inverseFunction = false;
+	/** Used only during inverse work. Creates a mention using a referenced annotation. The reference is inside an aligned annotation. example: 'NamedEntity_root.origRootID'*/	 
+	private String useReferenceAnnotationFeature = null;
 
 	@Override
 	public void execute() throws ExecutionException
@@ -64,6 +68,19 @@ public class CreateMentionsPR extends AbstractLanguageAnalyserWithInputAnnotType
 			}
 		}
 		
+		
+		String refType = null;
+		String refFeature = null;
+		Set<String> setRefFeature = null;
+		if (useReferenceAnnotationFeature != null)
+		{
+			String[] split = useReferenceAnnotationFeature.split("\\.", 2);
+			refType = split[0];
+			refFeature = split[1];
+			setRefFeature = new HashSet<String>(1);
+			setRefFeature.add(refFeature);
+		}
+
 		for (Annotation annotation : annotations)
 		{
 			FeatureMap fm = Factory.newFeatureMap();
@@ -71,7 +88,25 @@ public class CreateMentionsPR extends AbstractLanguageAnalyserWithInputAnnotType
 			String cls = (String) fm.get("class");
 			fm.put("class", annotation.getType());
 			fm.put("origMentID", annotation.getId());
-			outputAS.add(annotation.getStartNode(), annotation.getEndNode(), cls, fm);
+			
+			if (useReferenceAnnotationFeature != null)
+			{
+				AnnotationSet refSet = inputAS.
+					getContained(
+							annotation.getStartNode().getOffset(),
+							annotation.getEndNode().getOffset())
+								.get(refType, setRefFeature);
+				
+				if (refSet.isEmpty()) continue;
+				
+				Annotation annotWithReference = refSet.iterator().next();
+				Annotation referedAnnot = inputAS.get(
+						(Integer) annotWithReference.getFeatures().get(refFeature));
+
+				outputAS.add(referedAnnot.getStartNode(), referedAnnot.getEndNode(), cls, fm);								
+			}
+			else
+				outputAS.add(annotation.getStartNode(), annotation.getEndNode(), cls, fm);
 			
 			
 		}					
@@ -118,11 +153,22 @@ public class CreateMentionsPR extends AbstractLanguageAnalyserWithInputAnnotType
 		return inverseFunction;
 	}
 	
+	@Optional
+	@RunTime
+	@CreoleParameter(comment="Used only during inverse work. Creates a mention using a referenced annotation. The reference is inside an aligned annotation. example: 'NamedEntity_root.origRootID'")
+	public void setUseReferenceAnnotationFeature(String useReferenceAnnotationFeature) {
+		this.useReferenceAnnotationFeature = useReferenceAnnotationFeature;
+	}
+
+	public String getUseReferenceAnnotationFeature() {
+		return useReferenceAnnotationFeature;
+	}
+
+
 	public static void main(String[] args) throws Exception
 	{
 		Config.getConfig().setGateHome();
 		gate.Main.main(args);		
 	}
-
 
 }

@@ -125,8 +125,13 @@ public abstract class MLEngine implements TrainTest
 	public static class ILPEngine extends MLEngine
 	{
 
+		public ILPEngine(String configFileName)
+		{
+			super("ILP", configFileName);			
+		}
+
 		public ILPEngine() {
-			super("ILP", "ILP_config.xml");
+			this("ILP_config.xml");
 		}
 
 		@Override

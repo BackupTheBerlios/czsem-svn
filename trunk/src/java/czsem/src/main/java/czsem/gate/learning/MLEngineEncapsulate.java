@@ -44,10 +44,9 @@ public class MLEngineEncapsulate implements TrainTest
 		return child.getDefaultLearningAnnotationType();
 	}
 
-
-	public static class CreatePersistentMentions  extends MLEngineEncapsulate
+	public static class CreatePersistentMentionsNoPostprocessing  extends MLEngineEncapsulate
 	{
-		public CreatePersistentMentions(TrainTest child) {super(child);}
+		public CreatePersistentMentionsNoPostprocessing(TrainTest child) {super(child);}
 		
 		@Override
 		public List<PRSetup> getTrainControllerSetup(MLEngineConfig config)	throws MalformedURLException
@@ -63,8 +62,13 @@ public class MLEngineEncapsulate implements TrainTest
 				.putFeature("inputAnnotationTypeNames", config.originalLearnigAnnotationTypes));
 			
 			return ret;
-		}
-		
+		}		
+	}
+
+	public static class CreatePersistentMentions  extends CreatePersistentMentionsNoPostprocessing
+	{
+		public CreatePersistentMentions(TrainTest child) {super(child);}
+				
 		@Override
 		public List<PRSetup> getTestControllerSetup(MLEngineConfig config) throws MalformedURLException
 		{
@@ -101,42 +105,58 @@ public class MLEngineEncapsulate implements TrainTest
 		}		
 	}
 
-	public static class CreateTemporaryMentionsRootSubtree extends MLEngineEncapsulate
+	public static class CreateTemporaryMentionsReferedMentionsPostprocessing extends CreatePersistentMentionsNoPostprocessing
 	{
-		public CreateTemporaryMentionsRootSubtree(TrainTest child) {super(child);}
-
+		public CreateTemporaryMentionsReferedMentionsPostprocessing(TrainTest child) {super(child);}
+		
+		/** @see CreateTemporaryMentions#getTrainControllerSetup(MLEngineConfig) */
 		@Override
 		public List<PRSetup> getTrainControllerSetup(MLEngineConfig config)	throws MalformedURLException
 		{
 			List<PRSetup> ret = super.getTrainControllerSetup(config);
-
-			//CreateMentions
-			ret.add(0, new PRSetup.SinglePRSetup(CreateMentionsPR.class)
-				.putFeature("inputASName", config.keyAS)
-				.putFeature("outputASName", config.inputAS)
-				.putFeature("mentionAnntotationTypeName", config.learnigAnnotationType + "_subtree")
-				//.putFeatureList("inputAnnotationTypeNames", new String [0]));
-				.putFeature("inputAnnotationTypeNames", config.originalLearnigAnnotationTypes));
-
-			
-			//Training roots
-			ret.add(1, new PRSetup.SinglePRSetup(AnnotationDependencyRootMarker.class)
-				.putFeature("inputASName", config.inputAS)
-				.putFeature("outputASName", config.inputAS)
-				.putFeatureList("inputAnnotationTypeNames", config.learnigAnnotationType + "_subtree"));
-								
+						
 			//delete Mentions
 			ret.add(new PRSetup.SinglePRSetup(AnnotationDeletePR.class)
-				.putFeatureList("annotationTypes", 
-						config.learnigAnnotationType,
-						config.learnigAnnotationType + "_subtree")
+				.putFeatureList("annotationTypes", config.learnigAnnotationType)
 				.putFeatureList("setsToRemove", config.inputAS));		
-
+			
 			return ret;
-		}
-		
-		
+		}		
 
+		
+		@Override
+		public List<PRSetup> getTestControllerSetup(MLEngineConfig config) throws MalformedURLException
+		{
+			//output redirection
+			String outputAS_backup = config.outputAS;
+			config.outputAS = config.inputAS;			
+			List<PRSetup> ret = super.getTestControllerSetup(config);
+			config.outputAS = outputAS_backup;			
+	
+			//CreateMentions inverse
+			ret.add(new PRSetup.SinglePRSetup(CreateMentionsPR.class)
+				.putFeature("inputASName", config.inputAS)
+				.putFeature("outputASName", config.outputAS)
+				.putFeature("mentionAnntotationTypeName", config.learnigAnnotationType)
+				.putFeature("inverseFunction", true)
+				.putFeature("useReferenceAnnotationFeature", "NamedEntity_root.origRootID")
+				.putFeature("inputAnnotationTypeNames", config.originalLearnigAnnotationTypes));
+			
+			//delete working Mentions
+			ret.add(new PRSetup.SinglePRSetup(AnnotationDeletePR.class)
+				.putFeatureList("annotationTypes", config.learnigAnnotationType)
+				.putFeatureList("setsToRemove", config.inputAS));		
+			
+			return ret;
+		}		
+		
+	}
+
+	public static class MentionsSubtreePostprocessing extends MLEngineEncapsulate
+	{
+
+		public MentionsSubtreePostprocessing(TrainTest child) {super(child);}
+		
 		@Override
 		public List<PRSetup> getTestControllerSetup(MLEngineConfig config) throws MalformedURLException
 		{
@@ -172,8 +192,42 @@ public class MLEngineEncapsulate implements TrainTest
 
 			
 			return ret;
-		}
+		}		
+	}
 
+	public static class CreateTemporaryMentionsRootSubtree extends MentionsSubtreePostprocessing
+	{
+		public CreateTemporaryMentionsRootSubtree(TrainTest child) {super(child);}
+
+		@Override
+		public List<PRSetup> getTrainControllerSetup(MLEngineConfig config)	throws MalformedURLException
+		{
+			List<PRSetup> ret = super.getTrainControllerSetup(config);
+
+			//CreateMentions
+			ret.add(0, new PRSetup.SinglePRSetup(CreateMentionsPR.class)
+				.putFeature("inputASName", config.keyAS)
+				.putFeature("outputASName", config.inputAS)
+				.putFeature("mentionAnntotationTypeName", config.learnigAnnotationType + "_subtree")
+				//.putFeatureList("inputAnnotationTypeNames", new String [0]));
+				.putFeature("inputAnnotationTypeNames", config.originalLearnigAnnotationTypes));
+
+			
+			//Training roots
+			ret.add(1, new PRSetup.SinglePRSetup(AnnotationDependencyRootMarker.class)
+				.putFeature("inputASName", config.inputAS)
+				.putFeature("outputASName", config.inputAS)
+				.putFeatureList("inputAnnotationTypeNames", config.learnigAnnotationType + "_subtree"));
+								
+			//delete Mentions
+			ret.add(new PRSetup.SinglePRSetup(AnnotationDeletePR.class)
+				.putFeatureList("annotationTypes", 
+						config.learnigAnnotationType,
+						config.learnigAnnotationType + "_subtree")
+				.putFeatureList("setsToRemove", config.inputAS));		
+
+			return ret;
+		}
 	}
 
 	public static class SubsequentAnnotationMerge extends MLEngineEncapsulate

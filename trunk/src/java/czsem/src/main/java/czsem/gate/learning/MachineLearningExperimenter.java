@@ -203,7 +203,15 @@ public class MachineLearningExperimenter
 //	    		new CzechFireman("damage"),
 //	    		new MLEvaluate(new CreateTemporaryMentions(new ILPEngine()))
 //	    		new MLEvaluate(new CreateTemporaryMentionsRootSubtree(new ILPEngine())),
-	    		new MLEvaluate(new CreatePersistentMentions(new PaumEngine()))
+/*	    		new MLEvaluate(
+	    				new CreateTemporaryMentions(
+	    	    				new MentionsSubtreePostprocessing(
+	    	    						new ILPEngine("ILP_config_NE_roots.xml")))),
+*/	    		
+	    		new MLEvaluate(
+    	    				new CreateTemporaryMentionsReferedMentionsPostprocessing(
+    	    						new ILPEngine("ILP_config_NE_roots.xml"))),
+	    	    new MLEvaluate(new CreatePersistentMentions(new PaumEngine()))
 //	    		new ILPEngine()
 	    ).crossValidation(2);
 
