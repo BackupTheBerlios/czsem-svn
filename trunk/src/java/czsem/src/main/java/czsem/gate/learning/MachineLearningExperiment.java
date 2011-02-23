@@ -45,6 +45,7 @@ public class MachineLearningExperiment
 	}
 
 	
+	
 	public List<PRSetup> getTrainControllerSetup() throws JDOMException, IOException
 	{
 		List<PRSetup> prs = new ArrayList<PRSetup>();
@@ -112,9 +113,20 @@ public class MachineLearningExperiment
 	}
 
 	
+	public SerialAnalyserController getTrainController() throws ResourceInstantiationException, JDOMException, IOException
+	{
+		return PRSetup.buildGatePipeline(getTrainControllerSetup(), "TrainPipeline");		
+	}
+
+	public SerialAnalyserController getTestController() throws ResourceInstantiationException, JDOMException, IOException
+	{
+		return PRSetup.buildGatePipeline(getTestControllerSetup(), "TestPipeline");		
+	}
+
+	
 	public void trainOnly() throws PersistenceException, ResourceInstantiationException, JDOMException, IOException, ExecutionException
 	{
-	    SerialAnalyserController train_controller = PRSetup.buildGatePipeline(getTrainControllerSetup());
+	    SerialAnalyserController train_controller = getTrainController();
 	    
 	    train_controller.setCorpus(dataSet.getCorpus());			    	    	    
 	    train_controller.execute();
@@ -122,17 +134,17 @@ public class MachineLearningExperiment
 	
 	public void testOnly() throws ResourceInstantiationException, JDOMException, IOException, PersistenceException, ExecutionException
 	{
-	    SerialAnalyserController train_controller = PRSetup.buildGatePipeline(getTestControllerSetup());
+	    SerialAnalyserController test_controller = getTestController();
 	    
-	    train_controller.setCorpus(dataSet.getCorpus());			    	    	    
-	    train_controller.execute();
+	    test_controller.setCorpus(dataSet.getCorpus());			    	    	    
+	    test_controller.execute();
 	}
 
 	
 	public void crossValidation(int numOfFolds) throws ExecutionException, ResourceInstantiationException, PersistenceException, JDOMException, IOException
 	{
-	    SerialAnalyserController train_controller = PRSetup.buildGatePipeline(getTrainControllerSetup());
-	    SerialAnalyserController test_controller = PRSetup.buildGatePipeline(getTestControllerSetup());
+	    SerialAnalyserController train_controller = getTrainController();
+	    SerialAnalyserController test_controller = getTestController();
 	    
 		new PRSetup.SinglePRSetup(CrossValidation.class)
 			.putFeature("corpus", dataSet.getCorpus())

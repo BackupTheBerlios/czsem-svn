@@ -1,19 +1,5 @@
 package czsem.gate;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
-
 import gate.Annotation;
 import gate.Controller;
 import gate.Corpus;
@@ -26,7 +12,34 @@ import gate.ProcessingResource;
 import gate.Resource;
 import gate.creole.ResourceInstantiationException;
 import gate.persist.PersistenceException;
+import gate.util.Benchmark;
 import gate.util.GateException;
+import gate.util.reporting.PRTimeReporter;
+import gate.util.reporting.exceptions.BenchmarkReportInputFileFormatException;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
+
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
+import org.apache.log4j.RollingFileAppender;
+
+import czsem.utils.Config;
 
 public class GateUtils
 {
@@ -40,6 +53,120 @@ public class GateUtils
 		return ret;
 	}
 	
+	public static String getBenchmarkLogFileName() throws URISyntaxException, IOException
+	{
+		return Config.getConfig().getLogFileDirectoryPath()+"/benchmark.txt";
+	}
+	public static void enableGateBenchmark() throws URISyntaxException, IOException
+	{
+		RollingFileAppender appender = new RollingFileAppender();
+		appender.setThreshold(Level.DEBUG);
+		appender.setFile(getBenchmarkLogFileName());
+		appender.setAppend(false);
+		appender.setMaxFileSize("5MB");
+		appender.setMaxBackupIndex(1);
+		appender.setLayout(new PatternLayout("%m%n"));
+		
+		appender.activateOptions();
+		
+		Logger bl = Logger.getLogger(Benchmark.class);
+		bl.removeAllAppenders();
+		bl.addAppender(appender);
+		bl.setAdditivity(false);
+		bl.setLevel(Level.DEBUG);
+		
+		
+		Benchmark.setBenchmarkingEnabled(true);
+	}
+
+	public static String createGateBenchmarkReport() throws BenchmarkReportInputFileFormatException, URISyntaxException, IOException
+	{
+		return createGateBenchmarkReport(
+				getBenchmarkLogFileName(),
+				Config.getConfig().getLogFileDirectoryPath()+"/bechmark_report.txt",
+				PRTimeReporter.MEDIA_TEXT,
+				PRTimeReporter.SORT_EXEC_ORDER
+				);		
+	}
+
+	private static class PrintMap
+	{
+		public PrintMap(PrintStream out) {this.out = out;}
+
+		private PrintStream out;
+
+		@SuppressWarnings("unchecked")
+		private void printMap(Map<String, Object> map, String prefix)
+		{
+			
+			for (String pr_name : map.keySet()) {
+				if (pr_name.startsWith("doc") || pr_name.equals("systotal"))
+					continue;
+
+				out.print(prefix + pr_name);
+
+				Object child = map.get(pr_name);
+				Map<String, Object> ch_map = null;
+								
+				if (child instanceof String)
+				{
+					out.println("\t" + child);
+					continue;
+				}
+				else
+				{
+					ch_map = (Map<String, Object>) child;
+					out.println("\t" + ch_map.get("systotal"));
+				}
+				
+				
+				//recursive call
+				printMap(ch_map, prefix + "\t");
+
+			}
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static String createGateBenchmarkReport(String benchmarkInputFileName, String reportFileName, String outputMediaType, String sortOrder) throws BenchmarkReportInputFileFormatException
+	{
+		// Report on processing resources
+		// http://gate.ac.uk/sale/tao/splitch11.html#x15-30600011.4.4
+
+		// 1. Instantiate the Class PRTimeReporter
+		PRTimeReporter report = new PRTimeReporter();
+		// 2. Set the input benchmark file
+		File benchmarkFile = new File(benchmarkInputFileName);
+		report.setBenchmarkFile(benchmarkFile);
+		// 3. Set the output report file
+		File reportFile = new File(reportFileName);
+		report.setReportFile(reportFile);
+		// 4. Set the output format: in html or text format (default:
+		// MEDIA_HTML)
+		report.setPrintMedia(outputMediaType);
+		// 5. Set the sorting order: Sort in order of execution or descending
+		// order of time taken (default: EXEC_ORDER)
+		report.setSortOrder(sortOrder);
+		// 6. Set if suppress zero time entries: True/False (default: True).
+		// Parameter ignored if SortOrder specified is ‘SORT_TIME_TAKEN’
+		report.setSuppressZeroTimeEntries(true);
+		// 7. Set the logical start: A string indicating the logical start to be
+		// operated upon for generating reports
+		// report.setLogicalStart("");
+		// 8. Generate the text/html report
+//		report.executeReport();
+		
+		 Object report1Container1 = report.store(report.getBenchmarkFile());
+//		 System.err.println(report1Container1);
+
+		 ByteArrayOutputStream out = new ByteArrayOutputStream();
+		 		 
+		 new PrintMap(new PrintStream(out)).printMap((Map<String, Object>) report1Container1, "");
+		 
+		 return out.toString();
+		 
+	}
+
 	public static FeatureMap createDependencyArgsFeatureMap(Integer parent_id, Integer child_id)
 	{
 		FeatureMap fm = Factory.newFeatureMap();
@@ -290,9 +417,11 @@ public class GateUtils
 		return ret;		
 	}
 	
-	public static void main(String [] args)
+	public static void main(String [] args) throws BenchmarkReportInputFileFormatException, URISyntaxException, IOException
 	{
 		System.err.println(Arrays.toString(createRandomPermutation(10)));
+		
+		System.out.println(createGateBenchmarkReport());
 	}
 
 }

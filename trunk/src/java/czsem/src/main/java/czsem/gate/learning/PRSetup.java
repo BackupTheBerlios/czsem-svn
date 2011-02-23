@@ -15,11 +15,19 @@ public abstract class PRSetup
 	{
 		private Class<?> pr_class;
 		FeatureMap fm;
+		private String name = null;
 	
-		public SinglePRSetup(Class<?> cl)
+		public SinglePRSetup(Class<?> cl, String name)
 		{
 			pr_class = cl;
 			fm = Factory.newFeatureMap();
+			this.name = name;
+			
+		}
+
+		public SinglePRSetup(Class<?> cl)
+		{
+			this(cl, null);
 		}
 				
 		public SinglePRSetup putFeature(Object key, Object value)
@@ -38,16 +46,18 @@ public abstract class PRSetup
 	
 		public ProcessingResource createPR() throws ResourceInstantiationException
 		{
-			return(ProcessingResource) Factory.createResource(pr_class.getCanonicalName(), fm);			
+			return(ProcessingResource) Factory.createResource(pr_class.getCanonicalName(), fm, null, name);			
 		}				
 	}
 
 	public abstract ProcessingResource createPR() throws ResourceInstantiationException;
 
-	public static SerialAnalyserController buildGatePipeline(List<PRSetup> prs) throws ResourceInstantiationException
+	public static SerialAnalyserController buildGatePipeline(List<PRSetup> prs, String name) throws ResourceInstantiationException
 	{
 		SerialAnalyserController controller = (SerialAnalyserController)	    	   
 			Factory.createResource(SerialAnalyserController.class.getCanonicalName());
+		
+		controller.setName(name);
 	
 		
 		for (int i = 0; i < prs.size(); i++)

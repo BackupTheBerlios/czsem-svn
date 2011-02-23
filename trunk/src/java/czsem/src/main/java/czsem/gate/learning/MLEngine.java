@@ -61,6 +61,11 @@ public abstract class MLEngine implements TrainTest
 		return "Mention";
 	}
 	
+	public String getName()
+	{
+		return "MLEngine" + getDefaultOutputAS() + "_" + configFileName;
+	}
+	
 	public static String readLearninigAnnotType(URL config_doc_url) throws JDOMException, IOException
 	{
 		Document config_dom = JDomUtils.getJdomDoc(config_doc_url);
@@ -91,7 +96,7 @@ public abstract class MLEngine implements TrainTest
 			List<PRSetup> prs = new ArrayList<PRSetup>();
 
 			//Paum train
-			prs.add(new PRSetup.SinglePRSetup(LearningAPIMain.class)
+			prs.add(new PRSetup.SinglePRSetup(LearningAPIMain.class, getName()+"_train")
 				.putFeature("inputASName", config.inputAS)
 				.putFeature("outputASName", config.outputAS)
 				.putFeature("configFileURL", getConfigURL(config.experimentLearningConfigsDirectory))
@@ -106,7 +111,7 @@ public abstract class MLEngine implements TrainTest
 			List<PRSetup> prs = new ArrayList<PRSetup>();
 
 			//Paum Application
-			prs.add(new PRSetup.SinglePRSetup(LearningAPIMain.class)
+			prs.add(new PRSetup.SinglePRSetup(LearningAPIMain.class, getName()+"_apply")
 				.putFeature("configFileURL", getConfigURL(config.experimentLearningConfigsDirectory))
 				.putFeature("inputASName", config.inputAS)
 				.putFeature("outputASName", config.outputAS)
@@ -139,7 +144,7 @@ public abstract class MLEngine implements TrainTest
 		{
 			List<PRSetup> prs = new ArrayList<PRSetup>();
 						
-			prs.add(new PRSetup.SinglePRSetup(MachineLearningPR.class)
+			prs.add(new PRSetup.SinglePRSetup(MachineLearningPR.class, getName()+"_train")
 				.putFeature("inputASName", config.inputAS)
 				.putFeature("configFileURL", getConfigURL(config.experimentLearningConfigsDirectory))
 				.putFeature("training", true));
@@ -154,7 +159,7 @@ public abstract class MLEngine implements TrainTest
 			List<PRSetup> prs = new ArrayList<PRSetup>();
 
 			//ILP Apply
-			prs.add(new PRSetup.SinglePRSetup(MachineLearningPR.class)
+			prs.add(new PRSetup.SinglePRSetup(MachineLearningPR.class, getName()+"_apply")
 				.putFeature("configFileURL", getConfigURL(config.experimentLearningConfigsDirectory))
 				.putFeature("inputASName", config.inputAS)
 				.putFeature("training", false));

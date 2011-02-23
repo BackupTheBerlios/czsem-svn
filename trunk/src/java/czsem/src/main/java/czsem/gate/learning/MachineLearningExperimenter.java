@@ -5,6 +5,7 @@ import gate.creole.SerialController;
 import gate.learning.LogService;
 import gate.util.GateException;
 import gate.util.profile.Profiler;
+import gate.util.reporting.exceptions.BenchmarkReportInputFileFormatException;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,10 +19,13 @@ import org.apache.log4j.Logger;
 import org.jdom.JDOMException;
 
 import czsem.gate.GateUtils;
-import czsem.gate.learning.DataSet.*;
-import czsem.gate.learning.DataSet.DataSetImpl.*;
-import czsem.gate.learning.MLEngine.*;
+import czsem.gate.learning.DataSet.DataSetImpl.Acquisitions;
+import czsem.gate.learning.DataSet.DataSetReduce;
+import czsem.gate.learning.MLEngine.ILPEngine;
+import czsem.gate.learning.MLEngine.PaumEngine;
 import czsem.gate.learning.MLEngineEncapsulate.*;
+import czsem.gate.learning.MLEngineEncapsulate.CreateTemporaryMentionsReferedMentionsPostprocessing;
+import czsem.gate.learning.MLEngineEncapsulate.MLEvaluate;
 import czsem.gate.plugins.AnnotationDependencyRootMarker;
 import czsem.gate.plugins.CrossValidation;
 import czsem.utils.Config;
@@ -151,11 +155,14 @@ public class MachineLearningExperimenter
 *//*		
 	}
 */
-	public static void main(String [] args) throws GateException, URISyntaxException, IOException, JDOMException
+	public static void main(String [] args) throws GateException, URISyntaxException, IOException, JDOMException, BenchmarkReportInputFileFormatException
 	{
-		BasicConfigurator.configure();
+//		PropertyConfigurator.configure("C:\\Program Files\\gate\\GATE-6.0\\bin\\log4j.properties");
+		
+
 	    Logger logger = Logger.getRootLogger();
 	    logger.setLevel(Level.ALL);
+		BasicConfigurator.configure();
 
 	    @SuppressWarnings("unchecked")
 		Enumeration<Appender> apps = logger.getAllAppenders();
@@ -182,6 +189,9 @@ public class MachineLearningExperimenter
 		
 	    Config.getConfig().setGateHome();
 	    Gate.init();
+
+	    GateUtils.enableGateBenchmark();
+
 //	    GateUtils.registerPluginDirectory("Parser_Stanford");
 	    GateUtils.registerPluginDirectory("Machine_Learning");
 	    GateUtils.registerPluginDirectory("ANNIE");
@@ -202,18 +212,24 @@ public class MachineLearningExperimenter
 	    		new DataSetReduce(new Acquisitions("acquired"), 0.1),
 //	    		new CzechFireman("damage"),
 //	    		new MLEvaluate(new CreateTemporaryMentions(new ILPEngine()))
-//	    		new MLEvaluate(new CreateTemporaryMentionsRootSubtree(new ILPEngine())),
-/*	    		new MLEvaluate(
+	    		new MLEvaluate(new CreateTemporaryMentionsRootSubtree(new ILPEngine())),
+	    		new MLEvaluate(
 	    				new CreateTemporaryMentions(
 	    	    				new MentionsSubtreePostprocessing(
-	    	    						new ILPEngine("ILP_config_NE_roots.xml")))),
-*/	    		
+	    	    						new ILPEngine("ILP_config_NE_roots_subtree.xml")))),	    		
 	    		new MLEvaluate(
     	    				new CreateTemporaryMentionsReferedMentionsPostprocessing(
     	    						new ILPEngine("ILP_config_NE_roots.xml"))),
 	    	    new MLEvaluate(new CreatePersistentMentions(new PaumEngine()))
 //	    		new ILPEngine()
 	    ).crossValidation(2);
+	    
+	    
+	    
+	    logger.info("time statistics:\n"+GateUtils.createGateBenchmarkReport());
+	    
+	    
+	    
 
 	    
 	    

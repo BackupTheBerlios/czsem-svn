@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 import czsem.utils.Config;
-import czsem.utils.ProjectSetup;
 
 public class RulesSerializer extends ILPExec
 {
@@ -13,14 +12,9 @@ public class RulesSerializer extends ILPExec
 	protected String prolog_serialzation_script = "/rule_xml_serializer.yap";
 	protected String ontologyURI = null;
 	
-	protected void setDefaults()
-	{}
 	
 	public RulesSerializer(File working_directory, String project_name)
-	{super(working_directory, project_name); setDefaults();}
-
-	public RulesSerializer(ProjectSetup ps)
-	{super(ps); setDefaults();}
+	{super(working_directory, project_name);}
 	
 	public void serializeToSwrlx(String [] objectProperties) throws IOException, URISyntaxException
 	{

@@ -232,7 +232,7 @@ public class LinguisticSerializer
 		ilp_exec.close();
 		
 	
-		RulesSerializer rs = new RulesSerializer(workingDirectory, "RulesSerializer");
+		RulesSerializer rs = new RulesSerializer(workingDirectory, projectName);
 		rs.setOutputRulesFileName("../rules/" + projectName + ProjectSetup.makeTimeStamp() +"_rules.owl");
 		rs.setOntologyURIFromOutpuRulesFileNameAndWorkingDir();
 
@@ -273,8 +273,8 @@ public class LinguisticSerializer
 		@SuppressWarnings("unchecked")
 		Collection<String> [] ret = new HashSet[instancesIds.length];
 		
-		ILPExec test = new ILPExec(workingDirectory, backgroundFileName);
-		test.initBeforeApplyRules("classify");
+		ILPExec test = new ILPExec(workingDirectory, projectName);
+		test.initBeforeApplyRules(backgroundFileName, "classify");
 		
 		for (int i = 0; i < instancesIds.length; i++)
 		{

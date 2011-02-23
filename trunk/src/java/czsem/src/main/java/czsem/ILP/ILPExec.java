@@ -29,6 +29,7 @@ public class ILPExec extends ProcessExec {
 		this.project_name = project_name;
 		learnig_examples = project_name;
 		testing_examples = project_name + "_test";
+		rules_file = renderRulesFileName(project_name);
 		
 		new File(working_directory.getAbsolutePath() + "/log").mkdir();
 	}
@@ -36,11 +37,10 @@ public class ILPExec extends ProcessExec {
 	public ILPExec(ProjectSetup ps)
 	{
 		this(ps.working_directory, ps.project_name);
-		rules_file = renderRulesFileName(ps);
 	}
 	
-	public static String renderRulesFileName(ProjectSetup ps) {
-		return  ps.project_name + ".rules";
+	public static String renderRulesFileName(String name) {
+		return  name + ".rules";
 	}
 
 	public static String renderRulesFilePathName(ProjectSetup ps) {
@@ -301,11 +301,11 @@ public class ILPExec extends ProcessExec {
 	}
 
 
-	public void initBeforeApplyRules(String errLogName) throws IOException, URISyntaxException
+	public void initBeforeApplyRules(String backgroundFileName, String errLogName) throws IOException, URISyntaxException
 	{
 		startPrologProcess(getRulesFileName());
 		startErrReaderThread(errLogName);
-		consultFile(project_name);				
+		consultFile(backgroundFileName);				
 	}
 
 	public OutputStream getOutputStream() {
