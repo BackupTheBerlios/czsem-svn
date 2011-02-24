@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes"?>
+<installation version="1.0">
+    <info>
+        <appname>Czsem Mining Suite</appname>
+        <appversion>1.0</appversion>
+        <authors>
+            <author email="dedej1am@users.berlios.de" name="Jan Dedek"/>
+        </authors>
+        <url>http://czsem.berlios.de/</url>
+        <uninstaller name="Uninstaller.jar" write="yes"/>
+        <requiresjdk>no</requiresjdk>
+        <writeinstallationinformation>no</writeinstallationinformation>
+        <pack200/>
+        <run-privileged condition="izpack.windowsinstall.vista|izpack.windowsinstall.7"/>
+    </info>
+    <guiprefs height="480" resizable="no" width="640">
+        <modifier key="useFlags" value="yes"/>
+        <modifier key="langDisplayType" value="default"/>
+    </guiprefs>
+    <locale>
+        <langpack iso3="eng"/>
+    </locale>
+    <panels>
+        <panel classname="CheckedHelloPanel"/>
+        <panel classname="PacksPanel"/>
+        <panel classname="TargetPanel"/>
+        <panel classname="InstallPanel"/>
+        <panel classname="SimpleFinishPanel"/>
+    </panels>
+    <packs>
+        <pack name="main java binaries" preselected="no" required="no">
+            <description/>
+            <file override="update"
+                src="..\czsem-1.0.2-SNAPSHOT.jar" targetdir="$INSTALL_PATH/"/>
+        </pack>
+    </packs>
+</installation>
