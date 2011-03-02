@@ -246,8 +246,33 @@ public class MachineLearningExperimenter
 	{
 		gate.AnnotationSet binding_as = (gate.AnnotationSet) bindings.get("anot_tmp");
 		gate.Annotation annot = binding_as.iterator().next();
-		annot.getFeatures().put("rule", "damage_add_learninig_feature");			
+		annot.getFeatures().put("rule", "damage_add_learninig_feature");
+		
+		
+		
+		String lemma = "lema";
+		String form = "form";
 
+		int slash =  lemma.indexOf('-', 1);
+		int under =  lemma.indexOf('_', 1);
+		
+		int substr_end = lemma.length();
+		
+		if (slash > 0) substr_end = slash;
+		if (under > 0) substr_end = Math.min(substr_end, under);
+
+		
+		char first_ch = lemma.charAt(0);
+		
+		if (Character.isUpperCase(form.charAt(0)))
+		{
+			first_ch = Character.toUpperCase(first_ch);			
+		}
+
+		//String clean_lemma = first_ch + lemma.substring(1, substr_end);
+
+		
+		
 /*		
 		gate.AnnotationSet binding_as = (gate.AnnotationSet) bindings.get("anot_tmp");
 		gate.Annotation annot = binding_as.iterator().next();
