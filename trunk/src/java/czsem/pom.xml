@@ -66,6 +66,18 @@
 	</build>
 	<repositories>
 		<repository>
+			<id>on.cs.unibas.ch</id>
+			<name>DBIS Maven Releases Repository</name>
+			<url>http://on.cs.unibas.ch/maven/repository</url>
+			<layout>default</layout>
+			<snapshots>
+			<enabled>false</enabled>
+			</snapshots>
+			<releases>
+			<enabled>true</enabled>
+			</releases>
+		</repository>
+		<repository>
 			<id>cleartk</id>
 			<name>cleartk</name>
 			<url>http://cleartk.googlecode.com/svn/repo/</url>
@@ -94,8 +106,26 @@
 			<id>czsem.snapshots</id>
 			<url>http://czsem.berlios.de/maven2/snapshots/</url>
 		</repository>
+		<repository>
+			<id>swig</id>
+			<url>http://swig.hpclab.ceid.upatras.gr/maven/</url>
+		</repository>
 	</repositories>
 	<dependencies>
+		<dependency>
+			<groupId>com.owldl</groupId>
+			<artifactId>pellet</artifactId>
+			<version>2.2.2</version>
+			<scope>compile</scope>
+		</dependency>
+<!-- 
+		<dependency>
+			<groupId>com.clarkparsia.pellet</groupId>
+			<artifactId>pellet-owlapiv3</artifactId>
+			<version>2.2.2</version>
+			<scope>compile</scope>
+		</dependency>
+ -->				
 		<dependency>  
 		  <groupId>com.hp.hpl.jena</groupId>  
 		  <artifactId>jena</artifactId>  
