@@ -11,9 +11,20 @@
 	<name>czsem</name>
 	<url>http://maven.apache.org</url>
 
+	<distributionManagement>
+		<repository>
+			<id>czsem.repo</id>
+			<url>scp://shell.berlios.de/net/pork-da/export/nfs/home/groups/czsem/htdocs/maven2/repo/</url>			
+		</repository>
+		<snapshotRepository>
+			<id>czsem.snapshots</id>
+			<url>scp://shell.berlios.de/net/pork-da/export/nfs/home/groups/czsem/htdocs/maven2/snapshots/</url>			
+		</snapshotRepository>
+	</distributionManagement>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+
 
 	<build>
 		<plugins>
@@ -45,21 +56,77 @@
 				</dependencies>				
 			</plugin>
 		</plugins>
+		<extensions>
+	      <extension>
+	        <groupId>org.apache.maven.wagon</groupId>
+	        <artifactId>wagon-ssh</artifactId>
+	        <version>1.0-beta-7</version>
+	      </extension>		
+		</extensions>
 	</build>
 	<repositories>
+		<repository>
+			<id>cleartk</id>
+			<name>cleartk</name>
+			<url>http://cleartk.googlecode.com/svn/repo/</url>
+		</repository>
+		<repository>
+			<id>jena</id>
+			<name>jena</name>
+			<url>http://openjena.org/repo</url>
+		</repository>
+		<repository>
+			<id>ow2.org</id>
+			<name>ow2.org</name>
+			<url>http://maven.ow2.org/maven2/</url>
+		</repository>
+		<repository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>czsem.repo</id>
+			<url>http://czsem.berlios.de/maven2/repo/</url>
+		</repository>
+		<repository>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<id>czsem.snapshots</id>
+			<url>http://czsem.berlios.de/maven2/snapshots/</url>
+		</repository>
 	</repositories>
 	<dependencies>
+		<dependency>  
+		  <groupId>com.hp.hpl.jena</groupId>  
+		  <artifactId>jena</artifactId>  
+		  <version>2.6.3</version>  
+		</dependency> 
+		<dependency>  
+		  <groupId>com.ontotext.gate</groupId>  
+		  <artifactId>gazetteer</artifactId>  
+		  <version>1.0</version>  
+		</dependency> 
+		
+		<dependency>  
+		  <groupId>uk.ac.gate</groupId>  
+		  <artifactId>gate-core</artifactId>  
+		  <version>6.0</version>  
+		</dependency>
+		<dependency>
+			<groupId>net.sourceforge.nekohtml</groupId>
+			<artifactId>nekohtml</artifactId>
+			<version>1.9.14</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tika</groupId>
+			<artifactId>tika-parsers</artifactId>
+			<version>0.7</version>
+		</dependency> 
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>3.8.1</version>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>gate</groupId>
-			<artifactId>gate</artifactId>
-			<version>6.0-SNAPSHOT</version>
-			<type>pom</type>
 		</dependency>
 		<dependency>
 			<groupId>net.sourceforge.javacsv</groupId>
@@ -74,7 +141,7 @@
 		<dependency>
 			<groupId>weka</groupId>
 			<artifactId>weka</artifactId>
-			<version>3.6.1</version>
+			<version>3.6.3</version>
 		</dependency>
 		<dependency>
 			<groupId>gate.plugins</groupId>
@@ -92,13 +159,6 @@
 			<groupId>pdfbox</groupId>
 			<artifactId>pdfbox</artifactId>
 			<version>0.7.3</version>
-		</dependency>
-		<dependency>
-			<groupId>gate</groupId>
-			<artifactId>gate_bin</artifactId>
-			<version>5.2.1</version>
-			<type>jar</type>
-			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>gate.plugins</groupId>
@@ -137,6 +197,13 @@
 			<groupId>org.codehaus.izpack</groupId>
 			<artifactId>izpack-standalone-compiler</artifactId>
 			<version>4.3.2</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>maven</groupId>
+			<artifactId>wagon-ssh</artifactId>
+			<version>1.0-alpha-3</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
