@@ -70,7 +70,17 @@ public class CzsemRulesBenchmark {
 				args[0] + ".owl");
 		stats[cur][1] = System.nanoTime();
 
-				
+/*
+		cur++;
+
+		//Fact++
+		stats[cur][0] = System.nanoTime();
+		stats[cur][2] = Pml2GateReasoning.processDirectory(
+				new OwlApiRulesEngine(new FaCTPlusPlusReasonerFactory()),
+				args[1],
+				args[0] + ".owl");
+		stats[cur][1] = System.nanoTime();
+/**/				
 		for (int i = 0; i < stats.length; i++)
 		{
 			System.out.println("-----------------------------------------------");			

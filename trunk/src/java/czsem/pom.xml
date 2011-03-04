@@ -85,6 +85,16 @@
 	</build>
 	<repositories>
 		<repository>
+		   <id>fascinator-releases</id>
+		   <url>https://fascinator.usq.edu.au/nexus/content/groups/public</url>
+		   <releases>
+		    <enabled>true</enabled>
+		   </releases>
+		   <snapshots>
+		    <enabled>false</enabled>
+		   </snapshots>
+		  </repository> 
+		<repository>
 			<id>on.cs.unibas.ch</id>
 			<name>DBIS Maven Releases Repository</name>
 			<url>http://on.cs.unibas.ch/maven/repository</url>
@@ -256,5 +266,18 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+	      <groupId>org.marc4j</groupId>
+	      <artifactId>marc4j</artifactId>
+	      <version>b8</version>
+		  <scope>compile</scope>
+	    </dependency>		
+		<dependency>
+	      <groupId>uk.ac.manchester.cs</groupId>
+	      <artifactId>factplusplus</artifactId>
+	      <version>1.5.0</version>
+	      <optional>true</optional>
+		  <scope>compile</scope>
+	    </dependency>		
 	</dependencies>
 </project>
