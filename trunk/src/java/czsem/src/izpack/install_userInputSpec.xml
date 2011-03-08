@@ -1,0 +1,31 @@
+<userInput>
+    <panel order="0">
+        <field size="2" txt="Files and Directories" type="title"/>
+        <field align="left" txt="Aleph location" type="staticText"/>
+        <field align="left" type="file" variable="aleph">
+            <spec set="C:\Program Files\aleph\aleph.pl" size="25" txt=""/>
+        </field>
+        <field align="left"
+            txt="Aleph can be obtained at: http://www.comlab.ox.ac.uk/activities/machinelearning/Aleph/" type="staticText"/>
+        <field align="top" type="divider"/>
+        <field align="left" txt="Yap prolog path" type="staticText"/>
+        <field align="left" type="file" variable="prolog">
+            <spec set="C:\Program Files\Yap\bin\yap.exe" size="25" txt=""/>
+        </field>
+        <field align="left"
+            txt="Yap prolog can be obtained at: http://yap.sourceforge.net/" type="staticText"/>
+        <field align="top" type="divider"/>
+        <field align="left" txt="Weka JAR path" type="staticText"/>
+        <field align="left" type="file" variable="weka">
+            <spec set="C:\Program Files\Weka-3-6\weka.jar" size="25" txt=""/>
+        </field>
+        <field align="left"
+            txt="WEKA can be obtained at: http://www.cs.waikato.ac.nz/ml/weka/" type="staticText"/>
+        <field align="top" type="divider"/>
+        <field align="left"
+            txt="Where to place the ILP serialized projects directory" type="staticText"/>
+        <field align="left" type="dir" variable="projects">
+            <spec set="$SYSTEM_java_io_tmpdir" size="25" txt=""/>
+        </field>
+    </panel>
+</userInput>

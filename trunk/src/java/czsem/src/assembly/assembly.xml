@@ -4,7 +4,7 @@
   <!-- TODO: a jarjar format would be better -->
   <id>jar-with-dependencies</id>
   <formats>
-    <format>jar</format>
+    <format>zip</format>
   </formats>
   <includeBaseDirectory>false</includeBaseDirectory>
   <dependencySets>

@@ -24,6 +24,7 @@ public class Config
 	private static Config config = null;
 	public static ClassLoader classLoader = null;
 	private static final String config_filename = "czsem_config.xml";
+	public static final String config_filename_install = "czsem_config_install.xml";
 	private static final String czsem_plugin_dir_name = "czsem_GATE_plugins";
 	
 	private String wekaJarPath;
@@ -56,6 +57,7 @@ public class Config
 		Config ps = new Config();
 		ps.setMyWinValues();
 //		ps.setInstallDefaults();
+//		ps.saveToFile(czsem_plugin_dir_name+ '/' +config_filename_install);
 		ps.saveToFile(czsem_plugin_dir_name+ '/' +config_filename);
 		
 /*				
