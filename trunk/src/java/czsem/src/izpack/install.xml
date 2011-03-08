@@ -21,9 +21,9 @@
         <langpack iso3="eng"/>
     </locale>
     <resources>
-        <res id="shortcutSpec.xml" src="install_shortcutSpec.xml"/>
-        <res id="Unix_shortcutSpec.xml" src="install_Unix_shortcutSpec.xml"/>
-        <res id="userInputSpec.xml" src="install_userInputSpec.xml"/>
+        <res id="shortcutSpec.xml" src="../../src/izpack/install_shortcutSpec.xml"/>
+        <res id="Unix_shortcutSpec.xml" src="../../src/izpack/install_Unix_shortcutSpec.xml"/>
+        <res id="userInputSpec.xml" src="../../src/izpack/install_userInputSpec.xml"/>
     </resources>
     <panels>
         <panel classname="HelloPanel"/>
@@ -38,7 +38,7 @@
         <pack name="java binaries and configuration" preselected="yes" required="yes">
             <description/>
             <file override="update"
-                src="C:\workspace\czsem\src\java\czsem\target\czsem-1.0.2-SNAPSHOT-jar-with-dependencies.zip" targetdir="$INSTALL_PATH/"/>
+                src="../czsem-1.0.2-SNAPSHOT-jar-with-dependencies.zip" targetdir="$INSTALL_PATH/"/>
             <singlefile override="true"
                 src="C:\workspace\czsem\src\java\czsem\src\izpack\czsem_config_install.xml" target="$INSTALL_PATH/czsem_config.xml"/>
             <parsable encoding="UTF8"
