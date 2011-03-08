@@ -2,7 +2,7 @@
 <installation version="1.0">
     <info>
         <appname>Czsem Mining Suite</appname>
-        <appversion>1.3</appversion>
+        <appversion>${project.version}</appversion>
         <authors>
             <author email="dedekj@gmail.com" name="Jan Dedek"/>
         </authors>
@@ -14,13 +14,22 @@
         <run-privileged condition="izpack.windowsinstall.vista|izpack.windowsinstall.7"/>
     </info>
     <guiprefs height="480" resizable="no" width="640">
-        <modifier key="useFlags" value="yes"/>
-        <modifier key="langDisplayType" value="default"/>
+		<modifier key="useFlags" value="yes"/>
+		<modifier key="langDisplayType" value="default"/>
+		<modifier key="useHeadingPanel" value="yes"/>
+		<modifier key="labelGap" value="5"/>		
+		<modifier key="headingFontSize" value="1.5"/>                
+		<modifier key="labelFontSize" value="1.2"/>
+		<modifier key="headingImageOnLeft" value="yes"/>
+		<modifier key="headingBackgroundColor" value="0x00ffffff"/>
+		<modifier key="headingPanelCounter" value="text"/>
+		<modifier key="headingPanelCounterPos" value="inHeading"/>                         
     </guiprefs>
     <locale>
         <langpack iso3="eng"/>
     </locale>
     <resources>
+    	<res id="Heading.image" src="../../src/izpack/logo_czsem.png"/>
         <res id="shortcutSpec.xml" src="../../src/izpack/install_shortcutSpec.xml"/>
         <res id="Unix_shortcutSpec.xml" src="../../src/izpack/install_Unix_shortcutSpec.xml"/>
         <res id="userInputSpec.xml" src="../../src/izpack/install_userInputSpec.xml"/>
@@ -37,19 +46,15 @@
     <packs>
         <pack name="java binaries and configuration" preselected="yes" required="yes">
             <description/>
-            <file override="update"
-                src="../czsem-1.0.2-SNAPSHOT-jar-with-dependencies.zip" targetdir="$INSTALL_PATH/"/>
+            <file override="asktrue" unpack="true"
+                src="../${project.artifactId}-${project.version}-jar-with-dependencies.zip" targetdir="$INSTALL_PATH/"/>
             <singlefile override="true"
-                src="C:\workspace\czsem\src\java\czsem\src\izpack\czsem_config_install.xml" target="$INSTALL_PATH/czsem_config.xml"/>
+                src="..\..\src\izpack\czsem_config_install.xml" target="$INSTALL_PATH/czsem_GATE_plugins/czsem_config.xml"/>
             <parsable encoding="UTF8"
-                targetfile="$INSTALL_PATH/czsem_config.xml" type="xml"/>
+                targetfile="$INSTALL_PATH/czsem_GATE_plugins/czsem_config.xml" type="xml"/>
         </pack>
         <pack name="Weka integration" preselected="no" required="no">
             <description>Adds ILP classifier to Weka. Crisp ILP Classifier and Fuzzy ILP classifier can then be used inside the Weka (including GUI).</description>
-            <file override="update"
-                src="C:\workspace\czsem\src\netgraph\czsem\config.xml" targetdir="$INSTALL_PATH/"/>
-            <file override="update"
-                src="C:\workspace\czsem\src\netgraph\czsem\FuzzyILP.jar" targetdir="$INSTALL_PATH/"/>
             <file override="asktrue"
                 src="C:\workspace\czsem\src\ILP\ILP_serial_projects" targetdir="$projects"/>
             <file override="asktrue"

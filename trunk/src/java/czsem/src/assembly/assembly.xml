@@ -9,13 +9,13 @@
   <includeBaseDirectory>false</includeBaseDirectory>
   <dependencySets>
     <dependencySet>
-      <outputDirectory>/lib</outputDirectory>
+      <outputDirectory>/target/lib</outputDirectory>
       <useProjectArtifact>false</useProjectArtifact>
       <unpack>false</unpack>
       <scope>runtime</scope>
     </dependencySet>
     <dependencySet>
-      <outputDirectory>/</outputDirectory>
+      <outputDirectory>/target</outputDirectory>
       <useProjectArtifact>true</useProjectArtifact>
       <includes>
       	<include>${groupId}:${artifactId}:${packaging}:${version}</include>
