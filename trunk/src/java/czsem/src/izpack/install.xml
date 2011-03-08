@@ -12,6 +12,7 @@
         <writeinstallationinformation>no</writeinstallationinformation>
         <pack200/>
         <run-privileged condition="izpack.windowsinstall.vista|izpack.windowsinstall.7"/>
+        <appsubpath>czsem_suite_${project.version}</appsubpath>
     </info>
     <guiprefs height="480" resizable="no" width="640">
 		<modifier key="useFlags" value="yes"/>

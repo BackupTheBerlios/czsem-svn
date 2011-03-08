@@ -24,4 +24,19 @@
       <unpack>false</unpack>
     </dependencySet>
   </dependencySets>
+  <fileSets>
+  	<fileSet>
+  		<outputDirectory>/</outputDirectory>
+  		<includes>
+  			<include>czsem_GATE_plugins/*/*/*</include>
+  			<include>czsem_GATE_plugins/*/*</include>
+  			<include>czsem_GATE_plugins/*</include>
+  		</includes>
+  		<excludes>
+  			<exclude>.svn</exclude>
+  			<exclude>czsem_GATE_plugins/TmT_serializations/*</exclude>
+  			<exclude>czsem_GATE_plugins/log/*</exclude>
+  		</excludes>
+  	</fileSet>
+  </fileSets>  
 </assembly>
