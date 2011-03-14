@@ -445,7 +445,7 @@ In the environment of the Semantic Web it is essential that information is share
 
 
 
-In practice the extraction ontologies are usually strongly dependent on a particular extraction/annotation tool and cannot be used separately. The strong dependency of an extraction ontology on the corresponding tool makes it very difficult to share. When an extraction ontology cannot be used outside the tool there is also no need to keep the ontology in a standard ontology format such as RDF\footnote{\url{http://www.w3.org/RDF/}} or OWL\footnote{\url{http://www.w3.org/2001/sw/wiki/OWL}}. The only way how to use such extraction ontology is within the corresponding extraction tool. It is not necessary to have the ontology in a `owl' or `rdf' file. In a sense such extraction ontology is just a configuration file. For example in \cite{springerlink:10.1007/978-3-642-01891-6_5} %[Labsky]
+In practice the extraction ontologies are usually strongly dependent on a particular extraction/annotation tool and cannot be used separately. The strong dependency of an extraction ontology on the corresponding tool makes it very difficult to share. When an extraction ontology cannot be used outside the tool there is also no need to keep the ontology in a standard ontology format such as RDF\footnote{\url{http://www.w3.org/RDF/}} or OWL\footnote{\url{http://www.w3.org/2001/sw/wiki/OWL}}. The only way how to use such extraction ontology is within the corresponding extraction tool. It is not necessary to have the ontology in a ``owl or rdf file''. In a sense such extraction ontology is just a configuration file. For example in \cite{springerlink:10.1007/978-3-642-01891-6_5} %[Labsky]
  (and also in \cite{DBLP:conf/er/EmbleyTL02}) the so called extraction ontologies are kept in XML files with a proprietary structure and it is absolutely sufficient, there is no need to treat them differently.
 
 
@@ -486,7 +486,7 @@ and the later one -- IE system Ex\footnote{\url{http://eso.vse.cz/~labsky/ex/}} 
 But in both cases the extraction ontologies are dependent on the particular tool and they are kept in XML files with a proprietary structure.
 
 
-Also authors of \cite{citeulike:7291004} (a recent survey of OBIE systems) do not agree with allowing for extraction rules to be a part of an ontology. They use two arguments against that:
+By contrast authors of \cite{citeulike:7291004} (a recent survey of OBIE systems) do not agree with allowing for extraction rules to be a part of an ontology. They use two arguments against that:
 \begin{enumerate}
 	\item Extraction rules are known to contain errors (because they are never 100\% accurate), and objections can be raised on their inclusion in ontologies in terms of formality and accuracy.
 
@@ -512,7 +512,7 @@ An ontology is a formal specification of a shared conceptualization.	\cite{so178
 An ontology is a formal, explicit specification of a shared conceptualization. \cite{Studer1998161}
 \end{quote}
 
-Of course the word `shareable' has different meaning from `shared'. (Something that is shareable is not necessarily shared, but on the other hand something that is shared should be shareable.) We do not think that shareable extraction ontologies will contain shared knowledge about how to extract data from documents in certain domain. This is for example not true for all extraction models artificially learned from a training corpus. Here shareable simply means that the extraction rules can be shared amongst software agents and can be used separately from the original tool. This is the deviation in use of the term `ontology' in the context of extraction ontologies (and also document ontologies, see in Sect.~\ref{sec:doc_ont}) in this paper.
+Of course the word `shareable' has different meaning from `shared'. (Something that is shareable is not necessarily shared, but on the other hand something that is shared should be shareable.) We do not think that shareable extraction ontologies will contain shared knowledge about how to extract data from documents in certain domain. This is for example not true for all extraction models artificially learned from a training corpus. Here shareable simply means that the extraction rules can be shared amongst software agents and can be used separately from the original tool. This is the deviation in use of the term `ontology' in the context of extraction ontologies in this paper (similarly for document ontologies, see in Sect.~\ref{sec:doc_ont}).
 
 %In time it will turn out if such extraction ontologies are useful or not. But for sure they bring something new that was not possible before.
 
@@ -529,14 +529,14 @@ In this section we will describe the main idea of the paper and we will illustra
 
 \subsection{Document Ontologies} \label{sec:doc_ont}
 
-The main idea of this paper assumes that extraction ontologies will be shareable and they can be applied on a document outside of the original extraction/annotation tool. And we assert that the extraction ontologies can be applied by ordinary reasoners. This assumption implies that both extraction ontologies and documents have to be in a reasoner readable format. In the case of contemporary OWL reasoners there are standard reasoner-readable languages: OWL and RDF in a rich variety of possible serializations (XML, Turtle, N-Triples, etc.) Besides that there exists standard ways like GRDDL\footnote{\url{http://www.w3.org/TR/grddl/}} or RDFa\footnote{\url{http://www.w3.org/TR/xhtml-rdfa-primer/}} 
+The main idea of this paper assumes that extraction ontologies will be shareable and they can be applied on a document outside of the original extraction/annotation tool. We further assert that the extraction ontologies can be applied by ordinary reasoners. This assumption implies that both extraction ontologies and documents have to be in a reasoner readable format. In the case of contemporary OWL reasoners there are standard reasoner-readable languages: OWL and RDF in a rich variety of possible serializations (XML, Turtle, N-Triples, etc.) Besides that there exists standard ways like GRDDL\footnote{\url{http://www.w3.org/TR/grddl/}} or RDFa\footnote{\url{http://www.w3.org/TR/xhtml-rdfa-primer/}} 
 how to obtain a RDF document from an ``ordinary document'' (strictly speaking XHTML and XML documents).
 
 We call a `document ontology' an ontology that formally captures content of a document. A document ontology can be for example obtained from the source document by a suitable GRDDL transformation (as in our experiment). A document ontology should contain all relevant data of a document and preferably the document could be reconstructed from the document ontology on demand.
 
 When a reasoner is applying an extraction ontology to a document, it only has ``to annotate'' the corresponding document ontology, not the document itself. Here ``to annotate'' means to add new knowledge -- new class membership or property assertions. In fact it means just to do the inference tasks prescribed by the extraction ontology on the document ontology. 
 
-Obviously when a document can be reconstructed form its document ontology (this is very often true, it is necessary just to save all words and formatting instructions) then also an annotated document can be reconstructed form its annotated document ontology. 
+Obviously when a document can be reconstructed from its document ontology (this is very often true, it is necessary just to save all words and formatting instructions) then also an annotated document can be reconstructed from its annotated document ontology. 
 
 
 \subsection{Implementation} \label{sec:implement}
@@ -624,7 +624,7 @@ The presented rules belong to the group of so called DL-Safe rules \cite{Motik:D
 \verb@functor(?b, "APP"), tDependency(?c, ?b),@\\
 \verb@number(?c, "pl")@\\
 \verb@      -> mention_root(?a, "acquired")@   
-	\caption{Examples of extraction rules in Prot\'{e}g\'{e} 4 -- Rules View's format}
+	\caption{Examples of extraction rules in Prot\'{e}g\'{e} 4 -- Rules View's format.}
 	\label{img:rules_protege}
 \end{figure}
 
@@ -790,7 +790,7 @@ Table~\ref{tab:results} summarizes results of the experiment. The standard devia
 From the results we can conclude that similar tasks can be satisfactorily solved by contemporary OWL reasoners because three of four tested reasoners were working correctly and two reasoners finished in bearable time.
 
 On the other hand even the fastest system took 8.5 minutes to process 113 rules over 126MB of data. This is clearly   significantly longer than a bespoke system would require. 
-Contemporary Semantic Web reasoners are still often quite inefficient and the experiment showed that using them to do information extraction may just result in poor performance. However, efficiency problems can be solved
+Contemporary Semantic Web reasoners are known still to be often quite inefficient and the experiment showed that using them today to do information extraction will result in quite poor performance. However, efficiency problems can be solved
 and in the context of Linked Data providing shareable descriptions of information extraction rules may be valuable.
 
 
@@ -806,7 +806,7 @@ Our implementation is publicly available -- source codes and the datasets can be
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-In this paper (Section~\ref{sec:doc_ont}) we have described a method how to apply an extraction ontology to a document ontology and obtain so called ``annotated'' document ontology. To have an ``annotated'' document ontology is almost the same as to have an annotated document. An annotated document is useful (easier navigation, faster reading and lookup of information, possibility of structured queries on collections of such documents, etc.) but if we are interested in the actual information present in the document, if we want to know the facts that are in a document asserted about the real word things then an annotated document is not sufficient and the conversion of an annotated document to the real world facts is not simple.
+In this paper (Section~\ref{sec:doc_ont}) we have described a method how to apply an extraction ontology to a document ontology and obtain so called ``annotated'' document ontology. To have an ``annotated'' document ontology is almost the same as to have an annotated document. An annotated document is useful (easier navigation, faster reading and lookup of information, possibility of structured queries on collections of such documents, etc.) but if we are interested in the actual information present in the document, if we want to know the facts that are in a document asserted about the real word things then an annotated document is not sufficient. But the conversion of an annotated document to the real world facts is not simple.
 There are obvious issues concerning data integration and duplicity of information. For example when in a document two mentions of people are annotated as `injured', what is the number of injured people in the corresponding accident? Are the two annotations in fact linked to the same person or not?
 
 In the beginning of our work on the idea of shareable extraction ontologies we planned to develop it further, we wanted to cover also the step from annotated document ontologies to the real world facts. The extraction process would then end up with so called ``fact ontologies''. But two main obstacles prevent us to do that.
@@ -816,14 +816,14 @@ In the beginning of our work on the idea of shareable extraction ontologies we p
 	\item There are also technology problems of creating new facts (individuals) during reasoning.
 \end{enumerate}
 
-Because of the decidability and finality constraints of the Description Logic Reasoning task it is not possible to create new individuals during the reasoning process. There is no standard way how to do it. But there are some proprietary solutions like \verb@swrlx:createOWLThing@\footnote{\url{http://protege.cim3.net/cgi-bin/wiki.pl?action=browse&id=SWRLExtensionsBuiltIns}} from the Prot\'{e}g\'{e} project and \verb@makeTemp(?x)@ or \verb@makeInstance(?x, ?p, ?v)@\footnote{\url{http://jena.sourceforge.net/inference/#RULEbuiltins}} from the Jena project.
+Because of the decidability and finality constraints of the Description Logic Reasoning it is not possible to create new individuals during the reasoning process. There is no standard way how to do it. But there are some proprietary solutions like \verb@swrlx:createOWLThing@\footnote{\url{http://protege.cim3.net/cgi-bin/wiki.pl?action=browse&id=SWRLExtensionsBuiltIns}} from the Prot\'{e}g\'{e} project and \verb@makeTemp(?x)@ or \verb@makeInstance(?x, ?p, ?v)@\footnote{\url{http://jena.sourceforge.net/inference/#RULEbuiltins}} from the Jena project.
 And these solutions can be used in the future work. 
 
 \subsection{SPARQL Queries -- Increasing Performance?}
 
-There is also a possibility to transform the extraction rules to SPARQL\footnote{\url{http://www.w3.org/TR/rdf-sparql-query/}} construct queries. This could rapidly increase performance of the rule evaluation. However a document ontology would have to exactly fit with the schema of the extraction rules.  This would be a minor problem. 
+There is also a possibility to transform the extraction rules to SPARQL\footnote{\url{http://www.w3.org/TR/rdf-sparql-query/}} construct queries. This would probably rapidly increase the time performance. However a document ontology would then have to exactly fit with the schema of the extraction rules.  This would be a minor problem. 
 
-The reason why we did not study this approach from the beginning is that we were interested in extraction \emph{ontologies} and SPARQL queries are not currently regarded as a part of ontology.  
+The reason why we did not study this approach from the beginning is that we were interested in extraction \emph{ontologies} and SPARQL queries are not currently regarded as a part of an ontology and nothing is suggesting it to be other way round.  
 
 Anyway the performance comparison remains a valuable task for the future work.
 
@@ -842,7 +842,7 @@ In the end of the paper we would like to summarize the main contributions of the
 	\item In the beginning of the paper we pointed out the draw back of so called extraction ontologies -- in most cases they are dependent on a particular extraction/annotation tool and they cannot be used separately.	
 	\item We extended the concept of extraction ontologies by adding the shareable aspect and we introduced a new principle of making extraction ontologies independent of the original tool: the possibility of application of an extraction ontology to a document by an ordinary reasoner.
 	\item In Section~\ref{sec:case} we presented a case study that shows that the idea of shareable extraction ontologies is realizable. We presented implementation of an IE tool that exports its extraction rules to an extraction ontology and we demonstrated how this extraction ontology can be applied to a document by a reasoner.
-	\item Moreover in Section~\ref{sec:experiment} an experiment with several OWL reasoners was presented. The experiment evaluated the performance of contemporary OWL reasoners on IE tasks: application of extraction ontologies.  
+	\item Moreover in Section~\ref{sec:experiment} an experiment with several OWL reasoners was presented. The experiment evaluated the performance of contemporary OWL reasoners on IE tasks (application of extraction ontologies).  
 	\item A new publically available benchmark for OWL reasoning was created together with the experiment. Other reasoners can be tested this way.
 \end{itemize}
    
