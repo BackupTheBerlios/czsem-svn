@@ -74,14 +74,32 @@ public class TectoMTAbstractAnalyser extends AbstractLanguageAnalyserWithInputOu
 	public void setLanguage(String language) {
 		this.language = language;
 	}
-	
+		
 	protected String [] getTredEnvp() throws URISyntaxException, IOException
 	{
 		Config cfg = Config.getConfig();
+		String path_sep = System.getProperty( "path.separator" );
 		String tredEnvp [] =
 		{
-				"PERLLIB="+cfg.getTmtRoot()+"/libs/core" +System.getProperty( "path.separator" )+
-				cfg.getTmtRoot()+"/libs/blocks" +System.getProperty( "path.separator" )+
+/*
+ * ${TMT_ROOT%/}/share/installed_libs/lib/perl5
+ * ${TMT_ROOT%/}/share/installed_libs/lib/perl5/$(perl -MConfig -e 'print $Config{archname}')
+ * ${TMT_ROOT%/}/libs/core
+ * ${TMT_ROOT%/}/libs/blocks
+ * ${TMT_ROOT%/}/libs/other
+ * ${TMT_ROOT%/}/treex/lib
+ * ${TRED_DIR%/}/tredlib
+ * ${TRED_DIR%/}/tredlib/libs/fslib
+ * ${TRED_DIR%/}/tredlib/libs/pml-base
+ * ${TRED_DIR%/}/tredlib/libs/backends
+ * $PERL5LIB" 
+ * 				
+ */
+				
+				"PERLLIB="+
+				cfg.getTmtRoot()+"/libs/core" 	+path_sep+
+				cfg.getTmtRoot()+"/libs/core" 	+path_sep+
+				cfg.getTmtRoot()+"/libs/blocks" +path_sep+
 				cfg.getTmtRoot()+"/libs/other",
 				"TRED_DIR="+cfg.getTredRoot(),
 				"TMT_ROOT="+cfg.getTmtRoot()+"/",

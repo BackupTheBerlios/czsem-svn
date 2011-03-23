@@ -49,8 +49,10 @@
             <description/>
             <file override="asktrue" unpack="true"
                 src="../${project.artifactId}-${project.version}-jar-with-dependencies.zip" targetdir="$INSTALL_PATH/"/>
+<!-- 
             <singlefile override="true"
                 src="..\..\src\izpack\czsem_config_install.xml" target="$INSTALL_PATH/czsem_GATE_plugins/czsem_config.xml"/>
+ -->                
             <parsable encoding="UTF8"
                 targetfile="$INSTALL_PATH/czsem_GATE_plugins/czsem_config.xml" type="xml"/>
         </pack>

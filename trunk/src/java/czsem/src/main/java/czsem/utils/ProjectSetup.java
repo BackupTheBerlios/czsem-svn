@@ -43,7 +43,7 @@ public class ProjectSetup implements Serializable {
         current_project_dir = file_strb.toString();
         
         working_directory = new File(current_project_dir);
-        working_directory.mkdir();    
+        working_directory.mkdirs();    
 	}
 	
 	public String renderProjectFileName(String extension)

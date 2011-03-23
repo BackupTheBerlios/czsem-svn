@@ -348,7 +348,7 @@ public class TectoMTOnlineAnalyser extends TectoMTAbstractAnalyser
 	{
 		Document doc = getDocument();
 		try {
-			TMTDocumentHelper dh = new TMTDocumentHelper(doc, getLanguage(), 
+			TMTDocumentHelper dh = new TMTDocumentHelper(doc, getInputASName(), getLanguage(), 
 					Config.getConfig().getTmtSerializationDirectoryURL());
 			analyseFile(dh.getTMTFilePath());
 			annotateGateDocumentAcordingtoTMTfile(doc, dh.getTMTFilePath());

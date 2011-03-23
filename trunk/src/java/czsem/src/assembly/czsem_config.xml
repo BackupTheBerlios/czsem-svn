@@ -5,28 +5,28 @@
    <string>$aleph</string> 
   </void> 
   <void property="gateHome"> 
-   <string>C:\Program Files\gate\GATE-6.0</string> 
+   <string>$gateHome</string> 
   </void> 
   <void property="ilpProjestsPath"> 
    <string>$projects/ILP_serial_projects</string> 
   </void> 
   <void property="learnigConfigDirectoryForGate"> 
-   <string>C:\workspace\czsem\src\java\czsem\gate-learning</string> 
+   <string>$INSTALL_PATH/gate-learning</string> 
   </void> 
   <void property="logFileDirectoryPath"> 
-   <string>C:\workspace\czsem\src\java\czsem\czsem_GATE_plugins\log</string> 
+   <string>$INSTALL_PATH/czsem_GATE_plugins/log</string> 
   </void> 
   <void property="prologPath"> 
    <string>$prolog</string> 
   </void> 
   <void property="tmtRoot"> 
-   <string>C:\workspace\tectomt</string> 
+   <string>$tmtRoot</string> 
   </void> 
   <void property="tmtSerializationDirectoryPath"> 
-   <string>C:\workspace\czsem\src\java\czsem\czsem_GATE_plugins\TmT_serializations</string> 
+   <string>$projects/TmT_serializations</string> 
   </void> 
   <void property="tredRoot"> 
-   <string>C:\tred</string> 
+   <string>$tredRoot</string> 
   </void> 
   <void property="wekaJarPath"> 
    <string>$weka</string> 

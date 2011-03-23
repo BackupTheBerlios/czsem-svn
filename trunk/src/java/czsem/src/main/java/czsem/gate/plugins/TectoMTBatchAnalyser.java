@@ -2,9 +2,14 @@ package czsem.gate.plugins;
 
 import gate.Corpus;
 import gate.Document;
+import gate.Factory;
+import gate.FeatureMap;
+import gate.Gate;
+import gate.ProcessingResource;
 import gate.Resource;
 import gate.creole.ExecutionException;
 import gate.creole.ResourceInstantiationException;
+import gate.creole.SerialAnalyserController;
 import gate.creole.metadata.CreoleResource;
 import gate.persist.PersistenceException;
 import gate.security.SecurityException;
@@ -22,6 +27,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.apache.log4j.Logger;
 import org.xml.sax.SAXException;
 
+import czsem.gate.GateUtils;
 import czsem.gate.tectomt.TMTDocumentHelper;
 import czsem.utils.Config;
 import czsem.utils.ProcessExec;
@@ -71,7 +77,7 @@ public class TectoMTBatchAnalyser extends TectoMTAbstractAnalyser
 			if (documents_to_anlayse.size() <= corpus.size())
 			{
 				documents_to_anlayse.add(
-						new TMTDocumentHelper(document, getLanguage(),
+						new TMTDocumentHelper(document, getInputASName(), getLanguage(),
 								Config.getConfig().getTmtSerializationDirectoryURL()));
 				
 				if (documents_to_anlayse.size() == corpus.size())
@@ -134,15 +140,35 @@ public class TectoMTBatchAnalyser extends TectoMTAbstractAnalyser
 
 	
 
+	@SuppressWarnings("unchecked")
 	public static void main(String [] args) throws Exception
 	{
-/*
-		TectoMTBatchAnalyserTest t = new TectoMTBatchAnalyserTest();
+		Config cfg = Config.getConfig();
+		cfg.setGateHome();
+		Gate.init();
+		GateUtils.registerPluginDirectory(new File(cfg.getCzsemPluginDir()));
 				
-	    DataStore ds = GateUtils.openDataStore("file:/C:/Users/dedek/AppData/GATE/Acquisitions-v1.1");			
-		t.corpus = GateUtils.loadCorpusFormDatastore(ds, "Acquisitions-v1.1___1284475684516___2218");
-		t.executeTmtOnCurrentCorpus("english", TectoMTBatchAnalyserTest.english_full_blocks);				
-*/		
+		FeatureMap fm = Factory.newFeatureMap();
+		fm.put("scenarioFilePath", 
+				new File(
+						cfg.getCzsemPluginDir() + 
+						"/tmt_analysis_scenarios/english_full_blocks.scen")
+				.toURI().toURL());
+		
+		ProcessingResource tmtBA = (ProcessingResource) Factory.createResource(TectoMTBatchAnalyser.class.getCanonicalName(), fm);
+		
+		SerialAnalyserController controller = (SerialAnalyserController)	    	   
+			Factory.createResource(SerialAnalyserController.class.getCanonicalName());
+		
+		controller.add(tmtBA);
+		
+		Corpus corpus = Factory.newCorpus(null);
+		corpus.add(Factory.newDocument("My name is czsem mininig suite."));
+		controller.setCorpus(corpus);
+		
+		controller.execute();
+
+		
 	}
 
 }

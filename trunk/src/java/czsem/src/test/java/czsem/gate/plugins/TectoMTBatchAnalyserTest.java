@@ -74,6 +74,21 @@ public class TectoMTBatchAnalyserTest extends TestCase
 		corpus = gateCorpusFromDoc(document);		
 	}
 
+	protected void initCorpusAndDocFromSentencesWithSentenceAnnotation(String [] sentences, int num) throws ResourceInstantiationException, InvalidOffsetException
+	{
+		initCorpusAndDocFromSentences(sentences, num);
+		
+		AnnotationSet as = document.getAnnotations();
+	    
+	    long last_end = 0; 
+		for (int i = 0; i < num; i++)
+	    {
+	    	as.add(last_end, last_end+sentences[i].length(), "Sentence", Factory.newFeatureMap());
+	    	last_end += sentences[i].length()+1;
+		}
+
+	}
+
 	protected void initCorpusAndDocFromSentences(String [] sentences, int num) throws ResourceInstantiationException
 	{
 		StringBuilder sb= new StringBuilder();
@@ -393,6 +408,21 @@ public class TectoMTBatchAnalyserTest extends TestCase
 	}
 
 
+	public void testParseSentecesFormGateToTectoMTEnglish() throws ResourceInstantiationException, InvalidOffsetException, ExecutionException
+	{
+		String [] blocks = {"SEnglishW_to_SEnglishM::Tokenization"};
+		initCorpusAndDocFromSentencesWithSentenceAnnotation(english_sentences, english_sentences.length);
+//		initCorpusAndDocFromSentences(english_sentences, english_sentences.length);
+		executeTmtOnCurrentCorpus("english", blocks);
+		
+		AnnotationSet sents = document.getAnnotations().get("Sentence");
+		assertEquals(english_sentences.length*2, sents.size());		
+
+		AnnotationSet tokens = document.getAnnotations().get("Token");
+		assertEquals(44, tokens.size());		
+	}
+
+	
 	public void testExecuteEnglishMorphology() throws ResourceInstantiationException, ExecutionException
 	{
 		String [] blocks = {

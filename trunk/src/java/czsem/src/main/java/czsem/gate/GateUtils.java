@@ -17,10 +17,14 @@ import gate.util.GateException;
 import gate.util.reporting.PRTimeReporter;
 import gate.util.reporting.exceptions.BenchmarkReportInputFileFormatException;
 
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.PrintStream;
+import java.io.Writer;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -398,6 +402,27 @@ public class GateUtils
 		Arrays.sort(ret);
 		
 		return ret;
+	}
+
+	
+	public static void saveDocumentToDirectory(Document doc, String directory, String nameFeature) throws IOException
+	{
+		String filename = (String) doc.getFeatures().get(nameFeature);
+		
+		Writer out = new OutputStreamWriter(new BufferedOutputStream(
+				new FileOutputStream(directory+"/"+filename+".xml")), "utf8");
+		out.write(doc.toXml());
+		out.close();					
+	}
+
+	public static void saveCorpusToDirectory(Corpus corpus, String directory, String nameFeature) throws IOException
+	{
+		
+		for (Object doc_o : corpus)
+		{
+			Document doc = (Document) doc_o;
+			saveDocumentToDirectory(doc, directory, nameFeature);
+		}
 	}
 
 	

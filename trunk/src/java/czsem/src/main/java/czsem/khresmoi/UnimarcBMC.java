@@ -1,18 +1,94 @@
 package czsem.khresmoi;
 
+import gate.Document;
+import gate.FeatureMap;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.marc4j.MarcReader;
 import org.marc4j.MarcStreamReader;
+import org.marc4j.marc.ControlField;
 import org.marc4j.marc.DataField;
 import org.marc4j.marc.Record;
 import org.marc4j.marc.Subfield;
 
-public class UnimarcBMC {
+public class UnimarcBMC
+{
+	public static Logger logger = Logger.getLogger(UnimarcBMC.class);
+	
+
+	public static void setDocumentFeatures(Document doc, Record record)
+	{
+		List<String> meshIDs;
+		List<String> meshArticleTypeIDs;
+		List<String> meshTreeNodes;
+		List<String> meshTerms;
+		
+		meshIDs = readFields(record, "606", '0', '3');
+		meshArticleTypeIDs = readFields(record, "606", ' ', '3');
+		meshTreeNodes = readFields(record, "686", null, 'a');
+		meshTerms = readFields(record, "606", null, 'a');
+		
+		FeatureMap f = doc.getFeatures();
+		f.put("bmcID", readBMCID(record));
+		f.put("meshIDs", meshIDs);
+		f.put("meshArticleTypeIDs", meshArticleTypeIDs);
+		f.put("meshTreeNodes", meshTreeNodes);
+		f.put("meshTerms", meshTerms);
+		
+	}
+		
+
+	/**
+	 * @param record
+	 * @param fieldTag
+	 * @param indicator1 - use null if doesn't matter, space (' ') if not present
+	 * @return
+	 */
+	static List<String> readFields(Record record, String fieldTag, Character indicator1, char subfieldCode)
+	{
+		@SuppressWarnings("unchecked")
+		List<DataField> fields = record.getVariableFields(fieldTag);
+		
+		List<String> ret = new ArrayList<String>(fields.size());
+
+		for (int n=1; n<fields.size(); n++)
+		{
+			DataField dataField = fields.get(n);
+			if ((indicator1 != null) && (dataField.getIndicator1() != indicator1)) continue;
+			ret.add(dataField.getSubfield(subfieldCode).getData());
+		}
+
+		return ret;		
+	}
+	
+	public static String readBMCID(Record record)
+	{
+		return 	((ControlField) record.getVariableField("001")).getData();
+	}
+
+	public static String getURLStr(Record record)
+	{
+		DataField url = (DataField) record.getVariableField("856");
+		if (url != null)
+		{
+			Subfield f = url.getSubfield('u');
+			if (f!=null)
+			{
+//				System.err.println(f.getData());
+				return f.getData();
+			}
+			else
+				logger.warn("failed to obtain URL from: " + url.toString());					
+		}
+		
+		return null;
+	}
 
 	public static void main(String[] args) throws FileNotFoundException {
 
@@ -46,11 +122,50 @@ public class UnimarcBMC {
 				else
 					System.err.println(url.toString());					
 			}
-
-			/*			
+//			else continue;
+/*
 			System.err.println("---------------------------------------------------------------");
 			System.err.println(record.toString());
 			System.err.println("--------------CTRL---------------------------------------------");
+/*
+			MarcWriter writer = new MarcXmlWriter(System.err, true);
+		          writer.write(record);
+		      writer.close();
+				System.err.println("--------------XML---------------------------------------------");
+		   
+
+	/**		
+			@SuppressWarnings("unchecked")
+			List<DataField> mesh_ids = record.getVariableFields("606");
+
+			for (int n=1; n<mesh_ids.size(); n++)
+			{
+				DataField dataField = mesh_ids.get(n);
+				if (dataField.getIndicator1() != '0') continue;
+				System.err.format("%2d %c %s - %s - %s\n", n, dataField.getIndicator1(), 
+					dataField.getSubfield('a').getData(),
+					dataField.getSubfield('2').getData(),
+					dataField.getSubfield('3').getData());				
+			}
+
+			@SuppressWarnings("unchecked")
+			List<DataField> mesh_trees = record.getVariableFields("686");
+			for (int n=1; n<mesh_trees.size(); n++)
+			{
+				DataField dataField = mesh_trees.get(n);
+				System.err.format("%2d %s - %s\n", n,  
+					dataField.getSubfield('a').getData(),
+					dataField.getSubfield('2').getData());
+			}
+
+			
+
+			/**/			
+			
+			
+//			if (urls.size()>3) break;
+
+			/**			
 			List<ControlField> c = record.getControlFields();
 			for (ControlField controlField : c) {
 				System.err.println("-------CTRL--------------");
@@ -82,8 +197,8 @@ public class UnimarcBMC {
 		System.err.println("---last-record--------------------------------------------------------");
 		System.err.println(record.toString());
 		System.err.println("---last-record--------------------------------------------------------");
-		System.err.println("records: " + a);
-		System.err.println("urls: " + urls.size());
+		System.err.println("records: " + a);//617155
+		System.err.println("urls: " + urls.size());//25408
 		System.err.println("end");
 
 	}

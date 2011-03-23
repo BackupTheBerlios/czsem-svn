@@ -7,6 +7,6 @@
 <!--   
   <JAR>lib/learningapi.jar</JAR>
  -->  
-  <JAR SCAN="true">../target/czsem-1.0.3.jar</JAR>
+  <JAR SCAN="true">../target/${artifactId}-${version}.jar</JAR>
   <!-- <JAR>lib/stanford-parser.jar</JAR> -->
 </CREOLE-DIRECTORY> 
