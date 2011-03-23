@@ -5,6 +5,7 @@ import gate.creole.metadata.CreoleParameter;
 import gate.creole.metadata.Optional;
 import gate.util.InvalidOffsetException;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -22,6 +23,7 @@ import czsem.gate.tectomt.Annotator;
 import czsem.gate.tectomt.SentenceInfoManager;
 import czsem.gate.tectomt.TMTSAXParser;
 import czsem.utils.Config;
+import czsem.utils.ProcessExec;
 
 public class TectoMTAbstractAnalyser extends AbstractLanguageAnalyserWithInputOutputAS
 {
@@ -75,12 +77,29 @@ public class TectoMTAbstractAnalyser extends AbstractLanguageAnalyserWithInputOu
 		this.language = language;
 	}
 		
-	protected String [] getTredEnvp() throws URISyntaxException, IOException
+	public static void main(String [] args) throws Exception
+	{
+		System.err.println("xx"+getPerlArchName()+"xx");
+	}
+
+	public static String getPerlArchName() throws InterruptedException, FileNotFoundException, URISyntaxException, IOException
+	{
+		ProcessExec tmt_proc = new ProcessExec();
+		String[] args = {"perl", "-MConfig", "-e", "print $Config{archname}"};
+		tmt_proc.exec(args);
+		tmt_proc.startErrReaderThread();
+		String ret = tmt_proc.readLine();
+		tmt_proc.waitFor();		
+
+		return ret;		
+	}
+
+	
+	protected String [] getTredEnvp() throws URISyntaxException, IOException, InterruptedException
 	{
 		Config cfg = Config.getConfig();
 		String path_sep = System.getProperty( "path.separator" );
-		String tredEnvp [] =
-		{
+
 /*
  * ${TMT_ROOT%/}/share/installed_libs/lib/perl5
  * ${TMT_ROOT%/}/share/installed_libs/lib/perl5/$(perl -MConfig -e 'print $Config{archname}')
@@ -92,15 +111,24 @@ public class TectoMTAbstractAnalyser extends AbstractLanguageAnalyserWithInputOu
  * ${TRED_DIR%/}/tredlib/libs/fslib
  * ${TRED_DIR%/}/tredlib/libs/pml-base
  * ${TRED_DIR%/}/tredlib/libs/backends
- * $PERL5LIB" 
- * 				
+ * $PERL5LIB"  				
  */
-				
-				"PERLLIB="+
-				cfg.getTmtRoot()+"/libs/core" 	+path_sep+
-				cfg.getTmtRoot()+"/libs/core" 	+path_sep+
-				cfg.getTmtRoot()+"/libs/blocks" +path_sep+
-				cfg.getTmtRoot()+"/libs/other",
+		String perllib = 				
+			cfg.getTmtRoot()+"/share/installed_libs/lib/perl5" 	+path_sep+
+			cfg.getTmtRoot()+"/share/installed_libs/lib/perl5/"+ getPerlArchName() +path_sep+
+			cfg.getTmtRoot()+"/libs/core" 	+path_sep+
+			cfg.getTmtRoot()+"/libs/blocks" +path_sep+
+			cfg.getTmtRoot()+"/treex/lib" +path_sep+
+			cfg.getTredRoot()+"/tredlib" +path_sep+
+			cfg.getTredRoot()+"/tredlib/libs/fslib" +path_sep+
+			cfg.getTredRoot()+"/tredlib/libs/pml-base" +path_sep+
+			cfg.getTredRoot()+"/tredlib/libs/backends" +path_sep+
+			cfg.getTmtRoot()+"/libs/other"; 
+		
+		String tredEnvp [] =
+		{				
+				"PERLLIB="+perllib,
+				"PERL5LIB="+perllib,
 				"TRED_DIR="+cfg.getTredRoot(),
 				"TMT_ROOT="+cfg.getTmtRoot()+"/",
 				"JAVA_HOME="+System.getProperty("java.home"),
