@@ -31,7 +31,9 @@
   			<include>czsem_GATE_plugins/*/*/*</include>
   			<include>czsem_GATE_plugins/*/*</include>
   			<include>czsem_GATE_plugins/*</include>
-  			<include>czsem_GATE_plugins/log</include>
+  			<include>gate-learning/*/ILP_config*.xml</include>
+  			<include>gate-learning/*/Paum_config.xml</include>
+  			<include>gate-learning/*/rules/ILP_config_rules.owl</include>
   		</includes>
   		<excludes>
   			<exclude>.svn</exclude>
@@ -43,6 +45,11 @@
   	</fileSet>
   </fileSets>
   <files>
+  	<file>
+  		<source>czsem_GATE_plugins/log/log.txt</source>
+  		<outputDirectory>czsem_GATE_plugins/log</outputDirectory>
+  		<filtered>false</filtered>
+  	</file>
   	<file>
   		<source>src/assembly/czsem_config.xml</source>
   		<outputDirectory>czsem_GATE_plugins</outputDirectory>
