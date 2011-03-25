@@ -2,6 +2,7 @@ package czsem.ILP;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Arrays;
 
 import czsem.utils.Config;
 import czsem.utils.ProcessExec;
@@ -26,6 +27,10 @@ public class WekaRun
 				"weka.gui.GUIChooser"
 		};		
 		//java -classpath "./weka.jar;." weka.gui.GUIChooser
+		
+		System.out.println(Arrays.toString(cmdarray));
+		
+
 		ProcessExec proc = new ProcessExec();
 		proc.exec(cmdarray);
 		proc.startStdoutReaderThreads();

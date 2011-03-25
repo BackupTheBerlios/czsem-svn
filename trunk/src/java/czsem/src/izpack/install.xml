@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <installation version="1.0">
+	<variables>
+		<variable name="czsem_main_jar_loc" value="target/${project.artifactId}-${project.version}.jar"/>
+	</variables>
     <info>
         <appname>Czsem Mining Suite</appname>
         <appversion>${project.version}</appversion>
@@ -33,19 +36,29 @@
     	<res id="Heading.image" src="../../src/izpack/logo_czsem.png"/>
         <res id="shortcutSpec.xml" src="../../src/izpack/install_shortcutSpec.xml"/>
         <res id="Unix_shortcutSpec.xml" src="../../src/izpack/install_Unix_shortcutSpec.xml"/>
-        <res id="userInputSpec.xml" src="../../src/izpack/install_userInputSpec.xml"/>
+        <res id="userInputSpec.xml" src="../../src/izpack/install_userInputSpec.xml" />
     </resources>
+    <conditions>
+    	<condition type="packselection" id="gate.pack.selected"><packid>gate</packid></condition>    	
+    	<condition type="packselection" id="tmt.pack.selected"><packid>tmt</packid></condition>    	
+    	<condition type="packselection" id="ilp.pack.selected"><packid>ilp</packid></condition>    	
+    	<condition type="packselection" id="weka.pack.selected"><packid>weka</packid></condition>    	
+    </conditions>
     <panels>
         <panel classname="HelloPanel"/>
         <panel classname="TargetPanel"/>
-        <panel classname="UserInputPanel"/>
         <panel classname="PacksPanel"/>
+		<panel classname="UserInputPanel" id="GATE_userinput" condition="gate.pack.selected" />
+		<panel classname="UserInputPanel" id="TMT_userinput" condition="tmt.pack.selected" />
+		<panel classname="UserInputPanel" id="ILP_userinput" condition="ilp.pack.selected" />
+		<panel classname="UserInputPanel" id="WEKA_userinput" condition="weka.pack.selected" />
+		<panel classname="UserInputPanel" id="TMP_userinput" />
         <panel classname="InstallPanel"/>
         <panel classname="ShortcutPanel"/>
         <panel classname="SimpleFinishPanel"/>
     </panels>
     <packs>
-        <pack name="java binaries and configuration" preselected="yes" required="yes">
+        <pack name="java binaries" preselected="yes" required="yes">
             <description/>
             <file override="asktrue" unpack="true"
                 src="../${project.artifactId}-${project.version}-jar-with-dependencies.zip" targetdir="$INSTALL_PATH/"/>
@@ -56,14 +69,20 @@
             <parsable encoding="UTF8"
                 targetfile="$INSTALL_PATH/czsem_GATE_plugins/czsem_config.xml" type="xml"/>
         </pack>
-        <pack name="Weka integration" preselected="no" required="no">
-            <description>Adds ILP classifier to Weka. Crisp ILP Classifier and Fuzzy ILP classifier can then be used inside the Weka (including GUI).</description>
+        <pack name="Gate integration" required="no" preselected="yes" id="gate">
+            <description>Configures Czsem to work with GATE</description>
+        </pack>
+        <pack name="TectoMT integration" required="no" preselected="yes" id="tmt">
+            <description>Configures Czsem to work with TectoMT</description>
+        </pack>
+        <pack name="ILP integration" required="no" preselected="yes" id="ilp">
+            <description>Configures Czsem to work with an ILP system. It is necesary for the induction tasks: IE learning and Fuzzy ILP Classifier</description>
+        </pack>
+        <pack name="Weka integration" preselected="no" required="no" id="weka">
+            <description>Adds ILP Classifier to Weka. Crisp ILP Classifier and Fuzzy ILP Classifier can then be used inside the Weka (including GUI).</description>
+            <depends packname="ILP integration" /> 
             <file override="asktrue"
-                src="C:\workspace\czsem\src\ILP\ILP_serial_projects" targetdir="$projects"/>
-            <file override="asktrue"
-                src="C:\workspace\czsem\src\netgraph\czsem\GenericPropertiesCreator.props" targetdir="$USER_HOME/"/>
-            <parsable encoding="UTF-8"
-                targetfile="$INSTALL_PATH/config.xml" type="xml"/>
+                src="..\..\src\izpack\GenericPropertiesCreator.props" targetdir="$USER_HOME/"/>
         </pack>
     </packs>
     <native name="ShellLink.dll" type="izpack"/>

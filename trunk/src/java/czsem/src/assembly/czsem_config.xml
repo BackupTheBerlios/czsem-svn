@@ -32,7 +32,7 @@
    <string>$weka</string> 
   </void> 
   <void property="wekaRunFuzzyILPClassPath"> 
-   <string>$INSTALL_PATH/FuzzyILP.jar</string> 
+   <string>$INSTALL_PATH/$czsem_main_jar_loc</string> 
   </void> 
  </object> 
 </java> 

@@ -24,7 +24,6 @@ public class Config
 	private static Config config = null;
 	public static ClassLoader classLoader = null;
 	private static final String config_filename = "czsem_config.xml";
-	public static final String config_filename_install = "czsem_config_install.xml";
 	private static final String czsem_plugin_dir_name = "czsem_GATE_plugins";
 	
 	private String wekaJarPath;
