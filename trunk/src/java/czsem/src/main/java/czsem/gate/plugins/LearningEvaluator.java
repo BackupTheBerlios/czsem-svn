@@ -22,6 +22,8 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
+import czsem.gate.DocumentFeaturesDiff;
+
 /**
  * Mostly copied form {@link QualityAssurancePR}, slightly modified. 
  * @author dedek
@@ -60,7 +62,7 @@ public class LearningEvaluator extends AbstractLanguageAnalyser
 		
 	}
 	
-	protected class DocumentDiff
+	public static class DocumentDiff
 	{
 		public DocumentDiff(String documentName) {
 			this.documentName = documentName;
@@ -80,11 +82,19 @@ public class LearningEvaluator extends AbstractLanguageAnalyser
 	private AnnotationSet responseAS;
 	
 	private List<DocumentDiff> documentDifs;
+	
+	private boolean keyAnnotationsAreInDocumentFeatures; 
 
 	protected AnnotationDiffer calculateDocumentDiff(Document document, String annotTypeName)
 	{				
-		AnnotationSet keysIter = keyAS.get(annotTypeName);
 		AnnotationSet responsesIter = responseAS.get(annotTypeName);
+		
+		if (getKeyAnnotationsAreInDocumentFeatures())
+		{
+			return DocumentFeaturesDiff.computeDiff(document, featureNames, responsesIter);
+		}
+
+		AnnotationSet keysIter = keyAS.get(annotTypeName);
 		
 		AnnotationDiffer differ = new AnnotationDiffer();
 		differ.setSignificantFeaturesSet(new HashSet<String>(featureNames));
@@ -208,6 +218,16 @@ public class LearningEvaluator extends AbstractLanguageAnalyser
 	@CreoleParameter(defaultValue="")
 	public void setFeatureNames(List<String> featureNames) {
 		this.featureNames = featureNames;
+	}
+
+	public Boolean getKeyAnnotationsAreInDocumentFeatures() {
+		return keyAnnotationsAreInDocumentFeatures;
+	}
+
+	@RunTime
+	@CreoleParameter(defaultValue="false")
+	public void setKeyAnnotationsAreInDocumentFeatures(Boolean keyAnnotationsAreInDocumentFeatures) {
+		this.keyAnnotationsAreInDocumentFeatures = keyAnnotationsAreInDocumentFeatures;
 	}
 	
 

@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Enumeration;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.log4j.Appender;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
@@ -252,6 +253,9 @@ public class MachineLearningExperimenter
 		
 		String lemma = "lema";
 		String form = "form";
+		
+		if (lemma.startsWith("&"))	
+			lemma = StringEscapeUtils.unescapeXml(lemma);
 
 		int slash =  lemma.indexOf('-', 1);
 		int under =  lemma.indexOf('_', 1);
