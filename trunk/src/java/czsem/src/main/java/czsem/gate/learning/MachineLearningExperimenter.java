@@ -20,7 +20,7 @@ import org.apache.log4j.Logger;
 import org.jdom.JDOMException;
 
 import czsem.gate.GateUtils;
-import czsem.gate.learning.DataSet.DataSetImpl.Acquisitions;
+import czsem.gate.learning.DataSet.DataSetImpl.*;
 import czsem.gate.learning.DataSet.DataSetReduce;
 import czsem.gate.learning.MLEngine.ILPEngine;
 import czsem.gate.learning.MLEngine.PaumEngine;
@@ -156,6 +156,52 @@ public class MachineLearningExperimenter
 *//*		
 	}
 */
+	
+	public static MachineLearningExperiment czechAcquisitions() throws URISyntaxException, IOException
+	{
+		return
+			new MachineLearningExperiment(
+	    		new DataSetReduce(new Acquisitions("acquired"), 0.1),
+//	    		new MLEvaluate(new CreateTemporaryMentions(new ILPEngine()))
+	    		new MLEvaluate(new CreateTemporaryMentionsRootSubtree(new ILPEngine())),
+	    		new MLEvaluate(
+	    				new CreateTemporaryMentions(
+	    	    				new MentionsSubtreePostprocessing(
+	    	    						new ILPEngine("ILP_config_NE_roots_subtree.xml")))),	    		
+	    		new MLEvaluate(
+    	    				new CreateTemporaryMentionsReferedMentionsPostprocessing(
+    	    						new ILPEngine("ILP_config_NE_roots.xml"))),
+	    	    new MLEvaluate(new CreatePersistentMentions(new PaumEngine())));
+//	    		new ILPEngine()
+
+		
+	}
+	
+	public static MachineLearningExperiment czechFiremanSimple() throws URISyntaxException, IOException
+	{
+		return 	    
+			new MachineLearningExperiment(
+	    		new CzechFireman("damage"),
+//	    		new MLEvaluate(new CreateTemporaryMentions(new ILPEngine()))
+	    		new MLEvaluate(new CreateTemporaryMentionsRootSubtree(new ILPEngine())),
+	    	    new MLEvaluate(new CreatePersistentMentions(new PaumEngine()))
+
+/*
+	    		new MLEvaluate(
+	    				new CreateTemporaryMentions(
+	    	    				new MentionsSubtreePostprocessing(
+	    	    						new ILPEngine("ILP_config_NE_roots_subtree.xml")))),	    		
+	    		new MLEvaluate(
+    	    				new CreateTemporaryMentionsReferedMentionsPostprocessing(
+    	    						new ILPEngine("ILP_config_NE_roots.xml"))),
+	    	    new MLEvaluate(new CreatePersistentMentions(new PaumEngine()))
+*/	    	    
+//	    		new ILPEngine()
+			);
+
+		
+	}
+	
 	public static void main(String [] args) throws GateException, URISyntaxException, IOException, JDOMException, BenchmarkReportInputFileFormatException
 	{
 //		PropertyConfigurator.configure("C:\\Program Files\\gate\\GATE-6.0\\bin\\log4j.properties");
@@ -208,10 +254,11 @@ public class MachineLearningExperimenter
 //	    runExperiment(new TrainTestCzechFireman(new ILPEngine()), 2);
 	    
 	    LogService.minVerbosityLevel = 0;
-	    
+
+/*	    
 	    new MachineLearningExperiment(
-	    		new DataSetReduce(new Acquisitions("acquired"), 0.1),
-//	    		new CzechFireman("damage"),
+//	    		new DataSetReduce(new Acquisitions("acquired"), 0.1),
+	    		new CzechFireman("damage"),
 //	    		new MLEvaluate(new CreateTemporaryMentions(new ILPEngine()))
 	    		new MLEvaluate(new CreateTemporaryMentionsRootSubtree(new ILPEngine())),
 	    		new MLEvaluate(
@@ -224,7 +271,9 @@ public class MachineLearningExperimenter
 	    	    new MLEvaluate(new CreatePersistentMentions(new PaumEngine()))
 //	    		new ILPEngine()
 	    ).crossValidation(2);
+*/	    
 	    
+	    czechFiremanSimple().trainOnly();
 	    
 	    
 	    logger.info("time statistics:\n"+GateUtils.createGateBenchmarkReport());

@@ -59,7 +59,8 @@ public class DocumentFeaturesDiff
 		ProcessingResource eval = 
 			new PRSetup.SinglePRSetup(LearningEvaluator.class)
 				.putFeature("keyASName", ":-)")
-				.putFeature("responseASName", "lemma_flex")
+//				.putFeature("responseASName", "lemma_flex")
+				.putFeature("responseASName", "orig")
 				.putFeature("keyAnnotationsAreInDocumentFeatures", true)
 				.putFeatureList("annotationTypes", "Lookup")
 				.putFeatureList("featureNames", "meshID").createPR();
@@ -73,7 +74,8 @@ public class DocumentFeaturesDiff
 		
 		Corpus corpus = Factory.newCorpus(null);
 		corpus.populate(
-				new File("C:\\Users\\dedek\\Desktop\\bmca_devel").toURI().toURL(),
+				new File("C:\\Users\\dedek\\Desktop\\bmc50_analysed3").toURI().toURL(),
+//				new File("C:\\Users\\dedek\\Desktop\\bmca_devel").toURI().toURL(),
 				null, "utf8", false);
 		
 		System.err.println("populated");
