@@ -14,11 +14,13 @@ import gate.util.AnnotationDiffer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 
@@ -32,6 +34,7 @@ import czsem.gate.DocumentFeaturesDiff;
 @CreoleResource(name = "czsem LearningEvaluator", comment = "Measures performance between two AS, similar to QualityAssurancePR")
 public class LearningEvaluator extends AbstractLanguageAnalyser
 {		
+	 /** A temporary (not persistent) repository that stores results of all LearningEvaluators that were executed so far.*/	 
 	public static class CentralResultsRepository
 	{
 		public static CentralResultsRepository repository = new CentralResultsRepository();
@@ -43,6 +46,16 @@ public class LearningEvaluator extends AbstractLanguageAnalyser
 			repository_map.clear();
 		}
 
+		public Collection<LearningEvaluator> getContent()
+		{
+			return repository_map.keySet();
+		}
+		
+		public AnnotationDiffer getOveralResults(LearningEvaluator e)
+		{
+			return e.countOverallDiffer(repository_map.get(e));
+		}
+		
 		public void Add(LearningEvaluator eval, DocumentDiff diff)
 		{
 			List<DocumentDiff> prev = repository_map.get(eval);
@@ -151,22 +164,28 @@ public class LearningEvaluator extends AbstractLanguageAnalyser
 			);
 	}
 	
-	protected void logStatistics(List<DocumentDiff> docDifs)
-	{				
+	
+	public AnnotationDiffer countOverallDiffer(List<DocumentDiff> docDifs)
+	{
 		ArrayList<AnnotationDiffer> overall = new ArrayList<AnnotationDiffer>
 			(annotationTypes.size() * docDifs.size());
-		
+	
 		for (DocumentDiff diff : docDifs)
 		{
 			overall.addAll(Arrays.asList(diff.diff));			
 		}
-		
-		
-		AnnotationDiffer overall_differ = new AnnotationDiffer(overall);
+				
+		return new AnnotationDiffer(overall);		
+	}
+	
+	protected void logStatistics(List<DocumentDiff> docDifs)
+	{								
+		AnnotationDiffer overall_differ = countOverallDiffer(docDifs);
 		
 		Logger logger = Logger.getLogger(getClass());
 		
-		logger.info(String.format("%5s overall: %s", responseASName, getStatisticsStr(overall_differ)));
+//ILP_config_NE_roots_subtree
+		logger.info(String.format("%28s overall: %s", responseASName, getStatisticsStr(overall_differ)));
 	}
 
 	@Override

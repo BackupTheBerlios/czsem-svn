@@ -43,6 +43,7 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
 import org.apache.log4j.RollingFileAppender;
 
+import czsem.gate.GateUtils.TimeBenchmarkReporter;
 import czsem.utils.Config;
 
 public class GateUtils
@@ -57,15 +58,15 @@ public class GateUtils
 		return ret;
 	}
 	
-	public static String getBenchmarkLogFileName() throws URISyntaxException, IOException
+	public static String getTimeBenchmarkLogFileName() throws URISyntaxException, IOException
 	{
 		return Config.getConfig().getLogFileDirectoryPath()+"/benchmark.txt";
 	}
-	public static void enableGateBenchmark() throws URISyntaxException, IOException
+	public static void enableGateTimeBenchmark() throws URISyntaxException, IOException
 	{
 		RollingFileAppender appender = new RollingFileAppender();
 		appender.setThreshold(Level.DEBUG);
-		appender.setFile(getBenchmarkLogFileName());
+		appender.setFile(getTimeBenchmarkLogFileName());
 		appender.setAppend(false);
 		appender.setMaxFileSize("5MB");
 		appender.setMaxBackupIndex(1);
@@ -83,19 +84,30 @@ public class GateUtils
 		Benchmark.setBenchmarkingEnabled(true);
 	}
 
-	public static String createGateBenchmarkReport() throws BenchmarkReportInputFileFormatException, URISyntaxException, IOException
+	public static void doGateTimeBenchmarkReport(TimeBenchmarkReporter reporter) throws BenchmarkReportInputFileFormatException, URISyntaxException, IOException
 	{
-		return createGateBenchmarkReport(
-				getBenchmarkLogFileName(),
-				Config.getConfig().getLogFileDirectoryPath()+"/bechmark_report.txt",
+		doGateTimeBenchmarkReport(
+				reporter,
+				getTimeBenchmarkLogFileName(),
+				Config.getConfig().getLogFileDirectoryPath()+"/benchmark_report.txt",
 				PRTimeReporter.MEDIA_TEXT,
 				PRTimeReporter.SORT_EXEC_ORDER
 				);		
+		
 	}
 
-	private static class PrintMap
+	public static String createGateTimeBenchmarkReport() throws BenchmarkReportInputFileFormatException, URISyntaxException, IOException
 	{
-		public PrintMap(PrintStream out) {this.out = out;}
+		 ByteArrayOutputStream out = new ByteArrayOutputStream();
+		 
+		 doGateTimeBenchmarkReport(new TimeBenchmarkPrintMapSimple(new PrintStream(out)));
+		 
+		 return out.toString();			
+	}
+
+	private static class TimeBenchmarkPrintMapSimple implements TimeBenchmarkReporter
+	{
+		public TimeBenchmarkPrintMapSimple(PrintStream out) {this.out = out;}
 
 		private PrintStream out;
 
@@ -129,10 +141,23 @@ public class GateUtils
 
 			}
 		}
+
+		@Override
+		public void report(Map<String, Object> report1Container1)
+		{
+			printMap(report1Container1, "");
+		}
+	}
+	
+	public interface TimeBenchmarkReporter
+	{
+
+		void report(Map<String, Object> report1Container1);
+		
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static String createGateBenchmarkReport(String benchmarkInputFileName, String reportFileName, String outputMediaType, String sortOrder) throws BenchmarkReportInputFileFormatException
+	public static void doGateTimeBenchmarkReport(TimeBenchmarkReporter reporter, String benchmarkInputFileName, String reportFileName, String outputMediaType, String sortOrder) throws BenchmarkReportInputFileFormatException
 	{
 		// Report on processing resources
 		// http://gate.ac.uk/sale/tao/splitch11.html#x15-30600011.4.4
@@ -162,13 +187,8 @@ public class GateUtils
 		
 		 Object report1Container1 = report.store(report.getBenchmarkFile());
 //		 System.err.println(report1Container1);
-
-		 ByteArrayOutputStream out = new ByteArrayOutputStream();
 		 		 
-		 new PrintMap(new PrintStream(out)).printMap((Map<String, Object>) report1Container1, "");
-		 
-		 return out.toString();
-		 
+		 reporter.report((Map<String, Object>) report1Container1);		 		 
 	}
 
 	public static FeatureMap createDependencyArgsFeatureMap(Integer parent_id, Integer child_id)
@@ -446,7 +466,7 @@ public class GateUtils
 	{
 		System.err.println(Arrays.toString(createRandomPermutation(10)));
 		
-		System.out.println(createGateBenchmarkReport());
+		System.out.println(createGateTimeBenchmarkReport());
 	}
 
 }

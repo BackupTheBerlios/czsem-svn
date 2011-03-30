@@ -131,8 +131,10 @@ public abstract class MLEngine implements TrainTest
 	{
 
 		public ILPEngine(String configFileName)
-		{
-			super("ILP", configFileName);			
+		{			
+//			super("ILP", configFileName);
+			super(configFileName.substring(0, configFileName.indexOf('.')), configFileName);
+			
 		}
 
 		public ILPEngine() {

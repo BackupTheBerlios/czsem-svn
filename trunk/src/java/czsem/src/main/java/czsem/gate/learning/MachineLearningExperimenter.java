@@ -33,129 +33,6 @@ import czsem.utils.Config;
 
 public class MachineLearningExperimenter
 {
-/*	
-	static Logger logger = Logger.getLogger(MachineLearningExperimenter.class);
-
-	public interface TrainTest
-	{
-		List<PRSetup> getTrainControllerSetup() throws JDOMException, IOException;
-		List<PRSetup> getTestControllerSetup() throws JDOMException, IOException;
-	}
-	public static abstract class ExperimentSetup implements TrainTest
-	{
-		protected String dataStore;
-		protected String copusId;
-		protected MLEngineOld[] engines;
-		protected LearningSetup learningSetup;
-		
-		public ExperimentSetup(String dataStore, String copusId, MLEngineOld ... engines) {
-			this.dataStore = dataStore;
-			this.copusId = copusId;
-			this.engines = engines;
-		}
-		
-		protected void initEngines(String config_directory) throws MalformedURLException, JDOMException, IOException
-		{
-			learningSetup = null;
-			for (int i = 0; i < engines.length; i++)
-			{
-				engines[i].init(config_directory);
-				
-				//check if LearninigAnnotType matches among ML engines 
-				LearningSetup curLearninigSetup = engines[i].getLearninigSetup();
-				
-				if (learningSetup == null) learningSetup = curLearninigSetup;
-				else if (! learningSetup.equals(curLearninigSetup))
-				{
-					logger.warn(String.format(
-							"Learninig setups do not match! %s: %s, %s: %s",
-							engines[i].getClass().getName(),
-							curLearninigSetup.toString(),
-							engines[i-1].getClass().getName(),
-							learningSetup.toString()));
-					
-					learningSetup = curLearninigSetup;					
-				}				
-			}			
-		}
-		
-		protected List<PRSetup> addTrainMLEngines(List<PRSetup> prs) throws JDOMException, IOException
-		{
-			for (int i = 0; i < engines.length; i++)
-			{
-				prs.addAll(engines[i].getTrainControllerSetup());				
-			}
-			return prs;
-		}
-
-		protected List<PRSetup> addTestMLEngines(List<PRSetup> prs) throws JDOMException, IOException
-		{
-			for (int i = 0; i < engines.length; i++)
-			{
-				prs.addAll(engines[i].getTestControllerSetup());				
-			}
-			return prs;
-		}
-
-		
-		public Corpus getCorpus() throws PersistenceException, ResourceInstantiationException
-		{
-		    DataStore ds = GateUtils.openDataStore(dataStore);
-		    Corpus corpus = GateUtils.loadCorpusFormDatastore(ds, copusId);			
-		    return corpus; 
-		}		
-	}
-	
-	
-	
-	public static void trainOnly(ExperimentSetup setup) throws ResourceInstantiationException, JDOMException, IOException, PersistenceException, ExecutionException
-	{
-	    SerialAnalyserController train_controller = buildGatePipeline(setup.getTrainControllerSetup());
-	    
-	    train_controller.setCorpus(setup.getCorpus());			    	    	    
-	    train_controller.execute();
-		
-	}
-	
-
-	public static void runExperiment(ExperimentSetup setup, int number_of_folds) throws ResourceInstantiationException, ExecutionException, PersistenceException, JDOMException, IOException
-	{
-		
-		measureResults(setup.learningSetup, setup.getCorpus());
-
-	}
-/**	
-	protected static void measureResults(LearningSetup learningSetup, Corpus corpus) throws ResourceInstantiationException, ExecutionException
-	{
-		/*
-	private String keyASName;
-	private String responseASName;
-	private String annotationType;
-	private List<String> featureNames;
-		 *//*
-		
-		
-		PRSetup [] pr = {
-			new SinglePRSetup(LearningEvaluator.class)
-				.putFeature("keyASName", learningSetup.getKeyASName())
-				.putFeature("responseASName", learningSetup.getResponseASName())
-				.putFeature("annotationType", learningSetup.getLearninigAnnotType())
-				.putFeatureList("featureNames", learningSetup.getClassFetureName())
-		};
-
-		SerialAnalyserController pl = buildGatePipeline(Arrays.asList(pr));
-		pl.setCorpus(corpus);
-		
-		pl.execute();
-		
-/*		
-//		pr.
-		AnnotationDiffer differ = new AnnotationDiffer();
-		differ.setSignificantFeaturesSet(new HashSet<String>(0));
-		ClassificationMeasures classificationMeasures = new ClassificationMeasures();  
-*//*		
-	}
-*/
 	
 	public static MachineLearningExperiment czechAcquisitions() throws URISyntaxException, IOException
 	{
@@ -204,9 +81,6 @@ public class MachineLearningExperimenter
 	
 	public static void main(String [] args) throws GateException, URISyntaxException, IOException, JDOMException, BenchmarkReportInputFileFormatException
 	{
-//		PropertyConfigurator.configure("C:\\Program Files\\gate\\GATE-6.0\\bin\\log4j.properties");
-		
-
 	    Logger logger = Logger.getRootLogger();
 	    logger.setLevel(Level.ALL);
 		BasicConfigurator.configure();
@@ -237,9 +111,8 @@ public class MachineLearningExperimenter
 	    Config.getConfig().setGateHome();
 	    Gate.init();
 
-	    GateUtils.enableGateBenchmark();
+	    GateUtils.enableGateTimeBenchmark();
 
-//	    GateUtils.registerPluginDirectory("Parser_Stanford");
 	    GateUtils.registerPluginDirectory("Machine_Learning");
 	    GateUtils.registerPluginDirectory("ANNIE");
 	    GateUtils.registerPluginDirectory("Tools");
@@ -247,18 +120,13 @@ public class MachineLearningExperimenter
 	    
 	    GateUtils.registerPluginDirectory(new File("czsem_GATE_plugins"));
 		    		    
-//	    Corpus corpus = GateUtils.loadCorpusFormDatastore(ds, "ISWC___1274943456887___5663");
-//	    Corpus corpus = GateUtils.loadCorpusFormDatastore(ds, "fatalities___1277473852041___7082");
-	    
-//	    runExperiment(new TrainTestAcquisitions(), 2);	    
-//	    runExperiment(new TrainTestCzechFireman(new ILPEngine()), 2);
-	    
+	    	    
 	    LogService.minVerbosityLevel = 0;
 
-/*	    
+	    
 	    new MachineLearningExperiment(
-//	    		new DataSetReduce(new Acquisitions("acquired"), 0.1),
-	    		new CzechFireman("damage"),
+	    		new DataSetReduce(new Acquisitions("acquired"), 0.05),
+//	    		new CzechFireman("damage"),
 //	    		new MLEvaluate(new CreateTemporaryMentions(new ILPEngine()))
 	    		new MLEvaluate(new CreateTemporaryMentionsRootSubtree(new ILPEngine())),
 	    		new MLEvaluate(
@@ -271,13 +139,15 @@ public class MachineLearningExperimenter
 	    	    new MLEvaluate(new CreatePersistentMentions(new PaumEngine()))
 //	    		new ILPEngine()
 	    ).crossValidation(2);
-*/	    
-	    
-	    czechFiremanSimple().trainOnly();
 	    
 	    
-	    logger.info("time statistics:\n"+GateUtils.createGateBenchmarkReport());
+//	    czechFiremanSimple().trainOnly();
 	    
+	    
+	    logger.info("time statistics:\n"+GateUtils.createGateTimeBenchmarkReport());
+	    
+	    WekaResultExporter ex = new WekaResultExporter();
+	    ex.saveAll("weka_results.csv", true);
 	    
 	    
 
@@ -287,6 +157,14 @@ public class MachineLearningExperimenter
 //	    trainOnly(new TrainTestAcquisitions(new ILPEngine()));
 //	    trainOnly(new TrainTestCzechFireman(new ILPEngine()));
 	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	@SuppressWarnings("rawtypes")
 	public static void jape_pok (gate.Document doc, java.util.Map bindings, 
