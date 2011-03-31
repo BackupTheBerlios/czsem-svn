@@ -61,9 +61,24 @@ public abstract class MLEngine implements TrainTest
 		return "Mention";
 	}
 	
-	public String getName()
+	public static String renderPRNameTrain(String defaultOutputAS)
 	{
-		return "MLEngine" + getDefaultOutputAS() + "_" + configFileName;
+		return "MLEngine" + defaultOutputAS + "_train";		
+	}
+
+	public static String renderPRNameTest(String defaultOutputAS)
+	{
+		return "MLEngine" + defaultOutputAS + "_apply";		
+	}
+	
+	public String getNameTrain()
+	{
+		return renderPRNameTrain(getDefaultOutputAS());
+	}
+
+	public String getNameTest()
+	{
+		return renderPRNameTest(getDefaultOutputAS());
 	}
 	
 	public static String readLearninigAnnotType(URL config_doc_url) throws JDOMException, IOException
@@ -96,7 +111,7 @@ public abstract class MLEngine implements TrainTest
 			List<PRSetup> prs = new ArrayList<PRSetup>();
 
 			//Paum train
-			prs.add(new PRSetup.SinglePRSetup(LearningAPIMain.class, getName()+"_train")
+			prs.add(new PRSetup.SinglePRSetup(LearningAPIMain.class, getNameTrain())
 				.putFeature("inputASName", config.inputAS)
 				.putFeature("outputASName", config.outputAS)
 				.putFeature("configFileURL", getConfigURL(config.experimentLearningConfigsDirectory))
@@ -111,7 +126,7 @@ public abstract class MLEngine implements TrainTest
 			List<PRSetup> prs = new ArrayList<PRSetup>();
 
 			//Paum Application
-			prs.add(new PRSetup.SinglePRSetup(LearningAPIMain.class, getName()+"_apply")
+			prs.add(new PRSetup.SinglePRSetup(LearningAPIMain.class, getNameTest())
 				.putFeature("configFileURL", getConfigURL(config.experimentLearningConfigsDirectory))
 				.putFeature("inputASName", config.inputAS)
 				.putFeature("outputASName", config.outputAS)
@@ -146,7 +161,7 @@ public abstract class MLEngine implements TrainTest
 		{
 			List<PRSetup> prs = new ArrayList<PRSetup>();
 						
-			prs.add(new PRSetup.SinglePRSetup(MachineLearningPR.class, getName()+"_train")
+			prs.add(new PRSetup.SinglePRSetup(MachineLearningPR.class, getNameTrain())
 				.putFeature("inputASName", config.inputAS)
 				.putFeature("configFileURL", getConfigURL(config.experimentLearningConfigsDirectory))
 				.putFeature("training", true));
@@ -161,7 +176,7 @@ public abstract class MLEngine implements TrainTest
 			List<PRSetup> prs = new ArrayList<PRSetup>();
 
 			//ILP Apply
-			prs.add(new PRSetup.SinglePRSetup(MachineLearningPR.class, getName()+"_apply")
+			prs.add(new PRSetup.SinglePRSetup(MachineLearningPR.class, getNameTest())
 				.putFeature("configFileURL", getConfigURL(config.experimentLearningConfigsDirectory))
 				.putFeature("inputASName", config.inputAS)
 				.putFeature("training", false));

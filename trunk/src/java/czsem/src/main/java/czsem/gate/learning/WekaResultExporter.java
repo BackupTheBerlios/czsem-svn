@@ -1,6 +1,7 @@
 package czsem.gate.learning;
 
 import gate.util.AnnotationDiffer;
+import gate.util.profile.Profiler;
 import gate.util.reporting.exceptions.BenchmarkReportInputFileFormatException;
 
 import java.io.FileNotFoundException;
@@ -15,10 +16,13 @@ import java.nio.charset.CharsetEncoder;
 import java.util.Collection;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
 import com.csvreader.CsvWriter;
 
 import czsem.gate.GateUtils;
 import czsem.gate.GateUtils.TimeBenchmarkReporter;
+import czsem.gate.learning.WekaResultExporter.Result;
 import czsem.gate.plugins.LearningEvaluator;
 import czsem.utils.ProjectSetup;
 
@@ -26,6 +30,7 @@ public class WekaResultExporter
 {
 	private static class TimeBenchmarkWekaReporter implements TimeBenchmarkReporter
 	{
+		Logger logger = Logger.getLogger(TimeBenchmarkWekaReporter.class);
 
 		private WekaResultExporter wekaResultExporter;
 
@@ -48,8 +53,27 @@ public class WekaResultExporter
 								
 				if (child instanceof String)
 				{
-					if (pr_name.contains("train"))
-						System.err.format("%s %s\n", pr_name, child);
+					for (int i = 0; i < wekaResultExporter.results.length; i++)
+					{
+						Result r = wekaResultExporter.results[i];
+						if (pr_name.contains(
+								MLEngine.renderPRNameTrain(
+										r.getResponsesASName())))
+						{
+							logger.debug(String.format("train: %s %s", pr_name, child));
+							r.setTrainTime((String) child);
+							continue;
+						}
+
+						if (pr_name.contains(
+								MLEngine.renderPRNameTest(
+										r.getResponsesASName())))
+						{
+							logger.debug(String.format("test: %s %s", pr_name, child));
+							r.setTestTime((String) child);
+						}
+						
+					}
 
 //					out.println("\t" + child); //time
 					continue;
@@ -133,6 +157,20 @@ public class WekaResultExporter
 		public Result()
 		{
 			data = new String[header.length];			
+		}
+
+		public void setTestTime(String time)
+		{
+			data[data.length-1] = time;			
+		}
+
+		public void setTrainTime(String time)
+		{
+			data[data.length-2] = time;						
+		}
+
+		public String getResponsesASName() {
+			return data[1];
 		}
 
 		public Result(Object ... data)

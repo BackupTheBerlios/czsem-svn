@@ -43,7 +43,6 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
 import org.apache.log4j.RollingFileAppender;
 
-import czsem.gate.GateUtils.TimeBenchmarkReporter;
 import czsem.utils.Config;
 
 public class GateUtils

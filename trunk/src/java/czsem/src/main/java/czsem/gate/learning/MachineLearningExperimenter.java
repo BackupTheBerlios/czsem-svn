@@ -147,6 +147,7 @@ public class MachineLearningExperimenter
 	    logger.info("time statistics:\n"+GateUtils.createGateTimeBenchmarkReport());
 	    
 	    WekaResultExporter ex = new WekaResultExporter();
+	    ex.addInfoFromTimeBechmark();
 	    ex.saveAll("weka_results.csv", true);
 	    
 	    
