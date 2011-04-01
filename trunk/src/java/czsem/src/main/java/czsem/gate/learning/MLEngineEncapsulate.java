@@ -10,7 +10,6 @@ import czsem.gate.learning.MachineLearningExperiment.TrainTest;
 import czsem.gate.plugins.AnnotationDependencyRootMarker;
 import czsem.gate.plugins.AnnotationDependencySubtreeMarker;
 import czsem.gate.plugins.CreateMentionsPR;
-import czsem.gate.plugins.LearningEvaluator;
 import czsem.gate.plugins.SubsequentAnnotationMergePR;
 
 public class MLEngineEncapsulate implements TrainTest
@@ -257,11 +256,11 @@ public class MLEngineEncapsulate implements TrainTest
 		public List<PRSetup> getTestControllerSetup(MLEngineConfig config) throws MalformedURLException
 		{
 			List<PRSetup> ret = super.getTestControllerSetup(config);
-			ret.add(new PRSetup.SinglePRSetup(LearningEvaluator.class)
+			ret.add(new PRSetup.MLEvaluateSetup(config.evaluation_register)
 				.putFeature("keyASName", config.keyAS)
 				.putFeature("responseASName", config.outputAS)
 				.putFeature("annotationTypes", config.originalLearnigAnnotationTypes));
-		
+					
 			return ret;
 		}	
 	}

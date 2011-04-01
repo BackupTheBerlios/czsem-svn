@@ -16,6 +16,7 @@ import org.jdom.Element;
 import org.jdom.JDOMException;
 
 import czsem.gate.learning.MachineLearningExperiment.TrainTest;
+import czsem.gate.plugins.LearningEvaluator;
 import czsem.utils.JDomUtils;
 
 public abstract class MLEngine implements TrainTest
@@ -29,6 +30,8 @@ public abstract class MLEngine implements TrainTest
 		public String learnigAnnotationType = "Mention";
 		/** To be translated to the 'class' feature of the 'Mention' learning annotation type. **/
 		public List<String> originalLearnigAnnotationTypes;
+		
+		public List<LearningEvaluator> evaluation_register;
 	}
 		
 	private String outputAS;

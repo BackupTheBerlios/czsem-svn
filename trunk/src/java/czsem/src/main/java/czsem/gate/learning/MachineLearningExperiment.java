@@ -35,11 +35,15 @@ public class MachineLearningExperiment
 	
 	protected DataSet dataSet;
 	protected MachineLearningExperiment.TrainTest[] engines;
+
+	private List<LearningEvaluator> evaluation_register;
 	
 	public MachineLearningExperiment(DataSet dataSet, MachineLearningExperiment.TrainTest ... engines)
 	{
 		this.dataSet = dataSet;
 		this.engines = engines;
+		
+		this.evaluation_register = new ArrayList<LearningEvaluator>();
 		
 		inputLearninigAS = dataSet.getTectoMTAS();
 	}
@@ -78,7 +82,9 @@ public class MachineLearningExperiment
 		ret.outputAS = engine.getDefaultOutputAS();
 		ret.learnigAnnotationType = engine.getDefaultLearningAnnotationType();
 		ret.keyAS = dataSet.getKeyAS();
-		ret.originalLearnigAnnotationTypes = Arrays.asList(dataSet.getLearnigAnnotationTypes()); 
+		ret.originalLearnigAnnotationTypes = Arrays.asList(dataSet.getLearnigAnnotationTypes());
+		
+		ret.evaluation_register = this.evaluation_register;
 		return ret;
 	}
 
@@ -146,11 +152,15 @@ public class MachineLearningExperiment
 	    SerialAnalyserController train_controller = getTrainController();
 	    SerialAnalyserController test_controller = getTestController();
 	    
-		new PRSetup.SinglePRSetup(CrossValidation.class)
+		CrossValidation crossvalid = 
+			(CrossValidation) new PRSetup.SinglePRSetup(CrossValidation.class)
 			.putFeature("corpus", dataSet.getCorpus())
 			.putFeature("numberOfFolds", numOfFolds)
 			.putFeature("trainingPR", train_controller)
-			.putFeature("testingPR", test_controller).createPR().execute();
+			.putFeature("testingPR", test_controller).createPR();
+		
+		crossvalid.evaluation_register = evaluation_register;
+		crossvalid.execute();
 		
 		LearningEvaluator.CentralResultsRepository.repository.logAll();
 	}

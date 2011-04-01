@@ -1,29 +1,26 @@
 package czsem.gate.learning;
 
 import gate.util.AnnotationDiffer;
-import gate.util.profile.Profiler;
 import gate.util.reporting.exceptions.BenchmarkReportInputFileFormatException;
 
-import java.io.FileNotFoundException;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.PrintStream;
 import java.net.URISyntaxException;
 import java.nio.charset.Charset;
-import java.nio.charset.CharsetDecoder;
-import java.nio.charset.CharsetEncoder;
 import java.util.Collection;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
 
+import com.csvreader.CsvReader;
 import com.csvreader.CsvWriter;
 
 import czsem.gate.GateUtils;
 import czsem.gate.GateUtils.TimeBenchmarkReporter;
-import czsem.gate.learning.WekaResultExporter.Result;
 import czsem.gate.plugins.LearningEvaluator;
+import czsem.gate.plugins.LearningEvaluator.DiffCondition;
+import czsem.gate.plugins.LearningEvaluator.DocumentDiff;
 import czsem.utils.ProjectSetup;
 
 public class WekaResultExporter
@@ -73,6 +70,7 @@ public class WekaResultExporter
 							r.setTestTime((String) child);
 						}
 						
+						
 					}
 
 //					out.println("\t" + child); //time
@@ -98,36 +96,16 @@ public class WekaResultExporter
 	}
 
 	
+
+	
 	public static final String[] header =
-	{
-/*
-		learningEvaluator.getAnnotationTypes().toString(), //Key_Dataset
-		//Key_Run
-		//Key_Fold
-		learningEvaluator.getKeyASName(),//Key_Scheme
-		//Key_Scheme_options
-		//Key_Scheme_version_ID
-		//Date_time
-		//Number_of_training_instances
-		//Number_of_testing_instances
-		diff.getCorrectMatches(),
-		diff.getMissing(),
-		diff.getSpurious(),
-		diff.getPartiallyCorrectMatches(),
-		diff.getPrecisionStrict(),
-		diff.getRecallStrict(),
-		diff.getFMeasureStrict(1),
-		diff.getFMeasureLenient(1),
-		diff.getFMeasureAverage(1)
-*/
-		
+	{		
 		"Key_Dataset",
-//		"Key_Run",
-//		"Key_Fold",
-		"Key_ResponseAS",
-		"Key_KeyAS",
-//		"Key_Scheme_options",
-//		"Key_Scheme_version_ID",
+		"Key_Run",
+		"Key_Fold",
+		"Key_Scheme",
+		"Key_Scheme_options",
+		"Key_Scheme_version_ID",
 		"Date_time",
 //		"Number_of_training_instances",
 //		"Number_of_testing_instances",
@@ -148,10 +126,22 @@ public class WekaResultExporter
 		"Elapsed_Time_training",
 		"Elapsed_Time_testing",
 	};
-
 	
 	protected static class Result
 	{
+		public void setTestTime(String time) {
+			setField(data.length-1, time);			
+		}
+		public void setTrainTime(String time) {
+			setField(data.length-2, time);						
+		}
+		public String getResponsesASName() {
+			return data[3];
+		}	
+		public void setRunNumber(int run_number) {
+			setField(1, run_number);
+		}
+
 		String data[];
 
 		public Result()
@@ -159,19 +149,12 @@ public class WekaResultExporter
 			data = new String[header.length];			
 		}
 
-		public void setTestTime(String time)
+		protected void setField(int index, Object value)
 		{
-			data[data.length-1] = time;			
+			data[index] = value.toString();
 		}
+		
 
-		public void setTrainTime(String time)
-		{
-			data[data.length-2] = time;						
-		}
-
-		public String getResponsesASName() {
-			return data[1];
-		}
 
 		public Result(Object ... data)
 		{
@@ -186,16 +169,15 @@ public class WekaResultExporter
 			
 		}
 		
-		public Result(LearningEvaluator learningEvaluator, AnnotationDiffer diff, String timestamp)
+		public Result(LearningEvaluator learningEvaluator, AnnotationDiffer diff, int fold_number, String timestamp)
 		{
 			this(					
 					learningEvaluator.getAnnotationTypes().toString(), //Key_Dataset
-					//Key_Run
-					//Key_Fold
-					learningEvaluator.getResponseASName(),//Key_ResponseAS
-					learningEvaluator.getKeyASName(),//Key_KeyAS
-					//Key_Scheme_options
-					//Key_Scheme_version_ID
+					learningEvaluator.actualRunNumber,//Key_Run
+					fold_number,//Key_Fold
+					learningEvaluator.getResponseASName(),//Key_Scheme
+					learningEvaluator.getKeyASName(),//Key_Scheme_options
+					"a",//Key_Scheme_version_ID
 					timestamp,//Date_time
 					//Number_of_training_instances
 					//Number_of_testing_instances
@@ -257,6 +239,7 @@ public class WekaResultExporter
 					//measureNumRules
 			);
 		}
+
 		
 	}
 	
@@ -284,13 +267,33 @@ public class WekaResultExporter
 
 		Collection<LearningEvaluator> rep_contnet = LearningEvaluator.CentralResultsRepository.repository.getContent();
 		
-		results = new Result[rep_contnet.size()]; 
+		if (rep_contnet.isEmpty()) return;
+		
+		int num_of_folds = rep_contnet.iterator().next().actualFoldNumber;
+		
+		results = new Result[rep_contnet.size()*num_of_folds]; 
 		int a=0;
 		for (LearningEvaluator learningEvaluator : rep_contnet)
 		{
-			AnnotationDiffer eval = LearningEvaluator.CentralResultsRepository.repository.getOveralResults(learningEvaluator);
-			
-			results[a] = new Result(learningEvaluator, eval, timestamp );
+			for (int fold=0; fold < num_of_folds; fold++)
+			{
+				final int fold_number = fold+1;
+				
+				AnnotationDiffer eval = 
+					LearningEvaluator.CentralResultsRepository.repository.
+
+//					getOveralResults(learningEvaluator, new AllDiffsCondition());
+					getOveralResults(learningEvaluator, 
+/**/
+						new DiffCondition() {
+							@Override
+							public boolean evaluate(DocumentDiff diff) {
+								return diff.foldNumber == fold_number;
+							}
+						});
+/**/				
+				results[a*num_of_folds+fold] = new Result(learningEvaluator, eval, fold_number, timestamp );
+			}
 			a++;
 		}				
 	}
@@ -305,25 +308,61 @@ public class WekaResultExporter
 		FileOutputStream out = new FileOutputStream(filename, append);
 		CsvWriter wr = new CsvWriter(out, ',', Charset.defaultCharset());
 		
-		if (! append) wr.writeRecord(header);
+		int run_number;
+		if (append)
+		{
+			run_number = lastRunNumberFromData(filename)+1;
+		}
+		else
+		{
+			run_number = 1;
+			wr.writeRecord(header);
+		}
 		
 		for (int i = 0; i < results.length; i++)
 		{
-			wr.writeRecord(results[i].data);
+			Result res = results[i];
+			res.setRunNumber(run_number);
+			wr.writeRecord(res.data);
 			
 		}
 		
 		wr.close();		
 	}
 
+	private int lastRunNumberFromData(String filename) throws IOException
+	{
+		int ret = 0;
+		
+		FileInputStream in = new FileInputStream(filename);
+		CsvReader rd = new CsvReader(in, ',', Charset.defaultCharset());
+		
+		rd.readHeaders();
+		while (rd.readRecord())
+		{
+			String cur = rd.get("Key_Run");
+			int cur_int = Integer.parseInt(cur);
+			ret = Math.max(ret, cur_int);
+		}
+		
+		rd.close();
+		
+		return ret;
+	}
+
+
 	public static void main(String [] args) throws BenchmarkReportInputFileFormatException, URISyntaxException, IOException
 	{
 		String[][] data = 
 		{
-				{"data","Paum"},
-				{"data","ILP_config_NE_roots"},
-				{"data","ILP_config_NE_roots_subtree"},
-				{"data","ILP_config"},		
+				{"data","2","1","Paum"},
+				{"data","2","1","ILP_config_NE_roots"},
+				{"data","2","1","ILP_config_NE_roots_subtree"},
+				{"data","2","1","ILP_config"},		
+				{"data","2","2","Paum"},
+				{"data","2","2","ILP_config_NE_roots"},
+				{"data","2","2","ILP_config_NE_roots_subtree"},
+				{"data","2","2","ILP_config"},		
 		};
 		
 		System.err.println(GateUtils.createGateTimeBenchmarkReport());
@@ -331,7 +370,7 @@ public class WekaResultExporter
 		WekaResultExporter ex = new WekaResultExporter(data);
 		ex.addInfoFromTimeBechmark();
 		
-		ex.saveAll("main.csv", false);
+		ex.saveAll("main.csv", true);
 		
 	}
 

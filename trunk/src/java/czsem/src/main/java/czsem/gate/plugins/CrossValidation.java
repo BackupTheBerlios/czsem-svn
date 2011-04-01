@@ -23,6 +23,7 @@ import gate.util.GateException;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.util.Collections;
+import java.util.List;
 
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
@@ -43,6 +44,7 @@ public class CrossValidation extends AbstractProcessingResource
 	/**	two dimensional - corpusFolds[fold][0] small (testing), corpusFolds[fold][1] remaining large (training) */
 	protected Corpus [][] corpusFolds;
 	protected GateUtils.Evidence<Document> documentEvidence [];
+	public List<LearningEvaluator> evaluation_register = null;
 	
 	
 	@SuppressWarnings("unchecked")
@@ -148,6 +150,8 @@ public class CrossValidation extends AbstractProcessingResource
 			
 			for (int i = 0; i < numberOfFolds; i++)
 			{
+				updateEvaluatorsFold(i);
+				
 				//training
 				logger.info(String.format("training fold %3d", i));
 				GateUtils.safeDeepReInitPR_or_Controller(training_controller);
@@ -176,6 +180,18 @@ public class CrossValidation extends AbstractProcessingResource
 		}
 	}
 	
+	private void updateEvaluatorsFold(int fold_index)
+	{
+		if (evaluation_register == null) return;
+		
+		for (LearningEvaluator eval : evaluation_register)
+		{
+			eval.actualFoldNumber = fold_index+1;			
+		}
+		
+	}
+
+
 	protected void syncAllDocuments() throws PersistenceException, SecurityException
 	{
 		for (int i = 0; i < documentEvidence.length; i++)

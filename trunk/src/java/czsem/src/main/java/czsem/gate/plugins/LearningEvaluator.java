@@ -50,12 +50,12 @@ public class LearningEvaluator extends AbstractLanguageAnalyser
 			return repository_map.keySet();
 		}
 		
-		public AnnotationDiffer getOveralResults(LearningEvaluator e)
+		public AnnotationDiffer getOveralResults(LearningEvaluator e, DiffCondition diffCondition)
 		{
-			return e.countOverallDiffer(repository_map.get(e));
+			return e.countOverallDiffer(repository_map.get(e), diffCondition);
 		}
 		
-		public void Add(LearningEvaluator eval, DocumentDiff diff)
+		public void addDocumentDiff(LearningEvaluator eval, DocumentDiff diff)
 		{
 			List<DocumentDiff> prev = repository_map.get(eval);
 			if (prev == null) prev = new ArrayList<LearningEvaluator.DocumentDiff>();
@@ -76,9 +76,13 @@ public class LearningEvaluator extends AbstractLanguageAnalyser
 	
 	public static class DocumentDiff
 	{
-		public DocumentDiff(String documentName) {
+		public DocumentDiff(String documentName, int runNumber, int foldNumber) {
 			this.documentName = documentName;
+			this.runNumber = runNumber;
+			this.foldNumber = foldNumber;
 		}
+		public int runNumber = 0;
+		public int foldNumber = 0;
 		public String documentName;
 		public AnnotationDiffer []	diff;	
 	}
@@ -95,7 +99,11 @@ public class LearningEvaluator extends AbstractLanguageAnalyser
 	
 	private List<DocumentDiff> documentDifs;
 	
-	private boolean keyAnnotationsAreInDocumentFeatures; 
+	private boolean keyAnnotationsAreInDocumentFeatures;
+	
+	public int actualRunNumber = 0;
+	public int actualFoldNumber = 0;
+
 
 	protected AnnotationDiffer calculateDocumentDiff(Document document, String annotTypeName)
 	{				
@@ -136,11 +144,11 @@ public class LearningEvaluator extends AbstractLanguageAnalyser
 		keyAS = document.getAnnotations(keyASName);
 		responseAS = document.getAnnotations(responseASName);
 		
-		DocumentDiff diff = new DocumentDiff(document.getName());
+		DocumentDiff diff = new DocumentDiff(document.getName(), actualRunNumber, actualFoldNumber);
 		diff.diff = calculateDocumentDiff(document);
 		
 		documentDifs.add(diff);
-		CentralResultsRepository.repository.Add(this, diff);
+		CentralResultsRepository.repository.addDocumentDiff(this, diff);
 		
 		if (documentDifs.size() == corpus.size())
 		{
@@ -164,14 +172,26 @@ public class LearningEvaluator extends AbstractLanguageAnalyser
 	}
 	
 	
-	public AnnotationDiffer countOverallDiffer(List<DocumentDiff> docDifs)
+	public static interface DiffCondition
+	{
+		boolean evaluate(DocumentDiff diff);		
+	}
+	
+	public static class AllDiffsCondition implements DiffCondition
+	{
+		@Override
+		public boolean evaluate(DocumentDiff diff) {return true;}	
+	}
+	
+	public AnnotationDiffer countOverallDiffer(List<DocumentDiff> docDifs, DiffCondition diffCondition)
 	{
 		ArrayList<AnnotationDiffer> overall = new ArrayList<AnnotationDiffer>
 			(annotationTypes.size() * docDifs.size());
 	
 		for (DocumentDiff diff : docDifs)
 		{
-			overall.addAll(Arrays.asList(diff.diff));			
+			if (diffCondition.evaluate(diff))
+				overall.addAll(Arrays.asList(diff.diff));			
 		}
 				
 		return new AnnotationDiffer(overall);		
@@ -179,7 +199,7 @@ public class LearningEvaluator extends AbstractLanguageAnalyser
 	
 	protected void logStatistics(List<DocumentDiff> docDifs)
 	{								
-		AnnotationDiffer overall_differ = countOverallDiffer(docDifs);
+		AnnotationDiffer overall_differ = countOverallDiffer(docDifs, new AllDiffsCondition());
 		
 		Logger logger = Logger.getLogger(getClass());
 		

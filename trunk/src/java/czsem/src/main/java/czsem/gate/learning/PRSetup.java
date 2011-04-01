@@ -3,6 +3,8 @@ package czsem.gate.learning;
 import java.util.Arrays;
 import java.util.List;
 
+import czsem.gate.plugins.LearningEvaluator;
+
 import gate.Factory;
 import gate.FeatureMap;
 import gate.ProcessingResource;
@@ -49,6 +51,28 @@ public abstract class PRSetup
 			return(ProcessingResource) Factory.createResource(pr_class.getCanonicalName(), fm, null, name);			
 		}				
 	}
+	
+	public static class MLEvaluateSetup extends SinglePRSetup
+	{
+
+		private List<LearningEvaluator> evaluation_register;
+
+		public MLEvaluateSetup(List<LearningEvaluator> evaluation_register)
+		{
+			super(LearningEvaluator.class);
+			this.evaluation_register = evaluation_register;
+		}
+
+		@Override
+		public ProcessingResource createPR() throws ResourceInstantiationException
+		{
+			ProcessingResource ret = super.createPR();
+			evaluation_register.add((LearningEvaluator) ret);
+			return ret;
+		}
+
+	}
+
 
 	public abstract ProcessingResource createPR() throws ResourceInstantiationException;
 
