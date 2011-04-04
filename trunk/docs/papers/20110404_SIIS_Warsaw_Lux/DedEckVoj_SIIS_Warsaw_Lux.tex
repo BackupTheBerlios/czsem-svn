@@ -23,7 +23,7 @@
 \usepackage{graphicx}
 
 \usepackage{url}
-\urldef{\mailsa}\path|{alfred.hofmann, ursula.barth, ingrid.haas, frank.holzwarth,|
+\urldef{\mailsa}\path|{dedek, eckhardt, vojtas}@ksi.mff.cuni.cz|
 \urldef{\mailsb}\path|anna.kramer, leonie.kunz, christine.reiss, nicole.sator,|
 \urldef{\mailsc}\path|erika.siebert-cole, peter.strasser, lncs}@springer.com|    
 \newcommand{\keywords}[1]{\par\addvspace\baselineskip
@@ -52,12 +52,13 @@
 
 % the affiliations are given next; don't give your e-mail address
 % unless you accept that it will be published
-\institute{Department of software engineering, Faculty of Mathematics and Physics\\
+\institute{Department of Software Engineering, Faculty of Mathematics and Physics\\
 Charles University in Prague, Czech Republic \\
 \mailsa\\
-\mailsb\\
-\mailsc\\
-\url{http://www.ksi.mff.cuni.cz/}}
+%\mailsb\\
+%\mailsc\\
+%\url{http://www.ksi.mff.cuni.cz/}
+}
 
 %
 % NB: a more complex sample for affiliations and the mapping to the
@@ -84,13 +85,13 @@ Semantic annotation (SA) is considered to be one of the most important elements 
 Web information extraction \cite{biblio:WebDataMining} is often able to extract valuable data. We would like to couple the extraction process with the consecutive semantic annotation (initially human trained; later it should operate automatically). Our idea is to split the extraction process in two parts - domain independent and domain dependent. 
 
 
-Our first approach for domain independent intermediate information extraction and semantic annotation is to use the structural similarity in web pages containing large number of table cells and for each cell a link to detailed pages. This is often presented in web shops and on pages that presents more than one object (product offer). Each object is presented in a similar way and this fact can be exploited. [Marušèák]
+Our first approach for domain independent intermediate information extraction and semantic annotation is to use the structural similarity in web pages containing large number of table cells and for each cell a link to detailed pages. This is often presented in web shops and on pages that presents more than one object (product offer). Each object is presented in a similar way and this fact can be exploited \cite{biblio:EcHoUncertaintyIssues2008}.
 
 
-Our second approach for Web information extraction is targeted to textual pages. It is based on deep linguistic analysis (DLA) produced by Czech linguistics and NLP tools. We use a chain of linguistic analyzers prom the PDT and TectoMT projects that processes the text presented on a web page and produces linguistic (syntactic) trees corresponding with particular sentences. These trees serve as a basis of our semantic extraction. We use a machine learning method based on Inductive Logic Programming (ILP). The combination of DLA and ILP have several benefits: no need of manual selection of learning features, the learning procedure is capable to select relevant parts itself and to construct linguistic extraction rules, which can be easily visualized, understood and adapted by human. [Dìdek]
+Our second approach for Web information extraction is targeted to textual pages. It is based on deep linguistic analysis (DLA) produced by Czech linguistics and NLP tools. We use a chain of linguistic analyzers prom the PDT and TectoMT projects that processes the text presented on a web page and produces linguistic (syntactic) trees corresponding with particular sentences. These trees serve as a basis of our semantic extraction. We use a machine learning method based on Inductive Logic Programming (ILP). The combination of DLA and ILP have several benefits: no need of manual selection of learning features, the learning procedure is capable to select relevant parts itself and to construct linguistic extraction rules, which can be easily visualized, understood and adapted by human \cite{biblio:DedekISWC2010}. 
 
 \subsection{Collaborative Approach}
-Although automated and machine learning based methods for Information Extraction and Semantic Annotation can significantly reduce the amount of necessary human work, it is clear that it will be never possible avoid it completely. Therefore it is useful to heave a fancy tool that would be attractive to human users providing them an easy way of doing manual semantic annotation [Fisher]. Thus these users could benefit from having the content of their interest semantically annotated with as low cost as possible. To reduce the costs, which means to reduce the amount of manual annotations per user, we plan to develop a community site with a semantic repository [Lašek] where annotation work can be shared amongst users and assisted by automated tools.
+Although automated and machine learning based methods for Information Extraction and Semantic Annotation can significantly reduce the amount of necessary human work, it is clear that it will be never possible avoid it completely. Therefore it is useful to heave a fancy tool that would be attractive to human users providing them an easy way of doing manual semantic annotation \cite{biblio:FiserMaster}. Thus these users could benefit from having the content of their interest semantically annotated with as low cost as possible. To reduce the costs, which means to reduce the amount of manual annotations per user, we plan to develop a community site with a semantic repository \cite{biblio:LasekWWW} where annotation work can be shared amongst users and assisted by automated tools.
 
 \section{User preferences on the web}
 User preference learning is also loosely connected to Semantic web. It is not the core aspect, but without knowing the users needs, the semantic web wouldn't be able to improve user experience. We are investigating the area of preference learning. Since this area consists of many diverse topics, we currently concentrate on content based learning from user's ratings, but the focus shifts towards interpreting user behaviour. Our main motivation is preference learning. The main focus is to learn the preference of one specific user - we are not interested in "the average user".
