@@ -100,7 +100,7 @@ User preference learning is also loosely connected to Semantic web. It is not th
 We are working with the assumption of having annotated data in the database or other repository. Semantic web initiative enables the annotation of data. Annotated data allows us to use the attributes of the objects that may be difficult to find. The attributes may be stored on different web sites; the pages may have complicated structure, etc. 
 
 
-The paradigm of content based learning is to understand what properties an object should have in order to be preferred. Knowing which attribute values are desirable is important for many reasons. Being able to visualise the object and to emphasise those desired properties is the user interface part [Vaclav] (see the picture). Another advantage is the use of preferences in the database aspect, top-k query answering and indexing techniques [Fagin]. 
+The paradigm of content based learning is to understand what properties an object should have in order to be preferred. Knowing which attribute values are desirable is important for many reasons. Being able to visualise the object and to emphasise those desired properties is the user interface part \cite{biblio:FiserMaster} \textbf{(see the picture)}. Another advantage is the use of preferences in the database aspect, top-k query answering and indexing techniques \cite{Fagin:2001:OAA:375551.375567}. 
 
 
 Our approach is divided into two steps - criteria for each attribute are learnt during the first step, the preference degrees of attributes are aggregated into the overall preference of the whole object during the second step. The first step transforms attributes from ``price'' to ``cheap'' and ``weight'' to ``light'' (or ``heavy'', which depends on the user). The second step then computes the overall preference of the object, based on the satisfaction of the (learnt) criteria.
@@ -109,7 +109,7 @@ Our approach is divided into two steps - criteria for each attribute are learnt 
 There are various problems addressed. The first kind of problem comes from the preference nature - the sample rated by the user on the web is often very small (up to 50 objects) and the rating is given on a small set of rating, usually 1,2,3,4,5. Another kind of problem arises from the need to have a transparent user preference model, which will allow it to be used in other components of the system - indexing, query processing.
 
 
-The most recent area is user behaviour mining. This area is much more difficult than using user ratings to assess his/her preferences, because behaviour contains the preferences only implicitly and we cannot be sure whether they are contained at all. However, our preliminary experiments in [Peska] have shown that it is possible even on real world web shops. Much more investigation is needed in this area for better acquaintance with the subject. 
+The most recent area is user behaviour mining. This area is much more difficult than using user ratings to assess his/her preferences, because behaviour contains the preferences only implicitly and we cannot be sure whether they are contained at all. However, our preliminary experiments in \cite{biblio:Peska} have shown that it is possible even on real world web shops. Much more investigation is needed in this area for better acquaintance with the subject. 
 
 
 
