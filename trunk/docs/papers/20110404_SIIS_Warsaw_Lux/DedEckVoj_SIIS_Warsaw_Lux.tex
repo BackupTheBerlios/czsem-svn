@@ -99,8 +99,15 @@ User preference learning is also loosely connected to Semantic web. It is not th
  
 We are working with the assumption of having annotated data in the database or other repository. Semantic web initiative enables the annotation of data. Annotated data allows us to use the attributes of the objects that may be difficult to find. The attributes may be stored on different web sites; the pages may have complicated structure, etc. 
 
+\begin{figure}
+	\centering
+		\includegraphics{imgVaclav}
+	\caption{Attribute visualisation in the web shop interface}
+	\label{img:Vaclav}
+\end{figure}
 
-The paradigm of content based learning is to understand what properties an object should have in order to be preferred. Knowing which attribute values are desirable is important for many reasons. Being able to visualise the object and to emphasise those desired properties is the user interface part \cite{biblio:FiserMaster} \textbf{(see the picture)}. Another advantage is the use of preferences in the database aspect, top-k query answering and indexing techniques \cite{Fagin:2001:OAA:375551.375567}. 
+
+The paradigm of content based learning is to understand what properties an object should have in order to be preferred. Knowing which attribute values are desirable is important for many reasons. Being able to visualise the object and to emphasise those desired properties is the user interface part \cite{biblio:FiserMaster} (see the picture \ref{img:Vaclav}). Another advantage is the use of preferences in the database aspect, top-k query answering and indexing techniques \cite{Fagin:2001:OAA:375551.375567}. 
 
 
 Our approach is divided into two steps - criteria for each attribute are learnt during the first step, the preference degrees of attributes are aggregated into the overall preference of the whole object during the second step. The first step transforms attributes from ``price'' to ``cheap'' and ``weight'' to ``light'' (or ``heavy'', which depends on the user). The second step then computes the overall preference of the object, based on the satisfaction of the (learnt) criteria.
