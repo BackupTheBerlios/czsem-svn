@@ -1,0 +1,153 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Linguistic tools for automatic annotation of texts} \label{sec:ling_tools}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+In this section we will describe the linguistic tools that we have used to produce linguistic annotation of texts. These tools are being developed in the Institute of Formal and Applied Linguistics\footnote{\url{http://ufal.mff.cuni.cz}} in Prague (ÚFAL), Czech Republic. They are publicly available -- they have been published on a CD-ROM under the title PDT 2.0 -- \citealt{biblio:PDT20_CD} (first five tools) and in \citealt{biblio:KlTransformationBasedTectogrammatical2006} (Tectogrammatical analysis). These tools are used as a processing chain and at the end of the chain they produce tectogrammatical \citep{biblio:MiBeAnnotationtectogrammatical2006} dependency trees. The Table~\ref{tab:ling_tools} shows some details about these tools.
+
+
+
+\begin{enumerate}
+	\item \textbf{Segmentation and tokenization} consists of tokenization (dividing the input text into words and  punctuation) and segmentation (dividing a sequences of tokens into sentences).
+	
+	\item \textbf{Morphological analysis} assigns all possible lemmas and morphological tags to particular word forms (word occurrences) in the text.
+	
+	\item \textbf{Morphological tagging} consists in selecting a single pair lemma-tag from all possible alternatives assigned by the morphological analyzer.
+	
+	\item \textbf{Collins' parser -- Czech adaptation} \citep{biblio:collinshbrt_1999}
+		
+Unlike the usual approaches to the description of English syntax, the Czech syntactic descriptions are dependency-based, which means, that every edge of a syntactic tree captures the relation of dependency between a governor and its dependent node. Collins' parser gives the most probable parse of a given input sentence.
+	
+	\item \textbf{Analytical function assignment} assigns a description (\emph{analytical function} -- in linguistic sense) to every edge in the syntactic (dependency) tree.
+	
+	\item \textbf{Tectogrammatical analysis} \citep{biblio:KlTransformationBasedTectogrammatical2006} produces linguistic annotation at the tectogrammatical level.
+
+%	Tectogrammatical analysis produces linguistic annotation at the tectogrammatical layer, sometimes called “layer of deep syntax”. Annotation of a sentence at this layer is closer to meaning of the sentence than its syntactic annotation and thus information captured at the tectogrammatical layer is crucial for machine understanding of a natural language \citep{biblio:KlTransformationBasedTectogrammatical2006}.
+	 
+\end{enumerate}
+
+
+
+
+
+\begin{table}
+\centering
+\caption{Linguistic tools for machine annotation}
+%\renewcommand{\arraystretch}{1.4}
+	\begin{tabular}{l|l}
+		Name of the tool & Evaluation results (proclaimed by authors) \\[4pt]
+		\hline
+	Segmentation and tokenization & precision(p): 98,0\%, recall(r): 91,4\% \\[4pt]
+	Morphological analysis & 2,5\% unrecognized words\\
+	Morphological tagging & 93,0\% of tags assigned correctly \\[4pt]
+	Collins' parser -- Czech adaptation & 81,6\% dependencies assigned correctly\\
+	Analytical function assignment & precision: 92\% \\[4pt]
+	Tectogrammatical analysis & dependencies p:~90,2\%, r:~87,9\%\\
+	\hspace*{0.2cm} \citep{biblio:KlTransformationBasedTectogrammatical2006} & assignment of f-tags p:~86,5\%, r:~84,3\%\\
+	\end{tabular}
+\label{tab:ling_tools}
+\end{table}
+
+
+
+
+
+\noindent Although all tools mentioned above are a part of the processing chain mentioned in the previous chapter, the errors they produce are not multiplied. The numbers listed in the table are measured against a corresponding level of the Prague Dependency Treebank. If, for example, the morphological tagger, which is used as a prerequisite of the analytical parser (Collins' parser), has a precision of 93\%, the 7\% of incorrectly assigned tags definitely have some influence on the quality of the result of the parser. This influence is nevertheless already reflected in the 81,6\% precision of the parser. The results of the parser are measured against the correct trees contained in the PDT, therefore the precision of the parser is the \textbf{total} precision of the combination of the tagger and the parser. On the other hand, the (linguistic) analytical function assignment and the tectogrammatical analysis are both more or less dependent on the results of the previous phases and their precision has to be taken as a precision obtained on (already slightly imprecise) results of the analytical parser.
+
+These facts are important especially wrt. possible extension of the system in the future. It might be an interesting research topic to compare the results of the information extraction obtained through the exploitation of the full processing chain versus the results of the analytical parser only - the complications caused by the differences between the analytical level of representation and the desired structure of extracted information might be compensated by decreasing the amount of imprecision present in the system.     
+
+
+
+\section{Manually Created Rules}
+\subsection{Introduction IIS}
+The goal of the Semantic Web initiative \citep{biblio:2001-Berners-Lee-SemanticWeb} is to create an universal medium for the exchange of data. It is envisaged to smoothly interconnect systems, integrate application and to support the global sharing of data. The main step is to put machine-understandable data to the Web. To achieve this, we need standards and semantics for semantic enrichment of data. This is well in progress in ontological modeling (see \citealt{biblio:OWL}). Further we need to create semantic data, i.e. data annotated by ontological concepts sufficient for machine processing. Semantic annotation of data can be done either during the creation of data (by author or data generator) or after it (third party annotation). The third party annotation assumes we can extract (recognize) data from Web resources. 
+
+Semantic extraction of data from Web resources can be seen in three dimensions. The first dimension is the amount of human work associated with the extraction method. This dimension ranges from human hand written  through semiautomatic (human trained) to fully automatic approach. The second dimension is the difficulty of the automatic processing of the resource --- ranging from easy (tables generated from databases) through semistructured resources to textual resources. The third dimension of the problem is the selectivity of the extraction task --- ranging from document classification thorough data region and data record recognition to the extraction of attribute values \citep{biblio:Survey_of_Web_Information_Extraction_Systems}. Long distance goal of our research is to come closer to data extraction in the most difficult setting in all the dimensions. Some initial proposals and experiments are presented in this paper.
+
+In this paper we describe initial experiments with information extraction from traffic accident reports of fire departments in several regions of the Czech Republic. We would like to demonstrate the prospects of using linguistic tools developed in the Institute of Formal and Applied Linguistics in Prague (described in \ref{sec:ling_tools}). These experiments are promising, they e.g. enable the summarization of the number of injured people. 
+
+
+
+\subsection{Method details}
+
+We propose a relatively straightforward process for the extraction of semantic data from text-based web-resources. This process consists of four steps. The Figure~\ref{img:extract_process} describes it.
+
+
+We propose a relatively straightforward process for the extraction of semantic data from text-based web-resources. This process consists of four steps. The Figure~\ref{img:extract_process} describes it.
+
+\begin{enumerate}
+\item \textbf{Extraction of text} \\ The linguistic annotating tools process plain text only. In this phase we have to extract the text from the structure of a given web-resource. In this first phase we have used RSS feed of the fire department web-page. From this we have obtained URLs of particular articles and we have downloaded them. Finally we have extracted the desired text by means of a regular expression.
+
+%Lingvistické anotátory zpracovávají prostý text, který v této fázi musíme z~webové stránky získat.
+
+\item \textbf{Linguistic annotation} \\ In this phase the linguistic annotators process the extracted text and produce corresponding set of dependency trees representing the deep syntactic structure of individual sentences. We have used the linguistic tools described in the section~\ref{sec:ling_tools} for this task.
+
+%Extrahovaný text pøedložíme lingvistickému anotátoru, který v textu rozpozná jednotlivé vìty a zkonstruuje z nich lingvistické stromy.
+
+%\pagebreak
+
+\item \textbf{Data extraction} \\ We use the structure of tectogrammatic (i.e. deep syntactic) dependency trees to extract relevant data. 
+See section \ref{sec:extraction} for more details.
+
+%Pomocí lingvistické struktury jednotlivých vìt extrahujeme data, která reprezentují informace vyjádøené v textu. Podrobnosti -- viz sekce \ref{sec:extraction}.
+
+\item \textbf{Semantic representation} \\ This phase consists of quite simple data transformation or conversion to the desired ontology format. But it is quite important to choose suitable ontology that will properly represent semantics of the data. We have not implemented this phase yet.
+
+%V této fázi sémanticky interpretujeme extrahovaná data pomocí konceptù vhodné ontologie.
+\end{enumerate}
+
+
+
+\subsection{Implementation}
+The extraction method we have used is based on extraction rules. These rules correspond to query requests of Netgraph application. The Netgraph application \citep{biblio:MiNetgraphA2006} is a linguistic tool used for searching through a syntactically annotated corpus of a natural language. It was originally developed for searching the analytical and tectogrammatical levels of the Prague Dependency Treebank, a richly syntactically annotated corpus of Czech \citep{biblio:PDT20_CD}.
+
+Netgraph queries are written in a special query language. An example of such Netgraph query can be found in the Figure~\ref{img:extract_patern}. The Netgraph is a general tool for searching trees, it is not limited only to the trees in the PDT format. In our application we use it for searching the tectogrammatical trees provided by a set of language processing tools described in the previous chapter.  The tectogrammatical trees have a very convenient property of containing just the type of information we need for our purpose, namely the information about inner participants of verbs - actor, patient, addressee etc. 
+
+The tectogrammatical (deep syntactic) level of representation is more suitable for our purpose than the analytical (surface syntactic) level of representation of the structure of each sentence. The inner participants (actor, patient, addressee etc.) provide much more reliable information about the actual meaning of the sentence than the syntactic roles (subject, object etc.). The roles of a subject or object are misleading especially in the case of passive sentences, where usually the subject of the sentence corresponds to the patient or addressee while the actor is expressed by an object of the passive sentence. In these cases it would be necessary to develop (for the analytical level representation) some kind of algorithm analyzing these cases and providing the assignment of proper roles to individual words, while at the tectogrammatical level we get the desired information directly.
+
+The extraction works as follows: the extraction rule is in the first step evaluated by searching through a set of syntactic trees. Matching trees are returned and the desired information is taken from particular tree nodes.
+
+
+Let us explain it in more detail by using the example of extraction rule from the Figure~\ref{img:extract_patern}. This rule consists of five nodes. Each node of the rule will match some node in each matching tree. So we can investigate the relevant information by reading values of linguistic tags of matching nodes. We can find out the number (node number 5) and kind (4) of people, which were or were not (2) killed or injured (1) by an accident that is presented in the given sentence. And we can also identify the manner of injury in the node number 3.
+
+
+\subsection{Datasets}
+
+The Ministry of Interior of the Czech Republic presents on its Web pages\footnote{\url{http://www.mvcr.cz/rss/regionhzs.html}} also reports from fire departments of several regions of the Czech Republic. These departments are responsible for rescue and recovery after traffic accidents. These reports are rich in information, e.g. where and when an traffic accident occurred, which units helped, how much time it took them to show up on the place of accident, how many people were injured, killed etc. An example of such report can be seen in the Figure~\ref{img:web_page}.
+
+
+Nevertheless, there are also reports about fire accidents and also about fire-fighting contests. The task to extract information on the number of injured/killed people in traffic accidents needs deep linguistic analysis.
+
+
+In an ideal case all these reports would be already semantically annotated, e.g. using \emph{RDFa}. In this case extraction could be done fully automatically by a software agent. In our case, there is no semantic annotation present in the reports.
+
+
+\subsection{Experiments}
+
+Small part of the result of the extraction is shown in the Figure~\ref{img:extract_output}. This result contains three pieces of information extracted from three articles.
+
+Each piece of information is closed in the \verb+<action>+ element and each deals with some kind of incident that is described in given article.
+
+The attribute \verb+type+ specifies the type of the action. So in the first and in the third case there was somebody injured (\emph{zranit} means to injure in Czech) and in the second case somebody died (\emph{zemøít} means to die in Czech).
+
+The element \verb+<negation>+ holds the information about negation of the clause. So we can see that the participant of the third action was \textbf{not} injured.
+
+The element \verb+<participant>+ contains information about the participants of the action. The attribute \verb+type+ specifies the type of the participants and the element \verb+<quantity>+ holds the number of the participants. So in the first action only a single person (\emph{osoba}) was injured. In the second action two men (\emph{muž}) died and in the third action a driver (\emph{øidiè}) was not injured.
+\subsection{Evaluation}
+We have evaluated the extraction rule shown in the Figure~\ref{img:extract_patern} by using a set of 800 texts of news of several Czech fire departments. There were about 470 sentences matching the rule and we found about 200 numeric values contained in the node number 5. This extraction rule (Figure~\ref{img:extract_patern}) is a result of a learning procedure of a human designer. We are going to support and automatize the procedure of learning extraction rules in our future work.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Gathering similar words}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The Figure~\ref{img:extract_patern} shows, that it would be useful to gather words with similar meanings in our extraction rules. For example, the rule in the Figure~\ref{img:extract_patern} contains long disjunctions of similar words (nodes with numbers 1 and 4). These disjunctions could be replaced with some kind of expression telling that we are looking for any word from some semantic category (e.g. human beings). For this purpose we wanted to use the Czech WordNet \citep{biblio:WordNetCZ2004}. 
+
+After we have explored the records of the Czech WordNet (CzWN) related to the domain of our interest (car accidents, etc.) we have decided not to involve CzWN in the extraction process. The reason is that the coverage of the vocabulary of our domain is rather poor and the semantic connections of words are sometimes unfortunately missing. But we can supply the missing information to CzWN or we can build up a new domain-specific word-net based on the ground of CzWN.  
+
+
+\subsection{Conclusion}
+
+
+We have presented a proposal of a system for semantic extraction of information from Czech text on Web pages. Our system relies on linguistic annotating tools from ÚFAL and the tree querying tool Netgraph. Our contributions are in fact initial experiments in text extraction from downloaded pages, formulation of a rule-based extraction method and demonstration of semantics of the extracted data.
+
+More details can be found in \citealt{biblio:DedekSemAnot2007}. In the future we would like to extend this method by domain oriented lexical net and semiautomatic search for interesting extraction rules.
