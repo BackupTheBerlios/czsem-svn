@@ -66,6 +66,49 @@ Semantic extraction of data from Web resources can be seen in three dimensions. 
 
 In this paper we describe initial experiments with information extraction from traffic accident reports of fire departments in several regions of the Czech Republic. We would like to demonstrate the prospects of using linguistic tools developed in the Institute of Formal and Applied Linguistics in Prague (described in \ref{sec:ling_tools}). These experiments are promising, they e.g. enable the summarization of the number of injured people. 
 
+\subsection{intro IDC}
+For the Web to scale, tomorrow's programs must be able to share and process data even when these programs have been designed totally independently. Web services provide a standard means of interoperating between different software applications, running on a variety of platforms and/or frameworks. Web services are characterized by their great interoperability and extensibility, as well as their machine-processable descriptions thanks to the use of XML. They can be combined in a loosely coupled way in order to achieve complex operations. Programs providing simple services can interact with each other in order to deliver sophisticated added-value services \cite{biblio:W3C_Activity}.
+
+Still, more work needs to be done before the Web service infrastructure can make this vision come true. Current technology around UDDI, WSDL, and SOAP provide limited support in mechanizing service recognition, service configuration and combination (i.e., realizing complex workflows and business logics with Web services), service comparison and automated negotiation. In a business environment, the vision of flexible and autonomous Web service translates into automatic cooperation between enterprise services. Any enterprise requiring a business interaction with another enterprise can automatically discover and select the appropriate optimal Web services relying on selection policies. Services can be invoked automatically and payment processes can be initiated. Any necessary mediation would be applied based on data and process ontologies and the automatic translation and semantic interoperation. An example would be supply chain relationships where an enterprise manufacturing short-lived goods must frequently seek suppliers as well as buyers dynamically. Instead of employees constantly searching for suppliers and buyers, the Web service infrastructure does it automatically within the defined constraints. Other applications areas for this technology are Enterprise-Application Integration (EAI), eWork, and Knowledge Management \cite{biblio:SWSI}.
+
+Bottleneck for semantic web services is lack of semantically annotated information. This is especially difficult for Web resources described in natural language, especially for IndoEuropean flexitive type languages like Czech Language. We deal with linguistic information extraction from Czech texts from the Web for semantic annotation. 
+
+
+Linguistic extraction for semantic annotation of data from Web resources can be seen in three dimensions. The first dimension is the amount of human work associated with the extraction and annotation method. This dimension ranges from human "hand written"  through human assisted, semiautomatic (human trained) to fully automatic approach. The second dimension is the variety and complexity of queries (concepts) instances of which should be extracted and annotated. The third dimension of the problem is the independence on application domain. Problem of selectivity of the extraction task --- ranging from document classification thorough data region and data record recognition to the extraction of attribute values can be considered as an additional dimension, see e.g.  \cite{biblio:Survey_of_Web_Information_Extraction_Systems}. 
+
+In this paper we try to proceed in all dimensions in the "hard" direction. Nevertheless we are just in the begining.
+
+\subsubsection{Motivation}
+
+
+
+In this paper we describe initial experiments with information extraction from traffic accident reports of fire departments in several regions of the Czech Republic. These reports are being published on the web\footnote{\url{http://www.mvcr.cz/rss/regionhzs.html}} of the Ministry of Interior of the Czech Republic. An example of such report can be seen on the Figure~\ref{img:web_page}. We would like to demonstrate the prospects of using linguistic tools from the Prague school of computational linguistic (described in \ref{sec:ling_tools}). Our experiments are promising, they e.g. enable the summarization of the number of injured people. 
+
+The Ministry of Interior of the Czech Republic presents on its Web pages\footnote{\url{http://www.mvcr.cz/rss/regionhzs.html}} also reports from fire departments of several regions of the Czech Republic. These departments are responsible for rescue and recovery after traffic accidents. These reports are rich in information, e.g. where and when an traffic accident occurred, which units helped, how much time it took them to show up on the place of accident, how many people were injured, killed etc. An example of such report can be seen in the Figure~\ref{img:web_page}.
+
+
+
+
+
+
+\subsubsection{Main contributions}
+
+The method described in the paper exploits existing linguistic tools created originally for a syntactically annotated corpus, Prague Dependency Treebank (PDT 2.0) \cite{biblio:PDT20_CD}.
+
+Main contributions of this paper are: 
+ 
+\begin{enumerate}
+\item  Experimental chain of tools which captures text of web-pages, annotates it linguistically by PDT tools, extracts data and stores the data in an ontology. % (annotates).
+\item  In the third phase -- data extraction -- methods for learning queries over linguistically annotated data. 
+\item Initial experiments verifying these methods and tools
+\end{enumerate}
+ 
+Nevertheless, there are also reports about fire accidents and also about fire-fighting contests. The task to extract information on the number of injured/killed people in traffic accidents needs deep linguistic analysis.
+
+In an ideal case all these reports would be already semantically annotated, e.g. using RDFa \cite{biblio:RDFa}. In this case extraction could be done fully automatically by a software agent. In our case, there is no semantic annotation present in the reports.
+
+
+
 
 
 \subsection{Method details}
