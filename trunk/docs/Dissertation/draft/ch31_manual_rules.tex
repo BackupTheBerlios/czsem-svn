@@ -1,3 +1,88 @@
+\section{Listings}
+my @injure\_verbs = ("zranit", "usmrtit", "zemøít", "zahynout", "pøežít");
+
+
+\begin{minted}[linenos,
+               frame=lines]{perl}
+
+my @injure_verbs = ("zranit", "usmrtit", "zemøít", "zahynout", "pøežít");
+
+sub print_injured {
+	if ($this->{gram}{sempos} eq "v") {
+		foreach my $v (@injure_verbs) {
+			if ($this->{t_lemma} eq $v ) {
+				#action type
+				print "<action type=\"" . $this->{t_lemma} . "\">";
+
+				#sentece
+				print "<sentece>" . PML_T::GetSentenceString($root) . "</sentece>";
+				print "<sentece_id>" . $root->{id} . "</sentece_id>";
+				
+				#negation
+				if (test_negation($this)) {
+					print "<negation>true</negation>" ;					
+				} else {
+					print "<negation>false</negation>" ;										
+				}
+								
+				#manner of injurance
+				my @mans = find_node_by_attr_depth($this, 0, 'functor', '^MANN');
+				if (@mans) {
+					foreach my $m (@mans) {
+						print "<manner>"; 
+						print $m->{t_lemma};
+						print "</manner>"; 
+					};
+				}
+				
+				#actors and patients
+				my @pats = find_node_by_attr($this, 'functor', '^[PA][AC]T');
+				@pats = &filter_list(\&test_person, @pats);
+				
+				foreach my $p (@pats) {
+					print "<participant type=\"" . $p->{t_lemma} . "\">";
+
+					#patients count
+					my @cnt = find_node_by_attr($p, 'functor', '^RSTR');
+					@cnt = &filter_list(\&test_number_lemma, @cnt);
+					my $cnt1 = pop(@cnt);
+					print "<quantity>" . 
+						&test_number($cnt1->{t_lemma}) . 
+						"</quantity>" if ($cnt1);
+	
+					print "<full_string>";
+					print_subtree_as_text($p);
+					print "</full_string>";
+
+					print "</participant>";
+				}
+				
+				#action end
+				print "</action>\n";											
+}}}}
+\end{minted}
+
+
+
+\begin{minted}[mathescape,
+               linenos,
+               frame=lines]{sparql}
+
+SELECT ?participant ?participant_type ?quantity
+WHERE {
+	?action rdf:type :Incident;
+		:actionType "death";
+		:negation false;
+		:hasParticipant ?participant.
+	?participant :participantType ?participant_type.
+	OPTIONAL {
+		?participant :participantQuantity ?quantity.
+	}
+}
+
+\end{minted}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Linguistic tools for automatic annotation of texts} \label{sec:ling_tools}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -113,30 +198,17 @@ In an ideal case all these reports would be already semantically annotated, e.g.
 
 \subsection{Method details}
 
-We propose a relatively straightforward process for the extraction of semantic data from text-based web-resources. This process consists of four steps. The Figure~\ref{img:extract_process} describes it.
-
-
-We propose a relatively straightforward process for the extraction of semantic data from text-based web-resources. This process consists of four steps. The Figure~\ref{img:extract_process} describes it.
+Here we describe our chain of tools for the linguistic extraction of semantic information from text-based web-resources (containing grammatical sentences in a natural language). The chain covers a process that consists of four steps. The Figure~\ref{img:extract_process} describes it. Notice, more detailed structure of the third pahase we focus in this paper.
 
 \begin{enumerate}
-\item \textbf{Extraction of text} \\ The linguistic annotating tools process plain text only. In this phase we have to extract the text from the structure of a given web-resource. In this first phase we have used RSS feed of the fire department web-page. From this we have obtained URLs of particular articles and we have downloaded them. Finally we have extracted the desired text by means of a regular expression.
+\item \emph{Extraction of text} \\ The linguistic annotating tools process plain text only. In this phase we have to extract the text from the structure of a given web-resource. In this first phase we have used RSS feed of the fire department web-page. From this we have obtained URLs of particular articles and we have downloaded them. Finally we have extracted the desired text (see highlighted area in the Figure~\ref{img:web_page}) by means of a regular expression. This text is an input for the second phase.
 
-%Lingvistické anotátory zpracovávají prostý text, který v této fázi musíme z~webové stránky získat.
+\item \emph{Linguistic annotation} \\ In this phase the linguistic annotators process the extracted text and produce corresponding set of dependency trees representing the deep syntactic structure of individual sentences. We have used the linguistic tools described in the section~\ref{sec:ling_tools} for this task. Out put of this phase are tectogrammatical trees (for example see Figure~\ref{img:tecto_tree}) of sentences in document under investigation.
 
-\item \textbf{Linguistic annotation} \\ In this phase the linguistic annotators process the extracted text and produce corresponding set of dependency trees representing the deep syntactic structure of individual sentences. We have used the linguistic tools described in the section~\ref{sec:ling_tools} for this task.
+\item \emph{Data extraction} \\ We use the structure of tectogrammatical (i.e. deep syntactic) dependency trees to extract relevant data. Refinement of this step is the main focus of this paper, see section \ref{sec:extraction} for more details.
 
-%Extrahovaný text pøedložíme lingvistickému anotátoru, který v textu rozpozná jednotlivé vìty a zkonstruuje z nich lingvistické stromy.
+\item \emph{Semantic representation} \\ This phase consists of quite simple data transformation or conversion to the desired ontology format. But it is quite important to choose suitable ontology that will properly represent semantics of the data. Output are two fold. An ontology with instances. Annotation of a web resource (e.g. using API to an RDFa editor of html pages).
 
-%\pagebreak
-
-\item \textbf{Data extraction} \\ We use the structure of tectogrammatic (i.e. deep syntactic) dependency trees to extract relevant data. 
-See section \ref{sec:extraction} for more details.
-
-%Pomocí lingvistické struktury jednotlivých vìt extrahujeme data, která reprezentují informace vyjádøené v textu. Podrobnosti -- viz sekce \ref{sec:extraction}.
-
-\item \textbf{Semantic representation} \\ This phase consists of quite simple data transformation or conversion to the desired ontology format. But it is quite important to choose suitable ontology that will properly represent semantics of the data. We have not implemented this phase yet.
-
-%V této fázi sémanticky interpretujeme extrahovaná data pomocí konceptù vhodné ontologie.
 \end{enumerate}
 
 
