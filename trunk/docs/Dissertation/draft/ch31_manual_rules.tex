@@ -1,11 +1,100 @@
+\section{Figures}
+
+
+
+\begin{figure}
+	\centering
+		\includegraphics[width=0.2\hsize]{../img/ch3_ap_schema}
+	\caption{Schema of the extraction process.}
+	\label{fig:ch3_ap_schema}
+\end{figure}
+
+
+\begin{figure}
+	\centering
+		\includegraphics[width=0.5\hsize]{../img/ch3_article}
+	\caption{One web page with an accident report.}
+	\label{fig:ch3_article}
+\end{figure}
+
+
+\begin{figure}
+	\centering
+		\includegraphics[width=0.5\hsize]{../img/ch3_extract_patern}
+	\caption{A manually created extraction rule investigating numbers of injuries and fatalities.}
+	\label{fig:ch3_extract_patern}
+\end{figure}
+
+\begin{figure}
+	\centering
+		\includegraphics[width=0.5\hsize]{../img/ch3_eenv_extract_patern}
+	\caption{A manually created extraction rule investigating dangerous liquids that spilled out into the environment.}
+	\label{fig:ch3_eenv_extract_patern}
+\end{figure}
+
+
+\begin{figure}
+	\centering
+		\includegraphics[angle=-90, width=0.6\hsize]{../img/ch3_eenv_matching_tree}
+		
+Original sentence: 
+\emph{``Nárazem se utrhl hrdlo palivové nádrže a do potoka postupně vyteklo na 800 litrů nafty.''}\\
+English transcript: 
+\emph{``Due to the clash the throat of fuel tank tore off and 800 liters of oil (diesel) has run out to a stream.''}
+	\caption{A tree matching with the corresponding extraction rule in Figure~\ref{fig:ch3_eenv_extract_patern}.}
+	\label{fig:ch3_eenv_matching_tree}
+\end{figure}
+
+
+\begin{figure}
+	\centering
+		\includegraphics[angle=-90, width=0.7\hsize]{../img/ch3_eenv_results}
+	\caption{\emph{XML} structured output of the SQL select like query corresponding with the extraction rule in Figure~\ref{fig:ch3_eenv_extract_patern} and matching tree in Figure~\ref{fig:ch3_eenv_matching_tree}.}
+	\label{fig:ch3_eenv_results}
+\end{figure}
+
+
+
+\begin{figure}
+	\centering
+		\includegraphics[angle=-90, width=0.3\hsize]{../img/ch3_classes}
+	\caption{Schema of the target ontology.}
+	\label{fig:ch3_classes}
+\end{figure}
+
+
+\begin{figure}
+	\centering
+		\includegraphics[angle=-90, width=\hsize]{../img/ch3_instances}
+	\caption{Extracted instances of the target ontology.}
+	\label{fig:instatnces}
+\end{figure}
+
+
+\begin{figure}
+	\centering
+		\includegraphics[angle=-90, width=0.9\hsize]{../img/ch3_semantic_interpretation}
+	\caption{Semantic interpretation of the extraction rule.}
+	\label{fig:ch3_semantic_interpretation}
+\end{figure}
+
+
+\begin{figure}
+	\centering
+		\includegraphics[angle=-90, width=0.5\hsize]{../img/ch3_coverge_tuning}
+	\caption{Gradual refinement of an extraction rule.}
+	\label{fig:ch3_coverge_tuning}
+\end{figure}
+
+
+
 \section{Listings}
-my @injure\_verbs = ("zranit", "usmrtit", "zem��t", "zahynout", "p�e��t");
 
-
+\begin{listing}
 \begin{minted}[linenos,
                frame=lines]{perl}
 
-my @injure_verbs = ("zranit", "usmrtit", "zem��t", "zahynout", "p�e��t");
+my @injure_verbs = ("zranit", "usmrtit", "zemřít", "zahynout", "přežít");
 
 sub print_injured {
 	if ($this->{gram}{sempos} eq "v") {
@@ -61,14 +150,19 @@ sub print_injured {
 				print "</action>\n";											
 }}}}
 \end{minted}
+\caption{Procedurally written extraction rule in \emph{btred}.}
+\label{lst:btred_rule}
+\end{listing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
-\begin{minted}[mathescape,
-               linenos,
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{listing}
+\begin{minted}[linenos,
                frame=lines]{sparql}
 
-SELECT ?participant ?participant_type ?quantity
+SELECT ?action ?participant ?participant_type ?quantity
 WHERE {
 	?action rdf:type :Incident;
 		:actionType "death";
@@ -79,8 +173,105 @@ WHERE {
 		?participant :participantQuantity ?quantity.
 	}
 }
-
 \end{minted}
+\caption{\emph{SPARQL} query that summarizes fatalities of particular incidents.}
+\label{lst:sparql_aggregation}
+\end{listing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{listing}
+\begin{minted}[linenos,
+               frame=lines]{xml}
+<injured_result>
+	<action type="zranit">
+		<sentece>
+			Při požáru byla jedna osoba lehce zraněna -- jednalo se
+			o majitele domu, který si vykloubil rameno.
+		</sentece>
+		<sentece_id>T-vysocina63466.txt-001-p1s4</sentece_id>
+		<negation>false</negation>
+		<manner>lehký</manner>
+		<participant type="osoba">
+			<quantity>1</quantity>
+			<full_string>jedna osoba</full_string>
+		</participant>
+	</action>
+	<action type="zemřít">
+		<sentece>
+			Ve zdemolovaném trabantu na místě zemřeli dva muži -- 82letý
+			senior a další muž, jehož totožnost zjišťují policisté.
+		</sentece>
+		<sentece_id>T-jihomoravsky49640.txt-001-p1s4</sentece_id>
+		<negation>false</negation>
+		<participant type="muž">
+			<quantity>2</quantity>
+			<full_string>dva muži</full_string>
+		</participant>
+	</action>
+		<action type="zranit">
+		<sentece>čtyřiatřicetiletý řidič nebyl zraněn.</sentece>
+		<sentece_id>T-jihomoravsky49736.txt-001-p4s3</sentece_id>
+		<negation>true</negation>
+		<participant type="řidič">
+			<full_string>čtyřiatřicetiletý řidič</full_string>
+		</participant>
+	</action>
+</injured_result>
+\end{minted}
+\caption{\emph{XML} structured output of the query written in \emph{btred}.}
+\label{lst:btred_xml}
+\end{listing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{listing}
+\begin{minted}[linenos,
+               frame=lines]{xml}
+<QueryMatches>
+	<Match root_id="T-vysocina63466.txt-001-p1s4" match_string="2:0,7:3,8:4,11:2">
+		<Sentence>
+			Při požáru byla jedna osoba lehce zraněna - jednalo se
+			o majitele domu, který si vykloubil rameno.
+		</Sentence>
+		<Data>
+			<Value variable_name="action_type" attribute_name="t_lemma">zranit</Value>
+			<Value variable_name="injury_manner" attribute_name="t_lemma">lehký</Value>
+			<Value variable_name="participant" attribute_name="t_lemma">osoba</Value>
+			<Value variable_name="quantity" attribute_name="t_lemma">jeden</Value>
+		</Data>
+	</Match>
+	<Match root_id="T-jihomoravsky49640.txt-001-p1s4" match_string="1:0,13:3,14:4">
+		<Sentence>
+			Ve zdemolovaném trabantu na místě zemřeli dva muži - 82letý senior
+			a další muž, jehož totožnost zjišťují policisté.
+		</Sentence>
+		<Data>
+			<Value variable_name="action_type" attribute_name="t_lemma">zemřít</Value>
+			<Value variable_name="participant" attribute_name="t_lemma">muž</Value>
+			<Value variable_name="quantity" attribute_name="t_lemma">dva</Value>
+		</Data>
+	</Match>
+	<Match root_id="T-jihomoravsky49736.txt-001-p4s3" match_string="1:0,3:3,7:1">
+		<Sentence>Čtyřiatřicetiletý řidič nebyl zraněn.</Sentence>
+		<Data>
+			<Value variable_name="action_type" attribute_name="t_lemma">zranit</Value>
+			<Value variable_name="a-negation" 
+			       attribute_name="m/tag">VpYS---XR-NA---</Value>
+			<Value variable_name="participant" attribute_name="t_lemma">řidič</Value>
+		</Data>
+	</Match>
+</QueryMatches>
+\end{minted}
+\caption{\emph{XML} structured output of the SQL select like query. A negation can be detected form the \emph{m/tag} on the line 30.}
+\label{lst:select_xml}
+\end{listing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -88,7 +279,7 @@ WHERE {
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-In this section we will describe the linguistic tools that we have used to produce linguistic annotation of texts. These tools are being developed in the Institute of Formal and Applied Linguistics\footnote{\url{http://ufal.mff.cuni.cz}} in Prague (�FAL), Czech Republic. They are publicly available -- they have been published on a CD-ROM under the title PDT 2.0 -- \citealt{biblio:PDT20_CD} (first five tools) and in \citealt{biblio:KlTransformationBasedTectogrammatical2006} (Tectogrammatical analysis). These tools are used as a processing chain and at the end of the chain they produce tectogrammatical \citep{biblio:MiBeAnnotationtectogrammatical2006} dependency trees. The Table~\ref{tab:ling_tools} shows some details about these tools.
+In this section we will describe the linguistic tools that we have used to produce linguistic annotation of texts. These tools are being developed in the Institute of Formal and Applied Linguistics\footnote{\url{http://ufal.mff.cuni.cz}} in Prague (ÚFAL), Czech Republic. They are publicly available -- they have been published on a CD-ROM under the title PDT 2.0 -- \citealt{biblio:PDT20_CD} (first five tools) and in \citealt{biblio:KlTransformationBasedTectogrammatical2006} (Tectogrammatical analysis). These tools are used as a processing chain and at the end of the chain they produce tectogrammatical \citep{biblio:MiBeAnnotationtectogrammatical2006} dependency trees. The Table~\ref{tab:ling_tools} shows some details about these tools.
 
 
 
@@ -107,7 +298,7 @@ Unlike the usual approaches to the description of English syntax, the Czech synt
 	
 	\item \textbf{Tectogrammatical analysis} \citep{biblio:KlTransformationBasedTectogrammatical2006} produces linguistic annotation at the tectogrammatical level.
 
-%	Tectogrammatical analysis produces linguistic annotation at the tectogrammatical layer, sometimes called �layer of deep syntax�. Annotation of a sentence at this layer is closer to meaning of the sentence than its syntactic annotation and thus information captured at the tectogrammatical layer is crucial for machine understanding of a natural language \citep{biblio:KlTransformationBasedTectogrammatical2006}.
+%	Tectogrammatical analysis produces linguistic annotation at the tectogrammatical layer, sometimes called “layer of deep syntax”. Annotation of a sentence at this layer is closer to meaning of the sentence than its syntactic annotation and thus information captured at the tectogrammatical layer is crucial for machine understanding of a natural language \citep{biblio:KlTransformationBasedTectogrammatical2006}.
 	 
 \end{enumerate}
 
@@ -243,11 +434,11 @@ Small part of the result of the extraction is shown in the Figure~\ref{img:extra
 
 Each piece of information is closed in the \verb+<action>+ element and each deals with some kind of incident that is described in given article.
 
-The attribute \verb+type+ specifies the type of the action. So in the first and in the third case there was somebody injured (\emph{zranit} means to injure in Czech) and in the second case somebody died (\emph{zem��t} means to die in Czech).
+The attribute \verb+type+ specifies the type of the action. So in the first and in the third case there was somebody injured (\emph{zranit} means to injure in Czech) and in the second case somebody died (\emph{zemřít} means to die in Czech).
 
 The element \verb+<negation>+ holds the information about negation of the clause. So we can see that the participant of the third action was \textbf{not} injured.
 
-The element \verb+<participant>+ contains information about the participants of the action. The attribute \verb+type+ specifies the type of the participants and the element \verb+<quantity>+ holds the number of the participants. So in the first action only a single person (\emph{osoba}) was injured. In the second action two men (\emph{mu�}) died and in the third action a driver (\emph{�idi�}) was not injured.
+The element \verb+<participant>+ contains information about the participants of the action. The attribute \verb+type+ specifies the type of the participants and the element \verb+<quantity>+ holds the number of the participants. So in the first action only a single person (\emph{osoba}) was injured. In the second action two men (\emph{muž}) died and in the third action a driver (\emph{řidič}) was not injured.
 \subsection{Evaluation}
 We have evaluated the extraction rule shown in the Figure~\ref{img:extract_patern} by using a set of 800 texts of news of several Czech fire departments. There were about 470 sentences matching the rule and we found about 200 numeric values contained in the node number 5. This extraction rule (Figure~\ref{img:extract_patern}) is a result of a learning procedure of a human designer. We are going to support and automatize the procedure of learning extraction rules in our future work.
 
@@ -263,6 +454,6 @@ After we have explored the records of the Czech WordNet (CzWN) related to the do
 \subsection{Conclusion}
 
 
-We have presented a proposal of a system for semantic extraction of information from Czech text on Web pages. Our system relies on linguistic annotating tools from �FAL and the tree querying tool Netgraph. Our contributions are in fact initial experiments in text extraction from downloaded pages, formulation of a rule-based extraction method and demonstration of semantics of the extracted data.
+We have presented a proposal of a system for semantic extraction of information from Czech text on Web pages. Our system relies on linguistic annotating tools from ÚFAL and the tree querying tool Netgraph. Our contributions are in fact initial experiments in text extraction from downloaded pages, formulation of a rule-based extraction method and demonstration of semantics of the extracted data.
 
 More details can be found in \citealt{biblio:DedekSemAnot2007}. In the future we would like to extend this method by domain oriented lexical net and semiautomatic search for interesting extraction rules.
