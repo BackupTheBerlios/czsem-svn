@@ -531,8 +531,32 @@ The attribute \verb+type+ specifies the type of the action. So in the first and 
 The element \verb+<negation>+ holds the information about negation of the clause. So we can see that the participant of the third action was \textbf{not} injured.
 
 The element \verb+<participant>+ contains information about the participants of the action. The attribute \verb+type+ specifies the type of the participants and the element \verb+<quantity>+ holds the number of the participants. So in the first action only a single person (\emph{osoba}) was injured. In the second action two men (\emph{muž}) died and in the third action a driver (\emph{řidič}) was not injured.
+
+
+
+
 \subsection{Evaluation}
 We have evaluated the extraction rule shown in the Figure~\ref{img:extract_patern} by using a set of 800 texts of news of several Czech fire departments. There were about 470 sentences matching the rule and we found about 200 numeric values contained in the node number 5. This extraction rule (Figure~\ref{img:extract_patern}) is a result of a learning procedure of a human designer. We are going to support and automatize the procedure of learning extraction rules in our future work.
+
+
+
+
+
+
+
+
+\begin{table}
+	\centering
+		\includegraphics[angle=-90,width=\hsize]{../img/ch3_tab_manual_rules}
+	\caption{Evaluation of manually created rules.}
+	\label{tab:ch3_tab_manual_rules}
+\end{table}
+
+
+
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Gathering similar words}
