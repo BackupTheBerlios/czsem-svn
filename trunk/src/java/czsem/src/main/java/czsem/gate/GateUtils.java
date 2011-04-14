@@ -67,7 +67,7 @@ public class GateUtils
 		appender.setThreshold(Level.DEBUG);
 		appender.setFile(getTimeBenchmarkLogFileName());
 		appender.setAppend(false);
-		appender.setMaxFileSize("5MB");
+		appender.setMaxFileSize("50MB");
 		appender.setMaxBackupIndex(1);
 		appender.setLayout(new PatternLayout("%m%n"));
 		

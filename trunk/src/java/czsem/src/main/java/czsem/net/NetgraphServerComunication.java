@@ -239,7 +239,9 @@ public class NetgraphServerComunication extends NetgraphProtocolConnection {
 		if (first_match_in_a_tree_only) putChar('1');
 		else putChar('0');
 		
-		putString(query_string);
+//		putString(query_string);
+		putStringLn(query_string);
+		
 		sendMessage();
 				
 		assertReplyOK();

@@ -96,6 +96,8 @@ public class SimpleXMLQueryProcessor implements ResultProcessor {
 		public static void initAttributeIndexes(NetgraphServerComunication nc)
 		{
 			ID = nc.getGlobalHead().getIndexOfAttribute("id");
+			if (ID == -1) ID = nc.getGlobalHead().getIndexOfAttribute("ann_id");
+			
 			NAME = nc.getGlobalHead().getIndexOfAttribute("_name");
 		}
 	}

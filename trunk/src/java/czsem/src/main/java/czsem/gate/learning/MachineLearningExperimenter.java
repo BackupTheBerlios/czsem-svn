@@ -125,7 +125,8 @@ public class MachineLearningExperimenter
 
 	    
 	    new MachineLearningExperiment(
-	    		new DataSetReduce(new Acquisitions("acquired"), 0.05),
+	    		new Acquisitions("acquired"),
+//	    		new DataSetReduce(new Acquisitions("acquired"), 0.05),
 //	    		new CzechFireman("damage"),
 //	    		new MLEvaluate(new CreateTemporaryMentions(new ILPEngine()))
 	    		new MLEvaluate(new CreateTemporaryMentionsRootSubtree(new ILPEngine())),
