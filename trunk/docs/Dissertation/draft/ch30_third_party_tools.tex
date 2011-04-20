@@ -1,1 +1,38 @@
 \chapter{Third Party Tools}
+
+
+\section{Exploited Methods -- Linguistics and ILP}
+In our solution we have exploited several tools and formalisms. These can be divided into two groups: linguistics and (inductive) logic programming. First we describe the linguistic tools and formalisms, the rest will follow.
+
+\subsection{GATE}
+GATE\footnote{\url{http://gate.ac.uk/}} \citep{dedek:GATE_ACL2002} is probably the most widely used tool for text processing. In our solution the capabilities of document and annotation management, utility resources for annotation processing, JAPE grammar rules \citep{Cunningham00jape:a}, machine learning facilities and performance evaluation tools are the most helpful features of GATE that we have used.
+
+\subsection{PDT and TectoMT}
+As we have started with our native language -- Czech (a language with rich morphology and free word order), we had to make tools for processing Czech available in GATE. We have implemented a wrapper for the TectoMT system\footnote{\url{http://ufal.mff.cuni.cz/tectomt/}} \citep{dedek:ZaPtTectoMTHighly2008} to GATE. TectoMT is a Czech project that contains many linguistic analyzers for different languages including Czech and English. We have used a majority of applicable tools from TectoMT: a tokeniser, a sentence splitter, morphological analyzers (including POS tagger), a syntactic parser and the deep syntactic (tectogrammatical) parser. All the tools are based on the dependency based linguistic theory and formalism of the Prague Dependency Treebank project \citep{dedek:PDT20_CD}. So far our solution does not include any coreference and discourse analysis.
+
+
+\textbf{Rozepsat PDT}
+
+
+%Czech language
+%\\Slavic language, with rich morphology, free word order
+%\\Stanford dependencies
+
+
+\subsection{Inductive Logic Programming}
+Inductive Logic Programming (ILP) \citep{dedek:MuggletonILP} is a machine learning technique based on logic programming. Given an encoding of the known background knowledge (in our case linguistic structure of all sentences) and a set of examples represented as a logical database of facts (in our case tokens annotated with the target annotation type are positive examples and the remaining tokens negative ones), an ILP system will derive a hypothesized logic program (in our case extraction rules) which entails all the positive and none of the negative examples.
+
+\subsection{ILP tool}
+As an ILP tool we have used ``A Learning Engine for Proposing Hypotheses'' (Aleph v5)\footnote{\url{http://www.comlab.ox.ac.uk/activities/machinelearning/Aleph/}}, which we consider very practical. It uses quite effective method of inverse entailment \citep{biblio:InverseEntailment} and keeps all handy features of a Prolog system (we have used YAP Prolog\footnote{\url{http://www.dcc.fc.up.pt/~vsc/Yap/}}) in its background.
+
+
+From our experiments (Section~\ref{sec:evaluation}) can be seen that ILP is capable to find complex and meaningful rules that cover the intended information.
+
+
+
+\textbf{?? large amount of training data ??}
+
+As we do not have large amount of training data, there is no problem with excessive time demands during learning and the application of the learned rules is simple and quick.
+
+
+

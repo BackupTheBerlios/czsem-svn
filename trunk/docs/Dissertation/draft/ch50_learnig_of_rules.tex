@@ -1,4 +1,4 @@
-\chapter{Presented Extraction Method Based on ILP Machine Learning}
+\chapter{Extraction Method Based on ILP Machine Learning}
 
 
 \section{Introduction}
@@ -12,40 +12,6 @@ A description, implementation and initial evaluation of the method are the main 
 
 
 
-
-
-\section{Exploited Methods -- Linguistics and ILP}
-In our solution we have exploited several tools and formalisms. These can be divided into two groups: linguistics and (inductive) logic programming. First we describe the linguistic tools and formalisms, the rest will follow.
-
-\subsection{GATE}
-GATE\footnote{\url{http://gate.ac.uk/}} \citep{dedek:GATE_ACL2002} is probably the most widely used tool for text processing. In our solution the capabilities of document and annotation management, utility resources for annotation processing, JAPE grammar rules \citep{Cunningham00jape:a}, machine learning facilities and performance evaluation tools are the most helpful features of GATE that we have used.
-
-\subsection{PDT and TectoMT}
-As we have started with our native language -- Czech (a language with rich morphology and free word order), we had to make tools for processing Czech available in GATE. We have implemented a wrapper for the TectoMT system\footnote{\url{http://ufal.mff.cuni.cz/tectomt/}} \citep{dedek:ZaPtTectoMTHighly2008} to GATE. TectoMT is a Czech project that contains many linguistic analyzers for different languages including Czech and English. We have used a majority of applicable tools from TectoMT: a tokeniser, a sentence splitter, morphological analyzers (including POS tagger), a syntactic parser and the deep syntactic (tectogrammatical) parser. All the tools are based on the dependency based linguistic theory and formalism of the Prague Dependency Treebank project \citep{dedek:PDT20_CD}. So far our solution does not include any coreference and discourse analysis.
-
-
-\textbf{Rozepsat PDT - mozna v uvodu?}
-
-
-Czech language
-\\Slavic language, with rich morphology, free word order
-\\Stanford dependencies
-
-
-\subsection{Inductive Logic Programming}
-Inductive Logic Programming (ILP) \citep{dedek:MuggletonILP} is a machine learning technique based on logic programming. Given an encoding of the known background knowledge (in our case linguistic structure of all sentences) and a set of examples represented as a logical database of facts (in our case tokens annotated with the target annotation type are positive examples and the remaining tokens negative ones), an ILP system will derive a hypothesized logic program (in our case extraction rules) which entails all the positive and none of the negative examples.
-
-\subsection{ILP tool}
-As an ILP tool we have used ``A Learning Engine for Proposing Hypotheses'' (Aleph v5)\footnote{\url{http://www.comlab.ox.ac.uk/activities/machinelearning/Aleph/}}, which we consider very practical. It uses quite effective method of inverse entailment \citep{biblio:InverseEntailment} and keeps all handy features of a Prolog system (we have used YAP Prolog\footnote{\url{http://www.dcc.fc.up.pt/~vsc/Yap/}}) in its background.
-
-
-From our experiments (Section~\ref{sec:evaluation}) can be seen that ILP is capable to find complex and meaningful rules that cover the intended information.
-
-
-
-\textbf{?? large amount of training data ??}
-
-As we do not have large amount of training data, there is no problem with excessive time demands during learning and the application of the learned rules is simple and quick.
 
 
 
@@ -64,17 +30,16 @@ This consists of two steps:
 	\item learning of extraction rules from the target annotations and
 	\item application of the extraction rules on new documents.
 \end{enumerate}
-In both steps the linguistic analysis has to be done before and in both steps background knowledge (a logical database of facts) is constructed from linguistic structures of documents that are being processed. We call the process of background knowledge construction as \emph{ILP serialization}. Although this topic is quite interesting we do not present details here because of space limitations.
-\\; more details are presented below \textbf{(??Sect. 1??)}.
+In both steps the linguistic analysis has to be done before and in both steps background knowledge (a logical database of facts) is constructed from linguistic structures of documents that are being processed. We call the process of background knowledge construction as \emph{ILP serialization}; more details are presented below in Section~\ref{sec:ilp_serialization}.
 
 After the ILP serialization is done, in the learning case, positive and negative examples are constructed from target annotations and the machine learning ILP inductive procedure is executed to obtain extraction rules.
 
 In the application case a Prolog system is used to check if the extraction rules entail any of target annotation candidates.
 
 
-Learning / application
-\\1.	serialization -> learning in ILP
-\\2.	serialization -> application in ILP
+%Learning / application
+%\\1.	serialization -> learning in ILP
+%\\2.	serialization -> application in ILP
 
 
 The learning examples and annotation candidates are usually constructed from all document tokens (and we did so in the present solution), but it can be optionally changed to any other textual unit, for example only numerals or tectogrammatical nodes (words with lexical meaning) can be selected. This can be done easily with the help of \emph{Machine Learning PR} (LM PR) from GATE\footnote{\emph{Machine Learning PR} is an old GATE interface for ML and it is almost obsolete but in contrast to the new \emph{Batch Learning PR} the LM PR is easy to extend for a new ML engine.}.
@@ -82,8 +47,10 @@ The learning examples and annotation candidates are usually constructed from all
 ML PR provides an interface for exchange of features (including target class) between annotated texts and propositional learners in both directions -- during learning as well as during application. We have used ML PR and developed our \emph{ILP Wrapper} for it. The implementation was a little complicated because complex linguistic structures cannot be easily passed as propositional features, so in our solution we use the ML PR interface only for exchange of the class attribute and annotation id and we access the linguistic structures directly in a document.
 
 
-ILP tool presunuto do Exploited methods
-\\ILP serialization, annotation / tree node intersection 
+
+\subsection{ILP Serialization} \label{sec:ilp_serialization}
+
+\subsection{Connecting Linear GATE Annotations with Tree Nodes}
 
 
 \subsection{Root/Subtree Preprocessing/Postprocessing}
