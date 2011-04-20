@@ -183,7 +183,7 @@ English transcript:
 \section{Listings}
 
 \begin{listing}[ht]
-\begin{minted}[linenos,
+\begin{minted}[linenos,  fontsize=\footnotesize,
                frame=lines]{perl}
 
 my @injure_verbs = ("zranit", "usmrtit", "zemřít", "zahynout", "přežít");
@@ -251,7 +251,7 @@ sub print_injured {
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{listing}[ht]
-\begin{minted}[linenos,
+\begin{minted}[linenos,  fontsize=\footnotesize,
                frame=lines]{sparql}
 
 SELECT ?action ?participant ?participant_type ?quantity
@@ -281,7 +281,7 @@ WHERE {
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{listing}[ht]
-\begin{minted}[linenos,
+\begin{minted}[linenos,  fontsize=\footnotesize,
                frame=lines]{xml}
 <injured_result>
 	<action type="zranit">
@@ -329,7 +329,7 @@ WHERE {
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{listing}[ht]
-\begin{minted}[linenos, 
+\begin{minted}[linenos,  fontsize=\footnotesize,
                frame=lines]{xml}
 <QueryMatches>
 	<Match root_id="T-vysocina63466.txt-001-p1s4" match_string="2:0,7:3,8:4,11:2">
@@ -370,6 +370,215 @@ WHERE {
 \label{lst:select_xml}
 \end{listing}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{listing}[ht]
+\begin{minted}[linenos, fontsize=\footnotesize,
+               frame=lines]{prolog}
+tToken(id_jihomoravsky47443_243).
+t_lemma(id_jihomoravsky47443_243,'být'). %to be
+functor(id_jihomoravsky47443_243,'PRED').
+sempos(id_jihomoravsky47443_243,'v').
+tDependency(id_jihomoravsky47443_243,id_jihomoravsky47443_238).
+tToken(id_jihomoravsky47443_238).
+t_lemma(id_jihomoravsky47443_238,','). %comma
+functor(id_jihomoravsky47443_238,'APPS').
+sempos(id_jihomoravsky47443_238,'n.denot').
+gender(id_jihomoravsky47443_238,'nr').
+tDependency(id_jihomoravsky47443_238,id_jihomoravsky47443_237).
+tToken(id_jihomoravsky47443_237).
+t_lemma(id_jihomoravsky47443_237,'vyčíslit'). %to quantify
+functor(id_jihomoravsky47443_237,'PAT').
+sempos(id_jihomoravsky47443_237,'v').
+tDependency(id_jihomoravsky47443_237,id_jihomoravsky47443_245).
+tToken(id_jihomoravsky47443_245).
+t_lemma(id_jihomoravsky47443_245,'předběžně'). %preliminarily
+functor(id_jihomoravsky47443_245,'MANN').
+sempos(id_jihomoravsky47443_245,'adv.denot.grad.nneg').
+tDependency(id_jihomoravsky47443_237,id_jihomoravsky47443_244).
+tToken(id_jihomoravsky47443_244).
+t_lemma(id_jihomoravsky47443_244,'vyšetřovatel'). %investigator
+functor(id_jihomoravsky47443_244,'ACT').
+sempos(id_jihomoravsky47443_244,'n.denot').
+gender(id_jihomoravsky47443_244,'anim').
+tDependency(id_jihomoravsky47443_237,id_jihomoravsky47443_240).
+tToken(id_jihomoravsky47443_240).
+t_lemma(id_jihomoravsky47443_240,'osm'). %eight
+functor(id_jihomoravsky47443_240,'PAT').
+sempos(id_jihomoravsky47443_240,'n.quant.def').
+gender(id_jihomoravsky47443_240,'nr').
+tDependency(id_jihomoravsky47443_240,id_jihomoravsky47443_242).
+tToken(id_jihomoravsky47443_242).
+t_lemma(id_jihomoravsky47443_242,'tisíc'). %thousand
+functor(id_jihomoravsky47443_242,'RSTR').
+sempos(id_jihomoravsky47443_242,'n.quant.def').
+gender(id_jihomoravsky47443_242,'inan').
+tDependency(id_jihomoravsky47443_242,id_jihomoravsky47443_247).
+tToken(id_jihomoravsky47443_247).
+t_lemma(id_jihomoravsky47443_247,'koruna'). %crown
+functor(id_jihomoravsky47443_247,'MAT').
+sempos(id_jihomoravsky47443_247,'n.denot').
+gender(id_jihomoravsky47443_247,'fem').
+tDependency(id_jihomoravsky47443_237,id_jihomoravsky47443_246).
+tToken(id_jihomoravsky47443_246).
+t_lemma(id_jihomoravsky47443_246,'škoda'). %damage
+functor(id_jihomoravsky47443_246,'PAT').
+sempos(id_jihomoravsky47443_246,'n.denot').
+gender(id_jihomoravsky47443_246,'fem').
+tDependency(id_jihomoravsky47443_243,id_jihomoravsky47443_250).
+\end{minted}
+\caption{ILP serialization example}
+\label{lst:ilp_serialization}
+\end{listing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{listing}[ht]
+\begin{minted}[linenos, fontsize=\footnotesize,
+               frame=lines]{turtle}
+@prefix node: <http://czsem.berlios.de/ontologies/.../jihomoravsky47443.owl#node/> .
+@prefix pml: <http://ufal.mff.cuni.cz/pdt/pml/> .
+
+node:SCzechT-s4-n1 rdf:type pml:Node ,
+                            owl:Thing ;
+                   pml:sempos "v" ;
+                   pml:verbmod "ind" ;
+                   pml:t_lemma "být" ;
+                   pml:sentmod "enunc" ;
+                   pml:formeme "v:fin" ;
+                   pml:deontmod "decl" ;
+                   pml:is_clause_head "1" ;
+                   pml:dispmod "disp0" ;
+                   pml:functor "PRED" ;
+                   pml:aspect "proc" ;
+                   pml:nodetype "complex" ;
+                   pml:deepord "4" ;
+                   pml:tense "ant" ;
+                   pml:negation "neg0" ;
+                   pml:resultative "res0" ;
+                   pml:iterativeness "it0" ;
+                   pml:lex.rf node:SCzechA-s4-w4 ;
+                   pml:hasParent node:SCzechT-s4-root .
+node:SCzechT-s4-n10 rdf:type pml:Node ,
+                             owl:Thing ;
+                    pml:negation "neg0" ;
+                    pml:sempos "n.denot" ;
+                    pml:t_lemma "vyšetřovatel" ;
+                    pml:deepord "9" ;
+                    pml:gender "anim" ;
+                    pml:number "sg" ;
+                    pml:formeme "n:1" ;
+                    pml:functor "ACT" ;
+                    pml:nodetype "complex" ;
+                    pml:lex.rf node:SCzechA-s4-w9 ;
+                    pml:hasParent node:SCzechT-s4-n8 .
+node:SCzechT-s4-n11 rdf:type pml:Node ,
+                             owl:Thing ;
+                    pml:formeme "adv:" ;
+                    pml:sempos "adv.denot.grad.nneg" ;
+                    pml:nodetype "complex" ;
+                    pml:functor "MANN" ;
+                    pml:deepord "10" ;
+                    pml:negation "neg0" ;
+                    pml:degcmp "pos" ;
+                    pml:t_lemma "předběžně" ;
+                    pml:lex.rf node:SCzechA-s4-w10 ;
+                    pml:hasParent node:SCzechT-s4-n8 .
+node:SCzechT-s4-n12 rdf:type pml:Node ,
+                             owl:Thing ;
+                    pml:nodetype "complex" ;
+                    pml:t_lemma "osm" ;
+                    pml:deepord "12" ;
+                    pml:number "pl" ;
+                    pml:numertype "basic" ;
+                    pml:sempos "n.quant.def" ;
+                    pml:formeme "n:???" ;
+                    pml:functor "PAT" ;
+                    pml:gender "nr" ;
+                    pml:aux.rf node:SCzechA-s4-w12 ;
+                    pml:lex.rf node:SCzechA-s4-w13 ;
+                    pml:hasParent node:SCzechT-s4-n8 .
+node:SCzechT-s4-n13 rdf:type pml:Node ,
+                             owl:Thing ;
+                    pml:nodetype "complex" ;
+                    pml:t_lemma "tisíc" ;
+                    pml:number "sg" ;
+                    pml:functor "RSTR" ;
+                    pml:gender "inan" ;
+                    pml:sempos "n.quant.def" ;
+                    pml:deepord "13" ;
+                    pml:numertype "basic" ;
+                    pml:formeme "n:???" ;
+                    pml:lex.rf node:SCzechA-s4-w14 ;
+                    pml:hasParent node:SCzechT-s4-n12 .
+node:SCzechT-s4-n14 rdf:type pml:Node ,
+                             owl:Thing ;
+                    pml:gender "fem" ;
+                    pml:sempos "n.denot" ;
+                    pml:nodetype "complex" ;
+                    pml:number "pl" ;
+                    pml:formeme "n:2" ;
+                    pml:functor "MAT" ;
+                    pml:negation "neg0" ;
+                    pml:t_lemma "koruna" ;
+                    pml:deepord "14" ;
+                    pml:lex.rf node:SCzechA-s4-w15 ;
+                    pml:hasParent node:SCzechT-s4-n13 .
+node:SCzechT-s4-n7 rdf:type pml:Node ,
+                            owl:Thing ;
+                   pml:gender "nr" ;
+                   pml:negation "neg0" ;
+                   pml:sempos "n.denot" ;
+                   pml:functor "APPS" ;
+                   pml:nodetype "complex" ;
+                   pml:deepord "7" ;
+                   pml:t_lemma "," ;
+                   pml:formeme "n:???" ;
+                   pml:number "nr" ;
+                   pml:lex.rf node:SCzechA-s4-w7 ;
+                   pml:hasParent node:SCzechT-s4-n1 .
+node:SCzechT-s4-n8 rdf:type pml:Node ,
+                            owl:Thing ;
+                   pml:is_member "1" ;
+                   pml:deontmod "decl" ;
+                   pml:formeme "v:fin" ;
+                   pml:tense "ant" ;
+                   pml:deepord "11" ;
+                   pml:verbmod "ind" ;
+                   pml:aspect "cpl" ;
+                   pml:is_clause_head "1" ;
+                   pml:functor "PAR" ;
+                   pml:t_lemma "vyčíslit" ;
+                   pml:dispmod "disp0" ;
+                   pml:sempos "v" ;
+                   pml:iterativeness "it0" ;
+                   pml:resultative "res0" ;
+                   pml:nodetype "complex" ;
+                   pml:negation "neg0" ;
+                   pml:lex.rf node:SCzechA-s4-w11 ;
+                   pml:hasParent node:SCzechT-s4-n7 .
+node:SCzechT-s4-n9 rdf:type pml:Node ,
+                            owl:Thing ;
+                   pml:deepord "8" ;
+                   pml:sempos "n.denot" ;
+                   pml:t_lemma "škoda" ;
+                   pml:functor "PAT" ;
+                   pml:gender "fem" ;
+                   pml:nodetype "complex" ;
+                   pml:formeme "n:4" ;
+                   pml:number "sg" ;
+                   pml:negation "neg0" ;
+                   pml:lex.rf node:SCzechA-s4-w8 ;
+                   pml:hasParent node:SCzechT-s4-n8 .
+\end{minted}
+\caption{RDF serialization example}
+\label{lst:rdf_serialization}
+\end{listing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 
 \clearpage
