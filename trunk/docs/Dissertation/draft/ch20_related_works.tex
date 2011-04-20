@@ -1,0 +1,36 @@
+\chapter{Related Works}
+
+\section{Based on ILP}
+There are many users of ILP in the linguistic and information extraction area.
+For example in \citep{stasinos:phd} ILP was used for shallow parsing and phonotactics.
+Authors of \citep{Junker99learningfor} summarized some basic principles of using ILP for learning from text without any linguistic preprocessing. One of the most related approaches to ours can be found in \citep{aitken02:_learn_infor_extrac_rules}. The authors use ILP for extraction of information about chemical compounds and other concepts related to global warming and they try to express the extracted information in terms of ontology. They use only the part of speech analysis and named entity recognition in the preprocessing step. But their inductive procedure uses also additional domain knowledge for the extraction. In \citep{Ramakrishnan:UsingILPforFeatures} ILP was used to construct good features for propositional learners like SVM to do information extraction. It was discovered that this approach is a little bit more successful than a direct use of ILP but it is also more complicated. The later two approaches could be also employed in our solution.
+
+\section{Based on Dependency Linguistics}
+As stated in \citep{Bunescu:phd}, the choice of the actual learning algorithm depends on the type of structural information available. For example, deep syntactic information provided by current parsers for new types of corpora such as biomedical text is seldom reliable, since most parsers have been trained on different types of narrative. If reliable syntactic information is lacking, sequences of words around and between the two entities can be used as alternative useful discriminators.
+But in our case deep linguistic parsing plays an essential role.
+
+%As stated in \citep{Bunescu:phd} deep syntactic information provided by current parsers is not always reliable (e.g. for biomedical texts). 
+
+There are other approaches that use deep parsing, but they often use the syntactic structure only for relation extraction and either do not use machine learning at all (extraction rules have to be handcrafted) 
+%[Yakushiji: Event extraction from biomedical papers using a full parser]
+\citep{Yakushiji2001},
+%[Funde: RelEx-Relation extraction using dependency parse trees]
+\citep{RelEx},
+%[Buyko: Event extraction from trimmed dependency graphs]
+\citep{Buyko:dependencyGraphs}
+or do some kind of similarity search based on the syntactic structure
+%[Banko: Open Information Extraction from the Web]
+\citep{Etzioni08informationExtraction},
+%[Wang: Recognizing Textual Entailment Using Sentence Similarity based on Dependency Tree Skeletons]
+\citep{Wang:SimilarityTreeSkeletons}
+or the syntactic structure plays only very specific role in the process of feature selection for propositional learners %[Mooney: Extracting Relations from Text: From Word Sequences to Dependency Paths].
+\citep{Bunescu:DependencyPaths}.
+
+\section{Based on Propositional Machine Learning}
+\subsection{GATE Machine Learning}
+There is also a long row of information extraction approaches that use classical propositional learners like SVM on a set of features manually selected from input text. We do not cite them here. We just refer to \citep{Yaoyong09a} -- using machine learning facilities in GATE. This is the software component (Machine Learning PR) to that we have compared our solution. Our solution is also based on GATE (See next sections.)
+
+\section{Semantic annotation}
+\subsection{GATE}
+Last category of related works goes in the direction of semantics and ontologies. Because we do not develop this topic in this paper, we just refer to the ontology features in GATE \citep{Bon04b}, which can be easily used to populate an ontology with the extracted data. We discus this topic later in Section~\ref{sec:SemanticInterpretation}.
+
