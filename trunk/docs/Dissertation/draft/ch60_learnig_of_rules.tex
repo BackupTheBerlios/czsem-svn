@@ -1,4 +1,5 @@
 \chapter{Extraction Method Based on ILP Machine Learning}
+\graphicspath{{../img/ch60/}}
 
 
 \section{Introduction}
@@ -20,8 +21,50 @@ A description, implementation and initial evaluation of the method are the main 
 \section{Implementation}
 Here we just briefly describe implementation of our system. The system consists of several modules, all integrated in GATE as processing resources.
 
-\subsection{TectoMT Wrapper (Linguistic Analysis)}
-First is the TectoMT wrapper, which takes the text of a GATE document, sends it to TectoMT linguistic analyzers, parses the results and converts the results to the form of GATE annotations.
+\subsection{TectoMT Wrapper (Linguistic Analysis)} 
+
+TectoMT wrapper is a GATE component (processing resource), which takes the text of a GATE document, sends it to TectoMT linguistic analyzers, parses the results and converts the results to the form of GATE annotations.
+
+Because TectoMT has to run as a separate process (it is implemented in Perl) and the initialization of TectoMT analyzers usually takes significant amount of time it would be very inefficient to start a new TectoMT instance for each document. Therefore the implementation currently offers two modes of execution: batch (TectoMTBatchAnalyser) and online (TectoMTOnlineAnalyser).
+
+The batch mode is implemented similarly to the Batch Learning PR\footnote{\url{http://gate.ac.uk/userguide/sec:ml:batch-learning-pr}}. During the execution as a part of a corpus pipeline it only accumulates documents and the whole work is done as a batch when the last document is encountered. This also implies that TectoMTBatchAnalyser has to be the last PR in the pipeline because it produces no output in the time of execution (except for the last document). 
+
+Client-server model of implementation is used in the online mode. A separate TectoMT server process is started at the time of initialization and GATE documents are processed in ordinary way at the time of execution. This means that (similarly to the previous case) each document is converted to the TectoMT readable format, sent to TectoMT and the result is converted back to GATE. The online mode of execution is a bit slower than the batch mode because additional time is spent on client-server communication (XML-RPC\footnote{\url{http://www.xmlrpc.com/}}).
+
+
+
+\subsection{PDT Annotations in GATE} \label{sec:pdt_in_gate}
+
+Although GATE annotations are just highlighted pieces of text it is possible to use them to encode dependency tree structures. It is possible because each GATE annotation has a unique identifier (ID) and an arbitrary set of features (name-value pairs) can be assigned to it. The way how the PDT dependency trees are encoded in GATE is in fact the same as in the GATE wrapper for the Stanford Parser\footnote{\url{http://gate.ac.uk/userguide/sec:parsers:stanford}}. 
+
+Three main constructs are used to capture an arbitrary configuration of a linguistic dependency tree:
+
+
+\begin{description}
+	\item[tree nodes] (usually corresponding to words (tokens) of a sentence)
+	\item[edges] (dependency relations between nodes)
+	\item[node attributes] (connected linguistic features like POS, gender, tense, case, etc.)
+\end{description}
+
+These constructs are encoded in GATE in the following way: tree nodes correspond to token annotations, node attributes are saved as token annotation features and edges are encoded as another special kind of annotations.
+
+Two kinds of token annotations are used to represent two kinds of trees and tree nodes. ``Token'' annotation type is used for analytical tree nodes and ``tToken'' for tectogrammatical tree nodes.
+
+Four kinds of edges (dependencies) are implemented by the TectoMT wrapper: analytical dependencies, tectogrammatical dependencies, aux.rf (auxiliary reference) and lex.rf (main lexical reference). The last two kinds (aux.rf and lex.rf) are used to connect tectogrammatical and analytical nodes. The implementation differs according to the cardinality of a dependency type. The first three kinds are of the cardinality one-to-many (one parent node can have many children nodes) and the last one (lex.rf) if of the cardinality one-to-one (one parent node has at most one child). Because of that lex.rf edges can be stored as features (with the name ``lex.rf'') of ``tToken'' annotations. Note that a GATE annotation feature can only have one value per annotation. In this case the annotation ID of the referenced ``Token'' annotation (referenced analytical node) is the value of the lex.rf feature.
+
+One-to-many dependencies are stored as separate annotations (type names: ``aDependency'', ``tDependency'', ``aux.rf'') with a single feature called ``args''. Values of this feature are of Java type List<Integer> (list of integers). The list always contains just two items. The first one is the annotation ID of the parent annotation; the second one is the ID of the child annotation. Instead of using one list feature, two simple features (like ``arg1'', ``arg2'' or ``parentID'', ``childID'') could be used, but the implementation is consistent with the wrapper for the Stanford Parser (using the single list feature ``args''), thus PDT dependencies are compatible with Stanford dependencies in GATE.
+
+It is not simple to demonstrate the GATE representation of the dependencies in a static printed form; we can only show a GATE screenshot (Figure~\ref{fig:PDT_GATE}) that partly illustrates that.
+
+
+\begin{figure}
+	\centering
+		\includegraphics[width=0.7\hsize]{PDT_GATE}
+	\caption{PDT annotations in GATE (screenshot).}
+	\label{fig:PDT_GATE}
+\end{figure}
+
+
 
 \subsection{ILP Wrapper (Machine Learning)}
 After a human annotator have annotated several documents with desired target annotations, machine learning takes place. 
@@ -49,6 +92,90 @@ ML PR provides an interface for exchange of features (including target class) be
 
 
 \subsection{ILP Serialization} \label{sec:ilp_serialization}
+
+In this section details about conversion of linguistic trees to ILP background knowledge (a Prolog logical database of facts) will be presented. Although the construction is quite strait forward it is worth describing because it makes it easier to understand the extraction rules found by the ILP learning procedure. 
+
+As mentioned in Section~\ref{sec:pdt_in_gate}: three main constructs are used to capture an arbitrary configuration of a dependency linguistic tree: nodes, edges and node attributes. During the process of ILP Serialization these constructs are rendered to Prolog in following way. 
+
+A unique identifier (node ID) is generated for every tree node. The identifier is based on document name and GATE annotation ID (sentence order and node deep order are used outside of GATE, see PML$\rightarrow$RDF transformation in Section~\ref{sec:pml_to_rdf}.) These node IDs correspond to simple atoms and they represent tree nodes in the fact database. A node type (used by the ILP learning algorithm) is assigned to a node ID by predicates \texttt{Token(NodeID)} for analytical tree nodes and \texttt{tToken(NodeID)} for tectogrammatical tree nodes.
+
+Tree nodes are connected by edges using binary predicates of the form:
+
+\texttt{dependency\_type\_name(ParentNodeID, ChildNodeID)}
+
+\noindent Note that the parent (governor) node always occupies the first argument and the child (dependant) node the second one. Predicate name \emph{tDependency} is used for tectogrammatical dependencies and \emph{aDependency} for analytical ones. There are also special kinds of dependencies that connect tectogrammatical and analytical nodes: \emph{lex.rf} (main lexical reference) and \emph{aux.rf} (auxiliary reference), in these cases tectogrammatical node occupies the first argument and analytical the second.
+
+Node attributes are assigned to node IDs by binary predicates of the form:
+
+\texttt{attribute\_name(NodeID, AttributeValue)}
+
+\noindent There are about thirty such predicates like \emph{t\_lemma} (tectogrammatical lemma), \emph{functor} (tectogrammatical functor), \emph{sempos} (semantic part of speech), \emph{negation}, \emph{gender}, etc. but minority of them is usually used in extraction rules.
+
+Example of a serialized tectogrammatical tree is in Listing~\ref{lst:ilp_serialization} it is the same tree as in Figure~\ref{img:damage_tree}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{listing}[ht]
+\begin{minted}[linenos, fontsize=\footnotesize,
+               frame=lines]{prolog}
+tToken(  id_jihomoravsky47443_243).
+t_lemma( id_jihomoravsky47443_243, 'být'). %to be
+functor( id_jihomoravsky47443_243, 'PRED').
+sempos(  id_jihomoravsky47443_243, 'v').
+tDependency( id_jihomoravsky47443_243, id_jihomoravsky47443_238).
+tToken(  id_jihomoravsky47443_238).
+t_lemma( id_jihomoravsky47443_238, ','). %comma
+functor( id_jihomoravsky47443_238, 'APPS').
+sempos(  id_jihomoravsky47443_238, 'n.denot').
+gender(  id_jihomoravsky47443_238, 'nr').
+tDependency( id_jihomoravsky47443_238, id_jihomoravsky47443_237).
+tToken(  id_jihomoravsky47443_237).
+t_lemma( id_jihomoravsky47443_237, 'vyčíslit'). %to quantify
+functor( id_jihomoravsky47443_237, 'PAT').
+sempos(  id_jihomoravsky47443_237, 'v').
+tDependency( id_jihomoravsky47443_237, id_jihomoravsky47443_245).
+tToken(  id_jihomoravsky47443_245).
+t_lemma( id_jihomoravsky47443_245, 'předběžně'). %preliminarily
+functor( id_jihomoravsky47443_245, 'MANN').
+sempos(  id_jihomoravsky47443_245, 'adv.denot.grad.nneg').
+tDependency( id_jihomoravsky47443_237, id_jihomoravsky47443_244).
+tToken(  id_jihomoravsky47443_244).
+t_lemma( id_jihomoravsky47443_244, 'vyšetřovatel'). %investigator
+functor( id_jihomoravsky47443_244, 'ACT').
+sempos(  id_jihomoravsky47443_244, 'n.denot').
+gender(  id_jihomoravsky47443_244, 'anim').
+tDependency( id_jihomoravsky47443_237, id_jihomoravsky47443_240).
+tToken(  id_jihomoravsky47443_240).
+t_lemma( id_jihomoravsky47443_240, 'osm'). %eight
+functor( id_jihomoravsky47443_240, 'PAT').
+sempos(  id_jihomoravsky47443_240, 'n.quant.def').
+gender(  id_jihomoravsky47443_240, 'nr').
+tDependency( id_jihomoravsky47443_240, id_jihomoravsky47443_242).
+tToken(  id_jihomoravsky47443_242).
+t_lemma( id_jihomoravsky47443_242, 'tisíc'). %thousand
+functor( id_jihomoravsky47443_242, 'RSTR').
+sempos(  id_jihomoravsky47443_242, 'n.quant.def').
+gender(  id_jihomoravsky47443_242, 'inan').
+tDependency( id_jihomoravsky47443_242, id_jihomoravsky47443_247).
+tToken(  id_jihomoravsky47443_247).
+t_lemma( id_jihomoravsky47443_247, 'koruna'). %crown
+functor( id_jihomoravsky47443_247, 'MAT').
+sempos(  id_jihomoravsky47443_247, 'n.denot').
+gender(  id_jihomoravsky47443_247, 'fem').
+tDependency( id_jihomoravsky47443_237, id_jihomoravsky47443_246).
+tToken(  id_jihomoravsky47443_246).
+t_lemma( id_jihomoravsky47443_246, 'škoda'). %damage
+functor( id_jihomoravsky47443_246, 'PAT').
+sempos(  id_jihomoravsky47443_246, 'n.denot').
+gender(  id_jihomoravsky47443_246,'fem').
+\end{minted}
+\caption{ILP serialization example}
+\label{lst:ilp_serialization}
+\end{listing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
 
 \subsection{Connecting Linear GATE Annotations with Tree Nodes}
 
