@@ -66,7 +66,9 @@ We call the first point as \emph{root preprocessing} and the last point as \emph
 
 \subsection{Semantic Interpretation}
 \label{sec:SemanticInterpretation}
-Information extraction can solve the task ``how to get documents annotated'', but as we aim on the semantic annotation, there is a second step of ``semantic interpretation'' that has to be done. In this step we have to interpret the annotations in terms of a standard ontology. On a very coarse level this can be done easily. Thanks to GATE ontology tools \citep{Bon04b} we can convert all the annotations to ontology instances with a quite simple JAPE \citep{Cunningham00jape:a} rule, which takes the content of an annotation and saves it as a label of a new instance or as a value of some property of a shared instance. For example in our case of traffic and fire accidents, there will be a new instance of an accident class for each document and the annotations would be attached to this instance as values of its properties. Thus from all annotations of the same type, instances of the same ontology class or values of the same property would be constructed. This is very inaccurate form of semantic interpretation but still it can be useful. It is similar to the GoodRelation \citep{DBLP:conf/ekaw/Hepp08} design principle of \emph{incremental enrichment}\footnote{\url{http://www.ebusiness-unibw.org/wiki/Modeling_Product_Models#Recipe:_.22Incremental_Enrichment.22}}:
+Information extraction can solve the task ``how to get documents annotated'', but as we aim on the semantic annotation, there is a second step of ``semantic interpretation'' that has to be done. In this step we have to interpret the annotations in terms of a standard ontology. On a very coarse level this can be done easily. Thanks to GATE ontology tools \citep{Bon04b} we can convert all the annotations to ontology instances with a quite simple JAPE \citep{Cunningham00jape:a} rule, which takes the content of an annotation and saves it as a label of a new instance or as a value of some property of a shared instance. For example in our case of traffic and fire accidents, there will be a new instance of an accident class for each document and the annotations would be attached to this instance as values of its properties. Thus from all annotations of the same type, instances of the same ontology class or values of the same property would be constructed. This is very inaccurate form of semantic interpretation but still it can be useful. It is similar to the GoodRelation \citep{DBLP:conf/ekaw/Hepp08} design principle of \emph{incremental enrichment}\footnote{
+\url{http://www.ebusiness-unibw.org/wiki/Modeling_Product_Models#Recipe:_.22Incremental_Enrichment.22}
+}:
 \begin{quote}
 ``...you can still publish the data, even if not yet perfect. The Web will do the rest -- new tools and people.''	
 \end{quote}
@@ -138,23 +140,25 @@ In the first task (`damage') the methods obtained much higher scores then in the
 In Figure~\ref{fig:rules} we present some examples of the rules learned from the whole dataset. The rules demonstrate a connection of a target token with other parts of a sentence through linguistic syntax structures. For example the first rule connects a root numeral (\emph{n.quant.def}) of `damage' with a mention of `investigator' that stated the mount. In the last rule only a positive occurrence of the verb `injure' is allowed.
 
 \begin{figure}
-	\scriptsize
-[Rule 1] [Pos cover = 14 Neg cover = 0]\\
-\verb@damage_root(A) :- lex_rf(B,A), has_sempos(B,'n.quant.def'), tDependency(C,B),@
-\verb@   tDependency(C,D), has_t_lemma(D,'investigator').@ %\emph{\%vy353et345ovatel = investigator}
-\smallskip\newline
-[Rule 2] [Pos cover = 13 Neg cover = 0]\\
-\verb@damage_root(A) :- lex_rf(B,A), has_functor(B,'TOWH'), tDependency(C,B),@
-\verb@   tDependency(C,D), has_t_lemma(D,'damage').@\\
+\begin{minted}[linenos,  fontsize=\footnotesize,
+               frame=lines]{prolog}
+%[Rule 1] [Pos cover = 14 Neg cover = 0]
+damage_root(A) :- lex_rf(B,A), has_sempos(B,'n.quant.def'), tDependency(C,B),
+   tDependency(C,D), has_t_lemma(D,'investigator').
+
+%[Rule 2] [Pos cover = 13 Neg cover = 0]
+damage_root(A) :- lex_rf(B,A), has_functor(B,'TOWH'), tDependency(C,B),
+   tDependency(C,D), has_t_lemma(D,'damage').
 
 
-[Rule 1] [Pos cover = 7 Neg cover = 0]\\
-\verb@injuries(A) :- lex_rf(B,A), has_functor(B,'PAT'), has_gender(B,anim),@
-\verb@   tDependency(B,C), has_t_lemma(C,'injured').@
-\smallskip\newline
-[Rule 8] [Pos cover = 6 Neg cover = 0]\\
-\verb@injuries(A) :- lex_rf(B,A), has_gender(B,anim), tDependency(C,B),@
-\verb@   has_t_lemma(C,'injure'), has_negation(C,neg0).@
+%[Rule 1] [Pos cover = 7 Neg cover = 0]
+injuries(A) :- lex_rf(B,A), has_functor(B,'PAT'), has_gender(B,anim),
+   tDependency(B,C), has_t_lemma(C,'injured').
+
+%[Rule 8] [Pos cover = 6 Neg cover = 0]
+injuries(A) :- lex_rf(B,A), has_gender(B,anim), tDependency(C,B),
+   has_t_lemma(C,'injure'), has_negation(C,neg0).
+\end{minted}
 	\caption{Examples of learned rules, Czech words are translated.}
 	\label{fig:rules}
 \end{figure}
