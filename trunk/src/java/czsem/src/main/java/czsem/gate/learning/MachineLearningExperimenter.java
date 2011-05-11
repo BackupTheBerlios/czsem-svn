@@ -25,16 +25,15 @@ import czsem.gate.learning.DataSet.DataSetReduce;
 import czsem.gate.learning.MLEngine.ILPEngine;
 import czsem.gate.learning.MLEngine.PaumEngine;
 import czsem.gate.learning.MLEngineEncapsulate.*;
-import czsem.gate.learning.MLEngineEncapsulate.CreateTemporaryMentionsReferedMentionsPostprocessing;
-import czsem.gate.learning.MLEngineEncapsulate.MLEvaluate;
 import czsem.gate.plugins.AnnotationDependencyRootMarker;
 import czsem.gate.plugins.CrossValidation;
+import czsem.gate.plugins.LearningEvaluator;
 import czsem.utils.Config;
 
 public class MachineLearningExperimenter
 {
 	
-	public static MachineLearningExperiment czechAcquisitions() throws URISyntaxException, IOException
+	public static MachineLearningExperiment acquisitions() throws URISyntaxException, IOException
 	{
 		return
 			new MachineLearningExperiment(
@@ -58,9 +57,10 @@ public class MachineLearningExperimenter
 	{
 		return 	    
 			new MachineLearningExperiment(
-	    		new CzechFireman("damage"),
-//	    		new MLEvaluate(new CreateTemporaryMentions(new ILPEngine()))
-	    		new MLEvaluate(new CreateTemporaryMentionsRootSubtree(new ILPEngine())),
+	    		new CzechFireman("start"),
+	    		new MLEvaluate(new CreateTemporaryMentions(new ILPEngine())),
+//	    		new MLEvaluate(new CreateTemporaryMentionsRootSubtree(new ILPEngine())),
+//	    		new MLEvaluate(new CreateTemporaryMentions(new SubsequentAnnotationMerge(new ILPEngine()))),
 	    	    new MLEvaluate(new CreatePersistentMentions(new PaumEngine()))
 
 /*
@@ -80,6 +80,14 @@ public class MachineLearningExperimenter
 	}
 	
 	public static void main(String [] args) throws GateException, URISyntaxException, IOException, JDOMException, BenchmarkReportInputFileFormatException
+	{
+		for (int i = 0; i < 5; i++)
+		{
+			main2(args);			
+		}
+	}
+
+	public static void main2(String [] args) throws GateException, URISyntaxException, IOException, JDOMException, BenchmarkReportInputFileFormatException
 	{
 	    Logger logger = Logger.getRootLogger();
 	    logger.setLevel(Level.ALL);
@@ -123,7 +131,7 @@ public class MachineLearningExperimenter
 	    	    
 	    LogService.minVerbosityLevel = 0;
 
-	    
+/*	    
 	    new MachineLearningExperiment(
 	    		new Acquisitions("acquired"),
 //	    		new DataSetReduce(new Acquisitions("acquired"), 0.05),
@@ -140,16 +148,18 @@ public class MachineLearningExperimenter
 	    	    new MLEvaluate(new CreatePersistentMentions(new PaumEngine()))
 //	    		new ILPEngine()
 	    ).crossValidation(2);
+/**/	    
 	    
-	    
-//	    czechFiremanSimple().trainOnly();
+	    czechFiremanSimple().crossValidation(10);
 	    
 	    
 	    logger.info("time statistics:\n"+GateUtils.createGateTimeBenchmarkReport());
 	    
 	    WekaResultExporter ex = new WekaResultExporter();
 	    ex.addInfoFromTimeBechmark();
-	    ex.saveAll("weka_results.csv", true);
+	    ex.saveAll("weka_results.csv");
+	    
+	    LearningEvaluator.CentralResultsRepository.repository.clear();
 	    
 	    
 

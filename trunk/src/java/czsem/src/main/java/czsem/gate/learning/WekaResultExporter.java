@@ -3,6 +3,7 @@ package czsem.gate.learning;
 import gate.util.AnnotationDiffer;
 import gate.util.reporting.exceptions.BenchmarkReportInputFileFormatException;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -303,8 +304,10 @@ public class WekaResultExporter
 		GateUtils.doGateTimeBenchmarkReport(new TimeBenchmarkWekaReporter(this));
 	}
 	
-	public void saveAll(String filename, boolean append) throws IOException
+	public void saveAll(String filename) throws IOException
 	{
+		boolean append = new File(filename).exists();
+		
 		FileOutputStream out = new FileOutputStream(filename, append);
 		CsvWriter wr = new CsvWriter(out, ',', Charset.defaultCharset());
 		
@@ -370,7 +373,7 @@ public class WekaResultExporter
 		WekaResultExporter ex = new WekaResultExporter(data);
 		ex.addInfoFromTimeBechmark();
 		
-		ex.saveAll("main.csv", true);
+		ex.saveAll("main.csv");
 		
 	}
 

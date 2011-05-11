@@ -75,9 +75,23 @@ public class ILPExec extends ProcessExec {
 
 
 
+	public void startPrologProcess() throws IOException, URISyntaxException
+	{
+		String [] exec_args = {Config.getConfig().getPrologPath()};
+		
+		startPrologProcess(exec_args);		
+	}
+
 	public void startPrologProcess(String file_name_to_consult) throws IOException, URISyntaxException
 	{
 		String [] exec_args = {Config.getConfig().getPrologPath(), "-l", file_name_to_consult};
+		
+		startPrologProcess(exec_args);		
+	}
+
+	
+	public void startPrologProcess(String[] exec_args) throws IOException, URISyntaxException
+	{
 		
 //		System.err.println(Config.getConfig().getPrologPath());
 //		System.err.println(file_name_to_consult);
@@ -303,10 +317,13 @@ public class ILPExec extends ProcessExec {
 
 	public void initBeforeApplyRules(String backgroundFileName, String errLogName) throws IOException, URISyntaxException
 	{
-		startPrologProcess(getRulesFileName());
+		startPrologProcess();
 		startErrReaderThread(errLogName);
+		setUtf8Encoding();
+		consultFile(getRulesFileName());				
 		consultFile(backgroundFileName);				
 	}
+
 
 	public OutputStream getOutputStream() {
 		return process.getOutputStream();

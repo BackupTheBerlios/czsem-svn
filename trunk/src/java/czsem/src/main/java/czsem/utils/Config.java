@@ -250,8 +250,9 @@ public class Config
 	}
 
 	public void setGateHome()
-	{		
-		Gate.setGateHome(new File(getGateHome()));
+	{
+		if (Gate.getGateHome() == null)
+			Gate.setGateHome(new File(getGateHome()));
 	}
 
 
