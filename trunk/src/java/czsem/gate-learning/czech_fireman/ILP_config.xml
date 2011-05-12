@@ -91,7 +91,7 @@
 <!--
                         <feature>deepord</feature>
 -->                        
-                    </features>  
+                    </features>                    
                 </token>  
             </tokens>
             <tree_dependecies>
@@ -108,6 +108,11 @@
 <!--
 -->                
             </one2one_dependecies>
+            
+            <overlap_dependecies>
+                <dependecy parent_typename="Lookup" child_typename="tToken"/>
+            </overlap_dependecies>  
+
         </serializer>  
     </OPTIONS>  
   </ENGINE>  

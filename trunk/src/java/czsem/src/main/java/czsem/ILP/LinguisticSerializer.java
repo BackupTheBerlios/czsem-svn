@@ -24,6 +24,7 @@ public class LinguisticSerializer
 	protected List<Relation> featRels;
 	protected List<Relation> treeDepRels;
 	protected List<Relation> one2oneDepRels;
+	protected List<Relation> overlapRels;
 	
 	protected File workingDirectory;
 	protected String projectName;
@@ -58,12 +59,20 @@ public class LinguisticSerializer
 		
 		featRels = new ArrayList<Relation>();
 		treeDepRels = new ArrayList<Relation>(5);
+		overlapRels = new ArrayList<Relation>();
 		one2oneDepRels = new ArrayList<Relation>(3);
 		examples = new ArrayList<Example>();
 		exampleClassValues = new HashSet<String>();
 	}
 
 	
+	
+	
+	public void createOverlapRelsDependencyType(int index, String dependencyName, String parentType, String childType)
+	{
+		Relation rel = createDependencyType(index, dependencyName, parentType, childType);
+		overlapRels.add(index, rel);
+	};
 	public void createTreeDependencyType(int index, String dependencyName, String parentType, String childType)
 	{
 		Relation rel = createDependencyType(index, dependencyName, parentType, childType);
@@ -88,11 +97,14 @@ public class LinguisticSerializer
 	};
 	
 	
+	public void putOverlapDependency(int dependencyIndex, String parentId, String childId)
+	{
+		ser_bkg.putBinTuple(overlapRels.get(dependencyIndex), parentId, childId);
+	};
 	public void putTreeDependency(int dependencyIndex, String parentId, String childId)
 	{
 		ser_bkg.putBinTuple(treeDepRels.get(dependencyIndex), parentId, childId);
-	};
-	
+	};	
 	public void putOneToOneDependency(int dependencyIndex, String parentId, String childId)
 	{
 		ser_bkg.putBinTuple(one2oneDepRels.get(dependencyIndex), parentId, childId);
@@ -125,6 +137,13 @@ public class LinguisticSerializer
 //			ser_bkg.putBinaryMode(rel, "1", '+', '+');		
 //			ser_bkg.putBinaryMode(rel, "1", '-', '-');		
 		}
+		for (Relation rel : overlapRels)
+		{
+			ser_bkg.putBinaryMode(rel, "*", '+', '-');
+			ser_bkg.putBinaryMode(rel, "*", '-', '+');		
+//			ser_bkg.putBinaryMode(rel, "1", '+', '+');		
+//			ser_bkg.putBinaryMode(rel, "1", '-', '-');		
+		}
 		ser_bkg.putCommentLn("-------------------- Modes END --------------------");		
 	}
 
@@ -147,6 +166,10 @@ public class LinguisticSerializer
 		}
 
 		for (Relation rel : treeDepRels)
+		{
+			ser_bkg.putDetermination(target, rel);			
+		}
+		for (Relation rel : overlapRels)
 		{
 			ser_bkg.putDetermination(target, rel);			
 		}
@@ -232,6 +255,8 @@ public class LinguisticSerializer
 		ilp_exec.close();
 		
 	
+		//Rule serialization
+		//TODO: missing support for overlap dependencies
 		RulesSerializer rs = new RulesSerializer(workingDirectory, projectName);
 		rs.setOutputRulesFileName("../rules/" + projectName + ProjectSetup.makeTimeStamp() +"_rules.owl");
 		rs.setOntologyURIFromOutpuRulesFileNameAndWorkingDir();

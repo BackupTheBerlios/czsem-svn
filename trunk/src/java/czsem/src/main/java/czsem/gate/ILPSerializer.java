@@ -11,7 +11,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -36,9 +35,9 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 //	protected String [] class_attribute_values;
 	
 	protected MultiSet<String> instanceClassTypes = new MultiSet<String>();
-
 	
-	protected String [] tokens =
+	
+	protected String [] token_types =
 	{
 //		"Token",
 //		"tToken"
@@ -59,6 +58,7 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 //		"auxRfDependency"
 	};
 
+
 	protected String [][] tree_dependecy_args =
 	{
 //			{"Token", "Token"},			
@@ -67,6 +67,12 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 //			{"tToken", "Token"},			
 	};
 
+	protected String [][] overlap_dependecy_args =
+	{
+//			{"Lookup", "tToken"}			
+	};
+
+	
 	protected String [] one2one_dependecies =
 	{
 //		"lex.rf"	
@@ -85,13 +91,24 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 	protected void createFeatureTypes()
 	{
 		int cumulative_features = 0;
-		for (int t=0; t<tokens.length; t++)
+		for (int t=0; t<token_types.length; t++)
 		{
 			for (int f=0; f<token_features[t].length; f++)
 			{
-				lingSer.createFeatureType(cumulative_features++, tokens[t], token_features[t][f]);
+				lingSer.createFeatureType(cumulative_features++, token_types[t], token_features[t][f]);
 			}
 		}				
+	}
+	protected void createOverlapDependencyTypes()
+	{
+		for (int d=0; d<overlap_dependecy_args.length; d++)
+		{
+			lingSer.createOverlapRelsDependencyType(
+					d,
+					"overlap_"+overlap_dependecy_args[d][0]+'_'+ overlap_dependecy_args[d][1],
+					overlap_dependecy_args[d][0],
+					overlap_dependecy_args[d][1]);
+		}		
 	}
 	protected void createTreeDependencyTypes()
 	{
@@ -120,9 +137,9 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 	protected void serializeToneks()
 	{
 		int token_features_offset = 0;
-		for (int t=0; t<tokens.length; t++)
+		for (int t=0; t<token_types.length; t++)
 		{
-			AnnotationSet tocs = as.get(tokens[t]);			
+			AnnotationSet tocs = as.get(token_types[t]);			
 			for (Annotation token : tocs)
 			{
 				FeatureMap feats = token.getFeatures();
@@ -146,14 +163,24 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 	}
 
 	@SuppressWarnings("unchecked")
-	protected void serializeTreeDependency(int dependencyIndex, Annotation dep_annot)
+	public static List<Integer> argsFromDependencyAnnotation(Annotation dep_annot)
 	{
-		ArrayList<Integer> args = (ArrayList<Integer>) dep_annot.getFeatures().get("args");
-
+		return (List<Integer>) dep_annot.getFeatures().get("args");
+	}
+	
+	protected void serializeTreeDependency(int dependencyIndex, int parent_id, int child_id)
+	{
 		lingSer.putTreeDependency(
 				dependencyIndex,
-				renderID(args.get(0)),
-				renderID(args.get(1)));
+				renderID(parent_id),
+				renderID(child_id));
+	}
+	protected void serializeOverlapDependency(int dependencyIndex, int parent_id, int child_id)
+	{
+		lingSer.putOverlapDependency(
+				dependencyIndex,
+				renderID(parent_id),
+				renderID(child_id));
 	}
 	
 	protected void serializeOne2OneDependency(int dependencyIndex, Annotation parent)
@@ -169,6 +196,22 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 		}		
 	}
 
+	
+	protected void serializeOverlapDependencies()
+	{
+		for (int d=0; d<overlap_dependecy_args.length; d++)
+		{
+			AnnotationSet parents = as.get(overlap_dependecy_args[d][0]);
+			for (Annotation parent : parents)
+			{
+				AnnotationSet potential_children = as.get(overlap_dependecy_args[d][1]);
+				AnnotationSet children = potential_children.getContained(parent.getStartNode().getOffset(), parent.getEndNode().getOffset());
+				for (Annotation child : children) {
+					serializeOverlapDependency(d, parent.getId(), child.getId());									
+				}
+			}			
+		}		
+	}
 
 	protected void serializeTreeDependencies()
 	{
@@ -177,7 +220,8 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 			AnnotationSet deps = as.get(tree_dependecies[d]);
 			for (Annotation dep : deps)
 			{
-				serializeTreeDependency(d, dep);				
+				List<Integer> args = argsFromDependencyAnnotation(dep);
+				serializeTreeDependency(d, args.get(0), args.get(1));				
 			}			
 		}		
 	}
@@ -211,6 +255,7 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 		serializeToneks();
 		serializeTreeDependencies();
 		serializeOne2OneDependencies();				
+		serializeOverlapDependencies();
 	}
 
 	protected String renderID(String id)
@@ -280,9 +325,11 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 		createFeatureTypes();
 		createTreeDependencyTypes();
 		createOne2oneTreeDependencyTypes();
+		createOverlapDependencyTypes();
 		
 	}
 	
+
 	public void initLearning(String className, String classTypeName, String learning_settings)
 	{		
 		lingSer.putLearningSettings(learning_settings);
@@ -320,12 +367,12 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 //		class_attribute_values = parseClassAttributeValuesFromSerializerOptions(serializerOtionsElem);
 
 		List<Element> tokens = serializerOtionsElem.getChild("tokens").getChildren("token");
-		this.tokens = new String[tokens.size()];
+		this.token_types = new String[tokens.size()];
 		this.token_features = new String[tokens.size()][];
 		for (int t=0; t<tokens.size(); t++)
 		{
 			Element token = tokens.get(t);
-			this.tokens[t] = token.getAttributeValue("typename");
+			this.token_types[t] = token.getAttributeValue("typename");
 			List<Element> token_features = token.getChild("features").getChildren("feature");
 			this.token_features[t] = new String[token_features.size()];
 			for (int f = 0; f < token_features.size(); f++)
@@ -355,6 +402,16 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 			this.one2one_dependecy_args[one_dep][0] = one2one_dependecies.get(one_dep).getAttributeValue("parent_typename");
 			this.one2one_dependecy_args[one_dep][1] = one2one_dependecies.get(one_dep).getAttributeValue("child_typename");			
 		}		
+
+		List<Element> ovelap_dependecies = serializerOtionsElem.getChild("overlap_dependecies").getChildren("dependecy");
+		this.overlap_dependecy_args = new String[ovelap_dependecies.size()][];
+		for (int overlap_dep = 0; overlap_dep < ovelap_dependecies.size(); overlap_dep++)
+		{
+			this.overlap_dependecy_args[overlap_dep] = new String[2];
+			this.overlap_dependecy_args[overlap_dep][0] = ovelap_dependecies.get(overlap_dep).getAttributeValue("parent_typename");
+			this.overlap_dependecy_args[overlap_dep][1] = ovelap_dependecies.get(overlap_dep).getAttributeValue("child_typename");			
+		}
+
 	}
 
 	public void setBackgroundSerializerFileName(String fileName) throws FileNotFoundException, UnsupportedEncodingException

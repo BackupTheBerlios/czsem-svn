@@ -57,7 +57,7 @@ public class MachineLearningExperimenter
 	{
 		return 	    
 			new MachineLearningExperiment(
-	    		new CzechFireman("injuries"),
+	    		new CzechFireman("fatalities"),
 	    		new MLEvaluate(new CreateTemporaryMentions(new ILPEngine())),
 //	    		new MLEvaluate(new CreateTemporaryMentionsRootSubtree(new ILPEngine())),
 //	    		new MLEvaluate(new CreateTemporaryMentions(new SubsequentAnnotationMerge(new ILPEngine()))),
