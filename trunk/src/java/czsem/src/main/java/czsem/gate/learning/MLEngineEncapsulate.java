@@ -106,7 +106,16 @@ public class MLEngineEncapsulate implements TrainTest
 
 	public static class CreateTemporaryMentionsReferedMentionsPostprocessing extends CreatePersistentMentionsNoPostprocessing
 	{
-		public CreateTemporaryMentionsReferedMentionsPostprocessing(TrainTest child) {super(child);}
+		protected String referenceAnnotationFeature = "NamedEntity_root.origRootID";
+
+
+		public CreateTemporaryMentionsReferedMentionsPostprocessing(String referenceAnnotationFeature, TrainTest child)
+		{
+			super(child);
+			this.referenceAnnotationFeature = referenceAnnotationFeature;
+		}
+		public CreateTemporaryMentionsReferedMentionsPostprocessing(TrainTest child) {this("NamedEntity_root.origRootID", child);}
+		
 		
 		/** @see CreateTemporaryMentions#getTrainControllerSetup(MLEngineConfig) */
 		@Override
@@ -138,7 +147,7 @@ public class MLEngineEncapsulate implements TrainTest
 				.putFeature("outputASName", config.outputAS)
 				.putFeature("mentionAnntotationTypeName", config.learnigAnnotationType)
 				.putFeature("inverseFunction", true)
-				.putFeature("useReferenceAnnotationFeature", "NamedEntity_root.origRootID")
+				.putFeature("useReferenceAnnotationFeature", referenceAnnotationFeature )
 				.putFeature("inputAnnotationTypeNames", config.originalLearnigAnnotationTypes));
 			
 			//delete working Mentions

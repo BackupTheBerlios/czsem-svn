@@ -29,6 +29,7 @@ import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 
 import czsem.gate.GateUtils;
+import czsem.gate.ILPWrapper;
 
 @CreoleResource(name = "czsem CrossValidation", comment = "Does k-fold cross validation - training / testing on a corpus")
 public class CrossValidation extends AbstractProcessingResource
@@ -157,6 +158,10 @@ public class CrossValidation extends AbstractProcessingResource
 				GateUtils.safeDeepReInitPR_or_Controller(training_controller);
 			    training_controller.setCorpus(corpusFolds[i][1]);			    	    	    
 			    training_controller.execute();
+			    if (isInterrupted()) return;
+			    
+			    //TODO: reimplement
+			    ILPWrapper.executeAllTraingInRegister();
 			    if (isInterrupted()) return;
 			    
 				//testing

@@ -253,6 +253,7 @@ public class GateUtils
 		
 		public boolean isLastDocument()
 		{
+//			System.err.format("%d %d\n", numDocs, seenDocuments.size());
 			return numDocs <= seenDocuments.size();			
 		}
 

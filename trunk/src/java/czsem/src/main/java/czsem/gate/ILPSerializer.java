@@ -366,50 +366,63 @@ public class ILPSerializer extends AbstractLanguageAnalyser
 	{		
 //		class_attribute_values = parseClassAttributeValuesFromSerializerOptions(serializerOtionsElem);
 
-		List<Element> tokens = serializerOtionsElem.getChild("tokens").getChildren("token");
-		this.token_types = new String[tokens.size()];
-		this.token_features = new String[tokens.size()][];
-		for (int t=0; t<tokens.size(); t++)
+		if (serializerOtionsElem.getChild("tokens") != null)
 		{
-			Element token = tokens.get(t);
-			this.token_types[t] = token.getAttributeValue("typename");
-			List<Element> token_features = token.getChild("features").getChildren("feature");
-			this.token_features[t] = new String[token_features.size()];
-			for (int f = 0; f < token_features.size(); f++)
+			List<Element> tokens = serializerOtionsElem.getChild("tokens").getChildren("token");
+			this.token_types = new String[tokens.size()];
+			this.token_features = new String[tokens.size()][];
+			for (int t=0; t<tokens.size(); t++)
 			{
-				this.token_features[t][f] = token_features.get(f).getValue();				
+				Element token = tokens.get(t);
+				this.token_types[t] = token.getAttributeValue("typename");
+				List<Element> token_features = token.getChild("features").getChildren("feature");
+				this.token_features[t] = new String[token_features.size()];
+				for (int f = 0; f < token_features.size(); f++)
+				{
+					this.token_features[t][f] = token_features.get(f).getValue();				
+				}
 			}
 		}
 		
-		List<Element> tree_dependecies = serializerOtionsElem.getChild("tree_dependecies").getChildren("dependecy");
-		this.tree_dependecies = new String[tree_dependecies.size()];
-		this.tree_dependecy_args = new String[tree_dependecies.size()][];
-		for (int tree_dep = 0; tree_dep < tree_dependecies.size(); tree_dep++)
+		
+		if (serializerOtionsElem.getChild("tree_dependecies") != null)
 		{
-			this.tree_dependecies[tree_dep] = tree_dependecies.get(tree_dep).getAttributeValue("typename");
-			this.tree_dependecy_args[tree_dep] = new String[2];
-			this.tree_dependecy_args[tree_dep][0] = tree_dependecies.get(tree_dep).getAttributeValue("parent_typename");
-			this.tree_dependecy_args[tree_dep][1] = tree_dependecies.get(tree_dep).getAttributeValue("child_typename");			
+			List<Element> tree_dependecies = serializerOtionsElem.getChild("tree_dependecies").getChildren("dependecy");
+			this.tree_dependecies = new String[tree_dependecies.size()];
+			this.tree_dependecy_args = new String[tree_dependecies.size()][];
+			for (int tree_dep = 0; tree_dep < tree_dependecies.size(); tree_dep++)
+			{
+				this.tree_dependecies[tree_dep] = tree_dependecies.get(tree_dep).getAttributeValue("typename");
+				this.tree_dependecy_args[tree_dep] = new String[2];
+				this.tree_dependecy_args[tree_dep][0] = tree_dependecies.get(tree_dep).getAttributeValue("parent_typename");
+				this.tree_dependecy_args[tree_dep][1] = tree_dependecies.get(tree_dep).getAttributeValue("child_typename");			
+			}
 		}
 		
-		List<Element> one2one_dependecies = serializerOtionsElem.getChild("one2one_dependecies").getChildren("dependecy");		
-		this.one2one_dependecies = new String[one2one_dependecies.size()];
-		this.one2one_dependecy_args = new String[one2one_dependecies.size()][];
-		for (int one_dep = 0; one_dep < one2one_dependecies.size(); one_dep++)
+		if (serializerOtionsElem.getChild("one2one_dependecies") != null)
 		{
-			this.one2one_dependecies[one_dep] = one2one_dependecies.get(one_dep).getAttributeValue("typename");
-			this.one2one_dependecy_args[one_dep] = new String[2];
-			this.one2one_dependecy_args[one_dep][0] = one2one_dependecies.get(one_dep).getAttributeValue("parent_typename");
-			this.one2one_dependecy_args[one_dep][1] = one2one_dependecies.get(one_dep).getAttributeValue("child_typename");			
-		}		
+			List<Element> one2one_dependecies = serializerOtionsElem.getChild("one2one_dependecies").getChildren("dependecy");		
+			this.one2one_dependecies = new String[one2one_dependecies.size()];
+			this.one2one_dependecy_args = new String[one2one_dependecies.size()][];
+			for (int one_dep = 0; one_dep < one2one_dependecies.size(); one_dep++)
+			{
+				this.one2one_dependecies[one_dep] = one2one_dependecies.get(one_dep).getAttributeValue("typename");
+				this.one2one_dependecy_args[one_dep] = new String[2];
+				this.one2one_dependecy_args[one_dep][0] = one2one_dependecies.get(one_dep).getAttributeValue("parent_typename");
+				this.one2one_dependecy_args[one_dep][1] = one2one_dependecies.get(one_dep).getAttributeValue("child_typename");			
+			}
+		}
 
-		List<Element> ovelap_dependecies = serializerOtionsElem.getChild("overlap_dependecies").getChildren("dependecy");
-		this.overlap_dependecy_args = new String[ovelap_dependecies.size()][];
-		for (int overlap_dep = 0; overlap_dep < ovelap_dependecies.size(); overlap_dep++)
+		if (serializerOtionsElem.getChild("overlap_dependecies") != null)
 		{
-			this.overlap_dependecy_args[overlap_dep] = new String[2];
-			this.overlap_dependecy_args[overlap_dep][0] = ovelap_dependecies.get(overlap_dep).getAttributeValue("parent_typename");
-			this.overlap_dependecy_args[overlap_dep][1] = ovelap_dependecies.get(overlap_dep).getAttributeValue("child_typename");			
+			List<Element> ovelap_dependecies = serializerOtionsElem.getChild("overlap_dependecies").getChildren("dependecy");
+			this.overlap_dependecy_args = new String[ovelap_dependecies.size()][];
+			for (int overlap_dep = 0; overlap_dep < ovelap_dependecies.size(); overlap_dep++)
+			{
+				this.overlap_dependecy_args[overlap_dep] = new String[2];
+				this.overlap_dependecy_args[overlap_dep][0] = ovelap_dependecies.get(overlap_dep).getAttributeValue("parent_typename");
+				this.overlap_dependecy_args[overlap_dep][1] = ovelap_dependecies.get(overlap_dep).getAttributeValue("child_typename");			
+			}
 		}
 
 	}

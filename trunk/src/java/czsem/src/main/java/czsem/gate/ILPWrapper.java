@@ -7,6 +7,7 @@ import gate.creole.ml.AdvancedMLEngine;
 import gate.creole.ml.Attribute;
 import gate.creole.ml.DatasetDefintion;
 import gate.creole.ml.MachineLearningPR;
+import gate.event.ProgressListener;
 import gate.util.GateException;
 
 import java.io.File;
@@ -14,7 +15,9 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.jdom.Element;
@@ -23,7 +26,9 @@ import czsem.gate.GateUtils.CorpusDocumentCounter;
 
 public class ILPWrapper implements AdvancedMLEngine
 {
-	static Logger logger = Logger.getLogger(ILPWrapper.class); 
+	static Logger logger = Logger.getLogger(ILPWrapper.class);
+	
+	private static Set<ILPWrapper> train_register = new HashSet<ILPWrapper>();
 	
 	protected int idIndex;
 	protected int lastAttrIndex;
@@ -31,6 +36,9 @@ public class ILPWrapper implements AdvancedMLEngine
 	protected String className;
 	protected ILPSerializer ilpSer;
 	protected CorpusDocumentCounter docCounter;
+	
+	/** there are training instances in cache, training should be executed... */  
+	protected boolean triningInProgress = false;
 
 	protected DatasetDefintion datasetDefinition = null;
 	protected Element options;
@@ -57,7 +65,7 @@ public class ILPWrapper implements AdvancedMLEngine
 		return attributes.get(lastAttrIndex) == null;
 	}
 	
-	protected void serializeTrainingInstance(List<String> attributes) throws IOException, InterruptedException, URISyntaxException
+	protected void serializeCurrentDoc()
 	{
 		Document doc = pr.getDocument();
 		
@@ -66,26 +74,56 @@ public class ILPWrapper implements AdvancedMLEngine
 		{
 			ilpSer.serializeDocument(doc, pr.getInputASName());
 //			logger.debug("SerializeDocument: " + doc.getName());
+		}		
+	}
+
+	protected void startTraining() throws IOException, InterruptedException, URISyntaxException
+	{
+		if (! triningInProgress) return;
+		
+		ilpSer.flushAndClose();
+		logger.info(String.format("ILP training on %d documents...", docCounter.numDocs));
+		logger.info("Learning instace types: " + ilpSer.instanceClassTypes.toFormatedString(", "));
+		ilpSer.train();
+		
+		triningInProgress = false;
+//		ilpSer.train(options.getChild("ilp").getChildText("learning_settings"));		
+	}
+
+	public static void executeAllTraingInRegister() throws IOException, InterruptedException, URISyntaxException
+	{
+		for (ILPWrapper wrap : train_register)
+		{
+			wrap.startTraining();			
 		}
-				
+		
+		train_register.clear();
+	}
+	
+	protected void serializeTrainingInstance(List<String> attributes) throws IOException, InterruptedException, URISyntaxException
+	{				
+//		serializeCurrentDoc();
+		
 		ilpSer.serializeTrainingInstance(
 				attributes.get(idIndex),
 				pr.getDocument().getName(),
 				className,
 				attributes.get(classIndex));
 		
+		triningInProgress = true;
+		train_register.add(this);
+		
+/**/
 		if (docCounter.isLastDocument() && isLastInstanceInDocument(attributes))
 		{
-			ilpSer.flushAndClose();
-			logger.info(String.format("ILP training on %d documents...", docCounter.numDocs));
-			logger.info("Learning instace types: " + ilpSer.instanceClassTypes.toFormatedString(", "));
-			ilpSer.train();
-//			ilpSer.train(options.getChild("ilp").getChildText("learning_settings"));
+			startTraining();
 		}
+/**/		
 	}
 
 	public Collection<String>[] classifyInstances(List<List<String>> instances) throws IOException, InterruptedException, URISyntaxException
 	{
+		
 		Document doc = pr.getDocument();
 		String docName = doc.getName();
 
@@ -187,9 +225,20 @@ public class ILPWrapper implements AdvancedMLEngine
 	
 
 	@Override
-	public void setOwnerPR(ProcessingResource pr)
+	public void setOwnerPR(ProcessingResource owner_pr)
 	{
-		this.pr = (MachineLearningPR) pr;
+		this.pr = (MachineLearningPR) owner_pr;
+		this.pr.addProgressListener(new ProgressListener() {
+			@Override
+			public void progressChanged(int i)
+			{
+				if (pr.getTraining())
+					serializeCurrentDoc();
+			}
+			
+			@Override
+			public void processFinished() {}
+		});
 	}
 
 }

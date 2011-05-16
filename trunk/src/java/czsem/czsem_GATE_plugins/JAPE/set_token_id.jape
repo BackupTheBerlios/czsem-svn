@@ -1,11 +1,11 @@
 Phase:phase1
-Input: Token tToken NamedEntity_root   
+Input: Token tToken NamedEntity_root Lookup_root   
 Options: control = all
 
 Rule: set_id
 Priority: 20
 (
-{Token}|{tToken}|{NamedEntity_root}
+{Token}|{tToken}|{NamedEntity_root}|{Lookup_root}
 ): token_tmp
 -->
 {
