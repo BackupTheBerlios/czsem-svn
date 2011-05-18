@@ -1,124 +1,44 @@
+\chapter{Extraction Method Based on Manually Created Rules}
+\graphicspath{{../img/ch50/}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Presented Extraction Methods}
+
+The main motivation for creating both these methods was an attempt to use deep linguistic analysis of natural language texts. Especially for the Czech language with free word order this seemed reasonable. It is much more straightforward to design extraction rules on the basis of linguistic dependency trees than to struggle with the surface structure of text. In a dependency tree a position of a word is determined by its syntactic (analytical trees) or even semantic role (tectogrammatical trees). So the extraction rules might not be dramatically affected by minor variations (not changing the factual meaning of a sentence) of the word order.
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Linguistic tools for automatic annotation of texts} \label{sec:ling_tools}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Manually Created Rules}
+In this chapter the extraction method based on manually created linguistic rules will be described. First of all a data flow schema of the extraction process will be presented. Then several techniques and stages of evolution of the method will demonstrate how this method came to its existence and which decisions stood behind the development and the final implementation. At the end of the section several experiments will be presented to explain the usefulness of the method. 
 
 
-In this section we will describe the linguistic tools that we have used to produce linguistic annotation of texts. These tools are being developed in the Institute of Formal and Applied Linguistics\footnote{\url{http://ufal.mff.cuni.cz}} in Prague (ÚFAL), Czech Republic. They are publicly available -- they have been published on a CD-ROM under the title PDT 2.0 -- \citealt{biblio:PDT20_CD} (first five tools) and in \citealt{biblio:KlTransformationBasedTectogrammatical2006} (Tectogrammatical analysis). These tools are used as a processing chain and at the end of the chain they produce tectogrammatical \citep{biblio:MiBeAnnotationtectogrammatical2006} dependency trees. The Table~\ref{tab:ling_tools} shows some details about these tools.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Data Flow} \label{sec:ch50_data_flow}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{figure}
+	\centering
+		\includegraphics[width=0.2\hsize]{ap_schema}
+	\caption{Schema of the extraction process.}
+	\label{fig:ch50_ap_schema}
+\end{figure}
+
+
+\begin{figure}
+	\centering
+		\includegraphics[width=0.5\hsize]{article}
+	\caption{One web page with an accident report.}
+	\label{fig:ch50_article}
+\end{figure}
+
+
+The method was designed as a method for extraction of information from web resources. Thus the extraction process starts on the Web. On the other hand the method was intended to serve the evolution of the Semantic Web so the final goal and destination of the extraction process is the extracted information stored in the form of a semantic web ontology data or more precisely semantic web ontology instance. Figure~\ref{fig:ch50_ap_schema} splits the process into four steps among five media types. 
 
 
 \begin{enumerate}
-	\item \textbf{Segmentation and tokenization} consists of tokenization (dividing the input text into words and  punctuation) and segmentation (dividing a sequences of tokens into sentences).
-	
-	\item \textbf{Morphological analysis} assigns all possible lemmas and morphological tags to particular word forms (word occurrences) in the text.
-	
-	\item \textbf{Morphological tagging} consists in selecting a single pair lemma-tag from all possible alternatives assigned by the morphological analyzer.
-	
-	\item \textbf{Collins' parser -- Czech adaptation} \citep{biblio:collinshbrt_1999}
-		
-Unlike the usual approaches to the description of English syntax, the Czech syntactic descriptions are dependency-based, which means, that every edge of a syntactic tree captures the relation of dependency between a governor and its dependent node. Collins' parser gives the most probable parse of a given input sentence.
-	
-	\item \textbf{Analytical function assignment} assigns a description (\emph{analytical function} -- in linguistic sense) to every edge in the syntactic (dependency) tree.
-	
-	\item \textbf{Tectogrammatical analysis} \citep{biblio:KlTransformationBasedTectogrammatical2006} produces linguistic annotation at the tectogrammatical level.
-
-%	Tectogrammatical analysis produces linguistic annotation at the tectogrammatical layer, sometimes called “layer of deep syntax”. Annotation of a sentence at this layer is closer to meaning of the sentence than its syntactic annotation and thus information captured at the tectogrammatical layer is crucial for machine understanding of a natural language \citep{biblio:KlTransformationBasedTectogrammatical2006}.
-	 
-\end{enumerate}
-
-
-
-
-
-\begin{table}
-\centering
-\caption{Linguistic tools for machine annotation}
-%\renewcommand{\arraystretch}{1.4}
-	\begin{tabular}{l|l}
-		Name of the tool & Evaluation results (proclaimed by authors) \\[4pt]
-		\hline
-	Segmentation and tokenization & precision(p): 98,0\%, recall(r): 91,4\% \\[4pt]
-	Morphological analysis & 2,5\% unrecognized words\\
-	Morphological tagging & 93,0\% of tags assigned correctly \\[4pt]
-	Collins' parser -- Czech adaptation & 81,6\% dependencies assigned correctly\\
-	Analytical function assignment & precision: 92\% \\[4pt]
-	Tectogrammatical analysis & dependencies p:~90,2\%, r:~87,9\%\\
-	\hspace*{0.2cm} \citep{biblio:KlTransformationBasedTectogrammatical2006} & assignment of f-tags p:~86,5\%, r:~84,3\%\\
-	\end{tabular}
-\label{tab:ling_tools}
-\end{table}
-
-
-
-
-
-\noindent Although all tools mentioned above are a part of the processing chain mentioned in the previous chapter, the errors they produce are not multiplied. The numbers listed in the table are measured against a corresponding level of the Prague Dependency Treebank. If, for example, the morphological tagger, which is used as a prerequisite of the analytical parser (Collins' parser), has a precision of 93\%, the 7\% of incorrectly assigned tags definitely have some influence on the quality of the result of the parser. This influence is nevertheless already reflected in the 81,6\% precision of the parser. The results of the parser are measured against the correct trees contained in the PDT, therefore the precision of the parser is the \textbf{total} precision of the combination of the tagger and the parser. On the other hand, the (linguistic) analytical function assignment and the tectogrammatical analysis are both more or less dependent on the results of the previous phases and their precision has to be taken as a precision obtained on (already slightly imprecise) results of the analytical parser.
-
-These facts are important especially wrt. possible extension of the system in the future. It might be an interesting research topic to compare the results of the information extraction obtained through the exploitation of the full processing chain versus the results of the analytical parser only - the complications caused by the differences between the analytical level of representation and the desired structure of extracted information might be compensated by decreasing the amount of imprecision present in the system.     
-
-
-
-\section{Manually Created Rules}
-\subsection{Introduction IIS}
-The goal of the Semantic Web initiative \citep{biblio:2001-Berners-Lee-SemanticWeb} is to create an universal medium for the exchange of data. It is envisaged to smoothly interconnect systems, integrate application and to support the global sharing of data. The main step is to put machine-understandable data to the Web. To achieve this, we need standards and semantics for semantic enrichment of data. This is well in progress in ontological modeling (see \citealt{biblio:OWL}). Further we need to create semantic data, i.e. data annotated by ontological concepts sufficient for machine processing. Semantic annotation of data can be done either during the creation of data (by author or data generator) or after it (third party annotation). The third party annotation assumes we can extract (recognize) data from Web resources. 
-
-Semantic extraction of data from Web resources can be seen in three dimensions. The first dimension is the amount of human work associated with the extraction method. This dimension ranges from human hand written  through semiautomatic (human trained) to fully automatic approach. The second dimension is the difficulty of the automatic processing of the resource --- ranging from easy (tables generated from databases) through semistructured resources to textual resources. The third dimension of the problem is the selectivity of the extraction task --- ranging from document classification thorough data region and data record recognition to the extraction of attribute values \citep{biblio:Survey_of_Web_Information_Extraction_Systems}. Long distance goal of our research is to come closer to data extraction in the most difficult setting in all the dimensions. Some initial proposals and experiments are presented in this paper.
-
-In this paper we describe initial experiments with information extraction from traffic accident reports of fire departments in several regions of the Czech Republic. We would like to demonstrate the prospects of using linguistic tools developed in the Institute of Formal and Applied Linguistics in Prague (described in \ref{sec:ling_tools}). These experiments are promising, they e.g. enable the summarization of the number of injured people. 
-
-\subsection{intro IDC}
-For the Web to scale, tomorrow's programs must be able to share and process data even when these programs have been designed totally independently. Web services provide a standard means of interoperating between different software applications, running on a variety of platforms and/or frameworks. Web services are characterized by their great interoperability and extensibility, as well as their machine-processable descriptions thanks to the use of XML. They can be combined in a loosely coupled way in order to achieve complex operations. Programs providing simple services can interact with each other in order to deliver sophisticated added-value services \cite{biblio:W3C_Activity}.
-
-Still, more work needs to be done before the Web service infrastructure can make this vision come true. Current technology around UDDI, WSDL, and SOAP provide limited support in mechanizing service recognition, service configuration and combination (i.e., realizing complex workflows and business logics with Web services), service comparison and automated negotiation. In a business environment, the vision of flexible and autonomous Web service translates into automatic cooperation between enterprise services. Any enterprise requiring a business interaction with another enterprise can automatically discover and select the appropriate optimal Web services relying on selection policies. Services can be invoked automatically and payment processes can be initiated. Any necessary mediation would be applied based on data and process ontologies and the automatic translation and semantic interoperation. An example would be supply chain relationships where an enterprise manufacturing short-lived goods must frequently seek suppliers as well as buyers dynamically. Instead of employees constantly searching for suppliers and buyers, the Web service infrastructure does it automatically within the defined constraints. Other applications areas for this technology are Enterprise-Application Integration (EAI), eWork, and Knowledge Management \cite{biblio:SWSI}.
-
-Bottleneck for semantic web services is lack of semantically annotated information. This is especially difficult for Web resources described in natural language, especially for IndoEuropean flexitive type languages like Czech Language. We deal with linguistic information extraction from Czech texts from the Web for semantic annotation. 
-
-
-Linguistic extraction for semantic annotation of data from Web resources can be seen in three dimensions. The first dimension is the amount of human work associated with the extraction and annotation method. This dimension ranges from human "hand written"  through human assisted, semiautomatic (human trained) to fully automatic approach. The second dimension is the variety and complexity of queries (concepts) instances of which should be extracted and annotated. The third dimension of the problem is the independence on application domain. Problem of selectivity of the extraction task --- ranging from document classification thorough data region and data record recognition to the extraction of attribute values can be considered as an additional dimension, see e.g.  \cite{biblio:Survey_of_Web_Information_Extraction_Systems}. 
-
-In this paper we try to proceed in all dimensions in the "hard" direction. Nevertheless we are just in the begining.
-
-\subsubsection{Motivation}
-
-
-
-In this paper we describe initial experiments with information extraction from traffic accident reports of fire departments in several regions of the Czech Republic. These reports are being published on the web\footnote{\url{http://www.mvcr.cz/rss/regionhzs.html}} of the Ministry of Interior of the Czech Republic. An example of such report can be seen on the Figure~\ref{img:web_page}. We would like to demonstrate the prospects of using linguistic tools from the Prague school of computational linguistic (described in \ref{sec:ling_tools}). Our experiments are promising, they e.g. enable the summarization of the number of injured people. 
-
-The Ministry of Interior of the Czech Republic presents on its Web pages\footnote{\url{http://www.mvcr.cz/rss/regionhzs.html}} also reports from fire departments of several regions of the Czech Republic. These departments are responsible for rescue and recovery after traffic accidents. These reports are rich in information, e.g. where and when an traffic accident occurred, which units helped, how much time it took them to show up on the place of accident, how many people were injured, killed etc. An example of such report can be seen in the Figure~\ref{img:web_page}.
-
-
-
-
-
-
-\subsubsection{Main contributions}
-
-The method described in the paper exploits existing linguistic tools created originally for a syntactically annotated corpus, Prague Dependency Treebank (PDT 2.0) \cite{biblio:PDT20_CD}.
-
-Main contributions of this paper are: 
- 
-\begin{enumerate}
-\item  Experimental chain of tools which captures text of web-pages, annotates it linguistically by PDT tools, extracts data and stores the data in an ontology. % (annotates).
-\item  In the third phase -- data extraction -- methods for learning queries over linguistically annotated data. 
-\item Initial experiments verifying these methods and tools
-\end{enumerate}
- 
-Nevertheless, there are also reports about fire accidents and also about fire-fighting contests. The task to extract information on the number of injured/killed people in traffic accidents needs deep linguistic analysis.
-
-In an ideal case all these reports would be already semantically annotated, e.g. using RDFa \cite{biblio:RDFa}. In this case extraction could be done fully automatically by a software agent. In our case, there is no semantic annotation present in the reports.
-
-
-
-
-
-\subsection{Method details}
-
-Here we describe our chain of tools for the linguistic extraction of semantic information from text-based web-resources (containing grammatical sentences in a natural language). The chain covers a process that consists of four steps. The Figure~\ref{img:extract_process} describes it. Notice, more detailed structure of the third pahase we focus in this paper.
-
-\begin{enumerate}
-\item \emph{Extraction of text} \\ The linguistic annotating tools process plain text only. In this phase we have to extract the text from the structure of a given web-resource. In this first phase we have used RSS feed of the fire department web-page. From this we have obtained URLs of particular articles and we have downloaded them. Finally we have extracted the desired text (see highlighted area in the Figure~\ref{img:web_page}) by means of a regular expression. This text is an input for the second phase.
+\item \emph{Extraction of text} \\ The linguistic annotating tools process plain text only. In this phase we have to extract the text from the structure of a given web-resource. In this first phase we have used RSS feed of the fire department web-page. From this we have obtained URLs of particular articles and we have downloaded them. Finally we have extracted the desired text (see highlighted area in the Figure~\ref{fig:ch50_article}) by means of a regular expression. This text is an input for the second phase.
 
 \item \emph{Linguistic annotation} \\ In this phase the linguistic annotators process the extracted text and produce corresponding set of dependency trees representing the deep syntactic structure of individual sentences. We have used the linguistic tools described in the section~\ref{sec:ling_tools} for this task. Out put of this phase are tectogrammatical trees (for example see Figure~\ref{img:tecto_tree}) of sentences in document under investigation.
 
@@ -130,64 +50,402 @@ Here we describe our chain of tools for the linguistic extraction of semantic in
 
 
 
-\subsection{Implementation}
-The extraction method we have used is based on extraction rules. These rules correspond to query requests of Netgraph application. The Netgraph application \citep{biblio:MiNetgraphA2006} is a linguistic tool used for searching through a syntactically annotated corpus of a natural language. It was originally developed for searching the analytical and tectogrammatical levels of the Prague Dependency Treebank, a richly syntactically annotated corpus of Czech \citep{biblio:PDT20_CD}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Evolution of the Method}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Netgraph queries are written in a special query language. An example of such Netgraph query can be found in the Figure~\ref{img:extract_patern}. The Netgraph is a general tool for searching trees, it is not limited only to the trees in the PDT format. In our application we use it for searching the tectogrammatical trees provided by a set of language processing tools described in the previous chapter.  The tectogrammatical trees have a very convenient property of containing just the type of information we need for our purpose, namely the information about inner participants of verbs - actor, patient, addressee etc. 
+Our first attempt to extract some structured data from linguistically annotated text was done in a standard procedural programming environment (more precisely in Perl, Btred). After an initial phase of development first extraction rule was created as a single executable procedure. This procedure is listed in Listing~\ref{lst:btred_rule}. It clearly demonstrates all drawbacks of the procedural rule design: difficult to read, tedious to create, error prone, graphical or assisted design is impossible. On the other hand this approach has the advantage of the programming language proximity. When a designer designs a procedural extraction rule he or she actually codes it in a procedural programming language and it is easy to add some additional functionality that will be executed and evaluated along with the extraction rule. Thus the designer has the full power of the programming language in hand and he or she can use it inside of the extraction rule. This possibility will be discussed later in the context of semantic interpretation of extracted data.
 
-The tectogrammatical (deep syntactic) level of representation is more suitable for our purpose than the analytical (surface syntactic) level of representation of the structure of each sentence. The inner participants (actor, patient, addressee etc.) provide much more reliable information about the actual meaning of the sentence than the syntactic roles (subject, object etc.). The roles of a subject or object are misleading especially in the case of passive sentences, where usually the subject of the sentence corresponds to the patient or addressee while the actor is expressed by an object of the passive sentence. In these cases it would be necessary to develop (for the analytical level representation) some kind of algorithm analyzing these cases and providing the assignment of proper roles to individual words, while at the tectogrammatical level we get the desired information directly.
+Dissatisfaction from tedious and time consuming design of procedural extraction rules led to the idea of a special rule language. We were looking for a language that would allow expressing tree patterns and consequent extraction actions of extraction rules. It turned out that the Netgraph query language is very suitable for the first purpose -- expressing tree patterns. An extension of the Netgraph query language to a language for extraction rules was quite simple then. See the details in the next section.
 
-The extraction works as follows: the extraction rule is in the first step evaluated by searching through a set of syntactic trees. Matching trees are returned and the desired information is taken from particular tree nodes.
-
-
-Let us explain it in more detail by using the example of extraction rule from the Figure~\ref{img:extract_patern}. This rule consists of five nodes. Each node of the rule will match some node in each matching tree. So we can investigate the relevant information by reading values of linguistic tags of matching nodes. We can find out the number (node number 5) and kind (4) of people, which were or were not (2) killed or injured (1) by an accident that is presented in the given sentence. And we can also identify the manner of injury in the node number 3.
+Last two steps in the evolution of the extraction method were (1) creation of machine learning procedure that is capable to learn extraction rules from manually annotated corpus (See Chapter~\ref{ch:ILP_Learning}) and (2) possibility to export extraction rules to a shareable extraction ontology so the extraction rules can be evaluated on a document by an ordinary semantic web reasoner outside of the original extraction tool (See Chapter~\ref{ch:Shareable_Extraction_Ontologies}).
 
 
-\subsection{Datasets}
+\begin{listing}[ht]
+\begin{minted}[linenos,  fontsize=\footnotesize,
+               frame=lines]{perl}
 
-The Ministry of Interior of the Czech Republic presents on its Web pages\footnote{\url{http://www.mvcr.cz/rss/regionhzs.html}} also reports from fire departments of several regions of the Czech Republic. These departments are responsible for rescue and recovery after traffic accidents. These reports are rich in information, e.g. where and when an traffic accident occurred, which units helped, how much time it took them to show up on the place of accident, how many people were injured, killed etc. An example of such report can be seen in the Figure~\ref{img:web_page}.
+my @injure_verbs = ("zranit", "usmrtit", "zemřít", "zahynout", "přežít");
+
+sub print_injured {
+	if ($this->{gram}{sempos} eq "v") {
+		foreach my $v (@injure_verbs) {
+			if ($this->{t_lemma} eq $v ) {
+				#action type
+				print "<action type=\"" . $this->{t_lemma} . "\">";
+
+				#sentece
+				print "<sentece>" . PML_T::GetSentenceString($root) . "</sentece>";
+				print "<sentece_id>" . $root->{id} . "</sentece_id>";
+				
+				#negation
+				if (test_negation($this)) {
+					print "<negation>true</negation>" ;					
+				} else {
+					print "<negation>false</negation>" ;										
+				}
+								
+				#manner of injurance
+				my @mans = find_node_by_attr_depth($this, 0, 'functor', '^MANN');
+				if (@mans) {
+					foreach my $m (@mans) {
+						print "<manner>"; 
+						print $m->{t_lemma};
+						print "</manner>"; 
+					};
+				}
+				
+				#actors and patients
+				my @pats = find_node_by_attr($this, 'functor', '^[PA][AC]T');
+				@pats = &filter_list(\&test_person, @pats);
+				
+				foreach my $p (@pats) {
+					print "<participant type=\"" . $p->{t_lemma} . "\">";
+
+					#patients count
+					my @cnt = find_node_by_attr($p, 'functor', '^RSTR');
+					@cnt = &filter_list(\&test_number_lemma, @cnt);
+					my $cnt1 = pop(@cnt);
+					print "<quantity>" . 
+						&test_number($cnt1->{t_lemma}) . 
+						"</quantity>" if ($cnt1);
+	
+					print "<full_string>";
+					print_subtree_as_text($p);
+					print "</full_string>";
+
+					print "</participant>";
+				}
+				
+				#action end
+				print "</action>\n";											
+}}}}
+\end{minted}
+\caption{Procedurally written extraction rule in \emph{btred}.}
+\label{lst:btred_rule}
+\end{listing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-Nevertheless, there are also reports about fire accidents and also about fire-fighting contests. The task to extract information on the number of injured/killed people in traffic accidents needs deep linguistic analysis.
 
 
-In an ideal case all these reports would be already semantically annotated, e.g. using \emph{RDFa}. In this case extraction could be done fully automatically by a software agent. In our case, there is no semantic annotation present in the reports.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Implementation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Procedural Extraction Rules} \label{sec:ch50_Procedural_Extraction_Rules}
+
+Our first implementation was based on Btred API for processing linguistic trees. The extraction rules were implemented as Perl Btred procedures that were evaluated on all of the trees of an arbitrary corpus by Btred. An example of such extraction rule is in Listing~\ref{lst:btred_rule} and corresponding extraction output on Listing~\ref{lst:btred_xml}.
 
 
-\subsection{Experiments}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{listing}[ht]
+\begin{minted}[linenos,  fontsize=\footnotesize,
+               frame=lines]{xml}
+<injured_result>
+	<action type="zranit">
+		<sentece>
+			Při požáru byla jedna osoba lehce zraněna -- jednalo se
+			o majitele domu, který si vykloubil rameno.
+		</sentece>
+		<sentece_id>T-vysocina63466.txt-001-p1s4</sentece_id>
+		<negation>false</negation>
+		<manner>lehký</manner>
+		<participant type="osoba">
+			<quantity>1</quantity>
+			<full_string>jedna osoba</full_string>
+		</participant>
+	</action>
+	<action type="zemřít">
+		<sentece>
+			Ve zdemolovaném trabantu na místě zemřeli dva muži -- 82letý
+			senior a další muž, jehož totožnost zjišťují policisté.
+		</sentece>
+		<sentece_id>T-jihomoravsky49640.txt-001-p1s4</sentece_id>
+		<negation>false</negation>
+		<participant type="muž">
+			<quantity>2</quantity>
+			<full_string>dva muži</full_string>
+		</participant>
+	</action>
+		<action type="zranit">
+		<sentece>čtyřiatřicetiletý řidič nebyl zraněn.</sentece>
+		<sentece_id>T-jihomoravsky49736.txt-001-p4s3</sentece_id>
+		<negation>true</negation>
+		<participant type="řidič">
+			<full_string>čtyřiatřicetiletý řidič</full_string>
+		</participant>
+	</action>
+</injured_result>
+\end{minted}
+\caption{\emph{XML} structured output of the query written in \emph{btred}.}
+\label{lst:btred_xml}
+\end{listing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Small part of the result of the extraction is shown in the Figure~\ref{img:extract_output}. This result contains three pieces of information extracted from three articles.
-
-Each piece of information is closed in the \verb+<action>+ element and each deals with some kind of incident that is described in given article.
-
-The attribute \verb+type+ specifies the type of the action. So in the first and in the third case there was somebody injured (\emph{zranit} means to injure in Czech) and in the second case somebody died (\emph{zemřít} means to die in Czech).
-
-The element \verb+<negation>+ holds the information about negation of the clause. So we can see that the participant of the third action was \textbf{not} injured.
-
-The element \verb+<participant>+ contains information about the participants of the action. The attribute \verb+type+ specifies the type of the participants and the element \verb+<quantity>+ holds the number of the participants. So in the first action only a single person (\emph{osoba}) was injured. In the second action two men (\emph{muž}) died and in the third action a driver (\emph{řidič}) was not injured.
 
 
 
-
-\subsection{Evaluation}
-
+\subsection{Netgraph Based Extraction Rules} \label{sec:ch50_Netgraph_Based_Extraction_Rules}
 
 
+\begin{figure}
+	\centering
+		\includegraphics[width=0.5\hsize]{extract_patern}		
+\\Transcript:\\
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+zranit & usmrtit & zemřít & zahynout & přežít\\
+to injure & to kill & to die & to wane & to survive\\
+\hline
+\end{tabular}
+\\\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+kdo & člověk & osoba & muž & žena & dítě\\
+somebody & (hu)man & person & man & woman & child\\
+\hline
+\end{tabular}
+\\\begin{tabular}{|c|c|c|c|}
+\hline
+řidič & řidička & spolujezdec & spolujezdkyně\\
+driver & woman driver & passenger & woman passenger\\	
+\hline
+\end{tabular}		
+	\caption{A manually created extraction rule investigating numbers of injuries and fatalities.}
+	\label{fig:ch50_extract_patern}
+\end{figure}
+
+\begin{figure}
+	\centering
+		\includegraphics[width=0.5\hsize]{eenv_extract_patern}
+\\Transcript:\\
+\begin{tabular}{|c|c|}
+\hline
+uniknout, unikat & vytéci\\
+to leak out & to flow out\\
+\hline
+\end{tabular}		
+	\caption{A manually created extraction rule investigating dangerous liquids that spilled out into the environment.}
+	\label{fig:ch50_eenv_extract_patern}
+\end{figure}
+
+
+\begin{figure}
+	\centering
+		\includegraphics[angle=-90, width=0.6\hsize]{eenv_matching_tree}
+		
+Original sentence: 
+\emph{``Nárazem se utrhl hrdlo palivové nádrže a do potoka postupně vyteklo na 800 litrů nafty.''}\\
+English transcript: 
+\emph{``Due to the clash the throat of fuel tank tore off and 800 liters of oil (diesel) has run out to a stream.''}
+	\caption{A tree matching with the corresponding extraction rule in Figure~\ref{fig:ch50_eenv_extract_patern}.}
+	\label{fig:ch50_eenv_matching_tree}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{listing}[ht]
+\begin{minted}[linenos,  fontsize=\footnotesize,
+               frame=lines]{xml}
+<QueryMatches>
+	<Match root_id="T-vysocina63466.txt-001-p1s4" match_string="2:0,7:3,8:4,11:2">
+		<Sentence>
+			Při požáru byla jedna osoba lehce zraněna - jednalo se
+			o majitele domu, který si vykloubil rameno.
+		</Sentence>
+		<Data>
+			<Value variable_name="action_type" attribute_name="t_lemma">zranit</Value>
+			<Value variable_name="injury_manner" attribute_name="t_lemma">lehký</Value>
+			<Value variable_name="participant" attribute_name="t_lemma">osoba</Value>
+			<Value variable_name="quantity" attribute_name="t_lemma">jeden</Value>
+		</Data>
+	</Match>
+	<Match root_id="T-jihomoravsky49640.txt-001-p1s4" match_string="1:0,13:3,14:4">
+		<Sentence>
+			Ve zdemolovaném trabantu na místě zemřeli dva muži - 82letý senior
+			a další muž, jehož totožnost zjišťují policisté.
+		</Sentence>
+		<Data>
+			<Value variable_name="action_type" attribute_name="t_lemma">zemřít</Value>
+			<Value variable_name="participant" attribute_name="t_lemma">muž</Value>
+			<Value variable_name="quantity" attribute_name="t_lemma">dva</Value>
+		</Data>
+	</Match>
+	<Match root_id="T-jihomoravsky49736.txt-001-p4s3" match_string="1:0,3:3,7:1">
+		<Sentence>Čtyřiatřicetiletý řidič nebyl zraněn.</Sentence>
+		<Data>
+			<Value variable_name="action_type" attribute_name="t_lemma">zranit</Value>
+			<Value variable_name="a-negation" 
+			       attribute_name="m/tag">VpYS---XR-NA---</Value>
+			<Value variable_name="participant" attribute_name="t_lemma">řidič</Value>
+		</Data>
+	</Match>
+</QueryMatches>
+\end{minted}
+\caption{\emph{XML} structured output of the SQL select like query. A negation can be detected from the presence of \emph{m/tag} on the line 30.}
+\label{lst:select_xml}
+\end{listing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{figure}
+	\centering
+		\includegraphics[angle=-90, width=0.7\hsize]{eenv_results}
+	\caption{\emph{XML} structured output of the SQL select like query corresponding with the extraction rule in Figure~\ref{fig:ch50_eenv_extract_patern} and matching tree in Figure~\ref{fig:ch50_eenv_matching_tree}.}
+	\label{fig:ch50_eenv_results}
+\end{figure}
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Gathering similar words}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-The Figure~\ref{img:extract_patern} shows, that it would be useful to gather words with similar meanings in our extraction rules. For example, the rule in the Figure~\ref{img:extract_patern} contains long disjunctions of similar words (nodes with numbers 1 and 4). These disjunctions could be replaced with some kind of expression telling that we are looking for any word from some semantic category (e.g. human beings). For this purpose we wanted to use the Czech WordNet \citep{biblio:WordNetCZ2004}. 
-
-After we have explored the records of the Czech WordNet (CzWN) related to the domain of our interest (car accidents, etc.) we have decided not to involve CzWN in the extraction process. The reason is that the coverage of the vocabulary of our domain is rather poor and the semantic connections of words are sometimes unfortunately missing. But we can supply the missing information to CzWN or we can build up a new domain-specific word-net based on the ground of CzWN.  
 
 
-\subsection{Conclusion}
+The second implementation was based on Netgraph. Netgraph is a linguistic tool used for searching through a syntactically annotated corpus of a natural language (corpus of linguistic dependency trees). Basically Netgraph allows putting restrictions on the shape of a tree and on values of attributes of an arbitrary tree node. Besides that nodes of a query can be marked as optional (not necessarily present in a matching tree) and names can be assigned to query nodes. Naming of query nodes then allows putting restrictions based on referenced nodes (Give me all trees where there is a node with two children and both children have the same lemma.)
+
+Netgraph queries are written in a special query language with a graphical representation. The graphical representation of a query is much better readable than its linear textual representation and in this text we will use the graphical representation only. Examples of a Netgraph queries (in the graphical representation) can be found in Figures \ref{fig:ch50_extract_patern} and \ref{fig:ch50_eenv_extract_patern}. They clearly show the necessary tree structure that has to be present in any matching tree and attribute restrictions are printed beside the corresponding nodes.
+
+The Netgraph based extraction procedure works with extraction rules in a pseudo SQL SELECT form:
+
+\begin{minted}{sql}
+SELECT node1_name.attr1_name, node2_name.attr2_name, ... FROM netgraph_query
+\end{minted}
+
+where netgraph\_query stands for an arbitrary Netgraph query, node1\_name, node2\_name, etc. stand for individual names of nodes defined in netgraph\_query and attr1\_name, attr2\_name, etc. stand for names of linguistic attributes whose values should be picked out from the corresponding matching tree nodes.
+
+The extraction works as follows: the Netgraph query is evaluated by searching through a corpus of linguistic trees. Matching trees are returned and the desired information defined by the SELECT part of the extraction rule is taken from particular tree nodes and printed to the output.
+
+\subsection{Illustration Examples}
+
+Let us explain it in more detail by using the example of extraction rule from the Figure~\ref{fig:ch50_extract_patern}, which is looking for information about killed and injured people during a (usually car) accident. This rule consists of five nodes. Each node of the rule will match with the corresponding node in each matching tree. So we can investigate the relevant information by reading values of linguistic attributes of matching nodes. We can find out the number (node number 5) and kind (4) of people, which were or were not (2) killed or injured (1) by an accident that is presented in the given sentence. And we can also identify the manner of injury (light or heavy) in the node number 3.
+
+Evaluation of the extraction rule from Figure~\ref{fig:ch50_eenv_extract_patern} is illustrated on Figure~\ref{fig:ch50_eenv_matching_tree}. Figure~\ref{fig:ch50_eenv_matching_tree} shows a linguistic tree matching with the extraction rule. Matching nodes are decorated and labeled by the numbers of corresponding query nodes.
 
 
-We have presented a proposal of a system for semantic extraction of information from Czech text on Web pages. Our system relies on linguistic annotating tools from ÚFAL and the tree querying tool Netgraph. Our contributions are in fact initial experiments in text extraction from downloaded pages, formulation of a rule-based extraction method and demonstration of semantics of the extracted data.
+\subsection{Extraction Output}
 
-More details can be found in \citealt{biblio:DedekSemAnot2007}. In the future we would like to extend this method by domain oriented lexical net and semiautomatic search for interesting extraction rules.
+Small pieces of extraction outputs are shown in Listing~\ref{lst:select_xml} (for the extraction rule in Fig.~\ref{fig:ch50_extract_patern}) and in Figure~\ref{fig:ch50_eenv_results} (for the extraction rule in Fig.~\ref{fig:ch50_eenv_extract_patern}). 
+
+The former example (Listing~\ref{lst:select_xml}) contains three matches of the extraction rule in three different articles. Each query match is closed in the \verb+<Match>+ element and each contains values of some linguistic attributes closed inside the \verb+<Value>+ elements. Each value comes from some of the nodes of the extraction rule. Name of corresponding query node is saved in the \verb+variable_name+ attribute of the \verb+<Value>+ element.
+
+In the case of the example query, values identified by the variable \verb+action_type+ specify the type of the action. So in the first and third case somebody was injured (\emph{zranit} means to injure in Czech, lines 8 and 28) and in the second case somebody died (\emph{zemřít} means to die in Czech, line 20).
+
+Values identified by \verb+participant+ and \verb+quantity+ contain information about participants of the action. \verb+participant+ serves for specification of the type of the participants and \verb+quantity+ values hold numbers (quantity) of the participants. So in the first action one (\emph{jeden}, line 11) person (\emph{osoba}, line 10) was injured and in the second action two (\emph{dva}, line 22) men (\emph{muž}, line 21) died.
+
+Values identified by \verb+a-negation+ contain the information about a negation of a clause (The presence of negation is indicated by the 11th character of the position-based morphological tag, note that the corresponding node (number 2) of the extraction rule is marked as optional and the restriction on m/tag is put in the form of regular expression on the 11th character.) So we can see that the participant (driver -- \emph{řidič}, line 31) of the last action was \textbf{not} injured (lines 29-30).
+
+The last not described attribute name is \verb+injury_manner+. Corresponding values contain information about the manner of injury of an injury action. So in the first action of the example there was a light injury (\emph{lehký} means light in Czech, line 9).
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Methodology for Rule Designers}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{figure}
+	\centering
+		\includegraphics[angle=-90, width=0.5\hsize]{coverge_tuning}
+	\caption{Gradual refinement of an extraction rule.}
+	\label{fig:ch50_coverge_tuning}
+\end{figure}
+
+
+The process of manual design of extraction rules is heavily dependent on skills and experience of a human designer and fulfillment of the process is quite creative task. In this section we try to pick it up as precisely as possible because we assume that a formal description of this process can help in two ways. First -- a new designer can use it as a cook book and progress more quickly. Second -- it can help with development of tools for assisted rule design. We will concentrate on the Netgraph based extraction rules because we think they are more useful.
+
+The process consists of two parts: construction of a Netgraph query and semantic interpretation of the query. The semantic interpretation part will be discussed in the next section.
+
+One obvious preposition of the procedure is that we have a collection of training texts.
+The procedure is demonstrated in Figure~\ref{fig:ch50_coverge_tuning} and it starts with frequency analysis of words (their lemmas) occurring in the texts. Especially frequency analysis of verbs is very useful --- meaning of a clause is usually strongly dependent on the meaning of the corresponding verb.
+
+\textbf{Frequency analysis} helps the designer to choose some representative words (\textbf{key-words}) that will be further used for searching the training text collection. Ideal choice of key-words would cover the majority of sentences that express the information we are looking for and it should cover minimal number of the not-intended sentences. An initial choice need not be always sufficient and the process could iterate.
+
+Next step of the procedure consists in \textbf{investigating trees} that are covered by key-words. The designer is examining \textbf{matching trees} --- looking for positions of key-words and their \textbf{neighboring} nodes.
+
+After that the designer can formulate an initial \textbf{Netgraph query} and he or she can compare result of the Netgraph query with the coverage of key-words. Based on this he or she can reformulate the query and gradually refine the query and \textbf{tune the query coverage}.
+
+There are two goals of the query tuning. The first goal is maximization of the relevance of the query. An ideal result is a query that covers all sentences expressing given type of information and no other. The second goal is to involve all important tree-nodes to the query. The second goal is important because the \textbf{complexity of the query} (number of involved nodes) makes it possible to extract more complex information. For example see the query on the Figure~\ref{fig:ch50_extract_patern} --- each node keeps different kind of information.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Semantic Interpretation of Extracted Data}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+After the designer has successfully formulated the Netgraph query he or she has to supply semantic interpretation of the query. This interpretation expresses how to transform matching nodes of the query (and the available linguistic information connected with the nodes) to the output data.
+
+So far in the description of the implementation of the extraction method the output of the extraction was in the form of although structured but still proprietary XML format. This corresponds to the penultimate stage (raw data) of our data flow schema (Section~\ref{sec:ch50_data_flow}). In this section we will describe details about the last step of the data flow -- semantic representation of extracted data.
+
+First interesting thing is the difference between the output formats of the procedural extraction rules (Section~\ref{sec:ch50_Procedural_Extraction_Rules}, Listing~\ref{lst:btred_xml}) and the Netgraph based extraction rules (Section~\ref{sec:ch50_Netgraph_Based_Extraction_Rules}, Listing~\ref{lst:select_xml}). Apparently the procedural one is closer to the semantics of the extracted data while the Netgraph based one is more general, rather based on the semantics of the extraction process than on the data. The difference is clearly connected with the difference of the design processes of the extraction rules. While Netgraph based rules are designed in a comfortable way using a graphical tool, the procedural rules have to be coded manually in the programming language of Perl. Contrary, during coding of such procedural rule the programmer has great freedom in the design of that rule and he or she can adapt the rule to precisely fit with the data. A designer of a Netgraph based rule has the only freedom in the construction of the Netgraph query and in selection particular query nodes and linguistic attributes that will be printed on the output.
+
+The goal of the semantic extraction and annotation is to output the extracted information in the form of a semantic web ontology. This is not difficult in the case of procedural rules. If the target ontology is selected then the extraction rules can be simply designed to produce the output of that form (Note that semantic web ontologies can be captured in a specific XML format.) In the case of Netgraph based queries the situation is more complex and different solutions can be discovered. All the solutions have one thing in common: additional manual work is necessary. The problem is basically to create a mapping of the data in one format (results of Netgraph based rules) to another format (target ontology). This can be done by a variety of technical means (coded in an arbitrary programming language, XSLT, or using a graphical mapping tool like 
+Altova MapForce\footnote{\url{http://www.altova.com/mapforce/xml-mapping.html}}
+or
+Stylus Studio\footnote{\url{http://www.stylusstudio.com/xsd_to_xsd.html}}
+). 
+
+
+
+\begin{figure}
+	\centering
+		\includegraphics[angle=-90, width=0.9\hsize]{semantic_interpretation}
+	\caption{Semantic interpretation of the extraction rule.}
+	\label{fig:ch50_semantic_interpretation}
+\end{figure}
+
+
+\begin{figure}
+	\centering
+		\includegraphics[angle=-90, width=\hsize]{instances}
+	\caption{Extracted instances of the target ontology.}
+	\label{fig:ch50_instatnces}
+\end{figure}
+
+\begin{figure}
+	\centering
+		\includegraphics[angle=-90, width=0.3\hsize]{classes}
+	\caption{Schema of the target ontology.}
+	\label{fig:ch50_classes}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{listing}[ht]
+\begin{minted}[linenos,  fontsize=\footnotesize,
+               frame=lines]{sparql}
+
+SELECT ?action ?participant ?participant_type ?quantity
+WHERE {
+	{
+		?action rdf:type :Incident;
+			:actionType "death";
+			:negation false.
+	} UNION {
+		?action rdf:type :Incident;
+			:actionType "survival";
+			:negation true.
+	}
+	?action :hasParticipant ?participant.
+	?participant :participantType ?participant_type.
+	OPTIONAL {
+		?participant :participantQuantity ?quantity.
+	}
+}
+\end{minted}
+\caption{\emph{SPARQL} query that summarizes fatalities of particular incidents.}
+\label{lst:sparql_aggregation}
+\end{listing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+Similar but in a sense different solution is to ground the mapping directly in extraction rules. Instead of creating mapping of the extraction output, extraction rules will contain also the information about the form of the extraction output. Selection of particular query nodes and linguistic attributes for the output will be extended by the specification of how they will be rendered on the output. A graphical representation of such extraction query can look like in Figure~\ref{fig:ch50_semantic_interpretation}. It shows connection between a Netgraph query on the left and an ontology instance on the right. Every node of the query can be translated to the ontology and the translation can be configured. The configurable translations are probably the most interesting part of such extraction queries. The linguistic information on one side has to be converted the ontological information on the other side. Several translation types have to be supported e.g. in Figure\ref{fig:ch50_semantic_interpretation} a translation of numerals to numbers, lexical translation from a source language (Czech), and detection of negation present in a query node are used.
+
+For better illustration Figure~\ref{fig:ch50_instatnces} shows how the extraction output would look like in the semantic case. It is based on the same data as in the Listing~\ref{lst:select_xml}. The presented ontology was designed only for the illustration. Schema of the ontology can be seen in the Figure~\ref{fig:ch50_classes}. It consists of two classes (or concepts): \emph{Incident} and \emph{Participant}. These classes are connected with a relation \emph{hasParticipant}. There are also some data-type properties (\emph{actionType}, \emph{actionManner}, \emph{negation}, \emph{participantType}, \emph{participantQuantity}) to cover the extracted data. 
+
+The last illustration is a SPARQL query (Listing~\ref{lst:sparql_aggregation}) that would display a table of fatalities present in extracted RDF data. The query is based on the previous ontology and it demonstrates possible use of the schema and data.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Experiments and Evaluation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusion}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
