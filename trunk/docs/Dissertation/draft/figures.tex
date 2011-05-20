@@ -1,3 +1,4 @@
+\begin{comment}
 
 \begin{table}
 \centering 
@@ -57,6 +58,52 @@ overall           && 0.628 & $\pm$ & 0.36 && 0.621 & $\pm$ & 0.30 &  \\
 \caption{Evaluation on Czech Fireman dataset} \label{tab:ch60_fir_eval}
 \end{table}
 
+
+
+\begin{table}
+\centering 
+\begin{tabular}
+{lcrclcrcl@{\hspace{0.1cm}}cc}
+
+\multicolumn{11}{c}{Training time (in seconds)}\\
+\hline
+Task && \multicolumn{3}{c}{ILP}  && \multicolumn{3}{c}{PAUM} && \\
+\hline
+start              &  & 280.7 &  $\pm$  & 21.5 &  & 24.01 &  $\pm$  & 2.08 &  $\circ$\\
+damage             &  & 236.2 &  $\pm$  & 16.2 &  & 24.79 &  $\pm$  & 2.42 &  $\circ$\\
+end\_subtree       &  & 971.4 &  $\pm$  & 77.8 &  & 24.90 &  $\pm$  & 2.33 &  $\circ$\\
+injuries           &  & 938.1 &  $\pm$  & 34.8 &  & 24.77 &  $\pm$  & 2.20 &  $\circ$\\
+fatalities         &  & 477.0 &  $\pm$  & 64.4 &  & 24.64 &  $\pm$  & 2.12 &  $\circ$\\
+profesional\_unit  &  & 1615.6 &  $\pm$ & 84.9 &  & 24.51 &  $\pm$  & 2.04 &  $\circ$\\
+amateur\_unit      &  & 259.3 &  $\pm$  & 15.5 &  & 26.07 &  $\pm$  & 2.60 &  $\circ$\\
+\hline
+overall            &  & 682.6 &  $\pm$  & 481.9 & & 24.81 &  $\pm$  & 2.32 &  $\circ$\\
+\hline
+\\
+
+\multicolumn{11}{c}{Training time (in seconds)}\\
+\hline
+Task && \multicolumn{3}{c}{ILP}  && \multicolumn{3}{c}{PAUM} && \\
+\hline
+start              &  & 7.211 &  $\pm$  & 0.10 &  & 2.095 &  $\pm$  & 0.08 &  $\circ$\\
+damage             &  & 7.295 &  $\pm$  & 0.14 &  & 2.241 &  $\pm$  & 0.10 &  $\circ$\\
+end\_subtree       &  & 7.275 &  $\pm$  & 0.11 &  & 2.339 &  $\pm$  & 0.05 &  $\circ$\\
+injuries           &  & 7.278 &  $\pm$  & 0.09 &  & 2.200 &  $\pm$  & 0.08 &  $\circ$\\
+fatalities         &  & 7.149 &  $\pm$  & 0.07 &  & 2.268 &  $\pm$  & 0.11 &  $\circ$\\
+profesional\_unit  &  & 7.193 &  $\pm$  & 0.10 &  & 2.297 &  $\pm$  & 0.01 &  $\circ$\\
+amateur\_unit      &  & 7.218 &  $\pm$  & 0.15 &  & 2.275 &  $\pm$  & 0.04 &  $\circ$\\
+\hline
+overall            &  & 7.231 &  $\pm$  & 0.12 &  & 2.245 &  $\pm$  & 0.10 &  $\circ$\\
+\hline
+
+\multicolumn{11}{c}{$\circ$ statistically significant increase (not improvement in this case)}\\
+\end{tabular}
+
+\medskip
+The time is cumulative (sum over all folds in one experiment run).
+
+\caption{Time spent by ML engines on the Czech Fireman dataset.} \label{tab:ch60_fir_time}
+\end{table}
 
 
 
@@ -266,7 +313,7 @@ aaa
 
 
 
-\begin{comment}
+%\begin{comment}
 
 
 
@@ -652,10 +699,76 @@ WHERE {
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+\end{comment}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{listing}[ht]
+\begin{minted}[linenos,  fontsize=\footnotesize,
+               frame=lines]{prolog}
+serialize_rule_file(RuleFileName, OutputFileName, OntologyURI, ObjectProperties) :-
+	assert(objectProperties(ObjectProperties)),
+	open(OutputFileName, 'write', Stream), set_output(Stream),
+	write('<?xml version="1.0" encoding="UTF-8"?>\n'),
+	write('<!DOCTYPE Ontology [ <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >\n'),
+	write('	<!ENTITY pml "http://ufal.mff.cuni.cz/pdt/pml/" > ]>\n'),		
+	write('<Ontology xmlns="http://www.w3.org/2002/07/owl#"\n'),	
+	format('	ontologyIRI="~a">\n',[OntologyURI]),
+	consult(RuleFileName),   %Each rule in the file will be processed by serialize_rule,
+	                         %because of the term_expansion setting on the last line. 	                         
+	write('</Ontology>'),			
+	close(Stream).
+
+serialize_rule(:-(H, B)) :- 	
+	numbervars(:-(H, B), 0, _),	
+	write('<DLSafeRule>\n'),		
+		write('<Body>\n'),          
+			serialize_term(B),                       %Rule body
+		write('\n</Body>\n'), write('<Head>\n'),
+			serialize_term(H),                       %Rule head
+		write('\n</Head>\n'),			
+	write('</DLSafeRule>\n\n'),!.
+	 
+%Serialize object property
+serialize_term(T):- functor(T,F,N), objectProperties(OProps), member(F, OProps),!,	
+	write('<ObjectPropertyAtom>'),
+	format('<ObjectProperty IRI="&pml;~a"/>\n', [F]),
+	serialize_arg(T, 0, N),		
+	write('</ObjectPropertyAtom>').
+
+%Serialize datatype property
+serialize_term(T):- functor(T,F,N),	
+	write('<DataPropertyAtom>'),
+	format('<DataProperty IRI="&pml;~a"/>\n', [F]),
+	serialize_arg(T, 0, N),		
+	write('</DataPropertyAtom>').
+
+%Serialize argument list
+serialize_term(','(A,B)):- serialize_term(A), write('\n'), serialize_term(B),!.
+
+%Serialize variable
+serialize_term('$VAR'(N)):- char_code('a',I), Var is I + N,
+	format('<Variable IRI="urn:swrl#~c"/>\n',[Var]),!.
+%Serialize simple atom or string (printed without quotes)
+serialize_term(T):- atom(T), format('<Literal>~a</Literal>\n',[T]),!.
+%Serialize number
+serialize_term(T):- simple(T), format('<Literal>~k</Literal>\n',[T]),!.
+
+%Serialize term arguments: serialize_arg(+Term, +CurrentArgNumber, +LastArgNumber)
+serialize_arg(T, _, 0).
+serialize_arg(T, N, N).
+serialize_arg(T, M, N) :-  M2 is M+1, arg(M2, T, A),
+	serialize_term(A), serialize_arg(T, M2, N).  
+                                                  %All predicates loaded by consult
+term_expansion(T,T):- serialize_rule(T).          %will be processed by serialize_rule.
+\end{minted}
+\caption{Prolog module for export of extraction rules to OWL XML.}
+\label{lst:rules_export}
+\end{listing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+\begin{comment}
 
 \clearpage
 
