@@ -1,0 +1,262 @@
+
+       --========  Review Reports  ========--
+
+The review report from reviewer #1:
+
+*1: Is the paper relevant to WI?
+ [_] No
+ [X] Yes
+
+*2: How innovative is the paper?
+ [_] 5 (Very innovative)
+ [X] 4 (Innovative)
+ [_] 3 (Marginally)
+ [_] 2 (Not very much)
+ [_] 1 (Not)
+ [_] 0 (Not at all)
+
+*3: How would you rate the technical quality of the paper?
+ [_] 5 (Very high)
+ [_] 4 (High)
+ [X] 3 (Good)
+ [_] 2 (Needs improvement)
+ [_] 1 (Low)
+ [_] 0 (Very low)
+
+*4: How is the presentation?
+ [_] 5 (Excellent)
+ [_] 4 (Good)
+ [X] 3 (Above average)
+ [_] 2 (Below average)
+ [_] 1 (Fair)
+ [_] 0 (Poor)
+
+*5: Is the paper of interest to WI users and practitioners?
+ [_] 3 (Yes)
+ [X] 2 (May be)
+ [_] 1 (No)
+ [_] 0 (Not applicable)
+
+*6: What is your confidence in your review of this paper?
+ [_] 2 (High)
+ [X] 1 (Medium)
+ [_] 0 (Low)
+
+*7: Overall recommendation
+ [_] 5 (Strong Accept: top quality)
+ [_] 4 (Accept: a regular paper)
+ [X] 3 (Weak Accept: could be a poster or a short paper)
+ [_] 2 (Weak Reject: don't like it, but won't argue to reject it)
+ [_] 1 (Reject: will argue to reject it)
+ [_] 0 (Strong Reject: hopeless)
+
+*8: Detailed comments for the authors
+ This article presents an IE system where extraction ontologies are shearable, i.e. are not depending in any specific reasoner.
+
+This is achieved by translating the native prolog format for extraciton rules
+into different formats used by different tools, like jena or protege.
+A case study is presented about deep linguistic parsing. The experiment used
+as a prove of the concept takes two datasets for reasoners performance
+evaluation.
+
+Comments:
+
+The article is well written in general.
+
+- I do not understand the title's expression "Semantic Annotation Semantically".
+- In your experiments, how are the extraction results validated?
+- Is it possible to create translators for other models' rules in native
+formats and generate jena, protege or OWL/XML rules, as you did with your
+prolog native format ? If it is the case, it could be interesting to
+refer it to be clear that the barrier for independent extraction
+ontologies is the expression format of the rules, not the rules
+themselves, wherever the ontologies have shared knowledge or not.
+If it not the case, it should be interesting to show one example of
+such rules not being possible to translate.
+-section III which presents the main contribution of the paper needs to be more clear for the reader and may contains less unnecessary details
+
+
+
+
+========================================================
+The review report from reviewer #2:
+
+*1: Is the paper relevant to WI?
+ [_] No
+ [X] Yes
+
+*2: How innovative is the paper?
+ [_] 5 (Very innovative)
+ [_] 4 (Innovative)
+ [_] 3 (Marginally)
+ [X] 2 (Not very much)
+ [_] 1 (Not)
+ [_] 0 (Not at all)
+
+*3: How would you rate the technical quality of the paper?
+ [_] 5 (Very high)
+ [_] 4 (High)
+ [_] 3 (Good)
+ [X] 2 (Needs improvement)
+ [_] 1 (Low)
+ [_] 0 (Very low)
+
+*4: How is the presentation?
+ [_] 5 (Excellent)
+ [_] 4 (Good)
+ [X] 3 (Above average)
+ [_] 2 (Below average)
+ [_] 1 (Fair)
+ [_] 0 (Poor)
+
+*5: Is the paper of interest to WI users and practitioners?
+ [_] 3 (Yes)
+ [_] 2 (May be)
+ [X] 1 (No)
+ [_] 0 (Not applicable)
+
+*6: What is your confidence in your review of this paper?
+ [_] 2 (High)
+ [X] 1 (Medium)
+ [_] 0 (Low)
+
+*7: Overall recommendation
+ [_] 5 (Strong Accept: top quality)
+ [_] 4 (Accept: a regular paper)
+ [_] 3 (Weak Accept: could be a poster or a short paper)
+ [X] 2 (Weak Reject: don't like it, but won't argue to reject it)
+ [_] 1 (Reject: will argue to reject it)
+ [_] 0 (Strong Reject: hopeless)
+
+*8: Detailed comments for the authors
+ 1. The caption of Table II has the information that explains for the experiment. This should be described in the main body of the paper.
+
+2. The authors proposed an extension of the idea of extractiing ontologies, and demonstrated how this extracted ontology can be applied to a document by a reasoner. (This is a annotated document ontology.)
+In fact, a reader would expect an explanation for the annotated document ontology but the accuracy or the effectiveness for it is not described in the paper.
+
+
+========================================================
+The review report from reviewer #3:
+
+*1: Is the paper relevant to WI?
+ [_] No
+ [X] Yes
+
+*2: How innovative is the paper?
+ [_] 5 (Very innovative)
+ [X] 4 (Innovative)
+ [_] 3 (Marginally)
+ [_] 2 (Not very much)
+ [_] 1 (Not)
+ [_] 0 (Not at all)
+
+*3: How would you rate the technical quality of the paper?
+ [_] 5 (Very high)
+ [_] 4 (High)
+ [_] 3 (Good)
+ [X] 2 (Needs improvement)
+ [_] 1 (Low)
+ [_] 0 (Very low)
+
+*4: How is the presentation?
+ [_] 5 (Excellent)
+ [_] 4 (Good)
+ [_] 3 (Above average)
+ [X] 2 (Below average)
+ [_] 1 (Fair)
+ [_] 0 (Poor)
+
+*5: Is the paper of interest to WI users and practitioners?
+ [_] 3 (Yes)
+ [X] 2 (May be)
+ [_] 1 (No)
+ [_] 0 (Not applicable)
+
+*6: What is your confidence in your review of this paper?
+ [_] 2 (High)
+ [_] 1 (Medium)
+ [X] 0 (Low)
+
+*7: Overall recommendation
+ [_] 5 (Strong Accept: top quality)
+ [_] 4 (Accept: a regular paper)
+ [_] 3 (Weak Accept: could be a poster or a short paper)
+ [_] 2 (Weak Reject: don't like it, but won't argue to reject it)
+ [X] 1 (Reject: will argue to reject it)
+ [_] 0 (Strong Reject: hopeless)
+
+*8: Detailed comments for the authors
+ This paper present a demonstration by which tool independent extraction ontologies could be separated of reasoners for information extraction. This is empirically validated by means of an experiment based on a text collection, representing documents by document ontologies and processed separately by a reasoner.
+
+I think there are lots of pending questions that should be clarified in order to accept the paper. Mainly:
+
+I would like to know the real dependencies between an extraction ontology and an extraction/annotation tool, and the causes of these dependencies, how can they be removed and the technical challenges for that.
+
+
+
+
+
+========================================================
+The review report from reviewer #4:
+
+*1: Is the paper relevant to WI?
+ [_] No
+ [X] Yes
+
+*2: How innovative is the paper?
+ [_] 5 (Very innovative)
+ [_] 4 (Innovative)
+ [_] 3 (Marginally)
+ [X] 2 (Not very much)
+ [_] 1 (Not)
+ [_] 0 (Not at all)
+
+*3: How would you rate the technical quality of the paper?
+ [_] 5 (Very high)
+ [_] 4 (High)
+ [_] 3 (Good)
+ [_] 2 (Needs improvement)
+ [X] 1 (Low)
+ [_] 0 (Very low)
+
+*4: How is the presentation?
+ [_] 5 (Excellent)
+ [_] 4 (Good)
+ [_] 3 (Above average)
+ [_] 2 (Below average)
+ [X] 1 (Fair)
+ [_] 0 (Poor)
+
+*5: Is the paper of interest to WI users and practitioners?
+ [_] 3 (Yes)
+ [_] 2 (May be)
+ [X] 1 (No)
+ [_] 0 (Not applicable)
+
+*6: What is your confidence in your review of this paper?
+ [_] 2 (High)
+ [X] 1 (Medium)
+ [_] 0 (Low)
+
+*7: Overall recommendation
+ [_] 5 (Strong Accept: top quality)
+ [_] 4 (Accept: a regular paper)
+ [_] 3 (Weak Accept: could be a poster or a short paper)
+ [_] 2 (Weak Reject: don't like it, but won't argue to reject it)
+ [X] 1 (Reject: will argue to reject it)
+ [_] 0 (Strong Reject: hopeless)
+
+*8: Detailed comments for the authors
+ In this paper, the authors discuss on the limitations of the existing approaches of using extraction ontology and propose a technical method to separate extraction ontologies out of reasoners and make the ontologies shareable among multiple reasoners.
+
+The motivation of the research and the rationale of the approach need to be discussed more intensively. What are the actual dependencies between an extraction ontology and an extraction/annotation tool? What are the causes of these dependencies and how can they be removed? What are the technical challenges to remove the dependencies?
+
+I think that the criticism on using RDF or OWL representations for extraction ontologies in some tools is not directly related to the main issues of this paper and may not appropriate to be discussed in the introduction section.
+
+It is unclear what the unique contributions of this work are. There is no section allocated to explain about the unique approach developed. The descriptions about ontology definitions and document ontologies are too general to explain specific approaches. The main technical section, Section III, is too much biased toward implementation details rather than explaining the core approaches. Application of the linguistic analyzer and implementation of the rule transformation look trivial.
+
+In the evaluation, how are the extraction results validated? Why is it important to compare the performance among different reasoners? How can the quality of the extraction result be measured?
+
+
+========================================================
+
