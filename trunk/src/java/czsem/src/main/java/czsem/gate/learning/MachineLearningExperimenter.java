@@ -57,9 +57,9 @@ public class MachineLearningExperimenter
 	{
 		return 	    
 			new MachineLearningExperiment(
-	    		new CzechFireman("amateur_unit"),
+	    		new CzechFireman("cars"),
 //	    		new MLEvaluate(new CreateTemporaryMentions(new ILPEngine())),
-	    		new MLEvaluate(new CreateTemporaryMentionsRootSubtree(new ILPEngine())),
+	    		new MLEvaluate(new CreateTemporaryMentionsRootSubtree(new ILPEngine("ILP_root_subtree.xml"))),
 /*
 	    		new MLEvaluate(
 	    				new CreateTemporaryMentions(
@@ -69,8 +69,8 @@ public class MachineLearningExperimenter
     	    				new CreateTemporaryMentionsReferedMentionsPostprocessing(
     	    						"Lookup_root.origRootID",
     	    						new ILPEngine("ILP_config_NE_roots.xml"))),
-//	    		new MLEvaluate(new CreateTemporaryMentions(new SubsequentAnnotationMerge(new ILPEngine()))),
 /**/    	    						
+	    		new MLEvaluate(new CreateTemporaryMentions(new SubsequentAnnotationMerge(new ILPEngine()))),
 	    	    new MLEvaluate(new CreatePersistentMentions(new PaumEngine()))
 
 /*

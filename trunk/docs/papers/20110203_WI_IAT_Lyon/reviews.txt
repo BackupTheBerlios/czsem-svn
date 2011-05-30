@@ -259,4 +259,59 @@ In the evaluation, how are the extraction results validated? Why is it important
 
 
 ========================================================
+The review report from reviewer #5:
+
+*1: Is the paper relevant to WI?
+ [_] No
+ [X] Yes
+
+*2: How innovative is the paper?
+ [_] 5 (Very innovative)
+ [_] 4 (Innovative)
+ [X] 3 (Marginally)
+ [_] 2 (Not very much)
+ [_] 1 (Not)
+ [_] 0 (Not at all)
+
+*3: How would you rate the technical quality of the paper?
+ [_] 5 (Very high)
+ [_] 4 (High)
+ [_] 3 (Good)
+ [X] 2 (Needs improvement)
+ [_] 1 (Low)
+ [_] 0 (Very low)
+
+*4: How is the presentation?
+ [_] 5 (Excellent)
+ [_] 4 (Good)
+ [_] 3 (Above average)
+ [X] 2 (Below average)
+ [_] 1 (Fair)
+ [_] 0 (Poor)
+
+*5: Is the paper of interest to WI users and practitioners?
+ [_] 3 (Yes)
+ [X] 2 (May be)
+ [_] 1 (No)
+ [_] 0 (Not applicable)
+
+*6: What is your confidence in your review of this paper?
+ [_] 2 (High)
+ [X] 1 (Medium)
+ [_] 0 (Low)
+
+*7: Overall recommendation
+ [_] 5 (Strong Accept: top quality)
+ [_] 4 (Accept: a regular paper)
+ [_] 3 (Weak Accept: could be a poster or a short paper)
+ [X] 2 (Weak Reject: don't like it, but won't argue to reject it)
+ [_] 1 (Reject: will argue to reject it)
+ [_] 0 (Strong Reject: hopeless)
+
+*8: Detailed comments for the authors
+ "META-REVIEW"
+
+As pointed out by reviewers, the paper has the following weakness. The motivation and the unique contribution of the paper need to be clearly described. The main techniocal section describes implementation details rather than the core ideas. No section is dedicated to the description of the unique approach. The dependencies between an extraction ontology and an extraction/annotation tool are not clearly explained.
+
+========================================================
 
