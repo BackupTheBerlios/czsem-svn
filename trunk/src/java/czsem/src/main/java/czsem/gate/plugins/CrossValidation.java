@@ -28,6 +28,7 @@ import java.util.List;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 
+import czsem.Utils;
 import czsem.gate.GateUtils;
 import czsem.gate.ILPWrapper;
 
@@ -44,7 +45,7 @@ public class CrossValidation extends AbstractProcessingResource
 	
 	/**	two dimensional - corpusFolds[fold][0] small (testing), corpusFolds[fold][1] remaining large (training) */
 	protected Corpus [][] corpusFolds;
-	protected GateUtils.Evidence<Document> documentEvidence [];
+	protected Utils.Evidence<Document> documentEvidence [];
 	public List<LearningEvaluator> evaluation_register = null;
 	
 	
@@ -52,7 +53,7 @@ public class CrossValidation extends AbstractProcessingResource
 	@Override
 	public Resource init() throws ResourceInstantiationException
 	{
-		documentEvidence = GateUtils.createRandomPermutation(corpus);
+		documentEvidence = Utils.createRandomPermutation(corpus);
 		
 		corpusFolds = new Corpus[numberOfFolds][];
 		int reamining_documents = corpus.size();

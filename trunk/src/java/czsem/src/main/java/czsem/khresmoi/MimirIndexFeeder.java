@@ -37,7 +37,7 @@ public class MimirIndexFeeder {
 		for (Object object : corpus)
 		{
 			Document doc = (Document) object;
-			MimirConnector.indexDocument(doc, null, index_url);
+			MimirConnector.defaultConnector().sendToMimir(doc, null, index_url);
 			System.err.println(doc.getName());			
 		}
 

@@ -3,7 +3,7 @@ package czsem.gate.tectomt;
 import gate.Annotation;
 import gate.AnnotationSet;
 import gate.Document;
-import gate.Utils;
+import czsem.Utils;
 import gate.creole.AbstractResource;
 import gate.util.InvalidOffsetException;
 
@@ -19,7 +19,6 @@ import java.util.List;
 import com.generationjava.io.xml.SimpleXmlWriter;
 import com.generationjava.io.xml.XmlWriter;
 
-import czsem.gate.GateUtils;
 
 public class TMTDocumentHelper
 {
@@ -38,19 +37,19 @@ public class TMTDocumentHelper
 	protected String findTMTFileName(URL outputDirectory) throws IOException, URISyntaxException
 	{
 		StringBuilder sb = new StringBuilder();
-		sb.append(GateUtils.URLToFilePath(outputDirectory));
+		sb.append(Utils.URLToFilePath(outputDirectory));
 		sb.append('/');
 		sb.append(((AbstractResource) gate_doc).getName());
 		sb.append(".tmt");
 		
-		String dest_filename = GateUtils.findAvailableFileName(sb.toString());
+		String dest_filename = Utils.findAvailableFileName(sb.toString());
 		
 		return dest_filename;	
 	}
 
 	public String createTMTFile(URL outputDirectory, String language) throws IOException, URISyntaxException, InvalidOffsetException 
 	{
-		File out_dir = GateUtils.URLToFile(outputDirectory);
+		File out_dir = Utils.URLToFile(outputDirectory);
 		if (! out_dir.exists()) out_dir.mkdirs(); 
 		
 		tmt_filepath = findTMTFileName(outputDirectory);
@@ -72,7 +71,7 @@ public class TMTDocumentHelper
 		//write sentences
 		xmlwriter.writeEntity("bundles");
 		AnnotationSet sentences = inputAS.get("Sentence");
-		List<Annotation> ord_sents = Utils.inDocumentOrder(sentences);
+		List<Annotation> ord_sents = gate.Utils.inDocumentOrder(sentences);
 		
 		for (int a=0; a< ord_sents.size(); a++)
 		{

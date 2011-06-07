@@ -16,6 +16,7 @@ import junit.framework.TestSuite;
 
 import org.xml.sax.SAXException;
 
+import czsem.Utils;
 import czsem.gate.tectomt.Annotator;
 import czsem.gate.tectomt.Dependency;
 import czsem.gate.tectomt.SentenceInfoManager;
@@ -29,7 +30,7 @@ public class SAXTMTParserTest extends TestCase
 	public void testParseEglishMorpho() throws SAXException, IOException, URISyntaxException, ParserConfigurationException
 	{
 		TMTSAXParser parser = new TMTSAXParser("english");
-		List<SentenceInfoManager> sentences = parser.parse(GateUtils.URLToFilePath(getClass().getResource("/english_morphology.tmt")));
+		List<SentenceInfoManager> sentences = parser.parse(Utils.URLToFilePath(getClass().getResource("/english_morphology.tmt")));
 		assertEquals(sentences.size(), 1);
 		
 		SentenceInfoManager s1 = sentences.get(0);
@@ -50,7 +51,7 @@ public class SAXTMTParserTest extends TestCase
 	public void testParseEglishFull() throws ParserConfigurationException, SAXException, IOException, URISyntaxException
 	{
 		TMTSAXParser parser = new TMTSAXParser("english");
-		List<SentenceInfoManager> sentences = parser.parse(GateUtils.URLToFilePath(getClass().getResource("/english_full.tmt")));
+		List<SentenceInfoManager> sentences = parser.parse(Utils.URLToFilePath(getClass().getResource("/english_full.tmt")));
 		assertEquals(sentences.size(), 10);
 		
 		SentenceInfoManager s1 = sentences.get(0);

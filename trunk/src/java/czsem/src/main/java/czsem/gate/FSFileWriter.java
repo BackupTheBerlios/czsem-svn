@@ -12,6 +12,7 @@ import java.util.Set;
 
 import cz.cuni.mff.mirovsky.trees.Attribute;
 import cz.cuni.mff.mirovsky.trees.NGTreeHead;
+import czsem.Utils;
 
 public class FSFileWriter {
 	private PrintStream out = System.out;
@@ -87,7 +88,7 @@ public class FSFileWriter {
 	public static String[] guessAtttributes(AnnotationSet as)
 	{		
 		AnnotationSet tokens = as.get(
-				GateUtils.setFromArray(FSFileWriter.token_annotation_types));
+				Utils.setFromArray(FSFileWriter.token_annotation_types));
 		
 		Set<String> attr_set = new HashSet<String>();
 		

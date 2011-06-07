@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 
-import czsem.gate.GateUtils;
+import czsem.Utils;
 
 import junit.framework.TestCase;
 
@@ -15,7 +15,7 @@ public class ILPExecTest extends TestCase
 {
 	public void testUtf8() throws IOException, URISyntaxException, InterruptedException
 	{
-		File file = GateUtils.URLToFile(getClass().getResource("/utf8test.yap"));
+		File file = Utils.URLToFile(getClass().getResource("/utf8test.yap"));
 		
 		ILPExec exec = new ILPExec(file.getParentFile(), "utf8test");
 		exec.startILPProcess();

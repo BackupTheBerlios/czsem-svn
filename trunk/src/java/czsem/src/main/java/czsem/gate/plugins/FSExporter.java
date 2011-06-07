@@ -15,8 +15,8 @@ import gate.creole.metadata.RunTime;
 
 import java.net.URL;
 
+import czsem.Utils;
 import czsem.gate.FSFileWriter;
-import czsem.gate.GateUtils;
 
 
 /**
@@ -69,7 +69,7 @@ public class FSExporter extends AbstractLanguageAnalyser implements ProcessingRe
 		sb.append(((AbstractResource) document).getName());
 		sb.append(".fs");
 		
-		String dest_filename = GateUtils.findAvailableFileName(sb.toString());
+		String dest_filename = Utils.findAvailableFileName(sb.toString());
 		
 		System.out.print("Writing: ");
 		System.out.println(dest_filename);

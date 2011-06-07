@@ -13,8 +13,8 @@ import gate.creole.metadata.CreoleParameter;
 import gate.creole.metadata.CreoleResource;
 import gate.creole.metadata.Optional;
 import gate.creole.metadata.RunTime;
+import czsem.Utils;
 import czsem.gate.AbstractLanguageAnalyserWithInputAnnotTypes;
-import czsem.gate.GateUtils;
 import czsem.utils.Config;
 
 // 
@@ -120,7 +120,7 @@ public class CreateMentionsPR extends AbstractLanguageAnalyserWithInputAnnotType
 		if (inputAnnotationTypeNames == null || inputAnnotationTypeNames.size() == 0)
 			annotations = inputAS.get();
 		else
-			annotations = inputAS.get(GateUtils.setFromList(inputAnnotationTypeNames));
+			annotations = inputAS.get(Utils.setFromList(inputAnnotationTypeNames));
 		
 		for (Annotation annotation : annotations)
 		{

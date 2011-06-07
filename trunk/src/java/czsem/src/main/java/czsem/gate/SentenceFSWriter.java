@@ -9,6 +9,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import cz.cuni.mff.mirovsky.trees.NGTreeHead;
+import czsem.Utils;
 import czsem.utils.TreeIndex;
 
 public class SentenceFSWriter
@@ -230,7 +231,7 @@ public class SentenceFSWriter
 //		{
 			
 			AnnotationSet dependenciesAS = annotations.get(
-					GateUtils.setFromArray(
+					Utils.setFromArray(
 							FSFileWriter.dependency_annotation_types[dependency_annotation_type]));
 			
 			if (dependenciesAS.isEmpty()) return false;		

@@ -38,6 +38,7 @@ import junit.framework.TestSuite;
 
 import org.xml.sax.SAXException;
 
+import czsem.Utils;
 import czsem.gate.GateUtils;
 import czsem.utils.Config;
 
@@ -155,7 +156,7 @@ public class TectoMTBatchAnalyserTest extends TestCase
 		tmt_ba.setLanguage("english");
 		tmt_ba.annotateGateDocumentAcordingtoTMTfile(
 				document,
-				GateUtils.URLToFilePath(getClass().getResource("/Acquisitions10473.tmt")));
+				Utils.URLToFilePath(getClass().getResource("/Acquisitions10473.tmt")));
 		
 		//saveDocumentToFile("test_out.xml");
 		assertEquals(1703, as.size());
@@ -175,7 +176,7 @@ public class TectoMTBatchAnalyserTest extends TestCase
 		tmt_ba.setLanguage("english");
 		tmt_ba.annotateGateDocumentAcordingtoTMTfile(
 				document,
-				GateUtils.URLToFilePath(getClass().getResource("/english_full.tmt")));
+				Utils.URLToFilePath(getClass().getResource("/english_full.tmt")));
 		assertEquals(as.size(), 913);
 		
 				
@@ -256,7 +257,7 @@ public class TectoMTBatchAnalyserTest extends TestCase
 		tmt_ba.setLanguage("english");
 		tmt_ba.annotateGateDocumentAcordingtoTMTfile(
 				document,
-				GateUtils.URLToFilePath(getClass().getResource("/english_morphology.tmt")));
+				Utils.URLToFilePath(getClass().getResource("/english_morphology.tmt")));
 		
 		
 		assertEquals(20, as.size());

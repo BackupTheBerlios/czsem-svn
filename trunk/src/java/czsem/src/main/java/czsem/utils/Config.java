@@ -16,7 +16,7 @@ import java.net.URL;
 import java.util.Iterator;
 import java.util.Set;
 
-import czsem.gate.GateUtils;
+import czsem.Utils;
 
 
 public class Config
@@ -98,7 +98,7 @@ public class Config
 			{
 				URL url = findCzesemPluginDirectoryURL();
 				config = loadFromFile(
-						GateUtils.URLToFilePath(url)+ '/' +config_filename, classLoader);
+						Utils.URLToFilePath(url)+ '/' +config_filename, classLoader);
 			}
 			else throw e; 
 		}

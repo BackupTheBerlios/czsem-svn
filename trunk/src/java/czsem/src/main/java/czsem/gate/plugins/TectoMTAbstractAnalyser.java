@@ -17,8 +17,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import czsem.Utils;
 import czsem.gate.AbstractLanguageAnalyserWithInputOutputAS;
-import czsem.gate.GateUtils;
 import czsem.gate.tectomt.Annotator;
 import czsem.gate.tectomt.SentenceInfoManager;
 import czsem.gate.tectomt.TMTSAXParser;
@@ -179,7 +179,7 @@ public class TectoMTAbstractAnalyser extends AbstractLanguageAnalyserWithInputOu
 		if (getLoadScenarioFromFile())
 		{
 			cmd_list.add("--scen");			
-			cmd_list.add(GateUtils.URLToFilePath(scen));			
+			cmd_list.add(Utils.URLToFilePath(scen));			
 		}
 		else
 		{

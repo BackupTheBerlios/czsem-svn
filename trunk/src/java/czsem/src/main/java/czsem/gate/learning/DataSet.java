@@ -9,6 +9,7 @@ import gate.persist.PersistenceException;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+import czsem.Utils;
 import czsem.gate.GateUtils;
 import czsem.utils.Config;
 
@@ -50,7 +51,7 @@ public interface DataSet
 		public Corpus getCorpus() throws PersistenceException, ResourceInstantiationException
 		{
 			Corpus corpus = child.getCorpus();
-			int[] perm = GateUtils.createRandomPermutation(corpus.size());
+			int[] perm = Utils.createRandomPermutation(corpus.size());
 			
 			Corpus new_corp = Factory.newCorpus(null);
 			
