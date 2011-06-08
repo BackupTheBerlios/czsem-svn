@@ -7,6 +7,7 @@ import java.io.DataOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -49,6 +50,12 @@ public class MeshIndexer
 			}
 		}
 
+		public MeshIndex() throws IOException, URISyntaxException
+		{			
+			readFromFile(Utils.URLToFilePath(getClass().getResource("/mesh_child_index.bin")));			
+		}
+		
+		
 		public MeshIndex(String dat_filename) throws IOException
 		{
 			readFromFile(dat_filename);			
@@ -309,7 +316,7 @@ public class MeshIndexer
 		
 	}
 
-	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException
+	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException, URISyntaxException
 	{
 		MeshIndex index;
 
@@ -324,9 +331,10 @@ public class MeshIndexer
 		System.err.println(pr);
 		
 		index = new MeshIndex(parsed_index);
-		index.saveToFile("meshindex.dat");
+		index.saveToFile("src/main/resources/mesh_child_index.bin");
 /**/
-		index = new MeshIndex("meshindex.dat"); 
+//		index = new MeshIndex("meshindex.dat");
+		index = new MeshIndex();
 		
 		final String mesh_term = "D002130";
 		
