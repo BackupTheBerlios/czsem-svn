@@ -110,6 +110,7 @@
 		</filters>
 	</build>
 	<repositories>
+<!--  
 		<repository>
 		   <id>fascinator-releases</id>
 		   <url>https://fascinator.usq.edu.au/nexus/content/groups/public</url>
@@ -148,6 +149,11 @@
 			<url>http://maven.ow2.org/maven2/</url>
 		</repository>
 		<repository>
+			<id>swig</id>
+			<url>http://swig.hpclab.ceid.upatras.gr/maven/</url>
+		</repository>
+-->		
+		<repository>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
@@ -161,10 +167,7 @@
 			<id>czsem.snapshots</id>
 			<url>http://czsem.berlios.de/maven2/snapshots/</url>
 		</repository>
-		<repository>
-			<id>swig</id>
-			<url>http://swig.hpclab.ceid.upatras.gr/maven/</url>
-		</repository>
+		
 	</repositories>
 	<dependencies>
 		<dependency>
