@@ -1,6 +1,7 @@
 package czsem.gate.plugins;
 
 import gate.AnnotationSet;
+
 import gate.Corpus;
 import gate.Document;
 import gate.Factory;
@@ -20,15 +21,16 @@ import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
 
-import junit.framework.TestCase;
-
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.testng.annotations.Test;
 
 import czsem.gate.GateUtils;
 import czsem.utils.Config;
 
-public class TectoMTOnlineAnalyserTest extends TestCase
+import static org.testng.AssertJUnit.*;
+
+public class TectoMTOnlineAnalyserTest// extends TestCase
 {
 	public static List<String> getTempBlocks() {
 		String [] blocks =
@@ -91,16 +93,21 @@ public class TectoMTOnlineAnalyserTest extends TestCase
 	
 
 	
+	@Test
 	public void testRunTerminate() throws Exception
 	{
 		Logger.getLogger(TectoMTOnlineAnalyser.class).setLevel(Level.ALL);
 		TectoMTOnlineAnalyser ta = new TectoMTOnlineAnalyser();
 		
 		assertFalse(ta.isServerRunning());
-		
-//		ta.setLoadScenarioFromFile(false);
+
+/*
+		ta.setLoadScenarioFromFile(true);
 		ta.setScenarioFilePath(new File("czsem_GATE_plugins/tmt_analysis_scenarios/czech_full_blocks.scen").toURI().toURL());
+/**/
+		ta.setLoadScenarioFromFile(false);
 		ta.setBlocks(getTempBlocks());
+/**/
 
 		ta.startTMTAnalysisServer();
 //		Thread.sleep(2000);
@@ -119,6 +126,7 @@ public class TectoMTOnlineAnalyserTest extends TestCase
 
 	}
 	
+	@Test(groups={"slow"})
 	public void testExecuteCzechSentenceSegmentation() throws GateException, MalformedURLException
 	{		
 		

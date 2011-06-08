@@ -32,17 +32,16 @@ import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
+import org.testng.annotations.Test;
 import org.xml.sax.SAXException;
 
 import czsem.Utils;
 import czsem.gate.GateUtils;
 import czsem.utils.Config;
 
-public class TectoMTBatchAnalyserTest extends TestCase
+import static org.testng.AssertJUnit.*;
+
+public class TectoMTBatchAnalyserTest// extends TestCase
 {
 	Corpus corpus = null;
 	Document document = null;	
@@ -138,6 +137,7 @@ public class TectoMTBatchAnalyserTest extends TestCase
 		controller.execute();		
 	}
 
+	@Test(groups = { "slow" })
 	public void testAnnotateGateDocumentAcordingtoTMTfileAcquisitions10473() throws ResourceInstantiationException, InvalidOffsetException, ParserConfigurationException, SAXException, IOException, URISyntaxException
 	{
 		initCorpusAndDocFromFile(getClass().getResource("/Acquisitions10473.xml"));
@@ -163,6 +163,7 @@ public class TectoMTBatchAnalyserTest extends TestCase
 		
 	}
 
+	@Test(groups = { "slow" })
 	public void testAnnotateGateDocumentAcordingtoTMTfileFull() throws InvalidOffsetException, ParserConfigurationException, SAXException, IOException, URISyntaxException, ResourceInstantiationException
 	{
 		initCorpusAndDocFromFile(getClass().getResource("/english_full.txt"));
@@ -246,6 +247,7 @@ public class TectoMTBatchAnalyserTest extends TestCase
 
 	}
 	
+	@Test(groups = { "slow" })
 	public void testAnnotateGateDocumentAcordingtoTMTfileMorpho() throws URISyntaxException, InvalidOffsetException, ParserConfigurationException, SAXException, IOException, ResourceInstantiationException
 	{
 		initCorpusAndDocFromSentences(english_sentences, 1);
@@ -281,6 +283,7 @@ public class TectoMTBatchAnalyserTest extends TestCase
 
 	}
 
+	@Test(groups = { "slow" })
 	public void testExecuteCzechMorphology() throws ResourceInstantiationException, ExecutionException
 	{
 		String [] blocks = {
@@ -358,6 +361,7 @@ public class TectoMTBatchAnalyserTest extends TestCase
 		executeTmtOnCurrentCorpus("czech", czech_full_blocks);				
 	}
 	
+	@Test(groups = { "slow" })
 	public void testExecuteCzechFull() throws ResourceInstantiationException, ExecutionException, FileNotFoundException
 	{
 
@@ -386,7 +390,7 @@ public class TectoMTBatchAnalyserTest extends TestCase
 		
 	}
 
-	
+	@Test
 	public void testExecuteEnglishSentenceSegmentation() throws GateException, MalformedURLException
 	{		
 		
@@ -409,6 +413,7 @@ public class TectoMTBatchAnalyserTest extends TestCase
 	}
 
 
+	@Test
 	public void testParseSentecesFormGateToTectoMTEnglish() throws ResourceInstantiationException, InvalidOffsetException, ExecutionException
 	{
 		String [] blocks = {"SEnglishW_to_SEnglishM::Tokenization"};
@@ -424,6 +429,7 @@ public class TectoMTBatchAnalyserTest extends TestCase
 	}
 
 	
+	@Test(groups = { "slow" })
 	public void testExecuteEnglishMorphology() throws ResourceInstantiationException, ExecutionException
 	{
 		String [] blocks = {
@@ -505,6 +511,7 @@ public class TectoMTBatchAnalyserTest extends TestCase
 			"SEnglishA_to_SEnglishT::TBLa2t_phaseFx"
 		};
 
+	@Test(groups = { "slow" })
 	public void testExecuteEnglishFull() throws ResourceInstantiationException, ExecutionException
 	{
 		
@@ -516,6 +523,7 @@ public class TectoMTBatchAnalyserTest extends TestCase
 		assertEquals(72, as.size());		
 	}
 	
+	@Test(groups = { "slow" })
 	public void testExecuteEnglishFullAcquisitions10473() throws ResourceInstantiationException, ExecutionException, FileNotFoundException
 	{
 		initCorpusAndDocFromFile(getClass().getResource("/Acquisitions10473.xml"));
@@ -531,6 +539,7 @@ public class TectoMTBatchAnalyserTest extends TestCase
 	}
 
 	
+	@Test(groups = { "slow" })
 	public void testExecuteEnglishFullFilms() throws ResourceInstantiationException, ExecutionException, FileNotFoundException
 	{
 		String [] film_s = 
@@ -559,10 +568,9 @@ public class TectoMTBatchAnalyserTest extends TestCase
 			s.println(scenario[i]);			
 		}		
 	}
-	
-	public static Test suite(){
+/*	
+	public static junit.framework.Test suite(){
 		return new TestSuite(TectoMTBatchAnalyserTest.class);
 	}
-
-
+*/
 }

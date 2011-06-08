@@ -71,7 +71,7 @@ public class MeshIndexer
 			return children.get(meshID);
 		}
 
-		public int[] getDescendnats(String meshID) {
+		public int[] getDescendants(String meshID) {
 			return getDescendnats(MeshRecord.parseMeshID(meshID));
 		}
 
@@ -348,7 +348,7 @@ public class MeshIndexer
 		}
 	
 		System.err.println("---------------getDescendnats--------------------");
-		int[] chemicals_desc = index.getDescendnats(mesh_term);
+		int[] chemicals_desc = index.getDescendants(mesh_term);
 		System.err.println(chemicals_desc.length);
 		for (int i = 0; i < chemicals_desc.length; i++)
 		{
