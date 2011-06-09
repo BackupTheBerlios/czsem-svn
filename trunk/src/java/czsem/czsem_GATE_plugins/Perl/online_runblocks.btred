@@ -22,7 +22,10 @@ my $port_number = 9090;
 #the first argument must be server port number
 
 $port_number = $ARGV[0];
-shift(@ARGV); 
+shift(@ARGV);
+
+my $hanshake_hash = $ARGV[0];
+shift(@ARGV);
 
 
 if ($ARGV[0] eq '--scen') {
@@ -52,9 +55,9 @@ sub handshake
 {
     my ( $param ) = @_;
     
-    print STDERR "ok".$param."ok";
+    print STDERR "ok".$param."ok_".$hanshake_hash."\n";
     
-    return "ok".$param."ok";
+    return "ok".$param."ok_".$hanshake_hash;
 }
 
 

@@ -14,6 +14,7 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 import java.util.Vector;
 
 import org.apache.log4j.Logger;
@@ -21,6 +22,7 @@ import org.apache.xmlrpc.AsyncCallback;
 import org.apache.xmlrpc.XmlRpcClientLite;
 import org.apache.xmlrpc.XmlRpcException;
 
+import czsem.Utils;
 import czsem.gate.tectomt.TMTDocumentHelper;
 import czsem.utils.Config;
 import czsem.utils.ProcessExec;
@@ -59,10 +61,17 @@ public class TectoMTOnlineAnalyser extends TectoMTAbstractAnalyser
 	
 	protected void startTMTAnalysisServer() throws Exception
 	{				 
-		Calendar cal_start = Calendar.getInstance();
-		String [] port = {getServerPortNumber().toString()};
+		if (! Utils.porAvailable(getServerPortNumber()))
+		{
+			throw new ResourceInstantiationException("Filed to start TectoMT server, port nuber: "+getServerPortNumber()+" is not available.");						
+		}
 		
-		List<String> cmd_list = buildTredCmdArray(port);			
+		String handshake_code = Long.toHexString(new Random().nextLong());
+
+		Calendar cal_start = Calendar.getInstance();
+		String [] additional_args = {getServerPortNumber().toString(), handshake_code};
+		
+		List<String> cmd_list = buildTredCmdArray(additional_args);			
 		
 		tmtProcess = new ProcessExec();
 		tmtProcess.exec(cmd_list.toArray(new String[0]), getTredEnvp());
@@ -82,7 +91,7 @@ public class TectoMTOnlineAnalyser extends TectoMTAbstractAnalyser
 			throw new ResourceInstantiationException("Filed to start TectoMT server, see 'czsem_GATE_plugins/log/TMT_GATE_err.log'.");			
 		}		
 
-		serverConnection = new TectMTServerConnection(getServerPortNumber());
+		serverConnection = new TectMTServerConnection(getServerPortNumber(), handshake_code);
 		
 		
 		doHandShake();
@@ -135,7 +144,7 @@ public class TectoMTOnlineAnalyser extends TectoMTAbstractAnalyser
 			if (isServerRunning()) tmtProcess.destroy();
 			switch (result) {
 			case HandShakeKO:
-				throw new ResourceInstantiationException("Handshake with TectoMT server failed, see 'czsem_GATE_plugins/log/TMT_GATE_err.log'.");			
+				throw new ResourceInstantiationException("Handshake with TectoMT server failed (Another server already running on the same port?), see also 'czsem_GATE_plugins/log/TMT_GATE_err.log'.");			
 			case ProcessTrminated:
 				throw new ResourceInstantiationException("Error during run of TectoMT server, see 'czsem_GATE_plugins/log/TMT_GATE_err.log'.");			
 			case TimeOut:
@@ -151,9 +160,12 @@ public class TectoMTOnlineAnalyser extends TectoMTAbstractAnalyser
 	public static class TectMTServerConnection
 	{
 		private XmlRpcClientLite client = null;
+		private String handshake_code = Long.toHexString(new Random().nextLong());
+
 		
-		public TectMTServerConnection(int port) throws MalformedURLException
+		public TectMTServerConnection(int port, String handshake_code) throws MalformedURLException
 		{
+			this.handshake_code = handshake_code;
 			client = new XmlRpcClientLite("localhost", port);
 			client.setMaxThreads(1);
 		}
@@ -165,7 +177,7 @@ public class TectoMTOnlineAnalyser extends TectoMTAbstractAnalyser
 //			String res = (String) executeMethod("tectoMT.handshake", hash);
 //			System.err.println(hash);
 //			System.err.println(res);
-			return res != null && res.equals("ok"+hash+"ok");
+			return res != null && res.equals("ok"+hash+"ok_"+handshake_code);
 		}
 		
 		

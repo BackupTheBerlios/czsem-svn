@@ -4,6 +4,8 @@ import gate.util.reporting.exceptions.BenchmarkReportInputFileFormatException;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.DatagramSocket;
+import java.net.ServerSocket;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -184,6 +186,41 @@ public class Utils {
 			ret[a] = i.next(); 
 		return ret;
 	}
+	
+	/**
+	 * Checks to see if a specific port is available.
+	 *
+	 * @param port the port to check for availability
+	 * @author http://mina.apache.org/
+	 */
+	public static boolean porAvailable(int port)
+	{
+	    ServerSocket ss = null;
+	    DatagramSocket ds = null;
+	    try {
+	        ss = new ServerSocket(port);
+	        ss.setReuseAddress(true);
+	        ds = new DatagramSocket(port);
+	        ds.setReuseAddress(true);
+	        return true;
+	    } catch (IOException e) {
+	    } finally {
+	        if (ds != null) {
+	            ds.close();
+	        }
+
+	        if (ss != null) {
+	            try {
+	                ss.close();
+	            } catch (IOException e) {
+	                /* should not be thrown */
+	            }
+	        }
+	    }
+
+	    return false;
+	}
+
 
 
 }

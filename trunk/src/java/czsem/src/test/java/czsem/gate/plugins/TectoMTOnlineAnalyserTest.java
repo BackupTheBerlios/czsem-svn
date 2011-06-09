@@ -21,6 +21,8 @@ import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
 
+//import junit.framework.TestCase;
+
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.testng.annotations.Test;
@@ -30,7 +32,7 @@ import czsem.utils.Config;
 
 import static org.testng.AssertJUnit.*;
 
-public class TectoMTOnlineAnalyserTest// extends TestCase
+public class TectoMTOnlineAnalyserTest //extends TestCase
 {
 	public static List<String> getTempBlocks() {
 		String [] blocks =
@@ -90,7 +92,42 @@ public class TectoMTOnlineAnalyserTest// extends TestCase
 		Factory.deleteResource(controller);
 	}
 
-	
+//	@Test
+	@Test(groups={"slow"})
+	public void testConcurent() throws Exception
+	{
+		Logger.getLogger(TectoMTOnlineAnalyser.class).setLevel(Level.ALL);
+		
+		TectoMTOnlineAnalyser ta = new TectoMTOnlineAnalyser();		
+		assertFalse(ta.isServerRunning());
+		ta.setLoadScenarioFromFile(false);
+		ta.setBlocks(getTempBlocks());
+		ta.startTMTAnalysisServer();
+		assertTrue(ta.isServerRunning());
+		
+		TectoMTOnlineAnalyser ta2 = new TectoMTOnlineAnalyser();		
+		assertFalse(ta2.isServerRunning());
+		ta2.setLoadScenarioFromFile(false);
+//		ta2.setServerPortNumber(99);
+		ta2.setBlocks(getTempBlocks());
+		try {
+			ta2.startTMTAnalysisServer();
+			
+			assertFalse(true); //code above should throw an exception 
+		} catch (ResourceInstantiationException e)
+		{
+			//ok
+			System.err.println("Expected error message: " + e.getMessage());
+		}
+		assertFalse(ta2.isServerRunning());
+
+
+		ta.cleanup();
+		Thread.sleep(1000);
+		assertFalse(ta.isServerRunning());
+
+		
+	}
 
 	
 	@Test
@@ -126,6 +163,7 @@ public class TectoMTOnlineAnalyserTest// extends TestCase
 
 	}
 	
+//	@Test
 	@Test(groups={"slow"})
 	public void testExecuteCzechSentenceSegmentation() throws GateException, MalformedURLException
 	{		
@@ -133,7 +171,8 @@ public class TectoMTOnlineAnalyserTest// extends TestCase
 		String [] blocks = 
 		{
 			"SCzechW_to_SCzechM::TextSeg_tokenizer_and_segmenter",
-			"SCzechW_to_SCzechM::Tokenize_joining_numbers"};
+			"SCzechW_to_SCzechM::Tokenize_joining_numbers"
+		};
 
 
 		

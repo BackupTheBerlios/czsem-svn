@@ -328,5 +328,12 @@
 			<scope>test</scope>
 		</dependency>
 		
+		<dependency>
+			<groupId>uk.ac.gate</groupId>
+			<artifactId>gate-compiler-jdt</artifactId>
+			<version>1</version>
+			<type>jar</type>
+			<scope>runtime</scope>
+		</dependency>
 	</dependencies>
 </project>
