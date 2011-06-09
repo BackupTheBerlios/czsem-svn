@@ -7,6 +7,7 @@ import java.io.DataOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -52,7 +53,7 @@ public class MeshIndexer
 
 		public MeshIndex() throws IOException, URISyntaxException
 		{			
-			readFromFile(Utils.URLToFilePath(getClass().getResource("/mesh_child_index.bin")));			
+			readFromStream(getClass().getResourceAsStream("/mesh_child_index.bin"));			
 		}
 		
 		
@@ -75,22 +76,49 @@ public class MeshIndexer
 			return getDescendnats(MeshRecord.parseMeshID(meshID));
 		}
 
+		public static interface DescendantsCnstraint
+		{
+			boolean continueSearch(int currentDepth);			
+		}
+		
+		public Collection<Integer> getDescendnatsCollection(String meshID, DescendantsCnstraint c)
+		{
+			return getDescendnatsCollection(MeshRecord.parseMeshID(meshID), c);
+		}
+
 		public Collection<Integer> getDescendnatsCollection(int meshID)
 		{
-			Set<Integer> looking_for = new HashSet<Integer>();
-			looking_for.add(meshID);
+			return getDescendnatsCollection(meshID, new DescendantsCnstraint() {
+				
+				@Override
+				public boolean continueSearch(int currentDepth) {
+					return currentDepth > 0;
+				}
+			});
+		}
+
+		public Collection<Integer> getDescendnatsCollection(int meshID, DescendantsCnstraint c)
+		{
+			// <MeshID, Depth>
+			Map<Integer, Integer> looking_for = new HashMap<Integer, Integer>();
 
 			Set<Integer> ret = new HashSet<Integer>();
 			
+			looking_for.put(meshID, 0);
+			
 			while (! looking_for.isEmpty())
 			{
-				Iterator<Integer> i = looking_for.iterator();
-				Integer ii = i.next();
+				Iterator<Integer> i = looking_for.keySet().iterator();
+				int ii = i.next();
+				int depth = looking_for.get(ii);
 				i.remove();
-				int[] cur_children = getChildren(ii);
 				
-				Utils.copyArrayToSetExceptListed(cur_children, looking_for, ret);							
-				Utils.copyArrayToSet(cur_children, ret);
+				
+				if (c.continueSearch(depth)) ret.add(ii);
+				
+				
+				int[] cur_children = getChildren(ii);				
+				Utils.copyArrayToDepthMapExceptListed(cur_children, depth+1, looking_for, ret);											
 			}
 			
 			return ret;
@@ -121,9 +149,9 @@ public class MeshIndexer
 			out.close();
 		}
 
-		public void readFromFile(String filename) throws IOException
+		public void readFromStream(InputStream input_stream) throws IOException
 		{
-			DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream(filename)));
+			DataInputStream in = new DataInputStream(new BufferedInputStream(input_stream));
 			int size = in.readInt();
 			children = new HashMap<Integer, int[]>(size);
 			for (int j=0; j<size; j++)
@@ -138,7 +166,12 @@ public class MeshIndexer
 				
 				children.put(key, data);				
 			}
-			in.close();
+			in.close();			
+		}
+
+		public void readFromFile(String filename) throws IOException
+		{
+			readFromStream(new FileInputStream(filename));
 		}
 
 		

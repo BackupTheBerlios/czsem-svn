@@ -12,14 +12,16 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
 public class Utils {
 
-	public static String [] arrayConcatenate(String [] first, String [] second)
+	public static String[] arrayConcatenate(String[] first, String[] second)
 	{
 		String [] ret = new String[first.length + second.length];
+		
 		System.arraycopy(first, 0, ret, 0, first.length);
 		System.arraycopy(second, 0, ret, first.length, second.length);
 		return ret;		
@@ -141,20 +143,24 @@ public class Utils {
 		return URLToFile(url).getCanonicalPath();		
 	}
 
-	public static void copyArrayToSet(int[] src, Set<Integer> dest)
+	public static Set<Integer> copyArrayToSet(int[] src, Set<Integer> dest)
 	{
+		if (dest == null) dest = new HashSet<Integer>(src.length);
 		for (int i = 0; i < src.length; i++) {
 			dest.add(src[i]);
 		}
+		
+		return dest;
 	}
 	
-	public static void copyArrayToSetExceptListed(int[] src, Set<Integer> dest, Set<Integer> except)
+	public static void copyArrayToDepthMapExceptListed(int[] src, int depth, Map<Integer, Integer> dest, Set<Integer> except)
 	{
 		for (int i = 0; i < src.length; i++)
 		{
 			if (!except.contains(src[i]))
 			{			
-				dest.add(src[i]);
+				Integer prew = dest.put(src[i], depth);
+				if (prew != null && prew < depth) dest.put(src[i], prew);
 			}
 		}
 	}

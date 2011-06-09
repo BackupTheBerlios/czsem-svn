@@ -1,0 +1,36 @@
+import gate.creole.ANNIEConstants
+//import gate.mimir.measurements.MeasurementAnnotationHelper
+import gate.mimir.index.OriginalMarkupMetadataHelper
+import czsem.khresmoi.MeshAnnotationHelper
+import gate.mimir.db.DBSemanticAnnotationHelper as DefaultHelper
+//import gate.mimir.ordi.ORDISemanticAnnotationHelper
+//import gate.mimir.sesame.SesameSemanticAnnotationHelper
+
+
+//Token	TectoMT	0	9	362	{clean_lemma=Praktický, form=Praktický, lemma=praktický, tag=AAMS1----1A----}
+tokenASName = "TectoMT"
+tokenAnnotationType = "Token"
+tokenFeatures = {
+  form()
+  clean_lemma()
+  lemma()
+  tag()
+}
+
+//Lookup	lemma_flex	0	15	1424	{czTerm=praktiètí lékaøi, enTerm=General Practitioners, majorType=czmesh_lemmas, meshID=D058005}
+semanticASName = "mimir"
+semanticAnnotations = {
+  index {
+    Lookup(type: DefaultHelper, textFeatures:["czTerm","enTerm","meshID"])
+  }
+  index {
+    MeshTerm(new MeshAnnotationHelper(delegateHelperType : DefaultHelper))
+//    Lookup(type: DefaultHelper, textFeatures:["czTerm","enTerm","meshID"])
+//    Lookup(uriFeatures["inst"])
+  }
+  index {
+    Sentence(type:DefaultHelper)
+  }
+}
+documentRenderer = new OriginalMarkupMetadataHelper()
+documentMetadataHelpers = [documentRenderer]

@@ -26,6 +26,7 @@ public class CreateMentionsPR extends AbstractLanguageAnalyserWithInputAnnotType
 	
 	private String mentionAnntotationTypeName = "Mention";
 	private boolean inverseFunction = false;
+	private boolean copyFeatures = false;
 	/** Used only during inverse work. Creates a mention using a referenced annotation. The reference is inside an aligned annotation. example: 'NamedEntity_root.origRootID'*/	 
 	private String useReferenceAnnotationFeature = null;
 
@@ -125,8 +126,10 @@ public class CreateMentionsPR extends AbstractLanguageAnalyserWithInputAnnotType
 		for (Annotation annotation : annotations)
 		{
 			FeatureMap fm = Factory.newFeatureMap();
+			if (getCopyFeatures()) fm.putAll(annotation.getFeatures());				
 			fm.put("class", annotation.getType());
 			fm.put("origMentID", annotation.getId());
+			
 			outputAS.add(annotation.getStartNode(), annotation.getEndNode(), getMentionAnntotationTypeName(), fm);
 			
 			
@@ -164,6 +167,17 @@ public class CreateMentionsPR extends AbstractLanguageAnalyserWithInputAnnotType
 		return useReferenceAnnotationFeature;
 	}
 
+
+	@Optional
+	@RunTime
+	@CreoleParameter(comment="Weather to copy features form the original annotations.", defaultValue="false")
+	public void setCopyFeatures(Boolean copyFeatures) {
+		this.copyFeatures = copyFeatures;
+	}
+
+	public Boolean getCopyFeatures() {
+		return copyFeatures;
+	}
 
 	public static void main(String[] args) throws Exception
 	{

@@ -61,8 +61,7 @@
 		        </configuration>
 		        <executions>
 		        	<execution>
-			            <id>make-assembly</id> <!-- this is used for inheritance merges -->
-			            <phase>package</phase> <!-- bind to the packaging phase -->
+			            <id>make-assembly</id> <!-- this is used for inheritance merges --> <!-- bind to the packaging phase -->
 			            <goals>
 			              <goal>single</goal>
 			            </goals>
@@ -75,7 +74,8 @@
 				<version>1.0-alpha-5</version>
 				<executions>
 					<execution>
-						<phase>package</phase>
+						<id>izpack</id>
+						<phase>deploy</phase>
 						<goals>
 							<goal>izpack</goal>
 						</goals>
