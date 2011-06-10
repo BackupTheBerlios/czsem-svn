@@ -14,8 +14,10 @@ import gate.persist.PersistenceException;
 import gate.util.GateException;
 import gate.util.persistence.PersistenceManager;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.net.URL;
 
@@ -53,27 +55,77 @@ public class MimirIndexFeeder {
 		
 		
 	}
+	public static Boolean terminate_request = false;
+	
+	public static void start_terminate_request_detector()
+	{
+		Thread terminate_request_detector = new Thread() {
+			@Override
+			public void run()
+			{
+				BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+				String input = "";
+				do
+				{
+					try {
+						input = in.readLine();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					
+				} while (! input.equals("stop") && ! terminate_request);
+				
+				System.err.println("stop requsted!");
+				terminate_request = true;
+			}			
+		};
+		
+		terminate_request_detector.start();
+	}
+
+	
+	static String indexurl = "http://localhost:8080/mimir-demo/i1";
+
 	
 	public static void main(String[] args) throws IOException, GateException, URISyntaxException
 	{
 		Config.getConfig().setGateHome();
 		Gate.init();
 		
+		URL index_url = new URL(indexurl);
+		
 		
 		CzechMeshDocumentAnalysis a = new CzechMeshDocumentAnalysis();
 		a.initApp();
 		System.err.println("-inint done-");
 		
-		Document doc = Factory.newDocument("Krevní tlak stále roste.");
+		try {
 		
-		a.anlyseDoc(doc);
-
-		System.err.println("-analysis done-");
+			File dir = new File("C:\\Users\\dedek\\Desktop\\bmc\\bmc");
+			File[] files = dir.listFiles();
+			
+			start_terminate_request_detector();
+			
+			int files_count = 1;
+			for (File f : files)
+			{
+				System.err.println(String.format("file:%3d %s", files_count++, f.getName()));
+				Document doc = Factory.newDocument(f.toURI().toURL(), "utf8");			
+				a.anlyseDoc(doc);
+				MimirConnector.defaultConnector().sendToMimir(doc, doc.getFeatures().get("gate.SourceURL").toString(), index_url);
+				Factory.deleteResource(doc);
+				
+				if (terminate_request) break;
+			}
+			System.err.println("end of file processing.");
 		
-		System.err.println(doc.getAnnotations("mimir").get("MeshTerm"));
-		System.err.println("--");
-		
-		a.close();
+		}
+		finally
+		{
+			a.close();
+			terminate_request = true;
+			
+		}		
 	}
 
 	public static void main2(String[] args) throws IOException, GateException, URISyntaxException
@@ -81,9 +133,8 @@ public class MimirIndexFeeder {
 		Config.getConfig().setGateHome();
 		Gate.init();
 				
-		
-		String indexurl = "http://localhost:8080/mimir/8c9fe566-e6e4-4b71-826f-3f3d5e21370e";
 		URL index_url = new URL(indexurl);
+
 		
 		Corpus corpus = Factory.newCorpus(null);
 		corpus.populate(

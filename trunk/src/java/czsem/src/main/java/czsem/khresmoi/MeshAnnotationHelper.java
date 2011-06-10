@@ -188,7 +188,15 @@ public class MeshAnnotationHelper extends DelegatingSemanticAnnotationHelper
 				deleg_constraints.add(constraints.getMeshIdEqConstraint());
 			}
 			
-		}			
+		}
+		else
+		{
+			if (constraints.hasMeshDescendantsConstraint())
+			{	          
+				throw new IllegalArgumentException("A value of the <i>" +
+	        		  MESH_ID_FEATURE + "</i> feture must be provided to make <i>"+DESCENDANTS_FEATURE+"<i> feature work!");
+			}
+		}
 						
 		return super.getMentions(annotationType, deleg_constraints, engine);
 	}
@@ -251,7 +259,7 @@ public class MeshAnnotationHelper extends DelegatingSemanticAnnotationHelper
 	{
 		if (inputMeshID == null) 
 	          throw new IllegalArgumentException("A value of the <i>" +
-	        		  MESH_ID_FEATURE + "</i> feture must be provided!");
+	        		  MESH_ID_FEATURE + "</i> feture must be provided to make <i>"+DESCENDANTS_FEATURE+"<i> feature work!");
 		
 		int meshID;
 		if (Number.class.isInstance(inputMeshID))

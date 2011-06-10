@@ -42,7 +42,11 @@ public class BMCGateCorpusBuider
 		corpus = Factory.newCorpus(corpus_name);
 	}
 	
-	static String [] sl = {"www.tigis.cz"};
+	static String [] sl = 
+	{
+		"www.tigis.cz", //FileNotFoundException
+		"www.prolekare.cz" //controlled access
+	};
 	static Set<String> host_stoplist = new HashSet<String>(Arrays.asList(sl)); 
 	
 	@SuppressWarnings("unchecked")
@@ -65,7 +69,7 @@ public class BMCGateCorpusBuider
 				
 		Gate.init();
 		
-		BMCGateCorpusBuider b = new BMCGateCorpusBuider("BMC", true, "C:\\Users\\dedek\\Desktop\\bmc");
+		BMCGateCorpusBuider b = new BMCGateCorpusBuider("BMC", true, "C:\\Users\\dedek\\Desktop\\bmc\\bmc");
 		
 		InputStream in = new FileInputStream("c:/data/Khresmoi/BMC/bmc-2011-01.iso");
 		MarcReader reader = new MarcStreamReader(in, "UTF-8");
