@@ -21,7 +21,9 @@ import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.net.URL;
 
+import czsem.gate.GateUtils;
 import czsem.utils.Config;
+import czsem.utils.ProjectSetup;
 
 public class MimirIndexFeeder {
 
@@ -84,7 +86,9 @@ public class MimirIndexFeeder {
 	}
 
 	
-	static String indexurl = "http://localhost:8080/mimir-demo/i1";
+	static String indexurl = "http://localhost:8080/mimir-demo/big";
+	static String analyzed_dir = "C:\\Users\\dedek\\Desktop\\bmc\\analyzed\\";
+	static String plain_files_dir = "C:\\Users\\dedek\\Desktop\\bmc\\filter_include";
 
 	
 	public static void main(String[] args) throws IOException, GateException, URISyntaxException
@@ -94,25 +98,42 @@ public class MimirIndexFeeder {
 		
 		URL index_url = new URL(indexurl);
 		
-		
+/*		
 		CzechMeshDocumentAnalysis a = new CzechMeshDocumentAnalysis();
 		a.initApp();
 		System.err.println("-inint done-");
-		
+/**/		
 		try {
 		
-			File dir = new File("C:\\Users\\dedek\\Desktop\\bmc\\bmc");
+			File dir = new File(analyzed_dir);
+//			File dir = new File(plain_files_dir);
 			File[] files = dir.listFiles();
 			
 			start_terminate_request_detector();
 			
-			int files_count = 1;
+			int files_count = 0;
 			for (File f : files)
 			{
-				System.err.println(String.format("file:%3d %s", files_count++, f.getName()));
+				files_count++;
+				
+/*
+				if (new File(analyzed_dir+f.getName()).exists())
+				{
+					System.err.println(files_count);
+					continue;
+				}
+/**/				
+				System.err.println(String.format("%s file:%05d %s", ProjectSetup.makeTimeStamp(), files_count, f.getName()));
+//				if (files_count++ <= 841) continue;
 				Document doc = Factory.newDocument(f.toURI().toURL(), "utf8");			
-				a.anlyseDoc(doc);
+//				a.anlyseDoc(doc);
+				
+//				GateUtils.saveDocumentToDirectory(doc, analyzed_dir, "bmcID");
+
+/**/
+//				if (testDoc(doc)) ...
 				MimirConnector.defaultConnector().sendToMimir(doc, doc.getFeatures().get("gate.SourceURL").toString(), index_url);
+/**/					
 				Factory.deleteResource(doc);
 				
 				if (terminate_request) break;
@@ -122,10 +143,15 @@ public class MimirIndexFeeder {
 		}
 		finally
 		{
-			a.close();
+//			a.close();
 			terminate_request = true;
 			
 		}		
+	}
+
+	private static boolean testDoc(Document doc)
+	{		
+		return doc.getAnnotations("mimir").get("MeshTerm").size() >= 3;
 	}
 
 	public static void main2(String[] args) throws IOException, GateException, URISyntaxException

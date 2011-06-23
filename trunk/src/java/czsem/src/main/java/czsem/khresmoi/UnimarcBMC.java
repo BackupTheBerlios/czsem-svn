@@ -17,6 +17,8 @@ import org.marc4j.marc.DataField;
 import org.marc4j.marc.Record;
 import org.marc4j.marc.Subfield;
 
+import czsem.khresmoi.BMCGateCorpusBuider.BmcRecord;
+
 public class UnimarcBMC
 {
 	public static Logger logger = Logger.getLogger(UnimarcBMC.class);
@@ -34,8 +36,13 @@ public class UnimarcBMC
 		meshTreeNodes = readFields(record, "686", null, 'a');
 		meshTerms = readFields(record, "606", null, 'a');
 		
+		String title = readBMCArticleName(record);
+		
+		if (title != null) doc.setName(title);
+		
 		FeatureMap f = doc.getFeatures();
 		f.put("bmcID", readBMCID(record));
+		f.put("bmcTitle", title);
 		f.put("meshIDs", meshIDs);
 		f.put("meshArticleTypeIDs", meshArticleTypeIDs);
 		f.put("meshTreeNodes", meshTreeNodes);
@@ -61,7 +68,9 @@ public class UnimarcBMC
 		{
 			DataField dataField = fields.get(n);
 			if ((indicator1 != null) && (dataField.getIndicator1() != indicator1)) continue;
-			ret.add(dataField.getSubfield(subfieldCode).getData());
+			Subfield subf = dataField.getSubfield(subfieldCode);
+			if (subf != null)
+				ret.add(subf.getData());
 		}
 
 		return ret;		
@@ -72,7 +81,24 @@ public class UnimarcBMC
 		return 	((ControlField) record.getVariableField("001")).getData();
 	}
 
-	public static String getURLStr(Record record)
+	public static String readBMCArticleName(Record record)
+	{
+		DataField name = (DataField) record.getVariableField("200");
+		if (name != null)
+		{
+			Subfield f = name.getSubfield('a');
+			if (f!=null)
+			{
+//				System.err.println(f.getData());
+				return f.getData();
+			}
+		}
+		
+		logger.error("readBMCArticleName: failed to read article name!");
+		return null;
+	}
+
+	public static String readURLStr(Record record)
 	{
 		DataField url = (DataField) record.getVariableField("856");
 		if (url != null)
@@ -163,7 +189,7 @@ public class UnimarcBMC
 			/**/			
 			
 			
-//			if (urls.size()>3) break;
+			if (urls.size()>3) break;
 
 			/**			
 			List<ControlField> c = record.getControlFields();
@@ -201,6 +227,12 @@ public class UnimarcBMC
 		System.err.println("urls: " + urls.size());//25408
 		System.err.println("end");
 
+	}
+
+
+	public static BmcRecord readBmcRecord(Record record)
+	{
+		return new BmcRecord(record);
 	}
 
 }

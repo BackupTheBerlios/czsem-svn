@@ -158,14 +158,23 @@ public class TMTSAXParser extends DefaultHandler
 		{
 			case 1:
 			case 2:
-			case 3:	return;
+//			case 3:	
+				return;
 			
+			case Constants.DOC_DEPTH_SENTENCES-1:
+				if (qName.equalsIgnoreCase("LM"))
+				{
+					newSentence();
+					return;
+				}
+
 			case Constants.DOC_DEPTH_SENTENCES:
 				if (qName.equalsIgnoreCase(language+"_source_sentence"))
 				{
-					newSentence();
+//					newSentence();
 					break;
 				}
+
 				
 			case Constants.DOC_DEPTH_TREES:
 				if (qName.equalsIgnoreCase('S'+language+'T'))
@@ -217,7 +226,7 @@ public class TMTSAXParser extends DefaultHandler
 	
 	private boolean shouldReadContentOfCurrentElement()
 	{
-		if (context_stack.size() < Constants.DOC_DEPTH_SENTENCES) return false;
+		if (context_stack.size() < Constants.DOC_DEPTH_SENTENCES) return false;		
 		String[] actual_token_featurelist = actual_sentence.getActualTokenFeatureList();		
 		String current_qname = context_stack.peek().qname;
 		

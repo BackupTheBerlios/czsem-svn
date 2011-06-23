@@ -1,13 +1,27 @@
 package czsem.khresmoi;
 
+import static czsem.khresmoi.UnimarcBMC.readBMCArticleName;
+import static czsem.khresmoi.UnimarcBMC.readBMCID;
+import static czsem.khresmoi.UnimarcBMC.readFields;
+import static czsem.khresmoi.UnimarcBMC.readURLStr;
+import gate.Corpus;
+import gate.Document;
+import gate.Factory;
+import gate.Gate;
+import gate.creole.ResourceInstantiationException;
+import gate.util.GateException;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -17,13 +31,6 @@ import org.marc4j.marc.Record;
 
 import czsem.gate.GateUtils;
 import czsem.utils.Config;
-
-import gate.Corpus;
-import gate.Document;
-import gate.Factory;
-import gate.Gate;
-import gate.creole.ResourceInstantiationException;
-import gate.util.GateException;
 
 public class BMCGateCorpusBuider
 {
@@ -44,6 +51,7 @@ public class BMCGateCorpusBuider
 	
 	static String [] sl = 
 	{
+		"195.250.138.169", //Connection timed out
 		"www.tigis.cz", //FileNotFoundException
 		"www.prolekare.cz" //controlled access
 	};
@@ -63,6 +71,34 @@ public class BMCGateCorpusBuider
 		return doc;
 	}
 	
+	public static class BmcRecord implements Serializable
+	{
+		private static final long serialVersionUID = -302333240017740807L;
+
+		List<String> meshIDs;
+		List<String> meshArticleTypeIDs;
+		List<String> meshTreeNodes;
+		List<String> meshTerms;
+
+		String title;
+		String url;
+		String id;
+
+		public BmcRecord(Record record)
+		{			
+			meshIDs = readFields(record, "606", '0', '3');
+			meshArticleTypeIDs = readFields(record, "606", ' ', '3');
+			meshTreeNodes = readFields(record, "686", null, 'a');
+			meshTerms = readFields(record, "606", null, 'a');
+			
+			title = readBMCArticleName(record);
+			id = readBMCID(record);
+			url = readURLStr(record);						
+		}
+		
+	}
+
+	
 	public static void main(String[] args) throws URISyntaxException, IOException, GateException
 	{
 		Config.getConfig().setGateHome();
@@ -81,8 +117,8 @@ public class BMCGateCorpusBuider
 		while (reader.hasNext())
 		{
 			Record record = reader.next();
-			
-			String urlStr = UnimarcBMC.getURLStr(record);
+						
+			String urlStr = UnimarcBMC.readURLStr(record);
 			if (urlStr != null)
 			{
 				if (! b.documentExistsInTragetDirectory(UnimarcBMC.readBMCID(record)))
@@ -90,13 +126,23 @@ public class BMCGateCorpusBuider
 					logger.info(String.format("record: %d/617155  url: %d/25408", records, urls));
 					try 
 					{
-						Document doc = b.addDoc(new URL(urlStr));
-						UnimarcBMC.setDocumentFeatures(doc, record);
-						b.saveDocument(doc);
+						if (urls > 23000)
+						{
+							if (!urlStr.equals("http://www.chemicke-listy.cz/docs/full/2003_S.pdf"))
+							{
+								Document doc = b.addDoc(new URL(urlStr));
+								UnimarcBMC.setDocumentFeatures(doc, record);
+								b.saveDocument(doc);
+							}
+						}
 					}
 					catch (ResourceInstantiationException e)
 					{
 						logger.error(UnimarcBMC.readBMCID(record), e);						
+					}
+					catch (MalformedURLException e)
+					{
+						logger.error(urlStr, e);												
 					}
 					
 				}
@@ -124,7 +170,10 @@ public class BMCGateCorpusBuider
 	public void saveDocument(Document doc) throws IOException
 	{
 		if (dontBuildCorpus)
-			GateUtils.saveDocumentToDirectory(doc, outputDirectory, "bmcID");		
+		{
+			GateUtils.saveDocumentToDirectory(doc, outputDirectory, "bmcID");
+			Factory.deleteResource(doc);
+		}
 	}
 
 	public void saveCorpus() throws IOException
@@ -132,5 +181,7 @@ public class BMCGateCorpusBuider
 		if (! dontBuildCorpus)
 			GateUtils.saveCorpusToDirectory(corpus, outputDirectory, "bmcID");
 	}
-
+	
+	final static String BMC_DIR = "C:\\Users\\dedek\\Desktop\\bmc\\bmc\\";
+	
 }

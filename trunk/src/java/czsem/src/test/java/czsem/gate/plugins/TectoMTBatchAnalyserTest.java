@@ -32,6 +32,7 @@ import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+
 import org.testng.annotations.Test;
 import org.xml.sax.SAXException;
 
@@ -41,7 +42,7 @@ import czsem.utils.Config;
 
 import static org.testng.AssertJUnit.*;
 
-public class TectoMTBatchAnalyserTest// extends TestCase
+public class TectoMTBatchAnalyserTest //extends TestCase
 {
 	Corpus corpus = null;
 	Document document = null;	
@@ -70,7 +71,7 @@ public class TectoMTBatchAnalyserTest// extends TestCase
 
 	protected void initCorpusAndDocFromFile(URL file_url) throws ResourceInstantiationException
 	{
-		document = Factory.newDocument(file_url);
+		document = Factory.newDocument(file_url, "utf8");
 		corpus = gateCorpusFromDoc(document);		
 	}
 
@@ -137,7 +138,32 @@ public class TectoMTBatchAnalyserTest// extends TestCase
 		controller.execute();		
 	}
 
-	@Test(groups = { "slow" })
+	@Test
+	public void testAnnotateGateDocumentAcordingtoTMTfileBmc07504729() throws ResourceInstantiationException, InvalidOffsetException, ParserConfigurationException, SAXException, IOException, URISyntaxException
+	{
+		initCorpusAndDocFromFile(getClass().getResource("/bmc07504729.xml"));
+
+		assertEquals(48586, (long) document.getContent().size());
+		
+		document.getAnnotations().clear();
+		AnnotationSet as = document.getAnnotations();
+		assertEquals(as.size(), 0);
+		AnnotationSet as_orig = document.getAnnotations("Original markups");
+		assertEquals(24, as_orig.size());
+		
+		
+		
+		TectoMTBatchAnalyser tmt_ba = new TectoMTBatchAnalyser();
+		tmt_ba.setLanguage("czech");
+		tmt_ba.annotateGateDocumentAcordingtoTMTfile(
+				document,
+				Utils.URLToFilePath(getClass().getResource("/bmc07504729.tmt")));
+		
+//		saveDocumentToFile("test_out.xml");
+		assertEquals(10994, as.size());		
+	}
+
+	@Test
 	public void testAnnotateGateDocumentAcordingtoTMTfileAcquisitions10473() throws ResourceInstantiationException, InvalidOffsetException, ParserConfigurationException, SAXException, IOException, URISyntaxException
 	{
 		initCorpusAndDocFromFile(getClass().getResource("/Acquisitions10473.xml"));
