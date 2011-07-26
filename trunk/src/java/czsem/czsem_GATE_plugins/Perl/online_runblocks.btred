@@ -40,6 +40,15 @@ else {
 }
 
 
+#necesary to avoid memory leaks, but it si not solved yet :-(
+sub btredCloseFile
+{
+  $grp->{root}=undef;
+  $grp->{FSFile}=undef;
+  $grp->{treeNo}=undef;
+
+  delete $grp->{'currentNode'} if (exists $grp->{'currentNode'});
+}
 
 sub analyzeFile
 {
@@ -47,6 +56,8 @@ sub analyzeFile
     Open($file);
     $scenario->apply_on_fsfile_objects($grp->{FSFile});
     Save;
+#    main::closeFile($grp);
+    btredCloseFile;
     
     return "succes"; 
 }

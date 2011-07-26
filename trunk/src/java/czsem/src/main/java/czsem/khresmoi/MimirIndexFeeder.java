@@ -21,6 +21,7 @@ import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.net.URL;
 
+import czsem.Utils.StopRequestDetector;
 import czsem.gate.GateUtils;
 import czsem.utils.Config;
 import czsem.utils.ProjectSetup;
@@ -57,33 +58,6 @@ public class MimirIndexFeeder {
 		
 		
 	}
-	public static Boolean terminate_request = false;
-	
-	public static void start_terminate_request_detector()
-	{
-		Thread terminate_request_detector = new Thread() {
-			@Override
-			public void run()
-			{
-				BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-				String input = "";
-				do
-				{
-					try {
-						input = in.readLine();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-					
-				} while (! input.equals("stop") && ! terminate_request);
-				
-				System.err.println("stop requsted!");
-				terminate_request = true;
-			}			
-		};
-		
-		terminate_request_detector.start();
-	}
 
 	
 	static String indexurl = "http://localhost:8080/mimir-demo/big";
@@ -98,25 +72,28 @@ public class MimirIndexFeeder {
 		
 		URL index_url = new URL(indexurl);
 		
-/*		
+/**/		
 		CzechMeshDocumentAnalysis a = new CzechMeshDocumentAnalysis();
 		a.initApp();
 		System.err.println("-inint done-");
 /**/		
+		
+		StopRequestDetector stop_request_detector = new StopRequestDetector();
+		
 		try {
 		
-			File dir = new File(analyzed_dir);
-//			File dir = new File(plain_files_dir);
+//			File dir = new File(analyzed_dir);
+			File dir = new File(plain_files_dir);
 			File[] files = dir.listFiles();
 			
-			start_terminate_request_detector();
+			stop_request_detector.startDetector();
 			
 			int files_count = 0;
 			for (File f : files)
 			{
 				files_count++;
 				
-/*
+/**/
 				if (new File(analyzed_dir+f.getName()).exists())
 				{
 					System.err.println(files_count);
@@ -126,25 +103,25 @@ public class MimirIndexFeeder {
 				System.err.println(String.format("%s file:%05d %s", ProjectSetup.makeTimeStamp(), files_count, f.getName()));
 //				if (files_count++ <= 841) continue;
 				Document doc = Factory.newDocument(f.toURI().toURL(), "utf8");			
-//				a.anlyseDoc(doc);
+				a.anlyseDoc(doc);
 				
-//				GateUtils.saveDocumentToDirectory(doc, analyzed_dir, "bmcID");
+				GateUtils.saveDocumentToDirectory(doc, analyzed_dir, "bmcID");
 
 /**/
 //				if (testDoc(doc)) ...
-				MimirConnector.defaultConnector().sendToMimir(doc, doc.getFeatures().get("gate.SourceURL").toString(), index_url);
+//				MimirConnector.defaultConnector().sendToMimir(doc, doc.getFeatures().get("gate.SourceURL").toString(), index_url);
 /**/					
 				Factory.deleteResource(doc);
 				
-				if (terminate_request) break;
+				if (stop_request_detector.stop_requested) break;
 			}
 			System.err.println("end of file processing.");
 		
 		}
 		finally
 		{
-//			a.close();
-			terminate_request = true;
+			a.close();
+			stop_request_detector.stop_requested = true;
 			
 		}		
 	}

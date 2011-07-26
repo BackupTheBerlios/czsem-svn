@@ -2,8 +2,10 @@ package czsem;
 
 import gate.util.reporting.exceptions.BenchmarkReportInputFileFormatException;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.DatagramSocket;
 import java.net.ServerSocket;
 import java.net.URISyntaxException;
@@ -219,6 +221,38 @@ public class Utils {
 	    }
 
 	    return false;
+	}
+	
+	
+	public static class StopRequestDetector
+	{
+		public Boolean stop_requested = false;
+		
+		public void startDetector()
+		{
+			Thread terminate_request_detector = new Thread() {
+				@Override
+				public void run()
+				{
+					BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+					String input = "";
+					do
+					{
+						try {
+							input = in.readLine();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						
+					} while (! input.equals("stop") && ! stop_requested);
+					
+					System.err.println("stop requsted!");
+					stop_requested = true;
+				}			
+			};
+			
+			terminate_request_detector.start();
+		}
 	}
 
 

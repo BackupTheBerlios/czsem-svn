@@ -18,6 +18,7 @@ import gate.util.InvalidOffsetException;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +45,7 @@ public class TectoMTBatchAnalyser extends TectoMTAbstractAnalyser
 		
 	private List<TMTDocumentHelper> documents_to_anlayse= new ArrayList<TMTDocumentHelper>();
 
-	protected void executeBatch() throws ParserConfigurationException, SAXException, IOException, InterruptedException, URISyntaxException, InvalidOffsetException, PersistenceException, SecurityException
+	public void executeBatch() throws ParserConfigurationException, SAXException, IOException, InterruptedException, URISyntaxException, InvalidOffsetException, PersistenceException, SecurityException
 	{
 		logger.info("Executing external TMT analysis");
 		int ret = executeTMTAnalysis();
@@ -69,6 +70,14 @@ public class TectoMTBatchAnalyser extends TectoMTAbstractAnalyser
 		documents_to_anlayse.clear();		
 	}
 	
+	public void addDocumentToBtach(Document document) throws InvalidOffsetException, MalformedURLException, IOException, URISyntaxException
+	{
+		documents_to_anlayse.add(
+				new TMTDocumentHelper(document, getInputASName(), getLanguage(),
+						Config.getConfig().getTmtSerializationDirectoryURL()));		
+	}
+
+	
 	@Override
 	public void execute() throws ExecutionException
 	{
@@ -76,9 +85,7 @@ public class TectoMTBatchAnalyser extends TectoMTAbstractAnalyser
 			
 			if (documents_to_anlayse.size() <= corpus.size())
 			{
-				documents_to_anlayse.add(
-						new TMTDocumentHelper(document, getInputASName(), getLanguage(),
-								Config.getConfig().getTmtSerializationDirectoryURL()));
+				addDocumentToBtach(document);
 				
 				if (documents_to_anlayse.size() == corpus.size())
 				{
@@ -95,8 +102,11 @@ public class TectoMTBatchAnalyser extends TectoMTAbstractAnalyser
 	{
 		Config cfg = Config.getConfig();
 
-		String file_list_path = cfg.getTmtSerializationDirectoryPath() +
-		"/gate_tmt_filelist_" + ProjectSetup.makeTimeStamp();
+
+		File file_list_path = File.createTempFile(
+				"gate_tmt_filelist_" + ProjectSetup.makeTimeStamp() + "_",
+				"",
+				new File(cfg.getTmtSerializationDirectoryPath()));
 		PrintStream file_list_ostream = new PrintStream(file_list_path);
 		
 		for (TMTDocumentHelper da : documents_to_anlayse)
@@ -107,7 +117,7 @@ public class TectoMTBatchAnalyser extends TectoMTAbstractAnalyser
 		
 		List<String> cmd_list = buildTredCmdArray(null); 
 		cmd_list.add("-l");
-		cmd_list.add(file_list_path);
+		cmd_list.add(file_list_path.getCanonicalPath());
 		
 		logger.debug("-------------START list of commentds to execute------------------------");
 		for (String cmd : cmd_list)
