@@ -42,6 +42,7 @@ public class MorceBatchAnalysis
 		int firs_file_index_to_process = 0;
 		int files_count_to_process = 0;
 
+		@SuppressWarnings("unchecked")
 		@Override
 		public void run()
 		{
@@ -57,7 +58,7 @@ public class MorceBatchAnalysis
 					.putFeatureList("blocks", 
 							"SCzechW_to_SCzechM::TextSeg_tokenizer_and_segmenter"
 //							,"SCzechW_to_SCzechM::Tokenize_joining_numbers"
-//							,"SCzechW_to_SCzechM::TagMorce"
+							,"SCzechW_to_SCzechM::TagMorce"
 							)
 					.createPR();
 				

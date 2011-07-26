@@ -14,10 +14,8 @@ import gate.persist.PersistenceException;
 import gate.util.GateException;
 import gate.util.persistence.PersistenceManager;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.net.URL;
 
