@@ -30,6 +30,7 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -309,6 +310,8 @@ public class GateUtils
 
 	public static void saveDocumentToDirectory(Document doc, String directory, String nameFeature) throws IOException
 	{
+		if (doc.getAnnotations("TectoMT").size() <= 0) throw new RuntimeException("No TectoMT annotations present in document!");
+		
 		String filename = (String) doc.getFeatures().get(nameFeature);
 		
 		Writer out = new OutputStreamWriter(new BufferedOutputStream(
@@ -326,6 +329,19 @@ public class GateUtils
 			saveDocumentToDirectory(doc, directory, nameFeature);
 		}
 	}
+	
+	@SuppressWarnings("rawtypes")
+	public static void deleteAndCelarCorpusDocuments(Corpus corpus)
+	{		
+		//delete documents				
+		for (Iterator iter = corpus.iterator(); iter.hasNext(); )
+		{
+			Object doc = iter.next();
+			iter.remove();
+			Factory.deleteResource((Resource) doc);
+		}		
+	}
+
 
 	
 	public static void main(String [] args) throws BenchmarkReportInputFileFormatException, URISyntaxException, IOException

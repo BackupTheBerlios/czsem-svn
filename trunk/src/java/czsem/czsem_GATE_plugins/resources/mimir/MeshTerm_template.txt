@@ -7,7 +7,7 @@ import gate.mimir.db.DBSemanticAnnotationHelper as DefaultHelper
 //import gate.mimir.sesame.SesameSemanticAnnotationHelper
 
 
-//Token	TectoMT	0	9	362	{clean_lemma=Praktickı, form=Praktickı, lemma=praktickı, tag=AAMS1----1A----}
+//Token	TectoMT	0	9	362	{clean_lemma=PraktickÃ½, form=PraktickÃ½, lemma=praktickÃ½, tag=AAMS1----1A----}
 tokenASName = "TectoMT"
 tokenAnnotationType = "Token"
 tokenFeatures = {
@@ -17,7 +17,7 @@ tokenFeatures = {
   tag()
 }
 
-//Lookup	lemma_flex	0	15	1424	{czTerm=praktiètí lékaøi, enTerm=General Practitioners, majorType=czmesh_lemmas, meshID=D058005}
+//Lookup	lemma_flex	0	15	1424	{czTerm=praktiÄtÃ­ lÃ©kaÅ™i, enTerm=General Practitioners, majorType=czmesh_lemmas, meshID=D058005}
 semanticASName = "mimir"
 semanticAnnotations = {
   index {
