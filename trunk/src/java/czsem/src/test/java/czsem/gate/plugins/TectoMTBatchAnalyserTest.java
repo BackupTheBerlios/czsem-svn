@@ -38,6 +38,7 @@ import org.xml.sax.SAXException;
 
 import czsem.Utils;
 import czsem.gate.GateUtils;
+import czsem.gate.plugins.TectoMTAbstractAnalyser.CannotAnnotateDocumentException;
 import czsem.utils.Config;
 
 import static org.testng.AssertJUnit.*;
@@ -139,7 +140,7 @@ public class TectoMTBatchAnalyserTest //extends TestCase
 	}
 
 	@Test
-	public void testAnnotateGateDocumentAcordingtoTMTfileBmc07504729() throws ResourceInstantiationException, InvalidOffsetException, ParserConfigurationException, SAXException, IOException, URISyntaxException
+	public void testAnnotateGateDocumentAcordingtoTMTfileBmc07504729() throws ResourceInstantiationException, InvalidOffsetException, ParserConfigurationException, SAXException, IOException, URISyntaxException, CannotAnnotateDocumentException
 	{
 		initCorpusAndDocFromFile(getClass().getResource("/bmc07504729.xml"));
 
@@ -164,7 +165,7 @@ public class TectoMTBatchAnalyserTest //extends TestCase
 	}
 
 	@Test
-	public void testAnnotateGateDocumentAcordingtoTMTfileAcquisitions10473() throws ResourceInstantiationException, InvalidOffsetException, ParserConfigurationException, SAXException, IOException, URISyntaxException
+	public void testAnnotateGateDocumentAcordingtoTMTfileAcquisitions10473() throws ResourceInstantiationException, InvalidOffsetException, ParserConfigurationException, SAXException, IOException, URISyntaxException, CannotAnnotateDocumentException
 	{
 		initCorpusAndDocFromFile(getClass().getResource("/Acquisitions10473.xml"));
 
@@ -190,7 +191,7 @@ public class TectoMTBatchAnalyserTest //extends TestCase
 	}
 
 	@Test(groups = { "slow" })
-	public void testAnnotateGateDocumentAcordingtoTMTfileFull() throws InvalidOffsetException, ParserConfigurationException, SAXException, IOException, URISyntaxException, ResourceInstantiationException
+	public void testAnnotateGateDocumentAcordingtoTMTfileFull() throws InvalidOffsetException, ParserConfigurationException, SAXException, IOException, URISyntaxException, ResourceInstantiationException, CannotAnnotateDocumentException
 	{
 		initCorpusAndDocFromFile(getClass().getResource("/english_full.txt"));
 		
@@ -274,7 +275,7 @@ public class TectoMTBatchAnalyserTest //extends TestCase
 	}
 	
 	@Test(groups = { "slow" })
-	public void testAnnotateGateDocumentAcordingtoTMTfileMorpho() throws URISyntaxException, InvalidOffsetException, ParserConfigurationException, SAXException, IOException, ResourceInstantiationException
+	public void testAnnotateGateDocumentAcordingtoTMTfileMorpho() throws URISyntaxException, InvalidOffsetException, ParserConfigurationException, SAXException, IOException, ResourceInstantiationException, CannotAnnotateDocumentException
 	{
 		initCorpusAndDocFromSentences(english_sentences, 1);
 		document.getAnnotations().clear();

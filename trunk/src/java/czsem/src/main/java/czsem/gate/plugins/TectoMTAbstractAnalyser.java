@@ -192,12 +192,37 @@ public class TectoMTAbstractAnalyser extends AbstractLanguageAnalyserWithInputOu
 		return cmd_list;
 	}
 	
-	protected void annotateGateDocumentAcordingtoTMTfile(Document doc, String tmt_filepath) throws ParserConfigurationException, SAXException, IOException, InvalidOffsetException
+	public static class CannotAnnotateDocumentException extends Exception
 	{
-		TMTSAXParser parser = new TMTSAXParser(getLanguage());
-		List<SentenceInfoManager> sentences = parser.parse(tmt_filepath);
-		Annotator tmt_annot = new Annotator(sentences);
-    	tmt_annot.annotate(doc, outputASName);
+		private static final long serialVersionUID = 3849507670402431902L;
+		Document doc;
+		String tmt_filepath;
+
+		public CannotAnnotateDocumentException(Document doc, String tmt_filepath, Throwable cause)
+		{
+			super(
+					String.format("Cannot annotate document '%s' according tmt file '%s'",
+							doc.getName(), tmt_filepath),
+					cause);
+			this.doc = doc;
+			this.tmt_filepath = tmt_filepath;
+		}		
+	}
+
+	
+	protected void annotateGateDocumentAcordingtoTMTfile(Document doc, String tmt_filepath) throws ParserConfigurationException, SAXException, IOException, InvalidOffsetException, CannotAnnotateDocumentException
+	{
+		try
+		{
+			TMTSAXParser parser = new TMTSAXParser(getLanguage());
+			List<SentenceInfoManager> sentences = parser.parse(tmt_filepath);
+			Annotator tmt_annot = new Annotator(sentences);
+	    	tmt_annot.annotate(doc, outputASName);
+    	}
+		catch (Exception e)
+		{
+			throw new CannotAnnotateDocumentException(doc, tmt_filepath, e);
+		}
 	}
 	
 

@@ -61,6 +61,9 @@ public class InformationExtractionAnalysis extends BMCAnalysis
 			}
 			System.err.format("----- File%d %s -----\n", ++a, file);
 			analyzeFile(file);
+			System.gc();
+			System.gc();
+			System.gc();
 		}
 		
 	}
@@ -88,14 +91,20 @@ public class InformationExtractionAnalysis extends BMCAnalysis
 
 	AnnotationDiffer overall_differ = null;
 
-	private void logStatisitcs(Document doc)
+	public static AnnotationDiffer BMCCrossCoverageDiffer(Document doc)
 	{
-//		System.err.println("diffing.....");
 		AnnotationDiffer differ = new AnnotationDiffer();
 		differ.setSignificantFeaturesSet(new HashSet<String>());
 		differ.calculateDiff(
 				doc.getAnnotations("mimir").get("Lookup"), 
 				doc.getAnnotations("plain").get("Lookup")); // compare
+		return differ;
+	}
+	
+	private void logStatisitcs(Document doc)
+	{
+//		System.err.println("diffing.....");
+		AnnotationDiffer differ = BMCCrossCoverageDiffer(doc);
 		
 		System.err.format("   diff: prec: %f rec: %f\n", 
 				differ.getPrecisionStrict(),

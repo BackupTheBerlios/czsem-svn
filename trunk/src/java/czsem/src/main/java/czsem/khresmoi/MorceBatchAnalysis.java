@@ -98,7 +98,7 @@ public class MorceBatchAnalysis extends BMCAnalysis
 	
 					
 					controller.add(tmt_ba);
-					controller.setCorpus(corpus);
+					controller.setCorpus(corpus);					
 					controller.execute();
 					
 					//save documents

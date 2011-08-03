@@ -83,11 +83,6 @@ public class Utils {
 		}
 	}
 	
-	public static void main(String [] args) throws BenchmarkReportInputFileFormatException, URISyntaxException, IOException
-	{
-		System.err.println(Arrays.toString(createRandomPermutation(10)));
-	}
-
 	public static String findAvailableFileName(String destFileURI)
 	{
 	    String destFileName = destFileURI.substring(0,destFileURI.lastIndexOf("."));
@@ -253,6 +248,25 @@ public class Utils {
 			
 			terminate_request_detector.start();
 		}
+	}
+	
+	public static String fileNameWithoutExtensions(File file)
+	{
+		int index = file.getName().indexOf('.');
+		if (index>0&& index < file.getName().length())
+		{
+			return file.getName().substring(0, index);
+		}
+		return file.getName();
+	}
+
+	public static void main(String [] args) throws BenchmarkReportInputFileFormatException, URISyntaxException, IOException
+	{
+		System.err.println(Arrays.toString(createRandomPermutation(10)));
+		System.err.println(fileNameWithoutExtensions(new File("pok.txt.tar.gz")));
+		System.err.println(fileNameWithoutExtensions(new File("pok.txt")));
+		System.err.println(fileNameWithoutExtensions(new File("pok.")));
+		System.err.println(fileNameWithoutExtensions(new File("pok")));
 	}
 
 

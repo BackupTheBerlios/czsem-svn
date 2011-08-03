@@ -44,8 +44,8 @@ public class TectoMTBatchAnalyser extends TectoMTAbstractAnalyser
 
 		
 	private List<TMTDocumentHelper> documents_to_anlayse= new ArrayList<TMTDocumentHelper>();
-
-	public void executeBatch() throws ParserConfigurationException, SAXException, IOException, InterruptedException, URISyntaxException, InvalidOffsetException, PersistenceException, SecurityException
+	
+	public void executeBatch() throws ParserConfigurationException, SAXException, IOException, InterruptedException, URISyntaxException, InvalidOffsetException, PersistenceException, SecurityException, CannotAnnotateDocumentException, CannotAnnotateBatch
 	{
 		logger.info("Executing external TMT analysis");
 		int ret = executeTMTAnalysis();
@@ -55,20 +55,56 @@ public class TectoMTBatchAnalyser extends TectoMTAbstractAnalyser
 
 						
 		Corpus corpus = getCorpus();
+		
+		List<Exception> exceptions = new ArrayList<Exception>();
 		for (TMTDocumentHelper dh : documents_to_anlayse)
 		{
 			Document doc = dh.getDocument();
-			annotateGateDocumentAcordingtoTMTfile(doc , dh.getTMTFilePath());
-			int doc_index = corpus.indexOf(doc);
-			if (! corpus.isDocumentLoaded(doc_index))
+			try {
+				annotateGateDocumentAcordingtoTMTfile(doc , dh.getTMTFilePath());
+				int doc_index = corpus.indexOf(doc);
+				if (! corpus.isDocumentLoaded(doc_index))
+				{
+					doc.sync();
+				}
+			} catch (Exception e)
 			{
-				doc.sync();
+				exceptions.add(e);
 			}
-			dh = null; //saving memory
-		}		
+		}
+		if (exceptions.size() > 0)
+		{
+			throw new  CannotAnnotateBatch(exceptions);
+		}
 		logger.debug("All documents annotated");
 		documents_to_anlayse.clear();		
 	}
+	
+	public static class CannotAnnotateBatch extends Exception
+	{
+		private static final long serialVersionUID = -5453014597742681652L;
+		List<Exception> exceptions;
+
+		public CannotAnnotateBatch(List<Exception> exceptions)
+		{
+			super(exceptions.get(0));
+			this.exceptions = exceptions;
+		}
+
+		@Override
+		public String getMessage()
+		{
+			StringBuilder sb = new StringBuilder(String.format("%d exceptions rised during execution of the batch!", exceptions.size()));
+			int a =0;
+			for (Exception e : exceptions)
+			{
+				sb.append(String.format("\n%d: ", ++a));
+				sb.append(e.getMessage());
+			}
+			return sb.toString();
+		}
+	}
+
 	
 	public void addDocumentToBtach(Document document) throws InvalidOffsetException, MalformedURLException, IOException, URISyntaxException
 	{
