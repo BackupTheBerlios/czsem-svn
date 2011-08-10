@@ -142,11 +142,11 @@ sub print_injured {
 
 \subsection{Procedural Extraction Rules} \label{sec:ch50_Procedural_Extraction_Rules}
 
-Our first implementation was based on Btred API for processing linguistic trees. The extraction rules were implemented as Perl Btred procedures that were evaluated on all of the trees of an arbitrary corpus by Btred. An example of such extraction rule is in Listing~\ref{lst:btred_rule} and corresponding extraction output on Listing~\ref{lst:btred_xml}.
+Our first implementation was based on Btred API for processing linguistic trees. The extraction rules were implemented as Perl Btred procedures that were evaluated on all of the trees of an arbitrary corpus by Btred. An example of such extraction rule is in Listing~\ref{lst:btred_rule} and corresponding extraction output on Figure~\ref{fig:btred_xml}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{listing}[ht]
+\begin{figure}[ht]
 \begin{minted}[linenos,  fontsize=\footnotesize,
                frame=lines]{xml}
 <injured_result>
@@ -186,8 +186,8 @@ Our first implementation was based on Btred API for processing linguistic trees.
 </injured_result>
 \end{minted}
 \caption{\emph{XML} structured output of the query written in \emph{btred}.}
-\label{lst:btred_xml}
-\end{listing}
+\label{fig:btred_xml}
+\end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -251,7 +251,7 @@ English transcript:
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{listing}[ht]
+\begin{figure}[ht]
 \begin{minted}[linenos,  fontsize=\footnotesize,
                frame=lines]{xml}
 <QueryMatches>
@@ -290,8 +290,8 @@ English transcript:
 </QueryMatches>
 \end{minted}
 \caption{\emph{XML} structured output of the SQL select like query. A negation can be detected from the presence of \emph{m/tag} on the line 30.}
-\label{lst:select_xml}
-\end{listing}
+\label{fig:select_xml}
+\end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{figure}
@@ -328,9 +328,9 @@ Evaluation of the extraction rule from Figure~\ref{fig:ch50_eenv_extract_patern}
 
 \subsection{Extraction Output}
 
-Small pieces of extraction outputs are shown in Listing~\ref{lst:select_xml} (for the extraction rule in Fig.~\ref{fig:ch50_extract_patern}) and in Figure~\ref{fig:ch50_eenv_results} (for the extraction rule in Fig.~\ref{fig:ch50_eenv_extract_patern}). 
+Small pieces of extraction outputs are shown in Figure~\ref{fig:select_xml} (for the extraction rule in Fig.~\ref{fig:ch50_extract_patern}) and in Figure~\ref{fig:ch50_eenv_results} (for the extraction rule in Fig.~\ref{fig:ch50_eenv_extract_patern}). 
 
-The former example (Listing~\ref{lst:select_xml}) contains three matches of the extraction rule in three different articles. Each query match is closed in the \verb+<Match>+ element and each contains values of some linguistic attributes closed inside the \verb+<Value>+ elements. Each value comes from some of the nodes of the extraction rule. Name of corresponding query node is saved in the \verb+variable_name+ attribute of the \verb+<Value>+ element.
+The former example (Figure~\ref{fig:select_xml}) contains three matches of the extraction rule in three different articles. Each query match is closed in the \verb+<Match>+ element and each contains values of some linguistic attributes closed inside the \verb+<Value>+ elements. Each value comes from some of the nodes of the extraction rule. Name of corresponding query node is saved in the \verb+variable_name+ attribute of the \verb+<Value>+ element.
 
 In the case of the example query, values identified by the variable \verb+action_type+ specify the type of the action. So in the first and third case somebody was injured (\emph{zranit} means to injure in Czech, lines 8 and 28) and in the second case somebody died (\emph{zemřít} means to die in Czech, line 20).
 
@@ -379,7 +379,7 @@ After the designer has successfully formulated the Netgraph query he or she has 
 
 So far in the description of the implementation of the extraction method the output of the extraction was in the form of although structured but still proprietary XML format. This corresponds to the penultimate stage (raw data) of our data flow schema (Section~\ref{sec:ch50_data_flow}). In this section we will describe details about the last step of the data flow -- semantic representation of extracted data.
 
-First interesting thing is the difference between the output formats of the procedural extraction rules (Section~\ref{sec:ch50_Procedural_Extraction_Rules}, Listing~\ref{lst:btred_xml}) and the Netgraph based extraction rules (Section~\ref{sec:ch50_Netgraph_Based_Extraction_Rules}, Listing~\ref{lst:select_xml}). Apparently the procedural one is closer to the semantics of the extracted data while the Netgraph based one is more general, rather based on the semantics of the extraction process than on the data. The difference is clearly connected with the difference of the design processes of the extraction rules. While Netgraph based rules are designed in a comfortable way using a graphical tool, the procedural rules have to be coded manually in the programming language of Perl. Contrary, during coding of such procedural rule the programmer has great freedom in the design of that rule and he or she can adapt the rule to precisely fit with the data. A designer of a Netgraph based rule has the only freedom in the construction of the Netgraph query and in selection particular query nodes and linguistic attributes that will be printed on the output.
+First interesting thing is the difference between the output formats of the procedural extraction rules (Section~\ref{sec:ch50_Procedural_Extraction_Rules}, Figure~\ref{fig:btred_xml}) and the Netgraph based extraction rules (Section~\ref{sec:ch50_Netgraph_Based_Extraction_Rules}, Figure~\ref{fig:select_xml}). Apparently the procedural one is closer to the semantics of the extracted data while the Netgraph based one is more general, rather based on the semantics of the extraction process than on the data. The difference is clearly connected with the difference of the design processes of the extraction rules. While Netgraph based rules are designed in a comfortable way using a graphical tool, the procedural rules have to be coded manually in the programming language of Perl. Contrary, during coding of such procedural rule the programmer has great freedom in the design of that rule and he or she can adapt the rule to precisely fit with the data. A designer of a Netgraph based rule has the only freedom in the construction of the Netgraph query and in selection particular query nodes and linguistic attributes that will be printed on the output.
 
 The goal of the semantic extraction and annotation is to output the extracted information in the form of a semantic web ontology. This is not difficult in the case of procedural rules. If the target ontology is selected then the extraction rules can be simply designed to produce the output of that form (Note that semantic web ontologies can be captured in a specific XML format.) In the case of Netgraph based queries the situation is more complex and different solutions can be discovered. All the solutions have one thing in common: additional manual work is necessary. The problem is basically to create a mapping of the data in one format (results of Netgraph based rules) to another format (target ontology). This can be done by a variety of technical means (coded in an arbitrary programming language, XSLT, or using a graphical mapping tool like 
 Altova MapForce\footnote{\url{http://www.altova.com/mapforce/xml-mapping.html}}
@@ -412,7 +412,7 @@ Stylus Studio\footnote{\url{http://www.stylusstudio.com/xsd_to_xsd.html}}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{listing}[ht]
+\begin{figure}[ht]
 \begin{minted}[linenos,  fontsize=\footnotesize,
                frame=lines]{sparql}
 
@@ -435,17 +435,17 @@ WHERE {
 }
 \end{minted}
 \caption{\emph{SPARQL} query that summarizes fatalities of particular incidents.}
-\label{lst:sparql_aggregation}
-\end{listing}
+\label{fig:sparql_aggregation}
+\end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
 Similar but in a sense different solution is to ground the mapping directly in extraction rules. Instead of creating mapping of the extraction output, extraction rules will contain also the information about the form of the extraction output. Selection of particular query nodes and linguistic attributes for the output will be extended by the specification of how they will be rendered on the output. A graphical representation of such extraction query can look like in Figure~\ref{fig:ch50_semantic_interpretation}. It shows connection between a Netgraph query on the left and an ontology instance on the right. Every node of the query can be translated to the ontology and the translation can be configured. The configurable translations are probably the most interesting part of such extraction queries. The linguistic information on one side has to be converted the ontological information on the other side. Several translation types have to be supported e.g. in Figure\ref{fig:ch50_semantic_interpretation} a translation of numerals to numbers, lexical translation from a source language (Czech), and detection of negation present in a query node are used.
 
-For better illustration Figure~\ref{fig:ch50_instatnces} shows how the extraction output would look like in the semantic case. It is based on the same data as in the Listing~\ref{lst:select_xml}. The presented ontology was designed only for the illustration. Schema of the ontology can be seen in the Figure~\ref{fig:ch50_classes}. It consists of two classes (or concepts): \emph{Incident} and \emph{Participant}. These classes are connected with a relation \emph{hasParticipant}. There are also some data-type properties (\emph{actionType}, \emph{actionManner}, \emph{negation}, \emph{participantType}, \emph{participantQuantity}) to cover the extracted data. 
+For better illustration Figure~\ref{fig:ch50_instatnces} shows how the extraction output would look like in the semantic case. It is based on the same data as in the Figure~\ref{fig:select_xml}. The presented ontology was designed only for the illustration. Schema of the ontology can be seen in the Figure~\ref{fig:ch50_classes}. It consists of two classes (or concepts): \emph{Incident} and \emph{Participant}. These classes are connected with a relation \emph{hasParticipant}. There are also some data-type properties (\emph{actionType}, \emph{actionManner}, \emph{negation}, \emph{participantType}, \emph{participantQuantity}) to cover the extracted data. 
 
-The last illustration is a SPARQL query (Listing~\ref{lst:sparql_aggregation}) that would display a table of fatalities present in extracted RDF data. The query is based on the previous ontology and it demonstrates possible use of the schema and data.
+The last illustration is a SPARQL query (Figure~\ref{fig:sparql_aggregation}) that would display a table of fatalities present in extracted RDF data. The query is based on the previous ontology and it demonstrates possible use of the schema and data.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -455,7 +455,7 @@ The last illustration is a SPARQL query (Listing~\ref{lst:sparql_aggregation}) t
 
 In this section two experiments with manually created extraction rules will be presented. The first one provides measurements on a higher amount of texts without manual gold standard annotations, while the second experiment was done on a small manually annotated collection. 
 
-\subsection{First Experiment -- Quantitative Evaluation}
+\subsection{First Experiment -- Quantitative Evaluation} \label{sec:ch50_quant_experiment}
 
 We evaluated three extraction rules (one procedural and two Netgraph based) on a set of 814 texts of news of several Czech fire departments and measured several statics. All the rules had the same goal: to find numbers of people that died or were injured during an accident. The procedural rule was the same as in Listing~\ref{lst:btred_rule} and the Netgraph based rules correspond with the rule in Figure~\ref{fig:ch50_extract_patern}. The only difference between the Netgraph rules is that in the first case (Netgraph 1) all rule nodes except number 1 (\verb+action_type+) were set as optional, while in the second case (Netgraph 2) also node 4 (participant) was compulsory. This little change caused some interesting effects -- see below. 
 

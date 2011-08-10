@@ -1,9 +1,84 @@
 \chapter{Datasets}
 
 
-\section{Individual Datasets}
+In this chapter several datasets will be described. The datasets can be divided into several groups according to several criterions: 
+\begin{itemize}
+	\item structure and purpose of a particular dataset (textual for IE tasks, relational for classification ML tasks and RDF datasets for Semantic Web reasoning tasks), 
+	\item presence of manual annotations,
+	\item language in case of textual data (English and Czech), 
+	\item the origin of the dataset (third party datasets and datasets created as a part of the presented work).
+\end{itemize}
+The description of individual datasets will be presented at the very end of the chapter, before that, discussions of relevant common aspects of the datasets will be discussed.
 
-\subsection{Czech Fireman Reports without Annotations}
+
+\section{Purpose and Structure}
+In this section a distinction of datasets according their purpose and structure will be presented. Three types of datasets will be discussed: Information Extraction Datasets, Classification Datasets and Reasoning Datasets.
+
+\subsection{Information Extraction Datasets}
+An IE dataset is made up of a set of text documents. The texts are usually manually annotated (with one exception see Section~\ref{sec:ch50_fireman_without}). The manual annotations are of the form of labels on shorter segments of the text (the length of a segment ranges between one to approximately three tokens). 
+
+An IE engine can use such dataset for training and evaluation. During evaluation, the dataset is split into two parts -- training set and testing set. An IE engine is trained on the training set and success is measured on testing set by comparing the annotations returned by the IE engine and the actual annotations present in the dataset.
+Performance measures of precision and recall are mostly used for evaluation. 
+
+\subsection{Classification Datasets}
+Classification datasets are very familiar in the community of machine learning. They are used for evaluation of propositional ML engines (like Decision Trees, Naive Bayes, Multilayer Perceptron, Support Vector Machines, etc.) on the classification task. The classification task (or problem) can be simplified way described as follows: 
+
+Given a set of objects (e.g. accidents); each object is described using a fixed set of attributes (e.g. number of fatalities, number of injuries, number of intervening units; etc.) and each object is classified into one of a fixed set of classes (not serious accident, middle serious accident, very serious accident). Based on the known classification of the objects (training set), predict the classification for new objects that have been not classified yet (testing set). 
+
+A classification dataset is made up of a relational table. Each row of the table represents a single object; each column of the table represents a single attribute. One attribute (column) is marked as a class attribute and the values of this attribute determine the target classification. 
+
+Similarly to the previous section, the dataset is split into two parts during the evaluation. A ML engine is trained on the training set and success is measured on testing set by comparing the predicted classification of the ML engine and the actual classification present in the dataset.
+
+\subsection{Reasoning Datasets}
+
+%Guo, Yuanbo, Heflin, Jeff and Pan, Zhengxiang . Benchmarking DAML+OIL Repositories. Second International Semantic Web Conference, ISWC 2003, LNCS 2870. Springer. 2003. pp.613-627.
+
+The term ``Reasoning Datasets’’ is used here for the type of datasets which are used in Ontology Benchmarks. Ontology benchmarking is a scientific topic that is almost as old as ontologies and Semantic Web itself \cite{DBLP:conf/semweb/GuoHP03}. Ontology Benchmarks serve for evaluation of ontology systems and their capabilities. There are two obvious objectives of ontology benchmarking. The first one is to verify capabilities of a tested system -- weather the system is able to perform all actions prescribed by the particular benchmark. The second objective is to measure the time performance of the system. Unlike the previous two dataset types in the case of ontology benchmarking and reasoning datasets it does not make any sense to measure success of a system because there is no uncertainty in reasoning tasks. A system is either able to perform a particular action or not; it is unnecessary to measure that. 
+
+\section{Origin of the Datasets}
+The datasets can be simply divided into third party and contributed. 
+\subsection{Contributed Datasets}
+All the contributed datasets can be downloaded from the web site of the project. 
+\subsection{Third Party Datasets}
+
+
+\section{Individual Datasets}
+In this section individual datasets used in this thesis will be presented. The order of dataset presentations is the same as the order in which they were used in our work.
+
+\subsection{Czech Fireman Reports without Annotations} \label{sec:ch50_fireman_without}
+In the early beginning of our work first IE experiments were done with textual reports from fire departments of several regions of the Czech Republic. These departments are responsible for rescue and recovery after fire, traffic and other accidents. Likewise the reports do not deal only with fire and traffic accidents but also chemical interventions, fire-fighting contests, fire drills and similar events can be found. The reports are rich in information, e.g. where and when an accident occurred, which units helped, how much time it took them to show up on the place of accident, how many people were injured, killed etc. An example of such report can be seen in the Figure~\ref{fig:ch50_article}.
+
+The dataset is made up by 814 texts of the reports collected in the time period from February to September 2007 using a RSS feed. All the reports are still available on the web site of the Ministry of Interior of the Czech Republic (footnote). 
+
+Following URL pattern can be used to obtain a particular report:
+
+
+\begin{center}
+\verb+http://aplikace.mvcr.cz/archiv2008/rs_atlantic/hasici/REGION/ID.html+
+\end{center}
+
+For example report 55599 (ID) from Olomoucky region has following URL:
+
+\begin{center}
+\verb+http://aplikace.mvcr.cz/archiv2008/rs_atlantic/hasici/olomoucky/55599.html+
+\end{center}
+
+
+The dataset contains reports from eight Czech regions: Jihomoravský (127 reports), Královéhradecký (109 reports), Moravskoslezský (138), Olomoucký (77), Pardubický (95), Plzeòský (97), Ústecký (108) and Vysoèina (63). All the reports are written in Czech language. 
+
+The dataset does not contain any manual annotations; only linguistic annotations produced by PDT tools are included in the dataset (FS format for Netgraph processing and PML format for Btred processing). Table~\ref{tab:ch40_fire_without} summarizes some properties of the dataset’s reports described bellow.  Total sum, average value, standard deviation, minimum, maximum and median of the values is counted in the table.
+
+
+Text size is the length of the text of a particular report in characters. More precisely it is the size of the corresponding “.txt” file. ISO-8859-2 (Latin-2) character encoding is used in these files so the number of characters is the same as the file size in bytes. 
+
+Number of words in a particular report is counted using UNIX command ``wc -w’’.
+
+Annotations size expresses the number of bytes used by the corresponding linguistic annotations of a particular report. Only annotations in FS format are counted (PML files are not included in these numbers).
+
+Number of trees is the number of tectogrammatical trees in a particular report. The number also corresponds with the number of sentences in the report.
+
+
+The dataset was used for a quantitative evaluation experiment described in Section~\ref{sec:ch50_quant_experiment}. 
 
 
 \begin{table}
@@ -20,3 +95,20 @@ num. t-trees &     15 208 &     18.7 &     15.02 &     1 &     143 &     14.0\\
 \end{tabular}
 \caption{} \label{tab:ch40_fire_without}
 \end{table}
+
+
+\subsection{Czech Fireman Reports Manually Annotated}
+
+The dataset is made up of 50 articles selected form the dataset described in the previous section. Several kind of information were identified and manually annotated in the articles:
+
+>>>Event extraction?
+
+>>>>>>>>>Vlozip popis jednotlivych typu informace<<<<<<
+
+Counts of individual annotations are summarized in Table 99.
+\subsection{Corporate Acquisitions}
+\subsection{RDF Dataset based on Czech Fireman Reports}
+\subsection{RDF Dataset based on Corporate Acquisitions}
+\subsection{Classification Dataset based on Czech Fireman Reports}
+\subsection{Classification Datasets from UCI ML Repository}
+
