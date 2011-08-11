@@ -77,51 +77,53 @@ A general schema of our experimental system is shown in Fig.~\ref{img:schema}. W
 \subsection{Linguistic Analysis}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In this section we will briefly describe the linguistic tools that
-we have used to produce linguistic annotations of texts. 
-These tools are being developed in the Institute of Formal
-and Applied Linguistics in Prague, Czech Republic. They
-are publicly available -- they have been published on a CDROM
-under the title PDT 2.0 (\cite{dedek:PDT20_CD} -- the first five tools) and in
-(\cite{dedek:KlTransformationBasedTectogrammatical2006} -- Tectogrammatical analysis). These tools are used as a
-processing chain. At the end of the chain they produce
-tectogrammatical dependency trees \citep{dedek:MiBeAnnotationtectogrammatical2006} built up from the text.
+See \ref{sec:ch30_ling_tools}
 
-
-\begin{description}
- 
-	\item[Tool 1.] Segmentation and tokenization consists of dividing the input text into words and punctuation (tokenization) and dividing a sequence of tokens into sentences (segmentation).
-
-	\item[Tool 2.] Morphological analysis assigns all possible lemmas
-and morphological tags to particular word forms (word
-occurrences) in the text.
-
-	\item[Tool 3.] Morphological tagging consists in selecting a single
-pair lemma-tag from all possible alternatives assigned
-by the morphological analyzer.
-
-	\item[Tool 4.] Collins' parser -- Czech adaptation. 
-Unlike the usual approaches to the description of
-English syntax, the Czech syntactic descriptions are
-dependency-based, which means that every edge of
-a syntactic tree captures the relation of dependency
-between a governor and its dependent node. Collins'
-parser gives the most probable parse of a given input
-sentence.
-
-	\item[Tool 5.] Analytical function assignment assigns a description
-(analytical function, in linguistic sense) to every edge
-in the syntactic (dependency) tree.
-
-	\item[Tool 6.] Tectogrammatical analysis produces linguistic annotation
-at the tectogrammatical level, sometimes called
-``layer of deep syntax''. An example of a tectogrammatical tree can be seen in
-Fig.~\ref{img:ch80_tree}. Annotation of a sentence at this layer
-is closer to the meaning of the sentence than its syntactic
-annotation; thus, information captured at the tectogrammatical
-layer is crucial for machine understanding
-of natural language \citep{dedek:KlTransformationBasedTectogrammatical2006}.
-\end{description}
+%In this section we will briefly describe the linguistic tools that
+%we have used to produce linguistic annotations of texts. 
+%These tools are being developed in the Institute of Formal
+%and Applied Linguistics in Prague, Czech Republic. They
+%are publicly available -- they have been published on a CDROM
+%under the title PDT 2.0 (\cite{dedek:PDT20_CD} -- the first five tools) and in
+%(\cite{dedek:KlTransformationBasedTectogrammatical2006} -- Tectogrammatical analysis). These tools are used as a
+%processing chain. At the end of the chain they produce
+%tectogrammatical dependency trees \citep{dedek:MiBeAnnotationtectogrammatical2006} built up from the text.
+%
+%
+%\begin{description}
+ %
+	%\item[Tool 1.] Segmentation and tokenization consists of dividing the input text into words and punctuation (tokenization) and dividing a sequence of tokens into sentences (segmentation).
+%
+	%\item[Tool 2.] Morphological analysis assigns all possible lemmas
+%and morphological tags to particular word forms (word
+%occurrences) in the text.
+%
+	%\item[Tool 3.] Morphological tagging consists in selecting a single
+%pair lemma-tag from all possible alternatives assigned
+%by the morphological analyzer.
+%
+	%\item[Tool 4.] Collins' parser -- Czech adaptation. 
+%Unlike the usual approaches to the description of
+%English syntax, the Czech syntactic descriptions are
+%dependency-based, which means that every edge of
+%a syntactic tree captures the relation of dependency
+%between a governor and its dependent node. Collins'
+%parser gives the most probable parse of a given input
+%sentence.
+%
+	%\item[Tool 5.] Analytical function assignment assigns a description
+%(analytical function, in linguistic sense) to every edge
+%in the syntactic (dependency) tree.
+%
+	%\item[Tool 6.] Tectogrammatical analysis produces linguistic annotation
+%at the tectogrammatical level, sometimes called
+%``layer of deep syntax''. An example of a tectogrammatical tree can be seen in
+%Fig.~\ref{img:ch80_tree}. Annotation of a sentence at this layer
+%is closer to the meaning of the sentence than its syntactic
+%annotation; thus, information captured at the tectogrammatical
+%layer is crucial for machine understanding
+%of natural language \citep{dedek:KlTransformationBasedTectogrammatical2006}.
+%\end{description}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -283,7 +285,7 @@ and these groups determine the target class attribute of the classification task
 To make the text easier to read, we present a short description of the ILP techniques below.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Classical ILP}
+\subsection{Classical ILP} \label{sec:ch80_ILP_classic}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 In our presentation of ILP we follow \cite{dzeroski2001:relat_dm} and  \cite{biblio:Muggleton94inductivelogic}.
