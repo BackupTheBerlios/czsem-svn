@@ -179,12 +179,20 @@ related to acquisition events. These fields include `purchaser' , `acquired', an
 
 \subsection{RDF Dataset Based on Czech Fireman Reports} \label{sec:ch40_rdf_fireman}
 
-For the experiment we selected the `damage' task -- to find an amount (in CZK - Czech Crowns) of summarized damage arisen during a reported accident.
+Both reasoning datasets presented in this work are based on information extraction tasks. The datasets were created for evaluation of the idea of shareable extraction ontologies (see Chapter~\ref{ch:Shareable_Extraction_Ontologies}). The datasets consists of so called document ontologies -- RDF representation of source documents (see Section~\ref{sec:ch70_doc_ont}) and extraction ontologies -- RDF representation of extraction rules (see Section~\ref{sec:ch70_extraction_ontologies}). Besides that there are also small mapping ontologies that solve small differences of the schemas used in document and extraction ontologies.
+
+The reasoning task is to combine the three kinds of ontologies and infer all instances that should be found by the extraction rules saved in the particular extraction ontology, for details see the Section~\ref{sec:ch70_experiment}.
+
+This dataset is based on the IE dataset \sectiondoubleref{sec:ch40_fireman_annotated}; it consists of 50 document ontologies, one mapping ontology and currently one extraction ontology, which contains extraction rules for the `damage' task -- to find an amount (in CZK - Czech Crowns) of summarized damage arisen during a reported accident.
+
+Section~\ref{sec:ch70_datasets} provides also some additional information (basic statistics) about the dataset.
 
 
 \subsection{RDF Dataset Based on Corporate Acquisition Events} \label{sec:ch40_rdf_acquisitions}
 
-For the experiment we selected only the `acquired' task.
+This is the second reasoning dataset presented in this work. The dataset is very similar to the previous one (see details in the previous section). It is based on the information extraction dataset \sectiondoubleref{sec:ch40_corporate_acquisitions}. It consists of 600 document ontologies, one mapping ontology and currently one extraction ontology, which contains extraction rules for the `acquired' task.
+
+Section~\ref{sec:ch70_datasets} provides also some additional information (basic statistics) about the dataset.
 
 
 \subsection{Classification Dataset Based on Czech Fireman Reports} \label{sec:ch40_classify_fireman}

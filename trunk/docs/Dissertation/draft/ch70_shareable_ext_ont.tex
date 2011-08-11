@@ -22,7 +22,7 @@ In practice the extraction ontologies are usually strongly dependent on a partic
 
 
 
-\subsection{Shareable Extraction Ontologies}
+\subsection{Shareable Extraction Ontologies} \label{sec:ch70_extraction_ontologies}
 
 
 
@@ -86,7 +86,7 @@ An ontology is a formal specification of a shared conceptualization.	\citep{so17
 An ontology is a formal, explicit specification of a shared conceptualization. \citep{Studer1998161}
 \end{quote}
 
-Of course the word `shareable' has different meaning from `shared'. (Something that is shareable is not necessarily shared, but on the other hand something that is shared should be shareable.) We do not think that shareable extraction ontologies will contain shared knowledge about how to extract data from documents in certain domain. This is for example not true for all extraction models artificially learned from a training corpus. Here shareable simply means that the extraction rules can be shared amongst software agents and can be used separately from the original tool. This is the deviation in use of the term `ontology' in the context of extraction ontologies in this chapter (similarly for document ontologies, see in Sect.~\ref{sec:doc_ont}).
+Of course the word `shareable' has different meaning from `shared'. (Something that is shareable is not necessarily shared, but on the other hand something that is shared should be shareable.) We do not think that shareable extraction ontologies will contain shared knowledge about how to extract data from documents in certain domain. This is for example not true for all extraction models artificially learned from a training corpus. Here shareable simply means that the extraction rules can be shared amongst software agents and can be used separately from the original tool. This is the deviation in use of the term `ontology' in the context of extraction ontologies in this chapter (similarly for document ontologies, see in Sect.~\ref{sec:ch70_doc_ont}).
 
 %In time it will turn out if such extraction ontologies are useful or not. But for sure they bring something new that was not possible before.
 
@@ -101,7 +101,7 @@ Of course the word `shareable' has different meaning from `shared'. (Something t
 
 In this section we will describe the main idea of the work and we will illustrate it with a case study.
 
-\subsection{Document Ontologies} \label{sec:doc_ont}
+\subsection{Document Ontologies} \label{sec:ch70_doc_ont}
 
 The main idea of this chapter assumes that extraction ontologies will be shareable and they can be applied on a document outside of the original extraction/annotation tool. We further assert that the extraction ontologies can be applied by ordinary reasoners. This assumption implies that both extraction ontologies and documents have to be in a reasoner readable format. In the case of contemporary OWL reasoners there are standard reasoner-readable languages: OWL and RDF in a rich variety of possible serializations (XML, Turtle, N-Triples, etc.) Besides that there exists standard ways like GRDDL or RDFa how to obtain a RDF document from an ``ordinary document'' (strictly speaking XHTML and XML documents).
 
@@ -336,7 +336,7 @@ number(?c, "pl")
 A schema of the case study was presented in Fig.~\ref{img:rules_app_schema}.  
 The top row of the image illustrates how TectoMT (third party linguistic tool) linguistically annotates an input document and the linguistic annotations are translated to so-called document ontology by a GRDDL/XSLT transformation.
 
-In the bottom of the picture our IE engine learns extraction rules and exports them to an extraction ontology. The reasoner in the middle is used to apply the extraction ontology on the document ontology and it produces the ``annotated'' document ontology, which was described in Section~\ref{sec:doc_ont}.
+In the bottom of the picture our IE engine learns extraction rules and exports them to an extraction ontology. The reasoner in the middle is used to apply the extraction ontology on the document ontology and it produces the ``annotated'' document ontology, which was described in Section~\ref{sec:ch70_doc_ont}.
 
 
 
@@ -357,7 +357,7 @@ In both cases the task is to find all instances (corresponding to words in a doc
 The actual reasoning tasks are more difficult than a simple retrieval of all facts entailed by the extraction rules. Such simple retrieval task took only a few seconds for the Acquisitions v1.1 dataset (including parsing) in the native Prolog environment that the IE engine uses. There were several more inferences needed in the reasoning tasks because the schema of the input files was a little bit different from the schema used in rules. The mapping of the schemas was captured in another ``mapping'' ontology that was included in the reasoning. The mapping ontology is a part of the publically available project ontologies\footnote{See ``Data $\rightarrow$ ontologies'' link on the project page \url{http://czsem.berlios.de/}} and a potentially interested reader can find the complete mapping ontology there.
 
 
-\subsection{Datasets}
+\subsection{Datasets} \label{sec:ch70_datasets}
 
 In the experiment we used two slightly different datasets from two different domains and languages.  Table~\ref{tab:datasets} summarizes some basic information about them.
 
@@ -485,7 +485,7 @@ Our implementation is publicly available -- source codes and the datasets can be
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-In this chapter (Section~\ref{sec:doc_ont}) we have described a method how to apply an extraction ontology to a document ontology and obtain so called ``annotated'' document ontology. To have an ``annotated'' document ontology is almost the same as to have an annotated document. An annotated document is useful (easier navigation, faster reading and lookup of information, possibility of structured queries on collections of such documents, etc.) but if we are interested in the actual information present in the document, if we want to know the facts that are in a document asserted about the real word things then an annotated document is not sufficient. But the conversion of an annotated document to the real world facts is not simple.
+In this chapter (Section~\ref{sec:ch70_doc_ont}) we have described a method how to apply an extraction ontology to a document ontology and obtain so called ``annotated'' document ontology. To have an ``annotated'' document ontology is almost the same as to have an annotated document. An annotated document is useful (easier navigation, faster reading and lookup of information, possibility of structured queries on collections of such documents, etc.) but if we are interested in the actual information present in the document, if we want to know the facts that are in a document asserted about the real word things then an annotated document is not sufficient. But the conversion of an annotated document to the real world facts is not simple.
 There are obvious issues concerning data integration and duplicity of information. For example when in a document two mentions of people are annotated as `injured', what is the number of injured people in the corresponding accident? Are the two annotations in fact linked to the same person or not?
 
 In the beginning of our work on the idea of shareable extraction ontologies we planned to develop it further, we wanted to cover also the step from annotated document ontologies to the real world facts. The extraction process would then end up with so called ``fact ontologies''. But two main obstacles prevent us to do that.
