@@ -56,7 +56,7 @@ These datasets were used for evaluation of the Fuzzy ILP classification method i
 
 %Guo, Yuanbo, Heflin, Jeff and Pan, Zhengxiang . Benchmarking DAML+OIL Repositories. Second International Semantic Web Conference, ISWC 2003, LNCS 2870. Springer. 2003. pp.613-627.
 
-The term ``Reasoning Datasets’’ is used here for the type of datasets which are used in Ontology Benchmarks. Ontology benchmarking is a scientific topic that is almost as old as ontologies and Semantic Web itself \cite{DBLP:conf/semweb/GuoHP03}. Ontology Benchmarks serve for evaluation of ontology systems and their capabilities. There are two obvious objectives of ontology benchmarking. The first one is to verify capabilities of a tested system -- weather the system is able to perform all actions prescribed by the particular benchmark. The second objective is to measure the time performance of the system. Unlike the previous two dataset types in the case of ontology benchmarking and reasoning datasets it does not make any sense to measure success of a system because there is no uncertainty in reasoning tasks. A system is either able to perform a particular action or not; it is unnecessary to measure that. 
+The term ``Reasoning Datasetsâ€™â€™ is used here for the type of datasets which are used in Ontology Benchmarks. Ontology benchmarking is a scientific topic that is almost as old as ontologies and Semantic Web itself \cite{DBLP:conf/semweb/GuoHP03}. Ontology Benchmarks serve for evaluation of ontology systems and their capabilities. There are two obvious objectives of ontology benchmarking. The first one is to verify capabilities of a tested system -- weather the system is able to perform all actions prescribed by the particular benchmark. The second objective is to measure the time performance of the system. Unlike the previous two dataset types in the case of ontology benchmarking and reasoning datasets it does not make any sense to measure success of a system because there is no uncertainty in reasoning tasks. A system is either able to perform a particular action or not; it is unnecessary to measure that. 
 
 Reasoning datasets used in the present work:
 \begin{itemize}
@@ -113,14 +113,14 @@ For example report 55599 (ID) from Olomoucky region has following URL:
 \end{center}
 
 
-The dataset contains reports from eight Czech regions: Jihomoravský (127 reports), Královéhradecký (109 reports), Moravskoslezský (138), Olomoucký (77), Pardubický (95), Plzeòský (97), Ústecký (108) and Vysoèina (63). All the reports are written in Czech language. 
+The dataset contains reports from eight Czech regions: JihomoravskÃ½ (127 reports), KrÃ¡lovÃ©hradeckÃ½ (109 reports), MoravskoslezskÃ½ (138), OlomouckÃ½ (77), PardubickÃ½ (95), PlzeÅˆskÃ½ (97), ÃšsteckÃ½ (108) and VysoÄina (63). All the reports are written in Czech language. 
 
-The dataset does not contain any manual annotations; only linguistic annotations produced by PDT tools are included in the dataset (FS format for Netgraph processing and PML format for Btred processing). Table~\ref{tab:ch40_fire_without} summarizes some properties of the dataset’s reports described bellow.  Total sum, average value, standard deviation, minimum, maximum and median of the values is counted in the table.
+The dataset does not contain any manual annotations; only linguistic annotations produced by PDT tools are included in the dataset (FS format for Netgraph processing and PML format for Btred processing). Table~\ref{tab:ch40_fire_without} summarizes some properties of the datasetâ€™s reports described bellow.  Total sum, average value, standard deviation, minimum, maximum and median of the values is counted in the table.
 
 
-Text size is the length of the text of a particular report in characters. More precisely it is the size of the corresponding “.txt” file. ISO-8859-2 (Latin-2) character encoding is used in these files so the number of characters is the same as the file size in bytes. 
+Text size is the length of the text of a particular report in characters. More precisely it is the size of the corresponding ``.txt'' file. ISO-8859-2 (Latin-2) character encoding is used in these files so the number of characters is the same as the file size in bytes. 
 
-Number of words in a particular report is counted using UNIX command ``wc -w’’.
+Number of words in a particular report is counted using UNIX command ``wc -w''.
 
 Annotations size expresses the number of bytes used by the corresponding linguistic annotations of a particular report. Only annotations in FS format are counted (PML files are not included in these numbers).
 
@@ -142,7 +142,7 @@ annot. size  & 51 464 581 & 63 224.3 & 43 557.61 & 4 648 & 451 953 & 52 033.5\\
 num. t-trees &     15 208 &     18.7 &     15.02 &     1 &     143 &     14.0\\
 \hline
 \end{tabular}
-\caption{} \label{tab:ch40_fire_without}
+\caption{Dataset \ref{sec:ch40_fireman_without} -- \nameref{sec:ch40_fireman_without} -- statistics} \label{tab:ch40_fire_without}
 \end{table}
 
 
@@ -154,7 +154,55 @@ The dataset is made up of 50 articles selected form the dataset described in the
 
 >>>>>>>>>Vlozip popis jednotlivych typu informace<<<<<<
 
-Counts of individual annotations are summarized in Table 99.
+\begin{table}
+\centering
+\begin{tabular}{|r||c|c|}
+\hline
+\textbf{annotation type} & \textbf{number of annotations} & \textbf{used in evaluation}\\
+\hline
+\hline
+profesional\_unit & 78 & yes\\
+\hline
+cars & 45 & no\\
+\hline
+end & 42 & no, end\_subtree only\\
+\hline
+end\_subtree & 42 & yes\\
+\hline
+start & 42 & yes\\
+\hline
+injuries & 33 & yes\\
+\hline
+amateur\_unit & 31 & yes\\
+\hline
+damage & 20 & yes\\
+%\hline
+%damageNumber & 20 & yes\\
+\hline
+pipes & 16 & no\\
+\hline
+profesional\_units & 14 & yes\\
+\hline
+fatalities & 11 & yes\\
+\hline
+units & 10 & no\\
+\hline
+aqualung & 8 & no\\
+\hline
+duration & 3 & no\\
+\hline
+fan & 3 & no\\
+\hline
+amateur\_units & 1 & no\\
+\hline
+lather & 1 & no\\
+\hline
+\end{tabular}
+\caption{Dataset \ref{sec:ch40_fireman_annotated} -- \nameref{sec:ch40_fireman_annotated} -- manual annotations} \label{tab:ch40_fire_with}
+\end{table}
+
+
+Counts of individual annotations are summarized in Table~\ref{tab:ch40_fire_with}.
 
 \subsubsection{czech\_fireman}
 
@@ -163,6 +211,44 @@ The corpus is structured such that each document represents one event (accident)
 
 
 \subsection{Corporate Acquisition Events} \label{sec:ch40_corporate_acquisitions}
+
+\begin{table}
+\centering
+\begin{tabular}{|r||c|c|}
+\hline
+\textbf{annotation type} & \textbf{number of annotations} & \textbf{used in evaluation}\\
+\hline
+\hline
+acqabr & 1450 & maybe\\
+\hline
+acqbus & 264 & no\\
+\hline
+acqcode & 214 & no\\
+\hline
+acqloc & 213 & no\\
+\hline
+acquired & 683 & yes\\
+\hline
+dlramt & 283 & yes\\
+\hline
+purchabr & 1263 & maybe\\
+\hline
+purchaser & 624 & yes\\
+\hline
+purchcode & 279 & no\\
+\hline
+seller & 267 & yes\\
+\hline
+sellerabr & 431 & maybe\\
+\hline
+sellercode & 136 & no\\
+\hline
+status & 461 & no\\
+\hline
+\end{tabular}
+\caption{Dataset \ref{sec:ch40_corporate_acquisitions} -- \nameref{sec:ch40_corporate_acquisitions} -- manual annotations} \label{tab:ch40_acquisitions}
+\end{table}
+
 
 
 \subsubsection{Acquisitions v1.1}  
