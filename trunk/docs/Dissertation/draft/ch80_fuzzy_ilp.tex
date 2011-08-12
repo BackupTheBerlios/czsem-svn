@@ -40,15 +40,15 @@ The chapter is organized as follows: In Section~\ref{sec:related} we introduce s
 \section{Related Work} \label{sec:related}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-There are plenty of systems dealing with text mining and text classification. In \citep{dedek:ReYaLiOntoText08} the authors use ontology modeling to enhance text identification. The authors of \citep{dedek:CAP} use preprocessed data from National Automotive Sampling System and test various soft computing methods to model severity of injuries (some hybrid methods showed best performance). Methods of Information Retrieval (IR) are numerous, with extraction mainly based on key word search and similarities. The Connection of IR and text mining techniques with web information retrieval can be found in the chapter ``Opinion Mining’’ in the book of Bing Liu \citep{dedek:WebDataMining}. 
+There are plenty of systems dealing with text mining and text classification. In \citep{biblio:ReYaLiOntoText08} the authors use ontology modeling to enhance text identification. The authors of \citep{biblio:CAP} use preprocessed data from National Automotive Sampling System and test various soft computing methods to model severity of injuries (some hybrid methods showed best performance). Methods of Information Retrieval (IR) are numerous, with extraction mainly based on key word search and similarities. The Connection of IR and text mining techniques with web information retrieval can be found in the chapter ``Opinion Mining'' in the book of Bing Liu \citep{biblio:WebDataMining}. 
 
 The Fuzzy ILP Classifier can be seen as an ordinary classifier for data with the monotonicity constraint (the target class attribute has to be monotonizable -- a natural ordering has to exist for the target class attribute). There are several other approaches addressing the classification problems with the monotonicity constraint.
 
-The CART-like algorithm for decision tree construction does not guarantee a resulting monotone tree even on a monotone dataset. The algorithm can be modified \citep{dedek:mon_trees} to provide a monotone tree on the dataset by adding the corner elements of a node with an appropriate class label to the existing data whenever necessary.
+The CART-like algorithm for decision tree construction does not guarantee a resulting monotone tree even on a monotone dataset. The algorithm can be modified \citep{biblio:mon_trees} to provide a monotone tree on the dataset by adding the corner elements of a node with an appropriate class label to the existing data whenever necessary.
 
-An interesting approach is presented in \citep{dedek:mon_transf}: first, the dataset is ``corrected'' to be monotone (a minimal number of target class labels is changed to get a monotone dataset), then a learning algorithm (linear programming boosting in the cited paper) is applied.
+An interesting approach is presented in \citep{biblio:mon_transf}: first, the dataset is ``corrected'' to be monotone (a minimal number of target class labels is changed to get a monotone dataset), then a learning algorithm (linear programming boosting in the cited paper) is applied.
 
-Several other approaches to monotone classification have been presented, including instance based learning \citep{dedek:ibl} and rough sets \citep{dedek:rough_sets}.
+Several other approaches to monotone classification have been presented, including instance based learning \citep{biblio:ibl} and rough sets \citep{biblio:rough_sets}.
 
 
 
@@ -84,10 +84,10 @@ See \ref{sec:ch30_ling_tools}
 %These tools are being developed in the Institute of Formal
 %and Applied Linguistics in Prague, Czech Republic. They
 %are publicly available -- they have been published on a CDROM
-%under the title PDT 2.0 (\cite{dedek:PDT20_CD} -- the first five tools) and in
-%(\cite{dedek:KlTransformationBasedTectogrammatical2006} -- Tectogrammatical analysis). These tools are used as a
+%under the title PDT 2.0 (\cite{biblio:PDT20_CD} -- the first five tools) and in
+%(\cite{biblio:KlTransformationBasedTectogrammatical2006} -- Tectogrammatical analysis). These tools are used as a
 %processing chain. At the end of the chain they produce
-%tectogrammatical dependency trees \citep{dedek:MiBeAnnotationtectogrammatical2006} built up from the text.
+%tectogrammatical dependency trees \citep{biblio:MiBeAnnotationtectogrammatical2006} built up from the text.
 %
 %
 %\begin{description}
@@ -122,7 +122,7 @@ See \ref{sec:ch30_ling_tools}
 %is closer to the meaning of the sentence than its syntactic
 %annotation; thus, information captured at the tectogrammatical
 %layer is crucial for machine understanding
-%of natural language \citep{dedek:KlTransformationBasedTectogrammatical2006}.
+%of natural language \citep{biblio:KlTransformationBasedTectogrammatical2006}.
 %\end{description}
 
 
@@ -131,8 +131,8 @@ See \ref{sec:ch30_ling_tools}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 After the content of a web resource is analyzed by the above-mentioned linguistic tools, the output linguistic data is obtained in the form of tectogrammatical trees. To achieve our objectives we have to extract information from this representation. 
-Here we refer to our previous work %\citep{dedek:DeVoComputingaggregations2008,dedek:DeVoLinguisticextraction2008,dedek:DeEcExperimentswith2008}.
-\citep{dedek:DeVoComputingaggregations2008,dedek:DeEcExperimentswith2008}.
+Here we refer to our previous work %\citep{biblio:DeVoComputingaggregations2008,biblio:DeVoLinguisticextraction2008,biblio:DeEcExperimentswith2008}.
+\citep{biblio:DeVoComputingaggregations2008,biblio:DeEcExperimentswith2008}.
  A long path of tools, starting with web crawling and resulting in the extracted structured information, has been developed in our previous works. 
 In Fig.~\ref{img:ch80_tree}, nodes of the tectogrammatical tree are decorated. A piece of information about the damage of 8000 CZK can be found there (the three nodes on the right). We have used ILP to learn rules that are able to detect these nodes. 
 %In this paper we will concentrate on the usage of such extracted information to be able to classify content. 
@@ -726,7 +726,7 @@ Learning parameters for both ILP methods:\\set(noise,20). set(i,3). set(clausele
 \end{table}
 
 
-The Fuzzy ILP classifier performed quite well on our dataset, but the next question is: How is it with other data, with more learning instances, and what about the time complexity? To answer these questions we performed another experiment. We selected several datasets from the University of California, Irvine, Repository of Machine Learning Databases (UCI) \citep{dedek:UCI} and evaluated all the methods against them. 
+The Fuzzy ILP classifier performed quite well on our dataset, but the next question is: How is it with other data, with more learning instances, and what about the time complexity? To answer these questions we performed another experiment. We selected several datasets from the University of California, Irvine, Repository of Machine Learning Databases (UCI) \citep{biblio:UCI} and evaluated all the methods against them. 
 
 
 

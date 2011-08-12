@@ -114,7 +114,7 @@ Obviously when a document can be reconstructed from its document ontology (this 
 
 \subsection{Implementation} \label{sec:implement}
 
-In this section we will present details about the case study.  We have used our IE engine \citep{biblio:DedekISWC2010} based on deep linguistic parsing and Inductive Logic Programming. It is a complex system implemented with a great help of the GATE system \citep{dedek:GATE_ACL2002} and it also uses many other third party tools including several linguistic tools and a Prolog system. Installation and making the system operate is not simple. This case study should demonstrate that the extraction rules produced by the system are not dependent on the system in the sense described above.
+In this section we will present details about the case study.  We have used our IE engine \citep{biblio:DedekISWC2010} based on deep linguistic parsing and Inductive Logic Programming. It is a complex system implemented with a great help of the GATE system \citep{biblio:GATE_ACL2002} and it also uses many other third party tools including several linguistic tools and a Prolog system. Installation and making the system operate is not simple. This case study should demonstrate that the extraction rules produced by the system are not dependent on the system in the sense described above.
 
 
 
@@ -132,7 +132,7 @@ Nodes roughly correspond with words of a sentence, edges represent linguistic de
 
 Our IE engine needs a linguistic preprocessing (deep linguistic parsing) of documents on its input. Deep linguistic parsing brings a very complex structure to the text and the structure serves as a footing for construction and application of extraction rules. 
 
-We usually use TectoMT system \citep{dedek:ZaPtTectoMTHighly2008} to do the linguistic preprocessing. TectoMT is a Czech project that contains many linguistic analyzers for different languages including Czech and English. We are using a majority of applicable tools from TectoMT: a tokeniser, a sentence splitter, morphological analyzers (including POS tagger), a syntactic parser and the deep syntactic (tectogrammatical) parser. All the tools are based on the dependency based linguistic theory and formalism of the Prague Dependency Treebank project (PDT) \citep{dedek:PDT20_CD}.
+We usually use TectoMT system \citep{biblio:ZaPtTectoMTHighly2008} to do the linguistic preprocessing. TectoMT is a Czech project that contains many linguistic analyzers for different languages including Czech and English. We are using a majority of applicable tools from TectoMT: a tokeniser, a sentence splitter, morphological analyzers (including POS tagger), a syntactic parser and the deep syntactic (tectogrammatical) parser. All the tools are based on the dependency based linguistic theory and formalism of the Prague Dependency Treebank project (PDT) \citep{biblio:PDT20_CD}.
 
 The output linguistic annotations of the TectoMT system are stored (along with the text of the source document) in XML files in so called Prague Markup Language (PML). PML is a very complex language (or XML schema) that is able to express many linguistic elements and features present in text. For the IE engine a tree dependency structure of words in sentences is the most useful one because the edges of the structure guide the extraction rules. An example of such (tectogrammatical) tree structure is in Fig.~\ref{img:tree}.
 

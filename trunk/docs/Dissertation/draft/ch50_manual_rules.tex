@@ -128,7 +128,7 @@ sub print_injured {
 																																		\begin{comment}
 																																		this >>$<< hacks my syntax highlighter :-)
 																																		\end{comment}
-\caption{Procedurally written extraction rule in \emph{btred}.}
+\caption{Procedurally written extraction rule in \emph{Btred}.}
 \label{lst:btred_rule}
 \end{listing}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -185,7 +185,7 @@ Our first implementation was based on Btred API for processing linguistic trees.
 	</action>
 </injured_result>
 \end{minted}
-\caption{\emph{XML} structured output of the query written in \emph{btred}.}
+\caption{\emph{XML} structured output of the query written in \emph{Btred}.}
 \label{fig:btred_xml}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -305,7 +305,7 @@ English transcript:
 
 
 
-The second implementation was based on Netgraph. Netgraph is a linguistic tool used for searching through a syntactically annotated corpus of a natural language (corpus of linguistic dependency trees). Basically Netgraph allows putting restrictions on the shape of a tree and on values of attributes of an arbitrary tree node. Besides that nodes of a query can be marked as optional (not necessarily present in a matching tree) and names can be assigned to query nodes. Naming of query nodes then allows putting restrictions based on referenced nodes (Give me all trees where there is a node with two children and both children have the same lemma.)
+The second implementation was based on Netgraph -- a linguistic tool used for searching through a syntactically annotated corpus (see Section~\ref{sec:ch30_netgraph} for details). 
 
 Netgraph queries are written in a special query language with a graphical representation. The graphical representation of a query is much better readable than its linear textual representation and in this text we will use the graphical representation only. Examples of a Netgraph queries (in the graphical representation) can be found in Figures \ref{fig:ch50_extract_patern} and \ref{fig:ch50_eenv_extract_patern}. They clearly show the necessary tree structure that has to be present in any matching tree and attribute restrictions are printed beside the corresponding nodes.
 
