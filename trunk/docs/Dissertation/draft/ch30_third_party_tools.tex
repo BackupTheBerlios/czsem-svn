@@ -64,20 +64,31 @@ In this section we will briefly describe the linguistic tools that we have used 
 \begin{description}
  
 	\item \textbf{Segmentation and tokenization} consists of segmentation (dividing a sequences of tokens into sentences) and tokenization (dividing the input text into words and punctuation).
+	
+	TextSeg \citep{TextSeg}
 		
 	\item \textbf{Morphological analysis} \citep{biblio:HajicMorfTag} assigns all possible lemmas and morphological tags to particular word forms (word 
 occurrences) in the text.
 	
 	\item \textbf{Morphological tagging} \citep{biblio:HajicMorfTag} consists in selecting a single pair lemma-tag from all possible alternatives assigned 
 by the morphological analyzer.
+
+Morče \citep{biblio:VoMorphologicalTagging2006} 95.431 accuracy
 	
 	\item \textbf{Collins' parser -- Czech adaptation} \citep{biblio:collinshbrt_1999} Unlike the usual approaches to the description of 
 English syntax, the Czech syntactic descriptions are dependency-based, which means that every edge of a syntactic tree captures the relation of dependency between a governor and its dependent node. Collins' parser gives the most probable parse of a given input sentence.
+
+Feature engineering over McDonald's MST parser \citep{Novak:2007:FEM:1776334.1776350} 84.7 accuracy.
 	
 	\item \textbf{Analytical function assignment} \citep{biblio:AlyticAsign} assigns a description (\emph{analytical function}, in linguistic sense) to every edge in the syntactic (dependency) tree.
 	
 	\item \textbf{Tectogrammatical analysis} produces linguistic annotation at the tectogrammatical layer, sometimes called ``layer of deep syntax''. 
 	Annotation of a sentence at this layer is closer to the meaning of the sentence than its syntactic annotation; thus, information captured at the tectogrammatical layer is crucial for machine understanding of a natural language \citep{biblio:KlTransformationBasedTectogrammatical2006}.
+	
+	
+Tectogrammatical analysis of \textbf{English} 	Klimes:2007:TTD:1776334.1776341
+
+Uses Tag Morče + McD parser
 \end{description}
 
 \begin{table}
