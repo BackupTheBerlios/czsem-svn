@@ -5,42 +5,58 @@
 
 In our solution we have exploited several tools and formalisms. These can be divided into two groups: linguistics and (inductive) logic programming. First we describe the linguistic tools and formalisms, the rest will follow.
 
-\section{Linguistics Analysis} \label{sec:ch30_ling_tools}
 
 
-\subsection{Prague Dependency Treebank (PDT)}
-There exist  
-Prague Dependency Treebank related projects   
+\section{Prague Dependency Treebank (PDT)}
+There exist several projects\footnote{Prague Dependency Treebank (PDT 1.0, PDT 2.0), Prague English Dependency Treebank (PEDT 1.0), Prague Czech-English Dependency Treebank (PCEDT 1.0)} closely related to the ``Prague school of dependency linguistics’’ and the Institute of Formal and Applied Linguistics (ÚFAL). All the projects share common methodology and principles concerning the formal representation of natural language. We will refer to these principles and related formalism as ``PDT principles and formalisms’’ in the present work because the PDT projects are the most fundamental and the elaborate annotation guidelines (see bellow) were compiled within these projects. The most relevant principles for the present work will be briefly described in this section.
 
-Homepage of the project: \url{http://ufal.mff.cuni.cz/pdt2.0/}
+\subsection{Layers of Dependency Analysis in PDT}
+
+In PDT, text is split into individual sentences and dependency trees are built form them. Nodes of the trees are represented by individual words or tokens and edges represent their linguistic dependencies (simplified speaking, see bellow). Among others, two most important kinds of dependencies are distinguished: syntactical dependencies and ``underlying (deep) structure’’ dependencies. Syntactical dependencies are often called \emph{analytical} and the latter are called \emph{tectogrammatical} dependencies. These two kinds of dependencies form two kinds of dependency trees: \emph{analytical trees} and \emph{tectogrammatical trees}. The situation is usually described using a concept of different layers (or levels) of annotation. It is illustrated by Figure~\ref{fig:ch30_layers}. The description starts at the bottom with the surface structure of a sentence (\emph{w-layer}); note that there is a spelling error -- missing space between words `do’ and `lesa’ (into forest) in the example sentence. The lowest level of linguistic annotation (\emph{m-layer}) represents morphology. Word forms are disambiguated and correct lemmas and morphological tags are assigned at this level. The second level of annotation is called analytical (\emph{a-layer}). At this level the syntactical dependencies of words are captured (e.g. subject, predicate, object, attribute, adverbial, etc.) The top level of annotation is called tectogrammatical (\emph{t-layer}). At this level some tokens (e.g. tokens without lexical meaning) are leaved out or ``merged’’ together (e.g. prepositions are merged with their ``targets’’). Also some nodes without a morphological level counterpart are inserted to the tectogrammatical tree at certain occasions (e.g. a node representing omitted subject -- on Figure~\ref{fig:ch30_layers} labeled as ``\#PersPron’’).  
+
+More over all the layers of PDT sentence representation are interconnected and additional linguistic features are assigned to tree nodes. Among others: \emph{morphological tag} and \emph{lemma} is assigned at the morphological level; \emph{analytical function} (the actual kind of the particular analytical dependency, e.g. predicate, subject, object, etc.) is assigned to dependent nodes at the analytical level; \emph{semantic parts of speech} + \emph{grammatemes} (e.g. \emph{definite quantificational semantic noun} (n.quant.def) + \emph{number} and \emph{gender}, etc.) and \emph{tectogrammatical functor} (e.g. actor (ACT), patient (PAT), addressee (ADDR), temporal: when (TWHEN), directional: to (DIR3), etc.) is assigned at the tectogrammatical level. 
+
+Detailed information can be found:
+\begin{itemize}
+	\item Homepage of the PDT 2.0 project: \url{http://ufal.mff.cuni.cz/pdt2.0/}
+	\item Annotation guidelines:	
+	\begin{itemize}
+		\item Morphological Layer Annotation \citep{mmanCz2005}
+		\item Analytical Layer Annotation \citep{amanEn1999}
+		\item Tectogrammatical Layer Annotation \citep{biblio:MiBeAnnotationtectogrammatical2006}
+	\end{itemize}	
+\end{itemize}
+
+
+
+
 
 
 \begin{figure}
-\centerline{\includegraphics[width=0.6\hsize]{PDT_layers}}
+	\begin{center}
+	\includegraphics[width=0.6\hsize]{PDT_layers}
+		\begin{tabular}{rlllll}
+Sample sentence (in Czech): & & Byl & by & šel & dolesa.\\
+English translation (lit.):& [He] & would & have & gone & intoforest.			
+		\end{tabular}
+	\end{center}
 \caption{Layers of linguistic annotation in PDT}
 \label{fig:ch30_layers}
 \end{figure}
 
 
-\begin{description}
-	\item[Surface layer]
-	\item[Morphological layer]
-	\item[Analytical layer]
-	\item[Tectogrammatical layer]
-\end{description}
 
 
-Sample sentence: Byl by šel dolesa., lit. [He] would have gone intoforest.
 
-Byl by šel dolesa.
-\\\[He\] would have gone intoforest.
-
+\section{PDT Tools and Resources}
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Linguistic Analysis}
+\subsection{Linguistics Analysis} \label{sec:ch30_ling_tools}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\textbf{Czech vs English}
 
 In this section we will briefly describe the linguistic tools that we have used to produce linguistic annotations of texts. These tools are being developed in the Institute of Formal and Applied Linguistics\footnote{\url{http://ufal.mff.cuni.cz}} in Prague (ÚFAL), Czech Republic. They are publicly available -- they have been published on a CD-ROM under the title PDT 2.0 \citep{biblio:PDT20_CD} (first five tools) and in \citep{biblio:KlTransformationBasedTectogrammatical2006} (Tectogrammatical analysis). These tools are used as a processing chain and at the end of the chain they produce tectogrammatical \citep{biblio:MiBeAnnotationtectogrammatical2006} dependency trees. Table~\ref{tab:ling_tools} shows some details about these tools. Short descriptions of particular tools follows.
 
@@ -82,14 +98,15 @@ English syntax, the Czech syntactic descriptions are dependency-based, which mea
 \end{table}
 
 
+\subsection{TectoMT}
+As we have started with our native language -- Czech (a language with rich morphology and free word order), we had to make tools for processing Czech available in GATE. We have implemented a wrapper for the TectoMT system\footnote{\url{http://ufal.mff.cuni.cz/tectomt/}} \citep{biblio:ZaPtTectoMTHighly2008} to GATE. TectoMT is a Czech project that contains many linguistic analyzers for different languages including Czech and English. We have used a majority of applicable tools from TectoMT: a tokeniser, a sentence splitter, morphological analyzers (including POS tagger), a syntactic parser and the deep syntactic (tectogrammatical) parser. All the tools are based on the dependency based linguistic theory and formalism of the Prague Dependency Treebank project \citep{biblio:PDT20_CD}. So far our solution does not include any coreference and discourse analysis.
 
-\subsubsection{Prague Markup Language (PML)}
-\subsubsection{Feature Structure (FS)}
+Homepage of the project: \url{http://ufal.mff.cuni.cz/tectomt/}
 
 
 \subsection{Netgraph} \label{sec:ch30_netgraph}
 
-Netgraph \cite{biblio:MiNetgraphA2006} is a linguistic tool used for searching through a syntactically annotated corpus of a natural language (corpus of linguistic dependency trees). Basically Netgraph allows putting restrictions on the shape of a tree and on values of attributes of an arbitrary tree node. Besides that nodes of a query can be marked as optional (not necessarily present in a matching tree) and names can be assigned to query nodes. Naming of query nodes then allows putting restrictions based on referenced nodes (Give me all trees where there is a node with two children and both children have the same lemma.)
+Netgraph \citep{biblio:MiNetgraphA2006} is a linguistic tool used for searching through a syntactically annotated corpus of a natural language (corpus of linguistic dependency trees). Basically Netgraph allows putting restrictions on the shape of a tree and on values of attributes of an arbitrary tree node. Besides that nodes of a query can be marked as optional (not necessarily present in a matching tree) and names can be assigned to query nodes. Naming of query nodes then allows putting restrictions based on referenced nodes (Give me all trees where there is a node with two children and both children have the same lemma.)
 
 See also Section~\ref{sec:ch50_Netgraph_Based_Extraction_Rules}, it provides additional information including example Netgraph queries.
 
@@ -109,21 +126,16 @@ Homepage of the project: \url{http://ufal.mff.cuni.cz/~pajas/tred/}
 TrEd can be also controlled using a powerful set of Perl macros and there is also a non-interactive version of TrEd called Btred, which allows batch evaluation of user macros on an arbitrary set of annotated documents.
 
 \subsubsection{PML Tree Query}
-PML Tree Query (PML-TQ) \cite{biblio:PaStSystemfor2009} is a TrEd based module for searching through a treebank using a complex tree based query language.
+PML Tree Query (PML-TQ) \citep{biblio:PaStSystemfor2009} is a TrEd based module for searching through a treebank using a complex tree based query language.
 
 Homepage of the project: \url{http://ufal.mff.cuni.cz/~pajas/pmltq/}
 
+\subsection{Annotation Schemas}
+\subsubsection{Prague Markup Language (PML)}
+\subsubsection{Feature Structure (FS)}
 
-\subsection{TectoMT}
-As we have started with our native language -- Czech (a language with rich morphology and free word order), we had to make tools for processing Czech available in GATE. We have implemented a wrapper for the TectoMT system\footnote{\url{http://ufal.mff.cuni.cz/tectomt/}} \citep{biblio:ZaPtTectoMTHighly2008} to GATE. TectoMT is a Czech project that contains many linguistic analyzers for different languages including Czech and English. We have used a majority of applicable tools from TectoMT: a tokeniser, a sentence splitter, morphological analyzers (including POS tagger), a syntactic parser and the deep syntactic (tectogrammatical) parser. All the tools are based on the dependency based linguistic theory and formalism of the Prague Dependency Treebank project \citep{biblio:PDT20_CD}. So far our solution does not include any coreference and discourse analysis.
 
-Homepage of the project: \url{http://ufal.mff.cuni.cz/tectomt/}
-
-%Czech language
-%\\Slavic language, with rich morphology, free word order
-%\\Stanford dependencies
-
-\subsection{Czech WordNet}
+\section{Czech WordNet}
 
 The Figure~99 shows, that it would be useful to gather words with similar meanings in our extraction rules. For example, the rule in the Figure~99 contains long disjunctions of similar words (nodes with numbers 1 and 4). These disjunctions could be replaced with some kind of expression telling that we are looking for any word from some semantic category (e.g. human beings). For this purpose we wanted to use the Czech WordNet \citep{biblio:WordNetCZ2004}. 
 
@@ -133,15 +145,17 @@ Availability: \url{http://catalog.elra.info/product_info.php?products_id=1089}
 
 
 
-\subsection{GATE}
+\section{GATE}
 GATE\footnote{\url{http://gate.ac.uk/}} \citep{biblio:GATE_ACL2002} is probably the most widely used tool for text processing. In our solution the capabilities of document and annotation management, utility resources for annotation processing, JAPE grammar rules \citep{Cunningham00jape:a}, machine learning facilities and performance evaluation tools are the most helpful features of GATE that we have used.
+
+!!!!Vysvetlit \textbf{annotations} a \textbf{annotation features} !!!!
 
 Homepage of the project: \url{http://gate.ac.uk/}
 
 
 \section{Weka}
 
-Weka \cite{biblio:Weka} is a well known data-mining software.
+Weka \citep{biblio:Weka} is a well known data-mining software.
 
 Homepage of the project: \url{http://www.cs.waikato.ac.nz/ml/weka/}
 
