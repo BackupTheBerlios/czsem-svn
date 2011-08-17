@@ -8,11 +8,15 @@ In our solution we have exploited several tools and formalisms. These can be div
 
 
 \section{Prague Dependency Treebank (PDT)}
-There exist several projects\footnote{Prague Dependency Treebank (PDT 1.0, PDT 2.0), Prague English Dependency Treebank (PEDT 1.0), Prague Czech-English Dependency Treebank (PCEDT 1.0)} closely related to the ``Prague school of dependency linguistics’’ and the Institute of Formal and Applied Linguistics (ÚFAL). All the projects share common methodology and principles concerning the formal representation of natural language. We will refer to these principles and related formalism as ``PDT principles and formalisms’’ in the present work because the PDT projects are the most fundamental and the elaborate annotation guidelines (see bellow) were compiled within these projects. The most relevant principles for the present work will be briefly described in this section.
+There exist several projects\footnote{Prague Dependency Treebank
+ (PDT 1.0, PDT 2.0 \citep{biblio:PDT20_CD}), Prague English Dependency Treebank (PEDT 1.0), Prague Czech-English Dependency Treebank (PCEDT 1.0)} 
+closely related to the ``Prague school of dependency linguistics’’ and the Institute of Formal and Applied Linguistics\footnote{\url{http://ufal.mff.cuni.cz}} in Prague, Czech Republic (ÚFAL). All the projects share common methodology and principles concerning the formal representation of natural language (Czech above all; and recently also English). We will refer to these principles and related formalism as ``PDT principles and formalisms’’ in the present work because the PDT projects are the most fundamental and the elaborate annotation guidelines (see bellow) were compiled within these projects. The most relevant principles for the present work will be briefly described in this section.
 
 \subsection{Layers of Dependency Analysis in PDT}
 
-In PDT, text is split into individual sentences and dependency trees are built form them. Nodes of the trees are represented by individual words or tokens and edges represent their linguistic dependencies (simplified speaking, see bellow). Among others, two most important kinds of dependencies are distinguished: syntactical dependencies and ``underlying (deep) structure’’ dependencies. Syntactical dependencies are often called \emph{analytical} and the latter are called \emph{tectogrammatical} dependencies. These two kinds of dependencies form two kinds of dependency trees: \emph{analytical trees} and \emph{tectogrammatical trees}. The situation is usually described using a concept of different layers (or levels) of annotation. It is illustrated by Figure~\ref{fig:ch30_layers}. The description starts at the bottom with the surface structure of a sentence (\emph{w-layer}); note that there is a spelling error -- missing space between words `do’ and `lesa’ (into forest) in the example sentence. The lowest level of linguistic annotation (\emph{m-layer}) represents morphology. Word forms are disambiguated and correct lemmas and morphological tags are assigned at this level. The second level of annotation is called analytical (\emph{a-layer}). At this level the syntactical dependencies of words are captured (e.g. subject, predicate, object, attribute, adverbial, etc.) The top level of annotation is called tectogrammatical (\emph{t-layer}). At this level some tokens (e.g. tokens without lexical meaning) are leaved out or ``merged’’ together (e.g. prepositions are merged with their ``targets’’). Also some nodes without a morphological level counterpart are inserted to the tectogrammatical tree at certain occasions (e.g. a node representing omitted subject -- on Figure~\ref{fig:ch30_layers} labeled as ``\#PersPron’’).  
+Unlike the usual approaches to the description of English syntax, the Czech syntactic descriptions are dependency-based, which means that every edge of a syntactic tree captures the relation of dependency between a governor and its dependent node. 
+
+In PDT, text is split into individual sentences and dependency trees are built form them. Nodes of the trees are represented by individual words or tokens and edges represent their linguistic dependencies (simplified speaking, see bellow). Among others, two most important kinds of dependencies are distinguished: syntactical dependencies and ``underlying (deep) structure’’ dependencies. Syntactical dependencies are often called \emph{analytical} and the latter are called \emph{tectogrammatical} dependencies. These two kinds of dependencies form two kinds of dependency trees: \emph{analytical trees} and \emph{tectogrammatical trees}. The situation is usually described using a concept of different layers (or levels) of annotation. It is illustrated by Figure~\ref{fig:ch30_layers}. The description starts at the bottom with the surface structure of a sentence (\emph{w-layer}); note that there is a spelling error -- missing space between words `do’ and `lesa’ (into forest) in the example sentence. The lowest level of linguistic annotation (\emph{m-layer}) represents morphology. Word forms are disambiguated and correct lemmas (dictionary form) and morphological tags are assigned at this level. The second level of annotation is called analytical (\emph{a-layer}). At this level the syntactical dependencies of words are captured (e.g. subject, predicate, object, attribute, adverbial, etc.) The top level of annotation is called tectogrammatical (\emph{t-layer}), sometimes also called ``layer of deep syntax''. At this level some tokens (e.g. tokens without lexical meaning) are leaved out or ``merged’’ together (e.g. prepositions are merged with their ``targets’’). Also some nodes without a morphological level counterpart are inserted to the tectogrammatical tree at certain occasions (e.g. a node representing omitted subject -- on Figure~\ref{fig:ch30_layers} labeled as ``\#PersPron’’).  
 
 More over all the layers of PDT sentence representation are interconnected and additional linguistic features are assigned to tree nodes. Among others: \emph{morphological tag} and \emph{lemma} is assigned at the morphological level; \emph{analytical function} (the actual kind of the particular analytical dependency, e.g. predicate, subject, object, etc.) is assigned to dependent nodes at the analytical level; \emph{semantic parts of speech} + \emph{grammatemes} (e.g. \emph{definite quantificational semantic noun} (n.quant.def) + \emph{number} and \emph{gender}, etc.) and \emph{tectogrammatical functor} (e.g. actor (ACT), patient (PAT), addressee (ADDR), temporal: when (TWHEN), directional: to (DIR3), etc.) is assigned at the tectogrammatical level. 
 
@@ -24,12 +28,20 @@ Detailed information can be found:
 		\item Morphological Layer Annotation \citep{mmanCz2005}
 		\item Analytical Layer Annotation \citep{amanEn1999}
 		\item Tectogrammatical Layer Annotation \citep{biblio:MiBeAnnotationtectogrammatical2006}
+		\item Tectogrammatical Layer Annotation for English (PEDT 1.0) \citep{biblio:CiHaAnnotationEnglish2006}
+		
 	\end{itemize}	
 \end{itemize}
 
+\subsection{Why Tectogrammatical Dependencies?}
 
+The practice has shown that representing only syntactical roles of tokens present in a sentence is not sufficient to capture the actual meaning of the sentence. Therefore the tectogrammatical level of representation was established.
 
+Or according to \cite{biblio:KlTransformationBasedTectogrammatical2006}:
 
+\begin{quote}
+Annotation of a sentence at this [tectogrammatical] layer is closer to meaning of the sentence than its syntactic annotation and thus information captured at the tectogrammatical layer is crucial for machine understanding of a natural language. This can be used in areas such as machine translation and information retrieval, however it can help other tasks as well, e.g. text synthesis.	
+\end{quote}
 
 
 \begin{figure}
@@ -50,66 +62,71 @@ English translation (lit.):& [He] & would & have & gone & intoforest.
 
 \section{PDT Tools and Resources}
 
+In this section several linguistic tools and resources that are being developed at ÚFAL will be described. These tools and resources are closely connected with the PDT projects and they have been used also in the present work for various purposes.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Linguistics Analysis} \label{sec:ch30_ling_tools}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\textbf{Czech vs English}
-
-In this section we will briefly describe the linguistic tools that we have used to produce linguistic annotations of texts. These tools are being developed in the Institute of Formal and Applied Linguistics\footnote{\url{http://ufal.mff.cuni.cz}} in Prague (ÚFAL), Czech Republic. They are publicly available -- they have been published on a CD-ROM under the title PDT 2.0 \citep{biblio:PDT20_CD} (first five tools) and in \citep{biblio:KlTransformationBasedTectogrammatical2006} (Tectogrammatical analysis). These tools are used as a processing chain and at the end of the chain they produce tectogrammatical \citep{biblio:MiBeAnnotationtectogrammatical2006} dependency trees. Table~\ref{tab:ling_tools} shows some details about these tools. Short descriptions of particular tools follows.
+Linguistic tools that were used for automated (machine) linguistic annotations of texts will be briefly described in this section. These tools are used as a processing chain and at the end of the chain they produce tectogrammatical dependency trees. 
 
 
-\begin{description}
  
-	\item \textbf{Segmentation and tokenization} consists of segmentation (dividing a sequences of tokens into sentences) and tokenization (dividing the input text into words and punctuation).
-	
-	TextSeg \citep{TextSeg}
+\subsubsection{Tokenization and Segmentation} 
+On the beginning of text analysis the input text is divided into tokens (words and punctuation); this is called \emph{tokenization}. Sequences of tokens are then (or simultaneously) divided into sentences; this is called \emph{segmentation}. Note that although the task seems quite simple, especially segmentation is not trivial and painful errors occur at this early stage e.g. caused by abbreviations ended by full stop in the middle of a sentence.
+
+There are several tools available for Czech and English. The oldest (Czech) one can be found on the PDT 2.0 CD-ROM \cite{biblio:PDT20_CD} and several choices are provided by TectoMT (see Section~\ref{sec:ch30_tectomt}) and GATE (see Section~\ref{sec:ch30_gate}). The best choice for Czech is probably TextSeg \citep{TextSeg}, which is available through TectoMT.
+
+
 		
-	\item \textbf{Morphological analysis} \citep{biblio:HajicMorfTag} assigns all possible lemmas and morphological tags to particular word forms (word 
-occurrences) in the text.
-	
-	\item \textbf{Morphological tagging} \citep{biblio:HajicMorfTag} consists in selecting a single pair lemma-tag from all possible alternatives assigned 
-by the morphological analyzer.
+\subsubsection{Morphological Analysis}
 
-Morče \citep{biblio:VoMorphologicalTagging2006} 95.431 accuracy
-	
-	\item \textbf{Collins' parser -- Czech adaptation} \citep{biblio:collinshbrt_1999} Unlike the usual approaches to the description of 
-English syntax, the Czech syntactic descriptions are dependency-based, which means that every edge of a syntactic tree captures the relation of dependency between a governor and its dependent node. Collins' parser gives the most probable parse of a given input sentence.
+Because Czech is a language with rich inflections, morphological analysis (or at least lemmatization) is an important means to success of any NLP task (starting with key word search and indexing.) In PDT morphological analysis is a necessary precondition for analytical analysis (next section).
 
-Feature engineering over McDonald's MST parser \citep{Novak:2007:FEM:1776334.1776350} 84.7 accuracy.
-	
-	\item \textbf{Analytical function assignment} \citep{biblio:AlyticAsign} assigns a description (\emph{analytical function}, in linguistic sense) to every edge in the syntactic (dependency) tree.
-	
-	\item \textbf{Tectogrammatical analysis} produces linguistic annotation at the tectogrammatical layer, sometimes called ``layer of deep syntax''. 
-	Annotation of a sentence at this layer is closer to the meaning of the sentence than its syntactic annotation; thus, information captured at the tectogrammatical layer is crucial for machine understanding of a natural language \citep{biblio:KlTransformationBasedTectogrammatical2006}.
-	
-	
-Tectogrammatical analysis of \textbf{English} 	Klimes:2007:TTD:1776334.1776341
+The task of morphological analysis is for given word form in given context to select the right pair of lemma (dictionary form) and morphological tag. In PDT the tag includes part of speech (POS) and other linguistic categories like gender, number, grammatical case, tense, etc., see morphological annotation guidelines for details.
 
-Uses Tag Morče + McD parser
-\end{description}
+For Czech two main tools are available: Feature-based tagger\footnote{\url{http://ufal.mff.cuni.cz/tools.html/fbtag.html}} by \cite{biblio:HajicMorfTag} and perceptron-based tagger Morče\footnote{\url{http://ufal.mff.cuni.cz/morce/}} by \cite{biblio:VoMorphologicalTagging2006}. Morče is several years newer and it achieved few points better accuracy on PDT 2.0 (94.04\% vs. 95.12\% see in \citep{Spoustova07b}). Both tools are available through TectoMT, Morče also for English.
 
-\begin{table}
-\centering
-	\begin{tabular}{l|l}
-		Name of the tool & Evaluation results (proclaimed by authors) \\[4pt]
-		\hline
-	Segmentation and tokenization & precision(p): 98,0\%, recall(r): 91,4\% \\[4pt]
-	Morphological analysis & 2,5\% unrecognized words\\
-	Morphological tagging & 93,0\% of tags assigned correctly \\[4pt]
-	Collins' parser -- Czech adaptation & 81,6\% dependencies assigned correctly\\
-	Analytical function assignment & precision: 92\% \\[4pt]
-	Tectogrammatical analysis & dependencies p:~90,2\%, r:~87,9\%\\
-	& assignment of f-tags p:~86,5\%, r:~84,3\%\\
-	\end{tabular}
-\caption{Linguistic tools for machine annotation}
-\label{tab:ling_tools}
-\end{table}
+\subsubsection{Analytical Analysis}
+
+The task of Analytical analysis is to build up a syntactical dependency tree (analytical tree) from a morphologically analyzed sentence and to assign right kind of dependency (analytical function) to every edge of the tree.
 
 
-\subsection{TectoMT}
+There were experiments with almost all well known parsers on the Czech PDT data\footnote{See details at \url{http://ufal.mff.cuni.cz/czech-parsing/}}. But two of them have proved in practice: Czech adaptation of Collins' parser \citep{biblio:collinshbrt_1999} and Czech adaptation of McDonald's MST parser \citep{Novak:2007:FEM:1776334.1776350}. Again the second tool is few years newer and few points better in accuracy (80.9\% vs. 84.7\% on PDT 2.0\footnotemark[\value{footnote}]). The Collins' parser can be found on the PDT 2.0 CD-ROM and the MST parser is available through TectoMT.
+
+The analytical analysis of English is not very well established because PEDT 1.0\footnote{\url{http://ufal.mff.cuni.cz/pedt/}} contains only tectogrammatical level of annotation and there is no other English treebank for the analytical level. The English analytical analysis is regarded rather as a part of English tectogrammatical analysis; see details in \citep{Klimes:2007:TTD:1776334.1776341}.
+
+
+
+%\textbf{Analytical function assignment} \citep{biblio:AlyticAsign} assigns a description (\emph{analytical function}, in linguistic sense) to every edge in the syntactic (dependency) tree.
+	
+\subsubsection{Tectogrammatical Analysis}
+
+During tectogrammatical analysis analytical trees are transformed to tectogrammatical ones. Merging, omitting and inserting of tree nodes takes place as well as assignment of all the complex linguistic information of the tectogrammatical level (semantic parts of speech, grammatemes, tectogrammatical functors, etc.)
+
+The tectogrammatical analysis can by performed by a variety of TectoMT blocks (depending on the amount of requested linguistic information, for example only tectogrammatical functors can be assigned.) Better results can be obtained through transformation-based tools developed by Václav Klimeš: \citep{biblio:KlTransformationBasedTectogrammatical2006} for Czech and \citep{Klimes:2007:TTD:1776334.1776341} for English; they are also available thorough TectoMT.
+
+
+%\begin{table}
+%\centering
+	%\begin{tabular}{l|l}
+		%Name of the tool & Evaluation results (proclaimed by authors) \\[4pt]
+		%\hline
+	%Segmentation and tokenization & precision(p): 98,0\%, recall(r): 91,4\% \\[4pt]
+	%Morphological analysis & 2,5\% unrecognized words\\
+	%Morphological tagging & 93,0\% of tags assigned correctly \\[4pt]
+	%Collins' parser -- Czech adaptation & 81,6\% dependencies assigned correctly\\
+	%Analytical function assignment & precision: 92\% \\[4pt]
+	%Tectogrammatical analysis & dependencies p:~90,2\%, r:~87,9\%\\
+	%& assignment of f-tags p:~86,5\%, r:~84,3\%\\
+	%\end{tabular}
+%\caption{Linguistic tools for machine annotation}
+%\label{tab:ling_tools}
+%\end{table}
+%
+
+\subsection{TectoMT} \label{sec:ch30_tectomt}
 As we have started with our native language -- Czech (a language with rich morphology and free word order), we had to make tools for processing Czech available in GATE. We have implemented a wrapper for the TectoMT system\footnote{\url{http://ufal.mff.cuni.cz/tectomt/}} \citep{biblio:ZaPtTectoMTHighly2008} to GATE. TectoMT is a Czech project that contains many linguistic analyzers for different languages including Czech and English. We have used a majority of applicable tools from TectoMT: a tokeniser, a sentence splitter, morphological analyzers (including POS tagger), a syntactic parser and the deep syntactic (tectogrammatical) parser. All the tools are based on the dependency based linguistic theory and formalism of the Prague Dependency Treebank project \citep{biblio:PDT20_CD}. So far our solution does not include any coreference and discourse analysis.
 
 Homepage of the project: \url{http://ufal.mff.cuni.cz/tectomt/}
@@ -156,7 +173,7 @@ Availability: \url{http://catalog.elra.info/product_info.php?products_id=1089}
 
 
 
-\section{GATE}
+\section{GATE} \label{sec:ch30_gate}
 GATE\footnote{\url{http://gate.ac.uk/}} \citep{biblio:GATE_ACL2002} is probably the most widely used tool for text processing. In our solution the capabilities of document and annotation management, utility resources for annotation processing, JAPE grammar rules \citep{Cunningham00jape:a}, machine learning facilities and performance evaluation tools are the most helpful features of GATE that we have used.
 
 !!!!Vysvetlit \textbf{annotations} a \textbf{annotation features} !!!!
