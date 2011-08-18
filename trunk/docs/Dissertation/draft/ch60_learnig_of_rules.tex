@@ -22,9 +22,9 @@ A description, implementation and initial evaluation of the method are the main 
 \section{Implementation}
 Here we just briefly describe implementation of our system. The system consists of several modules, all integrated in GATE as processing resources.
 
-\subsection{TectoMT Wrapper (Linguistic Analysis)} 
+\subsection{TectoMT Wrapper (Linguistic Analysis)} \label{sec:ch60_tectomt_wrapper}
 
-TectoMT wrapper is a GATE component (processing resource), which takes the text of a GATE document, sends it to TectoMT linguistic analyzers, parses the results and converts the results to the form of GATE annotations.
+TectoMT wrapper is a GATE component (processing resource), which takes the text of a GATE document, sends it to TectoMT linguistic analyzers, parses the results and converts the results to the form of GATE annotations. The next section provides details about how PDT annotations are represented in GATE.
 
 Because TectoMT has to run as a separate process (it is implemented in Perl) and the initialization of TectoMT analyzers usually takes significant amount of time it would be very inefficient to start a new TectoMT instance for each document. Therefore the implementation currently offers two modes of execution: batch (TectoMTBatchAnalyser) and online (TectoMTOnlineAnalyser).
 
@@ -65,6 +65,18 @@ It is not simple to demonstrate the GATE representation of the dependencies in a
 	\label{fig:PDT_GATE}
 \end{figure}
 
+
+\subsubsection{Netgraph Tree Viewer} \label{sec:ch60_GATE_Netgraph}
+
+Figure~\ref{fig:GATE_Netgraph}
+
+\begin{figure}
+	\centering
+		\includegraphics[width=0.7\hsize]{netgraph_stanford}
+		\\Sentence: Users also said it is in the strongest financial position in its 24-year history.
+	\caption{Netgraph Tree Viewer in GATE (for Stanford Dependencies).}
+	\label{fig:GATE_Netgraph}
+\end{figure}
 
 
 \subsection{ILP Wrapper (Machine Learning)}

@@ -7,7 +7,7 @@ In our solution we have exploited several tools and formalisms. These can be div
 
 
 
-\section{Prague Dependency Treebank (PDT)}
+\section{Prague Dependency Treebank (PDT)} \label{sec:ch30_pdt}
 There exist several projects\footnote{Prague Dependency Treebank
  (PDT 1.0, PDT 2.0 \citep{biblio:PDT20_CD}), Prague English Dependency Treebank (PEDT 1.0), Prague Czech-English Dependency Treebank (PCEDT 1.0)} 
 closely related to the ``Prague school of dependency linguistics’’ and the Institute of Formal and Applied Linguistics\footnote{\url{http://ufal.mff.cuni.cz}} in Prague, Czech Republic (ÚFAL). All the projects share common methodology and principles concerning the formal representation of natural language (Czech above all; and recently also English). We will refer to these principles and related formalism as ``PDT principles and formalisms’’ in the present work because the PDT projects are the most fundamental and the elaborate annotation guidelines (see bellow) were compiled within these projects. The most relevant principles for the present work will be briefly described in this section.
@@ -20,6 +20,7 @@ In PDT, text is split into individual sentences and dependency trees are built f
 
 More over all the layers of PDT sentence representation are interconnected and additional linguistic features are assigned to tree nodes. Among others: \emph{morphological tag} and \emph{lemma} is assigned at the morphological level; \emph{analytical function} (the actual kind of the particular analytical dependency, e.g. predicate, subject, object, etc.) is assigned to dependent nodes at the analytical level; \emph{semantic parts of speech} + \emph{grammatemes} (e.g. \emph{definite quantificational semantic noun} (n.quant.def) + \emph{number} and \emph{gender}, etc.) and \emph{tectogrammatical functor} (e.g. actor (ACT), patient (PAT), addressee (ADDR), temporal: when (TWHEN), directional: to (DIR3), etc.) is assigned at the tectogrammatical level. 
 
+\medskip
 Detailed information can be found:
 \begin{itemize}
 	\item Homepage of the PDT 2.0 project: \url{http://ufal.mff.cuni.cz/pdt2.0/}
@@ -60,7 +61,7 @@ English translation (lit.):& [He] & would & have & gone & intoforest.
 
 
 
-\section{PDT Tools and Resources}
+\section{PDT Tools and Resources} \label{sec:ch30_pdt_tools_and_resources}
 
 In this section several linguistic tools and resources that are being developed at ÚFAL will be described. These tools and resources are closely connected with the PDT projects and they have been used also in the present work for various purposes.
 
@@ -105,7 +106,7 @@ The analytical analysis of English is not very well established because PEDT 1.0
 
 During tectogrammatical analysis analytical trees are transformed to tectogrammatical ones. Merging, omitting and inserting of tree nodes takes place as well as assignment of all the complex linguistic information of the tectogrammatical level (semantic parts of speech, grammatemes, tectogrammatical functors, etc.)
 
-The tectogrammatical analysis can by performed by a variety of TectoMT blocks (depending on the amount of requested linguistic information, for example only tectogrammatical functors can be assigned.) Better results can be obtained through transformation-based tools developed by Václav Klimeš: \citep{biblio:KlTransformationBasedTectogrammatical2006} for Czech and \citep{Klimes:2007:TTD:1776334.1776341} for English; they are also available thorough TectoMT.
+The tectogrammatical analysis can by performed by a variety of TectoMT ``blocks'' (depending on the amount of requested linguistic information, for example only tectogrammatical functors can be assigned.) Better results can be obtained through transformation-based tools developed by Václav Klimeš: \citep{biblio:KlTransformationBasedTectogrammatical2006} for Czech and \citep{Klimes:2007:TTD:1776334.1776341} for English; they are also available thorough TectoMT.
 
 
 %\begin{table}
@@ -126,41 +127,54 @@ The tectogrammatical analysis can by performed by a variety of TectoMT blocks (d
 %\end{table}
 %
 
-\subsection{TectoMT} \label{sec:ch30_tectomt}
-As we have started with our native language -- Czech (a language with rich morphology and free word order), we had to make tools for processing Czech available in GATE. We have implemented a wrapper for the TectoMT system\footnote{\url{http://ufal.mff.cuni.cz/tectomt/}} \citep{biblio:ZaPtTectoMTHighly2008} to GATE. TectoMT is a Czech project that contains many linguistic analyzers for different languages including Czech and English. We have used a majority of applicable tools from TectoMT: a tokeniser, a sentence splitter, morphological analyzers (including POS tagger), a syntactic parser and the deep syntactic (tectogrammatical) parser. All the tools are based on the dependency based linguistic theory and formalism of the Prague Dependency Treebank project \citep{biblio:PDT20_CD}. So far our solution does not include any coreference and discourse analysis.
-
-Homepage of the project: \url{http://ufal.mff.cuni.cz/tectomt/}
-
-
-\subsection{Netgraph} \label{sec:ch30_netgraph}
-
-Netgraph \citep{biblio:MiNetgraphA2006} is a linguistic tool used for searching through a syntactically annotated corpus of a natural language (corpus of linguistic dependency trees). Basically Netgraph allows putting restrictions on the shape of a tree and on values of attributes of an arbitrary tree node. Besides that nodes of a query can be marked as optional (not necessarily present in a matching tree) and names can be assigned to query nodes. Naming of query nodes then allows putting restrictions based on referenced nodes (Give me all trees where there is a node with two children and both children have the same lemma.)
-
-See also Section~\ref{sec:ch50_Netgraph_Based_Extraction_Rules}, it provides additional information including example Netgraph queries.
-
-Currently Netgraph is replaced by PML Tree Query (see in the next section) and the Netgraph development is ``discontinued''. We use Netgraph in the present work because it is written in Java, the language of what we use.
-
-Homepage of the project: \url{http://quest.ms.mff.cuni.cz/netgraph/}
-
-
 \subsection{Tree Editor TrEd, Btred}
 
-TrEd is the ÚFAL key tool for work with dependency based linguistic annotations. It provides a comfortable GUI for navigation, viewing and editing of linguistic trees at different levels if annotation, for different languages and different treebank schemas. 
+TrEd is the ÚFAL key tool for work with dependency based linguistic annotations. It provides a comfortable GUI for navigation, viewing and editing of linguistic trees at different levels of annotation, for different languages and different treebank schemas. TrEd is implemented in Perl and it is available for a variety of platforms (Windows, Unix, Linux, Mac OS X).
 
+\medskip
 Homepage of the project: \url{http://ufal.mff.cuni.cz/~pajas/tred/}
 
 
 \subsubsection{Btred}
 TrEd can be also controlled using a powerful set of Perl macros and there is also a non-interactive version of TrEd called Btred, which allows batch evaluation of user macros on an arbitrary set of annotated documents.
 
-\subsubsection{PML Tree Query}
+\subsubsection{PML Tree Query} \label{sec:ch30_pml_tree_query}
 PML Tree Query (PML-TQ) \citep{biblio:PaStSystemfor2009} is a TrEd based module for searching through a treebank using a complex tree based query language.
 
+\medskip
 Homepage of the project: \url{http://ufal.mff.cuni.cz/~pajas/pmltq/}
 
+
+
+\subsection{TectoMT} \label{sec:ch30_tectomt}
+%As we have started with our native language -- Czech (a language with rich morphology and free word order), we had to make tools for processing Czech available in GATE. We have implemented a wrapper for the TectoMT system\footnote{\url{http://ufal.mff.cuni.cz/tectomt/}}  to GATE.
+
+TectoMT \citep{biblio:ZaPtTectoMTHighly2008} is a Czech project that contains many linguistic tools for different languages including Czech and English; all the tools are based on the dependency based linguistic theory and formalism of PDT. It is implemented in Perl; highly exploiting TrEd libraries. The recommended platform is Linux. %Windows (not recomended platform for TectoMT)
+It is primarily aimed at machine translation but it can also facilitate development of software solutions of other NLP tasks.
+
+We have used a majority of applicable tools from TectoMT (e.g. tokeniser, sentence splitter, morphological, analytical and tectogrammatical analyzers for Czech and English). We have also developed TectoMT wrapper for GATE, which makes it possible to use TectoMT tools inside GATE, see details in Section~\ref{sec:ch60_tectomt_wrapper}.
+
+Similarly to GATE, TectoMT supports building of application pipelines (\emph{scenarios}) composed of so called \emph{blocks} -- processing units responsible for single independent task (like tokenization, parsing, etc.)
+
+\medskip
+Homepage of the project: \url{http://ufal.mff.cuni.cz/tectomt/}
+
+
+\subsection{Netgraph} \label{sec:ch30_netgraph}
+
+Netgraph \citep{biblio:MiNetgraphA2006} is a linguistic tool used for searching through a syntactically annotated corpus of a natural language (corpus of linguistic dependency trees). Besides the searching capabilities it also provides a GUI for viewing of dependency trees. Both of these features were exploited in the present work.
+
+Netgraph implementation is client-server based and a special query language is used for searching. The query language allows putting restrictions on the shape of a tree and on values of attributes of an arbitrary tree node. Besides that nodes of a query can be marked as optional (not necessarily present in a matching tree) and names can be assigned to query nodes. Naming of query nodes then allows putting restrictions based on referenced nodes (Give me all trees where there is a node with two children and both children have the same lemma.) See also Section~\ref{sec:ch50_Netgraph_Based_Extraction_Rules}, it provides additional information about the query language including example Netgraph queries.
+
+Currently Netgraph is replaced by PML Tree Query (see Section~\ref{sec:ch30_pml_tree_query}) and the Netgraph development is ``discontinued''. We use Netgraph in the present work because it is written in Java, the language of what we use. This also made it possible to use Netgraph inside GATE as a handy viewer of dependency trees, see Section~\ref{sec:ch60_GATE_Netgraph}. 
+
+\medskip
+Homepage of the project: \url{http://quest.ms.mff.cuni.cz/netgraph/}
+
+
 \subsection{Annotation Schemas}
-\subsubsection{Prague Markup Language (PML)}
-\subsubsection{Feature Structure (FS)}
+\subsubsection{Prague Markup Language (PML)} \label{sec:ch30_pml}
+\subsubsection{Feature Structure (FS)} \label{sec:ch30_fs}
 
 
 \section{Czech WordNet}
@@ -169,15 +183,17 @@ The Figure~99 shows, that it would be useful to gather words with similar meanin
 
 After we have explored the records of the Czech WordNet (CzWN) related to the domain of our interest (car accidents, etc.) we have decided not to involve CzWN in the extraction process. The reason is that the coverage of the vocabulary of our domain is rather poor and the semantic connections of words are sometimes unfortunately missing. But we can supply the missing information to CzWN or we can build up a new domain-specific word-net based on the ground of CzWN.  
 
+\medskip
 Availability: \url{http://catalog.elra.info/product_info.php?products_id=1089}
 
 
 
 \section{GATE} \label{sec:ch30_gate}
-GATE\footnote{\url{http://gate.ac.uk/}} \citep{biblio:GATE_ACL2002} is probably the most widely used tool for text processing. In our solution the capabilities of document and annotation management, utility resources for annotation processing, JAPE grammar rules \citep{Cunningham00jape:a}, machine learning facilities and performance evaluation tools are the most helpful features of GATE that we have used.
+GATE \citep{biblio:GATE_ACL2002} is probably the most widely used tool for text processing. In our solution the capabilities of document and annotation management, utility resources for annotation processing, JAPE grammar rules \citep{Cunningham00jape:a}, machine learning facilities and performance evaluation tools are the most helpful features of GATE that we have used.
 
 !!!!Vysvetlit \textbf{annotations} a \textbf{annotation features} !!!!
 
+\medskip
 Homepage of the project: \url{http://gate.ac.uk/}
 
 
@@ -185,6 +201,7 @@ Homepage of the project: \url{http://gate.ac.uk/}
 
 Weka \citep{biblio:Weka} is a well known data-mining software.
 
+\medskip
 Homepage of the project: \url{http://www.cs.waikato.ac.nz/ml/weka/}
 
 
@@ -196,6 +213,7 @@ See also formal definition of classical ILP task in Section~\ref{sec:ch80_ILP_cl
 \subsection{ILP tool}
 As an ILP tool we have used ``A Learning Engine for Proposing Hypotheses'' (Aleph v5)\footnote{\url{http://www.comlab.ox.ac.uk/activities/machinelearning/Aleph/}}, which we consider very practical. It uses quite effective method of inverse entailment \citep{biblio:InverseEntailment} and keeps all handy features of a Prolog system (we have used YAP Prolog\footnote{\url{http://www.dcc.fc.up.pt/~vsc/Yap/}}) in its background.
 
+\medskip
 Homepage of the project: \url{http://www.comlab.ox.ac.uk/activities/machinelearning/Aleph/}
 
 
