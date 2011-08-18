@@ -191,19 +191,15 @@ Availability: \url{http://catalog.elra.info/product_info.php?products_id=1089}
 \section{GATE} \label{sec:ch30_gate}
 GATE \citep{biblio:GATE_ACL2002} is probably the most widely used tool for text processing. In our solution the capabilities of document and annotation management, utility resources for annotation processing, JAPE grammar rules \citep{Cunningham00jape:a}, machine learning facilities and performance evaluation tools are the most helpful features of GATE that we have used.
 
-!!!!Vysvetlit \textbf{annotations} a \textbf{annotation features} !!!!
-
 \medskip
 Homepage of the project: \url{http://gate.ac.uk/}
 
+\subsection{GATE Annotations} \label{sec:ch30_gate_annotations}
+Contrary to PDT, GATE annotations are rather simple and minimalistic. They are designed as labeled segments of text. A single annotation is described by its label (\emph{annotation type}) and starting and ending character offset. Each annotation has a unique identifier (integer ID) and an arbitrary set of \emph{features} (name-value pairs) can be assigned to it. 
 
-\section{Weka}
+For example in a sentence ``Hamish Cunningham leads the GATE team.'', ``Hamish Cunningham'' can be annotated with a GATE annotation starting at character 0, ending at character 16, annotation type: ``Person'', with three features: ``firstName=Hamish; surname= Cunningham; gender=male''; because it is the only annotation, the ID would most probably be 0.
 
-Weka \citep{biblio:Weka} is a well known data-mining software.
-
-\medskip
-Homepage of the project: \url{http://www.cs.waikato.ac.nz/ml/weka/}
-
+Although the GATE annotation approach seems quite simple, very complex structures can be encoded this way (for example an annotation feature can contain a reference to another annotation using its ID), but such usage of GATE annotations is always tricky to some degree and it is always necessary to establish a convention about that. In Section~\ref{sec:ch60_pdt_in_gate} encoding of PDT dependency annotations in GATE will be presented.
 
 \section{Inductive Logic Programming}
 Inductive Logic Programming (ILP) \citep{biblio:MuggletonILP} is a machine learning technique based on logic programming. Given an encoding of the known background knowledge (in our case linguistic structure of all sentences) and a set of examples represented as a logical database of facts (in our case tokens annotated with the target annotation type are positive examples and the remaining tokens negative ones), an ILP system will derive a hypothesized logic program (in our case extraction rules) which entails all the positive and none of the negative examples.
@@ -227,4 +223,11 @@ From our experiments (Section~\ref{sec:evaluation}) can be seen that ILP is capa
 As we do not have large amount of training data, there is no problem with excessive time demands during learning and the application of the learned rules is simple and quick.
 
 
+
+\section{Weka}
+
+Weka \citep{biblio:Weka} is a well known data-mining software.
+
+\medskip
+Homepage of the project: \url{http://www.cs.waikato.ac.nz/ml/weka/}
 

@@ -17,6 +17,17 @@ A description, implementation and initial evaluation of the method are the main 
 
 
 
+\section{Data Flow}
+
+Figure~\ref{fig:ILP_data_flow}
+
+\begin{figure}
+	\centering
+		\includegraphics[angle=-90, width=0.85\hsize]{ILP_data_flow}
+	\caption{ILP data flow.}
+	\label{fig:ILP_data_flow}
+\end{figure}
+
 
 
 \section{Implementation}
@@ -34,9 +45,9 @@ Client-server model of implementation is used in the online mode. A separate Tec
 
 
 
-\subsection{PDT Annotations in GATE} \label{sec:pdt_in_gate}
+\subsection{PDT Annotations in GATE} \label{sec:ch60_pdt_in_gate}
 
-Although GATE annotations are just highlighted pieces of text it is possible to use them to encode dependency tree structures. It is possible because each GATE annotation has a unique identifier (ID) and an arbitrary set of features (name-value pairs) can be assigned to it. The way how the PDT dependency trees are encoded in GATE is in fact the same as in the GATE wrapper for the Stanford Parser\footnote{\url{http://gate.ac.uk/userguide/sec:parsers:stanford}}. 
+Although GATE annotations are just highlighted pieces of text (see also Section~\ref{sec:ch30_gate_annotations}) it is possible to use them to encode dependency tree structures. It is possible because each GATE annotation has a unique identifier (ID) and an arbitrary set of features (name-value pairs) can be assigned to it. The way how the PDT dependency trees are encoded in GATE is in fact the same as in the GATE wrapper for the Stanford Parser\footnote{\url{http://gate.ac.uk/userguide/sec:parsers:stanford}}. 
 
 Three main constructs are used to capture an arbitrary configuration of a linguistic dependency tree:
 
@@ -74,7 +85,7 @@ Figure~\ref{fig:GATE_Netgraph}
 	\centering
 		\includegraphics[width=0.7\hsize]{netgraph_stanford}
 		\\Sentence: Users also said it is in the strongest financial position in its 24-year history.
-	\caption{Netgraph Tree Viewer in GATE (for Stanford Dependencies).}
+	\caption{Netgraph Tree Viewer in GATE (for Stanford Dependencies, screenshot).}
 	\label{fig:GATE_Netgraph}
 \end{figure}
 
@@ -108,7 +119,7 @@ ML PR provides an interface for exchange of features (including target class) be
 
 In this section details about conversion of linguistic trees to ILP background knowledge (a Prolog logical database of facts) will be presented. Although the construction is quite strait forward it is worth describing because it makes it easier to understand the extraction rules found by the ILP learning procedure. 
 
-As mentioned in Section~\ref{sec:pdt_in_gate}: three main constructs are used to capture an arbitrary configuration of a dependency linguistic tree: nodes, edges and node attributes. During the process of ILP Serialization these constructs are rendered to Prolog in following way. 
+As mentioned in Section~\ref{sec:ch60_pdt_in_gate}: three main constructs are used to capture an arbitrary configuration of a dependency linguistic tree: nodes, edges and node attributes. During the process of ILP Serialization these constructs are rendered to Prolog in following way. 
 
 A unique identifier (node ID) is generated for every tree node. The identifier is based on document name and GATE annotation ID (sentence order and node deep order are used outside of GATE, see PML$\rightarrow$RDF transformation in Section~\ref{sec:pml_to_rdf}.) These node IDs correspond to simple atoms and they represent tree nodes in the fact database. A node type (used by the ILP learning algorithm) is assigned to a node ID by predicates \texttt{Token(NodeID)} for analytical tree nodes and \texttt{tToken(NodeID)} for tectogrammatical tree nodes.
 
