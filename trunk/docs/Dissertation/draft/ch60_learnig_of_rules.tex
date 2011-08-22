@@ -17,7 +17,7 @@ A description, implementation and initial evaluation of the method are the main 
 
 
 
-\section{Data Flow}
+\section{Data Flow ?or Schema of the Extraction Process?}
 
 Figure~\ref{fig:ILP_data_flow}
 
@@ -31,7 +31,7 @@ Figure~\ref{fig:ILP_data_flow}
 
 
 \section{Implementation}
-Here we just briefly describe implementation of our system. The system consists of several modules, all integrated in GATE as processing resources.
+Here we just briefly describe implementation of our system. The system consists of several modules, all integrated in GATE as processing resources (PRs).
 
 \subsection{TectoMT Wrapper (Linguistic Analysis)} \label{sec:ch60_tectomt_wrapper}
 
@@ -39,9 +39,9 @@ TectoMT wrapper is a GATE component (processing resource), which takes the text 
 
 Because TectoMT has to run as a separate process (it is implemented in Perl) and the initialization of TectoMT analyzers usually takes significant amount of time it would be very inefficient to start a new TectoMT instance for each document. Therefore the implementation currently offers two modes of execution: batch (TectoMTBatchAnalyser) and online (TectoMTOnlineAnalyser).
 
-The batch mode is implemented similarly to the Batch Learning PR\footnote{\url{http://gate.ac.uk/userguide/sec:ml:batch-learning-pr}}. During the execution as a part of a corpus pipeline it only accumulates documents and the whole work is done as a batch when the last document is encountered. This also implies that TectoMTBatchAnalyser has to be the last PR in the pipeline because it produces no output in the time of execution (except for the last document). 
+The batch mode is implemented similarly to the Batch Learning PR\footnote{\url{http://gate.ac.uk/userguide/sec:ml:batch-learning-pr}}. Batch mode of execution in the context of GATE corpus pipelines is a deviation from the standard execution mode, when documents are processed one by one. During the execution as a part of a corpus pipeline, TectoMTBatchAnalyser only accumulates documents and the whole work is done as a batch when the last document is encountered. This also implies that TectoMTBatchAnalyser has to be the last PR in the pipeline because it produces no output in the time of execution (except for the last document when the whole batch is executed). 
 
-Client-server model of implementation is used in the online mode. A separate TectoMT server process is started at the time of initialization and GATE documents are processed in ordinary way at the time of execution. This means that (similarly to the previous case) each document is converted to the TectoMT readable format, sent to TectoMT and the result is converted back to GATE. The online mode of execution is a bit slower than the batch mode because additional time is spent on client-server communication (XML-RPC\footnote{\url{http://www.xmlrpc.com/}}).
+Client-server model of implementation is used in the online mode. A separate TectoMT server process is started at the time of initialization and during the execution, GATE documents are processed in ordinary way, one by one. This means that (similarly to the previous case) each document is converted to the TectoMT readable format, sent to TectoMT and the result is converted back to GATE. The online mode of execution is a bit slower than the batch mode because additional time is spent on client-server communication (XML-RPC\footnote{\url{http://www.xmlrpc.com/}}).
 
 
 
@@ -135,7 +135,7 @@ Node attributes are assigned to node IDs by binary predicates of the form:
 
 \noindent There are about thirty such predicates like \emph{t\_lemma} (tectogrammatical lemma), \emph{functor} (tectogrammatical functor), \emph{sempos} (semantic part of speech), \emph{negation}, \emph{gender}, etc. but minority of them is usually used in extraction rules.
 
-Example of a serialized tectogrammatical tree is in Listing~\ref{lst:ilp_serialization} it is the same tree as in Figure~\ref{img:damage_tree}.
+Example of a serialized tectogrammatical tree is in Listing~\ref{lst:ilp_serialization} it is the same tree as in Figure~\ref{img:ch10_damage_tree}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
