@@ -122,12 +122,8 @@ public class TectoMTBatchAnalyserTest //extends TestCase
 	    }
 	}
 	
-	protected void executeTmtOnCurrentCorpus(String language, String [] blocks) throws ResourceInstantiationException, ExecutionException
+	protected void executeTmtOnCurrentCorpus(FeatureMap fm) throws ResourceInstantiationException, ExecutionException
 	{
-		FeatureMap fm = Factory.newFeatureMap();
-		fm.put("loadScenarioFromFile", "false");
-		fm.put("language", language);
-		fm.put("blocks", Arrays.asList(blocks));
 		Resource tmt_analyzer = Factory.createResource(TectoMTBatchAnalyser.class.getCanonicalName(), fm);
 
 		
@@ -136,7 +132,27 @@ public class TectoMTBatchAnalyserTest //extends TestCase
 	
 		controller.setCorpus(corpus);
 		controller.add((ProcessingResource) tmt_analyzer);
-		controller.execute();		
+		controller.execute();				
+	}
+
+	protected void executeTmtOnCurrentCorpus(String language, String [] blocks) throws ResourceInstantiationException, ExecutionException
+	{
+		FeatureMap fm = Factory.newFeatureMap();
+		fm.put("loadScenarioFromFile", "false");
+		fm.put("language", language);
+		fm.put("blocks", Arrays.asList(blocks));
+		
+		executeTmtOnCurrentCorpus(fm);
+	}
+
+	protected void executeTmtOnCurrentCorpus(String language, String blocks_filename) throws ResourceInstantiationException, ExecutionException, MalformedURLException
+	{
+		FeatureMap fm = Factory.newFeatureMap();
+		fm.put("loadScenarioFromFile", "true");
+		fm.put("language", language);
+		fm.put("scenarioFilePath", new File(blocks_filename).toURI().toURL());
+		
+		executeTmtOnCurrentCorpus(fm);
 	}
 
 	@Test
@@ -389,11 +405,15 @@ public class TectoMTBatchAnalyserTest //extends TestCase
 	}
 	
 	@Test(groups = { "slow" })
-	public void testExecuteCzechFull() throws ResourceInstantiationException, ExecutionException, FileNotFoundException
+	public void testExecuteCzechFull() throws ResourceInstantiationException, ExecutionException, MalformedURLException, URISyntaxException, IOException
 	{
+//		String [] s2  = {"Rychlost roste."};
+//		initCorpusAndDocFromSentences(s2, 1);
 
 		initCorpusAndDocFromSentences(czech_sentences, 1);
-		executeTmtOnCurrentCorpus("czech", czech_full_blocks);
+//		executeTmtOnCurrentCorpus("czech", czech_full_blocks);
+		executeTmtOnCurrentCorpus("czech", Config.getConfig().getCzsemPluginDir() + "/tmt_analysis_scenarios/czech_full_blocks.scen");
+
 
 		AnnotationSet as = document.getAnnotations();
 		
@@ -539,15 +559,15 @@ public class TectoMTBatchAnalyserTest //extends TestCase
 		};
 
 	@Test(groups = { "slow" })
-	public void testExecuteEnglishFull() throws ResourceInstantiationException, ExecutionException
+	public void testExecuteEnglishFull() throws ResourceInstantiationException, ExecutionException, MalformedURLException, URISyntaxException, IOException
 	{
 		
 		initCorpusAndDocFromSentences(english_sentences, 1);
-		executeTmtOnCurrentCorpus("english", english_full_blocks);
-		
+		executeTmtOnCurrentCorpus("english", Config.getConfig().getCzsemPluginDir() + "/tmt_analysis_scenarios/english_full_blocks.scen");
+				
 		AnnotationSet as = document.getAnnotations();
 		
-		assertEquals(72, as.size());		
+		assertEquals(74, as.size());		
 	}
 	
 	@Test(groups = { "slow" })

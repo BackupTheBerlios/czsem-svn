@@ -24,7 +24,8 @@ public class CreateMentionsPR extends AbstractLanguageAnalyserWithInputAnnotType
 	
 	private static final long serialVersionUID = 3795111522583168425L;
 	
-	private String mentionAnntotationTypeName = "Mention";
+	public static final String defaultMentionAnntotationTypeName = "Mention";
+	private String mentionAnntotationTypeName = defaultMentionAnntotationTypeName;
 	private boolean inverseFunction = false;
 	private boolean copyFeatures = false;
 	/** Used only during inverse work. Creates a mention using a referenced annotation. The reference is inside an aligned annotation. example: 'NamedEntity_root.origRootID'*/	 

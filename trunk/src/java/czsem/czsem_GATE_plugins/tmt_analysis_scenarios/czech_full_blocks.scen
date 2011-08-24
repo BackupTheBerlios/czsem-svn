@@ -20,5 +20,10 @@ SCzechA_to_SCzechT::Assign_grammatemes
 SCzechA_to_SCzechT::Detect_formeme
 SCzechA_to_SCzechT::Add_PersPron
 SCzechA_to_SCzechT::Mark_reflpron_coref
+#SCzechA_to_SCzechT::TBLa2t_phase0
+#SCzechA_to_SCzechT::TBLa2t_phase1_a
+#SCzechA_to_SCzechT::TBLa2t_phase2
+#SCzechA_to_SCzechT::TBLa2t_phase3
+#SCzechA_to_SCzechT::TBLa2t_phase4
 SCzechA_to_SCzechT::TBLa2t_phaseFd
 XAnylang1X_to_XAnylang2X::Normalize_ordering LAYER=SCzechT

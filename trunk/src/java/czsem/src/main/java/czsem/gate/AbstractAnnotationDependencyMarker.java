@@ -2,6 +2,7 @@ package czsem.gate;
 
 import gate.AnnotationSet;
 import gate.creole.metadata.CreoleParameter;
+import gate.creole.metadata.Optional;
 import gate.creole.metadata.RunTime;
 
 
@@ -10,6 +11,9 @@ import czsem.utils.TreeIndex;
 public abstract class AbstractAnnotationDependencyMarker extends AbstractLanguageAnalyserWithInputAnnotTypes
 {
 	private static final long serialVersionUID = 1L;
+	
+	protected String tokensAndDependenciesASName = null;
+
 	
 	protected AnnotationSet inputTokensAS = null;
 	protected AnnotationSet inputDependenciesAS = null;
@@ -38,9 +42,24 @@ public abstract class AbstractAnnotationDependencyMarker extends AbstractLanguag
 	{
 		super.initBeforeExecute();
 		
-		inputTokensAS = inputAS.get(tokenAnnotationTypeName);
-		inputDependenciesAS = inputAS.get(dependencyAnnotationTypeName);
+		if (getTokensAndDependenciesASName() == null) setTokensAndDependenciesASName(getInputASName());
+		
+		AnnotationSet tocDepAS = document.getAnnotations(getTokensAndDependenciesASName());
+		
+		inputTokensAS = tocDepAS.get(tokenAnnotationTypeName);
+		inputDependenciesAS = tocDepAS.get(dependencyAnnotationTypeName);
 		treeIndex = new TreeIndex(inputDependenciesAS);
+	}
+
+	public String getTokensAndDependenciesASName() {
+		return tokensAndDependenciesASName;
+	}
+	
+	@RunTime
+	@Optional
+	@CreoleParameter(comment="If not set, inputAS is taken.")
+	public void setTokensAndDependenciesASName(String tokensAndDependenciesASName) {
+		this.tokensAndDependenciesASName = tokensAndDependenciesASName;
 	}
 
 

@@ -171,7 +171,7 @@ public class BMCGateCorpusBuider
 	{
 		if (dontBuildCorpus)
 		{
-			GateUtils.saveDocumentToDirectory(doc, outputDirectory, "bmcID");
+			GateUtils.saveBMCDocumentToDirectory(doc, outputDirectory, "bmcID");
 			Factory.deleteResource(doc);
 		}
 	}
@@ -179,7 +179,7 @@ public class BMCGateCorpusBuider
 	public void saveCorpus() throws IOException
 	{
 		if (! dontBuildCorpus)
-			GateUtils.saveCorpusToDirectory(corpus, outputDirectory, "bmcID");
+			GateUtils.saveBMCCorpusToDirectory(corpus, outputDirectory, "bmcID");
 	}
 	
 	final static String BMC_DIR = "C:\\Users\\dedek\\Desktop\\bmc\\bmc\\";

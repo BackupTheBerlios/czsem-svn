@@ -106,6 +106,28 @@ public interface DataSet
 		
 		public static class CzechFireman extends DataSetImpl
 		{
+			public static final String [] all_annot_types =
+			{
+				"amateur_unit",
+				"amateur_units",
+				"aqualung",
+				"cars",
+				"damage",
+				"damageNumber",
+				"duration",
+				"end",
+				"end_subtree",
+				"fan",
+				"fatalities",
+				"injuries",
+				"lather",
+				"pipes",
+				"profesional_unit",
+				"profesional_units",
+				"start",
+				"units",
+			};
+
 			public CzechFireman(String ... learnigAnnotationTypes) throws URISyntaxException, IOException
 			{
 				super(
@@ -120,6 +142,23 @@ public interface DataSet
 	
 		public static class Acquisitions extends DataSetImpl
 		{
+			public static final String [] all_annot_types =
+			{
+				"acqabr",
+				"acqbus",
+				"acqcode",
+				"acqloc",
+				"acquired",
+				"dlramt",
+				"purchabr",
+				"purchaser",
+				"purchcode",
+				"seller",
+				"sellerabr",
+				"sellercode",
+				"status",
+			};
+			
 			public Acquisitions(String ... learnigAnnotationTypes) throws URISyntaxException, IOException
 			{
 				super(

@@ -20,7 +20,7 @@ import java.util.HashSet;
 import java.util.Locale;
 
 import czsem.gate.GateUtils;
-import czsem.khresmoi.MorceBatchAnalysis.DocumentLoadSynchrinizer;
+import czsem.khresmoi.MorceBatchAnalysis.DocumentLoadSynchronizer;
 import czsem.utils.Config;
 
 public class InformationExtractionAnalysis extends BMCAnalysis
@@ -70,20 +70,20 @@ public class InformationExtractionAnalysis extends BMCAnalysis
 
 	private void analyzeFile(File file) throws ResourceInstantiationException, ExecutionException, IOException
 	{
-		Document doc = DocumentLoadSynchrinizer.loadDocument(file);
+		Document doc = DocumentLoadSynchronizer.loadDocument(file);
 		analyzer.setDocument(doc);
 		
 		try
 		{
 			analyzer.execute();
 			logStatisitcs(doc);
-			GateUtils.saveDocumentToDirectory(doc, outputdir, "bmcID");
+			GateUtils.saveBMCDocumentToDirectory(doc, outputdir, "bmcID");
 		}
 		catch (ExecutionException e)
 		{
 			if (! InvalidOffsetException.class.isInstance(e.getCause())) throw e;
 			System.err.println("Could not be analyzed using FlexibleGazetteer!!!");
-			GateUtils.saveDocumentToDirectory(doc, default_crashdir, "bmcID");
+			GateUtils.saveBMCDocumentToDirectory(doc, default_crashdir, "bmcID");
 		}
 		
 		Factory.deleteResource(doc);
@@ -93,12 +93,7 @@ public class InformationExtractionAnalysis extends BMCAnalysis
 
 	public static AnnotationDiffer BMCCrossCoverageDiffer(Document doc)
 	{
-		AnnotationDiffer differ = new AnnotationDiffer();
-		differ.setSignificantFeaturesSet(new HashSet<String>());
-		differ.calculateDiff(
-				doc.getAnnotations("mimir").get("Lookup"), 
-				doc.getAnnotations("plain").get("Lookup")); // compare
-		return differ;
+		return GateUtils.calculateSimpleDiffer(doc, "mimir", "plain", "Lookup");
 	}
 	
 	private void logStatisitcs(Document doc)

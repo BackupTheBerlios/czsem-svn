@@ -42,4 +42,9 @@ SEnglishA_to_SEnglishT::Assign_grammatemes
 SEnglishA_to_SEnglishT::Detect_formeme
 SEnglishA_to_SEnglishT::Detect_voice
 SEnglishA_to_SEnglishT::Fill_is_name_of_person
+#SEnglishA_to_SEnglishT::TBLa2t_phase0
+SEnglishA_to_SEnglishT::TBLa2t_phase1
+SEnglishA_to_SEnglishT::TBLa2t_phase2
+SEnglishA_to_SEnglishT::TBLa2t_phase3
+SEnglishA_to_SEnglishT::TBLa2t_phase4
 SEnglishA_to_SEnglishT::TBLa2t_phaseFx

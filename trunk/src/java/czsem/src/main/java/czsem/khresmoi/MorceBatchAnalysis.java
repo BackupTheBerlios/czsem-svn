@@ -30,7 +30,7 @@ public class MorceBatchAnalysis extends BMCAnalysis
 
 	
 	
-	public static class DocumentLoadSynchrinizer
+	public static class DocumentLoadSynchronizer
 	{
 		synchronized static Document loadDocument(File fl) throws ResourceInstantiationException, MalformedURLException
 		{
@@ -72,7 +72,7 @@ public class MorceBatchAnalysis extends BMCAnalysis
 						fl.toString());
 
 				//Document doc = Factory.newDocument(fl.toURI().toURL(), "utf8");
-				Document doc = DocumentLoadSynchrinizer.loadDocument(fl);
+				Document doc = DocumentLoadSynchronizer.loadDocument(fl);
 				corpus.add(doc);
 			}
 			
@@ -102,7 +102,7 @@ public class MorceBatchAnalysis extends BMCAnalysis
 					controller.execute();
 					
 					//save documents
-					GateUtils.saveCorpusToDirectory(corpus, outputdir, "bmcID");
+					GateUtils.saveBMCCorpusToDirectory(corpus, outputdir, "bmcID");
 
 					Factory.deleteResource(tmt_ba); tmt_ba = null;
 					Factory.deleteResource(controller); controller = null;

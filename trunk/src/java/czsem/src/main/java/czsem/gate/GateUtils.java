@@ -12,6 +12,7 @@ import gate.ProcessingResource;
 import gate.Resource;
 import gate.creole.ResourceInstantiationException;
 import gate.persist.PersistenceException;
+import gate.util.AnnotationDiffer;
 import gate.util.Benchmark;
 import gate.util.GateException;
 import gate.util.reporting.PRTimeReporter;
@@ -276,6 +277,19 @@ public class GateUtils
 		
 	}
 	
+	public static abstract class CustomizeDiffer
+	{
+		public abstract String getKeyAs();
+		public abstract String getReponseAS();
+		public abstract String getAnnotationType();		
+	
+		public String annotType;
+		public void setAnnotType(String annotType)
+		{
+			this.annotType = annotType;
+		}
+	}
+
 	public static void safeDeepReInitPR_or_Controller(ProcessingResource processingResource) throws ResourceInstantiationException
 	{
 		if (processingResource instanceof Controller)
@@ -308,25 +322,31 @@ public class GateUtils
 	}
 	
 
-	public static void saveDocumentToDirectory(Document doc, String directory, String nameFeature) throws IOException
+	public static void saveGateDocumentToXML(Document doc, String filename) throws IOException
+	{
+		Writer out = new OutputStreamWriter(new BufferedOutputStream(
+				new FileOutputStream(filename)), "utf8");
+		out.write(doc.toXml());
+		out.close();							
+	}
+
+	
+	public static void saveBMCDocumentToDirectory(Document doc, String directory, String nameFeature) throws IOException
 	{
 		if (doc.getAnnotations("TectoMT").size() <= 0) throw new RuntimeException("No TectoMT annotations present in document!");
 		
 		String filename = (String) doc.getFeatures().get(nameFeature);
 		
-		Writer out = new OutputStreamWriter(new BufferedOutputStream(
-				new FileOutputStream(directory+"/"+filename+".xml")), "utf8");
-		out.write(doc.toXml());
-		out.close();					
+		saveGateDocumentToXML(doc, directory+"/"+filename+".xml");		
 	}
 
-	public static void saveCorpusToDirectory(Corpus corpus, String directory, String nameFeature) throws IOException
+	public static void saveBMCCorpusToDirectory(Corpus corpus, String directory, String nameFeature) throws IOException
 	{
 		
 		for (Object doc_o : corpus)
 		{
 			Document doc = (Document) doc_o;
-			saveDocumentToDirectory(doc, directory, nameFeature);
+			saveBMCDocumentToDirectory(doc, directory, nameFeature);
 		}
 	}
 	
@@ -348,5 +368,21 @@ public class GateUtils
 	{		
 		System.out.println(createGateTimeBenchmarkReport());
 	}
+	
+	public static AnnotationDiffer calculateSimpleDiffer(Document doc, CustomizeDiffer cd)
+	{
+		return calculateSimpleDiffer(doc, cd.getKeyAs(), cd.getReponseAS(), cd.getAnnotationType());		
+	}
+
+	public static AnnotationDiffer calculateSimpleDiffer(Document doc, String keyAS, String responseAS, String annotationType)
+	{
+		AnnotationDiffer differ = new AnnotationDiffer();
+		differ.setSignificantFeaturesSet(new HashSet<String>());
+		differ.calculateDiff(
+				doc.getAnnotations(keyAS).get(annotationType), 
+				doc.getAnnotations(responseAS).get(annotationType)); // compare
+		return differ;
+	}
+
 
 }
