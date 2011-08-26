@@ -162,7 +162,7 @@ public class MachineLearningExperiment
 		crossvalid.evaluation_register = evaluation_register;
 		crossvalid.execute();
 		
-		LearningEvaluator.CentralResultsRepository.repository.logAll();
+		LearningEvaluator.CentralResultsRepository.repository.logAll();		
 	}
 
 

@@ -6,8 +6,11 @@ import gate.Factory;
 import gate.creole.ResourceInstantiationException;
 import gate.persist.PersistenceException;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+
+import org.apache.commons.io.FileUtils;
 
 import czsem.Utils;
 import czsem.gate.GateUtils;
@@ -17,6 +20,7 @@ public interface DataSet
 {
 	String getKeyAS();
 	String getLearnigConfigDirectory();
+	void clearSevedFilesDirectory() throws IOException;
 	String [] getLearnigAnnotationTypes();
 	String getTectoMTAS();
 	Corpus getCorpus() throws PersistenceException, ResourceInstantiationException;
@@ -39,6 +43,9 @@ public interface DataSet
 
 		@Override
 		public String getLearnigConfigDirectory() {return child.getLearnigConfigDirectory();}
+
+		@Override
+		public void clearSevedFilesDirectory() throws IOException { child.clearSevedFilesDirectory();}
 
 		@Override
 		public String[] getLearnigAnnotationTypes() {return child.getLearnigAnnotationTypes();}
@@ -88,6 +95,11 @@ public interface DataSet
 
 		@Override
 		public String getLearnigConfigDirectory() {return learnigConfigDirectory;}
+
+		@Override
+		public void clearSevedFilesDirectory() throws IOException {
+			FileUtils.deleteQuietly(new File(getLearnigConfigDirectory() + "/savedFiles"));			
+		}
 
 		@Override
 		public String[] getLearnigAnnotationTypes() {return learnigAnnotationTypes;}

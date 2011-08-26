@@ -1,15 +1,19 @@
 package czsem.gate;
 
 import gate.Annotation;
+import gate.AnnotationSet;
 import gate.Controller;
 import gate.Corpus;
+import gate.CreoleRegister;
 import gate.DataStore;
 import gate.Document;
 import gate.Factory;
 import gate.FeatureMap;
 import gate.Gate;
+import gate.LanguageResource;
 import gate.ProcessingResource;
 import gate.Resource;
+import gate.Utils;
 import gate.creole.ResourceInstantiationException;
 import gate.persist.PersistenceException;
 import gate.util.AnnotationDiffer;
@@ -32,6 +36,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -58,13 +63,20 @@ public class GateUtils
 	{
 		return Config.getConfig().getLogFileDirectoryPath()+"/benchmark.txt";
 	}
+
+	public static void deleteGateTimeBenchmarkFile() throws URISyntaxException, IOException
+	{
+		new File(getTimeBenchmarkLogFileName()).delete();
+	}
+
+	
 	public static void enableGateTimeBenchmark() throws URISyntaxException, IOException
 	{
 		RollingFileAppender appender = new RollingFileAppender();
 		appender.setThreshold(Level.DEBUG);
 		appender.setFile(getTimeBenchmarkLogFileName());
 		appender.setAppend(false);
-		appender.setMaxFileSize("50MB");
+		appender.setMaxFileSize("10MB");
 		appender.setMaxBackupIndex(1);
 		appender.setLayout(new PatternLayout("%m%n"));
 		
@@ -382,6 +394,35 @@ public class GateUtils
 				doc.getAnnotations(keyAS).get(annotationType), 
 				doc.getAnnotations(responseAS).get(annotationType)); // compare
 		return differ;
+	}
+
+	public static boolean testAnnotationsDisjoint(AnnotationSet annots)
+	{
+		List<Annotation> ordered = Utils.inDocumentOrder(annots);
+		for (int i=0; i<ordered.size()-1; i++)
+		{
+			Annotation a = ordered.get(i);
+			Annotation next = ordered.get(i+1);
+			
+			if (a.getEndNode().getOffset() > next.getStartNode().getOffset()) return false;			
+		}
+		return true;
+	}
+
+	public static void deleteAllPublicGateResources()
+	{
+		CreoleRegister reg = Gate.getCreoleRegister();
+		
+		for (ProcessingResource i : reg.getPublicPrInstances())
+		{
+			Factory.deleteResource(i);			
+		}
+
+		for (LanguageResource l : reg.getPublicLrInstances())
+		{
+			Factory.deleteResource(l);			
+		}
+
 	}
 
 

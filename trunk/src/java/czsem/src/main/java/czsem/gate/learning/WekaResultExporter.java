@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.util.Collection;
-import java.util.Map;
 
 import org.apache.log4j.Logger;
 
@@ -18,7 +17,7 @@ import com.csvreader.CsvReader;
 import com.csvreader.CsvWriter;
 
 import czsem.gate.GateUtils;
-import czsem.gate.GateUtils.TimeBenchmarkReporter;
+import czsem.gate.TimeBenchmarkLogAnalysis;
 import czsem.gate.plugins.LearningEvaluator;
 import czsem.gate.plugins.LearningEvaluator.DiffCondition;
 import czsem.gate.plugins.LearningEvaluator.DocumentDiff;
@@ -26,6 +25,9 @@ import czsem.utils.ProjectSetup;
 
 public class WekaResultExporter
 {
+	Logger logger = Logger.getLogger(WekaResultExporter.class);
+
+/*	
 	private static class TimeBenchmarkWekaReporter implements TimeBenchmarkReporter
 	{
 		Logger logger = Logger.getLogger(TimeBenchmarkWekaReporter.class);
@@ -96,7 +98,7 @@ public class WekaResultExporter
 		}
 	}
 
-	
+	*/
 
 	
 	public static final String[] header =
@@ -130,6 +132,9 @@ public class WekaResultExporter
 	
 	protected static class Result
 	{
+		String data[];
+		int fold_number;
+
 		public void setTestTime(String time) {
 			setField(data.length-1, time);			
 		}
@@ -139,11 +144,17 @@ public class WekaResultExporter
 		public String getResponsesASName() {
 			return data[3];
 		}	
+		/** Counted form 1 not form 0 ! **/
+		public String getFoldNumber() {
+			return data[2];
+		}	
+		/** Counted form 1 not form 0 ! **/
+		public int getIntFoldNumber() {
+			return fold_number;
+		}	
 		public void setRunNumber(int run_number) {
 			setField(1, run_number);
 		}
-
-		String data[];
 
 		public Result()
 		{
@@ -239,6 +250,7 @@ public class WekaResultExporter
 					//Summary
 					//measureNumRules
 			);
+			this.fold_number = fold_number;
 		}
 
 		
@@ -301,7 +313,25 @@ public class WekaResultExporter
 	
 	public void addInfoFromTimeBechmark() throws BenchmarkReportInputFileFormatException, URISyntaxException, IOException
 	{
-		GateUtils.doGateTimeBenchmarkReport(new TimeBenchmarkWekaReporter(this));
+		TimeBenchmarkLogAnalysis a = new TimeBenchmarkLogAnalysis(
+				GateUtils.getTimeBenchmarkLogFileName());
+		a.parse();
+		
+		for (int i = 0; i < results.length; i++)
+		{
+			Result r = results[i];
+			int fold = r.getIntFoldNumber()-1;
+			String pr_name = r.getResponsesASName();
+			int trn_time = a.getTrainTimeForMLEngine(pr_name, fold);
+			int tst_time = a.getTestTimeForMLEngine(pr_name, fold);
+			logger.debug(String.format("train: %s %d", pr_name, trn_time));
+			r.setTrainTime(Integer.toString(trn_time));
+			logger.debug(String.format("test: %s %d", pr_name, tst_time));
+			r.setTestTime(Integer.toString(tst_time));						
+		}
+		
+		//slow variant:
+		//GateUtils.doGateTimeBenchmarkReport(new TimeBenchmarkWekaReporter(this));
 	}
 	
 	public void saveAll(String filename) throws IOException

@@ -269,6 +269,13 @@ public class Utils {
 		System.err.println(fileNameWithoutExtensions(new File("pok")));
 	}
 
+	public static void increaseCountingMap(Map<String, Integer> map, String key, int count)
+	{
+		Integer last_val = map.get(key);
+		map.put(key, last_val == null ? count : count + last_val);
+
+	}
+
 
 
 }

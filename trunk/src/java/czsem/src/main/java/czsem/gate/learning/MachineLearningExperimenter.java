@@ -89,6 +89,7 @@ public class MachineLearningExperimenter
 		
 	}
 	
+/*
 	public static void main(String [] args) throws GateException, URISyntaxException, IOException, JDOMException, BenchmarkReportInputFileFormatException
 	{
 		for (int i = 0; i < 5; i++)
@@ -96,10 +97,13 @@ public class MachineLearningExperimenter
 			main2(args);			
 		}
 	}
+/**/
+	
+    static Logger logger = Logger.getLogger(MachineLearningExperimenter.class);
 
-	public static void main2(String [] args) throws GateException, URISyntaxException, IOException, JDOMException, BenchmarkReportInputFileFormatException
+    public static void init() throws GateException, URISyntaxException, IOException
 	{
-	    Logger logger = Logger.getRootLogger();
+        Logger logger = Logger.getRootLogger();
 	    logger.setLevel(Level.ALL);
 		BasicConfigurator.configure();
 
@@ -129,8 +133,6 @@ public class MachineLearningExperimenter
 	    Config.getConfig().setGateHome();
 	    Gate.init();
 
-	    GateUtils.enableGateTimeBenchmark();
-
 	    GateUtils.registerPluginDirectory("Machine_Learning");
 	    GateUtils.registerPluginDirectory("ANNIE");
 	    GateUtils.registerPluginDirectory("Tools");
@@ -139,7 +141,56 @@ public class MachineLearningExperimenter
 	    GateUtils.registerPluginDirectory(new File("czsem_GATE_plugins"));
 		    		    
 	    	    
-	    LogService.minVerbosityLevel = 0;
+	    LogService.minVerbosityLevel = 0;		
+	}
+
+	
+	public static void main(String [] args) throws GateException, URISyntaxException, IOException, JDOMException, BenchmarkReportInputFileFormatException
+	{
+		init();
+		
+		String results_file_name = "weka_results.csv";
+		
+		new File(results_file_name).delete();
+		
+		for (String annot_type : Acquisitions.all_annot_types)
+		{
+		    LearningEvaluator.CentralResultsRepository.repository.clear();
+		    
+//		    GateUtils.deleteGateTimeBenchmarkFile();
+		    GateUtils.enableGateTimeBenchmark();
+		    
+			DataSet dataset = new Acquisitions(annot_type);
+//			DataSet dataset = new DataSetReduce(new Acquisitions(annot_type), 0.1);
+			dataset.clearSevedFilesDirectory();
+			
+			MachineLearningExperiment experiment = new MachineLearningExperiment(
+		    		dataset,
+		    		new MLEvaluate(
+		    				new CreateTemporaryMentionsReferedMentionsPostprocessing(
+		    						new ILPEngine("ILP_config_NE_roots.xml"))),
+		    		/*
+		    		new MLEvaluate(
+		    				new CreateTemporaryMentions(
+		    	    				new MentionsSubtreePostprocessing(
+		    	    						new ILPEngine("ILP_config_NE_roots_subtree.xml")))),	    		
+    	    		new MLEvaluate(new CreateTemporaryMentions(
+		    	    		new SubsequentAnnotationMerge(new ILPEngine()))),
+/**/
+		    	    new MLEvaluate(new CreatePersistentMentions(new PaumEngine()))
+		    );
+			experiment.crossValidation(2);
+			
+			GateUtils.deleteAllPublicGateResources();
+			
+			
+		    logger.info("counting time statistics...");
+		    
+		    WekaResultExporter ex = new WekaResultExporter();
+		    ex.addInfoFromTimeBechmark();
+		    ex.saveAll(results_file_name);		    
+		}
+	}
 
 /*	    
 	    new MachineLearningExperiment(
@@ -160,17 +211,10 @@ public class MachineLearningExperimenter
 	    ).crossValidation(2);
 /**/	    
 	    
-	    czechFiremanSimple().crossValidation(10);
+//	    czechFiremanSimple().crossValidation(10);
 	    
 	    
 //	    logger.info("time statistics:\n"+GateUtils.createGateTimeBenchmarkReport());	    
-	    logger.info("counting time statistics...");
-	    
-	    WekaResultExporter ex = new WekaResultExporter();
-	    ex.addInfoFromTimeBechmark();
-	    ex.saveAll("weka_results.csv");
-	    
-	    LearningEvaluator.CentralResultsRepository.repository.clear();
 	    
 	    
 
@@ -179,7 +223,7 @@ public class MachineLearningExperimenter
 	    //	    trainOnly(new TrainTestGateOnCzech(false, true));
 //	    trainOnly(new TrainTestAcquisitions(new ILPEngine()));
 //	    trainOnly(new TrainTestCzechFireman(new ILPEngine()));
-	}
+//	}
 	
 	
 	

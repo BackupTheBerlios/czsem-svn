@@ -87,6 +87,8 @@ public class ILPWrapper implements AdvancedMLEngine
 		ilpSer.train();
 		
 		triningInProgress = false;
+		
+		train_register.remove(this);
 //		ilpSer.train(options.getChild("ilp").getChildText("learning_settings"));		
 	}
 

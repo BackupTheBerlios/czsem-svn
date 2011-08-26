@@ -1,5 +1,7 @@
 package czsem.gate.learning;
 
+import gate.Annotation;
+import gate.AnnotationSet;
 import gate.Corpus;
 import gate.Document;
 import gate.Factory;
@@ -16,6 +18,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Arrays;
+import java.util.Locale;
 
 import czsem.gate.GateUtils;
 import czsem.gate.learning.DataSet.DataSetImpl.*;
@@ -24,6 +27,7 @@ import czsem.gate.plugins.AnnotationDependencyRootMarker;
 import czsem.gate.plugins.AnnotationDependencySubtreeMarker;
 import czsem.gate.plugins.CreateMentionsPR;
 import czsem.utils.Config;
+import czsem.utils.MultiSet;
 
 public class MeasureNamedEntityOverlap
 {
@@ -35,8 +39,8 @@ public class MeasureNamedEntityOverlap
 
 	public static String mentNE_AS = "ment_NamedEntity";
 	
-	final String tocType = "Token";
-	final String depType = "aDependency";
+	final String tocType = "tToken";
+	final String depType = "tDependency";
 	final String neType = "Lookup";
 //	final String neType = "NamedEntity";
 
@@ -176,6 +180,59 @@ public class MeasureNamedEntityOverlap
 
 	
 
+	public void countTokenOverlap()
+	{
+		for (String annot_type: dataset.getLearnigAnnotationTypes())
+		{
+			countTokenOverlap(annot_type);
+		}	
+	}
+
+	public void countTokenOverlap(String annot_type)
+	{
+		MultiSet<Integer> token_stats = new MultiSet<Integer>();
+		
+		for (int i=0; i<loaded_corpus.size(); i++)
+		{
+			Document doc = (Document) loaded_corpus.get(i);
+			
+			AnnotationSet anns = doc.getAnnotations(dataset.getKeyAS()).get(annot_type);
+			AnnotationSet tocs = doc.getAnnotations(dataset.getTectoMTAS()).get(tocType);
+			
+			for (Annotation a: anns)
+			{
+				AnnotationSet cont = tocs.getContained(a.getStartNode().getOffset(), a.getEndNode().getOffset());
+				token_stats.add(cont.size());
+				
+				if (! GateUtils.testAnnotationsDisjoint(cont))					
+				{
+					System.err.format(
+							"Warning: token annotations ar not dijoint: doc: '%s', top annotation: '%s' tokens: '%s'\n",
+							doc.getName(), a.toString(), cont.toString());
+				}
+			}			
+		}
+		
+		Integer[] keys = token_stats.toArray(new Integer[0]);
+
+		int sum=0;
+		int num=0;
+		for (int i=0; i<keys.length; i++)
+		{		
+			int n = token_stats.get(keys[i]);
+			num += n;
+			sum += n*keys[i];
+		}
+		System.err.format("%s (avg. %f)\n", annot_type, ((double) sum) / num);
+
+		
+		Arrays.sort(keys);
+		for (int i=0; i<keys.length; i++)
+		{
+			System.err.format("%10d-token annotations: %4d\n", keys[i], token_stats.get(keys[i]));
+		}
+	}
+
 	public void createMentions() throws ResourceInstantiationException, ExecutionException
 	{
 		SerialAnalyserController controller = (SerialAnalyserController)	    	   
@@ -212,25 +269,30 @@ public class MeasureNamedEntityOverlap
 
 	public static void main(String[] args) throws URISyntaxException, IOException, GateException
 	{
-	    Config.getConfig().setGateHome();
+	    Locale.setDefault(Locale.ENGLISH);
+		
+		Config.getConfig().setGateHome();
 	    Gate.init();
 	    GateUtils.registerPluginDirectory(new File("czsem_GATE_plugins"));
 	
 	
 		
-//		MeasureNamedEntityOverlap m = new MeasureNamedEntityOverlap(new Acquisitions(Acquisitions.all_annot_types));
-		MeasureNamedEntityOverlap m = new MeasureNamedEntityOverlap(new CzechFireman(CzechFireman.all_annot_types));
+		MeasureNamedEntityOverlap m = new MeasureNamedEntityOverlap(new Acquisitions(Acquisitions.all_annot_types));
+//		MeasureNamedEntityOverlap m = new MeasureNamedEntityOverlap(new CzechFireman(CzechFireman.all_annot_types));
 		
 		m.loadDataset();
 	
 		System.err.println("in memory");
 	
 		m.createMentions();
-		
-		
+				
 		GateUtils.saveGateDocumentToXML((Document) m.loaded_corpus.get(0), "test_doc.xml");
 			
 		m.compare();
+		
+		System.err.println("tokens");
+
+		m.countTokenOverlap();
 		
 		System.err.println("done");
 	
