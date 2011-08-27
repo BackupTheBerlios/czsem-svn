@@ -1,8 +1,12 @@
 package czsem.gate;
 
+import gate.CreoleRegister;
 import gate.Document;
+import gate.Gate;
+import gate.LanguageAnalyser;
 import gate.ProcessingResource;
 import gate.creole.ExecutionException;
+import gate.creole.SerialAnalyserController;
 import gate.creole.ml.AdvancedMLEngine;
 import gate.creole.ml.Attribute;
 import gate.creole.ml.DatasetDefintion;
@@ -23,6 +27,8 @@ import org.apache.log4j.Logger;
 import org.jdom.Element;
 
 import czsem.gate.GateUtils.CorpusDocumentCounter;
+import czsem.gate.plugins.CrossValidation;
+import czsem.gate.plugins.LearningEvaluator;
 
 public class ILPWrapper implements AdvancedMLEngine
 {
@@ -84,6 +90,16 @@ public class ILPWrapper implements AdvancedMLEngine
 		ilpSer.flushAndClose();
 		logger.info(String.format("ILP training on %d documents...", docCounter.numDocs));
 		logger.info("Learning instace types: " + ilpSer.instanceClassTypes.toFormatedString(", "));
+		
+		CrossValidation cv = findparentCrossValidationInstatnce();
+		if (cv != null)
+		{
+			LearningEvaluator.CentralResultsRepository.repository.
+				addNumberDocsAndTrainingInstances(
+						pr.getName(), docCounter.numDocs,
+						cv.actual_fold_number, ilpSer.instanceClassTypes);			
+		}
+		
 		ilpSer.train();
 		
 		triningInProgress = false;
@@ -226,11 +242,38 @@ public class ILPWrapper implements AdvancedMLEngine
 	}
 	
 
+	
+	protected CrossValidation findparentCrossValidationInstatnce()
+	{
+		CreoleRegister reg = Gate.getCreoleRegister();
+		
+		for (ProcessingResource i : reg.getPrInstances(CrossValidation.class.getCanonicalName()))
+		{
+			CrossValidation cv = (CrossValidation) i;
+			
+			LanguageAnalyser la;
+			if (pr.getTraining()) la = cv.getTrainingPR();
+			else la = cv.getTestingPR();
+			
+			if (SerialAnalyserController.class.isInstance(la))
+			{
+				SerialAnalyserController sac = (SerialAnalyserController) la;
+				for (Object child : sac.getPRs())
+				{
+					if (child == pr) return cv;					
+				}
+			}			
+		}
+
+		return null;		
+	}
+	
 	@Override
 	public void setOwnerPR(ProcessingResource owner_pr)
 	{
-		this.pr = (MachineLearningPR) owner_pr;
-		this.pr.addProgressListener(new ProgressListener() {
+		pr = (MachineLearningPR) owner_pr;
+				
+		pr.addProgressListener(new ProgressListener() {
 			@Override
 			public void progressChanged(int i)
 			{

@@ -277,7 +277,7 @@ public class MeasureNamedEntityOverlap
 	
 	
 		
-		MeasureNamedEntityOverlap m = new MeasureNamedEntityOverlap(new Acquisitions(Acquisitions.all_annot_types));
+		MeasureNamedEntityOverlap m = new MeasureNamedEntityOverlap(new Acquisitions(Acquisitions.eval_annot_types));
 //		MeasureNamedEntityOverlap m = new MeasureNamedEntityOverlap(new CzechFireman(CzechFireman.all_annot_types));
 		
 		m.loadDataset();

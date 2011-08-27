@@ -1,8 +1,11 @@
 package czsem.gate.learning;
 
 import gate.Gate;
+import gate.creole.ExecutionException;
+import gate.creole.ResourceInstantiationException;
 import gate.creole.SerialController;
 import gate.learning.LogService;
+import gate.persist.PersistenceException;
 import gate.util.GateException;
 import gate.util.profile.Profiler;
 import gate.util.reporting.exceptions.BenchmarkReportInputFileFormatException;
@@ -101,7 +104,7 @@ public class MachineLearningExperimenter
 	
     static Logger logger = Logger.getLogger(MachineLearningExperimenter.class);
 
-    public static void init() throws GateException, URISyntaxException, IOException
+    public static void initEnvironment() throws GateException, URISyntaxException, IOException
 	{
         Logger logger = Logger.getRootLogger();
 	    logger.setLevel(Level.ALL);
@@ -145,23 +148,25 @@ public class MachineLearningExperimenter
 	}
 
 	
-	public static void main(String [] args) throws GateException, URISyntaxException, IOException, JDOMException, BenchmarkReportInputFileFormatException
+	public static void saveResults(String results_file_name) throws BenchmarkReportInputFileFormatException, URISyntaxException, IOException
 	{
-		init();
-		
-		String results_file_name = "weka_results.csv";
-		
-		new File(results_file_name).delete();
-		
-		for (String annot_type : Acquisitions.all_annot_types)
+	    WekaResultExporter ex = new WekaResultExporter();
+	    ex.initFromLearningEvaluatorCentralResultsRepository();
+	    ex.addInfoFromTimeBechmark();
+	    ex.saveAll(results_file_name);		    		
+	}
+	
+	public static void bigAcquisitionsExperiment(String results_file_name) throws BenchmarkReportInputFileFormatException, URISyntaxException, IOException, ExecutionException, ResourceInstantiationException, PersistenceException, JDOMException
+	{
+		for (String annot_type : Acquisitions.eval_annot_types)
 		{
 		    LearningEvaluator.CentralResultsRepository.repository.clear();
 		    
 //		    GateUtils.deleteGateTimeBenchmarkFile();
 		    GateUtils.enableGateTimeBenchmark();
 		    
-			DataSet dataset = new Acquisitions(annot_type);
-//			DataSet dataset = new DataSetReduce(new Acquisitions(annot_type), 0.1);
+//			DataSet dataset = new Acquisitions(annot_type);
+			DataSet dataset = new DataSetReduce(new Acquisitions(annot_type), 0.1);
 			dataset.clearSevedFilesDirectory();
 			
 			MachineLearningExperiment experiment = new MachineLearningExperiment(
@@ -181,15 +186,30 @@ public class MachineLearningExperimenter
 		    );
 			experiment.crossValidation(2);
 			
-			GateUtils.deleteAllPublicGateResources();
 			
+		    logger.info("saving results, counting time statistics...");
+		    saveResults(results_file_name);
 			
-		    logger.info("counting time statistics...");
-		    
-		    WekaResultExporter ex = new WekaResultExporter();
-		    ex.addInfoFromTimeBechmark();
-		    ex.saveAll(results_file_name);		    
-		}
+		   
+		    GateUtils.deleteAllPublicGateResources();
+		}		
+	}
+    
+    public static void main(String [] args) throws Exception
+	{
+		initEnvironment();
+		
+		String results_file_name = "weka_results.csv";
+		
+		new File(results_file_name).delete();
+		
+		bigAcquisitionsExperiment(results_file_name);
+		
+		WekaResultTests t = new WekaResultTests(System.err);
+		t.loadInstances(results_file_name);
+		t.testsAttr(6); //F1
+
+		
 	}
 
 /*	    

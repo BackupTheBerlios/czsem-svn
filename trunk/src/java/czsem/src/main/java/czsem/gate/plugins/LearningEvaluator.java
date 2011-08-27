@@ -21,9 +21,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.log4j.Logger;
 
 import czsem.gate.DocumentFeaturesDiff;
+import czsem.utils.MultiSet;
 
 /**
  * Mostly copied form {@link QualityAssurancePR}, slightly modified. 
@@ -70,6 +73,78 @@ public class LearningEvaluator extends AbstractLanguageAnalyser
 			{
 				eval.logStatistics(repository_map.get(eval));				
 			}
+		}
+
+		public static class PrNameAndFold
+		{
+			public PrNameAndFold(String prName, int fold) {
+				this.prName = prName;
+				this.fold = fold;
+			}
+			String prName;
+			int fold;
+			
+			@Override
+			public int hashCode() {			
+				return new HashCodeBuilder().append(prName).append(fold).toHashCode();
+			}
+			@Override
+			public boolean equals(Object obj) {
+				   if (obj == null) { return false; }
+				   if (obj == this) { return true; }
+				   if (obj.getClass() != getClass()) {
+				     return false;
+				   }
+				   PrNameAndFold rhs = (PrNameAndFold) obj;
+				   return new EqualsBuilder()
+				                 .append(prName, rhs.prName)
+				                 .append(fold, rhs.fold)
+				                 .isEquals();				 			
+			}
+		}
+		
+		public static class NumDocsAndTrainInst
+		{
+			public NumDocsAndTrainInst(int numDocs,
+					MultiSet<String> instanceClassTypes) {
+				this.numDocs = numDocs;
+				this.instanceClassTypes = instanceClassTypes;
+			}
+			public int numDocs;
+			public MultiSet<String> instanceClassTypes;
+		}
+		
+		private Map<PrNameAndFold, NumDocsAndTrainInst> train_inst_stats = 
+			new HashMap<LearningEvaluator.CentralResultsRepository.PrNameAndFold, LearningEvaluator.CentralResultsRepository.NumDocsAndTrainInst>();
+
+		
+		public void addNumberDocsAndTrainingInstances(String prName, int numDocs,
+				int actual_fold_number, MultiSet<String> instanceClassTypes)
+		{
+			train_inst_stats.put(
+					new PrNameAndFold(prName, actual_fold_number),
+					new NumDocsAndTrainInst(numDocs, instanceClassTypes));			
+		}
+		
+
+		public int getNumTrainInst(String trainPRName, List<String> annotation_types, int fold_number)
+		{
+			NumDocsAndTrainInst entry = train_inst_stats.get(new PrNameAndFold(trainPRName, fold_number));
+			
+			if (entry == null) return -1;
+
+			int ret = 0;
+			MultiSet<String> insts = entry.instanceClassTypes;
+			for (String ann_type : annotation_types)
+			{
+				ret += insts.get(ann_type);				
+			}
+			return ret;
+		}
+
+		public int getNumDocs(String trainPRName, int fold_number) {
+			NumDocsAndTrainInst entry = train_inst_stats.get(new PrNameAndFold(trainPRName, fold_number));
+			return entry == null ? -1 : entry.numDocs;
 		}
 		
 	}

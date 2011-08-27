@@ -47,6 +47,7 @@ public class CrossValidation extends AbstractProcessingResource
 	protected Corpus [][] corpusFolds;
 	protected Utils.Evidence<Document> documentEvidence [];
 	public List<LearningEvaluator> evaluation_register = null;
+	public int actual_fold_number = 0; 
 	
 	
 	@SuppressWarnings("unchecked")
@@ -152,7 +153,7 @@ public class CrossValidation extends AbstractProcessingResource
 			
 			for (int i = 0; i < numberOfFolds; i++)
 			{
-				updateEvaluatorsFold(i);
+				distributeFoldNumber(i);
 				
 				//training
 				logger.info(String.format("training fold %3d", i));
@@ -186,8 +187,9 @@ public class CrossValidation extends AbstractProcessingResource
 		}
 	}
 	
-	private void updateEvaluatorsFold(int fold_index)
+	private void distributeFoldNumber(int fold_index)
 	{
+		actual_fold_number = fold_index;
 		if (evaluation_register == null) return;
 		
 		for (LearningEvaluator eval : evaluation_register)

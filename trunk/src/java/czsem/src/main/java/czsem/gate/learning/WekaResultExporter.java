@@ -19,6 +19,7 @@ import com.csvreader.CsvWriter;
 import czsem.gate.GateUtils;
 import czsem.gate.TimeBenchmarkLogAnalysis;
 import czsem.gate.plugins.LearningEvaluator;
+import czsem.gate.plugins.LearningEvaluator.CentralResultsRepository;
 import czsem.gate.plugins.LearningEvaluator.DiffCondition;
 import czsem.gate.plugins.LearningEvaluator.DocumentDiff;
 import czsem.utils.ProjectSetup;
@@ -109,25 +110,28 @@ public class WekaResultExporter
 		"Key_Scheme",
 		"Key_Scheme_options",
 		"Key_Scheme_version_ID",
-		"Date_time",
-//		"Number_of_training_instances",
+		"DateTime",
 //		"Number_of_testing_instances",
-		"Number_correct",
-		"Number_missing",
-		"Number_spurious",
-		"Number_overlap",
+		"Number Correct",
+		"Number Missing",
+		"Number Spurious",
+		"Number Overlap",
 //		"Percent_correct",
 //		"Percent_incorrect",
 //		"Percent_unclassified",
-		"Strict_precision",
-		"Strict_recall",
-		"Strict_F1",
-		"Lenient_F1",
-		"Average_F1",
+		"Strict Precision",
+		"Strict Recall",
+		"Strict $F_1$",
+		"Lenient $F_1$",
+		"Average $F_1$",
+		"Number Training Inst",
+		"Number Training Docs",
 //		"Area_under_ROC",
 //		"Weighted_avg_true_positive_rate",
-		"Elapsed_Time_training",
-		"Elapsed_Time_testing",
+		
+		//always the last two! 
+		"Time Training",
+		"Time Testing",
 	};
 	
 	protected static class Result
@@ -176,12 +180,13 @@ public class WekaResultExporter
 			{
 				if (i >= this.data.length) break;
 				
-				this.data[i] = data[i].toString();
+				if (data[i] != null)
+					this.data[i] = data[i].toString();
 			}
 			
 		}
 		
-		public Result(LearningEvaluator learningEvaluator, AnnotationDiffer diff, int fold_number, String timestamp)
+		public Result(LearningEvaluator learningEvaluator, AnnotationDiffer diff, int numDocs, int numTrainInst, int fold_number, String timestamp)
 		{
 			this(					
 					learningEvaluator.getAnnotationTypes().toString(), //Key_Dataset
@@ -201,7 +206,9 @@ public class WekaResultExporter
 					diff.getRecallStrict(),
 					diff.getFMeasureStrict(1),
 					diff.getFMeasureLenient(1),
-					diff.getFMeasureAverage(1)
+					diff.getFMeasureAverage(1),
+					numTrainInst,
+					numDocs
 					//Number_unclassified
 					//Percent_correct
 					//Percent_incorrect
@@ -271,10 +278,10 @@ public class WekaResultExporter
 	
 	public WekaResultExporter()
 	{
-		initFromLearningEvaluatorCentralResultsRepository();
+		//initFromLearningEvaluatorCentralResultsRepository();
 	}
 	
-	private void initFromLearningEvaluatorCentralResultsRepository()
+	public void initFromLearningEvaluatorCentralResultsRepository()
 	{
 		String timestamp = ProjectSetup.makeTimeStamp();
 
@@ -292,11 +299,12 @@ public class WekaResultExporter
 			{
 				final int fold_number = fold+1;
 				
+				CentralResultsRepository repository = LearningEvaluator.CentralResultsRepository.repository;
 				AnnotationDiffer eval = 
-					LearningEvaluator.CentralResultsRepository.repository.
+					
 
-//					getOveralResults(learningEvaluator, new AllDiffsCondition());
-					getOveralResults(learningEvaluator, 
+//					repository.getOveralResults(learningEvaluator, new AllDiffsCondition());
+					repository.getOveralResults(learningEvaluator, 
 /**/
 						new DiffCondition() {
 							@Override
@@ -305,7 +313,11 @@ public class WekaResultExporter
 							}
 						});
 /**/				
-				results[a*num_of_folds+fold] = new Result(learningEvaluator, eval, fold_number, timestamp );
+				String trainPRName = MLEngine.renderPRNameTrain(learningEvaluator.getResponseASName());
+				int numDocs = repository.getNumDocs(trainPRName, fold);
+				int numTrainInst = repository.getNumTrainInst(trainPRName, learningEvaluator.getAnnotationTypes(), fold);;
+				results[a*num_of_folds+fold] = new Result(
+						learningEvaluator, eval, numDocs, numTrainInst, fold_number, timestamp );
 			}
 			a++;
 		}				

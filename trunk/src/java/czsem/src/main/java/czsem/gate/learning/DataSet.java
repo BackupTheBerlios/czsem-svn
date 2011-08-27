@@ -154,21 +154,21 @@ public interface DataSet
 	
 		public static class Acquisitions extends DataSetImpl
 		{
-			public static final String [] all_annot_types =
+			public static final String [] eval_annot_types =
 			{
 				"acqabr",
-				"acqbus",
-				"acqcode",
-				"acqloc",
+//				"acqbus",
+//				"acqcode",
+//				"acqloc",
 				"acquired",
 				"dlramt",
 				"purchabr",
 				"purchaser",
-				"purchcode",
+//				"purchcode",
 				"seller",
 				"sellerabr",
-				"sellercode",
-				"status",
+//				"sellercode",
+//				"status",
 			};
 			
 			public Acquisitions(String ... learnigAnnotationTypes) throws URISyntaxException, IOException
