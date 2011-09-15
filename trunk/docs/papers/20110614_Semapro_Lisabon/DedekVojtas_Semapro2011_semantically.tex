@@ -408,14 +408,13 @@ Prague, Czech Republic\\
 
 
 \begin{abstract}
-Information extraction (IE) and automated semantic annotation of text are usually done by complex tools. These tools use some kind of a model that represents the actual task and its solution. The model is usually represented as a set of extraction rules (e.g. regular expressions), gazetteer lists, or it is based on some statistical measurements and probability assertions. In the environment of the Semantic Web it is essential that information is shareable and some ontology based IE tools keep the model in so called extraction ontologies. In practice the extraction ontologies are usually strongly dependent on a particular extraction/annotation tool and cannot be used separately. In this paper we present an extension of the idea of extraction ontologies. 
+Information extraction (IE) and automated semantic annotation of text are usually done by complex tools. These tools use some kind of a model that represents the actual task and its solution. The model is usually represented as a set of extraction rules (e.g., regular expressions), gazetteer lists, or it is based on some statistical measurements and probability assertions. In the environment of the Semantic Web it is essential that information is shareable and some ontology based IE tools keep the model in so called extraction ontologies. In practice, the extraction ontologies are usually strongly dependent on a particular extraction/annotation tool and cannot be used separately. In this paper we present an extension of the idea of extraction ontologies. 
 According to the presented concept the extraction ontologies should not be dependent on the particular extraction/annotation tool. In our solution the extraction/annotation process can be done separately by an ordinary reasoner. 
-
 We also present a proof of concept for the idea: a case study with a linguistically based IE engine that exports its extraction rules to an extraction ontology and we demonstrate how this extraction ontology can be applied to a document by a reasoner. The paper also contains an evaluation experiment with several OWL reasoners.
 \end{abstract}
 
 \begin{IEEEkeywords}
-Extraction Ontology; Reasoning; Information Extraction; Semantic Annotation
+Extraction Ontology, Reasoning, Information Extraction, Semantic Annotation.
 \end{IEEEkeywords}
 
 
@@ -436,9 +435,9 @@ Extraction Ontology; Reasoning; Information Extraction; Semantic Annotation
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-Information extraction (IE) and automated semantic annotation of text are usually done by complex tools and all these tools use some kind of model that represents the actual task and its solution. The model is usually represented as a set of some kind of extraction rules (e.g. regular expressions), gazetteer lists or it is based on some statistical measurements and probability assertions (classification algorithms like Support Vector Machines (SVM), Maximum Entropy Models, Decision Trees, Hidden Markov Models (HMM), Conditional Random Fields (CRF), etc.)
+Information extraction (IE) and automated semantic annotation of text are usually done by complex tools and all these tools use some kind of model that represents the actual task and its solution. The model is usually represented as a set of some kind of extraction rules (e.g., regular expressions), gazetteer lists or it is based on some statistical measurements and probability assertions (classification algorithms like Support Vector Machines (SVM), Maximum Entropy Models, Decision Trees, Hidden Markov Models (HMM), Conditional Random Fields (CRF), etc.)
 
-In the beginning a model is either created by a human user or it is learned from a training dataset. Then, in the actual extraction/annotation process, the model is used as a configuration or as a parameter of the particular extraction/annotation tool. These models are usually stored in~proprietary formats and they are accessible only by the corresponding tool.
+In the beginning, a model is either created by a human user or it is learned from a training dataset. Then, in the actual extraction/annotation process, the model is used as a configuration or as a parameter of the particular extraction/annotation tool. These models are usually stored in~proprietary formats and they are accessible only by the corresponding tool.
 
 In the environment of the Semantic Web it is essential that information is shareable and some ontology based IE tools keep the model in so called extraction ontologies \cite{DBLP:conf/er/EmbleyTL02}. Extraction ontologies should serve as a wrapper for documents of a narrow domain of interest. When we apply an extraction ontology to a document, the ontology identifies objects and relationships present in the document and it associates them with the corresponding ontology terms and thus wraps the document so that it is understandable in terms of the ontology \cite{DBLP:conf/er/EmbleyTL02}.
 
@@ -470,21 +469,14 @@ In this paper we present an extension of the idea of extraction ontologies. We a
 In this paper we present a proof of concept for the idea: a case study with our linguistically based IE engine and an experiment with several OWL reasoners. In the case study (see Section~\ref{sec:case}) the IE engine exports its extraction rules to the form of an extraction ontology. Third party linguistic tool linguistically annotates an input document and the linguistic annotations are translated to so-called document ontology. After that an ordinary OWL reasoner is used to apply the extraction ontology on the document ontology, which has the same effect as a direct application of the extraction rules on the document. The process is depicted in Fig~\ref{img:rules_app_schema} and it will be described in detail in Section~\ref{sec:implement}.
 
 
-Section~\ref{sec:relwork} presents several closely related works. The main idea of the paper will be described in Section~\ref{sec:main} and in Section~\ref{sec:experiment} we present an experiment with several OWL reasoners and IE datasets to verify feasibility of the idea.  
+Section~\ref{sec:relwork} presents several closely related works. The main idea of the paper will be described in Section~\ref{sec:main}, its implementation in Section~\ref{sec:case} and in Section~\ref{sec:experiment} an experiment with several OWL reasoners and IE datasets will be presented. In Section~\ref{sec:discuss} related issues are discussed and Section~\ref{sec:conclusion} concludes the paper.
 
-
-\subsection{Contributions for Information Extraction}
-The paper combines the field of ontology-based information extraction and rule-based reasoning. The aim is to show a new possibility in usage of IE tools and reasoners. In this paper we do not present a solution that would improve the performance of IE tools.
-
-We also do not provide a proposal of a universal extraction format (although a specific form for the rule based extraction on dependency parsed text could be inferred). This task is left for the future if a need for such activity emerges.
-
-The aim of the paper is a demonstration of the idea of tool independent extraction ontologies and the possibility to use reasoners for information extraction.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Related Work} \label{sec:relwork}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Ontology-based Information Extraction (OBIE) \cite{citeulike:7291004} or Ontology-driven Information Extraction \cite{Yildiz:2007:OMO:1793154.1793216} has recently emerged as a subfield of information extraction. Furthermore, Web Information Extraction \cite{DBLP:journals/tkde/ChangKGS06} is a closely related discipline. Many extraction and annotation tools can be found in the above mentioned surveys (\cite{citeulike:7291004,DBLP:journals/tkde/ChangKGS06}), many of the tools also use an ontology as an output format, but almost all of them store their extraction models in proprietary formats and the models are accessible only by the corresponding tool.
+Ontology-based Information Extraction (OBIE) \cite{citeulike:7291004} or Ontology-driven Information Extraction \cite{Yildiz:2007:OMO:1793154.1793216} has recently emerged as a subfield of information extraction. Furthermore, Web Information Extraction \cite{DBLP:journals/tkde/ChangKGS06} is a closely related discipline. Many extraction and annotation tools can be found in the above mentioned surveys (\cite{citeulike:7291004,DBLP:journals/tkde/ChangKGS06}), many of the tools also use an ontology as the output format, but almost all of them store their extraction models in proprietary formats and the models are accessible only by the corresponding tool.
 
 In the literature we have found only two approaches that use extraction ontologies. The former one was published by D. Embley \cite{DBLP:conf/er/EmbleyTL02,Embley:2004:TSU:1012294.1012295}
 and the later one -- IE system Ex
@@ -536,7 +528,7 @@ The problem of extraction ontologies that are not shareable was pointed out in t
 
 Although it is probably always possible to encode an extraction model using a standard ontology language, only certain way of encoding makes it possible to interpret such model by a standard reasoner in the same way as if the original extraction tool was used. The difference is in semantics. It is not sufficient to encode just the model's data, it is also necessary to encode the semantics of the model. Only then the reasoner is able to interpret the model in the same way as the original tool. And this is where the title of the paper and the present section comes from. If the process of information extraction or semantic annotation should be performed by an ordinary Semantic Web reasoner then only means of semantic inference are available and the extraction process must be correspondingly semantically described.
 
-In the presented solution the approaching support for Semantic Web Rule Language (SWRL) \cite{SWRL} is exploited. Although SWRL is not yet approved by W3C it is already widely supported by Semantic Web tools including many OWL reasoners. The SWRL support makes it much easier to transfer the semantics of extraction rules used by our IE tool. The case study in Section~\ref{sec:case} demonstrates the translation of the native extraction rules to SWRL rules, which form the core of the extraction ontology.
+In the presented solution the approaching support for Semantic Web Rule Language (SWRL) \cite{SWRL} is exploited. Although SWRL is not yet approved by W3C it is already widely supported by Semantic Web tools including many OWL reasoners. The SWRL support makes it much easier to transfer the semantics of extraction rules used by our IE tool. The case study in Section~\ref{sec:case} demonstrates the translation of the native extraction rules to SWRL rules that form the core of the extraction ontology.
 
 
 
@@ -556,7 +548,7 @@ or RDFa
 %\footnote{\url{http://www.w3.org/TR/xhtml-rdfa-primer/}} 
 how to obtain a RDF document from an ``ordinary document'' (strictly speaking XHTML and XML documents).
 
-We call a `document ontology' an ontology that formally captures content of a document. A document ontology can be for example obtained from the source document by a suitable GRDDL transformation (as in our experiment). A document ontology should contain all relevant data of a document and preferably the document could be reconstructed from the document ontology on demand.
+We call `document ontology' an ontology that formally captures content of a document. A document ontology can be for example obtained from the source document by a suitable GRDDL transformation (as in our experiment). A document ontology should contain all relevant data of a document and preferably the document could be reconstructed from the document ontology on demand.
 
 When a reasoner is applying an extraction ontology to a document, it only has ``to annotate'' the corresponding document ontology, not the document itself. Here ``to annotate'' means to add new knowledge -- new class membership or property assertions. In fact it means just to do the inference tasks prescribed by the extraction ontology on the document ontology. 
 
@@ -588,7 +580,27 @@ Nodes roughly correspond with words of a sentence, edges represent linguistic de
 \end{figure}
 
 
-\begin{figure}
+
+Our IE engine needs a linguistic preprocessing (deep linguistic parsing) of documents on its input. Deep linguistic parsing brings a very complex structure to the text and the structure serves as a footing for construction and application of extraction rules. 
+
+We usually use TectoMT system\footnote{\url{http://ufal.mff.cuni.cz/tectomt/}}
+%\cite{dedek:ZaPtTectoMTHighly2008}
+to do the linguistic preprocessing. TectoMT is a Czech project that contains many linguistic analyzers for different languages including Czech and English. We are using a majority of applicable tools from TectoMT: a tokeniser, a sentence splitter, morphological analyzers (including POS tagger), a syntactic parser and the deep syntactic (tectogrammatical) parser. All the tools are based on the dependency based linguistic theory and formalism of the Prague Dependency Treebank\footnote{\url{http://ufal.mff.cuni.cz/pdt2.0/}}.
+%\cite{dedek:PDT20_CD}.
+
+The output linguistic annotations of the TectoMT system are stored (along with the text of the source document) in XML files in so called Prague Markup Language\footnote{\url{http://ufal.mff.cuni.cz/jazz/PML/}} (PML). PML is a very complex language (or XML schema) that is able to express many linguistic elements and features present in text. For the IE engine a tree dependency structure of words in sentences is the most useful one because the edges of the structure guide the extraction rules. An example of such (tectogrammatical) tree structure is in Fig.~\ref{img:tree}.
+
+In this case study PML files made from source documents by TectoMT are transformed to RDF document ontology by quite simple GRDDL/XSLT
+%\footnote{\url{http://www.w3.org/TR/xslt}}
+transformation. Such document ontology contains the whole variety of PML in RDF format.
+
+
+
+
+
+
+
+\begin{figure}[t!]
 \footnotesize
 [Rule 1] [Pos cover = 23 Neg cover = 6]\\
 \verb@mention_root(acquired,A) :-@\\
@@ -610,46 +622,11 @@ Nodes roughly correspond with words of a sentence, edges represent linguistic de
 	\vspace{-2mm}
 	\caption{Examples of extraction rules in the native Prolog format.}
 	\label{img:rules_prolog}
-	\vspace{-7mm}
+	\vspace{-3mm}
 \end{figure}
 
 
-Our IE engine needs a linguistic preprocessing (deep linguistic parsing) of documents on its input. Deep linguistic parsing brings a very complex structure to the text and the structure serves as a footing for construction and application of extraction rules. 
-
-We usually use TectoMT system\footnote{\url{http://ufal.mff.cuni.cz/tectomt/}}
-%\cite{dedek:ZaPtTectoMTHighly2008}
-to do the linguistic preprocessing. TectoMT is a Czech project that contains many linguistic analyzers for different languages including Czech and English. We are using a majority of applicable tools from TectoMT: a tokeniser, a sentence splitter, morphological analyzers (including POS tagger), a syntactic parser and the deep syntactic (tectogrammatical) parser. All the tools are based on the dependency based linguistic theory and formalism of the Prague Dependency Treebank\footnote{\url{http://ufal.mff.cuni.cz/pdt2.0/}}.
-%\cite{dedek:PDT20_CD}.
-
-The output linguistic annotations of the TectoMT system are stored (along with the text of the source document) in XML files in so called Prague Markup Language\footnote{\url{http://ufal.mff.cuni.cz/jazz/PML/}} (PML). PML is a very complex language (or XML schema) that is able to express many linguistic elements and features present in text. For the IE engine a tree dependency structure of words in sentences is the most useful one because the edges of the structure guide the extraction rules. An example of such (tectogrammatical) tree structure is in Fig.~\ref{img:tree}.
-
-In this case study PML files made from source documents by TectoMT are transformed to RDF document ontology by quite simple GRDDL/XSLT
-%\footnote{\url{http://www.w3.org/TR/xslt}}
-transformation. Such document ontology contains the whole variety of PML in RDF format.
-
-
-
-
-
-
-
 \subsubsection{Rule Transformations}
-
-Extraction rules produced by the IE engine are natively kept in a Prolog format; examples can be seen in Fig.~\ref{img:rules_prolog}. The engine is capable to export them to the OWL/XML
-%\footnote{\url{http://www.w3.org/TR/owl-xmlsyntax/}}
-syntax for rules in OWL 2 \cite{GHPP09a} (see in Fig.~\ref{img:rules_xml}).
-Such rules can be parsed by OWL API\footnote{\url{http://owlapi.sourceforge.net/}} 3.1
-and exported to RDF/SWRL
-%\footnote{\url{http://www.w3.org/Submission/SWRL/}}
-which is very widely supported and hopefully becoming a W3C recommendation.
-%Fig.~\ref{img:rules_protege} shows the example rules in Prot\'{e}g\'{e}\footnote{\url{http://protege.stanford.edu/}} 4 -- Rules View's format. 
-The last rule example can be seen in Fig.~\ref{img:rules_jena}, it shows a rule in the Jena rules format.
-%\footnote{\url{http://jena.sourceforge.net/inference/#RULEsyntax}}.
-Conversion to Jena rules was necessary because it is the only format that Jena can parse, see details about our use of Jena in Section~\ref{sec:experiment}. The Jena rules were obtained using following transformation process: OWL/XML $\rightarrow$ RDF/SWRL conversion using OWL API and RDF/SWRL $\rightarrow$ Jena rules conversion using SweetRules\footnote{\url{http://sweetrules.semwebcentral.org/}}.
-
-The presented rules belong to the group of so called DL-Safe rules \cite{Motik:DL-Safe-rules} so the decidability of OWL reasoning is kept.
-
-
 
 %\begin{figure}
 %\small
@@ -674,7 +651,7 @@ The presented rules belong to the group of so called DL-Safe rules \cite{Motik:D
 %	\label{img:rules_protege}
 %\end{figure}
 
-\begin{figure}
+\begin{figure}[t!]
 \centerline{\includegraphics[width=\hsize]{rules_owl_xml}}
 	\vspace{-4mm}
 \caption{Rule 75 in the OWL/XML syntax for Rules in OWL 2 \cite{GHPP09a}.}
@@ -683,7 +660,7 @@ The presented rules belong to the group of so called DL-Safe rules \cite{Motik:D
 \end{figure}
 
 
-\begin{figure}
+\begin{figure}[t!]
 \footnotesize
 \begin{verbatim}
 @prefix pml: <http://ufal.mff.cuni.cz/pdt/pml/>.
@@ -697,7 +674,7 @@ The presented rules belong to the group of so called DL-Safe rules \cite{Motik:D
         ( ?a pml:mention_root 'acquired' )
 ]
 \end{verbatim}
-	\vspace{-4mm}
+	\vspace{-6mm}
 \caption{Rule 75 in the Jena rules syntax.}
 \label{img:rules_jena}
 	\vspace{-7mm}
@@ -705,6 +682,24 @@ The presented rules belong to the group of so called DL-Safe rules \cite{Motik:D
 
 
 %\clearpage
+
+
+Extraction rules produced by the IE engine are natively kept in a Prolog format; examples can be seen in Fig.~\ref{img:rules_prolog}. The engine is capable to export them to the OWL/XML
+%\footnote{\url{http://www.w3.org/TR/owl-xmlsyntax/}}
+syntax for rules in OWL 2 \cite{GHPP09a} (see in Fig.~\ref{img:rules_xml}).
+Such rules can be parsed by OWL API\footnote{\url{http://owlapi.sourceforge.net/}} 3.1
+and exported to RDF/SWRL,
+%\footnote{\url{http://www.w3.org/Submission/SWRL/}}
+which is very widely supported and hopefully becoming a W3C recommendation.
+%Fig.~\ref{img:rules_protege} shows the example rules in Prot\'{e}g\'{e}\footnote{\url{http://protege.stanford.edu/}} 4 -- Rules View's format. 
+The last rule example can be seen in Fig.~\ref{img:rules_jena}, it shows a rule in the Jena rules format.
+%\footnote{\url{http://jena.sourceforge.net/inference/#RULEsyntax}}.
+Conversion to Jena rules was necessary because it is the only format that Jena can parse, see details about our use of Jena in Section~\ref{sec:experiment}. The Jena rules were obtained using following transformation process: OWL/XML $\rightarrow$ RDF/SWRL conversion using OWL API and RDF/SWRL $\rightarrow$ Jena rules conversion using SweetRules\footnote{\url{http://sweetrules.semwebcentral.org/}}.
+
+The presented rules belong to the group of so called DL-Safe rules \cite{Motik:DL-Safe-rules} so the decidability of OWL reasoning is kept.
+
+
+
 \subsubsection{Schema of the Case Study}
 
 
@@ -866,7 +861,7 @@ and in the context of Linked Data providing shareable descriptions of informatio
 %Our implementation is publicly available -- source codes and the datasets can be downloaded from our project's web-page\footnote{\url{http://czsem.berlios.de/}}, so it should be also possible to repeat the experiment in a sense of  the SIGMOD Experimental Repeatability Requirements \cite{biblio:SIGMODrepeatability}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Conclusion and Future Work}
+\section{Discussion} \label{sec:discuss}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -893,16 +888,23 @@ The reason why we did not study this approach from the beginning is that we were
 %
 Anyway the performance comparison remains a valuable task for the future work.
 
+\subsection{Contributions for Information Extraction}
+The paper combines the field of ontology-based information extraction and rule-based reasoning. The aim is to show a new possibility in usage of IE tools and reasoners. In this paper we do not present a solution that would improve the performance of IE tools.
+
+We also do not provide a proposal of a universal extraction format (although a specific form for the rule based extraction on dependency parsed text could be inferred). This task is left for the future if a need for such activity emerges.
+
+%The aim of the paper is a demonstration of the idea of tool independent extraction ontologies and the possibility to use reasoners for information extraction.
+
 
 
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Main Contributions}
+\section{Conclusion} \label{sec:conclusion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In the end of the paper we would like to summarize the main contributions of the paper.
+%In the end of the paper we would like to summarize the main contributions of the paper.
 
 %\begin{itemize}
 %	\item In the beginning of the paper we pointed out the draw back of so called extraction ontologies -- in most cases they are dependent on a particular extraction/annotation tool and they cannot be used separately.	
@@ -918,7 +920,7 @@ In the beginning of the paper we pointed out the draw back of so called extracti
 We extended the concept of extraction ontologies by adding the shareable aspect and we introduced a new principle of making extraction ontologies independent of the original tool: the possibility of application of an extraction ontology to a document by an ordinary reasoner.
 
 In Section~\ref{sec:case} we presented a case study that shows that the idea of shareable extraction ontologies is realizable. We presented implementation of an IE tool that exports its extraction rules to an extraction ontology and we demonstrated how this extraction ontology can be applied to a document by a reasoner.
-
+%
 Moreover in Section~\ref{sec:experiment} an experiment with several OWL reasoners was presented. The experiment evaluated the performance of contemporary OWL reasoners on IE tasks (application of extraction ontologies).  
 
 A new publically available benchmark for OWL reasoning was created together with the experiment. Other reasoners can be tested this way.
@@ -928,6 +930,9 @@ A new publically available benchmark for OWL reasoning was created together with
 
 
 
+%\subsection*{Acknowledgments}
+\smallskip \textbf{Acknowledgments}:
+This work was partially supported by Czech projects: GACR P202/10/0761, GACR-201/09/H057, GAUK 31009 and MSM-0021620838.
 
 
 
