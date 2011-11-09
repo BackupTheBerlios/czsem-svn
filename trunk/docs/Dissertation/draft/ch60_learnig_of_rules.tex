@@ -135,11 +135,11 @@ Node attributes are assigned to node IDs by binary predicates of the form:
 
 \noindent There are about thirty such predicates like \emph{t\_lemma} (tectogrammatical lemma), \emph{functor} (tectogrammatical functor), \emph{sempos} (semantic part of speech), \emph{negation}, \emph{gender}, etc. but minority of them is usually used in extraction rules.
 
-Example of a serialized tectogrammatical tree is in Listing~\ref{lst:ilp_serialization} it is the same tree as in Figure~\ref{img:ch10_damage_tree}.
+Example of a serialized tectogrammatical tree is in Figure~\ref{lst:ilp_serialization} it is the same tree as in Figure~\ref{img:ch10_damage_tree}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{listing}[ht]
+\begin{figure}
 \begin{minted}[linenos, fontsize=\footnotesize,
                frame=lines]{prolog}
 tToken(  id_jihomoravsky47443_243).
@@ -195,7 +195,7 @@ gender(  id_jihomoravsky47443_246,'fem').
 \end{minted}
 \caption{ILP serialization example}
 \label{lst:ilp_serialization}
-\end{listing}
+\end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -321,6 +321,7 @@ injuries(A) :- lex_rf(B,A), has_functor(B,'PAT'), has_gender(B,anim),
 injuries(A) :- lex_rf(B,A), has_gender(B,anim), tDependency(C,B),
    has_t_lemma(C,'injure'), has_negation(C,neg0).
 \end{minted}
+	TODO: \verb+damage_root -> mention_root+
 	\caption{Examples of learned rules, Czech words are translated.}
 	\label{fig:rules}
 \end{figure}

@@ -1,10 +1,12 @@
 package czsem.ontology;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 
 import org.apache.log4j.Logger;
 import org.semanticweb.HermiT.Reasoner;
+
 
 
 public class Pml2GateReasoning
@@ -19,6 +21,24 @@ public class Pml2GateReasoning
 
 		return engine.printResults();
 	}
+	
+	public static int processFileAndSaveResults(
+			CzsemRulesBenchmarkEngine engine,
+			String ontology_path,
+			String rules_file_path,
+			String outptuPath) throws Exception
+	{
+		engine.newEngineFromRules(rules_file_path);
+		engine.addOntology(ontology_path);
+		engine.attachReasoner();
+
+		int ret = engine.printResults();
+		
+		engine.saveResutls(new FileOutputStream(outptuPath));
+		
+		return ret;
+	}
+
 
 	public static int processDirectory(
 			CzsemRulesBenchmarkEngine engine,
@@ -66,15 +86,17 @@ public class Pml2GateReasoning
 				args[1],
 				args[0]);
 		
-		/**
+		/*
 		processDirectory(
 				new CzsemJenaRules(),
 				"czsem_GATE_plugins/TmT_serializations/owl",
 				"gate-learning/acquisitions-v1.1/rules/ILP_config_rules_noise30.jena");
 
-		/**
+		/*
+
 		processDirectory(
-				new Pml2GateReasoning(new Reasoner.ReasonerFactory()),
+//				new OwlApiRulesEngine(PelletReasonerFactory.getInstance()),
+				new OwlApiRulesEngine(new Reasoner.ReasonerFactory()),
 				"czsem_GATE_plugins/TmT_serializations/owl",
 				"gate-learning/acquisitions-v1.1/rules/ILP_config_rules_noise30.owl");
 		/*		
@@ -84,7 +106,14 @@ public class Pml2GateReasoning
 		r.attachReasoner();
 		
 		r.printClassInstances(IRI.create("http://czsem.berlios.de/ontologies/PMT2GATE_ontology_utils.owl#MentionRoot"));
-		*/
+		/*
+		processFileAndSaveResults(
+				new OwlApiRulesEngine(PelletReasonerFactory.getInstance()),
+				"C:/data/czsem_coprus/czech_fireman_RDF_OWL/jihomoravsky47443.txt.xml_00034.tmt.owl",
+				"gate-learning/czech_fireman/rules/ILP_config_rules.owl",
+				"results.owl");
+		/**/
+
 	
 	}
 

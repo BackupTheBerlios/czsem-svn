@@ -2,9 +2,11 @@ package czsem.ontology;
 
 import java.io.File;
 import java.io.InputStream;
+import java.io.OutputStream;
 
 import org.apache.log4j.Logger;
 import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.semanticweb.owlapi.io.RDFXMLOntologyFormat;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLDataFactory;
@@ -12,6 +14,7 @@ import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
+import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 import org.semanticweb.owlapi.reasoner.IllegalConfigurationException;
 import org.semanticweb.owlapi.reasoner.Node;
 import org.semanticweb.owlapi.reasoner.NodeSet;
@@ -21,6 +24,7 @@ import org.semanticweb.owlapi.reasoner.OWLReasonerConfiguration;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
 import org.semanticweb.owlapi.reasoner.ReasonerProgressMonitor;
 import org.semanticweb.owlapi.reasoner.SimpleConfiguration;
+import org.semanticweb.owlapi.util.InferredOntologyGenerator;
 import org.semanticweb.owlapi.util.OWLOntologyMerger;
 
 public class OwlApiRulesEngine implements CzsemRulesBenchmarkEngine
@@ -126,5 +130,19 @@ public class OwlApiRulesEngine implements CzsemRulesBenchmarkEngine
 	@Override
 	public int printResults() {
 		return printClassInstances(IRI.create("http://czsem.berlios.de/ontologies/PMT2GATE_ontology_utils.owl#MentionRoot"));
+	}
+
+	@Override
+	public void saveResutls(OutputStream output) throws OWLOntologyCreationException, OWLOntologyStorageException
+	{
+		reasoner.flush();
+		
+		OWLOntology exportedOntology = manager.createOntology( IRI.create("http://czsem.berlios.de/ontologies/infered_export.owl"));
+				
+		InferredOntologyGenerator g = new InferredOntologyGenerator(reasoner);
+		g.fillOntology(manager, exportedOntology);
+		
+		manager.saveOntology( exportedOntology, new RDFXMLOntologyFormat(), output);
+		
 	}	
 }

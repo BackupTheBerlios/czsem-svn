@@ -1,6 +1,7 @@
 package czsem.ontology;
 
 import java.io.File;
+import java.io.OutputStream;
 import java.util.List;
 
 import com.hp.hpl.jena.ontology.OntModel;
@@ -52,6 +53,13 @@ public class CzsemJenaRuleEngine implements CzsemRulesBenchmarkEngine
             count ++;
 		}
 		return count;
+	}
+
+	@Override
+	public void saveResutls(OutputStream output)
+	{
+		inf.write(output);		
+		
 	}
 
 }

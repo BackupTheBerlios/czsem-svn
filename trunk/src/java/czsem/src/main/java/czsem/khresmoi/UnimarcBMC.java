@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.marc4j.MarcReader;
@@ -24,6 +25,26 @@ public class UnimarcBMC
 	public static Logger logger = Logger.getLogger(UnimarcBMC.class);
 	
 
+	public static void updateTermNames(Map<String, String> term_names, Record record)
+	{
+		@SuppressWarnings("unchecked")
+		List<DataField> fields = record.getVariableFields("606");
+		
+		for (int n=0; n<fields.size(); n++)
+		{
+			DataField dataField = fields.get(n);
+			Subfield id = dataField.getSubfield('3');
+			Subfield term = dataField.getSubfield('a');
+			if (id != null && term != null)
+			{
+				term_names.put(id.getData(), term.getData());				
+			}
+		}
+
+		
+	}
+
+	
 	public static void setDocumentFeatures(Document doc, Record record)
 	{
 		List<String> meshIDs;
@@ -34,7 +55,7 @@ public class UnimarcBMC
 		meshIDs = readFields(record, "606", '0', '3');
 		meshArticleTypeIDs = readFields(record, "606", ' ', '3');
 		meshTreeNodes = readFields(record, "686", null, 'a');
-		meshTerms = readFields(record, "606", null, 'a');
+		meshTerms = readFields(record, "606", '0', 'a');
 		
 		String title = readBMCArticleName(record);
 		
@@ -64,7 +85,7 @@ public class UnimarcBMC
 		
 		List<String> ret = new ArrayList<String>(fields.size());
 
-		for (int n=1; n<fields.size(); n++)
+		for (int n=0; n<fields.size(); n++)
 		{
 			DataField dataField = fields.get(n);
 			if ((indicator1 != null) && (dataField.getIndicator1() != indicator1)) continue;
@@ -76,6 +97,11 @@ public class UnimarcBMC
 		return ret;		
 	}
 	
+	public static List<String> readMeshIDs(Record record)
+	{
+		return readFields(record, "606", '0', '3');		
+	}
+
 	public static String readBMCID(Record record)
 	{
 		return 	((ControlField) record.getVariableField("001")).getData();

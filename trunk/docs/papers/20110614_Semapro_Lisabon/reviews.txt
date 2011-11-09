@@ -1,0 +1,123 @@
+--------- Comment 1:
+The paper proposes a practical apporach to information extraction based on extraction ontologies independent from the extraction/annotation toool adopted. A case study is presented that demonstrates the validaity of the approach and clear experiments results are presented.
+
+In general the paper is well written, although there are number of minor grammatical correctins that should be made  if the paper is accepted. In summary, the approach is well-motivated and has clear potential applications.
+
+
+
+--------- Comment 2:
+I must admit that the idea of mixing extraction rules and ontologies seems quite controversial to me (I do agree with [3]). The authors claim that their extraction ontologies are not ordinary ontologies -- so my question is why the ontologies should be used here at all?
+
+From the examples given, it is obvious that the extraction rules are some hand-written rules. I'm missing the result of the presented systems from the IE point of view (all we see is some time performance measurement). What's the output of the system at all?
+
+It's quite hard to follow the main ideas of the paper (the main aim of the paper appears finally on pg. 2, sec. B, par. 3).
+
+Fig. 1 appears quite early in the paper and is confusing without a deep explanation.
+
+Pg. 4: ".. our IE engine learns extraction rules ..." How? I think this is one of the key points and thus should be described in detail.
+
+To conclude, the authors did not show any benefits of using extraction ongologies and reasoners instead of traditional IE approaches.
+
+
+
+--------- Comment 3:
+Ontology-based information extraction is indeed an important area that worth further research. The authors introduce the idea of shareable extraction ontology, which I personally believe is the right direction to go. But the approached presented in the paper does not seem to be "independent on a particular extraction/annotation tool" as the authors claimed as the drawbacks of other systems. The documents to be annotated have to be pre-processed.
+There are some grammatical issues in the paper.
+
+
+
+--------- Comment 4:
+Authors propose a shareable extraction ontology independent of Information Extraction (IE) tools for IE. They transform IE rules to this extraction ontology as well as documents are represented by a document ontology for shareable IE. An ordinary reasoner is used to perform the IE. The idea sounds interesting, however, the performance of the system is poor even for a small dataset with 113 rules, which is not realistic for its use. It would be more interesting to see the transfomration of these rules to SPARQL queries as suggested by the authors in conclusions, hence performance can be improved significantly.
+Other comments:
+1) I don't think RDF representation of a document can stand for a document ontology. It is confusion.  
+2) Translation to document ontology by GRDDL/XSLT needs more explanation.
+
+3) Figure 3 and 4 can be presented consequetively since figure 4 is RDF version of the rules presented in figure 3.
+
+4)No details about mappings of schemas are presented.
+5) Conclusions and Future work is not focused. First part of the conclusion can be presented as a separate section named "discussions".  Future work is presented in many places. Combine them in one paragraph.
+6) There are many repetitions about the contribution of the paper.
+7) There is a link to the project. However URLs to ontologies should be explicitly given.
+
+
+
+--------- Comment 5:
+? uthentic paper describing an approach of applying sharable extraction ontologies over a documents using an OWL reasoner/s.
+
+Points in flavor:
+The paper is well readable and easy understandable and keep the reader's attention without any witty phrases.
+The motivation behind the use of reasoners in order to provide sharable extraction ontologies is realistic and understandable.
+Discussion around the related works is also good written.
+The abstract includes well the whole paper contents.
+Grammar and spelling mistakes were not noticed.
+
+Points against:
+Although used terms like: â  document ontologyâ   or â  annotated document ontologyâ   are defined, they are confusing for the reader. Please try to avoid use of such a terms and try to use some â  newâ   innovated naming.
+Poor description of what are the advantages of publishing sharable extraction ontologies as Linked Data.
+I would have liked to see also discussion about possibility of transformation of e.g. gazetteer lists as extraction ontologies as you mentioned that the extraction models can be represented also as gazetteer lists. Have you thought of transforming the gazetteer lists to extraction ontology?
+Example of final â  Annotatedâ   Document Ontology is missing.
+
+Minor issues:
+Relocation of the Figure 3 on 4th page will be better.
+Page 2 - relocation of the reminder at the end of Section 1. Usually the reminder somehow end the introduction section.
+Page 2, Section I.B. - this sub-section fits better in the Section VI.B (Main Contributions) or as its own sub-section in Section VI.
+The provided link in the reference [7] is not available.
+
+Altogether, I recommend the acceptance of the proposal.
+
+Accept.
+
+
+
+--------- Comment 6:
+IMPORTANT
+=========
+Please, email the updated version to petre@iaria.org for a cross-validation before sending it to the publisher; there are English/punctuations issues to be fixed.
+
+e.g.,
+
+-- In practice the extraction ontologies are usually
+must be
+--> In practice, the extraction ontologies are usually
+
+-- In the beginning a model is either created by
+--> In the beginning, a model is either created by
+
+etc.
+
+----------------
+
+
+
+--------- Comment 7:
+this paper present an extension of the idea of extraction ontologies. the extraction/annotation process can be done
+separately by an ordinary reasoner.
+the autors present a proof of concept for the idea: a case study
+with a linguistically based IE engine that exports its extraction
+rules to an extraction ontology and demonstrate how this
+extraction ontology can be applied to a document by a reasoner.
+The paper also contains an evaluation experiment with several
+OWL reasoners.
+
+
+
+------------------------------------------------------------------------------------------------
+Dear authors,
+
+This is an email concerning your contribution with title 'Semantic Annotation Semantically: Using a Shareable Extraction Ontology and a Reasoner' submitted to SEMAPRO 2011 and having contribution id 50013.
+
+After verification, it has been noted that there are a few corrections needed in your final manuscript, namely:
+
+1) Remove all the footnotes, add them as references and refer to them in the text as references
+2) The format for Keywords should be italic, no bold, keywords separated by ";"
+3) For all online references, include the date of last access (should be close to the conference submission date)
+4) Please use "," after " In this paper, "  " In this section, "  "In this case study, " across entire paper
+5) Use correct commas "Moreover, in Section V, an experiment with several OWL reasoners was presented."
+
+Please update your final manuscript and re-upload it with the Publisher.
+You will need to re-enter all authors again when prompted to do so.
+
+Thank you for your cooperation! The proceedings are ready to go to Press so your immediate action is needed!
+
+Best Regards,
+The Organizing Committee

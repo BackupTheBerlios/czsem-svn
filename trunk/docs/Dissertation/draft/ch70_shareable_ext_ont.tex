@@ -137,7 +137,7 @@ In this case study PML files made from source documents by TectoMT are transform
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{listing}[ht]
+\begin{figure}
 \begin{minted}[linenos, fontsize=\footnotesize,
                frame=lines]{turtle}
 @prefix node: <http://czsem.berlios.de/ontologies/.../jihomoravsky47443.owl#node/> .
@@ -200,7 +200,47 @@ node:SCzechT-s4-n9 rdf:type pml:Node, owl:Thing;
 \end{minted}
 \caption{RDF serialization example}
 \label{lst:rdf_serialization}
-\end{listing}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+\begin{minted}[linenos, fontsize=\footnotesize,
+               frame=lines]{turtle}
+@prefix node: <http://czsem.berlios.de/ontologies/.../jihomoravsky47443.owl#node/> .
+@prefix pml: <http://ufal.mff.cuni.cz/pdt/pml/> .
+# Mapping Ontology
+@prefix PML2GATE: <http://czsem.berlios.de/ontologies/PML2GATE_ontology_utils.owl#> .
+
+node:SCzechT-s4-n12 rdf:type pml:Node, owl:Thing;
+                    pml:t_lemma "osm" ; #eight
+                    pml:number "pl" ; pml:numertype "basic" ;
+                    pml:sempos "n.quant.def" ; pml:formeme "n:???" ;
+                    pml:functor "PAT" ; pml:gender "nr" ;
+                    pml:lex.rf node:SCzechA-s4-w13 ; pml:hasParent node:SCzechT-s4-n8 ;
+################### Added by Reasoner ################################################
+                    rdf:type PML2GATE:TNode ; #Tectogrammatical node
+                    PML2GATE:hasChild node:SCzechT-s4-n13 ;
+                    pml:tDependency node:SCzechT-s4-n13 .
+######################################################################################
+node:SCzechA-s4-w13 rdf:type pml:Node, owl:Thing;
+                    pml:is_auxiliary "0" ; pml:edge_to_collapse "1" ;
+                    pml:ord "13" ; pml:tag "Cn-S4----------" ;
+                    pml:afun "Obj" ; pml:form "osm" ; pml:lemma "osm\1408" ;
+                    pml:m.rf node:SCzechM-s4-w13 ; pml:hasParent node:SCzechA-s4-w12 ;
+################### Added by Reasoner ################################################
+                    PML2GATE:hasChild node:SCzechA-s4-w14 ;
+                    pml:mention_root "damage" ;
+                    rdf:type PML2GATE:MentionRoot .
+######################################################################################
+\end{minted}
+\textbf{TODO: extraction rules jsou anglicky !!! vysledek (Annotated document ontology) cesky !!!!!!!}
+\caption{Annotated document ontology example}
+\label{lst:annotated_DO}
+\end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -353,10 +393,11 @@ All the resources (including source codes of the case study and the experiment, 
 In the experiment we used two slightly different datasets from two different domains and languages.  Table~\ref{tab:datasets} summarizes some basic information about them.
 
 \begin{table}
-\begin{tabular}{|r||l|l|b{7mm}|b{7mm}|b{7mm}|}
+\begin{center}
+\begin{tabular}{|r||l|l|b{20mm}|b{20mm}|b{20mm}|}
 %\begin{tabular}{|r||r|r|c|r|c|}
 \hline
-dataset & domain & language & number of files &  dataset size (MB) &  number of rules  \\
+dataset & domain & language & number of~files &  dataset size (MB) &  number of~rules  \\
 \hline
 \hline
 \textbf{czech\_fireman} & accidents & Czech &  50 &  16 &  2\\
@@ -365,6 +406,7 @@ dataset & domain & language & number of files &  dataset size (MB) &  number of 
 \hline
 \end{tabular}
 \caption{Description of datasets that were used.}\centering
+\end{center}
 \label{tab:datasets}
 \end{table}
 
@@ -526,5 +568,3 @@ Moreover in Section~\ref{sec:ch70_experiment} an experiment with several OWL rea
 
 %We would like to conclude the chapter by stating that only time will show if the fundamental idea of the chapter will be useful but today it is at least a new use case for both: usage of IE tools and reasoners.
 
-\bigskip
-\textbf{TODO: ukazat annotated document ontology}

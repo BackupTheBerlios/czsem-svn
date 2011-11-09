@@ -1,5 +1,10 @@
 package czsem.ontology;
 
+import java.io.OutputStream;
+
+import org.semanticweb.owlapi.model.OWLOntologyCreationException;
+import org.semanticweb.owlapi.model.OWLOntologyStorageException;
+
 
 public interface CzsemRulesBenchmarkEngine
 {
@@ -11,5 +16,7 @@ public interface CzsemRulesBenchmarkEngine
 	void attachReasoner() throws Exception;
 
 	int printResults();
+
+	void saveResutls(OutputStream output) throws OWLOntologyCreationException, OWLOntologyStorageException;
 
 }
