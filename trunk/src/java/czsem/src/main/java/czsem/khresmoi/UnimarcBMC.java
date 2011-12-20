@@ -107,6 +107,19 @@ public class UnimarcBMC
 		return 	((ControlField) record.getVariableField("001")).getData();
 	}
 
+	public static String readBMCLoc(Record record)
+	{
+		return readFields(record, "102", null, 'a').iterator().next();
+	}
+
+	public static String readBMCLang(Record record)
+	{		
+		List<String> f1 = readFields(record, "101", null, 'a');
+		if (f1.isEmpty()) f1 = readFields(record, "101", null, 'd');
+		
+		return f1.iterator().next();
+	}
+
 	public static String readBMCArticleName(Record record)
 	{
 		DataField name = (DataField) record.getVariableField("200");
