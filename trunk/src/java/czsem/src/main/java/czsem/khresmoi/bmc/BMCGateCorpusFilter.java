@@ -1,4 +1,4 @@
-package czsem.khresmoi;
+package czsem.khresmoi.bmc;
 
 import gate.Document;
 import gate.Factory;
@@ -33,7 +33,7 @@ import org.marc4j.marc.Record;
 
 import czsem.gate.GateUtils;
 import czsem.gate.learning.PRSetup;
-import czsem.khresmoi.BMCGateCorpusBuider.BmcRecord;
+import czsem.khresmoi.bmc.BMCGateCorpusBuider.BmcRecord;
 import czsem.utils.Config;
 
 public class BMCGateCorpusFilter

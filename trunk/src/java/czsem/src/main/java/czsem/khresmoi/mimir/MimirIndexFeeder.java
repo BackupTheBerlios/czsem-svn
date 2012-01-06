@@ -1,4 +1,4 @@
-package czsem.khresmoi;
+package czsem.khresmoi.mimir;
 
 import gate.Document;
 import gate.Factory;
@@ -13,6 +13,7 @@ import java.net.URL;
 
 import czsem.Utils;
 import czsem.Utils.StopRequestDetector;
+import czsem.khresmoi.InformationExtractionAnalysis;
 import czsem.utils.Config;
 import czsem.utils.ProjectSetup;
 

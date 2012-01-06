@@ -1,4 +1,4 @@
-package czsem.khresmoi;
+package czsem.khresmoi.mimir;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -23,8 +23,9 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import czsem.Utils;
-import czsem.khresmoi.MeshIndexer.MeshParsedIndex.MeshRecord;
-import czsem.khresmoi.MeshIndexer.MeshParsedIndex.MeshTreeNum;
+import czsem.khresmoi.mesh.MeshSaxParser;
+import czsem.khresmoi.mimir.MeshIndexer.MeshParsedIndex.MeshRecord;
+import czsem.khresmoi.mimir.MeshIndexer.MeshParsedIndex.MeshTreeNum;
 
 public class MeshIndexer
 {

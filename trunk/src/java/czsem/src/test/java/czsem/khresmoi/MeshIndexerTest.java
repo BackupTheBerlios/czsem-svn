@@ -5,8 +5,8 @@ import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
 
-import czsem.khresmoi.MeshIndexer.MeshIndex;
-import czsem.khresmoi.MeshIndexer.MeshParsedIndex.MeshRecord;
+import czsem.khresmoi.mimir.MeshIndexer.MeshIndex;
+import czsem.khresmoi.mimir.MeshIndexer.MeshParsedIndex.MeshRecord;
 import junit.framework.TestCase;
 
 public class MeshIndexerTest extends TestCase {

@@ -1,4 +1,4 @@
-package czsem.khresmoi;
+package czsem.khresmoi.bmc;
 
 import gate.Annotation;
 import gate.AnnotationSet;

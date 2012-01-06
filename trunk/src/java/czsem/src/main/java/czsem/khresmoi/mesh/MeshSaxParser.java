@@ -1,4 +1,4 @@
-package czsem.khresmoi;
+package czsem.khresmoi.mesh;
 
 import java.io.FileInputStream;
 import java.io.IOException;

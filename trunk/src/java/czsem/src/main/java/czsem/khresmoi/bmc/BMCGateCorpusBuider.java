@@ -1,9 +1,9 @@
-package czsem.khresmoi;
+package czsem.khresmoi.bmc;
 
-import static czsem.khresmoi.UnimarcBMC.readBMCArticleName;
-import static czsem.khresmoi.UnimarcBMC.readBMCID;
-import static czsem.khresmoi.UnimarcBMC.readFields;
-import static czsem.khresmoi.UnimarcBMC.readURLStr;
+import static czsem.khresmoi.bmc.UnimarcBMC.readBMCArticleName;
+import static czsem.khresmoi.bmc.UnimarcBMC.readBMCID;
+import static czsem.khresmoi.bmc.UnimarcBMC.readFields;
+import static czsem.khresmoi.bmc.UnimarcBMC.readURLStr;
 import gate.Corpus;
 import gate.Document;
 import gate.Factory;

@@ -20,6 +20,7 @@ import java.util.Locale;
 
 import czsem.gate.GateUtils;
 import czsem.khresmoi.MorceBatchAnalysis.DocumentLoadSynchronizer;
+import czsem.khresmoi.bmc.BMCAnalysis;
 import czsem.utils.Config;
 
 public class InformationExtractionAnalysis extends BMCAnalysis

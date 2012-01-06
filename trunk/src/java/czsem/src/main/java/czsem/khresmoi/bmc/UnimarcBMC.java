@@ -1,4 +1,4 @@
-package czsem.khresmoi;
+package czsem.khresmoi.bmc;
 
 import gate.Document;
 import gate.FeatureMap;
@@ -18,7 +18,7 @@ import org.marc4j.marc.DataField;
 import org.marc4j.marc.Record;
 import org.marc4j.marc.Subfield;
 
-import czsem.khresmoi.BMCGateCorpusBuider.BmcRecord;
+import czsem.khresmoi.bmc.BMCGateCorpusBuider.BmcRecord;
 
 public class UnimarcBMC
 {

@@ -1,4 +1,4 @@
-package czsem.khresmoi;
+package czsem.khresmoi.bmc;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

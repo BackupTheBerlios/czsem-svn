@@ -1,4 +1,4 @@
-package czsem.khresmoi;
+package czsem.khresmoi.bmc;
 
 import gate.Document;
 import gate.Factory;
@@ -22,6 +22,7 @@ import org.apache.commons.math.stat.descriptive.rank.Median;
 import org.apache.commons.math.stat.descriptive.rank.Min;
 
 import czsem.Utils.StopRequestDetector;
+import czsem.khresmoi.InformationExtractionAnalysis;
 import czsem.utils.Config;
 import czsem.utils.MultiSet;
 import czsem.utils.ProjectSetup;

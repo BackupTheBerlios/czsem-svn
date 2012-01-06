@@ -1,4 +1,4 @@
-package czsem.khresmoi;
+package czsem.khresmoi.mimir;
 
 import gate.Corpus;
 import gate.Document;
@@ -27,9 +27,6 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import czsem.khresmoi.MeshIndexer.MeshIndex;
-import czsem.khresmoi.MeshIndexer.MeshIndex.DescendantsCnstraint;
-import czsem.khresmoi.MeshIndexer.MeshParsedIndex.MeshRecord;
 import czsem.utils.Config;
 
 public class MeshAnnotationHelper extends DelegatingSemanticAnnotationHelper

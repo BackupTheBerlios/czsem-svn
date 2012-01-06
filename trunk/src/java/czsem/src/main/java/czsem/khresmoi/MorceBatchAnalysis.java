@@ -16,6 +16,7 @@ import java.net.URISyntaxException;
 import czsem.gate.GateUtils;
 import czsem.gate.learning.PRSetup.SinglePRSetup;
 import czsem.gate.plugins.TectoMTBatchAnalyser;
+import czsem.khresmoi.bmc.BMCAnalysis;
 import czsem.utils.Config;
 
 public class MorceBatchAnalysis extends BMCAnalysis
