@@ -58,7 +58,7 @@ public class MeshAnnieGazeteer extends MeshSaxParser
 
 
 
-	private void writeGazeteerList() throws IOException, URISyntaxException 
+	public void writeGazeteerList() throws IOException, URISyntaxException 
 	{
 		PrintWriter out = 
 			new PrintWriter(
@@ -73,22 +73,22 @@ public class MeshAnnieGazeteer extends MeshSaxParser
 			outputter.outputRecord(out, rec, a);
 		}
 		out.println();
-		out.close();
-		
+		out.close();		
 	}
 
-	public static String [] loadMeshLemmas() throws GateException, URISyntaxException, IOException
+	public static List<String> [] loadMeshLemmas() throws GateException, URISyntaxException, IOException
 	{
 		Config.getConfig().setGateHome();
 		Gate.init();
 		
-		Document doc = Factory.newDocument(new File("C:\\Users\\dedek\\Desktop\\meshcz_analysed_gate.xml").toURI().toURL());
+		Document doc = Factory.newDocument(new File("C:\\Users\\dedek\\Desktop\\bmc\\meshcz_analysed_gate.xml").toURI().toURL());
 		
 		AnnotationSet tmt = doc.getAnnotations("TectoMT");
 		AnnotationSet sents = tmt.get("Sentence");
 		AnnotationSet tocs = tmt.get("Token");
 		
-		String [] ret = new String[sents.size()];
+		@SuppressWarnings("unchecked")
+		List<String>[] ret = new ArrayList[sents.size()];
 		
 		List<Annotation> ord_sents = Utils.inDocumentOrder(sents);
 		int a = 0;
@@ -98,13 +98,11 @@ public class MeshAnnieGazeteer extends MeshSaxParser
 			AnnotationSet conttocs = tocs.getContained(
 					s.getStartNode().getOffset(), s.getEndNode().getOffset());
 			List<Annotation> ord_tocs = Utils.inDocumentOrder(conttocs);
-			StringBuilder sb = new StringBuilder();
+			List<String> sb = new ArrayList<String>(ord_tocs.size());
 			for (Annotation toc : ord_tocs) {
-				sb.append(toc.getFeatures().get("clean_lemma"));				
-				sb.append(' ');				
+				sb.add((String) toc.getFeatures().get("clean_lemma"));				
 			}
-			sb.deleteCharAt(sb.length()-1);
-			ret[a] = sb.toString();
+			ret[a] = sb;
 			
 			a++;
 			
@@ -115,7 +113,7 @@ public class MeshAnnieGazeteer extends MeshSaxParser
 	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException, URISyntaxException, GateException
 	{
 		System.err.println("start");
-		final String[] mesh_lemmas = loadMeshLemmas();
+		final List<String>[] mesh_lemmas = loadMeshLemmas();
 		System.err.println("mesh lemmas loaded");
 		
 /*	    
@@ -134,11 +132,14 @@ public class MeshAnnieGazeteer extends MeshSaxParser
 	    		new Outputter(){
 					@Override
 					public void outputRecord(PrintWriter out, MeshRecord rec, int ord_num) {
-						out.format("%s:meshID=%s:czTerm=%s:enTerm=%s\n", mesh_lemmas[ord_num], rec.meshID, rec.czTerm, rec.enTerm);						
+						out.format("%s:meshID=%s:czTerm=%s:enTerm=%s\n", 
+								czsem.Utils.listToStr(mesh_lemmas[ord_num], " "),
+								rec.meshID, rec.czTerm, rec.enTerm);						
 					}});
 	    		
+				
 		
-	    g.parse("c:/data/Khresmoi/czmesh/mesh2011.xml");
+		g.parse("c:/data/Khresmoi/czmesh/mesh2011.xml");
 //	    g.parse("c:/data/Khresmoi/mesh/desc2011.xml");
 		
 		g.writeGazeteerList();

@@ -1,5 +1,8 @@
 package czsem.khresmoi.bmc;
 
+import gate.Document;
+import gate.util.AnnotationDiffer;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
@@ -12,6 +15,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -21,6 +25,7 @@ import org.marc4j.MarcStreamReader;
 import org.marc4j.marc.Record;
 import org.mindswap.pellet.utils.MultiValueMap;
 
+import czsem.gate.DocumentFeaturesDiff;
 import czsem.utils.MultiSet;
 
 public class BMCDatabase {
@@ -39,7 +44,11 @@ public class BMCDatabase {
 		private String lang;
 		private String loc;
 		
-		
+		public String getID()
+		{
+			return bmcID;
+		}
+				
 		public BMCEntry(Record record)
 		{			
 			meshIDs = UnimarcBMC.readFields(record, "606", '0', '3');
@@ -56,10 +65,33 @@ public class BMCDatabase {
 			
 
 			
-			title = UnimarcBMC.readBMCArticleName(record);
+			setTitle(UnimarcBMC.readBMCArticleName(record));
 			bmcID = UnimarcBMC.readBMCID(record);
 			url = UnimarcBMC.readURLStr(record);						
 		}
+
+		public void setTitle(String title) {
+			this.title = title;
+		}
+
+		public String getTitle() {
+			return title;
+		}
+	}
+	
+	public Iterable<String> urlIter()
+	{
+		return url_index.keySet();
+	}
+
+	public Iterable<BMCEntry> entriesForUrl(String url)
+	{
+		return url_index.get(url);
+	}
+	
+	public void loadCZ() throws FileNotFoundException, IOException, ClassNotFoundException
+	{
+		deserializeFromFile("bmcDB.ser");		
 	}
 
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
@@ -167,6 +199,29 @@ public class BMCDatabase {
 			bmcid_index.put(e.bmcID, e);			
 		}
 		
+	}
+	
+	public AnnotationDiffer computeDocumentDiff(Document doc, String responsesAsName)
+	{
+				
+		Set<String> goldData = new HashSet<String>();
+		String[] bmc_path = doc.getSourceUrl().getFile().split("\\.")[0].split("/");
+		String bmc_id = bmc_path[bmc_path.length-1];
+		
+		String url = bmcid_index.get(bmc_id).url;
+		
+		for (BMCEntry e : url_index.get(url))
+		{
+			goldData.addAll(e.meshIDs);
+		}
+		
+//		Set<String> names = doc.getAnnotationSetNames();
+//		AnnotationSet a1 = doc.getAnnotations("flex");
+		
+		return DocumentFeaturesDiff.computeDiffWithGoldStandardDataForSingleFeature(
+				"meshID",
+				goldData,
+				doc.getAnnotations(responsesAsName).get("Lookup"));
 	}
 
 

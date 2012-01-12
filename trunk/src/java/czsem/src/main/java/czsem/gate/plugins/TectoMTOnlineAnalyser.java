@@ -61,7 +61,7 @@ public class TectoMTOnlineAnalyser extends TectoMTAbstractAnalyser
 	
 	protected void startTMTAnalysisServer() throws Exception
 	{				 
-		if (! Utils.porAvailable(getServerPortNumber()))
+		if (! Utils.portAvailable(getServerPortNumber()))
 		{
 			throw new ResourceInstantiationException("Filed to start TectoMT server, port nuber: "+getServerPortNumber()+" is not available.");						
 		}

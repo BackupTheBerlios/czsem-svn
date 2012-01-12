@@ -12,6 +12,8 @@ import gate.creole.SerialAnalyserController;
 import gate.util.AnnotationDiffer;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -19,6 +21,7 @@ import java.util.Set;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
+import czsem.Utils;
 import czsem.gate.learning.PRSetup;
 import czsem.gate.plugins.LearningEvaluator;
 import czsem.utils.Config;
@@ -27,6 +30,7 @@ public class DocumentFeaturesDiff
 {
 	public static class AnnotationDifferDocumentFeaturesImpl extends AnnotationDiffer 
 	{
+		@SuppressWarnings({ "rawtypes", "unchecked" })
 		public AnnotationDifferDocumentFeaturesImpl(int correct, int missing, int spurious)
 		{
 			super();
@@ -34,6 +38,9 @@ public class DocumentFeaturesDiff
 			this.spurious = spurious;
 			this.missing = missing;
 			this.correctMatches = correct;
+			
+		    keyList = new ArrayList(Collections.nCopies(getKeysCount(), null));
+		    responseList = new ArrayList(Collections.nCopies(getResponsesCount(), null));
 		}
 
 		@Override
@@ -60,7 +67,7 @@ public class DocumentFeaturesDiff
 			new PRSetup.SinglePRSetup(LearningEvaluator.class)
 				.putFeature("keyASName", ":-)")
 //				.putFeature("responseASName", "lemma_flex")
-				.putFeature("responseASName", "orig")
+				.putFeature("responseASName", "flex")
 				.putFeature("keyAnnotationsAreInDocumentFeatures", true)
 				.putFeatureList("annotationTypes", "Lookup")
 				.putFeatureList("featureNames", "meshID").createPR();
@@ -74,7 +81,7 @@ public class DocumentFeaturesDiff
 		
 		Corpus corpus = Factory.newCorpus(null);
 		corpus.populate(
-				new File("C:\\Users\\dedek\\Desktop\\bmc50_analysed3").toURI().toURL(),
+				new File("C:\\Users\\dedek\\Desktop\\bmc\\experiment\\analyzed").toURI().toURL(),
 //				new File("C:\\Users\\dedek\\Desktop\\bmca_devel").toURI().toURL(),
 				null, "utf8", false);
 		
@@ -88,11 +95,41 @@ public class DocumentFeaturesDiff
 		
 	}
 
+	public static AnnotationDiffer computeDiffWithGoldStandardDataForSingleFeature(
+			String featureName,
+			Set<String> goldData,
+			AnnotationSet responsesAnnotations)
+	{
+		Set<String> vals_from_annot =  new HashSet<String>();
+		for (Annotation annotation : responsesAnnotations)
+		{
+			vals_from_annot.add((String) annotation.getFeatures().get(featureName));				
+		}
+		
+		int correct = 0;
+		int missing = 0;
+		int spurious;
+
+		
+		for (String doc_val : goldData)
+		{
+			if (vals_from_annot.contains(doc_val))
+			{
+				correct++;
+				//log.debug("cerrect id: " + doc_val);
+			}
+			else missing++;				
+		}
+		spurious = vals_from_annot.size() - correct;
+		return new AnnotationDifferDocumentFeaturesImpl(correct, missing, spurious);		
+	}
+
+	
 	@SuppressWarnings("unchecked")
-	public static AnnotationDiffer computeDiff(Document document, List<String> featureNames, AnnotationSet responsesAnnotations)
+	public static AnnotationDiffer computeDiffWithDocFeatures(Document document, List<String> featureNames, AnnotationSet responsesAnnotations)
 	{		
 		FeatureMap doc_fm = document.getFeatures();
-		Logger log = Logger.getLogger(DocumentFeaturesDiff.class);
+		//Logger log = Logger.getLogger(DocumentFeaturesDiff.class);
 
 		
 		int correct = 0;
@@ -101,33 +138,23 @@ public class DocumentFeaturesDiff
 
 		for (String feature_name : featureNames)
 		{
-			int cur_correct = 0;
+			//int cur_correct = 0;
 			
 			List<String> f = (List<String>) doc_fm.get(feature_name);
 			if (f == null) 
 			{
 				f = (List<String>) doc_fm.get(feature_name+"s");
 			}
+					
+			AnnotationDiffer diff = computeDiffWithGoldStandardDataForSingleFeature(
+					feature_name,
+					Utils.setFromList(f),
+					responsesAnnotations);
 			
-			Set<String> vals_from_annot =  new HashSet<String>();
-			for (Annotation annotation : responsesAnnotations)
-			{
-				vals_from_annot.add((String) annotation.getFeatures().get(feature_name));				
-			}
 			
-			
-			for (String doc_val : f)
-			{
-				if (vals_from_annot.contains(doc_val))
-				{
-					cur_correct++;
-					log.debug("cerrect id: " + doc_val);
-				}
-				else missing++;				
-			}
-			
-			spurious += vals_from_annot.size() - cur_correct;
-			correct += cur_correct;						
+			spurious += diff.getSpurious();
+			correct += diff.getCorrectMatches();
+			missing += diff.getMissing();
 		}
 
 		

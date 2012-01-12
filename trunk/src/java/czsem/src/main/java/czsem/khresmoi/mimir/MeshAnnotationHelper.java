@@ -27,6 +27,9 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
+import czsem.khresmoi.mimir.MeshIndexer.MeshIndex;
+import czsem.khresmoi.mimir.MeshIndexer.MeshIndex.DescendantsCnstraint;
+import czsem.khresmoi.mimir.MeshIndexer.MeshParsedIndex.MeshRecord;
 import czsem.utils.Config;
 
 public class MeshAnnotationHelper extends DelegatingSemanticAnnotationHelper

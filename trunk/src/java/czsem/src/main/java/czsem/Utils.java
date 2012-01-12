@@ -20,7 +20,24 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
+import org.apache.commons.lang.NotImplementedException;
+import org.mindswap.pellet.utils.PermutationGenerator;
+
 public class Utils {
+
+	public static <TypeName> String listToStr(Collection<TypeName> c, String delim)
+	{
+		StringBuilder sb = new StringBuilder();
+		int a=0;
+		for (Iterator<TypeName> i = c.iterator(); i.hasNext(); )
+		{
+			TypeName s = i.next(); 
+		    sb.append(s);
+		    if (++a >= c.size()) break;
+		    sb.append(delim);
+		}
+		return sb.toString();
+	}
 
 	public static String[] arrayConcatenate(String[] first, String[] second)
 	{
@@ -31,6 +48,41 @@ public class Utils {
 		return ret;		
 	}
 
+	public static <ElementType> Iterable<List<ElementType>> allPermutations(final List<ElementType> collection)
+	{
+		return new Iterable<List<ElementType>>() {
+
+			@Override
+			public Iterator<List<ElementType>> iterator() {
+				return new Iterator<List<ElementType>>() {
+					PermutationGenerator p = new PermutationGenerator(collection.size());
+
+					@Override
+					public boolean hasNext() {
+						return p.hasMore();
+					}
+
+					@Override
+					public List<ElementType> next() {
+						int[] perm = p.getNext();
+						List<ElementType> ret = new ArrayList<ElementType>(collection.size());
+						for (int a=0; a<collection.size(); a++)
+						{
+							ret.add(collection.get(perm[a]));
+						}
+						return ret;
+					}
+
+					@Override
+					public void remove() {
+						throw new NotImplementedException();
+					}
+				};
+			}
+		};		
+	}
+
+	
 	public static <ElementType> Evidence<ElementType>[] createRandomPermutation(Collection<ElementType> collection)
 	{
 		Random rand = new Random();
@@ -190,7 +242,7 @@ public class Utils {
 	 * @param port the port to check for availability
 	 * @author http://mina.apache.org/
 	 */
-	public static boolean porAvailable(int port)
+	public static boolean portAvailable(int port)
 	{
 	    ServerSocket ss = null;
 	    DatagramSocket ds = null;

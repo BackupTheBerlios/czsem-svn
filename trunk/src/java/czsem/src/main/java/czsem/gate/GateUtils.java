@@ -345,7 +345,7 @@ public class GateUtils
 	
 	public static void saveBMCDocumentToDirectory(Document doc, String directory, String nameFeature) throws IOException
 	{
-		if (doc.getAnnotations("TectoMT").size() <= 0) throw new RuntimeException("No TectoMT annotations present in document!");
+		//if (doc.getAnnotations("TectoMT").size() <= 0) throw new RuntimeException("No TectoMT annotations present in document!");
 		
 		String filename = (String) doc.getFeatures().get(nameFeature);
 		

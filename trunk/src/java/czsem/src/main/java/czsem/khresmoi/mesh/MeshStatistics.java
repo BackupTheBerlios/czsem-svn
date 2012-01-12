@@ -61,6 +61,11 @@ public class MeshStatistics
 		ms.countTokenStats();
 	}
 	
+	public void load() throws FileNotFoundException, IOException, ClassNotFoundException
+	{
+		deserializeFromFile("mesh_terms.ser");		
+	}
+	
 	public void parse(String filename) throws ParserConfigurationException, SAXException, IOException {
 		mp.parse(filename);
 	}
@@ -117,8 +122,16 @@ public class MeshStatistics
 	}
 
 	
+	public static final String tokenSplitChars = " ()-";
+
+	public static boolean isSeparator(String sep)
+	{
+		if (sep.length() > 1) return false;
+		return tokenSplitChars.contains(sep);		
+	}
+	
 	public static String[] splitTerm(String term) {
-		 return term.split("[ ()-]+");		 
+		 return term.split("["+tokenSplitChars+"]+");		 
 	}
 
 	@SuppressWarnings("unchecked")

@@ -8,12 +8,15 @@ import gate.util.AnnotationDiffer;
 import gate.util.GateException;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import org.apache.commons.math.stat.descriptive.moment.Mean;
 import org.apache.commons.math.stat.descriptive.moment.StandardDeviation;
@@ -23,6 +26,7 @@ import org.apache.commons.math.stat.descriptive.rank.Min;
 
 import czsem.Utils.StopRequestDetector;
 import czsem.khresmoi.InformationExtractionAnalysis;
+import czsem.khresmoi.bmc.BMCDatabase.BMCEntry;
 import czsem.utils.Config;
 import czsem.utils.MultiSet;
 import czsem.utils.ProjectSetup;
@@ -33,9 +37,11 @@ public class BMCStatistics
 	int next_free_entry = 0;
 	
 	String [][] str_data = new String[2][];
-	double [][] double_data = new double[5][];
+	double [][] double_data = new double[9][];
 	
-	public BMCStatistics(File[] files)
+	BMCDatabase db = new BMCDatabase();
+	
+	public BMCStatistics(File[] files) throws FileNotFoundException, IOException, ClassNotFoundException
 	{
 		next_free_entry = 0;
 		
@@ -48,6 +54,8 @@ public class BMCStatistics
 		{
 			str_data[i] = new String[files.length];			
 		}
+		
+		db.loadCZ();
 
 	}
 	
@@ -77,11 +85,18 @@ public class BMCStatistics
 			setText_length(doc.getContent().size());
 			setTokens(doc.getAnnotations("TectoMT").get("Token").size());
 			setMesh_terms(doc.getAnnotations("mimir").get("MeshTerm").size());
-			setCross_coverage(InformationExtractionAnalysis.BMCCrossCoverageDiffer(doc));
+			setCrossCoverage(InformationExtractionAnalysis.BMCCrossCoverageDiffer(doc));
+			setGoldCoverage(db.computeDocumentDiff(doc, "mimir"));
+			setGoldPlainCoverage(db.computeDocumentDiff(doc, "plain"));
 			
-			System.err.format("   diff: prec: %f rec: %f\n", 
-					getPrecision(),
-					getRecall());
+			System.err.format("CROSS  : prec: %f rec: %f\n", 
+					getCrossPrecision(),
+					getCrossRecall());
+
+			System.err.format("GOLD   : prec: %f rec: %f\n", 
+					getGoldPrecision(),
+					getGoldRecall());
+
 		}
 		
 		public boolean checkEntry()
@@ -91,9 +106,9 @@ public class BMCStatistics
 			if (getText_length() <= 0) return false;
 			if (getTokens() <= 0) return false;
 			if (getMesh_terms() <= 0) return false;
-			if (getPrecision() <= 0.2) return false;
+			if (getCrossPrecision() <= 0.2) return false;
 //			if (getPrecision() <= 0.5) return false;
-			if (getRecall() < 0 || (getRecall() > 1)) return false;
+			if (getCrossRecall() < 0 || (getCrossRecall() > 1)) return false;
 //			if (getRecall() < 0.01 || (getRecall() > 0.9)) return false;
 			
 			return true;
@@ -140,25 +155,59 @@ public class BMCStatistics
 			return (int) double_data[2][index];
 		}
 
-		public void setCross_coverage(AnnotationDiffer cross_coverage) {
-			setPrec(cross_coverage.getPrecisionLenient());
-			setRec(cross_coverage.getRecallLenient());
+		public void setCrossCoverage(AnnotationDiffer cross_coverage) {
+			setCrossPrec(cross_coverage.getPrecisionLenient());
+			setCrossRec(cross_coverage.getRecallLenient());
 		}
 
-		private void setRec(double recallStrict) {
-			double_data[3][index] = recallStrict; 			
+		public void setGoldCoverage(AnnotationDiffer cross_coverage) {
+			setGoldPrec(cross_coverage.getPrecisionLenient());
+			setGoldRec(cross_coverage.getRecallLenient());
+		}
+		
+		public void setGoldPlainCoverage(AnnotationDiffer cross_coverage) {
+			setGoldPlainPrec(cross_coverage.getPrecisionLenient());
+			setGoldPlainRec(cross_coverage.getRecallLenient());
+		}
+		
+		
+		private void setCrossRec(double recall) {
+			double_data[3][index] = recall; 			
 		}
 
-		private void setPrec(double precisionStrict) {
-			double_data[4][index] = precisionStrict; 						
+		private void setCrossPrec(double precision) {
+			double_data[4][index] = precision; 						
 		}
 
-		public double getPrecision() {
+		private void setGoldRec(double recall) {
+			double_data[5][index] = recall; 						
+		}
+
+		private void setGoldPrec(double precision) {
+			double_data[6][index] = precision; 									
+		}
+		private void setGoldPlainRec(double recall) {
+			double_data[7][index] = recall; 						
+		}
+
+		private void setGoldPlainPrec(double precision) {
+			double_data[8][index] = precision; 									
+		}
+
+		public double getCrossPrecision() {
 			return double_data[4][index];
 		}
 
-		public double getRecall() {
+		public double getCrossRecall() {
 			return double_data[3][index];
+		}
+
+		public double getGoldPrecision() {
+			return double_data[6][index];
+		}
+
+		public double getGoldRecall() {
+			return double_data[5][index];
 		}
 	}
 
@@ -202,10 +251,18 @@ public class BMCStatistics
 		printNumericStatistics(double_data[1]);
 		System.err.print("MeSH terms ");
 		printNumericStatistics(double_data[2]);
-		System.err.print("precisison ");
+		System.err.print("corss rec  ");
 		printNumericStatistics(double_data[3]);
-		System.err.print("recall     ");
+		System.err.print("cross prec ");
 		printNumericStatistics(double_data[4]);
+		System.err.print("gold  rec  ");
+		printNumericStatistics(double_data[5]);
+		System.err.print("gold  prec ");
+		printNumericStatistics(double_data[6]);
+		System.err.print("gold- rec  ");
+		printNumericStatistics(double_data[7]);
+		System.err.print("gold- prec ");
+		printNumericStatistics(double_data[8]);
 	}
 
 	public static void printStringStatistics(String[] str_strings, int top_count, int count)
@@ -231,7 +288,43 @@ public class BMCStatistics
 		return s.checkEntry();
 	}
 
-	public static void main(String[] args) throws URISyntaxException, IOException, GateException
+	public static void checkMultipleFilesForSingleUrl() throws FileNotFoundException, IOException, ClassNotFoundException
+	{
+		File dir = new File(InformationExtractionAnalysis.default_outputdir);
+		File[] files = dir.listFiles();
+		
+		Map<String, String> db_hash = new HashMap<String, String>();
+		
+		BMCDatabase db = new BMCDatabase();
+		db.loadCZ();
+		
+		for (String url : db.urlIter())
+		{
+			for (BMCEntry entry : db.entriesForUrl(url))
+			{
+				db_hash.put(
+						"C:\\Users\\dedek\\Desktop\\bmc\\analyzed\\" + entry.getID() + ".xml",
+						url); 				
+			}
+		}
+		
+		MultiSet<String> hits = new MultiSet<String>();
+		
+		for (File f : files)
+		{
+			String url = db_hash.get(f.toString());
+			hits.add(url);
+		}
+		
+		List<String> top = hits.getTopKeys(50);
+		for (String t : top)
+		{
+			System.err.format("%d x %s \n", hits.get(t), t);
+		}
+		
+	}
+
+	public static void main(String[] args) throws URISyntaxException, IOException, GateException, ClassNotFoundException
 	{
 		Locale.setDefault(Locale.ENGLISH);
 	

@@ -19,7 +19,6 @@ import java.util.Arrays;
 import java.util.Locale;
 
 import czsem.gate.GateUtils;
-import czsem.khresmoi.MorceBatchAnalysis.DocumentLoadSynchronizer;
 import czsem.khresmoi.bmc.BMCAnalysis;
 import czsem.utils.Config;
 
@@ -27,7 +26,6 @@ public class InformationExtractionAnalysis extends BMCAnalysis
 {
 	public static String default_outputdir = "C:\\Users\\dedek\\Desktop\\bmc\\analyzed\\";
 	public static String default_crashdir = "C:\\Users\\dedek\\Desktop\\bmc\\flex_crash\\";
-	private LanguageAnalyser analyzer;
 
 	public InformationExtractionAnalysis(String inputdir, String outputdir) throws PersistenceException, ResourceInstantiationException, IOException, URISyntaxException
 	{
@@ -46,47 +44,6 @@ public class InformationExtractionAnalysis extends BMCAnalysis
 		
 		 ret.setCorpus(Factory.newCorpus("empty"));
 		 return ret;
-	}
-
-	public void doTheAnalysis() throws ResourceInstantiationException, ExecutionException, IOException
-	{
-		int a=0;
-		for (File file : files)
-		{
-			if (stop_request_detector.stop_requested) return;
-			if (new File(outputdir+file.getName()).exists())
-			{
-				System.err.println(++a);
-				continue;
-			}
-			System.err.format("----- File%d %s -----\n", ++a, file);
-			analyzeFile(file);
-			System.gc();
-			System.gc();
-			System.gc();
-		}
-		
-	}
-
-	private void analyzeFile(File file) throws ResourceInstantiationException, ExecutionException, IOException
-	{
-		Document doc = DocumentLoadSynchronizer.loadDocument(file);
-		analyzer.setDocument(doc);
-		
-		try
-		{
-			analyzer.execute();
-			logStatisitcs(doc);
-			GateUtils.saveBMCDocumentToDirectory(doc, outputdir, "bmcID");
-		}
-		catch (ExecutionException e)
-		{
-			if (! InvalidOffsetException.class.isInstance(e.getCause())) throw e;
-			System.err.println("Could not be analyzed using FlexibleGazetteer!!!");
-			GateUtils.saveBMCDocumentToDirectory(doc, default_crashdir, "bmcID");
-		}
-		
-		Factory.deleteResource(doc);
 	}
 
 	AnnotationDiffer overall_differ = null;
@@ -121,6 +78,24 @@ public class InformationExtractionAnalysis extends BMCAnalysis
 				overall_differ.getRecallStrict());
 
 	}
+	
+	@Override
+	protected boolean executeAnalysis(Document doc) throws IOException, ExecutionException {
+		try
+		{
+			analyzer.execute();
+			logStatisitcs(doc);
+			return true;
+		}
+		catch (ExecutionException e)
+		{
+			if (! InvalidOffsetException.class.isInstance(e.getCause())) throw e;
+			System.err.println("Could not be analyzed using FlexibleGazetteer!!!");
+			GateUtils.saveBMCDocumentToDirectory(doc, default_crashdir, "bmcID");
+		}
+		return false;
+	}
+
 
 	public static void main(String[] args) throws IOException, URISyntaxException, GateException
 	{

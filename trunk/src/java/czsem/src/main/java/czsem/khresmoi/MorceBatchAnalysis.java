@@ -33,7 +33,7 @@ public class MorceBatchAnalysis extends BMCAnalysis
 	
 	public static class DocumentLoadSynchronizer
 	{
-		synchronized static Document loadDocument(File fl) throws ResourceInstantiationException, MalformedURLException
+		public synchronized static Document loadDocument(File fl) throws ResourceInstantiationException, MalformedURLException
 		{
 			return Factory.newDocument(fl.toURI().toURL(), "utf8");			
 		}		

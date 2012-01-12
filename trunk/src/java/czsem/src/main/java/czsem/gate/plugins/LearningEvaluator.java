@@ -186,7 +186,7 @@ public class LearningEvaluator extends AbstractLanguageAnalyser
 		
 		if (getKeyAnnotationsAreInDocumentFeatures())
 		{
-			return DocumentFeaturesDiff.computeDiff(document, featureNames, responsesIter);
+			return DocumentFeaturesDiff.computeDiffWithDocFeatures(document, featureNames, responsesIter);
 		}
 
 		AnnotationSet keysIter = keyAS.get(annotTypeName);
