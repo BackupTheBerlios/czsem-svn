@@ -6,22 +6,22 @@ import java.util.Arrays;
 import java.util.List;
 
 import czsem.khresmoi.mimir.MeshIndexer.MeshIndex;
-import czsem.khresmoi.mimir.MeshIndexer.MeshParsedIndex.MeshRecord;
+import czsem.khresmoi.mimir.MeshIndexer.MeshParsedIndex.MeshIndexRecord;
 import junit.framework.TestCase;
 
 public class MeshIndexerTest extends TestCase {
 
 	public void testMeshIndex() throws IOException, URISyntaxException
 	{
-		assertEquals("D002130", MeshRecord.renderMeshID(2130));
-		assertEquals(2130, MeshRecord.parseMeshID("D002130"));
+		assertEquals("D002130", MeshIndexRecord.renderMeshID(2130));
+		assertEquals(2130, MeshIndexRecord.parseMeshID("D002130"));
 		
 		boolean asserions_enabled = false;
 		
 		try {assert(false);}catch (java.lang.AssertionError e) {asserions_enabled = true;}
 		
 		try {
-			assertEquals(2130, MeshRecord.parseMeshID("D02130"));
+			assertEquals(2130, MeshIndexRecord.parseMeshID("D02130"));
 			if (asserions_enabled) fail(); //should throw AssertionError 
 		}
 		catch (java.lang.AssertionError e)

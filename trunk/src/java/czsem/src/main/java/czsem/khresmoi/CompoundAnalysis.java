@@ -21,6 +21,7 @@ import gate.util.persistence.PersistenceManager;
 import czsem.gate.GateUtils;
 import czsem.gate.learning.PRSetup.SinglePRSetup;
 import czsem.khresmoi.bmc.BMCAnalysis;
+import czsem.khresmoi.bmc.BMCStatistics;
 import czsem.utils.Config;
 
 public class CompoundAnalysis extends BMCAnalysis
@@ -36,7 +37,7 @@ public class CompoundAnalysis extends BMCAnalysis
 	{
 		ProcessingResource pr = new SinglePRSetup(AnnotationDeletePR.class)
 			.putFeature("keepOriginalMarkupsAS", false)
-			.putFeatureList("setsToKeep", "mimir", "plain", "compound_short", "compound_long").createPR();
+			.putFeatureList("setsToKeep", BMCStatistics.asNames).createPR();
 		
 		c.add(pr);
 		

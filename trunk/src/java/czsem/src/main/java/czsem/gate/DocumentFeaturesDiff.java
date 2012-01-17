@@ -95,6 +95,29 @@ public class DocumentFeaturesDiff
 		
 	}
 
+	public static AnnotationDiffer computeDiffWithGoldStandardData(
+			Set<String> goldData,
+			Set<String> responsesData)
+	{
+		int correct = 0;
+		int missing = 0;
+		int spurious;
+
+		
+		for (String doc_val : goldData)
+		{
+			if (responsesData.contains(doc_val))
+			{
+				correct++;
+				//log.debug("cerrect id: " + doc_val);
+			}
+			else missing++;				
+		}
+		spurious = responsesData.size() - correct;
+		return new AnnotationDifferDocumentFeaturesImpl(correct, missing, spurious);				
+	}
+
+	
 	public static AnnotationDiffer computeDiffWithGoldStandardDataForSingleFeature(
 			String featureName,
 			Set<String> goldData,
@@ -106,22 +129,7 @@ public class DocumentFeaturesDiff
 			vals_from_annot.add((String) annotation.getFeatures().get(featureName));				
 		}
 		
-		int correct = 0;
-		int missing = 0;
-		int spurious;
-
-		
-		for (String doc_val : goldData)
-		{
-			if (vals_from_annot.contains(doc_val))
-			{
-				correct++;
-				//log.debug("cerrect id: " + doc_val);
-			}
-			else missing++;				
-		}
-		spurious = vals_from_annot.size() - correct;
-		return new AnnotationDifferDocumentFeaturesImpl(correct, missing, spurious);		
+		return computeDiffWithGoldStandardData(goldData, vals_from_annot);		
 	}
 
 	

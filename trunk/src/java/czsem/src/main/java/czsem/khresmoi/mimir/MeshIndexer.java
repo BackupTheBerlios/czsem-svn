@@ -24,7 +24,7 @@ import org.xml.sax.SAXException;
 
 import czsem.Utils;
 import czsem.khresmoi.mesh.MeshSaxParser;
-import czsem.khresmoi.mimir.MeshIndexer.MeshParsedIndex.MeshRecord;
+import czsem.khresmoi.mimir.MeshIndexer.MeshParsedIndex.MeshIndexRecord;
 import czsem.khresmoi.mimir.MeshIndexer.MeshParsedIndex.MeshTreeNum;
 
 public class MeshIndexer
@@ -37,7 +37,7 @@ public class MeshIndexer
 		{
 			children = new HashMap<Integer, int[]>(parsedIndex.records.size());
 			
-			for (MeshRecord record : parsedIndex.records)
+			for (MeshIndexRecord record : parsedIndex.records)
 			{
 				Set<Integer> l = new HashSet<Integer>();
 				for (MeshTreeNum tn : record.tree_nums)
@@ -65,7 +65,7 @@ public class MeshIndexer
 
 		public int[] getChildren(String meshID)
 		{
-			return getChildren(MeshRecord.parseMeshID(meshID));
+			return getChildren(MeshIndexRecord.parseMeshID(meshID));
 		}
 
 		public int[] getChildren(int meshID)
@@ -74,7 +74,7 @@ public class MeshIndexer
 		}
 
 		public int[] getDescendants(String meshID) {
-			return getDescendnats(MeshRecord.parseMeshID(meshID));
+			return getDescendnats(MeshIndexRecord.parseMeshID(meshID));
 		}
 
 		public static interface DescendantsCnstraint
@@ -84,7 +84,7 @@ public class MeshIndexer
 		
 		public Collection<Integer> getDescendnatsCollection(String meshID, DescendantsCnstraint c)
 		{
-			return getDescendnatsCollection(MeshRecord.parseMeshID(meshID), c);
+			return getDescendnatsCollection(MeshIndexRecord.parseMeshID(meshID), c);
 		}
 
 		public Collection<Integer> getDescendnatsCollection(int meshID)
@@ -185,11 +185,11 @@ public class MeshIndexer
 		public static class MeshTreeNum
 		{
 			
-			private MeshRecord main_record = null;
+			private MeshIndexRecord main_record = null;
 			private int[] id_numbers;
 			private Map<Integer, MeshTreeNum> children_by_numbers = null;
 			
-			public MeshTreeNum(String treeNumber, MeshRecord record)
+			public MeshTreeNum(String treeNumber, MeshIndexRecord record)
 			{
 				assert(record != null);
 				main_record = record;
@@ -258,7 +258,7 @@ public class MeshIndexer
 				StringBuilder sb = new StringBuilder();
 				for ( MeshTreeNum tn : children_by_numbers.values())
 				{
-					sb.append(MeshRecord.renderMeshID(tn.main_record.id));
+					sb.append(MeshIndexRecord.renderMeshID(tn.main_record.id));
 					sb.append(": ");					
 					sb.append(tn.main_record.name);
 					sb.append('\n');					
@@ -267,17 +267,20 @@ public class MeshIndexer
 			}
 		};
 		
-		public static class MeshRecord
+		public static class MeshIndexRecord
 		{
 			private int id = -1;
 			private List<MeshTreeNum> tree_nums = new ArrayList<MeshIndexer.MeshParsedIndex.MeshTreeNum>(2);
 			
 			public String name;
 		
+			/**
+			 * @return mesh integer ID or -1
+			 */
 			public static int parseMeshID(String meshID)
 			{
-				assert(meshID.length() == 7);
-				assert(meshID.charAt(0) == 'D');				
+				if (meshID.length() != 7) return -1;
+				if (meshID.charAt(0) != 'D') return -1;;				
 				int id = Integer.parseInt(meshID.substring(1));
 				assert(id > 0);
 				return id;
@@ -297,8 +300,8 @@ public class MeshIndexer
 				tree_nums.add(treeNumber);
 			}}
 
-		private Set<MeshRecord> records = new HashSet<MeshIndexer.MeshParsedIndex.MeshRecord>(27000);
-		public void addRecord(MeshRecord record) {
+		private Set<MeshIndexRecord> records = new HashSet<MeshIndexer.MeshParsedIndex.MeshIndexRecord>(27000);
+		public void addRecord(MeshIndexRecord record) {
 			records.add(record);
 		}
 		
@@ -310,7 +313,7 @@ public class MeshIndexer
 		
 		
 		MeshSaxParser parser = new MeshSaxParser() {
-			private MeshParsedIndex.MeshRecord record = null;
+			private MeshParsedIndex.MeshIndexRecord record = null;
 			
 			@Override
 			public void putTreeNumber(String treeNumber) {
@@ -338,7 +341,7 @@ public class MeshIndexer
 			
 			@Override
 			public void newRecord() {
-				record = new MeshParsedIndex.MeshRecord();
+				record = new MeshParsedIndex.MeshIndexRecord();
 				index.addRecord(record);
 			}
 		};
@@ -377,7 +380,7 @@ public class MeshIndexer
 		System.err.println(chemicals.length);
 		for (int i = 0; i < chemicals.length; i++)
 		{
-			System.err.println(MeshRecord.renderMeshID(chemicals[i]));
+			System.err.println(MeshIndexRecord.renderMeshID(chemicals[i]));
 			
 		}
 	
@@ -386,7 +389,7 @@ public class MeshIndexer
 		System.err.println(chemicals_desc.length);
 		for (int i = 0; i < chemicals_desc.length; i++)
 		{
-			System.err.println(MeshRecord.renderMeshID(chemicals_desc[i]));
+			System.err.println(MeshIndexRecord.renderMeshID(chemicals_desc[i]));
 			
 		}
 	}

@@ -29,7 +29,7 @@ import org.apache.log4j.Logger;
 
 import czsem.khresmoi.mimir.MeshIndexer.MeshIndex;
 import czsem.khresmoi.mimir.MeshIndexer.MeshIndex.DescendantsCnstraint;
-import czsem.khresmoi.mimir.MeshIndexer.MeshParsedIndex.MeshRecord;
+import czsem.khresmoi.mimir.MeshIndexer.MeshParsedIndex.MeshIndexRecord;
 import czsem.utils.Config;
 
 public class MeshAnnotationHelper extends DelegatingSemanticAnnotationHelper
@@ -269,7 +269,7 @@ public class MeshAnnotationHelper extends DelegatingSemanticAnnotationHelper
 		else
 		{
 			try{			
-				meshID = MeshRecord.parseMeshID( inputMeshID.toString());
+				meshID = MeshIndexRecord.parseMeshID( inputMeshID.toString());
 			} catch(NumberFormatException e)
 			{
 		          throw new IllegalArgumentException("Unable to parse the string value '"+inputMeshID.toString()+"' of the <i>" +
@@ -292,7 +292,7 @@ public class MeshAnnotationHelper extends DelegatingSemanticAnnotationHelper
 		for (Iterator<Integer> iterator = ids.iterator(); ;)
 		{
 			Integer i = iterator.next();
-			sb.append(MeshRecord.renderMeshID(i));
+			sb.append(MeshIndexRecord.renderMeshID(i));
 			if (! iterator.hasNext()) break;
 			sb.append('|');
 		}

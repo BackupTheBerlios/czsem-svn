@@ -388,13 +388,19 @@ public class GateUtils
 
 	public static AnnotationDiffer calculateSimpleDiffer(Document doc, String keyAS, String responseAS, String annotationType)
 	{
-		AnnotationDiffer differ = new AnnotationDiffer();
-		differ.setSignificantFeaturesSet(new HashSet<String>());
-		differ.calculateDiff(
+		return calculateSimpleDiffer(
 				doc.getAnnotations(keyAS).get(annotationType), 
 				doc.getAnnotations(responseAS).get(annotationType)); // compare
+	}
+	
+	public static AnnotationDiffer calculateSimpleDiffer(AnnotationSet keyAS, AnnotationSet responseAS)
+	{
+		AnnotationDiffer differ = new AnnotationDiffer();
+		differ.setSignificantFeaturesSet(new HashSet<String>());
+		differ.calculateDiff(keyAS,	responseAS); // compare
 		return differ;
 	}
+	
 
 	public static boolean testAnnotationsDisjoint(AnnotationSet annots)
 	{

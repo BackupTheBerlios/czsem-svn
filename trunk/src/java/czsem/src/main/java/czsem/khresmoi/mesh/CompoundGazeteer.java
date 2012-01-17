@@ -12,8 +12,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import czsem.khresmoi.mesh.MeshAnnieGazeteer.MeshRecord;
 import czsem.khresmoi.mesh.MeshAnnieGazeteer.Outputter;
+import czsem.khresmoi.mesh.MeshRecordDB.MeshRecord;
 import czsem.utils.Config;
 
 public class CompoundGazeteer {
@@ -92,7 +92,7 @@ public class CompoundGazeteer {
 		}		
 	}
 	
-	public static void main(String[] args) throws GateException, URISyntaxException, IOException, ParserConfigurationException, SAXException
+	public static void main(String[] args) throws GateException, URISyntaxException, IOException, ParserConfigurationException, SAXException, ClassNotFoundException
 	{
 		System.err.println("start");		
 		
@@ -103,7 +103,7 @@ public class CompoundGazeteer {
 	    		
 				
 		
-		g.parse("c:/data/Khresmoi/czmesh/mesh2011.xml");
+		g.loadMeshDB();
 		
 		g.writeGazeteerList();
 

@@ -1,5 +1,7 @@
 package czsem.khresmoi.bmc;
 
+import gate.Annotation;
+import gate.AnnotationSet;
 import gate.Document;
 import gate.Factory;
 import gate.FeatureMap;
@@ -10,13 +12,18 @@ import gate.util.GateException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.math.stat.descriptive.moment.Mean;
 import org.apache.commons.math.stat.descriptive.moment.StandardDeviation;
@@ -25,21 +32,106 @@ import org.apache.commons.math.stat.descriptive.rank.Median;
 import org.apache.commons.math.stat.descriptive.rank.Min;
 
 import czsem.Utils.StopRequestDetector;
+import czsem.gate.DocumentFeaturesDiff;
+import czsem.gate.GateUtils;
+import czsem.khresmoi.CompoundAnalysis;
 import czsem.khresmoi.InformationExtractionAnalysis;
 import czsem.khresmoi.bmc.BMCDatabase.BMCEntry;
+import czsem.khresmoi.mesh.MeshRecordDB;
+import czsem.khresmoi.mesh.MeshRecordDB.MeshRecord;
 import czsem.utils.Config;
 import czsem.utils.MultiSet;
 import czsem.utils.ProjectSetup;
 
 public class BMCStatistics
 {
+	public class ComulativeStats
+	{
+		MultiSet<Integer> tocCounts = new MultiSet<Integer>();
+		MultiSet<String> permutations = new MultiSet<String>();
+		public void addTocs(Iterable<String> tocs) {
+			for (String s: tocs)
+			{
+				MeshRecord e = mdb.getEntry(s);			
+				tocCounts.add(e.tokones().length);			
+			}			
+		}		
+		public void addPerms(Iterable<String> perms) {
+			permutations.addAll(perms);
+		}
+		public void print(PrintStream out) {
+			out.println("tocounts");
+			out.print(tocCounts.toFormatedString("\n"));
+			out.println("permutations");						
+			out.print(permutations.toFormatedString("\n"));
+		}
+	}
+	
+	public static class AsStats
+	{
+		int mesh_terms;
+		int unique_mesh_terms;
+		int unique_mesh_terms_with_separator = 0;
+		
+		AnnotationDiffer mesh_terms_diff;
+		AnnotationDiffer unique_mesh_terms_diff;
+		AnnotationDiffer goldDiff;				
+		
+//		MultiSet<Integer> unique_mesh_terms_toc_counts = new MultiSet<Integer>();
+//		MultiSet<String> mesh_terms_permutations = new MultiSet<String>();
+
+		public AsStats(int mesh_terms, int unique_mesh_terms) {
+			this.mesh_terms = mesh_terms;
+			this.unique_mesh_terms = unique_mesh_terms;
+		}
+
+		public void fillDocStats(DocStatas docStatas, int asOrd)
+		{
+			docStatas.setAsTokenData(asOrd,
+					mesh_terms, unique_mesh_terms, unique_mesh_terms_with_separator);
+			docStatas.setAsDiffData(asOrd, 0, mesh_terms_diff);
+			docStatas.setAsDiffData(asOrd, 1, unique_mesh_terms_diff);
+			docStatas.setAsDiffData(asOrd, 2, goldDiff);
+			
+		}
+	}
+	
 //	DocStatas [] stats;
 	int next_free_entry = 0;
 	
+	public static final String [] asNames = {"mimir", "plain", "compound_short", "compound_long"};
+	public ComulativeStats comulativeGold = new ComulativeStats();
+	public ComulativeStats comulativeResp[] = new ComulativeStats[asNames.length];
+
 	String [][] str_data = new String[2][];
-	double [][] double_data = new double[9][];
+	double [][] double_data = new double[9+(1+4)*3+4*3*3][];
+//	AsStats [][] as_data = new AsStats[asNames.length][];
 	
-	BMCDatabase db = new BMCDatabase();
+	String doubleLabels[] = {
+		"text_length",
+		"tokens",		
+		"mesh terms mimir",
+		"CrossRec mimir plain",
+		"CrossPrec mimir plain",
+		"GoldRec mimir",
+		"GoldPrec mimir",
+		"GoldPlainRec",
+		"GoldPlainPrec",
+		
+		//1+4x as toc data (gold + as) [9] resp [12] first (5x3)
+
+		//4x as diff data [24] first (4x3x3)(as x {prec rec F} x {plain, unique, gold})
+
+	};  
+	
+	public static final int gold_as_toc = 9;  
+	public static final int first_as_toc = 12;  
+	public static final int first_as_diff = 24;  
+	
+	
+	BMCDatabase bmc_db = new BMCDatabase();
+	MeshRecordDB mdb = new MeshRecordDB();
+
 	
 	public BMCStatistics(File[] files) throws FileNotFoundException, IOException, ClassNotFoundException
 	{
@@ -55,7 +147,21 @@ public class BMCStatistics
 			str_data[i] = new String[files.length];			
 		}
 		
-		db.loadCZ();
+		
+		for (int i = 0; i < comulativeResp.length; i++)
+		{
+			comulativeResp[i] = new ComulativeStats();			
+		}
+		
+/*
+		for (int i = 0; i < as_data.length; i++)
+		{
+			as_data[i] = new AsStats[files.length];			
+		}
+*/
+		bmc_db.loadCZ();
+		mdb.load();
+
 
 	}
 	
@@ -76,7 +182,37 @@ public class BMCStatistics
 			this.index = index;
 		}
 
-		public void fillDocStatas(Document doc) throws MalformedURLException
+		public void setAsTokenData(int asOrd, int mesh_terms,
+				int unique_mesh_terms, int unique_mesh_terms_with_separator) {
+			double_data[first_as_toc+asOrd][index] = mesh_terms; 			
+			double_data[first_as_toc+asOrd+1][index] = unique_mesh_terms; 			
+			double_data[first_as_toc+asOrd+2][index] = unique_mesh_terms_with_separator; 						
+		}
+
+		public void setAsDiffData(int asOrd, int i, AnnotationDiffer diff) {
+			double_data[first_as_diff+asOrd][index] = diff.getRecallStrict(); 			
+			double_data[first_as_diff+asOrd+1][index] = diff.getPrecisionStrict(); 			
+			double_data[first_as_diff+asOrd+2][index] = diff.getFMeasureStrict(1); 						
+		}
+
+		public void fillAsStats(Document doc, Set<String> gold)
+		{
+			AnnotationSet last_as = doc.getAnnotations("empttty");
+			for (int a=0; a<asNames.length; a++)
+			{
+				AnnotationSet this_as = doc.getAnnotations(asNames[a]);
+				AsStats asData = createAsStats(this_as, last_as, gold, comulativeResp[a]);
+				asData.fillDocStats(this, a);
+				last_as = this_as;
+			}			
+		}
+
+		
+		private void fillGoldStats(Set<String> gold) {
+			setAsTokenData(-3, gold.size(), gold.size(), mdb.meshTermsWithSeparator(gold));			
+		}
+
+		public void fillDocStats(Document doc) throws MalformedURLException
 		{
 			FeatureMap f = doc.getFeatures();
 			URL url = new URL(f.get("gate.SourceURL").toString());
@@ -86,8 +222,8 @@ public class BMCStatistics
 			setTokens(doc.getAnnotations("TectoMT").get("Token").size());
 			setMesh_terms(doc.getAnnotations("mimir").get("MeshTerm").size());
 			setCrossCoverage(InformationExtractionAnalysis.BMCCrossCoverageDiffer(doc));
-			setGoldCoverage(db.computeDocumentDiff(doc, "mimir"));
-			setGoldPlainCoverage(db.computeDocumentDiff(doc, "plain"));
+			setGoldCoverage(bmc_db.computeDocumentDiff(doc, "mimir"));
+			setGoldPlainCoverage(bmc_db.computeDocumentDiff(doc, "plain"));
 			
 			System.err.format("CROSS  : prec: %f rec: %f\n", 
 					getCrossPrecision(),
@@ -169,8 +305,7 @@ public class BMCStatistics
 			setGoldPlainPrec(cross_coverage.getPrecisionLenient());
 			setGoldPlainRec(cross_coverage.getRecallLenient());
 		}
-		
-		
+				
 		private void setCrossRec(double recall) {
 			double_data[3][index] = recall; 			
 		}
@@ -209,6 +344,7 @@ public class BMCStatistics
 		public double getGoldRecall() {
 			return double_data[5][index];
 		}
+
 	}
 
 	public static void printNumericStatistics(double[] values, int count)
@@ -232,6 +368,67 @@ public class BMCStatistics
 			median.evaluate(values, 0, count)				
 		);
 
+	}
+
+	
+	
+	
+	public static Set<String> uniqueMeshIDsFromAnnots(AnnotationSet annots)
+	{
+		Set<String> ret = new HashSet<String>();
+		return getFetureValsFromAnnots(annots, "meshID", ret) ;
+	}
+	
+	public static <CollectionType extends Collection<String>> 
+	CollectionType getFetureValsFromAnnots(AnnotationSet annots, String feture_name, CollectionType ret)
+	{
+		for (Annotation a: annots)
+		{
+			String id = (String) a.getFeatures().get(feture_name);
+			ret.add(id);
+		}
+		return ret;
+	}
+	
+	public AsStats createAsStats(AnnotationSet this_as, AnnotationSet last_as, Set<String> goldData, ComulativeStats comulativeStats) {		
+		AnnotationSet this_terms = this_as.get("Lookup");
+		AnnotationSet last_terms = last_as.get("Lookup");
+
+		Set<String> this_unique = uniqueMeshIDsFromAnnots(this_terms);
+		Set<String> last_unique = uniqueMeshIDsFromAnnots(last_terms);
+		
+		comulativeStats.addTocs(getFetureValsFromAnnots(this_terms, "meshID", 
+				new ArrayList<String>(last_terms.size())));
+		
+		comulativeStats.addPerms(getFetureValsFromAnnots(this_terms, "permut", 
+				new ArrayList<String>(last_terms.size())));
+
+				
+		AsStats ret = new AsStats(this_terms.size(), this_unique.size());
+
+		ret.goldDiff = DocumentFeaturesDiff.computeDiffWithGoldStandardData(
+				goldData, this_unique);
+
+/*
+		for (String s: this_unique)
+		{
+			MeshRecord e = mdb.getEntry(s);			
+			if (e.hasSeparator()) ret.unique_mesh_terms_with_separator++;
+//			ret.unique_mesh_terms_toc_counts.add(e.tokones().length);			
+		}
+*/				
+		ret.unique_mesh_terms_with_separator = mdb.meshTermsWithSeparator(this_unique); 
+		
+		ret.mesh_terms_diff = GateUtils.calculateSimpleDiffer(last_terms, this_terms);
+		ret.unique_mesh_terms_diff = 
+			DocumentFeaturesDiff.computeDiffWithGoldStandardData(last_unique, this_unique);
+		
+/*
+		ret.mesh_terms_permutations.addAll(
+				getFetureValsFromAnnots(this_terms, "permut", 
+						new ArrayList<String>(this_terms.size())));		
+*/	
+		return ret;
 	}
 
 	public void printStatistics()
@@ -263,6 +460,14 @@ public class BMCStatistics
 		printNumericStatistics(double_data[7]);
 		System.err.print("gold- prec ");
 		printNumericStatistics(double_data[8]);
+		
+		System.err.println("-- gold tocs --");
+		comulativeGold.print(System.err);
+		for (int a=0; a< asNames.length; a++)
+		{
+			System.err.format("-- %s tocs --\n", asNames[a]);
+			comulativeResp[a].print(System.err);			
+		}
 	}
 
 	public static void printStringStatistics(String[] str_strings, int top_count, int count)
@@ -284,7 +489,13 @@ public class BMCStatistics
 	public boolean add(Document doc) throws MalformedURLException
 	{
 		DocStatas s = new DocStatas(next_free_entry++);
-		s.fillDocStatas(doc);
+		s.fillDocStats(doc);
+		
+		Set<String> gold = bmc_db.getGoldData(doc);
+		s.fillGoldStats(gold);
+		comulativeGold.addTocs(gold);
+
+		s.fillAsStats(doc, gold);
 		return s.checkEntry();
 	}
 
@@ -332,7 +543,8 @@ public class BMCStatistics
 		Gate.init();
 						
 		StopRequestDetector stop_request_detector = new StopRequestDetector();
-		File dir = new File(InformationExtractionAnalysis.default_outputdir);
+		File dir = new File(CompoundAnalysis.default_outputdir);
+//		File dir = new File(InformationExtractionAnalysis.default_outputdir);
 		File[] files = dir.listFiles();
 		
 		stop_request_detector.startDetector();
@@ -350,7 +562,7 @@ public class BMCStatistics
 			if (! bmc_stat.add(doc))
 			{
 				System.err.println("Error!");
-				break;
+//				break;
 			}
 			
 			Factory.deleteResource(doc);

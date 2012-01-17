@@ -16,6 +16,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -26,6 +27,8 @@ import org.marc4j.marc.Record;
 import org.mindswap.pellet.utils.MultiValueMap;
 
 import czsem.gate.DocumentFeaturesDiff;
+import czsem.khresmoi.mesh.MeshRecordDB;
+import czsem.khresmoi.mimir.MeshIndexer.MeshParsedIndex.MeshIndexRecord;
 import czsem.utils.MultiSet;
 
 public class BMCDatabase {
@@ -33,6 +36,9 @@ public class BMCDatabase {
 	private List<BMCEntry> entries;
 	private MultiValueMap<String, BMCEntry> url_index;
 	private Map<String, BMCEntry> bmcid_index;
+	
+	public static MeshRecordDB mdb = null;
+
 		
 	public static class BMCEntry implements Serializable
 	{
@@ -48,10 +54,25 @@ public class BMCDatabase {
 		{
 			return bmcID;
 		}
-				
+		
+
+		
 		public BMCEntry(Record record)
 		{			
 			meshIDs = UnimarcBMC.readFields(record, "606", '0', '3');
+			
+			for (Iterator<String> i  = meshIDs.iterator(); i.hasNext();)
+			{
+				String id = i.next();
+				if (MeshIndexRecord.parseMeshID(id) < 0)
+				{
+					i.remove();
+					continue;
+				}
+
+				if (mdb.getEntry(id) == null) 
+					i.remove();
+			}
 //			meshArticleTypeIDs = readFields(record, "606", ' ', '3');
 //			meshTreeNodes = readFields(record, "686", null, 'a');
 //			meshTerms = readFields(record, "606", null, 'a');
@@ -97,8 +118,8 @@ public class BMCDatabase {
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
 		System.err.println("load");
 		BMCDatabase db = new BMCDatabase();
-		//db.parseMarcIsoFile("c:/data/Khresmoi/BMC/bmc-2011-01.iso");
-		db.deserializeFromFile("bmcDB.ser");
+		db.parseMarcIsoFile("c:/data/Khresmoi/BMC/bmc-2011-01.iso");
+		//db.deserializeFromFile("bmcDB.ser");
 		System.err.println("test");
 		db.test();
 		System.err.println("save");
@@ -150,7 +171,10 @@ public class BMCDatabase {
 		buildIndexes();
 	}
 
-	public void parseMarcIsoFile(String file_name) throws FileNotFoundException {
+	public void parseMarcIsoFile(String file_name) throws IOException, ClassNotFoundException {
+		mdb = new MeshRecordDB();
+		mdb.load();
+		
 		entries = new ArrayList<BMCDatabase.BMCEntry>();
 		
 		InputStream in = new FileInputStream(file_name);
@@ -201,9 +225,9 @@ public class BMCDatabase {
 		
 	}
 	
-	public AnnotationDiffer computeDocumentDiff(Document doc, String responsesAsName)
+
+	public Set<String> getGoldData(Document doc)
 	{
-				
 		Set<String> goldData = new HashSet<String>();
 		String[] bmc_path = doc.getSourceUrl().getFile().split("\\.")[0].split("/");
 		String bmc_id = bmc_path[bmc_path.length-1];
@@ -214,13 +238,14 @@ public class BMCDatabase {
 		{
 			goldData.addAll(e.meshIDs);
 		}
-		
-//		Set<String> names = doc.getAnnotationSetNames();
-//		AnnotationSet a1 = doc.getAnnotations("flex");
-		
+		return goldData;
+	}
+
+	public AnnotationDiffer computeDocumentDiff(Document doc, String responsesAsName)
+	{				
 		return DocumentFeaturesDiff.computeDiffWithGoldStandardDataForSingleFeature(
 				"meshID",
-				goldData,
+				getGoldData(doc),
 				doc.getAnnotations(responsesAsName).get("Lookup"));
 	}
 

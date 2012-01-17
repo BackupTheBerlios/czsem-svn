@@ -10,12 +10,14 @@ import gate.util.GateException;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -23,31 +25,23 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import czsem.khresmoi.mesh.MeshRecordDB.MeshRecord;
 import czsem.utils.Config;
 
 
-public class MeshAnnieGazeteer extends MeshSaxParser
+public class MeshAnnieGazeteer
 {
 	public static interface Outputter
 	{
-
 		void outputRecord(PrintWriter out, MeshRecord rec, int ord_num);
 	}
 	
-	public static class MeshRecord
-	{		
-		String czTerm;
-		String enTerm;
-
-		String meshID;
-	}
-	
-	List<MeshRecord> records = new ArrayList<MeshRecord>(10000);
 	
 	
 
 	private String output_file_name;
 	private Outputter outputter;
+	Collection<MeshRecord> records;
 
 	
 	public MeshAnnieGazeteer(String output_file_name, Outputter outputter)
@@ -67,11 +61,13 @@ public class MeshAnnieGazeteer extends MeshSaxParser
 							new FileOutputStream(output_file_name)),
 					"utf8"));
 		
-		for(int a=0; a<records.size(); a++)
+
+		int ord_num = 0;
+		for (MeshRecord r : records)
 		{
-			MeshRecord rec = records.get(a);
-			outputter.outputRecord(out, rec, a);
+			outputter.outputRecord(out, r, ord_num++);			
 		}
+		
 		out.println();
 		out.close();		
 	}
@@ -110,7 +106,7 @@ public class MeshAnnieGazeteer extends MeshSaxParser
 		return ret;
 	}
 	
-	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException, URISyntaxException, GateException
+	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException, URISyntaxException, GateException, ClassNotFoundException
 	{
 		System.err.println("start");
 		final List<String>[] mesh_lemmas = loadMeshLemmas();
@@ -138,9 +134,7 @@ public class MeshAnnieGazeteer extends MeshSaxParser
 					}});
 	    		
 				
-		
-		g.parse("c:/data/Khresmoi/czmesh/mesh2011.xml");
-//	    g.parse("c:/data/Khresmoi/mesh/desc2011.xml");
+		g.loadMeshDB();
 		
 		g.writeGazeteerList();
 
@@ -151,40 +145,9 @@ public class MeshAnnieGazeteer extends MeshSaxParser
 
 
 
-	@Override
-	public void newRecord() {
-		records.add(new MeshRecord());		
+	void loadMeshDB() throws FileNotFoundException, IOException, ClassNotFoundException {
+		MeshRecordDB db = new MeshRecordDB();
+		db.load();
+		records = db.getRecords();		
 	}
-
-
-
-	@Override
-	public void putMeshID(String meshID) {
-		records.get(records.size()-1).meshID = meshID;
-	}
-
-
-
-	@Override
-	public void putCzTerm(String czTerm) {
-		MeshRecord rec = records.get(records.size()-1);
-		rec.czTerm = czTerm;		
-	}
-
-
-
-	@Override
-	public void putEnTerm(String enTerm) {
-		MeshRecord rec = records.get(records.size()-1);
-		rec.enTerm = enTerm;				
-	}
-
-
-
-	@Override
-	public void putTreeNumber(String treeNumber) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
