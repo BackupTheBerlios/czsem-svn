@@ -6,6 +6,7 @@ import gate.Document;
 import gate.Factory;
 import gate.FeatureMap;
 import gate.Gate;
+
 import gate.util.AnnotationDiffer;
 import gate.util.GateException;
 
@@ -49,11 +50,13 @@ public class BMCStatistics
 	{
 		MultiSet<Integer> tocCounts = new MultiSet<Integer>();
 		MultiSet<String> permutations = new MultiSet<String>();
+		MultiSet<String> uniqueTerms = new MultiSet<String>();
 		public void addTocs(Iterable<String> tocs) {
 			for (String s: tocs)
 			{
 				MeshRecord e = mdb.getEntry(s);			
-				tocCounts.add(e.tokones().length);			
+				tocCounts.add(e.tokones().length);
+				uniqueTerms.add(e.getEnTerm());
 			}			
 		}		
 		public void addPerms(Iterable<String> perms) {
@@ -64,6 +67,11 @@ public class BMCStatistics
 			out.print(tocCounts.toFormatedString("\n"));
 			out.println("permutations");						
 			out.print(permutations.toFormatedString("\n"));
+			out.format("unique terms: %d\n", uniqueTerms.size());
+			for (String key : uniqueTerms.getTopKeys(20))
+			{
+				out.format("%s :%5d\n", key, uniqueTerms.get(key));				
+			}
 		}
 	}
 	
@@ -99,12 +107,12 @@ public class BMCStatistics
 //	DocStatas [] stats;
 	int next_free_entry = 0;
 	
-	public static final String [] asNames = {"mimir", "plain", "compound_short", "compound_long"};
+	public static final String [] asNames = {"plain", "mimir", "compound_short", "compound_long"};
 	public ComulativeStats comulativeGold = new ComulativeStats();
 	public ComulativeStats comulativeResp[] = new ComulativeStats[asNames.length];
 
 	String [][] str_data = new String[2][];
-	double [][] double_data = new double[9+(1+4)*3+4*3*3][];
+	double [][] double_data = new double[10+(1+4)*3+4*3*3][];
 //	AsStats [][] as_data = new AsStats[asNames.length][];
 	
 	String doubleLabels[] = {
@@ -117,6 +125,7 @@ public class BMCStatistics
 		"GoldPrec mimir",
 		"GoldPlainRec",
 		"GoldPlainPrec",
+		"mergedBmcEntries",
 		
 		//1+4x as toc data (gold + as) [9] resp [12] first (5x3)
 
@@ -124,9 +133,9 @@ public class BMCStatistics
 
 	};  
 	
-	public static final int gold_as_toc = 9;  
-	public static final int first_as_toc = 12;  
-	public static final int first_as_diff = 24;  
+	public static final int gold_as_toc = 10;  
+	public static final int first_as_toc = gold_as_toc+3;  
+	public static final int first_as_diff = gold_as_toc +15;  
 	
 	
 	BMCDatabase bmc_db = new BMCDatabase();
@@ -184,20 +193,21 @@ public class BMCStatistics
 
 		public void setAsTokenData(int asOrd, int mesh_terms,
 				int unique_mesh_terms, int unique_mesh_terms_with_separator) {
-			double_data[first_as_toc+asOrd][index] = mesh_terms; 			
-			double_data[first_as_toc+asOrd+1][index] = unique_mesh_terms; 			
-			double_data[first_as_toc+asOrd+2][index] = unique_mesh_terms_with_separator; 						
+			double_data[first_as_toc+asOrd*3  ][index] = mesh_terms; 			
+			double_data[first_as_toc+asOrd*3+1][index] = unique_mesh_terms; 			
+			double_data[first_as_toc+asOrd*3+2][index] = unique_mesh_terms_with_separator; 						
 		}
 
 		public void setAsDiffData(int asOrd, int i, AnnotationDiffer diff) {
-			double_data[first_as_diff+asOrd][index] = diff.getRecallStrict(); 			
-			double_data[first_as_diff+asOrd+1][index] = diff.getPrecisionStrict(); 			
-			double_data[first_as_diff+asOrd+2][index] = diff.getFMeasureStrict(1); 						
+			double_data[first_as_diff + asOrd*9 + i*3    ][index] = diff.getRecallStrict(); 			
+			double_data[first_as_diff + asOrd*9 + i*3 + 1][index] = diff.getPrecisionStrict(); 			
+			double_data[first_as_diff + asOrd*9 + i*3 + 2][index] = diff.getFMeasureStrict(1); 						
 		}
 
 		public void fillAsStats(Document doc, Set<String> gold)
 		{
 			AnnotationSet last_as = doc.getAnnotations("empttty");
+			last_as.clear();
 			for (int a=0; a<asNames.length; a++)
 			{
 				AnnotationSet this_as = doc.getAnnotations(asNames[a]);
@@ -209,7 +219,7 @@ public class BMCStatistics
 
 		
 		private void fillGoldStats(Set<String> gold) {
-			setAsTokenData(-3, gold.size(), gold.size(), mdb.meshTermsWithSeparator(gold));			
+			setAsTokenData(-1, gold.size(), gold.size(), mdb.meshTermsWithSeparator(gold));			
 		}
 
 		public void fillDocStats(Document doc) throws MalformedURLException
@@ -224,6 +234,8 @@ public class BMCStatistics
 			setCrossCoverage(InformationExtractionAnalysis.BMCCrossCoverageDiffer(doc));
 			setGoldCoverage(bmc_db.computeDocumentDiff(doc, "mimir"));
 			setGoldPlainCoverage(bmc_db.computeDocumentDiff(doc, "plain"));
+			
+			setNumberOfMergedBmcEntries(bmc_db.getNumberOfMergedEntries(doc));
 			
 			System.err.format("CROSS  : prec: %f rec: %f\n", 
 					getCrossPrecision(),
@@ -286,6 +298,11 @@ public class BMCStatistics
 		public void setMesh_terms(int mesh_terms) {
 			double_data[2][index] = mesh_terms; 
 		}
+		
+		private void setNumberOfMergedBmcEntries(int numberOfMergedEntries) {
+			double_data[9][index] = numberOfMergedEntries; 
+		}
+
 
 		public int getMesh_terms() {
 			return (int) double_data[2][index];
@@ -390,6 +407,20 @@ public class BMCStatistics
 		return ret;
 	}
 	
+	List<String> getPermutValsFromAnnots(AnnotationSet annots)
+	{
+		List<String> ret = new ArrayList<String>(annots.size());
+		for (Annotation a: annots)
+		{
+			String permut = (String) a.getFeatures().get("permut");
+			String meshID = (String) a.getFeatures().get("meshID"); 
+			int tokens = mdb.getEntry(meshID).tokones().length;
+			ret.add("toc"+tokens+" "+permut);
+		}
+		return ret;
+	}
+
+	
 	public AsStats createAsStats(AnnotationSet this_as, AnnotationSet last_as, Set<String> goldData, ComulativeStats comulativeStats) {		
 		AnnotationSet this_terms = this_as.get("Lookup");
 		AnnotationSet last_terms = last_as.get("Lookup");
@@ -398,11 +429,12 @@ public class BMCStatistics
 		Set<String> last_unique = uniqueMeshIDsFromAnnots(last_terms);
 		
 		comulativeStats.addTocs(getFetureValsFromAnnots(this_terms, "meshID", 
-				new ArrayList<String>(last_terms.size())));
+				new ArrayList<String>(this_terms.size())));
 		
-		comulativeStats.addPerms(getFetureValsFromAnnots(this_terms, "permut", 
-				new ArrayList<String>(last_terms.size())));
-
+//		comulativeStats.addPerms(getFetureValsFromAnnots(this_terms, "permut", 
+//				new ArrayList<String>(this_terms.size())));
+		comulativeStats.addPerms(getPermutValsFromAnnots(this_terms));
+		
 				
 		AsStats ret = new AsStats(this_terms.size(), this_unique.size());
 
@@ -460,15 +492,68 @@ public class BMCStatistics
 		printNumericStatistics(double_data[7]);
 		System.err.print("gold- prec ");
 		printNumericStatistics(double_data[8]);
+		System.err.print("merged entr");
+		printNumericStatistics(double_data[9]);
 		
-		System.err.println("-- gold tocs --");
+		System.err.println("-- gold cumulative tocs --");
 		comulativeGold.print(System.err);
 		for (int a=0; a< asNames.length; a++)
 		{
-			System.err.format("-- %s tocs --\n", asNames[a]);
+			System.err.format("-- %s cumulative tocs --\n", asNames[a]);
 			comulativeResp[a].print(System.err);			
 		}
+
+		System.err.format("-- %s as terms --\n", "gold");
+		printAsTocStats(-1);
+		for (int a=0; a< asNames.length; a++)
+		{
+			System.err.format("-- %s as terms --\n", asNames[a]);
+			printAsTocStats(a);
+		}
+
+		for (int a=0; a< asNames.length; a++)
+		{
+			System.err.format("-- %s as diff --\n", asNames[a]);
+			printAsDiffStatsAll(a);
+		}
+
 	}
+
+	private void printAsDiffStatsAll(int ord)
+	{
+		System.err.println("- prew dif -");
+		printAsDiffStats(ord*9);
+		System.err.println("- prew unique dif -");
+		printAsDiffStats(ord*9+3);
+		System.err.println("- gold dif -");
+		printAsDiffStats(ord*9+6);
+		
+	}
+
+	private void printAsDiffStats(int ord)
+	{		
+		System.err.print("recall    ");
+		printNumericStatistics(double_data[first_as_diff+ord]);
+		System.err.print("precision ");
+		printNumericStatistics(double_data[first_as_diff+ord+1]);
+		System.err.print("F1        ");
+		printNumericStatistics(double_data[first_as_diff+ord+2]);
+		
+	}
+
+	
+	private void printAsTocStats(int ord)
+	{		
+		System.err.print("terms          ");
+		printNumericStatistics(double_data[first_as_toc+ord*3]);
+		System.err.print("unique terms   ");
+		printNumericStatistics(double_data[first_as_toc+ord*3+1]);
+		System.err.print("terms with sep ");
+		printNumericStatistics(double_data[first_as_toc+ord*3+2]);		
+	}
+
+
+
 
 	public static void printStringStatistics(String[] str_strings, int top_count, int count)
 	{

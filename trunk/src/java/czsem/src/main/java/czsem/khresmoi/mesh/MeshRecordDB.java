@@ -10,7 +10,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -41,6 +40,10 @@ public class MeshRecordDB {
 
 		public String[] tokones() {
 			return MeshStatistics.splitTerm(czTerm);
+		}
+
+		public String getEnTerm() {
+			return enTerm;
 		}
 	}
 	
@@ -100,11 +103,11 @@ public class MeshRecordDB {
 		MeshRecordDB db = new MeshRecordDB();
 		System.err.println("parse");
 //		db.parseMesh("c:/data/Khresmoi/czmesh/mesh2011.xml");
+//	    db.parseMesh("c:/data/Khresmoi/mesh/desc2011.xml");
 		System.err.println("ser");
 //		db.serializeToFile("meshDB.ser");
 		System.err.println("deser");
 		db.deserializeFromFile("meshDB.ser");
-//	    db.parseMesh("c:/data/Khresmoi/mesh/desc2011.xml");
 
 		System.err.println(db.getEntry("D059085").czTerm);
 		
@@ -142,9 +145,9 @@ public class MeshRecordDB {
 		deserializeFromFile("meshDB.ser");		
 	}
 
-	public MeshRecord getEntry(String s)
+	public MeshRecord getEntry(String meshIdStr)
 	{	
-		return records.get(MeshIndexRecord.parseMeshID(s));		
+		return records.get(MeshIndexRecord.parseMeshID(meshIdStr));		
 	}
 
 	public int meshTermsWithSeparator(Iterable<String> terms) {

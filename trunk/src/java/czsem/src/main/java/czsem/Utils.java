@@ -319,6 +319,12 @@ public class Utils {
 		System.err.println(fileNameWithoutExtensions(new File("pok.txt")));
 		System.err.println(fileNameWithoutExtensions(new File("pok.")));
 		System.err.println(fileNameWithoutExtensions(new File("pok")));
+		
+		Integer [] perm = {1,2,3}; 
+		for (List<Integer> l : allPermutations(Arrays.asList(perm)))
+		{
+			System.err.println(l);
+		}
 	}
 
 	public static void increaseCountingMap(Map<String, Integer> map, String key, int count)

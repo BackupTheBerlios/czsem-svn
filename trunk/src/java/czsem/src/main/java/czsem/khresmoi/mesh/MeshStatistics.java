@@ -54,9 +54,10 @@ public class MeshStatistics
 	public static void main(String [] args) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{
 		MeshStatistics ms = new MeshStatistics(true);
+	    ms.parse("c:/data/Khresmoi/mesh/desc2011.xml");
 //		ms.parse("c:/data/Khresmoi/czmesh/mesh2011.xml");
 //		ms.serializeToFile("mesh_terms.ser");
-		ms.deserializeFromFile("mesh_terms.ser");
+//		ms.deserializeFromFile("mesh_terms.ser");
 		ms.countCharStats();
 		ms.countTokenStats();
 	}
@@ -116,22 +117,23 @@ public class MeshStatistics
 		List<String> top = toc_stats.getTopKeys(100);
 		for (String key : top)
 		{
-			System.err.format("%3d x %s\n", toc_stats.get(key), key);
+			System.err.format("%s : %3d\n", key, toc_stats.get(key));
 		}
 		
 	}
 
 	
-	public static final String tokenSplitChars = " ()-";
+	public static final String tokenSplitCharsRegexp = " (),\\-";
+	public static final String seprators = "(),-";
 
 	public static boolean isSeparator(String sep)
 	{
 		if (sep.length() > 1) return false;
-		return tokenSplitChars.contains(sep);		
+		return tokenSplitCharsRegexp.contains(sep);		
 	}
 	
 	public static String[] splitTerm(String term) {
-		 return term.split("["+tokenSplitChars+"]+");		 
+		 return term.split("["+tokenSplitCharsRegexp+"]+");		 
 	}
 
 	@SuppressWarnings("unchecked")

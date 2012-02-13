@@ -226,11 +226,26 @@ public class BMCDatabase {
 	}
 	
 
+	public static String bmcIdFromDoc(Document doc)
+	{
+		String[] bmc_path = doc.getSourceUrl().getFile().split("\\.")[0].split("/");
+		String bmc_id = bmc_path[bmc_path.length-1];
+		return bmc_id;
+	}
+	
+	public int getNumberOfMergedEntries(Document doc)
+	{
+		String bmc_id = bmcIdFromDoc(doc);
+		String url = bmcid_index.get(bmc_id).url;
+		return url_index.get(url).size();
+	}
+	
+	
 	public Set<String> getGoldData(Document doc)
 	{
 		Set<String> goldData = new HashSet<String>();
-		String[] bmc_path = doc.getSourceUrl().getFile().split("\\.")[0].split("/");
-		String bmc_id = bmc_path[bmc_path.length-1];
+		
+		String bmc_id = bmcIdFromDoc(doc);
 		
 		String url = bmcid_index.get(bmc_id).url;
 		
