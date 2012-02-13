@@ -11,7 +11,7 @@ In our solution we have exploited several tools and formalisms. These can be div
 There exist several projects\footnote{Prague Dependency Treebank
  (PDT 1.0, PDT 2.0 \citep{biblio:PDT20_CD}), Prague English Dependency Treebank (PEDT 1.0), Prague Czech-English Dependency Treebank (PCEDT 1.0)} 
 closely related to the ``Prague school of dependency linguistics’’ and the Institute of Formal and Applied Linguistics\footnote{\url{http://ufal.mff.cuni.cz}} in Prague, Czech Republic (ÚFAL). All the projects share common methodology and principles concerning the formal representation of natural language %(Czech above all; and recently also English)
- based on the theory of Functional Generative Description \citep{SgallHajicovaPanevova1986}.
+ based on the theory of Functional Generative Description (FGD) \citep{SgallHajicovaPanevova1986}. FGD provides a formal framework for natural language representation. It is viewed as a system of layers (stratification) expressing the relations of forms and functions. Special attention is devoted to the layers of language meaning described inter alia in dependency terms.
 We will refer to these principles and related formalism as ``PDT principles and formalisms’’ in the present work because the PDT projects are the most fundamental and the elaborate annotation guidelines (see bellow) were compiled within these projects. The most relevant principles for the present work will be briefly described in this section.
 
 \subsection{Layers of Dependency Analysis in PDT}
@@ -45,6 +45,9 @@ Or according to \cite{biblio:KlTransformationBasedTectogrammatical2006}:
 \begin{quote}
 Annotation of a sentence at this [tectogrammatical] layer is closer to meaning of the sentence than its syntactic annotation and thus information captured at the tectogrammatical layer is crucial for machine understanding of a natural language. This can be used in areas such as machine translation and information retrieval, however it can help other tasks as well, e.g. text synthesis.	
 \end{quote}
+
+One particularly important thing about t-layer is that it is designed as unambiguous from the viewpoint of language meaning, which means that synonymous sentences should have the same single representation on t-layer. Obviously this property is very beneficial to information extraction.
+
 
 
 \begin{figure}
