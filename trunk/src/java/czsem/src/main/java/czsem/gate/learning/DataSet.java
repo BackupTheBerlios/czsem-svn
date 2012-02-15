@@ -62,7 +62,7 @@ public interface DataSet
 			
 			Corpus new_corp = Factory.newCorpus(null);
 			
-			for (int i = 0; i <= perm.length*reduceRatio; i++)
+			for (int i = 0; i < perm.length*reduceRatio; i++)
 			{
 				new_corp.add(corpus.get(perm[i]));								
 			}
