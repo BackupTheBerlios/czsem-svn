@@ -1,0 +1,130 @@
+Introduction
+Introduction
+Web Information Extraction Systems for Web Semantization
+The Semantic Web in Use
+Web Semantization
+Web Information Extraction
+General Applicable
+Domain Specific
+Form Specific
+Information Extraction from Text-based Resources
+Tasks of Information Extraction
+Information Extraction Benchmarks
+Our Solutions
+Linguistic Information Extraction
+The Web Semantization Setting
+User Initiative and Effort
+Conclusion and Future Work
+Related Work
+Document Classification
+ML Classification with Monotonicity Constraint
+Based on ILP
+Based on Dependency Linguistics
+Based on Propositional Machine Learning
+GATE Machine Learning
+Semantic annotation
+GATE
+Third Party Tools and Resources
+Prague Dependency Treebank (PDT)
+Layers of Dependency Analysis in PDT
+Why Tectogrammatical Dependencies?
+PDT Tools and Resources
+Linguistics Analysis
+Tree Editor TrEd, Btred
+TectoMT
+Netgraph
+Annotation Schemas
+Czech WordNet
+Other dependency representations
+CoNLL’X dependencies
+Stanford dependencies
+GATE
+GATE Annotations
+Named Entity Recognition
+Inductive Logic Programming
+Classical ILP
+Fuzzy ILP
+ILP tool
+Weka
+Datasets
+Purpose and Structure
+Information Extraction Datasets
+Classification Datasets
+Reasoning Datasets
+Origin of the Datasets
+Contributed Datasets
+Third Party Datasets
+Individual Datasets
+Czech Fireman Reports without Annotations
+Czech Fireman Reports Manually Annotated
+Corporate Acquisition Events
+RDF Dataset Based on Czech Fireman Reports
+RDF Dataset Based on Corporate Acquisition Events
+Classification Dataset Based on Czech Fireman Reports
+Classification Datasets from UCI ML Repository
+Extraction Method Based on Manually Created Rules
+Introduction
+Presented Extraction Methods
+Manually Created Rules
+Data Flow
+Evolution of the Method
+Implementation
+Procedural Extraction Rules
+Netgraph Based Extraction Rules
+Illustration Examples
+Extraction Output
+Methodology for Rule Designers
+Semantic Interpretation of Extracted Data
+Experiments and Evaluation
+First Experiment – Quantitative Evaluation
+Second Experiment – Qualitative Evaluation
+Conclusion
+Extraction Method Based on ILP Machine Learning
+Introduction
+Data Flow ?or Schema of the Extraction Process?
+Implementation
+TectoMT Wrapper (Linguistic Analysis)
+PDT Annotations in GATE
+ILP Wrapper (Machine Learning)
+ILP Serialization
+?Connecting Linear GATE Annotations with Tree Nodes? Intersection with Tree Nodes?
+Root/Subtree Preprocessing/Postprocessing
+Semantic Interpretation
+How to Download
+Evaluation
+Dataset
+Comparison with Paum classifier
+Cross validation
+Results
+Examples of learned rules
+Conclusion and Future Work
+Shareable Extraction Ontologies
+Introduction
+Shareable Extraction Ontologies
+Related Work
+Semantic Annotation Semantically
+The Main Idea Illustrated – a Case Study
+Document Ontologies
+Implementation
+Experiment
+Datasets
+Reasoners
+Evaluation Results of the Experiment
+Discussion
+SPARQL Queries – Increasing Performance?
+Contributions for Information Extraction
+Conclusion
+Usage of Annotations – Fuzzy ILP Document Classification
+Introduction
+Design of the System
+The Case Study – Accident Seriousness Classification
+Theoretical Background
+Translation of Fuzzy ILP Task to Several Classical ILP Tasks
+Implementation
+Results
+Evaluation
+Conclusion
+Conclusion
+Extraction Methods or Classification Methods?
+Repeatability of Experiments
+A Complete Evaluation Results
