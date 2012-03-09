@@ -48,7 +48,7 @@ public class BMCAnalysis {
 		for (File file : files)
 		{
 			if (stop_request_detector.stop_requested) return;
-			if (new File(outputdir+file.getName()).exists())
+			if (new File(outputdir+getOtputFileName(file)).exists())
 			{
 				System.err.println(++a);
 				continue;
@@ -60,6 +60,10 @@ public class BMCAnalysis {
 			System.gc();
 		}
 		
+	}
+
+	protected String getOtputFileName(File orig_file) {
+		return orig_file.getName();
 	}
 
 	protected void analyzeFile(File file) throws ResourceInstantiationException, ExecutionException, IOException
