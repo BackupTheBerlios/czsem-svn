@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -27,6 +28,7 @@ import org.marc4j.marc.Record;
 import org.mindswap.pellet.utils.MultiValueMap;
 
 import czsem.gate.DocumentFeaturesDiff;
+import cuni.khresmoi.KhresmoiConfig;
 import cuni.khresmoi.mesh.MeshRecordDB;
 import cuni.khresmoi.mimir.MeshIndexer.MeshParsedIndex.MeshIndexRecord;
 import czsem.utils.MultiSet;
@@ -110,20 +112,21 @@ public class BMCDatabase {
 		return url_index.get(url);
 	}
 	
-	public void loadCZ() throws FileNotFoundException, IOException, ClassNotFoundException
+	public void load() throws FileNotFoundException, IOException, ClassNotFoundException, URISyntaxException
 	{
-		deserializeFromFile("bmcDB.ser");		
+		deserializeFromFile(KhresmoiConfig.getConfig().getSerializedResourcesDir()+"bmcDB.ser");		
 	}
 
-	public static void main(String[] args) throws IOException, ClassNotFoundException {
+	public static void main(String[] args) throws IOException, ClassNotFoundException, URISyntaxException {
 		System.err.println("load");
 		BMCDatabase db = new BMCDatabase();
-		db.parseMarcIsoFile("c:/data/Khresmoi/BMC/bmc-2011-01.iso");
+		KhresmoiConfig c = KhresmoiConfig.getConfig();
+		db.parseMarcIsoFile(c.getBmcIsoFilePath());
 		//db.deserializeFromFile("bmcDB.ser");
 		System.err.println("test");
 		db.test();
 		System.err.println("save");
-		db.serializeToFile("bmcDB.ser");
+		db.serializeToFile(c.getSerializedResourcesDir()+"bmcDB.ser");
 		System.err.println("end");
 	}
 
@@ -171,7 +174,7 @@ public class BMCDatabase {
 		buildIndexes();
 	}
 
-	public void parseMarcIsoFile(String file_name) throws IOException, ClassNotFoundException {
+	public void parseMarcIsoFile(String file_name) throws IOException, ClassNotFoundException, URISyntaxException {
 		mdb = new MeshRecordDB();
 		mdb.load();
 		

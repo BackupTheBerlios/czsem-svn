@@ -24,9 +24,6 @@ import czsem.utils.Config;
 
 public class InformationExtractionAnalysis extends BMCAnalysis
 {
-	public static String default_outputdir = "C:\\Users\\dedek\\Desktop\\bmc\\analyzed\\";
-	public static String default_crashdir = "C:\\Users\\dedek\\Desktop\\bmc\\flex_crash\\";
-
 	public InformationExtractionAnalysis(String inputdir, String outputdir) throws PersistenceException, ResourceInstantiationException, IOException, URISyntaxException
 	{
 		super(inputdir, outputdir);
@@ -91,7 +88,12 @@ public class InformationExtractionAnalysis extends BMCAnalysis
 		{
 			if (! InvalidOffsetException.class.isInstance(e.getCause())) throw e;
 			System.err.println("Could not be analyzed using FlexibleGazetteer!!!");
-			GateUtils.saveBMCDocumentToDirectory(doc, default_crashdir, "bmcID");
+			try {
+				GateUtils.saveBMCDocumentToDirectory(doc, 
+						KhresmoiConfig.getConfig().getOutputDirBmcCrash(), "bmcID");
+			} catch (URISyntaxException e1) {
+				throw new ExecutionException(e1);
+			}
 		}
 		return false;
 	}
@@ -104,17 +106,14 @@ public class InformationExtractionAnalysis extends BMCAnalysis
 		Config.getConfig().setGateHome();
 		Gate.init();
 		
-	    GateUtils.registerPluginDirectory(new File("czsem_GATE_plugins"));
+		GateUtils.registerCzsemPlugin();
 	
+		KhresmoiConfig c = KhresmoiConfig.getConfig();
+		
 		InformationExtractionAnalysis iea = 
 			new InformationExtractionAnalysis(
-					MorceBatchAnalysis.default_outputdir,
-					default_outputdir );
-/*		InformationExtractionAnalysis iea = 
-			new InformationExtractionAnalysis(
-					"C:\\Users\\dedek\\Desktop\\bmc\\flex_crash\\",
-					null);
-/**/		
+					c.getOutputDirBmcAnalyzedTmp_Morce(),
+					c.getOutputDirBmcAnalyzed() );
 		iea.doTheAnalysis();		
 	}
 

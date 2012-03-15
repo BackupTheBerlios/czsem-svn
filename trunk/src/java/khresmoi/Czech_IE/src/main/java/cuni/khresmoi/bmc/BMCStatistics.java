@@ -6,7 +6,6 @@ import gate.Document;
 import gate.Factory;
 import gate.FeatureMap;
 import gate.Gate;
-
 import gate.util.AnnotationDiffer;
 import gate.util.GateException;
 
@@ -32,14 +31,14 @@ import org.apache.commons.math.stat.descriptive.rank.Max;
 import org.apache.commons.math.stat.descriptive.rank.Median;
 import org.apache.commons.math.stat.descriptive.rank.Min;
 
-import czsem.Utils.StopRequestDetector;
-import czsem.gate.DocumentFeaturesDiff;
-import czsem.gate.GateUtils;
-import cuni.khresmoi.CompoundAnalysis;
 import cuni.khresmoi.InformationExtractionAnalysis;
+import cuni.khresmoi.KhresmoiConfig;
 import cuni.khresmoi.bmc.BMCDatabase.BMCEntry;
 import cuni.khresmoi.mesh.MeshRecordDB;
 import cuni.khresmoi.mesh.MeshRecordDB.MeshRecord;
+import czsem.Utils.StopRequestDetector;
+import czsem.gate.DocumentFeaturesDiff;
+import czsem.gate.GateUtils;
 import czsem.utils.Config;
 import czsem.utils.MultiSet;
 import czsem.utils.ProjectSetup;
@@ -142,7 +141,7 @@ public class BMCStatistics
 	MeshRecordDB mdb = new MeshRecordDB();
 
 	
-	public BMCStatistics(File[] files) throws FileNotFoundException, IOException, ClassNotFoundException
+	public BMCStatistics(File[] files) throws FileNotFoundException, IOException, ClassNotFoundException, URISyntaxException
 	{
 		next_free_entry = 0;
 		
@@ -168,7 +167,7 @@ public class BMCStatistics
 			as_data[i] = new AsStats[files.length];			
 		}
 */
-		bmc_db.loadCZ();
+		bmc_db.load();
 		mdb.load();
 
 
@@ -584,31 +583,33 @@ public class BMCStatistics
 		return s.checkEntry();
 	}
 
-	public static void checkMultipleFilesForSingleUrl() throws FileNotFoundException, IOException, ClassNotFoundException
+	public static void checkMultipleFilesForSingleUrl(String directory) throws FileNotFoundException, IOException, ClassNotFoundException, URISyntaxException
 	{
-		File dir = new File(InformationExtractionAnalysis.default_outputdir);
-		File[] files = dir.listFiles();
+		if (directory == null) directory = KhresmoiConfig.getConfig().getInputDirStatistics(); 
 		
-		Map<String, String> db_hash = new HashMap<String, String>();
+		Map<String, String> file_url_map = new HashMap<String, String>();
 		
 		BMCDatabase db = new BMCDatabase();
-		db.loadCZ();
+		db.load();
 		
 		for (String url : db.urlIter())
 		{
 			for (BMCEntry entry : db.entriesForUrl(url))
 			{
-				db_hash.put(
-						"C:\\Users\\dedek\\Desktop\\bmc\\analyzed\\" + entry.getID() + ".xml",
+				file_url_map.put(
+						directory + entry.getID() + ".xml",
 						url); 				
 			}
 		}
 		
+		File dir = new File(directory);
+		File[] files = dir.listFiles();
+
 		MultiSet<String> hits = new MultiSet<String>();
 		
 		for (File f : files)
 		{
-			String url = db_hash.get(f.toString());
+			String url = file_url_map.get(f.toString());
 			hits.add(url);
 		}
 		
@@ -628,8 +629,7 @@ public class BMCStatistics
 		Gate.init();
 						
 		StopRequestDetector stop_request_detector = new StopRequestDetector();
-		File dir = new File(CompoundAnalysis.default_outputdir);
-//		File dir = new File(InformationExtractionAnalysis.default_outputdir);
+		File dir = new File(KhresmoiConfig.getConfig().getInputDirStatistics());
 		File[] files = dir.listFiles();
 		
 		stop_request_detector.startDetector();

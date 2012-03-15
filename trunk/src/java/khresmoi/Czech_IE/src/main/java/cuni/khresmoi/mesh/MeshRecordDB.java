@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.net.URISyntaxException;
 import java.util.Collection;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -17,6 +18,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import cuni.khresmoi.KhresmoiConfig;
 import cuni.khresmoi.mimir.MeshIndexer.MeshParsedIndex.MeshIndexRecord;
 
 public class MeshRecordDB {
@@ -97,17 +99,17 @@ public class MeshRecordDB {
 		addRecord(parser.tmp);
 	}
 	
-	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, URISyntaxException
 	{
 		System.err.println("start");
 		MeshRecordDB db = new MeshRecordDB();
 		System.err.println("parse");
-//		db.parseMesh("c:/data/Khresmoi/czmesh/mesh2011.xml");
-//	    db.parseMesh("c:/data/Khresmoi/mesh/desc2011.xml");
+		KhresmoiConfig c = KhresmoiConfig.getConfig();
+		db.parseMesh(c.getMeshXmlFilePath());
 		System.err.println("ser");
-//		db.serializeToFile("meshDB.ser");
+		db.serializeToFile(c.getSerializedResourcesDir()+"meshDB.ser");
 		System.err.println("deser");
-		db.deserializeFromFile("meshDB.ser");
+		db.deserializeFromFile(c.getSerializedResourcesDir()+"meshDB.ser");
 
 		System.err.println(db.getEntry("D059085").czTerm);
 		
@@ -141,8 +143,8 @@ public class MeshRecordDB {
 		in.close();			
 	}
 
-	public void load() throws FileNotFoundException, IOException, ClassNotFoundException {
-		deserializeFromFile("meshDB.ser");		
+	public void load() throws FileNotFoundException, IOException, ClassNotFoundException, URISyntaxException {
+		deserializeFromFile(KhresmoiConfig.getConfig().getSerializedResourcesDir()+"meshDB.ser");		
 	}
 
 	public MeshRecord getEntry(String meshIdStr)

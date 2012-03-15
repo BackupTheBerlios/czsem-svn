@@ -12,45 +12,48 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import cuni.khresmoi.KhresmoiConfig;
 import cuni.khresmoi.mesh.MeshAnnieGazeteer.Outputter;
 import cuni.khresmoi.mesh.MeshRecordDB.MeshRecord;
-import czsem.utils.Config;
 
 public class CompoundGazeteer {
 	
 	/**
-	 * @param nosep MeSH term tokens not including separators
+	 * @param nosep contains MeSH term tokens not including separators
 	 * @see MeshStatistics#isSeparator(String)
 	 */
-	public static boolean shouldPermutate(List<String> nosep)
-	{
-/*
-		List<String> nosep = new ArrayList<String>(tokens.size());
-		for (String t: tokens)
-		{
-			if (! MeshStatistics.isSeparator(t)) nosep.add(t);
-		}
-*/		
-		if (nosep.size() <= 1) return false;
-		if (nosep.size() > 2) return false;
-
-		for (String t: nosep)
-		{
-			if (t.length() <= 2) return false;
-		}
-		return true;
-	}
 	
 	public static class CompoundGazeteerOutputter implements Outputter
 	{
 		private List<String>[] mesh_lemmas;
-		public CompoundGazeteerOutputter() throws GateException, URISyntaxException, IOException
+		private int maxTermTokensForPermutation;
+		public CompoundGazeteerOutputter(int maxTermTokensForPermutation) throws GateException, URISyntaxException, IOException
 		{
+			this.maxTermTokensForPermutation = maxTermTokensForPermutation;
 			mesh_lemmas = MeshAnnieGazeteer.loadMeshLemmas();
 			System.err.println("mesh lemmas loaded");			
 		}		
 
-				
+		public boolean shouldPermutate(List<String> nosep)
+		{
+	/*
+			List<String> nosep = new ArrayList<String>(tokens.size());
+			for (String t: tokens)
+			{
+				if (! MeshStatistics.isSeparator(t)) nosep.add(t);
+			}
+	*/		
+			if (nosep.size() <= 1) return false;
+			if (nosep.size() > maxTermTokensForPermutation) return false;
+
+			for (String t: nosep)
+			{
+				if (t.length() <= 2) return false;
+			}
+			return true;
+		}
+
+		
 		private void putLine(PrintWriter out, String term, String meshID, String czTerm, String enTerm, String permutID)
 		{
 			out.format("%s:meshID=%s:czTerm=%s:enTerm=%s:permut=%s\n", term, meshID, czTerm, enTerm, permutID);									
@@ -92,14 +95,15 @@ public class CompoundGazeteer {
 		}		
 	}
 	
-	public static void main(String[] args) throws GateException, URISyntaxException, IOException, ParserConfigurationException, SAXException, ClassNotFoundException
+
+	public static void buildCompoundGazetteer(int maxTermTokensForPermutation, String filename) throws URISyntaxException, IOException, GateException, ClassNotFoundException
 	{
-		System.err.println("start");		
+		System.err.println(filename);		
 		
 		MeshAnnieGazeteer g = new MeshAnnieGazeteer(
-	    		Config.getConfig().getCzsemPluginDir() + 
-	    		"/resources/gazetteer/meshcz_lemmas_compound_short.lst",
-	    		new CompoundGazeteerOutputter());
+	    		KhresmoiConfig.getConfig().getGazetteerResourcesDir() + 
+	    		filename,
+	    		new CompoundGazeteerOutputter(maxTermTokensForPermutation));
 	    		
 				
 		
@@ -109,6 +113,12 @@ public class CompoundGazeteer {
 
 	    System.err.print("end, record written: ");
 	    System.err.println(g.records.size());
-
+		
+	}
+	
+	public static void main(String[] args) throws GateException, URISyntaxException, IOException, ParserConfigurationException, SAXException, ClassNotFoundException
+	{
+		buildCompoundGazetteer(2, "meshcz_lemmas_compound_short.lst");
+		buildCompoundGazetteer(3, "meshcz_lemmas_compound_long.lst");
 	}
 }

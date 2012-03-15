@@ -22,6 +22,7 @@ import org.marc4j.MarcReader;
 import org.marc4j.MarcStreamReader;
 import org.marc4j.marc.Record;
 
+import cuni.khresmoi.KhresmoiConfig;
 import czsem.utils.Config;
 import czsem.utils.MultiSet;
 
@@ -34,7 +35,9 @@ public class FileInfo {
 		Config.getConfig().setGateHome();
 		Gate.init();
 		
-		String inputdir = "C:\\Users\\dedek\\Desktop\\bmc\\samples\\analysed\\";
+		KhresmoiConfig c = KhresmoiConfig.getConfig();
+		
+		String inputdir = c.getInputDirFileInfo();
 		File dir = new File(inputdir );
 		File[] files = dir.listFiles();
 		
@@ -43,7 +46,7 @@ public class FileInfo {
 		
 		BMCGateCorpusBuider b = new BMCGateCorpusBuider("BMC", true, inputdir);
 
-		InputStream in = new FileInputStream("c:/data/Khresmoi/BMC/bmc-2011-01.iso");
+		InputStream in = new FileInputStream(c.getBmcIsoFilePath());
 		MarcReader reader = new MarcStreamReader(in, "UTF-8");
 		
 		int foud = 0;

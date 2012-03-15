@@ -141,7 +141,7 @@ public class MachineLearningExperimenter
 	    GateUtils.registerPluginDirectory("Tools");
 	    GateUtils.registerPluginDirectory("Learning");
 	    
-	    GateUtils.registerPluginDirectory(new File("czsem_GATE_plugins"));
+	    GateUtils.registerCzsemPlugin();
 		    		    
 	    	    
 	    LogService.minVerbosityLevel = 0;		

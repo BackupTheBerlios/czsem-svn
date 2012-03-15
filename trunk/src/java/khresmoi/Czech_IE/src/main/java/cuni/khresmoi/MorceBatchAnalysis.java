@@ -20,10 +20,7 @@ import cuni.khresmoi.bmc.BMCAnalysis;
 import czsem.utils.Config;
 
 public class MorceBatchAnalysis extends BMCAnalysis
-{
-	static String default_inputdir = "C:\\Users\\dedek\\Desktop\\bmc\\filter_include\\";
-	static String default_outputdir = "C:\\Users\\dedek\\Desktop\\bmc\\morce_analyzed\\";
-	
+{	
 	static final int threads = 1; //multi-thread execution does not work with TectoMT (Morce)!! 
 	int files_in_single_btach = 80;
 	
@@ -169,10 +166,14 @@ public class MorceBatchAnalysis extends BMCAnalysis
 		Config.getConfig().setGateHome();
 		Gate.init();
 		
-	    GateUtils.registerPluginDirectory(new File("czsem_GATE_plugins"));
+		GateUtils.registerCzsemPlugin();
+		
+		KhresmoiConfig c = KhresmoiConfig.getConfig();
 
 
-		MorceBatchAnalysis mba = new MorceBatchAnalysis(default_inputdir, default_outputdir); 
+		MorceBatchAnalysis mba = new MorceBatchAnalysis(
+				c.getOutputDirBmcFilterInlude(),
+				c.getOutputDirBmcAnalyzedTmp_Morce()); 
 		
 		
 		for (int thread=0; thread<threads; thread++)

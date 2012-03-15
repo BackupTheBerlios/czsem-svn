@@ -19,6 +19,7 @@ import gate.Factory;
 import gate.Gate;
 import gate.creole.ResourceInstantiationException;
 import gate.util.GateException;
+import cuni.khresmoi.KhresmoiConfig;
 import czsem.utils.Config;
 
 public class LinkExporter {
@@ -98,7 +99,7 @@ public class LinkExporter {
 		Config.getConfig().setGateHome();
 		Gate.init();
 		
-		exportLinksGateFilesDir("C:\\Users\\dedek\\Desktop\\bmc\\analyzed", "bmc_links_filered.txt");
+		exportLinksGateFilesDir(KhresmoiConfig.getConfig().getInputDirLinkExport(), "bmc_links_filered.txt");
 				
 		/***/
 		

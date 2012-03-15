@@ -3,12 +3,8 @@ package czsem.utils;
 import gate.Gate;
 import gate.util.GateException;
 
-import java.beans.XMLDecoder;
-import java.beans.XMLEncoder;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
@@ -19,7 +15,7 @@ import java.util.Set;
 import czsem.Utils;
 
 
-public class Config
+public class Config extends AbstractConfig
 {
 	private static Config config = null;
 	public static ClassLoader classLoader = null;
@@ -43,16 +39,16 @@ public class Config
 	
 	public static void main(String[] args) throws IOException, GateException, URISyntaxException
 	{
-		/*
-		Config cfg = new Config();
-		cfg.setMyWinValues();
+		/**/
+		Config cfg = getConfig();
+//		cfg.setMyWinValues();
 		cfg.setGateHome();
 		Gate.init();
-	    GateUtils.registerPluginDirectory(new File("czsem_GATE_plugins"));
+	    czsem.gate.GateUtils.registerCzsemPlugin();;
 	    System.err.println(getConfig().getGateHome());
-		*/
+		/**/
 
-/**/
+/**
 		Config ps = new Config();
 		ps.setMyWinValues();
 //		ps.setInstallDefaults();
@@ -89,7 +85,14 @@ public class Config
 			} 
 			catch (FileNotFoundException e)
 			{
-				config = loadFromFile(config_filename, classLoader);				
+				try
+				{
+					config = loadFromFile("../../czsem/"+czsem_plugin_dir_name+ '/' +config_filename, classLoader);
+				} 
+				catch (FileNotFoundException e2)
+				{
+					config = loadFromFile(config_filename, classLoader);				
+				}
 			}
 		} 
 		catch (FileNotFoundException e)
@@ -153,28 +156,9 @@ public class Config
 		setLearnigConfigDirectoryForGate(	"C:\\workspace\\czsem\\src\\java\\czsem\\gate-learning");
 	}
 
-	public void saveToFile(String filename) throws IOException
-	{
-		// Create output stream.
-		  FileOutputStream fos = new FileOutputStream(filename);
-
-		  // Create XML encoder.
-		  XMLEncoder xenc = new XMLEncoder(fos);
-
-		  // Write object.
-		  xenc.writeObject(this);
-		  xenc.flush();		  
-		  xenc.close();
-		  fos.close();
-	}
-
 	public static Config loadFromFile(String filename, ClassLoader classLoader) throws IOException
 	{
-		FileInputStream os = new FileInputStream(filename);
-		XMLDecoder decoder = new XMLDecoder(os, null, null, classLoader);
-		Config c = (Config)decoder.readObject();
-		decoder.close();
-		os.close();
+		Config c = (Config) loadAbstaractConfigFromFile(filename, classLoader);
 		c.czsemPluginDir = new File(new File(filename).getParent()).getCanonicalPath();
 		return c;
 	}

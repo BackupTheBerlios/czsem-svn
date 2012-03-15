@@ -26,8 +26,6 @@ import czsem.utils.Config;
 
 public class CompoundAnalysis extends BMCAnalysis
 {
-	public static String default_outputdir = "C:\\Users\\dedek\\Desktop\\bmc\\compound\\";
-
 	public CompoundAnalysis(String inputdir, String outputdir) throws PersistenceException, ResourceInstantiationException, IOException, URISyntaxException {
 		super(inputdir, outputdir);
 		analyzer = prepareAnalyser();
@@ -46,9 +44,7 @@ public class CompoundAnalysis extends BMCAnalysis
 	private LanguageAnalyser prepareAnalyser() throws PersistenceException, ResourceInstantiationException, IOException, URISyntaxException {
 		 ConditionalSerialAnalyserController ret = (ConditionalSerialAnalyserController)
 		 	PersistenceManager.loadObjectFromFile(
-				new File(
-						Config.getConfig().getCzsemPluginDir()+
-						"/resources/mimir/Compound_only.gapp"));
+				new File(KhresmoiConfig.getConfig().getGateAppCmpoundAnalysis()));
 		
 		 ret.setCorpus(Factory.newCorpus("empty"));
 		 
@@ -70,12 +66,12 @@ public class CompoundAnalysis extends BMCAnalysis
 		Config.getConfig().setGateHome();
 		Gate.init();
 		
-	    GateUtils.registerPluginDirectory(new File("czsem_GATE_plugins"));
+	    GateUtils.registerCzsemPlugin();
 	
 	    CompoundAnalysis iea = 
 			new CompoundAnalysis(
-					InformationExtractionAnalysis.default_outputdir,
-					default_outputdir );
+					KhresmoiConfig.getConfig().getOutputDirBmcAnalyzed(),
+					KhresmoiConfig.getConfig().getOutputDirBmcAnalyzedCompound() );
 
 	    iea.doTheAnalysis();		
 	}

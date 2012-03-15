@@ -22,7 +22,7 @@ import cuni.khresmoi.mimir.MeshIndexer.MeshParsedIndex.MeshIndexRecord;
 
 public class UmlsMapping {
 
-	public static void main(String[] args) throws SAXException, IOException, ParserConfigurationException, ClassNotFoundException {
+	public static void main(String[] args) throws SAXException, IOException, ParserConfigurationException, ClassNotFoundException, URISyntaxException {
 		System.err.println("start");
 		Map<Integer, UmlsEnty> ds = parseUMSFile("c:/data/Khresmoi/mesh_umls_linkedlifedata_middle.xml");
 		System.err.println("parsed");

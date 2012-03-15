@@ -321,6 +321,11 @@ public class GateUtils
 		}		
 	}
 
+	public static void registerCzsemPlugin() throws GateException, URISyntaxException, IOException
+	{
+		registerPluginDirectory(new File(Config.getConfig().getCzsemPluginDir()));		
+	}
+
 	public static void registerPluginDirectory(File pluginDirectory) throws MalformedURLException, GateException
 	{
 	    Gate.getCreoleRegister().registerDirectories( 

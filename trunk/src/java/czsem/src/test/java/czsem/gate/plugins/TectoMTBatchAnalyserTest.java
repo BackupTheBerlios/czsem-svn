@@ -118,7 +118,7 @@ public class TectoMTBatchAnalyserTest //extends TestCase
 	    {
 			Config.getConfig().setGateHome();
 			Gate.init();
-		    GateUtils.registerPluginDirectory(new File("czsem_GATE_plugins"));
+			GateUtils.registerCzsemPlugin();
 	    }
 	}
 	

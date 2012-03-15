@@ -23,6 +23,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import czsem.Utils;
+import cuni.khresmoi.KhresmoiConfig;
 import cuni.khresmoi.mesh.MeshSaxParser;
 import cuni.khresmoi.mimir.MeshIndexer.MeshParsedIndex.MeshIndexRecord;
 import cuni.khresmoi.mimir.MeshIndexer.MeshParsedIndex.MeshTreeNum;
@@ -307,7 +308,7 @@ public class MeshIndexer
 		
 	}
 
-	public MeshParsedIndex parseMesh() throws ParserConfigurationException, SAXException, IOException
+	public MeshParsedIndex parseMesh() throws ParserConfigurationException, SAXException, IOException, URISyntaxException
 	{
 		final MeshParsedIndex index = new MeshParsedIndex();
 		
@@ -347,7 +348,7 @@ public class MeshIndexer
 		};
 		
 		
-		parser.parse("c:/data/Khresmoi/czmesh/mesh2011.xml");
+		parser.parse(KhresmoiConfig.getConfig().getMeshXmlFilePath());
 		
 		return index;
 		

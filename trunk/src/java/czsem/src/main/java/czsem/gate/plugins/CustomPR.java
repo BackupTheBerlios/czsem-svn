@@ -10,7 +10,6 @@ import gate.creole.metadata.CreoleResource;
 import gate.persist.PersistenceException;
 import gate.util.GateException;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -67,7 +66,7 @@ public class CustomPR extends AbstractLanguageAnalyser {
 	    Config.getConfig().setGateHome();
 	    Gate.init();
 
-	    GateUtils.registerPluginDirectory(new File("czsem_GATE_plugins"));
+	    GateUtils.registerCzsemPlugin();
 		
 		CustomPR pr = CustomPR.createInstance(
 				new AnalyzeDocDelegate()

@@ -61,7 +61,7 @@
         <pack name="java binaries" preselected="yes" required="yes">
             <description/>
             <file override="asktrue" unpack="true"
-                src="../${project.artifactId}-${project.version}-jar-with-dependencies.zip" targetdir="$INSTALL_PATH/"/>
+                src="../${project.artifactId}-${project.version}-install-zip.zip" targetdir="$INSTALL_PATH/"/>
 <!-- 
             <singlefile override="true"
                 src="..\..\src\izpack\czsem_config_install.xml" target="$INSTALL_PATH/czsem_GATE_plugins/czsem_config.xml"/>

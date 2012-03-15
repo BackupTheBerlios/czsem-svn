@@ -25,6 +25,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import cuni.khresmoi.KhresmoiConfig;
 import cuni.khresmoi.mesh.MeshRecordDB.MeshRecord;
 import czsem.utils.Config;
 
@@ -77,7 +78,9 @@ public class MeshAnnieGazeteer
 		Config.getConfig().setGateHome();
 		Gate.init();
 		
-		Document doc = Factory.newDocument(new File("C:\\Users\\dedek\\Desktop\\bmc\\meshcz_analysed_gate.xml").toURI().toURL());
+		Document doc = Factory.newDocument(new File(
+				KhresmoiConfig.getConfig().getMeshCzLammatizationAnalysisOutput())
+				.toURI().toURL());
 		
 		AnnotationSet tmt = doc.getAnnotations("TectoMT");
 		AnnotationSet sents = tmt.get("Sentence");
@@ -145,7 +148,7 @@ public class MeshAnnieGazeteer
 
 
 
-	void loadMeshDB() throws FileNotFoundException, IOException, ClassNotFoundException {
+	void loadMeshDB() throws FileNotFoundException, IOException, ClassNotFoundException, URISyntaxException {
 		MeshRecordDB db = new MeshRecordDB();
 		db.load();
 		records = db.getRecords();		

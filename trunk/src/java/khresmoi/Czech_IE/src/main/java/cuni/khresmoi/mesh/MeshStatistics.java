@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import cuni.khresmoi.KhresmoiConfig;
 import czsem.utils.MultiSet;
 
 public class MeshStatistics
@@ -51,20 +53,19 @@ public class MeshStatistics
 	
 	private MeshStatisticsMeshParser mp;
 
-	public static void main(String [] args) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static void main(String [] args) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, URISyntaxException
 	{
 		MeshStatistics ms = new MeshStatistics(true);
-	    ms.parse("c:/data/Khresmoi/mesh/desc2011.xml");
-//		ms.parse("c:/data/Khresmoi/czmesh/mesh2011.xml");
-//		ms.serializeToFile("mesh_terms.ser");
-//		ms.deserializeFromFile("mesh_terms.ser");
+	    KhresmoiConfig c = KhresmoiConfig.getConfig();
+		ms.parse(c.getMeshXmlFilePath());
+		ms.serializeToFile(c.getSerializedResourcesDir()+"mesh_terms.ser");
 		ms.countCharStats();
 		ms.countTokenStats();
 	}
 	
-	public void load() throws FileNotFoundException, IOException, ClassNotFoundException
+	public void load() throws FileNotFoundException, IOException, ClassNotFoundException, URISyntaxException
 	{
-		deserializeFromFile("mesh_terms.ser");		
+		deserializeFromFile(KhresmoiConfig.getConfig().getSerializedResourcesDir()+"mesh_terms.ser");		
 	}
 	
 	public void parse(String filename) throws ParserConfigurationException, SAXException, IOException {

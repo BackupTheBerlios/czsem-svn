@@ -1,24 +1,14 @@
 package cuni.khresmoi.mimir;
 
-import gate.Corpus;
-import gate.Document;
-import gate.Factory;
-import gate.Gate;
 import gate.mimir.Constraint;
 import gate.mimir.ConstraintType;
 import gate.mimir.SemanticAnnotationHelper;
 import gate.mimir.index.Mention;
-import gate.mimir.index.MimirConnector;
 import gate.mimir.search.QueryEngine;
 import gate.mimir.util.DelegatingSemanticAnnotationHelper;
-import gate.util.GateException;
 import gate.util.GateRuntimeException;
 
-import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.Constructor;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -30,7 +20,6 @@ import org.apache.log4j.Logger;
 import cuni.khresmoi.mimir.MeshIndexer.MeshIndex;
 import cuni.khresmoi.mimir.MeshIndexer.MeshIndex.DescendantsCnstraint;
 import cuni.khresmoi.mimir.MeshIndexer.MeshParsedIndex.MeshIndexRecord;
-import czsem.utils.Config;
 
 public class MeshAnnotationHelper extends DelegatingSemanticAnnotationHelper
 {	
@@ -316,6 +305,7 @@ public class MeshAnnotationHelper extends DelegatingSemanticAnnotationHelper
 		System.err.println(j);
 	}
 
+	/*
 	public static void main(String[] args) throws IOException, GateException, URISyntaxException
 	{
 		Config.getConfig().setGateHome();
@@ -340,11 +330,8 @@ public class MeshAnnotationHelper extends DelegatingSemanticAnnotationHelper
 			MimirConnector.defaultConnector().sendToMimir(doc, null, index_url);
 			System.err.println(doc.getName());			
 		}
-
 		
-		
-
 	}
-
+/**/
 
 }

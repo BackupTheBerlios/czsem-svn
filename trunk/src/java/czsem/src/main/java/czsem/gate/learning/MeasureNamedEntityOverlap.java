@@ -14,14 +14,13 @@ import gate.persist.PersistenceException;
 import gate.util.AnnotationDiffer;
 import gate.util.GateException;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.Locale;
 
 import czsem.gate.GateUtils;
-import czsem.gate.learning.DataSet.DataSetImpl.*;
+import czsem.gate.learning.DataSet.DataSetImpl.Acquisitions;
 import czsem.gate.learning.PRSetup.SinglePRSetup;
 import czsem.gate.plugins.AnnotationDependencyRootMarker;
 import czsem.gate.plugins.AnnotationDependencySubtreeMarker;
@@ -273,7 +272,7 @@ public class MeasureNamedEntityOverlap
 		
 		Config.getConfig().setGateHome();
 	    Gate.init();
-	    GateUtils.registerPluginDirectory(new File("czsem_GATE_plugins"));
+	    GateUtils.registerCzsemPlugin();
 	
 	
 		

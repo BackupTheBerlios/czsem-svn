@@ -29,6 +29,7 @@ import org.marc4j.MarcReader;
 import org.marc4j.MarcStreamReader;
 import org.marc4j.marc.Record;
 
+import cuni.khresmoi.KhresmoiConfig;
 import czsem.gate.GateUtils;
 import czsem.utils.Config;
 
@@ -105,7 +106,8 @@ public class BMCGateCorpusBuider
 				
 		Gate.init();
 		
-		BMCGateCorpusBuider b = new BMCGateCorpusBuider("BMC", true, "C:\\Users\\dedek\\Desktop\\bmc\\bmc");
+		BMCGateCorpusBuider b = new BMCGateCorpusBuider("BMC", true, 
+				KhresmoiConfig.getConfig().getOutputDirBmcOrig());
 		
 		InputStream in = new FileInputStream("c:/data/Khresmoi/BMC/bmc-2011-01.iso");
 		MarcReader reader = new MarcStreamReader(in, "UTF-8");
@@ -180,8 +182,5 @@ public class BMCGateCorpusBuider
 	{
 		if (! dontBuildCorpus)
 			GateUtils.saveBMCCorpusToDirectory(corpus, outputDirectory, "bmcID");
-	}
-	
-	final static String BMC_DIR = "C:\\Users\\dedek\\Desktop\\bmc\\bmc\\";
-	
+	}	
 }

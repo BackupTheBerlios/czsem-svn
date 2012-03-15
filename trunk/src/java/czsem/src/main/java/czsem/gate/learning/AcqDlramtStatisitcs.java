@@ -11,7 +11,6 @@ import gate.creole.ResourceInstantiationException;
 import gate.persist.PersistenceException;
 import gate.util.GateException;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -48,7 +47,7 @@ public class AcqDlramtStatisitcs implements AnalyzeDocDelegate {
 	    Config.getConfig().setGateHome();
 	    Gate.init();
 
-	    GateUtils.registerPluginDirectory(new File("czsem_GATE_plugins"));
+	    GateUtils.registerCzsemPlugin();
 		
 	    AcqDlramtStatisitcs ads = new AcqDlramtStatisitcs();
 	    ads.exec();

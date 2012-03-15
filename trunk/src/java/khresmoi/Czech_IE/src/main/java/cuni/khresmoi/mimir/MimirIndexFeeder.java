@@ -11,46 +11,13 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 
+import cuni.khresmoi.KhresmoiConfig;
 import czsem.Utils;
 import czsem.Utils.StopRequestDetector;
-import cuni.khresmoi.InformationExtractionAnalysis;
 import czsem.utils.Config;
 import czsem.utils.ProjectSetup;
 
 public class MimirIndexFeeder {
-
-/*
-	public static class CzechMeshDocumentAnalysis
-	{
-		public static interface LanguageAnalyserController extends Controller, LanguageAnalyser {}
-
-		ConditionalSerialAnalyserController app;
-
-		public void initApp() throws URISyntaxException, IOException, PersistenceException, ResourceInstantiationException
-		{
-			
-			
-			app = (ConditionalSerialAnalyserController) PersistenceManager.loadObjectFromFile(
-					new File(
-							Config.getConfig().getCzsemPluginDir()+
-							"/resources/mimir/CzechMeshAnalysis.gapp"));
-			
-		}
-
-		public void anlyseDoc(Document doc) throws ExecutionException
-		{
-			app.setDocument(doc);
-			app.execute();
-		}
-
-		public void close()
-		{
-			app.cleanup();			
-		}
-		
-		
-	}
-/**/
 	
 	static String indexurl = "http://localhost:8080/mimir-demo/mesh_final";
 //	static String indexurl = "http://195.113.17.17:8080/mimir-demo-3.2.1-snapshot/pok2_local";
@@ -67,7 +34,7 @@ public class MimirIndexFeeder {
 		
 		try {
 		
-			File dir = new File(InformationExtractionAnalysis.default_outputdir);
+			File dir = new File(KhresmoiConfig.getConfig().getInputDirMimirIndexFeeder());
 			File[] files = dir.listFiles();
 			
 			stop_request_detector.startDetector();

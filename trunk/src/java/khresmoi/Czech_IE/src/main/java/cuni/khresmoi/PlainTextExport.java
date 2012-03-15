@@ -29,9 +29,6 @@ import czsem.utils.Config;
 
 public class PlainTextExport extends BMCAnalysis
 {
-public static String default_outputdir = "C:\\Users\\dedek\\Desktop\\bmc\\plain_text_export\\";
-
-
 	public PlainTextExport(String inputdir, String outputdir) {
 		super(inputdir, outputdir);
 	}
@@ -100,10 +97,12 @@ public static String default_outputdir = "C:\\Users\\dedek\\Desktop\\bmc\\plain_
 		Gate.init();
 		
 		
+		KhresmoiConfig c = KhresmoiConfig.getConfig();
+		
 		PlainTextExport export = 
 			new PlainTextExport(
-					InformationExtractionAnalysis.default_outputdir,
-					default_outputdir );
+					c.getOutputDirBmcAnalyzed(),
+					c.getOutputDirBmcPlainTextExport());
 
 	    export.doTheAnalysis();		
 

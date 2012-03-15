@@ -1,7 +1,8 @@
 package czsem.gate.plugins;
 
+import static org.testng.AssertJUnit.assertFalse;
+import static org.testng.AssertJUnit.assertTrue;
 import gate.AnnotationSet;
-
 import gate.Corpus;
 import gate.Document;
 import gate.Factory;
@@ -14,14 +15,11 @@ import gate.creole.ResourceInstantiationException;
 import gate.creole.SerialAnalyserController;
 import gate.util.GateException;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
-
-//import junit.framework.TestCase;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -29,8 +27,6 @@ import org.testng.annotations.Test;
 
 import czsem.gate.GateUtils;
 import czsem.utils.Config;
-
-import static org.testng.AssertJUnit.*;
 
 public class TectoMTOnlineAnalyserTest //extends TestCase
 {
@@ -68,7 +64,7 @@ public class TectoMTOnlineAnalyserTest //extends TestCase
 	    {
 			Config.getConfig().setGateHome();
 			Gate.init();
-		    GateUtils.registerPluginDirectory(new File("czsem_GATE_plugins"));
+			GateUtils.registerCzsemPlugin();
 	    }
 	}
 	
