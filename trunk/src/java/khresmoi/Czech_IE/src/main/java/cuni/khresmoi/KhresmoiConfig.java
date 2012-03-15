@@ -10,34 +10,36 @@ import czsem.utils.AbstractConfig;
 public class KhresmoiConfig extends AbstractConfig {
 	private static KhresmoiConfig config = null;
 	private static final String config_filename = "khresmoi_config.xml";
-			
-	private String outputDirBmcOrig = "C:\\Users\\dedek\\Desktop\\bmc\\bmc\\";
-	private String outputDirBmcFilterInlude = "C:\\Users\\dedek\\Desktop\\bmc\\filter_include\\";
-	private String outputDirBmcFilterExclude = "C:\\Users\\dedek\\Desktop\\bmc\\filter_exclude\\";
-	private String outputDirBmcAnalyzedTmp_Morce = "C:\\Users\\dedek\\Desktop\\bmc\\morce_analyzed\\";
-	private String outputDirBmcAnalyzed = "C:\\Users\\dedek\\Desktop\\bmc\\analyzed\\";
-	private String outputDirBmcAnalyzedCompound = "C:\\Users\\dedek\\Desktop\\bmc\\compound\\";
-	private String outputDirBmcCrash = "C:\\Users\\dedek\\Desktop\\bmc\\flex_crash\\";
-	private String outputDirBmcFitered = "C:\\Users\\dedek\\Desktop\\bmc\\filter_include\\";
-	private String outputDirBmcPlainTextExport = "C:\\Users\\dedek\\Desktop\\bmc\\plain_text_export\\";
 	
-	private String inputDirFileInfo = "C:\\Users\\dedek\\Desktop\\bmc\\samples\\analysed\\";
-	private String inputDirLinkExport = "C:\\Users\\dedek\\Desktop\\bmc\\analyzed";
-	private String inputDirStatistics = "C:\\Users\\dedek\\Desktop\\bmc\\compound\\";
-	private String inputDirMimirIndexFeeder = "C:\\Users\\dedek\\Desktop\\bmc\\analyzed\\";
 	
-	private String serializedResourcesDir = "./resources/serialized/";
-	private String gazetteerResourcesDir = "./resources/gazetteer/";
+	
+	private String outputDirBmcOrig 	;
+	private String outputDirBmcFilterInlude 	;
+	private String outputDirBmcFilterExclude 	;
+	private String outputDirBmcAnalyzedTmp_Morce 	;
+	private String outputDirBmcAnalyzed 	;
+	private String outputDirBmcAnalyzedCompound 	;
+	private String outputDirBmcCrash 	;
+	private String outputDirBmcFitered 	;
+	private String outputDirBmcPlainTextExport 	;
 
-	
-	private String bmcIsoFilePath = "C:\\data\\Khresmoi\\BMC\\bmc-2011-01.iso";
-	private String meshXmlFilePath = "C:\\data\\Khresmoi\\czmesh\\mesh2011.xml";
-	private String meshCzLammatizationAnalysisOutput = "./resources/gazetteer/meshcz_analysed_gate.xml";
-	
-	private String gateAppCmpoundAnalysis = "./resources/gapp/Compound_only.gapp";
-	private String gateAppIeAnalysis = "./resources/gapp/CzechMeshAnalysis_IE_only.gapp";
-		
-	private String mimirIndexUrl = "http://localhost:8080/mimir-demo/mesh_final";
+	private String inputDirFileInfo 	;
+	private String inputDirLinkExport 	;
+	private String inputDirStatistics 	;
+	private String inputDirMimirIndexFeeder 	;
+
+	private String serializedResourcesDir 	;
+	private String gazetteerResourcesDir 	;
+
+
+	private String bmcIsoFilePath 	;
+	private String meshXmlFilePath 	;
+	private String meshCzLammatizationAnalysisOutput 	;
+
+	private String gateAppCmpoundAnalysis 	;
+	private String gateAppIeAnalysis 	;
+
+	private String mimirIndexUrl 	;
 
 	
 	
@@ -59,6 +61,7 @@ public class KhresmoiConfig extends AbstractConfig {
 	public static void main(String[] args) throws IOException, GateException, URISyntaxException
 	{
 		KhresmoiConfig c = new KhresmoiConfig();
+		c.setMyWinDefaults();
 		c.saveToFile(config_filename);
 	}
 
@@ -68,7 +71,36 @@ public class KhresmoiConfig extends AbstractConfig {
 	
 	
 	
-	
+	private void setMyWinDefaults() {
+		 outputDirBmcOrig = "C:\\Users\\dedek\\Desktop\\bmc\\bmc\\";
+		 outputDirBmcFilterInlude = "C:\\Users\\dedek\\Desktop\\bmc\\filter_include\\";
+		 outputDirBmcFilterExclude = "C:\\Users\\dedek\\Desktop\\bmc\\filter_exclude\\";
+		 outputDirBmcAnalyzedTmp_Morce = "C:\\Users\\dedek\\Desktop\\bmc\\morce_analyzed\\";
+		 outputDirBmcAnalyzed = "C:\\Users\\dedek\\Desktop\\bmc\\analyzed\\";
+		 outputDirBmcAnalyzedCompound = "C:\\Users\\dedek\\Desktop\\bmc\\compound\\";
+		 outputDirBmcCrash = "C:\\Users\\dedek\\Desktop\\bmc\\flex_crash\\";
+		 outputDirBmcFitered = "C:\\Users\\dedek\\Desktop\\bmc\\filter_include\\";
+		 outputDirBmcPlainTextExport = "C:\\Users\\dedek\\Desktop\\bmc\\plain_text_export\\";
+		
+		 inputDirFileInfo = "C:\\Users\\dedek\\Desktop\\bmc\\samples\\analysed\\";
+		 inputDirLinkExport = "C:\\Users\\dedek\\Desktop\\bmc\\analyzed";
+		 inputDirStatistics = "C:\\Users\\dedek\\Desktop\\bmc\\compound\\";
+		 inputDirMimirIndexFeeder = "C:\\Users\\dedek\\Desktop\\bmc\\analyzed\\";
+		
+		 serializedResourcesDir = "./resources/serialized/";
+		 gazetteerResourcesDir = "./resources/gazetteer/";
+
+		
+		 bmcIsoFilePath = "C:\\data\\Khresmoi\\BMC\\bmc-2011-01.iso";
+		 meshXmlFilePath = "C:\\data\\Khresmoi\\czmesh\\mesh2011.xml";
+		 meshCzLammatizationAnalysisOutput = "./resources/gazetteer/meshcz_analysed_gate.xml";
+		
+		 gateAppCmpoundAnalysis = "./resources/gapp/Compound_only.gapp";
+		 gateAppIeAnalysis = "./resources/gapp/CzechMeshAnalysis_IE_only.gapp";
+			
+		 mimirIndexUrl = "http://localhost:8080/mimir-demo/mesh_final";
+	}
+
 /**************************************************************************************/	
 	public String getOutputDirBmcOrig() {
 		return outputDirBmcOrig;

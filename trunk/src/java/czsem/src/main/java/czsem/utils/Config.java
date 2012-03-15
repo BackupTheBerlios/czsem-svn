@@ -39,7 +39,7 @@ public class Config extends AbstractConfig
 	
 	public static void main(String[] args) throws IOException, GateException, URISyntaxException
 	{
-		/**/
+		/*
 		Config cfg = getConfig();
 //		cfg.setMyWinValues();
 		cfg.setGateHome();
@@ -48,7 +48,7 @@ public class Config extends AbstractConfig
 	    System.err.println(getConfig().getGateHome());
 		/**/
 
-/**
+/**/
 		Config ps = new Config();
 		ps.setMyWinValues();
 //		ps.setInstallDefaults();

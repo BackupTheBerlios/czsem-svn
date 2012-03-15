@@ -1,4 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 <java version="1.6.0_16" class="java.beans.XMLDecoder"> 
- <object class="cuni.khresmoi.KhresmoiConfig"/> 
+ <object class="cuni.khresmoi.KhresmoiConfig"> 
+  <void property="bmcIsoFilePath"> 
+   <string>C:\data\Khresmoi\BMC\bmc-2011-01.iso</string> 
+  </void> 
+  <void property="gateAppCmpoundAnalysis"> 
+   <string>./resources/gapp/Compound_only.gapp</string> 
+  </void> 
+  <void property="gateAppIeAnalysis"> 
+   <string>./resources/gapp/CzechMeshAnalysis_IE_only.gapp</string> 
+  </void> 
+  <void property="gazetteerResourcesDir"> 
+   <string>./resources/gazetteer/</string> 
+  </void> 
+  <void property="inputDirFileInfo"> 
+   <string>C:\Users\dedek\Desktop\bmc\samples\analysed\</string> 
+  </void> 
+  <void property="inputDirLinkExport"> 
+   <string>C:\Users\dedek\Desktop\bmc\analyzed</string> 
+  </void> 
+  <void property="inputDirMimirIndexFeeder"> 
+   <string>C:\Users\dedek\Desktop\bmc\analyzed\</string> 
+  </void> 
+  <void property="inputDirStatistics"> 
+   <string>C:\Users\dedek\Desktop\bmc\compound\</string> 
+  </void> 
+  <void property="meshCzLammatizationAnalysisOutput"> 
+   <string>./resources/gazetteer/meshcz_analysed_gate.xml</string> 
+  </void> 
+  <void property="meshXmlFilePath"> 
+   <string>C:\data\Khresmoi\czmesh\mesh2011.xml</string> 
+  </void> 
+  <void property="mimirIndexUrl"> 
+   <string>http://localhost:8080/mimir-demo/mesh_final</string> 
+  </void> 
+  <void property="outputDirBmcAnalyzed"> 
+   <string>C:\Users\dedek\Desktop\bmc\analyzed\</string> 
+  </void> 
+  <void property="outputDirBmcAnalyzedCompound"> 
+   <string>C:\Users\dedek\Desktop\bmc\compound\</string> 
+  </void> 
+  <void property="outputDirBmcAnalyzedTmp_Morce"> 
+   <string>C:\Users\dedek\Desktop\bmc\morce_analyzed\</string> 
+  </void> 
+  <void property="outputDirBmcCrash"> 
+   <string>C:\Users\dedek\Desktop\bmc\flex_crash\</string> 
+  </void> 
+  <void property="outputDirBmcFilterExclude"> 
+   <string>C:\Users\dedek\Desktop\bmc\filter_exclude\</string> 
+  </void> 
+  <void property="outputDirBmcFilterInlude"> 
+   <string>C:\Users\dedek\Desktop\bmc\filter_include\</string> 
+  </void> 
+  <void property="outputDirBmcFitered"> 
+   <string>C:\Users\dedek\Desktop\bmc\filter_include\</string> 
+  </void> 
+  <void property="outputDirBmcOrig"> 
+   <string>C:\Users\dedek\Desktop\bmc\bmc\</string> 
+  </void> 
+  <void property="outputDirBmcPlainTextExport"> 
+   <string>C:\Users\dedek\Desktop\bmc\plain_text_export\</string> 
+  </void> 
+  <void property="serializedResourcesDir"> 
+   <string>./resources/serialized/</string> 
+  </void> 
+ </object> 
 </java> 
