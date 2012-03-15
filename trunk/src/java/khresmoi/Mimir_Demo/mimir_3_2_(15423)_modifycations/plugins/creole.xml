@@ -1,0 +1,13 @@
+<?xml version="1.0"?>  
+<CREOLE-DIRECTORY>
+  <JAR>target/lib/xmlrpc-2.0.1.jar</JAR>
+<!--   
+  <JAR>target/lib/netgraph-1.94.jar</JAR>
+  <JAR>target/lib/xmlwriter-2.2.2.jar</JAR>
+  <JAR>target/lib/commons-codec-1.4.jar</JAR>
+-   
+  <JAR>lib/learningapi.jar</JAR>
+ -->  
+  <JAR SCAN="true">target/czsem-1.0.3.jar</JAR>
+  <!-- <JAR>lib/stanford-parser.jar</JAR> -->
+</CREOLE-DIRECTORY> 
