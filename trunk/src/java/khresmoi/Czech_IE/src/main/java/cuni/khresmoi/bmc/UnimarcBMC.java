@@ -5,7 +5,9 @@ import gate.FeatureMap;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +20,7 @@ import org.marc4j.marc.DataField;
 import org.marc4j.marc.Record;
 import org.marc4j.marc.Subfield;
 
+import cuni.khresmoi.KhresmoiConfig;
 import cuni.khresmoi.bmc.BMCGateCorpusBuider.BmcRecord;
 
 public class UnimarcBMC
@@ -155,9 +158,9 @@ public class UnimarcBMC
 		return null;
 	}
 
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) throws URISyntaxException, IOException {
 
-		InputStream in = new FileInputStream("c:/data/Khresmoi/BMC/bmc-2011-01.iso");
+		InputStream in = new FileInputStream(KhresmoiConfig.getConfig().getBmcIsoFilePath());
 		MarcReader reader = new MarcStreamReader(in, "UTF-8");
 
 		System.err.println("Start");

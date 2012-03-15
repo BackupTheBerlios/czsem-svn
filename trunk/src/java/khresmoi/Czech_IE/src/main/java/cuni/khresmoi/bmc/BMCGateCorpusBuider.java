@@ -106,10 +106,11 @@ public class BMCGateCorpusBuider
 				
 		Gate.init();
 		
+		KhresmoiConfig c = KhresmoiConfig.getConfig();
 		BMCGateCorpusBuider b = new BMCGateCorpusBuider("BMC", true, 
-				KhresmoiConfig.getConfig().getOutputDirBmcOrig());
+				c.getOutputDirBmcOrig());
 		
-		InputStream in = new FileInputStream("c:/data/Khresmoi/BMC/bmc-2011-01.iso");
+		InputStream in = new FileInputStream(c.getBmcIsoFilePath());
 		MarcReader reader = new MarcStreamReader(in, "UTF-8");
 
 		logger.info("Start");

@@ -24,14 +24,14 @@ import czsem.utils.Config;
 
 public class LinkExporter {
 	
-	public static void exportLinksMarc(String output_filename) throws IOException
+	public static void exportLinksMarc(String output_filename) throws IOException, URISyntaxException
 	{
 		Writer out = 
 			new OutputStreamWriter(
 				new BufferedOutputStream(
 						new FileOutputStream(output_filename)));
 		
-		InputStream in = new FileInputStream("c:/data/Khresmoi/BMC/bmc-2011-01.iso");
+		InputStream in = new FileInputStream(KhresmoiConfig.getConfig().getBmcIsoFilePath());
 		MarcReader reader = new MarcStreamReader(in, "UTF-8");
 		
 		int records = 0;
