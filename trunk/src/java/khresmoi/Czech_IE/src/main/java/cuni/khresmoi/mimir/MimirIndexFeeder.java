@@ -19,7 +19,7 @@ import czsem.utils.ProjectSetup;
 
 public class MimirIndexFeeder {
 	
-	static String indexurl = "http://localhost:8080/mimir-demo/mesh_final";
+//	static String indexurl = "http://localhost:8080/mimir-demo/mesh_final";
 //	static String indexurl = "http://195.113.17.17:8080/mimir-demo-3.2.1-snapshot/pok2_local";
 	
 	
@@ -28,7 +28,7 @@ public class MimirIndexFeeder {
 		Config.getConfig().setGateHome();
 		Gate.init();
 		
-		URL index_url = new URL(indexurl);
+		URL index_url = new URL(KhresmoiConfig.getConfig().getMimirIndexUrl());
 				
 		StopRequestDetector stop_request_detector = new StopRequestDetector();
 		

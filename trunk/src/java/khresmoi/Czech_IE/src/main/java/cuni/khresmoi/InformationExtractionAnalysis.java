@@ -34,10 +34,7 @@ public class InformationExtractionAnalysis extends BMCAnalysis
 	{
 		 LanguageAnalyser ret = (LanguageAnalyser)
 		 	PersistenceManager.loadObjectFromFile(
-				new File(
-						Config.getConfig().getCzsemPluginDir()+
-//						"/resources/mimir/CzechMeshAnalysis.gapp"));
-						"/resources/mimir/CzechMeshAnalysis_IE_only.gapp"));
+				new File(KhresmoiConfig.getConfig().getGateAppIeAnalysis()));
 		
 		 ret.setCorpus(Factory.newCorpus("empty"));
 		 return ret;

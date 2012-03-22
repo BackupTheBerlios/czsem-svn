@@ -22,7 +22,7 @@ import gate.util.GateException;
 import cuni.khresmoi.KhresmoiConfig;
 import czsem.utils.Config;
 
-public class LinkExporter {
+public class LinkExport {
 	
 	public static void exportLinksMarc(String output_filename) throws IOException, URISyntaxException
 	{
@@ -94,15 +94,12 @@ public class LinkExporter {
 	
 	public static void main(String[] args) throws URISyntaxException, IOException, GateException
 	{
-		//exportLinksMarc("bmc_links_all.txt");
-		/**/
 		Config.getConfig().setGateHome();
 		Gate.init();
 		
 		exportLinksGateFilesDir(KhresmoiConfig.getConfig().getInputDirLinkExport(), "bmc_links_filered.txt");
 				
-		/***/
-		
+		exportLinksMarc("bmc_links_all.txt");		
 	}
 
 }

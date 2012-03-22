@@ -36,7 +36,7 @@ public class KhresmoiConfig extends AbstractConfig {
 	private String meshXmlFilePath 	;
 	private String meshCzLammatizationAnalysisOutput 	;
 
-	private String gateAppCmpoundAnalysis 	;
+	private String gateAppCompoundAnalysis 	;
 	private String gateAppIeAnalysis 	;
 
 	private String mimirIndexUrl 	;
@@ -61,7 +61,7 @@ public class KhresmoiConfig extends AbstractConfig {
 	public static void main(String[] args) throws IOException, GateException, URISyntaxException
 	{
 		KhresmoiConfig c = new KhresmoiConfig();
-		c.setMyWinDefaults();
+		c.setDefaults();
 		c.saveToFile(config_filename);
 	}
 
@@ -71,7 +71,7 @@ public class KhresmoiConfig extends AbstractConfig {
 	
 	
 	
-	private void setMyWinDefaults() {
+	public void setMyWinDefaults() {
 		 outputDirBmcOrig = "C:\\Users\\dedek\\Desktop\\bmc\\bmc\\";
 		 outputDirBmcFilterInlude = "C:\\Users\\dedek\\Desktop\\bmc\\filter_include\\";
 		 outputDirBmcFilterExclude = "C:\\Users\\dedek\\Desktop\\bmc\\filter_exclude\\";
@@ -82,7 +82,7 @@ public class KhresmoiConfig extends AbstractConfig {
 		 outputDirBmcFitered = "C:\\Users\\dedek\\Desktop\\bmc\\filter_include\\";
 		 outputDirBmcPlainTextExport = "C:\\Users\\dedek\\Desktop\\bmc\\plain_text_export\\";
 		
-		 inputDirFileInfo = "C:\\Users\\dedek\\Desktop\\bmc\\samples\\analysed\\";
+		 inputDirFileInfo = "C:\\Users\\dedek\\Desktop\\bmc\\bmc_samples\\gate-xml-analyzed\\";
 		 inputDirLinkExport = "C:\\Users\\dedek\\Desktop\\bmc\\analyzed";
 		 inputDirStatistics = "C:\\Users\\dedek\\Desktop\\bmc\\compound\\";
 		 inputDirMimirIndexFeeder = "C:\\Users\\dedek\\Desktop\\bmc\\analyzed\\";
@@ -95,12 +95,43 @@ public class KhresmoiConfig extends AbstractConfig {
 		 meshXmlFilePath = "C:\\data\\Khresmoi\\czmesh\\mesh2011.xml";
 		 meshCzLammatizationAnalysisOutput = "./resources/gazetteer/meshcz_analysed_gate.xml";
 		
-		 gateAppCmpoundAnalysis = "./resources/gapp/Compound_only.gapp";
+		 gateAppCompoundAnalysis = "./resources/gapp/Compound_only.gapp";
 		 gateAppIeAnalysis = "./resources/gapp/CzechMeshAnalysis_IE_only.gapp";
 			
 		 mimirIndexUrl = "http://localhost:8080/mimir-demo/mesh_final";
 	}
 
+	public void setDefaults() {
+		 outputDirBmcOrig = "./bmc/bmc/";
+		 outputDirBmcFilterInlude = "./bmc/filter_include/";
+		 outputDirBmcFilterExclude = "./bmc/filter_exclude/";
+		 outputDirBmcAnalyzedTmp_Morce = "./bmc/morce_analyzed/";
+		 outputDirBmcAnalyzed = "./bmc/analyzed/";
+		 outputDirBmcAnalyzedCompound = "./bmc/compound/";
+		 outputDirBmcCrash = "./bmc/flex_crash/";
+		 outputDirBmcFitered = "./bmc/filter_include/";
+		 outputDirBmcPlainTextExport = "./bmc/plain_text_export/";
+		
+		 inputDirFileInfo = "./bmc/analyzed/";
+		 inputDirLinkExport = "./bmc/analyzed/";
+		 inputDirStatistics = "./bmc/compound/";
+		 inputDirMimirIndexFeeder = "./bmc/analyzed/";
+		
+		 serializedResourcesDir = "./resources/serialized/";
+		 gazetteerResourcesDir = "./resources/gazetteer/";
+
+		
+		 bmcIsoFilePath = "C:\\data\\Khresmoi\\BMC\\bmc-2011-01.iso";
+		 meshXmlFilePath = "C:\\data\\Khresmoi\\czmesh\\mesh2011.xml";
+		 meshCzLammatizationAnalysisOutput = "./resources/gazetteer/meshcz_analysed_gate.xml";
+		
+		 gateAppCompoundAnalysis = "./resources/gapp/Compound_only.gapp";
+		 gateAppIeAnalysis = "./resources/gapp/CzechMeshAnalysis_IE_only.gapp";
+			
+		 mimirIndexUrl = "http://localhost:8080/mimir-demo/mesh_final";
+	}
+
+	
 /**************************************************************************************/	
 	public String getOutputDirBmcOrig() {
 		return outputDirBmcOrig;
@@ -192,12 +223,12 @@ public class KhresmoiConfig extends AbstractConfig {
 		this.meshCzLammatizationAnalysisOutput = meshCzLammatizationAnalysisOutput;
 	}
 
-	public String getGateAppCmpoundAnalysis() {
-		return gateAppCmpoundAnalysis;
+	public String getGateAppCompoundAnalysis() {
+		return gateAppCompoundAnalysis;
 	}
 
-	public void setGateAppCmpoundAnalysis(String gateAppCmpoundAnalysis) {
-		this.gateAppCmpoundAnalysis = gateAppCmpoundAnalysis;
+	public void setGateAppCompoundAnalysis(String gateAppCmpoundAnalysis) {
+		this.gateAppCompoundAnalysis = gateAppCmpoundAnalysis;
 	}
 
 	public String getGateAppIeAnalysis() {

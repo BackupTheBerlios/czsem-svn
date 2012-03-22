@@ -41,6 +41,12 @@ public class FileInfo {
 		File dir = new File(inputdir );
 		File[] files = dir.listFiles();
 		
+		if (files == null || files.length <= 0)
+		{
+			System.err.format("No files found in directory: %s\n", inputdir);
+			return;
+		}
+		
 		
 		int files_count = 0;
 		
@@ -79,7 +85,7 @@ public class FileInfo {
 				}
 			}
 			
-			if (foud >= 5) break;			
+			if (foud >= files.length) break;			
 		}
 		
 		//System.err.format("records: %d   urls: %d\n", records, urls);

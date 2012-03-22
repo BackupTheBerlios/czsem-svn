@@ -26,7 +26,8 @@ import czsem.utils.Config;
 
 public class CompoundAnalysis extends BMCAnalysis
 {
-	public CompoundAnalysis(String inputdir, String outputdir) throws PersistenceException, ResourceInstantiationException, IOException, URISyntaxException {
+	public CompoundAnalysis(String inputdir, String outputdir) throws PersistenceException, ResourceInstantiationException, IOException, URISyntaxException 
+	{
 		super(inputdir, outputdir);
 		analyzer = prepareAnalyser();
 	}
@@ -44,7 +45,7 @@ public class CompoundAnalysis extends BMCAnalysis
 	private LanguageAnalyser prepareAnalyser() throws PersistenceException, ResourceInstantiationException, IOException, URISyntaxException {
 		 ConditionalSerialAnalyserController ret = (ConditionalSerialAnalyserController)
 		 	PersistenceManager.loadObjectFromFile(
-				new File(KhresmoiConfig.getConfig().getGateAppCmpoundAnalysis()));
+				new File(KhresmoiConfig.getConfig().getGateAppCompoundAnalysis()));
 		
 		 ret.setCorpus(Factory.newCorpus("empty"));
 		 

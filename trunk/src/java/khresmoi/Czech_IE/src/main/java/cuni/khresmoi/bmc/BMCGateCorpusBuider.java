@@ -36,7 +36,7 @@ import czsem.utils.Config;
 public class BMCGateCorpusBuider
 {
 	private Corpus corpus;
-	private boolean dontBuildCorpus;
+	private boolean dontBuildGateCorpus;
 	private String outputDirectory;
 	public static Logger logger = Logger.getLogger(BMCGateCorpusBuider.class);
 
@@ -44,7 +44,7 @@ public class BMCGateCorpusBuider
 	public BMCGateCorpusBuider(String corpus_name, boolean dontBuildCorpus, String outputDirectory) throws ResourceInstantiationException
 	{
 		this.outputDirectory = outputDirectory;
-		this.dontBuildCorpus = dontBuildCorpus;
+		this.dontBuildGateCorpus = dontBuildCorpus;
 		if (dontBuildCorpus) return;
 		
 		corpus = Factory.newCorpus(corpus_name);
@@ -66,7 +66,7 @@ public class BMCGateCorpusBuider
 		
 		logger.info("adding: " + sourceUrl.toString());
 		Document doc = Factory.newDocument(sourceUrl);
-		if (! dontBuildCorpus) corpus.add(doc);
+		if (! dontBuildGateCorpus) corpus.add(doc);
 		logger.info("added: " + doc.getContent().size());
 		
 		return doc;
@@ -113,7 +113,8 @@ public class BMCGateCorpusBuider
 		InputStream in = new FileInputStream(c.getBmcIsoFilePath());
 		MarcReader reader = new MarcStreamReader(in, "UTF-8");
 
-		logger.info("Start");
+		logger.info("Start building BMC corpus at:");
+		logger.info(b.outputDirectory);
 
 		int urls = 0;
 		int records = 0;
@@ -129,7 +130,7 @@ public class BMCGateCorpusBuider
 					logger.info(String.format("record: %d/617155  url: %d/25408", records, urls));
 					try 
 					{
-						if (urls > 23000)
+//						if (urls > 23000)
 						{
 							if (!urlStr.equals("http://www.chemicke-listy.cz/docs/full/2003_S.pdf"))
 							{
@@ -172,7 +173,7 @@ public class BMCGateCorpusBuider
 	
 	public void saveDocument(Document doc) throws IOException
 	{
-		if (dontBuildCorpus)
+		if (dontBuildGateCorpus)
 		{
 			GateUtils.saveBMCDocumentToDirectory(doc, outputDirectory, "bmcID");
 			Factory.deleteResource(doc);
@@ -181,7 +182,7 @@ public class BMCGateCorpusBuider
 
 	public void saveCorpus() throws IOException
 	{
-		if (! dontBuildCorpus)
+		if (! dontBuildGateCorpus)
 			GateUtils.saveBMCCorpusToDirectory(corpus, outputDirectory, "bmcID");
 	}	
 }

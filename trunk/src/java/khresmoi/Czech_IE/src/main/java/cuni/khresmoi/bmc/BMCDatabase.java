@@ -5,6 +5,7 @@ import gate.util.AnnotationDiffer;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -14,6 +15,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -229,11 +231,25 @@ public class BMCDatabase {
 	}
 	
 
-	public static String bmcIdFromDoc(Document doc)
+	public static String bmcIdFromUrl(URL url)
 	{
+		String file = url.getFile();
+		File f = new File(file);
+		String name = f.getName();
+		
+		int dot = name.indexOf('.');
+		return name.substring(0, dot);
+		
+		/*
 		String[] bmc_path = doc.getSourceUrl().getFile().split("\\.")[0].split("/");
 		String bmc_id = bmc_path[bmc_path.length-1];
 		return bmc_id;
+		*/
+	}
+
+	public static String bmcIdFromDoc(Document doc)
+	{
+		return bmcIdFromUrl(doc.getSourceUrl());
 	}
 	
 	public int getNumberOfMergedEntries(Document doc)
