@@ -344,7 +344,10 @@ public class GateUtils
 		Writer out = new OutputStreamWriter(new BufferedOutputStream(
 				new FileOutputStream(filename)), "utf8");
 		out.write(doc.toXml());
-		out.close();							
+		out.close();
+		Logger l = Logger.getLogger(GateUtils.class);
+		l.debug(String.format("saveGateDocumentToXML done: %s", filename));
+
 	}
 
 	

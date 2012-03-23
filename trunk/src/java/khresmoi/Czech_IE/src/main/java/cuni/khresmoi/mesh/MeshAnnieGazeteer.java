@@ -80,7 +80,7 @@ public class MeshAnnieGazeteer
 		
 		Document doc = Factory.newDocument(new File(
 				KhresmoiConfig.getConfig().getMeshCzLammatizationAnalysisOutput())
-				.toURI().toURL());
+				.toURI().toURL(), "utf8");
 		
 		AnnotationSet tmt = doc.getAnnotations("TectoMT");
 		AnnotationSet sents = tmt.get("Sentence");
@@ -127,7 +127,8 @@ public class MeshAnnieGazeteer
 
 		
 		MeshAnnieGazeteer g = new MeshAnnieGazeteer(
-	    		Config.getConfig().getCzsemPluginDir() + "/resources/gazetteer/meshcz_lemmas.lst",
+//	    		Config.getConfig().getCzsemPluginDir() + "/resources/gazetteer/meshcz_lemmas.lst",
+				KhresmoiConfig.getConfig().getGazetteerResourcesDir() + "/meshcz_lemmas.lst",
 	    		new Outputter(){
 					@Override
 					public void outputRecord(PrintWriter out, MeshRecord rec, int ord_num) {

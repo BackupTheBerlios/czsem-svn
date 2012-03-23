@@ -55,14 +55,23 @@ public class MeshStatistics
 
 	public static void main(String [] args) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, URISyntaxException
 	{
-		MeshStatistics ms = new MeshStatistics(true);
-	    KhresmoiConfig c = KhresmoiConfig.getConfig();
-		ms.parse(c.getMeshXmlFilePath());
-		ms.serializeToFile(c.getSerializedResourcesDir()+"mesh_terms.ser");
-		ms.countCharStats();
-		ms.countTokenStats();
+		System.err.println("--- English Terms ---");
+		MeshStatistics ms_en = new MeshStatistics(true);
+		printAllStats(ms_en);
+
+		System.err.println("--- Czech Terms ---");
+		MeshStatistics ms_cz = new MeshStatistics(false);
+		printAllStats(ms_cz);
 	}
 	
+	private static void printAllStats(MeshStatistics ms) throws ParserConfigurationException, SAXException, IOException, URISyntaxException {
+	    KhresmoiConfig c = KhresmoiConfig.getConfig();
+		ms.parse(c.getMeshXmlFilePath());
+//		ms.serializeToFile(c.getSerializedResourcesDir()+"mesh_terms.ser");
+		ms.countCharStats();
+		ms.countTokenStats();		
+	}
+
 	public void load() throws FileNotFoundException, IOException, ClassNotFoundException, URISyntaxException
 	{
 		deserializeFromFile(KhresmoiConfig.getConfig().getSerializedResourcesDir()+"mesh_terms.ser");		

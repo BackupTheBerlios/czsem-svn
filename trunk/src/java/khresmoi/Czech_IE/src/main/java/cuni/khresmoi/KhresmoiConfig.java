@@ -112,7 +112,7 @@ public class KhresmoiConfig extends AbstractConfig {
 		 outputDirBmcFitered = "./bmc/filter_include/";
 		 outputDirBmcPlainTextExport = "./bmc/plain_text_export/";
 		
-		 inputDirFileInfo = "./bmc/analyzed/";
+		 inputDirFileInfo = "./bmc/bmc_samples/gate-xml-analyzed/";
 		 inputDirLinkExport = "./bmc/analyzed/";
 		 inputDirStatistics = "./bmc/compound/";
 		 inputDirMimirIndexFeeder = "./bmc/analyzed/";

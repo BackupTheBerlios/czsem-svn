@@ -4,7 +4,7 @@
   <void property="bmcIsoFilePath"> 
    <string>C:\data\Khresmoi\BMC\bmc-2011-01.iso</string> 
   </void> 
-  <void property="gateAppCmpoundAnalysis"> 
+  <void property="gateAppCompoundAnalysis"> 
    <string>./resources/gapp/Compound_only.gapp</string> 
   </void> 
   <void property="gateAppIeAnalysis"> 
