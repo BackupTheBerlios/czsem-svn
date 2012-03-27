@@ -8,17 +8,18 @@
 	<version>1.1.0</version>
 	<packaging>jar</packaging>
 
+
 	<name>czsem</name>
 	<url>http://czsem.berlios.de</url>
 
 	<distributionManagement>
 		<repository>
 			<id>czsem.repo</id>
-			<url>scp://shell.berlios.de/net/pork-da/export/nfs/home/groups/czsem/htdocs/maven2/repo/</url>			
+			<url>scp://shell.berlios.de/net/nfs-bd/vol1/home/groups/czsem/htdocs/maven2/repo/</url>			
 		</repository>
 		<snapshotRepository>
 			<id>czsem.snapshots</id>
-			<url>scp://shell.berlios.de/net/pork-da/export/nfs/home/groups/czsem/htdocs/maven2/snapshots/</url>			
+			<url>scp://shell.berlios.de/net/nfs-bd/vol1/home/groups/czsem/htdocs/maven2/snapshots/</url>			
 		</snapshotRepository>
 	</distributionManagement>
 	<properties>
@@ -70,7 +71,10 @@
 		        <executions>
 		        	<execution>
 			            <id>make-assembly</id> <!-- this is used for inheritance merges --> <!-- bind to the packaging phase -->
-						<phase>package</phase> <!-- bind to the packaging phase -->
+						<!-- 
+						<phase>package</phase> 
+						-->
+						<!-- bind to the packaging phase -->
 			            <goals>
 			              <goal>single</goal>
 			            </goals>
@@ -81,6 +85,7 @@
 				<groupId>org.codehaus.izpack</groupId>
 				<artifactId>izpack-maven-plugin</artifactId>
 				<version>1.0-alpha-5</version>
+<!-- 
 				<executions>
 					<execution>
 						<id>izpack</id>
@@ -91,12 +96,10 @@
 						<configuration>
 							<descriptorEncoding>UTF-8</descriptorEncoding>
 							<attach>false</attach>
-							<!-- 
-							<izpackBasedir>src/izpack</izpackBasedir>
-							 -->
 						</configuration>
 					</execution>
 				</executions>
+ -->				
 				<dependencies>
 					<dependency>
 						<groupId>org.codehaus.izpack</groupId>
