@@ -1,13 +1,14 @@
 % Pokud tiskneme oboustranně:
  \documentclass[12pt,a4paper,twoside,openright]{report}
- \setlength\textwidth{145mm}
- \setlength\textheight{247mm}
- \setlength\oddsidemargin{15mm}
- \setlength\evensidemargin{0mm}
- \setlength\topmargin{0mm}
- \setlength\headsep{0mm}
- \setlength\headheight{0mm}
- \let\openright=\cleardoublepage
+\usepackage[a4paper, 
+						twoside, 
+						inner=2.9cm, 
+						outer=1.9cm, 
+						bottom=2.6cm, 
+						top=2.1cm] {geometry}
+ 
+ 
+\let\openright=\cleardoublepage
 
 \usepackage{nameref}
 \usepackage[square]{natbib}
@@ -37,6 +38,8 @@
 \usepackage{xltxtra}
 \setsansfont{Calibri}
 \setmonofont{Consolas}
+
+\makenomenclature 
 
 
 
@@ -69,8 +72,6 @@
 % Trochu volnější nastavení dělení slov, než je default.
 \lefthyphenmin=2
 \righthyphenmin=2
-
-%%% Titulní strana práce
 
 \pagestyle{empty}
 \begin{center}
@@ -130,10 +131,8 @@ Prague YEAR
 %%% Na tomto místě mohou být napsána případná poděkování (vedoucímu práce,
 %%% konzultantovi, tomu, kdo zapůjčil software, literaturu apod.)
 
-\openright
-
-\noindent
-Dedication.
+\chapter*{Acknowledgments}
+I wish to thank my supervisor ...
 
 \newpage
 
@@ -228,24 +227,30 @@ Keywords:
 \setcounter{page}{1}
 \tableofcontents
 
+
+
+
+
+
+
+
+
+
 %%% Jednotlivé kapitoly práce jsou pro přehlednost uloženy v samostatných souborech
-\include{preface}
-\include{chap1}
-\include{chap2}
-
-% Ukázka použití některých konstrukcí LateXu (odkomentujte, chcete-li)
-% \include{example}
-
-\include{epilog}
+\include{ch60_learnig_of_rules}
 
 %%% Seznam použité literatury
-\include{bibliography}
+\bibliographystyle{../style/iisproc}
+\bibliography{../dedek_phd}
 
 %%% Tabulky v disertační práci, existují-li.
 \chapwithtoc{List of Tables}
 
 %%% Použité zkratky v disertační práci, existují-li, včetně jejich vysvětlení.
-\chapwithtoc{List of Abbreviations}
+%\chapwithtoc{List of Abbreviations}
+\input{../dedek_phd_nomenclature}
+\printnomenclature[2.5cm]
+\addcontentsline{toc}{chapter}{Nomenclature}
 
 %%% Přílohy k disertační práci, existují-li (různé dodatky jako výpisy programů,
 %%% diagramy apod.). Každá příloha musí být alespoň jednou odkazována z vlastního
