@@ -10,6 +10,11 @@
  
 \let\openright=\cleardoublepage
 
+\def\myauthor{Jan Dědek}
+\def\mytitle{Semantic Annotations}
+\def\mysupervisor{Prof. RNDr. Peter Vojtáš, DrSc.}
+\def\mydepartment{Department of Software Engineering}
+
 \usepackage{nameref}
 \usepackage[square]{natbib}
 \usepackage{url}
@@ -20,13 +25,14 @@
 \usepackage{verbatim}
 
 
+
 %minted staci \usepackage[utf8]{inputenc}
 \usepackage{minted}
 
 \usepackage{bigfoot}
 \usepackage{hyperref}
-\hypersetup{pdftitle=Semantic Annotations}
-\hypersetup{pdfauthor=Jan Dědek}
+\hypersetup{pdftitle=\mytitle}
+\hypersetup{pdfauthor=\myauthor}
 
 
 \usepackage[xetex]{graphicx}
@@ -95,34 +101,34 @@ Faculty of Mathematics and Physics
 \vfill
 \vspace{5mm}
 
-{\LARGE First and last name of the author}
+{\LARGE \myauthor}
 
 \vspace{15mm}
 
 % Název práce přesně podle zadání
-{\LARGE\bfseries Title of the thesis}
+{\LARGE\bfseries \mytitle}
 
 \vfill
 
 % Název katedry nebo ústavu, kde byla práce oficiálně zadána
 % (dle Organizační struktury MFF UK)
-Name of the department or institute
+\mydepartment
 
 \vfill
 
 \begin{tabular}{rl}
 
-Supervisor of the doctoral thesis: & First and last name \\
+Supervisor of the doctoral thesis: & \mysupervisor \\
 \noalign{\vspace{2mm}}
-Study programme: & programme \\
-\noalign{\vspace{2mm}}
-Specialization: & specialization \\
+Study programme: & Softwarové systémy \\
+%\noalign{\vspace{2mm}}
+%Specialization: & specialization \\
 \end{tabular}
 
 \vfill
 
 % Zde doplňte rok
-Prague YEAR
+Prague 2012
 
 \end{center}
 
@@ -168,18 +174,18 @@ signature of the author
 \setlength\parskip{5mm}
 
 Název práce:
-Název práce
+Sémantické Anotace
 % přesně dle zadání
 
 Autor:
-Jméno a příjmení autora
+\myauthor
 
 Katedra:  % Případně Ústav:
-Název katedry či ústavu, kde byla práce oficiálně zadána
+Katedra Softwarového Inženýrství
 % dle Organizační struktury MFF UK
 
 Vedoucí disertační práce:
-Jméno a příjmení s tituly, pracoviště
+\mysupervisor
 % dle Organizační struktury MFF UK, případně plný název pracoviště mimo MFF UK
 
 Abstrakt:
@@ -193,17 +199,17 @@ Klíčová slova:
 \setlength\parskip{5mm}
 
 Title:
-% přesný překlad názvu práce v angličtině
+\mytitle
 
 Author:
-Jméno a příjmení autora
+\myauthor
 
 Department:
-Název katedry či ústavu, kde byla práce oficiálně zadána
+\mydepartment
 % dle Organizační struktury MFF UK v angličtině
 
 Supervisor:
-Jméno a příjmení s tituly, pracoviště
+\mysupervisor
 % dle Organizační struktury MFF UK, případně plný název pracoviště
 % mimo MFF UK v angličtině
 
@@ -223,9 +229,16 @@ Keywords:
 %%% na začátku práce, místo na jejím konci.
 
 \openright
-\pagestyle{plain}
-\setcounter{page}{1}
+
+%vykopat cislovani
+\addtocontents{toc}{\protect\thispagestyle{empty}}
+
 \tableofcontents
+%\addcontentsline{toc}{chapter}{Contents}
+
+
+\chapwithtoc{Introduction}
+\setcounter{page}{1}
 
 
 
@@ -239,12 +252,25 @@ Keywords:
 %%% Jednotlivé kapitoly práce jsou pro přehlednost uloženy v samostatných souborech
 \include{ch60_learnig_of_rules}
 
+
+\chapwithtoc{Conclusion}
+
+
 %%% Seznam použité literatury
 \bibliographystyle{../style/iisproc}
 \bibliography{../dedek_phd}
+\addcontentsline{toc}{chapter}{Bibliography}
+
+
+%\chapwithtoc{List of Figures}
+\listoffigures
+\addcontentsline{toc}{chapter}{List of Figures}
+
 
 %%% Tabulky v disertační práci, existují-li.
-\chapwithtoc{List of Tables}
+%\chapwithtoc{List of Tables}
+\listoftables
+\addcontentsline{toc}{chapter}{List of Tables}
 
 %%% Použité zkratky v disertační práci, existují-li, včetně jejich vysvětlení.
 %\chapwithtoc{List of Abbreviations}
