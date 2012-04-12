@@ -121,9 +121,9 @@ In this section details about conversion of linguistic trees to ILP background k
 
 As mentioned in Section~\ref{sec:ch60_pdt_in_gate}: three main constructs are used to capture an arbitrary configuration of a dependency linguistic tree: nodes, edges and node attributes. During the process of ILP Serialization these constructs are rendered to Prolog in following way. 
 
-A unique identifier (node ID) is generated for every tree node. The identifier is based on document name and GATE annotation ID (sentence order and node deep order are used outside of GATE, see PML$\rightarrow$RDF transformation in Section~\ref{sec:pml_to_rdf}.) These node IDs correspond to simple atoms and they represent tree nodes in the fact database. A node type (used by the ILP learning algorithm) is assigned to a node ID by predicates \texttt{Token(NodeID)} for analytical tree nodes and \texttt{tToken(NodeID)} for tectogrammatical tree nodes.
+A unique identifier (node ID) is generated for every tree node. The identifier is based on document name and GATE annotation ID (node IDs based on sentence order and node deep order are used outside of GATE, see PML$\rightarrow$RDF transformation in Section~\ref{sec:pml_to_rdf}.) These node IDs correspond to simple Prolog atoms and they represent tree nodes in the Prolog fact database. A node type (used by the ILP learning algorithm) is assigned to a node ID by predicates \texttt{Token(NodeID)} for analytical tree nodes and \texttt{tToken(NodeID)} for tectogrammatical tree nodes.
 
-Tree nodes are connected by edges using binary predicates of the form:
+Tree nodes are connected by edges using several binary predicates with a common form:
 
 \texttt{dependency\_type\_name(ParentNodeID, ChildNodeID)}
 
