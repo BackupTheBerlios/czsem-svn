@@ -1,0 +1,153 @@
+\chapter{Problems and Consequent Tasks Definitions}
+
+As already said in introduction, four separate topics are presented in this thesis. This chapter provides definitions of the main problems connected with these topics and consequent tasks that have to be addressed to solve these problems.
+
+\section{Information Extraction}
+
+\subsection{The Problem}
+
+The basic problem addressed by information extraction approaches can be formulated as follows. We have a large collection of texts (or a source of texts) and we want to have a machine readable (understandable, workable) or structured form of the information present in these texts. Why? Because additional postprocessing of the information is needed.
+
+Let us for example have texts about acquisition events. Each text describes a single acquisition event and you can find answers to following questions in these texts. 
+
+What was the object of the acquisition? 
+
+Who was the buyer? 
+
+What was the deal amount?
+
+What was the acquisition date?
+
+If we put the corresponding information into a relational table then we can easily obtain statistics like numbers of acquisitions per month of the year or a list of ten most valuable (largest deal amount) acquired subjects, etc. This would be impossible if the information were kept in the textual form only.
+
+Document search and indexing is another important purpose of information extraction. Let us imagine a person interested in articles about acquisitions made in January 2009 where the deal amount was between 100 and 500 million dollars.  Keyword search and indexing can not satisfy this need accurately. But if we have corresponding machine readable information, it is easy to create a simple search engine supporting this kind of queries.
+
+The idea of the Semantic Web [citace TBL] brings us to even a bigger problem that could be solved by information extraction approaches. On the Semantic Web, as much information as possible should be in structured machine readable form. But absolute majority of ordinary content of the present day web is understandable only by humans. Machines can use only very limited part of the present day web. This issue is often called “Semantic Web Bottleneck” [citace].
+
+\subsection{Consequent Tasks}
+
+The definition of the problem presented in the previous section was general. We did not specify any particular kind of information to be extracted or target structure for capturing it. This is exactly the point, where different kinds of information extraction approaches differ. Currently, the variety of information extraction approaches is huge. In this thesis, we will focus on a small subset only. 
+
+It was already mentioned in the previous section that the source information is captured in plain text. Let us specify it more precisely: 
+
+We are interested in cases where information is expressed in plain text in natural language. We do not consider additional structural information or formatting instructions that may be potentially available e.g. through HTML or XML tags. 
+
+We are primarily interested in texts consisting of natural language sentences. We do not consider textual fragments, tables, etc.
+
+These two options were selected mainly based on our personal interest and background. This setting is very close to the topic of natural language understanding, very attractive problem since the very establishment of artificial intelligence. 
+\footnote{See e.g. in the Wikipedia article Natural language understanding: \url{http://en.wikipedia.org/wiki/Natural_language_understanding#History}}
+And this setting is also very common in practice, e.g. in news articles, scientific papers, blog posts, official statements and reports, offers, requests, advertisements, etc. 
+
+
+
+After the specification of input format, let us specify the kind of information to be extracted and the target structure for capturing it. Higher complexity of the extracted information makes the task more difficult. The entire complexity of human language is still far beyond the boundary of machine workability. In practice, extraction of very simple facts represented by plain relations already provides significant help. For example only one relation (e.g. “acquisition”) with four arguments (“object”, “buyer”, “deal amount” and “date”) would be sufficient for capturing the information about acquisition events mentioned above. In this thesis, we concentrate on these simple relational facts, not considering any of the wide range of possibilities that the human language offers like expression of tense, causality, modality, general statements with quantifiers, etc.
+
+
+
+Stating that we will extract “simple relational facts” is still not precise enough and several well established information extraction tasks conform to this statement. We will describe them in Sections 88-99, but before that, it is necessary to explain how the term “document annotation” will be used in this thesis.
+
+\subsection{Document Annotation}
+
+Document Annotation is a term, which usually refers to the process of putting annotations to a document. In this thesis, the term annotations will always refer to a special kind of annotations used in the GATE framework.  These annotations refer to (usually shorter) segments of text and they provide a label (or annotation type) and arbitrary set of features to each such segment (or simply annotation). Each annotation occupies a continuous portion of text between the beginning and the end of the annotation. These annotations can be easily visualized using colored background in text. Different annotation types are usually decorated with different colors; see Figure 99 for an example. Section 99 provides some technical details about this kind of annotations.
+
+There is a very small difference between the process of document annotation and information extraction. In fact they are equivalent in the case we are describing. Because annotations can be reconstructed from extracted relational facts and relational facts can be reconstructed from annotations. There are only two conditions that have to hold true:
+
+(1) It has to be always possible to determine a portion of text representing any extracted fact.
+
+(2) Each annotation has to keep all its relational arguments as annotation features.
+
+Relation name can be saved as annotation label and vice versa.
+
+\subsection{Entity Recognition}
+
+Entity Recognition or Named Entity Recognition corresponds to the extraction task of identification of significant entities (people, organizations, locations, chemicals, genes, etc.) that are present in text. From the annotation perspective, this is the simplest annotation task: just to mark these entities in text and assign correct labels to them. From the relational perspective, this task corresponds with unary relation extraction.
+
+It can be for example illustrated on following sentence:
+
+“Google just announced that it is acquiring Motorola Mobility.”
+
+There are two entities mentioned in this sentence: Google and Motorola Mobility. Both entities have to be extracted and put into correct unary relations, e.g. “organization(Google)” or “company(Google)” depending on the used vocabulary. Or, in the annotation case, they have to be marked in text and annotated with corresponding label (“organization” or “company”).
+
+\subsection{Relation Extraction}
+
+Relation Extraction is an extraction task that usually comes after entity recognition. When all the significant entities are identified, the task is to connect together those entities that are connected in text and to assign the correct label (relation name) to that connection. Let us again use the example sentence about Google acquiring Motorola. The extracted relation should be connecting the two entities (in the right order) and the label would be something like: “acquiredBy”, “purchasing” or “takingOver” (depending on the system vocabulary; note the dependency between the label and the relation orientation.)
+
+\subsection{Event Extraction}
+
+In literature, Relation Extraction usually refers to binary relations only and Event Extraction is used for relations (events) with more arguments. Individual events have to be correctly indentified in text and arguments have to be assigned to them in proper roles. For example an acquisition event can have roles like purchaser, seller, acquired, dollar amount, etc. We have to extend our running example with Motorola to demonstrate event extraction on it:
+
+Google just announced that it is acquiring Motorola Mobility. The search and online advertising company is buying the company for approximately \$12.5 billion (or \$40 per share), in cash.
+
+In this case, both sentences would be covered by the acquisition event and arguments would be: purchaser(Google), acquired(Motorola Mobility) and dollar\_amount(\$12.5 billion).
+
+\subsection{Instance Resolution}
+
+Instance Resolution further extends entity recognition. It aims at linking a particular entity to its unique representative (or identifier) such that the same entities have always the same identifier and, vice versa, different entities have always different identifiers. Disambiguation is the main task that has to be solved by instance resolution.
+
+It can be illustrated on some ambiguous entity, for example “George Bush”. General entity recognition system just marks the string and assigns a corresponding label (e.g. person, politician or president -- depending on the granularity of the system) to it. In extraction case, such system just puts the string into the corresponding relation. 
+
+Instance resolution is more difficult. Instance resolution system has to select the right representative for that entity -- George W. Bush (junior) or George H. W. Bush (senior) that will be probably both available in the system’s database. Similarly, instance resolution system has to assign the same identifier in cases where for example shortcuts are used, e.g. “George W. Bush” and “G. W. Bush” should be linked to the same identifier.
+
+\subsection{Summary}
+
+The problem of information extraction consists in obtaining machine workable form of information that was previously available in textual form only. We have specified that we are interested only in extraction of simple relational facts and that the extracted facts can be kept either as relational data or they can have the form of document annotations. Depending on the complexity of extracted information, four basic extraction tasks were defined:
+
+Entity Recognition
+
+Relation Extraction
+
+Event Extraction and
+
+Instance Resolution.
+
+\section{Machine Learning for Information Extraction}
+
+\subsection{The Problem}
+
+Development of an information extraction system is always, more or les, dependent on a concrete domain and extraction tasks. It is always necessary to adapt the system when it should be used in a new domain with new extraction tasks. The difficulty of such adaptation varies. In some cases the whole system has to be redesigned and reimplemented. Many systems are based on some kind of extraction rules or extraction models and only these rules or models have to be adapted in such case. But still, only highly qualified experts can do such adaptation. These experts have to know the extraction system in detail as well as the domain, target data (texts) and extraction tasks. Such qualification is sometimes (e.g. in biomedical domains) unreachable in one person and difficult cooperation of a domain expert with a system expert is necessary. 
+
+\subsection{Consequent Tasks}
+
+Usage of machine learning techniques can address this problem in such a way that the system is capable to adapt itself. But a learning collection of example texts with gold standard annotations has to be provided. The effort needed to build such collection is still big and demanding, but such gold standard collection is not dependent on any concrete extraction system and expert knowledge related to extraction systems is not needed for its construction. 
+
+Another important purpose of machine learning is that extraction rules or models constructed by machine learning techniques are often more successful than those designed manually.
+
+\section{Extraction Ontologies}
+
+\subsection{The Problem}
+
+Information extraction and automated semantic annotation of text are usually done by complex systems and all these systems use some kind of model that represents the actual task and its solution. The model is usually represented as a set of some kind of extraction rules (e.g., regular expressions), gazetteer lists or it is based on some statistical measurements and probability assertions (classification algorithms like Support Vector Machines (SVM), Maximum Entropy Models, Decision Trees, Hidden Markov Models (HMM), Conditional Random Fields (CRF), etc.)
+
+
+
+Before the first usage of an information extraction system, such model is either created by a human designer or it is learned from training dataset. Then, in the actual extraction/annotation process, the model is used as a configuration or as a parameter of the particular extraction/annotation system. These models are usually stored in~proprietary formats and they are accessible only by the corresponding system.
+
+
+
+In the environment of the Semantic Web it is essential that information is shareable and some ontology based IE systems keep the model in so called extraction ontologies \cite{DBLP:conf/er/EmbleyTL02}. Extraction ontologies should serve as a wrapper for documents of a narrow domain of interest. When we apply an extraction ontology to a document, the ontology identifies objects and relationships present in the document and it associates them with the corresponding ontology terms and thus wraps the document so that it is understandable in terms of the ontology \cite{DBLP:conf/er/EmbleyTL02}.
+
+
+
+In practice the extraction ontologies are usually strongly dependent on a particular extraction/annotation system and cannot be used separately. The strong dependency of an extraction ontology on the corresponding system makes it very difficult to share. When an extraction ontology cannot be used outside the system there is also no need to keep the ontology in a standard ontology format (RDF or OWL).
+
+
+
+\subsection{Consequent Tasks}
+
+The cause of the problem is that a particular extraction model can only be used and interpreted by the corresponding extraction tool. If an extraction ontology should be shareable, there has to be a commonly used tool that is able to interpret the extraction model encoded by the extraction ontology. For example Semantic Web reasoners can play the role of commonly used tools that can interpret shareable extraction ontologies.
+
+
+
+Although it is probably always possible to encode an extraction model using a standard ontology language, only certain way of encoding makes it possible to interpret such model by a standard reasoner in the same way as if the original extraction tool was used. The difference is in semantics. It is not sufficient to encode just the model's data, it is also necessary to encode the semantics of the model. Only then the reasoner is able to interpret the model in the same way as the original tool. If the process of information extraction or semantic annotation should be performed by an ordinary Semantic Web reasoner then only means of semantic inference are available and the extraction process must be correspondingly semantically described.
+
+\section{Document Classification}
+
+\subsection{The Problem}
+
+Similarly to information extraction, document classification solves a problem when we have a large collection of documents and we do not exactly know what the individual documents are about. Document classification helps in cases when we want to just pick such documents that belong to certain category, e.g. to pick only football news from a general collection of sport news articles. 
+
+\subsection{Consequent Tasks}
+
+The task of document classification can be formulated as follows. Having a textual document and a (usually small) set of target categories, the task is to decide to which category the document belongs. 
+
+In the case of the present thesis, we are especially interested in cases when the set of categories is ordered or, in other words, we can always decide which one of any two categories is higher. This kind of categories is mostly used as rankings and individual categories then correspond to ranking degrees, e.g. ranking of seriousness of a traffic accident, which is used in classification experiments of the present thesis.

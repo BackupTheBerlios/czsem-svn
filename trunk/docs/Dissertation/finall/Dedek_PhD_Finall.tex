@@ -23,6 +23,7 @@
 \usepackage{array}
 \usepackage{amsthm}
 \usepackage{verbatim}
+\usepackage{import} 
 
 
 
@@ -137,7 +138,11 @@ Prague 2012
 %%% Na tomto místě mohou být napsána případná poděkování (vedoucímu práce,
 %%% konzultantovi, tomu, kdo zapůjčil software, literaturu apod.)
 
-\chapter*{Acknowledgments}
+{\Huge\bfseries Acknowledgments 
+ \par\nobreak \vskip 20pt
+}
+
+
 I wish to thank my supervisor ...
 
 \newpage
@@ -237,20 +242,23 @@ Keywords:
 %\addcontentsline{toc}{chapter}{Contents}
 
 
-\chapwithtoc{Introduction}
+
+\chapter{Introduction}
 \setcounter{page}{1}
+\pagestyle{plain}
 
-
-
-
-
-
-
-
-
+\input{../chapters/intro}
+\input{../chapters/problems}
+\input{../chapters/related}
+\input{../chapters/third_party}
+\input{../chapters/methods}
+\input{../chapters/implementation}
+\input{../chapters/data}
+\input{../chapters/eval}
+ 
 
 %%% Jednotlivé kapitoly práce jsou pro přehlednost uloženy v samostatných souborech
-\include{ch60_learnig_of_rules}
+%\include{ch60_learnig_of_rules}
 
 
 \chapwithtoc{Conclusion}
@@ -281,7 +289,15 @@ Keywords:
 %%% Přílohy k disertační práci, existují-li (různé dodatky jako výpisy programů,
 %%% diagramy apod.). Každá příloha musí být alespoň jednou odkazována z vlastního
 %%% textu práce. Přílohy se číslují.
-\chapwithtoc{Attachments}
+
+
+%\chapwithtoc{Attachments}
+\appendix
+
+
+
+\input{../chapters/publications}
+
 
 \openright
 \end{document}
