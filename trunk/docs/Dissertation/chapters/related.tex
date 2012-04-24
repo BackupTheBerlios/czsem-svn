@@ -1,35 +1,28 @@
 \chapter{Related Work}
 
+This chapter shortly introduces mostly related work to the present thesis. Again, the chapter is split to four sections corresponding to the four main topics of this thesis.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Document Classification} \label{sec:ch20_doc_classification}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-There are plenty of systems dealing with text mining and text classification. In \citep{biblio:ReYaLiOntoText08} the authors use ontology modeling to enhance text identification. The authors of \citep{biblio:CAP} use preprocessed data from National Automotive Sampling System and test various soft computing methods to model severity of injuries (some hybrid methods showed best performance). Methods of Information Retrieval (IR) are numerous, with extraction mainly based on key word search and similarities. The Connection of IR and text mining techniques with web information retrieval can be found in the chapter ``Opinion Mining'' in the book of Bing Liu \citep{biblio:WebDataMining}. 
 
-\subsection{ML Classification with Monotonicity Constraint}
-The Fuzzy ILP Classifier can be seen as an ordinary classifier for data with the monotonicity constraint (the target class attribute has to be monotonizable -- a natural ordering has to exist for the target class attribute). There are several other approaches addressing the classification problems with the monotonicity constraint.
-
-The CART-like algorithm for decision tree construction does not guarantee a resulting monotone tree even on a monotone dataset. The algorithm can be modified \citep{biblio:mon_trees} to provide a monotone tree on the dataset by adding the corner elements of a node with an appropriate class label to the existing data whenever necessary.
-
-An interesting approach is presented in \citep{biblio:mon_transf}: first, the dataset is ``corrected'' to be monotone (a minimal number of target class labels is changed to get a monotone dataset), then a learning algorithm (linear programming boosting in the cited paper) is applied.
-
-Several other approaches to monotone classification have been presented, including instance based learning \citep{biblio:ibl} and rough sets \citep{biblio:rough_sets}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Rule Based Information Extraction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Machine Learning for Information Extraction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
-
-
-\section{Based on ILP}
+\subsection{Based on ILP}
 There are many users of ILP in the linguistic and information extraction area.
 For example in \citep{stasinos:phd} ILP was used for shallow parsing and phonotactics.
 Authors of \citep{Junker99learningfor} summarized some basic principles of using ILP for learning from text without any linguistic preprocessing. One of the most related approaches to ours can be found in \citep{aitken02:_learn_infor_extrac_rules}. The authors use ILP for extraction of information about chemical compounds and other concepts related to global warming and they try to express the extracted information in terms of ontology. They use only the part of speech analysis and named entity recognition in the preprocessing step. But their inductive procedure uses also additional domain knowledge for the extraction. In \citep{Ramakrishnan:UsingILPforFeatures} ILP was used to construct good features for propositional learners like SVM to do information extraction. It was discovered that this approach is a little bit more successful than a direct use of ILP but it is also more complicated. The later two approaches could be also employed in our solution.
 
-\section{Based on Dependency Linguistics}
+\subsection{Based on Dependency Linguistics}
 As stated in \citep{Bunescu:phd}, the choice of the actual learning algorithm depends on the type of structural information available. For example, deep syntactic information provided by current parsers for new types of corpora such as biomedical text is seldom reliable, since most parsers have been trained on different types of narrative. If reliable syntactic information is lacking, sequences of words around and between the two entities can be used as alternative useful discriminators.
 But in our case deep linguistic parsing plays an essential role.
 
@@ -58,12 +51,82 @@ domain (e.g., by \cite{MiyaoACL2008}, (\cite{Yakushiji2001}) or
 \cite{Clegg2005Evaluating}).
 
 
-\section{Based on Propositional Machine Learning}
-\subsection{GATE Machine Learning}
+\subsection{Based on Propositional Machine Learning}
+\subsubsection{GATE Machine Learning}
 There is also a long row of information extraction approaches that use classical propositional learners like SVM on a set of features manually selected from input text. We do not cite them here. We just refer to \citep{Yaoyong09a} -- using machine learning facilities in GATE. This is the software component (Machine Learning PR) to that we have compared our solution. 
 %Our solution is also based on GATE (See next sections.)
 
-\section{Semantic annotation}
-\subsection{GATE}
+\subsection{Semantic annotation}
+\subsubsection{GATE}
 Last category of related works goes in the direction of semantics and ontologies. Because we do not develop this topic in this paper, we just refer to the ontology features in GATE \citep{Bon04b}, which can be easily used to populate an ontology with the extracted data. We discus this topic later in Section~\ref{sec:SemanticInterpretation}.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Extraction Ontologies} \label{sec:relwork_ext_ont}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Ontology-based Information Extraction (OBIE) \citep{citeulike:7291004} or Ontology-driven Information Extraction \citep{Yildiz:2007:OMO:1793154.1793216} has recently emerged as a subfield of information extraction. Furthermore, Web Information Extraction \citep{DBLP:journals/tkde/ChangKGS06} is a closely related discipline. Many extraction and annotation tools can be found in the above mentioned surveys (\citep{citeulike:7291004,DBLP:journals/tkde/ChangKGS06}), many of the tools also use an ontology as the output format, but almost all of them store their extraction models in proprietary formats and the models are accessible only by the corresponding tool.
+
+In the literature we have found only two approaches that use extraction ontologies. The former one was published by D. Embley \citep{DBLP:conf/er/EmbleyTL02,Embley:2004:TSU:1012294.1012295}
+and the later one -- IE system Ex\footnote{\url{http://eso.vse.cz/~labsky/ex/}} was developped by M. Labsk\'{y} \citep{springerlink:10.1007/978-3-642-01891-6_5}. 
+But in both cases the extraction ontologies are dependent on the particular tool and they are kept in XML files with a proprietary structure.
+
+
+By contrast authors of \citep{citeulike:7291004} (a recent survey of OBIE systems) do not agree with allowing for extraction rules to be a part of an ontology. They use two arguments against that:
+\begin{enumerate}
+	\item Extraction rules are known to contain errors (because they are never 100\% accurate), and objections can be raised on their inclusion in ontologies in terms of formality and accuracy.
+
+	\item It is hard to argue that linguistic extraction rules should be considered a part of an ontology while information extractors based on other IE techniques (such as SVM, HMM, CRF, etc. classifiers used to identify instances of a class when classification is used as the IE technique) should be kept out of it: all IE techniques perform the same task with comparable effectiveness (generally successful but not 100\% accurate). But the techniques advocated for the inclusion of linguistic rules in ontologies cannot accommodate such IE techniques.
+	
+The authors then conclude that either all information extractors (that use different IE techniques) should be included in the ontologies or none should be included.
+\end{enumerate}
+
+
+
+Concerning the first argument, we have to take into account that extraction ontologies are not ordinary ontologies, it should be agreed that they do not contain 100\% accurate knowledge. Also the estimated accuracy of the extraction rules can be saved in the extraction ontology and it can then help potential users to decide how much they will trust the extraction ontology.
+
+Concerning the second argument, we agree that in the case of complex classification based models (SVM, HMM, CRF, etc.) serialization of such model to RDF does not make much sense (cf. the next section). But on the other hand we think that there are cases when shareable extraction ontologies can be useful and in the context of Linked Data\footnote{\url{http://linkeddata.org/}} providing shareable descriptions of information extraction rules may be valuable. It is also possible that new standard ways how to encode such models to an ontology will appear in the future.
+
+
+%it is not always possible to save an extraction model to an ontology (at least not currently). \subsection{Notes on Ontology Definitions}
+This short section briefly reminds main ontology definitions because they are touched and in a sense misused in this chapter. The most widely agreed definitions of an ontology emphasize the shared aspect of ontologies: 
+\begin{quote}
+An ontology is a formal specification of a shared conceptualization.	\citep{so17864}
+\end{quote}
+
+\begin{quote}
+An ontology is a formal, explicit specification of a shared conceptualization. \citep{Studer1998161}
+\end{quote}
+
+Of course the word `shareable' has different meaning from `shared'. (Something that is shareable is not necessarily shared, but on the other hand something that is shared should be shareable.) We do not think that shareable extraction ontologies will contain shared knowledge about how to extract data from documents in certain domain. This is for example not true for all extraction models artificially learned from a training corpus. Here shareable simply means that the extraction rules can be shared amongst software agents and can be used separately from the original tool. This is the deviation in use of the term `ontology' in the context of extraction ontologies in this chapter (similarly for document ontologies, see in Section~\ref{sec:ch70_doc_ont}).
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Document Classification} \label{sec:ch20_doc_classification}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{General Document Classification}
+
+There are plenty of systems dealing with text mining and text classification. In \citep{biblio:ReYaLiOntoText08} the authors use ontology modeling to enhance text identification. The authors of \citep{biblio:CAP} use preprocessed data from National Automotive Sampling System and test various soft computing methods to model severity of injuries (some hybrid methods showed best performance). Methods of Information Retrieval (IR) are numerous, with extraction mainly based on key word search and similarities. The Connection of IR and text mining techniques with web information retrieval can be found in the chapter ``Opinion Mining'' in the book of Bing Liu \citep{biblio:WebDataMining}. 
+
+\subsection{ML Classification with Monotonicity Constraint}
+The Fuzzy ILP Classifier can be seen as an ordinary classifier for data with the monotonicity constraint (the target class attribute has to be monotonizable -- a natural ordering has to exist for the target class attribute). There are several other approaches addressing the classification problems with the monotonicity constraint.
+
+The CART-like algorithm for decision tree construction does not guarantee a resulting monotone tree even on a monotone dataset. The algorithm can be modified \citep{biblio:mon_trees} to provide a monotone tree on the dataset by adding the corner elements of a node with an appropriate class label to the existing data whenever necessary.
+
+An interesting approach is presented in \citep{biblio:mon_transf}: first, the dataset is ``corrected'' to be monotone (a minimal number of target class labels is changed to get a monotone dataset), then a learning algorithm (linear programming boosting in the cited paper) is applied.
+
+Several other approaches to monotone classification have been presented, including instance based learning \citep{biblio:ibl} and rough sets \citep{biblio:rough_sets}.
+
+
+
+
+
+
+
 

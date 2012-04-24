@@ -37,47 +37,10 @@ In this chapter we present an extension of the idea of extraction ontologies. We
 In this chapter we present a proof of concept for the idea: a case study with our linguistically based IE engine and an experiment with several OWL reasoners. In the case study (see Section~\ref{sec:case}) the IE engine exports its extraction rules to the form of an extraction ontology. Third party linguistic tool linguistically annotates an input document and the linguistic annotations are translated to so-called document ontology. After that an ordinary OWL reasoner is used to apply the extraction ontology on the document ontology, which has the same effect as a direct application of the extraction rules on the document. The process is depicted in Fig~\ref{img:rules_app_schema} and it will be described in detail in Section~\ref{sec:implement}.
 
 
-Section~\ref{sec:relwork} presents several closely related works. The main idea of the chapter will be described in Section~\ref{sec:main}, its implementation in Section~\ref{sec:case} and in Section~\ref{sec:ch70_experiment} an experiment with several OWL reasoners and IE datasets will be presented. In Section~\ref{sec:discuss} related issues are discussed and Section~\ref{sec:ch70_conclusion} concludes the chapter.
+The most closely related work was already presented in Section~\ref{sec:relwork_ext_ont}. The main idea of the chapter will be described in Section~\ref{sec:main}, its implementation in Section~\ref{sec:case} and in Section~\ref{sec:ch70_experiment} an experiment with several OWL reasoners and IE datasets will be presented. In Section~\ref{sec:discuss} related issues are discussed and Section~\ref{sec:ch70_conclusion} concludes the chapter.
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Related Work} \label{sec:relwork}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Ontology-based Information Extraction (OBIE) \citep{citeulike:7291004} or Ontology-driven Information Extraction \citep{Yildiz:2007:OMO:1793154.1793216} has recently emerged as a subfield of information extraction. Furthermore, Web Information Extraction \citep{DBLP:journals/tkde/ChangKGS06} is a closely related discipline. Many extraction and annotation tools can be found in the above mentioned surveys (\citep{citeulike:7291004,DBLP:journals/tkde/ChangKGS06}), many of the tools also use an ontology as the output format, but almost all of them store their extraction models in proprietary formats and the models are accessible only by the corresponding tool.
-
-In the literature we have found only two approaches that use extraction ontologies. The former one was published by D. Embley \citep{DBLP:conf/er/EmbleyTL02,Embley:2004:TSU:1012294.1012295}
-and the later one -- IE system Ex\footnote{\url{http://eso.vse.cz/~labsky/ex/}} was developped by M. Labsk\'{y} \citep{springerlink:10.1007/978-3-642-01891-6_5}. 
-But in both cases the extraction ontologies are dependent on the particular tool and they are kept in XML files with a proprietary structure.
-
-
-By contrast authors of \citep{citeulike:7291004} (a recent survey of OBIE systems) do not agree with allowing for extraction rules to be a part of an ontology. They use two arguments against that:
-\begin{enumerate}
-	\item Extraction rules are known to contain errors (because they are never 100\% accurate), and objections can be raised on their inclusion in ontologies in terms of formality and accuracy.
-
-	\item It is hard to argue that linguistic extraction rules should be considered a part of an ontology while information extractors based on other IE techniques (such as SVM, HMM, CRF, etc. classifiers used to identify instances of a class when classification is used as the IE technique) should be kept out of it: all IE techniques perform the same task with comparable effectiveness (generally successful but not 100\% accurate). But the techniques advocated for the inclusion of linguistic rules in ontologies cannot accommodate such IE techniques.
-	
-The authors then conclude that either all information extractors (that use different IE techniques) should be included in the ontologies or none should be included.
-\end{enumerate}
-
-
-
-Concerning the first argument, we have to take into account that extraction ontologies are not ordinary ontologies, it should be agreed that they do not contain 100\% accurate knowledge. Also the estimated accuracy of the extraction rules can be saved in the extraction ontology and it can then help potential users to decide how much they will trust the extraction ontology.
-
-Concerning the second argument, we agree that in the case of complex classification based models (SVM, HMM, CRF, etc.) serialization of such model to RDF does not make much sense (cf. the next section). But on the other hand we think that there are cases when shareable extraction ontologies can be useful and in the context of Linked Data\footnote{\url{http://linkeddata.org/}} providing shareable descriptions of information extraction rules may be valuable. It is also possible that new standard ways how to encode such models to an ontology will appear in the future.
-
-
-%it is not always possible to save an extraction model to an ontology (at least not currently). \subsection{Notes on Ontology Definitions}
-This short section briefly reminds main ontology definitions because they are touched and in a sense misused in this chapter. The most widely agreed definitions of an ontology emphasize the shared aspect of ontologies: 
-\begin{quote}
-An ontology is a formal specification of a shared conceptualization.	\citep{so17864}
-\end{quote}
-
-\begin{quote}
-An ontology is a formal, explicit specification of a shared conceptualization. \citep{Studer1998161}
-\end{quote}
-
-Of course the word `shareable' has different meaning from `shared'. (Something that is shareable is not necessarily shared, but on the other hand something that is shared should be shareable.) We do not think that shareable extraction ontologies will contain shared knowledge about how to extract data from documents in certain domain. This is for example not true for all extraction models artificially learned from a training corpus. Here shareable simply means that the extraction rules can be shared amongst software agents and can be used separately from the original tool. This is the deviation in use of the term `ontology' in the context of extraction ontologies in this chapter (similarly for document ontologies, see in Sect.~\ref{sec:ch70_doc_ont}).
 
 %In time it will turn out if such extraction ontologies are useful or not. But for sure they bring something new that was not possible before.
 
