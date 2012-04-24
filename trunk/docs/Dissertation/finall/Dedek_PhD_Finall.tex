@@ -7,13 +7,8 @@
 						bottom=2.6cm, 
 						top=2.1cm] {geometry}
  
+\input{../my_commands}
  
-\let\openright=\cleardoublepage
-
-\def\myauthor{Jan Dědek}
-\def\mytitle{Semantic Annotations}
-\def\mysupervisor{Prof. RNDr. Peter Vojtáš, DrSc.}
-\def\mydepartment{Department of Software Engineering}
 
 \usepackage{nameref}
 \usepackage[square]{natbib}
@@ -48,30 +43,6 @@
 
 \makenomenclature 
 
-
-
-% Tato makra přesvědčují mírně ošklivým trikem LaTeX, aby hlavičky kapitol
-% sázel příčetněji a nevynechával nad nimi spoustu místa. Směle ignorujte.
-\makeatletter
-\def\@makechapterhead#1{
-  {\parindent \z@ \raggedright \normalfont
-   \Huge\bfseries \thechapter. #1
-   \par\nobreak
-   \vskip 20\p@
-}}
-\def\@makeschapterhead#1{
-  {\parindent \z@ \raggedright \normalfont
-   \Huge\bfseries #1
-   \par\nobreak
-   \vskip 20\p@
-}}
-\makeatother
-
-% Toto makro definuje kapitolu, která není očíslovaná, ale je uvedena v obsahu.
-\def\chapwithtoc#1{
-\chapter*{#1}
-\addcontentsline{toc}{chapter}{#1}
-}
 
 
 \begin{document}
