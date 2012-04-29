@@ -10,60 +10,21 @@
 The main motivation for creating both these methods was an attempt to use deep linguistic analysis of natural language texts. Especially for the Czech language with free word order this seemed reasonable. It is much more straightforward to design extraction rules on the basis of linguistic dependency trees than to struggle with the surface structure of text. In a dependency tree a position of a word is determined by its syntactic (analytical trees) or even semantic role (tectogrammatical trees). So the extraction rules might not be dramatically affected by minor variations (not changing the factual meaning of a sentence) of the word order.
 
 
-\subsection{Manually Created Rules}
-In this chapter the extraction method based on manually created linguistic rules will be described. First of all a data flow schema of the extraction process will be presented. Then several techniques and stages of evolution of the method will demonstrate how this method came to its existence and which decisions stood behind the development and the final implementation. At the end of the section several experiments will be presented to explain the usefulness of the method. 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Data Flow} \label{sec:ch50_data_flow}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{figure}
-	\centering
-		\includegraphics[width=0.2\hsize]{ap_schema}
-	\caption{Schema of the extraction process.}
-	\label{fig:ch50_ap_schema}
-\end{figure}
-
-
-\begin{figure}
-	\centering
-		\includegraphics[width=0.5\hsize]{article}
-	\caption{One web page with an accident report.}
-	\label{fig:ch50_article}
-\end{figure}
-
-
-The method was designed as a method for extraction of information from web resources. Thus the extraction process starts on the Web. On the other hand the method was intended to serve the evolution of the Semantic Web so the final goal and destination of the extraction process is the extracted information stored in the form of a semantic web ontology data or more precisely semantic web ontology instance. A schema in Figure~\ref{fig:ch50_ap_schema} splits the process into four steps (phases) among five media types. The schema does not cover the extraction rules design phase; it is assumed that extraction rules were already designed by a human user; Section~\ref{sec:ch50_rules_design} provides details about that. A description of the individual steps follows. 
-
-
-
-\begin{enumerate}
-\item \emph{Extraction of text} \\ First of all, target web pages have to be identified, downloaded and text has to be extracted form them. This issue is not studied in the present work. A RSS feed of the fire department web-site was used to identify and download relevant pages and the desired text (see highlighted area in the Figure~\ref{fig:ch50_article}) was extracted by means of a regular expression. The text is an input of the second phase.
-
-\item \emph{Linguistic annotation} \\ In this phase the extracted text is processed by several linguistic tools. The tools analyze the text and produce corresponding set of linguistic dependency trees. There is a rich choice of linguistic tools available (see Section~\ref{sec:ch30_ling_tools}), but in this chapter only PDT based tools were used and the linguistic trees are always of the form of Tectogrammatical trees, but note that the method is general and it is not limited to the PDT presentation of linguistic dependency trees.
-
-\item \emph{Data extraction} \\ The structure of linguistic dependency trees is used for the extraction of relevant structured data form the text. The extraction method used in this phase is the main topic of the present chapter and many details about the method are discuses in next sections.
-
-\item \emph{Semantic representation} \\ Although the output of the previous phase is already of a structured form, it is not necessarily of the form of a semantic web ontology and the output has to be converted to the format of an appropriate ontology for given domain and type of extracted information. This last step of the extraction process represents a logical distinction between two functionally different tasks of the extraction method. The first task represented by the previous (Data extraction) phase is responsible for choosing of ``what’’ should be extracted, while the second task (Semantic representation) should determine what to do with the extracted data or how to formulate the pieces of information discovered by the Data extraction phase. The border between these two tasks is rather vague and they could be merged together, but we thing that the distinction between them can help to understand the problem better.
-
-
-In the present work only a design of this phase is provided (with a small exception -- using shareable extraction ontologies, see Chapter~\ref{ch:Shareable_Extraction_Ontologies}) because this task seems to be strongly dependent on manual work of human designers and its potential for meaningful scientific investigation seems to be rather small. Details about this step are discussed in Section~\ref{sec:ch50_sem_interpret}.
-\end{enumerate}
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Evolution of the Method}
+\section{Implementation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Our first attempt to extract some structured data from linguistically annotated text was done in a standard procedural programming environment (more precisely in Perl, Btred). After an initial phase of development first extraction rule was created as a single executable procedure. This procedure is listed in Figure~\ref{lst:btred_rule}. It clearly demonstrates all drawbacks of the procedural rule design: difficult to read, tedious to create, error prone, graphical or assisted design is impossible. On the other hand this approach has the advantage of the programming language proximity. When a designer designs a procedural extraction rule he or she actually codes it in a procedural programming language and it is easy to add some additional functionality that will be executed and evaluated along with the extraction rule. Thus the designer has the full power of the programming language in hand and he or she can use it inside of the extraction rule. This possibility will be discussed later in the context of semantic interpretation of extracted data.
+\subsection{Procedural Extraction Rules} \label{sec:ch50_Procedural_Extraction_Rules}
 
-Dissatisfaction from tedious and time consuming design of procedural extraction rules led to the idea of a special rule language. We were looking for a language that would allow expressing tree patterns and consequent extraction actions of extraction rules. It turned out that the Netgraph query language is very suitable for the first purpose -- expressing tree patterns. An extension of the Netgraph query language to a language for extraction rules was quite simple then. See the details in the next section.
-
-Last two steps in the evolution of the extraction method were (1) creation of machine learning procedure that is capable to learn extraction rules from manually annotated corpus (See Chapter~\ref{ch:ILP_Learning}) and (2) possibility to export extraction rules to a shareable extraction ontology so the extraction rules can be evaluated on a document by an ordinary semantic web reasoner outside of the original extraction tool (See Chapter~\ref{ch:Shareable_Extraction_Ontologies}).
+Our first implementation was based on Btred API for processing linguistic trees. The extraction rules were implemented as Perl Btred procedures that were evaluated on all of the trees of an arbitrary corpus by Btred. An example of such extraction rule is in Figure~\ref{lst:btred_rule} and corresponding extraction output on Figure~\ref{fig:btred_xml}.
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}
 \begin{minted}[linenos,  fontsize=\footnotesize,
                frame=lines]{perl}
@@ -137,15 +98,6 @@ sub print_injured {
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Implementation}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Procedural Extraction Rules} \label{sec:ch50_Procedural_Extraction_Rules}
-
-Our first implementation was based on Btred API for processing linguistic trees. The extraction rules were implemented as Perl Btred procedures that were evaluated on all of the trees of an arbitrary corpus by Btred. An example of such extraction rule is in Figure~\ref{lst:btred_rule} and corresponding extraction output on Figure~\ref{fig:btred_xml}.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}
 \begin{minted}[linenos,  fontsize=\footnotesize,
                frame=lines]{xml}
@@ -195,32 +147,6 @@ Our first implementation was based on Btred API for processing linguistic trees.
 
 \subsection{Netgraph Based Extraction Rules} \label{sec:ch50_Netgraph_Based_Extraction_Rules}
 
-
-\begin{figure}
-	\centering
-		\includegraphics[width=0.5\hsize]{extract_patern}		
-\\Transcript:\\
-\begin{tabular}{|c|c|c|c|c|}
-\hline
-zranit & usmrtit & zemřít & zahynout & přežít\\
-to injure & to kill & to die & to wane & to survive\\
-\hline
-\end{tabular}
-\\\begin{tabular}{|c|c|c|c|c|c|}
-\hline
-kdo & člověk & osoba & muž & žena & dítě\\
-somebody & (hu)man & person & man & woman & child\\
-\hline
-\end{tabular}
-\\\begin{tabular}{|c|c|c|c|}
-\hline
-řidič & řidička & spolujezdec & spolujezdkyně\\
-driver & woman driver & passenger & woman passenger\\	
-\hline
-\end{tabular}		
-	\caption{A manually created extraction rule investigating numbers of injuries and fatalities.}
-	\label{fig:ch50_extract_patern}
-\end{figure}
 
 \begin{figure}
 	\centering
@@ -343,109 +269,6 @@ The last not described attribute name is \verb+injury_manner+. Corresponding val
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Methodology for Rule Designers} \label{sec:ch50_rules_design}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{figure}
-	\centering
-		\includegraphics[angle=-90, width=0.5\hsize]{coverge_tuning}
-	\caption{Gradual refinement of an extraction rule.}
-	\label{fig:ch50_coverge_tuning}
-\end{figure}
-
-
-The process of manual design of extraction rules is heavily dependent on skills and experience of a human designer and fulfillment of the process is quite creative task. In this section we try to pick it up as precisely as possible because we assume that a formal description of this process can help in two ways. First -- a new designer can use it as a cook book and progress more quickly. Second -- it can help with development of tools for assisted rule design. We will concentrate on the Netgraph based extraction rules because we think they are more useful.
-
-The process consists of two parts: construction of a Netgraph query and semantic interpretation of the query. The semantic interpretation part will be discussed in the next section.
-
-One obvious preposition of the procedure is that we have a collection of training texts.
-The procedure is demonstrated in Figure~\ref{fig:ch50_coverge_tuning} and it starts with frequency analysis of words (their lemmas) occurring in the texts. Especially frequency analysis of verbs is very useful --- meaning of a clause is usually strongly dependent on the meaning of the corresponding verb.
-
-\textbf{Frequency analysis} helps the designer to choose some representative words (\textbf{key-words}) that will be further used for searching the training text collection. Ideal choice of key-words would cover the majority of sentences that express the information we are looking for and it should cover minimal number of the not-intended sentences. An initial choice need not be always sufficient and the process could iterate.
-
-Next step of the procedure consists in \textbf{investigating trees} that are covered by key-words. The designer is examining \textbf{matching trees} --- looking for positions of key-words and their \textbf{neighboring} nodes.
-
-After that the designer can formulate an initial \textbf{Netgraph query} and he or she can compare result of the Netgraph query with the coverage of key-words. Based on this he or she can reformulate the query and gradually refine the query and \textbf{tune the query coverage}.
-
-There are two goals of the query tuning. The first goal is maximization of the relevance of the query. An ideal result is a query that covers all sentences expressing given type of information and no other. The second goal is to involve all important tree-nodes to the query. The second goal is important because the \textbf{complexity of the query} (number of involved nodes) makes it possible to extract more complex information. For example see the query on the Figure~\ref{fig:ch50_extract_patern} --- each node keeps different kind of information.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Semantic Interpretation of Extracted Data} \label{sec:ch50_sem_interpret}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-After the designer has successfully formulated the Netgraph query he or she has to supply semantic interpretation of the query. This interpretation expresses how to transform matching nodes of the query (and the available linguistic information connected with the nodes) to the output data.
-
-So far in the description of the implementation of the extraction method the output of the extraction was in the form of although structured but still proprietary XML format. This corresponds to the penultimate stage (raw data) of our data flow schema (Section~\ref{sec:ch50_data_flow}). In this section we will describe details about the last step of the data flow -- semantic representation of extracted data.
-
-First interesting thing is the difference between the output formats of the procedural extraction rules (Section~\ref{sec:ch50_Procedural_Extraction_Rules}, Figure~\ref{fig:btred_xml}) and the Netgraph based extraction rules (Section~\ref{sec:ch50_Netgraph_Based_Extraction_Rules}, Figure~\ref{fig:select_xml}). Apparently the procedural one is closer to the semantics of the extracted data while the Netgraph based one is more general, rather based on the semantics of the extraction process than on the data. The difference is clearly connected with the difference of the design processes of the extraction rules. While Netgraph based rules are designed in a comfortable way using a graphical tool, the procedural rules have to be coded manually in the programming language of Perl. Contrary, during coding of such procedural rule the programmer has great freedom in the design of that rule and he or she can adapt the rule to precisely fit with the data. A designer of a Netgraph based rule has the only freedom in the construction of the Netgraph query and in selection particular query nodes and linguistic attributes that will be printed on the output.
-
-The goal of the semantic extraction and annotation is to output the extracted information in the form of a semantic web ontology. This is not difficult in the case of procedural rules. If the target ontology is selected then the extraction rules can be simply designed to produce the output of that form (Note that semantic web ontologies can be captured in a specific XML format.) In the case of Netgraph based queries the situation is more complex and different solutions can be discovered. All the solutions have one thing in common: additional manual work is necessary. The problem is basically to create a mapping of the data in one format (results of Netgraph based rules) to another format (target ontology). This can be done by a variety of technical means (coded in an arbitrary programming language, XSLT, or using a graphical mapping tool like 
-Altova MapForce\footnote{\url{http://www.altova.com/mapforce/xml-mapping.html}}
-or
-Stylus Studio\footnote{\url{http://www.stylusstudio.com/xsd_to_xsd.html}}
-). 
-
-
-
-\begin{figure}
-	\centering
-		\includegraphics[angle=-90, width=0.9\hsize]{semantic_interpretation}
-	\caption{Semantic interpretation of the extraction rule.}
-	\label{fig:ch50_semantic_interpretation}
-\end{figure}
-
-
-\begin{figure}
-	\centering
-		\includegraphics[angle=-90, width=\hsize]{instances}
-	\caption{Extracted instances of the target ontology.}
-	\label{fig:ch50_instatnces}
-\end{figure}
-
-\begin{figure}
-	\centering
-		\includegraphics[angle=-90, width=0.3\hsize]{classes}
-	\caption{Schema of the target ontology.}
-	\label{fig:ch50_classes}
-\end{figure}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}
-\begin{minted}[linenos,  fontsize=\footnotesize,
-               frame=lines]{sparql}
-
-SELECT ?action ?participant ?participant_type ?quantity
-WHERE {
-	{
-		?action rdf:type :Incident;
-			:actionType "death";
-			:negation false.
-	} UNION {
-		?action rdf:type :Incident;
-			:actionType "survival";
-			:negation true.
-	}
-	?action :hasParticipant ?participant.
-	?participant :participantType ?participant_type.
-	OPTIONAL {
-		?participant :participantQuantity ?quantity.
-	}
-}
-\end{minted}
-\caption{\emph{SPARQL} query that summarizes fatalities of particular incidents.}
-\label{fig:sparql_aggregation}
-\end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-Similar but in a sense different solution is to ground the mapping directly in extraction rules. Instead of creating mapping of the extraction output, extraction rules will contain also the information about the form of the extraction output. Selection of particular query nodes and linguistic attributes for the output will be extended by the specification of how they will be rendered on the output. A graphical representation of such extraction query can look like in Figure~\ref{fig:ch50_semantic_interpretation}. It shows connection between a Netgraph query on the left and an ontology instance on the right. Every node of the query can be translated to the ontology and the translation can be configured. The configurable translations are probably the most interesting part of such extraction queries. The linguistic information on one side has to be converted the ontological information on the other side. Several translation types have to be supported e.g. in Figure\ref{fig:ch50_semantic_interpretation} a translation of numerals to numbers, lexical translation from a source language (Czech), and detection of negation present in a query node are used.
-
-For better illustration Figure~\ref{fig:ch50_instatnces} shows how the extraction output would look like in the semantic case. It is based on the same data as in the Figure~\ref{fig:select_xml}. The presented ontology was designed only for the illustration. Schema of the ontology can be seen in the Figure~\ref{fig:ch50_classes}. It consists of two classes (or concepts): \emph{Incident} and \emph{Participant}. These classes are connected with a relation \emph{hasParticipant}. There are also some data-type properties (\emph{actionType}, \emph{actionManner}, \emph{negation}, \emph{participantType}, \emph{participantQuantity}) to cover the extracted data. 
-
-The last illustration is a SPARQL query (Figure~\ref{fig:sparql_aggregation}) that would display a table of fatalities present in extracted RDF data. The query is based on the previous ontology and it demonstrates possible use of the schema and data.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
