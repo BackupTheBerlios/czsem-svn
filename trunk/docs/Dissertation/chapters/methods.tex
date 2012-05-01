@@ -97,6 +97,8 @@ Netgraph based extraction rules are declarative, they do not specify a sequentia
 
 Netgraph is a linguistic tool used for searching through a syntactically annotated corpus (see Section~\ref{sec:ch30_netgraph} for details). Netgraph queries are written in a special query language with a graphical representation. The graphical representation of a query is much better readable than its linear textual representation and we will use the graphical representation only. Figure~\ref{fig:ch50_extract_patern} shows an example Netgraph query. It specifies necessary tree structure that has to be present in a matching tree and attribute restrictions that have to hold true for corresponding nodes (the restrictions are printed beside the nodes).
 
+
+
 We adopted Netgraph queries and extended them to extraction rules that can be written in following pseudo SQL SELECT form:
 
 \begin{minted}{sql}
@@ -106,6 +108,8 @@ SELECT node1_name.attr1_name, node2_name.attr2_name, ... FROM netgraph_query
 where \emph{netgraph\_query} stands for an arbitrary Netgraph query, \emph{node1\_name}, \emph{node2\_name}, etc. stand for individual names of nodes defined in \emph{netgraph\_query} and \emph{attr1\_name}, \emph{attr2\_name}, etc. stand for names of linguistic attributes whose values should be picked out from the corresponding matching tree nodes.
 
 The extraction works as follows: the Netgraph query is evaluated by searching through a corpus of linguistic trees. Matching trees are returned and the desired information defined by the SELECT part of the extraction rule is taken from particular tree nodes and printed to the output.
+
+Let us explain the extraction procedure in detail, using the example of extraction rule from the Figure~\ref{fig:ch50_extract_patern}, which is looking for information about killed and injured people during a (usually car) accident. This rule consists of five nodes. Each node of the rule will match with the corresponding node in each matching tree. So we can investigate the relevant information by reading values of linguistic attributes of matching nodes. We can find out the number (node number 5) and kind (4) of people, which were or were not (2) killed or injured (1) by an accident that is presented in the given sentence. And we can also identify the manner of injury (light or heavy) in the node number 3.
 
 Implementation details and some additional examples of these extraction rules will be presented in the next chapter (Section~\ref{sec:impl_manual_rules}).
 
