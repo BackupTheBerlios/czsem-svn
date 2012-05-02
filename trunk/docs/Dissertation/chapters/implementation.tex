@@ -278,7 +278,7 @@ The last not described attribute name is \verb+injury_manner+. Corresponding val
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Machine Learning of Extraction Rules} \graphicspath{{../img/ch60/}}
+\section{Machine Learning of Extraction Rules} \graphicspath{{../img/ch60/}} \label{sec:impl_learning}
 
 
 
@@ -296,7 +296,7 @@ Client-server model of implementation is used in the online mode. A separate Tec
 
 
 
-\subsection{PDT Annotations in GATE} \label{sec:ch60_pdt_in_gate}
+\subsection{PDT Annotations in GATE} \label{sec:ch60_pdt_in_gate} \label{sec:LDR_in_GATE}
 
 Although GATE annotations are just highlighted pieces of text (see also Section~\ref{sec:ch30_gate_annotations}) it is possible to use them to encode dependency tree structures. It is possible because each GATE annotation has a unique identifier (ID) and an arbitrary set of features (name-value pairs) can be assigned to it. The way how the PDT dependency trees are encoded in GATE is in fact the same as in the GATE wrapper for the Stanford Parser\footnote{\url{http://gate.ac.uk/userguide/sec:parsers:stanford}}. 
 
@@ -309,13 +309,13 @@ Three main constructs are used to capture an arbitrary configuration of a lingui
 	\item[node attributes] (connected linguistic features like POS, gender, tense, case, etc.)
 \end{description}
 
-These constructs are encoded in GATE in the following way: tree nodes correspond to token annotations, node attributes are saved as token annotation features and edges are encoded as another special kind of annotations.
+These constructs are encoded in GATE in the following way: tree nodes correspond to \emph{token} annotations, node attributes are saved as token annotation features and edges are encoded as another special kind of annotations.
 
 Two kinds of token annotations are used to represent two kinds of trees and tree nodes. ``Token'' annotation type is used for analytical tree nodes and ``tToken'' for tectogrammatical tree nodes.
 
-Four kinds of edges (dependencies) are implemented by the TectoMT wrapper: analytical dependencies, tectogrammatical dependencies, aux.rf (auxiliary reference) and lex.rf (main lexical reference). The last two kinds (aux.rf and lex.rf) are used to connect tectogrammatical and analytical nodes. The implementation differs according to the cardinality of a dependency type. The first three kinds are of the cardinality one-to-many (one parent node can have many children nodes) and the last one (lex.rf) if of the cardinality one-to-one (one parent node has at most one child). Because of that lex.rf edges can be stored as features (with the name ``lex.rf'') of ``tToken'' annotations. Note that a GATE annotation feature can only have one value per annotation. In this case the annotation ID of the referenced ``Token'' annotation (referenced analytical node) is the value of the lex.rf feature.
+Four kinds of edges (PDT dependencies) are implemented by the TectoMT wrapper: analytical dependencies, tectogrammatical dependencies, aux.rf (auxiliary reference) and lex.rf (main lexical reference). The last two kinds (aux.rf and lex.rf) are used to connect tectogrammatical and analytical nodes. The implementation differs according to the cardinality of a dependency type. The first three kinds are of the cardinality one-to-many (one parent node can have many children nodes) and the last one (lex.rf) if of the cardinality one-to-one (one parent node has at most one child). Because of that, lex.rf edges can be stored as features (with the name ``lex.rf'') of ``tToken'' annotations. Note that a single GATE annotation feature can have at most one value in each annotation. In this case the annotation ID of the referenced ``Token'' annotation (referenced analytical node) is the value of the lex.rf feature.
 
-One-to-many dependencies are stored as separate annotations (type names: ``aDependency'', ``tDependency'', ``aux.rf'') with a single feature called ``args''. Values of this feature are of Java type List<Integer> (list of integers). The list always contains just two items. The first one is the annotation ID of the parent annotation; the second one is the ID of the child annotation. Instead of using one list feature, two simple features (like ``arg1'', ``arg2'' or ``parentID'', ``childID'') could be used, but the implementation is consistent with the wrapper for the Stanford Parser (using the single list feature ``args''), thus PDT dependencies are compatible with Stanford dependencies in GATE.
+One-to-many dependencies are stored as separate annotations (type names: ``aDependency'', ``tDependency'', ``aux.rf'') with a single feature called ``args''. Values of this feature are of Java type List<Integer> (list of integers). The list always contains just two items. The first one is the annotation ID of the parent annotation; the second one is the ID of the child annotation. Instead of using one list feature, two simple features (like ``arg1'', ``arg2'' or ``parentID'', ``childID'') could be used, but the implementation is consistent with the wrapper for the Stanford Parser\footnote{\url{http://gate.ac.uk/userguide/sec:parsers:stanford}}, which uses the single list feature called ``args''), thus PDT dependencies are compatible with Stanford dependencies in GATE.
 
 It is not simple to demonstrate the GATE representation of the dependencies in a static printed form; we can only show a GATE screenshot (Figure~\ref{fig:PDT_GATE}) that partly illustrates that.
 
@@ -348,9 +348,11 @@ This consists of two steps:
 	\item learning of extraction rules from the target annotations and
 	\item application of the extraction rules on new documents.
 \end{enumerate}
-In both steps the linguistic analysis has to be done before and in both steps background knowledge (a logical database of facts) is constructed from linguistic structures of documents that are being processed. We call the process of background knowledge construction as \emph{ILP serialization}; more details are presented below in Section~\ref{sec:ilp_serialization}.
+In both steps the linguistic analysis has to be done before and in both steps ILP background knowledge (a logical database of facts) is constructed from linguistic structures of documents that are being processed. We call the process of background knowledge construction as \emph{ILP serialization}; more details are presented below in Section~\ref{sec:ilp_serialization}.
 
-After the ILP serialization is done, in the learning case, positive and negative examples are constructed from target annotations and the machine learning ILP inductive procedure is executed to obtain extraction rules.
+After the ILP serialization is done, the next step depends on the phase which is being performed.
+
+In the learning case, positive and negative examples are constructed from target annotations and the machine learning ILP inductive procedure is executed to obtain extraction rules.
 
 In the application case a Prolog system is used to check if the extraction rules entail any of target annotation candidates.
 
@@ -372,7 +374,7 @@ In this section details about conversion of linguistic trees to ILP background k
 
 As mentioned in Section~\ref{sec:ch60_pdt_in_gate}: three main constructs are used to capture an arbitrary configuration of a dependency linguistic tree: nodes, edges and node attributes. During the process of ILP Serialization these constructs are rendered to Prolog in following way. 
 
-A unique identifier (node ID) is generated for every tree node. The identifier is based on document name and GATE annotation ID (node IDs based on sentence order and node deep order are used outside of GATE, see PML$\rightarrow$RDF transformation in Section~\ref{sec:pml_to_rdf}.) These node IDs correspond to simple Prolog atoms and they represent tree nodes in the Prolog fact database. A node type (used by the ILP learning algorithm) is assigned to a node ID by predicates \texttt{Token(NodeID)} for analytical tree nodes and \texttt{tToken(NodeID)} for tectogrammatical tree nodes.
+A unique identifier (node ID) is generated for every tree node. The identifier is based on document name and GATE annotation ID.\footnote{Note that node IDs based on sentence order and node deep order are used outside of GATE, see PML$\rightarrow$RDF transformation in Section~\ref{sec:pml_to_rdf}.} These node IDs correspond to simple Prolog atoms and they represent tree nodes in the Prolog fact database. A node type (used by the ILP learning algorithm) is assigned to a node ID by predicates \texttt{Token(NodeID)} for analytical tree nodes and \texttt{tToken(NodeID)} for tectogrammatical tree nodes.
 
 Tree nodes are connected by edges using several binary predicates with a common form:
 
@@ -384,7 +386,7 @@ Node attributes are assigned to node IDs by binary predicates of the form:
 
 \texttt{attribute\_name(NodeID, AttributeValue)}
 
-\noindent There are about thirty such predicates like \emph{t\_lemma} (tectogrammatical lemma), \emph{functor} (tectogrammatical functor), \emph{sempos} (semantic part of speech), \emph{negation}, \emph{gender}, etc. but minority of them is usually used in extraction rules.
+\noindent There are about thirty such predicates like \emph{t\_lemma} (tectogrammatical lemma), \emph{functor} (tectogrammatical functor), \emph{sempos} (semantic part of speech), \emph{negation}, \emph{gender}, etc. but only some of them can be found in example extraction rules and we also excluded some of the attributes from serialization examples for space and simplicity reasons.
 
 Example of a serialized tectogrammatical tree is in Figure~\ref{lst:ilp_serialization} it is the same tree as in Figure~\ref{img:ch10_damage_tree}.
 
