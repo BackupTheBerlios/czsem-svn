@@ -457,11 +457,279 @@ gender(  id_jihomoravsky47443_246,'fem').
 
 
 
-\section{Shareable Extraction Ontologies}
 
-\subsection{Data Transformation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Shareable Extraction Ontologies} \label{sec:implement}
+\graphicspath{{../img/ch70/}}
+
+
+In this section we will present details about the implementation of our case study with shareable extraction intoilogies.  We have used our IE engine based on deep linguistic parsing and Inductive Logic Programming, which was described in Section~\ref{sec:methods_learning}. It is a complex system implemented with a great help of the GATE system and it also uses many other third party tools including several linguistic tools and a Prolog system. Installation and making the system operate is not simple. This case study should demonstrate that the extraction rules produced by the system are not dependent on the system in the sense of shareable extraction ontologies.
+
+
+
+
+\subsection{Linguistic Analysis}
+
+
+\begin{figure}
+\centerline{\includegraphics[angle=90, width=0.4\hsize]{tree}}
+\caption{Tectogrammatical tree of the sentence: ``Hutton is offering 35 dlrs cash per share for 83 pct of the shares.''
+Nodes roughly correspond with words of a sentence, edges represent linguistic dependencies between nodes and some linguistic features (tectogrammatical lemma, semantic functor and semantic part of speech) are printed under each node. The node `Hutton' is decorated as a named entity.}
+\label{img:tree}
+\end{figure}
+
+
+The IE engine needs a linguistic preprocessing (deep linguistic parsing) of documents on its input. Deep linguistic parsing brings a very complex structure to the text and the structure serves as a footing for construction and application of extraction rules. We usually use TectoMT system to do the linguistic preprocessing, see Section~\ref{sec:ch30_tectomt} for details. The output linguistic annotations of the TectoMT system are stored (along with the text of the source document) in XML files in so called Prague Markup Language (PML). PML is a very complex language (or XML schema) that is able to express many linguistic elements and features present in text. For the IE engine a tree dependency structure of words in sentences is the most useful one because the edges of the structure guide the extraction rules. An example of such (tectogrammatical) tree structure is in Figure~\ref{img:tree}.
+
+
+\subsection{Data Transformation (PML to RDF)} \label{sec:pml_to_rdf}
+
+In this case study PML files made from source documents by TectoMT are transformed to RDF document ontology by quite simple GRDDL/XSLT transformation\footnote{The transformation is available on-line at \url{http://czsem.berlios.de/ontologies/tmt2rdf.xsl}}. Such document ontology contains the whole variety of PML in RDF format.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+\begin{minted}[linenos, fontsize=\footnotesize,
+               frame=lines]{turtle}
+@prefix node: <http://czsem.berlios.de/ontologies/.../jihomoravsky47443.owl#node/> .
+@prefix pml: <http://ufal.mff.cuni.cz/pdt/pml/> .
+
+node:SCzechT-s4-n1 rdf:type pml:Node, owl:Thing;
+                   pml:t_lemma "být" ; #to be
+                   pml:sempos "v" ; pml:verbmod "ind" ; 
+                   pml:lex.rf node:SCzechA-s4-w4 ; pml:hasParent node:SCzechT-s4-root .
+node:SCzechT-s4-n10 rdf:type pml:Node, owl:Thing;
+                    pml:t_lemma "vyšetřovatel" ; #investigator
+                    pml:negation "neg0" ; pml:sempos "n.denot" ;
+                    pml:gender "anim" ; pml:number "sg" ;
+                    pml:formeme "n:1" ; pml:functor "ACT" ;
+                    pml:lex.rf node:SCzechA-s4-w9 ; pml:hasParent node:SCzechT-s4-n8 .
+node:SCzechT-s4-n11 rdf:type pml:Node, owl:Thing;
+                    pml:degcmp "pos" ; pml:t_lemma "předběžně" ; #preliminarily
+                    pml:formeme "adv:" ; pml:sempos "adv.denot.grad.nneg" ;
+                    pml:functor "MANN" ; pml:negation "neg0" ;
+                    pml:lex.rf node:SCzechA-s4-w10 ; pml:hasParent node:SCzechT-s4-n8 .
+node:SCzechT-s4-n12 rdf:type pml:Node, owl:Thing;
+                    pml:t_lemma "osm" ; #eight
+                    pml:number "pl" ; pml:numertype "basic" ;
+                    pml:sempos "n.quant.def" ; pml:formeme "n:???" ;
+                    pml:functor "PAT" ; pml:gender "nr" ;
+                    pml:lex.rf node:SCzechA-s4-w13 ; pml:hasParent node:SCzechT-s4-n8 .
+node:SCzechT-s4-n13 rdf:type pml:Node, owl:Thing;
+                    pml:t_lemma "tisíc" ; #thousand
+                    pml:number "sg" ; pml:functor "RSTR" ;
+                    pml:gender "inan" ; pml:sempos "n.quant.def" ;
+                    pml:numertype "basic" ; pml:formeme "n:???" ;
+                    pml:lex.rf node:SCzechA-s4-w14 ; pml:hasParent node:SCzechT-s4-n12 .
+node:SCzechT-s4-n14 rdf:type pml:Node, owl:Thing;
+                    pml:t_lemma "koruna" ; #crown
+                    pml:gender "fem" ; pml:sempos "n.denot" ;
+                    pml:number "pl" ; pml:formeme "n:2" ;
+                    pml:functor "MAT" ; pml:negation "neg0" ;
+                    pml:lex.rf node:SCzechA-s4-w15 ; pml:hasParent node:SCzechT-s4-n13 .
+node:SCzechT-s4-n7 rdf:type pml:Node, owl:Thing;
+                   pml:t_lemma "," ; #comma
+                   pml:gender "nr" ; pml:negation "neg0" ;
+                   pml:sempos "n.denot" ; pml:functor "APPS" ;
+                   pml:formeme "n:???" ; pml:number "nr" ;
+                   pml:lex.rf node:SCzechA-s4-w7 ; pml:hasParent node:SCzechT-s4-n1 .
+node:SCzechT-s4-n8 rdf:type pml:Node, owl:Thing;
+                   pml:t_lemma "vyčíslit" ; #quantify
+                   pml:is_member "1" ; pml:deontmod "decl" ;
+                   pml:formeme "v:fin" ; pml:tense "ant" ;
+                   pml:verbmod "ind" ; pml:aspect "cpl" ;
+                   pml:is_clause_head "1" ; pml:functor "PAR" ;
+                   pml:dispmod "disp0" ; pml:sempos "v" ;
+                   pml:negation "neg0" ;
+                   pml:lex.rf node:SCzechA-s4-w11 ; pml:hasParent node:SCzechT-s4-n7 .
+node:SCzechT-s4-n9 rdf:type pml:Node, owl:Thing;
+                   pml:t_lemma "škoda" ; #damage
+                   pml:sempos "n.denot" ; pml:functor "PAT" ;
+                   pml:gender "fem" ; pml:formeme "n:4" ;
+                   pml:number "sg" ; pml:negation "neg0" ;
+                   pml:lex.rf node:SCzechA-s4-w8 ; pml:hasParent node:SCzechT-s4-n8 .
+\end{minted}
+\caption{RDF serialization example}
+\label{lst:rdf_serialization}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+\begin{minted}[linenos, fontsize=\footnotesize,
+               frame=lines]{turtle}
+@prefix node: <http://czsem.berlios.de/ontologies/.../jihomoravsky47443.owl#node/> .
+@prefix pml: <http://ufal.mff.cuni.cz/pdt/pml/> .
+# Mapping Ontology
+@prefix PML2GATE: <http://czsem.berlios.de/ontologies/PML2GATE_ontology_utils.owl#> .
+
+node:SCzechT-s4-n12 rdf:type pml:Node, owl:Thing;
+                    pml:t_lemma "osm" ; #eight
+                    pml:number "pl" ; pml:numertype "basic" ;
+                    pml:sempos "n.quant.def" ; pml:formeme "n:???" ;
+                    pml:functor "PAT" ; pml:gender "nr" ;
+                    pml:lex.rf node:SCzechA-s4-w13 ; pml:hasParent node:SCzechT-s4-n8 ;
+################### Added by Reasoner ################################################
+                    rdf:type PML2GATE:TNode ; #Tectogrammatical node
+                    PML2GATE:hasChild node:SCzechT-s4-n13 ;
+                    pml:tDependency node:SCzechT-s4-n13 .
+######################################################################################
+node:SCzechA-s4-w13 rdf:type pml:Node, owl:Thing;
+                    pml:is_auxiliary "0" ; pml:edge_to_collapse "1" ;
+                    pml:ord "13" ; pml:tag "Cn-S4----------" ;
+                    pml:afun "Obj" ; pml:form "osm" ; pml:lemma "osm\1408" ;
+                    pml:m.rf node:SCzechM-s4-w13 ; pml:hasParent node:SCzechA-s4-w12 ;
+################### Added by Reasoner ################################################
+                    PML2GATE:hasChild node:SCzechA-s4-w14 ;
+                    pml:mention_root "damage" ;
+                    rdf:type PML2GATE:MentionRoot .
+######################################################################################
+\end{minted}
+\textbf{TODO: extraction rules jsou anglicky !!! vysledek (Annotated document ontology) cesky !!!!!!!}
+\caption{Annotated document ontology example}
+\label{lst:annotated_DO}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{figure}
+\centerline{\framebox{\includegraphics[width=0.7\hsize]{PDT_PROTEGE.png}}}
+\caption{Annotated document ontology in Protégé ontology editor}
+\label{img:PDT_PROTEGE}
+\end{figure}
+
 
 \subsection{Rule Transformations}
+
+
+Extraction rules produced by the IE engine are natively kept in a Prolog format; examples can be seen in Figure~\ref{img:rules_prolog}. The engine is capable to export them to the OWL/XML\footnote{\url{http://www.w3.org/TR/owl-xmlsyntax/}}syntax for rules in OWL 2 \citep{GHPP09a} (see in Figure~\ref{img:rules_xml}). Such rules can be parsed by OWL API\footnote{\url{http://owlapi.sourceforge.net/}} 3.1 
+and exported to RDF/SWRL, which is very widely supported and hopefully becoming a W3C recommendation.
+Figure~\ref{img:rules_protege} shows the example rules in Prot\'{e}g\'{e}\footnote{\url{http://protege.stanford.edu/}} 4 -- Rules View's format. The last rule example can be seen in Figure~\ref{img:rules_jena}, it shows a rule in the Jena rules format\footnote{\url{http://jena.sourceforge.net/inference/#RULEsyntax}}. Conversion to Jena rules was necessary because it is the only format that Jena can parse, see details about our use of Jena in Section~\ref{sec:ch70_experiment}. The Jena rules were obtained using following transformation process: OWL/XML $\rightarrow$ RDF/SWRL conversion using OWL API and RDF/SWRL $\rightarrow$ Jena rules conversion using SweetRules\footnote{\url{http://sweetrules.semwebcentral.org/}}.
+
+The presented rules belong to the group of so called DL-Safe rules \citep{Motik:DL-Safe-rules} so the decidability of OWL reasoning is kept.
+
+
+
+
+\begin{figure}
+\begin{minted}[linenos,  fontsize=\footnotesize,
+               frame=lines]{prolog}
+%[Rule 1] [Pos cover = 23 Neg cover = 6]
+mention_root(acquired,A) :-
+		'lex.rf'(B,A), t_lemma(B,'Inc'),
+		tDependency(C,B), tDependency(C,D),
+		formeme(D,'n:in+X'), tDependency(E,C).
+%[Rule 11] [Pos cover = 25 Neg cover = 6]
+mention_root(acquired,A) :-
+		'lex.rf'(B,A), t_lemma(B,'Inc'),
+		tDependency(C,B), formeme(C,'n:obj'),
+		tDependency(C,D), functor(D,'APP').
+%[Rule 75] [Pos cover = 14 Neg cover = 1]
+mention_root(acquired,A) :-
+		'lex.rf'(B,A), t_lemma(B,'Inc'),
+		functor(B,'APP'), tDependency(C,B),
+		number(C,pl).							
+\end{minted}
+	\caption{Examples of extraction rules in the native Prolog format.}
+	\label{img:rules_prolog}
+\end{figure}
+
+\begin{figure}
+\begin{minted}[linenos,  fontsize=\footnotesize,
+               frame=lines]{jena}
+#[Rule 1]
+lex.rf(?b, ?a), t_lemma(?b, "Inc"),
+tDependency(?c, ?b), tDependency(?c, ?d),
+formeme(?d, "n:in+X"), tDependency(?c, ?e)
+		-> mention_root(?a, "acquired")
+#[Rule 11]
+lex.rf(?b, ?a), t_lemma(?b, "Inc"),
+tDependency(?c, ?b), formeme(?c, "n:obj"),
+tDependency(?c, ?d), functor(?d, "APP")
+		-> mention_root(?a, "acquired")
+#[Rule 75]
+lex.rf(?b, ?a), t_lemma(?b, "Inc"),
+functor(?b, "APP"), tDependency(?c, ?b),
+number(?c, "pl")
+		-> mention_root(?a, "acquired")							
+\end{minted}
+	\caption{Examples of extraction rules in Prot\'{e}g\'{e} 4 -- Rules View's format.}
+	\label{img:rules_protege}
+\end{figure}
+
+\begin{figure}
+\begin{minted}[linenos,  fontsize=\footnotesize,
+               frame=lines]{xml}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Ontology [
+	<!ENTITY pml "http://ufal.mff.cuni.cz/pdt/pml/" >
+]>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+	ontologyIRI="http://czsem.berlios.de/onto ... rules.owl">
+	<DLSafeRule>
+		<Body>
+			<ObjectPropertyAtom>
+				<ObjectProperty IRI="&pml;lex.rf" />
+				<Variable IRI="urn:swrl#b" />
+				<Variable IRI="urn:swrl#a" />
+			</ObjectPropertyAtom>
+...
+			<DataPropertyAtom>
+				<DataProperty IRI="&pml;number" />
+				<Variable IRI="urn:swrl#c" />
+				<Literal>pl</Literal>
+			</DataPropertyAtom>
+		</Body>
+		<Head>
+			<DataPropertyAtom>
+				<DataProperty IRI="&pml;mention_root" />
+				<Literal>acquired</Literal>
+				<Variable IRI="urn:swrl#a" />
+			</DataPropertyAtom>
+		</Head>
+	</DLSafeRule>
+</Ontology>
+\end{minted}
+\caption{Rule 75 in the OWL/XML syntax for Rules in OWL 2 \citep{GHPP09a}.}
+\label{img:rules_xml}
+\end{figure}
+
+
+\begin{figure}
+\begin{minted}[linenos,  fontsize=\footnotesize,
+               frame=lines]{jena}
+@prefix pml: <http://ufal.mff.cuni.cz/pdt/pml/>.
+[rule-75:  
+        ( ?b pml:lex.rf ?a )
+        ( ?c pml:tDependency ?b )
+        ( ?b pml:functor 'APP' )
+        ( ?c pml:number 'pl' )
+        ( ?b pml:t_lemma 'Inc' )
+     -> 
+        ( ?a pml:mention_root 'acquired' )
+]
+\end{minted}
+\caption{Rule 75 in the Jena rules syntax.}
+\label{img:rules_jena}
+\end{figure}
+
+
+%\clearpage
+
+
+
+
+
+
+
+
+
 
 \section{Fuzzy ILP Classification}
 

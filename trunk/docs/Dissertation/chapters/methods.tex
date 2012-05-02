@@ -329,14 +329,64 @@ But of course we are not satisfied with this fashion of semantic interpretation 
 
 
 
-\section{Shareable Extraction Ontologies} \label{sec:methods_Shareable_Extraction_Ontologies}
 
-\subsection{Semantic Annotation Semantically}
 
-\subsection{The Main Idea Illustrated – a Case Study}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Document Ontologies}
+\section{Shareable Extraction Ontologies} \label{sec:methods_Shareable_Extraction_Ontologies} \label{sec:ch70_extraction_ontologies}
+\graphicspath{{../img/ch70/}}
 
+In this section we present an extension of the idea of extraction ontologies that was originally presented by \cite{DBLP:conf/er/EmbleyTL02}. We adopt the point that extraction models are kept in extraction ontologies and we add that the extraction ontologies should not be dependent on the particular extraction/annotation tool. In such case the extraction/annotation process can be done separately by an ordinary reasoner.
+
+
+We present a proof of concept for the idea: a case study with our linguistically based IE engine and an experiment with several OWL reasoners. In the case study (see Section~\ref{sec:case}) the IE engine exports its extraction rules to the form of an extraction ontology. Third party linguistic tool linguistically annotates an input document and the linguistic annotations are translated to so-called document ontology. After that an ordinary OWL reasoner is used to apply the extraction ontology on the document ontology, which has the same effect as a direct application of the extraction rules on the document. The process is depicted in Figure~\ref{img:rules_app_schema} and it will be described in detail in Section~\ref{sec:case}.
+
+
+
+The most closely related work was already presented in Section~\ref{sec:relwork_ext_ont}. The main idea will be illustrated on our case study in Section~\ref{sec:case}, its implementation in Section~\ref{sec:implement} and in Section~\ref{sec:ch70_experiment} an experiment with several OWL reasoners and IE datasets will be presented. In Section~\ref{sec:discuss} related issues are discussed and Section~\ref{sec:ch70_conclusion} concludes the discussion.
+
+\subsection{Document Ontologies and Annotated Document Ontologies} \label{sec:ch70_doc_ont}
+
+The idea of shareable extraction ontologies assumes that extraction ontologies will be shareable and they can be applied on a document outside of the original extraction/annotation tool. We further assert that the extraction ontologies can be applied by ordinary reasoners. This assumption implies that both extraction ontologies and documents have to be in a reasoner readable format. In the case of contemporary OWL reasoners there are standard reasoner-readable languages: OWL and RDF in a rich variety of possible serializations (XML, Turtle, N-Triples, etc.) Besides that there exists standard ways like GRDDL or RDFa how to obtain a RDF document from an ``ordinary document'' (strictly speaking XHTML and XML documents).
+
+We call `document ontology' an ontology that formally captures content of a document. A document ontology can be for example obtained from the source document by a suitable GRDDL transformation (as in our experiment). A document ontology should contain all relevant data of a document and preferably the document could be reconstructed from the document ontology on demand.
+
+When a reasoner is applying an extraction ontology to a document, it only has ``to annotate'' the corresponding document ontology, not the document itself. Here ``to annotate'' means to add new knowledge -- new class membership or property assertions. In fact it means just to do the inference tasks prescribed by the extraction ontology on the document ontology. 
+
+Obviously when a document can be reconstructed from its document ontology (this is very often true, it is necessary just to save all words and formatting instructions) then also an annotated document can be reconstructed from its annotated document ontology. 
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{The Main Idea Illustrated -- a Case Study} \label{sec:case}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In this section, realization of the main idea will be described and illustrated on a case study.
+
+A schema of the case study is presented in Figure~\ref{img:rules_app_schema}.  
+The top row of the image illustrates how TectoMT (third party linguistic tool) linguistically annotates an input document and the linguistic annotations are translated to so-called document ontology by a GRDDL/XSLT transformation.
+
+In the bottom of the picture our IE engine learns extraction rules and exports them to an extraction ontology. The reasoner in the middle is used to apply the extraction ontology on the document ontology and it produces the ``annotated'' document ontology, which was described in the previous section.
+
+
+\begin{figure}
+\centerline{\includegraphics[angle=-90, width=0.7\hsize]{semantic_rules_app_schema}}
+\caption{Semantic annotation driven by an extraction ontology and a reasoner -- schema of the process.}
+\label{img:rules_app_schema}
+\end{figure}
+
+Implementation of the case study will be described in Section~\ref{sec:implement}. It exploits the approaching support for Semantic Web Rule Language (SWRL) \citep{SWRL}. Although SWRL is not yet approved by W3C it is already widely supported by Semantic Web tools including many OWL reasoners. The SWRL support makes it much easier to transfer the semantics of extraction rules used by our IE tool to extraction ontology. The translation of the native extraction rules to SWRL rules that form the core of the extraction ontology will be also presented in Section~\ref{sec:implement}.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Fuzzy ILP Classification}
 
 \subsection{Design of the System}
