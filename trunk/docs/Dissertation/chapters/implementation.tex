@@ -44,9 +44,7 @@ sub print_injured {
 				my @mans = find_node_by_attr_depth($this, 0, 'functor', '^MANN');
 				if (@mans) {
 					foreach my $m (@mans) {
-						print "<manner>"; 
-						print $m->{t_lemma};
-						print "</manner>"; 
+						print "<manner>"; print $m->{t_lemma}; print "</manner>"; 
 					};
 				}
 				

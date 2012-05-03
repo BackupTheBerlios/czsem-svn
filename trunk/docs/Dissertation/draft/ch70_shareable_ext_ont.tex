@@ -37,66 +37,9 @@ And this is where the title of the chapter and the present section comes from.
 
 
 
-\section{How to Download}
-All the resources (including source codes of the case study and the experiment, datasets and ontologies) mentioned in this chapter are publically available on the project's web site\footnote{\url{http://czsem.berlios.de/}} and detailed information can be found there.
 
 
 
 %\subsection{Repeatability}
 %
 %Our implementation is publicly available -- source codes and the datasets can be downloaded from our project's web-page\footnote{\url{http://czsem.berlios.de/}}, so it should be also possible to repeat the experiment in a sense of  the SIGMOD Experimental Repeatability Requirements \citep{biblio:SIGMODrepeatability}.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Discussion} \label{sec:discuss}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-In this chapter (Section~\ref{sec:ch70_doc_ont}) we have described a method how to apply an extraction ontology to a document ontology and obtain so called ``annotated'' document ontology. To have an ``annotated'' document ontology is almost the same as to have an annotated document. An annotated document is useful (easier navigation, faster reading and lookup of information, possibility of structured queries on collections of such documents, etc.) but if we are interested in the actual information present in the document, if we want to know the facts that are in a document asserted about the real word things then an annotated document is not sufficient. But the conversion of an annotated document to the real world facts is not simple.
-There are obvious issues concerning data integration and duplicity of information. For example when in a document two mentions of people are annotated as `injured', what is then the number of injured people in the corresponding accident? Are the two annotations in fact linked to the same person or not?
-
-In the beginning of our work on the idea of shareable extraction ontologies we planned to develop it further, we wanted to cover also the step from annotated document ontologies to the real world facts. The extraction process would then end up with so called ``fact ontologies''. But two main obstacles prevent us to do that.
-
-\begin{enumerate}
-	\item Our IE engine is not yet capable to solve these data integration and duplicity of information issues and the real world facts would be quite imprecise then.
-	\item There are also technology problems of creating new facts (individuals) during reasoning.
-\end{enumerate}
-
-Because of the decidability and finality constraints of the Description Logic Reasoning it is not possible to create new individuals during the reasoning process. There is no standard way how to do it. But there are some proprietary solutions like \verb@swrlx:createOWLThing@\footnote{\url{http://protege.cim3.net/cgi-bin/wiki.pl?action=browse&id=SWRLExtensionsBuiltIns}} from the Prot\'{e}g\'{e} project and \verb@makeTemp(?x)@ or \verb@makeInstance(?x, ?p, ?v)@\footnote{\url{http://jena.sourceforge.net/inference/#RULEbuiltins}} from the Jena project.
-And these solutions can be used in the future work. 
-
-\subsection{SPARQL Queries -- Increasing Performance?}
-
-There is also a possibility to transform the extraction rules to SPARQL construct queries. This would probably rapidly increase the time performance. However a document ontology would then have to exactly fit with the schema of the extraction rules.  This would be a minor problem. 
-
-The reason why we did not study this approach from the beginning is that we were interested in extraction \emph{ontologies} and SPARQL queries are not currently regarded as a part of an ontology and nothing is suggesting it to be other way round.  
-
-Anyway the performance comparison remains a valuable task for the future work.
-
-\subsection{Contributions for Information Extraction}The chapter combines the field of ontology-based information extraction and rule-based reasoning. The aim is to show a new possibility in usage of IE tools and reasoners. In this chapter we do not present a solution that would improve the performance of IE tools.
-We also do not provide a proposal of a universal extraction format (although a specific form for the rule based extraction on dependency parsed text could be inferred). This task is left for the future if a need for such activity emerges.
-%The aim of the chapter is a demonstration of the idea of tool independent extraction ontologies and the possibility to use reasoners for information extraction.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Conclusion} \label{sec:ch70_conclusion}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%In the end of the chapter we would like to summarize the main contributions of the chapter.
-
-%\begin{itemize}
-	%\item In the beginning of the chapter we pointed out the draw back of so called extraction ontologies -- in most cases they are dependent on a particular extraction/annotation tool and they cannot be used separately.	
-	%\item We extended the concept of extraction ontologies by adding the shareable aspect and we introduced a new principle of making extraction ontologies independent of the original tool: the possibility of application of an extraction ontology to a document by an ordinary reasoner.
-	%\item In Section~\ref{sec:case} we presented a case study that shows that the idea of shareable extraction ontologies is realizable. We presented implementation of an IE tool that exports its extraction rules to an extraction ontology and we demonstrated how this extraction ontology can be applied to a document by a reasoner.
-	%\item Moreover in Section~\ref{sec:ch70_experiment} an experiment with several OWL reasoners was presented. The experiment evaluated the performance of contemporary OWL reasoners on IE tasks (application of extraction ontologies).  
-	%\item A new publically available benchmark for OWL reasoning was created together with the experiment. Other reasoners can be tested this way.
-%\end{itemize}
-   
-In the beginning of the chapter we pointed out the draw back of so called extraction ontologies -- in most cases they are dependent on a particular extraction/annotation tool and they cannot be used separately.	
-
-We extended the concept of extraction ontologies by adding the shareable aspect and we introduced a new principle of making extraction ontologies independent of the original tool: the possibility of application of an extraction ontology to a document by an ordinary reasoner.
-
-In Section~\ref{sec:case} we presented a case study that shows that the idea of shareable extraction ontologies is realizable. We presented implementation of an IE tool that exports its extraction rules to an extraction ontology and we demonstrated how this extraction ontology can be applied to a document by a reasoner.
-
-Moreover in Section~\ref{sec:ch70_experiment} an experiment with several OWL reasoners was presented. The experiment evaluated the performance of contemporary OWL reasoners on IE tasks (application of extraction ontologies). A new publically available benchmark for OWL reasoning was created together with the experiment. Other reasoners can be tested this way.
-
-%We would like to conclude the chapter by stating that only time will show if the fundamental idea of the chapter will be useful but today it is at least a new use case for both: usage of IE tools and reasoners.
-

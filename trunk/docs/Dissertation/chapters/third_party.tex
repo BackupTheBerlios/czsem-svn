@@ -181,9 +181,9 @@ Currently Netgraph is replaced by PML Tree Query (see Section~\ref{sec:ch30_pml_
 Homepage of the project: \url{http://quest.ms.mff.cuni.cz/netgraph/}
 
 
-\subsection{Annotation Schemas}
-\subsubsection{Prague Markup Language (PML)} \label{sec:ch30_pml}
-\subsubsection{Feature Structure (FS)} \label{sec:ch30_fs}
+%\subsection{Annotation Schemas}
+%\subsubsection{Prague Markup Language (PML)} \label{sec:ch30_pml}
+%\subsubsection{Feature Structure (FS)} \label{sec:ch30_fs}
 
 
 \section{Czech WordNet}
@@ -233,7 +233,7 @@ Although the GATE annotation approach seems quite simple, very complex structure
 
 \subsection{Machine Learning in GATE} \label{sec:third_gate_ML}
 
-Figure~\ref{img:ExtractionProcessIntro} learning and annotation process in general (ILP version later, Chapter~\ref{ch:ILP_Learning})
+Figure~\ref{img:ExtractionProcessIntro} learning and annotation process in general (ILP version later, Section~\ref{sec:methods_learning})
 
 
 \begin{figure}
@@ -255,7 +255,7 @@ Figure~\ref{img:ExtractionProcessIntro} learning and annotation process in gener
 
 Inductive Logic Programming (ILP) \citep{biblio:MuggletonILP} is a machine learning technique based on logic programming. Given an encoding of the known background knowledge (in our case linguistic structure of all sentences) and a set of examples represented as a logical database of facts (in our case tokens annotated with the target annotation type are positive examples and the remaining tokens negative ones), an ILP system will derive a hypothesized logic program (in our case extraction rules) which entails all the positive and none of the negative examples.
 
-Formal definitions of ILP tasks are presented in following sections. They will be extended and used for implementation of Fuzzy ILP Classifier in Chapter~\ref{sec:ch80_fuzzy_ilp_chapter}.
+Formal definitions of ILP tasks are presented in following sections. They will be extended and used for implementation of Fuzzy ILP Classifier, see details in Section~\ref{sec:methods_fuzzy}.
 
 
 

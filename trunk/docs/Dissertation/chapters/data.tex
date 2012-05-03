@@ -208,6 +208,11 @@ The fist dataset is called `czech\_fireman'. This dataset was created by ourselv
 The corpus is structured such that each document represents one event (accident) and several attributes of the accident are marked in text. 
 
 
+\subsubsection{Dataset}
+We have evaluated our state of the art solution on a small dataset that we use for development. It is a collection of 50 Czech texts that are reporting on some accidents (car accidents and other actions of fire rescue services). These reports come from the web of Fire rescue service of Czech Republic\footnote{\url{http://www.hzscr.cz/hasicien/}}. The labeled corpus is publically available on the web of our project\footnote{\url{http://czsem.berlios.de/}}.
+The corpus is structured such that each document represents one event (accident) and several attributes of the accident are marked in text.
+
+
 \subsection{Corporate Acquisition Events} \label{sec:ch40_corporate_acquisitions}
 
 \begin{table}
@@ -263,7 +268,7 @@ related to acquisition events. These fields include `purchaser' , `acquired', an
 
 \subsection{RDF Dataset Based on Czech Fireman Reports} \label{sec:ch40_rdf_fireman}
 
-Both reasoning datasets presented in this work are based on information extraction tasks. The datasets were created for evaluation of the idea of shareable extraction ontologies (see Chapter~\ref{ch:Shareable_Extraction_Ontologies}). The datasets consists of so called document ontologies -- RDF representation of source documents (see Section~\ref{sec:ch70_doc_ont}) and extraction ontologies -- RDF representation of extraction rules (see Section~\ref{sec:ch70_extraction_ontologies}). Besides that there are also small mapping ontologies that solve small differences of the schemas used in document and extraction ontologies.
+Both reasoning datasets presented in this work are based on information extraction tasks. The datasets were created for evaluation of the idea of shareable extraction ontologies (see Section~\ref{sec:methods_Shareable_Extraction_Ontologies}). The datasets consists of so called document ontologies -- RDF representation of source documents (see Section~\ref{sec:ch70_doc_ont}) and extraction ontologies -- RDF representation of extraction rules (see Section~\ref{sec:ch70_extraction_ontologies}). Besides that there are also small mapping ontologies that solve small differences of the schemas used in document and extraction ontologies.
 
 The reasoning task is to combine the three kinds of ontologies and infer all instances that should be found by the extraction rules saved in the particular extraction ontology, for details see the Section~\ref{sec:ch70_experiment}.
 
