@@ -1,9 +1,11 @@
 \chapter{Experiments and Evaluation} \label{sec:ch_eval}
 
+Experiments that were performed to evaluate our methods and approaches will be presented in this chapter. Four main sections separate the experiments by topic, to which they belong.
+
 \section{Evaluation of Manual Rules} \graphicspath{{../img/ch50/}}
 
 
-In this section, several experiments will be presented to explain the usefulness of our extrraction method based on manually designed rules. 
+In this section, several experiments will be presented to explain the usefulness of our extraction method based on manually designed rules. 
 
 
 
@@ -149,18 +151,281 @@ Table~\ref{tab:ch50_damage_cross_method} it is apparent that the methods agreed 
 
 \subsection{?Acquisitions Time?}
 
-\section{Evaluation of Shareable Extraction Ontologies Performance} \label{sec:eval_Shareable_Extraction_Ontologies}
+
+
+
+
+
+
+
+
+
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Evaluation of Shareable Extraction Ontologies Performance} \label{sec:eval_Shareable_Extraction_Ontologies} \label{sec:ch70_experiment}
+
+In this section we present an experiment that should serve as a proof of a concept that the proposed idea of independent extraction ontologies is realizable. We have selected several reasoners (namely Jena, HermiT, Pellet and FaCT++) and tested them on two slightly different datasets from two different domains and languages (see Table~\ref{tab:datasets}). This should at least partially demonstrate the universality of the proposed approach.
+
+In both cases the task is to find all instances (corresponding to words in a document) that should be uncovered by the extraction rules. The extraction rules are saved in single extraction ontology for each dataset. The datasets are divided into individual document ontologies (owl files) corresponding to the individual documents. During the experiment the individual document ontologies are processed separately (one ontology in a step) by a selected reasoner. The total time taken to process all document ontologies of a dataset is the measured result of the reasoner for the dataset.
+
+The actual reasoning tasks are more difficult than a simple retrieval of all facts entailed by the extraction rules. Such simple retrieval task took only a few seconds for the Acquisitions v1.1 dataset (including parsing) in the native Prolog environment that the IE engine uses. There were several more inferences needed in the reasoning tasks because the schema of the input files was a little bit different from the schema used in rules. The mapping of the schemas was captured in another ``mapping'' ontology that was included in the reasoning. The mapping ontology is a part of the publically available project ontologies.
+%\footnote{See ``Data/ontologies'' link on the project page \url{http://czsem.berlios.de/}}%and a potentially interested reader can find the complete mapping ontology on the project's web site.
+
+
+\subsection{Datasets} \label{sec:ch70_datasets}
+
+In the experiment we used two slightly different datasets from two different domains and languages.  Table~\ref{tab:datasets} summarizes some basic information about them. The fist dataset is called `czech\_fireman', it is based on Czech texts that are reporting on fire and traffic accidents and it was already described in Section~\ref{sec:ch40_rdf_fireman}. The second dataset is called ``Corporate Acquisition Events'', it is based on news articles describing acquisition events, taken from the Reuters dataset and it was already described in Section~\ref{sec:ch40_rdf_acquisitions}.
+
+\begin{table}
+\begin{center}
+\begin{tabular}{|r||l|l|b{20mm}|b{20mm}|b{20mm}|}
+%\begin{tabular}{|r||r|r|c|r|c|}
+\hline
+dataset & domain & language & number of~files &  dataset size (MB) &  number of~rules  \\
+\hline
+\hline
+\textbf{czech\_fireman} & accidents & Czech &  50 &  16 &  2\\
+\hline
+\textbf{acquisitions} & finance & English &  600 &  126 &  113\\
+\hline
+\end{tabular}
+\caption{Description of datasets that were used.}\label{tab:datasets}
+\end{center}
+\end{table}
+
+
+
 
 \subsection{Reasoners}
 
-\subsection{Czech Fireman Time}
+%In the experiment we used four OWL reasoners
+Four OWL reasoners were used in the experiment(namely
+Jena\footnote{\url{http://jena.sourceforge.net}}
+,HermiT\footnote{\url{http://hermit-reasoner.com}}
+,Pellet\footnote{\url{http://clarkparsia.com/pellet}}
+and FaCT++\footnote{\url{http://code.google.com/p/factplusplus}}
+) and the time they spent on processing a particular dataset was measured. The time also includes time spent on parsing the input. HermiT, Pellet and FaCT++ were called through OWL API-3.1, so the same parser was used for them. Jena reasoner was used in its native environment with the Jena parser.
+In the early beginning of the experiment we had to exclude the FaCT++ reasoner from both tests. It turned out that FaCT++ does not work with rules\footnote{\url{http://en.wikipedia.org/wiki/Semantic_reasoner#Reasoner_comparison}} and it did not return any result instances.  All the remaining reasoners strictly agreed on the results and returned the same sets of instances.
 
-\subsection{Acquisitions Time}
+Also HermiT was not fully evaluated on the Acquisitions v1.1 dataset because it was too slow. The reasoner spent 13 hours of running to process only 30 of 600 files of the dataset. And it did not seem useful to let it continue. We contacted the authors of HermiT to clarify this issue and we were reminded that HermiT was mainly designed as a TBox reasoner and it was particularly optimized for the ontology classification problem \citep{ghms10classification}; it was never optimized for simple rule based (ABox) inferences.
 
-\section{Evaluation of Fuzzy ILP Classification}
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Evaluation Results}
+
+
+
+\begin{table}
+\begin{center}
+\begin{tabular}{|r||r|r||r|r|}
+\hline
+reasoner & \textbf{czech\_fireman} & stdev & \textbf{acquisitions-v1.1} & stdev\\
+\hline
+\hline
+\textbf{Jena} & 161 s & 0.226 & 1259 s & 3.579\\
+\hline
+\textbf{HermiT} & 219 s & 1.636 & $\gg$ 13 hours & \\
+\hline
+\textbf{Pellet} & 11 s & 0.062 & 503 s & 4.145\\
+\hline
+\textbf{FaCT++} & \multicolumn{4}{|c|}{Does not support rules.}\\
+\hline
+\end{tabular}
+\end{center}
+
+Time is measured in seconds. Average values from 6 measurements. Experiment environment: Intel Core I7-920 CPU 2.67GHz, 3GB of RAM, Java SE 1.6.0\_03, Windows XP.
+
+\caption{Time performance of tested reasoners on both datasets.}
+\label{tab:results}
+\end{table}
+
+Table~\ref{tab:results} summarizes results of the experiment. The standard deviations are relatively small when compared to the differences between the average times.  So there is no doubt about the order of the tested reasoners. Pellet performed the best and HermiT was the slowest amongst the tested and usable reasoners in this experiment.
+
+From the results we can conclude that similar tasks can be satisfactorily solved by contemporary OWL reasoners because three of four tested reasoners were working correctly and two reasoners finished in bearable time.
+
+On the other hand even the fastest system took 8.5 minutes to process 113 rules over 126MB of data. This is clearly   significantly longer than a operational system would require. 
+Contemporary Semantic Web reasoners are known still to be often quite inefficient and the experiment showed that using them today to do information extraction will result in quite poor performance. However, efficiency problems can be solved
+and in the context of Linked Data providing shareable descriptions of information extraction rules may be valuable.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Evaluation of Fuzzy ILP Classification} \label{sec:ch80_eval}
+\graphicspath{{../img/ch80/}}
+
+\begin{figure}[p]
+\centerline{\includegraphics[width=0.8\hsize]{2x10cross}}
+\caption{Evaluation of the methods -- average values.}
+\label{img:graph2x10}
+\end{figure}
+
+
+\begin{table}[p]
+\scriptsize
+{\centering \begin{tabular}{lr@{\hspace{0cm}}c@{\hspace{0cm}}rr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}c}
+\hline
+& \multicolumn{3}{c}{Fuzzy}& \multicolumn{4}{c}{Crisp} & \multicolumn{4}{c}{MultPerc} & \multicolumn{4}{c}{SMO} & \multicolumn{4}{c}{J48} & \multicolumn{4}{c}{JRip} & \multicolumn{4}{c}{LBoost} \\
+\hline
+Corr	& 0.61 & $\pm$ & .19 & .22 & $\pm$ & .17 & $\bullet$ & .41 & $\pm$ & .19 & $\bullet$ & .36 & $\pm$ & .24 & $\bullet$ & .41 & $\pm$ & .22 & $\bullet$ & .44 & $\pm$ & .17 & $\bullet$ & .59 & $\pm$ & .26 &        \\
+Incor	&  .39 & $\pm$ & .19 & .27 & $\pm$ & .24 &         	 & .59 & $\pm$ & .19 & $\circ$ 	 & .64 & $\pm$ & .24 & $\circ$ 	 & .59 & $\pm$ & .22 & $\circ$ 	 & .56 & $\pm$ & .17 & $\circ$ 	 & .41 & $\pm$ & .26 &        \\
+Uncl	&  .00 & $\pm$ & .00 & .51 & $\pm$ & .29 & $\circ$   & .00 & $\pm$ & .00 &         	 & .00 & $\pm$ & .00 &         	 & .00 & $\pm$ & .00 &         	 & .00 & $\pm$ & .00 &         	 & .00 & $\pm$ & .00 &        \\
+Prec	&  .56 & $\pm$ & .24 & .53 & $\pm$ & .37 &         	 & .35 & $\pm$ & .20 & $\bullet$ & .33 & $\pm$ & .26 &         	 & .39 & $\pm$ & .22 &         	 & .34 & $\pm$ & .21 & $\bullet$ & .56 & $\pm$ & .28 &        \\
+Rec		&  .61 & $\pm$ & .19 & .49 & $\pm$ & .32 &         	 & .41 & $\pm$ & .19 & $\bullet$ & .36 & $\pm$ & .24 & $\bullet$ & .41 & $\pm$ & .22 & $\bullet$ & .44 & $\pm$ & .17 & $\bullet$ & .59 & $\pm$ & .26 &        \\
+F			&  .56 & $\pm$ & .20 & .49 & $\pm$ & .33 &         	 & .36 & $\pm$ & .19 & $\bullet$ & .32 & $\pm$ & .24 & $\bullet$ & .39 & $\pm$ & .21 &         	 & .36 & $\pm$ & .19 & $\bullet$ & .56 & $\pm$ & .27 &        \\
+\hline
+\multicolumn{21}{c}{$\circ$, $\bullet$ statistically significant increase or decrease}\\
+\end{tabular} \scriptsize \par}
+\scriptsize
+\smallskip
+Legend:\\
+{\centering
+\begin{tabular}{p{2cm}@{}p{10.5cm}}\\
+Fuzzy \dotfill{}& czsem.ILP.FuzzyILPClassifier '' \\
+Crisp \dotfill{} & czsem.ILP.CrispILPClassifier '' \\
+MultPerc \dotfill{} & functions.MultilayerPerceptron '-L 0.3 -M 0.2 -N 500 -V 0 -S 0 -E 20 -H a' \\
+SMO \dotfill{} & functions.SMO '-C 1.0 -L 0.0010 -P 1.0E-12 -N 0 -V -1 -W 1 -K \textbackslash"functions.supportVector.PolyKernel -C 250007 -E 1.0\textbackslash"' \\
+J48 \dotfill{} & trees.J48 '-C 0.25 -M 2' \\
+JRip \dotfill{} & rules.JRip '-F 3 -N 2.0 -O 2 -S 1' \\
+LBoost \dotfill{} & meta.LogitBoost '-P 100 -F 0 -R 1 -L -1.7976931348623157E308 -H 0.1 -S 1 -I 10 -W trees.DecisionStump' \\
+\\
+Corr \dotfill{} & Percent correct\\
+Inor \dotfill{} & Percent incorrect\\
+Uncl \dotfill{} & Percent unclassified\\
+Prec \dotfill{} & IR precision, weighted average from all classes\\
+Rec \dotfill{} 	& IR recall, weighted average from all classes\\
+F \dotfill{} 		& F measure, weighted average from all classes\\
+\end{tabular}
+}
+\caption{Evaluation of the methods in 2 times 10-fold cross validation.}
+\label{tab:table2x10}
+\end{table}
+
+
+We have evaluated both ILP methods and compared them with other machine learning procedures used in data mining. To make the comparison clear and easy to perform, we have implemented an interface between the ILP methods and Weka (Section~\ref{sec:ch30_weka}). This interface makes it possible to use the ILP methods as an ordinary Weka classifier for any\footnote{For the fuzzy ILP method, there is a requirement on the target (class) attribute: it has to be monotonizable (e.g. numeric).} classification task inside the Weka software. This also makes the presented experiments easily repeatable (see Secrion~\ref{sec:ch90_repeatablity} for details.) 
+
+
 
 \subsection{Czech Fireman Performance}
 
+
+For our experiment we used the Weka Experimenter (see in Section~\ref{sec:ch30_weka}) and performed an experiment in which the Crisp and Fuzzy ILP classifiers were compared with five additional classifiers:
+\begin{itemize}
+	\item Multilayer Perceptron \citep{biblio:bishop-1995},
+	\item Support Vector Machine classifier SMO \citep{biblio:SMO},
+	\item J48 decision tree \citep{biblio:J48},
+	\item JRip rules \citep{weka:JRip} and
+	\item Additive logistic regression LogitBoost \citep{biblio:LogitBoost}.
+\end{itemize}
+We have evaluated all the methods two times by 10-fold cross validation. %(section~\ref{sec:experiment_desc}).
+The obtained results (average values) are described by the graph in Figure~\ref{img:graph2x10} and in Table~\ref{tab:table2x10} (with standard deviations and marked statistically significant values).
+
+There is no clear winner in our experiment. But the Fuzzy ILP classifier proved better results than a majority of the methods on our data and the results are statistically significant in many cases. Very good results were also obtained using LogitBoost. 
+
+
+
+
+
+\begin{table}
+\scriptsize
+{\centering \begin{tabular}{l|r@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.3cm}}r@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}l@{\hspace{0cm}}r@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0cm}}c@{\hspace{0.25cm}}c@{\hspace{0.20cm}}c@{\hspace{0.10cm}}}
+& \multicolumn{3}{c}{Fuzzy}& \multicolumn{4}{c}{Crisp} & \multicolumn{4}{c}{MultPerc} & \multicolumn{4}{c}{SMO} & \multicolumn{4}{c}{J48} & \multicolumn{4}{c}{JRip} & \multicolumn{4}{c}{LBoost} & train & test\\
+\hline
+car & .39 & $\pm$ & .03 & .36 & $\pm$ & .03 & $\bullet$ & .53 & $\pm$ & .02 & $\circ$ & .57 & $\pm$ & .01 & $\circ$ & .50 & $\pm$ & .02 & $\circ$ & .51 & $\pm$ & .03 & $\circ$ & .54 & $\pm$ & .02 & $\circ$ & 173 & 1554\\
+\hline
+wine & .44 & $\pm$ & .03 & .42 & $\pm$ & .02 & $\bullet$ & .48 & $\pm$ & .02 & $\circ$ & .46 & $\pm$ & .02 & $\circ$ & .47 & $\pm$ & .02 & $\circ$ & .48 & $\pm$ & .03 & $\circ$ & .52 & $\pm$ & .02 & $\circ$ & 160 & 1439\\
+\hline
+cmc & .79 & $\pm$ & .02 & .77 & $\pm$ & .03 & $\bullet$ & .89 & $\pm$ & .02 & $\circ$ & .81 & $\pm$ & .01 & $\circ$ & .88 & $\pm$ & .02 & $\circ$ & .82 & $\pm$ & .03 & $\circ$ & .85 & $\pm$ & .02 & $\circ$ & 147 & 1325\\
+\hline
+tae & .50 & $\pm$ & .12 & .39 & $\pm$ & .11 & $\bullet$ & .59 & $\pm$ & .11 & $\circ$ & .55 & $\pm$ & .12 & $\circ$ & .50 & $\pm$ & .12 &  & .37 & $\pm$ & .11 & $\bullet$ & .55 & $\pm$ & .11 & $\circ$ & 135 & 15\\
+\hline
+pop & .66 & $\pm$ & .09 & .54 & $\pm$ & .17 & $\bullet$ & .57 & $\pm$ & .13 & $\bullet$ & .70 & $\pm$ & .06 & $\circ$ & .70 & $\pm$ & .07 & $\circ$ & .70 & $\pm$ & .06 & $\circ$ & .66 & $\pm$ & .10 &  & 80 & 9\\
+\hline
+nurs & .79 & $\pm$ & .04 & .68 & $\pm$ & .06 & $\bullet$ & .81 & $\pm$ & .04 & $\circ$ & .73 & $\pm$ & .04 & $\bullet$ & .80 & $\pm$ & .04 & $\circ$ & .79 & $\pm$ & .06 &  & .83 & $\pm$ & .02 & $\circ$ & 52 & 12907\\
+\hline
+\multicolumn{23}{c}{$\circ$, $\bullet$ statistically significant improvement or degradation}\\
+\end{tabular} \scriptsize \par}
+\scriptsize
+\smallskip
+Legend:\\
+{\centering
+\begin{tabular}{p{2cm}@{}p{10.5cm}}\\
+train \dotfill{} & average number ($\pm$1) of training instances in each run\\
+test \dotfill{} & average number ($\pm$1) of testing instances in each run\\
+\\
+car \dotfill{} & \url{http://archive.ics.uci.edu/ml/datasets/Car+Evaluation}\\
+wine \dotfill{} & red wine dataset \url{http://archive.ics.uci.edu/ml/datasets/Wine+Quality}\\
+cmc \dotfill{} & \url{http://archive.ics.uci.edu/ml/datasets/Contraceptive+Method+Choice}\\
+tae \dotfill{} & \url{http://archive.ics.uci.edu/ml/datasets/Teaching+Assistant+Evaluation}\\
+pop \dotfill{} & \url{http://archive.ics.uci.edu/ml/datasets/Post-Operative+Patient}\\
+nurs \dotfill{} & \url{http://archive.ics.uci.edu/ml/datasets/Nursery}\\
+\end{tabular}
+}
+
+
+\smallskip
+
+
+Learning parameters for both ILP methods:\\set(noise,20). set(i,3). set(clauselength,13). set(search,heuristic). set(evalfn,wracc). set(samplesize,3).
+\caption{Evaluation of the methods on UCI datasets, \textbf{percent correct}, average values from 100 repetitions.}
+\label{tab:UCItable}
+\end{table}
+
+
 \subsection{UCI Performance}
 
+
+The Fuzzy ILP classifier performed quite well on our dataset, but the next question is: How is it with other data, with more learning instances, and what about the time complexity? To answer these questions we performed another experiment. We selected several datasets from the UCI repository (see Section~\ref{sec:ch40_uci_datasets}) and evaluated all the methods against them. 
+
+
+
+The list of selected datasets can be found in the legend of Table~\ref{tab:UCItable}. All the datasets are monotonizable (the target attribute can be naturally ordered), so the fuzzy classifier could take advantage of that. Learning settings are the same as before (Table~\ref{tab:table2x10}) except for settings of both ILP classifiers, which  performed a little bit better with modified settings on a majority of the datasets (see in the legend of Table~\ref{tab:UCItable}). 
+
+Table~\ref{tab:UCItable} compares the numbers of correctly classified instances on all the datasets. The last two columns show numbers of training and testing instances. The numbers of training instances are quite low; this is because the ILP classifiers are probably not capable of fully exploiting higher numbers of training instances and the difference between ILP classifiers and the others would be even a bit higher. This is demonstrated in Figure~\ref{img:corect_growing_learninig_instances} (for `nursery' dataset only). It can be seen that when the number of training instances was under about 40, the fuzzy classifier performed better than some of the others (SMO, JRip and Multilayer Perceptron), but from about 60 training instances further, both ILP classifiers performed worse than the others.
+
+
+\begin{figure}
+\centerline{\includegraphics[width=0.8\hsize]{corect_growing_learninig_instances}}
+\caption{x-axis: number of training instances, y-axis: percent of correctly classified instances, average values from 10 repetitions, `nursery' dataset.}
+\label{img:corect_growing_learninig_instances}
+\end{figure}
+
+
 \subsection{UCI Time}
+
+
+Figure~\ref{img:learning_speed} demonstrates time complexity of the classifiers in the same experiment as in Figure~\ref{img:corect_growing_learninig_instances}. Despite the fact that the Fuzzy ILP classifier was several times slower than the Crisp ILP classifier and even more than the others, it is still computable on current processors (e.g. P9600, 2.66 GHz, which we used) and the curve of time complexity did not grow rapidly during the experiment. Because ILP is a heuristic and iterative method, the time complexity can be quite directly managed by the setting of learning parameters.
+
+\begin{figure}
+\centerline{\includegraphics[width=\hsize]{learning_speed}}
+\caption{x-axis: number of training instances, y-axis: training time in seconds, average values from 10 repetitions, `nursery' dataset.}
+\label{img:learning_speed}
+\end{figure}
+
+

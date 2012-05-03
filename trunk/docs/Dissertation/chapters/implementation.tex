@@ -1,5 +1,6 @@
 \chapter{Implementation} \label{sec:ch_implementation}
 
+This chapter provides the most important implementation details, it is, again, divided into four main sections that correspond the four topics of this thesis.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -8,7 +9,7 @@
 
 \subsection{Procedural Extraction Rules} \label{sec:ch50_Procedural_Extraction_Rules} \label{sec:impl_btred_rules}
 
-Our first extraction method, which is based on procedural extraction rules, was implemented using Btred\footnote{See details about Btred in Section~\ref{sec:third_tred}.} API for processing linguistic trees. The extraction rules were implemented in Perl as Btred procedures. Application of these extraction rules on a corpus of linguistic trees is realized such that each procedure (or extraction rule) is executed on every available tree by Btred. 
+Our earliest extraction method, which is based on procedural extraction rules, was implemented using Btred\footnote{See details about Btred in Section~\ref{sec:third_tred}.} API for processing linguistic trees. The extraction rules were implemented in Perl as Btred procedures. Application of these extraction rules on a corpus of linguistic trees is realized such that each procedure (or extraction rule) is executed on every available tree by Btred. 
 
 An example of such extraction rule is in Figure~\ref{lst:btred_rule} and corresponding extraction output on Figure~\ref{fig:btred_xml}. TODO: explain
 
@@ -608,7 +609,7 @@ node:SCzechA-s4-w13 rdf:type pml:Node, owl:Thing;
 \subsection{Rule Transformations}
 
 
-Extraction rules produced by the IE engine are natively kept in a Prolog format; examples can be seen in Figure~\ref{img:rules_prolog}. The engine is capable to export them to the OWL/XML\footnote{\url{http://www.w3.org/TR/owl-xmlsyntax/}}syntax for rules in OWL 2 \citep{GHPP09a} (see in Figure~\ref{img:rules_xml}). Such rules can be parsed by OWL API\footnote{\url{http://owlapi.sourceforge.net/}} 3.1 
+Extraction rules produced by the IE engine are natively kept in a Prolog format; examples can be seen in Figure~\ref{img:rules_prolog}. The engine is capable to export them to the OWL/XML\footnote{\url{http://www.w3.org/TR/owl-xmlsyntax/}} syntax for rules in OWL 2 \citep{GHPP09a} (see in Figure~\ref{img:rules_xml}). Such rules can be parsed by OWL API\footnote{\url{http://owlapi.sourceforge.net/}} 3.1 
 and exported to RDF/SWRL, which is very widely supported and hopefully becoming a W3C recommendation.
 Figure~\ref{img:rules_protege} shows the example rules in Prot\'{e}g\'{e}\footnote{\url{http://protege.stanford.edu/}} 4 -- Rules View's format. The last rule example can be seen in Figure~\ref{img:rules_jena}, it shows a rule in the Jena rules format\footnote{\url{http://jena.sourceforge.net/inference/#RULEsyntax}}. Conversion to Jena rules was necessary because it is the only format that Jena can parse, see details about our use of Jena in Section~\ref{sec:ch70_experiment}. The Jena rules were obtained using following transformation process: OWL/XML $\rightarrow$ RDF/SWRL conversion using OWL API and RDF/SWRL $\rightarrow$ Jena rules conversion using SweetRules\footnote{\url{http://sweetrules.semwebcentral.org/}}.
 
@@ -731,8 +732,176 @@ number(?c, "pl")
 
 
 
-\section{Fuzzy ILP Classification}
+\section{Fuzzy ILP Classification} \label{sec:implementation}
 
-\subsection{Translation of Fuzzy ILP Task to Several Classical ILP Tasks}
+In the experimental system we use two inductive logic approaches: crisp and fuzzy (as described above). Technically, the difference between the approaches consists in a different setting of the underlying \emph{ILP task}. Both can be done with a classical ILP tool (Aleph (see Section~\ref{sec:ch30_ILP_tool}) was used in the final implementation).
 
-\subsection{Learned Rules Examples}
+We have compared results of the crisp and fuzzy approaches with other classification methods and, in our experiment, the fuzzy approach produced better results than many other methods, including the crisp one. See Section~\ref{sec:results} for details.
+
+
+
+\begin{figure}
+\begin{minipage}[b]{0.5\hsize}
+\begin{minted}[mathescape,fontsize=\footnotesize,
+               frame=single]{prolog}
+% Crisp learning examples $E_t$
+
+serious_2(id_47443). %positive
+
+serious_0(id_47443). %negative
+serious_1(id_47443). %negative
+serious_3(id_47443). %negative							
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Monotonized learning examples $E_{{\ge}t}$
+
+serious_atl_0(id_47443). %positive
+serious_atl_1(id_47443). %positive
+serious_atl_2(id_47443). %positive
+
+serious_atl_3(id_47443). %negative					
+\end{minted}						
+	\caption{Learning examples.}
+	\label{img:examples}
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}[b]{0.5\hsize}
+\begin{minted}[fontsize=\footnotesize,
+               frame=single]{prolog}
+size(id_47443, 427).
+type(id_47443, fire).
+damage(id_47443, 8000).
+dur_minutes(id_47443, 50).
+fatalities(id_47443, 0).
+injuries(id_47443, 0).
+cars(id_47443, 0).
+amateur_units(id_47443, 3).
+profesional_units(id_47443, 1).
+pipes(id_47443, unknown).
+lather(id_47443, 0).
+aqualung(id_47443, 0).
+fan(id_47443, 0).
+\end{minted}						
+	\caption{$B^{crisp}_{T}$ -- crisp attributes.}
+	\label{img:crisp_attributes}
+\end{minipage}
+\end{figure}
+
+
+
+
+
+
+To use ILP for a classification task we have to translate the input data to the Prolog-like logic representation, as it was already described in previous sections. Here we will describe implementation details of constructing crisp and fuzzy knowledge bases and example sets.
+
+In construction of a crisp example set $E_t$, the target predicate is denoted as \texttt{serious\_t}. The letter \texttt{t} stands for the actual seriousness degree. We use multiple unary predicates \texttt{serious\_0}, \texttt{serious\_1}, etc., instead of one binary predicate \texttt{serious(ID,Degree)}. These two cases are equivalent and we have decided to use the unary option because a visual distinction between the multiple ILP tasks is then clearer.
+
+In construction of a fuzzy (or monotonized) example set $E_{\ge t}$, the target predicate is denoted as \texttt{serious\_atl\_t}, see examples in Figure~\ref{img:examples}.
+
+
+
+In construction of a crisp background knowledge $B^{crisp}_{T}$, we use a~simple translation of the attribute names to the names of predicates and fill them with actual values. It is illustrated in Figure~\ref{img:crisp_attributes}). 
+
+
+
+In construction of a monotonized background knowledge $B^{monot}_T$ we reuse the crisp background knowledge and add monotonization rules. An~example for predicate \texttt{damage} is shown in Figure~\ref{img:attribute_monotonization}.
+%on predicates \texttt{damage} and \texttt{damage\_atl}.
+The first rule deals with \texttt{unknown} values (Section~\ref{sec:ch40_features} deals with unknown values in the dataset) and the second does the monotonization. 
+
+Negations used in Figure~\ref{img:attribute_monotonization} and Figure~\ref{img:conversion} are the standard Prolog \emph{negations as failure}.
+
+
+
+\begin{figure}	
+\begin{minted}[fontsize=\footnotesize,
+               frame=lines]{prolog}
+damage_atl(ID,N) :- damage(ID,N), not(integer(N)). %unknown values
+
+damage_atl(ID,N) :- damage(ID,N2), integer(N2), %numeric values
+                    damage(N), integer(N), N2>=N.
+\end{minted}						
+	\caption{Monotonization of attributes (damage\_atl $\leftarrow$ damage).}
+	\label{img:attribute_monotonization}
+\end{figure}
+
+
+\begin{figure}
+\begin{minted}[linenos,  fontsize=\footnotesize,
+               frame=lines]{prolog}
+serious_0(A) :- fatalities(A,0), injuries(A,0), cars(A,1), amateur_units(A,0), lather(A,0).
+serious_0(A) :- fatalities(A,0), cars(A,0), amateur_units(A,0), professional_units(A,1).
+serious_1(A) :- amateur_units(A,1).
+serious_1(A) :- damage(A,300000).
+serious_1(A) :- type(A,fire), amateur_units(A,0), pipes(A,2).
+serious_1(A) :- type(A,car_accident),dur_minutes(A,unknown),fatalities(A,0),injuries(A,1).
+serious_2(A) :- lather(A,unknown).
+serious_2(A) :- cars(A,0), lather(A,0), aqualung(A,1), fan(A,0).
+serious_2(A) :- amateur_units(A,2).
+serious_3(A) :- fatalities(A,2).
+serious_3(A) :- type(A,fire), dur_minutes(A,unknown), cars(A,0), fan(A,0).
+serious_3(A) :- injuries(A,2), cars(A,2).
+serious_3(A) :- fatalities(A,1).
+
+serious_atl_0(A).
+serious_atl_1(A) :- injuries_atl(A,1).
+serious_atl_1(A) :- dur_minutes_atl(A,21), pipes_atl(A,1), aqualung_atl(A,0).
+serious_atl_1(A) :- damage_atl(A,8000), amateur_units_atl(A,3).
+serious_atl_1(A) :- dur_minutes_atl(A,197).
+serious_atl_1(A) :- dur_minutes_atl(A,unknown).
+serious_atl_2(A) :- dur_minutes_atl(A,50), pipes_atl(A,3).
+serious_atl_2(A) :- size_atl(A,1364), injuries_atl(A,1).
+serious_atl_2(A) :- fatalities_atl(A,1).
+serious_atl_2(A) :- size_atl(A,1106), professional_units_atl(A,3).
+serious_atl_3(A) :- fatalities_atl(A,1).
+serious_atl_3(A) :- damage_atl(A,1500000).
+\end{minted}
+\caption{Crisp and monotonized hypotheses.}
+\label{img:rules}
+\end{figure}
+
+
+\begin{figure}	
+\begin{minted}[fontsize=\footnotesize,
+               frame=lines]{prolog}
+serious_0(ID) :- serious_atl_0(ID),
+                 not(serious_atl_1(ID)), not(serious_atl_2(ID)), not(serious_atl_3(ID)).
+serious_1(ID) :- serious_atl_1(ID),
+                 not(serious_atl_2(ID)), not(serious_atl_3(ID)).
+serious_2(ID) :- serious_atl_2(ID),
+                 not(serious_atl_3(ID)).
+serious_3(ID) :- serious_atl_3(ID).
+\end{minted}						
+\caption{Conversion rules for monotonized hypotheses (\texttt{serious\_t} $\leftarrow$ \texttt{serious\_atl\_t}).}
+\label{img:conversion}
+\end{figure}
+
+
+
+Once we have learning examples and background knowledge, we can run the ILP inductive procedure and obtain learned rules (a learned hypothesis). According to the kind of the ILP task (crisp or monotonized), we obtain the corresponding kind (crisp or monotonized) of rules (see e.g. in Figure~\ref{img:rules}). But these rules cannot be used directly to solve the classification task. There are common cases when more than one rule is applicable to a single instance. So we have to select which one to use. For the monotonized hypothesis we select the one with the biggest return value; it is illustrated in Figure~\ref{img:conversion}. Such clear criterion does not exist for the crisp hypothesis, so we simply use the first applicable rule.
+
+
+In the crisp case there are often many instances which cannot be classified because there is no applicable rule. In our experiment there was about a 51\%
+of unclassified instances (see in the next section). It could be caused by the lack of training data, but the monotonized approach does not suffer from this shortage. We can always select the bottom value.
+
+Another advantage of the monotonized approach is that the set of positive training examples is extended by monotonization. 
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Learned Rules Examples} \label{sec:results}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Figure~\ref{img:rules} summarizes obtained hypotheses learned from our data: 
+\begin{itemize}
+	\item a crisp hypothesis learned from $E_t$ and $B^{crisp}_{T}$ (lines 1-13) and
+	\item a monotonized hypothesis learned from $E_{\ge t}$ and ${B}^{monot}_T$ (lines 15-26).
+\end{itemize}
+
+
+In both cases, learning examples and background knowledge have the origin in the same data (the same accidents). The hypotheses differ in the form of the ILP task (crisp and monotonized). The crisp hypothesis uses only the crisp predicates, and the monotonized hypothesis uses only the monotonized predicates.
+
+
+
+
