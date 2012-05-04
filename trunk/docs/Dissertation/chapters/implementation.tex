@@ -17,7 +17,7 @@ An example of such extraction rule is in Figure~\ref{lst:btred_rule} and corresp
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}
 \begin{minted}[linenos,  fontsize=\footnotesize,
-               frame=lines]{perl}
+               frame=lines,tabsize=2]{perl}
 #variable $this contains currently processed node, $root current root node
 
 my @injure_verbs = ("zranit", "usmrtit", "zemřít", "zahynout", "přežít");
@@ -88,7 +88,7 @@ sub print_injured {
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}
 \begin{minted}[linenos,  fontsize=\footnotesize,
-               frame=lines]{xml}
+               frame=lines, tabsize=2]{xml}
 <injured_result>
 	<action type="zranit">
 		<sentece>
@@ -176,7 +176,7 @@ English transcript:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}
 \begin{minted}[linenos,  fontsize=\footnotesize,
-               frame=lines]{xml}
+               frame=lines, tabsize=2]{xml}
 <QueryMatches>
 	<Match root_id="T-vysocina63466.txt-001-p1s4" match_string="2:0,7:3,8:4,11:2">
 		<Sentence>
@@ -493,64 +493,61 @@ In this case study PML files made from source documents by TectoMT are transform
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}
 \begin{minted}[linenos, fontsize=\footnotesize,
-               frame=lines]{turtle}
-@prefix node: <http://czsem.berlios.de/ontologies/.../jihomoravsky47443.owl#node/> .
+               frame=lines, tabsize=2]{turtle}
+@prefix node: <http://czsem.berlios.de/ontolog.../jihomoravsky47443.owl#node/> .
 @prefix pml: <http://ufal.mff.cuni.cz/pdt/pml/> .
 
 node:SCzechT-s4-n1 rdf:type pml:Node, owl:Thing;
-                   pml:t_lemma "být" ; #to be
-                   pml:sempos "v" ; pml:verbmod "ind" ; 
-                   pml:lex.rf node:SCzechA-s4-w4 ; pml:hasParent node:SCzechT-s4-root .
+			pml:t_lemma "být" ; #to be
+			pml:sempos "v" ; pml:verbmod "ind" ; 
+			pml:lex.rf node:SCzechA-s4-w4 ; pml:hasParent node:SCzechT-s4-root .
 node:SCzechT-s4-n10 rdf:type pml:Node, owl:Thing;
-                    pml:t_lemma "vyšetřovatel" ; #investigator
-                    pml:negation "neg0" ; pml:sempos "n.denot" ;
-                    pml:gender "anim" ; pml:number "sg" ;
-                    pml:formeme "n:1" ; pml:functor "ACT" ;
-                    pml:lex.rf node:SCzechA-s4-w9 ; pml:hasParent node:SCzechT-s4-n8 .
+			pml:t_lemma "vyšetřovatel" ; #investigator
+			pml:negation "neg0" ; pml:sempos "n.denot" ;
+			pml:gender "anim" ; pml:number "sg" ;
+			pml:formeme "n:1" ; pml:functor "ACT" ;
+			pml:lex.rf node:SCzechA-s4-w9 ; pml:hasParent node:SCzechT-s4-n8 .
 node:SCzechT-s4-n11 rdf:type pml:Node, owl:Thing;
-                    pml:degcmp "pos" ; pml:t_lemma "předběžně" ; #preliminarily
-                    pml:formeme "adv:" ; pml:sempos "adv.denot.grad.nneg" ;
-                    pml:functor "MANN" ; pml:negation "neg0" ;
-                    pml:lex.rf node:SCzechA-s4-w10 ; pml:hasParent node:SCzechT-s4-n8 .
+			pml:degcmp "pos" ; pml:t_lemma "předběžně" ; #preliminarily
+			pml:formeme "adv:" ; pml:sempos "adv.denot.grad.nneg" ;
+			pml:functor "MANN" ; pml:negation "neg0" ;
+			pml:lex.rf node:SCzechA-s4-w10 ; pml:hasParent node:SCzechT-s4-n8 .
 node:SCzechT-s4-n12 rdf:type pml:Node, owl:Thing;
-                    pml:t_lemma "osm" ; #eight
-                    pml:number "pl" ; pml:numertype "basic" ;
-                    pml:sempos "n.quant.def" ; pml:formeme "n:???" ;
-                    pml:functor "PAT" ; pml:gender "nr" ;
-                    pml:lex.rf node:SCzechA-s4-w13 ; pml:hasParent node:SCzechT-s4-n8 .
+			pml:t_lemma "osm" ; #eight
+			pml:number "pl" ; pml:numertype "basic" ;
+			pml:sempos "n.quant.def" ; pml:formeme "n:???" ;
+			pml:functor "PAT" ; pml:gender "nr" ;
+			pml:lex.rf node:SCzechA-s4-w13 ; pml:hasParent node:SCzechT-s4-n8 .
 node:SCzechT-s4-n13 rdf:type pml:Node, owl:Thing;
-                    pml:t_lemma "tisíc" ; #thousand
-                    pml:number "sg" ; pml:functor "RSTR" ;
-                    pml:gender "inan" ; pml:sempos "n.quant.def" ;
-                    pml:numertype "basic" ; pml:formeme "n:???" ;
-                    pml:lex.rf node:SCzechA-s4-w14 ; pml:hasParent node:SCzechT-s4-n12 .
+			pml:t_lemma "tisíc" ; #thousand
+			pml:number "sg" ; pml:functor "RSTR" ;
+			pml:gender "inan" ; pml:sempos "n.quant.def" ;
+			pml:numertype "basic" ; pml:formeme "n:???" ;
+			pml:lex.rf node:SCzechA-s4-w14 ; pml:hasParent node:SCzechT-s4-n12 .
 node:SCzechT-s4-n14 rdf:type pml:Node, owl:Thing;
-                    pml:t_lemma "koruna" ; #crown
-                    pml:gender "fem" ; pml:sempos "n.denot" ;
-                    pml:number "pl" ; pml:formeme "n:2" ;
-                    pml:functor "MAT" ; pml:negation "neg0" ;
-                    pml:lex.rf node:SCzechA-s4-w15 ; pml:hasParent node:SCzechT-s4-n13 .
+			pml:t_lemma "koruna" ; #crown
+			pml:gender "fem" ; pml:sempos "n.denot" ;
+			pml:number "pl" ; pml:formeme "n:2" ;
+			pml:functor "MAT" ; pml:negation "neg0" ;
+			pml:lex.rf node:SCzechA-s4-w15 ; pml:hasParent node:SCzechT-s4-n13 .
 node:SCzechT-s4-n7 rdf:type pml:Node, owl:Thing;
-                   pml:t_lemma "," ; #comma
-                   pml:gender "nr" ; pml:negation "neg0" ;
-                   pml:sempos "n.denot" ; pml:functor "APPS" ;
-                   pml:formeme "n:???" ; pml:number "nr" ;
-                   pml:lex.rf node:SCzechA-s4-w7 ; pml:hasParent node:SCzechT-s4-n1 .
+			pml:t_lemma "," ; #comma
+			pml:gender "nr" ; pml:negation "neg0" ;
+			pml:sempos "n.denot" ; pml:functor "APPS" ;
+			pml:formeme "n:???" ; pml:number "nr" ;
+			pml:lex.rf node:SCzechA-s4-w7 ; pml:hasParent node:SCzechT-s4-n1 .
 node:SCzechT-s4-n8 rdf:type pml:Node, owl:Thing;
-                   pml:t_lemma "vyčíslit" ; #quantify
-                   pml:is_member "1" ; pml:deontmod "decl" ;
-                   pml:formeme "v:fin" ; pml:tense "ant" ;
-                   pml:verbmod "ind" ; pml:aspect "cpl" ;
-                   pml:is_clause_head "1" ; pml:functor "PAR" ;
-                   pml:dispmod "disp0" ; pml:sempos "v" ;
-                   pml:negation "neg0" ;
-                   pml:lex.rf node:SCzechA-s4-w11 ; pml:hasParent node:SCzechT-s4-n7 .
+			pml:t_lemma "vyčíslit" ; #quantify
+			pml:is_member "1" ; pml:deontmod "decl" ; pml:formeme "v:fin" ;
+			pml:tense "ant" ; pml:verbmod "ind" ; pml:aspect "cpl" ;
+			pml:is_clause_head "1" ; pml:functor "PAR" ;
+			pml:dispmod "disp0" ; pml:sempos "v" ; pml:negation "neg0" ;
+			pml:lex.rf node:SCzechA-s4-w11 ; pml:hasParent node:SCzechT-s4-n7 .
 node:SCzechT-s4-n9 rdf:type pml:Node, owl:Thing;
-                   pml:t_lemma "škoda" ; #damage
-                   pml:sempos "n.denot" ; pml:functor "PAT" ;
-                   pml:gender "fem" ; pml:formeme "n:4" ;
-                   pml:number "sg" ; pml:negation "neg0" ;
-                   pml:lex.rf node:SCzechA-s4-w8 ; pml:hasParent node:SCzechT-s4-n8 .
+			pml:t_lemma "škoda" ; #damage
+			pml:sempos "n.denot" ; pml:functor "PAT" ; pml:gender "fem" ;
+			pml:formeme "n:4" ; pml:number "sg" ; pml:negation "neg0" ;
+			pml:lex.rf node:SCzechA-s4-w8 ; pml:hasParent node:SCzechT-s4-n8 .
 \end{minted}
 \caption{RDF serialization example}
 \label{lst:rdf_serialization}
@@ -563,33 +560,33 @@ node:SCzechT-s4-n9 rdf:type pml:Node, owl:Thing;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}
 \begin{minted}[linenos, fontsize=\footnotesize,
-               frame=lines]{turtle}
+               frame=lines, tabsize=2]{turtle}
 @prefix node: <http://czsem.berlios.de/ontologies/.../jihomoravsky47443.owl#node/> .
 @prefix pml: <http://ufal.mff.cuni.cz/pdt/pml/> .
 # Mapping Ontology
 @prefix PML2GATE: <http://czsem.berlios.de/ontologies/PML2GATE_ontology_utils.owl#> .
 
 node:SCzechT-s4-n12 rdf:type pml:Node, owl:Thing;
-                    pml:t_lemma "osm" ; #eight
-                    pml:number "pl" ; pml:numertype "basic" ;
-                    pml:sempos "n.quant.def" ; pml:formeme "n:???" ;
-                    pml:functor "PAT" ; pml:gender "nr" ;
-                    pml:lex.rf node:SCzechA-s4-w13 ; pml:hasParent node:SCzechT-s4-n8 ;
-################### Added by Reasoner ################################################
-                    rdf:type PML2GATE:TNode ; #Tectogrammatical node
-                    PML2GATE:hasChild node:SCzechT-s4-n13 ;
-                    pml:tDependency node:SCzechT-s4-n13 .
-######################################################################################
+			 pml:t_lemma "osm" ; #eight
+			 pml:number "pl" ; pml:numertype "basic" ;
+			 pml:sempos "n.quant.def" ; pml:formeme "n:???" ;
+			 pml:functor "PAT" ; pml:gender "nr" ;
+			 pml:lex.rf node:SCzechA-s4-w13 ; pml:hasParent node:SCzechT-s4-n8 ;
+################### Added by Reasoner ############################################
+			 rdf:type PML2GATE:TNode ; #Tectogrammatical node
+			 PML2GATE:hasChild node:SCzechT-s4-n13 ;
+			 pml:tDependency node:SCzechT-s4-n13 .
+##################################################################################
 node:SCzechA-s4-w13 rdf:type pml:Node, owl:Thing;
-                    pml:is_auxiliary "0" ; pml:edge_to_collapse "1" ;
-                    pml:ord "13" ; pml:tag "Cn-S4----------" ;
-                    pml:afun "Obj" ; pml:form "osm" ; pml:lemma "osm\1408" ;
-                    pml:m.rf node:SCzechM-s4-w13 ; pml:hasParent node:SCzechA-s4-w12 ;
-################### Added by Reasoner ################################################
-                    PML2GATE:hasChild node:SCzechA-s4-w14 ;
-                    pml:mention_root "damage" ;
-                    rdf:type PML2GATE:MentionRoot .
-######################################################################################
+			 pml:is_auxiliary "0" ; pml:edge_to_collapse "1" ;
+			 pml:ord "13" ; pml:tag "Cn-S4----------" ;
+			 pml:afun "Obj" ; pml:form "osm" ; pml:lemma "osm\1408" ;
+			 pml:m.rf node:SCzechM-s4-w13 ; pml:hasParent node:SCzechA-s4-w12 ;
+################### Added by Reasoner ############################################
+			 PML2GATE:hasChild node:SCzechA-s4-w14 ;
+			 pml:mention_root "damage" ;
+			 rdf:type PML2GATE:MentionRoot .
+##################################################################################
 \end{minted}
 \textbf{TODO: extraction rules jsou anglicky !!! vysledek (Annotated document ontology) cesky !!!!!!!}
 \caption{Annotated document ontology example}
@@ -618,7 +615,7 @@ The presented rules belong to the group of so called DL-Safe rules \citep{Motik:
 
 \begin{figure}
 \begin{minted}[linenos,  fontsize=\footnotesize,
-               frame=lines]{prolog}
+               frame=lines, tabsize=2]{prolog}
 %[Rule 1] [Pos cover = 23 Neg cover = 6]
 mention_root(acquired,A) :-
 		'lex.rf'(B,A), t_lemma(B,'Inc'),
@@ -641,7 +638,7 @@ mention_root(acquired,A) :-
 
 \begin{figure}
 \begin{minted}[linenos,  fontsize=\footnotesize,
-               frame=lines]{jena}
+               frame=lines, tabsize=2]{jena}
 #[Rule 1]
 lex.rf(?b, ?a), t_lemma(?b, "Inc"),
 tDependency(?c, ?b), tDependency(?c, ?d),
@@ -664,7 +661,7 @@ number(?c, "pl")
 
 \begin{figure}
 \begin{minted}[linenos,  fontsize=\footnotesize,
-               frame=lines]{xml}
+               frame=lines, tabsize=2]{xml}
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Ontology [
 	<!ENTITY pml "http://ufal.mff.cuni.cz/pdt/pml/" >
@@ -702,7 +699,7 @@ number(?c, "pl")
 
 \begin{figure}
 \begin{minted}[linenos,  fontsize=\footnotesize,
-               frame=lines]{jena}
+               frame=lines, tabsize=2]{jena}
 @prefix pml: <http://ufal.mff.cuni.cz/pdt/pml/>.
 [rule-75:  
         ( ?b pml:lex.rf ?a )
@@ -812,7 +809,7 @@ Negations used in Figure~\ref{img:attribute_monotonization} and Figure~\ref{img:
 
 \begin{figure}	
 \begin{minted}[fontsize=\footnotesize,
-               frame=lines]{prolog}
+               frame=lines, tabsize=2]{prolog}
 damage_atl(ID,N) :- damage(ID,N), not(integer(N)). %unknown values
 
 damage_atl(ID,N) :- damage(ID,N2), integer(N2), %numeric values
@@ -860,7 +857,7 @@ serious_atl_3(A) :- damage_atl(A,1500000).
 
 \begin{figure}	
 \begin{minted}[fontsize=\footnotesize,
-               frame=lines]{prolog}
+               frame=lines, tabsize=2]{prolog}
 serious_0(ID) :- serious_atl_0(ID),
                  not(serious_atl_1(ID)), not(serious_atl_2(ID)), not(serious_atl_3(ID)).
 serious_1(ID) :- serious_atl_1(ID),

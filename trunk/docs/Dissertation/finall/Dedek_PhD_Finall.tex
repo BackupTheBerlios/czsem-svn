@@ -7,7 +7,6 @@
 						bottom=2.6cm, 
 						top=2.1cm] {geometry}
  
-\input{../my_commands}
  
 
 \usepackage{nameref}
@@ -20,6 +19,8 @@
 \usepackage{verbatim}
 \usepackage{import} 
 
+
+\input{../my_commands}
 
 
 %minted staci \usepackage[utf8]{inputenc}
@@ -37,9 +38,12 @@
 \usepackage{longtable}
 \usepackage{multirow}
 
+\usepackage[log-declarations=false]{xparse}
+\usepackage[quiet]{fontspec}
 \usepackage{xltxtra}
 \setsansfont{Calibri}
 \setmonofont{Consolas}
+
 
 \makenomenclature 
 
@@ -229,11 +233,6 @@ Keywords:
 \input{../chapters/conclusion}
  
 
-%%% Jednotlivé kapitoly práce jsou pro přehlednost uloženy v samostatných souborech
-%\include{ch60_learnig_of_rules}
-
-
-\chapwithtoc{Conclusion}
 
 
 %%% Seznam použité literatury

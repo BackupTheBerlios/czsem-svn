@@ -293,6 +293,9 @@ Another difference with the previous approach is that the previous approach is b
 
 On the one hand, our extraction method is based on linguistic trees that are composed of individual tree nodes, but on the other hand, we are performing document annotation using GATE, which means that annotations can occupy any segment of text, e.g. a segment starting or ending in the middle of some word. The correspondence of tree nodes with individual words (or tokens) of text is quite clear\footnote{Tectogrammatical tree nodes make it a little more difficult, see details in Section~\ref{sec:third_PDT_layers}.} but the learning algorithm is not capable to deal with partial word matches. This is not a problem in the case when annotations discovered by the extraction technique are put to the text because all the annotations will simply occupy whole words only. The problem can occur when ILP learning data are constructed from GATE annotations. During this construction, only those tree nodes that are completely covered by corresponding annotations will be accordingly marked in the ILP learning data.
 
+%kvuli footenote-um, aby se vesly...
+\pagebreak
+
 Let us for example have a phrase ``eight thousand Crowns’’ and an annotation labeled as ``amount’’ that will almost cover the whole phrase up to the word ``Crowns’’, which will be covered only partly, without the ending ``s’’. Thus the annotated text will be ``eight thousand Crown’’.\footnote{Such annotation could be created by an uninformed annotator who could think that currencies should be marked as in singular form.} During the construction of ILP learning data, only the tree nodes corresponding to words ``eight’’ and ``thousand’’ will be marked as ``amount’’, not the node that corresponds with the word ``Crowns’’.
 
 Fortunately, this phenomenon does not occur very often, in fact we have not met it in our experiments so far. But there is another issue that is connected with multi-word annotations and it is quite common. See in the next section.
@@ -307,7 +310,7 @@ We have used another approach to solve this issue. Our approach is based on synt
 	\item learn extraction rules for parent nodes only and 
 	\item span annotations over the whole subtrees of root tokens found during the application of extraction rules.
 \end{enumerate}
-We call the first point as \emph{root preprocessing} and the last point as \emph{subtree postprocessing}. The situation is ilustrated on Figure~\ref{fig:tree-subtree}. We have successfully used this technique for the `damage' task of our evaluation corpus (see Section~\ref{sec:evaluation} for details.)
+We call the first point as \emph{root preprocessing} and the last point as \emph{subtree postprocessing}. The situation is illustrated on Figure~\ref{fig:tree-subtree}. We have successfully used this technique for the `damage' task of our evaluation corpus (see Section~\ref{sec:evaluation} for details.)
 
 \begin{figure}
 	\centering
@@ -320,9 +323,8 @@ We call the first point as \emph{root preprocessing} and the last point as \emph
 
 \subsection{Semantic Interpretation} \label{sec:SemanticInterpretation}
 
-Information extraction can solve the task ``how to get documents annotated'', but as we aim on the semantic annotation, there is a second step of ``semantic interpretation'' that has to be done. In this step we have to interpret the annotations in terms of a standard ontology. On a very coarse level this can be done easily. Thanks to GATE ontology tools \citep{Bon04b} we can convert all the annotations to ontology instances with a quite simple JAPE \citep{Cunningham00jape:a} rule, which takes the content of an annotation and saves it as a label of a new ontology instance or as a value of some property of a shared ontology instance. For example in our case of traffic and fire accidents, there will be a new instance of an accident class for each document and the annotations would be attached to this instance as values of its properties. Thus from all annotations of the same type, instances of the same ontology class or values of the same property would be constructed. This is very inaccurate form of semantic interpretation but still it can be useful. It is similar to the GoodRelation \citep{DBLP:conf/ekaw/Hepp08} design principle of \emph{incremental enrichment}\footnote{
-\url{http://www.ebusiness-unibw.org/wiki/Modeling_Product_Models#Recipe:_.22Incremental_Enrichment.22}
-}:
+Information extraction can solve the task ``how to get documents annotated'', but as we aim on the semantic annotation, there is a second step of ``semantic interpretation'' that has to be done. In this step we have to interpret the annotations in terms of a standard ontology. On a very coarse level this can be done easily. Thanks to GATE ontology tools \citep{Bon04b} we can convert all the annotations to ontology instances with a quite simple JAPE \citep{Cunningham00jape:a} rule, which takes the content of an annotation and saves it as a label of a new ontology instance or as a value of some property of a shared ontology instance. For example in our case of traffic and fire accidents, there will be a new instance of an accident class for each document and the annotations would be attached to this instance as values of its properties. Thus from all annotations of the same type, instances of the same ontology class or values of the same property would be constructed. This is very inaccurate form of semantic interpretation but still it can be useful. It is similar to the GoodRelation \citep{DBLP:conf/ekaw/Hepp08} design principle of \emph{incremental enrichment}\footnote{\url{http://www.ebusiness-unibw.org/wiki/Modeling_Product_Models#Recipe:_.22Incremental_Enrichment.22}}:
+
 \begin{quote}
 ``...you can still publish the data, even if not yet perfect. The Web will do the rest -- new tools and people.''	
 \end{quote}
@@ -331,6 +333,8 @@ But of course we are not satisfied with this fashion of semantic interpretation 
 
 
 
+%kvuli footenote-um, aby se vesly...
+\clearpage
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
