@@ -11,7 +11,7 @@ In this chapter several datasets will be described. The datasets can be divided 
 	\item language in case of textual data (English and Czech), 
 	\item the origin of the dataset (third party datasets and datasets created as a part of the presented work).
 \end{itemize}
-The description of individual datasets will be presented at the very end of the chapter, before that, discussions of relevant common aspects of the datasets will be discussed.
+The description of individual datasets will be presented at the very end of the chapter, before that, relevant common aspects of the datasets will be discussed.
 
 
 \section{Purpose and Structure}
@@ -32,6 +32,23 @@ Following datasets can be regarded as IE datasets:
 \end{itemize}
 
 
+
+
+\subsection{Reasoning Datasets}
+
+%Guo, Yuanbo, Heflin, Jeff and Pan, Zhengxiang . Benchmarking DAML+OIL Repositories. Second International Semantic Web Conference, ISWC 2003, LNCS 2870. Springer. 2003. pp.613-627.
+
+The term ``Reasoning Datasets’’ is used here for the type of datasets which are used in Ontology Benchmarks. Ontology benchmarking is a scientific topic that is almost as old as ontologies and Semantic Web itself \citep{DBLP:conf/semweb/GuoHP03}. Ontology Benchmarks serve for evaluation of ontology systems and their capabilities. There are two obvious objectives of ontology benchmarking. The first one is to verify capabilities of a tested system -- weather the system is able to perform all actions prescribed by the particular benchmark. The second objective is to measure the time performance of the system. Unlike the previous two dataset types in the case of ontology benchmarking and reasoning datasets it does not make any sense to measure success of a system because there is no uncertainty in reasoning tasks. A system is either able to perform a particular action or not; it is unnecessary to measure that. 
+
+Reasoning datasets used in the present work:
+\begin{itemize}
+	\item \sectiondoubleref{sec:ch40_rdf_fireman}
+	\item \sectiondoubleref{sec:ch40_rdf_acquisitions}
+\end{itemize}
+
+These datasets were used for evaluation of the idea of shareable extraction ontologies, see Section~\ref{sec:ch70_experiment}. 
+
+
 \subsection{Classification Datasets}
 Classification datasets are very familiar in the community of machine learning. They are used for evaluation of propositional ML engines (like Decision Trees, Naive Bayes, Multilayer Perceptron, Support Vector Machines, etc.) on the classification task. The classification task (or problem) can be simplified way described as follows: 
 
@@ -50,22 +67,11 @@ Classification datasets used in the present work:
 These datasets were used for evaluation of the Fuzzy ILP classification method in Section~\ref{sec:ch80_eval}. 
 
 
-\subsection{Reasoning Datasets}
 
-%Guo, Yuanbo, Heflin, Jeff and Pan, Zhengxiang . Benchmarking DAML+OIL Repositories. Second International Semantic Web Conference, ISWC 2003, LNCS 2870. Springer. 2003. pp.613-627.
-
-The term ``Reasoning Datasets’’ is used here for the type of datasets which are used in Ontology Benchmarks. Ontology benchmarking is a scientific topic that is almost as old as ontologies and Semantic Web itself \citep{DBLP:conf/semweb/GuoHP03}. Ontology Benchmarks serve for evaluation of ontology systems and their capabilities. There are two obvious objectives of ontology benchmarking. The first one is to verify capabilities of a tested system -- weather the system is able to perform all actions prescribed by the particular benchmark. The second objective is to measure the time performance of the system. Unlike the previous two dataset types in the case of ontology benchmarking and reasoning datasets it does not make any sense to measure success of a system because there is no uncertainty in reasoning tasks. A system is either able to perform a particular action or not; it is unnecessary to measure that. 
-
-Reasoning datasets used in the present work:
-\begin{itemize}
-	\item \sectiondoubleref{sec:ch40_rdf_fireman}
-	\item \sectiondoubleref{sec:ch40_rdf_acquisitions}
-\end{itemize}
-
-These datasets were used for evaluation of the idea of shareable extraction ontologies, see Section~\ref{sec:ch70_experiment}. 
 
 \section{Origin of the Datasets}
 The datasets can be simply divided into third party and contributed. 
+
 \subsection{Contributed Datasets}
 Datasets that were partly or mostly prepared as a part the present work are:
 
@@ -93,9 +99,9 @@ Datasets that were used without any additional contributions are:
 In this section individual datasets used in this thesis will be presented. The order of dataset presentations is the same as the order in which they were used in our work.
 
 \subsection{Czech Fireman Reports without Annotations} \label{sec:ch40_fireman_without}
-In the early beginning of our work first IE experiments were done with textual reports from fire departments of several regions of the Czech Republic. These departments are responsible for rescue and recovery after fire, traffic and other accidents. Likewise the reports do not deal only with fire and traffic accidents but also chemical interventions, fire-fighting contests, fire drills and similar events can be found. The reports are rich in information, e.g. where and when an accident occurred, which units helped, how much time it took them to show up on the place of accident, how many people were injured, killed etc. An example of such report can be seen in the Figure~\ref{fig:ch50_article}.
+In the early beginning of our work, first IE experiments were done with textual reports from fire departments of several regions of the Czech Republic. These departments are responsible for rescue and recovery after fire, traffic and other accidents. Likewise the reports do not deal only with fire and traffic accidents but also chemical interventions, fire-fighting contests, fire drills and similar events can be found. The reports are rich in information, e.g. where and when an accident occurred, which units helped, how much time it took them to show up on the place of accident, how many people were injured, killed etc. An example of such report can be seen in the Figure~\ref{fig:ch50_article}.
 
-The dataset is made up by 814 texts of the reports collected in the time period from February to September 2007 using a RSS feed. All the reports are still available on the web site of the Ministry of Interior of the Czech Republic (footnote). 
+The dataset is made up by 814 texts of the reports collected in the time period from February to September 2007 using a RSS feed. All the reports are still available on the web site of the Ministry of Interior of the Czech Republic\footnote{\url{http://www.hzscr.cz/hasicien/}}. 
 
 Following URL pattern can be used to obtain a particular report:
 
@@ -104,16 +110,16 @@ Following URL pattern can be used to obtain a particular report:
 \verb+http://aplikace.mvcr.cz/archiv2008/rs_atlantic/hasici/REGION/ID.html+
 \end{center}
 
-For example report 55599 (ID) from Olomoucky region has following URL:
+For example report 47443 (ID) from Jihomoravský region has following URL:
 
 \begin{center}
-\verb+http://aplikace.mvcr.cz/archiv2008/rs_atlantic/hasici/olomoucky/55599.html+
+\verb+http://aplikace.mvcr.cz/archiv2008/rs_atlantic/hasici/jihomoravsky/47443.html+
 \end{center}
 
 
 The dataset contains reports from eight Czech regions: Jihomoravský (127 reports), Královéhradecký (109 reports), Moravskoslezský (138), Olomoucký (77), Pardubický (95), Plzeňský (97), Ústecký (108) and Vysočina (63). All the reports are written in Czech language. 
 
-The dataset does not contain any manual annotations; only linguistic annotations produced by PDT tools are included in the dataset (FS format for Netgraph processing and PML format for Btred processing, see Section~\ref{sec:ch30_pdt_tools_and_resources} for details about the tools and formats). Table~\ref{tab:ch40_fire_without} summarizes some properties of the dataset’s reports described bellow.  Total sum, average value, standard deviation, minimum, maximum and median of the values is counted in the table.
+The dataset does not contain any manual annotations; only linguistic annotations produced by PDT tools are included in the dataset (FS format for Netgraph processing and PML format for Btred processing, see Section~\ref{sec:ch30_pdt_tools_and_resources} for details about these tools). Table~\ref{tab:ch40_fire_without} summarizes some properties of the dataset’s reports described bellow.  Total sum, average value, standard deviation, minimum, maximum and median of the values can be found in the table.
 
 
 Text size is the length of the text of a particular report in characters. More precisely it is the size of the corresponding ``.txt'' file. ISO-8859-2 (Latin-2) character encoding is used in these files so the number of characters is the same as the file size in bytes. 
@@ -146,7 +152,11 @@ num. t-trees &     15 208 &     18.7 &     15.02 &     1 &     143 &     14.0\\
 
 \subsection{Czech Fireman Reports Manually Annotated} \label{sec:ch40_fireman_annotated}
 
-The dataset is made up of 50 articles selected form the dataset described in the previous section. Several kind of information were identified and manually annotated in the articles:
+We have created a manually annotated version of the previous dataset. 
+This dataset was created by ourselves during the development of our IE  engine based on machine learning (Section~\ref{sec:methods_learning}). 50 reports from the previous dataset were selected and manually annotated. 
+ Several annotation types were used; numbers of annotations per each annotation type are summarized in Table~\ref{tab:ch40_fire_with} along with the information whether the particular annotation type was used in the evaluation. See details abut the evaluation results in Section~\ref{sec:eval_learning}. 
+
+
 
 >>>Event extraction?
 
@@ -200,17 +210,10 @@ lather & 1 & no\\
 \end{table}
 
 
-Counts of individual annotations are summarized in Table~\ref{tab:ch40_fire_with}.
-
-\subsubsection{czech\_fireman}
-
-The fist dataset is called `czech\_fireman'. This dataset was created by ourselves during the development of our IE  engine. It is a collection of 50 Czech texts that are reporting on some accidents (car accidents and other actions of fire rescue services). These reports come from the web of Fire rescue service of Czech Republic\footnote{\url{http://www.hzscr.cz/hasicien/}}. The labeled corpus is publically available on the website of our project\footnote{\url{http://czsem.berlios.de/}}.
-The corpus is structured such that each document represents one event (accident) and several attributes of the accident are marked in text. 
 
 
-\subsubsection{Dataset}
-We have evaluated our state of the art solution on a small dataset that we use for development. It is a collection of 50 Czech texts that are reporting on some accidents (car accidents and other actions of fire rescue services). These reports come from the web of Fire rescue service of Czech Republic\footnote{\url{http://www.hzscr.cz/hasicien/}}. The labeled corpus is publically available on the web of our project\footnote{\url{http://czsem.berlios.de/}}.
-The corpus is structured such that each document represents one event (accident) and several attributes of the accident are marked in text.
+
+
 
 
 \subsection{Corporate Acquisition Events} \label{sec:ch40_corporate_acquisitions}
@@ -253,16 +256,13 @@ status & 461 & no\\
 \end{table}
 
 
-
-\subsubsection{Acquisitions v1.1}  
-
-The second dataset is called ``Corporate Acquisition Events'' and it is
-described in \citep{lewis1992representation}. More precisely we use the \emph{Acquisitions v1.1} version\footnote{This version of the corpus comes from the Dot.kom (Designing infOrmation extracTion for KnOwledge Management) project's resources: \url{http://nlp.shef.ac.uk/dot.kom/resources.html}} of the corpus.
-This is a collection of 600 news articles describing acquisition
+The second manually annotated information extraction dataset used in this thesis is called ``Corporate Acquisition Events''. It was originally described by \cite{lewis1992representation}, but, more precisely, we use the \emph{Acquisitions v1.1} version\footnote{This version of the corpus comes from the Dot.kom (Designing infOrmation extracTion for KnOwledge Management) project's resources: \url{http://nlp.shef.ac.uk/dot.kom/resources.html}} of the corpus.
+It is a collection of 600 news articles describing acquisition
 events taken from the Reuters dataset. News articles are tagged to identify fields
 related to acquisition events. These fields include `purchaser' , `acquired', and
 `seller' companies along with their abbreviated names (`purchabr', `acqabr' and
-`sellerabr') Some news articles also mention the field `deal amount'.
+`sellerabr'). Some news articles also mention the field `deal amount'. 
+Table~\ref{tab:ch40_acquisitions} provides numbers of annotations per annotation type for the whole dataset along with the information whether the particular annotation type was used in the evaluation. See details abut the evaluation results in Section~\ref{sec:eval_learning}. 
 
 
 
@@ -284,17 +284,19 @@ This is the second reasoning dataset presented in this work. The dataset is very
 Section~\ref{sec:ch70_datasets} provides also some additional information (basic statistics) about the dataset.
 
 
+
 \subsection{Classification Dataset Based on Czech Fireman Reports} \label{sec:ch40_classify_fireman}
 
+The development of the Fuzzy ILP Classifier was partly motivated by the possibility of doing seriousness classification of accidents presented in the reports described in previous sections. We selected the same collection of 50 web reports as in the previous section and we manually extracted values of the most interesting features (These features will be described in Section \ref{sec:ch40_features}.) We also assigned a value of overall ranking of seriousness of the presented accident to each report.  The value of seriousness ranking is the target attribute of the classification task. 
 
-The main experiment presented in this chapter leads to the seriousness classification of an accident presented in a web report. %Our long term goal is extraction of semantic information from web reports. 
+%The main experiment presented in this chapter leads to the . %Our long term goal is extraction of semantic information from web reports. 
 %which is one of possible utilizations of the extracted information. 
-We use online fire department reports from several regions of the Czech Republic. These reports are written in Czech and can be accessed through the web of the General Directorate of the Fire and Rescue Service of the Czech Republic\footnote{\url{http://www.hzscr.cz}}. 
+%We use online fire department reports from several regions of the Czech Republic. These reports are written in Czech and can be accessed through the web of the General Directorate of the Fire and Rescue Service of the Czech Republic\footnote{\url{http://www.hzscr.cz}}. 
 %These reports are rich in information, e.g. where and when an traffic accident occurred, which units helped, how much time it took them to show up on the place of accident, how many people were injured, killed etc.
 
-For our experiment we have selected a collection of 50 web reports. We have identified several features presented in these reports and manually extracted the corresponding values. This will be described in more detail in Section \ref{sec:ch40_features}. To each report we have also assigned a value of overall ranking of seriousness of the presented accident, which is the target of the classification. The whole dataset can be downloaded from our Fuzzy ILP classifier's web page\footnote{\url{http://www.ksi.mff.cuni.cz/~dedek/fuzzyILP/}}.
+%For our experiment  We have identified several  and .  
 
-In this experiment we have not used any information extracted by our automated information extraction tools. Instead, we concentrate on~the classification; the actual source of the information is not so important. The integration step still lies ahead.
+%In this experiment we have not used any information extracted by our automated information extraction tools. Instead, we concentrate on~the classification; the actual source of the information is not so important. The integration step still lies ahead.
 
 %There are two objectives to do. Fist is the web information extraction, a long path starting with web crawling and resulting with the extracted structured information. Second is the seriousness classification, which utilizes the extracted information. We have made much work on the first (see e.g. %\citep{biblio:DeVoLinguisticextraction2008,biblio:DeVoComputingaggregations2008, biblio:DeEcExperimentswith2008}), in this paper we will concentrate on the second.
 %\citep{biblio:DeEcExperimentswith2008}), in this paper we will concentrate on the second.
@@ -349,7 +351,7 @@ ranking & 14 & 0 & yes\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-Table~\ref{img:ch40_attributes_description} summarizes all features (or attributes) that we have obtained from accident reports. Except for the attribute \verb+type+ (type of an accident -- \verb+fire+, \verb+car_accident+ and \verb+other+), all the attributes are numerical and therefore \emph{monotonizable} (see the next sections). There are cases in which the value of an attribute is unknown. We have decided to make evidence of this and keep the values \verb+unknown+ in the knowledge base. A brief explanation of each attribute follows.
+Table~\ref{img:ch40_attributes_description} summarizes all features (or attributes) that were obtained from accident reports. Except for the attribute \verb+type+ (type of an accident -- \verb+fire+, \verb+car_accident+ and \verb+other+), all the attributes are numeric and therefore \emph{monotonizable} (This is important, because only monotonizable attributes can be translated to fuzzy degrees.) There are cases in which the value of an attribute is unknown. We decided to make evidence of this and keep the values \verb+unknown+ in the knowledge base. A brief explanation of each attribute follows.
 \begin{itemize}
 	\item \verb+size+ is length of text of a particular report.
 	\item \verb+damage+ is an amount (in CZK -- Czech Crowns) of summarized damage arisen during a reported accident.
@@ -382,7 +384,7 @@ deals with ecological disasters, chemical accidents, etc.
 Values of the overall seriousness ranking attribute were stated from ``a general impression'' made by the texts with respect to particular attributes. %(Figure~\ref{img:attributes_description}). 
 The values have evolved to 14 distinct values in the range from 0.5 to 8. 
 A histogram with frequencies of all these values is in Figure~\ref{img:ch40_ranking_histogram}.
-We have divided the values into four approximately equipotent groups 
+We divided the values into four approximately equipotent groups 
 (see in Figure~\ref{img:ch40_ranking_histogram}) 
 and these groups determine the target class attribute of the classification task. 
 %and logic rules were learned for each group separately\footnote{We do not have a binary rule, which would return an exact value of the rating, but we have one ``true/false'' rule for each of the four categories.}.

@@ -9,14 +9,13 @@ As already said in introduction, four separate topics are presented in this thes
 The basic problem addressed by information extraction approaches can be formulated as follows. We have a large collection of texts (or a source of texts) and we want to have a machine readable (understandable, workable) or structured form of the information present in these texts. Why? Because additional postprocessing of the information is needed.
 
 Let us for example have texts about acquisition events. Each text describes a single acquisition event and you can find answers to following questions in these texts. 
+\begin{itemize}
+	\item What was the object of the acquisition? 
+	\item Who was the buyer? 
+	\item What was the deal amount?
+	\item What was the acquisition date?
+\end{itemize}
 
-What was the object of the acquisition? 
-
-Who was the buyer? 
-
-What was the deal amount?
-
-What was the acquisition date?
 
 If we put the corresponding information into a relational table then we can easily obtain statistics like numbers of acquisitions per month of the year or a list of ten most valuable (largest deal amount) acquired subjects, etc. This would be impossible if the information were kept in the textual form only.
 
