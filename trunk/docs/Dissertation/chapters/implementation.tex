@@ -473,15 +473,10 @@ In this section we will present details about the implementation of our case stu
 \subsection{Linguistic Analysis}
 
 
-\begin{figure}
-\centerline{\includegraphics[angle=90, width=0.4\hsize]{tree}}
-\caption{Tectogrammatical tree of the sentence: ``Hutton is offering 35 dlrs cash per share for 83 pct of the shares.''
-Nodes roughly correspond with words of a sentence, edges represent linguistic dependencies between nodes and some linguistic features (tectogrammatical lemma, semantic functor and semantic part of speech) are printed under each node. The node `Hutton' is decorated as a named entity.}
-\label{img:tree}
-\end{figure}
 
+The IE engine needs a linguistic preprocessing (deep linguistic parsing) of documents on its input. Deep linguistic parsing brings a very complex structure to the text and the structure serves as a footing for construction and application of extraction rules. We usually use TectoMT system to do the linguistic preprocessing, see Section~\ref{sec:ch30_tectomt} for details. The output linguistic annotations of the TectoMT system are stored (along with the text of the source document) in XML files in so called Prague Markup Language (PML). PML is a very complex language (or XML schema) that is able to express many linguistic elements and features present in text. For the IE engine a tree dependency structure of words in sentences is the most useful one because the edges of the structure guide the extraction rules. 
 
-The IE engine needs a linguistic preprocessing (deep linguistic parsing) of documents on its input. Deep linguistic parsing brings a very complex structure to the text and the structure serves as a footing for construction and application of extraction rules. We usually use TectoMT system to do the linguistic preprocessing, see Section~\ref{sec:ch30_tectomt} for details. The output linguistic annotations of the TectoMT system are stored (along with the text of the source document) in XML files in so called Prague Markup Language (PML). PML is a very complex language (or XML schema) that is able to express many linguistic elements and features present in text. For the IE engine a tree dependency structure of words in sentences is the most useful one because the edges of the structure guide the extraction rules. An example of such (tectogrammatical) tree structure is in Figure~\ref{img:tree}.
+An example of such (tectogrammatical) tree structure is in Figure~\ref{img:ch10_damage_tree}.
 
 
 \subsection{Data Transformation (PML to RDF)} \label{sec:pml_to_rdf}
@@ -588,7 +583,6 @@ node:SCzechA-s4-w13 rdf:type pml:Node, owl:Thing;
 			 rdf:type PML2GATE:MentionRoot .
 ##################################################################################
 \end{minted}
-\textbf{TODO: extraction rules jsou anglicky !!! vysledek (Annotated document ontology) cesky !!!!!!!}
 \caption{Annotated document ontology example}
 \label{lst:annotated_DO}
 \end{figure}
@@ -616,21 +610,15 @@ The presented rules belong to the group of so called DL-Safe rules \citep{Motik:
 \begin{figure}
 \begin{minted}[linenos,  fontsize=\footnotesize,
                frame=lines, tabsize=2]{prolog}
-%[Rule 1] [Pos cover = 23 Neg cover = 6]
-mention_root(acquired,A) :-
-		'lex.rf'(B,A), t_lemma(B,'Inc'),
-		tDependency(C,B), tDependency(C,D),
-		formeme(D,'n:in+X'), tDependency(E,C).
-%[Rule 11] [Pos cover = 25 Neg cover = 6]
-mention_root(acquired,A) :-
-		'lex.rf'(B,A), t_lemma(B,'Inc'),
-		tDependency(C,B), formeme(C,'n:obj'),
-		tDependency(C,D), functor(D,'APP').
-%[Rule 75] [Pos cover = 14 Neg cover = 1]
-mention_root(acquired,A) :-
-		'lex.rf'(B,A), t_lemma(B,'Inc'),
-		functor(B,'APP'), tDependency(C,B),
-		number(C,pl).							
+%[Rule 1] [Pos cover = 14 Neg cover = 0]
+mention_root(damage,A) :-
+   'lex.rf'(B,A), sempos(B,'n.quant.def'), tDependency(C,B), tDependency(C,D), 
+   t_lemma(D,'vyšetřovatel'). %investigator
+
+%[Rule 2] [Pos cover = 13 Neg cover = 0]
+mention_root(damage,A) :-
+   'lex.rf'(B,A), functor(B,'TOWH'), tDependency(C,B), tDependency(C,D), 
+   t_lemma(D,'škoda'). %damage
 \end{minted}
 	\caption{Examples of extraction rules in the native Prolog format.}
 	\label{img:rules_prolog}
@@ -640,20 +628,14 @@ mention_root(acquired,A) :-
 \begin{minted}[linenos,  fontsize=\footnotesize,
                frame=lines, tabsize=2]{jena}
 #[Rule 1]
-lex.rf(?b, ?a), t_lemma(?b, "Inc"),
-tDependency(?c, ?b), tDependency(?c, ?d),
-formeme(?d, "n:in+X"), tDependency(?c, ?e)
-		-> mention_root(?a, "acquired")
-#[Rule 11]
-lex.rf(?b, ?a), t_lemma(?b, "Inc"),
-tDependency(?c, ?b), formeme(?c, "n:obj"),
-tDependency(?c, ?d), functor(?d, "APP")
-		-> mention_root(?a, "acquired")
-#[Rule 75]
-lex.rf(?b, ?a), t_lemma(?b, "Inc"),
-functor(?b, "APP"), tDependency(?c, ?b),
-number(?c, "pl")
-		-> mention_root(?a, "acquired")							
+lex.rf(?b, ?a), sempos(?b, "n.quant.def"), tDependency(?c, ?b),
+tDependency(?c, ?d), t_lemma(?d, "vyšetřovatel") #investigator
+		-> mention_root(?a, "damage")
+
+#[Rule 2]
+lex.rf(?b, ?a), functor(?b, "TOWH"), tDependency(?c, ?b),
+tDependency(?c, ?d), t_lemma(?d, "škoda") #damage
+		-> mention_root(?a, "damage")
 \end{minted}
 	\caption{Examples of extraction rules in Prot\'{e}g\'{e} 4 -- Rules View's format.}
 	\label{img:rules_protege}
@@ -667,32 +649,34 @@ number(?c, "pl")
 	<!ENTITY pml "http://ufal.mff.cuni.cz/pdt/pml/" >
 ]>
 <Ontology xmlns="http://www.w3.org/2002/07/owl#"
-	ontologyIRI="http://czsem.berlios.de/onto ... rules.owl">
+	ontologyIRI="http://czsem.berlios.de/ontologies/...rules.owl">
 	<DLSafeRule>
 		<Body>
-			<ObjectPropertyAtom>
-				<ObjectProperty IRI="&pml;lex.rf" />
-				<Variable IRI="urn:swrl#b" />
-				<Variable IRI="urn:swrl#a" />
+			<ObjectPropertyAtom> <ObjectProperty IRI="&pml;lex.rf"/>
+				<Variable IRI="urn:swrl#b"/> <Variable IRI="urn:swrl#a"/>
 			</ObjectPropertyAtom>
-...
-			<DataPropertyAtom>
-				<DataProperty IRI="&pml;number" />
-				<Variable IRI="urn:swrl#c" />
-				<Literal>pl</Literal>
+			<DataPropertyAtom> <DataProperty IRI="&pml;sempos"/>
+				<Variable IRI="urn:swrl#b"/> <Literal>n.quant.def</Literal>
+			</DataPropertyAtom>
+			<ObjectPropertyAtom> <ObjectProperty IRI="&pml;tDependency"/>
+				<Variable IRI="urn:swrl#c"/> <Variable IRI="urn:swrl#b"/>
+			</ObjectPropertyAtom>
+			<ObjectPropertyAtom> <ObjectProperty IRI="&pml;tDependency"/>
+				<Variable IRI="urn:swrl#c"/> <Variable IRI="urn:swrl#d"/>
+			</ObjectPropertyAtom>
+			<DataPropertyAtom> <DataProperty IRI="&pml;t_lemma"/>
+				<Variable IRI="urn:swrl#d"/> <Literal>vyšetřovatel</Literal>
 			</DataPropertyAtom>
 		</Body>
 		<Head>
-			<DataPropertyAtom>
-				<DataProperty IRI="&pml;mention_root" />
-				<Literal>acquired</Literal>
-				<Variable IRI="urn:swrl#a" />
+			<DataPropertyAtom> <DataProperty IRI="&pml;mention_root" />
+				<Literal>damage</Literal> <Variable IRI="urn:swrl#a" />
 			</DataPropertyAtom>
 		</Head>
 	</DLSafeRule>
 </Ontology>
 \end{minted}
-\caption{Rule 75 in the OWL/XML syntax for Rules in OWL 2 \citep{GHPP09a}.}
+\caption{Rule 1 in the OWL/XML syntax for Rules in OWL 2 \citep{GHPP09a}.}
 \label{img:rules_xml}
 \end{figure}
 
@@ -703,20 +687,20 @@ number(?c, "pl")
 @prefix pml: <http://ufal.mff.cuni.cz/pdt/pml/>.
 [rule-75:  
         ( ?b pml:lex.rf ?a )
+        ( ?b pml:sempos 'n.quant.def' )
         ( ?c pml:tDependency ?b )
-        ( ?b pml:functor 'APP' )
-        ( ?c pml:number 'pl' )
-        ( ?b pml:t_lemma 'Inc' )
+        ( ?c pml:tDependency ?d )
+        ( ?d pml:t_lemma 'vyšetřovatel' )
      -> 
-        ( ?a pml:mention_root 'acquired' )
+        ( ?a pml:mention_root 'damage' )
 ]
 \end{minted}
-\caption{Rule 75 in the Jena rules syntax.}
+\caption{Rule 1 in the Jena rules syntax.}
 \label{img:rules_jena}
 \end{figure}
 
 
-%\clearpage
+\clearpage
 
 
 
