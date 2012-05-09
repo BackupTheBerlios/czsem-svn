@@ -395,12 +395,33 @@ and these groups determine the target class attribute of the classification task
 
 
 \subsection{Classification Datasets from UCI ML Repository} \label{sec:ch40_uci_datasets}
-\subsubsection{UCI datasets}
 
-To answer these questions we performed another experiment. We selected several datasets from the University of California, Irvine, Repository of Machine Learning Databases (UCI) \citep{biblio:UCI} and evaluated all the methods against them. 
+UCI Machine Learning Repository\footnote{\url{http://archive.ics.uci.edu/ml/index.html}} \citep{biblio:UCI} is a large archive of machine learning datasets collected at the University of California, Irvine. Several classification datasets were selected and used in the evaluation of the Fuzzy ILP Classifier, see in Section~\ref{sec:eval_fuzzy_uci}.
+The list of selected datasets can be found in Table~\ref{tab:UCI_datasets}. All the datasets are monotonizable (the target attribute can be naturally ordered), so the fuzzy classifier could take advantage of that.
 
 
+\begin{table}
+	\centering
+	\begin{threeparttable}
+		\begin{tabular}{lll}
+shortcut & name & url suffix\tnote{a}\\
+\hline
+car    & Car Evaluation  & \href{http://archive.ics.uci.edu/ml/datasets/Car+Evaluation}{\ttfamily Car+Evaluation}\\
+wine\tnote{b} & Wine Quality  & \href{http://archive.ics.uci.edu/ml/datasets/Wine+Quality}{\ttfamily Wine+Quality}\\
+cmc    & Contraceptive Method Choice  & \href{http://archive.ics.uci.edu/ml/datasets/Contraceptive+Method+Choice}{\ttfamily Contraceptive+Method+Choice}\\
+tae    & Teaching Assistant Evaluation  & \href{http://archive.ics.uci.edu/ml/datasets/Teaching+Assistant+Evaluation}{\ttfamily Teaching+Assistant+Evaluation}\\
+pop    & Post-Operative Patient  & \href{http://archive.ics.uci.edu/ml/datasets/Post-Operative+Patient}{\ttfamily Post-Operative+Patient}\\
+nurs   & Nursery  & \href{http://archive.ics.uci.edu/ml/datasets/Nursery}{\ttfamily Nursery}\\
+\hline
+		\end{tabular}
+		\begin{tablenotes}
+			\item [a] The prefix is: \url{http://archive.ics.uci.edu/ml/datasets/}
+			\item [b] Only red wine part of the dataset was used.
+		\end{tablenotes}
+		\caption{Classification datasets selected form the UCI ML Repository.} \label{tab:UCI_datasets}
+	\end{threeparttable}
+	
+\end{table}
 
-The list of selected datasets can be found in the legend of Table~\ref{tab:UCItable}. All the datasets are monotonizable (the target attribute can be naturally ordered), so the fuzzy classifier could take advantage of that.
 
 

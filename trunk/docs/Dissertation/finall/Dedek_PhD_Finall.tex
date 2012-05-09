@@ -1,5 +1,5 @@
 % Pokud tiskneme oboustranně:
- \documentclass[12pt,a4paper,twoside,openright]{report}
+\documentclass[12pt,a4paper,twoside,openright]{report}
 \usepackage[a4paper, 
 						twoside, 
 						inner=2.9cm, 
@@ -7,42 +7,15 @@
 						bottom=2.6cm, 
 						top=2.1cm] {geometry}
  
- 
 
-\usepackage{nameref}
-\usepackage[square]{natbib}
-\usepackage{url}
-\usepackage{nomencl}
-\usepackage{multicol}
-\usepackage{array}
-\usepackage{amsthm}
-\usepackage{verbatim}
-\usepackage{import} 
-
-
+\input{../common_packages}
 \input{../my_commands}
 
 
-%minted staci \usepackage[utf8]{inputenc}
-\usepackage{minted}
-
-\usepackage{bigfoot}
-\usepackage{hyperref}
-\hypersetup{pdftitle=\mytitle}
-\hypersetup{pdfauthor=\myauthor}
 
 
-\usepackage[xetex]{graphicx}
 
-\usepackage{rotating}
-\usepackage{longtable}
-\usepackage{multirow}
 
-\usepackage[log-declarations=false]{xparse}
-\usepackage[quiet]{fontspec}
-\usepackage{xltxtra}
-\setsansfont{Calibri}
-\setmonofont{Consolas}
 
 
 \makenomenclature 

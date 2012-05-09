@@ -387,7 +387,7 @@ Node attributes are assigned to node IDs by binary predicates of the form:
 
 \noindent There are about thirty such predicates like \emph{t\_lemma} (tectogrammatical lemma), \emph{functor} (tectogrammatical functor), \emph{sempos} (semantic part of speech), \emph{negation}, \emph{gender}, etc. but only some of them can be found in example extraction rules and we also excluded some of the attributes from serialization examples for space and simplicity reasons.
 
-Example of a serialized tectogrammatical tree is in Figure~\ref{lst:ilp_serialization} it is the same tree as in Figure~\ref{img:ch10_damage_tree}.
+Example of a serialized tectogrammatical tree is in Figure~\ref{fig:ilp_serialization} it is the same tree as in Figure~\ref{img:ch10_damage_tree}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -445,8 +445,8 @@ functor( id_jihomoravsky47443_246, 'PAT').
 sempos(  id_jihomoravsky47443_246, 'n.denot').
 gender(  id_jihomoravsky47443_246,'fem').
 \end{minted}
-\caption{ILP serialization example}
-\label{lst:ilp_serialization}
+\caption{ILP serialization example based on the tree from Figure~\ref{img:ch10_damage_tree}.}
+\label{fig:ilp_serialization}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -457,6 +457,8 @@ gender(  id_jihomoravsky47443_246,'fem').
 
 
 
+\clearpage
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -465,7 +467,7 @@ gender(  id_jihomoravsky47443_246,'fem').
 \graphicspath{{../img/ch70/}}
 
 
-In this section we will present details about the implementation of our case study with shareable extraction intoilogies.  We have used our IE engine based on deep linguistic parsing and Inductive Logic Programming, which was described in Section~\ref{sec:methods_learning}. It is a complex system implemented with a great help of the GATE system and it also uses many other third party tools including several linguistic tools and a Prolog system. Installation and making the system operate is not simple. This case study should demonstrate that the extraction rules produced by the system are not dependent on the system in the sense of shareable extraction ontologies.
+In this section we will present details about the implementation of our case study with shareable extraction ontologies.  We have used our IE engine based on deep linguistic parsing and Inductive Logic Programming, which was described in Section~\ref{sec:methods_learning}. It is a complex system implemented with a great help of the GATE system and it also uses many other third party tools including several linguistic tools and a Prolog system. Installation and making the system operate is not simple. This case study should demonstrate that the extraction rules produced by the system are not dependent on the system in the sense of shareable extraction ontologies.
 
 
 
@@ -474,14 +476,14 @@ In this section we will present details about the implementation of our case stu
 
 
 
-The IE engine needs a linguistic preprocessing (deep linguistic parsing) of documents on its input. Deep linguistic parsing brings a very complex structure to the text and the structure serves as a footing for construction and application of extraction rules. We usually use TectoMT system to do the linguistic preprocessing, see Section~\ref{sec:ch30_tectomt} for details. The output linguistic annotations of the TectoMT system are stored (along with the text of the source document) in XML files in so called Prague Markup Language (PML). PML is a very complex language (or XML schema) that is able to express many linguistic elements and features present in text. For the IE engine a tree dependency structure of words in sentences is the most useful one because the edges of the structure guide the extraction rules. 
-
-An example of such (tectogrammatical) tree structure is in Figure~\ref{img:ch10_damage_tree}.
+The IE engine needs a linguistic preprocessing (deep linguistic parsing) of documents on its input. Deep linguistic parsing brings a very complex structure to the text and the structure serves as a footing for the construction and application of extraction rules. We usually use TectoMT system to do the linguistic preprocessing, see Section~\ref{sec:ch30_tectomt} for details. The output linguistic annotations of the TectoMT system are stored (along with the text of the source document) in XML files in so called Prague Markup Language (PML). PML is a very complex language (or XML schema) that is able to express many linguistic elements and features present in text. For the IE engine a tree dependency structure of words in sentences is the most useful one because the edges of the structure guide the extraction rules. Such (tectogrammatical) tree structure was already presented in this thesis, e.g. in Figure~\ref{img:ch10_damage_tree}.
 
 
 \subsection{Data Transformation (PML to RDF)} \label{sec:pml_to_rdf}
 
-In this case study PML files made from source documents by TectoMT are transformed to RDF document ontology by quite simple GRDDL/XSLT transformation\footnote{The transformation is available on-line at \url{http://czsem.berlios.de/ontologies/tmt2rdf.xsl}}. Such document ontology contains the whole variety of PML in RDF format.
+In this case study, PML files made by TectoMT from source documents are transformed to RDF document ontologies by quite simple GRDDL/XSLT transformation\footnote{The transformation is available on-line at \url{http://czsem.berlios.de/ontologies/tmt2rdf.xsl}}. Such document ontology contains the whole variety of PML in RDF format. An example of such document ontology can be seen in Figure~\ref{fig:rdf_serialization}. It shows RDF serialization of the tree presented in Figure~\ref{img:ch10_damage_tree} and transformed to ILP background knowledge in Figure~\ref{fig:ilp_serialization}. Transcript of Czech words is provided in comments.
+
+Figure~\ref{fig:annotated_DO} shows an example of annotated document ontology, which was created by the application of extraction rules on the document ontology from Figure~\ref{fig:rdf_serialization}. Lines 13-15 and 23-25 are added by reasoner; lines 13-15 and 23 are not very interesting, they show some technical constructions based on the schema mapping, but lines 24 and 25 represent the result of extraction rules, these lines mark the corresponding tree node as ``\emph{mention root} of the \emph{damage} task''. The same annotated document ontology is shown on Figure~\ref{img:PDT_PROTEGE} as a screenshot of the Protégé ontology editor\footnote{\url{http://protege.stanford.edu/}}.
 
 
 
@@ -544,8 +546,8 @@ node:SCzechT-s4-n9 rdf:type pml:Node, owl:Thing;
 			pml:formeme "n:4" ; pml:number "sg" ; pml:negation "neg0" ;
 			pml:lex.rf node:SCzechA-s4-w8 ; pml:hasParent node:SCzechT-s4-n8 .
 \end{minted}
-\caption{RDF serialization example}
-\label{lst:rdf_serialization}
+\caption{Document ontology example (RDF serialization of linguistic trees), based on Figure~\ref{img:ch10_damage_tree}}.
+\label{fig:rdf_serialization}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -584,7 +586,7 @@ node:SCzechA-s4-w13 rdf:type pml:Node, owl:Thing;
 ##################################################################################
 \end{minted}
 \caption{Annotated document ontology example}
-\label{lst:annotated_DO}
+\label{fig:annotated_DO}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -595,12 +597,23 @@ node:SCzechA-s4-w13 rdf:type pml:Node, owl:Thing;
 \end{figure}
 
 
+
+
+
+
+\clearpage
+
 \subsection{Rule Transformations}
 
 
 Extraction rules produced by the IE engine are natively kept in a Prolog format; examples can be seen in Figure~\ref{img:rules_prolog}. The engine is capable to export them to the OWL/XML\footnote{\url{http://www.w3.org/TR/owl-xmlsyntax/}} syntax for rules in OWL 2 \citep{GHPP09a} (see in Figure~\ref{img:rules_xml}). Such rules can be parsed by OWL API\footnote{\url{http://owlapi.sourceforge.net/}} 3.1 
 and exported to RDF/SWRL, which is very widely supported and hopefully becoming a W3C recommendation.
-Figure~\ref{img:rules_protege} shows the example rules in Prot\'{e}g\'{e}\footnote{\url{http://protege.stanford.edu/}} 4 -- Rules View's format. The last rule example can be seen in Figure~\ref{img:rules_jena}, it shows a rule in the Jena rules format\footnote{\url{http://jena.sourceforge.net/inference/#RULEsyntax}}. Conversion to Jena rules was necessary because it is the only format that Jena can parse, see details about our use of Jena in Section~\ref{sec:ch70_experiment}. The Jena rules were obtained using following transformation process: OWL/XML $\rightarrow$ RDF/SWRL conversion using OWL API and RDF/SWRL $\rightarrow$ Jena rules conversion using SweetRules\footnote{\url{http://sweetrules.semwebcentral.org/}}.
+Figure~\ref{img:rules_protege} shows the example rules in Prot\'{e}g\'{e} 4 -- Rules View's format. The last rule example can be seen in Figure~\ref{img:rules_jena}, it shows a rule in the Jena rules format\footnote{\url{http://jena.sourceforge.net/inference/#RULEsyntax}}. Conversion to Jena rules was necessary because it is the only format that Jena can parse, see details about our use of Jena in Section~\ref{sec:ch70_experiment}. The Jena rules were obtained using following transformation process:
+\begin{enumerate}
+	\item OWL/XML $\rightarrow$ RDF/SWRL conversion using OWL API and 
+	\item RDF/SWRL $\rightarrow$ Jena rules conversion using SweetRules\footnote{\url{http://sweetrules.semwebcentral.org/}}.
+\end{enumerate}
+
 
 The presented rules belong to the group of so called DL-Safe rules \citep{Motik:DL-Safe-rules} so the decidability of OWL reasoning is kept.
 
@@ -624,22 +637,6 @@ mention_root(damage,A) :-
 	\label{img:rules_prolog}
 \end{figure}
 
-\begin{figure}
-\begin{minted}[linenos,  fontsize=\footnotesize,
-               frame=lines, tabsize=2]{jena}
-#[Rule 1]
-lex.rf(?b, ?a), sempos(?b, "n.quant.def"), tDependency(?c, ?b),
-tDependency(?c, ?d), t_lemma(?d, "vyšetřovatel") #investigator
-		-> mention_root(?a, "damage")
-
-#[Rule 2]
-lex.rf(?b, ?a), functor(?b, "TOWH"), tDependency(?c, ?b),
-tDependency(?c, ?d), t_lemma(?d, "škoda") #damage
-		-> mention_root(?a, "damage")
-\end{minted}
-	\caption{Examples of extraction rules in Prot\'{e}g\'{e} 4 -- Rules View's format.}
-	\label{img:rules_protege}
-\end{figure}
 
 \begin{figure}
 \begin{minted}[linenos,  fontsize=\footnotesize,
@@ -679,6 +676,25 @@ tDependency(?c, ?d), t_lemma(?d, "škoda") #damage
 \caption{Rule 1 in the OWL/XML syntax for Rules in OWL 2 \citep{GHPP09a}.}
 \label{img:rules_xml}
 \end{figure}
+
+
+\begin{figure}
+\begin{minted}[linenos,  fontsize=\footnotesize,
+               frame=lines, tabsize=2]{jena}
+#[Rule 1]
+lex.rf(?b, ?a), sempos(?b, "n.quant.def"), tDependency(?c, ?b),
+tDependency(?c, ?d), t_lemma(?d, "vyšetřovatel") #investigator
+		-> mention_root(?a, "damage")
+
+#[Rule 2]
+lex.rf(?b, ?a), functor(?b, "TOWH"), tDependency(?c, ?b),
+tDependency(?c, ?d), t_lemma(?d, "škoda") #damage
+		-> mention_root(?a, "damage")
+\end{minted}
+	\caption{Examples of extraction rules in Prot\'{e}g\'{e} 4 -- Rules View's format.}
+	\label{img:rules_protege}
+\end{figure}
+
 
 
 \begin{figure}
