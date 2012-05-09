@@ -12,7 +12,7 @@ The vast amount of information on the web increases the need of automated proces
 \centering
 \framebox{\includegraphics[width=0.7\hsize]{acquisitions_annotated}}
 \caption{Corporate Acquisition Events annotations}
-\label{img:acquisitions_annotated}
+\label{fig:acquisitions_annotated}
 \end{figure}
 
 
@@ -20,11 +20,11 @@ The vast amount of information on the web increases the need of automated proces
 \centering
 \includegraphics[width=0.5\hsize]{fireman_annotated}
 \caption{Fireman Events annotations}
-\label{img:fireman_annotated}
+\label{fig:fireman_annotated}
 \end{figure}
 
 
-In Figure~\ref{img:ch10_damage_tree}, nodes of the tectogrammatical tree are decorated. A piece of information about the damage of 8000 CZK can be found there (the three nodes on the right). We have used ILP to learn rules that are able to detect these nodes. 
+In Figure~\ref{fig:intro_damage_tree}, nodes of the tectogrammatical tree are decorated. A piece of information about the damage of 8000 CZK can be found there (the three nodes on the right). We have used ILP to learn rules that are able to detect these nodes. 
 
 The extraction process requires human assistance when annotating the training data.
 
@@ -33,14 +33,14 @@ Note that our method is general and is not limited to Czech. It can be used with
 \begin{figure}
 \centerline{\framebox{\includegraphics[width=0.55\hsize]{damage_tree}}}
 \caption{Example of a linguistic tree of one analyzed sentence.}
-\label{img:ch10_damage_tree} 
+\label{fig:intro_damage_tree} 
 \end{figure}
 
 \begin{figure}
 \centerline{\includegraphics[angle=90, width=0.4\hsize]{../img/ch70/tree}}
 \caption{Tectogrammatical tree of the sentence: ``Hutton is offering 35 dlrs cash per share for 83 pct of the shares.''
 Nodes roughly correspond with words of a sentence, edges represent linguistic dependencies between nodes and some linguistic features (tectogrammatical lemma, semantic functor and semantic part of speech) are printed under each node. The node `Hutton' is decorated as a named entity.}
-\label{img:tree}
+\label{fig:tree}
 \end{figure}
 
 
@@ -48,7 +48,7 @@ Nodes roughly correspond with words of a sentence, edges represent linguistic de
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Web Information Extraction Systems for Web Semantization} \label{sec:intro}
+\section{Web Information Extraction Systems for Web Semantization} 
 
 
 There exist many extraction tools that can process web pages and produce structured machine understandable data (or information) that corresponds with the content of a web page. This process is often called Web Information Extraction (WIE). 
@@ -67,12 +67,12 @@ The chapter is structured as follows. First we sketch the basic ideas of semanti
 \centering
 \includegraphics[width=0.6\hsize]{SemanticWeb}
 \caption{The Semantic/Semantized Web in Use}
-\label{img:SemWebUse}
+\label{fig:SemWebUse}
 \end{figure}
 
 The idea of the Semantic Web \citep{biblio:2001-Berners-Lee-SemanticWeb} (World Wide Web dedicated not only to human but also to machine -- software agents) is very well known today. Let us just shortly demonstrate its use with respect to the idea of Web Semantization (see in next section).
 
-The Figure~\ref{img:SemWebUse} shows a human user using the (Semantic) Web in three manners: a keyword query, a semantic query and by using a software agent. The difference between the first two manners (keyword and semantic query) can be illustrated with the question: ``Give me a list of the names of E.U. heads of state.'' This example from interesting article \citep{biblio:Horrocks_Onto} by Ian Horrocks shows the big difference between use of a semantic query language instead of keywords. In the semantic case you should be given exactly the list of names you were requesting without having to pore through results of (probably more then one) keyword queries. Of course the user have to know the syntax of the semantic query language or a special GUI\footnote{Such handy GUI can be found for example in the KIM project \citep{biblio:KIM}.} must be provided.
+The Figure~\ref{fig:SemWebUse} shows a human user using the (Semantic) Web in three manners: a keyword query, a semantic query and by using a software agent. The difference between the first two manners (keyword and semantic query) can be illustrated with the question: ``Give me a list of the names of E.U. heads of state.'' This example from interesting article \citep{biblio:Horrocks_Onto} by Ian Horrocks shows the big difference between use of a semantic query language instead of keywords. In the semantic case you should be given exactly the list of names you were requesting without having to pore through results of (probably more then one) keyword queries. Of course the user have to know the syntax of the semantic query language or a special GUI\footnote{Such handy GUI can be found for example in the KIM project \citep{biblio:KIM}.} must be provided.
 
 The last and the most important possibility (in the semantic or semantized setting) is to use some (personalized) software agent that is specialized to tasks of some kind like planning a business trip or finding the most optimal choice from all the relevant job offers, flats for rent, cars for sale, etc.
 
@@ -84,7 +84,7 @@ Both the semantic querying and software agents engagement is impossible without 
 \begin{figure}
 \includegraphics[width=\hsize]{extraction_method}
 \caption{Division of extraction methods}
-\label{img:extraction_method}
+\label{fig:extraction_method}
 \end{figure}
 
 
@@ -101,7 +101,7 @@ The idea of a semantic repository and a public service providing semantic annota
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Web Information Extraction} \label{sec:WIE}
 
-The task of a web information extraction system is to transform web pages into machine-friendly structures such as relational databases. There exists a rich variety of Web Information Extraction systems. The results generated by distinct tools usually can not be directly compared since the addressed extraction tasks are different. The extraction tasks can be distinguished according several dimensions: domain specificity, automation degree, techniques used, etc. These dimensions are analyzed in detail in the recent publications  \citep{biblio:Survey_of_Web_Information_Extraction_Systems} and \citep{biblio:WebDataMining}. Here we will concentrate on a little bit more specific division of WIE according to the needs of the Web Semantization (see in Sect.~\ref{sec:SemantizationSetting}). The division is demonstrated on the Figure~\ref{img:extraction_method} and should not be considered as disjoint division of the methods but rather as emphasizing different aspects of the methods. For example many extraction methods are domain and form specific at the same time.
+The task of a web information extraction system is to transform web pages into machine-friendly structures such as relational databases. There exists a rich variety of Web Information Extraction systems. The results generated by distinct tools usually can not be directly compared since the addressed extraction tasks are different. The extraction tasks can be distinguished according several dimensions: domain specificity, automation degree, techniques used, etc. These dimensions are analyzed in detail in the recent publications  \citep{biblio:Survey_of_Web_Information_Extraction_Systems} and \citep{biblio:WebDataMining}. Here we will concentrate on a little bit more specific division of WIE according to the needs of the Web Semantization (see in Sect.~\ref{sec:SemantizationSetting}). The division is demonstrated on the Figure~\ref{fig:extraction_method} and should not be considered as disjoint division of the methods but rather as emphasizing different aspects of the methods. For example many extraction methods are domain and form specific at the same time.
 
 The distinguishing between general applicable methods and the others that have meaningful application only in some specific setting (specific domain, specific form of input) is very important for Web Semantization because when we try to produce annotations in large scale, we have to control which web resource is suitable for which processing method (see in Sect.~\ref{sec:SemantizationSetting}). 
 
@@ -221,21 +221,21 @@ The novelty that web semantization brings into account is the cross domain aspec
 
 
 \subsection{User Initiative and Effort}
-An interesting point is the question: Whose effort will be used in the process of supporting new domain in the web semantization process? How skilled such user has to be? There are two possibilities (demonstrated on the Fig~\ref{img:extraction_proces_and_user}). The easier one is that we have to employ very experienced expert who will decide about the new domain and who will also realize the support needed for the new domain. In the Fig~\ref{img:extraction_proces_and_user} this situation is labeled as \emph{Provider Initiated} and \emph{Provider Trained} because the expert works on the side of the system that provides the semantics. 
+An interesting point is the question: Whose effort will be used in the process of supporting new domain in the web semantization process? How skilled such user has to be? There are two possibilities (demonstrated on the Fig~\ref{fig:extraction_proces_and_user}). The easier one is that we have to employ very experienced expert who will decide about the new domain and who will also realize the support needed for the new domain. In the Fig~\ref{fig:extraction_proces_and_user} this situation is labeled as \emph{Provider Initiated} and \emph{Provider Trained} because the expert works on the side of the system that provides the semantics. 
 
 \begin{figure}
 \centering
 \includegraphics[width=0.6\hsize]{extraction_proces_and_user}
 \caption{User initiative and effort}
-\label{img:extraction_proces_and_user}
+\label{fig:extraction_proces_and_user}
 \end{figure}
 
 The second possibility is to enable ordinary users form outside to add a new domain to the semantization system. Such user is probably interested in semantic data form the domain so we call such user \emph{Consumer}.
 
-A cooperation of a consumer (possibly a domain expert) and a provider (system expert) on the support of the new domain can be considered as hybrid approach. This is represented with the dashed arrow in the Fig~\ref{img:extraction_proces_and_user}.
+A cooperation of a consumer (possibly a domain expert) and a provider (system expert) on the support of the new domain can be considered as hybrid approach. This is represented with the dashed arrow in the Fig~\ref{fig:extraction_proces_and_user}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Conclusion and Future Work} \label{sec:conlusion}
+\section{Conclusion and Future Work} 
 
 In this chapter we tried to show the complexity of the problem of web semantization in connection with the possibilities of web information extraction systems. Future work goes in several directions: 
 \begin{itemize}

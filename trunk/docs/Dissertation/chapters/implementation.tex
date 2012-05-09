@@ -4,14 +4,14 @@ This chapter provides the most important implementation details, it is, again, d
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Manual Design of Extraction Rules} \label{sec:impl_manual_rules} \graphicspath{{../img/ch50/}}
+\section{Manual Design of Extraction Rules} \label{sec:manual_impl_rules} \graphicspath{{../img/ch50/}}
 
 
-\subsection{Procedural Extraction Rules} \label{sec:ch50_Procedural_Extraction_Rules} \label{sec:impl_btred_rules}
+\subsection{Procedural Extraction Rules} \label{sec:manual_Procedural_Extraction_Rules} 
 
 Our earliest extraction method, which is based on procedural extraction rules, was implemented using Btred\footnote{See details about Btred in Section~\ref{sec:third_tred}.} API for processing linguistic trees. The extraction rules were implemented in Perl as Btred procedures. Application of these extraction rules on a corpus of linguistic trees is realized such that each procedure (or extraction rule) is executed on every available tree by Btred. 
 
-An example of such extraction rule is in Figure~\ref{lst:btred_rule} and corresponding extraction output on Figure~\ref{fig:btred_xml}. TODO: explain
+An example of such extraction rule is in Figure~\ref{fig:btred_rule} and corresponding extraction output on Figure~\ref{fig:btred_xml}. TODO: explain
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -78,7 +78,7 @@ sub print_injured {
 																																		this >>$<< hacks my syntax highlighter :-)
 																																		\end{comment}
 \caption{Procedurally written extraction rule in \emph{Btred}.}
-\label{lst:btred_rule}
+\label{fig:btred_rule}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -134,9 +134,9 @@ sub print_injured {
 
 
 
-\subsection{Netgraph Based Extraction Rules} \label{sec:ch50_Netgraph_Based_Extraction_Rules}
+\subsection{Netgraph Based Extraction Rules} \label{sec:manual_Netgraph_Based_Extraction_Rules}
 
-Our second extraction method, which is based on Netgraph (see Section~\ref{sec:ch30_netgraph} for details), is implemented in Java. Java was chosen partly because we use the Java implementation of Netgraph client as a library. 
+Our second extraction method, which is based on Netgraph (see Section~\ref{sec:third_netgraph} for details), is implemented in Java. Java was chosen partly because we use the Java implementation of Netgraph client as a library. 
 
 
 
@@ -156,7 +156,7 @@ to leak out & to flow out\\
 \hline
 \end{tabular}		
 	\caption{A manually created extraction rule investigating dangerous liquids that spilled out into the environment.}
-	\label{fig:ch50_eenv_extract_patern}
+	\label{fig:manual_eenv_extract_patern}
 \end{figure}
 
 
@@ -168,8 +168,8 @@ Original sentence:
 \emph{``Nárazem se utrhl hrdlo palivové nádrže a do potoka postupně vyteklo na 800 litrů nafty.''}\\
 English transcript: 
 \emph{``Due to the clash the throat of fuel tank tore off and 800 liters of oil (diesel) has run out to a stream.''}
-	\caption{A tree matching with the corresponding extraction rule in Figure~\ref{fig:ch50_eenv_extract_patern}.}
-	\label{fig:ch50_eenv_matching_tree}
+	\caption{A tree matching with the corresponding extraction rule in Figure~\ref{fig:manual_eenv_extract_patern}.}
+	\label{fig:manual_eenv_matching_tree}
 \end{figure}
 
 
@@ -220,8 +220,8 @@ English transcript:
 \begin{figure}
 	\centering
 		\includegraphics[angle=-90, width=0.7\hsize]{eenv_results}
-	\caption{\emph{XML} structured output of the SQL select like query corresponding with the extraction rule in Figure~\ref{fig:ch50_eenv_extract_patern} and matching tree in Figure~\ref{fig:ch50_eenv_matching_tree}.}
-	\label{fig:ch50_eenv_results}
+	\caption{\emph{XML} structured output of the SQL select like query corresponding with the extraction rule in Figure~\ref{fig:manual_eenv_extract_patern} and matching tree in Figure~\ref{fig:manual_eenv_matching_tree}.}
+	\label{fig:manual_eenv_results}
 \end{figure}
 
 
@@ -250,13 +250,13 @@ English transcript:
 
 
 
-Evaluation of the extraction rule from Figure~\ref{fig:ch50_eenv_extract_patern} is illustrated on Figure~\ref{fig:ch50_eenv_matching_tree}. Figure~\ref{fig:ch50_eenv_matching_tree} shows a linguistic tree matching with the extraction rule. Matching nodes are decorated and labeled by the numbers of corresponding query nodes.
+Evaluation of the extraction rule from Figure~\ref{fig:manual_eenv_extract_patern} is illustrated on Figure~\ref{fig:manual_eenv_matching_tree}. Figure~\ref{fig:manual_eenv_matching_tree} shows a linguistic tree matching with the extraction rule. Matching nodes are decorated and labeled by the numbers of corresponding query nodes.
 
 
 
-\subsection{Extraction Output} \label{sec:impl_manual_output}
+\subsection{Extraction Output} \label{sec:manual_impl_output}
 
-Small pieces of extraction outputs are shown in Figure~\ref{fig:select_xml} (for the extraction rule in Figure~\ref{fig:ch50_extract_patern}) and in Figure~\ref{fig:ch50_eenv_results} (for the extraction rule in Figure~\ref{fig:ch50_eenv_extract_patern}). 
+Small pieces of extraction outputs are shown in Figure~\ref{fig:select_xml} (for the extraction rule in Figure~\ref{fig:manual_extract_patern}) and in Figure~\ref{fig:manual_eenv_results} (for the extraction rule in Figure~\ref{fig:manual_eenv_extract_patern}). 
 
 The former example (Figure~\ref{fig:select_xml}) contains three matches of the extraction rule in three different articles. Each query match is closed in the \verb+<Match>+ element and each contains values of some linguistic attributes closed inside the \verb+<Value>+ elements. Each value comes from some of the nodes of the extraction rule. Name of corresponding query node is saved in the \verb+variable_name+ attribute of the \verb+<Value>+ element.
 
@@ -277,13 +277,13 @@ The last not described attribute name is \verb+injury_manner+. Corresponding val
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Machine Learning of Extraction Rules} \graphicspath{{../img/ch60/}} \label{sec:impl_learning}
+\section{Machine Learning of Extraction Rules} \graphicspath{{../img/ch60/}} \label{sec:learning_impl}
 
 
 
 Here we just briefly describe implementation of our system. The system consists of several modules, all integrated in GATE as processing resources (PRs).
 
-\subsection{TectoMT Wrapper (Linguistic Analysis)} \label{sec:ch60_tectomt_wrapper}
+\subsection{TectoMT Wrapper (Linguistic Analysis)} \label{sec:learning_tectomt_wrapper}
 
 TectoMT wrapper is a GATE component (processing resource), which takes the text of a GATE document, sends it to TectoMT linguistic analyzers, parses the results and converts the results to the form of GATE annotations. The next section provides details about how PDT annotations are represented in GATE.
 
@@ -295,9 +295,9 @@ Client-server model of implementation is used in the online mode. A separate Tec
 
 
 
-\subsection{PDT Annotations in GATE} \label{sec:ch60_pdt_in_gate} \label{sec:LDR_in_GATE}
+\subsection{PDT Annotations in GATE} \label{sec:learning_pdt_in_gate} \label{sec:LDR_in_GATE}
 
-Although GATE annotations are just highlighted pieces of text (see also Section~\ref{sec:ch30_gate_annotations}) it is possible to use them to encode dependency tree structures. It is possible because each GATE annotation has a unique identifier (ID) and an arbitrary set of features (name-value pairs) can be assigned to it. The way how the PDT dependency trees are encoded in GATE is in fact the same as in the GATE wrapper for the Stanford Parser\footnote{\url{http://gate.ac.uk/userguide/sec:parsers:stanford}}. 
+Although GATE annotations are just highlighted pieces of text (see also Section~\ref{sec:third_gate_annotations}) it is possible to use them to encode dependency tree structures. It is possible because each GATE annotation has a unique identifier (ID) and an arbitrary set of features (name-value pairs) can be assigned to it. The way how the PDT dependency trees are encoded in GATE is in fact the same as in the GATE wrapper for the Stanford Parser\footnote{\url{http://gate.ac.uk/userguide/sec:parsers:stanford}}. 
 
 Three main constructs are used to capture an arbitrary configuration of a linguistic dependency tree:
 
@@ -327,7 +327,7 @@ It is not simple to demonstrate the GATE representation of the dependencies in a
 \end{figure}
 
 
-\subsubsection{Netgraph Tree Viewer} \label{sec:ch60_GATE_Netgraph}
+\subsubsection{Netgraph Tree Viewer} \label{sec:learning_GATE_Netgraph}
 
 Figure~\ref{fig:GATE_Netgraph}
 
@@ -340,14 +340,14 @@ Figure~\ref{fig:GATE_Netgraph}
 \end{figure}
 
 
-\subsection{ILP Wrapper (Machine Learning)} \label{sec:impl_ilp_wrapper}
+\subsection{ILP Wrapper (Machine Learning)} \label{sec:learning_ilp_wrapper}
 After a human annotator have annotated several documents with desired target annotations, machine learning takes place. 
 This consists of two steps: 
 \begin{enumerate}
 	\item learning of extraction rules from the target annotations and
 	\item application of the extraction rules on new documents.
 \end{enumerate}
-In both steps the linguistic analysis has to be done before and in both steps ILP background knowledge (a logical database of facts) is constructed from linguistic structures of documents that are being processed. We call the process of background knowledge construction as \emph{ILP serialization}; more details are presented below in Section~\ref{sec:ilp_serialization}.
+In both steps the linguistic analysis has to be done before and in both steps ILP background knowledge (a logical database of facts) is constructed from linguistic structures of documents that are being processed. We call the process of background knowledge construction as \emph{ILP serialization}; more details are presented below in Section~\ref{sec:learning_ilp_serialization}.
 
 After the ILP serialization is done, the next step depends on the phase which is being performed.
 
@@ -367,13 +367,13 @@ ML PR provides an interface for exchange of features (including target class) be
 
 
 
-\subsection{ILP Serialization} \label{sec:ilp_serialization} \label{sec:impl_ilp_serialization}
+\subsection{ILP Serialization} \label{sec:learning_ilp_serialization}
 
 In this section details about conversion of linguistic trees to ILP background knowledge (a Prolog logical database of facts) will be presented. Although the construction is quite strait forward it is worth describing because it makes it easier to understand the extraction rules found by the ILP learning procedure. 
 
-As mentioned in Section~\ref{sec:ch60_pdt_in_gate}: three main constructs are used to capture an arbitrary configuration of a dependency linguistic tree: nodes, edges and node attributes. During the process of ILP Serialization these constructs are rendered to Prolog in following way. 
+As mentioned in Section~\ref{sec:learning_pdt_in_gate}: three main constructs are used to capture an arbitrary configuration of a dependency linguistic tree: nodes, edges and node attributes. During the process of ILP Serialization these constructs are rendered to Prolog in following way. 
 
-A unique identifier (node ID) is generated for every tree node. The identifier is based on document name and GATE annotation ID.\footnote{Note that node IDs based on sentence order and node deep order are used outside of GATE, see PML$\rightarrow$RDF transformation in Section~\ref{sec:pml_to_rdf}.} These node IDs correspond to simple Prolog atoms and they represent tree nodes in the Prolog fact database. A node type (used by the ILP learning algorithm) is assigned to a node ID by predicates \texttt{Token(NodeID)} for analytical tree nodes and \texttt{tToken(NodeID)} for tectogrammatical tree nodes.
+A unique identifier (node ID) is generated for every tree node. The identifier is based on document name and GATE annotation ID.\footnote{Note that node IDs based on sentence order and node deep order are used outside of GATE, see PML$\rightarrow$RDF transformation in Section~\ref{sec:onto_pml_to_rdf}.} These node IDs correspond to simple Prolog atoms and they represent tree nodes in the Prolog fact database. A node type (used by the ILP learning algorithm) is assigned to a node ID by predicates \texttt{Token(NodeID)} for analytical tree nodes and \texttt{tToken(NodeID)} for tectogrammatical tree nodes.
 
 Tree nodes are connected by edges using several binary predicates with a common form:
 
@@ -387,7 +387,7 @@ Node attributes are assigned to node IDs by binary predicates of the form:
 
 \noindent There are about thirty such predicates like \emph{t\_lemma} (tectogrammatical lemma), \emph{functor} (tectogrammatical functor), \emph{sempos} (semantic part of speech), \emph{negation}, \emph{gender}, etc. but only some of them can be found in example extraction rules and we also excluded some of the attributes from serialization examples for space and simplicity reasons.
 
-Example of a serialized tectogrammatical tree is in Figure~\ref{fig:ilp_serialization} it is the same tree as in Figure~\ref{img:ch10_damage_tree}.
+Example of a serialized tectogrammatical tree is in Figure~\ref{fig:ilp_serialization} it is the same tree as in Figure~\ref{fig:intro_damage_tree}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -445,7 +445,7 @@ functor( id_jihomoravsky47443_246, 'PAT').
 sempos(  id_jihomoravsky47443_246, 'n.denot').
 gender(  id_jihomoravsky47443_246,'fem').
 \end{minted}
-\caption{ILP serialization example based on the tree from Figure~\ref{img:ch10_damage_tree}.}
+\caption{ILP serialization example based on the tree from Figure~\ref{fig:intro_damage_tree}.}
 \label{fig:ilp_serialization}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -463,11 +463,11 @@ gender(  id_jihomoravsky47443_246,'fem').
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Shareable Extraction Ontologies} \label{sec:implement}
+\section{Shareable Extraction Ontologies} \label{sec:onto_implement}
 \graphicspath{{../img/ch70/}}
 
 
-In this section we will present details about the implementation of our case study with shareable extraction ontologies.  We have used our IE engine based on deep linguistic parsing and Inductive Logic Programming, which was described in Section~\ref{sec:methods_learning}. It is a complex system implemented with a great help of the GATE system and it also uses many other third party tools including several linguistic tools and a Prolog system. Installation and making the system operate is not simple. This case study should demonstrate that the extraction rules produced by the system are not dependent on the system in the sense of shareable extraction ontologies.
+In this section we will present details about the implementation of our case study with shareable extraction ontologies.  We have used our IE engine based on deep linguistic parsing and Inductive Logic Programming, which was described in Section~\ref{sec:learning_methods}. It is a complex system implemented with a great help of the GATE system and it also uses many other third party tools including several linguistic tools and a Prolog system. Installation and making the system operate is not simple. This case study should demonstrate that the extraction rules produced by the system are not dependent on the system in the sense of shareable extraction ontologies.
 
 
 
@@ -476,14 +476,14 @@ In this section we will present details about the implementation of our case stu
 
 
 
-The IE engine needs a linguistic preprocessing (deep linguistic parsing) of documents on its input. Deep linguistic parsing brings a very complex structure to the text and the structure serves as a footing for the construction and application of extraction rules. We usually use TectoMT system to do the linguistic preprocessing, see Section~\ref{sec:ch30_tectomt} for details. The output linguistic annotations of the TectoMT system are stored (along with the text of the source document) in XML files in so called Prague Markup Language (PML). PML is a very complex language (or XML schema) that is able to express many linguistic elements and features present in text. For the IE engine a tree dependency structure of words in sentences is the most useful one because the edges of the structure guide the extraction rules. Such (tectogrammatical) tree structure was already presented in this thesis, e.g. in Figure~\ref{img:ch10_damage_tree}.
+The IE engine needs a linguistic preprocessing (deep linguistic parsing) of documents on its input. Deep linguistic parsing brings a very complex structure to the text and the structure serves as a footing for the construction and application of extraction rules. We usually use TectoMT system to do the linguistic preprocessing, see Section~\ref{sec:third_tectomt} for details. The output linguistic annotations of the TectoMT system are stored (along with the text of the source document) in XML files in so called Prague Markup Language (PML). PML is a very complex language (or XML schema) that is able to express many linguistic elements and features present in text. For the IE engine a tree dependency structure of words in sentences is the most useful one because the edges of the structure guide the extraction rules. Such (tectogrammatical) tree structure was already presented in this thesis, e.g. in Figure~\ref{fig:intro_damage_tree}.
 
 
-\subsection{Data Transformation (PML to RDF)} \label{sec:pml_to_rdf}
+\subsection{Data Transformation (PML to RDF)} \label{sec:onto_pml_to_rdf}
 
-In this case study, PML files made by TectoMT from source documents are transformed to RDF document ontologies by quite simple GRDDL/XSLT transformation\footnote{The transformation is available on-line at \url{http://czsem.berlios.de/ontologies/tmt2rdf.xsl}}. Such document ontology contains the whole variety of PML in RDF format. An example of such document ontology can be seen in Figure~\ref{fig:rdf_serialization}. It shows RDF serialization of the tree presented in Figure~\ref{img:ch10_damage_tree} and transformed to ILP background knowledge in Figure~\ref{fig:ilp_serialization}. Transcript of Czech words is provided in comments.
+In this case study, PML files made by TectoMT from source documents are transformed to RDF document ontologies by quite simple GRDDL/XSLT transformation\footnote{The transformation is available on-line at \url{http://czsem.berlios.de/ontologies/tmt2rdf.xsl}}. Such document ontology contains the whole variety of PML in RDF format. An example of such document ontology can be seen in Figure~\ref{fig:rdf_serialization}. It shows RDF serialization of the tree presented in Figure~\ref{fig:intro_damage_tree} and transformed to ILP background knowledge in Figure~\ref{fig:ilp_serialization}. Transcript of Czech words is provided in comments.
 
-Figure~\ref{fig:annotated_DO} shows an example of annotated document ontology, which was created by the application of extraction rules on the document ontology from Figure~\ref{fig:rdf_serialization}. Lines 13-15 and 23-25 are added by reasoner; lines 13-15 and 23 are not very interesting, they show some technical constructions based on the schema mapping, but lines 24 and 25 represent the result of extraction rules, these lines mark the corresponding tree node as ``\emph{mention root} of the \emph{damage} task''. The same annotated document ontology is shown on Figure~\ref{img:PDT_PROTEGE} as a screenshot of the Protégé ontology editor\footnote{\url{http://protege.stanford.edu/}}.
+Figure~\ref{fig:annotated_DO} shows an example of annotated document ontology, which was created by the application of extraction rules on the document ontology from Figure~\ref{fig:rdf_serialization}. Lines 13-15 and 23-25 are added by reasoner; lines 13-15 and 23 are not very interesting, they show some technical constructions based on the schema mapping, but lines 24 and 25 represent the result of extraction rules, these lines mark the corresponding tree node as ``\emph{mention root} of the \emph{damage} task''. The same annotated document ontology is shown on Figure~\ref{fig:PDT_PROTEGE} as a screenshot of the Protégé ontology editor\footnote{\url{http://protege.stanford.edu/}}.
 
 
 
@@ -546,7 +546,7 @@ node:SCzechT-s4-n9 rdf:type pml:Node, owl:Thing;
 			pml:formeme "n:4" ; pml:number "sg" ; pml:negation "neg0" ;
 			pml:lex.rf node:SCzechA-s4-w8 ; pml:hasParent node:SCzechT-s4-n8 .
 \end{minted}
-\caption{Document ontology example (RDF serialization of linguistic trees), based on Figure~\ref{img:ch10_damage_tree}}.
+\caption{Document ontology example (RDF serialization of linguistic trees), based on Figure~\ref{fig:intro_damage_tree}}.
 \label{fig:rdf_serialization}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -593,7 +593,7 @@ node:SCzechA-s4-w13 rdf:type pml:Node, owl:Thing;
 \begin{figure}
 \centerline{\framebox{\includegraphics[width=0.7\hsize]{PDT_PROTEGE.png}}}
 \caption{Annotated document ontology in Protégé ontology editor}
-\label{img:PDT_PROTEGE}
+\label{fig:PDT_PROTEGE}
 \end{figure}
 
 
@@ -606,9 +606,9 @@ node:SCzechA-s4-w13 rdf:type pml:Node, owl:Thing;
 \subsection{Rule Transformations}
 
 
-Extraction rules produced by the IE engine are natively kept in a Prolog format; examples can be seen in Figure~\ref{img:rules_prolog}. The engine is capable to export them to the OWL/XML\footnote{\url{http://www.w3.org/TR/owl-xmlsyntax/}} syntax for rules in OWL 2 \citep{GHPP09a} (see in Figure~\ref{img:rules_xml}). Such rules can be parsed by OWL API\footnote{\url{http://owlapi.sourceforge.net/}} 3.1 
+Extraction rules produced by the IE engine are natively kept in a Prolog format; examples can be seen in Figure~\ref{fig:rules_prolog}. The engine is capable to export them to the OWL/XML\footnote{\url{http://www.w3.org/TR/owl-xmlsyntax/}} syntax for rules in OWL 2 \citep{GHPP09a} (see in Figure~\ref{fig:rules_xml}). Such rules can be parsed by OWL API\footnote{\url{http://owlapi.sourceforge.net/}} 3.1 
 and exported to RDF/SWRL, which is very widely supported and hopefully becoming a W3C recommendation.
-Figure~\ref{img:rules_protege} shows the example rules in Prot\'{e}g\'{e} 4 -- Rules View's format. The last rule example can be seen in Figure~\ref{img:rules_jena}, it shows a rule in the Jena rules format\footnote{\url{http://jena.sourceforge.net/inference/#RULEsyntax}}. Conversion to Jena rules was necessary because it is the only format that Jena can parse, see details about our use of Jena in Section~\ref{sec:ch70_experiment}. The Jena rules were obtained using following transformation process:
+Figure~\ref{fig:rules_protege} shows the example rules in Prot\'{e}g\'{e} 4 -- Rules View's format. The last rule example can be seen in Figure~\ref{fig:rules_jena}, it shows a rule in the Jena rules format\footnote{\url{http://jena.sourceforge.net/inference/#RULEsyntax}}. Conversion to Jena rules was necessary because it is the only format that Jena can parse, see details about our use of Jena in Section~\ref{sec:onto_experiment}. The Jena rules were obtained using following transformation process:
 \begin{enumerate}
 	\item OWL/XML $\rightarrow$ RDF/SWRL conversion using OWL API and 
 	\item RDF/SWRL $\rightarrow$ Jena rules conversion using SweetRules\footnote{\url{http://sweetrules.semwebcentral.org/}}.
@@ -634,7 +634,7 @@ mention_root(damage,A) :-
    t_lemma(D,'škoda'). %damage
 \end{minted}
 	\caption{Examples of extraction rules in the native Prolog format.}
-	\label{img:rules_prolog}
+	\label{fig:rules_prolog}
 \end{figure}
 
 
@@ -674,7 +674,7 @@ mention_root(damage,A) :-
 </Ontology>
 \end{minted}
 \caption{Rule 1 in the OWL/XML syntax for Rules in OWL 2 \citep{GHPP09a}.}
-\label{img:rules_xml}
+\label{fig:rules_xml}
 \end{figure}
 
 
@@ -692,7 +692,7 @@ tDependency(?c, ?d), t_lemma(?d, "škoda") #damage
 		-> mention_root(?a, "damage")
 \end{minted}
 	\caption{Examples of extraction rules in Prot\'{e}g\'{e} 4 -- Rules View's format.}
-	\label{img:rules_protege}
+	\label{fig:rules_protege}
 \end{figure}
 
 
@@ -712,7 +712,7 @@ tDependency(?c, ?d), t_lemma(?d, "škoda") #damage
 ]
 \end{minted}
 \caption{Rule 1 in the Jena rules syntax.}
-\label{img:rules_jena}
+\label{fig:rules_jena}
 \end{figure}
 
 
@@ -727,11 +727,11 @@ tDependency(?c, ?d), t_lemma(?d, "škoda") #damage
 
 
 
-\section{Fuzzy ILP Classification} \label{sec:implementation}
+\section{Fuzzy ILP Classification}
 
-In the experimental system we use two inductive logic approaches: crisp and fuzzy (as described above). Technically, the difference between the approaches consists in a different setting of the underlying \emph{ILP task}. Both can be done with a classical ILP tool (Aleph (see Section~\ref{sec:ch30_ILP_tool}) was used in the final implementation).
+In the experimental system we use two inductive logic approaches: crisp and fuzzy (as described above). Technically, the difference between the approaches consists in a different setting of the underlying \emph{ILP task}. Both can be done with a classical ILP tool (Aleph (see Section~\ref{sec:third_ILP_tool}) was used in the final implementation).
 
-We have compared results of the crisp and fuzzy approaches with other classification methods and, in our experiment, the fuzzy approach produced better results than many other methods, including the crisp one. See Section~\ref{sec:results} for details.
+We have compared results of the crisp and fuzzy approaches with other classification methods and, in our experiment, the fuzzy approach produced better results than many other methods, including the crisp one. See Section~\ref{sec:fuzzy_results} for details.
 
 
 
@@ -757,7 +757,7 @@ serious_atl_2(id_47443). %positive
 serious_atl_3(id_47443). %negative					
 \end{minted}						
 	\caption{Learning examples.}
-	\label{img:examples}
+	\label{fig:examples}
 \end{minipage}
 \hspace{0.5cm}
 \begin{minipage}[b]{0.5\hsize}
@@ -778,7 +778,7 @@ aqualung(id_47443, 0).
 fan(id_47443, 0).
 \end{minted}						
 	\caption{$B^{crisp}_{T}$ -- crisp attributes.}
-	\label{img:crisp_attributes}
+	\label{fig:crisp_attributes}
 \end{minipage}
 \end{figure}
 
@@ -791,19 +791,19 @@ To use ILP for a classification task we have to translate the input data to the 
 
 In construction of a crisp example set $E_t$, the target predicate is denoted as \texttt{serious\_t}. The letter \texttt{t} stands for the actual seriousness degree. We use multiple unary predicates \texttt{serious\_0}, \texttt{serious\_1}, etc., instead of one binary predicate \texttt{serious(ID,Degree)}. These two cases are equivalent and we have decided to use the unary option because a visual distinction between the multiple ILP tasks is then clearer.
 
-In construction of a fuzzy (or monotonized) example set $E_{\ge t}$, the target predicate is denoted as \texttt{serious\_atl\_t}, see examples in Figure~\ref{img:examples}.
+In construction of a fuzzy (or monotonized) example set $E_{\ge t}$, the target predicate is denoted as \texttt{serious\_atl\_t}, see examples in Figure~\ref{fig:examples}.
 
 
 
-In construction of a crisp background knowledge $B^{crisp}_{T}$, we use a~simple translation of the attribute names to the names of predicates and fill them with actual values. It is illustrated in Figure~\ref{img:crisp_attributes}). 
+In construction of a crisp background knowledge $B^{crisp}_{T}$, we use a~simple translation of the attribute names to the names of predicates and fill them with actual values. It is illustrated in Figure~\ref{fig:crisp_attributes}). 
 
 
 
-In construction of a monotonized background knowledge $B^{monot}_T$ we reuse the crisp background knowledge and add monotonization rules. An~example for predicate \texttt{damage} is shown in Figure~\ref{img:attribute_monotonization}.
+In construction of a monotonized background knowledge $B^{monot}_T$ we reuse the crisp background knowledge and add monotonization rules. An~example for predicate \texttt{damage} is shown in Figure~\ref{fig:attribute_monotonization}.
 %on predicates \texttt{damage} and \texttt{damage\_atl}.
-The first rule deals with \texttt{unknown} values (Section~\ref{sec:ch40_features} deals with unknown values in the dataset) and the second does the monotonization. 
+The first rule deals with \texttt{unknown} values (Section~\ref{sec:data_features} deals with unknown values in the dataset) and the second does the monotonization. 
 
-Negations used in Figure~\ref{img:attribute_monotonization} and Figure~\ref{img:conversion} are the standard Prolog \emph{negations as failure}.
+Negations used in Figure~\ref{fig:attribute_monotonization} and Figure~\ref{fig:conversion} are the standard Prolog \emph{negations as failure}.
 
 
 
@@ -816,7 +816,7 @@ damage_atl(ID,N) :- damage(ID,N2), integer(N2), %numeric values
                     damage(N), integer(N), N2>=N.
 \end{minted}						
 	\caption{Monotonization of attributes (damage\_atl $\leftarrow$ damage).}
-	\label{img:attribute_monotonization}
+	\label{fig:attribute_monotonization}
 \end{figure}
 
 
@@ -851,7 +851,7 @@ serious_atl_3(A) :- fatalities_atl(A,1).
 serious_atl_3(A) :- damage_atl(A,1500000).
 \end{minted}
 \caption{Crisp and monotonized hypotheses.}
-\label{img:rules}
+\label{fig:rules}
 \end{figure}
 
 
@@ -867,12 +867,12 @@ serious_2(ID) :- serious_atl_2(ID),
 serious_3(ID) :- serious_atl_3(ID).
 \end{minted}						
 \caption{Conversion rules for monotonized hypotheses (\texttt{serious\_t} $\leftarrow$ \texttt{serious\_atl\_t}).}
-\label{img:conversion}
+\label{fig:conversion}
 \end{figure}
 
 
 
-Once we have learning examples and background knowledge, we can run the ILP inductive procedure and obtain learned rules (a learned hypothesis). According to the kind of the ILP task (crisp or monotonized), we obtain the corresponding kind (crisp or monotonized) of rules (see e.g. in Figure~\ref{img:rules}). But these rules cannot be used directly to solve the classification task. There are common cases when more than one rule is applicable to a single instance. So we have to select which one to use. For the monotonized hypothesis we select the one with the biggest return value; it is illustrated in Figure~\ref{img:conversion}. Such clear criterion does not exist for the crisp hypothesis, so we simply use the first applicable rule.
+Once we have learning examples and background knowledge, we can run the ILP inductive procedure and obtain learned rules (a learned hypothesis). According to the kind of the ILP task (crisp or monotonized), we obtain the corresponding kind (crisp or monotonized) of rules (see e.g. in Figure~\ref{fig:rules}). But these rules cannot be used directly to solve the classification task. There are common cases when more than one rule is applicable to a single instance. So we have to select which one to use. For the monotonized hypothesis we select the one with the biggest return value; it is illustrated in Figure~\ref{fig:conversion}. Such clear criterion does not exist for the crisp hypothesis, so we simply use the first applicable rule.
 
 
 In the crisp case there are often many instances which cannot be classified because there is no applicable rule. In our experiment there was about a 51\%
@@ -885,10 +885,10 @@ Another advantage of the monotonized approach is that the set of positive traini
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Learned Rules Examples} \label{sec:results}
+\subsection{Learned Rules Examples} \label{sec:fuzzy_results}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Figure~\ref{img:rules} summarizes obtained hypotheses learned from our data: 
+Figure~\ref{fig:rules} summarizes obtained hypotheses learned from our data: 
 \begin{itemize}
 	\item a crisp hypothesis learned from $E_t$ and $B^{crisp}_{T}$ (lines 1-13) and
 	\item a monotonized hypothesis learned from $E_{\ge t}$ and ${B}^{monot}_T$ (lines 15-26).

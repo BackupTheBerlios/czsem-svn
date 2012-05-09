@@ -18,7 +18,7 @@ The description of individual datasets will be presented at the very end of the 
 In this section a distinction of datasets according their purpose and structure will be presented. Three types of datasets will be discussed: Information Extraction Datasets, Classification Datasets and Reasoning Datasets.
 
 \subsection{Information Extraction Datasets}
-An IE dataset is made up of a set of text documents. The texts are usually manually annotated (with one exception see Section~\ref{sec:ch40_fireman_without}). The manual annotations are of the form of labels on shorter segments of the text (the length of a segment ranges between one to approximately three tokens). 
+An IE dataset is made up of a set of text documents. The texts are usually manually annotated (with one exception see Section~\ref{sec:data_fireman_without}). The manual annotations are of the form of labels on shorter segments of the text (the length of a segment ranges between one to approximately three tokens). 
 
 An IE engine can use such dataset for training and evaluation. During evaluation, the dataset is split into two parts -- training set and testing set. An IE engine is trained on the training set and success is measured on testing set by comparing the annotations returned by the IE engine and the actual annotations present in the dataset.
 Performance measures of precision and recall are mostly used for evaluation. 
@@ -26,9 +26,9 @@ Performance measures of precision and recall are mostly used for evaluation.
 Following datasets can be regarded as IE datasets:
 
 \begin{itemize}
-	\item \sectiondoubleref{sec:ch40_fireman_without}
-	\item \sectiondoubleref{sec:ch40_fireman_annotated}
-	\item \sectiondoubleref{sec:ch40_corporate_acquisitions}
+	\item \sectiondoubleref{sec:data_fireman_without}
+	\item \sectiondoubleref{sec:data_fireman_annotated}
+	\item \sectiondoubleref{sec:data_corporate_acquisitions}
 \end{itemize}
 
 
@@ -42,11 +42,11 @@ The term ``Reasoning Datasets’’ is used here for the type of datasets which 
 
 Reasoning datasets used in the present work:
 \begin{itemize}
-	\item \sectiondoubleref{sec:ch40_rdf_fireman}
-	\item \sectiondoubleref{sec:ch40_rdf_acquisitions}
+	\item \sectiondoubleref{sec:data_rdf_fireman}
+	\item \sectiondoubleref{sec:data_rdf_acquisitions}
 \end{itemize}
 
-These datasets were used for evaluation of the idea of shareable extraction ontologies, see Section~\ref{sec:ch70_experiment}. 
+These datasets were used for evaluation of the idea of shareable extraction ontologies, see Section~\ref{sec:onto_experiment}. 
 
 
 \subsection{Classification Datasets}
@@ -60,11 +60,11 @@ Similarly to the previous section, the dataset is split into two parts during th
 
 Classification datasets used in the present work:
 \begin{itemize}
-	\item \sectiondoubleref{sec:ch40_classify_fireman}
-	\item \sectiondoubleref{sec:ch40_uci_datasets}
+	\item \sectiondoubleref{sec:data_classify_fireman}
+	\item \sectiondoubleref{sec:data_uci_datasets}
 \end{itemize}
 
-These datasets were used for evaluation of the Fuzzy ILP classification method in Section~\ref{sec:ch80_eval}. 
+These datasets were used for evaluation of the Fuzzy ILP classification method in Section~\ref{sec:fuzzy_eval}. 
 
 
 
@@ -77,11 +77,11 @@ Datasets that were partly or mostly prepared as a part the present work are:
 
 
 \begin{itemize}
-	\item \sectiondoubleref{sec:ch40_fireman_without}
-	\item \sectiondoubleref{sec:ch40_fireman_annotated}
-	\item \sectiondoubleref{sec:ch40_rdf_fireman}
-	\item \sectiondoubleref{sec:ch40_rdf_acquisitions}
-	\item \sectiondoubleref{sec:ch40_classify_fireman}
+	\item \sectiondoubleref{sec:data_fireman_without}
+	\item \sectiondoubleref{sec:data_fireman_annotated}
+	\item \sectiondoubleref{sec:data_rdf_fireman}
+	\item \sectiondoubleref{sec:data_rdf_acquisitions}
+	\item \sectiondoubleref{sec:data_classify_fireman}
 \end{itemize}
 
 All the contributed datasets can be downloaded from the web site of the project. 
@@ -90,16 +90,16 @@ All the contributed datasets can be downloaded from the web site of the project.
 Datasets that were used without any additional contributions are:
 
 \begin{itemize}
-	\item \sectiondoubleref{sec:ch40_corporate_acquisitions}
-	\item \sectiondoubleref{sec:ch40_uci_datasets}
+	\item \sectiondoubleref{sec:data_corporate_acquisitions}
+	\item \sectiondoubleref{sec:data_uci_datasets}
 \end{itemize}
 
 
 \section{Individual Datasets}
 In this section individual datasets used in this thesis will be presented. The order of dataset presentations is the same as the order in which they were used in our work.
 
-\subsection{Czech Fireman Reports without Annotations} \label{sec:ch40_fireman_without}
-In the early beginning of our work, first IE experiments were done with textual reports from fire departments of several regions of the Czech Republic. These departments are responsible for rescue and recovery after fire, traffic and other accidents. Likewise the reports do not deal only with fire and traffic accidents but also chemical interventions, fire-fighting contests, fire drills and similar events can be found. The reports are rich in information, e.g. where and when an accident occurred, which units helped, how much time it took them to show up on the place of accident, how many people were injured, killed etc. An example of such report can be seen in the Figure~\ref{fig:ch50_article}.
+\subsection{Czech Fireman Reports without Annotations} \label{sec:data_fireman_without}
+In the early beginning of our work, first IE experiments were done with textual reports from fire departments of several regions of the Czech Republic. These departments are responsible for rescue and recovery after fire, traffic and other accidents. Likewise the reports do not deal only with fire and traffic accidents but also chemical interventions, fire-fighting contests, fire drills and similar events can be found. The reports are rich in information, e.g. where and when an accident occurred, which units helped, how much time it took them to show up on the place of accident, how many people were injured, killed etc. An example of such report can be seen in the Figure~\ref{fig:manual_article}.
 
 The dataset is made up by 814 texts of the reports collected in the time period from February to September 2007 using a RSS feed. All the reports are still available on the web site of the Ministry of Interior of the Czech Republic\footnote{\url{http://www.hzscr.cz/hasicien/}}. 
 
@@ -119,7 +119,7 @@ For example report 47443 (ID) from Jihomoravský region has following URL:
 
 The dataset contains reports from eight Czech regions: Jihomoravský (127 reports), Královéhradecký (109 reports), Moravskoslezský (138), Olomoucký (77), Pardubický (95), Plzeňský (97), Ústecký (108) and Vysočina (63). All the reports are written in Czech language. 
 
-The dataset does not contain any manual annotations; only linguistic annotations produced by PDT tools are included in the dataset (FS format for Netgraph processing and PML format for Btred processing, see Section~\ref{sec:ch30_pdt_tools_and_resources} for details about these tools). Table~\ref{tab:ch40_fire_without} summarizes some properties of the dataset’s reports described bellow.  Total sum, average value, standard deviation, minimum, maximum and median of the values can be found in the table.
+The dataset does not contain any manual annotations; only linguistic annotations produced by PDT tools are included in the dataset (FS format for Netgraph processing and PML format for Btred processing, see Section~\ref{sec:third_pdt_tools_and_resources} for details about these tools). Table~\ref{tab:data_fire_without} summarizes some properties of the dataset’s reports described bellow.  Total sum, average value, standard deviation, minimum, maximum and median of the values can be found in the table.
 
 
 Text size is the length of the text of a particular report in characters. More precisely it is the size of the corresponding ``.txt'' file. ISO-8859-2 (Latin-2) character encoding is used in these files so the number of characters is the same as the file size in bytes. 
@@ -131,7 +131,7 @@ Annotations size expresses the number of bytes used by the corresponding linguis
 Number of trees is the number of tectogrammatical trees in a particular report. The number also corresponds with the number of sentences in the report.
 
 
-The dataset was used for a quantitative evaluation experiment described in Section~\ref{sec:ch50_quant_experiment}. 
+The dataset was used for a quantitative evaluation experiment described in Section~\ref{sec:manual_quant_experiment}. 
 
 
 \begin{table}
@@ -146,15 +146,15 @@ annot. size  & 51 464 581 & 63 224.3 & 43 557.61 & 4 648 & 451 953 & 52 033.5\\
 num. t-trees &     15 208 &     18.7 &     15.02 &     1 &     143 &     14.0\\
 \hline
 \end{tabular}
-\caption{Dataset \ref{sec:ch40_fireman_without} -- \nameref{sec:ch40_fireman_without} -- statistics} \label{tab:ch40_fire_without}
+\caption{Dataset \ref{sec:data_fireman_without} -- \nameref{sec:data_fireman_without} -- statistics} \label{tab:data_fire_without}
 \end{table}
 
 
-\subsection{Czech Fireman Reports Manually Annotated} \label{sec:ch40_fireman_annotated}
+\subsection{Czech Fireman Reports Manually Annotated} \label{sec:data_fireman_annotated}
 
 We have created a manually annotated version of the previous dataset. 
-This dataset was created by ourselves during the development of our IE  engine based on machine learning (Section~\ref{sec:methods_learning}). 50 reports from the previous dataset were selected and manually annotated. 
- Several annotation types were used; numbers of annotations per each annotation type are summarized in Table~\ref{tab:ch40_fire_with} along with the information whether the particular annotation type was used in the evaluation. See details abut the evaluation results in Section~\ref{sec:eval_learning}. 
+This dataset was created by ourselves during the development of our IE  engine based on machine learning (Section~\ref{sec:learning_methods}). 50 reports from the previous dataset were selected and manually annotated. 
+ Several annotation types were used; numbers of annotations per each annotation type are summarized in Table~\ref{tab:data_fire_with} along with the information whether the particular annotation type was used in the evaluation. See details abut the evaluation results in Section~\ref{sec:learning_eval}. 
 
 
 
@@ -206,7 +206,7 @@ amateur\_units & 1 & no\\
 lather & 1 & no\\
 \hline
 \end{tabular}
-\caption{Dataset \ref{sec:ch40_fireman_annotated} -- \nameref{sec:ch40_fireman_annotated} -- manual annotations} \label{tab:ch40_fire_with}
+\caption{Dataset \ref{sec:data_fireman_annotated} -- \nameref{sec:data_fireman_annotated} -- manual annotations} \label{tab:data_fire_with}
 \end{table}
 
 
@@ -216,7 +216,7 @@ lather & 1 & no\\
 
 
 
-\subsection{Corporate Acquisition Events} \label{sec:ch40_corporate_acquisitions}
+\subsection{Corporate Acquisition Events} \label{sec:data_corporate_acquisitions}
 
 \begin{table}
 \centering
@@ -252,7 +252,7 @@ sellercode & 136 & no\\
 status & 461 & no\\
 \hline
 \end{tabular}
-\caption{Dataset \ref{sec:ch40_corporate_acquisitions} -- \nameref{sec:ch40_corporate_acquisitions} -- manual annotations} \label{tab:ch40_acquisitions}
+\caption{Dataset \ref{sec:data_corporate_acquisitions} -- \nameref{sec:data_corporate_acquisitions} -- manual annotations} \label{tab:data_acquisitions}
 \end{table}
 
 
@@ -262,32 +262,32 @@ events taken from the Reuters dataset. News articles are tagged to identify fiel
 related to acquisition events. These fields include `purchaser' , `acquired', and
 `seller' companies along with their abbreviated names (`purchabr', `acqabr' and
 `sellerabr'). Some news articles also mention the field `deal amount'. 
-Table~\ref{tab:ch40_acquisitions} provides numbers of annotations per annotation type for the whole dataset along with the information whether the particular annotation type was used in the evaluation. See details abut the evaluation results in Section~\ref{sec:eval_learning}. 
+Table~\ref{tab:data_acquisitions} provides numbers of annotations per annotation type for the whole dataset along with the information whether the particular annotation type was used in the evaluation. See details abut the evaluation results in Section~\ref{sec:learning_eval}. 
 
 
 
-\subsection{RDF Dataset Based on Czech Fireman Reports} \label{sec:ch40_rdf_fireman}
+\subsection{RDF Dataset Based on Czech Fireman Reports} \label{sec:data_rdf_fireman}
 
-Both reasoning datasets presented in this work are based on information extraction tasks. The datasets were created for evaluation of the idea of shareable extraction ontologies (see Section~\ref{sec:methods_Shareable_Extraction_Ontologies}). The datasets consists of so called document ontologies -- RDF representation of source documents (see Section~\ref{sec:ch70_doc_ont}) and extraction ontologies -- RDF representation of extraction rules (see Section~\ref{sec:ch70_extraction_ontologies}). Besides that there are also small mapping ontologies that solve small differences of the schemas used in document and extraction ontologies.
+Both reasoning datasets presented in this work are based on information extraction tasks. The datasets were created for evaluation of the idea of shareable extraction ontologies (see Section~\ref{sec:onto_extraction_ontologies}). The datasets consists of so called document ontologies -- RDF representation of source documents (see Section~\ref{sec:onto_doc_ont}) and extraction ontologies -- RDF representation of extraction rules (see Section~\ref{sec:onto_extraction_ontologies}). Besides that there are also small mapping ontologies that solve small differences of the schemas used in document and extraction ontologies.
 
-The reasoning task is to combine the three kinds of ontologies and infer all instances that should be found by the extraction rules saved in the particular extraction ontology, for details see the Section~\ref{sec:ch70_experiment}.
+The reasoning task is to combine the three kinds of ontologies and infer all instances that should be found by the extraction rules saved in the particular extraction ontology, for details see the Section~\ref{sec:onto_experiment}.
 
-This dataset is based on the IE dataset \sectiondoubleref{sec:ch40_fireman_annotated}; it consists of 50 document ontologies, one mapping ontology and currently one extraction ontology, which contains extraction rules for the `damage' task -- to find an amount (in CZK - Czech Crowns) of summarized damage arisen during a reported accident.
+This dataset is based on the IE dataset \sectiondoubleref{sec:data_fireman_annotated}; it consists of 50 document ontologies, one mapping ontology and currently one extraction ontology, which contains extraction rules for the `damage' task -- to find an amount (in CZK - Czech Crowns) of summarized damage arisen during a reported accident.
 
-Section~\ref{sec:ch70_datasets} provides also some additional information (basic statistics) about the dataset.
-
-
-\subsection{RDF Dataset Based on Corporate Acquisition Events} \label{sec:ch40_rdf_acquisitions}
-
-This is the second reasoning dataset presented in this work. The dataset is very similar to the previous one (see details in the previous section). It is based on the information extraction dataset \sectiondoubleref{sec:ch40_corporate_acquisitions}. It consists of 600 document ontologies, one mapping ontology and currently one extraction ontology, which contains extraction rules for the `acquired' task.
-
-Section~\ref{sec:ch70_datasets} provides also some additional information (basic statistics) about the dataset.
+Section~\ref{sec:onto_datasets} provides also some additional information (basic statistics) about the dataset.
 
 
+\subsection{RDF Dataset Based on Corporate Acquisition Events} \label{sec:data_rdf_acquisitions}
 
-\subsection{Classification Dataset Based on Czech Fireman Reports} \label{sec:ch40_classify_fireman}
+This is the second reasoning dataset presented in this work. The dataset is very similar to the previous one (see details in the previous section). It is based on the information extraction dataset \sectiondoubleref{sec:data_corporate_acquisitions}. It consists of 600 document ontologies, one mapping ontology and currently one extraction ontology, which contains extraction rules for the `acquired' task.
 
-The development of the Fuzzy ILP Classifier was partly motivated by the possibility of doing seriousness classification of accidents presented in the reports described in previous sections. We selected the same collection of 50 web reports as in the previous section and we manually extracted values of the most interesting features (These features will be described in Section \ref{sec:ch40_features}.) We also assigned a value of overall ranking of seriousness of the presented accident to each report.  The value of seriousness ranking is the target attribute of the classification task. 
+Section~\ref{sec:onto_datasets} provides also some additional information (basic statistics) about the dataset.
+
+
+
+\subsection{Classification Dataset Based on Czech Fireman Reports} \label{sec:data_classify_fireman}
+
+The development of the Fuzzy ILP Classifier was partly motivated by the possibility of doing seriousness classification of accidents presented in the reports described in previous sections. We selected the same collection of 50 web reports as in the previous section and we manually extracted values of the most interesting features (These features will be described in Section \ref{sec:data_features}.) We also assigned a value of overall ranking of seriousness of the presented accident to each report.  The value of seriousness ranking is the target attribute of the classification task. 
 
 %The main experiment presented in this chapter leads to the . %Our long term goal is extraction of semantic information from web reports. 
 %which is one of possible utilizations of the extracted information. 
@@ -342,16 +342,16 @@ ranking & 14 & 0 & yes\\
 \end{tabular}
 
 \caption{Accident attributes.}
-\label{img:ch40_attributes_description}
+\label{fig:data_attributes_description}
 \end{table}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Features of accidents} \label{sec:ch40_features}
+\subsubsection{Features of accidents} \label{sec:data_features}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-Table~\ref{img:ch40_attributes_description} summarizes all features (or attributes) that were obtained from accident reports. Except for the attribute \verb+type+ (type of an accident -- \verb+fire+, \verb+car_accident+ and \verb+other+), all the attributes are numeric and therefore \emph{monotonizable} (This is important, because only monotonizable attributes can be translated to fuzzy degrees.) There are cases in which the value of an attribute is unknown. We decided to make evidence of this and keep the values \verb+unknown+ in the knowledge base. A brief explanation of each attribute follows.
+Table~\ref{fig:data_attributes_description} summarizes all features (or attributes) that were obtained from accident reports. Except for the attribute \verb+type+ (type of an accident -- \verb+fire+, \verb+car_accident+ and \verb+other+), all the attributes are numeric and therefore \emph{monotonizable} (This is important, because only monotonizable attributes can be translated to fuzzy degrees.) There are cases in which the value of an attribute is unknown. We decided to make evidence of this and keep the values \verb+unknown+ in the knowledge base. A brief explanation of each attribute follows.
 \begin{itemize}
 	\item \verb+size+ is length of text of a particular report.
 	\item \verb+damage+ is an amount (in CZK -- Czech Crowns) of summarized damage arisen during a reported accident.
@@ -369,7 +369,7 @@ the rest (type \verb+other+, 18\%)
 deals with ecological disasters, chemical accidents, etc.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Seriousness ranking} \label{sec:ch40_seriousness}
+\subsubsection{Seriousness ranking} \label{sec:data_seriousness}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %\vspace{0.2cm}
@@ -378,14 +378,14 @@ deals with ecological disasters, chemical accidents, etc.
 \begin{figure}
 \centerline{\includegraphics[angle=-90, width=0.6\hsize]{ranking_histogram}}
 \caption{Frequencies of the seriousness ranking.}
-\label{img:ch40_ranking_histogram}
+\label{fig:data_ranking_histogram}
 \end{figure}
 
-Values of the overall seriousness ranking attribute were stated from ``a general impression'' made by the texts with respect to particular attributes. %(Figure~\ref{img:attributes_description}). 
+Values of the overall seriousness ranking attribute were stated from ``a general impression'' made by the texts with respect to particular attributes. %(Figure~\ref{fig:attributes_description}). 
 The values have evolved to 14 distinct values in the range from 0.5 to 8. 
-A histogram with frequencies of all these values is in Figure~\ref{img:ch40_ranking_histogram}.
+A histogram with frequencies of all these values is in Figure~\ref{fig:data_ranking_histogram}.
 We divided the values into four approximately equipotent groups 
-(see in Figure~\ref{img:ch40_ranking_histogram}) 
+(see in Figure~\ref{fig:data_ranking_histogram}) 
 and these groups determine the target class attribute of the classification task. 
 %and logic rules were learned for each group separately\footnote{We do not have a binary rule, which would return an exact value of the rating, but we have one ``true/false'' rule for each of the four categories.}.
 
@@ -394,9 +394,9 @@ and these groups determine the target class attribute of the classification task
 
 
 
-\subsection{Classification Datasets from UCI ML Repository} \label{sec:ch40_uci_datasets}
+\subsection{Classification Datasets from UCI ML Repository} \label{sec:data_uci_datasets}
 
-UCI Machine Learning Repository\footnote{\url{http://archive.ics.uci.edu/ml/index.html}} \citep{biblio:UCI} is a large archive of machine learning datasets collected at the University of California, Irvine. Several classification datasets were selected and used in the evaluation of the Fuzzy ILP Classifier, see in Section~\ref{sec:eval_fuzzy_uci}.
+UCI Machine Learning Repository\footnote{\url{http://archive.ics.uci.edu/ml/index.html}} \citep{biblio:UCI} is a large archive of machine learning datasets collected at the University of California, Irvine. Several classification datasets were selected and used in the evaluation of the Fuzzy ILP Classifier, see in Section~\ref{sec:fuzzy_eval_uci}.
 The list of selected datasets can be found in Table~\ref{tab:UCI_datasets}. All the datasets are monotonizable (the target attribute can be naturally ordered), so the fuzzy classifier could take advantage of that.
 
 

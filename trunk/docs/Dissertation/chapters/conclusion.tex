@@ -26,7 +26,7 @@ Our method can also provide a comparison of linguistic formalisms and tools beca
 \section{Shareable Extraction Ontologies} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{From Annotations to Real World Facts} \label{sec:discuss}
+\subsection{From Annotations to Real World Facts} \label{sec:onto_discuss}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -60,7 +60,7 @@ We also do not provide a proposal of a universal extraction ontology format (alt
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Conclusion} \label{sec:ch70_conclusion}
+\subsection{Conclusion} \label{sec:onto_conclusion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %In the end of the chapter we would like to summarize the main contributions of the chapter.
@@ -68,8 +68,8 @@ We also do not provide a proposal of a universal extraction ontology format (alt
 %\begin{itemize}
 	%\item In the beginning of the chapter we pointed out the draw back of so called extraction ontologies -- in most cases they are dependent on a particular extraction/annotation tool and they cannot be used separately.	
 	%\item We extended the concept of extraction ontologies by adding the shareable aspect and we introduced a new principle of making extraction ontologies independent of the original tool: the possibility of application of an extraction ontology to a document by an ordinary reasoner.
-	%\item In Section~\ref{sec:case} we presented a case study that shows that the idea of shareable extraction ontologies is realizable. We presented implementation of an IE tool that exports its extraction rules to an extraction ontology and we demonstrated how this extraction ontology can be applied to a document by a reasoner.
-	%\item Moreover in Section~\ref{sec:ch70_experiment} an experiment with several OWL reasoners was presented. The experiment evaluated the performance of contemporary OWL reasoners on IE tasks (application of extraction ontologies).  
+	%\item In Section~\ref{sec:onto_case} we presented a case study that shows that the idea of shareable extraction ontologies is realizable. We presented implementation of an IE tool that exports its extraction rules to an extraction ontology and we demonstrated how this extraction ontology can be applied to a document by a reasoner.
+	%\item Moreover in Section~\ref{sec:onto_experiment} an experiment with several OWL reasoners was presented. The experiment evaluated the performance of contemporary OWL reasoners on IE tasks (application of extraction ontologies).  
 	%\item A new publically available benchmark for OWL reasoning was created together with the experiment. Other reasoners can be tested this way.
 %\end{itemize}
    
@@ -77,9 +77,9 @@ In the beginning of our description, we pointed out the draw back of so called e
 
 We extended the concept of extraction ontologies by adding the shareable aspect and we introduced a new principle of making extraction ontologies independent of the original tool: the possibility of application of an extraction ontology to a document by an ordinary reasoner.
 
-In Section~\ref{sec:case} we presented a case study that shows that the idea of shareable extraction ontologies is realizable. We presented implementation of our IE tool that exports its extraction rules to an extraction ontology and we demonstrated how this extraction ontology can be applied to a document by a reasoner.
+In Section~\ref{sec:onto_case} we presented a case study that shows that the idea of shareable extraction ontologies is realizable. We presented implementation of our IE tool that exports its extraction rules to an extraction ontology and we demonstrated how this extraction ontology can be applied to a document by a reasoner.
 
-Moreover in Section~\ref{sec:ch70_experiment} an experiment with several OWL reasoners was presented. The experiment evaluated the performance of contemporary OWL reasoners on IE tasks (application of extraction ontologies). A new publically available benchmark for OWL reasoning was created together with the experiment. Other reasoners can be tested this way.
+Moreover in Section~\ref{sec:onto_experiment} an experiment with several OWL reasoners was presented. The experiment evaluated the performance of contemporary OWL reasoners on IE tasks (application of extraction ontologies). A new publically available benchmark for OWL reasoning was created together with the experiment. Other reasoners can be tested this way.
 
 %We would like to conclude the chapter by stating that only time will show if the fundamental idea of the chapter will be useful but today it is at least a new use case for both: usage of IE tools and reasoners.
 
@@ -112,7 +112,7 @@ Our experiments deal with texts in the Czech language but our method is general 
 The term statistical significance refers to the result of a pair-wise comparison of learning engines using the corrected resampled (two tailed) T-Test \citep{Nadeau:2003:IGE:779909.779927}, which is suitable for cross validation based experiments. The Weka implementation\footnote{\url{http://www.cs.waikato.ac.nz/ml/weka/}} is used. Test significance is 0.05 in all cases.
 
 
-\section{Repeatability of Experiments} \label{sec:ch90_repeatablity}
+\section{Repeatability of Experiments} \label{sec:conclusion_repeatablity}
 
 
 Our implementation is publicly available. The data, source codes and a platform-independent installer of the Crisp and Fuzzy ILP classifiers for Weka can be downloaded from our Fuzzy ILP classifier's web page\footnote{\url{http://www.ksi.mff.cuni.cz/~dedek/fuzzyILP/}}. This makes our experiment repeatable according to the

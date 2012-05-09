@@ -10,16 +10,16 @@ This chapter shortly introduces mostly related work of other researchers. The ch
 \begin{quotation}
 The choice of the actual learning algorithm depends on the type of structural information available. For example, deep syntactic information provided by current parsers for new types of corpora such as biomedical text is seldom reliable, since most parsers have been trained on different types of narrative. If reliable syntactic information is lacking, sequences of words around and between the two entities can be used as alternative useful discriminators.	
 \end{quotation}
-Since that time, the situation has improved and deep linguistic parsing is often used even for biomedical texts (because new biomedical corpora are available for retraining of the parsers; see e.g. in \citep{Buyko:2010:EIA:1870658.1870754}) and  dependency graphs constitute the fundamental data structure for syntactic structuring and subsequent knowledge extraction from natural language documents in many contemporary approaches to information extraction (see details about individual information extraction systems in Section~\ref{sec:rel_deep_IE_systems}). Currently, quite a lot of parsers can be used for generation of these structures from natural language texts. 
+Since that time, the situation has improved and deep linguistic parsing is often used even for biomedical texts (because new biomedical corpora are available for retraining of the parsers; see e.g. in \citep{Buyko:2010:EIA:1870658.1870754}) and  dependency graphs constitute the fundamental data structure for syntactic structuring and subsequent knowledge extraction from natural language documents in many contemporary approaches to information extraction (see details about individual information extraction systems in Section~\ref{sec:relwork_deep_IE_systems}). Currently, quite a lot of parsers can be used for generation of these structures from natural language texts. 
 
-Besides the possibility of using different parsers there are also various language dependency representations (LDR) such as the Stanford \citep{stanfordDeps} and CoNLL-X \citep{johansson2007a} dependencies and the Functional Generative Description (FGD) \citep{SgallHajicovaPanevova1986} studied mainly in Prague. All the dependency representations are very similar from the structural point of view; they differ mainly in the number of different dependency kinds they offer. FGD provides also additional node attributes and so called layered approach (see in Section~\ref{sec:ch30_pdt}) and is the only representation available for Czech.
+Besides the possibility of using different parsers there are also various language dependency representations (LDR) such as the Stanford \citep{stanfordDeps} and CoNLL-X \citep{johansson2007a} dependencies and the Functional Generative Description (FGD) \citep{SgallHajicovaPanevova1986} studied mainly in Prague. All the dependency representations are very similar from the structural point of view; they differ mainly in the number of different dependency kinds they offer. FGD provides also additional node attributes and so called layered approach (see in Section~\ref{sec:third_pdt}) and is the only representation available for Czech.
 
 
 It is also worthy to investigate the impact of usage of different LDRs on the performance of information extraction. \cite{Buyko:2010:EIA:1870658.1870754} compared the impact of different LDRs and parsers in their IE system, namely Stanford and CoNLL-X dependencies and usage of different trimming operations. Their findings are definitely not supporting one choice against another because one representation was better for some tasks and another one for other tasks, see examples in their paper. More important seems to be the quality of used parser.
 
 
 
-\subsection{IE Systems Based on Deep Language Parsing} \label{sec:rel_deep_IE_systems}
+\subsection{IE Systems Based on Deep Language Parsing} \label{sec:relwork_deep_IE_systems}
 
 
 We describe in this section several information extraction systems based on deep language parsing. The systems differ greatly in the manner of using LDR.
@@ -56,7 +56,7 @@ Classical machine learning (ML) approaches rely on the existence of a learning c
 
 \subsubsection{Inductive Systems}
 
-There are also systems using some inductive technique e.g. Inductive Logic Programming (ILP, see also Section~\ref{sec:ch30_ILP}) to induce learning features or extraction rules automatically from learning collection. In these cases it is neither necessary to manually design extraction rules nor select the right learning features. For example \cite{DBLP:conf/ilp/RamakrishnanJBS07} used the dependency parser MINIPAR\footurl{http://webdocs.cs.ualberta.ca/~lindek/minipar.htm} \citep{minipar} and ILP for construction of both:
+There are also systems using some inductive technique e.g. Inductive Logic Programming (ILP, see also Section~\ref{sec:third_ILP}) to induce learning features or extraction rules automatically from learning collection. In these cases it is neither necessary to manually design extraction rules nor select the right learning features. For example \cite{DBLP:conf/ilp/RamakrishnanJBS07} used the dependency parser MINIPAR\footurl{http://webdocs.cs.ualberta.ca/~lindek/minipar.htm} \citep{minipar} and ILP for construction of both:
 \begin{enumerate}
 	\item learning features for SVM classifier and
 	\item plain extraction rules.
@@ -115,7 +115,7 @@ An ontology is a formal specification of a shared conceptualization.	\citep{so17
 An ontology is a formal, explicit specification of a shared conceptualization. \citep{Studer1998161}
 \end{quote}
 
-Of course the word `shareable' has different meaning from `shared'. (Something that is shareable is not necessarily shared, but on the other hand something that is shared should be shareable.) We do not think that shareable extraction ontologies will contain shared knowledge about how to extract data from documents in certain domain. This is for example not true for all extraction models artificially learned from a training corpus. Here shareable simply means that the extraction rules can be shared amongst software agents and can be used separately from the original tool. This is the deviation in use of the term `ontology' in the context of extraction ontologies in this chapter (similarly for document ontologies, see in Section~\ref{sec:ch70_doc_ont}).
+Of course the word `shareable' has different meaning from `shared'. (Something that is shareable is not necessarily shared, but on the other hand something that is shared should be shareable.) We do not think that shareable extraction ontologies will contain shared knowledge about how to extract data from documents in certain domain. This is for example not true for all extraction models artificially learned from a training corpus. Here shareable simply means that the extraction rules can be shared amongst software agents and can be used separately from the original tool. This is the deviation in use of the term `ontology' in the context of extraction ontologies in this chapter (similarly for document ontologies, see in Section~\ref{sec:onto_doc_ont}).
 
 
 
@@ -123,7 +123,7 @@ Of course the word `shareable' has different meaning from `shared'. (Something t
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Document Classification} \label{sec:relwork_doc_classification}  \label{sec:ch20_doc_classification}
+\section{Document Classification} \label{sec:relwork_doc_classification} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{General Document Classification}

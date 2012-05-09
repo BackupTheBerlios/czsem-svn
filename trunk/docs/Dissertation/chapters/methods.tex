@@ -2,7 +2,7 @@
 
 In this chapter, the four methods corresponding to the four topics of this thesis will be introduced and described. The chapter is structured to four main sections according to the four topics. 
 
-\section{Manual Design of Extraction Rules} \label{sec:methods_manual} \label{sec:ch50_manual_rules_chapter}
+\section{Manual Design of Extraction Rules} \label{sec:manual_methods}
 \graphicspath{{../img/ch50/}}
 
 In this section, the extraction method based on manually created linguistic rules will be described. First of all a data flow schema of the extraction process will be presented. Then a description of several stages of evolution of the method will demonstrate how this method came to its existence and which decisions stood behind the development and the final implementation, which will be described in the next chapter.
@@ -12,14 +12,14 @@ The approach is based on linguistic preprocessing, oriented to text structured t
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Data Flow} \label{sec:ch50_data_flow}
+\subsection{Data Flow} \label{sec:manual_data_flow}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{figure}
 	\centering
 		\includegraphics[width=0.2\hsize]{ap_schema}
 	\caption{Schema of the extraction process.}
-	\label{fig:ch50_ap_schema}
+	\label{fig:manual_ap_schema}
 \end{figure}
 
 
@@ -27,27 +27,27 @@ The approach is based on linguistic preprocessing, oriented to text structured t
 	\centering
 		\includegraphics[width=0.5\hsize]{article}
 	\caption{One web page with an accident report.}
-	\label{fig:ch50_article}
+	\label{fig:manual_article}
 \end{figure}
 
 
-The method was designed as a method for extraction of information from web resources. Thus the extraction process starts on the Web. On the other hand the method was intended to serve the evolution of the Semantic Web, so the final goal of the extraction process is the extracted information stored in the form of a semantic web ontology. A schema in Figure~\ref{fig:ch50_ap_schema} splits the process into four steps (phases) among five media types. The schema does not cover the extraction rules design phase; it is assumed that extraction rules were already designed by a human designer; Section~\ref{sec:ch50_rules_design} provides details about that. A description of individual steps follows. 
+The method was designed as a method for extraction of information from web resources. Thus the extraction process starts on the Web. On the other hand the method was intended to serve the evolution of the Semantic Web, so the final goal of the extraction process is the extracted information stored in the form of a semantic web ontology. A schema in Figure~\ref{fig:manual_ap_schema} splits the process into four steps (phases) among five media types. The schema does not cover the extraction rules design phase; it is assumed that extraction rules were already designed by a human designer; Section~\ref{sec:manual_rules_design} provides details about that. A description of individual steps follows. 
 
 
 
 \begin{enumerate}
-\item \emph{Extraction of text} \\ First of all, target web pages have to be identified, downloaded and text has to be extracted form them. This issue is not studied in the present work. A RSS feed of the fire department web-site was used to identify and download relevant pages and the desired text (see highlighted area in the Figure~\ref{fig:ch50_article}) was extracted by means of a regular expression. The text is an input of the second phase.
+\item \emph{Extraction of text} \\ First of all, target web pages have to be identified, downloaded and text has to be extracted form them. This issue is not studied in the present work. A RSS feed of the fire department web-site was used to identify and download relevant pages and the desired text (see highlighted area in the Figure~\ref{fig:manual_article}) was extracted by means of a regular expression. The text is an input of the second phase.
 
-\item \emph{Linguistic annotation} \\ In this phase the extracted text is processed by several linguistic tools. The tools analyze the text and produce corresponding set of linguistic dependency trees. There is a rich choice of linguistic tools available (see Section~\ref{sec:ch30_ling_tools}), but only PDT based tools were used in illustration examples and linguistic trees are always of the form of Tectogrammatical trees, but note that the method is general and it is not limited to the PDT presentation of linguistic dependency trees.
+\item \emph{Linguistic annotation} \\ In this phase the extracted text is processed by several linguistic tools. The tools analyze the text and produce corresponding set of linguistic dependency trees. There is a rich choice of linguistic tools available (see Section~\ref{sec:third_ling_tools}), but only PDT based tools were used in illustration examples and linguistic trees are always of the form of Tectogrammatical trees, but note that the method is general and it is not limited to the PDT presentation of linguistic dependency trees.
 
-\item \emph{Data extraction} \\ The structure of linguistic dependency trees is used for the extraction of relevant structured data form the text. The extraction method used in this phase is the main topic of this section (Section~\ref{sec:methods_manual}) and details about the method are discuses in following subsections.
+\item \emph{Data extraction} \\ The structure of linguistic dependency trees is used for the extraction of relevant structured data form the text. The extraction method used in this phase is the main topic of this section (Section~\ref{sec:manual_methods}) and details about the method are discuses in following subsections.
 
 \item \emph{Semantic representation} \\ Although the output of the previous phase is already of a structured form, it is not necessarily of the form of a semantic web ontology. The output has to be converted to some ontology format (RDF, OWL) and appropriate schema for given domain and type of extracted information. 
 
 This last step of the extraction process represents a logical distinction between two functionally different tasks of the extraction method. The first task represented by the previous (Data extraction) phase is responsible for choosing of ``what’’ should be extracted, while the second task (Semantic representation) should determine what to do with the extracted data or how to formulate the pieces of information discovered by the Data extraction phase. The border between these two tasks is rather vague and they could be merged together, but we think that the distinction between them can help to understand the problem better.
 
 
-In the present work only a design of this phase is provided (with a small exception -- using shareable extraction ontologies, see Section~\ref{sec:methods_Shareable_Extraction_Ontologies}) because: (1) this task seems to be strongly dependent on manual work of human designers and (2) its potential for meaningful scientific investigation seems to be rather small. Details about this step are further discussed in Section~\ref{sec:ch50_sem_interpret}.
+In the present work only a design of this phase is provided (with a small exception -- using shareable extraction ontologies, see Section~\ref{sec:onto_extraction_ontologies}) because: (1) this task seems to be strongly dependent on manual work of human designers and (2) its potential for meaningful scientific investigation seems to be rather small. Details about this step are further discussed in Section~\ref{sec:manual_sem_interpret}.
 \end{enumerate}
 
 
@@ -56,11 +56,11 @@ In the present work only a design of this phase is provided (with a small except
 \subsection{Evolution of the Method}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Our first attempt to extract some structured data from linguistically annotated text was done in a standard procedural programming environment (more precisely in Perl, Btred). After an initial phase of development first extraction rule was created as a single executable procedure. This procedure will be described in the next chapter (Section~\ref{sec:impl_btred_rules}) and listed in Figure~\ref{lst:btred_rule}. There are many drawbacks of the procedural rule design: such extraction rules are difficult to read, tedious to create, error prone, graphical or assisted design is impossible. On the other hand, this approach has the advantage of the programming language proximity. When a designer designs a procedural extraction rule he or she actually codes it in a procedural programming language and it is easy to add some additional functionality that will be executed and evaluated along with the extraction rule. Thus the designer has the full power of the programming language in hand and he or she can use it inside of the extraction rule. This possibility will be discussed later in the context of semantic interpretation of extracted data.
+Our first attempt to extract some structured data from linguistically annotated text was done in a standard procedural programming environment (more precisely in Perl, Btred). After an initial phase of development first extraction rule was created as a single executable procedure. This procedure will be described in the next chapter (Section~\ref{sec:manual_Procedural_Extraction_Rules}) and listed in Figure~\ref{fig:btred_rule}. There are many drawbacks of the procedural rule design: such extraction rules are difficult to read, tedious to create, error prone, graphical or assisted design is impossible. On the other hand, this approach has the advantage of the programming language proximity. When a designer designs a procedural extraction rule he or she actually codes it in a procedural programming language and it is easy to add some additional functionality that will be executed and evaluated along with the extraction rule. Thus the designer has the full power of the programming language in hand and he or she can use it inside of the extraction rule. This possibility will be discussed later in the context of semantic interpretation of extracted data.
 
 Dissatisfaction from tedious and time consuming design of procedural extraction rules led us to the idea of a special rule language. We were looking for a language that would allow expressing tree patterns and consequent extraction actions of extraction rules. It turned out that the Netgraph query language is very suitable for the first purpose -- expressing tree patterns. An extension of the Netgraph query language to a language for extraction rules was quite simple then. See the details in the next section.
 
-Last two steps in the evolution of the extraction method were (1) creation of machine learning procedure that is capable to learn extraction rules from manually annotated corpus (see in Section~\ref{sec:methods_learning}) and (2) possibility to export extraction rules to a shareable extraction ontology so the extraction rules can be evaluated on a document by an ordinary semantic web reasoner outside of the original extraction tool (see in Section~\ref{sec:methods_Shareable_Extraction_Ontologies}).
+Last two steps in the evolution of the extraction method were (1) creation of machine learning procedure that is capable to learn extraction rules from manually annotated corpus (see in Section~\ref{sec:learning_methods}) and (2) possibility to export extraction rules to a shareable extraction ontology so the extraction rules can be evaluated on a document by an ordinary semantic web reasoner outside of the original extraction tool (see in Section~\ref{sec:onto_extraction_ontologies}).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -90,14 +90,14 @@ driver & woman driver & passenger & woman passenger\\
 \hline
 \end{tabular}		
 	\caption{A manually created extraction rule investigating numbers of injuries and fatalities.}
-	\label{fig:ch50_extract_patern}
+	\label{fig:manual_extract_patern}
 \end{figure}
 
 
 
 Netgraph based extraction rules are declarative, they do not specify a sequential procedure ``what to do with a linguistic tree'', they are rather based on conditions and selections similar to SQL.
 
-Netgraph is a linguistic tool used for searching through a syntactically annotated corpus (see Section~\ref{sec:ch30_netgraph} for details). Netgraph queries are written in a special query language with a graphical representation. The graphical representation of a query is much better readable than its linear textual representation and we will use the graphical representation only. Figure~\ref{fig:ch50_extract_patern} shows an example Netgraph query. It specifies necessary tree structure that has to be present in a matching tree and attribute restrictions that have to hold true for corresponding nodes (the restrictions are printed beside the nodes).
+Netgraph is a linguistic tool used for searching through a syntactically annotated corpus (see Section~\ref{sec:third_netgraph} for details). Netgraph queries are written in a special query language with a graphical representation. The graphical representation of a query is much better readable than its linear textual representation and we will use the graphical representation only. Figure~\ref{fig:manual_extract_patern} shows an example Netgraph query. It specifies necessary tree structure that has to be present in a matching tree and attribute restrictions that have to hold true for corresponding nodes (the restrictions are printed beside the nodes).
 
 
 
@@ -111,21 +111,21 @@ where \emph{netgraph\_query} stands for an arbitrary Netgraph query, \emph{node1
 
 The extraction works as follows: the Netgraph query is evaluated by searching through a corpus of linguistic trees. Matching trees are returned and the desired information defined by the SELECT part of the extraction rule is taken from particular tree nodes and printed to the output.
 
-Let us explain the extraction procedure in detail, using the example of extraction rule from the Figure~\ref{fig:ch50_extract_patern}, which is looking for information about killed and injured people during a (usually car) accident. This rule consists of five nodes. Each node of the rule will match with the corresponding node in each matching tree. So we can investigate the relevant information by reading values of linguistic attributes of matching nodes. We can find out the number (node number 5) and kind (4) of people, which were or were not (2) killed or injured (1) by an accident that is presented in the given sentence. And we can also identify the manner of injury (light or heavy) in the node number 3.
+Let us explain the extraction procedure in detail, using the example of extraction rule from the Figure~\ref{fig:manual_extract_patern}, which is looking for information about killed and injured people during a (usually car) accident. This rule consists of five nodes. Each node of the rule will match with the corresponding node in each matching tree. So we can investigate the relevant information by reading values of linguistic attributes of matching nodes. We can find out the number (node number 5) and kind (4) of people, which were or were not (2) killed or injured (1) by an accident that is presented in the given sentence. And we can also identify the manner of injury (light or heavy) in the node number 3.
 
-Implementation details and some additional examples of these extraction rules will be presented in the next chapter (Section~\ref{sec:impl_manual_rules}).
+Implementation details and some additional examples of these extraction rules will be presented in the next chapter (Section~\ref{sec:manual_impl_rules}).
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Methodology for Rule Designers} \label{sec:ch50_rules_design}
+\subsection{Methodology for Rule Designers} \label{sec:manual_rules_design}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{figure}
 	\centering
 		\includegraphics[angle=-90, width=0.5\hsize]{coverge_tuning}
 	\caption{Gradual refinement of an extraction rule.}
-	\label{fig:ch50_coverge_tuning}
+	\label{fig:manual_coverge_tuning}
 \end{figure}
 
 
@@ -134,7 +134,7 @@ The process of manual design of extraction rules is heavily dependent on skills 
 The process consists of two parts: construction of a Netgraph query and semantic interpretation of the query. The semantic interpretation part will be discussed in the next section.
 
 One obvious preposition of the procedure is that we have a collection of training texts.
-The procedure is demonstrated in Figure~\ref{fig:ch50_coverge_tuning} and it starts with frequency analysis of words (their lemmas) occurring in the texts. Especially frequency analysis of verbs is very useful --- meaning of a clause is usually strongly dependent on the meaning of the corresponding verb.
+The procedure is demonstrated in Figure~\ref{fig:manual_coverge_tuning} and it starts with frequency analysis of words (their lemmas) occurring in the texts. Especially frequency analysis of verbs is very useful --- meaning of a clause is usually strongly dependent on the meaning of the corresponding verb.
 
 \textbf{Frequency analysis} helps the designer to choose some representative words (\textbf{key-words}) that will be further used for searching the training text collection. Ideal choice of key-words would cover the majority of sentences that express the information we are looking for and it should cover minimal number of the not-intended sentences. An initial choice need not be always sufficient and the process could iterate.
 
@@ -142,20 +142,20 @@ Next step of the procedure consists in \textbf{investigating trees} that are cov
 
 After that the designer can formulate an initial \textbf{Netgraph query} and he or she can compare result of the Netgraph query with the coverage of key-words. Based on this he or she can reformulate the query and gradually refine the query and \textbf{tune the query coverage}.
 
-There are two goals of the query tuning. The first goal is maximization of the relevance of the query. An ideal result is a query that covers all sentences expressing given type of information and no other. The second goal is to involve all important tree-nodes to the query. The second goal is important because the \textbf{complexity of the query} (number of involved nodes) makes it possible to extract more complex information. For example see the query on the Figure~\ref{fig:ch50_extract_patern} --- each node keeps different kind of information.
+There are two goals of the query tuning. The first goal is maximization of the relevance of the query. An ideal result is a query that covers all sentences expressing given type of information and no other. The second goal is to involve all important tree-nodes to the query. The second goal is important because the \textbf{complexity of the query} (number of involved nodes) makes it possible to extract more complex information. For example see the query on the Figure~\ref{fig:manual_extract_patern} --- each node keeps different kind of information.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Semantic Interpretation of Extracted Data} \label{sec:ch50_sem_interpret}
+\subsection{Semantic Interpretation of Extracted Data} \label{sec:manual_sem_interpret}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 After the designer has successfully formulated the Netgraph query he or she has to supply semantic interpretation of the query. This interpretation expresses how to transform matching nodes of the query (and the available linguistic information connected with the nodes) to the output data.
 
-We did not talk about the extraction output so far. It will be described in the next chapter. For the current description, it is sufficient to say that both methods (the procedural one and the declarative one) have, although structured but still, proprietary XML extraction output. This corresponds to the penultimate stage (raw data) of our data flow schema presented in Section~\ref{sec:ch50_data_flow}. In this section, we will describe details about the last step of the data flow schema -- semantic representation of extracted data.
+We did not talk about the extraction output so far. It will be described in the next chapter. For the current description, it is sufficient to say that both methods (the procedural one and the declarative one) have, although structured but still, proprietary XML extraction output. This corresponds to the penultimate stage (raw data) of our data flow schema presented in Section~\ref{sec:manual_data_flow}. In this section, we will describe details about the last step of the data flow schema -- semantic representation of extracted data.
 
-In Section~\ref{sec:impl_manual_output}, the difference between the output of the procedural extraction rule (Section~\ref{sec:ch50_Procedural_Extraction_Rules}, Figure~\ref{fig:btred_xml}) and the Netgraph based extraction rule (Section~\ref{sec:ch50_Netgraph_Based_Extraction_Rules}, Figure~\ref{fig:select_xml}) can be observed. The procedural one is closer to the semantics of the extracted data while the Netgraph based one is more general, rather based on the semantics of the matching tree and extraction rule. The difference is connected with the difference of the design processes of these extraction rules. While Netgraph based rules are designed in a comfortable way using a graphical tool, the procedural rules have to be coded manually in the programming language of Perl. A Perl programmer has great freedom in the design of a procedural rule and he or she can adapt the rule such that it precisely respects the semantics of extracted data. A designer of a Netgraph based rule has the only freedom in the construction of a Netgraph query and in selection particular query nodes and linguistic attributes that will be selected for the output.
+In Section~\ref{sec:manual_impl_output}, the difference between the output of the procedural extraction rule (Section~\ref{sec:manual_Procedural_Extraction_Rules}, Figure~\ref{fig:btred_xml}) and the Netgraph based extraction rule (Section~\ref{sec:manual_Netgraph_Based_Extraction_Rules}, Figure~\ref{fig:select_xml}) can be observed. The procedural one is closer to the semantics of the extracted data while the Netgraph based one is more general, rather based on the semantics of the matching tree and extraction rule. The difference is connected with the difference of the design processes of these extraction rules. While Netgraph based rules are designed in a comfortable way using a graphical tool, the procedural rules have to be coded manually in the programming language of Perl. A Perl programmer has great freedom in the design of a procedural rule and he or she can adapt the rule such that it precisely respects the semantics of extracted data. A designer of a Netgraph based rule has the only freedom in the construction of a Netgraph query and in selection particular query nodes and linguistic attributes that will be selected for the output.
 
-As stated in Section~\ref{sec:ch50_data_flow} about the data flow, the goal of our extraction process is in the form of a semantic web ontology. This is not difficult in the case of procedural rules. Once the schema (or vocabulary) of the target ontology is selected, the extraction rules can be simply designed to produce the output of that form (Note that semantic web ontologies can be captured in a specific XML format.)
+As stated in Section~\ref{sec:manual_data_flow} about the data flow, the goal of our extraction process is in the form of a semantic web ontology. This is not difficult in the case of procedural rules. Once the schema (or vocabulary) of the target ontology is selected, the extraction rules can be simply designed to produce the output of that form (Note that semantic web ontologies can be captured in a specific XML format.)
 
 In the case of Netgraph based queries the situation is more complex and different solutions can be discovered. All the solutions have one thing in common: additional manual work is necessary. The problem is basically to create a mapping of the data in one format (results of Netgraph based rules) to another format (target ontology). It can be done by a variety of technical means (coded in an arbitrary programming language, XSLT, or using a graphical mapping tool like 
 Altova MapForce\footnote{\url{http://www.altova.com/mapforce/xml-mapping.html}}
@@ -169,7 +169,7 @@ Stylus Studio\footnote{\url{http://www.stylusstudio.com/xsd_to_xsd.html}}
 	\centering
 		\includegraphics[angle=-90, width=0.9\hsize]{semantic_interpretation}
 	\caption{Semantic interpretation of the extraction rule.}
-	\label{fig:ch50_semantic_interpretation}
+	\label{fig:manual_semantic_interpretation}
 \end{figure}
 
 
@@ -177,14 +177,14 @@ Stylus Studio\footnote{\url{http://www.stylusstudio.com/xsd_to_xsd.html}}
 	\centering
 		\includegraphics[angle=-90, width=\hsize]{instances}
 	\caption{Extracted instances of the target ontology.}
-	\label{fig:ch50_instatnces}
+	\label{fig:manual_instatnces}
 \end{figure}
 
 \begin{figure}
 	\centering
 		\includegraphics[angle=-90, width=0.3\hsize]{classes}
 	\caption{Schema of the target ontology.}
-	\label{fig:ch50_classes}
+	\label{fig:manual_classes}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -217,11 +217,11 @@ WHERE {
 
 
 
-Similar but in a sense different solution is to ground the mapping directly in extraction rules. Instead of creating mapping of the extraction output, extraction rules will contain also the information about the form of the extraction output. Selection of particular query nodes and linguistic attributes for the output will be extended by the specification of how the attributes will be rendered on the output. A graphical representation of such extraction rule can look like in Figure~\ref{fig:ch50_semantic_interpretation}. It shows the connection between a Netgraph query on the left and an ontology instance on the right. Every node of the query can be translated to the ontology and the translation can be configured. 
+Similar but in a sense different solution is to ground the mapping directly in extraction rules. Instead of creating mapping of the extraction output, extraction rules will contain also the information about the form of the extraction output. Selection of particular query nodes and linguistic attributes for the output will be extended by the specification of how the attributes will be rendered on the output. A graphical representation of such extraction rule can look like in Figure~\ref{fig:manual_semantic_interpretation}. It shows the connection between a Netgraph query on the left and an ontology instance on the right. Every node of the query can be translated to the ontology and the translation can be configured. 
 
-The configurable translations are the most interesting part of these extraction rules. The linguistic information on one side has to be converted to the ontological information on the other side. In Figure~\ref{fig:ch50_semantic_interpretation}, following translation types were used: a translation of numerals to numbers, lexical translation from a source language (Czech), and detection of negation present in a query node.
+The configurable translations are the most interesting part of these extraction rules. The linguistic information on one side has to be converted to the ontological information on the other side. In Figure~\ref{fig:manual_semantic_interpretation}, following translation types were used: a translation of numerals to numbers, lexical translation from a source language (Czech), and detection of negation present in a query node.
 
-For better illustration, Figure~\ref{fig:ch50_instatnces} shows how the extraction output would look like in the semantic case\footnote{The same data will be used in the next chapter in the example of raw extraction output (Figure~\ref{fig:select_xml}).}. The presented ontology was designed only for the illustration. Schema of the ontology can be seen in the Figure~\ref{fig:ch50_classes}. It consists of two classes (or concepts): \emph{Incident} and \emph{Participant}. These classes are connected with a relation \emph{hasParticipant}. There are also some data-type properties (\emph{actionType}, \emph{actionManner}, \emph{negation}, \emph{participantType}, \emph{participantQuantity}) to cover the extracted data. 
+For better illustration, Figure~\ref{fig:manual_instatnces} shows how the extraction output would look like in the semantic case\footnote{The same data will be used in the next chapter in the example of raw extraction output (Figure~\ref{fig:select_xml}).}. The presented ontology was designed only for the illustration. Schema of the ontology can be seen in the Figure~\ref{fig:manual_classes}. It consists of two classes (or concepts): \emph{Incident} and \emph{Participant}. These classes are connected with a relation \emph{hasParticipant}. There are also some data-type properties (\emph{actionType}, \emph{actionManner}, \emph{negation}, \emph{participantType}, \emph{participantQuantity}) to cover the extracted data. 
 
 The last illustration is a SPARQL query (Figure~\ref{fig:sparql_aggregation}) that would display a table of fatalities present in extracted RDF data. The query is based on the previous ontology and it demonstrates possible use of the schema and the extracted data.
 
@@ -234,7 +234,7 @@ The last illustration is a SPARQL query (Figure~\ref{fig:sparql_aggregation}) th
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Machine Learning of Extraction Rules} \label{sec:methods_learning} \graphicspath{{../img/ch60/}}
+\section{Machine Learning of Extraction Rules} \label{sec:learning_methods} \graphicspath{{../img/ch60/}}
 
 In this section we present %main results and reflections of our ongoing PhD project, 
 our method for information extraction and annotation of texts, which is based on a deep linguistic analysis and Inductive Logic Programming (ILP) and implemented with the great help of the GATE framework. This approach is quite novel because it directly combines deep linguistic parsing with machine learning (ML). This combination and the use of ILP as a ML engine have following benefits: Manual selection of learning features is not needed. 
@@ -259,7 +259,7 @@ Before we can execute the learning procedure of Inductive Logic Programming (gre
 	\item transform these linguistic trees to ILP background knowledge and
 	\item transform the gold standard annotations to ILP learning examples.
 \end{enumerate}
-These steps will be described in following sections and in the next chapter about implementation (Section~\ref{sec:impl_learning}). The ILP learning procedure will produce extraction rules (orange oval) that will be used in the application phase.
+These steps will be described in following sections and in the next chapter about implementation (Section~\ref{sec:learning_impl}). The ILP learning procedure will produce extraction rules (orange oval) that will be used in the application phase.
 
 \subsubsection{Application Phase}
 Again, let us start the description on the web. Assume that target web pages for extraction have been identified, text extracted from them and linguistic trees constructed from the text. In this phase, we do not need ILP, but ordinary Logic Programming is still used for deciding which linguistic trees are covered by extraction rules. Therefore, again, the linguistic trees have to be transformed to ILP background knowledge.
@@ -280,9 +280,9 @@ First of all, the interface of this extraction method is different from the prev
 
 Another difference with the previous approach is that the previous approach is based on Netgraph and Netgraph is responsible for the management of linguistic trees in that case. The present method is based on GATE and ILP and these tools do not provide any special functions for working with linguistic trees. These functions were added by us and they provide:
 \begin{itemize}	
-	\item conversion of PDT linguistic trees to GATE annotations (see details in Section~\ref{sec:ch60_pdt_in_gate}) and the possibility of calling TectoMT linguistic analysis directly from GATE (see details in Section~\ref{sec:ch60_tectomt_wrapper}) and
+	\item conversion of PDT linguistic trees to GATE annotations (see details in Section~\ref{sec:learning_pdt_in_gate}) and the possibility of calling TectoMT linguistic analysis directly from GATE (see details in Section~\ref{sec:learning_tectomt_wrapper}) and
 	
-	\item integration of Prolog and ILP with GATE (see details in Section~\ref{sec:impl_ilp_wrapper}), which includes conversion of GATE annotations and the linguistic tree structure to ILP background knowledge (see details in Section~\ref{sec:impl_ilp_serialization}).
+	\item integration of Prolog and ILP with GATE (see details in Section~\ref{sec:learning_ilp_wrapper}), which includes conversion of GATE annotations and the linguistic tree structure to ILP background knowledge (see details in Section~\ref{sec:learning_ilp_serialization}).
 \end{itemize}
 
 
@@ -310,12 +310,12 @@ We have used another approach to solve this issue. Our approach is based on synt
 	\item learn extraction rules for parent nodes only and 
 	\item span annotations over the whole subtrees of root tokens found during the application of extraction rules.
 \end{enumerate}
-We call the first point as \emph{root preprocessing} and the last point as \emph{subtree postprocessing}. The situation is illustrated on Figure~\ref{fig:tree-subtree}. We have successfully used this technique for the `damage' task of our evaluation corpus (see Section~\ref{sec:evaluation} for details.)
+We call the first point as \emph{root preprocessing} and the last point as \emph{subtree postprocessing}. The situation is illustrated on Figure~\ref{fig:tree-subtree}. We have successfully used this technique for the `damage' task of our evaluation corpus (see Section~\ref{sec:learning_eval} for details.)
 
 \begin{figure}
 	\centering
 		\includegraphics[width=0.85\hsize]{tree-subtree}
-	\caption{Root/Subtree Preprocessing/Postprocessing example, see also Figure~\ref{img:ch10_damage_tree} with the original tree.}
+	\caption{Root/Subtree Preprocessing/Postprocessing example, see also Figure~\ref{fig:intro_damage_tree} with the original tree.}
 	\label{fig:tree-subtree}
 \end{figure}
 
@@ -341,19 +341,19 @@ But of course we are not satisfied with this fashion of semantic interpretation 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Shareable Extraction Ontologies} \label{sec:methods_Shareable_Extraction_Ontologies} \label{sec:ch70_extraction_ontologies}
+\section{Shareable Extraction Ontologies} \label{sec:onto_extraction_ontologies}
 \graphicspath{{../img/ch70/}}
 
 In this section we present an extension of the idea of extraction ontologies that was originally presented by \cite{DBLP:conf/er/EmbleyTL02}. We adopt the point that extraction models are kept in extraction ontologies and we add that the extraction ontologies should not be dependent on the particular extraction/annotation tool. In such case the extraction/annotation process can be done separately by an ordinary reasoner.
 
 
-We present a proof of concept for the idea: a case study with our linguistically based IE engine and an experiment with several OWL reasoners. In the case study (see Section~\ref{sec:case}) the IE engine exports its extraction rules to the form of an extraction ontology. Third party linguistic tool linguistically annotates an input document and the linguistic annotations are translated to so-called document ontology. After that an ordinary OWL reasoner is used to apply the extraction ontology on the document ontology, which has the same effect as a direct application of the extraction rules on the document. The process is depicted in Figure~\ref{img:rules_app_schema} and it will be described in detail in Section~\ref{sec:case}.
+We present a proof of concept for the idea: a case study with our linguistically based IE engine and an experiment with several OWL reasoners. In the case study (see Section~\ref{sec:onto_case}) the IE engine exports its extraction rules to the form of an extraction ontology. Third party linguistic tool linguistically annotates an input document and the linguistic annotations are translated to so-called document ontology. After that an ordinary OWL reasoner is used to apply the extraction ontology on the document ontology, which has the same effect as a direct application of the extraction rules on the document. The process is depicted in Figure~\ref{fig:rules_app_schema} and it will be described in detail in Section~\ref{sec:onto_case}.
 
 
 
-The most closely related work was already presented in Section~\ref{sec:relwork_ext_ont}. The main idea will be illustrated on our case study in Section~\ref{sec:case}, its implementation in Section~\ref{sec:implement} and in Section~\ref{sec:ch70_experiment} an experiment with several OWL reasoners and IE datasets will be presented. In Section~\ref{sec:discuss} related issues are discussed and Section~\ref{sec:ch70_conclusion} concludes the discussion.
+The most closely related work was already presented in Section~\ref{sec:relwork_ext_ont}. The main idea will be illustrated on our case study in Section~\ref{sec:onto_case}, its implementation in Section~\ref{sec:onto_implement} and in Section~\ref{sec:onto_experiment} an experiment with several OWL reasoners and IE datasets will be presented. In Section~\ref{sec:onto_discuss} related issues are discussed and Section~\ref{sec:onto_conclusion} concludes the discussion.
 
-\subsection{Document Ontologies and Annotated Document Ontologies} \label{sec:ch70_doc_ont}
+\subsection{Document Ontologies and Annotated Document Ontologies} \label{sec:onto_doc_ont}
 
 The idea of shareable extraction ontologies assumes that extraction ontologies will be shareable and they can be applied on a document outside of the original extraction/annotation tool. We further assert that the extraction ontologies can be applied by ordinary reasoners. This assumption implies that both extraction ontologies and documents have to be in a reasoner readable format. In the case of contemporary OWL reasoners there are standard reasoner-readable languages: OWL and RDF in a rich variety of possible serializations (XML, Turtle, N-Triples, etc.) Besides that there exists standard ways like GRDDL or RDFa how to obtain a RDF document from an ``ordinary document'' (strictly speaking XHTML and XML documents).
 
@@ -368,12 +368,12 @@ Obviously when a document can be reconstructed from its document ontology (this 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{The Main Idea Illustrated -- a Case Study} \label{sec:case}
+\subsection{The Main Idea Illustrated -- a Case Study} \label{sec:onto_case}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 In this section, realization of the main idea will be described and illustrated on a case study.
 
-A schema of the case study is presented in Figure~\ref{img:rules_app_schema}.  
+A schema of the case study is presented in Figure~\ref{fig:rules_app_schema}.  
 The top row of the image illustrates how TectoMT (third party linguistic tool) linguistically annotates an input document and the linguistic annotations are translated to so-called document ontology by a GRDDL/XSLT transformation.
 
 In the bottom of the picture our IE engine learns extraction rules and exports them to an extraction ontology. The reasoner in the middle is used to apply the extraction ontology on the document ontology and it produces the ``annotated'' document ontology, which was described in the previous section.
@@ -382,10 +382,10 @@ In the bottom of the picture our IE engine learns extraction rules and exports t
 \begin{figure}
 \centerline{\includegraphics[angle=-90, width=0.7\hsize]{semantic_rules_app_schema}}
 \caption{Semantic annotation driven by an extraction ontology and a reasoner -- schema of the process.}
-\label{img:rules_app_schema}
+\label{fig:rules_app_schema}
 \end{figure}
 
-Implementation of the case study will be described in Section~\ref{sec:implement}. It exploits the approaching support for Semantic Web Rule Language (SWRL) \citep{SWRL}. Although SWRL is not yet approved by W3C it is already widely supported by Semantic Web tools including many OWL reasoners. The SWRL support makes it much easier to transfer the semantics of extraction rules used by our IE tool to extraction ontology. The translation of the native extraction rules to SWRL rules that form the core of the extraction ontology will be also presented in Section~\ref{sec:implement}.
+Implementation of the case study will be described in Section~\ref{sec:onto_implement}. It exploits the approaching support for Semantic Web Rule Language (SWRL) \citep{SWRL}. Although SWRL is not yet approved by W3C it is already widely supported by Semantic Web tools including many OWL reasoners. The SWRL support makes it much easier to transfer the semantics of extraction rules used by our IE tool to extraction ontology. The translation of the native extraction rules to SWRL rules that form the core of the extraction ontology will be also presented in Section~\ref{sec:onto_implement}.
 
 
 
@@ -396,56 +396,56 @@ Implementation of the case study will be described in Section~\ref{sec:implement
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Fuzzy ILP Classification} \label{sec:methods_fuzzy}
+\section{Fuzzy ILP Classification} \label{sec:fuzzy_methods}
 \graphicspath{{../img/ch80/}}
 
 In this section, we study the problem of classification of textual reports. We are %specifically
- focused on the situation in which structured information extracted from the reports is used for such classification. We present a~proposal and a partial implementation of an experimental classification system based on our previous work on information extraction (see Sections~\ref{sec:methods_manual} and \ref{sec:methods_learning} for details) and fuzzy inductive logic programming (fuzzy ILP).
+ focused on the situation in which structured information extracted from the reports is used for such classification. We present a~proposal and a partial implementation of an experimental classification system based on our previous work on information extraction (see Sections~\ref{sec:manual_methods} and \ref{sec:learning_methods} for details) and fuzzy inductive logic programming (fuzzy ILP).
 Our description is based on a case study of seriousness classification of accident reports. 
-%Figure~\ref{img:message} presents an example of an accident report from a message on the web.
+%Figure~\ref{fig:message} presents an example of an accident report from a message on the web.
 We would like to have a tool that is able to classify the accident's degree of seriousness on the basis of information obtained through information extraction.
 %Our approach is based on information extraction and on a fuzzy-based machine learning procedure that provides rules for classification of the reports.
 In this section,
-% we do not provide any details about the information extraction part of the solution (it was already described in Chapters~\ref{sec:ch50_manual_rules_chapter} and \ref{ch:ILP_Learning}). 
+% we do not provide any details about the information extraction part of the solution (it was already described in Chapters~\ref{sec:manual_manual_rules_chapter} and \ref{ch:ILP_Learning}). 
 we concentrate on the classification part and present a detailed study of the fuzzy ILP classification method (so-called `Fuzzy ILP Classifier'). 
 
 This problem represents a challenge of induction and/or mining on several occasions. First we need an inductive procedure when extracting attributes of an accident from text. Second (the subject of this section) we need an inductive procedure when trying to explain an accident's degree of seriousness by its attributes. ILP is used as the inductive procedure in both of these places.
 \begin{itemize}
 	\item During the information extraction phase, we exploit the fact that ILP can work directly with multirelational data, e.g., deep syntactic (tectogrammatical) trees built from sentences of the processed text.
-	\item During the classification phase, we are experimentally using the Fuzzy ILP Classifier because it performs quite well on our dataset (see Section~\ref{sec:ch80_eval}) and it is naturally capable of handling fuzzy data, which occurs when the information extraction engine returns confidence probability values along with extracted data. But the description does not go so far and only the approach is fuzzy in the present demonstration.
+	\item During the classification phase, we are experimentally using the Fuzzy ILP Classifier because it performs quite well on our dataset (see Section~\ref{sec:fuzzy_eval}) and it is naturally capable of handling fuzzy data, which occurs when the information extraction engine returns confidence probability values along with extracted data. But the description does not go so far and only the approach is fuzzy in the present demonstration.
 \end{itemize}
 
 
-The rest of this section is organized as follows: Design of the experimental system is presented in Section~\ref{sec:system}. %including a short description of the information extraction method and linguistic analyzers. 
-Section~\ref{sec:ch80_case} provides details about our case study, which is later used in examples. Formal models of the system (including several translations of a fuzzy ILP task to classical ILP) are presented in Section~\ref{sec:ILP}, followed by a description of implementation of the models in the system. In Section~\ref{sec:results} we present the main results of the work, and then we evaluate and compare the methods with other well-known classifiers. Section~\ref{sec:conclusion} concludes the chapter.
+The rest of this section is organized as follows: Design of the experimental system is presented in Section~\ref{sec:fuzzy_system}. %including a short description of the information extraction method and linguistic analyzers. 
+Section~\ref{sec:fuzzy_case} provides details about our case study, which is later used in examples. Formal models of the system (including several translations of a fuzzy ILP task to classical ILP) are presented in Section~\ref{sec:fuzzy_ilp_task_translation}, followed by a description of implementation of the models in the system. In Section~\ref{sec:fuzzy_results} we present the main results of the work, and then we evaluate and compare the methods with other well-known classifiers. Section~\ref{sec:conclusion} concludes the chapter.
 
-See also Section~\ref{sec:ch20_doc_classification}, where some closely related works were introduced. 
+See also Section~\ref{sec:relwork_doc_classification}, where some closely related works were introduced. 
 
  
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Data Flow} \label{sec:system}
+\subsection{Data Flow} \label{sec:fuzzy_system}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}
 \centerline{\includegraphics[width=0.4\hsize]{schema}}
 \caption{Schema of the experimental system.}
-\label{img:schema}
+\label{fig:schema}
 \end{figure}
 
 %\begin{floatingfigure}[r]{.45\hsize}
 %\centerline{\includegraphics[width=\hsize]{img/schema}}
 %\caption{Schema of the whole system.}
-%\label{img:schema}
+%\label{fig:schema}
 %\end{floatingfigure}
 
-A general schema of the experimental system is shown in Figure~\ref{img:schema}. In the schema, previously developed information extraction tools based on third party linguistic analyzers are used (the upper two dashed arrows). The information extraction tools are supposed to extract structured information from the reports and the extracted information is then translated to ILP background knowledge and, along with a user rating, it is used for the classification (we assume that a small amount of learning data is annotated by a human user). The classification is based on ILP and it could be \emph{fuzzy} or \emph{crisp}. Crisp denotes a straightforward application of ILP and fuzzy stands for the fuzzy method (subject of the present description), see in the next sections.
+A general schema of the experimental system is shown in Figure~\ref{fig:schema}. In the schema, previously developed information extraction tools based on third party linguistic analyzers are used (the upper two dashed arrows). The information extraction tools are supposed to extract structured information from the reports and the extracted information is then translated to ILP background knowledge and, along with a user rating, it is used for the classification (we assume that a small amount of learning data is annotated by a human user). The classification is based on ILP and it could be \emph{fuzzy} or \emph{crisp}. Crisp denotes a straightforward application of ILP and fuzzy stands for the fuzzy method (subject of the present description), see in the next sections.
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{The Case Study -- Accident Seriousness Classification} \label{sec:ch80_case}
+\subsection{The Case Study -- Accident Seriousness Classification} \label{sec:fuzzy_case}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -453,24 +453,21 @@ A general schema of the experimental system is shown in Figure~\ref{img:schema}.
 The main experiment leads to the seriousness classification of an accident presented in a report. %Our long term goal is extraction of semantic information from reports. 
 %which is one of possible utilizations of the extracted information. 
 
-For the experiment a classification dataset (Section~\ref{sec:ch40_classify_fireman}) was built based on a collection of 50 textual reports. We have identified several features presented in these reports and manually extracted the corresponding values. To each report we have also assigned a value of overall ranking of seriousness of the presented accident, which is the target of the classification. The dataset is described in Section~\ref{sec:ch40_classify_fireman}. 
+For the experiment a classification dataset (Section~\ref{sec:data_classify_fireman}) was built based on a collection of 50 textual reports. We have identified several features presented in these reports and manually extracted the corresponding values. To each report we have also assigned a value of overall ranking of seriousness of the presented accident, which is the target of the classification. The dataset is described in Section~\ref{sec:data_classify_fireman}. 
 %The whole dataset can be downloaded from our Fuzzy ILP classifier's web page\footnote{\url{http://www.ksi.mff.cuni.cz/~dedek/fuzzyILP/}}.
 
 In the experiment, we have not used any information extracted by our automated information extraction tools. Instead, we concentrate on~the classification; the actual source of the information is not so important for us and the integration step still lies ahead.
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\subsection{Theoretical Background} \label{sec:ILP}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Translation of Fuzzy ILP Task to Several Classical ILP Tasks} \label{sec:ILP} \label{sec:ch80_GAP}
+\subsection{Translation of Fuzzy ILP Task to Several Classical ILP Tasks} \label{sec:fuzzy_ilp_task_translation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Formal definitions of classical and fuzzy ILP tasks were presented in Section~\ref{sec:ch30_ILP}. In this section, additional formal constructions will be presented, because they are the basis for the implementation.
+Formal definitions of classical and fuzzy ILP tasks were presented in Section~\ref{sec:third_ILP}. In this section, additional formal constructions will be presented, because they are the basis for the implementation.
 
 
 As far as there is no implementation of fuzzy ILP, we have to use a~classical ILP system. Fortunately, any fuzzy ILP task can be translated to several classical ILP tasks (subject to some rounding and using a finite set of truth values).
@@ -552,7 +549,7 @@ is a correct solution of the fuzzy ILP task given by ${\mathcal E}$ and ${\mathc
 
 \subsubsection{Illustration Example}
 
-In our case \verb@serious(Accident_ID)@ is the fuzzy or GAP target predicate $C$. Let for example $t=3$ and $H_{\ge t}$ be the same as in Figure~\ref{img:rules} (the last two (25, 26) rows correspond with $H_{\ge 3}$). Then \verb@serious_atl_3(Accident_ID)@ is the monotonized target predicate $C_{\ge t}$ and $B_1$, $B_2$ and $u$ are realized as follows:\\
+In our case \verb@serious(Accident_ID)@ is the fuzzy or GAP target predicate $C$. Let for example $t=3$ and $H_{\ge t}$ be the same as in Figure~\ref{fig:rules} (the last two (25, 26) rows correspond with $H_{\ge 3}$). Then \verb@serious_atl_3(Accident_ID)@ is the monotonized target predicate $C_{\ge t}$ and $B_1$, $B_2$ and $u$ are realized as follows:\\
 \hspace*{1cm}$B_1(y,t_1)$ \dots \verb@fatalities_atl(Accident_ID, 1)@,\\
 \hspace*{1cm}$B_2(y,t_2)$ \dots \verb@damage_atl(Accident_ID, 1500000)@,\\
 $u$ is an arbitrary function of $m$ arguments ($m$ is the number of all predicates used in background knowledge) for which following restrictions hold true:\\

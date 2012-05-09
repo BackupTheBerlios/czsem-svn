@@ -8,17 +8,17 @@ Experiments that were performed to evaluate our methods and approaches will be p
 In this section, two experiments will be presented to explain the usefulness of our extraction method based on manually designed rules. 
 The first one provides measurements on a higher amount of texts without manual gold standard annotations, while the second experiment was done on a small manually annotated collection. 
 
-\subsection{Czech Fireman Quantitative} \label{sec:ch50_quant_experiment}
+\subsection{Czech Fireman Quantitative} \label{sec:manual_quant_experiment}
 
-We evaluated three extraction rules (one procedural and two Netgraph based) on a set of 814 texts of news of several Czech fire departments and measured several statics. All the rules had the same goal: to find numbers of people that died or were injured during an accident. The procedural rule was the same as in Figure~\ref{lst:btred_rule} and the Netgraph based rules correspond with the rule in Figure~\ref{fig:ch50_extract_patern}. The only difference between the Netgraph rules is that in the first case (Netgraph 1) all rule nodes except number 1 (\verb+action_type+) were set as optional, while in the second case (Netgraph 2) also node 4 (participant) was compulsory. This little change caused some interesting effects -- see below. 
+We evaluated three extraction rules (one procedural and two Netgraph based) on a set of 814 texts of news of several Czech fire departments and measured several statics. All the rules had the same goal: to find numbers of people that died or were injured during an accident. The procedural rule was the same as in Figure~\ref{fig:btred_rule} and the Netgraph based rules correspond with the rule in Figure~\ref{fig:manual_extract_patern}. The only difference between the Netgraph rules is that in the first case (Netgraph 1) all rule nodes except number 1 (\verb+action_type+) were set as optional, while in the second case (Netgraph 2) also node 4 (participant) was compulsory. This little change caused some interesting effects -- see below. 
 
-Table~\ref{tab:ch50_tab_manual_rules} summarizes some of the statics that were measured. Description of individual values follows.
+Table~\ref{tab:manual_tab_manual_rules} summarizes some of the statics that were measured. Description of individual values follows.
 
 \begin{table}
 	\centering
 		\includegraphics[angle=-90,width=0.6\hsize]{tab_manual_rules}
 	\caption{Evaluation of manually created rules (bigger dataset without manual annotations).}
-	\label{tab:ch50_tab_manual_rules}
+	\label{tab:manual_tab_manual_rules}
 \end{table}
 
 
@@ -66,7 +66,7 @@ Values of participant quantity also demonstrate several errors made by the parti
 
 \subsubsection{Detected errors}
 
-Results of the extraction were investigated only partly; no formal evaluation is available in this case (except on a small evaluation set, see bellow: the second experiment). About 10-20\% of information was not extracted because of errors of linguistic parsing; majority of the errors was made in long complex sentences, which are known to be difficult for linguistic processing. There was only a few of false positives. A nice example can be traced from the maximum values of participant quantity in Table~\ref{tab:ch50_tab_manual_rules}. Three different numbers were found in the three experiments: 27800, 4988 and 333. The number of 27800 is actually a number of chickens that died during one of the accidents. The number was extracted by the first Netgraph based rule because the query node 4 (participant) was marked as optional and omitted during the evaluation. This node normally ensures that the participant is one of: person, man, woman, child, driver, etc.
+Results of the extraction were investigated only partly; no formal evaluation is available in this case (except on a small evaluation set, see bellow: the second experiment). About 10-20\% of information was not extracted because of errors of linguistic parsing; majority of the errors was made in long complex sentences, which are known to be difficult for linguistic processing. There was only a few of false positives. A nice example can be traced from the maximum values of participant quantity in Table~\ref{tab:manual_tab_manual_rules}. Three different numbers were found in the three experiments: 27800, 4988 and 333. The number of 27800 is actually a number of chickens that died during one of the accidents. The number was extracted by the first Netgraph based rule because the query node 4 (participant) was marked as optional and omitted during the evaluation. This node normally ensures that the participant is one of: person, man, woman, child, driver, etc.
 Numbers 4988 and 333 are both correct. They were both used in the same sentence, which summarized numbers of injured (4988) and killed (333) people during one whole year. Although the sentence was quite complex it was linguistically parsed correctly and also the procedural rule managed to extract both numbers correctly. The Netgraph based rule extracted only the first number in the sentence because the current evaluation algorithm does not allow multiple matches per sentence (see above the comments of rule matches and effective rule matches).
 
 
@@ -84,13 +84,13 @@ Numbers 4988 and 333 are both correct. They were both used in the same sentence,
 		fatalities & 1 & 10 & 0 & 0.09 & 1 & 0.17\\
 		\hline
 	\end{tabular}
-	\caption{Evaluation of the manually created rule form Figure~\ref{fig:ch50_extract_patern} on the manually annotated dataset.}
-	\label{tab:ch50_extract_patern_eval}
+	\caption{Evaluation of the manually created rule form Figure~\ref{fig:manual_extract_patern} on the manually annotated dataset.}
+	\label{tab:manual_extract_patern_eval}
 \end{table}
 
 
 
-In the second experiment a manually annotated collection of 50 fireman news texts was used. Having the extraction rule from the previous experiment and a set of manually annotated texts it is only natural to ask a question about the success of the extraction rule on that collection. Table~\ref{tab:ch50_extract_patern_eval} summarizes the results. These results are far from satisfactory; the recall of 0.09 is something that is far from any acceptable use. Several explanations of the issue can be provided. The extraction rule serves more for a demonstration than for exhausting coverage of all possible cases. The extraction rule looks for particular verb (to injure, to die, etc.) but the information can be also expressed by an adjective (injured driver, death passenger, etc.); another extraction rules should be constructed for these and other cases. The training collection used for the design was also of a different spectrum of texts.
+In the second experiment a manually annotated collection of 50 fireman news texts was used. Having the extraction rule from the previous experiment and a set of manually annotated texts it is only natural to ask a question about the success of the extraction rule on that collection. Table~\ref{tab:manual_extract_patern_eval} summarizes the results. These results are far from satisfactory; the recall of 0.09 is something that is far from any acceptable use. Several explanations of the issue can be provided. The extraction rule serves more for a demonstration than for exhausting coverage of all possible cases. The extraction rule looks for particular verb (to injure, to die, etc.) but the information can be also expressed by an adjective (injured driver, death passenger, etc.); another extraction rules should be constructed for these and other cases. The training collection used for the design was also of a different spectrum of texts.
 
 
 
@@ -112,7 +112,7 @@ On the other hand this experiment shows how a manually annotated collection cont
 		\hline
 	\end{tabular}
 	\caption{Evaluation of the manually created rules and ILP learned rules (manually annotated dataset was used for rule design (training half) and evaluation (testing half) -- see the description of the second experiment in text.)}
-	\label{tab:ch50_damage_manual_eval}
+	\label{tab:manual_damage_manual_eval}
 \end{table}
 
 \begin{table}
@@ -127,7 +127,7 @@ On the other hand this experiment shows how a manually annotated collection cont
 		\hline
 	\end{tabular}
 	\caption{Cross method comparison of found instances.}
-	\label{tab:ch50_damage_cross_method}
+	\label{tab:manual_damage_cross_method}
 \end{table}
 
 
@@ -135,16 +135,16 @@ On the other hand this experiment shows how a manually annotated collection cont
 
 Next question that naturally emerges is: How would be the performance if the rules were designed with the support of a manually annotated collection? An additional experiment was made to answer that question. The collection was split into two even parts -- training part and testing part. A manually created rule was designed so that it correctly matched with all annotations of the training part and then it was evaluated on the testing part. For the validity of the experiment it was necessary that the designer did not have any knowledge about the data of the testing part; that is why we used a different extraction task (damage instead of injuries and fatalities). We have also compared the performance of the manually created rule with a rule learned by the ILP machine learning engine.
 
-The results are summarized in Table~\ref{tab:ch50_damage_manual_eval}. Both kinds of rules (manually designed and learned by ILP) performed the same (recall: 0.71, precision: 1); both the methods correctly found 5 instances and they were both unable to find 2 instances. From the cross coverage comparison in 
-Table~\ref{tab:ch50_damage_cross_method} it is apparent that the methods agreed on 4 instances and each method was able to discovered one instance that the other did not discover. Such results could be accepted for a practical application but we must not forget the fact that the collection is very small and only single evidence is provided by the experiment, so it dies not provide any statistical significance (getting statistically significant results would require experiments with different datasets, extraction tasks and human designers.) 
+The results are summarized in Table~\ref{tab:manual_damage_manual_eval}. Both kinds of rules (manually designed and learned by ILP) performed the same (recall: 0.71, precision: 1); both the methods correctly found 5 instances and they were both unable to find 2 instances. From the cross coverage comparison in 
+Table~\ref{tab:manual_damage_cross_method} it is apparent that the methods agreed on 4 instances and each method was able to discovered one instance that the other did not discover. Such results could be accepted for a practical application but we must not forget the fact that the collection is very small and only single evidence is provided by the experiment, so it dies not provide any statistical significance (getting statistically significant results would require experiments with different datasets, extraction tasks and human designers.) 
 
 
 
-\section{Evaluation of Learned Rules} \label{sec:evaluation} \label{sec:eval_learning}
+\section{Evaluation of Learned Rules} \label{sec:learning_eval}
 
 \subsection{Examples of learned rules}
 
-In Figure~\ref{fig:rules} we present some examples of the rules learned from the whole dataset. The rules demonstrate a connection of a target token with other parts of a sentence through linguistic syntax structures. For example the first rule connects a root numeral (\emph{n.quant.def}) of `damage' with a mention of `investigator' that stated the mount. In the last rule only a positive occurrence of the verb `injure' is allowed.
+In Figure~\ref{fig:learning_eval_rules} we present some examples of the rules learned from the whole dataset. The rules demonstrate a connection of a target token with other parts of a sentence through linguistic syntax structures. For example the first rule connects a root numeral (\emph{n.quant.def}) of `damage' with a mention of `investigator' that stated the mount. In the last rule only a positive occurrence of the verb `injure' is allowed.
 
 \begin{figure}
 \begin{minted}[linenos,  fontsize=\footnotesize,
@@ -168,7 +168,7 @@ injuries(A) :- lex_rf(B,A), has_gender(B,anim), tDependency(C,B),
 \end{minted}
 	TODO: \verb+damage_root -> mention_root+
 	\caption{Examples of learned rules, Czech words are translated.}
-	\label{fig:rules}
+	\label{fig:learning_eval_rules}
 \end{figure}
 
 
@@ -239,7 +239,7 @@ overall           && 0.628 & $\pm$ & 0.36 && 0.621 & $\pm$ & 0.30 &  \\
 \multicolumn{11}{c}{$\circ$, $\bullet$ statistically significant improvement or degradation}\\
 \end{tabular}
 
-\caption{Evaluation on Czech Fireman dataset} \label{tab:ch60_fir_eval}
+\caption{Evaluation on Czech Fireman dataset} \label{tab:learning_fir_eval}
 \end{table}
 
 
@@ -286,7 +286,7 @@ overall            &  & 7.231 &  $\pm$  & 0.12 &  & 2.245 &  $\pm$  & 0.10 &  $\
 \medskip
 The time in this table is cumulative (sum over all folds in one experiment run).
 
-\caption{Time spent by ML engines on the Czech Fireman dataset.} \label{tab:ch60_fir_time}
+\caption{Time spent by ML engines on the Czech Fireman dataset.} \label{tab:learning_fir_time}
 \end{table}
 
 
@@ -313,7 +313,7 @@ The time in this table is cumulative (sum over all folds in one experiment run).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Evaluation of Shareable Extraction Ontologies Performance} \label{sec:eval_Shareable_Extraction_Ontologies} \label{sec:ch70_experiment}
+\section{Evaluation of Shareable Extraction Ontologies Performance}  \label{sec:onto_experiment}
 
 In this section we present an experiment that should serve as a proof of a concept that the proposed idea of independent extraction ontologies is realizable. We have selected several reasoners (namely Jena, HermiT, Pellet and FaCT++) and tested them on two slightly different datasets from two different domains and languages (see Table~\ref{tab:datasets}). This should at least partially demonstrate the universality of the proposed approach.
 
@@ -323,9 +323,9 @@ The actual reasoning tasks are more difficult than a simple retrieval of all fac
 %\footnote{See ``Data/ontologies'' link on the project page \url{http://czsem.berlios.de/}}%and a potentially interested reader can find the complete mapping ontology on the project's web site.
 
 
-\subsection{Datasets} \label{sec:ch70_datasets}
+\subsection{Datasets} \label{sec:onto_datasets}
 
-In the experiment we used two slightly different datasets from two different domains and languages.  Table~\ref{tab:datasets} summarizes some basic information about them. The fist dataset is called `czech\_fireman', it is based on Czech texts that are reporting on fire and traffic accidents and it was already described in Section~\ref{sec:ch40_rdf_fireman}. The second dataset is called ``Corporate Acquisition Events'', it is based on news articles describing acquisition events, taken from the Reuters dataset and it was already described in Section~\ref{sec:ch40_rdf_acquisitions}.
+In the experiment we used two slightly different datasets from two different domains and languages.  Table~\ref{tab:datasets} summarizes some basic information about them. The fist dataset is called `czech\_fireman', it is based on Czech texts that are reporting on fire and traffic accidents and it was already described in Section~\ref{sec:data_rdf_fireman}. The second dataset is called ``Corporate Acquisition Events'', it is based on news articles describing acquisition events, taken from the Reuters dataset and it was already described in Section~\ref{sec:data_rdf_acquisitions}.
 
 \begin{table}
 \begin{center}
@@ -424,13 +424,13 @@ and in the context of Linked Data providing shareable descriptions of informatio
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Evaluation of Fuzzy ILP Classification} \label{sec:ch80_eval}
+\section{Evaluation of Fuzzy ILP Classification} \label{sec:fuzzy_eval}
 \graphicspath{{../img/ch80/}}
 
 \begin{figure}[p]
 \centerline{\includegraphics[width=0.8\hsize]{2x10cross}}
 \caption{Evaluation of the methods -- average values.}
-\label{img:graph2x10}
+\label{fig:graph2x10}
 \end{figure}
 
 
@@ -475,14 +475,14 @@ F \dotfill{} 		& F measure, weighted average from all classes\\
 \end{table}
 
 
-We have evaluated both ILP methods and compared them with other machine learning procedures used in data mining. To make the comparison clear and easy to perform, we have implemented an interface between the ILP methods and Weka (Section~\ref{sec:ch30_weka}). This interface makes it possible to use the ILP methods as an ordinary Weka classifier for any\footnote{For the fuzzy ILP method, there is a requirement on the target (class) attribute: it has to be monotonizable (e.g. numeric).} classification task inside the Weka software. This also makes the presented experiments easily repeatable (see Secrion~\ref{sec:ch90_repeatablity} for details.) 
+We have evaluated both ILP methods and compared them with other machine learning procedures used in data mining. To make the comparison clear and easy to perform, we have implemented an interface between the ILP methods and Weka (Section~\ref{sec:third_weka}). This interface makes it possible to use the ILP methods as an ordinary Weka classifier for any\footnote{For the fuzzy ILP method, there is a requirement on the target (class) attribute: it has to be monotonizable (e.g. numeric).} classification task inside the Weka software. This also makes the presented experiments easily repeatable (see Secrion~\ref{sec:conclusion_repeatablity} for details.) 
 
 
 
 \subsection{Czech Fireman Performance}
 
 
-For our experiment we used the Weka Experimenter (see in Section~\ref{sec:ch30_weka}) and performed an experiment in which the Crisp and Fuzzy ILP classifiers were compared with five additional classifiers:
+For our experiment we used the Weka Experimenter (see in Section~\ref{sec:third_weka}) and performed an experiment in which the Crisp and Fuzzy ILP classifiers were compared with five additional classifiers:
 \begin{itemize}
 	\item Multilayer Perceptron \citep{biblio:bishop-1995},
 	\item Support Vector Machine classifier SMO \citep{biblio:SMO},
@@ -491,13 +491,13 @@ For our experiment we used the Weka Experimenter (see in Section~\ref{sec:ch30_w
 	\item Additive logistic regression LogitBoost \citep{biblio:LogitBoost}.
 \end{itemize}
 We have evaluated all the methods two times by 10-fold cross validation. %(section~\ref{sec:experiment_desc}).
-The obtained results (average values) are described by the graph in Figure~\ref{img:graph2x10} and in Table~\ref{tab:table2x10} (with standard deviations and marked statistically significant values).
+The obtained results (average values) are described by the graph in Figure~\ref{fig:graph2x10} and in Table~\ref{tab:table2x10} (with standard deviations and marked statistically significant values).
 
 There is no clear winner in our experiment. But the Fuzzy ILP classifier proved better results than a majority of the methods on our data and the results are statistically significant in many cases. Very good results were also obtained using LogitBoost. 
 
 
 
-\subsection{UCI Performance} \label{sec:eval_fuzzy_uci}
+\subsection{UCI Performance} \label{sec:fuzzy_eval_uci}
 
 
 \begin{table}
@@ -541,32 +541,32 @@ Learning parameters for both ILP methods:\\set(noise,20). set(i,3). set(clausele
 
 
 
-The Fuzzy ILP classifier performed quite well on our dataset, but the next question is: How is it with other data, with more learning instances, and what about the time complexity? To answer these questions we performed another experiment. We selected several datasets from the UCI repository (see Section~\ref{sec:ch40_uci_datasets}) and evaluated all the methods against them. 
+The Fuzzy ILP classifier performed quite well on our dataset, but the next question is: How is it with other data, with more learning instances, and what about the time complexity? To answer these questions we performed another experiment. We selected several datasets from the UCI repository (see Section~\ref{sec:data_uci_datasets}) and evaluated all the methods against them. 
 
 
 
 %The list of selected datasets can be found in the legend of Table~\ref{tab:UCItable}. 
 All the selected datasets are monotonizable (the target attribute can be naturally ordered), so the fuzzy classifier could take advantage of that. Learning settings are the same as before (Table~\ref{tab:table2x10}) except for settings of both ILP classifiers, which  performed a little bit better with modified settings on a majority of the datasets (see in the legend of Table~\ref{tab:UCItable}). 
 
-Table~\ref{tab:UCItable} compares the numbers of correctly classified instances on all the datasets. The last two columns show numbers of training and testing instances. The numbers of training instances are quite low; this is because the ILP classifiers are probably not capable of fully exploiting higher numbers of training instances and the difference between ILP classifiers and the others would be even a bit higher. This is demonstrated in Figure~\ref{img:corect_growing_learninig_instances} (for `nursery' dataset only). It can be seen that when the number of training instances was under about 40, the fuzzy classifier performed better than some of the others (SMO, JRip and Multilayer Perceptron), but from about 60 training instances further, both ILP classifiers performed worse than the others.
+Table~\ref{tab:UCItable} compares the numbers of correctly classified instances on all the datasets. The last two columns show numbers of training and testing instances. The numbers of training instances are quite low; this is because the ILP classifiers are probably not capable of fully exploiting higher numbers of training instances and the difference between ILP classifiers and the others would be even a bit higher. This is demonstrated in Figure~\ref{fig:corect_growing_learninig_instances} (for `nursery' dataset only). It can be seen that when the number of training instances was under about 40, the fuzzy classifier performed better than some of the others (SMO, JRip and Multilayer Perceptron), but from about 60 training instances further, both ILP classifiers performed worse than the others.
 
 
 \begin{figure}
 \centerline{\includegraphics[width=0.8\hsize]{corect_growing_learninig_instances}}
 \caption{x-axis: number of training instances, y-axis: percent of correctly classified instances, average values from 10 repetitions, `nursery' dataset.}
-\label{img:corect_growing_learninig_instances}
+\label{fig:corect_growing_learninig_instances}
 \end{figure}
 
 
 \subsection{UCI Time}
 
 
-Figure~\ref{img:learning_speed} demonstrates time complexity of the classifiers in the same experiment as in Figure~\ref{img:corect_growing_learninig_instances}. Despite the fact that the Fuzzy ILP classifier was several times slower than the Crisp ILP classifier and even more than the others, it is still computable on current processors (e.g. P9600, 2.66 GHz, which we used) and the curve of time complexity did not grow rapidly during the experiment. Because ILP is a heuristic and iterative method, the time complexity can be quite directly managed by the setting of learning parameters.
+Figure~\ref{fig:learning_speed} demonstrates time complexity of the classifiers in the same experiment as in Figure~\ref{fig:corect_growing_learninig_instances}. Despite the fact that the Fuzzy ILP classifier was several times slower than the Crisp ILP classifier and even more than the others, it is still computable on current processors (e.g. P9600, 2.66 GHz, which we used) and the curve of time complexity did not grow rapidly during the experiment. Because ILP is a heuristic and iterative method, the time complexity can be quite directly managed by the setting of learning parameters.
 
 \begin{figure}
 \centerline{\includegraphics[width=\hsize]{learning_speed}}
 \caption{x-axis: number of training instances, y-axis: training time in seconds, average values from 10 repetitions, `nursery' dataset.}
-\label{img:learning_speed}
+\label{fig:learning_speed}
 \end{figure}
 
 

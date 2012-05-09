@@ -1,4 +1,4 @@
-%\chapter{Usage of Annotations -- Fuzzy ILP Document Classification} \label{sec:ch80_fuzzy_ilp_chapter}
+%\chapter{Usage of Annotations -- Fuzzy ILP Document Classification} \label{sec:fuzzy_fuzzy_ilp_chapter}
 
 %\graphicspath{{../img/ch80/}}
 
@@ -9,7 +9,7 @@
 %\subsection{Linguistic Analysis}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%See \ref{sec:ch30_ling_tools}
+%See \ref{sec:third_ling_tools}
 
 %In this section we will briefly describe the linguistic tools that
 %we have used to produce linguistic annotations of texts. 
@@ -50,7 +50,7 @@
 	%\item[Tool 6.] Tectogrammatical analysis produces linguistic annotation
 %at the tectogrammatical level, sometimes called
 %``layer of deep syntax''. An example of a tectogrammatical tree can be seen in
-%Figure~\ref{img:ch80_tree}. Annotation of a sentence at this layer
+%Figure~\ref{fig:ilp_tree}. Annotation of a sentence at this layer
 %is closer to the meaning of the sentence than its syntactic
 %annotation; thus, information captured at the tectogrammatical
 %layer is crucial for machine understanding
@@ -127,7 +127,7 @@
 %\end{tabular}
 %
 %\caption{Accident attributes.}
-%\label{img:attributes_description}
+%\label{fig:attributes_description}
 %\end{table}
 %
 %
@@ -136,7 +136,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %
-%Table~\ref{img:attributes_description} summarizes all features (or attributes) that we have obtained from accident reports. Except for the attribute \verb+type+ (type of an accident -- \verb+fire+, \verb+car_accident+ and \verb+other+), all the attributes are numerical and therefore \emph{monotonizable} (see the next sections). There are cases in which the value of an attribute is unknown. We have decided to make evidence of this and keep the values \verb+unknown+ in the knowledge base. A brief explanation of each attribute follows.
+%Table~\ref{fig:attributes_description} summarizes all features (or attributes) that we have obtained from accident reports. Except for the attribute \verb+type+ (type of an accident -- \verb+fire+, \verb+car_accident+ and \verb+other+), all the attributes are numerical and therefore \emph{monotonizable} (see the next sections). There are cases in which the value of an attribute is unknown. We have decided to make evidence of this and keep the values \verb+unknown+ in the knowledge base. A brief explanation of each attribute follows.
 %\begin{itemize}
 	%\item \verb+size+ is length of text of a particular report.
 	%\item \verb+damage+ is an amount (in CZK -- Czech Crowns) of summarized damage arisen during a reported accident.
@@ -163,14 +163,14 @@
 %\begin{figure}
 %\centerline{\includegraphics[angle=-90, width=0.6\hsize]{ranking_histogram}}
 %\caption{Frequencies of the seriousness ranking.}
-%\label{img:ranking_histogram}
+%\label{fig:ranking_histogram}
 %\end{figure}
 %
-%Values of the overall seriousness ranking attribute were stated from ``a general impression'' made by the texts with respect to particular attributes. %(Figure~\ref{img:attributes_description}). 
+%Values of the overall seriousness ranking attribute were stated from ``a general impression'' made by the texts with respect to particular attributes. %(Figure~\ref{fig:attributes_description}). 
 %The values have evolved to 14 distinct values in the range from 0.5 to 8. 
-%A histogram with frequencies of all these values is in Figure~\ref{img:ranking_histogram}.
+%A histogram with frequencies of all these values is in Figure~\ref{fig:ranking_histogram}.
 %We have divided the values into four approximately equipotent groups 
-%(see in Figure~\ref{img:ranking_histogram}) 
+%(see in Figure~\ref{fig:ranking_histogram}) 
 %and these groups determine the target class attribute of the classification task. 
 %%and logic rules were learned for each group separately\footnote{We do not have a binary rule, which would return an exact value of the rating, but we have one ``true/false'' rule for each of the four categories.}.
 %
@@ -182,7 +182,7 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\section{Evaluation} \label{sec:ch80_eval}
+%\section{Evaluation} \label{sec:fuzzy_eval}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 

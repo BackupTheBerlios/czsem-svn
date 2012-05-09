@@ -7,7 +7,7 @@ In our solution we have exploited several tools and formalisms. These can be div
 
 
 
-\section{Prague Dependency Treebank (PDT)} \label{sec:ch30_pdt}
+\section{Prague Dependency Treebank (PDT)} \label{sec:third_pdt}
 There exist several projects\footnote{Prague Dependency Treebank
  (PDT 1.0, PDT 2.0 \citep{biblio:PDT20_CD}), Prague English Dependency Treebank (PEDT 1.0), Prague Czech-English Dependency Treebank (PCEDT 1.0)} 
 closely related to the ``Prague school of dependency linguistics’’ and the Institute of Formal and Applied Linguistics\footnote{\url{http://ufal.mff.cuni.cz}} in Prague, Czech Republic (ÚFAL). All the projects share common methodology and principles concerning the formal representation of natural language %(Czech above all; and recently also English)
@@ -18,7 +18,7 @@ We will refer to these principles and related formalism as ``PDT principles and 
 
 Unlike the usual approaches to the description of English syntax, the Czech syntactic descriptions are dependency-based, which means that every edge of a syntactic tree captures the relation of dependency between a governor and its dependent node. 
 
-In PDT, text is split into individual sentences and dependency trees are built form them. Nodes of the trees are represented by individual words or tokens and edges represent their linguistic dependencies (simplified speaking, see bellow). Among others, two most important kinds of dependencies are distinguished: syntactical dependencies and ``underlying (deep) structure’’ dependencies. Syntactical dependencies are often called \emph{analytical} and the latter are called \emph{tectogrammatical} dependencies. These two kinds of dependencies form two kinds of dependency trees: \emph{analytical trees} and \emph{tectogrammatical trees}. The situation is usually described using a concept of different layers (or levels) of annotation. It is illustrated by Figure~\ref{fig:ch30_layers}. The description starts at the bottom with the surface structure of a sentence (\emph{w-layer}); note that there is a spelling error -- missing space between words `do’ and `lesa’ (into forest) in the example sentence. The lowest level of linguistic annotation (\emph{m-layer}) represents morphology. Word forms are disambiguated and correct lemmas (dictionary form) and morphological tags are assigned at this level. The second level of annotation is called analytical (\emph{a-layer}). At this level the syntactical dependencies of words are captured (e.g. subject, predicate, object, attribute, adverbial, etc.) The top level of annotation is called tectogrammatical (\emph{t-layer}), sometimes also called ``layer of deep syntax''. At this level some tokens (e.g. tokens without lexical meaning) are leaved out or ``merged’’ together (e.g. prepositions are merged with referred words). Also some nodes without a morphological level counterpart are inserted to the tectogrammatical tree at certain occasions (e.g. a node representing omitted subject -- on Figure~\ref{fig:ch30_layers} labeled as ``\#PersPron’’).  
+In PDT, text is split into individual sentences and dependency trees are built form them. Nodes of the trees are represented by individual words or tokens and edges represent their linguistic dependencies (simplified speaking, see bellow). Among others, two most important kinds of dependencies are distinguished: syntactical dependencies and ``underlying (deep) structure’’ dependencies. Syntactical dependencies are often called \emph{analytical} and the latter are called \emph{tectogrammatical} dependencies. These two kinds of dependencies form two kinds of dependency trees: \emph{analytical trees} and \emph{tectogrammatical trees}. The situation is usually described using a concept of different layers (or levels) of annotation. It is illustrated by Figure~\ref{fig:third_layers}. The description starts at the bottom with the surface structure of a sentence (\emph{w-layer}); note that there is a spelling error -- missing space between words `do’ and `lesa’ (into forest) in the example sentence. The lowest level of linguistic annotation (\emph{m-layer}) represents morphology. Word forms are disambiguated and correct lemmas (dictionary form) and morphological tags are assigned at this level. The second level of annotation is called analytical (\emph{a-layer}). At this level the syntactical dependencies of words are captured (e.g. subject, predicate, object, attribute, adverbial, etc.) The top level of annotation is called tectogrammatical (\emph{t-layer}), sometimes also called ``layer of deep syntax''. At this level some tokens (e.g. tokens without lexical meaning) are leaved out or ``merged’’ together (e.g. prepositions are merged with referred words). Also some nodes without a morphological level counterpart are inserted to the tectogrammatical tree at certain occasions (e.g. a node representing omitted subject -- on Figure~\ref{fig:third_layers} labeled as ``\#PersPron’’).  
 
 More over all the layers are interconnected and additional linguistic features are assigned to tree nodes. Among others: \emph{morphological tag} and \emph{lemma} is assigned at the morphological level; \emph{analytical function} (the actual kind of the particular analytical dependency, e.g. predicate, subject, object, etc.) is assigned to dependent nodes at the analytical level; \emph{semantic parts of speech} + \emph{grammatemes} (e.g. \emph{definite quantificational semantic noun} (n.quant.def) + \emph{number} and \emph{gender}, etc.) and \emph{tectogrammatical functor} (e.g. actor (ACT), patient (PAT), addressee (ADDR), temporal: when (TWHEN), directional: to (DIR3), etc.) is assigned at the tectogrammatical level. 
 
@@ -59,20 +59,20 @@ English translation (lit.):& [He] & would & have & gone & intoforest.
 		\end{tabular}
 	\end{center}
 \caption{Layers of linguistic annotation in PDT}
-\label{fig:ch30_layers}
+\label{fig:third_layers}
 \end{figure}
 
 
 
 
 
-\section{PDT Tools and Resources} \label{sec:ch30_pdt_tools_and_resources}
+\section{PDT Tools and Resources} \label{sec:third_pdt_tools_and_resources}
 
 In this section several linguistic tools and resources that are being developed at ÚFAL will be described. These tools and resources are closely connected with the PDT projects and they have been used also in the present work for various purposes.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Linguistics Analysis} \label{sec:ch30_ling_tools}
+\subsection{Linguistics Analysis} \label{sec:third_ling_tools}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Linguistic tools that were used for automated (machine) linguistic annotations of texts will be briefly described in this section. These tools are used as a processing chain and at the end of the chain they produce tectogrammatical dependency trees. 
@@ -82,7 +82,7 @@ Linguistic tools that were used for automated (machine) linguistic annotations o
 \subsubsection{Tokenization and Segmentation} 
 On the beginning of text analysis the input text is divided into tokens (words and punctuation); this is called \emph{tokenization}. Sequences of tokens are then (or simultaneously) divided into sentences; this is called \emph{segmentation}. Note that although the task seems quite simple, especially segmentation is not trivial and painful errors occur at this early stage e.g. caused by abbreviations ended by full stop in the middle of a sentence.
 
-There are several tools available for Czech and English. The oldest (Czech) one can be found on the PDT 2.0 CD-ROM \cite{biblio:PDT20_CD} and several choices are provided by TectoMT (see Section~\ref{sec:ch30_tectomt}) and GATE (see Section~\ref{sec:ch30_gate}). The best choice for Czech is probably TextSeg \citep{TextSeg}, which is available through TectoMT.
+There are several tools available for Czech and English. The oldest (Czech) one can be found on the PDT 2.0 CD-ROM \cite{biblio:PDT20_CD} and several choices are provided by TectoMT (see Section~\ref{sec:third_tectomt}) and GATE (see Section~\ref{sec:third_gate}). The best choice for Czech is probably TextSeg \citep{TextSeg}, which is available through TectoMT.
 
 
 		
@@ -147,7 +147,7 @@ TrEd can be also controlled using a powerful set of Perl macros and there is als
 Btred/ntred tutorial: \url{http://ufal.mff.cuni.cz/~pajas/tred/bn-tutorial.html}
 
 
-\subsubsection{PML Tree Query} \label{sec:ch30_pml_tree_query}
+\subsubsection{PML Tree Query} \label{sec:third_pml_tree_query}
 PML Tree Query (PML-TQ) \citep{biblio:PaStSystemfor2009} is a TrEd based module for searching through a treebank using a complex tree based query language.
 
 \medskip
@@ -155,13 +155,13 @@ Homepage of the project: \url{http://ufal.mff.cuni.cz/~pajas/pmltq/}
 
 
 
-\subsection{TectoMT} \label{sec:ch30_tectomt}
+\subsection{TectoMT} \label{sec:third_tectomt}
 %As we have started with our native language -- Czech (a language with rich morphology and free word order), we had to make tools for processing Czech available in GATE. We have implemented a wrapper for the TectoMT system\footnote{\url{http://ufal.mff.cuni.cz/tectomt/}}  to GATE.
 
 TectoMT \citep{biblio:ZaPtTectoMTHighly2008} is a Czech project that contains many linguistic tools for different languages including Czech and English; all the tools are based on the dependency based linguistic theory and formalism of PDT. It is implemented in Perl; highly exploiting TrEd libraries. The recommended platform is Linux. %Windows (not recomended platform for TectoMT)
 It is primarily aimed at machine translation but it can also facilitate development of software solutions of other NLP tasks.
 
-We have used a majority of applicable tools from TectoMT (e.g. tokeniser, sentence splitter, morphological, analytical and tectogrammatical analyzers for Czech and English). We have also developed TectoMT wrapper for GATE, which makes it possible to use TectoMT tools inside GATE, see details in Section~\ref{sec:ch60_tectomt_wrapper}.
+We have used a majority of applicable tools from TectoMT (e.g. tokeniser, sentence splitter, morphological, analytical and tectogrammatical analyzers for Czech and English). We have also developed TectoMT wrapper for GATE, which makes it possible to use TectoMT tools inside GATE, see details in Section~\ref{sec:learning_tectomt_wrapper}.
 
 Similarly to GATE, TectoMT supports building of application pipelines (\emph{scenarios}) composed of so called \emph{blocks} -- processing units responsible for single independent task (like tokenization, parsing, etc.)
 
@@ -169,21 +169,21 @@ Similarly to GATE, TectoMT supports building of application pipelines (\emph{sce
 Homepage of the project: \url{http://ufal.mff.cuni.cz/tectomt/}
 
 
-\subsection{Netgraph} \label{sec:ch30_netgraph}
+\subsection{Netgraph} \label{sec:third_netgraph}
 
 Netgraph \citep{biblio:MiNetgraphA2006} is a linguistic tool used for searching through a syntactically annotated corpus of a natural language (corpus of linguistic dependency trees). Besides the searching capabilities it also provides a GUI for viewing of dependency trees. Both of these features were exploited in the present work.
 
-Netgraph implementation is client-server based and a special query language is used for searching. The query language allows putting restrictions on the shape of a tree and on values of attributes of an arbitrary tree node. Besides that nodes of a query can be marked as optional (not necessarily present in a matching tree) and names can be assigned to query nodes. Naming of query nodes then allows putting restrictions based on referenced nodes (Give me all trees where there is a node with two children and both children have the same lemma.) See also Section~\ref{sec:ch50_Netgraph_Based_Extraction_Rules}, it provides additional information about the query language including example Netgraph queries.
+Netgraph implementation is client-server based and a special query language is used for searching. The query language allows putting restrictions on the shape of a tree and on values of attributes of an arbitrary tree node. Besides that nodes of a query can be marked as optional (not necessarily present in a matching tree) and names can be assigned to query nodes. Naming of query nodes then allows putting restrictions based on referenced nodes (Give me all trees where there is a node with two children and both children have the same lemma.) See also Section~\ref{sec:manual_Netgraph_Based_Extraction_Rules}, it provides additional information about the query language including example Netgraph queries.
 
-Currently Netgraph is replaced by PML Tree Query (see Section~\ref{sec:ch30_pml_tree_query}) and the Netgraph development is ``discontinued''. We use Netgraph in the present work because it is written in Java, the language of what we use. This also made it possible to use Netgraph inside GATE as a handy viewer of dependency trees, see Section~\ref{sec:ch60_GATE_Netgraph}. 
+Currently Netgraph is replaced by PML Tree Query (see Section~\ref{sec:third_pml_tree_query}) and the Netgraph development is ``discontinued''. We use Netgraph in the present work because it is written in Java, the language of what we use. This also made it possible to use Netgraph inside GATE as a handy viewer of dependency trees, see Section~\ref{sec:learning_GATE_Netgraph}. 
 
 \medskip
 Homepage of the project: \url{http://quest.ms.mff.cuni.cz/netgraph/}
 
 
 %\subsection{Annotation Schemas}
-%\subsubsection{Prague Markup Language (PML)} \label{sec:ch30_pml}
-%\subsubsection{Feature Structure (FS)} \label{sec:ch30_fs}
+%\subsubsection{Prague Markup Language (PML)} \label{sec:third_pml}
+%\subsubsection{Feature Structure (FS)} \label{sec:third_fs}
 
 
 \section{Czech WordNet}
@@ -218,44 +218,44 @@ the Stanford tools\footnote{\url{http://nlp.stanford.edu/software/lex-parser.sht
 
 
 
-\section{GATE} \label{sec:ch30_gate}
+\section{GATE} \label{sec:third_gate}
 GATE \citep{biblio:GATE_ACL2002} is probably the most widely used tool for text processing. In our solution the capabilities of document and annotation management, utility resources for annotation processing, JAPE grammar rules \citep{Cunningham00jape:a}, machine learning facilities and performance evaluation tools are the most helpful features of GATE that we have used.
 
 \medskip
 Homepage of the project: \url{http://gate.ac.uk/}
 
-\subsection{GATE Annotations} \label{sec:ch30_gate_annotations}
+\subsection{GATE Annotations} \label{sec:third_gate_annotations}
 Contrary to PDT, GATE annotations\footnote{\url{http://gate.ac.uk/userguide/sec:corpora:dags}} are rather simple and minimalistic. They are designed as labeled segments of text. A single annotation is described by its label (\emph{annotation type}) and starting and ending character offset. Each annotation has a unique identifier (integer ID) and an arbitrary set of \emph{features}\footnote{\url{http://gate.ac.uk/userguide/sec:corpora:features}} (name-value pairs) can be assigned to it. 
 
 For example in a sentence ``Hamish Cunningham leads the GATE team.'', ``Hamish Cunningham'' can be annotated with a GATE annotation starting at character 0, ending at character 16, annotation type: ``Person'', with three features: ``firstName=Hamish; surname= Cunningham; gender=male''; because it is the only annotation, the ID would most probably be 0.
 
-Although the GATE annotation approach seems quite simple, very complex structures can be encoded this way (for example an annotation feature can contain a reference to another annotation using its ID), but such usage of GATE annotations is always tricky to some degree and it is always necessary to establish a convention about that. In Section~\ref{sec:ch60_pdt_in_gate} encoding of PDT dependency annotations in GATE will be presented.
+Although the GATE annotation approach seems quite simple, very complex structures can be encoded this way (for example an annotation feature can contain a reference to another annotation using its ID), but such usage of GATE annotations is always tricky to some degree and it is always necessary to establish a convention about that. In Section~\ref{sec:learning_pdt_in_gate} encoding of PDT dependency annotations in GATE will be presented.
 
 \subsection{Machine Learning in GATE} \label{sec:third_gate_ML}
 
-Figure~\ref{img:ExtractionProcessIntro} learning and annotation process in general (ILP version later, Section~\ref{sec:methods_learning})
+Figure~\ref{fig:ExtractionProcessIntro} learning and annotation process in general (ILP version later, Section~\ref{sec:learning_methods})
 
 
 \begin{figure}
 \centering
 \includegraphics[angle=-90, width=0.8\hsize]{../img/ch10/annotation_process}
 \caption{Learning and annotation process -- general overview}
-\label{img:ExtractionProcessIntro}
+\label{fig:ExtractionProcessIntro}
 \end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Named Entity Recognition} \label{sec:ch30_named_entity_recognition}
+\section{Named Entity Recognition} \label{sec:third_named_entity_recognition}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Inductive Logic Programming} \label{sec:ch30_ILP}
+\section{Inductive Logic Programming} \label{sec:third_ILP}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Inductive Logic Programming (ILP) \citep{biblio:MuggletonILP} is a machine learning technique based on logic programming. Given an encoding of the known background knowledge (in our case linguistic structure of all sentences) and a set of examples represented as a logical database of facts (in our case tokens annotated with the target annotation type are positive examples and the remaining tokens negative ones), an ILP system will derive a hypothesized logic program (in our case extraction rules) which entails all the positive and none of the negative examples.
 
-Formal definitions of ILP tasks are presented in following sections. They will be extended and used for implementation of Fuzzy ILP Classifier, see details in Section~\ref{sec:methods_fuzzy}.
+Formal definitions of ILP tasks are presented in following sections. They will be extended and used for implementation of Fuzzy ILP Classifier, see details in Section~\ref{sec:fuzzy_methods}.
 
 
 
@@ -265,7 +265,7 @@ Formal definitions of ILP tasks are presented in following sections. They will b
 %To make the text easier to read, we present a short description of the ILP techniques below.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Classical ILP} \label{sec:ch30_ILP_classic}
+\subsection{Classical ILP} \label{sec:third_ILP_classic}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 In our presentation of ILP we follow \cite{dzeroski2001:relat_dm} and  \cite{biblio:Muggleton94inductivelogic}.
@@ -282,7 +282,7 @@ $$
 (\forall e\in N)(B\cup H\not\models e).
 $$
 \end{definition}
-Typically, $E$ consists of ground instances of the target predicate, in our case tree nodes relevant for the praticular extraction task or accident seriousness (see examples in Figure~\ref{img:examples}). $B$ typically consists of several predicates (relational tables), which describe properties of an object, in our case properties of an accident (see examples in Figure~\ref{img:crisp_attributes}) or the structure and properties of linguistic trees. The background knowledge can also contain some rules. A hypothesis $H$ typically consists of logic programming rules (see examples in Figure~\ref{img:rules} and Figure~\ref{fig:rules}). $H$ added to $B$ entails all positive examples and no negative examples.
+Typically, $E$ consists of ground instances of the target predicate, in our case tree nodes relevant for the praticular extraction task or accident seriousness (see examples in Figure~\ref{fig:examples}). $B$ typically consists of several predicates (relational tables), which describe properties of an object, in our case properties of an accident (see examples in Figure~\ref{fig:crisp_attributes}) or the structure and properties of linguistic trees. The background knowledge can also contain some rules. A hypothesis $H$ typically consists of logic programming rules (see examples in Figure~\ref{fig:rules} and Figure~\ref{fig:rules}). $H$ added to $B$ entails all positive examples and no negative examples.
 %
 The main advantage of ILP is its multirelational character, namely, $B$ can reside in several relational tables.
 
@@ -329,7 +329,7 @@ Typically, ${\mathcal E}$ consists of ground instances of the target predicate, 
 A~hypothesis ${\mathcal H}$ typically consists of a fuzzy logic program, which, when added to ${\mathcal B}$, prevents misclassification (what is better cannot be declared to be worse, nevertheless it can be declared as having the same degree -- for more detailed discussion on this definition of fuzzy ILP we refer to the paper \citep{biblio:FILP}).
 
 
-\subsection{ILP tool} \label{sec:ch30_ILP_tool}
+\subsection{ILP tool} \label{sec:third_ILP_tool}
 As an ILP tool we have used ``A Learning Engine for Proposing Hypotheses'' (Aleph v5)\footnote{\url{http://www.comlab.ox.ac.uk/activities/machinelearning/Aleph/}}, which we consider very practical. It uses quite effective method of inverse entailment \citep{biblio:InverseEntailment} and keeps all handy features of a Prolog system (we have used YAP Prolog\footnote{\url{http://www.dcc.fc.up.pt/~vsc/Yap/}}) in its background.
 
 
@@ -340,7 +340,7 @@ Homepage of the project: \url{http://www.comlab.ox.ac.uk/activities/machinelearn
 
 
 
-From our experiments (Section~\ref{sec:evaluation}) can be seen that ILP is capable to find complex and meaningful rules that cover the intended information.
+From our experiments (Section~\ref{sec:learning_eval}) can be seen that ILP is capable to find complex and meaningful rules that cover the intended information.
 
 
 
@@ -350,7 +350,7 @@ As we do not have large amount of training data, there is no problem with excess
 
 
 
-\section{Weka} \label{sec:ch30_weka}
+\section{Weka} \label{sec:third_weka}
 
 Weka \citep{biblio:Weka} is a well known data-mining software.
 
@@ -360,7 +360,7 @@ Weka Experimenter
 
 experimenter
 
-usage: evaluation of Fuzzy ILP Classifier (Section~\ref{sec:ch80_eval})
+usage: evaluation of Fuzzy ILP Classifier (Section~\ref{sec:fuzzy_eval})
 
 \medskip
 Homepage of the project: \url{http://www.cs.waikato.ac.nz/ml/weka/}

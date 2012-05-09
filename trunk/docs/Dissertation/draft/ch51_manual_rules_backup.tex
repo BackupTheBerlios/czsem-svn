@@ -84,9 +84,9 @@ In this paper we try to proceed in all dimensions in the "hard" direction. Never
 
 
 
-In this paper we describe initial experiments with information extraction from traffic accident reports of fire departments in several regions of the Czech Republic. These reports are being published on the web\footnote{\url{http://www.mvcr.cz/rss/regionhzs.html}} of the Ministry of Interior of the Czech Republic. An example of such report can be seen on the Figure~\ref{img:web_page}. We would like to demonstrate the prospects of using linguistic tools from the Prague school of computational linguistic (described in \ref{sec:ling_tools}). Our experiments are promising, they e.g. enable the summarization of the number of injured people. 
+In this paper we describe initial experiments with information extraction from traffic accident reports of fire departments in several regions of the Czech Republic. These reports are being published on the web\footnote{\url{http://www.mvcr.cz/rss/regionhzs.html}} of the Ministry of Interior of the Czech Republic. An example of such report can be seen on the Figure~\ref{fig:web_page}. We would like to demonstrate the prospects of using linguistic tools from the Prague school of computational linguistic (described in \ref{sec:ling_tools}). Our experiments are promising, they e.g. enable the summarization of the number of injured people. 
 
-The Ministry of Interior of the Czech Republic presents on its Web pages\footnote{\url{http://www.mvcr.cz/rss/regionhzs.html}} also reports from fire departments of several regions of the Czech Republic. These departments are responsible for rescue and recovery after traffic accidents. These reports are rich in information, e.g. where and when an traffic accident occurred, which units helped, how much time it took them to show up on the place of accident, how many people were injured, killed etc. An example of such report can be seen in the Figure~\ref{img:web_page}.
+The Ministry of Interior of the Czech Republic presents on its Web pages\footnote{\url{http://www.mvcr.cz/rss/regionhzs.html}} also reports from fire departments of several regions of the Czech Republic. These departments are responsible for rescue and recovery after traffic accidents. These reports are rich in information, e.g. where and when an traffic accident occurred, which units helped, how much time it took them to show up on the place of accident, how many people were injured, killed etc. An example of such report can be seen in the Figure~\ref{fig:web_page}.
 
 
 
@@ -115,12 +115,12 @@ In an ideal case all these reports would be already semantically annotated, e.g.
 
 \subsection{Method details}
 
-Here we describe our chain of tools for the linguistic extraction of semantic information from text-based web-resources (containing grammatical sentences in a natural language). The chain covers a process that consists of four steps. The Figure~\ref{img:extract_process} describes it. Notice, more detailed structure of the third pahase we focus in this paper.
+Here we describe our chain of tools for the linguistic extraction of semantic information from text-based web-resources (containing grammatical sentences in a natural language). The chain covers a process that consists of four steps. The Figure~\ref{fig:extract_process} describes it. Notice, more detailed structure of the third pahase we focus in this paper.
 
 \begin{enumerate}
-\item \emph{Extraction of text} \\ The linguistic annotating tools process plain text only. In this phase we have to extract the text from the structure of a given web-resource. In this first phase we have used RSS feed of the fire department web-page. From this we have obtained URLs of particular articles and we have downloaded them. Finally we have extracted the desired text (see highlighted area in the Figure~\ref{img:web_page}) by means of a regular expression. This text is an input for the second phase.
+\item \emph{Extraction of text} \\ The linguistic annotating tools process plain text only. In this phase we have to extract the text from the structure of a given web-resource. In this first phase we have used RSS feed of the fire department web-page. From this we have obtained URLs of particular articles and we have downloaded them. Finally we have extracted the desired text (see highlighted area in the Figure~\ref{fig:web_page}) by means of a regular expression. This text is an input for the second phase.
 
-\item \emph{Linguistic annotation} \\ In this phase the linguistic annotators process the extracted text and produce corresponding set of dependency trees representing the deep syntactic structure of individual sentences. We have used the linguistic tools described in the section~\ref{sec:ling_tools} for this task. Out put of this phase are tectogrammatical trees (for example see Figure~\ref{img:tecto_tree}) of sentences in document under investigation.
+\item \emph{Linguistic annotation} \\ In this phase the linguistic annotators process the extracted text and produce corresponding set of dependency trees representing the deep syntactic structure of individual sentences. We have used the linguistic tools described in the section~\ref{sec:ling_tools} for this task. Out put of this phase are tectogrammatical trees (for example see Figure~\ref{fig:tecto_tree}) of sentences in document under investigation.
 
 \item \emph{Data extraction} \\ We use the structure of tectogrammatical (i.e. deep syntactic) dependency trees to extract relevant data. Refinement of this step is the main focus of this paper, see section \ref{sec:extraction} for more details.
 
@@ -133,19 +133,19 @@ Here we describe our chain of tools for the linguistic extraction of semantic in
 \subsection{Implementation}
 The extraction method we have used is based on extraction rules. These rules correspond to query requests of Netgraph application. The Netgraph application \citep{biblio:MiNetgraphA2006} is a linguistic tool used for searching through a syntactically annotated corpus of a natural language. It was originally developed for searching the analytical and tectogrammatical levels of the Prague Dependency Treebank, a richly syntactically annotated corpus of Czech \citep{biblio:PDT20_CD}.
 
-Netgraph queries are written in a special query language. An example of such Netgraph query can be found in the Figure~\ref{img:extract_patern}. The Netgraph is a general tool for searching trees, it is not limited only to the trees in the PDT format. In our application we use it for searching the tectogrammatical trees provided by a set of language processing tools described in the previous chapter.  The tectogrammatical trees have a very convenient property of containing just the type of information we need for our purpose, namely the information about inner participants of verbs - actor, patient, addressee etc. 
+Netgraph queries are written in a special query language. An example of such Netgraph query can be found in the Figure~\ref{fig:extract_patern}. The Netgraph is a general tool for searching trees, it is not limited only to the trees in the PDT format. In our application we use it for searching the tectogrammatical trees provided by a set of language processing tools described in the previous chapter.  The tectogrammatical trees have a very convenient property of containing just the type of information we need for our purpose, namely the information about inner participants of verbs - actor, patient, addressee etc. 
 
 The tectogrammatical (deep syntactic) level of representation is more suitable for our purpose than the analytical (surface syntactic) level of representation of the structure of each sentence. The inner participants (actor, patient, addressee etc.) provide much more reliable information about the actual meaning of the sentence than the syntactic roles (subject, object etc.). The roles of a subject or object are misleading especially in the case of passive sentences, where usually the subject of the sentence corresponds to the patient or addressee while the actor is expressed by an object of the passive sentence. In these cases it would be necessary to develop (for the analytical level representation) some kind of algorithm analyzing these cases and providing the assignment of proper roles to individual words, while at the tectogrammatical level we get the desired information directly.
 
 The extraction works as follows: the extraction rule is in the first step evaluated by searching through a set of syntactic trees. Matching trees are returned and the desired information is taken from particular tree nodes.
 
 
-Let us explain it in more detail by using the example of extraction rule from the Figure~\ref{img:extract_patern}. This rule consists of five nodes. Each node of the rule will match some node in each matching tree. So we can investigate the relevant information by reading values of linguistic tags of matching nodes. We can find out the number (node number 5) and kind (4) of people, which were or were not (2) killed or injured (1) by an accident that is presented in the given sentence. And we can also identify the manner of injury in the node number 3.
+Let us explain it in more detail by using the example of extraction rule from the Figure~\ref{fig:extract_patern}. This rule consists of five nodes. Each node of the rule will match some node in each matching tree. So we can investigate the relevant information by reading values of linguistic tags of matching nodes. We can find out the number (node number 5) and kind (4) of people, which were or were not (2) killed or injured (1) by an accident that is presented in the given sentence. And we can also identify the manner of injury in the node number 3.
 
 
 \subsection{Datasets}
 
-The Ministry of Interior of the Czech Republic presents on its Web pages\footnote{\url{http://www.mvcr.cz/rss/regionhzs.html}} also reports from fire departments of several regions of the Czech Republic. These departments are responsible for rescue and recovery after traffic accidents. These reports are rich in information, e.g. where and when an traffic accident occurred, which units helped, how much time it took them to show up on the place of accident, how many people were injured, killed etc. An example of such report can be seen in the Figure~\ref{img:web_page}.
+The Ministry of Interior of the Czech Republic presents on its Web pages\footnote{\url{http://www.mvcr.cz/rss/regionhzs.html}} also reports from fire departments of several regions of the Czech Republic. These departments are responsible for rescue and recovery after traffic accidents. These reports are rich in information, e.g. where and when an traffic accident occurred, which units helped, how much time it took them to show up on the place of accident, how many people were injured, killed etc. An example of such report can be seen in the Figure~\ref{fig:web_page}.
 
 
 Nevertheless, there are also reports about fire accidents and also about fire-fighting contests. The task to extract information on the number of injured/killed people in traffic accidents needs deep linguistic analysis.
@@ -156,7 +156,7 @@ In an ideal case all these reports would be already semantically annotated, e.g.
 
 \subsection{Experiments}
 
-Small part of the result of the extraction is shown in the Figure~\ref{img:extract_output}. This result contains three pieces of information extracted from three articles.
+Small part of the result of the extraction is shown in the Figure~\ref{fig:extract_output}. This result contains three pieces of information extracted from three articles.
 
 Each piece of information is closed in the \verb+<action>+ element and each deals with some kind of incident that is described in given article.
 
@@ -180,7 +180,7 @@ The element \verb+<participant>+ contains information about the participants of 
 \subsection{Gathering similar words}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The Figure~\ref{img:extract_patern} shows, that it would be useful to gather words with similar meanings in our extraction rules. For example, the rule in the Figure~\ref{img:extract_patern} contains long disjunctions of similar words (nodes with numbers 1 and 4). These disjunctions could be replaced with some kind of expression telling that we are looking for any word from some semantic category (e.g. human beings). For this purpose we wanted to use the Czech WordNet \citep{biblio:WordNetCZ2004}. 
+The Figure~\ref{fig:extract_patern} shows, that it would be useful to gather words with similar meanings in our extraction rules. For example, the rule in the Figure~\ref{fig:extract_patern} contains long disjunctions of similar words (nodes with numbers 1 and 4). These disjunctions could be replaced with some kind of expression telling that we are looking for any word from some semantic category (e.g. human beings). For this purpose we wanted to use the Czech WordNet \citep{biblio:WordNetCZ2004}. 
 
 After we have explored the records of the Czech WordNet (CzWN) related to the domain of our interest (car accidents, etc.) we have decided not to involve CzWN in the extraction process. The reason is that the coverage of the vocabulary of our domain is rather poor and the semantic connections of words are sometimes unfortunately missing. But we can supply the missing information to CzWN or we can build up a new domain-specific word-net based on the ground of CzWN.  
 
