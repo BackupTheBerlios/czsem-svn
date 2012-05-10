@@ -11,7 +11,21 @@ This chapter provides the most important implementation details, it is, again, d
 
 Our earliest extraction method, which is based on procedural extraction rules, was implemented using Btred\footnote{See details about Btred in Section~\ref{sec:third_tred}.} API for processing linguistic trees. The extraction rules were implemented in Perl as Btred procedures. Application of these extraction rules on a corpus of linguistic trees is realized such that each procedure (or extraction rule) is executed on every available tree by Btred. 
 
-An example of such extraction rule is in Figure~\ref{fig:btred_rule} and corresponding extraction output on Figure~\ref{fig:btred_xml}. TODO: explain
+An example of such extraction rule is in Figure~\ref{fig:btred_rule} and corresponding extraction output on Figure~\ref{fig:btred_xml}. Let us briefly describe this extraction rule. The execution is configured such that the procedure of a particular extraction rule (`print\_injured’ on the line 5 in the presented case) is repeatedly called for all nodes of all available trees and the variable `\$this` always contains a reference to the actual tree node. 
+
+The procedure starts with testing if the actual node is a verb (line 6) and if it is one of the intended verbs (lines 7, 8 and 3). If these tests succeed, the rule is applied and following information is printed to the output:
+\begin{description}
+	\item[<action> enclosing element and its type (line 10)]: the actual verb, that triggered this extraction rule, is used as the type of the action.
+	\item[<sentence> (lines 13, 14)]: the full sentence and its \emph{id}.
+	\item[<negation> (lines 17-21)]: test whether negation is present or not (e.g. ``truck driver \myemph{did not} survive the accident.’’)
+	\item[<manner> (lines 24-29)]: looks for a word expressing the manner of injury (e.g. ``driver was \myemph{seriously} injured.’’)
+	\item[<participant> (lines 32-51)]: looks for all participants attached to the action.
+	\item[<quantity> of participants (lines 39-44)]: looks for a numeral expressing the quantity of participants (e.g. ``\myemph{two} people died.’’)
+	\item[<full\_string> representation of given participant (lines 46-48)]: all words attached to the particular participant node (e.g. ``\myemph{fifteen years old woman} died.’’)
+\end{description}
+
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -21,7 +35,7 @@ An example of such extraction rule is in Figure~\ref{fig:btred_rule} and corresp
 #variable $this contains currently processed node, $root current root node
 
 my @injure_verbs = ("zranit", "usmrtit", "zemřít", "zahynout", "přežít");
-
+# transcript:       "injure"  "kill"     "die"     "perish"    "survive"
 sub print_injured {
 	if ($this->{gram}{sempos} eq "v") {
 		foreach my $v (@injure_verbs) {
@@ -40,7 +54,7 @@ sub print_injured {
 					print "<negation>false</negation>" ;										
 				}
 								
-				#manner of injurance
+				#manner of injury
 				my @mans = find_node_by_attr_depth($this, 0, 'functor', '^MANN');
 				if (@mans) {
 					foreach my $m (@mans) {
@@ -55,7 +69,7 @@ sub print_injured {
 				foreach my $p (@pats) {
 					print "<participant type=\"" . $p->{t_lemma} . "\">";
 
-					#patients count
+					#participants count
 					my @cnt = find_node_by_attr($p, 'functor', '^RSTR');
 					@cnt = &filter_list(\&test_number_lemma, @cnt);
 					my $cnt1 = pop(@cnt);
