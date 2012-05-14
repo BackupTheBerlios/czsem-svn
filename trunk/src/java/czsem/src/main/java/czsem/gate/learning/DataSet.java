@@ -157,11 +157,11 @@ public interface DataSet
 			public static final String [] eval_annot_types =
 			{
 				"acqabr",
+				"dlramt",
 //				"acqbus",
 //				"acqcode",
 //				"acqloc",
 				"acquired",
-				"dlramt",
 				"purchabr",
 				"purchaser",
 //				"purchcode",

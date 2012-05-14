@@ -31,8 +31,9 @@ public class WekaResultTests
 		Locale.setDefault(Locale.ENGLISH);
 		WekaResultTests t = new WekaResultTests(System.err);
 		
-		t.loadInstances("weka_results_acq_ne_root_longer.csv");
+//		t.loadInstances("weka_results_acq_ne_root_longer.csv");
 //		t.loadInstances("weka_results.csv");
+		t.loadInstances("gate-learning/results/weka_results_acq_complete.csv");
 		
 		t.printBasicStats();
 		

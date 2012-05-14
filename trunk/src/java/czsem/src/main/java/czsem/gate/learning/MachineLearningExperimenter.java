@@ -60,7 +60,7 @@ public class MachineLearningExperimenter
 	{
 		return 	    
 			new MachineLearningExperiment(
-	    		new CzechFireman("cars"),
+	    		new CzechFireman("damage"),
 //	    		new MLEvaluate(new CreateTemporaryMentions(new ILPEngine())),
 	    		new MLEvaluate(new CreateTemporaryMentionsRootSubtree(new ILPEngine("ILP_root_subtree.xml"))),
 /*
@@ -73,7 +73,7 @@ public class MachineLearningExperimenter
     	    						"Lookup_root.origRootID",
     	    						new ILPEngine("ILP_config_NE_roots.xml"))),
 /**/    	    						
-	    		new MLEvaluate(new CreateTemporaryMentions(new SubsequentAnnotationMerge(new ILPEngine()))),
+//	    		new MLEvaluate(new CreateTemporaryMentions(new SubsequentAnnotationMerge(new ILPEngine()))),
 	    	    new MLEvaluate(new CreatePersistentMentions(new PaumEngine()))
 
 /*
@@ -156,6 +156,38 @@ public class MachineLearningExperimenter
 	    ex.saveAll(results_file_name);		    		
 	}
 	
+	public static MachineLearningExperiment acqCommonExperiment(DataSet dataset)
+	{
+		MachineLearningExperiment experiment = new MachineLearningExperiment(
+	    		dataset,
+	    		new MLEvaluate(
+	    				new CreateTemporaryMentionsReferedMentionsPostprocessing(
+	    						new ILPEngine("ILP_config_NE_roots.xml"))),
+	    		/*
+	    		new MLEvaluate(
+	    				new CreateTemporaryMentions(
+	    	    				new MentionsSubtreePostprocessing(
+	    	    						new ILPEngine("ILP_config_NE_roots_subtree.xml")))),	    		
+	    		new MLEvaluate(new CreateTemporaryMentions(
+	    	    		new SubsequentAnnotationMerge(new ILPEngine()))),
+/**/
+	    	    new MLEvaluate(new CreatePersistentMentions(new PaumEngine()))
+	    );
+		return experiment;
+	}
+
+	public static MachineLearningExperiment acqDlrAmountExperiment(DataSet dataset)
+	{
+		MachineLearningExperiment experiment = new MachineLearningExperiment(
+	    		dataset,
+	    		new MLEvaluate(
+	    				new CreateTemporaryMentionsRootSubtree(
+	    	    				new ILPEngine())),	    		
+	    	    new MLEvaluate(new CreatePersistentMentions(new PaumEngine()))
+	    );
+		return experiment;
+	}
+	
 	public static void bigAcquisitionsExperiment(String results_file_name) throws BenchmarkReportInputFileFormatException, URISyntaxException, IOException, ExecutionException, ResourceInstantiationException, PersistenceException, JDOMException
 	{
 		for (String annot_type : Acquisitions.eval_annot_types)
@@ -166,24 +198,17 @@ public class MachineLearningExperimenter
 		    GateUtils.enableGateTimeBenchmark();
 		    
 //			DataSet dataset = new Acquisitions(annot_type);
-			DataSet dataset = new DataSetReduce(new Acquisitions(annot_type), 0.1);
+			DataSet dataset = new DataSetReduce(new Acquisitions(annot_type), 1.0);
 			dataset.clearSevedFilesDirectory();
 			
-			MachineLearningExperiment experiment = new MachineLearningExperiment(
-		    		dataset,
-		    		new MLEvaluate(
-		    				new CreateTemporaryMentionsReferedMentionsPostprocessing(
-		    						new ILPEngine("ILP_config_NE_roots.xml"))),
-		    		/*
-		    		new MLEvaluate(
-		    				new CreateTemporaryMentions(
-		    	    				new MentionsSubtreePostprocessing(
-		    	    						new ILPEngine("ILP_config_NE_roots_subtree.xml")))),	    		
-    	    		new MLEvaluate(new CreateTemporaryMentions(
-		    	    		new SubsequentAnnotationMerge(new ILPEngine()))),
-/**/
-		    	    new MLEvaluate(new CreatePersistentMentions(new PaumEngine()))
-		    );
+			MachineLearningExperiment experiment =
+				annot_type.equalsIgnoreCase("dlramt") 
+				? 
+				acqDlrAmountExperiment(dataset) 
+				:
+				acqCommonExperiment(dataset);
+				
+
 			experiment.crossValidation(2);
 			
 			
@@ -197,20 +222,19 @@ public class MachineLearningExperimenter
     
     public static void main(String [] args) throws Exception
 	{
-		initEnvironment();
+    	initEnvironment();
+    	/**/
 		
 		String results_file_name = "weka_results.csv";
 		
 		new File(results_file_name).delete();
 		
-		bigAcquisitionsExperiment(results_file_name);
+		for (int a=0; a<5; a++)
+			bigAcquisitionsExperiment(results_file_name);
 		
 		WekaResultTests t = new WekaResultTests(System.err);
 		t.loadInstances(results_file_name);
 		t.testsAttr(6); //F1
-
-		
-	}
 
 /*	    
 	    new MachineLearningExperiment(
@@ -229,9 +253,10 @@ public class MachineLearningExperimenter
 	    	    new MLEvaluate(new CreatePersistentMentions(new PaumEngine()))
 //	    		new ILPEngine()
 	    ).crossValidation(2);
-/**/	    
+/*	    
 	    
-//	    czechFiremanSimple().crossValidation(10);
+	    czechFiremanSimple().trainOnly();
+	}
 	    
 	    
 //	    logger.info("time statistics:\n"+GateUtils.createGateTimeBenchmarkReport());	    
@@ -243,7 +268,10 @@ public class MachineLearningExperimenter
 	    //	    trainOnly(new TrainTestGateOnCzech(false, true));
 //	    trainOnly(new TrainTestAcquisitions(new ILPEngine()));
 //	    trainOnly(new TrainTestCzechFireman(new ILPEngine()));
-//	}
+//	
+/**/				
+	}
+
 	
 	
 	
@@ -309,7 +337,6 @@ public class MachineLearningExperimenter
 		gate.Annotation token_an = inputAS.get(args.get(1));
 		gate.FeatureMap fm = token_an.getFeatures();
 		fm.put("depency_type", dep_kind);
-		*/		
+/**/				
 	}
-
 }
