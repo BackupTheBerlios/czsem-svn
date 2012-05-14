@@ -1,6 +1,8 @@
 \appendix
 \chapter{Complete Evaluation Results}
 
+\section{Czech Fireman}
+
 \begin{longtable}{|r|r|l||rcl|rcl|c|}
 \hline
 \multirow{2}{*}{task} & \multicolumn{2}{|c||}{\multirow{2}{*}{measured quantity}} & \multicolumn{3}{|c|}{ILP} & \multicolumn{3}{|c|}{PAUM} & \multirow{2}{*}{ stat. sig.}\\
@@ -10,7 +12,8 @@
 \endhead
 \hline
 \hline
-\multirow{11}{*}{\begin{sideways}start\end{sideways} } & \multirow{4}{*}{Number} &  Correct  & 3.780 &  $\pm$  & 0.95 & 4.100 &  $\pm$  & 0.91 &  $\circ$\\
+\multirow{11}{*}{\begin{sideways}start\end{sideways} } 
+& \multirow{4}{*}{Number} &  Correct  & 3.780 &  $\pm$  & 0.95 & 4.100 &  $\pm$  & 0.91 &  $\circ$\\
 \cline{3-10}
  &  &  Missing  & 0.420 &  $\pm$  & 0.64 & 0.100 &  $\pm$  & 0.30 &  $\bullet$\\
 \cline{3-10}
@@ -194,6 +197,132 @@
   & \multirow{2}{*}{Time} &  training  & 682.622 &  $\pm$  & 481.87 & 24.814 &  $\pm$  & 2.32 &  $\bullet$\\
 \cline{3-10}
   &  &  testing  & 7.231 &  $\pm$  & 0.12 & 2.245 &  $\pm$  & 0.10 &  $\bullet$\\
+\hline
+\end{longtable}
+
+\section{Acquisitions}
+
+
+\begin{longtable}{|r|r|l||rcl|rcl|c|}
+\hline
+\multirow{2}{*}{task} & \multicolumn{2}{|c||}{\multirow{2}{*}{measured quantity}} & \multicolumn{3}{|c|}{ILP} & \multicolumn{3}{|c|}{PAUM} & \multirow{2}{*}{ stat. sig.}\\
+\cline{4-9}
+  & \multicolumn{2}{|c||}{} &  avg  &    &  stdev  &  avg  &    &  stdev  & \\
+\hline
+\endhead
+\hline
+\hline
+\multirow{11}{*}{\begin{sideways}acqabr\end{sideways} }
+& \multirow{4}{*}{    Number} &         Correct &     374.500 &  $\pm$  &      21.681 &     130.500 &  $\pm$  &      18.295 & $\bullet$ \\
+&                             &         Missing &     257.400 &  $\pm$  &      33.200 &     589.300 &  $\pm$  &      43.071 & $\circ$ \\
+&                             &        Spurious &     449.800 &  $\pm$  &      25.455 &     149.100 &  $\pm$  &      17.508 & $\bullet$ \\
+&                             &         Overlap &      93.100 &  $\pm$  &       5.259 &       5.200 &  $\pm$  &       1.989 & $\bullet$ \\
+& \multirow{3}{*}{    Strict} &       Precision &       0.408 &  $\pm$  &       0.015 &       0.457 &  $\pm$  &       0.034 & $\circ$ \\
+&                             &          Recall &       0.517 &  $\pm$  &       0.027 &       0.180 &  $\pm$  &       0.025 & $\bullet$ \\
+&                             &           $F_1$ &       0.456 &  $\pm$  &       0.015 &       0.258 &  $\pm$  &       0.030 & $\bullet$ \\
+&                     Lenient &           $F_1$ &       0.569 &  $\pm$  &       0.009 &       0.268 &  $\pm$  &       0.032 & $\bullet$ \\
+&                     Average &           $F_1$ &       0.513 &  $\pm$  &       0.011 &       0.263 &  $\pm$  &       0.031 & $\bullet$ \\
+& \multirow{2}{*}{    Number} &   Training Inst &      -1.000 &  $\pm$  &       0.000 &     419.000 &  $\pm$  &      37.848 & $\circ$ \\
+&                             &   Training Docs &      -1.000 &  $\pm$  &       0.000 &     300.000 &  $\pm$  &       0.000 & $\circ$ \\
+& \multirow{2}{*}{      Time} &        Training &    9978.100 &  $\pm$  &     566.699 &  984907.000 &  $\pm$  &  502945.575 & $\circ$ \\
+&                             &         Testing &   13554.600 &  $\pm$  &     272.939 &   27449.100 &  $\pm$  &     781.975 & $\circ$ \\
+\hline
+\hline
+\multirow{11}{*}{\begin{sideways}dlramt\end{sideways} }
+& \multirow{4}{*}{    Number} &         Correct &     104.700 &  $\pm$  &       9.068 &      39.100 &  $\pm$  &       6.871 & $\bullet$ \\
+&                             &         Missing &      27.700 &  $\pm$  &       8.731 &      50.100 &  $\pm$  &       6.385 & $\circ$ \\
+&                             &        Spurious &      62.300 &  $\pm$  &      13.292 &      45.800 &  $\pm$  &      14.906 & $\bullet$ \\
+&                             &         Overlap &       9.100 &  $\pm$  &       2.025 &      52.300 &  $\pm$  &       5.355 & $\circ$ \\
+& \multirow{3}{*}{    Strict} &       Precision &       0.597 &  $\pm$  &       0.030 &       0.286 &  $\pm$  &       0.052 & $\bullet$ \\
+&                             &          Recall &       0.740 &  $\pm$  &       0.063 &       0.276 &  $\pm$  &       0.043 & $\bullet$ \\
+&                             &           $F_1$ &       0.659 &  $\pm$  &       0.022 &       0.280 &  $\pm$  &       0.046 & $\bullet$ \\
+&                     Lenient &           $F_1$ &       0.716 &  $\pm$  &       0.024 &       0.656 &  $\pm$  &       0.053 & $\bullet$ \\
+&                     Average &           $F_1$ &       0.687 &  $\pm$  &       0.022 &       0.468 &  $\pm$  &       0.045 & $\bullet$ \\
+& \multirow{2}{*}{    Number} &   Training Inst &      -1.000 &  $\pm$  &       0.000 &     141.500 &  $\pm$  &       6.587 & $\circ$ \\
+&                             &   Training Docs &      -1.000 &  $\pm$  &       0.000 &     300.000 &  $\pm$  &       0.000 & $\circ$ \\
+& \multirow{2}{*}{      Time} &        Training &   10805.300 &  $\pm$  &    2794.120 & 1407623.800 &  $\pm$  &  945716.224 & $\circ$ \\
+&                             &         Testing &    9845.000 &  $\pm$  &     501.315 &   30511.400 &  $\pm$  &     799.928 & $\circ$ \\
+\hline
+\hline
+\multirow{11}{*}{\begin{sideways}acquired\end{sideways} }
+& \multirow{4}{*}{    Number} &         Correct &     174.800 &  $\pm$  &       8.842 &      92.700 &  $\pm$  &      18.013 & $\bullet$ \\
+&                             &         Missing &     135.100 &  $\pm$  &      10.989 &     234.000 &  $\pm$  &      23.580 & $\circ$ \\
+&                             &        Spurious &     191.300 &  $\pm$  &      22.765 &     138.200 &  $\pm$  &      22.190 & $\bullet$ \\
+&                             &         Overlap &      31.600 &  $\pm$  &       5.522 &      14.800 &  $\pm$  &       4.264 & $\bullet$ \\
+& \multirow{3}{*}{    Strict} &       Precision &       0.441 &  $\pm$  &       0.027 &       0.376 &  $\pm$  &       0.028 & $\bullet$ \\
+&                             &          Recall &       0.512 &  $\pm$  &       0.033 &       0.272 &  $\pm$  &       0.054 & $\bullet$ \\
+&                             &           $F_1$ &       0.473 &  $\pm$  &       0.024 &       0.313 &  $\pm$  &       0.046 & $\bullet$ \\
+&                     Lenient &           $F_1$ &       0.559 &  $\pm$  &       0.019 &       0.363 &  $\pm$  &       0.057 & $\bullet$ \\
+&                     Average &           $F_1$ &       0.516 &  $\pm$  &       0.020 &       0.338 &  $\pm$  &       0.052 & $\bullet$ \\
+& \multirow{2}{*}{    Number} &   Training Inst &      -1.000 &  $\pm$  &       0.000 &     297.000 &  $\pm$  &       3.300 & $\circ$ \\
+&                             &   Training Docs &      -1.000 &  $\pm$  &       0.000 &     300.000 &  $\pm$  &       0.000 & $\circ$ \\
+& \multirow{2}{*}{      Time} &        Training &    9823.200 &  $\pm$  &     425.859 &  615995.200 &  $\pm$  &  431095.860 & $\circ$ \\
+&                             &         Testing &   11763.200 &  $\pm$  &     348.427 &   26731.400 &  $\pm$  &     721.914 & $\circ$ \\
+\hline
+\hline
+\multirow{11}{*}{\begin{sideways}purchabr\end{sideways} }
+& \multirow{4}{*}{    Number} &         Correct &     324.400 &  $\pm$  &      23.604 &      75.200 &  $\pm$  &      24.262 & $\bullet$ \\
+&                             &         Missing &     252.600 &  $\pm$  &      26.517 &     548.500 &  $\pm$  &      53.817 & $\circ$ \\
+&                             &        Spurious &     454.400 &  $\pm$  &      43.221 &     150.800 &  $\pm$  &      40.157 & $\bullet$ \\
+&                             &         Overlap &      54.500 &  $\pm$  &       6.416 &       7.800 &  $\pm$  &       3.795 & $\bullet$ \\
+& \multirow{3}{*}{    Strict} &       Precision &       0.390 &  $\pm$  &       0.015 &       0.318 &  $\pm$  &       0.050 & $\bullet$ \\
+&                             &          Recall &       0.514 &  $\pm$  &       0.033 &       0.120 &  $\pm$  &       0.041 & $\bullet$ \\
+&                             &           $F_1$ &       0.443 &  $\pm$  &       0.016 &       0.172 &  $\pm$  &       0.050 & $\bullet$ \\
+&                     Lenient &           $F_1$ &       0.517 &  $\pm$  &       0.018 &       0.190 &  $\pm$  &       0.055 & $\bullet$ \\
+&                     Average &           $F_1$ &       0.480 &  $\pm$  &       0.016 &       0.181 &  $\pm$  &       0.052 & $\bullet$ \\
+& \multirow{2}{*}{    Number} &   Training Inst &      -1.000 &  $\pm$  &       0.000 &     413.000 &  $\pm$  &      29.885 & $\circ$ \\
+&                             &   Training Docs &      -1.000 &  $\pm$  &       0.000 &     300.000 &  $\pm$  &       0.000 & $\circ$ \\
+& \multirow{2}{*}{      Time} &        Training &   10197.300 &  $\pm$  &    1398.843 & 1011648.600 &  $\pm$  &  554745.447 & $\circ$ \\
+&                             &         Testing &   13223.800 &  $\pm$  &     515.043 &   27405.200 &  $\pm$  &     851.512 & $\circ$ \\
+\hline
+\hline
+\multirow{11}{*}{\begin{sideways}purchaser\end{sideways} }
+& \multirow{4}{*}{    Number} &         Correct &     173.300 &  $\pm$  &       9.557 &     105.900 &  $\pm$  &      19.490 & $\bullet$ \\
+&                             &         Missing &     119.400 &  $\pm$  &      11.394 &     194.400 &  $\pm$  &      26.421 & $\circ$ \\
+&                             &        Spurious &     174.000 &  $\pm$  &      19.743 &     144.100 &  $\pm$  &      21.850 & $\bullet$ \\
+&                             &         Overlap &      19.300 &  $\pm$  &       3.164 &      11.700 &  $\pm$  &       4.547 & $\bullet$ \\
+& \multirow{3}{*}{    Strict} &       Precision &       0.474 &  $\pm$  &       0.029 &       0.403 &  $\pm$  &       0.037 & $\bullet$ \\
+&                             &          Recall &       0.556 &  $\pm$  &       0.028 &       0.340 &  $\pm$  &       0.064 & $\bullet$ \\
+&                             &           $F_1$ &       0.511 &  $\pm$  &       0.022 &       0.367 &  $\pm$  &       0.051 & $\bullet$ \\
+&                     Lenient &           $F_1$ &       0.568 &  $\pm$  &       0.018 &       0.408 &  $\pm$  &       0.061 & $\bullet$ \\
+&                     Average &           $F_1$ &       0.539 &  $\pm$  &       0.020 &       0.387 &  $\pm$  &       0.056 & $\bullet$ \\
+& \multirow{2}{*}{    Number} &   Training Inst &      -1.000 &  $\pm$  &       0.000 &     298.500 &  $\pm$  &      11.787 & $\circ$ \\
+&                             &   Training Docs &      -1.000 &  $\pm$  &       0.000 &     300.000 &  $\pm$  &       0.000 & $\circ$ \\
+& \multirow{2}{*}{      Time} &        Training &   10352.500 &  $\pm$  &    1183.772 &  747072.900 &  $\pm$  &  442606.269 & $\circ$ \\
+&                             &         Testing &   11501.300 &  $\pm$  &    1219.063 &   27464.000 &  $\pm$  &    1954.475 & $\circ$ \\
+\hline
+\hline
+\multirow{11}{*}{\begin{sideways}seller\end{sideways} }
+& \multirow{4}{*}{    Number} &         Correct &      29.800 &  $\pm$  &       4.940 &      17.400 &  $\pm$  &       5.929 & $\bullet$ \\
+&                             &         Missing &      99.200 &  $\pm$  &      14.421 &     113.000 &  $\pm$  &      12.257 & $\circ$ \\
+&                             &        Spurious &      89.000 &  $\pm$  &      19.050 &      46.100 &  $\pm$  &      16.954 & $\bullet$ \\
+&                             &         Overlap &       4.500 &  $\pm$  &       1.269 &       3.100 &  $\pm$  &       1.197 &  \\
+& \multirow{3}{*}{    Strict} &       Precision &       0.245 &  $\pm$  &       0.041 &       0.261 &  $\pm$  &       0.071 &  \\
+&                             &          Recall &       0.226 &  $\pm$  &       0.046 &       0.131 &  $\pm$  &       0.047 & $\bullet$ \\
+&                             &           $F_1$ &       0.232 &  $\pm$  &       0.036 &       0.170 &  $\pm$  &       0.050 & $\bullet$ \\
+&                     Lenient &           $F_1$ &       0.267 &  $\pm$  &       0.039 &       0.201 &  $\pm$  &       0.056 & $\bullet$ \\
+&                     Average &           $F_1$ &       0.250 &  $\pm$  &       0.037 &       0.186 &  $\pm$  &       0.053 & $\bullet$ \\
+& \multirow{2}{*}{    Number} &   Training Inst &      -1.000 &  $\pm$  &       0.000 &     127.500 &  $\pm$  &      13.260 & $\circ$ \\
+&                             &   Training Docs &      -1.000 &  $\pm$  &       0.000 &     300.000 &  $\pm$  &       0.000 & $\circ$ \\
+& \multirow{2}{*}{      Time} &        Training &   10145.200 &  $\pm$  &    1008.992 &  552200.000 &  $\pm$  &  235228.335 & $\circ$ \\
+&                             &         Testing &   10650.000 &  $\pm$  &     847.431 &   27347.600 &  $\pm$  &    3157.359 & $\circ$ \\
+\hline
+\hline
+\multirow{11}{*}{\begin{sideways}sellerabr\end{sideways} }
+& \multirow{4}{*}{    Number} &         Correct &      40.900 &  $\pm$  &       7.460 &      10.800 &  $\pm$  &       6.143 & $\bullet$ \\
+&                             &         Missing &     165.800 &  $\pm$  &      21.765 &     203.800 &  $\pm$  &      21.928 & $\circ$ \\
+&                             &        Spurious &     137.400 &  $\pm$  &      16.801 &      22.500 &  $\pm$  &       7.778 & $\bullet$ \\
+&                             &         Overlap &       8.800 &  $\pm$  &       2.573 &       0.900 &  $\pm$  &       0.876 & $\bullet$ \\
+& \multirow{3}{*}{    Strict} &       Precision &       0.219 &  $\pm$  &       0.036 &       0.306 &  $\pm$  &       0.111 & $\circ$ \\
+&                             &          Recall &       0.190 &  $\pm$  &       0.032 &       0.050 &  $\pm$  &       0.027 & $\bullet$ \\
+&                             &           $F_1$ &       0.202 &  $\pm$  &       0.030 &       0.085 &  $\pm$  &       0.044 & $\bullet$ \\
+&                     Lenient &           $F_1$ &       0.247 &  $\pm$  &       0.027 &       0.092 &  $\pm$  &       0.042 & $\bullet$ \\
+&                     Average &           $F_1$ &       0.225 &  $\pm$  &       0.027 &       0.089 &  $\pm$  &       0.043 & $\bullet$ \\
+& \multirow{2}{*}{    Number} &   Training Inst &      -1.000 &  $\pm$  &       0.000 &     120.500 &  $\pm$  &      20.684 & $\circ$ \\
+&                             &   Training Docs &      -1.000 &  $\pm$  &       0.000 &     300.000 &  $\pm$  &       0.000 & $\circ$ \\
+& \multirow{2}{*}{      Time} &        Training &    9743.600 &  $\pm$  &     345.353 &  371527.500 &  $\pm$  &  243268.103 & $\circ$ \\
+&                             &         Testing &   11536.500 &  $\pm$  &     342.035 &   26137.200 &  $\pm$  &     731.118 & $\circ$ \\
+\hline
 \hline
 \end{longtable}
 

@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Locale;
 
+import org.apache.commons.lang.StringUtils;
+
 import weka.core.Instances;
 import weka.core.Range;
 import weka.core.converters.CSVLoader;
@@ -16,7 +18,7 @@ import weka.experiment.Tester;
 public class WekaResultTests
 {
 	Tester m_TTester = new PairedCorrectedTTester();
-	private PrintStream out;
+	protected PrintStream out;
 	
 	int first_test_attr = 7;
 
@@ -32,8 +34,7 @@ public class WekaResultTests
 		WekaResultTests t = new WekaResultTests(System.err);
 		
 //		t.loadInstances("weka_results_acq_ne_root_longer.csv");
-//		t.loadInstances("weka_results.csv");
-		t.loadInstances("gate-learning/results/weka_results_acq_complete.csv");
+		t.loadInstances("weka_results.csv");
 		
 		t.printBasicStats();
 		
@@ -85,6 +86,57 @@ public class WekaResultTests
 		out.println( m_TTester.getNumDatasets());
 		
 	}
+	
+	private static class CommonPrefixAnalysis
+	{
+		private Instances inst;
+		int commonPrefixForNextRows = 0;
+		int maxCommonPrefixForNextRows = 0;
+		int current_row = 0;
+		String current_prefix = "";
+
+		public CommonPrefixAnalysis(Instances inst, int first_attr) {
+			this.inst = inst;
+			current_row = first_attr;
+			initNewPrefix();
+		}
+
+		private void initNewPrefix() {
+			current_prefix = "";
+			commonPrefixForNextRows = 0;
+			for (int a=1; a<inst.numAttributes()-current_row; a++)
+			{
+				String [] array = new String[a+1];
+				for (int b=0; b<=a; b++) 
+					array[b] = inst.attribute(current_row+b).name().replace(' ', '§');
+				String new_prefix = StringUtils.getCommonPrefix(array);
+				if (new_prefix.equals("")) break;
+				current_prefix = new_prefix;
+				commonPrefixForNextRows++;
+			}
+			
+			maxCommonPrefixForNextRows = commonPrefixForNextRows;
+			
+		}
+
+		public void next() {
+			commonPrefixForNextRows--;
+			current_row++;
+			if (commonPrefixForNextRows<0) initNewPrefix();
+			
+		}
+		public String getCurrentPrefix() {
+			return current_prefix;
+		}
+		public int getCurrentNextRows() {
+			if (commonPrefixForNextRows == maxCommonPrefixForNextRows)
+				return maxCommonPrefixForNextRows;
+			else
+				return 0;
+		}
+
+		
+	}
 
 	
 	public void performAllTests() throws Exception
@@ -115,10 +167,14 @@ public class WekaResultTests
 			for (int d=0; d<m_TTester.getNumDatasets(); d++)
 			{
 				printDatasetHeader(inst.attribute(0).value(d));
+				
+				CommonPrefixAnalysis cpa = new CommonPrefixAnalysis(inst, first_test_attr);
 				for (int c=0; c< num_tests ; c++)
 				{
 					int cur_attr_index = c+first_test_attr;
-					printAttrName(inst.attribute(cur_attr_index).name());
+					printAttrName(inst.attribute(cur_attr_index).name(), cpa.getCurrentPrefix(), cpa.getCurrentNextRows());
+					cpa.next();
+
 					int col = 0;
 					printAttrValue(results[c].getMean(col, d), results[c].getStdDev(col, d));
 					col++;
@@ -157,8 +213,8 @@ public class WekaResultTests
 		out.println("dataset: " + filterAttrName(dataset.substring(1, dataset.length()-1)));
 	}
 	
-	protected void printAttrName(String name) {
-		out.format("%40s | ", filterAttrName(name));		
+	protected void printAttrName(String name, String commonPrefix, int commonPrefixForNextRows) {
+		out.format("%40s | ", filterAttrName(name));
 	}
 
 	protected void printAttrValue(double avg, double stdev)
