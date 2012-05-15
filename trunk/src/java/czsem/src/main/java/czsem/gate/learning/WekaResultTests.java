@@ -90,10 +90,10 @@ public class WekaResultTests
 	private static class CommonPrefixAnalysis
 	{
 		private Instances inst;
-		int commonPrefixForNextRows = 0;
-		int maxCommonPrefixForNextRows = 0;
-		int current_row = 0;
-		String current_prefix = "";
+		private int commonPrefixForNextRows = 0;
+		private int maxCommonPrefixForNextRows = 0;
+		private int current_row = 0;
+		private String current_prefix = "";
 
 		public CommonPrefixAnalysis(Instances inst, int first_attr) {
 			this.inst = inst;
@@ -166,7 +166,10 @@ public class WekaResultTests
 			
 			for (int d=0; d<m_TTester.getNumDatasets(); d++)
 			{
-				printDatasetHeader(inst.attribute(0).value(d));
+				int[] sel = m_TTester.getDatasetKeyColumns().getSelection();
+				int attr = sel[0];
+				String dataset = inst.attribute(attr).value(d);
+				printDatasetHeader(dataset);
 				
 				CommonPrefixAnalysis cpa = new CommonPrefixAnalysis(inst, first_test_attr);
 				for (int c=0; c< num_tests ; c++)
@@ -175,12 +178,14 @@ public class WekaResultTests
 					printAttrName(inst.attribute(cur_attr_index).name(), cpa.getCurrentPrefix(), cpa.getCurrentNextRows());
 					cpa.next();
 
-					int col = 0;
+					//inverted
+					int col = 1;
 					printAttrValue(results[c].getMean(col, d), results[c].getStdDev(col, d));
-					col++;
+					col=0;
 					printAttrValue(results[c].getMean(col, d), results[c].getStdDev(col, d));
 					
-					printSignificance(results[c].getSignificance(1, d));					
+					//inverted
+					printSignificance(3-results[c].getSignificance(1, d));					
 				}
 				
 			}
@@ -205,6 +210,9 @@ public class WekaResultTests
 
 	public static String filterAttrName(String name)
 	{
+		if (name.charAt(0) == '[' && name.charAt(name.length()-1) == ']')
+			name = name.substring(1, name.length()-1);
+			
 		return name.replace('_', ' ');
 	}
 	

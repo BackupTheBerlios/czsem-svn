@@ -1,6 +1,9 @@
 %\chapter{Introduction}
 %already present in the main file
 
+\graphicspath{{../img/ch10/}}
+
+
 Four separate topics are presented in the present thesis and the discipline of Information Extraction is the central point of them. Each topic represents one particular aspect of the Information Extraction discipline.
 
 The first two topics are focused on our original information extraction method based on deep language parsing. The first topic describes how deep language parsing was used in our method in combination with manually designed extraction rules.
@@ -16,6 +19,11 @@ The last topic of this thesis is the most distant from the original information 
 The main motivation for creating both these methods was an attempt to use deep linguistic analysis of natural language texts. Especially for the Czech language with free word order this seemed reasonable. It is much more straightforward to design extraction rules on the basis of linguistic dependency trees than to struggle with the surface structure of text. In a dependency tree a position of a word is determined by its syntactic (analytical trees) or even semantic role (tectogrammatical trees). So the extraction rules might not be dramatically affected by minor variations of the word order.
 
 
+\begin{figure}
+\centerline{\framebox{\includegraphics[width=0.55\hsize]{damage_tree}}}
+\caption{Example of a linguistic tree of one analyzed sentence.}
+\label{fig:intro_damage_tree} 
+\end{figure}
 
 
 

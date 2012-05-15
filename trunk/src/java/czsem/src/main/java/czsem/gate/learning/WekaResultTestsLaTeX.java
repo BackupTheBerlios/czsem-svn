@@ -5,11 +5,16 @@ import java.util.Locale;
 
 import org.apache.commons.lang.StringUtils;
 
+import weka.core.Range;
+
 public class WekaResultTestsLaTeX extends WekaResultTests {
 
 	public WekaResultTestsLaTeX(PrintStream out) {
 		super(out);
 	}
+	
+	protected boolean first_row_in_dataset = false;
+	protected boolean na_val = false;
 
 	public static void main(String[] args) throws Exception {
 		Locale.setDefault(Locale.ENGLISH);
@@ -21,6 +26,12 @@ public class WekaResultTestsLaTeX extends WekaResultTests {
 		
 		System.err.println();
 		t.performAllTests();
+
+		//overall
+		System.err.println("\n\n\n---------------------- overall ----------------------");
+		t.m_TTester.setDatasetKeyColumns(new Range("5"));
+		t.performAllTests();
+
 		
 		//t.testsAttr(6);
 		
@@ -30,18 +41,25 @@ public class WekaResultTestsLaTeX extends WekaResultTests {
 
 	@Override
 	protected void printSignificance(int significance) {
-		switch (significance) {
-		case 1: out.print("$\\circ$"); break;
-		case 2: out.print("$\\bullet$");	break;
+		if (! na_val)
+		{		
+			switch (significance) {
+			case 1: out.print("$\\circ$"); break;
+			case 2: out.print("$\\bullet$");	break;
+			}
 		}
 		
 		out.println(" \\\\");
+		
+		first_row_in_dataset = false;
 	}
 
 	@Override
 	protected void printDatasetHeader(String dataset) {
 		out.format("\\hline\n\\hline\n\\multirow{11}{*}{\\begin{sideways}%s\\end{sideways} }\n", 
-				filterAttrName(dataset.substring(1, dataset.length()-1)));		
+				filterAttrName(dataset));
+		
+		first_row_in_dataset = true;
 	}
 
 	@Override
@@ -67,6 +85,14 @@ public class WekaResultTestsLaTeX extends WekaResultTests {
 
 		
 /**/
+		int cline = 2;
+		
+		if (commonPrefix.length() > 0 && commonPrefixForNextRows == 0) cline = 3;
+		
+		if (! first_row_in_dataset) out.format("\\cline{%d-10} ", cline);
+		else out.print("             ");
+
+		
 		out.print("& ");
 		if (commonPrefixForNextRows>0)
 			out.format("\\multirow{%d}{*}{%10s} ", commonPrefixForNextRows+1, finall_prefix);
@@ -76,12 +102,21 @@ public class WekaResultTestsLaTeX extends WekaResultTests {
 		out.format("& %15s & ", finall_sufix);
 /**/
 		
-		//out.format("'%s'\t\t'%s'\t\t%d\t", finall_prefix, finall_sufix, commonPrefixForNextRows); 
+		//out.format("'%s'\t\t'%s'\t\t%d\t", finall_prefix, finall_sufix, commonPrefixForNextRows);
+		
+		na_val = false;
 	}
 
 	@Override
 	protected void printAttrValue(double avg, double stdev) {
-		out.format("%11.3f &  $\\pm$  & %11.3f & ", avg, stdev);				
+		if (avg < 0)
+		{
+			out.print("   \\multicolumn{3}{c|}{n/a}         & ");
+			na_val = true;
+		} else if (avg > 9000)
+			out.format("%11.0f &  $\\pm$  & %11.0f & ", avg, stdev);				
+		else
+			out.format("%11.3f &  $\\pm$  & %11.3f & ", avg, stdev);				
 	}
 
 }
