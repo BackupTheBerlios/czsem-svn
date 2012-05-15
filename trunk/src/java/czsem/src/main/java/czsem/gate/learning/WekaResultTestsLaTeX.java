@@ -3,14 +3,15 @@ package czsem.gate.learning;
 import java.io.PrintStream;
 import java.util.Locale;
 
+import org.apache.commons.io.output.NullOutputStream;
 import org.apache.commons.lang.StringUtils;
 
 import weka.core.Range;
 
 public class WekaResultTestsLaTeX extends WekaResultTests {
 
-	public WekaResultTestsLaTeX(PrintStream out) {
-		super(out);
+	public WekaResultTestsLaTeX(PrintStream out, PrintStream log) {
+		super(out, log);
 	}
 	
 	protected boolean first_row_in_dataset = false;
@@ -18,7 +19,7 @@ public class WekaResultTestsLaTeX extends WekaResultTests {
 
 	public static void main(String[] args) throws Exception {
 		Locale.setDefault(Locale.ENGLISH);
-		WekaResultTestsLaTeX t = new WekaResultTestsLaTeX(System.err);
+		WekaResultTestsLaTeX t = new WekaResultTestsLaTeX(System.out, new PrintStream(new NullOutputStream()));
 		
 		t.loadInstances("gate-learning/acquisitions-v1.1/results/weka_results_acq_complete.csv");
 		
@@ -28,14 +29,25 @@ public class WekaResultTestsLaTeX extends WekaResultTests {
 		t.performAllTests();
 
 		//overall
-		System.err.println("\n\n\n---------------------- overall ----------------------");
+		System.out.println("\n\n\n---------------------- overall ----------------------");
 		t.m_TTester.setDatasetKeyColumns(new Range("5"));
 		t.performAllTests();
 
 		
 		//t.testsAttr(6);
 		
-		System.err.println("done");
+		
+		System.out.println("\n\n\n---------------------- selected attributes ----------------------");
+		t.printTestAttrWithOverall(4, "&"); //Strict Precision
+		t.printTestAttrWithOverall(5, "&"); //Strict Recall
+		t.printTestAttrWithOverall(6, "&"); //Strict $F_1$
+		
+		System.out.println("\n");
+
+		t.printTestAttrWithOverall(11, "&"); //Time Training
+		t.printTestAttrWithOverall(12, "&"); //Time Testing
+
+		System.out.println("done");
 
 	}
 
@@ -108,7 +120,9 @@ public class WekaResultTestsLaTeX extends WekaResultTests {
 	}
 
 	@Override
-	protected void printAttrValue(double avg, double stdev) {
+	protected void printAttrValue(double avg, double stdev, String value_prefix) {
+		out.print(value_prefix);
+		
 		if (avg < 0)
 		{
 			out.print("   \\multicolumn{3}{c|}{n/a}         & ");
@@ -118,5 +132,33 @@ public class WekaResultTestsLaTeX extends WekaResultTests {
 		else
 			out.format("%11.3f &  $\\pm$  & %11.3f & ", avg, stdev);				
 	}
+
+	@Override
+	protected void printDatasetName(String dataset)
+	{
+		out.format("%15s &", filterAttrName(dataset));
+	}
+	
+	public void printTestAttrWithOverall(int test_attr, String value_prefix) throws Exception
+	{
+		m_TTester.setDatasetKeyColumns(new Range("1"));
+		printTestAttr(test_attr, value_prefix);
+		m_TTester.setDatasetKeyColumns(new Range("5"));
+		out.println("\\hline");
+		printTestAttrTableOnly(test_attr, value_prefix);
+		out.println("\\hline");
+		out.println("\\\\\n");
+
+
+	}
+
+	@Override
+	protected void printAttrName(String name) {
+		out.format("\\multicolumn{11}{c}{%s}\\\\\n", name);
+		out.println("\\hline");
+		out.println("Task && \\multicolumn{3}{c}{ILP}  && \\multicolumn{3}{c}{PAUM} && \\\\");
+		out.println("\\hline");
+	}
+
 
 }

@@ -19,19 +19,25 @@ public class WekaResultTests
 {
 	Tester m_TTester = new PairedCorrectedTTester();
 	protected PrintStream out;
+	protected PrintStream log;
 	
 	int first_test_attr = 7;
 
 
-	public WekaResultTests(PrintStream out) {
+	public WekaResultTests(PrintStream out, PrintStream log) {
 		this.out = out;
+		this.log = log;
 		m_TTester.setShowStdDevs(true);
+	}
+
+	public WekaResultTests(PrintStream both) {
+		this(both, both);
 	}
 
 	public static void main(String[] args) throws Exception
 	{
 		Locale.setDefault(Locale.ENGLISH);
-		WekaResultTests t = new WekaResultTests(System.err);
+		WekaResultTests t = new WekaResultTests(System.err, System.err);
 		
 //		t.loadInstances("weka_results_acq_ne_root_longer.csv");
 		t.loadInstances("weka_results.csv");
@@ -52,8 +58,8 @@ public class WekaResultTests
 		int cur_attr_index = c+first_test_attr;
 		ResultMatrix ret = new ResultMatrixPlainText();
 		m_TTester.setResultMatrix(ret);
-		out.println( m_TTester.header(cur_attr_index));
-		out.print(m_TTester.multiResultsetFull(0, cur_attr_index));
+		log.println( m_TTester.header(cur_attr_index));
+		log.print(m_TTester.multiResultsetFull(0, cur_attr_index));
 		
 		return ret;
 	}
@@ -138,7 +144,53 @@ public class WekaResultTests
 		
 	}
 
+
 	
+	public void printTestAttr(int test_attr, String value_prefix) throws Exception
+	{
+		Instances inst = m_TTester.getInstances();
+		int cur_attr_index = test_attr+first_test_attr;
+		printAttrName(inst.attribute(cur_attr_index).name());
+		
+		printTestAttrTableOnly(test_attr, value_prefix);		
+	}
+
+	public void printTestAttrTableOnly(int test_attr, String value_prefix) throws Exception
+	{
+		Instances inst = m_TTester.getInstances();
+		ResultMatrix results = testsAttr(test_attr);
+		
+		
+		for (int d=0; d<m_TTester.getNumDatasets(); d++)
+		{
+			int[] sel = m_TTester.getDatasetKeyColumns().getSelection();
+			int attr = sel[0];
+			String dataset = inst.attribute(attr).value(d);
+			printDatasetName(dataset);
+	
+	
+			//inverted
+			int col = 1;
+			printAttrValue(results.getMean(col, d), results.getStdDev(col, d), value_prefix);
+			col=0;
+			printAttrValue(results.getMean(col, d), results.getStdDev(col, d), value_prefix);
+			
+			//inverted
+			printSignificance(3-results.getSignificance(1, d));
+		}
+
+
+		
+	}
+	
+	protected void printDatasetName(String dataset) {
+		out.format("%15s ", dataset);				
+	}
+
+	protected void printAttrName(String name) {
+		out.println(name);		
+	}
+
 	public void performAllTests() throws Exception
 		{
 			
@@ -180,9 +232,9 @@ public class WekaResultTests
 
 					//inverted
 					int col = 1;
-					printAttrValue(results[c].getMean(col, d), results[c].getStdDev(col, d));
+					printAttrValue(results[c].getMean(col, d), results[c].getStdDev(col, d), "");
 					col=0;
-					printAttrValue(results[c].getMean(col, d), results[c].getStdDev(col, d));
+					printAttrValue(results[c].getMean(col, d), results[c].getStdDev(col, d), "");
 					
 					//inverted
 					printSignificance(3-results[c].getSignificance(1, d));					
@@ -225,7 +277,7 @@ public class WekaResultTests
 		out.format("%40s | ", filterAttrName(name));
 	}
 
-	protected void printAttrValue(double avg, double stdev)
+	protected void printAttrValue(double avg, double stdev, String value_prefix)
 	{
 		out.format("%11.3f +/- %8.3f | ", avg, stdev);				
 	}
