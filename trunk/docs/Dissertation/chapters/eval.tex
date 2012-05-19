@@ -138,7 +138,7 @@ Next question that naturally emerges is: How would be the performance if the rul
 The results are summarized in Table~\ref{tab:manual_damage_manual_eval}. Both kinds of rules (manually designed and learned by ILP) performed the same (recall: 0.71, precision: 1); both the methods correctly found 5 instances and they were both unable to find 2 instances. From the cross coverage comparison in 
 Table~\ref{tab:manual_damage_cross_method} it is apparent that the methods agreed on 4 instances and each method was able to discovered one instance that the other did not discover. Such results could be accepted for a practical application but we must not forget the fact that the collection is very small and only single evidence is provided by the experiment, so it dies not provide any statistical significance (getting statistically significant results would require experiments with different datasets, extraction tasks and human designers.) 
 
-
+\clearpage
 
 \section{Evaluation of Learned Rules} \label{sec:learning_eval}
 
@@ -189,53 +189,53 @@ We used the 10-fold cross validation in the evaluation. Thanks to this technique
 \begin{tabular}
 {lcrclcrcl@{\hspace{0.1cm}}cc}
 
-\multicolumn{11}{c}{Precision (strict)}\\
+\multicolumn{11}{c}{Strict Precision}\\
 \hline
 Task && \multicolumn{3}{c}{ILP}  && \multicolumn{3}{c}{PAUM} && \\
 \hline
-start             && 0.946 & $\pm$ & 0.09 && 0.668 & $\pm$ & 0.18 & $\bullet$\\
-damage            && 0.916 & $\pm$ & 0.16 && 0.864 & $\pm$ & 0.21 &          \\
-end\_subtree      && 0.687 & $\pm$ & 0.34 && 0.552 & $\pm$ & 0.24 & $\bullet$\\
-injuries          && 0.663 & $\pm$ & 0.36 && 0.417 & $\pm$ & 0.29 & $\bullet$\\
-fatalities        && 0.940 & $\pm$ & 0.24 && 0.347 & $\pm$ & 0.40 & $\bullet$\\
-profesional\_unit && 0.716 & $\pm$ & 0.19 && 0.678 & $\pm$ & 0.15 &          \\
-amateur\_unit     && 0.841 & $\pm$ & 0.28 && 0.561 & $\pm$ & 0.30 & $\bullet$\\
+            damage &&      0.913 &  $\pm$  &       0.160 & &      0.853 &  $\pm$  &       0.193 & $\bullet$ \\
+       end subtree &&      0.689 &  $\pm$  &       0.317 & &      0.510 &  $\pm$  &       0.210 & $\bullet$ \\
+             start &&      0.936 &  $\pm$  &       0.103 & &      0.654 &  $\pm$  &       0.117 & $\bullet$ \\
+          injuries &&      0.559 &  $\pm$  &       0.325 & &      0.394 &  $\pm$  &       0.268 & $\bullet$ \\
+        fatalities &&      0.863 &  $\pm$  &       0.335 & &      0.347 &  $\pm$  &       0.401 & $\bullet$ \\
+  profesional unit &&      0.500 &  $\pm$  &       0.189 & &      0.674 &  $\pm$  &       0.132 & $\circ$ \\
+      amateur unit &&      0.805 &  $\pm$  &       0.300 & &      0.601 &  $\pm$  &       0.297 & $\bullet$ \\
 \hline
-overall           && 0.816 & $\pm$ & 0.28 && 0.584 & $\pm$ & 0.31 & $\bullet$\\
+          overall &&      0.752 &  $\pm$  &       0.306 & &      0.576 &  $\pm$  &       0.296 & $\bullet$ \\
 \hline
 \\
 
-
-\multicolumn{11}{c}{Recall (strict)}\\
+\multicolumn{11}{c}{Strict Recall}\\
 \hline
 Task && \multicolumn{3}{c}{ILP}  && \multicolumn{3}{c}{PAUM} && \\
 \hline
-start             && 0.906 & $\pm$ & 0.15 && 0.978 & $\pm$ & 0.07 & $\circ$\\
-damage            && 0.827 & $\pm$ & 0.26 && 0.905 & $\pm$ & 0.23 &        \\
-end\_subtree      && 0.237 & $\pm$ & 0.24 && 0.632 & $\pm$ & 0.26 & $\circ$\\
-injuries          && 0.531 & $\pm$ & 0.36 && 0.797 & $\pm$ & 0.25 & $\circ$\\
-fatalities        && 0.440 & $\pm$ & 0.48 && 0.653 & $\pm$ & 0.45 & $\circ$\\
-profesional\_unit && 0.615 & $\pm$ & 0.16 && 0.813 & $\pm$ & 0.17 & $\circ$\\
-amateur\_unit     && 0.850 & $\pm$ & 0.27 && 0.954 & $\pm$ & 0.10 & $\circ$\\
+            damage &&      0.817 &  $\pm$  &       0.258 & &      0.904 &  $\pm$  &       0.188 & $\circ$ \\
+       end subtree &&      0.254 &  $\pm$  &       0.214 & &      0.623 &  $\pm$  &       0.226 & $\circ$ \\
+             start &&      0.896 &  $\pm$  &       0.130 & &      0.980 &  $\pm$  &       0.061 & $\circ$ \\
+          injuries &&      0.540 &  $\pm$  &       0.322 & &      0.801 &  $\pm$  &       0.242 & $\circ$ \\
+        fatalities &&      0.417 &  $\pm$  &       0.451 & &      0.567 &  $\pm$  &       0.452 & $\circ$ \\
+  profesional unit &&      0.500 &  $\pm$  &       0.152 & &      0.814 &  $\pm$  &       0.156 & $\circ$ \\
+      amateur unit &&      0.845 &  $\pm$  &       0.272 & &      0.932 &  $\pm$  &       0.136 & $\circ$ \\
 \hline
-overall           && 0.629 & $\pm$ & 0.37 && 0.819 & $\pm$ & 0.28 & $\circ$\\
+          overall &&      0.610 &  $\pm$  &       0.357 & &      0.803 &  $\pm$  &       0.277 & $\circ$ \\
 \hline
 \\
 
-\multicolumn{11}{c}{$F_1$ measure (strict)}\\
+\multicolumn{11}{c}{Strict $F_1$}\\
 \hline
 Task && \multicolumn{3}{c}{ILP}  && \multicolumn{3}{c}{PAUM} && \\
 \hline
-start             && 0.916 & $\pm$ & 0.10 && 0.779 & $\pm$ & 0.13 & $\bullet$\\
-damage            && 0.833 & $\pm$ & 0.22 && 0.845 & $\pm$ & 0.23 &          \\
-end\_subtree      && 0.277 & $\pm$ & 0.25 && 0.562 & $\pm$ & 0.21 & $\circ$\\
-injuries          && 0.512 & $\pm$ & 0.35 && 0.488 & $\pm$ & 0.25 &          \\
-fatalities        && 0.437 & $\pm$ & 0.48 && 0.300 & $\pm$ & 0.37 &          \\
-profesional\_unit && 0.651 & $\pm$ & 0.15 && 0.729 & $\pm$ & 0.14 & $\circ$\\
-amateur\_unit     && 0.770 & $\pm$ & 0.32 && 0.646 & $\pm$ & 0.30 & $\bullet$\\
+            damage &&      0.824 &  $\pm$  &       0.224 & &      0.848 &  $\pm$  &       0.169 &  \\
+       end subtree &&      0.312 &  $\pm$  &       0.222 & &      0.541 &  $\pm$  &       0.192 & $\circ$ \\
+             start &&      0.909 &  $\pm$  &       0.094 & &      0.779 &  $\pm$  &       0.087 & $\bullet$ \\
+          injuries &&      0.484 &  $\pm$  &       0.288 & &      0.470 &  $\pm$  &       0.251 &  \\
+        fatalities &&      0.346 &  $\pm$  &       0.431 & &      0.221 &  $\pm$  &       0.309 & $\bullet$ \\
+  profesional unit &&      0.488 &  $\pm$  &       0.154 & &      0.730 &  $\pm$  &       0.126 & $\circ$ \\
+      amateur unit &&      0.759 &  $\pm$  &       0.314 & &      0.675 &  $\pm$  &       0.284 & $\bullet$ \\
 \hline
-overall           && 0.628 & $\pm$ & 0.36 && 0.621 & $\pm$ & 0.30 &  \\
+          overall &&      0.589 &  $\pm$  &       0.346 & &      0.609 &  $\pm$  &       0.294 &  \\
 \hline
+\\
 \multicolumn{11}{c}{$\circ$, $\bullet$ statistically significant improvement or degradation}\\
 \end{tabular}
 
@@ -251,37 +251,36 @@ overall           && 0.628 & $\pm$ & 0.36 && 0.621 & $\pm$ & 0.30 &  \\
 \begin{tabular}
 {lcrclcrcl@{\hspace{0.1cm}}cc}
 
-\multicolumn{11}{c}{Training time (in seconds)}\\
+\multicolumn{11}{c}{Time Training}\\
 \hline
 Task && \multicolumn{3}{c}{ILP}  && \multicolumn{3}{c}{PAUM} && \\
 \hline
-start              &  & 280.7 &  $\pm$  & 21.5 &  & 24.01 &  $\pm$  & 2.08 &  $\bullet$\\
-damage             &  & 236.2 &  $\pm$  & 16.2 &  & 24.79 &  $\pm$  & 2.42 &  $\bullet$\\
-end\_subtree       &  & 971.4 &  $\pm$  & 77.8 &  & 24.90 &  $\pm$  & 2.33 &  $\bullet$\\
-injuries           &  & 938.1 &  $\pm$  & 34.8 &  & 24.77 &  $\pm$  & 2.20 &  $\bullet$\\
-fatalities         &  & 477.0 &  $\pm$  & 64.4 &  & 24.64 &  $\pm$  & 2.12 &  $\bullet$\\
-profesional\_unit  &  & 1615.6 &  $\pm$ & 84.9 &  & 24.51 &  $\pm$  & 2.04 &  $\bullet$\\
-amateur\_unit      &  & 259.3 &  $\pm$  & 15.5 &  & 26.07 &  $\pm$  & 2.60 &  $\bullet$\\
+            damage &&     0:24.1 &  $\pm$  &      0:06.3 & &     0:02.2 &  $\pm$  &      0:00.1 & $\bullet$ \\
+       end subtree &&     1:37.8 &  $\pm$  &      0:14.6 & &     0:02.2 &  $\pm$  &      0:00.1 & $\bullet$ \\
+             start &&     0:26.5 &  $\pm$  &      0:04.1 & &     0:02.2 &  $\pm$  &      0:00.1 & $\bullet$ \\
+          injuries &&     1:34.9 &  $\pm$  &      0:15.2 & &     0:02.2 &  $\pm$  &      0:00.1 & $\bullet$ \\
+        fatalities &&     0:45.5 &  $\pm$  &      0:09.0 & &     0:02.2 &  $\pm$  &      0:00.1 & $\bullet$ \\
+  profesional unit &&     2:41.4 &  $\pm$  &      0:24.5 & &     0:02.2 &  $\pm$  &      0:00.1 & $\bullet$ \\
+      amateur unit &&     0:25.2 &  $\pm$  &      0:05.2 & &     0:02.2 &  $\pm$  &      0:00.1 & $\bullet$ \\
 \hline
-overall            &  & 682.6 &  $\pm$  & 481.9 & & 24.81 &  $\pm$  & 2.32 &  $\bullet$\\
+          overall &&     1:07.9 &  $\pm$  &      0:50.1 & &     0:02.2 &  $\pm$  &      0:00.1 & $\bullet$ \\
 \hline
 \\
-
-\multicolumn{11}{c}{Applycation time (in seconds)}\\
+\multicolumn{11}{c}{Time Testing}\\
 \hline
 Task && \multicolumn{3}{c}{ILP}  && \multicolumn{3}{c}{PAUM} && \\
 \hline
-start              &  & 7.211 &  $\pm$  & 0.10 &  & 2.095 &  $\pm$  & 0.08 &  $\bullet$\\
-damage             &  & 7.295 &  $\pm$  & 0.14 &  & 2.241 &  $\pm$  & 0.10 &  $\bullet$\\
-end\_subtree       &  & 7.275 &  $\pm$  & 0.11 &  & 2.339 &  $\pm$  & 0.05 &  $\bullet$\\
-injuries           &  & 7.278 &  $\pm$  & 0.09 &  & 2.200 &  $\pm$  & 0.08 &  $\bullet$\\
-fatalities         &  & 7.149 &  $\pm$  & 0.07 &  & 2.268 &  $\pm$  & 0.11 &  $\bullet$\\
-profesional\_unit  &  & 7.193 &  $\pm$  & 0.10 &  & 2.297 &  $\pm$  & 0.01 &  $\bullet$\\
-amateur\_unit      &  & 7.218 &  $\pm$  & 0.15 &  & 2.275 &  $\pm$  & 0.04 &  $\bullet$\\
+            damage &&     0:00.9 &  $\pm$  &      0:00.2 & &     0:00.3 &  $\pm$  &      0:00.1 & $\bullet$ \\
+       end subtree &&     0:00.9 &  $\pm$  &      0:00.2 & &     0:00.3 &  $\pm$  &      0:00.1 & $\bullet$ \\
+             start &&     0:00.9 &  $\pm$  &      0:00.1 & &     0:00.3 &  $\pm$  &      0:00.0 & $\bullet$ \\
+          injuries &&     0:00.9 &  $\pm$  &      0:00.1 & &     0:00.3 &  $\pm$  &      0:00.0 & $\bullet$ \\
+        fatalities &&     0:00.9 &  $\pm$  &      0:00.2 & &     0:00.3 &  $\pm$  &      0:00.1 & $\bullet$ \\
+  profesional unit &&     0:00.9 &  $\pm$  &      0:00.1 & &     0:00.3 &  $\pm$  &      0:00.0 & $\bullet$ \\
+      amateur unit &&     0:00.9 &  $\pm$  &      0:00.1 & &     0:00.3 &  $\pm$  &      0:00.0 & $\bullet$ \\
 \hline
-overall            &  & 7.231 &  $\pm$  & 0.12 &  & 2.245 &  $\pm$  & 0.10 &  $\bullet$\\
+          overall &&     0:00.9 &  $\pm$  &      0:00.1 & &     0:00.3 &  $\pm$  &      0:00.0 & $\bullet$ \\
 \hline
-
+\\
 \multicolumn{11}{c}{$\bullet$ statistically significant decrease (not improvement in this case)}\\
 \end{tabular}
 
@@ -308,15 +307,15 @@ The time in this table is cumulative (sum over all folds in one experiment run).
 \hline
 Task && \multicolumn{3}{c}{ILP}  && \multicolumn{3}{c}{PAUM} && \\
 \hline
-         acqabr &&      0.457 &  $\pm$  &       0.034 & &      0.408 &  $\pm$  &       0.015 & $\bullet$ \\
-         dlramt &&      0.286 &  $\pm$  &       0.052 & &      0.597 &  $\pm$  &       0.030 & $\circ$ \\
-       acquired &&      0.376 &  $\pm$  &       0.028 & &      0.441 &  $\pm$  &       0.027 & $\circ$ \\
-       purchabr &&      0.318 &  $\pm$  &       0.050 & &      0.390 &  $\pm$  &       0.015 & $\circ$ \\
-      purchaser &&      0.403 &  $\pm$  &       0.037 & &      0.474 &  $\pm$  &       0.029 & $\circ$ \\
-         seller &&      0.261 &  $\pm$  &       0.071 & &      0.245 &  $\pm$  &       0.041 &  \\
-      sellerabr &&      0.306 &  $\pm$  &       0.111 & &      0.219 &  $\pm$  &       0.036 & $\bullet$ \\
+            acqabr &&      0.457 &  $\pm$  &       0.034 & &      0.408 &  $\pm$  &       0.015 & $\bullet$ \\
+            dlramt &&      0.286 &  $\pm$  &       0.052 & &      0.597 &  $\pm$  &       0.030 & $\circ$ \\
+          acquired &&      0.376 &  $\pm$  &       0.028 & &      0.441 &  $\pm$  &       0.027 & $\circ$ \\
+          purchabr &&      0.318 &  $\pm$  &       0.050 & &      0.390 &  $\pm$  &       0.015 & $\circ$ \\
+         purchaser &&      0.403 &  $\pm$  &       0.037 & &      0.474 &  $\pm$  &       0.029 & $\circ$ \\
+            seller &&      0.261 &  $\pm$  &       0.071 & &      0.245 &  $\pm$  &       0.041 &  \\
+         sellerabr &&      0.306 &  $\pm$  &       0.111 & &      0.219 &  $\pm$  &       0.036 & $\bullet$ \\
 \hline
-            overall &&      0.344 &  $\pm$  &       0.088 & &      0.396 &  $\pm$  &       0.125 & $\circ$ \\
+           overall &&      0.344 &  $\pm$  &       0.088 & &      0.396 &  $\pm$  &       0.125 & $\circ$ \\
 \hline
 \\
 
@@ -324,15 +323,15 @@ Task && \multicolumn{3}{c}{ILP}  && \multicolumn{3}{c}{PAUM} && \\
 \hline
 Task && \multicolumn{3}{c}{ILP}  && \multicolumn{3}{c}{PAUM} && \\
 \hline
-         acqabr &&      0.180 &  $\pm$  &       0.025 & &      0.517 &  $\pm$  &       0.027 & $\circ$ \\
-         dlramt &&      0.276 &  $\pm$  &       0.043 & &      0.740 &  $\pm$  &       0.063 & $\circ$ \\
-       acquired &&      0.272 &  $\pm$  &       0.054 & &      0.512 &  $\pm$  &       0.033 & $\circ$ \\
-       purchabr &&      0.120 &  $\pm$  &       0.041 & &      0.514 &  $\pm$  &       0.033 & $\circ$ \\
-      purchaser &&      0.340 &  $\pm$  &       0.064 & &      0.556 &  $\pm$  &       0.028 & $\circ$ \\
-         seller &&      0.131 &  $\pm$  &       0.047 & &      0.226 &  $\pm$  &       0.046 & $\circ$ \\
-      sellerabr &&      0.050 &  $\pm$  &       0.027 & &      0.190 &  $\pm$  &       0.032 & $\circ$ \\
+            acqabr &&      0.180 &  $\pm$  &       0.025 & &      0.517 &  $\pm$  &       0.027 & $\circ$ \\
+            dlramt &&      0.276 &  $\pm$  &       0.043 & &      0.740 &  $\pm$  &       0.063 & $\circ$ \\
+          acquired &&      0.272 &  $\pm$  &       0.054 & &      0.512 &  $\pm$  &       0.033 & $\circ$ \\
+          purchabr &&      0.120 &  $\pm$  &       0.041 & &      0.514 &  $\pm$  &       0.033 & $\circ$ \\
+         purchaser &&      0.340 &  $\pm$  &       0.064 & &      0.556 &  $\pm$  &       0.028 & $\circ$ \\
+            seller &&      0.131 &  $\pm$  &       0.047 & &      0.226 &  $\pm$  &       0.046 & $\circ$ \\
+         sellerabr &&      0.050 &  $\pm$  &       0.027 & &      0.190 &  $\pm$  &       0.032 & $\circ$ \\
 \hline
-            overall &&      0.196 &  $\pm$  &       0.106 & &      0.465 &  $\pm$  &       0.184 & $\circ$ \\
+           overall &&      0.196 &  $\pm$  &       0.106 & &      0.465 &  $\pm$  &       0.184 & $\circ$ \\
 \hline
 \\
 
@@ -340,17 +339,17 @@ Task && \multicolumn{3}{c}{ILP}  && \multicolumn{3}{c}{PAUM} && \\
 \hline
 Task && \multicolumn{3}{c}{ILP}  && \multicolumn{3}{c}{PAUM} && \\
 \hline
-         acqabr &&      0.258 &  $\pm$  &       0.030 & &      0.456 &  $\pm$  &       0.015 & $\circ$ \\
-         dlramt &&      0.280 &  $\pm$  &       0.046 & &      0.659 &  $\pm$  &       0.022 & $\circ$ \\
-       acquired &&      0.313 &  $\pm$  &       0.046 & &      0.473 &  $\pm$  &       0.024 & $\circ$ \\
-       purchabr &&      0.172 &  $\pm$  &       0.050 & &      0.443 &  $\pm$  &       0.016 & $\circ$ \\
-      purchaser &&      0.367 &  $\pm$  &       0.051 & &      0.511 &  $\pm$  &       0.022 & $\circ$ \\
-         seller &&      0.170 &  $\pm$  &       0.050 & &      0.232 &  $\pm$  &       0.036 & $\circ$ \\
-      sellerabr &&      0.085 &  $\pm$  &       0.044 & &      0.202 &  $\pm$  &       0.030 & $\circ$ \\
+            acqabr &&      0.258 &  $\pm$  &       0.030 & &      0.456 &  $\pm$  &       0.015 & $\circ$ \\
+            dlramt &&      0.280 &  $\pm$  &       0.046 & &      0.659 &  $\pm$  &       0.022 & $\circ$ \\
+          acquired &&      0.313 &  $\pm$  &       0.046 & &      0.473 &  $\pm$  &       0.024 & $\circ$ \\
+          purchabr &&      0.172 &  $\pm$  &       0.050 & &      0.443 &  $\pm$  &       0.016 & $\circ$ \\
+         purchaser &&      0.367 &  $\pm$  &       0.051 & &      0.511 &  $\pm$  &       0.022 & $\circ$ \\
+            seller &&      0.170 &  $\pm$  &       0.050 & &      0.232 &  $\pm$  &       0.036 & $\circ$ \\
+         sellerabr &&      0.085 &  $\pm$  &       0.044 & &      0.202 &  $\pm$  &       0.030 & $\circ$ \\
 \hline
-            overall &&      0.235 &  $\pm$  &       0.101 & &      0.425 &  $\pm$  &       0.150 & $\circ$ \\
+           overall &&      0.235 &  $\pm$  &       0.101 & &      0.425 &  $\pm$  &       0.150 & $\circ$ \\
 \hline
-
+\\
 \multicolumn{11}{c}{$\circ$, $\bullet$ statistically significant improvement or degradation}\\
 \end{tabular}
 
@@ -372,15 +371,15 @@ Task && \multicolumn{3}{c}{ILP}  && \multicolumn{3}{c}{PAUM} && \\
 \hline
 Task && \multicolumn{3}{c}{ILP}  && \multicolumn{3}{c}{PAUM} && \\
 \hline
-         acqabr &&     984907 &  $\pm$  &      502946 & &       9978 &  $\pm$  &         567 & $\bullet$ \\
-         dlramt &&    1407624 &  $\pm$  &      945716 & &      10805 &  $\pm$  &        2794 & $\bullet$ \\
-       acquired &&     615995 &  $\pm$  &      431096 & &       9823 &  $\pm$  &         426 & $\bullet$ \\
-       purchabr &&    1011649 &  $\pm$  &      554745 & &      10197 &  $\pm$  &        1399 & $\bullet$ \\
-      purchaser &&     747073 &  $\pm$  &      442606 & &      10353 &  $\pm$  &        1184 & $\bullet$ \\
-         seller &&     552200 &  $\pm$  &      235228 & &      10145 &  $\pm$  &        1009 & $\bullet$ \\
-      sellerabr &&     371528 &  $\pm$  &      243268 & &       9744 &  $\pm$  &         345 & $\bullet$ \\
+            acqabr &&    16:24.9 &  $\pm$  &      8:22.9 & &     0:10.0 &  $\pm$  &      0:00.6 & $\bullet$ \\
+            dlramt &&    23:27.6 &  $\pm$  &     15:45.7 & &     0:10.8 &  $\pm$  &      0:02.8 & $\bullet$ \\
+          acquired &&    10:16.0 &  $\pm$  &      7:11.1 & &     0:09.8 &  $\pm$  &      0:00.4 & $\bullet$ \\
+          purchabr &&    16:51.6 &  $\pm$  &      9:14.7 & &     0:10.2 &  $\pm$  &      0:01.4 & $\bullet$ \\
+         purchaser &&    12:27.1 &  $\pm$  &      7:22.6 & &     0:10.4 &  $\pm$  &      0:01.2 & $\bullet$ \\
+            seller &&     9:12.2 &  $\pm$  &      3:55.2 & &     0:10.1 &  $\pm$  &      0:01.0 & $\bullet$ \\
+         sellerabr &&     6:11.5 &  $\pm$  &      4:03.3 & &     0:09.7 &  $\pm$  &      0:00.3 & $\bullet$ \\
 \hline
-            overall &&     812996 &  $\pm$  &      600104 & &      10149 &  $\pm$  &        1335 & $\bullet$ \\
+           overall &&    13:33.0 &  $\pm$  &     10:00.1 & &     0:10.1 &  $\pm$  &      0:01.3 & $\bullet$ \\
 \hline
 \\
 
@@ -388,17 +387,17 @@ Task && \multicolumn{3}{c}{ILP}  && \multicolumn{3}{c}{PAUM} && \\
 \hline
 Task && \multicolumn{3}{c}{ILP}  && \multicolumn{3}{c}{PAUM} && \\
 \hline
-         acqabr &&      27449 &  $\pm$  &         782 & &      13555 &  $\pm$  &         273 & $\bullet$ \\
-         dlramt &&      30511 &  $\pm$  &         800 & &       9845 &  $\pm$  &         501 & $\bullet$ \\
-       acquired &&      26731 &  $\pm$  &         722 & &      11763 &  $\pm$  &         348 & $\bullet$ \\
-       purchabr &&      27405 &  $\pm$  &         852 & &      13224 &  $\pm$  &         515 & $\bullet$ \\
-      purchaser &&      27464 &  $\pm$  &        1954 & &      11501 &  $\pm$  &        1219 & $\bullet$ \\
-         seller &&      27348 &  $\pm$  &        3157 & &      10650 &  $\pm$  &         847 & $\bullet$ \\
-      sellerabr &&      26137 &  $\pm$  &         731 & &      11537 &  $\pm$  &         342 & $\bullet$ \\
+            acqabr &&     0:27.4 &  $\pm$  &      0:00.8 & &     0:13.6 &  $\pm$  &      0:00.3 & $\bullet$ \\
+            dlramt &&     0:30.5 &  $\pm$  &      0:00.8 & &     0:09.8 &  $\pm$  &      0:00.5 & $\bullet$ \\
+          acquired &&     0:26.7 &  $\pm$  &      0:00.7 & &     0:11.8 &  $\pm$  &      0:00.3 & $\bullet$ \\
+          purchabr &&     0:27.4 &  $\pm$  &      0:00.9 & &     0:13.2 &  $\pm$  &      0:00.5 & $\bullet$ \\
+         purchaser &&     0:27.5 &  $\pm$  &      0:02.0 & &     0:11.5 &  $\pm$  &      0:01.2 & $\bullet$ \\
+            seller &&     0:27.3 &  $\pm$  &      0:03.2 & &     0:10.7 &  $\pm$  &      0:00.8 & $\bullet$ \\
+         sellerabr &&     0:26.1 &  $\pm$  &      0:00.7 & &     0:11.5 &  $\pm$  &      0:00.3 & $\bullet$ \\
 \hline
-            overall &&      27578 &  $\pm$  &        1965 & &      11725 &  $\pm$  &        1378 & $\bullet$ \\
+           overall &&     0:27.6 &  $\pm$  &      0:02.0 & &     0:11.7 &  $\pm$  &      0:01.4 & $\bullet$ \\
 \hline
-
+\\
 \multicolumn{11}{c}{$\bullet$ statistically significant decrease (not improvement in this case)}\\
 \end{tabular}
 

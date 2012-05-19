@@ -27,6 +27,7 @@ import czsem.gate.learning.DataSet.DataSetImpl.*;
 import czsem.gate.learning.DataSet.DataSetReduce;
 import czsem.gate.learning.MLEngine.ILPEngine;
 import czsem.gate.learning.MLEngine.PaumEngine;
+import czsem.gate.learning.MachineLearningExperiment.TrainTest;
 import czsem.gate.learning.MLEngineEncapsulate.*;
 import czsem.gate.plugins.AnnotationDependencyRootMarker;
 import czsem.gate.plugins.CrossValidation;
@@ -56,13 +57,24 @@ public class MachineLearningExperimenter
 		
 	}
 	
-	public static MachineLearningExperiment czechFiremanSimple() throws URISyntaxException, IOException
+	public static MachineLearningExperiment czechFiremanSimple(DataSet dataset, String annot_type) throws URISyntaxException, IOException
 	{
+		TrainTest ilp_engine;
+		
+		if (annot_type.equalsIgnoreCase("damage") || annot_type.equalsIgnoreCase("end_subtree"))
+		{
+			ilp_engine = new MLEvaluate(new CreateTemporaryMentionsRootSubtree(new ILPEngine("ILP_root_subtree.xml")));			
+		} 
+		else
+		{
+			ilp_engine = new MLEvaluate(new CreateTemporaryMentions(new ILPEngine()));			
+		}
+		
 		return 	    
 			new MachineLearningExperiment(
-	    		new CzechFireman("damage"),
-//	    		new MLEvaluate(new CreateTemporaryMentions(new ILPEngine())),
-	    		new MLEvaluate(new CreateTemporaryMentionsRootSubtree(new ILPEngine("ILP_root_subtree.xml"))),
+	    		dataset,
+	    		ilp_engine,
+//	    		new MLEvaluate(new CreateTemporaryMentionsRootSubtree(new ILPEngine("ILP_root_subtree.xml"))),
 /*
 	    		new MLEvaluate(
 	    				new CreateTemporaryMentions(
@@ -187,6 +199,35 @@ public class MachineLearningExperimenter
 	    );
 		return experiment;
 	}
+
+	public static void bigFiremanExperiment(String results_file_name) throws BenchmarkReportInputFileFormatException, URISyntaxException, IOException, ExecutionException, ResourceInstantiationException, PersistenceException, JDOMException
+	{
+		for (String annot_type : CzechFireman.eval_annot_types)
+		{
+		    LearningEvaluator.CentralResultsRepository.repository.clear();
+		    
+//		    GateUtils.deleteGateTimeBenchmarkFile();
+		    GateUtils.enableGateTimeBenchmark();
+		    
+//			DataSet dataset = new Acquisitions(annot_type);
+			DataSet dataset = new DataSetReduce(new CzechFireman(annot_type), 1.0);
+			dataset.clearSevedFilesDirectory();
+			
+
+			MachineLearningExperiment experiment = czechFiremanSimple(dataset, annot_type);
+			
+
+			experiment.crossValidation(8);
+			
+			
+		    logger.info("saving results, counting time statistics...");
+		    saveResults(results_file_name);
+			
+		   
+		    GateUtils.deleteAllPublicGateResources();
+		}		
+	}
+
 	
 	public static void bigAcquisitionsExperiment(String results_file_name) throws BenchmarkReportInputFileFormatException, URISyntaxException, IOException, ExecutionException, ResourceInstantiationException, PersistenceException, JDOMException
 	{
@@ -229,8 +270,9 @@ public class MachineLearningExperimenter
 		
 		new File(results_file_name).delete();
 		
-		for (int a=0; a<5; a++)
-			bigAcquisitionsExperiment(results_file_name);
+		for (int a=0; a<10; a++)
+//			bigAcquisitionsExperiment(results_file_name);
+			bigFiremanExperiment(results_file_name);
 		
 		WekaResultTests t = new WekaResultTests(System.err);
 		t.loadInstances(results_file_name);

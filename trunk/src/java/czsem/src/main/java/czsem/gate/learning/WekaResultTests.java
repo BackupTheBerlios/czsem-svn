@@ -22,6 +22,8 @@ public class WekaResultTests
 	protected PrintStream log;
 	
 	int first_test_attr = 7;
+	
+	boolean invert_columns = false;
 
 
 	public WekaResultTests(PrintStream out, PrintStream log) {
@@ -167,28 +169,41 @@ public class WekaResultTests
 			int attr = sel[0];
 			String dataset = inst.attribute(attr).value(d);
 			printDatasetName(dataset);
-	
-	
-			//inverted
-			int col = 1;
-			printAttrValue(results.getMean(col, d), results.getStdDev(col, d), value_prefix);
-			col=0;
-			printAttrValue(results.getMean(col, d), results.getStdDev(col, d), value_prefix);
 			
-			//inverted
-			printSignificance(3-results.getSignificance(1, d));
+			
+			printValueRow(results, d, value_prefix);				
 		}
 
 
 		
 	}
 	
-	protected void printDatasetName(String dataset) {
-		out.format("%15s ", dataset);				
+	protected void printValueRow(ResultMatrix results, int row, String value_prefix) {
+		int col;
+		if (invert_columns)
+		{
+			//inverted
+			col = 1;
+			printAttrValue(results.getMean(col, row), results.getStdDev(col, row), value_prefix);
+			col=0;
+			printAttrValue(results.getMean(col, row), results.getStdDev(col, row), value_prefix);
+			
+			//inverted
+			printSignificance(3-results.getSignificance(1, row));								
+		}
+		else
+		{
+			col = 0;
+			printAttrValue(results.getMean(col, row), results.getStdDev(col, row), value_prefix);
+			col=1;
+			printAttrValue(results.getMean(col, row), results.getStdDev(col, row), value_prefix);
+			
+			printSignificance(results.getSignificance(1, row));								
+		}		
 	}
 
-	protected void printAttrName(String name) {
-		out.println(name);		
+	protected void printDatasetName(String dataset) {
+		out.format("%15s ", dataset);				
 	}
 
 	public void performAllTests() throws Exception
@@ -230,14 +245,7 @@ public class WekaResultTests
 					printAttrName(inst.attribute(cur_attr_index).name(), cpa.getCurrentPrefix(), cpa.getCurrentNextRows());
 					cpa.next();
 
-					//inverted
-					int col = 1;
-					printAttrValue(results[c].getMean(col, d), results[c].getStdDev(col, d), "");
-					col=0;
-					printAttrValue(results[c].getMean(col, d), results[c].getStdDev(col, d), "");
-					
-					//inverted
-					printSignificance(3-results[c].getSignificance(1, d));					
+					printValueRow(results[c], d, "");
 				}
 				
 			}
@@ -271,6 +279,10 @@ public class WekaResultTests
 	protected void printDatasetHeader(String dataset)
 	{
 		out.println("dataset: " + filterAttrName(dataset.substring(1, dataset.length()-1)));
+	}
+	
+	protected void printAttrName(String name) {
+		out.println(name);		
 	}
 	
 	protected void printAttrName(String name, String commonPrefix, int commonPrefixForNextRows) {

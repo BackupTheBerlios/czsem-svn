@@ -118,6 +118,18 @@ public interface DataSet
 		
 		public static class CzechFireman extends DataSetImpl
 		{
+			public static final String [] eval_annot_types =
+			{
+				"damage",
+				"end_subtree",
+				"start",
+				"injuries",
+				"fatalities",
+				"profesional_unit",
+				"amateur_unit",
+			};
+
+			
 			public static final String [] all_annot_types =
 			{
 				"amateur_unit",
