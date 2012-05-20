@@ -25,8 +25,10 @@ import org.jdom.JDOMException;
 import czsem.gate.GateUtils;
 import czsem.gate.learning.DataSet.DataSetImpl.*;
 import czsem.gate.learning.DataSet.DataSetReduce;
+import czsem.gate.learning.DataSet.DatasetFactory;
 import czsem.gate.learning.MLEngine.ILPEngine;
 import czsem.gate.learning.MLEngine.PaumEngine;
+import czsem.gate.learning.MachineLearningExperiment.EngineFactory;
 import czsem.gate.learning.MachineLearningExperiment.TrainTest;
 import czsem.gate.learning.MLEngineEncapsulate.*;
 import czsem.gate.plugins.AnnotationDependencyRootMarker;
@@ -36,7 +38,7 @@ import czsem.utils.Config;
 
 public class MachineLearningExperimenter
 {
-	
+/*	
 	public static MachineLearningExperiment acquisitions() throws URISyntaxException, IOException
 	{
 		return
@@ -56,19 +58,50 @@ public class MachineLearningExperimenter
 
 		
 	}
-	
+/**/	
+	public static EngineFactory getAcquisitionsIlpEngineFactory() {
+		return new EngineFactory() {
+			@Override
+			public TrainTest createEngine(String annot_type) {
+				if (annot_type.equalsIgnoreCase("dlramt"))
+				{
+					return new MLEvaluate(
+							new CreateTemporaryMentionsRootSubtree(    	    				
+									new ILPEngine()));			
+				} 
+				else
+				{
+					return new MLEvaluate(
+		    				new CreateTemporaryMentionsReferedMentionsPostprocessing(
+		    						new ILPEngine("ILP_config_NE_roots.xml")));
+				}
+			}
+		};
+	}
+
+	public static EngineFactory getCzechFiremanIlpEngineFactory() {
+		return new EngineFactory() {			
+			@Override
+			public TrainTest createEngine(String annot_type) {
+				if (
+						annot_type.equalsIgnoreCase("damage") ||
+						annot_type.equalsIgnoreCase("end_subtree") || 
+						annot_type.equalsIgnoreCase("cars"))
+				{
+					return new MLEvaluate(new CreateTemporaryMentionsRootSubtree(new ILPEngine("ILP_root_subtree.xml")));			
+				} 
+				else
+				{
+					return new MLEvaluate(new CreateTemporaryMentions(new ILPEngine()));			
+				}
+			}
+		};
+	}
+/*
 	public static MachineLearningExperiment czechFiremanSimple(DataSet dataset, String annot_type) throws URISyntaxException, IOException
 	{
 		TrainTest ilp_engine;
 		
-		if (annot_type.equalsIgnoreCase("damage") || annot_type.equalsIgnoreCase("end_subtree"))
-		{
-			ilp_engine = new MLEvaluate(new CreateTemporaryMentionsRootSubtree(new ILPEngine("ILP_root_subtree.xml")));			
-		} 
-		else
-		{
-			ilp_engine = new MLEvaluate(new CreateTemporaryMentions(new ILPEngine()));			
-		}
 		
 		return 	    
 			new MachineLearningExperiment(
@@ -84,7 +117,7 @@ public class MachineLearningExperimenter
     	    				new CreateTemporaryMentionsReferedMentionsPostprocessing(
     	    						"Lookup_root.origRootID",
     	    						new ILPEngine("ILP_config_NE_roots.xml"))),
-/**/    	    						
+/**    	    						
 //	    		new MLEvaluate(new CreateTemporaryMentions(new SubsequentAnnotationMerge(new ILPEngine()))),
 	    	    new MLEvaluate(new CreatePersistentMentions(new PaumEngine()))
 
@@ -97,7 +130,7 @@ public class MachineLearningExperimenter
     	    				new CreateTemporaryMentionsReferedMentionsPostprocessing(
     	    						new ILPEngine("ILP_config_NE_roots.xml"))),
 	    	    new MLEvaluate(new CreatePersistentMentions(new PaumEngine()))
-*/	    	    
+*	    	    
 //	    		new ILPEngine()
 			);
 
@@ -168,6 +201,7 @@ public class MachineLearningExperimenter
 	    ex.saveAll(results_file_name);		    		
 	}
 	
+/*
 	public static MachineLearningExperiment acqCommonExperiment(DataSet dataset)
 	{
 		MachineLearningExperiment experiment = new MachineLearningExperiment(
@@ -182,12 +216,13 @@ public class MachineLearningExperimenter
 	    	    						new ILPEngine("ILP_config_NE_roots_subtree.xml")))),	    		
 	    		new MLEvaluate(new CreateTemporaryMentions(
 	    	    		new SubsequentAnnotationMerge(new ILPEngine()))),
-/**/
+/*
 	    	    new MLEvaluate(new CreatePersistentMentions(new PaumEngine()))
 	    );
 		return experiment;
 	}
 
+	/*
 	public static MachineLearningExperiment acqDlrAmountExperiment(DataSet dataset)
 	{
 		MachineLearningExperiment experiment = new MachineLearningExperiment(
@@ -200,6 +235,7 @@ public class MachineLearningExperimenter
 		return experiment;
 	}
 
+/*	
 	public static void bigFiremanExperiment(String results_file_name) throws BenchmarkReportInputFileFormatException, URISyntaxException, IOException, ExecutionException, ResourceInstantiationException, PersistenceException, JDOMException
 	{
 		for (String annot_type : CzechFireman.eval_annot_types)
@@ -228,6 +264,7 @@ public class MachineLearningExperimenter
 		}		
 	}
 
+	/*
 	
 	public static void bigAcquisitionsExperiment(String results_file_name) throws BenchmarkReportInputFileFormatException, URISyntaxException, IOException, ExecutionException, ResourceInstantiationException, PersistenceException, JDOMException
 	{
@@ -260,8 +297,48 @@ public class MachineLearningExperimenter
 		    GateUtils.deleteAllPublicGateResources();
 		}		
 	}
+    /**/
     
-    public static void main(String [] args) throws Exception
+    public static void performLargeExperiment(
+    		DatasetFactory ds_factory,
+    		double ds_reduce_retio,
+    		String [] eval_annot_types,
+    		EngineFactory engineFactory,
+    		int repeatCount,
+    		int numFolds,
+    		String results_file_name) throws URISyntaxException, IOException, ExecutionException, ResourceInstantiationException, PersistenceException, JDOMException, BenchmarkReportInputFileFormatException
+    {
+		for (int a=0; a<repeatCount; a++)
+		{
+			for (String annot_type : eval_annot_types)
+			{
+			    LearningEvaluator.CentralResultsRepository.repository.clear();
+			    GateUtils.enableGateTimeBenchmark();
+			    
+				DataSet dataset =  new DataSetReduce(
+						ds_factory.createDataset(annot_type),
+						ds_reduce_retio);
+				dataset.clearSevedFilesDirectory();
+				
+				TrainTest engine = engineFactory.createEngine(annot_type);
+				
+				MachineLearningExperiment experiment = new MachineLearningExperiment(
+						dataset,
+						engine,
+						new MLEvaluate(new CreatePersistentMentions(new PaumEngine())));
+				
+				experiment.crossValidation(numFolds);
+				
+				
+			    logger.info("saving results, counting time statistics...");
+			    saveResults(results_file_name);
+							   
+			    GateUtils.deleteAllPublicGateResources();
+			}			
+		}    	
+    }
+	
+	public static void main(String [] args) throws Exception
 	{
     	initEnvironment();
     	/**/
@@ -270,10 +347,31 @@ public class MachineLearningExperimenter
 		
 		new File(results_file_name).delete();
 		
-		for (int a=0; a<10; a++)
-//			bigAcquisitionsExperiment(results_file_name);
-			bigFiremanExperiment(results_file_name);
+/**/
+//		bigFiremanExperiment
+		performLargeExperiment(
+				CzechFireman.getFactory(),
+				1.0,
+				CzechFireman.eval_annot_types,
+				getCzechFiremanIlpEngineFactory(),
+				8, //repeats
+				8, //folds
+				results_file_name);
+				
+
+/*		
+
 		
+//		bigAcquisitionsExperiment
+		performLargeExperiment(
+				Acquisitions.getFactory(),
+				1.0,
+				Acquisitions.eval_annot_types,
+				getAcquisitionsIlpEngineFactory(),
+				10, //repeats
+				2,  //folds
+				results_file_name);
+/**/		
 		WekaResultTests t = new WekaResultTests(System.err);
 		t.loadInstances(results_file_name);
 		t.testsAttr(6); //F1
@@ -323,6 +421,7 @@ public class MachineLearningExperimenter
 	
 	
 	
+
 	@SuppressWarnings("rawtypes")
 	public static void jape_pok (gate.Document doc, java.util.Map bindings, 
 			                     gate.AnnotationSet annotations, 

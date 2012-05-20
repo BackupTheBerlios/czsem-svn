@@ -25,6 +25,11 @@ public interface DataSet
 	String getTectoMTAS();
 	Corpus getCorpus() throws PersistenceException, ResourceInstantiationException;
 
+	public static interface DatasetFactory
+	{
+		public DataSet createDataset(String ... learnigAnnotationTypes) throws URISyntaxException, IOException;
+	}
+	
 	public static class DataSetReduce implements DataSet
 	{
 		public DataSetReduce(DataSet child, double reduceRatio)
@@ -120,6 +125,7 @@ public interface DataSet
 		{
 			public static final String [] eval_annot_types =
 			{
+				"cars",
 				"damage",
 				"end_subtree",
 				"start",
@@ -161,6 +167,15 @@ public interface DataSet
 						"TectoMT",
 						"czech_fireman",
 						learnigAnnotationTypes);
+			}
+
+			public static DatasetFactory getFactory() {
+				return new DatasetFactory() {
+					@Override
+					public DataSet createDataset(String... learnigAnnotationTypes) throws URISyntaxException, IOException {
+						return new CzechFireman(learnigAnnotationTypes);
+					}
+				};
 			}		
 		}
 	
@@ -192,6 +207,16 @@ public interface DataSet
 						"TectoMT",
 						"acquisitions-v1.1",
 						learnigAnnotationTypes);
+			}
+
+			public static DatasetFactory getFactory() {
+				return new DatasetFactory() {					
+					@Override
+					public DataSet createDataset(String... learnigAnnotationTypes)
+							throws URISyntaxException, IOException {
+						return new Acquisitions(learnigAnnotationTypes);
+					}
+				};
 			}		
 		}
 	}

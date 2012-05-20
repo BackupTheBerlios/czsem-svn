@@ -27,8 +27,12 @@ public class WekaResultTestsLaTeX extends WekaResultTests {
 		t.loadInstances("gate-learning/acquisitions-v1.1/results/weka_results_acq_complete.csv");
 		t.setInvertColumns(true);
 /**/
-		t.loadInstances("gate-learning/czech_fireman/results/weka_results_LONG.csv");
+		t.loadInstances("gate-learning/czech_fireman/results/weka_results_cars.csv");
+		t.setInvertColumns(true);
+/*		
+		t.loadInstances("weka_results.csv");
 /**/		
+
 		t.printBasicStats();
 		
 		System.err.println();

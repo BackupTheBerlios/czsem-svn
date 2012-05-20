@@ -28,6 +28,11 @@ public class MachineLearningExperiment
 		String getDefaultOutputAS();
 		String getDefaultLearningAnnotationType();
 	}
+	
+	public static interface EngineFactory 
+	{
+		TrainTest createEngine(String annot_type);		
+	}
 
 	
 	/** Usually TectoMT, loaded form dataSet.tectoMTAS **/
