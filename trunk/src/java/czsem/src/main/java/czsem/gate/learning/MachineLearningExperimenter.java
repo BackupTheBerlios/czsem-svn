@@ -299,7 +299,13 @@ public class MachineLearningExperimenter
 	}
     /**/
     
-    public static void performLargeExperiment(
+	
+	/**
+	 * @param numFolds (1 == train only)
+	 * @see Acquisitions#getFactory()
+	 * @see #getAcquisitionsIlpEngineFactory()
+	 */
+	public static void performLargeExperiment(
     		DatasetFactory ds_factory,
     		double ds_reduce_retio,
     		String [] eval_annot_types,
@@ -327,11 +333,17 @@ public class MachineLearningExperimenter
 						engine,
 						new MLEvaluate(new CreatePersistentMentions(new PaumEngine())));
 				
-				experiment.crossValidation(numFolds);
+				if (numFolds == 1)
+					experiment.trainOnly();
+				else
+				{
+					experiment.crossValidation(numFolds);
+				    
+					logger.info("saving results, counting time statistics...");
+				    saveResults(results_file_name);
+				}
 				
 				
-			    logger.info("saving results, counting time statistics...");
-			    saveResults(results_file_name);
 							   
 			    GateUtils.deleteAllPublicGateResources();
 			}			
@@ -357,7 +369,18 @@ public class MachineLearningExperimenter
 				8, //repeats
 				8, //folds
 				results_file_name);
-				
+/*
+		// trin only
+		performLargeExperiment(
+				CzechFireman.getFactory(),
+				1.0,
+//				CzechFireman.eval_annot_types,
+				new String[] {"amateur_unit"},
+				getCzechFiremanIlpEngineFactory(),
+				1, //repeats
+				1, //folds, 1 == train only 
+				results_file_name);
+
 
 /*		
 

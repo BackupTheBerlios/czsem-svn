@@ -403,6 +403,16 @@ Node attributes are assigned to node IDs by binary predicates of the form:
 
 Example of a serialized tectogrammatical tree is in Figure~\ref{fig:ilp_serialization} it is the same tree as in Figure~\ref{fig:intro_damage_tree}.
 
+\subsubsection{Attachment of Other GATE Annotations}
+During the development of the method, it turned out that it would be very useful to attach additional information, represented by overlapping GATE annotations, to tree nodes. This allows combination of information provided by linguistic trees with information provided by other GATE tools like gazetteers, etc. 
+
+Technically, this is realized using binary predicates with a common form:
+
+\texttt{overlap\_OverlappingType\_OverlappedType(}
+\\ \phantom{a} \hfill{} \phantom{b} \texttt{OverlappingNodeID, OverlappedNodeID)}
+
+\noindent Overlap with named entities discovers by gazetteers is the most common form of such overlap. For tectogrammatical nodes, it has the form of \texttt{overlap\_Lookup\_tToken(id1,id2)}. An example can be found in Figure~\ref{fig:learning_eval_rules} on line 34. 
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}

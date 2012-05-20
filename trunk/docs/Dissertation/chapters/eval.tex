@@ -37,10 +37,10 @@ Because the procedural rules and the Netgraph based rules are evaluated in a dif
 In the Netgraph case it is necessary to select the most relevant matches of all possible ones. The first longest (maximum of optional nodes) match for each tree is selected. This is unfortunately not optimal and also not consistent with the procedural case, but it is the easiest option for the implementation (Netgraph can be directly used in that case.)
 
 	\item[Negation, participant, participant quantity (count), action type]
-These values represent numbers of matching nodes (or more precisely of pieces of extracted information) of the given type. For example values of participant are the numbers of all participants (node number 4 in the Netgraph based rule) identified by the extraction rule and values of \emph{p�e��t} (survive) are numbers of matching action type nodes with the value of \emph{p�e��t} (survive). Note that some postprocessing of the Netgraph based output was necessary to count TRUE and FLASE negation values.
+These values represent numbers of matching nodes (or more precisely of pieces of extracted information) of the given type. For example values of participant are the numbers of all participants (node number 4 in the Netgraph based rule) identified by the extraction rule and values of \emph{přežít} (survive) are numbers of matching action type nodes with the value of \emph{přežít} (survive). Note that some postprocessing of the Netgraph based output was necessary to count TRUE and FLASE negation values.
 
 	\item[Participant quantity]
-Values in this group are all connected with the quantity kind of information. It expresses the quantity of participants involved in the corresponding incident action. This kind of information is numeric so some numerical calculations can be made (average value, median and maximum value). Again postprocessing of the Netgraph based output was necessary to obtain these values -- in this case translation of seven kinds of numerals to numbers (\emph{jeden} - 1, \emph{dva} - 2, \emph{t�i} - 3, \emph{�ty�i} - 4, \emph{�est} - 6, \emph{sedm} - 7, \emph{osm} - 8). Note that the vale of average is strongly affected by the very few high numbers present in the results (the values 1 and 2 accounted for more than half of the results.)\\
+Values in this group are all connected with the quantity kind of information. It expresses the quantity of participants involved in the corresponding incident action. This kind of information is numeric so some numerical calculations can be made (average value, median and maximum value). Again postprocessing of the Netgraph based output was necessary to obtain these values -- in this case translation of seven kinds of numerals to numbers (\emph{jeden} - 1, \emph{dva} - 2, \emph{tři} - 3, \emph{čtyři} - 4, \emph{šest} - 6, \emph{sedm} - 7, \emph{osm} - 8). Note that the vale of average is strongly affected by the very few high numbers present in the results (the values 1 and 2 accounted for more than half of the results.)\\
 Values of participant quantity also demonstrate several errors made by the particular extraction rules, see bellow for details.
 \end{description}
 
@@ -149,34 +149,55 @@ In Figure~\ref{fig:learning_eval_rules} we present some examples of the rules le
 \begin{figure}
 \begin{minted}[linenos,  fontsize=\footnotesize,
                frame=lines]{prolog}
-%[Rule 1] [Pos cover = 14 Neg cover = 0]
-damage_root(A) :- lex_rf(B,A), has_sempos(B,'n.quant.def'), tDependency(C,B),
-   tDependency(C,D), has_t_lemma(D,'investigator').
+% [cars - Rule 3] [Pos cover = 5 Neg cover = 0]
+mention(cars,A) :-
+   'lex.rf'(B,A), sempos(B,'n.denot'), tDependency(C,B), t_lemma(C,vozidlo), 
+   functor(C,'ACT'), number(C,sg).   % vozidlo ~ vehicle
 
-%[Rule 2] [Pos cover = 13 Neg cover = 0]
-damage_root(A) :- lex_rf(B,A), has_functor(B,'TOWH'), tDependency(C,B),
-   tDependency(C,D), has_t_lemma(D,'damage').
+% [damage - Rule 1] [Pos cover = 14 Neg cover = 0]
+mention(damage,A) :-
+   'lex.rf'(B,A), sempos(B,'n.quant.def'), tDependency(C,B), tDependency(C,D), 
+   t_lemma(D,'vyšetřovatel').   % vyšetřovatel ~ investigating officer
 
+% [end_subtree - Rule 7] [Pos cover = 6 Neg cover = 0]
+mention(end_subtree,A) :-
+   'lex.rf'(B,A), sempos(B,'n.quant.def'), tDependency(C,B), t_lemma(C,'ukončit').
+	    % ukončit ~ finish
 
-%[Rule 1] [Pos cover = 7 Neg cover = 0]
-injuries(A) :- lex_rf(B,A), has_functor(B,'PAT'), has_gender(B,anim),
-   tDependency(B,C), has_t_lemma(C,'injured').
+% [start - Rule 2] [Pos cover = 15 Neg cover = 0]
+mention(start,A) :-
+   'lex.rf'(B,A), functor(B,'TWHEN'), tDependency(C,B), tDependency(C,D), 
+   t_lemma(D,ohlásit).   % ohlásit ~ report (e.g. a fire)
 
-%[Rule 8] [Pos cover = 6 Neg cover = 0]
-injuries(A) :- lex_rf(B,A), has_gender(B,anim), tDependency(C,B),
-   has_t_lemma(C,'injure'), has_negation(C,neg0).
+% [injuries - Rule 1] [Pos cover = 7 Neg cover = 0]
+mention(injuries,A) :-
+   'lex.rf'(B,A), functor(B,'PAT'), tDependency(B,C), t_lemma(C,'zraněný'), 
+   tDependency(D,B), aspect(D,cpl).   % zraněný ~ injured
+
+% [fatalities - Rule 1] [Pos cover = 3 Neg cover = 0]
+mention(fatalities,A) :-
+   'lex.rf'(B,A), functor(B,'PAT'), tDependency(C,B), t_lemma(C,srazit).
+	    % srazit ~ knock down
+
+% [profesional_unit - Rule 1] [Pos cover = 17 Neg cover = 0]
+mention(profesional_unit,A) :-
+   'lex.rf'(B,A), functor(B,'LOC'), gender(B,fem), tDependency(C,B), 
+   functor(C,'CONJ'), overlap_Lookup_tToken(D,B).
+
+% [amateur_unit - Rule 1] [Pos cover = 19 Neg cover = 0]
+mention(amateur_unit,A) :-
+   'lex.rf'(B,A), tDependency(C,B), tDependency(D,C), tDependency(D,E), 
+   t_lemma(E,dobrovolný).   % dobrovolný ~ voluntary
 \end{minted}
-	TODO: \verb+damage_root -> mention_root+
-	\caption{Examples of learned rules, Czech words are translated.}
+	\caption{The most successful rules for each task learned form the whole Fireman dataset.}
 	\label{fig:learning_eval_rules}
 \end{figure}
 
 
 
 \subsection{Comparison with Paum classifier}
-To compare our solution with other alternatives we took the Paum propositional learner from GATE \citep{Li:Paum}. The quality of propositional learning from texts is strongly dependent on the selection of right features. We obtained quite good results with features of a window of two preceding and two following token lemmas and morphological tags. The precision was further improved by adding the feature of \emph{analytical function} from the syntactic parser (see the last row of Table~\ref{tab:EvaluationResults}).
+To compare our solution with other alternatives we took the PAUM (Perceptron Algorithm with Uneven Margins) propositional learner from GATE \citep{Li:Paum}. The quality of propositional learning from texts is strongly dependent on the selection of right features. We obtained quite good results with features of a window of two preceding and two following token lemmas and morphological tags. The precision was further improved by adding the feature of \emph{analytical function}\footurl{http://ufal.mff.cuni.cz/pdt2.0/doc/manuals/en/a-layer/html/ch03.html\#s1-list-anal-func} from the syntactic parser and information about the presence of a named entity.
 
-Because we did not want to invest much time to this and the feature setting of the Paum learner was quite simple (a window of two preceding and following token lemmas and morphological tags). We admit that looking for better features could further improve the results of the Paum learner.
 
 \subsection{Cross validation}
 We used the 10-fold cross validation in the evaluation. Thanks to this technique the evaluation is simple. After processing all the folds each document is processed with some of the ten learned models such that the particular document was not used in learning of that model, so all documents are unseen by the model applied on them. At the end we just compare the gold standard annotations with the learned ones in all documents.
