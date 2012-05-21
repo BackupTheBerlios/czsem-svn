@@ -138,7 +138,7 @@ Next question that naturally emerges is: How would be the performance if the rul
 The results are summarized in Table~\ref{tab:manual_damage_manual_eval}. Both kinds of rules (manually designed and learned by ILP) performed the same (recall: 0.71, precision: 1); both the methods correctly found 5 instances and they were both unable to find 2 instances. From the cross coverage comparison in 
 Table~\ref{tab:manual_damage_cross_method} it is apparent that the methods agreed on 4 instances and each method was able to discovered one instance that the other did not discover. Such results could be accepted for a practical application but we must not forget the fact that the collection is very small and only single evidence is provided by the experiment, so it dies not provide any statistical significance (getting statistically significant results would require experiments with different datasets, extraction tasks and human designers.) 
 
-\clearpage
+%\clearpage
 
 \section{Evaluation of Learned Rules} \label{sec:learning_eval}
 
@@ -147,10 +147,6 @@ In this section, we present two experiments with two manually annotated datasets
 Evaluation of machine learning approaches is easier than evaluation of approaches based on manual extraction rules because it is not necessary to construct extraction rules for each experiment manually. Thanks to this fact and the availability of manually annotated datasets, the evaluation is more comprehensive than in the previous section.
 
 \subsection{Examples of Learned Rules}
-
-In Figure~\ref{fig:learning_eval_rules}, we present the most representative examples of extraction rules learned from the whole dataset \sectiondoubleref{sec:data_fireman_annotated}. The rule with largest coverage for each extraction task was selected and it is provided in the figure. Each rule demonstrates a connection of the target token, annotated as `\emph{mention(task\_name)}’, with other parts of the sentence through linguistic syntax structures. 
-
-For example the second rule (\emph{damage} task, lines 6-9) connects the node A with its tectogrammatical counterpart -- numeral B (\emph{n.quant.def}) and with node D (`vyšetřovatel') representing the investigating officer who stated the mount of damage. 
 
 \begin{figure}
 \begin{minted}[linenos,  fontsize=\footnotesize,
@@ -199,9 +195,15 @@ mention(amateur_unit,A) :-
 	\label{fig:learning_eval_rules}
 \end{figure}
 
+In Figure~\ref{fig:learning_eval_rules}, we present the most representative examples of extraction rules learned from the whole dataset \sectiondoubleref{sec:data_fireman_annotated}. The rule with largest coverage for each extraction task was selected and it is provided in the figure. Each rule demonstrates a connection of the target token, annotated as `\emph{mention(task\_name)}’, with other parts of the sentence through linguistic syntax structures. 
+
+For example the second rule (\emph{damage} task, lines 6-9) connects the node A with its tectogrammatical counterpart -- numeral B (\emph{n.quant.def}) and with node D (`vyšetřovatel') representing the investigating officer who stated the mount of damage. 
+
+
+
 \subsection{Evaluation Methods and Measures}
 
-Evaluation experiments have to be preformed repeatedly in order to investigate statistical significance. A dataset consisting of individual documents is randomly split into the training and testing part in each experimental run. The ratio between the training and testing part depends on the size of the dataset. It is important to have enough training data and therefore larger training part and smaller testing part is used if the dataset is too small. The cross validation technique meets exactly this requirement: the more cross validation folds, the greater the ratio.
+Evaluation experiments have to be preformed repeatedly in order to investigate statistical significance. A dataset consisting of individual documents is randomly split into the training and testing part in each experimental run. The ratio between the training and testing part depends on the size of the dataset. It is important to have enough training data and therefore larger training part and smaller testing part is used if the dataset is too small. The cross validation technique meets exactly this requirement: the more cross validation folds, the greater the ratio. In following sections presenting individual experiments, different numbers of cross validation folds are used according to the sizes of the datasets.
 
 In each experiment run, the performance is evaluated using several performance measures; precision, recall and $F_1$ (harmonic mean of precision and recall) are mostly used for information extraction experiments. Partially correct (or overlapping) matches can occur when annotations do not match exactly (they are overlapping). Strict, lenient and average variants of performance measures allow dealing with partially correct matches in different ways:
 \begin{itemize}
@@ -215,7 +217,7 @@ and few details about the statistical significance in Section~\ref{sec:conclusio
 
 
 
-\subsection{Comparison with Paum classifier}
+\subsection{Comparison with PAUM Classifier}
 To compare our solution with other alternatives, we took the PAUM (Perceptron Algorithm with Uneven Margins) propositional learner from GATE \citep{Li:Paum}. The quality of propositional learning from texts is strongly dependent on the selection of right features. We obtained quite good results with features of a window of two preceding and two following token lemmas and morphological tags. The precision was further improved by adding the feature of \emph{analytical function}\footurl{http://ufal.mff.cuni.cz/pdt2.0/doc/manuals/en/a-layer/html/ch03.html\#s1-list-anal-func} from the syntactic parser and information about presence of named entities.
 
 
@@ -224,6 +226,11 @@ To compare our solution with other alternatives, we took the PAUM (Perceptron Al
 
 
 \subsection{Czech Fireman Performance}
+
+Table~\ref{tab:learning_eval_fir_perfom} summarizes performance evaluation of our ILP based method and its comparison with PAUM classifier on the dataset \sectiondoubleref{sec:data_fireman_annotated}. The table shows results of the three main evaluation measures: strict precision, strict recall and strict $F_1$ for each extraction task as well as overall results. 8-fold cross validation was performed 8 times in the experiment. Average values and standard deviations are printed in the table and statistical significance is indicated. Root/subtree preprocessing/postprocessing was performed for the first three tasks: `cars’, `damage’ and `end subtree’.
+
+Although the precision of the ILP method was better in the majority of tasks and also its overall precision is statically better than the precision of the PAUM method, its recall was worse in all the measurements and also $F_1$ score is indicating better results of the PAUM method. 
+
 
 \begin{table}[ht!]
 \centering 
@@ -283,14 +290,23 @@ Task && \multicolumn{3}{c}{ILP}  && \multicolumn{3}{c}{PAUM} && \\
 \multicolumn{11}{c}{$\circ$, $\bullet$ statistically significant improvement or degradation}\\
 \end{tabular}
 
-\caption{Evaluation on Czech Fireman dataset} \label{tab:learning_fir_eval}
+\caption{Evaluation on Czech Fireman dataset} \label{tab:learning_eval_fir_perfom}
 \end{table}
 
-\clearpage
-\subsection{Czech Fireman Time}
 
 
-\begin{table}[h!]
+
+Table~\ref{tab:learning_eval_fir_time} provides learning and application (or testing) times of the compared methods. It is clear that learning time of the ILP method is many times higher than the time of the PAUM method. For example the `cars’ task took the ILP method approximately three and half minutes while the PAUM method spent only two seconds on it. On the other hand, the testing or application time of the ILP method is not that much higher than the time of the PAUM method 
+%and once the extraction rules are done, the time requirements of the ILP method are acceptable.
+but we have to notice that these times do not include linguistic preprocessing and deep language parsing needed by the ILP method will increase the time significantly.
+
+Detailed results with much more evaluation measurements including lenient variants are available in the appendix -- Section~\ref{sec:complete_eval_fire}.
+
+%\clearpage
+%\subsection{Czech Fireman Time}
+
+
+\begin{table}
 \centering 
 \begin{tabular}
 {lcrclcrcl@{\hspace{0.1cm}}cc}
@@ -334,14 +350,14 @@ Task && \multicolumn{3}{c}{ILP}  && \multicolumn{3}{c}{PAUM} && \\
 \medskip
 The time in this table is cumulative (sum over all folds in one experiment run).
 
-\caption{Time spent by ML engines on the Czech Fireman dataset.} \label{tab:learning_fir_time}
+\caption{Time spent by ML engines on the Czech Fireman dataset.} \label{tab:learning_eval_fir_time}
 \end{table}
 
 
 
 
 
-\clearpage
+%\clearpage
 
 \subsection{Acquisitions Performance}
 
@@ -404,9 +420,9 @@ Task && \multicolumn{3}{c}{ILP}  && \multicolumn{3}{c}{PAUM} && \\
 \end{table}
 
 
-\clearpage
+%\clearpage
 
-\subsection{Acquisitions Time}
+%\subsection{Acquisitions Time}
 
 
 \begin{table}[h!]

@@ -218,7 +218,12 @@ the Stanford tools\footnote{\url{http://nlp.stanford.edu/software/lex-parser.sht
 
 
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{GATE} \label{sec:third_gate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 GATE \citep{biblio:GATE_ACL2002} is probably the most widely used tool for text processing. In our solution the capabilities of document and annotation management, utility resources for annotation processing, JAPE grammar rules \citep{Cunningham00jape:a}, machine learning facilities and performance evaluation tools are the most helpful features of GATE that we have used.
 
 \medskip
@@ -231,15 +236,42 @@ For example in a sentence ``Hamish Cunningham leads the GATE team.'', ``Hamish C
 
 Although the GATE annotation approach seems quite simple, very complex structures can be encoded this way (for example an annotation feature can contain a reference to another annotation using its ID), but such usage of GATE annotations is always tricky to some degree and it is always necessary to establish a convention about that. In Section~\ref{sec:learning_pdt_in_gate} encoding of PDT dependency annotations in GATE will be presented.
 
+
+\subsection{Gazetteer Lists} \label{sec:third_gate_gaze}
+
+Gazetteers provide a list of known entities for a particular category, such as all counties of the world or all human diseases and are often used in information extraction. See also the GATE documentation chapter about gazetteers\footurl{http://gate.ac.uk/userguide/chap:gazetteers}.
+
+For flexitive languages like Czech, gazetteers can not be used directly because the term lookup without lemmatization would result in poor performance. Using GATE Flexible Gazetteer\footurl{http://gate.ac.uk/userguide/sec:gazetteers:flexgazetteer} this problem can be elegantly solved and terms from gazetteer list are then matched against tokens lemmas instead of their original forms. This also implies that the gazetteer’s terms have to be in the form of lemmas and lemmatization has to be preformed on the analyzed documents before the gazetteer application.
+
+
+
 \subsection{Machine Learning in GATE} \label{sec:third_gate_ML}
 
-Figure~\ref{fig:ExtractionProcessIntro} learning and annotation process in general (ILP version later, Section~\ref{sec:learning_methods})
+Figure~\ref{fig:ExtractionProcessIntro} presents a general machine learning and annotation process in GATE and the same schema apply also to majority of information extraction approaches based on machine learning. An adaptation of this schema will be presented in Section~\ref{sec:learning_methods}, where our method based on deep language parsing and Inductive Logic Programming will be presented.
+
+The schema presets two sub-processes or phases:
+
+\begin{itemize}
+	\item Learning phase represented by arrows with numbers (1-6).
+	\item Application phase represented by arrows with Latin characters (a-e).
+\end{itemize}
+
+Arrows with Greek characters ($\alpha$-$\gamma$) represent configuration of individual components.
+
+\medskip
+
+During the \textbf{learning phase}, input documents are presented to users or human annotators (1) and they perform manual annotation on them (2). Annotated documents are collected and they form a learning collection (2). The size of learning collection and selection of documents is configured in learning setup by an expert user or administrator ($\alpha$). Before a learning algorithm can be applied on the learning collection (5), preprocessing of learning documents takes place (4). The learning phase ends up with learned extraction rules or other kind of machine learning model (6). Document preprocessing ($\beta$) as well as learning algorithm ($\gamma$) have to be properly configured by the administrator because different kinds of preprocessing and different setting of learning parameters are suitable to different extraction tasks.
+
+During the \textbf{application phase}, an input document goes through the same preprocessing (a) as learning documents. Extraction or annotation procedure applies the previously learned extraction rules (c) on the preprocessed document (b). The result document is usually not yet in the final form and postprocessing has to be performed on it (d). The final annotated document (e) contains the same form of annotations as those created by human annotator.
+
+There is one configuration arrow missing in the schema. This arrow should go to the postprocessing procedure because different kinds of postprocessing suit to different extraction tasks and the actual choice of postprocessing steps is highly dependent on the preprocessing steps performed before. For example ``root preprocessing'' has to be followed by ``subtree postprocessing''; see details in Section~\ref{sec:learning_root_subtree}.
+
 
 
 \begin{figure}
 \centering
 \includegraphics[angle=-90, width=0.8\hsize]{../img/ch10/annotation_process}
-\caption{Learning and annotation process -- general overview}
+\caption{Machine learning and annotation process -- general overview}
 \label{fig:ExtractionProcessIntro}
 \end{figure}
 

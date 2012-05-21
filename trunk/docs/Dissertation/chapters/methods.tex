@@ -301,7 +301,7 @@ Let us for example have a phrase ``eight thousand Crowns’’ and an annotation
 Fortunately, this phenomenon does not occur very often, in fact we have not met it in our experiments so far. But there is another issue that is connected with multi-word annotations and it is quite common. See in the next section.
 
 
-\subsection{Root/Subtree Preprocessing/Postprocessing}
+\subsection{Root/Subtree Preprocessing/Postprocessing} \label{sec:learning_root_subtree}
 Sometimes annotations span over more than one token. This situation complicates the process of machine learning and this situation is often called as ``chunk learning''. Either we have to split a single annotation to multiple learning instances and after the application of extraction rules we have to merge them back together, or we can change the learning task from learning annotated tokens to learning borders of annotations (start tokens and end tokens). The later approach is implemented in GATE in \emph{Batch Learning PR}\footnote{\url{http://gate.ac.uk/userguide/sec:ml:batch-learning-pr}} in the `SURROUND' mode.
 
 We have used another approach to solve this issue. Our approach is based on syntactic structure of a sentence and we call it ``root/subtree preprocessing/postprocessing''. The idea is based on the observation that tokens of a multi-token annotation usually have a common parent node in a syntactic tree. So we can
