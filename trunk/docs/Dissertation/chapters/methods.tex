@@ -1,9 +1,27 @@
 \chapter{Models and Methods} \label{sec:ch_methods} 
 
+
 In this chapter, the four methods corresponding to the four topics of this thesis will be introduced and described. The chapter is structured to four main sections according to the four topics. 
+
+
 
 \section{Manual Design of Extraction Rules} \label{sec:manual_methods}
 \graphicspath{{../img/ch50/}}
+
+\begin{wrapfigure}[21]{r}{.3\hsize}
+\vspace{-0.5cm}
+\centerline{\includegraphics[width=\hsize]{ap_schema}}
+\caption{Schema of the extraction process.}
+\label{fig:manual_ap_schema}
+\end{wrapfigure}
+
+%\begin{figure}
+	%\centering
+		%\includegraphics[width=0.2\hsize]{ap_schema}
+	%\caption{Schema of the extraction process.}
+	%\label{fig:manual_ap_schema}
+%\end{figure}
+
 
 In this section, the extraction method based on manually created linguistic rules will be described. First of all a data flow schema of the extraction process will be presented. Then a description of several stages of evolution of the method will demonstrate how this method came to its existence and which decisions stood behind the development and the final implementation, which will be described in the next chapter.
 
@@ -15,17 +33,13 @@ The approach is based on linguistic preprocessing, oriented to text structured t
 \subsection{Data Flow} \label{sec:manual_data_flow}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{figure}
-	\centering
-		\includegraphics[width=0.2\hsize]{ap_schema}
-	\caption{Schema of the extraction process.}
-	\label{fig:manual_ap_schema}
-\end{figure}
+
+
 
 
 \begin{figure}
 	\centering
-		\includegraphics[width=0.5\hsize]{article}
+		\includegraphics[width=0.7\hsize]{article}
 	\caption{One web page with an accident report.}
 	\label{fig:manual_article}
 \end{figure}
@@ -424,6 +438,9 @@ This problem represents a challenge of induction and/or mining on several occasi
 \end{itemize}
 
 
+
+
+
 The rest of this section is organized as follows: Design of the experimental system is presented in Section~\ref{sec:fuzzy_system}. %including a short description of the information extraction method and linguistic analyzers. 
 Section~\ref{sec:fuzzy_case} provides details about our case study, which is later used in examples. Formal models of the system (including several translations of a fuzzy ILP task to classical ILP) are presented in Section~\ref{sec:fuzzy_ilp_task_translation}, followed by a description of implementation of the models in the system. In Section~\ref{sec:fuzzy_results} we present the main results of the work, and then we evaluate and compare the methods with other well-known classifiers. Section~\ref{sec:conclusion} concludes the chapter.
 
@@ -436,21 +453,24 @@ See also Section~\ref{sec:relwork_doc_classification}, where some closely relate
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Data Flow} \label{sec:fuzzy_system}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}
-\centerline{\includegraphics[width=0.4\hsize]{schema}}
+%\begin{figure}
+%\centerline{\includegraphics[width=0.4\hsize]{schema}}
+%\caption{Schema of the experimental system.}
+%\label{fig:schema}
+%\end{figure}
+
+
+\begin{wrapfigure}[27]{r}{.45\hsize}
+\vspace{-1.5cm}
+\centerline{\includegraphics[width=\hsize]{schema}}
 \caption{Schema of the experimental system.}
 \label{fig:schema}
-\end{figure}
+\end{wrapfigure}
 
-%\begin{floatingfigure}[r]{.45\hsize}
-%\centerline{\includegraphics[width=\hsize]{img/schema}}
-%\caption{Schema of the whole system.}
-%\label{fig:schema}
-%\end{floatingfigure}
 
 A general schema of the experimental system is shown in Figure~\ref{fig:schema}. In the schema, previously developed information extraction tools based on third party linguistic analyzers are used (the upper two dashed arrows). The information extraction tools are supposed to extract structured information from the reports and the extracted information is then translated to ILP background knowledge and, along with a user rating, it is used for the classification (we assume that a small amount of learning data is annotated by a human user). The classification is based on ILP and it could be \emph{fuzzy} or \emph{crisp}. Crisp denotes a straightforward application of ILP and fuzzy stands for the fuzzy method (subject of the present description), see in the next sections.
 
-
+\clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{The Case Study -- Accident Seriousness Classification} \label{sec:fuzzy_case}

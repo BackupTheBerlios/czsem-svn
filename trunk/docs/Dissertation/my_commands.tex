@@ -22,6 +22,13 @@
 %openright
 \let\openright=\cleardoublepage
 
+%myaddchaptertoc
+\newcommand{\myaddchaptertoc}[1]{
+\openright
+\phantomsection
+\addcontentsline{toc}{chapter}{#1}
+}
+
 
 %definition
 \theoremstyle{definition}

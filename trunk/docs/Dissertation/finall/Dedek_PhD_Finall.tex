@@ -69,7 +69,7 @@ Faculty of Mathematics and Physics
 
 Supervisor of the doctoral thesis: & \mysupervisor \\
 \noalign{\vspace{2mm}}
-Study programme: & Softwarové systémy \\
+Study programme: & Software systems \\
 %\noalign{\vspace{2mm}}
 %Specialization: & specialization \\
 \end{tabular}
@@ -209,26 +209,26 @@ Keywords:
 
 
 %%% Seznam použité literatury
+\myaddchaptertoc{Bibliography}
 \bibliographystyle{../style/iisproc}
 \bibliography{../dedek_phd}
-\addcontentsline{toc}{chapter}{Bibliography}
 
 
 %\chapwithtoc{List of Figures}
+\myaddchaptertoc{List of Figures}
 \listoffigures
-\addcontentsline{toc}{chapter}{List of Figures}
 
 
 %%% Tabulky v disertační práci, existují-li.
 %\chapwithtoc{List of Tables}
+\myaddchaptertoc{List of Tables}
 \listoftables
-\addcontentsline{toc}{chapter}{List of Tables}
 
 %%% Použité zkratky v disertační práci, existují-li, včetně jejich vysvětlení.
 %\chapwithtoc{List of Abbreviations}
+\myaddchaptertoc{Nomenclature}
 \input{../dedek_phd_nomenclature}
 \printnomenclature[2.5cm]
-\addcontentsline{toc}{chapter}{Nomenclature}
 
 %%% Přílohy k disertační práci, existují-li (různé dodatky jako výpisy programů,
 %%% diagramy apod.). Každá příloha musí být alespoň jednou odkazována z vlastního

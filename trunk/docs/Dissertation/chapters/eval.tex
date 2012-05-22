@@ -361,7 +361,7 @@ The time in this table is cumulative (sum over all folds in one experiment run).
 
 \subsection{Acquisitions Performance} \label{sec:learning_eval_acq}
 
-\begin{table}[h!]
+\begin{table}[th!]
 \centering 
 \begin{tabular}
 {lcrclcrcl@{\hspace{0.1cm}}cc}
@@ -371,8 +371,8 @@ The time in this table is cumulative (sum over all folds in one experiment run).
 Task && \multicolumn{3}{c}{ILP}  && \multicolumn{3}{c}{PAUM} && \\
 \hline
             acqabr &&      0.457 &  $\pm$  &       0.034 & &      0.408 &  $\pm$  &       0.015 & $\bullet$ \\
-            dlramt &&      0.286 &  $\pm$  &       0.052 & &      0.597 &  $\pm$  &       0.030 & $\circ$ \\
           acquired &&      0.376 &  $\pm$  &       0.028 & &      0.441 &  $\pm$  &       0.027 & $\circ$ \\
+            dlramt &&      0.286 &  $\pm$  &       0.052 & &      0.597 &  $\pm$  &       0.030 & $\circ$ \\
           purchabr &&      0.318 &  $\pm$  &       0.050 & &      0.390 &  $\pm$  &       0.015 & $\circ$ \\
          purchaser &&      0.403 &  $\pm$  &       0.037 & &      0.474 &  $\pm$  &       0.029 & $\circ$ \\
             seller &&      0.261 &  $\pm$  &       0.071 & &      0.245 &  $\pm$  &       0.041 &  \\
@@ -387,8 +387,8 @@ Task && \multicolumn{3}{c}{ILP}  && \multicolumn{3}{c}{PAUM} && \\
 Task && \multicolumn{3}{c}{ILP}  && \multicolumn{3}{c}{PAUM} && \\
 \hline
             acqabr &&      0.180 &  $\pm$  &       0.025 & &      0.517 &  $\pm$  &       0.027 & $\circ$ \\
-            dlramt &&      0.276 &  $\pm$  &       0.043 & &      0.740 &  $\pm$  &       0.063 & $\circ$ \\
           acquired &&      0.272 &  $\pm$  &       0.054 & &      0.512 &  $\pm$  &       0.033 & $\circ$ \\
+            dlramt &&      0.276 &  $\pm$  &       0.043 & &      0.740 &  $\pm$  &       0.063 & $\circ$ \\
           purchabr &&      0.120 &  $\pm$  &       0.041 & &      0.514 &  $\pm$  &       0.033 & $\circ$ \\
          purchaser &&      0.340 &  $\pm$  &       0.064 & &      0.556 &  $\pm$  &       0.028 & $\circ$ \\
             seller &&      0.131 &  $\pm$  &       0.047 & &      0.226 &  $\pm$  &       0.046 & $\circ$ \\
@@ -403,8 +403,8 @@ Task && \multicolumn{3}{c}{ILP}  && \multicolumn{3}{c}{PAUM} && \\
 Task && \multicolumn{3}{c}{ILP}  && \multicolumn{3}{c}{PAUM} && \\
 \hline
             acqabr &&      0.258 &  $\pm$  &       0.030 & &      0.456 &  $\pm$  &       0.015 & $\circ$ \\
-            dlramt &&      0.280 &  $\pm$  &       0.046 & &      0.659 &  $\pm$  &       0.022 & $\circ$ \\
           acquired &&      0.313 &  $\pm$  &       0.046 & &      0.473 &  $\pm$  &       0.024 & $\circ$ \\
+            dlramt &&      0.280 &  $\pm$  &       0.046 & &      0.659 &  $\pm$  &       0.022 & $\circ$ \\
           purchabr &&      0.172 &  $\pm$  &       0.050 & &      0.443 &  $\pm$  &       0.016 & $\circ$ \\
          purchaser &&      0.367 &  $\pm$  &       0.051 & &      0.511 &  $\pm$  &       0.022 & $\circ$ \\
             seller &&      0.170 &  $\pm$  &       0.050 & &      0.232 &  $\pm$  &       0.036 & $\circ$ \\
@@ -420,12 +420,13 @@ Task && \multicolumn{3}{c}{ILP}  && \multicolumn{3}{c}{PAUM} && \\
 \end{table}
 
 
-%\clearpage
-
-%\subsection{Acquisitions Time}
 
 
-\begin{table}[h!]
+The second experiment made with our ILP based extraction method was performed on the dataset \sectiondoubleref{sec:data_corporate_acquisitions}. Table~\ref{tab:learning_acq_eval} provides the same measurements as in the previous experiment. This time, 2-fold cross validation was performed 10 times; root/subtree preprocessing/postprocessing was performed in the `dlramt’ task only and the technique of learning on named entity roots (see Section~\ref{sec:learning_ne_roots}) was used on the rest of the tasks.
+
+On this dataset, the PAUM method performed significantly better than the ILP method. There are only three tasks (`acqabr’, `seller’ and `sellerabr’), where the ILP method achieved better precision than the PAUM method and only two of the measurements are statistically significant. 
+
+\begin{table}[th!]
 \centering 
 \begin{tabular}
 {lcrclcrcl@{\hspace{0.1cm}}cc}
@@ -435,8 +436,8 @@ Task && \multicolumn{3}{c}{ILP}  && \multicolumn{3}{c}{PAUM} && \\
 Task && \multicolumn{3}{c}{ILP}  && \multicolumn{3}{c}{PAUM} && \\
 \hline
             acqabr &&    16:24.9 &  $\pm$  &      8:22.9 & &     0:10.0 &  $\pm$  &      0:00.6 & $\bullet$ \\
-            dlramt &&    23:27.6 &  $\pm$  &     15:45.7 & &     0:10.8 &  $\pm$  &      0:02.8 & $\bullet$ \\
           acquired &&    10:16.0 &  $\pm$  &      7:11.1 & &     0:09.8 &  $\pm$  &      0:00.4 & $\bullet$ \\
+            dlramt &&    23:27.6 &  $\pm$  &     15:45.7 & &     0:10.8 &  $\pm$  &      0:02.8 & $\bullet$ \\
           purchabr &&    16:51.6 &  $\pm$  &      9:14.7 & &     0:10.2 &  $\pm$  &      0:01.4 & $\bullet$ \\
          purchaser &&    12:27.1 &  $\pm$  &      7:22.6 & &     0:10.4 &  $\pm$  &      0:01.2 & $\bullet$ \\
             seller &&     9:12.2 &  $\pm$  &      3:55.2 & &     0:10.1 &  $\pm$  &      0:01.0 & $\bullet$ \\
@@ -451,8 +452,8 @@ Task && \multicolumn{3}{c}{ILP}  && \multicolumn{3}{c}{PAUM} && \\
 Task && \multicolumn{3}{c}{ILP}  && \multicolumn{3}{c}{PAUM} && \\
 \hline
             acqabr &&     0:27.4 &  $\pm$  &      0:00.8 & &     0:13.6 &  $\pm$  &      0:00.3 & $\bullet$ \\
-            dlramt &&     0:30.5 &  $\pm$  &      0:00.8 & &     0:09.8 &  $\pm$  &      0:00.5 & $\bullet$ \\
           acquired &&     0:26.7 &  $\pm$  &      0:00.7 & &     0:11.8 &  $\pm$  &      0:00.3 & $\bullet$ \\
+            dlramt &&     0:30.5 &  $\pm$  &      0:00.8 & &     0:09.8 &  $\pm$  &      0:00.5 & $\bullet$ \\
           purchabr &&     0:27.4 &  $\pm$  &      0:00.9 & &     0:13.2 &  $\pm$  &      0:00.5 & $\bullet$ \\
          purchaser &&     0:27.5 &  $\pm$  &      0:02.0 & &     0:11.5 &  $\pm$  &      0:01.2 & $\bullet$ \\
             seller &&     0:27.3 &  $\pm$  &      0:03.2 & &     0:10.7 &  $\pm$  &      0:00.8 & $\bullet$ \\
@@ -467,24 +468,24 @@ Task && \multicolumn{3}{c}{ILP}  && \multicolumn{3}{c}{PAUM} && \\
 \caption{Time spent by ML engines on the Acquisitions dataset.} \label{tab:learning_acq_time}
 \end{table}
 
+Table~\ref{tab:learning_acq_time} provides learning and application (or testing) times on this dataset. Again, learning times of the ILP method are several times higher than the times of the PAUM method and there is not so big difference between application times, although the same notice about the necessity of deep language parsing in the preprocessing step pays also in this case. 
+
+An interesting observation can be made when comparing training times of the ILP method on tasks, where the technique of learning on named entity roots was performed, with the remaining task `dlramt’. Table~\ref{tab:data_acquisitions} presents numbers of annotations per extraction task and it can be seen that the training time quite correlate with the number of annotations. But the task `dlramt’ has almost the least instances form the tasks used in the evaluation and its average training time is about two times higher than the time spent on other tasks and from there it can be seen that the technique of  learning on named entity roots can save training time. 
+
+Detailed results with much more evaluation measurements including lenient variants are available in the appendix -- Section~\ref{sec:complete_eval_acq}.
 
 
+%\clearpage
+
+%\subsection{Acquisitions Time}
 
 
-
-
-
-
-
-
-
-
-\clearpage
+%\clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Evaluation of Shareable Extraction Ontologies Performance}  \label{sec:onto_experiment}
+\section{Evaluation of Shareable Extraction Ontologies}  \label{sec:onto_experiment}
 
 In this section we present an experiment that should serve as a proof of a concept that the proposed idea of independent extraction ontologies is realizable. We have selected several reasoners (namely Jena, HermiT, Pellet and FaCT++) and tested them on two slightly different datasets from two different domains and languages (see Table~\ref{tab:datasets}). This should at least partially demonstrate the universality of the proposed approach.
 

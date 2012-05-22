@@ -247,6 +247,14 @@ For flexitive languages like Czech, gazetteers can not be used directly because 
 
 \subsection{Machine Learning in GATE} \label{sec:third_gate_ML}
 
+\begin{figure}[b!]
+\centering
+\includegraphics[angle=-90, width=0.8\hsize]{../img/ch10/annotation_process}
+\caption{Machine learning and annotation process -- general overview}
+\label{fig:ExtractionProcessIntro}
+\end{figure}
+
+
 Figure~\ref{fig:ExtractionProcessIntro} presents a general machine learning and annotation process in GATE and the same schema apply also to majority of information extraction approaches based on machine learning. An adaptation of this schema will be presented in Section~\ref{sec:learning_methods}, where our method based on deep language parsing and Inductive Logic Programming will be presented.
 
 The schema presets two sub-processes or phases:
@@ -264,16 +272,9 @@ During the \textbf{learning phase}, input documents are presented to users or hu
 
 During the \textbf{application phase}, an input document goes through the same preprocessing (a) as learning documents. Extraction or annotation procedure applies the previously learned extraction rules (c) on the preprocessed document (b). The result document is usually not yet in the final form and postprocessing has to be performed on it (d). The final annotated document (e) contains the same form of annotations as those created by human annotator.
 
+
 There is one configuration arrow missing in the schema. This arrow should go to the postprocessing procedure because different kinds of postprocessing suit to different extraction tasks and the actual choice of postprocessing steps is highly dependent on the preprocessing steps performed before. For example ``root preprocessing'' has to be followed by ``subtree postprocessing''; see details in Section~\ref{sec:learning_root_subtree}.
 
-
-
-\begin{figure}
-\centering
-\includegraphics[angle=-90, width=0.8\hsize]{../img/ch10/annotation_process}
-\caption{Machine learning and annotation process -- general overview}
-\label{fig:ExtractionProcessIntro}
-\end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
