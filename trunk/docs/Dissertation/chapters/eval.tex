@@ -227,7 +227,7 @@ To compare our solution with other alternatives, we took the PAUM (Perceptron Al
 
 \subsection{Czech Fireman Performance}
 
-Table~\ref{tab:learning_eval_fir_perfom} summarizes performance evaluation of our ILP based method and its comparison with PAUM classifier on the dataset \sectiondoubleref{sec:data_fireman_annotated}. The table shows results of the three main evaluation measures: strict precision, strict recall and strict $F_1$ for each extraction task as well as overall results. 8-fold cross validation was performed 8 times in the experiment. Average values and standard deviations are printed in the table and statistical significance is indicated. Root/subtree preprocessing/postprocessing was performed for the first three tasks: `cars’, `damage’ and `end subtree’.
+Table~\ref{tab:learning_eval_fir_perfom} summarizes performance evaluation of our ILP based method and its comparison with PAUM classifier on the dataset \sectiondoubleref{sec:data_fireman_annotated}. The table shows results of the three main evaluation measures: strict precision, strict recall and strict $F_1$ for each extraction task as well as overall results. 8-fold cross validation was performed 8 times in the experiment. Average values and standard deviations are printed in the table and statistical significance is indicated. Root/subtree preprocessing/postprocessing (Section~\ref{sec:learning_root_subtree}) was performed in the first three tasks: `cars’, `damage’ and `end subtree’.
 
 Although the precision of the ILP method was better in the majority of tasks and also its overall precision is statically better than the precision of the PAUM method, its recall was worse in all the measurements and also $F_1$ score is indicating better results of the PAUM method. 
 
@@ -359,7 +359,7 @@ The time in this table is cumulative (sum over all folds in one experiment run).
 
 %\clearpage
 
-\subsection{Acquisitions Performance}
+\subsection{Acquisitions Performance} \label{sec:learning_eval_acq}
 
 \begin{table}[h!]
 \centering 

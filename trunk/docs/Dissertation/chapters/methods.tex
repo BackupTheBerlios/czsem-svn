@@ -320,6 +320,14 @@ We call the first point as \emph{root preprocessing} and the last point as \emph
 \end{figure}
 
 
+\subsection{Learning on Named Entity Roots} \label{sec:learning_ne_roots}
+Another technique, that we have used to improve the efficiency of ILP machine learning, is closely connected with named entities. It can be used when target entities of an extraction task always (or most often) overlap with annotations of some available type (e.g. named entity). For example entities of the task `acquired' always overlap with some named entity, or in other words, `acquired' entities are merely a special case of named entities.
+
+In this case, the extraction task can be rephrased as ``decide which of the named entities belong to the extraction task.'' The collection of learning examples is reduced only to named entities and the learning algorithm is then faster and can be also more accurate.
+
+In order to ILP had the opportunity to decide about these named entities, they have to be connected with additional information present in linguistic trees. But how to connect a potentially multi-token named entity with the nodes of linguistic trees? One possibility is to connect each named entity with all tree nodes it occupies but we have used a simpler solution when only the root token of a named entity is connected.
+
+This solution was used for the majority of extraction tasks of the Acquisitions dataset; see evaluation details in Section~\ref{sec:learning_eval_acq}.
 
 \subsection{Semantic Interpretation} \label{sec:SemanticInterpretation}
 

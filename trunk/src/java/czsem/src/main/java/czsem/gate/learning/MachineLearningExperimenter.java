@@ -72,7 +72,7 @@ public class MachineLearningExperimenter
 				else
 				{
 					return new MLEvaluate(
-		    				new CreateTemporaryMentionsReferedMentionsPostprocessing(
+		    				new CreateTemporaryMentionsReferredMentionsPostprocessing(
 		    						new ILPEngine("ILP_config_NE_roots.xml")));
 				}
 			}

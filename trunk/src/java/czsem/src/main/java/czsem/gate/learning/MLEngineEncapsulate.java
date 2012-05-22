@@ -104,17 +104,17 @@ public class MLEngineEncapsulate implements TrainTest
 		}		
 	}
 
-	public static class CreateTemporaryMentionsReferedMentionsPostprocessing extends CreatePersistentMentionsNoPostprocessing
+	public static class CreateTemporaryMentionsReferredMentionsPostprocessing extends CreatePersistentMentionsNoPostprocessing
 	{
 		protected String referenceAnnotationFeature = "NamedEntity_root.origRootID";
 
 
-		public CreateTemporaryMentionsReferedMentionsPostprocessing(String referenceAnnotationFeature, TrainTest child)
+		public CreateTemporaryMentionsReferredMentionsPostprocessing(String referenceAnnotationFeature, TrainTest child)
 		{
 			super(child);
 			this.referenceAnnotationFeature = referenceAnnotationFeature;
 		}
-		public CreateTemporaryMentionsReferedMentionsPostprocessing(TrainTest child) {this("NamedEntity_root.origRootID", child);}
+		public CreateTemporaryMentionsReferredMentionsPostprocessing(TrainTest child) {this("NamedEntity_root.origRootID", child);}
 		
 		
 		/** @see CreateTemporaryMentions#getTrainControllerSetup(MLEngineConfig) */
