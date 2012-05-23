@@ -326,6 +326,14 @@ These constructs are encoded in GATE in the following way: tree nodes correspond
 
 Two kinds of token annotations are used to represent two kinds of trees and tree nodes. ``Token'' annotation type is used for analytical tree nodes and ``tToken'' for tectogrammatical tree nodes.
 
+\begin{figure}[t!]
+	\centering
+		\framebox{\includegraphics[width=\hsize]{PDT_GATE}}
+	\caption{PDT annotations in GATE (screenshot).}
+	\label{fig:PDT_GATE}
+\end{figure}
+
+
 Four kinds of edges (PDT dependencies) are implemented by the TectoMT wrapper: analytical dependencies, tectogrammatical dependencies, aux.rf (auxiliary reference) and lex.rf (main lexical reference). The last two kinds (aux.rf and lex.rf) are used to connect tectogrammatical and analytical nodes. The implementation differs according to the cardinality of a dependency type. The first three kinds are of the cardinality one-to-many (one parent node can have many children nodes) and the last one (lex.rf) if of the cardinality one-to-one (one parent node has at most one child). Because of that, lex.rf edges can be stored as features (with the name ``lex.rf'') of ``tToken'' annotations. Note that a single GATE annotation feature can have at most one value in each annotation. In this case the annotation ID of the referenced ``Token'' annotation (referenced analytical node) is the value of the lex.rf feature.
 
 One-to-many dependencies are stored as separate annotations (type names: ``aDependency'', ``tDependency'', ``aux.rf'') with a single feature called ``args''. Values of this feature are of Java type List<Integer> (list of integers). The list always contains just two items. The first one is the annotation ID of the parent annotation; the second one is the ID of the child annotation. Instead of using one list feature, two simple features (like ``arg1'', ``arg2'' or ``parentID'', ``childID'') could be used, but the implementation is consistent with the wrapper for the Stanford Parser\footnote{\url{http://gate.ac.uk/userguide/sec:parsers:stanford}}, which uses the single list feature called ``args''), thus PDT dependencies are compatible with Stanford dependencies in GATE.
@@ -333,25 +341,25 @@ One-to-many dependencies are stored as separate annotations (type names: ``aDepe
 It is not simple to demonstrate the GATE representation of the dependencies in a static printed form; we can only show a GATE screenshot (Figure~\ref{fig:PDT_GATE}) that partly illustrates that.
 
 
-\begin{figure}
+
+
+\subsection{Netgraph Tree Viewer in GATE} \label{sec:learning_GATE_Netgraph}
+
+\begin{figure}[ht!]
 	\centering
-		\framebox{\includegraphics[width=0.7\hsize]{PDT_GATE}}
-	\caption{PDT annotations in GATE (screenshot).}
-	\label{fig:PDT_GATE}
-\end{figure}
-
-
-\subsubsection{Netgraph Tree Viewer} \label{sec:learning_GATE_Netgraph}
-
-Figure~\ref{fig:GATE_Netgraph}
-
-\begin{figure}
-	\centering
-		\includegraphics[width=0.7\hsize]{netgraph_stanford}
+		\includegraphics[width=0.95\hsize]{netgraph_stanford}
 		\\Sentence: Users also said it is in the strongest financial position in its 24-year history.
 	\caption{Netgraph Tree Viewer in GATE (for Stanford Dependencies, screenshot).}
 	\label{fig:GATE_Netgraph}
 \end{figure}
+
+
+Because GATE does not provide a graphical viewer of dependency trees (Only phrase structure tree viewer is available\footurl{http://gate.ac.uk/userguide/sec:parsers:supple:treeviewer}.) and we are quite familiar with the Java implementation of Netgraph, we decided to integrate the Netgraph viewer with GATE. This is quite handy during the adaptation of the extraction method to a new dataset and investigation of learned extraction rules and matching trees.
+
+Figure~\ref{fig:GATE_Netgraph} shows a screenshot of the integrated Netgraph viewer displaying a dependency tree obtained by the Stanford Parser (a GATE plugin). Stanford dependencies were selected for this image to demonstrate the compatibility of Stanford and PDT dependency representations in GATE. Not only the Netgraph viewer but also the whole ILP based extraction method can handle either of the dependencies. 
+
+
+
 
 
 \subsection{ILP Wrapper (Machine Learning)} \label{sec:learning_ilp_wrapper}
@@ -630,21 +638,8 @@ node:SCzechA-s4-w13 rdf:type pml:Node, owl:Thing;
 \subsection{Rule Transformations}
 
 
-Extraction rules produced by the IE engine are natively kept in a Prolog format; examples can be seen in Figure~\ref{fig:rules_prolog}. The engine is capable to export them to the OWL/XML\footnote{\url{http://www.w3.org/TR/owl-xmlsyntax/}} syntax for rules in OWL 2 \citep{GHPP09a} (see in Figure~\ref{fig:rules_xml}). Such rules can be parsed by OWL API\footnote{\url{http://owlapi.sourceforge.net/}} 3.1 
-and exported to RDF/SWRL, which is very widely supported and hopefully becoming a W3C recommendation.
-Figure~\ref{fig:rules_protege} shows the example rules in Prot\'{e}g\'{e} 4 -- Rules View's format. The last rule example can be seen in Figure~\ref{fig:rules_jena}, it shows a rule in the Jena rules format\footnote{\url{http://jena.sourceforge.net/inference/#RULEsyntax}}. Conversion to Jena rules was necessary because it is the only format that Jena can parse, see details about our use of Jena in Section~\ref{sec:onto_experiment}. The Jena rules were obtained using following transformation process:
-\begin{enumerate}
-	\item OWL/XML $\rightarrow$ RDF/SWRL conversion using OWL API and 
-	\item RDF/SWRL $\rightarrow$ Jena rules conversion using SweetRules\footnote{\url{http://sweetrules.semwebcentral.org/}}.
-\end{enumerate}
 
-
-The presented rules belong to the group of so called DL-Safe rules \citep{Motik:DL-Safe-rules} so the decidability of OWL reasoning is kept.
-
-
-
-
-\begin{figure}
+\begin{figure}[h!]
 \begin{minted}[linenos,  fontsize=\footnotesize,
                frame=lines, tabsize=2]{prolog}
 %[Rule 1] [Pos cover = 14 Neg cover = 0]
@@ -662,7 +657,8 @@ mention_root(damage,A) :-
 \end{figure}
 
 
-\begin{figure}
+
+\begin{figure}[h!]
 \begin{minted}[linenos,  fontsize=\footnotesize,
                frame=lines, tabsize=2]{xml}
 <?xml version="1.0" encoding="UTF-8"?>
@@ -702,7 +698,37 @@ mention_root(damage,A) :-
 \end{figure}
 
 
-\begin{figure}
+
+
+
+\clearpage
+
+Extraction rules produced by the IE engine are natively kept in a Prolog format; examples can be seen in Figure~\ref{fig:rules_prolog}. The engine is capable to export them to the OWL/XML\footnote{\url{http://www.w3.org/TR/owl-xmlsyntax/}} syntax for rules in OWL 2 \citep{GHPP09a} (see examples in Figure~\ref{fig:rules_xml}). The complete Prolog procedure performing the export is listed in the appendix, Section~\ref{sec:onto_prolog_rules_export_module}.
+
+
+
+
+The OWL/XML rules can be parsed by OWL API\footnote{\url{http://owlapi.sourceforge.net/}} 3.1 
+and exported to RDF/SWRL, which is very widely supported and hopefully becoming a W3C recommendation. We do not provide examples of rules in this format because it occupies lots of space and it is very difficult to follow.
+
+
+OWL/XML rules can be also parsed by the Prot\'{e}g\'{e} ontology editor and Figure~\ref{fig:rules_protege} shows the example rules in Prot\'{e}g\'{e} 4 -- Rules View's format. 
+
+The last rule example can be seen in Figure~\ref{fig:rules_jena}, it shows a rule in the Jena rules format\footnote{\url{http://jena.sourceforge.net/inference/#RULEsyntax}}. Conversion to Jena rules was necessary because it is the only format that Jena can parse, see details about our usage of Jena in Section~\ref{sec:onto_experiment}. The Jena rules were obtained using following transformation process:
+\begin{enumerate}
+	\item OWL/XML $\rightarrow$ RDF/SWRL conversion using OWL API and 
+	\item RDF/SWRL $\rightarrow$ Jena rules conversion using SweetRules\footnote{\url{http://sweetrules.semwebcentral.org/}}.
+\end{enumerate}
+
+
+The presented rules belong to the group of so called DL-Safe rules \citep{Motik:DL-Safe-rules} so the decidability of OWL reasoning is kept.
+
+
+
+
+
+
+\begin{figure}[b!]
 \begin{minted}[linenos,  fontsize=\footnotesize,
                frame=lines, tabsize=2]{jena}
 #[Rule 1]
@@ -721,7 +747,7 @@ tDependency(?c, ?d), t_lemma(?d, "škoda") #damage
 
 
 
-\begin{figure}
+\begin{figure}[b!]
 \begin{minted}[linenos,  fontsize=\footnotesize,
                frame=lines, tabsize=2]{jena}
 @prefix pml: <http://ufal.mff.cuni.cz/pdt/pml/>.
@@ -759,7 +785,7 @@ We have compared results of the crisp and fuzzy approaches with other classifica
 
 
 
-\begin{figure}
+\begin{figure}[b!]
 \begin{minipage}[b]{0.5\hsize}
 \begin{minted}[mathescape,fontsize=\footnotesize,
                frame=single]{prolog}
@@ -795,7 +821,7 @@ fatalities(id_47443, 0).
 injuries(id_47443, 0).
 cars(id_47443, 0).
 amateur_units(id_47443, 3).
-profesional_units(id_47443, 1).
+professional_units(id_47443, 1).
 pipes(id_47443, unknown).
 lather(id_47443, 0).
 aqualung(id_47443, 0).

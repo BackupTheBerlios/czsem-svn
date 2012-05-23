@@ -73,17 +73,25 @@ Relation Extraction is an extraction task that usually comes after entity recogn
 
 \subsection{Event Extraction}
 
-In literature, Relation Extraction usually refers to binary relations only and Event Extraction is used for relations (events) with more arguments. Individual events have to be correctly indentified in text and arguments have to be assigned to them in proper roles. For example an acquisition event can have roles like purchaser, seller, acquired, dollar amount, etc. We have to extend our running example with Motorola to demonstrate event extraction on it:
+In literature, Relation Extraction usually refers to binary relations only and Event Extraction is used for relations (events) with more arguments. Individual events have to be correctly identified in text and arguments have to be assigned to them in proper roles. For example an acquisition event can have roles like purchaser, seller, acquired, dollar amount, etc. We have to extend our running example with Motorola to demonstrate event extraction on it:
 
 Google just announced that it is acquiring Motorola Mobility. The search and online advertising company is buying the company for approximately \$12.5 billion (or \$40 per share), in cash.
 
-In this case, both sentences would be covered by the acquisition event and arguments would be: purchaser(Google), acquired(Motorola Mobility) and dollar\_amount(\$12.5 billion).
+In this case, both sentences would be covered by the acquisition event with attached arguments: purchaser(Google), acquired(Motorola Mobility) and dollar\_amount(\$12.5 billion).
+
+
+\subsection{Event Extraction Encoded as Entity Recognition} \label{sec:problems_event_entities}
+
+In practice, there are quite common cases when only a single event is reported in each document. In this case it is not necessary to annotate the exact location of the event in the document and mere identification of event roles is sufficient. Technically, annotation of such events looks like the same as annotation of ordinary entities of an entity recognition task. The difference is only in labels of these entities because they correspond with event roles. A proper example would look like a combination of the examples that we have used for the demonstration of Entity Recognition and Event Extraction tasks. Google, Motorola and `\$12.5 billion' will be annotated the same as in Event Extraction -- purchaser(Google), acquired(Motorola Mobility), dollar\_amount(\$12.5 billion) -- but they will be not linked to any particular event because they belong to the implicit event identified by the current document.
+
+Both manually annotated datasets described in this thesis are of this kind of event extraction; see details in Sections~\ref{sec:data_fireman_annotated} ans \ref{sec:data_corporate_acquisitions}. 
+
 
 \subsection{Instance Resolution}
 
 Instance Resolution further extends entity recognition. It aims at linking a particular entity to its unique representative (or identifier) such that the same entities have always the same identifier and, vice versa, different entities have always different identifiers. Disambiguation is the main task that has to be solved by instance resolution.
 
-It can be illustrated on some ambiguous entity, for example “George Bush”. General entity recognition system just marks the string and assigns a corresponding label (e.g. person, politician or president -- depending on the granularity of the system) to it. In extraction case, such system just puts the string into the corresponding relation. 
+It can be illustrated on some ambiguous entity, for example ``George Bush”. General entity recognition system just marks the string and assigns a corresponding label (e.g. person, politician or president -- depending on the granularity of the system) to it. In extraction case, such system just puts the string into the corresponding relation. 
 
 Instance resolution is more difficult. Instance resolution system has to select the right representative for that entity -- George W. Bush (junior) or George H. W. Bush (senior) that will be probably both available in the system’s database. Similarly, instance resolution system has to assign the same identifier in cases where for example shortcuts are used, e.g. “George W. Bush” and “G. W. Bush” should be linked to the same identifier.
 

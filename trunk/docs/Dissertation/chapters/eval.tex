@@ -142,7 +142,7 @@ Table~\ref{tab:manual_damage_cross_method} it is apparent that the methods agree
 
 \section{Evaluation of Learned Rules} \label{sec:learning_eval}
 
-In this section, we present two experiments with two manually annotated datasets. The performance of our method based on ILP machine learning was measured and compared with an alternative extraction method based on propositional machine learning.
+In this section, we present two experiments with two manually annotated datasets. Both the datasets are of the kind of \emph{event extraction encoded as entity recognition} described in Section~\ref{sec:problems_event_entities}. The performance of our method based on ILP machine learning was measured and compared with an alternative extraction method based on propositional machine learning.
 
 Evaluation of machine learning approaches is easier than evaluation of approaches based on manual extraction rules because it is not necessary to construct extraction rules for each experiment manually. Thanks to this fact and the availability of manually annotated datasets, the evaluation is more comprehensive than in the previous section.
 
@@ -181,8 +181,8 @@ mention(fatalities,A) :-
    'lex.rf'(B,A), functor(B,'PAT'), tDependency(C,B), t_lemma(C,srazit).
 	    % srazit ~ knock down
 
-% [profesional_unit - Rule 1] [Pos cover = 17 Neg cover = 0]
-mention(profesional_unit,A) :-
+% [professional_unit - Rule 1] [Pos cover = 17 Neg cover = 0]
+mention(professional_unit,A) :-
    'lex.rf'(B,A), functor(B,'LOC'), gender(B,fem), tDependency(C,B), 
    functor(C,'CONJ'), overlap_Lookup_tToken(D,B).
 
@@ -247,7 +247,7 @@ Task && \multicolumn{3}{c}{ILP}  && \multicolumn{3}{c}{PAUM} && \\
              start &&      0.929 &  $\pm$  &       0.109 & &      0.651 &  $\pm$  &       0.152 & $\bullet$ \\
           injuries &&      0.667 &  $\pm$  &       0.291 & &      0.398 &  $\pm$  &       0.205 & $\bullet$ \\
         fatalities &&      0.814 &  $\pm$  &       0.379 & &      0.307 &  $\pm$  &       0.390 & $\bullet$ \\
-  profesional unit &&      0.500 &  $\pm$  &       0.241 & &      0.677 &  $\pm$  &       0.138 & $\circ$ \\
+  professional unit &&      0.500 &  $\pm$  &       0.241 & &      0.677 &  $\pm$  &       0.138 & $\circ$ \\
       amateur unit &&      0.863 &  $\pm$  &       0.256 & &      0.546 &  $\pm$  &       0.293 & $\bullet$ \\
 \hline
            overall &&      0.691 &  $\pm$  &       0.358 & &      0.540 &  $\pm$  &       0.297 & $\bullet$ \\
@@ -264,7 +264,7 @@ Task && \multicolumn{3}{c}{ILP}  && \multicolumn{3}{c}{PAUM} && \\
              start &&      0.908 &  $\pm$  &       0.115 & &      0.978 &  $\pm$  &       0.058 & $\circ$ \\
           injuries &&      0.574 &  $\pm$  &       0.309 & &      0.814 &  $\pm$  &       0.224 & $\circ$ \\
         fatalities &&      0.388 &  $\pm$  &       0.449 & &      0.536 &  $\pm$  &       0.452 & $\circ$ \\
-  profesional unit &&      0.506 &  $\pm$  &       0.191 & &      0.811 &  $\pm$  &       0.138 & $\circ$ \\
+  professional unit &&      0.506 &  $\pm$  &       0.191 & &      0.811 &  $\pm$  &       0.138 & $\circ$ \\
       amateur unit &&      0.886 &  $\pm$  &       0.210 & &      0.955 &  $\pm$  &       0.096 & $\circ$ \\
 \hline
            overall &&      0.550 &  $\pm$  &       0.382 & &      0.748 &  $\pm$  &       0.312 & $\circ$ \\
@@ -281,7 +281,7 @@ Task && \multicolumn{3}{c}{ILP}  && \multicolumn{3}{c}{PAUM} && \\
              start &&      0.912 &  $\pm$  &       0.089 & &      0.771 &  $\pm$  &       0.111 & $\bullet$ \\
           injuries &&      0.543 &  $\pm$  &       0.280 & &      0.498 &  $\pm$  &       0.204 &  \\
         fatalities &&      0.306 &  $\pm$  &       0.420 & &      0.222 &  $\pm$  &       0.308 &  \\
-  profesional unit &&      0.491 &  $\pm$  &       0.200 & &      0.730 &  $\pm$  &       0.118 & $\circ$ \\
+  professional unit &&      0.491 &  $\pm$  &       0.200 & &      0.730 &  $\pm$  &       0.118 & $\circ$ \\
       amateur unit &&      0.827 &  $\pm$  &       0.253 & &      0.634 &  $\pm$  &       0.296 & $\bullet$ \\
 \hline
            overall &&      0.537 &  $\pm$  &       0.369 & &      0.574 &  $\pm$  &       0.295 & $\circ$ \\
@@ -321,7 +321,7 @@ Task && \multicolumn{3}{c}{ILP}  && \multicolumn{3}{c}{PAUM} && \\
              start &&     0:28.9 &  $\pm$  &      0:03.1 & &     0:02.2 &  $\pm$  &      0:00.1 & $\bullet$ \\
           injuries &&     1:30.7 &  $\pm$  &      0:15.0 & &     0:02.2 &  $\pm$  &      0:00.1 & $\bullet$ \\
         fatalities &&     0:49.2 &  $\pm$  &      0:10.6 & &     0:02.2 &  $\pm$  &      0:00.1 & $\bullet$ \\
-  profesional unit &&     2:37.4 &  $\pm$  &      0:27.4 & &     0:02.2 &  $\pm$  &      0:00.1 & $\bullet$ \\
+  professional unit &&     2:37.4 &  $\pm$  &      0:27.4 & &     0:02.2 &  $\pm$  &      0:00.1 & $\bullet$ \\
       amateur unit &&     0:24.0 &  $\pm$  &      0:04.6 & &     0:02.2 &  $\pm$  &      0:00.1 & $\bullet$ \\
 \hline
            overall &&     1:24.5 &  $\pm$  &      1:05.8 & &     0:02.2 &  $\pm$  &      0:00.1 & $\bullet$ \\
@@ -338,7 +338,7 @@ Task && \multicolumn{3}{c}{ILP}  && \multicolumn{3}{c}{PAUM} && \\
              start &&     0:00.9 &  $\pm$  &      0:00.1 & &     0:00.3 &  $\pm$  &      0:00.0 & $\bullet$ \\
           injuries &&     0:00.9 &  $\pm$  &      0:00.2 & &     0:00.3 &  $\pm$  &      0:00.1 & $\bullet$ \\
         fatalities &&     0:00.9 &  $\pm$  &      0:00.1 & &     0:00.3 &  $\pm$  &      0:00.0 & $\bullet$ \\
-  profesional unit &&     0:00.9 &  $\pm$  &      0:00.1 & &     0:00.3 &  $\pm$  &      0:00.0 & $\bullet$ \\
+  professional unit &&     0:00.9 &  $\pm$  &      0:00.1 & &     0:00.3 &  $\pm$  &      0:00.0 & $\bullet$ \\
       amateur unit &&     0:00.9 &  $\pm$  &      0:00.1 & &     0:00.3 &  $\pm$  &      0:00.0 & $\bullet$ \\
 \hline
            overall &&     0:00.9 &  $\pm$  &      0:00.1 & &     0:00.3 &  $\pm$  &      0:00.0 & $\bullet$ \\

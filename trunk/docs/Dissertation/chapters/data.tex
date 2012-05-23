@@ -31,7 +31,7 @@ Following datasets can be regarded as IE datasets:
 	\item \sectiondoubleref{sec:data_corporate_acquisitions}
 \end{itemize}
 
-
+Both the manually annotated datasets (\nameref{sec:data_fireman_annotated} and \nameref{sec:data_corporate_acquisitions}) are of the kind of \emph{event extraction encoded as entity recognition} described in Section~\ref{sec:problems_event_entities}.
 
 
 \subsection{Reasoning Datasets}
@@ -155,12 +155,31 @@ num. t-trees &     15 208 &     18.7 &     15.02 &     1 &     143 &     14.0\\
 We have created a manually annotated version of the previous dataset. 
 This dataset was created by ourselves during the development of our IE  engine based on machine learning (Section~\ref{sec:learning_methods}). 50 reports from the previous dataset were selected and manually annotated. 
  Several annotation types were used; numbers of annotations per each annotation type are summarized in Table~\ref{tab:data_fire_with} along with the information whether the particular annotation type was used in the evaluation. See details abut the evaluation results in Section~\ref{sec:learning_eval}. 
+This dataset is of the kind of \emph{event extraction encoded as entity recognition} described in Section~\ref{sec:problems_event_entities}.
+Individual annotation types will be briefly described in the rest of this section.
 
 
+\begin{description}
+	\item[`professional\_unit'] annotates mentions of professional fireman units that intervened in the particular accident.
+	\item[`cars'] annotates mentions of cars damaged during the particular accident.
+	\item[`end'] annotates mentions of the time when the whole operation of fireman units finished.  
+	\item[`end\_subtree'] was obtained by the subtree postprocessing of `end' annotations. This was necessary because `end' annotations were not annotated consistently -- sometimes they included only the numeric representation of the time, sometimes they included also the unit; e.g. `16:10' versus `16:10 hours'. 'end\_subtree' always include the time unit (if available in text).
+	\item[`start'] annotates mentions of the time when the accident started or was reported to firemen.  
+	\item[`injuries'] annotates mentions of people being injured during the accident. 
+	\item[`amateur\_unit'] annotates mentions of voluntary fireman units that intervened in the particular accident.
+	\item[`damage'] annotates mentions of money amounts representing the total damage sought by the accident.
+	\item[`pipes'] annotates numbers of fireman pipes or fire hoses used during the accident.
+	\item[`professional\_units'] annotates numbers of professional fireman units intervening during the accident.
+	\item[`fatalities'] annotates mentions of people who died during or after the accident. 
+	\item[`units'] annotates numbers of all (professional or voluntary) fireman units intervening during the accident.
+	\item[`aqualung'] annotates mentions of an aqualung (or breathing apparatus) used during the accident.
+	\item[`duration'] annotates mentions of the time duration of the whole action or operation.  
+	\item[`fan'] annotates mentions of a fan (or ventilator) used during the accident.
+	\item[`amateur\_units'] annotates numbers of voluntary fireman units intervening during the accident.
+	\item[`lather'] annotates mentions of lather (or foam) used during the accident.
+\end{description}
 
->>>Event extraction?
 
->>>>>>>>>Vlozip popis jednotlivych typu informace<<<<<<
 
 \begin{table}
 \centering
@@ -169,7 +188,7 @@ This dataset was created by ourselves during the development of our IE  engine b
 \textbf{annotation type} & \textbf{number of annotations} & \textbf{used in evaluation}\\
 \hline
 \hline
-profesional\_unit & 78 & yes\\
+professional\_unit & 78 & yes\\
 \hline
 cars & 45 & yes\\
 \hline
@@ -189,7 +208,7 @@ damage & 20 & yes\\
 \hline
 pipes & 16 & no\\
 \hline
-profesional\_units & 14 & no\\
+professional\_units & 14 & no\\
 \hline
 fatalities & 11 & yes\\
 \hline
@@ -264,7 +283,7 @@ related to acquisition events. These fields include `purchaser' , `acquired', an
 `sellerabr'). Some news articles also mention the field `deal amount'. 
 Table~\ref{tab:data_acquisitions} provides numbers of annotations per annotation type for the whole dataset along with the information whether the particular annotation type was used in the evaluation. See details abut the evaluation results in Section~\ref{sec:learning_eval}. 
 
-
+Also this dataset is of the kind of \emph{event extraction encoded as entity recognition} described in Section~\ref{sec:problems_event_entities}.
 
 \subsection{RDF Dataset Based on Czech Fireman Reports} \label{sec:data_rdf_fireman}
 
@@ -308,7 +327,7 @@ The development of the Fuzzy ILP Classifier was partly motivated by the possibil
 \centering
 \begin{tabular}{|r||c|c|c|}
 \hline
-attribute name & distinct values & missing values & monotonic\\
+\textbf{attribute name} & \textbf{distinct values} & \textbf{missing values} & \textbf{monotonic}\\
 \hline
 \hline
 size (of file) & 49 & 0 & yes\\
@@ -327,7 +346,7 @@ cars & 5 & 0 & yes\\
 \hline
 amateur\_units & 7 & 1 & yes\\
 \hline
-profesional\_units & 6 & 1 & yes\\
+professional\_units & 6 & 1 & yes\\
 \hline
 pipes & 7 & 8 & yes\\
 \hline
@@ -351,7 +370,7 @@ ranking & 14 & 0 & yes\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-Table~\ref{fig:data_attributes_description} summarizes all features (or attributes) that were obtained from accident reports. Except for the attribute \verb+type+ (type of an accident -- \verb+fire+, \verb+car_accident+ and \verb+other+), all the attributes are numeric and therefore \emph{monotonizable} (This is important, because only monotonizable attributes can be translated to fuzzy degrees.) There are cases in which the value of an attribute is unknown. We decided to make evidence of this and keep the values \verb+unknown+ in the knowledge base. A brief explanation of each attribute follows.
+Table~\ref{fig:data_attributes_description} summarizes all features (or attributes) that were obtained from accident reports. Except for the attribute \verb+type+ (type of an accident -- \verb+fire+, \verb+car_accident+ and \verb+other+), all the attributes are numeric and therefore \emph{monotonizable}\footnote{This is important, because only monotonizable attributes can be translated to fuzzy degrees; see details in Section~\ref{sec:fuzzy_ilp_task_translation}.}. There are cases in which the value of an attribute is unknown. We decided to make evidence of this and keep the values \verb+unknown+ in the knowledge base. A brief explanation of each attribute follows.
 \begin{itemize}
 	\item \verb+size+ is length of text of a particular report.
 	\item \verb+damage+ is an amount (in CZK -- Czech Crowns) of summarized damage arisen during a reported accident.

@@ -1,0 +1,61 @@
+\pagebreak
+
+\section{Extraction rules export to OWL in Prolog.} \label{sec:onto_prolog_rules_export_module}
+\begin{minted}[linenos,  fontsize=\footnotesize,
+               frame=lines, tabsize=2]{prolog}
+serialize_rule_file(RuleFileName, OutputFileName, OntologyURI, ObjectProperties) :-
+	assert(objectProperties(ObjectProperties)),
+	open(OutputFileName, 'write', Stream), set_output(Stream),
+	write('<?xml version="1.0" encoding="UTF-8"?>\n'),
+	write('<!DOCTYPE Ontology [ <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >\n'),
+	write('	<!ENTITY pml "http://ufal.mff.cuni.cz/pdt/pml/" > ]>\n'),		
+	write('<Ontology xmlns="http://www.w3.org/2002/07/owl#"\n'),	
+	format('	ontologyIRI="~a">\n',[OntologyURI]),
+	consult(RuleFileName), %Each rule in the file will be processed by serialize_rule,
+	                       %because of the term_expansion setting on the last line. 	                         
+	write('</Ontology>'),			
+	close(Stream).
+
+serialize_rule(:-(H, B)) :- 	
+	numbervars(:-(H, B), 0, _),	
+	write('<DLSafeRule>\n'),		
+		write('<Body>\n'),          
+			serialize_term(B),                       %Rule body
+		write('\n</Body>\n'), write('<Head>\n'),
+			serialize_term(H),                       %Rule head
+		write('\n</Head>\n'),			
+	write('</DLSafeRule>\n\n'),!.
+	 
+%Serialize object property
+serialize_term(T):- functor(T,F,N), objectProperties(OProps), member(F, OProps),!,	
+	write('<ObjectPropertyAtom>'),
+	format('<ObjectProperty IRI="&pml;~a"/>\n', [F]),
+	serialize_arg(T, 0, N),		
+	write('</ObjectPropertyAtom>').
+
+%Serialize datatype property
+serialize_term(T):- functor(T,F,N),	
+	write('<DataPropertyAtom>'),
+	format('<DataProperty IRI="&pml;~a"/>\n', [F]),
+	serialize_arg(T, 0, N),		
+	write('</DataPropertyAtom>').
+
+%Serialize argument list
+serialize_term(','(A,B)):- serialize_term(A), write('\n'), serialize_term(B),!.
+
+%Serialize variable
+serialize_term('$VAR'(N)):- char_code('a',I), Var is I + N,
+	format('<Variable IRI="urn:swrl#~c"/>\n',[Var]),!.
+%Serialize simple atom or string (printed without quotes)
+serialize_term(T):- atom(T), format('<Literal>~a</Literal>\n',[T]),!.
+%Serialize number
+serialize_term(T):- simple(T), format('<Literal>~k</Literal>\n',[T]),!.
+
+%Serialize term arguments: serialize_arg(+Term, +CurrentArgNumber, +LastArgNumber)
+serialize_arg(T, _, 0).
+serialize_arg(T, N, N).
+serialize_arg(T, M, N) :-  M2 is M+1, arg(M2, T, A),
+	serialize_term(A), serialize_arg(T, M2, N).  
+                                               %All predicates loaded by consult
+term_expansion(T,T):- serialize_rule(T).       %will be processed by serialize_rule.
+\end{minted}
