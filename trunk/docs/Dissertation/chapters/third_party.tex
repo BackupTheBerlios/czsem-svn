@@ -366,39 +366,40 @@ Typically, ${\mathcal E}$ consists of ground instances of the target predicate, 
 %Background knowledge can contain also some rules, so far only crisp rules are used.
 A~hypothesis ${\mathcal H}$ typically consists of a fuzzy logic program, which, when added to ${\mathcal B}$, prevents misclassification (what is better cannot be declared to be worse, nevertheless it can be declared as having the same degree -- for more detailed discussion on this definition of fuzzy ILP we refer to the paper \citep{biblio:FILP}).
 
+\pagebreak
+\subsection{ILP Tool} \label{sec:third_ILP_tool}
+The ILP tool, which we have used in both:
+\begin{itemize}
+	\item the information extraction method based on deep language parsing and ILP machine learning (Section~\ref{sec:learning_methods}) and
+	\item the Fyzzy ILP Classifier (Section~\ref{sec:fuzzy_methods}),
+\end{itemize}
+is called ``A Learning Engine for Proposing Hypotheses'' (Aleph v5)\footnote{\url{http://www.comlab.ox.ac.uk/activities/machinelearning/Aleph/}}. We consider this tool very practical. It uses quite effective method of inverse entailment \citep{biblio:InverseEntailment} and keeps all handy features of a Prolog system (we have used YAP Prolog\footnote{\url{http://www.dcc.fc.up.pt/~vsc/Yap/}}) in its background.
 
-\subsection{ILP tool} \label{sec:third_ILP_tool}
-As an ILP tool we have used ``A Learning Engine for Proposing Hypotheses'' (Aleph v5)\footnote{\url{http://www.comlab.ox.ac.uk/activities/machinelearning/Aleph/}}, which we consider very practical. It uses quite effective method of inverse entailment \citep{biblio:InverseEntailment} and keeps all handy features of a Prolog system (we have used YAP Prolog\footnote{\url{http://www.dcc.fc.up.pt/~vsc/Yap/}}) in its background.
 
-
-Na rozdil od prologu examples we dvou souborech.
+%Na rozdil od prologu examples we dvou souborech.
 
 \medskip
-Homepage of the project: \url{http://www.comlab.ox.ac.uk/activities/machinelearning/Aleph/}
+Homepage of the project: \\
+\phantom{a} \hfill{} \phantom{b} \url{http://www.comlab.ox.ac.uk/activities/machinelearning/Aleph/}
 
 
 
-From our experiments (Section~\ref{sec:learning_eval}) can be seen that ILP is capable to find complex and meaningful rules that cover the intended information.
+%From our experiments (Section~\ref{sec:learning_eval}) can be seen that ILP is capable to find complex and meaningful rules that cover the intended information.
 
 
 
-\textbf{?? large amount of training data ??}
+%\textbf{?? large amount of training data ??}
 
-As we do not have large amount of training data, there is no problem with excessive time demands during learning and the application of the learned rules is simple and quick.
+%As we do not have large amount of training data, there is no problem with excessive time demands during learning and the application of the learned rules is simple and quick.
 
 
 
 \section{Weka} \label{sec:third_weka}
 
-Weka \citep{biblio:Weka} is a well known data-mining software.
+Weka \citep{biblio:Weka} is a well known data-mining software. In our work, we have used the Weka implementation of various machine learning algorithms (Multilayer Perceptron, SVM, J48 decision trees, etc.) for the classical classification problem and we compared the performance of the Fuzzy ILP Classifier with these algorithms; see details in Section~\ref{sec:fuzzy_eval}.
 
-Weka data mining software\footnote{\url{http://www.cs.waikato.ac.nz/ml/weka/}} \citep{biblio:Weka}
+The \textbf{Weka Experimenter} is another very useful component of Weka. This component supports running of multiple experiments in batch mode and then an easy comparison of the performance of various algorithms and investigation of the statistical significance. All experiments (see Sections~\ref{sec:learning_eval} and \ref{sec:fuzzy_eval}) presented in this thesis, where the statistical significance is provided, were performed using the Weka Experimenter
 
-Weka Experimenter 
-
-experimenter
-
-usage: evaluation of Fuzzy ILP Classifier (Section~\ref{sec:fuzzy_eval})
 
 \medskip
 Homepage of the project: \url{http://www.cs.waikato.ac.nz/ml/weka/}

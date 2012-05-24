@@ -117,8 +117,10 @@ Netgraph is a linguistic tool used for searching through a syntactically annotat
 
 We adopted Netgraph queries and extended them to extraction rules that can be written in following pseudo SQL SELECT form:
 
+
 \begin{minted}{sql}
-SELECT node1_name.attr1_name, node2_name.attr2_name, ... FROM netgraph_query
+	SELECT node1_name.attr1_name, node2_name.attr2_name, ... 
+	FROM netgraph_query
 \end{minted}
 
 where \emph{netgraph\_query} stands for an arbitrary Netgraph query, \emph{node1\_name}, \emph{node2\_name}, etc. stand for individual names of nodes defined in \emph{netgraph\_query} and \emph{attr1\_name}, \emph{attr2\_name}, etc. stand for names of linguistic attributes whose values should be picked out from the corresponding matching tree nodes.
@@ -171,7 +173,7 @@ In Section~\ref{sec:manual_impl_output}, the difference between the output of th
 
 As stated in Section~\ref{sec:manual_data_flow} about the data flow, the goal of our extraction process is in the form of a semantic web ontology. This is not difficult in the case of procedural rules. Once the schema (or vocabulary) of the target ontology is selected, the extraction rules can be simply designed to produce the output of that form (Note that semantic web ontologies can be captured in a specific XML format.)
 
-In the case of Netgraph based queries the situation is more complex and different solutions can be discovered. All the solutions have one thing in common: additional manual work is necessary. The problem is basically to create a mapping of the data in one format (results of Netgraph based rules) to another format (target ontology). It can be done by a variety of technical means (coded in an arbitrary programming language, XSLT, or using a graphical mapping tool like 
+In the case of Netgraph based queries, the situation is more complex and different solutions can be discovered. All the solutions have one thing in common: additional manual work is necessary. The problem is basically to create a mapping of the data in one format (results of Netgraph based rules) to another format (target ontology). It can be done by a variety of technical means (coded in an arbitrary programming language, XSLT, or using a graphical mapping tool like 
 Altova MapForce\footnote{\url{http://www.altova.com/mapforce/xml-mapping.html}}
 or
 Stylus Studio\footnote{\url{http://www.stylusstudio.com/xsd_to_xsd.html}}
@@ -181,7 +183,7 @@ Stylus Studio\footnote{\url{http://www.stylusstudio.com/xsd_to_xsd.html}}
 
 \begin{figure}
 	\centering
-		\includegraphics[angle=-90, width=0.9\hsize]{semantic_interpretation}
+		\includegraphics[angle=-90, width=\hsize]{semantic_interpretation}
 	\caption{Semantic interpretation of the extraction rule.}
 	\label{fig:manual_semantic_interpretation}
 \end{figure}

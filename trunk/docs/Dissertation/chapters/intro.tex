@@ -14,16 +14,43 @@ The idea of the Semantic Web was the strongest motivation of our research from t
 
 The last topic of this thesis is the most distant from the original information extraction topic. We have included it because it represents an important part of our research and considerable effort was spent on it. The topic deals with document classification and fuzzy logic. We are investigating the possibility of using information obtained by information extraction techniques to document classification. Our implementation of so called Fuzzy ILP Classifier was experimentally used for the purpose of document classification.
 
-\section{Motivation for Our Extraction Methods}
+\section{Motivation}
+
+
+Figure~\ref{fig:acquisitions_annotated}
+
+Figure~\ref{fig:fireman_annotated}
+
+Figure~\ref{fig:intro_damage_tree} The tree provides many indications where to look for.
+
+\begin{figure}
+\centering
+\framebox{\includegraphics[width=0.75\hsize]{acquisitions_annotated}}
+\caption{Corporate Acquisition Events annotations}
+\label{fig:acquisitions_annotated}
+\end{figure}
+
+
+\begin{figure}
+\centering
+\includegraphics[width=0.65\hsize]{fireman_annotated}
+\caption{Fireman Events annotations}
+\label{fig:fireman_annotated}
+\end{figure}
+
+
+\begin{figure}
+\centerline{\framebox{\includegraphics[width=0.7\hsize]{damage_tree}}}
+\caption{Example of a linguistic tree of one analyzed sentence.}
+\label{fig:intro_damage_tree} 
+\end{figure}
+
+
+\subsection{Motivation of our Approaches}
 
 The main motivation for creating both these methods was an attempt to use deep linguistic analysis of natural language texts. Especially for the Czech language with free word order this seemed reasonable. It is much more straightforward to design extraction rules on the basis of linguistic dependency trees than to struggle with the surface structure of text. In a dependency tree a position of a word is determined by its syntactic (analytical trees) or even semantic role (tectogrammatical trees). So the extraction rules might not be dramatically affected by minor variations of the word order.
 
 
-\begin{figure}
-\centerline{\framebox{\includegraphics[width=0.55\hsize]{damage_tree}}}
-\caption{Example of a linguistic tree of one analyzed sentence.}
-\label{fig:intro_damage_tree} 
-\end{figure}
 
 
 
