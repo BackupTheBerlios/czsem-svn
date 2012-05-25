@@ -14,9 +14,9 @@ We evaluated three extraction rules (one procedural and two Netgraph based) on a
 
 Table~\ref{tab:manual_tab_manual_rules} summarizes some of the statics that were measured. Description of individual values follows.
 
-\begin{table}
+\begin{table}[t!]
 	\centering
-		\includegraphics[angle=-90,width=0.6\hsize]{tab_manual_rules}
+		\includegraphics[angle=-90,width=0.75\hsize]{tab_manual_rules}
 	\caption{Evaluation of manually created rules (bigger dataset without manual annotations).}
 	\label{tab:manual_tab_manual_rules}
 \end{table}
@@ -227,12 +227,7 @@ To compare our solution with other alternatives, we took the PAUM (Perceptron Al
 
 \subsection{Czech Fireman Performance}
 
-Table~\ref{tab:learning_eval_fir_perfom} summarizes performance evaluation of our ILP based method and its comparison with PAUM classifier on the dataset \sectiondoubleref{sec:data_fireman_annotated}. The table shows results of the three main evaluation measures: strict precision, strict recall and strict $F_1$ for each extraction task as well as overall results. 8-fold cross validation was performed 8 times in the experiment. Average values and standard deviations are printed in the table and statistical significance is indicated. Root/subtree preprocessing/postprocessing (Section~\ref{sec:learning_root_subtree}) was performed in the first three tasks: `cars’, `damage’ and `end subtree’.
-
-Although the precision of the ILP method was better in the majority of tasks and also its overall precision is statically better than the precision of the PAUM method, its recall was worse in all the measurements and also $F_1$ score is indicating better results of the PAUM method. 
-
-
-\begin{table}[ht!]
+\begin{table}[t!]
 \centering 
 \begin{tabular}
 {lcrclcrcl@{\hspace{0.1cm}}cc}
@@ -294,6 +289,13 @@ Task && \multicolumn{3}{c}{ILP}  && \multicolumn{3}{c}{PAUM} && \\
 \end{table}
 
 
+
+
+
+
+Table~\ref{tab:learning_eval_fir_perfom} summarizes performance evaluation of our ILP based method and its comparison with PAUM classifier on the dataset \sectiondoubleref{sec:data_fireman_annotated}. The table shows results of the three main evaluation measures: strict precision, strict recall and strict $F_1$ for each extraction task as well as overall results. 8-fold cross validation was performed 8 times in the experiment. Average values and standard deviations are printed in the table and statistical significance is indicated. Root/subtree preprocessing/postprocessing (Section~\ref{sec:learning_root_subtree}) was performed in the first three tasks: `cars’, `damage’ and `end subtree’.
+
+Although the precision of the ILP method was better in the majority of tasks and also its overall precision is statically better than the precision of the PAUM method, its recall was worse in all the measurements and also $F_1$ score is indicating better results of the PAUM method. 
 
 
 Table~\ref{tab:learning_eval_fir_time} provides learning and application (or testing) times of the compared methods. It is clear that learning time of the ILP method is many times higher than the time of the PAUM method. For example the `cars’ task took the ILP method approximately three and half minutes while the PAUM method spent only two seconds on it. On the other hand, the testing or application time of the ILP method is not that much higher than the time of the PAUM method 

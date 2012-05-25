@@ -36,16 +36,15 @@ The approach is based on linguistic preprocessing, oriented to text structured t
 
 
 
+The method was designed as a method for extraction of information from web resources. Thus the extraction process starts on the Web. On the other hand the method was intended to serve the evolution of the Semantic Web, so the final goal of the extraction process is the extracted information stored in the form of a semantic web ontology. A schema in Figure~\ref{fig:manual_ap_schema} splits the process into four steps (phases) among five media types. The schema does not cover the extraction rules design phase; it is assumed that extraction rules were already designed by a human designer; Section~\ref{sec:manual_rules_design} provides details about that. A description of individual steps follows. 
 
-\begin{figure}
+
+\begin{figure}[t!]
 	\centering
-		\includegraphics[width=0.7\hsize]{article}
-	\caption{One web page with an accident report.}
+		\includegraphics[width=0.8\hsize]{article}
+	\caption{Example web page with an accident report.}
 	\label{fig:manual_article}
 \end{figure}
-
-
-The method was designed as a method for extraction of information from web resources. Thus the extraction process starts on the Web. On the other hand the method was intended to serve the evolution of the Semantic Web, so the final goal of the extraction process is the extracted information stored in the form of a semantic web ontology. A schema in Figure~\ref{fig:manual_ap_schema} splits the process into four steps (phases) among five media types. The schema does not cover the extraction rules design phase; it is assumed that extraction rules were already designed by a human designer; Section~\ref{sec:manual_rules_design} provides details about that. A description of individual steps follows. 
 
 
 
@@ -83,7 +82,7 @@ Last two steps in the evolution of the extraction method were (1) creation of ma
 
 \begin{figure}
 	\centering
-		\includegraphics[width=0.5\hsize]{extract_patern}		
+		\includegraphics[width=0.7\hsize]{extract_patern}		
 \\Transcript:\\
 \begin{tabular}{|c|c|c|c|c|}
 \hline
@@ -139,7 +138,7 @@ Implementation details and some additional examples of these extraction rules wi
 
 \begin{figure}
 	\centering
-		\includegraphics[angle=-90, width=0.5\hsize]{coverge_tuning}
+		\includegraphics[angle=-90, width=0.65\hsize]{coverge_tuning}
 	\caption{Gradual refinement of an extraction rule.}
 	\label{fig:manual_coverge_tuning}
 \end{figure}
@@ -181,7 +180,7 @@ Stylus Studio\footnote{\url{http://www.stylusstudio.com/xsd_to_xsd.html}}
 
 
 
-\begin{figure}
+\begin{figure}[b!]
 	\centering
 		\includegraphics[angle=-90, width=\hsize]{semantic_interpretation}
 	\caption{Semantic interpretation of the extraction rule.}
@@ -196,15 +195,21 @@ Stylus Studio\footnote{\url{http://www.stylusstudio.com/xsd_to_xsd.html}}
 	\label{fig:manual_instatnces}
 \end{figure}
 
-\begin{figure}
+
+\begin{wrapfigure}[15]{r}{.35\hsize}
 	\centering
-		\includegraphics[angle=-90, width=0.3\hsize]{classes}
+		\includegraphics[angle=-90, width=\hsize]{classes}
 	\caption{Schema of the target ontology.}
 	\label{fig:manual_classes}
-\end{figure}
+\end{wrapfigure}
+
+
+
+Similar but in a sense different solution is to ground the mapping directly in extraction rules. Instead of creating mapping of the extraction output, extraction rules will contain also the information about the form of the extraction output. Selection of particular query nodes and linguistic attributes for the output will be extended by the specification of how the attributes will be rendered on the output. A graphical representation of such extraction rule can look like in Figure~\ref{fig:manual_semantic_interpretation}. It shows the connection between a Netgraph query on the left and an ontology instance on the right. Every node of the query can be translated to the ontology and the translation can be configured. 
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}
+\begin{figure}[b!]
 \begin{minted}[linenos,  fontsize=\footnotesize,
                frame=lines]{sparql}
 
@@ -231,9 +236,6 @@ WHERE {
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-
-Similar but in a sense different solution is to ground the mapping directly in extraction rules. Instead of creating mapping of the extraction output, extraction rules will contain also the information about the form of the extraction output. Selection of particular query nodes and linguistic attributes for the output will be extended by the specification of how the attributes will be rendered on the output. A graphical representation of such extraction rule can look like in Figure~\ref{fig:manual_semantic_interpretation}. It shows the connection between a Netgraph query on the left and an ontology instance on the right. Every node of the query can be translated to the ontology and the translation can be configured. 
 
 The configurable translations are the most interesting part of these extraction rules. The linguistic information on one side has to be converted to the ontological information on the other side. In Figure~\ref{fig:manual_semantic_interpretation}, following translation types were used: a translation of numerals to numbers, lexical translation from a source language (Czech), and detection of negation present in a query node.
 
@@ -310,7 +312,7 @@ Another difference with the previous approach is that the previous approach is b
 On the one hand, our extraction method is based on linguistic trees that are composed of individual tree nodes, but on the other hand, we are performing document annotation using GATE, which means that annotations can occupy any segment of text, e.g. a segment starting or ending in the middle of some word. The correspondence of tree nodes with individual words (or tokens) of text is quite clear\footnote{Tectogrammatical tree nodes make it a little more difficult, see details in Section~\ref{sec:third_PDT_layers}.} but the learning algorithm is not capable to deal with partial word matches. This is not a problem in the case when annotations discovered by the extraction technique are put to the text because all the annotations will simply occupy whole words only. The problem can occur when ILP learning data are constructed from GATE annotations. During this construction, only those tree nodes that are completely covered by corresponding annotations will be accordingly marked in the ILP learning data.
 
 %kvuli footenote-um, aby se vesly...
-\pagebreak
+%\pagebreak
 
 Let us for example have a phrase ``eight thousand Crowns’’ and an annotation labeled as ``amount’’ that will almost cover the whole phrase up to the word ``Crowns’’, which will be covered only partly, without the ending ``s’’. Thus the annotated text will be ``eight thousand Crown’’.\footnote{Such annotation could be created by an uninformed annotator who could think that currencies should be marked as in singular form.} During the construction of ILP learning data, only the tree nodes corresponding to words ``eight’’ and ``thousand’’ will be marked as ``amount’’, not the node that corresponds with the word ``Crowns’’.
 
@@ -358,7 +360,7 @@ But of course we are not satisfied with this fashion of semantic interpretation 
 
 
 %kvuli footenote-um, aby se vesly...
-\clearpage
+%\clearpage
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -376,6 +378,10 @@ We present a proof of concept for the idea: a case study with our linguistically
 
 
 The most closely related work was already presented in Section~\ref{sec:relwork_ext_ont}. The main idea will be illustrated on our case study in Section~\ref{sec:onto_case}, its implementation in Section~\ref{sec:onto_implement} and in Section~\ref{sec:onto_experiment} an experiment with several OWL reasoners and IE datasets will be presented. In Section~\ref{sec:onto_discuss} related issues are discussed and Section~\ref{sec:onto_conclusion} concludes the discussion.
+
+%kvuli footenote-um, aby se vesly...
+\pagebreak
+
 
 \subsection{Document Ontologies and Annotated Document Ontologies} \label{sec:onto_doc_ont}
 
@@ -404,7 +410,7 @@ In the bottom of the picture our IE engine learns extraction rules and exports t
 
 
 \begin{figure}
-\centerline{\includegraphics[angle=-90, width=0.7\hsize]{semantic_rules_app_schema}}
+\centerline{\includegraphics[angle=-90, width=0.8\hsize]{semantic_rules_app_schema}}
 \caption{Semantic annotation driven by an extraction ontology and a reasoner -- schema of the process.}
 \label{fig:rules_app_schema}
 \end{figure}
@@ -462,8 +468,8 @@ See also Section~\ref{sec:relwork_doc_classification}, where some closely relate
 %\end{figure}
 
 
-\begin{wrapfigure}[27]{r}{.45\hsize}
-\vspace{-1.5cm}
+\begin{wrapfigure}[25]{r}{.45\hsize}
+\vspace{-0.75cm}
 \centerline{\includegraphics[width=\hsize]{schema}}
 \caption{Schema of the experimental system.}
 \label{fig:schema}
@@ -472,7 +478,7 @@ See also Section~\ref{sec:relwork_doc_classification}, where some closely relate
 
 A general schema of the experimental system is shown in Figure~\ref{fig:schema}. In the schema, previously developed information extraction tools based on third party linguistic analyzers are used (the upper two dashed arrows). The information extraction tools are supposed to extract structured information from the reports and the extracted information is then translated to ILP background knowledge and, along with a user rating, it is used for the classification (we assume that a small amount of learning data is annotated by a human user). The classification is based on ILP and it could be \emph{fuzzy} or \emph{crisp}. Crisp denotes a straightforward application of ILP and fuzzy stands for the fuzzy method (subject of the present description), see in the next sections.
 
-\clearpage
+%\clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{The Case Study -- Accident Seriousness Classification} \label{sec:fuzzy_case}

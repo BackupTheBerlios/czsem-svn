@@ -46,8 +46,7 @@ Or according to \cite{biblio:KlTransformationBasedTectogrammatical2006}:
 Annotation of a sentence at this [tectogrammatical] layer is closer to meaning of the sentence than its syntactic annotation and thus information captured at the tectogrammatical layer is crucial for machine understanding of a natural language. This can be used in areas such as machine translation and information retrieval, however it can help other tasks as well, e.g. text synthesis.	
 \end{quote}
 
-One particularly important thing about t-layer is that it is designed as unambiguous from the viewpoint of language meaning, which means that synonymous sentences should have the same single representation on t-layer. Obviously this property is very beneficial to information extraction.
-
+One important thing about t-layer is that it is designed as unambiguous from the viewpoint of language meaning \citep{SgallHajicovaPanevova1986}, which means that synonymous sentences should have the same single representation on t-layer. Obviously this property is very beneficial to information extraction because t-layer provides certain generalization of synonymous phrases and extraction techniques do not have to handle so many irregularities. 
 
 
 \begin{figure}
@@ -111,7 +110,7 @@ The analytical analysis of English is not very well established because PEDT 1.0
 
 During tectogrammatical analysis analytical trees are transformed to tectogrammatical ones. Merging, omitting and inserting of tree nodes takes place as well as assignment of all the complex linguistic information of the tectogrammatical level (semantic parts of speech, grammatemes, tectogrammatical functors, etc.)
 
-The tectogrammatical analysis can by performed by a variety of TectoMT ``blocks'' (depending on the amount of requested linguistic information, for example only tectogrammatical functors can be assigned.) Better results can be obtained through transformation-based tools developed by Václav Klimeš: \citep{biblio:KlTransformationBasedTectogrammatical2006} for Czech and \citep{Klimes:2007:TTD:1776334.1776341} for English; they are also available thorough TectoMT.
+The tectogrammatical analysis can by performed by a variety of TectoMT \emph{blocks} (depending on the amount of requested linguistic information, for example only tectogrammatical functors can be assigned.) Better results can be obtained through transformation-based tools developed by Václav Klimeš: \citep{biblio:KlTransformationBasedTectogrammatical2006} for Czech and \citep{Klimes:2007:TTD:1776334.1776341} for English; they are also available thorough TectoMT.
 
 
 %\begin{table}
@@ -175,7 +174,7 @@ Netgraph \citep{biblio:MiNetgraphA2006} is a linguistic tool used for searching 
 
 Netgraph implementation is client-server based and a special query language is used for searching. The query language allows putting restrictions on the shape of a tree and on values of attributes of an arbitrary tree node. Besides that nodes of a query can be marked as optional (not necessarily present in a matching tree) and names can be assigned to query nodes. Naming of query nodes then allows putting restrictions based on referenced nodes (Give me all trees where there is a node with two children and both children have the same lemma.) See also Section~\ref{sec:manual_Netgraph_Based_Extraction_Rules}, it provides additional information about the query language including example Netgraph queries.
 
-Currently Netgraph is replaced by PML Tree Query (see Section~\ref{sec:third_pml_tree_query}) and the Netgraph development is ``discontinued''. We use Netgraph in the present work because it is written in Java, the language of what we use. This also made it possible to use Netgraph inside GATE as a handy viewer of dependency trees, see Section~\ref{sec:learning_GATE_Netgraph}. 
+Currently Netgraph is replaced by PML Tree Query (see Section~\ref{sec:third_pml_tree_query}) and the Netgraph development is ``discontinued''. We use Netgraph in the present work because PML Tree Query is quite young and it was not available when our development started and because Netgraph is written in Java, the language used for GATE as well as for our implementation. The usage of Java also allowed integration of Netgraph inside GATE as a handy viewer of dependency trees, see details in Section~\ref{sec:learning_GATE_Netgraph}. 
 
 \medskip
 Homepage of the project: \url{http://quest.ms.mff.cuni.cz/netgraph/}
@@ -188,7 +187,7 @@ Homepage of the project: \url{http://quest.ms.mff.cuni.cz/netgraph/}
 
 \section{Czech WordNet}
 
-Figure~\ref{fig:manual_extract_patern} shows, that it would be useful to gather words with similar meanings in our extraction rules. For example, the rule (Figure~\ref{fig:manual_extract_patern}) contains long disjunctions of similar words (nodes with numbers 1 and 4). These disjunctions could be replaced with some kind of expression telling that we are looking for any word from some semantic category (e.g. human beings). For this purpose we wanted to use the Czech WordNet \citep{biblio:WordNetCZ2004}. 
+Figure~\ref{fig:manual_extract_patern}, presented and described in later sections, shows, that it would be useful to gather words with similar meanings in our extraction rules. For example, the rule (Figure~\ref{fig:manual_extract_patern}) contains long disjunctions of similar words (nodes with numbers 1 and 4). These disjunctions could be replaced with some kind of expression telling that we are looking for any word from some semantic category (e.g. human beings). For this purpose we wanted to use the Czech WordNet \citep{biblio:WordNetCZ2004}. 
 
 After we have explored the records of the Czech WordNet (CzWN) related to the domain of our interest (car accidents, etc.) we have decided not to involve CzWN in the extraction process. The reason is that the coverage of the vocabulary of our domain is rather poor and the semantic connections of words are sometimes unfortunately missing (e.g. car brands and models). A sample from the Czech WordNet can found in the appendix, Section~\ref{sec:listing_czWordNet}. But we can supply the missing information to CzWN or we can build up a new domain-specific word-net based on the ground of CzWN.  
 
@@ -285,6 +284,10 @@ There is one configuration arrow missing in the schema. This arrow should go to 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Named Entity Recognition} \label{sec:third_named_entity_recognition}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In our solution, various tools performing Named Entity Recognition\footnote{See also Section~\ref{sec:problems_entity_recognition} providing the definition of the problem.} were used. Some of them are available thorough TectoMT (e.g. Stanford Named Entity Recognizer \citep{Finkel:2005:INI:1219840.1219885}), some of them through GATE, mainly ANNIE\footurl{http://gate.ac.uk/userguide/chap:annie} (a Nearly-New Information Extraction System). 
+
+For Czech, we used a simple solution based on gazetteer list of all Czech cities, city parts and streets provided by the Ministry of the interior of the Czech Republic\footurl{http://www.mvcr.cz/adresa}, although there are mature Czech named entity recognizers available, see for example work of \cite{biblio:KrZaCzechNamed2009}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

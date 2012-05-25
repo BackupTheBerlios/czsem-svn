@@ -21,7 +21,7 @@ If we put the corresponding information into a relational table then we can easi
 
 Document search and indexing is another important purpose of information extraction. Let us imagine a person interested in articles about acquisitions made in January 2009 where the deal amount was between 100 and 500 million dollars.  Keyword search and indexing can not satisfy this need accurately. But if we have corresponding machine readable information, it is easy to create a simple search engine supporting this kind of queries.
 
-The idea of the Semantic Web [citace TBL] brings us to even a bigger problem that could be solved by information extraction approaches. On the Semantic Web, as much information as possible should be in structured machine readable form. But absolute majority of ordinary content of the present day web is understandable only by humans. Machines can use only very limited part of the present day web. This issue is often called “Semantic Web Bottleneck” [citace].
+The idea of the Semantic Web \citep{biblio:2001-Berners-Lee-SemanticWeb} brings us to even a bigger problem that could be solved by information extraction approaches. On the Semantic Web, as much information as possible should be in structured machine readable form. But absolute majority of ordinary content of the present day web is understandable only by humans. Machines can use only very limited part of the present day web. This issue is often called “Semantic Web Bottleneck” \citep{Konstantinou2010}.
 
 \subsection{Consequent Tasks}
 
@@ -43,7 +43,7 @@ After the specification of input format, let us specify the kind of information 
 
 
 
-Stating that we will extract “simple relational facts” is still not precise enough and several well established information extraction tasks conform to this statement. We will describe them in Sections~\ref{sec:problems_entity_recognition}-\ref{sec:problems_instance_resolution}, but before that, it is necessary to explain how the term “document annotation” will be used in this thesis.
+Stating that we will extract “simple relational facts” is still not precise enough and several well established information extraction tasks conform to this statement. We will describe them in Sections~\ref{sec:problems_entity_recognition}--\ref{sec:problems_instance_resolution}, but before that, it is necessary to explain how the term “document annotation” will be used in this thesis.
 
 \subsection{Document Annotation}
 
@@ -84,7 +84,7 @@ In this case, both sentences would be covered by the acquisition event with atta
 
 In practice, there are quite common cases when only a single event is reported in each document. In this case it is not necessary to annotate the exact location of the event in the document and mere identification of event roles is sufficient. Technically, annotation of such events looks like the same as annotation of ordinary entities of an entity recognition task. The difference is only in labels of these entities because they correspond with event roles. A proper example would look like a combination of the examples that we have used for the demonstration of Entity Recognition and Event Extraction tasks. Google, Motorola and `\$12.5 billion' will be annotated the same as in Event Extraction -- purchaser(Google), acquired(Motorola Mobility), dollar\_amount(\$12.5 billion) -- but they will be not linked to any particular event because they belong to the implicit event identified by the current document.
 
-Both manually annotated datasets described in this thesis are of this kind of event extraction; see details in Sections~\ref{sec:data_fireman_annotated} ans \ref{sec:data_corporate_acquisitions}. 
+Both manually annotated datasets described in this thesis are of this kind of event extraction; see details in Sections~\ref{sec:data_fireman_annotated} and \ref{sec:data_corporate_acquisitions}. 
 
 
 \subsection{Instance Resolution} \label{sec:problems_instance_resolution}
