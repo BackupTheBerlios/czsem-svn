@@ -51,14 +51,14 @@ public class PlainTextExport extends BMCAnalysis
 
 
 	
-	private void exportSingleDocument(Document doc) throws UnsupportedEncodingException, FileNotFoundException
+	protected void exportSingleDocument(Document doc) throws UnsupportedEncodingException, FileNotFoundException
 	{
 		String filename = (String) doc.getFeatures().get("bmcID");
 		
 		exportSingleDocument(doc, outputdir+"/"+filename+".bmc");				
 	}
 
-	private void exportSingleDocument(Document doc, String file_path) throws UnsupportedEncodingException, FileNotFoundException
+	protected void exportSingleDocument(Document doc, String file_path) throws UnsupportedEncodingException, FileNotFoundException
 	{
 		PrintWriter out = new PrintWriter(new OutputStreamWriter(new BufferedOutputStream(new FileOutputStream(file_path)), "utf8"));
 				
