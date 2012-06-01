@@ -369,14 +369,15 @@ Typically, ${\mathcal E}$ consists of ground instances of the target predicate, 
 %Background knowledge can contain also some rules, so far only crisp rules are used.
 A~hypothesis ${\mathcal H}$ typically consists of a fuzzy logic program, which, when added to ${\mathcal B}$, prevents misclassification (what is better cannot be declared to be worse, nevertheless it can be declared as having the same degree -- for more detailed discussion on this definition of fuzzy ILP we refer to the paper \citep{biblio:FILP}).
 
-\pagebreak
-\subsection{ILP Tool} \label{sec:third_ILP_tool}
+%\pagebreak
+\subsection{Aleph -- the ILP Tool} \label{sec:third_ILP_tool}
 The ILP tool, which we have used in both:
 \begin{itemize}
 	\item the information extraction method based on deep language parsing and ILP machine learning (Section~\ref{sec:learning_methods}) and
 	\item the Fyzzy ILP Classifier (Section~\ref{sec:fuzzy_methods}),
 \end{itemize}
-is called ``A Learning Engine for Proposing Hypotheses'' (Aleph v5)\footnote{\url{http://www.comlab.ox.ac.uk/activities/machinelearning/Aleph/}}. We consider this tool very practical. It uses quite effective method of inverse entailment \citep{biblio:InverseEntailment} and keeps all handy features of a Prolog system (we have used YAP Prolog\footnote{\url{http://www.dcc.fc.up.pt/~vsc/Yap/}}) in its background.
+is called ``A Learning Engine for Proposing Hypotheses'' (Aleph v5).%\footnote{\url{http://www.comlab.ox.ac.uk/activities/machinelearning/Aleph/}}
+We consider this tool very practical. It uses quite effective method of inverse entailment \citep{biblio:InverseEntailment} and keeps all handy features of a Prolog system (we have used YAP Prolog\footnote{\url{http://www.dcc.fc.up.pt/~vsc/Yap/}}) in its background.
 
 
 %Na rozdil od prologu examples we dvou souborech.

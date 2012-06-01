@@ -23,14 +23,18 @@ import org.apache.log4j.Logger;
 import org.jdom.JDOMException;
 
 import czsem.gate.GateUtils;
-import czsem.gate.learning.DataSet.DataSetImpl.*;
+import czsem.gate.learning.DataSet.DataSetImpl.Acquisitions;
 import czsem.gate.learning.DataSet.DataSetReduce;
 import czsem.gate.learning.DataSet.DatasetFactory;
 import czsem.gate.learning.MLEngine.ILPEngine;
 import czsem.gate.learning.MLEngine.PaumEngine;
+import czsem.gate.learning.MLEngineEncapsulate.CreatePersistentMentions;
+import czsem.gate.learning.MLEngineEncapsulate.CreateTemporaryMentions;
+import czsem.gate.learning.MLEngineEncapsulate.CreateTemporaryMentionsReferredMentionsPostprocessing;
+import czsem.gate.learning.MLEngineEncapsulate.CreateTemporaryMentionsRootSubtree;
+import czsem.gate.learning.MLEngineEncapsulate.MLEvaluate;
 import czsem.gate.learning.MachineLearningExperiment.EngineFactory;
 import czsem.gate.learning.MachineLearningExperiment.TrainTest;
-import czsem.gate.learning.MLEngineEncapsulate.*;
 import czsem.gate.plugins.AnnotationDependencyRootMarker;
 import czsem.gate.plugins.CrossValidation;
 import czsem.gate.plugins.LearningEvaluator;
@@ -321,7 +325,7 @@ public class MachineLearningExperimenter
 			    LearningEvaluator.CentralResultsRepository.repository.clear();
 			    GateUtils.enableGateTimeBenchmark();
 			    
-				DataSet dataset =  new DataSetReduce(
+				final DataSet dataset =  new DataSetReduce(
 						ds_factory.createDataset(annot_type),
 						ds_reduce_retio);
 				dataset.clearSevedFilesDirectory();
@@ -337,7 +341,16 @@ public class MachineLearningExperimenter
 					experiment.trainOnly();
 				else
 				{
-					experiment.crossValidation(numFolds);
+					experiment.crossValidation(numFolds, new Runnable() {						
+						@Override
+						public void run() {
+							try {
+								dataset.clearSevedFilesDirectory();
+							} catch (IOException e) {
+								throw new RuntimeException(e);
+							}
+						}
+					});
 				    
 					logger.info("saving results, counting time statistics...");
 				    saveResults(results_file_name);
@@ -359,7 +372,7 @@ public class MachineLearningExperimenter
 		
 		new File(results_file_name).delete();
 		
-/**/
+/*
 //		bigFiremanExperiment
 		performLargeExperiment(
 				CzechFireman.getFactory(),
@@ -382,7 +395,7 @@ public class MachineLearningExperimenter
 				results_file_name);
 
 
-/*		
+/**/		
 
 		
 //		bigAcquisitionsExperiment
@@ -391,7 +404,7 @@ public class MachineLearningExperimenter
 				1.0,
 				Acquisitions.eval_annot_types,
 				getAcquisitionsIlpEngineFactory(),
-				10, //repeats
+				5, //repeats
 				2,  //folds
 				results_file_name);
 /**/		

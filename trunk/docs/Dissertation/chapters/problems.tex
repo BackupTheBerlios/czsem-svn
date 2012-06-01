@@ -63,7 +63,10 @@ Entity Recognition or Named Entity Recognition corresponds to the extraction tas
 
 It can be for example illustrated on following sentence:
 
-“Google just announced that it is acquiring Motorola Mobility.”
+\begin{quote}
+Google just announced that it is acquiring Motorola Mobility.
+\end{quote}
+
 
 There are two entities mentioned in this sentence: Google and Motorola Mobility. Both entities have to be extracted and put into correct unary relations, e.g. “organization(Google)” or “company(Google)” depending on the used vocabulary. Or, in the annotation case, they have to be marked in text and annotated with corresponding label (“organization” or “company”).
 
@@ -75,7 +78,9 @@ Relation Extraction is an extraction task that usually comes after entity recogn
 
 In literature, Relation Extraction usually refers to binary relations only and Event Extraction is used for relations (events) with more arguments. Individual events have to be correctly identified in text and arguments have to be assigned to them in proper roles. For example an acquisition event can have roles like purchaser, seller, acquired, dollar amount, etc. We have to extend our running example with Motorola to demonstrate event extraction on it:
 
+\begin{quote}
 Google just announced that it is acquiring Motorola Mobility. The search and online advertising company is buying the company for approximately \$12.5 billion (or \$40 per share), in cash.
+\end{quote}
 
 In this case, both sentences would be covered by the acquisition event with attached arguments: purchaser(Google), acquired(Motorola Mobility) and dollar\_amount(\$12.5 billion).
 

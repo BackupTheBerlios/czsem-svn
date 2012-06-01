@@ -154,6 +154,13 @@ public class MachineLearningExperiment
 	
 	public void crossValidation(int numOfFolds) throws ExecutionException, ResourceInstantiationException, PersistenceException, JDOMException, IOException
 	{
+		crossValidation(numOfFolds, null);
+	}
+
+
+
+	public void crossValidation(int numOfFolds, Runnable beforeTrainingCallback)  throws ExecutionException, ResourceInstantiationException, PersistenceException, JDOMException, IOException
+	{		
 	    SerialAnalyserController train_controller = getTrainController();
 	    SerialAnalyserController test_controller = getTestController();
 	    
@@ -163,6 +170,8 @@ public class MachineLearningExperiment
 			.putFeature("numberOfFolds", numOfFolds)
 			.putFeature("trainingPR", train_controller)
 			.putFeature("testingPR", test_controller).createPR();
+		
+		crossvalid.addBeforeTrainingCallback(beforeTrainingCallback);
 		
 		crossvalid.evaluation_register = evaluation_register;
 		crossvalid.execute();

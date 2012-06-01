@@ -477,6 +477,53 @@ An interesting observation can be made when comparing training times of the ILP 
 Detailed results with much more evaluation measurements including lenient variants are available in the appendix -- Section~\ref{sec:complete_eval_acq}.
 
 
+\subsection{Comparison with Results Reported in Literature}
+
+Other researchers used the Acquisitions dataset and reported the performance of their information extraction systems in the literature. Table~\ref{tab:learning_acq_eval_third} provides comparison of four extraction systems 
+(
+SRV \citep{Freitag:1999_phd},
+HMM \citep{Freitag1999InformationExtraction},
+Elie \citep{DBLP:conf/ecml/FinnK04} and 
+SVM+ILP \citep{DBLP:conf/ilp/RamakrishnanJBS07};
+short description of these systems was provided in Section~\ref{sec:relwork_directly_comparable}) with our results obtained in the experiment described in the previous section. 
+Table~\ref{tab:learning_acq_eval_third} compares values of $F_1$ measure (displayed as percentage, 100-times higher values than in previous tables) for individual tasks and it also provides overall weighted average for each method obtained by following formula:
+$$
+overall\ F_1 = \frac{\sum_{t\in Tasks}{A_t {F_1}_t}}{\sum_{t\in Tasks}A_t}
+$$
+\noindent Where $A_t$ represents the number of annotations of the particular extraction task and ${F_1}_t$ represents the actual value of $F_1$ measure on the extraction task.
+
+Unfortunately not all the results can be directly compared because experiments of \cite{DBLP:conf/ilp/RamakrishnanJBS07} (SVM+ILP) were performed on a different version of the dataset. First two columns of Table~\ref{tab:learning_acq_eval_third} show the difference of the two versions of the dataset in terms of numbers of annotations per extraction task. Columns corresponding to the second version (ver. B) of the dataset have gray background for better distinction. 
+Although not all the numbers are directly comparable, we still compare them all together because, for the majority of the tasks (except `seller'), the difference of the datasets is very small. Maximum values are highlighted in bold and minimum in italic.
+
+Very interesting observation relates to the results of the PAUM method, which performed the best on most tasks, which is quite surprising because the method is relatively simple and no special learning features were designed for it. On the other hand, our ILP based method (the one before the last column of the table) did not demonstrate any major improvement, although a few lower values can be found in the table (`seller' Elie and  `acquired' HMM). 
+
+The reason why we computed the overall $F_1$ measure as the weighted average is that \cite{DBLP:conf/ilp/RamakrishnanJBS07} did so. Their paper provides also the overall $F_1$ measure for a plain ILP variant of their method, which is very close to our ILP based method. They provide following overall values of the $F_1$ measure:
+	
+	39.8 $\pm$ 0.9 for the original SVM + ILP approach and
+	
+	35.2 $\pm$ 1.5 for the plain ILP variant.
+
+\noindent If we compare the first value with the one reported in Table~\ref{tab:learning_acq_eval_third} (Overall value in the SVM+ILP column) it is clear that they are not the same\footnote{Their values were probably collected during each experiment run based on the actual performance and annotation counts.}, but they are quite similar and from there we can see that also their plain ILP approach was more successful than ours (35.2 vs. 23.9 $F_1$ measure), although on different version of the dataset.
+
+
+\begin{table}
+	\centering
+\begin{tabular}{l|r>{\columncolor{lightgray}}r|ccc>{\columncolor{lightgray}}ccc}
+\hline%
+& \multicolumn{2}{c|}{Annotations} & \multicolumn{6}{c}{Extraction Method}\\
+Task 				 &  ver. A 				 &  ver. B 				 &  SRV  					 &  HMM 				  &  Elie				  &  SVM+ILP			  &  ILP				  &  PAUM\\\hline%\\
+acquired		 &  \textbf{683} 	 &  651 					 &  38.5 					 &  \emph{30.9}	  &  43.5				  &  41.8					  &  31.3				  & \textbf{47.3}\\
+acqabr   		 &  \textbf{1450}  &  1494					 &  38.1 					 &  40.1 				  &  39.7				  &  42.6					  &  \emph{25.8}  & \textbf{45.6}\\
+purchaser 	 &  \textbf{624} 	 &  594 					 &  45.1 					 &  48.1				  &  46.2				  &  45.4					  &  \emph{36.7}  & \textbf{51.1}\\
+purchabr 		 &  1263 					 &  \textbf{1347}  &  \textbf{48.5}	 &  n/a 				  &  28.7				  &  35.4					  &  \emph{17.2}  & 44.3\\
+seller 			 &  267 					 &  \textbf{707} 	 &  23.4 					 &  n/a 				  &  \emph{15.6}  &  \textbf{51.5}  &  17.0				  & 23.2\\
+sellerabr 	 &  431 					 &  \textbf{458} 	 &  \textbf{25.1}  &  n/a 				  &  13.4 			  &  21.7 				  &  \emph{8.5}	  & 20.2\\
+dlramt 			 &  \textbf{283} 	 &  206 					 &  61.8 					 &  55.3 				  &  59.0				  &  53.0 				  &  \emph{28.0}  & \textbf{65.9}\\\hline%\\
+Total/Overall&  5001 					 &  \textbf{5457}	 &  41.1 					 &  n/a				 	  &  33.5				  &  40.8					  &  \emph{23.9}  & \textbf{44.0}\\
+\hline%
+\end{tabular}
+\caption{Performance comparison of reported results, $F_1$ measure.}\label{tab:learning_acq_eval_third}
+\end{table}
 %\clearpage
 
 %\subsection{Acquisitions Time}

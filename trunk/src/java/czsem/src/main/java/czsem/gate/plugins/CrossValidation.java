@@ -22,6 +22,7 @@ import gate.util.GateException;
 
 import java.io.File;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -47,7 +48,8 @@ public class CrossValidation extends AbstractProcessingResource
 	protected Corpus [][] corpusFolds;
 	protected Utils.Evidence<Document> documentEvidence [];
 	public List<LearningEvaluator> evaluation_register = null;
-	public int actual_fold_number = 0; 
+	public int actual_fold_number = 0;
+	private List<Runnable> beforeTrainingCallbacks = new ArrayList<Runnable>(); 
 	
 	
 	@SuppressWarnings("unchecked")
@@ -157,6 +159,7 @@ public class CrossValidation extends AbstractProcessingResource
 				
 				//training
 				logger.info(String.format("training fold %3d", i));
+				executeBeforeTrainingCallbacks();
 				GateUtils.safeDeepReInitPR_or_Controller(training_controller);
 			    training_controller.setCorpus(corpusFolds[i][1]);			    	    	    
 			    training_controller.execute();
@@ -187,6 +190,18 @@ public class CrossValidation extends AbstractProcessingResource
 		}
 	}
 	
+	public void addBeforeTrainingCallback(Runnable beforeTrainingCallback) {
+		beforeTrainingCallbacks.add(beforeTrainingCallback);
+	}
+
+	protected void executeBeforeTrainingCallbacks() {
+		for (Runnable e : beforeTrainingCallbacks)
+		{
+			e.run();
+		}
+	}
+
+
 	private void distributeFoldNumber(int fold_index)
 	{
 		actual_fold_number = fold_index;

@@ -9,6 +9,8 @@ import gate.persist.PersistenceException;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 
@@ -103,7 +105,18 @@ public interface DataSet
 
 		@Override
 		public void clearSevedFilesDirectory() throws IOException {
-			FileUtils.deleteQuietly(new File(getLearnigConfigDirectory() + "/savedFiles"));			
+			File dir = new File(getLearnigConfigDirectory() + "/savedFiles");
+			File[] files = dir.listFiles();
+			List<File> dirs = new ArrayList<File>(files.length);
+			for (File f : files)
+			{
+				if (f.isDirectory()) dirs.add(f);
+			}
+			FileUtils.deleteQuietly(dir );			
+			for (File d : dirs)
+			{
+				d.mkdirs();
+			}
 		}
 
 		@Override
