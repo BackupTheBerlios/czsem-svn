@@ -60,7 +60,7 @@ There are also systems using some inductive technique e.g. Inductive Logic Progr
 	\item learning features for SVM classifier and
 	\item plain extraction rules.
 \end{enumerate}
-They compared the success of the two approaches and discoverd that the extraction model constructed by SVM (based on the induced learning features) was more successful than the plain extraction rules directly constructed by ILP.
+They compared the success of the two approaches and discovered that the extraction model constructed by SVM (based on the induced learning features) was more successful than the plain extraction rules directly constructed by ILP.
 
 
 
@@ -73,7 +73,30 @@ Authors of \citep{Junker99learningfor} summarized some basic principles of using
 
 \subsection{Directly Comparable Systems} \label{sec:relwork_directly_comparable}
 
-TODO
+Thanks to the fact that evaluation of our extraction method based on ILP was performed also on a commonly used dataset, its performance can be compared with other information extraction systems that were evaluated on the dataset as well. Details about the results of the comparison will be presented in Section~\ref{sec:learning_eval_acq_third}. Brief introduction of the directly comparable systems will be present in this section.
+
+\subsubsection{PAUM}
+
+The PAUM (Perceptron Algorithm with Uneven Margins) algorithm \citep{Li:Paum} is one of machine learning alternatives provided by GATE. The algorithm represents a slight modification of the classical Perceptron \citep{rosenblatt1957perceptron} used in neural networks and extended by SVM \citep{springerlink:10.1007/BF00994018}. PAUM belongs to the category of classical propositional learners working on a set of learning features manually extracted from text.
+
+Thanks to the easy accessibility of PAUM in GATE, all our machine learning experiments could be performed with PAUM in the same time as our extraction method based on ILP. Hence these two methods were directly compared with absolutely equal conditions (the same learning and evaluation sets) and statistically significant results were recorded; see the details in Section~\ref{sec:learning_eval}.
+
+\subsubsection{SRV}
+
+\cite{Freitag:1999_phd}
+
+\subsubsection{HMM}
+
+\cite{Freitag1999InformationExtraction}
+
+\subsubsection{Elie}
+
+\cite{DBLP:conf/ecml/FinnK04}
+
+\subsubsection{SVM with ILP Feature Induction}
+
+\cite{DBLP:conf/ilp/RamakrishnanJBS07}
+
 
 \subsection{Semantic Annotation}
 Last category of information extraction related work goes in the direction of semantics and ontologies. \cite{Bon04b} described  ontology features in GATE. They can be easily used to populate an ontology with the extracted data. We discus this topic later in Section~\ref{sec:SemanticInterpretation}.
