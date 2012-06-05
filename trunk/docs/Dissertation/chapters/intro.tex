@@ -50,14 +50,53 @@ Besides that information extraction and annotation is very interesting and chall
 
 
 
-\section{Main Goals and Contributions}
+\section{Main Contributions}
 
-To be written!!!
+Let us briefly summarize the main contributions of the present work.
 
-----
+\subsection{New Ideas -- Models and Methods}
 
-The main \emph{contributions} presented in this chapter are \emph{formal models}, prototype \emph{implementation} and experimental \emph{evaluation} of the Fuzzy ILP Classifier.
+Novel and original approaches or adaptations of existing ones are presented in this work.
 
+The extraction method based on manually designed extraction rules is unique in the high expressiveness of extraction rules and the existence GUI for graphical design of these rules, both of these benefits are brought by the existence of the linguistic tool Netgraph, which was exploited as the core of the extraction method.
+
+Very similar approaches to our extraction method based on ILP were already reported in literature, but they were developed partly in parallel with our solution and they do not provide a publicly available and usable implementation. The method also represents the first attempt to use PDT resources (e.g. tectogrammatical trees) in the area of information extraction and the evaluation on the language pair of Czech and English demonstrates its language independence.
+
+The topic of shareable extraction ontologies introduces completely new paradigm to the design and usage of extraction ontologies. The usage of a semantic web reasoner as the interpreter of an extraction ontology has never been demonstrated before.
+
+Last but not least, the attempt to use information extracted from a document for document classification is also reported for the first time, although our attention is more focused on the implementation and evaluation of the Fuzzy ILP Classifier based on the sound theory of fuzzy ILP.
+
+
+
+\subsection{New Software}
+
+As a part of our work, new publicly available implementation of the described methods was created. 
+
+A simple and extensible API interface to the extraction method based on manually designed extraction rules is provided such that users can design extraction rules in the Netgraph GUI and evaluate them on the whole corpus. 
+
+The extraction method based on ILP is fully integrated in GATE and it can be used as any other machine learning algorithm in GATE. Moreover integration of TectoMT linguistic tools as well as Netgraph tree viewer in GATE was implemented. The implementation also provides a framework for  comparative information extraction experiments using the cross-validation technique and investigation of statistical significance. 
+
+The implementation of the case study with shareable extraction ontologies is not that general as the rest of the software part of our work but it can be easily followed and reproduced in similar experiments.
+
+The implementation of the Fuzzy ILP Classifier is fully compatible with Weka and it can be used as any other Weka classifier, it also provides the possibility of custom integration of the classifier to an existing installation of the Weka system on the user's computer.
+
+\subsection{New Data}
+
+Several new datasets were established as a part of our work. See the complete list of contributed datasets in Section~\ref{sec:data_contributed}.
+
+\subsection{Exploitation of Existing Resources}
+
+Work of other researchers was exploited, extended and/or evaluated in the present work. For example our extraction methods represent the first application of PDT resources (e.g. Netgraph, tectogrammatical trees, etc.) in the area of information extraction. See also the description of experiments performed with the PAUM extraction algorithm, with various semantic web reasoners, Weka classifiers, etc. in Chapter~\ref{sec:ch_eval}.
+
+\subsection{Evaluation Experiments}
+
+All approaches presented in this thesis were evaluated such that readers can obtain clear picture abut the performance and usability of these approaches. Most evaluation experiments are detailed and comprehensive, investigating also the statistical significance of the results.
+
+\subsection{Publications and New Publicly Available Resources}
+
+Majority of topics presented in this thesis were already published (going through peer review process), presented and discussed with public audience. Moreover several citations can be found in the literature showing that the work is already contributing to the generally available knowledge. See the complete list of publications in the appendix, Chapter~\ref{sec:my_publications}.
+
+Also the software and data parts of our work are publically available on the web, Section~\ref{sec:download_notes} provides all URLs leading to these resources.  
 
 
 \section{Organization}
