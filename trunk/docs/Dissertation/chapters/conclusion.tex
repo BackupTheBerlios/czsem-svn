@@ -120,13 +120,13 @@ The term statistical significance used in this thesis refers to the result of a 
 
 \section{How to Download} \label{sec:download_notes}
 The project website\footnote{\url{http://czsem.berlios.de}} provides several ways how to get all the presented tools running. A platform independent installer, Java binaries and source codes are provided under the GPL license.
-
+%
 Also majority of the datasets mentioned in this thesis are available for public download.
-
+%
 Table~\ref{tab:download_links} provides links to individual resources.
 
 
-\begin{table}[b!]
+\begin{table}
 \centering
 \begin{tabular}{|p{.97\textwidth}|}
 		\hline
@@ -156,6 +156,16 @@ SIGMOD Experimental Repeatability Requirements \citep{biblio:SIGMODrepeatability
 
 \section{Summary}
 
-Our experiments deal with texts in the Czech language but our method is general and it can be used with any structured linguistic representation. 
+Instead of focusing on a single topic and developing it in depth, this thesis has rather broader scope, even though many interesting ideas that came to our minds could not be investigated at all. For example the possibility to perform customized sentence clustering based on the syntactic tree structure could, supported by a handy GUI, result in a powerful tool for manual design of information extraction rules. We also could not develop any web information extraction approach exploiting the HTML structure, which, in combination with topological information about the placement of the elements on the screen, or even OCR, could bring new and interesting solution. The time is running fast and we just reached the end of this thesis. We are pleased to share our best experience using the thesis, which includes:
+
+\begin{itemize}
+	\item Rather practically oriented information extraction method based on deep language parsing and manually designed extraction rules (Section~\ref{sec:manual_methods}).
+
+	\item A challenge presented by the attempt to beat the performance of other information extraction system by our method based on Inductive Logic Programming (Section~\ref{sec:learning_methods}).  Let us note that the method touched the state-of-the-art in some cases but its time requirements are rather farther from it (Section~\ref{sec:learning_eval}).
+
+	\item Agitation brought by the presentation of something completely new, visionary and ``unconventional'', the idea of shareable extraction ontologies (Section~\ref{sec:onto_extraction_ontologies}).
+
+	\item Again a challenge connected with the evaluation of the Fuzzy ILP Classifier (Section~\ref{sec:fuzzy_methods}) with the same result of touching the state-of-the-art (in some cases) and high time requirements (Section~\ref{sec:fuzzy_eval}); and also the experience with the implementation of formal mathematics with the result in a piece of working software (Section~\ref{sec:fuzzy_impl}).
+\end{itemize}
 
 Let us conclude the whole work by reminding the main contributions mentioned in Section~\ref{sec:phd_contributions}.
