@@ -104,48 +104,56 @@ sub print_injured {
 \begin{minted}[linenos,  fontsize=\footnotesize,
                frame=lines, tabsize=2]{xml}
 <injured_result>
-	<action type="zranit">
+	<action type="zranit"> <!-- to injure -->
 		<sentece>
 			Při požáru byla jedna osoba lehce zraněna -- jednalo se
 			o majitele domu, který si vykloubil rameno.
 		</sentece>
+<!-- transcript:
+      During the fire, one person was slightly injured - it was 
+      the homeowner, who dislocated his shoulder. -->
 		<sentece_id>T-vysocina63466.txt-001-p1s4</sentece_id>
 		<negation>false</negation>
 		<manner>lehký</manner>
-		<participant type="osoba">
+		<participant type="osoba"> <!-- person -->
 			<quantity>1</quantity>
 			<full_string>jedna osoba</full_string>
 		</participant>
 	</action>
-	<action type="zemřít">
+	<action type="zemřít"> <!-- to die -->
 		<sentece>
 			Ve zdemolovaném trabantu na místě zemřeli dva muži -- 82letý
 			senior a další muž, jehož totožnost zjišťují policisté.
 		</sentece>
+<!-- transcript:
+      Two men died on the spot in a demolished Trabant -- 82-year-old 
+      senior and another man, whose identity police are finding. -->		
 		<sentece_id>T-jihomoravsky49640.txt-001-p1s4</sentece_id>
 		<negation>false</negation>
-		<participant type="muž">
+		<participant type="muž"> <!-- man -->
 			<quantity>2</quantity>
 			<full_string>dva muži</full_string>
 		</participant>
 	</action>
-		<action type="zranit">
-		<sentece>čtyřiatřicetiletý řidič nebyl zraněn.</sentece>
+		<action type="zranit">  <!-- to injure -->
+		<sentece>Čtyřiatřicetiletý řidič nebyl zraněn.</sentece>
+<!-- transcript:
+            24-year-old driver was not injured. -->		
 		<sentece_id>T-jihomoravsky49736.txt-001-p4s3</sentece_id>
 		<negation>true</negation>
-		<participant type="řidič">
+		<participant type="řidič">  <!-- driver -->
 			<full_string>čtyřiatřicetiletý řidič</full_string>
 		</participant>
 	</action>
 </injured_result>
 \end{minted}
-\caption{\emph{XML} structured output of the query written in \emph{Btred}.}
+\caption{XML structured output of the procedurally written extraction rule.}
 \label{fig:btred_xml}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
+\clearpage
 
 
 \subsection{Netgraph Based Extraction Rules} \label{sec:manual_Netgraph_Based_Extraction_Rules}
@@ -159,9 +167,9 @@ The extraction is implemented as follows: Netgraph implementation is responsible
 
 
 
-\begin{figure}
+\begin{figure}[t!]
 	\centering
-		\includegraphics[width=0.5\hsize]{eenv_extract_patern}
+		\includegraphics[width=0.7\hsize]{eenv_extract_patern}
 \\Transcript:\\
 \begin{tabular}{|c|c|}
 \hline
@@ -174,15 +182,15 @@ to leak out & to flow out\\
 \end{figure}
 
 
-\begin{figure}
+\begin{figure}[t!]
 	\centering
-		\includegraphics[angle=-90, width=0.6\hsize]{eenv_matching_tree}
-		
+		\includegraphics[angle=-90, width=0.85\hsize]{eenv_matching_tree}\\
+\smallskip		
 Original sentence: 
 \emph{``Nárazem se utrhl hrdlo palivové nádrže a do potoka postupně vyteklo na 800 litrů nafty.''}\\
 English transcript: 
 \emph{``Due to the clash the throat of fuel tank tore off and 800 liters of oil (diesel) has run out to a stream.''}
-	\caption{A tree matching with the corresponding extraction rule in Figure~\ref{fig:manual_eenv_extract_patern}.}
+	\caption{A matching tree corresponding with the extraction rule in Figure~\ref{fig:manual_eenv_extract_patern}.}
 	\label{fig:manual_eenv_matching_tree}
 \end{figure}
 
@@ -226,15 +234,25 @@ English transcript:
 	</Match>
 </QueryMatches>
 \end{minted}
-\caption{\emph{XML} structured output of the SQL select like query. A negation can be detected from the presence of \emph{m/tag} on the line 30.}
+\begin{minted}{sql}
+SELECT action_type.t_lemma, injury_manner.t_lemma, 
+  a-negation.m/tag, participant.t_lemma, quantity.t_lemma
+FROM <...netgraph_query>
+\end{minted}
+The transcript of individual sentences was already provided in Figure~\ref{fig:btred_xml}.
+\caption[XML structured output of the declarative extraction rule (1)]{XML structured output of the SQL select like extraction rule from Figure~\ref{fig:manual_extract_patern}. Negative information is reported using the presence of \emph{m/tag} on the line 30.}
 \label{fig:select_xml}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{figure}
 	\centering
-		\includegraphics[angle=-90, width=0.7\hsize]{eenv_results}
-	\caption{\emph{XML} structured output of the SQL select like query corresponding with the extraction rule in Figure~\ref{fig:manual_eenv_extract_patern} and matching tree in Figure~\ref{fig:manual_eenv_matching_tree}.}
+		\includegraphics[angle=-90, width=\hsize]{eenv_results}
+\begin{minted}{sql}
+SELECT amount.t_lemma, unit.t_lemma, material.t_lemma, 'where'.t_lemma
+FROM <...netgraph_query>
+\end{minted}
+\caption[XML structured output of the declarative extraction rule (2)]{XML structured output of the SQL select like extraction rule from Figure~\ref{fig:manual_eenv_extract_patern}. Corresponding matching tree can be seen in Figure~\ref{fig:manual_eenv_matching_tree}.}
 	\label{fig:manual_eenv_results}
 \end{figure}
 
@@ -258,7 +276,7 @@ English transcript:
 
 
 
-
+\pagebreak
 
 \subsubsection{Illustration Examples}
 
@@ -786,7 +804,7 @@ We have compared results of the crisp and fuzzy approaches with other classifica
 
 
 \begin{figure}[b!]
-\begin{minipage}[b]{0.5\hsize}
+\begin{minipage}[b]{0.47\hsize}
 \begin{minted}[mathescape,fontsize=\footnotesize,
                frame=single]{prolog}
 % Crisp learning examples $E_t$
@@ -810,7 +828,7 @@ serious_atl_3(id_47443). %negative
 	\label{fig:examples}
 \end{minipage}
 \hspace{0.5cm}
-\begin{minipage}[b]{0.5\hsize}
+\begin{minipage}[b]{0.47\hsize}
 \begin{minted}[fontsize=\footnotesize,
                frame=single]{prolog}
 size(id_47443, 427).
@@ -873,12 +891,15 @@ damage_atl(ID,N) :- damage(ID,N2), integer(N2), %numeric values
 \begin{figure}
 \begin{minted}[linenos,  fontsize=\footnotesize,
                frame=lines]{prolog}
-serious_0(A) :- fatalities(A,0), injuries(A,0), cars(A,1), amateur_units(A,0), lather(A,0).
-serious_0(A) :- fatalities(A,0), cars(A,0), amateur_units(A,0), professional_units(A,1).
+serious_0(A) :- fatalities(A,0), injuries(A,0), cars(A,1), 
+                amateur_units(A,0), lather(A,0).
+serious_0(A) :- fatalities(A,0), cars(A,0), amateur_units(A,0),
+                professional_units(A,1).
 serious_1(A) :- amateur_units(A,1).
 serious_1(A) :- damage(A,300000).
 serious_1(A) :- type(A,fire), amateur_units(A,0), pipes(A,2).
-serious_1(A) :- type(A,car_accident),dur_minutes(A,unknown),fatalities(A,0),injuries(A,1).
+serious_1(A) :- type(A,car_accident), dur_minutes(A,unknown),
+                fatalities(A,0), injuries(A,1).
 serious_2(A) :- lather(A,unknown).
 serious_2(A) :- cars(A,0), lather(A,0), aqualung(A,1), fan(A,0).
 serious_2(A) :- amateur_units(A,2).
@@ -909,7 +930,8 @@ serious_atl_3(A) :- damage_atl(A,1500000).
 \begin{minted}[fontsize=\footnotesize,
                frame=lines, tabsize=2]{prolog}
 serious_0(ID) :- serious_atl_0(ID),
-                 not(serious_atl_1(ID)), not(serious_atl_2(ID)), not(serious_atl_3(ID)).
+                 not(serious_atl_1(ID)), not(serious_atl_2(ID)),
+                 not(serious_atl_3(ID)).
 serious_1(ID) :- serious_atl_1(ID),
                  not(serious_atl_2(ID)), not(serious_atl_3(ID)).
 serious_2(ID) :- serious_atl_2(ID),

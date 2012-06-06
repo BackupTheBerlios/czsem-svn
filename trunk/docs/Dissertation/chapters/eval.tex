@@ -2,7 +2,7 @@
 
 Experiments that were performed to evaluate our methods and approaches will be presented in this chapter. Four main sections separate the experiments by topic, to which they belong.
 
-\section{Evaluation of Manual Rules} \graphicspath{{../img/ch50/}}
+\section{Evaluation of Manual Rules} \graphicspath{{../img/ch50/}} \label{sec:manual_eval}
 
 
 In this section, two experiments will be presented to explain the usefulness of our extraction method based on manually designed rules. 
@@ -649,14 +649,14 @@ and in the context of Linked Data providing shareable descriptions of informatio
 \graphicspath{{../img/ch80/}}
 
 \begin{figure}[p]
-\centerline{\includegraphics[width=0.8\hsize]{2x10cross}}
+\centerline{\includegraphics[width=\hsize]{2x10cross}}
 \caption{Evaluation of the methods -- average values.}
 \label{fig:graph2x10}
 \end{figure}
 
 
 \begin{table}[p]
-\scriptsize
+%\scriptsize
 {\centering \begin{tabular}{lr@{\hspace{0cm}}c@{\hspace{0cm}}rr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}c}
 \hline
 & \multicolumn{3}{c}{Fuzzy}& \multicolumn{4}{c}{Crisp} & \multicolumn{4}{c}{MultPerc} & \multicolumn{4}{c}{SMO} & \multicolumn{4}{c}{J48} & \multicolumn{4}{c}{JRip} & \multicolumn{4}{c}{LBoost} \\
@@ -669,8 +669,8 @@ Rec		&  .61 & $\pm$ & .19 & .49 & $\pm$ & .32 &         	 & .41 & $\pm$ & .19 & 
 F			&  .56 & $\pm$ & .20 & .49 & $\pm$ & .33 &         	 & .36 & $\pm$ & .19 & $\bullet$ & .32 & $\pm$ & .24 & $\bullet$ & .39 & $\pm$ & .21 &         	 & .36 & $\pm$ & .19 & $\bullet$ & .56 & $\pm$ & .27 &        \\
 \hline
 \multicolumn{21}{c}{$\circ$, $\bullet$ statistically significant increase or decrease}\\
-\end{tabular} \scriptsize \par}
-\scriptsize
+\end{tabular} \par}
+\footnotesize
 \smallskip
 Legend:\\
 {\centering
@@ -722,7 +722,7 @@ There is no clear winner in our experiment. But the Fuzzy ILP classifier proved 
 
 
 \begin{table}
-\scriptsize
+\footnotesize
 {\centering \begin{tabular}{l|r@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.3cm}}r@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}l@{\hspace{0cm}}r@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0cm}}c@{\hspace{0.25cm}}c@{\hspace{0.20cm}}c@{\hspace{0.10cm}}}
 dataset & \multicolumn{3}{c}{Fuzzy}& \multicolumn{4}{c}{Crisp} & \multicolumn{4}{c}{MultPerc} & \multicolumn{4}{c}{SMO} & \multicolumn{4}{c}{J48} & \multicolumn{4}{c}{JRip} & \multicolumn{4}{c}{LBoost} & train & test\\
 \hline
@@ -739,8 +739,8 @@ pop & .66 & $\pm$ & .09 & .54 & $\pm$ & .17 & $\bullet$ & .57 & $\pm$ & .13 & $\
 nurs & .79 & $\pm$ & .04 & .68 & $\pm$ & .06 & $\bullet$ & .81 & $\pm$ & .04 & $\circ$ & .73 & $\pm$ & .04 & $\bullet$ & .80 & $\pm$ & .04 & $\circ$ & .79 & $\pm$ & .06 &  & .83 & $\pm$ & .02 & $\circ$ & 52 & 12907\\
 \hline
 \multicolumn{23}{c}{$\circ$, $\bullet$ statistically significant improvement or degradation}\\
-\end{tabular} \scriptsize \par}
-\scriptsize
+\end{tabular} \par}
+\footnotesize
 \smallskip
 Legend:\\
 {\centering
