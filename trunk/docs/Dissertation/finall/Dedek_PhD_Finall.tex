@@ -81,7 +81,8 @@ Prague 2012
 
 \end{center}
 
-\newpage
+%\newpage
+\openright
 
 %%% Na tomto místě mohou být napsána případná poděkování (vedoucímu práce,
 %%% konzultantovi, tomu, kdo zapůjčil software, literaturu apod.)
@@ -99,7 +100,8 @@ Alan Eckhardt helped me with writing and participated in numerous discussions ab
 Last but no least, I would like to thank grant agencies for their support of individual parts of the research. Without them, it would be hardly possible to confront the ideas with international audience and obtain helpful knowledge at summer schools and training courses. The Charles University Grant Agency supported my PhD project by an individual contract (number GAUK 31009), Czech Science Foundation supported, among other things, the cooperation with other young researchers (contract number GAČR 201/09/H057) and the development of the idea of Web Semantization (GAČR P202/10/0761). Ministry of Education, Youth and Sports provided partial support within the grant Modern Methods, Structures and Systems of Computer Science (MŠMT MSM0021620838).
 
 
-\newpage
+%\newpage
+\openright
 
 %%% Strana s čestným prohlášením k disertační práci
 
@@ -124,7 +126,9 @@ signature of the author
 \hss}}
 
 \vspace{25mm}
-\newpage
+%\newpage
+\openright
+
 
 %%% Povinná informační strana disertační práce
 
@@ -232,6 +236,13 @@ Four relatively separate topics are presented in the thesis. Each topic represen
 \bibliography{../dedek_phd}
 
 
+%%% Použité zkratky v disertační práci, existují-li, včetně jejich vysvětlení.
+%\chapwithtoc{List of Abbreviations}
+\myaddchaptertoc{Nomenclature}
+\input{../dedek_phd_nomenclature}
+\printnomenclature[2.5cm]
+
+
 %\chapwithtoc{List of Figures}
 \myaddchaptertoc{List of Figures}
 \listoffigures
@@ -242,11 +253,9 @@ Four relatively separate topics are presented in the thesis. Each topic represen
 \myaddchaptertoc{List of Tables}
 \listoftables
 
-%%% Použité zkratky v disertační práci, existují-li, včetně jejich vysvětlení.
-%\chapwithtoc{List of Abbreviations}
-\myaddchaptertoc{Nomenclature}
-\input{../dedek_phd_nomenclature}
-\printnomenclature[2.5cm]
+\listofappendices
+\addcontentsline{toc}{chapter}{List of Appendices}
+
 
 %%% Přílohy k disertační práci, existují-li (různé dodatky jako výpisy programů,
 %%% diagramy apod.). Každá příloha musí být alespoň jednou odkazována z vlastního

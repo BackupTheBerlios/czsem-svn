@@ -7,6 +7,13 @@
 \hypersetup{pdfauthor=\myauthor}
 
 
+% Toto makro definuje kapitolu, která není očíslovaná, ale je uvedena v obsahu.
+\def\chapwithtoc#1{
+\chapter*{#1}
+\addcontentsline{toc}{chapter}{#1}
+}
+
+
 
 %myemph	
 \newcommand{\myemph}[1]{\textbf{\emph{#1}}}
@@ -17,6 +24,18 @@
 %smallurl
 \newcommand{\smallurl}[1]{{\footnotesize\url{#1}}}
 
+%appendices
+\newcommand{\appendices}[1]{\addcontentsline{apc}{appendices}{#1}}
+
+\newlistof{appendices}{apc}{\chapter*{List of Appendices}}
+
+
+
+%newapendix
+\newcommand{\newapendix}[2]{
+\chapter{#1} \label{#2}
+\appendices{\ref{#2} #1}
+}
 
 
 %sectiondoubleref
@@ -59,8 +78,3 @@
 \makeatother
 
 
-% Toto makro definuje kapitolu, která není očíslovaná, ale je uvedena v obsahu.
-\def\chapwithtoc#1{
-\chapter*{#1}
-\addcontentsline{toc}{chapter}{#1}
-}
