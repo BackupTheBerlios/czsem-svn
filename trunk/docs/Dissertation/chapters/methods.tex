@@ -383,7 +383,7 @@ We present a proof of concept for the idea: a case study with our linguistically
 
 
 
-The most closely related work was already presented in Section~\ref{sec:relwork_ext_ont}. The main idea will be illustrated on our case study in Section~\ref{sec:onto_case}, its implementation in Section~\ref{sec:onto_implement} and in Section~\ref{sec:onto_experiment} an experiment with several OWL reasoners and IE datasets will be presented. In Section~\ref{sec:onto_discuss} related issues are discussed and Section~\ref{sec:onto_conclusion} concludes the discussion.
+The description is organized as follows. The most closely related work was already presented in Section~\ref{sec:relwork_ext_ont}. The main idea will be illustrated on our case study in Section~\ref{sec:onto_case}, its implementation in Section~\ref{sec:onto_implement} and in Section~\ref{sec:onto_experiment} an experiment with several OWL reasoners and IE datasets will be presented. In Section~\ref{sec:onto_discuss} related issues are discussed and Section~\ref{sec:onto_conclusion} concludes the discussion.
 
 %kvuli footenote-um, aby se vesly...
 \pagebreak
@@ -421,7 +421,7 @@ In the bottom of the picture our IE engine learns extraction rules and exports t
 \label{fig:rules_app_schema}
 \end{figure}
 
-Implementation of the case study will be described in Section~\ref{sec:onto_implement}. It exploits the approaching support for Semantic Web Rule Language (SWRL) \citep{SWRL}. Although SWRL is not yet approved by W3C it is already widely supported by Semantic Web tools including many OWL reasoners. The SWRL support makes it much easier to transfer the semantics of extraction rules used by our IE tool to extraction ontology. The translation of the native extraction rules to SWRL rules that form the core of the extraction ontology will be also presented in Section~\ref{sec:onto_implement}.
+Implementation of the case study will be described in Section~\ref{sec:onto_implement}. It exploits the approaching support for Semantic Web Rule Language (SWRL) \citep{SWRL}. Although SWRL is not yet approved by W3C it is already widely supported by Semantic Web tools including many OWL reasoners. The SWRL support makes it much easier to transfer the semantics of the extraction rules used by our IE tool to extraction ontology. The translation of the native extraction rules to SWRL rules that form the core of the extraction ontology will be also presented in Section~\ref{sec:onto_implement}.
 
 
 
@@ -441,11 +441,11 @@ Our description is based on a case study of seriousness classification of accide
 %Figure~\ref{fig:message} presents an example of an accident report from a message on the web.
 We would like to have a tool that is able to classify the accident's degree of seriousness on the basis of information obtained through information extraction.
 %Our approach is based on information extraction and on a fuzzy-based machine learning procedure that provides rules for classification of the reports.
-In this section,
+In this part of our work,
 % we do not provide any details about the information extraction part of the solution (it was already described in Chapters~\ref{sec:manual_manual_rules_chapter} and \ref{ch:ILP_Learning}). 
-we concentrate on the classification part and present a detailed study of the fuzzy ILP classification method (so-called `Fuzzy ILP Classifier'). 
+we concentrate on the classification problem and present a detailed study of the fuzzy ILP classification method (so-called `Fuzzy ILP Classifier'). 
 
-This problem represents a challenge of induction and/or mining on several occasions. First we need an inductive procedure when extracting attributes of an accident from text. Second (the subject of this section) we need an inductive procedure when trying to explain an accident's degree of seriousness by its attributes. ILP is used as the inductive procedure in both of these places.
+The whole problem represents a challenge of induction and/or mining on several occasions. First we need an inductive procedure when extracting attributes of an accident from text. Second (the subject of this part of our work) we need an inductive procedure when trying to explain an accident's degree of seriousness by its attributes. ILP is used as the inductive procedure in both of these places.
 \begin{itemize}
 	\item During the information extraction phase, we exploit the fact that ILP can work directly with multirelational data, e.g., deep syntactic (tectogrammatical) trees built from sentences of the processed text.
 	\item During the classification phase, we are experimentally using the Fuzzy ILP Classifier because it performs quite well on our dataset (see Section~\ref{sec:fuzzy_eval}) and it is naturally capable of handling fuzzy data, which occurs when the information extraction engine returns confidence probability values along with extracted data. But the description does not go so far and only the approach is fuzzy in the present demonstration.
@@ -456,7 +456,7 @@ This problem represents a challenge of induction and/or mining on several occasi
 
 
 The rest of this section is organized as follows: Design of the experimental system is presented in Section~\ref{sec:fuzzy_system}. %including a short description of the information extraction method and linguistic analyzers. 
-Section~\ref{sec:fuzzy_case} provides details about our case study, which is later used in examples. Formal models of the system (including several translations of a fuzzy ILP task to classical ILP) are presented in Section~\ref{sec:fuzzy_ilp_task_translation}, followed by a description of implementation of the models in the system. In Section~\ref{sec:fuzzy_results} we present the main results of the work, and then we evaluate and compare the methods with other well-known classifiers. Section~\ref{sec:conclusion} concludes the chapter.
+Section~\ref{sec:fuzzy_case} provides details about our case study, which is later used in examples. Formal models of the system (including several translations of a fuzzy ILP task to classical ILP) are presented in Section~\ref{sec:fuzzy_ilp_task_translation}. The description of implementation of the models in the system will be presented in Section~\ref{sec:fuzzy_impl} and in Section~\ref{sec:fuzzy_results} we present examples of learned classification rules, in Section~\ref{sec:fuzzy_eval} we evaluate and compare the methods with other well-known classifiers. Section~\ref{sec:conclusion} concludes this part of our work.
 
 See also Section~\ref{sec:relwork_doc_classification}, where some closely related works were introduced. 
 
@@ -482,7 +482,7 @@ See also Section~\ref{sec:relwork_doc_classification}, where some closely relate
 \end{wrapfigure}
 
 
-A general schema of the experimental system is shown in Figure~\ref{fig:schema}. In the schema, previously developed information extraction tools based on third party linguistic analyzers are used (the upper two dashed arrows). The information extraction tools are supposed to extract structured information from the reports and the extracted information is then translated to ILP background knowledge and, along with a user rating, it is used for the classification (we assume that a small amount of learning data is annotated by a human user). The classification is based on ILP and it could be \emph{fuzzy} or \emph{crisp}. Crisp denotes a straightforward application of ILP and fuzzy stands for the fuzzy method (subject of the present description), see in the next sections.
+A general schema of the experimental system is shown in Figure~\ref{fig:schema}. In the schema, previously developed information extraction tools based on third party linguistic analyzers are used (the upper two dashed arrows). The information extraction tools are supposed to extract structured information from the reports and the extracted information is then translated to ILP background knowledge and, along with a user rating, it is used for the classification (we assume that a small amount of learning data is annotated by a human user). The classification is based on ILP and it could be \emph{fuzzy} or \emph{crisp}. Crisp (Classical ILP in Figure~\ref{fig:schema}) denotes a straightforward application of ILP and fuzzy stands for the fuzzy method (subject of the present description), see in the next sections.
 
 %\clearpage
 
@@ -492,13 +492,13 @@ A general schema of the experimental system is shown in Figure~\ref{fig:schema}.
 
 
 
-The main experiment leads to the seriousness classification of an accident presented in a report. %Our long term goal is extraction of semantic information from reports. 
+The main experiment of this part of our work leads to the seriousness classification of an accident presented in a report. %Our long term goal is extraction of semantic information from reports. 
 %which is one of possible utilizations of the extracted information. 
 
 For the experiment a classification dataset (Section~\ref{sec:data_classify_fireman}) was built based on a collection of 50 textual reports. We have identified several features presented in these reports and manually extracted the corresponding values. To each report we have also assigned a value of overall ranking of seriousness of the presented accident, which is the target of the classification. The dataset is described in Section~\ref{sec:data_classify_fireman}. 
 %The whole dataset can be downloaded from our Fuzzy ILP classifier's web page\footnote{\url{http://www.ksi.mff.cuni.cz/~dedek/fuzzyILP/}}.
 
-In the experiment, we have not used any information extracted by our automated information extraction tools. Instead, we concentrate on~the classification; the actual source of the information is not so important for us and the integration step still lies ahead.
+In the experiment, we have not used any information extracted by our automated information extraction tools. Instead, we concentrate on~the classification; the actual source of the information is not so important for the present description and the integration step still lies ahead.
 
 
 
@@ -518,7 +518,7 @@ Moreover, GAP -- Generalized Annotated Programs \citep{Kifer:1992:TGA:139720.139
 
 The proposed experimental classification system is based on two ILP classification methods -- crisp and fuzzy. 
 Technically, the difference between the approaches consists in a different setting of the underlying classical ILP tasks. 
-In the following text, translation of the original fuzzy ILP task to the two classical ILP tasks will be presented; the first will be denoted as \emph{crisp}, the second as \emph{monot} (because so called monotonization technique is used). The original \textbf{fuzzy} ILP task can be informally expressed as: ``From a degree of injury, a degree of damage, a degree of duration, etc. determine the degree of seriousness.''   
+In the following text, two different translations of the original fuzzy ILP task to classical ILP tasks will be presented; the first will be denoted as \emph{crisp}, the second as \emph{monot} (because so called monotonization technique is used). The original \textbf{fuzzy} ILP task can be informally expressed as: ``From a degree of injury, a degree of damage, a degree of duration, etc. determine the degree of seriousness.''   
 
 \bigskip
 In the following text, assume that all fuzzy sets take truth values only from a finite set of truth values $T: \{0,1\}\subseteq T\subseteq [0,1]$.
