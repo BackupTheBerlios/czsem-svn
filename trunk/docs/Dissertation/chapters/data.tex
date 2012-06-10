@@ -6,19 +6,19 @@
 
 In this chapter several datasets will be described. The datasets can be divided into several groups according to several criterions: 
 \begin{itemize}
-	\item structure and purpose of a particular dataset (textual for IE tasks, relational for classification ML tasks and RDF datasets for Semantic Web reasoning tasks), 
+	\item structure and purpose of the particular dataset (textual for IE tasks, relational for classification ML tasks and RDF datasets for Semantic Web reasoning tasks), 
 	\item presence of manual annotations,
 	\item language in case of textual data (English and Czech), 
 	\item the origin of the dataset (third party datasets and datasets created as a part of the presented work).
 \end{itemize}
-The description of individual datasets will be presented at the very end of the chapter, before that, relevant common aspects of the datasets will be discussed.
+The description of individual datasets will be presented at the very end of the chapter (Section~\ref{sec:data_individual}), before that, relevant common aspects of the datasets will be discussed.
 
 
 \section{Purpose and Structure}
 In this section a distinction of datasets according their purpose and structure will be presented. Three types of datasets will be discussed: Information Extraction Datasets, Classification Datasets and Reasoning Datasets.
 
 \subsection{Information Extraction Datasets}
-An IE dataset is made up of a set of text documents. The texts are usually manually annotated (with one exception see Section~\ref{sec:data_fireman_without}). The manual annotations are of the form of labels on shorter segments of the text (the length of a segment ranges between one to approximately three tokens). 
+An IE dataset is made up of a set of textual documents. The texts are usually manually annotated (with one exception see Section~\ref{sec:data_fireman_without}). The manual annotations are of the form of labels on shorter segments of the text (the length of a segment ranges between one to approximately three tokens). 
 
 An IE engine can use such dataset for training and evaluation. During evaluation, the dataset is split into two parts -- training set and testing set. An IE engine is trained on the training set and success is measured on testing set by comparing the annotations returned by the IE engine and the actual annotations present in the dataset.
 Performance measures of precision and recall are mostly used for evaluation. 
@@ -38,9 +38,9 @@ Both the manually annotated datasets (\nameref{sec:data_fireman_annotated} and \
 
 %Guo, Yuanbo, Heflin, Jeff and Pan, Zhengxiang . Benchmarking DAML+OIL Repositories. Second International Semantic Web Conference, ISWC 2003, LNCS 2870. Springer. 2003. pp.613-627.
 
-The term ``Reasoning Datasets’’ is used here for the type of datasets which are used in Ontology Benchmarks. Ontology benchmarking is a scientific topic that is almost as old as ontologies and Semantic Web itself \citep{DBLP:conf/semweb/GuoHP03}. Ontology Benchmarks serve for evaluation of ontology systems and their capabilities. There are two obvious objectives of ontology benchmarking. The first one is to verify capabilities of a tested system -- weather the system is able to perform all actions prescribed by the particular benchmark. The second objective is to measure the time performance of the system. Unlike the previous two dataset types in the case of ontology benchmarking and reasoning datasets it does not make any sense to measure success of a system because there is no uncertainty in reasoning tasks. A system is either able to perform a particular action or not; it is unnecessary to measure that. 
+The term ``Reasoning Datasets’’ is used here for the type of datasets which are used in Ontology Benchmarks. Ontology benchmarking is a scientific topic that is almost as old as ontologies and Semantic Web itself \citep{DBLP:conf/semweb/GuoHP03}. Ontology Benchmarks serve for evaluation of ontology systems and their capabilities. There are two obvious objectives of ontology benchmarking. The first one is to verify capabilities of a tested system -- weather the system is able to perform all actions prescribed by the particular benchmark. The second objective is to measure the time performance of the system. Unlike the remaining two dataset types (the previous one and the following one) in the case of ontology benchmarking and reasoning datasets it does not make any sense to measure the performance in terms of precision and similar measures because there is no uncertainty in reasoning tasks. A system is either able to perform a particular action or not; it is unnecessary to measure that. 
 
-Reasoning datasets used in the present work:
+There are two reasoning datasets used in the present work:
 \begin{itemize}
 	\item \sectiondoubleref{sec:data_rdf_fireman}
 	\item \sectiondoubleref{sec:data_rdf_acquisitions}
@@ -50,9 +50,9 @@ These datasets were used for evaluation of the idea of shareable extraction onto
 
 
 \subsection{Classification Datasets}
-Classification datasets are very familiar in the community of machine learning. They are used for evaluation of propositional ML engines (like Decision Trees, Naive Bayes, Multilayer Perceptron, Support Vector Machines, etc.) on the classification task. The classification task (or problem) can be simplified way described as follows: 
+Classification datasets are very familiar in the community of machine learning. They are used for evaluation of propositional ML engines (like Decision Trees, Naive Bayes, Multilayer Perceptron, Support Vector Machines, etc.) on the classification task. The classification task (or problem) can be, in a simplified way, described as follows: 
 
-Given a set of objects (e.g. accidents); each object is described using a fixed set of attributes (e.g. number of fatalities, number of injuries, number of intervening units; etc.) and each object is classified into one of a fixed set of classes (not serious accident, middle serious accident, very serious accident). Based on the known classification of the objects (training set), predict the classification for new objects that have been not classified yet (testing set). 
+Given a set of objects (e.g. accidents); each object is described using the same set of attributes (e.g. number of fatalities, number of injuries, number of intervening units; etc.) and each object is classified into one of a fixed set of classes (not serious accident, middle serious accident, very serious accident). Based on the known classification of the objects form the training set, predict the classification for new objects with unknown classification (testing set). 
 
 A classification dataset is made up of a relational table. Each row of the table represents a single object; each column of the table represents a single attribute. One attribute (column) is marked as a class attribute and the values of this attribute determine the target classification. 
 
@@ -70,7 +70,7 @@ These datasets were used for evaluation of the Fuzzy ILP classification method i
 
 
 \section{Origin of the Datasets}
-The datasets can be simply divided into third party and contributed. 
+In this section, the datasets will be divided into third party datasets and contributed ones. 
 
 \subsection{Contributed Datasets} \label{sec:data_contributed}
 Datasets that were partly or mostly prepared as a part the present work are:
@@ -96,46 +96,12 @@ Datasets that were used without any additional contributions are:
 \end{itemize}
 
 
-\section{Individual Datasets}
-In this section individual datasets used in this thesis will be presented. The order of dataset presentations is the same as the order in which they were used in our work.
+\section{Individual Datasets} \label{sec:data_individual}
+In this section individual datasets used in this thesis will be presented. The order of dataset presentations is the same as the order in which they were used in this work.
 
 \subsection{Czech Fireman Reports without Annotations} \label{sec:data_fireman_without}
-In the early beginning of our work, first IE experiments were done with textual reports from fire departments of several regions of the Czech Republic. These departments are responsible for rescue and recovery after fire, traffic and other accidents. Likewise the reports do not deal only with fire and traffic accidents but also chemical interventions, fire-fighting contests, fire drills and similar events can be found. The reports are rich in information, e.g. where and when an accident occurred, which units helped, how much time it took them to show up on the place of accident, how many people were injured, killed etc. An example of such report can be seen in the Figure~\ref{fig:manual_article}.
 
-The dataset is made up by 814 texts of the reports collected in the time period from February to September 2007 using a RSS feed. All the reports are still available on the web site of the Ministry of Interior of the Czech Republic\footnote{\url{http://www.hzscr.cz/hasicien/}}. 
-
-Following URL pattern can be used to obtain a particular report:
-
-
-\begin{center}
-\verb+http://aplikace.mvcr.cz/archiv2008/rs_atlantic/hasici/REGION/ID.html+
-\end{center}
-
-For example report 47443 (ID) from Jihomoravský region has following URL:
-
-\begin{center}
-\verb+http://aplikace.mvcr.cz/archiv2008/rs_atlantic/hasici/jihomoravsky/47443.html+
-\end{center}
-
-
-The dataset contains reports from eight Czech regions: Jihomoravský (127 reports), Královéhradecký (109 reports), Moravskoslezský (138), Olomoucký (77), Pardubický (95), Plzeňský (97), Ústecký (108) and Vysočina (63). All the reports are written in Czech language. 
-
-The dataset does not contain any manual annotations; only linguistic annotations produced by PDT tools are included in the dataset (FS format for Netgraph processing and PML format for Btred processing, see Section~\ref{sec:third_pdt_tools_and_resources} for details about these tools). Table~\ref{tab:data_fire_without} summarizes some properties of the dataset’s reports described bellow.  Total sum, average value, standard deviation, minimum, maximum and median of the values can be found in the table.
-
-
-Text size is the length of the text of a particular report in characters. More precisely it is the size of the corresponding ``.txt'' file. ISO-8859-2 (Latin-2) character encoding is used in these files so the number of characters is the same as the file size in bytes. 
-
-Number of words in a particular report is counted using UNIX command ``wc -w''.
-
-Annotations size expresses the number of bytes used by the corresponding linguistic annotations of a particular report. Only annotations in FS format are counted (PML files are not included in these numbers).
-
-Number of trees is the number of tectogrammatical trees in a particular report. The number also corresponds with the number of sentences in the report.
-
-
-The dataset was used for a quantitative evaluation experiment described in Section~\ref{sec:manual_quant_experiment}. 
-
-
-\begin{table}
+\begin{table}[b!]
 \centering
 \begin{tabular}{|l|r|r|r|r|r|r|}
 \hline
@@ -147,8 +113,45 @@ annot. size  & 51 464 581 & 63 224.3 & 43 557.61 & 4 648 & 451 953 & 52 033.5\\
 num. t-trees &     15 208 &     18.7 &     15.02 &     1 &     143 &     14.0\\
 \hline
 \end{tabular}
-\caption{Dataset \ref{sec:data_fireman_without} -- \nameref{sec:data_fireman_without} -- statistics} \label{tab:data_fire_without}
+\caption{\nameref{sec:data_fireman_without} dataset -- statistics} \label{tab:data_fire_without}
 \end{table}
+
+
+
+In the early beginning of our work, first IE experiments were done with textual reports from fire departments of several regions of the Czech Republic. These departments are responsible for rescue and recovery after fire, traffic and other accidents. But the reports do not deal only with fire and traffic accidents but also chemical interventions, fire-fighting contests, fire drills and similar events can be found. The reports are rich in information, e.g. where and when an accident occurred, which units helped, how much time it took them to show up on the place of accident, how many people were injured, killed etc. An example of such report was presented in Figure~\ref{fig:manual_article}.
+
+The dataset is made up by 814 texts of the reports collected in the time period from February to September 2007 using a RSS feed. All the reports are still available on the web site of the Ministry of Interior of the Czech Republic\footnote{\url{http://www.hzscr.cz/hasicien/}}. 
+
+Following URL pattern can be used to obtain a particular report:
+
+
+\begin{center}
+{\footnotesize\verb+http://aplikace.mvcr.cz/archiv2008/rs_atlantic/hasici/REGION/ID.html+}
+\end{center}
+
+For example report 47443 (ID) from Jihomoravský region has following URL:
+
+\begin{center}
+{\footnotesize\verb+http://aplikace.mvcr.cz/archiv2008/rs_atlantic/hasici/jihomoravsky/47443.html+}
+\end{center}
+
+
+The dataset contains reports from eight Czech regions: Jihomoravský (127 reports), Královéhradecký (109 reports), Moravskoslezský (138), Olomoucký (77), Pardubický (95), Plzeňský (97), Ústecký (108) and Vysočina (63). All the reports are written in the Czech language. 
+
+The dataset does not contain any manual annotations; only linguistic annotations produced by PDT tools are included in the dataset (FS format for Netgraph processing and PML format for Btred processing, see Section~\ref{sec:third_pdt_tools_and_resources} for details about these tools). Table~\ref{tab:data_fire_without} summarizes some properties (described bellow) of the dataset’s reports.  Total sum, average value, standard deviation, minimum, maximum and median of the values can be found in the table.
+
+
+
+\begin{description}
+	\item[Text size] is the length of the text of a particular report in characters. More precisely it is the size of the corresponding ``.txt'' file. ISO-8859-2 (Latin-2) character encoding is used in these files so the number of characters is the same as the file size in bytes. 
+	\item[Number of words] in a particular report is counted using UNIX command ``wc -w''.
+	\item[Annotations size] expresses the number of bytes used by the corresponding linguistic annotations of a particular report. Only annotations in FS format are counted (PML files are not included in these numbers).
+	\item[Number of trees] is the number of tectogrammatical trees in a particular report. The number also corresponds with the number of sentences in the report.
+\end{description}
+
+
+The dataset was used for a quantitative evaluation experiment described in Section~\ref{sec:manual_quant_experiment}. 
+
 
 
 \subsection{Czech Fireman Reports Manually Annotated} \label{sec:data_fireman_annotated}
@@ -164,14 +167,14 @@ Individual annotation types will be briefly described in the rest of this sectio
 	\item[`professional\_unit'] annotates mentions of professional fireman units that intervened in the particular accident.
 	\item[`cars'] annotates mentions of cars damaged during the particular accident.
 	\item[`end'] annotates mentions of the time when the whole operation of fireman units finished.  
-	\item[`end\_subtree'] was obtained by the subtree postprocessing of `end' annotations. This was necessary because `end' annotations were not annotated consistently -- sometimes they included only the numeric representation of the time, sometimes they included also the unit; e.g. `16:10' versus `16:10 hours'. 'end\_subtree' always include the time unit (if available in text).
+	\item[`end\_subtree'] was obtained by the subtree postprocessing of `end' annotations. This was necessary because `end' annotations were not annotated consistently -- sometimes they include only the numeric representation of the time, sometimes they include also the unit; e.g. `16:10' versus `16:10 hours'. 'end\_subtree' always include the time unit (if available in text).
 	\item[`start'] annotates mentions of the time when the accident started or was reported to firemen.  
 	\item[`injuries'] annotates mentions of people being injured during the accident. 
 	\item[`amateur\_unit'] annotates mentions of voluntary fireman units that intervened in the particular accident.
 	\item[`damage'] annotates mentions of money amounts representing the total damage sought by the accident.
 	\item[`pipes'] annotates numbers of fireman pipes or fire hoses used during the accident.
 	\item[`professional\_units'] annotates numbers of professional fireman units intervening during the accident.
-	\item[`fatalities'] annotates mentions of people who died during or after the accident. 
+	\item[`fatalities'] annotates mentions of people who died during or shortly after the accident. 
 	\item[`units'] annotates numbers of all (professional or voluntary) fireman units intervening during the accident.
 	\item[`aqualung'] annotates mentions of an aqualung (or breathing apparatus) used during the accident.
 	\item[`duration'] annotates mentions of the time duration of the whole action or operation.  
@@ -226,7 +229,7 @@ amateur\_units & 1 & no\\
 lather & 1 & no\\
 \hline
 \end{tabular}
-\caption{Dataset \ref{sec:data_fireman_annotated} -- \nameref{sec:data_fireman_annotated} -- manual annotations} \label{tab:data_fire_with}
+\caption{\nameref{sec:data_fireman_annotated} -- counts of manual annotations} \label{tab:data_fire_with}
 \end{table}
 
 
@@ -272,7 +275,7 @@ sellercode & 136 & no\\
 status & 461 & no\\
 \hline
 \end{tabular}
-\caption{Dataset \ref{sec:data_corporate_acquisitions} -- \nameref{sec:data_corporate_acquisitions} -- manual annotations} \label{tab:data_acquisitions}
+\caption{\nameref{sec:data_corporate_acquisitions} -- counts of manual annotations} \label{tab:data_acquisitions}
 \end{table}
 
 
@@ -289,18 +292,18 @@ Also this dataset is of the kind of \emph{event extraction encoded as entity rec
 
 \subsection{RDF Dataset Based on Czech Fireman Reports} \label{sec:data_rdf_fireman}
 
-Both reasoning datasets presented in this work are based on information extraction tasks. The datasets were created for evaluation of the idea of shareable extraction ontologies (see Section~\ref{sec:onto_extraction_ontologies}). The datasets consists of so called document ontologies -- RDF representation of source documents (see Section~\ref{sec:onto_doc_ont}) and extraction ontologies -- RDF representation of extraction rules (see Section~\ref{sec:onto_extraction_ontologies}). Besides that there are also small mapping ontologies that solve small differences of the schemas used in document and extraction ontologies.
+Both reasoning datasets presented in this work are based on information extraction tasks. The datasets were created for evaluation of the idea of shareable extraction ontologies (see Section~\ref{sec:onto_extraction_ontologies}). The datasets consists of so called document ontologies -- RDF representation of source documents (see Section~\ref{sec:onto_doc_ont}) and extraction ontologies -- RDF representation of extraction rules (see Section~\ref{sec:onto_extraction_ontologies}). Besides that there are also small mapping ontologies that solve small differences of the schemas used in documents and extraction ontologies.
 
 The reasoning task is to combine the three kinds of ontologies and infer all instances that should be found by the extraction rules saved in the particular extraction ontology, for details see the Section~\ref{sec:onto_experiment}.
 
-This dataset is based on the IE dataset \sectiondoubleref{sec:data_fireman_annotated}; it consists of 50 document ontologies, one mapping ontology and currently one extraction ontology, which contains extraction rules for the `damage' task -- to find an amount (in CZK - Czech Crowns) of summarized damage arisen during a reported accident.
+This dataset is based on the IE dataset \sectiondoubleref{sec:data_fireman_annotated}. It consists of 50 document ontologies, one mapping ontology and, currently, one extraction ontology, which contains extraction rules for the `damage' task -- to find an amount (in CZK - Czech Crowns) of summarized damage arisen during a reported accident.
 
 Section~\ref{sec:onto_datasets} provides also some additional information (basic statistics) about the dataset.
 
 
 \subsection{RDF Dataset Based on Corporate Acquisition Events} \label{sec:data_rdf_acquisitions}
 
-This is the second reasoning dataset presented in this work. The dataset is very similar to the previous one (see details in the previous section). It is based on the information extraction dataset \sectiondoubleref{sec:data_corporate_acquisitions}. It consists of 600 document ontologies, one mapping ontology and currently one extraction ontology, which contains extraction rules for the `acquired' task.
+This is the second reasoning dataset presented in this work. The dataset is very similar to the previous one (see details in the previous section). It is based on the information extraction dataset \sectiondoubleref{sec:data_corporate_acquisitions}. It consists of 600 document ontologies, one mapping ontology and, currently, one extraction ontology, which contains extraction rules for the `acquired' task.
 
 Section~\ref{sec:onto_datasets} provides also some additional information (basic statistics) about the dataset.
 
@@ -308,7 +311,7 @@ Section~\ref{sec:onto_datasets} provides also some additional information (basic
 
 \subsection{Classification Dataset Based on Czech Fireman Reports} \label{sec:data_classify_fireman}
 
-The development of the Fuzzy ILP Classifier was partly motivated by the possibility of doing seriousness classification of accidents presented in the reports described in previous sections. We selected the same collection of 50 web reports as in the previous section and we manually extracted values of the most interesting features (These features will be described in Section \ref{sec:data_features}.) We also assigned a value of overall ranking of seriousness of the presented accident to each report.  The value of seriousness ranking is the target attribute of the classification task. 
+The development of the Fuzzy ILP Classifier was partly motivated by the possibility of doing seriousness classification of accidents presented in the reports described in previous sections. We selected the same collection of 50 web reports as in the dataset \nameref{sec:data_fireman_annotated} and we manually extracted values of the most interesting features (These features will be described bellow.) We also assigned a value of overall ranking of seriousness of the presented accident to each report.  The value of seriousness ranking is the target attribute of the classification task. 
 
 %The main experiment presented in this chapter leads to the . %Our long term goal is extraction of semantic information from web reports. 
 %which is one of possible utilizations of the extracted information. 
@@ -384,23 +387,14 @@ Table~\ref{fig:data_attributes_description} summarizes all features (or attribut
 	\item \verb+lather+, \verb+aqualung+ and \verb+fan+ (ventilator) indicates whether these devices were used.
 \end{itemize}
 
-A majority of accidents are of the type \verb+fire+ (52\%)
-and \verb+car_accident+ (30\%),
+The majority of accidents are of the type \verb+fire+ (52\%)
+or \verb+car_accident+ (30\%),
 the rest (type \verb+other+, 18\%)
 deals with ecological disasters, chemical accidents, etc.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Seriousness Ranking} \label{sec:data_seriousness}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%\vspace{0.2cm}
-%\noindent \textbf{Seriousness ranking}
-
-\begin{figure}
-\centerline{\includegraphics[angle=-90, width=0.6\hsize]{ranking_histogram}}
-\caption{Frequencies of the seriousness ranking.}
-\label{fig:data_ranking_histogram}
-\end{figure}
 
 Values of the overall seriousness ranking attribute were stated from ``a general impression'' made by the texts with respect to particular attributes. %(Figure~\ref{fig:attributes_description}). 
 The values have evolved to 14 distinct values in the range from 0.5 to 8. 
@@ -412,6 +406,15 @@ and these groups determine the target class attribute of the classification task
 
 
 
+
+%\vspace{0.2cm}
+%\noindent \textbf{Seriousness ranking}
+
+\begin{figure}
+\centerline{\includegraphics[angle=-90, width=0.6\hsize]{ranking_histogram}}
+\caption{Frequencies of the seriousness ranking.}
+\label{fig:data_ranking_histogram}
+\end{figure}
 
 
 
