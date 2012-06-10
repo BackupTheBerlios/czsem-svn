@@ -8,7 +8,7 @@ Four relatively separate topics are presented in the present thesis and the disc
 
 The first two topics are focused on our information extraction methods based on deep language parsing. The first topic relates to how deep language parsing was used in our first method in combination with manually designed extraction rules.
 
-The second topic deals with an alternative extraction method based on machine learning. An inductive procedure was developed based on Inductive Logic Programming, which allows automated learning of extraction rules from a learning collection.
+The second topic deals with an alternative extraction method based on machine learning. An inductive procedure was developed based on Inductive Logic Programming (ILP), which allows automated learning of extraction rules from a learning collection.
 
 The idea of the Semantic Web was the strongest motivation of our research from the very beginning. We wanted to exploit information extraction techniques to speed up the semantic web evolution. The third topic of the thesis presents even more than that. The core of the extraction method was experimentally reimplemented using semantic web technologies. Therefore not only the result of information extraction but also the extraction procedure itself is realized using semantic web technologies. The main advantage of this approach is the possibility to save the extraction rules in so called shareable extraction ontologies.
 
@@ -58,11 +58,11 @@ Let us briefly summarize the main contributions of the present work.
 
 Novel and original approaches or adaptations of existing ones are presented in this work.
 
-The extraction method based on manually designed extraction rules is unique in the high expressiveness of extraction rules and the existence GUI for graphical design of these rules, both of these benefits are brought by the existence of the linguistic tool Netgraph, which was exploited as the core of the extraction method.
+The extraction method based on manually designed extraction rules is unique in the high expressiveness of extraction rules and the existence GUI (Graphical User Interface) for graphical design of these rules, both of these benefits are brought by the existence of the linguistic tool Netgraph (Section~\ref{sec:third_netgraph}), which was exploited as the core of the extraction method.
 
-Very similar approaches to our extraction method based on ILP were already reported in literature, but they were developed partly in parallel with our solution and they do not provide a publicly available and usable implementation. The method also represents the first attempt to use PDT resources (e.g. tectogrammatical trees) in the area of information extraction and the evaluation on the language pair of Czech and English demonstrates its language independence.
+Very similar approaches to our extraction method based on ILP were already reported in literature, but they were developed partly in parallel with our solution and they do not provide a publicly available and usable implementation. The method also represents the first attempt to use PDT (Prague Dependency Treebank) resources (e.g. tectogrammatical trees, Sections~\ref{sec:third_pdt_tools_and_resources}) in the area of information extraction. Evaluation of the method on the language pair of Czech and English demonstrates its language independence.
 
-The topic of shareable extraction ontologies introduces completely new paradigm to the design and usage of extraction ontologies. The usage of a semantic web reasoner as the interpreter of an extraction ontology has never been demonstrated before.
+The topic of shareable extraction ontologies introduces completely new paradigm to the design and usage of extraction ontologies \citep{DBLP:conf/er/EmbleyTL02}. The usage of a semantic web reasoner as the interpreter of an extraction ontology has never been demonstrated before.
 
 Last but not least, the attempt to use information extracted from a document for document classification is also reported for the first time, although our attention is more focused on the implementation and evaluation of the Fuzzy ILP Classifier based on the sound theory of fuzzy ILP.
 
@@ -72,13 +72,13 @@ Last but not least, the attempt to use information extracted from a document for
 
 As a part of our work, new publicly available implementation of the described methods was created. 
 
-A simple and extensible API interface to the extraction method based on manually designed extraction rules is provided such that users can design extraction rules in the Netgraph GUI and evaluate them on the whole corpus. 
+A simple and extensible API (Application Programming Interface) interface of the extraction method based on manually designed extraction rules is provided such that users can design extraction rules in the Netgraph GUI and evaluate them on the whole corpus using this interface. 
 
-The extraction method based on ILP is fully integrated in GATE and it can be used as any other machine learning algorithm in GATE. Moreover integration of TectoMT linguistic tools as well as Netgraph tree viewer in GATE was implemented. The implementation also provides a framework for  comparative information extraction experiments using the cross-validation technique and investigation of statistical significance. 
+The extraction method based on ILP is fully integrated in GATE (a widely used framework for text engineering; Section~\ref{sec:third_gate}) and it can be used as any other machine learning algorithm inside the framework. Moreover integration of TectoMT linguistic tools (Section~\ref{sec:third_tectomt}) as well as the Netgraph tree viewer (Section~\ref{sec:learning_GATE_Netgraph}) to the GATE framework was realized. Our implementation also provides utility functions for  comparative information extraction experiments using the cross-validation technique and investigation of statistical significance. 
 
 The implementation of the case study with shareable extraction ontologies is not that general as the rest of the software part of our work but it can be easily followed and reproduced in similar experiments.
 
-The implementation of the Fuzzy ILP Classifier is fully compatible with Weka and it can be used as any other Weka classifier, it also provides the possibility of custom integration of the classifier to an existing installation of the Weka system on the user's computer.
+The implementation of the Fuzzy ILP Classifier (Section~\ref{sec:fuzzy_impl}) is fully compatible with Weka (a widely used framework for machine learning experiments; Section~\ref{sec:third_weka}) and it can be used as any other Weka classifier, it also provides the possibility of custom integration of the classifier to an existing installation of the Weka system on the user's computer.
 
 \subsection{New Data}
 
@@ -86,7 +86,7 @@ Several new datasets were established as a part of our work. See the complete li
 
 \subsection{Exploitation of Existing Resources}
 
-Work of other researchers was exploited, extended and/or evaluated in the present work. For example our extraction methods represent the first application of PDT resources (e.g. Netgraph, tectogrammatical trees, etc.) in the area of information extraction. See also the description of experiments performed with the PAUM extraction algorithm, with various semantic web reasoners, Weka classifiers, etc. in Chapter~\ref{sec:ch_eval}.
+Work of other researchers was exploited, extended and/or evaluated in the present work. For example our extraction methods represent the first application of PDT resources (e.g. Netgraph, tectogrammatical trees, etc.) in the area of information extraction. See also the description of experiments performed with the PAUM extraction algorithm (Section~\ref{sec:learning_eval_PAUM}), with various semantic web reasoners (Section~\ref{sec:onto_reasoners}), Weka classifiers (Section~\ref{sec:fuzzy_eval}), etc.
 
 \subsection{Evaluation Experiments}
 
@@ -94,16 +94,16 @@ All approaches presented in this thesis were evaluated such that readers can obt
 
 \subsection{Publications and New Publicly Available Resources}
 
-Majority of topics presented in this thesis were already published (going through peer review process), presented and discussed with public audience. Moreover several citations can be found in the literature showing that the work is already contributing to the generally available knowledge. See the complete list of publications in the appendix, Chapter~\ref{sec:my_publications}.
+Majority of topics presented in this thesis were already published (going through peer review process), presented and discussed with international audience. Moreover several citations can be found in the literature showing that the work is already contributing to the generally available knowledge. See the complete list of publications in the appendix, Chapter~\ref{sec:my_publications}.
 
-Also the software and data parts of our work are publically available on the web, Section~\ref{sec:download_notes} provides all URLs leading to these resources.  
+Also the software and data parts of our work are publically available on the web, Section~\ref{sec:download_notes} provides details about the availability of these resources.  
 
 
 \section{Organization}
 
-Rather than presenting individual topics or approaches of this thesis separately in distinct chapters, we decided to organize this document according to common aspects of these approaches and to dedicate individual chapters to these aspects instead of individual approaches. This way, all the (four) approaches are described in parallel in each chapter. 
+Rather than presenting individual topics or approaches of this thesis separately in distinct chapters, we decided to organize this document according to common aspects of these approaches and to dedicate individual chapters to these aspects instead of  approaches. This way, all the (four) topics are described in parallel in each chapter. 
 
-Chapter~\ref{sec:ch_problems} provides definitions of the individual problems and consequent tasks solved in this thesis.
+Chapter~\ref{sec:ch_problems} provides definitions of the individual problems and consequent tasks solved later in this thesis.
 Chapter~\ref{sec:ch_related} contains description of the most related work of other scientists.
 Chapter~\ref{sec:ch_third_party} introduces the most important third party tools and resources that were used in our research.
 Chapter~\ref{sec:ch_methods} describes solutions, used models and methods of the individual approaches presented in this thesis.

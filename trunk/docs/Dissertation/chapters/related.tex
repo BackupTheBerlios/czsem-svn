@@ -1,6 +1,6 @@
 \chapter{Related Work} \label{sec:ch_related}
 
-This chapter shortly introduces mostly related work of other researchers. The chapter is split to three main sections. Section~\ref{sec:relwork_doc_classification} is dedicated to information extraction approaches, Section~\ref{sec:relwork_ext_ont} to extraction ontologies and Section~\ref{sec:relwork_doc_classification} to document classification.
+This chapter shortly introduces mostly related work of other researchers. The chapter is split to three main sections. Section~\ref{sec:relwork_ie} is dedicated to information extraction approaches, Section~\ref{sec:relwork_ext_ont} to extraction ontologies and Section~\ref{sec:relwork_doc_classification} to document classification.
 
 \section{Information Extraction Approaches} \label{sec:relwork_ie}
 
@@ -9,9 +9,9 @@ This chapter shortly introduces mostly related work of other researchers. The ch
 \begin{quotation}
 The choice of the actual learning algorithm depends on the type of structural information available. For example, deep syntactic information provided by current parsers for new types of corpora such as biomedical text is seldom reliable, since most parsers have been trained on different types of narrative. If reliable syntactic information is lacking, sequences of words around and between the two entities can be used as alternative useful discriminators. \citep{Bunescu:phd}
 \end{quotation}
-Since that time, the situation has improved and deep linguistic parsing is often used even for biomedical texts (because new biomedical corpora are available for retraining of the parsers; see e.g. in \citep{Buyko:2010:EIA:1870658.1870754}) and  dependency graphs constitute the fundamental data structure for syntactic structuring and subsequent knowledge extraction from natural language documents in many contemporary approaches to information extraction (see details about individual information extraction systems in Section~\ref{sec:relwork_deep_IE_systems}). Currently, quite a lot of parsers can be used for generation of these structures from natural language texts. 
+Since that time, the situation has improved and deep linguistic parsing is often used even for biomedical texts (because new biomedical corpora are available for retraining of the parsers; see e.g. in \citep{Buyko:2010:EIA:1870658.1870754}) and  dependency graphs constitute the fundamental data structure for syntactic structuring and subsequent knowledge extraction from natural language documents in many contemporary approaches to information extraction (see details about individual information extraction systems in Section~\ref{sec:relwork_deep_IE_systems}). 
 
-Besides the possibility of using different parsers there are also various language dependency representations (LDR) such as the Stanford \citep{stanfordDeps} and CoNLL-X \citep{johansson2007a} dependencies and the Functional Generative Description (FGD) \citep{SgallHajicovaPanevova1986} studied mainly in Prague. All the dependency representations are very similar from the structural point of view; they differ mainly in the number of different dependency kinds they offer. FGD provides also additional node attributes and so called layered approach (see in Section~\ref{sec:third_pdt}) and is the only representation available for Czech.
+Currently, quite a lot of parsers can be used for generation of syntactic dependency structures from natural language texts. Some of them will be briefly described in Section~\ref{sec:third_ling_tools}. Besides the possibility of using different parsers there are also various language dependency representations (LDR) such as the Stanford \citep{stanfordDeps} and CoNLL-X \citep{johansson2007a} dependencies and the Functional Generative Description (FGD) \citep{SgallHajicovaPanevova1986} studied mainly in Prague. All the dependency representations are very similar from the structural point of view; they differ mainly in the number of different dependency kinds they offer. FGD provides also additional node attributes and so called layered approach (see in Section~\ref{sec:third_pdt}) and is the only representation available for Czech.
 
 
 It is also worthy to investigate the impact of usage of different LDRs on the performance of information extraction. \cite{Buyko:2010:EIA:1870658.1870754} compared the impact of different LDRs and parsers in their IE system, namely Stanford and CoNLL-X dependencies and usage of different trimming operations. Their findings are definitely not supporting one choice against another because one representation was better for some tasks and another one for other tasks, see examples in their paper. More important seems to be the quality of used parser.
@@ -30,10 +30,11 @@ There are many systems using hand crafted extraction rules based on LDR. These s
 
 \subsubsection{Classical Machine Learning Systems}
 
-Classical machine learning (ML) approaches rely on the existence of a learning collection. They usually use LDR just for construction of learning features for propositional learners like decision trees, neural networks, support vector machines (SVM), etc. Learning features are selected manually when the system is being adapted to new domain or extraction task. For example in \citep{Bunescu:DependencyPaths}, learning features based on so called dependency paths constructed from LDR are used for relation extraction. Similar approach was used in \citep{Buyko:dependencyGraphs} for biomedical event extraction.
+Classical machine learning (ML) approaches rely on the existence of a learning collection. They usually use LDR just for construction of learning features for propositional learners like decision trees, neural networks, SVM, etc. Learning features are selected manually when the system is being adapted to new domain or extraction task. For example in \citep{Bunescu:DependencyPaths}, learning features based on so called dependency paths constructed from LDR are used for relation extraction. Similar approach was used in \citep{Buyko:dependencyGraphs} for biomedical event extraction.
 
 
-\citep{Yaoyong09a} described machine learning facilities available in GATE. This approach is an example of classical adaptation of propositional learners for information extraction. It should be noted that GATE itself does not provide any prebuilt functions for working with LDR but they can be added as they were in our case (see in Section~\ref{sec:LDR_in_GATE}). This is also the software component (GATE Machine Learning PR) to that we have compared our solution. 
+\citep{Yaoyong09a} described machine learning facilities available in GATE. This approach is an example of classical adaptation of propositional learners for information extraction, but it is not necessarily connected with LDR. GATE itself does not provide any prebuilt functions for working with LDR but they can be added as they were in our case (see in Section~\ref{sec:LDR_in_GATE}). 
+%This is also the software component (GATE Machine Learning PR) to that we have compared our solution. 
 %Our solution is also based on GATE (See next sections.)
 
 
@@ -66,9 +67,10 @@ set of relational tuples without requiring any human input (e.g. without the def
 
 
 \subsection{Inductive Logic Programming and Information Extraction}
+
 There are many users of ILP in the linguistic and information extraction area.
-For example in \citep{stasinos:phd} ILP was used for shallow parsing and phonotactics.
-Authors of \citep{Junker99learningfor} summarized some basic principles of using ILP for learning from text without any linguistic preprocessing. One of the most related approaches to ours can be found in \citep{aitken02:_learn_infor_extrac_rules}. The authors use ILP for extraction of information about chemical compounds and other concepts related to global warming and they try to express the extracted information in terms of ontology. They use only the part of speech analysis and named entity recognition in the preprocessing step. But their inductive procedure uses also additional domain knowledge for the extraction. In \citep{DBLP:conf/ilp/RamakrishnanJBS07} ILP was used to construct good features for propositional learners like SVM to do information extraction. It was discovered that this approach is a little bit more successful than a direct use of ILP but it is also more complicated. The later two approaches could be also employed in our solution.
+For example \cite{stasinos:phd} used ILP for shallow parsing and phonotactics.
+\cite{Junker99learningfor} summarized some basic principles of using ILP for learning from text without any linguistic preprocessing. One of the most related approaches to ours was described by \cite{aitken02:_learn_infor_extrac_rules}. The authors use ILP for extraction of information about chemical compounds and other concepts related to global warming and they try to express the extracted information in terms of ontology. They use only the part of speech analysis and named entity recognition in the preprocessing step. But their inductive procedure uses also additional domain knowledge for the extraction. \cite{DBLP:conf/ilp/RamakrishnanJBS07} used ILP to construct good features for propositional learners like SVM to do information extraction. It was discovered that this approach is a little bit more successful than a direct use of ILP but it is also more complicated. The later two approaches could be also employed in our solution.
 
 
 \subsection{Directly Comparable Systems} \label{sec:relwork_directly_comparable}
@@ -94,7 +96,7 @@ token, e.g. the contextual (previous or next) tokens of the input tokens. The le
 
 \subsubsection{HMM}
 
-\cite{Freitag1999InformationExtraction} described how Hidden Markov Models (HMM) can be successfully applied to information extraction. They used a statistical technique called \emph{shrinkage} for balancing the trade-of between the complexity of models and small quantifies of available training data. The combination of shrinkage with appropriately designed model topologies yields a learning algorithm comparable with the state of the art systems.
+\cite{Freitag1999InformationExtraction} described how Hidden Markov Models can be successfully applied to information extraction. They used a statistical technique called \emph{shrinkage} for balancing the trade-of between the complexity of models and small quantifies of available training data. The combination of shrinkage with appropriately designed topologies yields a learning algorithm comparable with the state of the art systems.
 
 The authors do not report usage of any additional linguistic resources like WordNet, POS tagger or syntactical parser.
 
@@ -104,17 +106,17 @@ Elie \citep{DBLP:conf/ecml/FinnK04} is another representative of a classical pro
 
 The multilevel boundary classification approach consists in a combination of the predictions of two sets of classifiers, one set (L1) with high precision and one (L2) with high recall. The L1 classifiers adopt the the standard ``IE as classification'' approach. L2 uses a second level of ``biased'' classifiers trained only on surrounding tokens of positive learning instances.
 
-The authors used Brill's POS tagger \citep{Brill:1994:ATP:199288.199378} providing, apart from POSs, also chunking information (noun-phrases, verb-phrases) about the tokes. Their second resource was a gazetteer list containing U.S. fist-names and last-names, list of countries, cities, streets, titles, etc. 
+The authors used Brill's POS tagger \citep{Brill:1994:ATP:199288.199378} providing, apart from POSs, also chunking information (noun-phrases, verb-phrases) about the tokes. Their second resource was a gazetteer list containing U.S. fist-names and last-names, list of countries, cities, streets, titles, etc. See the details in their paper.
 
 \subsubsection{SVM with ILP Feature Induction}
 
 We already mentioned the work of \cite{DBLP:conf/ilp/RamakrishnanJBS07} in previous sections. Once because they used deep language parsing (MINIPAR parser \citep{minipar}) and once because they used ILP. Their approach is very close to ours and it is even more complex. Instead of using ILP directly for the construction of extraction rules, they used ILP just for construction of good learning features for SVM classifier. They also used WordNet as a source of additional information. 
 
-Surprising fact about their solution is that it was not that much successful as one would expect (see the results in Section~\ref{sec:learning_eval_acq_third}), especially when compared with the relatively simple solution of the PAUM algorithm that we have been experimenting with. It could be caused by the usage of different version of the dataset or by too large number of learning features (the authors reported up to 20,000 features).
+Surprising fact about their solution is that it was not that much successful as one would expect (see the results in Section~\ref{sec:learning_eval_acq_third}), especially when compared with the relatively simple solution of the PAUM algorithm that we have been experimenting with. It could be caused by the usage of different version of the dataset or by too large number of learning features (the authors reported up to 20,000 learning features).
 
 
 \subsection{Semantic Annotation}
-Last category of information extraction related work goes in the direction of semantics and ontologies. \cite{Bon04b} described  ontology features in GATE. They can be easily used to populate an ontology with the extracted data. We discus this topic later in Section~\ref{sec:learning_SemanticInterpretation}.
+Last category of related work goes in the direction of semantics and ontologies. \cite{Bon04b} described  ontology features in GATE. They can be easily used to populate an ontology with extracted data. We discus this topic later in Section~\ref{sec:learning_SemanticInterpretation}.
 
 See also references to related work connected with ontologies and information extraction in the following section. 
 
@@ -123,14 +125,14 @@ See also references to related work connected with ontologies and information ex
 \section{Extraction Ontologies} \label{sec:relwork_ext_ont}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Ontology-based Information Extraction (OBIE) \citep{citeulike:7291004} or Ontology-driven Information Extraction \citep{Yildiz:2007:OMO:1793154.1793216} has recently emerged as a subfield of information extraction. Furthermore, Web Information Extraction \citep{biblio:Survey_of_Web_Information_Extraction_Systems} is a closely related discipline. Many extraction and annotation tools can be found in the above mentioned surveys (\citep{biblio:Survey_of_Web_Information_Extraction_Systems}), many of the tools also use an ontology as the output format, but almost all of them store their extraction models in proprietary formats and the models are accessible only by the corresponding tool.
+Ontology-based Information Extraction (OBIE) \citep{citeulike:7291004} or Ontology-driven Information Extraction \citep{Yildiz:2007:OMO:1793154.1793216} has recently emerged as a subfield of information extraction. Furthermore, Web Information Extraction \citep{biblio:Survey_of_Web_Information_Extraction_Systems} is a closely related discipline. Many extraction and annotation tools can be found in the above mentioned surveys (\cite{biblio:Survey_of_Web_Information_Extraction_Systems}). Many of the tools also use an ontology as the output format, but almost all of them store their extraction models in proprietary formats and the models are accessible only by the corresponding tool.
 
-In the literature we have found only two approaches that use extraction ontologies. The former one was published by D. Embley \citep{DBLP:conf/er/EmbleyTL02,Embley:2004:TSU:1012294.1012295}
+In the literature, we have found only two approaches that use extraction ontologies. The former one was published by D. Embley \citep{DBLP:conf/er/EmbleyTL02,Embley:2004:TSU:1012294.1012295}
 and the later one -- IE system Ex\footnote{\url{http://eso.vse.cz/~labsky/ex/}} was developped by M. Labsk\'{y} \citep{springerlink:10.1007/978-3-642-01891-6_5}. 
 But in both cases the extraction ontologies are dependent on the particular tool and they are kept in XML files with a proprietary structure.
 
 
-By contrast authors of \citep{citeulike:7291004} (a recent survey of OBIE systems) do not agree with allowing for extraction rules to be a part of an ontology. They use two arguments against that:
+By contrast \cite{citeulike:7291004} (a recent survey of OBIE systems) do not agree with allowing for extraction rules to be a part of an ontology. They use two arguments against that:
 \begin{enumerate}
 	\item Extraction rules are known to contain errors (because they are never 100\% accurate), and objections can be raised on their inclusion in ontologies in terms of formality and accuracy.
 
@@ -141,13 +143,13 @@ The authors then conclude that either all information extractors (that use diffe
 
 
 
-Concerning the first argument, we have to take into account that extraction ontologies are not ordinary ontologies, it should be agreed that they do not contain 100\% accurate knowledge. Also the estimated accuracy of the extraction rules can be saved in the extraction ontology and it can then help potential users to decide how much they will trust the extraction ontology.
+Concerning the first argument, we have to take into account that extraction ontologies are not ordinary ontologies, it should be agreed that they do not contain 100\% accurate knowledge. The estimated accuracy of the extraction rules can be saved in the extraction ontology and it can then help potential users to decide how much they will trust the extraction ontology.
 
-Concerning the second argument, we agree that in the case of complex classification based models (SVM, HMM, CRF, etc.) serialization of such model to RDF does not make much sense (cf. the next section). But on the other hand we think that there are cases when shareable extraction ontologies can be useful and in the context of Linked Data\footnote{\url{http://linkeddata.org/}} providing shareable descriptions of information extraction rules may be valuable. It is also possible that new standard ways how to encode such models to an ontology will appear in the future.
+Concerning the second argument, we agree that in the case of complex classification based models (SVM, HMM, CRF, etc.) serialization of such model to RDF does not make much sense (cf. Section~\ref{sec:onto_tasks}). But on the other hand we think that there are cases when (shareable) extraction ontologies can be useful and in the context of Linked Data\footnote{\url{http://linkeddata.org/}} providing shareable descriptions of information extraction rules may be valuable. It is also possible that new standard ways how to encode such models to an ontology will appear in the future.
 
 
 %it is not always possible to save an extraction model to an ontology (at least not currently). \subsection{Notes on Ontology Definitions}
-This short section briefly reminds main ontology definitions because they are touched and in a sense misused in this chapter. The most widely agreed definitions of an ontology emphasize the shared aspect of ontologies: 
+Let us briefly remind main ontology definitions because they are touched and in a sense misused in our work on shareable extraction ontologies. The most widely agreed definitions of an ontology emphasize the shared aspect of ontologies: 
 \begin{quote}
 An ontology is a formal specification of a shared conceptualization.	\citep{so17864}
 \end{quote}
@@ -156,7 +158,7 @@ An ontology is a formal specification of a shared conceptualization.	\citep{so17
 An ontology is a formal, explicit specification of a shared conceptualization. \citep{Studer1998161}
 \end{quote}
 
-Of course the word `shareable' has different meaning from `shared'. (Something that is shareable is not necessarily shared, but on the other hand something that is shared should be shareable.) We do not think that shareable extraction ontologies will contain shared knowledge about how to extract data from documents in certain domain. This is for example not true for all extraction models artificially learned from a training corpus. Here shareable simply means that the extraction rules can be shared amongst software agents and can be used separately from the original tool. This is the deviation in use of the term `ontology' in the context of extraction ontologies in this chapter (similarly for document ontologies, see in Section~\ref{sec:onto_doc_ont}).
+Of course the word `shareable' has different meaning from `shared'. (Something that is shareable is not necessarily shared, but on the other hand something that is shared should be shareable.) We do not think that shareable extraction ontologies will contain shared knowledge about how to extract data from documents in certain domain. This is for example not true for all extraction models artificially learned from a training corpus. Here shareable simply means that the extraction rules can be shared amongst software agents and can be used separately from the original tool. This is the deviation in use of the term `ontology' in the context of (shareable) extraction ontologies (similarly for ``document ontologies'', see in Section~\ref{sec:onto_doc_ont}).
 
 
 
@@ -169,14 +171,14 @@ Of course the word `shareable' has different meaning from `shared'. (Something t
 
 \subsection{General Document Classification}
 
-There are plenty of systems dealing with text mining and text classification. In \citep{biblio:ReYaLiOntoText08} the authors use ontology modeling to enhance text identification. The authors of \citep{biblio:CAP} use preprocessed data from National Automotive Sampling System and test various soft computing methods to model severity of injuries (some hybrid methods showed best performance). Methods of Information Retrieval (IR) are numerous, with extraction mainly based on key word search and similarities. The Connection of IR and text mining techniques with web information retrieval can be found in the chapter ``Opinion Mining'' in the book of Bing Liu \citep{biblio:WebDataMining}. 
+There are plenty of systems dealing with text mining and text classification. \cite{biblio:ReYaLiOntoText08} use ontology modeling to enhance text identification. \cite{biblio:CAP} use preprocessed data from National Automotive Sampling System and test various soft computing methods to model severity of injuries (some hybrid methods showed best performance). Methods of Information Retrieval (IR) are numerous, mainly based on key word search and similarities. The Connection of IR and text mining techniques with web information retrieval can be found in the chapter ``Opinion Mining'' in the book of Bing \cite{biblio:WebDataMining}. 
 
 \subsection{ML Classification with Monotonicity Constraint}
 The Fuzzy ILP Classifier can be seen as an ordinary classifier for data with the monotonicity constraint (the target class attribute has to be monotonizable -- a natural ordering has to exist for the target class attribute). There are several other approaches addressing the classification problems with the monotonicity constraint.
 
 The CART-like algorithm for decision tree construction does not guarantee a resulting monotone tree even on a monotone dataset. The algorithm can be modified \citep{biblio:mon_trees} to provide a monotone tree on the dataset by adding the corner elements of a node with an appropriate class label to the existing data whenever necessary.
 
-An interesting approach is presented in \citep{biblio:mon_transf}: first, the dataset is ``corrected'' to be monotone (a minimal number of target class labels is changed to get a monotone dataset), then a learning algorithm (linear programming boosting in the cited paper) is applied.
+An interesting approach was presented by \cite{biblio:mon_transf}: first, the dataset is ``corrected'' to be monotone (a minimal number of target class labels is changed to get a monotone dataset), then a learning algorithm (linear programming boosting in the cited paper) is applied.
 
 Several other approaches to monotone classification have been presented, including instance based learning \citep{biblio:ibl} and rough sets \citep{biblio:rough_sets}.
 
