@@ -138,7 +138,7 @@ Next question, that naturally emerges, is: How would be the performance if the r
 The results are summarized in Table~\ref{tab:manual_damage_manual_eval}. Both kinds of rules (manually designed and learned by ILP) performed the same (recall: 0.71, precision: 1); both the methods correctly found 5 instances and they were both unable to find 2 instances. From the cross coverage comparison in 
 Table~\ref{tab:manual_damage_cross_method} it is apparent that the methods agreed on 4 instances and each method was able to discover one instance that the other did not discover. Such results could be accepted for a practical application but we must not forget the fact that the collection is very small and only a single evidence is provided by the experiment, so it does not provide any statistical significance (getting statistically significant results would require more experiments, preferably  with various datasets, extraction tasks and human designers.) 
 
-%\clearpage
+\clearpage
 
 \section{Evaluation of Learned Rules} \label{sec:learning_eval}
 
@@ -195,39 +195,7 @@ mention(amateur_unit,A) :-
 	\label{fig:learning_eval_rules}
 \end{figure}
 
-In Figure~\ref{fig:learning_eval_rules}, we present the most representative examples of extraction rules learned from the whole dataset \sectiondoubleref{sec:data_fireman_annotated}. The rule with largest coverage for each extraction task was selected and it is provided in the figure. Each rule demonstrates a connection of the target token, annotated as `\emph{mention(task\_name)}’, with other parts of the sentence through linguistic syntax structures. 
-
-For example the second rule (\emph{damage} task, lines 6-9) connects the node A with its tectogrammatical counterpart -- numeral B (\emph{n.quant.def}) and with node D (`vyšetřovatel') representing the investigating officer who stated the mount of damage. 
-
-
-
-\subsection{Evaluation Methods and Measures}
-
-Evaluation experiments have to be preformed repeatedly in order to investigate statistical significance. A dataset consisting of individual documents is randomly split into the training and testing part in each experiment run. The ratio between the training and testing part depends on the size of the dataset. It is important to have enough training data and therefore larger training part and smaller testing part is used if the dataset is too small. The cross validation technique meets exactly this requirement: the more cross validation folds, the greater the ratio. In following sections presenting individual experiments, different numbers of cross validation folds are used according to the sizes of the datasets.
-
-In each experiment run, the performance is evaluated using several performance measures; precision, recall and $F_1$ (harmonic mean of precision and recall) are most often used measures for information extraction experiments. Partially correct (or overlapping) matches can occur when annotations do not match exactly (they are overlapping). Strict, lenient and average variants of performance measures allow dealing with partially correct matches in different ways:
-\begin{itemize}
-	\item     Strict measures considers all partially correct matches as incorrect (spurious).
-	\item     Lenient measures considers all partially correct matches as correct.
-	\item     Average measures takes the average of strict and lenient.
-\end{itemize}
-
-See also the GATE documentation chapter about performance evaluation\footurl{http://gate.ac.uk/userguide/chap:eval}
-and few details about the statistical significance in Section~\ref{sec:conclusion_statsig}.
-
-
-
-\subsection{Comparison with PAUM Classifier} \label{sec:learning_eval_PAUM}
-To compare our solution with other alternatives, we took the PAUM (Perceptron Algorithm with Uneven Margins) propositional learner from GATE \citep{Li:Paum}. The quality of propositional learning from texts is strongly dependent on the selection of right features. We obtained quite good results with features of a window of two preceding and two following token lemmas and morphological tags. The precision was further improved by adding the feature of \emph{analytical function}\footurl{http://ufal.mff.cuni.cz/pdt2.0/doc/manuals/en/a-layer/html/ch03.html\#s1-list-anal-func} from the syntactic parser and information about presence of named entities.
-
-
-%\subsection{Cross validation}
-%We used the 10-fold cross validation in the evaluation. Thanks to this technique the evaluation is simple. After processing all the folds each document is processed with some of the ten learned models such that the particular document was not used in learning of that model, so all documents are unseen by the model applied on them. At the end we just compare the gold standard annotations with the learned ones in all documents.
-
-
-\subsection{Czech Fireman Performance}
-
-\begin{table}[t!]
+\begin{table}[p!]
 \centering 
 \begin{tabular}
 {lcrclcrcl@{\hspace{0.1cm}}cc}
@@ -293,22 +261,45 @@ Task && \multicolumn{3}{c}{ILP}  && \multicolumn{3}{c}{PAUM} && \\
 
 
 
-Table~\ref{tab:learning_eval_fir_perfom} summarizes performance evaluation of our ILP based method and its comparison with PAUM classifier on the dataset \sectiondoubleref{sec:data_fireman_annotated}. The table shows results of the three main evaluation measures: strict precision, strict recall and strict $F_1$ for each extraction task as well as overall results. 8-fold cross validation was performed 8 times in the experiment. Average values and standard deviations are printed in the table and statistical significance is indicated. Root/subtree preprocessing/postprocessing (Section~\ref{sec:learning_root_subtree}) was performed in the first three tasks: `cars’, `damage’ and `end subtree’.
-
-Although the precision of the ILP method was better in the majority of tasks and also its overall precision is statically better than the precision of the PAUM method, its recall was worse in all the measurements and also $F_1$ score is indicating better results of the PAUM method. 
 
 
-Table~\ref{tab:learning_eval_fir_time} provides learning and application (testing) times of the compared methods. It is clear that learning time of the ILP method is many times higher than the time of the PAUM method. For example the `cars’ task took the ILP method approximately three and half minutes while the PAUM method spent only two seconds on it. On the other hand, the testing time of the ILP method is not that much higher than the time of the PAUM method 
-%and once the extraction rules are done, the time requirements of the ILP method are acceptable.
-but we have to notice that these times do not include linguistic preprocessing and deep language parsing needed by the ILP method will increase the time significantly.
 
-Detailed results with much more evaluation measurements including lenient variants are available in the appendix -- Section~\ref{sec:complete_eval_fire}.
+In Figure~\ref{fig:learning_eval_rules}, we present the most representative examples of extraction rules learned from the whole dataset \sectiondoubleref{sec:data_fireman_annotated}. The rule with largest coverage for each extraction task was selected and it is provided in the figure. Each rule demonstrates a connection of the target token, annotated as `\emph{mention(task\_name)}’, with other parts of the sentence through linguistic syntax structures. 
 
-%\clearpage
-%\subsection{Czech Fireman Time}
+For example the second rule (\emph{damage} task, lines 6-9) connects the node A with its tectogrammatical counterpart -- numeral B (\emph{n.quant.def}) and with node D (`vyšetřovatel') representing the investigating officer who stated the mount of damage. 
 
 
-\begin{table}
+
+\subsection{Evaluation Methods and Measures}
+
+Evaluation experiments have to be preformed repeatedly in order to investigate statistical significance. A dataset consisting of individual documents is randomly split into the training and testing part in each experiment run. The ratio between the training and testing part depends on the size of the dataset. It is important to have enough training data and therefore larger training part and smaller testing part is used if the dataset is too small. The cross validation technique meets exactly this requirement: the more cross validation folds, the greater the ratio. In following sections presenting individual experiments, different numbers of cross validation folds are used according to the sizes of the datasets.
+
+In each experiment run, the performance is evaluated using several performance measures; precision, recall and $F_1$ (harmonic mean of precision and recall) are most often used measures for information extraction experiments. Partially correct (or overlapping) matches can occur when annotations do not match exactly (they are overlapping). Strict, lenient and average variants of performance measures allow dealing with partially correct matches in different ways:
+\begin{itemize}
+	\item     Strict measures considers all partially correct matches as incorrect (spurious).
+	\item     Lenient measures considers all partially correct matches as correct.
+	\item     Average measures takes the average of strict and lenient.
+\end{itemize}
+
+See also the GATE documentation chapter about performance evaluation\footurl{http://gate.ac.uk/userguide/chap:eval}
+and few details about the statistical significance in Section~\ref{sec:conclusion_statsig}.
+
+
+
+\subsection{Comparison with PAUM Classifier} \label{sec:learning_eval_PAUM}
+To compare our solution with other alternatives, we took the PAUM (Perceptron Algorithm with Uneven Margins) propositional learner from GATE \citep{Li:Paum}. The quality of propositional learning from texts is strongly dependent on the selection of right features. We obtained quite good results with features of a window of two preceding and two following token lemmas and morphological tags. The precision was further improved by adding the feature of \emph{analytical function}\footurl{http://ufal.mff.cuni.cz/pdt2.0/doc/manuals/en/a-layer/html/ch03.html\#s1-list-anal-func} from the syntactic parser and information about presence of named entities.
+
+
+%\subsection{Cross validation}
+%We used the 10-fold cross validation in the evaluation. Thanks to this technique the evaluation is simple. After processing all the folds each document is processed with some of the ten learned models such that the particular document was not used in learning of that model, so all documents are unseen by the model applied on them. At the end we just compare the gold standard annotations with the learned ones in all documents.
+
+
+
+\subsection{Czech Fireman Performance}
+
+
+
+\begin{table}[b!]
 \centering 
 \begin{tabular}
 {lcrclcrcl@{\hspace{0.1cm}}cc}
@@ -361,9 +352,25 @@ The time in this table is cumulative (sum over all folds in one experiment run).
 
 %\clearpage
 
+
+Table~\ref{tab:learning_eval_fir_perfom} summarizes performance evaluation of our ILP based method and its comparison with PAUM classifier on the dataset \sectiondoubleref{sec:data_fireman_annotated}. The table shows results of the three main evaluation measures: strict precision, strict recall and strict $F_1$ for each extraction task as well as overall results. 8-fold cross validation was performed 8 times in the experiment. Average values and standard deviations are printed in the table and statistical significance is indicated. Root/subtree preprocessing/postprocessing (Section~\ref{sec:learning_root_subtree}) was performed in the first three tasks: `cars’, `damage’ and `end subtree’.
+
+Although the precision of the ILP method was better in the majority of tasks and also its overall precision is statically better than the precision of the PAUM method, its recall was worse in all the measurements and also $F_1$ score is indicating better results of the PAUM method. 
+
+
+Table~\ref{tab:learning_eval_fir_time} provides learning and application (testing) times of the compared methods. It is clear that learning time of the ILP method is many times higher than the time of the PAUM method. For example the `cars’ task took the ILP method approximately three and half minutes while the PAUM method spent only two seconds on it. On the other hand, the testing time of the ILP method is not that much higher than the time of the PAUM method 
+%and once the extraction rules are done, the time requirements of the ILP method are acceptable.
+but we have to notice that these times do not include linguistic preprocessing and deep language parsing needed by the ILP method will increase the time significantly.
+
+Detailed results with much more evaluation measurements including lenient variants are available in the appendix -- Section~\ref{sec:complete_eval_fire}.
+
+%\clearpage
+%\subsection{Czech Fireman Time}
+
+
 \subsection{Acquisitions Performance} \label{sec:learning_eval_acq}
 
-\begin{table}[th!]
+\begin{table}
 \centering 
 \begin{tabular}
 {lcrclcrcl@{\hspace{0.1cm}}cc}
@@ -476,7 +483,7 @@ An interesting observation can be made when comparing training times of the ILP 
 
 Detailed results with much more evaluation measurements including lenient variants are available in the appendix -- Section~\ref{sec:complete_eval_acq}.
 
-
+\pagebreak
 \subsection{Comparison with Results Reported in Literature} \label{sec:learning_eval_acq_third}
 
 Other researchers used the Acquisitions dataset and reported the performance of their information extraction systems in the literature. Table~\ref{tab:learning_acq_eval_third} provides comparison of four extraction systems 
@@ -537,15 +544,15 @@ Total/Overall&  5001 					 &  \textbf{5457}	 &  41.1 					 &  n/a				 	  &  33.5
 
 In this section we present an experiment that should serve as a proof of a concept that the proposed idea of independent extraction ontologies is realizable. We have selected several reasoners (namely Jena, HermiT, Pellet and FaCT++) and tested them on two slightly different datasets from two different domains and languages (see Table~\ref{tab:datasets}). This should at least partially demonstrate the universality of the proposed approach.
 
-In both cases the task is to find all instances (corresponding to words in a document) that should be uncovered by the extraction rules. The extraction rules are saved in single extraction ontology for each dataset. The datasets are divided into individual document ontologies (owl files) corresponding to the individual documents. During the experiment the individual document ontologies are processed separately (one ontology in a step) by a selected reasoner. The total time taken to process all document ontologies of a dataset is the measured result of the reasoner for the dataset.
+In both cases the task is to find all instances (corresponding to words in a document) that should be uncovered by the extraction rules. The extraction rules are saved in single extraction ontology for each dataset. The datasets are divided into individual document ontologies (owl files) corresponding to the individual documents. During the experiment, the individual document ontologies are processed separately (one ontology in a step) by a selected reasoner. The total time taken to process all document ontologies of a dataset is the measured result of the reasoner for the dataset.
 
-The actual reasoning tasks are more difficult than a simple retrieval of all facts entailed by the extraction rules. Such simple retrieval task took only a few seconds for the Acquisitions v1.1 dataset (including parsing) in the native Prolog environment that the IE engine uses. There were several more inferences needed in the reasoning tasks because the schema of the input files was a little bit different from the schema used in rules. The mapping of the schemas was captured in another ``mapping'' ontology that was included in the reasoning. The mapping ontology is a part of the publically available project ontologies.
+The actual reasoning tasks are more difficult than a simple retrieval of all facts entailed by the extraction rules. Such simple retrieval task took only a few seconds for the Acquisitions dataset (including parsing) in the native Prolog environment that the IE engine uses. There were several more inferences needed in the reasoning tasks because the schema of the input files was a little bit different from the schema used in rules. The mapping of the schemas was captured in another ``mapping'' ontology that was included in the reasoning. The mapping ontology is a part of the publically available project ontologies, see Section~\ref{sec:download_notes} for avalability details.
 %\footnote{See ``Data/ontologies'' link on the project page \url{http://czsem.berlios.de/}}%and a potentially interested reader can find the complete mapping ontology on the project's web site.
 
 
 \subsection{Datasets} \label{sec:onto_datasets}
 
-In the experiment we used two slightly different datasets from two different domains and languages.  Table~\ref{tab:datasets} summarizes some basic information about them. The fist dataset is called `czech\_fireman', it is based on Czech texts that are reporting on fire and traffic accidents and it was already described in Section~\ref{sec:data_rdf_fireman}. The second dataset is called ``Corporate Acquisition Events'', it is based on news articles describing acquisition events, taken from the Reuters dataset and it was already described in Section~\ref{sec:data_rdf_acquisitions}.
+In the experiment, we used two slightly different datasets from two different domains and languages.  Table~\ref{tab:datasets} summarizes some basic information about them. The fist dataset is called Czech Fireman, it is based on Czech texts that are reporting on fire and traffic accidents and it was already described in Section~\ref{sec:data_rdf_fireman}. The second dataset is called Corporate Acquisition Events, it is based on news articles describing acquisition events, taken from the Reuters dataset and it was already described in Section~\ref{sec:data_rdf_acquisitions}.
 
 \begin{table}
 \begin{center}
@@ -555,9 +562,9 @@ In the experiment we used two slightly different datasets from two different dom
 dataset & domain & language & number of~files &  dataset size (MB) &  number of~rules  \\
 \hline
 \hline
-\textbf{czech\_fireman} & accidents & Czech &  50 &  16 &  2\\
+\textbf{Czech Fireman} & accidents & Czech &  50 &  16 &  2\\
 \hline
-\textbf{acquisitions} & finance & English &  600 &  126 &  113\\
+\textbf{Acquisitions} & finance & English &  600 &  126 &  113\\
 \hline
 \end{tabular}
 \caption{Description of datasets that were used.}\label{tab:datasets}
@@ -570,15 +577,16 @@ dataset & domain & language & number of~files &  dataset size (MB) &  number of~
 \subsection{Reasoners} \label{sec:onto_reasoners}
 
 %In the experiment we used four OWL reasoners
-Four OWL reasoners were used in the experiment(namely
+Four OWL reasoners were used in the experiment (namely
 Jena\footnote{\url{http://jena.sourceforge.net}}
 ,HermiT\footnote{\url{http://hermit-reasoner.com}}
 ,Pellet\footnote{\url{http://clarkparsia.com/pellet}}
-and FaCT++\footnote{\url{http://code.google.com/p/factplusplus}}
-) and the time they spent on processing a particular dataset was measured. The time also includes time spent on parsing the input. HermiT, Pellet and FaCT++ were called through OWL API-3.1, so the same parser was used for them. Jena reasoner was used in its native environment with the Jena parser.
+and FaCT++\footnote{\url{http://code.google.com/p/factplusplus}})
+and the time they spent on processing a particular dataset was measured. The time also includes time spent on parsing the input. HermiT, Pellet and FaCT++ were called through OWL API-3.1, so the same parser was used for them. Jena reasoner was used in its native environment with the Jena parser.
+
 In the early beginning of the experiment we had to exclude the FaCT++ reasoner from both tests. It turned out that FaCT++ does not work with rules\footnote{\url{http://en.wikipedia.org/wiki/Semantic_reasoner#Reasoner_comparison}} and it did not return any result instances.  All the remaining reasoners strictly agreed on the results and returned the same sets of instances.
 
-Also HermiT was not fully evaluated on the Acquisitions v1.1 dataset because it was too slow. The reasoner spent 13 hours of running to process only 30 of 600 files of the dataset. And it did not seem useful to let it continue. We contacted the authors of HermiT to clarify this issue and we were reminded that HermiT was mainly designed as a TBox reasoner and it was particularly optimized for the ontology classification problem \citep{ghms10classification}; it was never optimized for simple rule based (ABox) inferences.
+Also HermiT was not fully evaluated on the Acquisitions dataset because it was too slow. The reasoner spent 13 hours of running to process only 30 of 600 files of the dataset. And it did not seem useful to let it continue. We contacted the authors of HermiT to clarify this issue and we were reminded that HermiT was mainly designed as a TBox reasoner and it was particularly optimized for the ontology classification problem \citep{ghms10classification}; it was never optimized for simple rule based (ABox) inferences.
 
 
 
@@ -636,8 +644,7 @@ and in the context of Linked Data providing shareable descriptions of informatio
 
 
 
-
-
+\clearpage
 
 
 
@@ -647,14 +654,36 @@ and in the context of Linked Data providing shareable descriptions of informatio
 \section{Evaluation of Fuzzy ILP Classification} \label{sec:fuzzy_eval}
 \graphicspath{{../img/ch80/}}
 
-\begin{figure}[p]
+In this section, evaluation experiments with the Fuzzy ILP Classifier will be presented. Two main experiments were performed, one with the Czech Fireman dataset and one with several UCI datasets.
+
+We have evaluated both ILP methods and compared them with other machine learning procedures used in data mining. To make the comparison clear and easy to perform, we have implemented an interface between the ILP methods and Weka (see some details about Weka in Section~\ref{sec:third_weka}). This interface makes it possible to use the ILP methods as an ordinary Weka classifier for any\footnote{For the fuzzy ILP method, there is a requirement on the target (class) attribute: it has to be monotonizable (e.g. numeric).} classification task inside the Weka software. This also makes the presented experiments easily repeatable.% (see Secrion~\ref{sec:conclusion_repeatablity} for details.) 
+
+%\pagebreak
+
+\subsection{Czech Fireman Performance} \label{sec:fuzzy_eval_fireman}
+
+
+For our experiment we used the Weka Experimenter (see in Section~\ref{sec:third_weka}) and performed an experiment in which the Crisp and Fuzzy ILP classifiers were compared with five additional classifiers:
+\begin{itemize}
+	\item Multilayer Perceptron \citep{biblio:bishop-1995},
+	\item Support Vector Machine classifier SMO \citep{biblio:SMO},
+	\item J48 decision tree \citep{biblio:J48},
+	\item JRip rules \citep{weka:JRip} and
+	\item Additive logistic regression LogitBoost \citep{biblio:LogitBoost}.
+\end{itemize}
+We have evaluated all the methods two times by 10-fold cross validation. %(section~\ref{sec:experiment_desc}).
+The obtained results (average values) are described by the graph in Figure~\ref{fig:graph2x10} and in Table~\ref{tab:table2x10} (with standard deviations and marked statistically significant values).
+
+There is no clear winner in our experiment. But the Fuzzy ILP classifier proved better results than a majority of the methods on our data and the results are statistically significant in many cases. Very good results were also obtained using LogitBoost. 
+
+\begin{figure}
 \centerline{\includegraphics[width=\hsize]{2x10cross}}
-\caption{Evaluation of the methods -- average values.}
+\caption[Evaluation of the methods on the Fireman dataset.]{Evaluation of the methods on the Fireman dataset -- average values.}
 \label{fig:graph2x10}
 \end{figure}
 
 
-\begin{table}[p]
+\begin{table}
 %\scriptsize
 {\centering \begin{tabular}{lr@{\hspace{0cm}}c@{\hspace{0cm}}rr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}c}
 \hline
@@ -690,40 +719,22 @@ Rec \dotfill{} 	& IR recall, weighted average from all classes\\
 F \dotfill{} 		& F measure, weighted average from all classes\\
 \end{tabular}
 }
-\caption{Evaluation of the methods in 2 times 10-fold cross validation.}
+\caption[Evaluation of the methods on the Fireman dataset.]{Evaluation of the methods on the Fireman dataset in 2 times 10-fold cross validation.}
 \label{tab:table2x10}
 \end{table}
 
 
-We have evaluated both ILP methods and compared them with other machine learning procedures used in data mining. To make the comparison clear and easy to perform, we have implemented an interface between the ILP methods and Weka (Section~\ref{sec:third_weka}). This interface makes it possible to use the ILP methods as an ordinary Weka classifier for any\footnote{For the fuzzy ILP method, there is a requirement on the target (class) attribute: it has to be monotonizable (e.g. numeric).} classification task inside the Weka software. This also makes the presented experiments easily repeatable (see Secrion~\ref{sec:conclusion_repeatablity} for details.) 
 
 
 
-\subsection{Czech Fireman Performance}
-
-
-For our experiment we used the Weka Experimenter (see in Section~\ref{sec:third_weka}) and performed an experiment in which the Crisp and Fuzzy ILP classifiers were compared with five additional classifiers:
-\begin{itemize}
-	\item Multilayer Perceptron \citep{biblio:bishop-1995},
-	\item Support Vector Machine classifier SMO \citep{biblio:SMO},
-	\item J48 decision tree \citep{biblio:J48},
-	\item JRip rules \citep{weka:JRip} and
-	\item Additive logistic regression LogitBoost \citep{biblio:LogitBoost}.
-\end{itemize}
-We have evaluated all the methods two times by 10-fold cross validation. %(section~\ref{sec:experiment_desc}).
-The obtained results (average values) are described by the graph in Figure~\ref{fig:graph2x10} and in Table~\ref{tab:table2x10} (with standard deviations and marked statistically significant values).
-
-There is no clear winner in our experiment. But the Fuzzy ILP classifier proved better results than a majority of the methods on our data and the results are statistically significant in many cases. Very good results were also obtained using LogitBoost. 
-
-
-
+\clearpage
 \subsection{UCI Performance} \label{sec:fuzzy_eval_uci}
 
 
 \begin{table}
 \footnotesize
-{\centering \begin{tabular}{l|r@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.3cm}}r@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}l@{\hspace{0cm}}r@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0cm}}c@{\hspace{0.25cm}}c@{\hspace{0.20cm}}c@{\hspace{0.10cm}}}
-dataset & \multicolumn{3}{c}{Fuzzy}& \multicolumn{4}{c}{Crisp} & \multicolumn{4}{c}{MultPerc} & \multicolumn{4}{c}{SMO} & \multicolumn{4}{c}{J48} & \multicolumn{4}{c}{JRip} & \multicolumn{4}{c}{LBoost} & train & test\\
+{\centering \begin{tabular}{l|r@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.3cm}}r@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}l@{\hspace{0cm}}r@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0cm}}c@{\hspace{0.25cm}}|c@{\hspace{0.20cm}}c@{\hspace{0.10cm}}}
+dataset & \multicolumn{3}{c}{Fuzzy}& \multicolumn{4}{c}{Crisp} & \multicolumn{4}{c}{MultPerc} & \multicolumn{4}{c}{SMO} & \multicolumn{4}{c}{J48} & \multicolumn{4}{c}{JRip} & \multicolumn{4}{c|}{LBoost} & train & test\\
 \hline
 car & .39 & $\pm$ & .03 & .36 & $\pm$ & .03 & $\bullet$ & .53 & $\pm$ & .02 & $\circ$ & .57 & $\pm$ & .01 & $\circ$ & .50 & $\pm$ & .02 & $\circ$ & .51 & $\pm$ & .03 & $\circ$ & .54 & $\pm$ & .02 & $\circ$ & 173 & 1554\\
 \hline
@@ -754,38 +765,38 @@ test \dotfill{} & average number ($\pm$1) of testing instances in each run\\
 
 
 Learning parameters for both ILP methods:\\set(noise,20). set(i,3). set(clauselength,13). set(search,heuristic). set(evalfn,wracc). set(samplesize,3).
-\caption{Evaluation of the methods on UCI datasets, \textbf{percent correct}, average values from 100 repetitions.}
+\caption[Evaluation of the methods on UCI datasets.]{Evaluation of the methods on UCI datasets, \textbf{percent correct}, average values from 100 repetitions.}
 \label{tab:UCItable}
 \end{table}
 
 
 
 
-The Fuzzy ILP classifier performed quite well on our dataset, but the next question is: How is it with other data, with more learning instances, and what about the time complexity? To answer these questions we performed another experiment. We selected several datasets from the UCI repository (see Section~\ref{sec:data_uci_datasets}) and evaluated all the methods against them. 
+The Fuzzy ILP Classifier performed quite well on our dataset, but the next question is: How is it with other data, with more learning instances, and what about the time complexity? To answer these questions we performed another experiment. We selected several datasets from the UCI repository (see Section~\ref{sec:data_uci_datasets}) and evaluated all the methods against them. 
 
 
 
 %The list of selected datasets can be found in the legend of Table~\ref{tab:UCItable}. 
 All the selected datasets are monotonizable (the target attribute can be naturally ordered), so the fuzzy classifier could take advantage of that. Learning settings are the same as before (Table~\ref{tab:table2x10}) except for settings of both ILP classifiers, which  performed a little bit better with modified settings on a majority of the datasets (see in the legend of Table~\ref{tab:UCItable}). 
 
-Table~\ref{tab:UCItable} compares the numbers of correctly classified instances on all the datasets. The last two columns show numbers of training and testing instances. The numbers of training instances are quite low; this is because the ILP classifiers are probably not capable of fully exploiting higher numbers of training instances and the difference between ILP classifiers and the others would be even a bit higher. This is demonstrated in Figure~\ref{fig:corect_growing_learninig_instances} (for `nursery' dataset only). It can be seen that when the number of training instances was under about 40, the fuzzy classifier performed better than some of the others (SMO, JRip and Multilayer Perceptron), but from about 60 training instances further, both ILP classifiers performed worse than the others.
+Table~\ref{tab:UCItable} compares the numbers of correctly classified instances on all the datasets. The last two columns show numbers of training and testing instances. The numbers of training instances are quite low; this is because the ILP classifiers are probably not capable of fully exploiting higher numbers of training instances and the difference between ILP classifiers and the others would be even a bit higher. This is demonstrated in Figure~\ref{fig:corect_growing_learninig_instances} (for the `nursery' dataset only). It can be seen that when the number of training instances was under about 40, the fuzzy classifier performed better than some of the others (SMO, JRip and Multilayer Perceptron), but from about 60 training instances further, both ILP classifiers performed worse than the others.
 
 
-\begin{figure}
-\centerline{\includegraphics[width=0.8\hsize]{corect_growing_learninig_instances}}
-\caption{x-axis: number of training instances, y-axis: percent of correctly classified instances, average values from 10 repetitions, `nursery' dataset.}
+\begin{figure}[p]
+\centerline{\includegraphics[width=0.85\hsize]{corect_growing_learninig_instances}}
+\caption[The impact of dataset size on classification performance.]{The impact of dataset size on classification performance,\\x-axis: number of training instances, \\y-axis: percent of correctly classified instances, average values from 10 repetitions, `nursery' dataset.}
 \label{fig:corect_growing_learninig_instances}
 \end{figure}
 
 
-\subsection{UCI Time}
+\subsection{UCI Time} \label{sec:fuzzy_eval_uci_time}
 
 
-Figure~\ref{fig:learning_speed} demonstrates time complexity of the classifiers in the same experiment as in Figure~\ref{fig:corect_growing_learninig_instances}. Despite the fact that the Fuzzy ILP classifier was several times slower than the Crisp ILP classifier and even more than the others, it is still computable on current processors (e.g. P9600, 2.66 GHz, which we used) and the curve of time complexity did not grow rapidly during the experiment. Because ILP is a heuristic and iterative method, the time complexity can be quite directly managed by the setting of learning parameters.
+Figure~\ref{fig:learning_speed} demonstrates time complexity of the classifiers in the same experiment as in Figure~\ref{fig:corect_growing_learninig_instances}. Despite the fact that the Fuzzy ILP Classifier was several times slower than the Crisp ILP Classifier and even more than the others, it is still computable on current processors (e.g. P9600, 2.66 GHz, which we used) and the curve of time complexity did not grow rapidly during the experiment. Because ILP is a heuristic and iterative method, the time complexity can be quite directly managed by the setting of learning parameters.
 
-\begin{figure}
+\begin{figure}[p]
 \centerline{\includegraphics[width=\hsize]{learning_speed}}
-\caption{x-axis: number of training instances, y-axis: training time in seconds, average values from 10 repetitions, `nursery' dataset.}
+\caption[The impact of dataset size on classification time.]{The impact of dataset size on classification time,\\x-axis: number of training instances, \\y-axis: training time in seconds, average values from 10 repetitions, `nursery' dataset.}
 \label{fig:learning_speed}
 \end{figure}
 

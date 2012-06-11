@@ -122,7 +122,7 @@ We adopted Netgraph queries and extended them to extraction rules that can be wr
 	FROM netgraph_query
 \end{minted}
 
-where \emph{netgraph\_query} stands for an arbitrary Netgraph query, \emph{node1\_name}, \emph{node2\_name}, etc. stand for individual names of nodes defined in \emph{netgraph\_query} and \emph{attr1\_name}, \emph{attr2\_name}, etc. stand for names of linguistic attributes whose values should be picked out from the matching nodes.
+\noindent where \emph{netgraph\_query} stands for an arbitrary Netgraph query, \emph{node1\_name}, \emph{node2\_name}, etc. stand for individual names of nodes defined in \emph{netgraph\_query} and \emph{attr1\_name}, \emph{attr2\_name}, etc. stand for names of linguistic attributes whose values should be picked out from the matching nodes.
 
 The extraction works as follows: the Netgraph query is evaluated by searching through a corpus of linguistic trees. Matching trees are returned and the desired information defined by the SELECT part of the extraction rule is taken out from particular tree nodes and printed to the output.
 
@@ -235,7 +235,7 @@ WHERE {
 	}
 }
 \end{minted}
-\caption{\emph{SPARQL} query that summarizes fatalities of particular incidents.}
+\caption{SPARQL query that summarizes fatalities of particular incidents.}
 \label{fig:sparql_aggregation}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -381,12 +381,11 @@ In this section we present an extension of the idea of extraction ontologies tha
 
 We present a proof of concept for the idea: a case study with our linguistically based IE engine and an experiment with several OWL reasoners. In the case study (see Section~\ref{sec:onto_case}) the IE engine exports its extraction rules to the form of an extraction ontology. Third party linguistic tool linguistically annotates an input document and the linguistic annotations are translated to so-called document ontology. After that an ordinary OWL reasoner is used to apply the extraction ontology on the document ontology, which has the same effect as a direct application of the extraction rules on the document. The process is depicted in Figure~\ref{fig:rules_app_schema} and it will be described in detail in Section~\ref{sec:onto_case}.
 
-
+%kvuli footenote-um, aby se vesly...
+\pagebreak
 
 The description is organized as follows. The most closely related work was already presented in Section~\ref{sec:relwork_ext_ont}. The main idea will be illustrated on our case study in Section~\ref{sec:onto_case}, its implementation in Section~\ref{sec:onto_implement} and in Section~\ref{sec:onto_experiment} an experiment with several OWL reasoners and IE datasets will be presented. In Section~\ref{sec:onto_discuss} related issues are discussed and Section~\ref{sec:onto_conclusion} concludes the discussion.
 
-%kvuli footenote-um, aby se vesly...
-\pagebreak
 
 
 \subsection{Document Ontologies and Annotated Document Ontologies} \label{sec:onto_doc_ont}

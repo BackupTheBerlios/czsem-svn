@@ -9,7 +9,7 @@ This is the last chapter of the thesis. It contains mainly concluding remarks, s
 We have presented the development of our extraction method based on deep language parsing from its early beginning. Its evolution begun with procedurally written extraction rules (Section~\ref{sec:manual_Procedural_Extraction_Rules}) followed by declarative ones (Section~\ref{sec:manual_Netgraph_Based_Extraction_Rules_method}) and, finally, it was supported by the automated induction of extraction rules using the machine learning technique of Inductive Logic Programming (Section~\ref{sec:learning_methods}).
 
 
-Our extraction method based on manually designed extraction rules do not consider the annotation aspect of information extraction. Although it is possible to infer an annotation based variety of the presented method, we did not take it into account because during the development of the method the aim was more to produce structured data from text than to produce annotated documents. In the second approach the emphasis was inverted. 
+Our extraction method based on manually designed extraction rules does not consider the annotation aspect of information extraction. Although it is possible to infer an annotation based variety of the presented method, we did not take it into account because during the development of the method the aim was more to produce structured data from text than to produce annotated documents. In the second approach the emphasis was inverted. 
 
 Although the evaluation experiments brought interesting results about different variants of the method (see details in Section~\ref{sec:manual_eval}), a deeper evaluation of the method would be definitely beneficiall, but at the moment, the information provided is the only available. There is no real world application of the method outside the academic ground. The method is still waiting for deep testing and further development in an extensive real world project.
 
@@ -17,14 +17,14 @@ Although the evaluation experiments brought interesting results about different 
 
 \section{Machine Learning of Extraction Rules}
 
-From our experiments can be seen that ILP is capable to find complex and meaningful rules that cover the intended information. But in terms of the performance measures the results are not better than those from a propositional learner. This is quite surprising observation mainly for Czech because it is a language with free word order and we would expect much better results of the dependency based approach than those of the position based approach, which was used by the propositional learner.
+From our experiments with the extraction method based on ILP (Section~\ref{sec:learning_eval}) can be seen that ILP is capable to find complex and meaningful rules that cover the intended information. But in terms of the performance measures the results are not better than those from a propositional learner. This is quite surprising observation mainly for Czech because it is a language with free word order and we would expect much better results of the dependency based approach than those of the position based approach, which was used by the propositional learner.
 
-The answer to this issue could be provided by integration of the two approaches: use ILP as a source of good learning features for a propositional learner as described by \cite{DBLP:conf/ilp/RamakrishnanJBS07}. But the usage of ``black box'' propositional learner implies that the extraction model would not be readable and workable for humans any more and its interpretation as extraction ontology by a reasoner would be much more problematic. Further development and experiments with tuning the ILP learning procedure could also bring improvement of the performance but they would require more time, which we decided to invest to other topics of the thesis.
+The answer to this issue could be provided by integration of the two approaches: use ILP as a source of good learning features for a propositional learner as described by \cite{DBLP:conf/ilp/RamakrishnanJBS07}. But the usage of ``black box'' propositional learner implies that the extraction model would not be readable and workable for humans any more and its interpretation as an extraction ontology by a reasoner would be much more problematic. Further development and experiments with tuning the ILP learning procedure could also bring improvement of the performance but they would require more time, which we decided to invest to other topics of the thesis.
 
 The method is still missing an intelligent semantic interpretation procedure proposed in Section~\ref{sec:learning_SemanticInterpretation} and it could be also evaluated on other datasets (e.g. MUC, ACE, TAC, CoNLL) and other languages. So far we also do not provide a method for classical event and relation extraction. %(like e.g. in \citep{Bunescu:DependencyPaths}). 
 In the present solution, we work with events in the same way as with entities; details about this variant of event extraction were provided in Section~\ref{sec:problems_event_entities}. The method has to be adapted for explicit learning of events and relations in the form of ``subject predicate object''.
 
-Our method can also provide a comparison of different linguistic formalisms and tools and their benefit to information extraction (e.g. PDT vs. CoNLL'X vs. Stanford dependencies) because we could run the method using different linguistic analyzers and compare the results on the same dataset.
+Similarly to the work of \cite{Buyko:2010:EIA:1870658.1870754}, our method can also provide a comparison of different linguistic formalisms and tools and their benefit to information extraction (e.g. PDT vs. CoNLL'X vs. Stanford dependencies) because we could run the method using different linguistic analyzers and compare the results on the same dataset.
 
 
 
@@ -38,10 +38,10 @@ Our method can also provide a comparison of different linguistic formalisms and 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-In this thesis, we have described our method how to apply an extraction ontology to a document ontology and obtain so called ``annotated'' document ontology. To have an ``annotated'' document ontology is almost the same as to have an annotated document. An annotated document is useful (easier navigation, faster reading and lookup of information, possibility of structured queries on collections of such documents, etc.) but if we are interested in the actual information present in the document, if we want to know the facts that are in a document asserted about the real word things then an annotated document is not sufficient. But the conversion of an annotated document to the real world facts is not simple.
+In this thesis, we have described our method how to apply an extraction ontology to a document ontology and obtain so called ``annotated'' document ontology. To have an annotated document ontology is almost the same as to have an annotated document. An annotated document is useful (easier navigation, faster reading and lookup of information, possibility of structured queries on collections of such documents, etc.) but if we are interested in the actual information present in the document, if we want to know the facts that are in a document asserted about the real word things then an annotated document is not sufficient. But the conversion of an annotated document to the real world facts is not simple.
 There are obvious issues concerning data integration and duplicity of information. For example when in a document two mentions of people are annotated as `injured', what is then the number of injured people in the corresponding accident? Are the two annotations in fact linked to the same person or not?
 
-In the beginning of our work on the idea of shareable extraction ontologies we planned to develop it further, we wanted to cover also the step from annotated document ontologies to the real world facts. The extraction process would then end up with so called ``fact ontologies''. But two main obstacles prevent us to do that.
+In the beginning of our work on the idea of shareable extraction ontologies we planned to develop it further, we wanted to cover also the step from annotated document ontologies to the real world facts. The extraction process would then end up with so called ``fact ontologies''. But two main obstacles prevent us from doing.
 
 \begin{enumerate}
 	\item Our IE engine is not yet capable to solve these data integration and duplicity of information issues and the real world facts would be quite imprecise then.
@@ -91,7 +91,7 @@ We extended the concept of extraction ontologies by adding the shareable aspect 
 
 In Section~\ref{sec:onto_case} we presented a case study that shows that the idea of shareable extraction ontologies is realizable. We presented implementation of our IE tool that exports its extraction rules to an extraction ontology and we demonstrated how this extraction ontology can be applied to a document by a reasoner.
 
-Moreover in Section~\ref{sec:onto_experiment} an experiment with several OWL reasoners was presented. The experiment evaluated the performance of contemporary OWL reasoners on IE tasks (application of extraction ontologies). A new publically available benchmark for OWL reasoning was created together with the experiment. Other reasoners can be tested this way.
+Moreover in Section~\ref{sec:onto_experiment} an experiment with several OWL reasoners was presented. The experiment evaluated the performance of contemporary OWL reasoners on IE tasks (application of extraction ontologies). A new publically available benchmark for OWL reasoning was created along with the experiment. Other reasoners can be tested this way.
 
 %We would like to conclude the chapter by stating that only time will show if the fundamental idea of the chapter will be useful but today it is at least a new use case for both: usage of IE tools and reasoners.
 
@@ -105,10 +105,10 @@ Moreover in Section~\ref{sec:onto_experiment} an experiment with several OWL rea
 
 In our work on fuzzy ILP classification, we provided a design and partial implementation of a fuzzy system, which provides a fuzzy classification of textual reports. Our approach is based on usage of third party linguistic analyzers, our work on information extraction, and fuzzy inductive logic programming.
 
-The main contributions are formal models, prototype implementation of the presented methods and evaluation experiments. The first experiment evaluated performance of the presented methods and compared them with other machine learning procedures used in data mining on our dataset. The Fuzzy ILP Classifier proved better results than a majority of the methods. The results are statistically significant in many cases. 
+The main contributions are formal models, prototype implementation of the presented methods and evaluation experiments. The first experiment (Section~\ref{sec:fuzzy_eval_fireman}) evaluated performance of the presented methods and compared them with other machine learning procedures used in data mining on our dataset. The Fuzzy ILP Classifier proved better results than a majority of the methods. The results are statistically significant in many cases. 
 We see the advantage of the Fuzzy ILP classifier in the fact that monotonization leads to the extension of the learning domain and it utilizes the fact that the domain is or can be monotonically ordered.
 
-In the second experiment, we evaluated all the methods on other datasets with more training instances and we also experimentally measured the time complexity of the methods. This experiment shows that the fuzzy method is suitable mainly in situations with a small amount of training instances and in cases when the target attribute mostly respects the natural order of the remaining attributes. But this did not hold true for any of the later-used datasets. When comparing the fuzzy approach with the crisp one, the fuzzy approach always performed better in terms of correctness of the classification, but it was many times slower than all the methods in terms of time complexity.
+In the second experiment (Section~\ref{sec:fuzzy_eval_uci}), we evaluated all the methods on other datasets with more training instances and we also experimentally measured the time complexity of the methods (Section~\ref{sec:fuzzy_eval_uci_time}). This experiment shows that the fuzzy method is suitable mainly in situations with a small amount of training instances and in cases when the target attribute mostly respects the natural order of the remaining attributes. But this did not hold true for any of the later-used datasets. When comparing the fuzzy approach with the crisp one, the fuzzy approach always performed better in terms of correctness of the classification, but it was many times slower than all the methods in terms of time complexity.
 
 
 
@@ -138,7 +138,7 @@ Table~\ref{tab:download_links} provides links to individual resources.
 		$\,$\hfill{} \smallurl{http://czsem.berlios.de/ontologies/acquisitions-v1.1/download_instructions.html}\\
 		$\,$\hfill{} \smallurl{http://czsem.berlios.de/ontologies/czech_fireman/download_instructions.html}\\
 		\hline		
-		General download area: \hfill{}\\
+		General download area (including all datasets): \hfill{}\\
 		$\,$\hfill{} \smallurl{http://developer.berlios.de/project/filelist.php?group_id=8427}\\
 		\hline
 		Apache Maven repository: \hfill{} \smallurl{http://czsem.berlios.de/maven2/}\\
@@ -146,6 +146,8 @@ Table~\ref{tab:download_links} provides links to individual resources.
 \end{tabular}
 	\caption{Download links to the implementation and datasets.} \label{tab:download_links}
 \end{table}
+
+\pagebreak
 
 \section{Repeatability of Experiments} \label{sec:conclusion_repeatablity}
 

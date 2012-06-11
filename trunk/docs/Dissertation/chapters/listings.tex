@@ -9,7 +9,7 @@ This sample shows the word coverage in the domain of means of transport and vehi
 
 \bigskip
 
-\fbox{\parbox[b]{\hsize}{
+\noindent\fbox{\hspace{3mm}\parbox[b]{0.965\hsize}{
 \hspace*{0cm}$\bullet$ entita:1\\
 \hspace*{1cm}$\bullet$ objekt:1\\
 \hspace*{2cm}$\bullet$ celek:1\\
@@ -48,7 +48,8 @@ This sample shows the word coverage in the domain of means of transport and vehi
 \hspace*{1cm}$\bullet$ sklápěč:1,\\
 \hspace*{1cm}\phantom{$\bullet$}  vyklápěcí nákladní automobil:1\\
 \hspace*{1cm}$\bullet$ tahač:1\\
-\hspace*{1cm}$\bullet$ pick-up:1, malý nákladní automobil:1\\
+\hspace*{1cm}$\bullet$ pick-up:1,\\
+\hspace*{1cm}\phantom{$\bullet$} malý nákladní automobil:1\\
 \hspace*{1cm}$\bullet$ hasící vůz:1, požární stříkačka:1\\
 \hspace*{1cm}$\bullet$ rozhlasový vůz:1\\
 \hspace*{1cm}$\bullet$ kamion:1\\
@@ -61,12 +62,14 @@ This sample shows the word coverage in the domain of means of transport and vehi
 \hspace*{0cm}$\bullet$ auto:1, vůz:2\\
 \hspace*{1cm}$\bullet$ limuzína:1\\
 \hspace*{1cm}$\bullet$ elektrický vozík:1\\
-\hspace*{1cm}$\bullet$ závodní vůz:1, závodní automobil:1\\
+\hspace*{1cm}$\bullet$ závodní vůz:1,\\
+\hspace*{1cm}\phantom{$\bullet$} závodní automobil:1\\
 \hspace*{1cm}$\bullet$ sportovní vůz:1\\
 \hspace*{1cm}$\bullet$ kabriolet:1, sporťák:1\\
 \hspace*{1cm}$\bullet$ vrak:3\\
 \hspace*{1cm}$\bullet$ limuzína:2\\
-\hspace*{1cm}$\bullet$ hlídkový vůz:1, policejní vůz:1\\
+\hspace*{1cm}$\bullet$ hlídkový vůz:1,\\
+\hspace*{1cm}\phantom{$\bullet$} policejní vůz:1\\
 \hspace*{1cm}$\bullet$ sériový automobil:1\\
 \hspace*{1cm}$\bullet$ cestovní vůz:1\\
 \hspace*{1cm}$\bullet$ džíp:1\\
@@ -75,14 +78,15 @@ This sample shows the word coverage in the domain of means of transport and vehi
 \hspace*{1cm}$\bullet$ kombi:1\\
 \hspace*{1cm}$\bullet$ taxi:1\\
 \hspace*{1cm}$\bullet$ ambulance:1, sanitka:1,\\
-\hspace*{1cm}\phantom{$\bullet$} pohotovost:6, záchranka:1, sanita:1
+\hspace*{1cm}\phantom{$\bullet$} pohotovost:6, záchranka:1,\\
+\hspace*{1cm}\phantom{$\bullet$} sanita:1\\
 \end{multicols}
-\setlength{\columnsep}{5cm}
+%\setlength{\columnsep}{5cm}
 }}
 
 
 \clearpage
-\section{Extraction rules export to OWL in Prolog.} \label{sec:onto_prolog_rules_export_module}
+\section{Extraction Rules Export to OWL in Prolog.} \label{sec:onto_prolog_rules_export_module}
 \begin{minted}[linenos,  fontsize=\footnotesize,
                frame=lines, tabsize=2]{prolog}
 serialize_rule_file(RuleFileName, OutputFileName, OntologyURI, ObjectProperties) :-
