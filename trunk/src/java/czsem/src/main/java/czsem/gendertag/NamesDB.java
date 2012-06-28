@@ -7,6 +7,7 @@ import java.text.Normalizer;
 import java.text.Normalizer.Form;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -14,6 +15,8 @@ import com.csvreader.CsvReader;
 
 public class NamesDB {
 	public static void main(String[] args) throws Exception {
+		Locale.setDefault(Locale.ENGLISH);
+		
 		NamesDB new_db = new NamesDB();
 		
 		new_db.printStats();
@@ -29,7 +32,7 @@ public class NamesDB {
 
 	public static String normalizeName(String name)
 	{
-		String s0 = name.trim().toLowerCase();
+		String s0 = name.replaceAll("[,.;\\-/\\%*+]", " ").trim().toLowerCase();
 		String s1 = Normalizer.normalize(s0, Form.NFD);
 		String s2 = s1.replaceAll("[^\\p{ASCII}]", "");
 		return s2;
@@ -39,10 +42,10 @@ public class NamesDB {
 	public static class DbRecord
 	{
 		public String origName;
-		public int nameFrquency;
+		public double nameFrquency;
 
 		public DbRecord(String name, String frequncy) {
-			nameFrquency = Integer.parseInt(frequncy);
+			nameFrquency = Double.parseDouble(frequncy);
 			origName = name; 
 		}
 
@@ -55,7 +58,7 @@ public class NamesDB {
 
 		@Override
 		public String toString() {
-			return String.format("[%d]", nameFrquency);
+			return String.format("[%f]", nameFrquency);
 		}
 		
 		public void merge(DbRecord rec)
@@ -85,7 +88,7 @@ public class NamesDB {
 			
 			plane = new HashMap<String, NamesDB.DbRecord>();
 			
-			File f = new File("C:/Users/dedek/Desktop/jmena/stat/processing/" + filename + ".csv");
+			File f = new File("C:/Users/dedek/Desktop/jmena/stat/processing/scaled_" + filename + ".csv");
 			if (f.exists())
 			{
 				loadFromFile(f.getAbsolutePath());				
@@ -108,14 +111,14 @@ public class NamesDB {
 			out.close();
 			
 /**/			
-			CsvReader reader = new CsvReader(filename, ';', Charset.forName("utf8"));
+			CsvReader reader = new CsvReader(filename, ',', Charset.forName("utf8"));
 			
-			//reader.readHeaders();
+			reader.readHeaders();
 			
 			while (reader.readRecord())
 			{
-				String freq = reader.get(2);
-				String name = reader.get(1);
+				String freq = reader.get(1);
+				String name = reader.get(0);
 				if (! freq.equals(""))
 				{
 					DbRecord new_rec = new DbRecord(name, freq);
@@ -148,6 +151,8 @@ public class NamesDB {
 		{"first", "last"},
 		{"cz"  , "inter"},
 	};
+
+	private static final int attr_num = 8;
 
 	private DbPlane [][][] db; 
 
@@ -201,7 +206,7 @@ public class NamesDB {
 
 
 	public DbRecord[] findAll(String string) throws Exception {
-		final DbRecord[] ret = new DbRecord[(attr_names.length+1)*(attr_names[0].length+1)];
+		final DbRecord[] ret = new DbRecord[attr_num];
 		
 		final String norm = normalizeName(string);
 
@@ -227,7 +232,7 @@ public class NamesDB {
 
 	
 	public String[] findAllToStr(String string) throws Exception {
-		final String[] ret = new String[(attr_names.length+1)*(attr_names[0].length+1)*2];
+		final String[] ret = new String[attr_num*2];
 		
 		final String norm = normalizeName(string);
 
@@ -240,7 +245,7 @@ public class NamesDB {
 				if (rec != null)
 				{
 					ret[cur] = rec.origName;
-					ret[cur+1] = Integer.toString(rec.nameFrquency);
+					ret[cur+1] = Double.toString(rec.nameFrquency);
 				}
 				
 				cur+=2;
@@ -265,6 +270,24 @@ public class NamesDB {
 			}
 		});
 		
+	}
+
+	public String[] getHeadersShort() throws Exception {
+		final String[] ret = new String[attr_num];
+		
+		Irator3d<DbPlane> iter = new Irator3d<NamesDB.DbPlane>() {
+			int cur = 0; 
+			
+			@Override
+			public DbPlane iterte(DbPlane current, String x1, String x2, String x3) throws Exception {
+				ret[cur] = String.format("%s_%s_%s", x1, x2, x3);				
+				cur++;				
+				return null;
+			}
+		};		
+		
+		iterateDbPlanes(iter);		
+		return ret;
 	}
 
 }
