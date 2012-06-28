@@ -38,12 +38,18 @@ public class NamesDB {
 	
 	public static class DbRecord
 	{
-		private String origName;
+		public String origName;
 		public int nameFrquency;
 
 		public DbRecord(String name, String frequncy) {
 			nameFrquency = Integer.parseInt(frequncy);
 			origName = name; 
+		}
+
+
+		public DbRecord() {
+			origName = "";
+			nameFrquency = 0;
 		}
 
 
@@ -55,7 +61,12 @@ public class NamesDB {
 		public void merge(DbRecord rec)
 		{
 			if (rec == null) return;
-			origName = rec.origName+"+"+origName;
+			if (origName.equals(""))
+				origName = rec.origName;
+			else
+				origName = rec.origName+"+"+origName;
+			
+			
 			nameFrquency += rec.nameFrquency;
 		}
 	}
@@ -189,8 +200,8 @@ public class NamesDB {
 	}
 
 
-	public int[] findAll(String string) throws Exception {
-		final int[] ret = new int[(attr_names.length+1)*(attr_names[0].length+1)];
+	public DbRecord[] findAll(String string) throws Exception {
+		final DbRecord[] ret = new DbRecord[(attr_names.length+1)*(attr_names[0].length+1)];
 		
 		final String norm = normalizeName(string);
 
@@ -199,9 +210,8 @@ public class NamesDB {
 			
 			@Override
 			public DbPlane iterte(DbPlane current, String x1, String x2, String x3) throws Exception {
-				DbRecord rec = current.plane.get(norm);
-				if (rec != null)
-					ret[cur] = rec.nameFrquency;
+				
+				ret[cur] = current.plane.get(norm);
 				
 				cur++;
 				
