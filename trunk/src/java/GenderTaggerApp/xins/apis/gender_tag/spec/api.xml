@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE api PUBLIC "-//XINS//DTD XINS API 2.2//EN" "http://www.xins.org/dtd/api_2_2.dtd">
+
+<api name="gender_tag"
+rcsversion="$Revision$" rcsdate="$Date$">
+
+	<description>Assigns gender to a person name.</description>
+
+	<function name="assignGender" />
+
+</api>

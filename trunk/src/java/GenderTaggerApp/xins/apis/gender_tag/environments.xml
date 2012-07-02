@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE environments PUBLIC "-//XINS//DTD Environments 2.2//EN" "http://www.xins.org/dtd/environments_2_2.dtd">
+
+<environments>
+
+	<environment id="appengine" url="http://dedekj.appspot.com/gender_tag/" />
+	<environment id="localhost" url="http://127.0.0.1:8080/gender_tag/" />
+
+</environments>

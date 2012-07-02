@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE impl PUBLIC "-//XINS//DTD Implementation 2.2//EN" "http://www.xins.org/dtd/impl_2_2.dtd">
+<!-- The order of the elements is logdoc, bootstrap-properties, runtime-properties, content, dependency, calling-convention, instance. -->
+<impl>
+<!-- 
+	<calling-convention name="rest" class="com.mycompany.rest.api.RESTCallingConvention"/>
+ -->
+	<calling-convention name="_xins-soap" />
+	<calling-convention name="_xins-soap-map" />
+	<calling-convention name="_xins-xml" />
+	<calling-convention name="_xins-std" default="true" />
+	<calling-convention name="_xins-xmlrpc" />
+	<calling-convention name="_xins-json" />
+	<calling-convention name="_xins-jsonrpc" />
+</impl>

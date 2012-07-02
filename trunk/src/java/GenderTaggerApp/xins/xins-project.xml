@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE project PUBLIC "-//XINS//DTD XINS Project 2.3//EN"
+          "http://www.xins.org/dtd/xins-project_2_3.dtd">
+<project name="dedek_xins_projects"
+         rcsversion="$Revision$" rcsdate="$Date$"
+         domain="com.appspot.dedekj">
+	<api name="gender_tag">
+		<impl />
+		<environments />
+	</api>
+</project>
