@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?><web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.5" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<servlet>
+		<servlet-name>GenderTaggerApp</servlet-name>
+		<servlet-class>dedek.GenderTaggerAppServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GenderTaggerApp</servlet-name>
+		<url-pattern>/gendertaggerapp</url-pattern>
+	</servlet-mapping>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+	<servlet>
+		<servlet-name>SystemServiceServlet</servlet-name>
+		<servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
+		<init-param>
+			<param-name>services</param-name>
+			<param-value/>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SystemServiceServlet</servlet-name>
+		<url-pattern>/_ah/spi/*</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>gender_tag</servlet-name>
+<!-- 
+		<display-name>gender_tag</display-name>
+		<description>Implementation of 'gender_tag' API.</description>
+-->		
+		<servlet-class>org.xins.server.APIServlet</servlet-class>
+		<init-param>
+			<param-name>org.xins.api.name</param-name>
+			<param-value>gender_tag</param-value>
+		</init-param>
+		<init-param>
+			<param-name>org.xins.api.class</param-name>
+			<param-value>com.appspot.dedekj.gender_tag.api.APIImpl</param-value>
+		</init-param>
+		<init-param>
+			<param-name>org.xins.api.build.version</param-name>
+			<param-value>2.3</param-value>
+		</init-param>
+		<init-param>
+			<param-name>org.xins.api.version</param-name>
+			<param-value>Not specified</param-value>
+		</init-param>
+		<init-param>
+			<param-name>org.xins.api.build.java.version</param-name>
+			<param-value>1.6</param-value>
+		</init-param>
+		<init-param>
+			<param-name>org.xins.api.build.host</param-name>
+			<param-value>dedek-notebook</param-value>
+		</init-param>
+		<init-param>
+			<param-name>org.xins.api.build.time</param-name>
+			<param-value>2012.06.30 16:31:27.513</param-value>
+		</init-param>
+		<init-param>
+			<param-name>org.xins.api.calling.convention</param-name>
+			<param-value>_xins-soap</param-value>
+		</init-param>
+		<load-on-startup>0</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>gender_tag</servlet-name>
+		<url-pattern>/gender_tag/*</url-pattern>
+	</servlet-mapping>
+</web-app>

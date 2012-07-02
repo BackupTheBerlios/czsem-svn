@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- The HTML 4.01 Transitional DOCTYPE declaration-->
+<!-- above set at the top of the file will set     -->
+<!-- the browser's rendering engine into           -->
+<!-- "Quirks Mode". Replacing this declaration     -->
+<!-- with a "Standards Mode" doctype is supported, -->
+<!-- but may lead to some differences in layout.   -->
+
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Gender Tagger</title>
+  </head>
+
+  <body>
+    <h1>Gender Tagger</h1>
+	
+	<!-- 
+    <table>
+      <tr>
+        <td colspan="2" style="font-weight:bold;">Available Servlets:</td>        
+      </tr>
+      <tr>
+        <td><a href="gendertaggerapp">GenderTaggerApp</a></td>
+      </tr>
+    </table>
+     -->
+    <form action="gender_tag/assignGender" method="get"> 
+    <input type="hidden" name="_function" value="assignGender">
+    <table>
+	<tr><td align="right">name: <td><input name="inputName" type="text" value="Jan Dědek">
+    <tr><td align="right">language code: <td><input name="languageTag" type="text" value="cz">
+    <tr>
+    <td align="right">convention:
+    <td>
+	    <select name="_convention">
+	    	<option>_xins-soap</option>
+	    	<option>_xins-soap-map</option>
+	    	<option>_xins-xml</option>
+	    	<option selected="selected">_xins-std</option>
+	    	<option>_xins-xmlrpc</option>
+	    	<option>_xins-json</option>
+	    	<option>_xins-jsonrpc</option>
+	    </select>
+    <tr><td><td><input type="submit">
+    </table>
+    </form>
+    <ul>
+	    <li> <a href="specdocs/">API Documentation</a>
+	    <li> <a href="wsdl/gender_tag.wsdl">WSDL</a>
+    </ul>
+    
+    
+  </body>
+</html>
