@@ -42,7 +42,7 @@ public final class assignGenderImpl extends assignGender {
      */
     public Result call(Request request) throws Throwable {
         SuccessfulResult result = new SuccessfulResult();        
-        result.setGender(GenderTagger.getSingleton().classify(request.getInputName()));
+        result.setGender(GenderTagger.getSingleton().classify(request.getInputName(), request.getLanguageTag()));
         return result;
     }
 }

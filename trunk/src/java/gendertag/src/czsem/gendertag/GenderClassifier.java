@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import czsem.gendertag.FeatureMaker.Features;
+
 import weka.classifiers.Classifier;
 import weka.core.Instance;
 import weka.core.Instances;
@@ -30,9 +32,9 @@ public class GenderClassifier {
 		dataset = createDeataset();
 	}
 	
-	public String printDistribution(double[] data) throws Exception
+	public String printDistribution(Features features) throws Exception
 	{
-		Instance instance = featureDataToInstnce(data);
+		Instance instance = featureDataToInstnce(features);
 		double[] dist = classifier.distributionForInstance(instance);
 		
 		StringBuilder ret = new StringBuilder();
@@ -65,25 +67,39 @@ public class GenderClassifier {
 		
 	}
 
-	public String classify(double[] data) throws Exception {
-		return classifyInstance(featureDataToInstnce(data));
+	public String classify(Features features) throws Exception {
+		return classifyInstance(featureDataToInstnce(features));
 	}
 
-	public Instance featureDataToInstnce(double[] data) {
-		Instance instance = new Instance(0, data);
+	public Instance featureDataToInstnce(Features features) {
+		Instance instance = new Instance(dataset.numAttributes());
 		instance.setDataset(dataset);
+		
+		for (int i = 0; i < features.doubleFeatures.length; i++) {
+			instance.setValue(i, features.doubleFeatures[i]);
+		}
+
+		for (int i = features.doubleFeatures.length;
+		i < instance.numAttributes(); i++)
+		{
+			instance.setValue(i, 
+					instance.attribute(i).indexOfValue(
+							features.stringFeatures[i - features.doubleFeatures.length]));
+		}
+		
 		return instance;
 	}
 
+/*	
 	public static void main(String[] args) throws Exception {
 		GenderClassifier clas = new GenderClassifier();
 		FeatureMaker tag = new FeatureMaker();
-		double[] data = tag.createDoubleFetures("Jan Dedek");
+		double[] data = tag.createDoubleFeatures("Jan Dedek");
 		System.err.println(clas.classify(data));
-		System.err.println(clas.classify(tag.createDoubleFetures("Jana volhejnova")));
+		System.err.println(clas.classify(tag.createDoubleFeatures("Jana volhejnova")));
 	
-		System.err.println(clas.printDistribution(tag.createDoubleFetures("Jana volhejnova")));
+		System.err.println(clas.printDistribution(tag.createDoubleFeatures("Jana volhejnova")));
 	
 	}
-
+*/
 }

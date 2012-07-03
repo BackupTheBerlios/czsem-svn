@@ -31,28 +31,29 @@ public class GenderTagger {
 
 	public static void main(String[] args) throws Exception {
 		GenderTagger t = new GenderTagger();
-		System.err.println(t.classify("Jan Dedek"));
-		System.err.println(t.classify("Jana Dedekova"));
-		System.err.println(t.classify("Chantal Poullain"));
-		System.err.println(t.printDetails("Chantal Poullain"));
-		System.err.println(t.printDetails("Štěpánek Jára"));
+		System.err.println(t.classify("Jan Dedek", "cz"));
+		System.err.println(t.classify("Jana Dedekova", "cz"));
+		System.err.println(t.classify("Chantal Poullain", "cz"));
+		System.err.println(t.printDetails("Chantal Poullain", "cz"));
+		System.err.println(t.printDetails("Štěpánek Jára", "cz"));
+		System.err.println(t.printDetails("Spilmannová Dana", "cz"));
 
 	}
 
 
 
-	public String printDetails(String name) throws Exception {
+	public String printDetails(String name, String lang) throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append(Arrays.toString(featureMaker.createFeturesAll(name)));
-		sb.append(classifier.printDistribution(featureMaker.createDoubleFetures(name)));
+		sb.append(Arrays.toString(featureMaker.createDoubleFeturesWithDescriptions(name)));
+		sb.append(classifier.printDistribution(featureMaker.createFeatures(name, lang, "")));
 		return sb.toString();
 	}
 
 
 
-	public String classify(String name) throws Exception
+	public String classify(String name, String lang) throws Exception
 	{
-		return classifier.classify(featureMaker.createDoubleFetures(name));
+		return classifier.classify(featureMaker.createFeatures(name, lang, ""));
 	}
 	
 	/*

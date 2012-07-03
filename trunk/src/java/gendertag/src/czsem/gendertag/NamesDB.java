@@ -3,8 +3,6 @@ package czsem.gendertag;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
-import java.text.Normalizer;
-import java.text.Normalizer.Form;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Locale;
@@ -29,9 +27,8 @@ public class NamesDB {
 	public static String normalizeName(String name)
 	{
 		String s0 = name.replaceAll("[,.;\\-/\\%*+]", " ").trim().toLowerCase();
-		String s1 = Normalizer.normalize(s0, Form.NFD);
-		String s2 = s1.replaceAll("[^\\p{ASCII}]", "");
-		return s2;
+//		return Utils.removeDiacritics(s0);
+		return s0;
 	}
 
 	
@@ -70,7 +67,7 @@ public class NamesDB {
 		}
 	}
 	
-	public static interface Irator3d<ObjType>
+	public static interface Iterator3d<ObjType>
 	{
 		public ObjType iterte(ObjType current, String x1, String x2, String x3) throws IOException;		
 	}
@@ -166,6 +163,9 @@ public class NamesDB {
 
 	private static final int attr_num = 8;
 
+	public static final int[] firstNameFeatures = {0,1,4,5};
+	public static final int[] lastNameFeatures = {2,3,6,7};
+
 	private DbPlane [][][] db; 
 
 	
@@ -176,7 +176,7 @@ public class NamesDB {
 		
 
 	private void createDbPlanes() throws IOException {
-		db = createDbPlanes(new Irator3d<NamesDB.DbPlane>() {
+		db = createDbPlanes(new Iterator3d<NamesDB.DbPlane>() {
 
 			@Override
 			public DbPlane iterte(DbPlane current, String x1, String x2, String x3) throws IOException {
@@ -185,12 +185,12 @@ public class NamesDB {
 		});
 	}
 
-	protected void iterateDbPlanes(Irator3d<DbPlane> iter) throws IOException
+	protected void iterateDbPlanes(Iterator3d<DbPlane> iter) throws IOException
 	{
 		iterateDbPlanes(iter, db);		
 	}
 
-	protected static void iterateDbPlanes(Irator3d<DbPlane> iter, DbPlane[][][] in_db) throws IOException
+	protected static void iterateDbPlanes(Iterator3d<DbPlane> iter, DbPlane[][][] in_db) throws IOException
 	{
 		for (int a=0; a<attr_names[0].length; a++)
 		{
@@ -205,7 +205,7 @@ public class NamesDB {
 		
 	}
 
-	protected static DbPlane[][][] createDbPlanes(Irator3d<DbPlane> iter) throws IOException {		
+	protected static DbPlane[][][] createDbPlanes(Iterator3d<DbPlane> iter) throws IOException {		
 		DbPlane[][][] ret_db = new DbPlane[attr_names[0].length][][];
 		for (int a=0; a<attr_names[0].length; a++)
 		{
@@ -223,12 +223,12 @@ public class NamesDB {
 	}
 
 
-	public DbRecord[] findAll(String string) throws IOException {
+	public DbRecord[] findAll(String string) {
 		final DbRecord[] ret = new DbRecord[attr_num];
 		
 		final String norm = normalizeName(string);
 
-		Irator3d<DbPlane> iter = new Irator3d<NamesDB.DbPlane>() {
+		Iterator3d<DbPlane> iter = new Iterator3d<NamesDB.DbPlane>() {
 			int cur = 0; 
 			
 			@Override
@@ -242,7 +242,11 @@ public class NamesDB {
 			}
 		};
 		
-		iterateDbPlanes(iter);
+		try {
+			iterateDbPlanes(iter);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 		
 		return ret;
 		
@@ -251,7 +255,7 @@ public class NamesDB {
 	
 
 	public void printStats() throws Exception {
-		iterateDbPlanes(new Irator3d<NamesDB.DbPlane>() {
+		iterateDbPlanes(new Iterator3d<NamesDB.DbPlane>() {
 
 			@Override
 			public DbPlane iterte(DbPlane current, String x1, String x2, String x3) throws IOException {
@@ -265,7 +269,7 @@ public class NamesDB {
 	public static String[] getHeadersShort() throws Exception {
 		final String[] ret = new String[attr_num];
 				
-		createDbPlanes(new Irator3d<NamesDB.DbPlane>() {
+		createDbPlanes(new Iterator3d<NamesDB.DbPlane>() {
 			int cur = 0; 
 			
 			@Override
