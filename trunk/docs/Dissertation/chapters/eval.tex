@@ -674,7 +674,7 @@ For our experiment we used the Weka Experimenter (see in Section~\ref{sec:third_
 We have evaluated all the methods two times by 10-fold cross validation. %(section~\ref{sec:experiment_desc}).
 The obtained results (average values) are described by the graph in Figure~\ref{fig:graph2x10} and in Table~\ref{tab:table2x10} (with standard deviations and marked statistically significant values).
 
-There is no clear winner in our experiment. But the Fuzzy ILP classifier proved better results than a majority of the methods on our data and the results are statistically significant in many cases. Very good results were also obtained using LogitBoost. 
+There is no clear winner in our experiment. But the Fuzzy ILP classifier proved better results than majority of the methods on our data and the results are statistically significant in many cases. Very good results were also obtained using LogitBoost. 
 
 \begin{figure}
 \centerline{\includegraphics[width=\hsize]{2x10cross}}
@@ -777,7 +777,7 @@ The Fuzzy ILP Classifier performed quite well on our dataset, but the next quest
 
 
 %The list of selected datasets can be found in the legend of Table~\ref{tab:UCItable}. 
-All the selected datasets are monotonizable (the target attribute can be naturally ordered), so the fuzzy classifier could take advantage of that. Learning settings are the same as before (Table~\ref{tab:table2x10}) except for settings of both ILP classifiers, which  performed a little bit better with modified settings on a majority of the datasets (see in the legend of Table~\ref{tab:UCItable}). 
+All the selected datasets are monotonizable (the target attribute can be naturally ordered), so the fuzzy classifier could take advantage of that. Learning settings are the same as before (Table~\ref{tab:table2x10}) except for settings of both ILP classifiers, which  performed a little bit better with modified settings on majority of the datasets (see in the legend of Table~\ref{tab:UCItable}). 
 
 Table~\ref{tab:UCItable} compares the numbers of correctly classified instances on all the datasets. The last two columns show numbers of training and testing instances. The numbers of training instances are quite low; this is because the ILP classifiers are probably not capable of fully exploiting higher numbers of training instances and the difference between ILP classifiers and the others would be even a bit higher. This is demonstrated in Figure~\ref{fig:corect_growing_learninig_instances} (for the `nursery' dataset only). It can be seen that when the number of training instances was under about 40, the fuzzy classifier performed better than some of the others (SMO, JRip and Multilayer Perceptron), but from about 60 training instances further, both ILP classifiers performed worse than the others.
 

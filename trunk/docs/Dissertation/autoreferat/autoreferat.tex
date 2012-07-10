@@ -211,9 +211,9 @@ Department of Software Engineering\\ % doplňte n\'{a}zev katedry \v{c}i \'{u}st
 
 \vspace{4mm}
 
-\noindent Autorefer\'{a}t byl rozesl\'{a}n dne
+\noindent Autorefer\'{a}t byl rozesl\'{a}n dne 24.8.2012.
 
-\noindent Obhajoba se kon\'{a} dne~\quad~\quad~\quad~\quad~\quad~v~\quad~\quad~\quad~hodin p\v{r}ed komis\'{i} pro obhajoby diserta\v{c}n\'{i}ch prac\'{i} v oboru I-2 -- Softwarov\'{e} syst\'{e}my na Matematicko-fyzik\'{a}ln\'{i} fakult\v{e} Univerzity Karlovy, Malostransk\'{e} n\'{a}m. 25, Praha 1, v m\'{i}stnosti \v{c}.~\quad~\quad~.
+\noindent Obhajoba se kon\'{a} dne 24.9.2012 ve~13:00~hodin p\v{r}ed komis\'{i} pro obhajoby diserta\v{c}n\'{i}ch prac\'{i} v oboru I-2 -- Softwarov\'{e} syst\'{e}my na Matematicko-fyzik\'{a}ln\'{i} fakult\v{e} Univerzity Karlovy, Malostransk\'{e} n\'{a}m. 25, Praha 1, v m\'{i}stnosti S1.
 
 \noindent S disertac\'{i} je mo\v{z}n\'{e} se sezn\'{a}mit na studijn\'{i}m odd\v{e}len\'{i} MFF UK, Ke Karlovu~3, Praha 2.
 
@@ -244,7 +244,7 @@ The idea of the Semantic Web was the strongest motivation of our research from t
 The last topic of the thesis is the most distant from the original information extraction topic. We have included it because it represents an important part of our research and considerable effort was spent on it. The topic deals with document classification and fuzzy logic. We are investigating the possibility of using information obtained by information extraction techniques to document classification. Our implementation of so called Fuzzy ILP Classifier was experimentally used for the purpose of document classification.
 
 \subsection{Motivation}
-The basic motivation of our research can be illustrated with three images or schemas that are presented in Figures~\ref{fig:acquisitions_annotated}, \ref{fig:fireman_annotated} and \ref{fig:intro_damage_tree}. The first two figures show some texts with several pieces of information decorated in it. If you show such images to a human, he or she will be shortly able to find such pieces of information in any other text of the same kind. But can this relatively simple task do a computer as well? Figure~\ref{fig:intro_damage_tree} represents our first ideas when we started to look for the answer. The figure shows a linguistic tree obtained by automated linguistic analysis of the last sentence of the second figure (Figure~\ref{fig:fireman_annotated}). It already contain lots of indications (decorated with orange tags) of where to look for the wanted piece of information, in this case, the amount of 8,000 Czech Crowns representing the total damage sought by the accident reported in the text.
+The basic motivation of our research can be illustrated with three images or schemas that are presented in Figures~\ref{fig:acquisitions_annotated}, \ref{fig:fireman_annotated} and \ref{fig:intro_damage_tree}. The first two figures show some texts with several pieces of information decorated in it. If you show such images to a human, he or she will be shortly able to find such pieces of information in any other text of the same kind. But can this relatively simple task do a computer as well? Figure~\ref{fig:intro_damage_tree} represents our first ideas when we started to look for the answer. The figure shows a linguistic tree obtained by automated linguistic analysis of the last sentence of the second figure (Figure~\ref{fig:fireman_annotated}). It already contain lots of indications (decorated by corresponding labels) of where to look for the wanted piece of information, in this case, the amount of 8,000 Czech Crowns representing the total damage sought by the accident reported in the text.
 
 
 \begin{figure}[p]
@@ -281,7 +281,7 @@ Besides that information extraction and annotation is very interesting and chall
 
 \section{Contribution} \label{sec:phd_contributions}
 
-Let us briefly summarize the main contributions of the present work.
+Let us summarize the main contributions of the present work in this section.
 
 \subsection{New Ideas, Models and Methods}
 
@@ -291,7 +291,9 @@ Novel and original approaches or adaptations of existing ones are presented in t
 The extraction method based on manually designed extraction rules is unique in the high expressiveness of extraction rules and the existence GUI (Graphical User Interface) for graphical design of these rules, both of these benefits are brought by the existence of the linguistic tool Netgraph \citep{biblio:MiNetgraphA2006}, which was exploited as the core of the extraction method.
 
 \subsubsection{Machine Learning of Extraction Rules}
-Very similar approaches to our extraction method based on ILP were already reported in literature \citep{DBLP:conf/ilp/RamakrishnanJBS07, aitken02:_learn_infor_extrac_rules}, but they were developed partly in parallel with our solution and they do not provide a publicly available and usable implementation. The method also represents the first attempt to use PDT (Prague Dependency Treebank) resources (e.g. tectogrammatical trees \citep{biblio:MiBeAnnotationtectogrammatical2006}) in the area of information extraction. Evaluation of the method on the language pair of Czech and English demonstrates its language independence.
+Very similar approaches to our extraction method based on ILP were already reported in literature \citep{DBLP:conf/ilp/RamakrishnanJBS07, aitken02:_learn_infor_extrac_rules}, but they were developed partly in parallel with our solution and they do not provide a~publicly available and usable implementation. 
+
+The method also represents the first attempt to use PDT (Prague Dependency Treebank) resources (e.g. tectogrammatical trees \citep{biblio:MiBeAnnotationtectogrammatical2006}) in the area of information extraction. Evaluation of the method on the language pair of Czech and English demonstrates its language independence.
 
 \subsubsection{Shareable Extraction Ontologies}
 The topic of shareable extraction ontologies introduces completely new paradigm to the design and usage of extraction ontologies \citep{DBLP:conf/er/EmbleyTL02}. The usage of a semantic web reasoner as the interpreter of an extraction ontology has never been demonstrated before.
@@ -339,7 +341,193 @@ Additive logistic regression LogitBoost \citep{biblio:LogitBoost}), etc.
 
 \subsection{Evaluation Experiments}
 
-All approaches presented in the thesis were evaluated such that readers can obtain clear picture abut the performance and usability of these approaches. Most evaluation experiments are detailed and comprehensive, investigating also the statistical significance of the results.
+All approaches presented in the thesis were evaluated such that readers can obtain clear picture about the performance and usability of these approaches. Most evaluation experiments are detailed and comprehensive, investigating also the statistical significance of the results.
+
+In following subsections, some examples of the evaluation results will be presented. 
+
+
+\subsubsection{Examples of Learned Extraction Rules}
+In Figure~\ref{fig:learning_eval_rules}, we present the most representative examples of extraction rules learned by ILP procedure from the whole dataset Czech Fireman Reports Manually Annotated. The rule with largest coverage for each extraction task was selected and it is provided in the figure. Each rule demonstrates a connection of the target token, annotated as `\emph{mention(task\_name)}’, with other parts of the sentence through linguistic syntax structures. 
+
+For example the second rule (\emph{damage} task, lines 6-10) connects the node A with its tectogrammatical counterpart -- numeral B (\emph{n.quant.def}) and with node D (`vyšetřovatel') representing the \emph{investigating officer} who stated the mount of damage. 
+
+
+\begin{figure}
+\begin{minted}[linenos,  fontsize=\footnotesize,
+               frame=lines]{prolog}
+% [cars - Rule 3] [Pos cover = 5 Neg cover = 0]
+mention(cars,A) :-
+   'lex.rf'(B,A), sempos(B,'n.denot'), tDependency(C,B),
+   t_lemma(C,vozidlo), functor(C,'ACT'), number(C,sg). % vozidlo ~ vehicle
+
+% [damage - Rule 1] [Pos cover = 14 Neg cover = 0]
+mention(damage,A) :-
+   'lex.rf'(B,A), sempos(B,'n.quant.def'), tDependency(C,B),
+   tDependency(C,D), t_lemma(D,'vyšetřovatel').   
+      % vyšetřovatel ~ investigating officer
+
+% [end_subtree - Rule 7] [Pos cover = 6 Neg cover = 0]
+mention(end_subtree,A) :-
+   'lex.rf'(B,A), sempos(B,'n.quant.def'), tDependency(C,B),
+   t_lemma(C,'ukončit').   % ukončit ~ finish
+
+% [start - Rule 2] [Pos cover = 15 Neg cover = 0]
+mention(start,A) :-
+   'lex.rf'(B,A), functor(B,'TWHEN'), tDependency(C,B), tDependency(C,D), 
+   t_lemma(D,ohlásit).   % ohlásit ~ report (e.g. a fire)
+
+% [injuries - Rule 1] [Pos cover = 7 Neg cover = 0]
+mention(injuries,A) :-
+   'lex.rf'(B,A), functor(B,'PAT'), tDependency(B,C), t_lemma(C,'zraněný'), 
+   tDependency(D,B), aspect(D,cpl).   % zraněný ~ injured
+
+% [fatalities - Rule 1] [Pos cover = 3 Neg cover = 0]
+mention(fatalities,A) :-
+   'lex.rf'(B,A), functor(B,'PAT'), tDependency(C,B), t_lemma(C,srazit).
+	    % srazit ~ knock down
+
+% [professional_unit - Rule 1] [Pos cover = 17 Neg cover = 0]
+mention(professional_unit,A) :-
+   'lex.rf'(B,A), functor(B,'LOC'), gender(B,fem), tDependency(C,B), 
+   functor(C,'CONJ'), overlap_Lookup_tToken(D,B).
+
+% [amateur_unit - Rule 1] [Pos cover = 19 Neg cover = 0]
+mention(amateur_unit,A) :-
+   'lex.rf'(B,A), tDependency(C,B), tDependency(D,C), tDependency(D,E), 
+   t_lemma(E,dobrovolný).   % dobrovolný ~ voluntary
+\end{minted}
+	\caption[Rules with largest coverage for each task.]{Rules with largest coverage for each task learned from the whole dataset Czech Fireman Reports Manually Annotated.}
+	\label{fig:learning_eval_rules}
+\end{figure}
+
+
+\subsubsection{Czech Fireman Performance}
+
+
+
+\begin{table}
+\centering 
+\begin{tabular}
+{lcrclcrcl@{\hspace{0.1cm}}cc}
+
+\multicolumn{11}{c}{Strict Precision}\\
+\hline
+Task && \multicolumn{3}{c}{ILP}  && \multicolumn{3}{c}{PAUM} && \\
+\hline
+              cars &&      0.324 &  $\pm$  &       0.387 & &      0.380 &  $\pm$  &       0.249 &  \\
+            damage &&      0.901 &  $\pm$  &       0.178 & &      0.860 &  $\pm$  &       0.176 &  \\
+       end subtree &&      0.529 &  $\pm$  &       0.381 & &      0.499 &  $\pm$  &       0.242 &  \\
+             start &&      0.929 &  $\pm$  &       0.109 & &      0.651 &  $\pm$  &       0.152 & $\bullet$ \\
+          injuries &&      0.667 &  $\pm$  &       0.291 & &      0.398 &  $\pm$  &       0.205 & $\bullet$ \\
+        fatalities &&      0.814 &  $\pm$  &       0.379 & &      0.307 &  $\pm$  &       0.390 & $\bullet$ \\
+  professional unit &&      0.500 &  $\pm$  &       0.241 & &      0.677 &  $\pm$  &       0.138 & $\circ$ \\
+      amateur unit &&      0.863 &  $\pm$  &       0.256 & &      0.546 &  $\pm$  &       0.293 & $\bullet$ \\
+\hline
+           overall &&      0.691 &  $\pm$  &       0.358 & &      0.540 &  $\pm$  &       0.297 & $\bullet$ \\
+\hline
+\\
+
+\multicolumn{11}{c}{Strict Recall}\\
+\hline
+Task && \multicolumn{3}{c}{ILP}  && \multicolumn{3}{c}{PAUM} && \\
+\hline
+              cars &&      0.088 &  $\pm$  &       0.129 & &      0.353 &  $\pm$  &       0.231 & $\circ$ \\
+            damage &&      0.821 &  $\pm$  &       0.261 & &      0.933 &  $\pm$  &       0.148 & $\circ$ \\
+       end subtree &&      0.231 &  $\pm$  &       0.203 & &      0.601 &  $\pm$  &       0.249 & $\circ$ \\
+             start &&      0.908 &  $\pm$  &       0.115 & &      0.978 &  $\pm$  &       0.058 & $\circ$ \\
+          injuries &&      0.574 &  $\pm$  &       0.309 & &      0.814 &  $\pm$  &       0.224 & $\circ$ \\
+        fatalities &&      0.388 &  $\pm$  &       0.449 & &      0.536 &  $\pm$  &       0.452 & $\circ$ \\
+  professional unit &&      0.506 &  $\pm$  &       0.191 & &      0.811 &  $\pm$  &       0.138 & $\circ$ \\
+      amateur unit &&      0.886 &  $\pm$  &       0.210 & &      0.955 &  $\pm$  &       0.096 & $\circ$ \\
+\hline
+           overall &&      0.550 &  $\pm$  &       0.382 & &      0.748 &  $\pm$  &       0.312 & $\circ$ \\
+\hline
+\\
+
+\multicolumn{11}{c}{Strict $F_1$}\\
+\hline
+Task && \multicolumn{3}{c}{ILP}  && \multicolumn{3}{c}{PAUM} && \\
+\hline
+              cars &&      0.109 &  $\pm$  &       0.147 & &      0.335 &  $\pm$  &       0.205 & $\circ$ \\
+            damage &&      0.828 &  $\pm$  &       0.217 & &      0.876 &  $\pm$  &       0.131 & $\circ$ \\
+       end subtree &&      0.283 &  $\pm$  &       0.219 & &      0.525 &  $\pm$  &       0.213 & $\circ$ \\
+             start &&      0.912 &  $\pm$  &       0.089 & &      0.771 &  $\pm$  &       0.111 & $\bullet$ \\
+          injuries &&      0.543 &  $\pm$  &       0.280 & &      0.498 &  $\pm$  &       0.204 &  \\
+        fatalities &&      0.306 &  $\pm$  &       0.420 & &      0.222 &  $\pm$  &       0.308 &  \\
+  professional unit &&      0.491 &  $\pm$  &       0.200 & &      0.730 &  $\pm$  &       0.118 & $\circ$ \\
+      amateur unit &&      0.827 &  $\pm$  &       0.253 & &      0.634 &  $\pm$  &       0.296 & $\bullet$ \\
+\hline
+           overall &&      0.537 &  $\pm$  &       0.369 & &      0.574 &  $\pm$  &       0.295 & $\circ$ \\
+\hline
+\\
+\multicolumn{11}{c}{$\circ$, $\bullet$ statistically significant improvement or degradation}\\
+\end{tabular}
+
+\caption{Evaluation on Czech Fireman dataset} \label{tab:learning_eval_fir_perfom}
+\end{table}
+
+
+
+
+%\clearpage
+
+
+Table~\ref{tab:learning_eval_fir_perfom} summarizes performance evaluation of our ILP based extraction method and its comparison with the PAUM based one \citep{Li:Paum} on the dataset Czech Fireman Reports Manually Annotated. The table shows results of the three main evaluation measures: strict precision, strict recall and strict $F_1$ for each extraction task as well as overall results. 8-fold cross validation was performed 8 times in the experiment. Average values and standard deviations are printed in the table and statistical significance is indicated. Root/subtree preprocessing/postprocessing was performed in the first three tasks: `cars’, `damage’ and `end subtree’.
+
+Although the precision of the ILP method was better in the majority of tasks and also its overall precision is statically better than the precision of the PAUM method, its recall was worse in all the measurements and also $F_1$ score is indicating better results of the PAUM method. 
+
+\subsubsection{Evaluation of Fuzzy ILP Classification} \label{sec:fuzzy_eval}
+\graphicspath{{../img/ch80/}}
+
+In this section, evaluation experiments with the Fuzzy ILP Classifier will be presented. 
+
+We have evaluated both ILP methods and compared them with five additional classifiers:
+Multilayer Perceptron \citep{biblio:bishop-1995},
+Support Vector Machine classifier SMO \citep{biblio:SMO},
+J48 decision tree \citep{biblio:J48},
+JRip rules \citep{weka:JRip} and
+Additive logistic regression LogitBoost \citep{biblio:LogitBoost}.
+
+
+We have evaluated all the methods two times by 10-fold cross validation. %(section~\ref{sec:experiment_desc}).
+The obtained results (average values) are described in Table~\ref{tab:table2x10} (with standard deviations and marked statistically significant values).
+
+There is no clear winner in our experiment. But the Fuzzy ILP classifier proved better results than majority of the methods on our data and the results are statistically significant in many cases. Very good results were also obtained using LogitBoost. 
+
+
+\begin{table}
+\footnotesize
+{\centering \begin{tabular}{lr@{\hspace{0cm}}c@{\hspace{0cm}}rr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.05cm}}c}
+\hline
+& \multicolumn{3}{c}{Fuzzy}& \multicolumn{4}{c}{Crisp} & \multicolumn{4}{c}{MultPerc} & \multicolumn{4}{c}{SMO} & \multicolumn{4}{c}{J48} & \multicolumn{4}{c}{JRip} & \multicolumn{4}{c}{LBoost} \\
+\hline
+Corr	& 0.61 & $\pm$ & .19 & .22 & $\pm$ & .17 & $\bullet$ & .41 & $\pm$ & .19 & $\bullet$ & .36 & $\pm$ & .24 & $\bullet$ & .41 & $\pm$ & .22 & $\bullet$ & .44 & $\pm$ & .17 & $\bullet$ & .59 & $\pm$ & .26 &        \\
+Incor	&  .39 & $\pm$ & .19 & .27 & $\pm$ & .24 &         	 & .59 & $\pm$ & .19 & $\circ$ 	 & .64 & $\pm$ & .24 & $\circ$ 	 & .59 & $\pm$ & .22 & $\circ$ 	 & .56 & $\pm$ & .17 & $\circ$ 	 & .41 & $\pm$ & .26 &        \\
+Uncl	&  .00 & $\pm$ & .00 & .51 & $\pm$ & .29 & $\circ$   & .00 & $\pm$ & .00 &         	 & .00 & $\pm$ & .00 &         	 & .00 & $\pm$ & .00 &         	 & .00 & $\pm$ & .00 &         	 & .00 & $\pm$ & .00 &        \\
+Prec	&  .56 & $\pm$ & .24 & .53 & $\pm$ & .37 &         	 & .35 & $\pm$ & .20 & $\bullet$ & .33 & $\pm$ & .26 &         	 & .39 & $\pm$ & .22 &         	 & .34 & $\pm$ & .21 & $\bullet$ & .56 & $\pm$ & .28 &        \\
+Rec		&  .61 & $\pm$ & .19 & .49 & $\pm$ & .32 &         	 & .41 & $\pm$ & .19 & $\bullet$ & .36 & $\pm$ & .24 & $\bullet$ & .41 & $\pm$ & .22 & $\bullet$ & .44 & $\pm$ & .17 & $\bullet$ & .59 & $\pm$ & .26 &        \\
+F			&  .56 & $\pm$ & .20 & .49 & $\pm$ & .33 &         	 & .36 & $\pm$ & .19 & $\bullet$ & .32 & $\pm$ & .24 & $\bullet$ & .39 & $\pm$ & .21 &         	 & .36 & $\pm$ & .19 & $\bullet$ & .56 & $\pm$ & .27 &        \\
+\hline
+\multicolumn{21}{c}{$\circ$, $\bullet$ statistically significant increase or decrease}\\
+\end{tabular} \par}
+\footnotesize
+\smallskip
+Legend:\\
+{\centering
+\begin{tabular}{p{2cm}@{}p{10.5cm}}\\
+Corr \dotfill{} & Percent correct\\
+Inor \dotfill{} & Percent incorrect\\
+Uncl \dotfill{} & Percent unclassified\\
+Prec \dotfill{} & IR precision, weighted average from all classes\\
+Rec \dotfill{} 	& IR recall, weighted average from all classes\\
+F \dotfill{} 		& F measure, weighted average from all classes\\
+\end{tabular}
+}
+\caption[Evaluation of the methods on the Fireman dataset.]{Evaluation of the methods on the Fireman dataset in 2 times 10-fold cross validation.}
+\label{tab:table2x10}
+\end{table}
+
+
 
 \subsection{Publications and New Publicly Available Resources}
 
@@ -578,161 +766,6 @@ Jan D{\v{e}}dek, Peter Vojt{\'{a}}{\v{s}}, and Juraj Vojt{\'{a}}{\v{s}}.
 
 
 \newpage
-%
-%\section*{Citations}
-%
-%
-%\begin{itemize}
-%\item
-%Alan Eckhardt, T.~Horv{\'{a}}th, and Peter Vojt{\'{a}}{\v{s}}.
-%\newblock {PHASES}: A user profile learning approach for web search.
-%\newblock In Tsau Lin, Laura Haas, R.~Motwani, A.~Broder, and H.~Ho, editors,
-%  \emph{2007 {IEEE}/{WIC}/{ACM} International Conference on Web Intelligence -
-%  {WI} 2007}, pages 780--783. {IEEE}, 2007{}.
-%\newblock ISBN 0-7695-3026-5/07.
-%\begin{itemize}
-%
-%\item
-%\bibitem[Dokulil et~al.(2008)Dokulil, Yaghob, and Katreniakov\'{a}]{b:citace2}
-%Jir\'{\i} Dokulil, Jakub Yaghob, and Jana Katreniakov\'{a}.
-%\newblock Everything you ever wanted to learn from the semantic web but were
-%  unable to ask.
-%\newblock In \emph{ADVCOMP '08: Proceedings of the 2008 The Second
-%  International Conference on Advanced Engineering Computing and Applications
-%  in Sciences}, pages 21--26, Washington, DC, USA, 2008. IEEE Computer Society.
-%\newblock ISBN 978-0-7695-3369-8.
-%\newblock \doi{http://dx.doi.org/10.1109/ADVCOMP.2008.12}.
-%
-%\end{itemize}
-%
-%\item
-%\bibitem[Vojt{\'{a}}{\v{s}} and Eckhardt(2009)]{bmy:VoEcUsingtuneable2009}
-%Peter Vojt{\'{a}}{\v{s}} and Alan Eckhardt.
-%\newblock Using tuneable fuzzy similarity in non-metric search.
-%\newblock In Tom{\'{a}}{\v{s}} Skopal and Pavel Zezula, editors, \emph{{SISAP}
-%  2009: Second international workshop on similarity search and applications},
-%  pages 163--164, Prague, Czech Republic, 2009. {IEEE}.
-%\newblock ISBN 978-0-7695-3765-8.
-%
-%\begin{itemize}
-%\item
-%\bibitem[Skopal and Bustos(2010)]{b:citace1}
-%Tomas Skopal and Benjamin Bustos.
-%\newblock On nonmetric similarity search problems in complex domains.
-%\newblock To appear in \emph{ACM Computing Surveys}, 2010.
-%
-%\end{itemize}
-%
-%
-%
-%\item
-%Alan Eckhardt, T.~Horv{\'{a}}th, and Peter Vojt{\'{a}}{\v{s}}.
-%\newblock Learning different user profile annotated rules for fuzzy preference
-%  top-k querying.
-%\newblock In H.~Prade and V.~Subrahmanian, editors, \emph{International
-%  Conference on Scalable Uncertainty Management}, volume 4772 of \emph{Lecture
-%  Notes In Computer Science}, pages 116--130, Washington {DC}, {USA},
-%  2007{}. Springer Berlin / Heidelberg.
-%\newblock ISBN 978-3-540-75407-7.
-%
-%\begin{itemize}
-%\item
-%\bibitem[Barla and Bieliková(2009)]{b:citace3}
-%Michal Barla and Mária Bieliková.
-%\newblock M.: Rule-based user characteristics acquisition from.
-%\newblock In \emph{Logs With Semantics for Personalized Web-based Systems.
-%  Computing and Informatics}, 2009.
-%
-%\end{itemize}
-%
-%
-%
-%\end{itemize}
-
-%
-%\newpage
-%
-%\section*{Ji\v{r}\'{i} Dokulil - Curriculum Vitae}
-%
-%\noindent
-%Department of Software Engineering\\
-%Faculty of Mathematics and Physics\\
-%Charles University in Prague
-%
-%\vspace{8pt}
-%\noindent
-%\emph{Phone:} +420 221 914 271
-%
-%\vspace{8pt}
-%\noindent
-%\emph{Fax:} +420-221-914-323
-%
-%\vspace{8pt}
-%\noindent
-%\emph{E-mail:} \TheAuthorMail
-%
-%\vspace{8pt}
-%\noindent
-%\emph{Work address:} Malostransk\'{e} n\'{a}m. 25, 118 00, Praha 1, Czech Republic
-%
-%\vspace{8pt}
-%\noindent
-%\emph{Home address:} U Hradiska 7, 779 00, Olomouc, Czech Republic
-%
-%\vspace{8pt}
-%\noindent
-%\emph{Date and place of birth:} May 21, 1982, Olomouc, Czech Republic
-%
-%
-%\subsubsection*{Education}
-%
-%\begin{itemize}
-%\item \emph{2001--2006} Master's degree, software systems, Faculty of Mathematics and Physics, Charles University in Prague\\
-%\emph{Master's thesis:} RDF querying (awarded 3rd place at SVO\v{C} 2006)
-%\end{itemize}
-%
-%\subsubsection*{Research experience}
-%
-%\begin{itemize}
-%\item \emph{2009 onwards:} Parallel data processing\\
-%Bobox framework
-%\item \emph{2005 onwards:} RDF querying\\
-%SPARQL evaluation and indexing\\
-%Trisolda query interface: A relational query inteface for RDF\\
-%TriQ algebra: An algebra for RDF querying akin to relational algebra\\
-%TriQuery language: A extension of XQuery for RDF querying
-%\item \emph{2007--2009:} RDF visualization\\
-%Trisolda RDF visualizer: A visualizer for large RDF data
-%\item \emph{2004--2006:} Data integration\\
-%DataPile: A universal storage architecture
-%\end{itemize}
-%
-%\subsubsection*{Teaching experience}
-%
-%\begin{itemize}
-%\item Compiler principles
-%\item Parallel programming
-%\item Object-oriented programming; C/C++
-%\item Supervisor: 8 bachelor and master theses
-%
-%\end{itemize}
-%
-%\subsubsection*{Program committee membership}
-%
-%\begin{itemize}
-%\item SEMAPRO 2009, 2010 conferences
-%\item ITAT 2009, 2010 conferences
-%\item ADVCOMP 2008 conference
-%\end{itemize}
-%
-%\subsubsection*{Organizing committee membership}
-%
-%\begin{itemize}
-%\item SOFSEM 2009 conference
-%\end{itemize}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \end{document}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
