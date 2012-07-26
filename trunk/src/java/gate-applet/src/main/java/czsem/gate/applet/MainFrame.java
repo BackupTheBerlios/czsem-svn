@@ -4,6 +4,7 @@ import gate.Document;
 import gate.Factory;
 import gate.Gate;
 import gate.creole.ResourceInstantiationException;
+import gate.mimir.tool.WebUtils;
 import gate.util.GateException;
 import gate.util.InvalidOffsetException;
 
@@ -13,11 +14,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.Set;
 
 import javax.swing.JOptionPane;
@@ -26,8 +24,6 @@ import javax.swing.JTabbedPane;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-
-import czsem.online.helpers.DocumentHandler;
 
 public class MainFrame {
 
@@ -44,6 +40,8 @@ public class MainFrame {
 	}
 
 	public static void initGate() throws GateException {
+		if (Gate.isInitialised()) return;
+		
 		Logger logger = Logger.getRootLogger();
 	    logger.setLevel(Level.OFF);
 		BasicConfigurator.configure();
@@ -51,12 +49,35 @@ public class MainFrame {
 		Gate.runInSandbox(true);
 		Gate.init();		
 	}
+	
+	public static Document downloadGateDocument(URL documentUrl) throws ResourceInstantiationException {
+		Document doc;
+		
+		WebUtils wu = new WebUtils();
+		
+		try {
+			doc = (Document) wu.getObject(documentUrl.toString());
+			//doc = Factory.newDocument(documentUrl, "utf8");
+		} catch (Exception e)
+		{
+			doc = Factory.newDocument(
+					String.format("Requested document could not be initialized.\nurl: %s\nerror message: %s",
+							documentUrl.toString(), e.getLocalizedMessage()));
+			
+		}
+		return doc;
+	}
+
 
 	/**
 	 * @return null is succeeds
 	 */
 	public static Exception uploadGateDocuemnt(Document document, URL url) {
+		WebUtils wu = new WebUtils();
+				
 		try {
+			wu.postObject(url.toString(), document);
+			/*		
 			URLConnection conn = url.openConnection();
 			conn.setDoOutput(true);
 			DocumentHandler.writeGateDocXml(document, conn.getOutputStream());
@@ -68,6 +89,7 @@ public class MainFrame {
 				System.err.println(line);
 			}
 			rd.close();
+*/		
 		} catch (Exception e)
 		{
 			return e;
@@ -81,7 +103,7 @@ public class MainFrame {
 			InvalidOffsetException, IOException {												
 				documentEditor = new DefaultDocumentEditor();
 			
-				Document doc = Factory.newDocument(documentUrl);
+				Document doc = downloadGateDocument(documentUrl);
 				documentEditor.setTarget(doc);
 				
 				documentEditor.setSize(parent.getSize());
@@ -113,6 +135,7 @@ public class MainFrame {
 				});
 				
 			}
+
 
 
 	protected void saveDocuemnt() throws IOException {
