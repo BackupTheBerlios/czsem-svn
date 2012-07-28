@@ -1,6 +1,5 @@
 package czsem.online
 
-import czsem.online.helpers.PageCreator
 import org.springframework.dao.DataIntegrityViolationException
 
 class PageController {
@@ -21,19 +20,11 @@ class PageController {
     }
 
     def save() {
-
-		def pageInstance
-		try {
-        	pageInstance = new Page(params.url)
-		} catch(Exception e)
+        def pageInstance = new Page(params)		
+		if (! pageInstance.createDocument())
 		{
-			pageInstance = new Page(params)
-			pageInstance.errors.rejectValue("url", "default.optimistic.locking.failure",
-				[message(code: 'page.url', default: 'Url')] as Object[],
-				e.getLocalizedMessage())
-			render(view: "edit", model: [pageInstance: pageInstance])
+			render(view: "create", model: [pageInstance: pageInstance])
 			return
-			
 		}
         if (!pageInstance.save(flush: true)) {
             render(view: "create", model: [pageInstance: pageInstance])
@@ -55,6 +46,7 @@ class PageController {
         [pageInstance: pageInstance]
     }
 
+/*	
     def edit() {
         def pageInstance = Page.get(params.id)
         if (!pageInstance) {
@@ -95,7 +87,7 @@ class PageController {
 		flash.message = message(code: 'default.updated.message', args: [message(code: 'page.label', default: 'Page'), pageInstance.id])
         redirect(action: "show", id: pageInstance.id)
     }
-
+*/
     def delete() {
         def pageInstance = Page.get(params.id)
         if (!pageInstance) {
