@@ -23,6 +23,7 @@
 			<unpack>true</unpack>
 			<includes>
 				<include>*:gate-core</include>
+				<include>*:mimir-client-tools</include>
 				<include>*:log4j</include>
 				<include>*:jdom</include>
 				<include>*:ant</include>
@@ -30,8 +31,7 @@
 				<include>*:jaxen</include>
 				<include>*:xercesImpl</include>
 				<include>*:commons-io</include>	
-				<include>*:commons-lang</include>	
-							 
+				<include>*:commons-lang</include>								 
 			</includes>
 			<unpackOptions>
 				<excludes>

@@ -1,0 +1,7 @@
+<log4j:configuration threshold="OFF">
+    <root>
+        <priority value ="off" />
+        <appender-ref ref="console" />
+        <appender-ref ref="rolling-file" />
+    </root>
+</log4j:configuration>
