@@ -6,7 +6,11 @@ class AnnotationType {
 	
 	static hasMany = [usage: AnnotationTypeUsage]
 	
+	public String toString() {
+		return name;
+	}
 
+	
     static constraints = {
 		name unique: true
     }

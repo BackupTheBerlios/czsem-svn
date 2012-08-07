@@ -35,6 +35,8 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLStreamWriter;
 
+import czsem.encoding.HttpTargetContentDetector;
+
 public class DocumentHandler {
 
 	private static XMLOutputFactory outputFactory = XMLOutputFactory
@@ -161,9 +163,10 @@ public class DocumentHandler {
 
 	}
 
-	public static Document documentFromUrl(String url_str) throws MalformedURLException, ResourceInstantiationException {
+	public static Document documentFromUrl(String url_str) throws ResourceInstantiationException, IOException {
+		return HttpTargetContentDetector.gateDocFromUrl(url_str);
+		/*
 		URL url = new URL(url_str);
-/*
 		CharsetDetector detector = new CharsetDetector();
 		detector.setText(new BufferedInputStream(url.openStream()));
 		CharsetMatch match = detector.detect();
@@ -172,8 +175,8 @@ public class DocumentHandler {
 		System.err.println(encoding);
 		
 		return Factory.newDocument(url, encoding);
-*/		
 		return Factory.newDocument(url);
+*/		
 	}
 	
 	public static String extractTitle(Document doc) throws InvalidOffsetException

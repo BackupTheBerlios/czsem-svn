@@ -34,17 +34,6 @@ public class PageCreator {
 				a.getEndNode().getOffset()).toString();		
 	}
 	
-	public PageCreator(String url) throws ResourceInstantiationException, InvalidOffsetException, IOException
-	{
-		doc = DocumentHandler.documentFromUrl(url);
-		
-		params = new HashMap<Object, Object>();
-		
-		params.put("url", url);
-		params.put("date", new Date());
-		params.put("title", extractTitle());
-	}
-
 	public Document getDoc() {
 		return doc;
 	}

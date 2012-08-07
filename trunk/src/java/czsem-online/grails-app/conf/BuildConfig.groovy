@@ -24,7 +24,7 @@ grails.project.dependency.resolution = {
 
         // uncomment these to enable remote dependency resolution from public Maven repositories
         //mavenCentral()
-        //mavenLocal()
+        mavenLocal()
         //mavenRepo "http://snapshots.repository.codehaus.org"
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
@@ -39,7 +39,12 @@ grails.project.dependency.resolution = {
 		{
 			transitive = false
 		}
-		
+
+		compile('czsem:detect-content4gate:1.0')
+		{
+			excludes "gate-core", "slf4j-log4j12"			
+		}
+
 		runtime 'org.jdom:jdom:1.1'
 		runtime ('jaxen:jaxen:1.1') { transitive = false }
 		runtime 'org.bluestemsoftware.open.maven.tparty:xerces-impl:2.9.0'

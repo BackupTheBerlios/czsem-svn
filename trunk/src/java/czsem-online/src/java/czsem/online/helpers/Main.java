@@ -16,18 +16,18 @@ public class Main {
 		
 //		PageCreator pc = new PageCreator("http://localhost:8888/charset");
 //		PageCreator pc = new PageCreator("http://lezec.cz");
-		PageCreator pc = new PageCreator("http://dedekj.appspot.com");
+//		PageCreator pc = new PageCreator("http://dedekj.appspot.com");
 		
 		//InputStream in = new URL("http://lezec.cz").openStream();
 		
 		//IOUtils.copy(in, System.out);
 		
-		
+/*		
 		System.err.println(pc.getParams());
 
 		System.err.println(pc.getDocContentString());
 		
-
+*/
 		System.err.println("end");
 
 	}

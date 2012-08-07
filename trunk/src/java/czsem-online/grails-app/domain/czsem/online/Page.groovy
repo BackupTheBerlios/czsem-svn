@@ -16,6 +16,21 @@ class Page {
 		url(unique: true, url: true, reuire: true)
 		date(reuire: true)
     }
+	
+	public String toString() {
+		String strip1 = url.replaceFirst("^http://", "");
+		String ret = strip1; 
+		if (strip1.length() > 20)
+		{
+			int subst = strip1.length() - 20 -3;
+			int start_sub = strip1.length()/2 - subst/2;
+			int end_sub = start_sub + subst;
+			
+			ret = strip1.substring(0, start_sub) + "..." + strip1.substring(end_sub, strip1.length());  
+			
+		}
+		return ret;
+	}
 		
 	
 	public boolean createDocument()

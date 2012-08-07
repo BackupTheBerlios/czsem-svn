@@ -17,11 +17,11 @@ class DocumentController {
         [documentInstanceList: Document.list(params), documentInstanceTotal: Document.count()]
     }
 
+  /*
     def create() {
         [documentInstance: new Document(params)]
     }
 
-  /*
 	  def save() {
         def documentInstance = new Document(params)
         if (!documentInstance.save(flush: true)) {
