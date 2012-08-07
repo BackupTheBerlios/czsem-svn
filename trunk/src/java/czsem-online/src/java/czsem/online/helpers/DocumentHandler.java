@@ -1,9 +1,11 @@
 package czsem.online.helpers;
 
+import gate.Annotation;
 import gate.Document;
 import gate.Factory;
 import gate.Gate;
 import gate.Resource;
+import gate.SimpleDocument;
 import gate.TextualDocument;
 import gate.corpora.DocumentImpl;
 import gate.corpora.DocumentStaxUtils;
@@ -11,6 +13,7 @@ import gate.creole.ResourceData;
 import gate.creole.ResourceInstantiationException;
 import gate.persist.PersistenceException;
 import gate.util.GateException;
+import gate.util.InvalidOffsetException;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -24,6 +27,7 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Iterator;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLOutputFactory;
@@ -171,5 +175,17 @@ public class DocumentHandler {
 */		
 		return Factory.newDocument(url);
 	}
+	
+	public static String extractTitle(Document doc) throws InvalidOffsetException
+	{
+		Iterator<Annotation> i = doc.getAnnotations("Original markups").get("title").iterator();
+		if (! i.hasNext()) return "";
+		Annotation a = i.next();
+			
+		return doc.getContent().getContent(
+				a.getStartNode().getOffset(), 
+				a.getEndNode().getOffset()).toString();		
+	}
+
 
 }

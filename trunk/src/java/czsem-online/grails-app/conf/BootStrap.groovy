@@ -6,8 +6,10 @@ class BootStrap {
 
     def init = { servletContext ->
 		CzsemBootStrap.bootStrap()
-		
-		new Page('http://google.com').save(flush: true)
+				
+		def p = new Page(url:'http://google.com');
+		p.createDocument();
+		p.save(flush: true)
     }
     def destroy = {
     }

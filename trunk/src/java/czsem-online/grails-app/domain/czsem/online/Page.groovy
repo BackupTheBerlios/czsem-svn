@@ -1,6 +1,7 @@
 package czsem.online
 
 import czsem.online.helpers.PageCreator
+import czsem.online.helpers.DocumentHandler
 
 
 class Page {
@@ -12,25 +13,28 @@ class Page {
 	static hasMany = [annotations: AnnotationTypeUsage]
 		
     static constraints = {
-		url(unique: true, url: true)
+		url(unique: true, url: true, reuire: true)
+		date(reuire: true)
     }
-	
-	public Page () {}
-	
-
-	/**
-	 * Creates new Page and Document objects.
-	 * @return created Page instance
-	 */
-	public Page (PageCreator pc)
-	{
-		this(pc.getParams());
 		
-		content = new Document(doc: pc.getDoc())
-	}
 	
-	public Page (String url)
+	public boolean createDocument()
 	{
-		this (new PageCreator(url))
-	}
+		try {
+	
+			gate.Document doc = DocumentHandler.documentFromUrl(url);
+			
+			date = new Date();
+			
+			title = DocumentHandler.extractTitle(doc);
+	
+			content = new Document(doc: doc)
+			return true;
+			
+		} catch (Exception e)
+		{
+			this.errors.rejectValue("url", String.format("Cannot create document for url '%s', reason: %s", url, e.getLocalizedMessage()))
+			return false;
+		}
+	}	
 }

@@ -57,7 +57,34 @@ class DocumentController {
 			DocumentHandler.writeDocumentToOutputStream(documentInstance.doc, response.outputStream)
 		}
 	}
-		
+
+	def xml() {
+		def documentInstance = Document.get(params.id)
+		if (!documentInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [message(code: 'document.label', default: 'Document'), params.id])
+			redirect(action: "list")
+			return
+		}
+		else
+		{
+			render(text:documentInstance.doc.toXml(), contentType:"text/xml", encoding:"UTF-8")			
+		}
+	}
+
+	def html() {
+		def documentInstance = Document.get(params.id)
+		if (!documentInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [message(code: 'document.label', default: 'Document'), params.id])
+			redirect(action: "list")
+			return
+		}
+		else
+		{
+			render(text:documentInstance.doc.toXml(null, false), contentType:"text/html", encoding:"UTF-8")
+		}
+	}
+
+			
 	def show() {
         def documentInstance = Document.get(params.id)
         if (!documentInstance) {
@@ -79,7 +106,7 @@ class DocumentController {
 
         [documentInstance: documentInstance]
     }
-
+/*
     def update() {
         def documentInstance = Document.get(params.id)
         if (!documentInstance) {
@@ -109,7 +136,7 @@ class DocumentController {
 		flash.message = message(code: 'default.updated.message', args: [message(code: 'document.label', default: 'Document'), documentInstance.id])
         redirect(action: "show", id: documentInstance.id)
     }
-
+*/
     def delete() {
         def documentInstance = Document.get(params.id)
         if (!documentInstance) {
