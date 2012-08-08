@@ -62,6 +62,7 @@
 					<include>gate/corpora/DocumentImpl.*</include>
 					<include>gate/corpora/DocumentContentImpl.*</include>
 					<include>gate/corpora/RepositioningInfo.*</include>
+					<include>gate/creole/ontology/*.*</include>
 					<include>gate/creole/metadata/*.*</include>
 					<include>gate/persist/PersistenceException.*</include>
 					<include>gate/jape/parser/ParseCpsl.*</include>
