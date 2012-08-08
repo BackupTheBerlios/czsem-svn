@@ -55,6 +55,31 @@
 				</executions>
 			</plugin>
 			<plugin>
+				<groupId>com.pyx4me</groupId>
+				<artifactId>proguard-maven-plugin</artifactId>
+				<version>2.0.4</version>
+				<executions>
+<!-- 
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>proguard</goal>
+						</goals>
+					</execution>
+ -->					
+				</executions>
+				<configuration>
+					<options>
+						<option>-ignorewarnings</option>
+						<option>-allowaccessmodification</option>
+						<option>-keep public class * extends java.applet.Applet { *; }</option>
+					</options>
+					<mamaxMemory>1024m</mamaxMemory>
+					<injar>${project.artifactId}-${project.version}-jar-with-dependencies.${project.packaging}</injar>
+					<outjar>${project.artifactId}-${project.version}-proguard.${project.packaging}</outjar>
+				</configuration>
+			</plugin>
+			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>1.2.1</version>

@@ -5,6 +5,7 @@
 <title>Run Czsem Applet</title>
 </head>
 <body>
+<!--
 <applet 
 alt="Czsem Applet" 
 archive="target/gate-applet-1.0-signed.jar"
@@ -16,6 +17,18 @@ value="http://localhost:8080/czsem-online/document/serialized/1">
 <param name="defaultAnnotationSet" value="accident">
 
 </applet>
+-->
+
+<object type="application/x-java-applet" width="800" height="600">
+  <param name="code" value="czsem.gate.applet.GateApplet.class" />
+  <param name="archive" value="target/gate-applet-1.0-signed.jar" />
+  <!--
+  <param name="java_arguments" value="-Djnlp.packEnabled=true"/>
+      -->
+  <param name="gateDocumentUrl" value="http://localhost:8080/czsem-online/document/serialized/1" />
+  <param name="defaultAnnotationSet" value="accident" />
+  Applet failed to run.  No Java plug-in was found.
+</object>
 
 </body>
 </html>
