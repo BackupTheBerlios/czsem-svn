@@ -1,7 +1,8 @@
-<log4j:configuration threshold="OFF">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration threshold="off">
     <root>
         <priority value ="off" />
-        <appender-ref ref="console" />
-        <appender-ref ref="rolling-file" />
     </root>
 </log4j:configuration>

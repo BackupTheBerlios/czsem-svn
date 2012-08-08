@@ -9,13 +9,13 @@
       <CLASS>gate.corpora.DocumentImpl</CLASS>
     </RESOURCE>
     <!-- Corpora -->
+    <!--
     <RESOURCE>
       <CLASS>gate.corpora.XmlDocumentFormat</CLASS>
     </RESOURCE>
     <RESOURCE>
       <CLASS>gate.corpora.TextualDocumentFormat</CLASS>
     </RESOURCE>
-    <!--
     <RESOURCE>
       <CLASS>gate.corpora.CorpusImpl</CLASS>
     </RESOURCE>
@@ -63,8 +63,8 @@
     <RESOURCE>
       <CLASS>gate.gui.FeaturesSchemaEditor</CLASS>
     </RESOURCE>
-
 <!-- 
+
     <RESOURCE>
       <CLASS>gate.gui.PRViewer</CLASS>
     </RESOURCE>
