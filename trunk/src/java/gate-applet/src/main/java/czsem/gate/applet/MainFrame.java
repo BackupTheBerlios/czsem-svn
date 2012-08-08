@@ -2,11 +2,13 @@ package czsem.gate.applet;
 
 import gate.Document;
 import gate.Factory;
+import gate.FeatureMap;
 import gate.Gate;
+import gate.creole.AnnotationSchema;
 import gate.creole.ResourceInstantiationException;
+import gate.gui.annedit.SchemaAnnotationEditor;
 import gate.mimir.tool.WebUtils;
 import gate.util.GateException;
-import gate.util.InvalidOffsetException;
 
 import java.awt.Container;
 import java.awt.HeadlessException;
@@ -31,12 +33,33 @@ public class MainFrame {
 	private URL documentUrl;
 	private String asName;
 	private Container parent;
+	private String[] loadSchemas;
 
-	public MainFrame(URL documentUrl, String asName, Container parent)
+	public MainFrame(URL documentUrl, String asName, String loadSchemas, Container parent)
 			throws HeadlessException {
 		this.documentUrl = documentUrl;
 		this.asName = asName;
 		this.parent = parent;
+		this.loadSchemas = loadSchemas == null ? null : loadSchemas.split("\\|");
+	}
+
+	public static boolean loadGateSchema(String schemaUrlStr) throws ResourceInstantiationException
+	{
+		try {
+		
+			URL schemaUrl = new URL(schemaUrlStr);
+			FeatureMap fm = Factory.newFeatureMap();
+			fm.put(AnnotationSchema.FILE_URL_PARAM_NAME, schemaUrl);
+			Factory.createResource(AnnotationSchema.class.getCanonicalName(), fm);
+			return true;		
+		} catch (Exception e) {
+			return false;
+		}			
+	}
+
+	public static void enableGateSchemaEditor() throws GateException
+	{
+		Gate.getCreoleRegister().registerComponent(SchemaAnnotationEditor.class);		
 	}
 
 	public static void initGate() throws GateException {
@@ -99,42 +122,50 @@ public class MainFrame {
 
 	
 	
-	public void initDocuemtEditor() throws ResourceInstantiationException,
-			InvalidOffsetException, IOException {												
-				documentEditor = new DefaultDocumentEditor();
-			
-				Document doc = downloadGateDocument(documentUrl);
-				documentEditor.setTarget(doc);
-				
-				documentEditor.setSize(parent.getSize());
-				documentEditor.setPreferredSize(parent.getSize());
-				documentEditor.init();
-						
-				parent.add(new JTabbedPane().add(documentEditor));
-				
-				parent.addComponentListener(new ComponentListener() {			
-					public void componentShown(ComponentEvent e) {
-						Set<String> types = documentEditor.getDocument().getAnnotations(asName).getAllTypes();
-						for (String annType : types) {
-							documentEditor.selectAnnotationType(asName, annType, true);
-						}
-					
-						documentEditor.addSaveButtonListener(new ActionListener() {			
-							public void actionPerformed(ActionEvent e) {
-								try {
-									saveDocuemnt();
-								} catch (IOException exception) {
-									throw new RuntimeException(exception);
-								}
-							}
-						});
-					}			
-					public void componentResized(ComponentEvent e) {}			
-					public void componentMoved(ComponentEvent e) {}			
-					public void componentHidden(ComponentEvent e) {}
-				});
-				
+	public void initDocuemtEditor() throws IOException, GateException
+	{												
+		if (loadSchemas != null)
+		{
+			enableGateSchemaEditor();
+			for (int i = 0; i < loadSchemas.length; i++) {
+				loadGateSchema(loadSchemas[i]);
 			}
+		}
+		
+		documentEditor = new DefaultDocumentEditor();
+	
+		Document doc = downloadGateDocument(documentUrl);
+		documentEditor.setTarget(doc);
+		
+		documentEditor.setSize(parent.getSize());
+		documentEditor.setPreferredSize(parent.getSize());
+		documentEditor.init();
+				
+		parent.add(new JTabbedPane().add(documentEditor));
+		
+		parent.addComponentListener(new ComponentListener() {			
+			public void componentShown(ComponentEvent e) {
+				Set<String> types = documentEditor.getDocument().getAnnotations(asName).getAllTypes();
+				for (String annType : types) {
+					documentEditor.selectAnnotationType(asName, annType, true);
+				}
+			
+				documentEditor.addSaveButtonListener(new ActionListener() {			
+					public void actionPerformed(ActionEvent e) {
+						try {
+							saveDocuemnt();
+						} catch (IOException exception) {
+							throw new RuntimeException(exception);
+						}
+					}
+				});
+			}			
+			public void componentResized(ComponentEvent e) {}			
+			public void componentMoved(ComponentEvent e) {}			
+			public void componentHidden(ComponentEvent e) {}
+		});
+		
+	}
 
 
 

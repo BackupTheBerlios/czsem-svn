@@ -4,7 +4,6 @@ import gate.Document;
 import gate.gui.docview.AnnotationListView;
 import gate.gui.docview.AnnotationSetsView;
 import gate.gui.docview.AnnotationSetsView.TypeHandler;
-import gate.gui.docview.CorefEditor;
 import gate.gui.docview.DocumentEditor;
 import gate.gui.docview.DocumentView;
 
@@ -57,9 +56,10 @@ public class DefaultDocumentEditor extends DocumentEditor {
 
 	@Override
 	protected void addView(DocumentView view, String name) {
+		/*
 		if (view instanceof CorefEditor)
 			return;
-
+		 */
 		if (view instanceof AnnotationSetsView) {
 			addSaveButton();
 		}

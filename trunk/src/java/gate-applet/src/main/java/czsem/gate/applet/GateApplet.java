@@ -28,6 +28,7 @@ public class GateApplet extends JApplet {
 			final MainFrame mf = new MainFrame(
 					new URL(getParameter("gateDocumentUrl")),
 					getParameter("defaultAnnotationSet"),
+					getParameter("loadSchemas"),
 					this);
 			
 			//file:/C:/data/czsem_coprus/Czech_Fireman_50_messages/analyzed_GATE_xml/jihomoravsky47443.txt.xml
@@ -48,12 +49,15 @@ public class GateApplet extends JApplet {
 	public static void main(String[] args) throws GateException, MalformedURLException {
         MainFrame.initGate();
 		
-		JFrame frame = new JFrame("HelloWorldSwing");
+		JFrame frame = new JFrame("Gate Applet");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setPreferredSize(new Dimension(800, 600));
         
 		URL docUrl;
 		String defaultAnnotationSet;
+		String schemas = null;
+		
+		//System.err.println(new File("date_schema.xml").toURI().toURL());
 
         
         if (args.length < 1)
@@ -66,7 +70,13 @@ public class GateApplet extends JApplet {
         else 
         	defaultAnnotationSet = args[1];
 		
-		MainFrame mf = new MainFrame(docUrl, defaultAnnotationSet, frame);
+        if (args.length > 2)
+        {
+        	schemas = args[2];
+        }
+		
+		
+		MainFrame mf = new MainFrame(docUrl, defaultAnnotationSet, schemas , frame);
 
 		mf.initGui();                
         
