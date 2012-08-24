@@ -68,4 +68,9 @@ grails.project.dependency.resolution = {
 
         build ":tomcat:$grailsVersion"
     }
+	
+	grails.war.resources = { stagingDir, args ->
+		copy(file: System.getenv("USERPROFILE")+"/.m2/repository/czsem/gate-applet/2.1-SNAPSHOT/gate-applet-2.1-SNAPSHOT-signed.jar" ,
+			 tofile: "${stagingDir}/applet/gate-applet-latest-signed.jar")
+	}
 }

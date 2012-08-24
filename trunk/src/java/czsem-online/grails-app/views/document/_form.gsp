@@ -7,9 +7,13 @@
 <div class="applet">
 <object type="application/x-java-applet" height="97%" width="100%" >
         <param name="code" value="czsem.gate.applet.GateApplet" />
-        <param name="archive" value="${resource(dir: 'applet', file: 'gate-applet-1.0-signed.jar')}" />
+        <param name="archive" value="${resource(dir: 'applet', file: 'gate-applet-latest-signed.jar')}" />
         <param name="gateDocumentUrl" value="${createLink(action: 'serialized', absolute: true, id: documentInstance.id)}"/>
         <param name="defaultAnnotationSet" value=""/>
+        <g:if test="${schemaListStr}">
+        	<param name="loadSchemas" value="${schemaListStr}" />
+        </g:if>
+                
         Applet failed to run.  No Java plug-in was found.
 </object>
 </div>

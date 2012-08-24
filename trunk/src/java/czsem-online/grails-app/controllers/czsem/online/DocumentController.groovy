@@ -1,5 +1,6 @@
 package czsem.online
 
+import org.h2.command.ddl.CreateLinkedTable;
 import org.springframework.dao.DataIntegrityViolationException
 
 import czsem.online.helpers.DocumentHandler;
@@ -103,8 +104,24 @@ class DocumentController {
             redirect(action: "list")
             return
         }
-
-        [documentInstance: documentInstance]
+		
+		StringBuilder sb = new StringBuilder();
+		for (Object o : session.schemaSettings)
+		{
+			def l = createLink(controller: 'annotationType', action: 'schema', absolute: true, id: o)
+			println(l)
+			sb.append(l)
+			sb.append('|')			
+		} 
+		
+		//remove last '|' character
+		if (sb.length() > 0)
+		{ 
+			return [documentInstance: documentInstance, schemaListStr: sb.toString()]
+			sb.replace(sb.length()-1, sb.length(), "")
+		}
+		
+        return [documentInstance: documentInstance]
     }
 /*
     def update() {
