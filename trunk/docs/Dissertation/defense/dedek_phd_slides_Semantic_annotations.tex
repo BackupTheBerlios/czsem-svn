@@ -127,6 +127,28 @@ Defence of Doctoral Thesis\\21\textsuperscript{st} September\\2012
 \end{itemize}
 \end{frame}
 
+\begin{frame}{Layers of linguistic annotation in PDT}
+\begin{columns}
+\column{.5\textwidth}
+\includegraphics[height=0.9\vsize]{img/PDT_layers}
+\column{.5\textwidth}
+\begin{itemize}
+	\item Tectogrammatical layer
+	\item Analytical layer
+	\item Morphological layer
+\end{itemize}
+\begin{itemize}
+	\item PDT 2.0 on-line:\\\centerline{\scriptsize\url{http://ufal.mff.cuni.cz/pdt2.0/}} 
+\end{itemize}
+\vspace{2cm}
+\emph{Sentence:}
+\medskip
+\\Byl by šel dolesa.
+\\He-was would went toforest.
+\end{columns}
+\end{frame}
+
+
 \subsection{Inductive Logic Programming} 
 
 \begin{frame}{Inductive Logic Programming}
@@ -191,8 +213,115 @@ Slides about the topic \emph{Fuzzy ILP Document Classification} will have \theme
 
 
 \section{Contents}
-\frame{\tableofcontents[currentsection]}
+\subsection{Manual Design of Extraction Rules}
+\themecolor{\colorManual}
+\frame{\frametitle{Manual Design of Extraction Rules} \tableofcontents[currentsubsection]}
 
+
+\begin{frame}[plain]
+\begin{columns}
+\column{.67\textwidth}
+%\centerline{\includegraphics[height=1.1\vsize,width=\hsize]{img/TectogramaticalTree}}
+\centerline{\includegraphics[height=1.1\vsize]{img/Two_Tree}}
+\column{.33\textwidth}
+\begin{itemize}
+	\item How to extract the information about \alert{two dead} people?
+\end{itemize}
+\vspace{2cm}
+\end{columns}
+\end{frame}
+
+
+
+\begin{frame}{Extraction rules -- Netgraph queries}
+\begin{center}
+\includegraphics[height=0.6\vsize]{img/extract_patern}
+\end{center}
+\begin{itemize}
+	\item Tree patterns on \alert{shape} and \alert{nodes} (on node attributes).
+	\item Evaluation gives \alert{actual matches} of particular nodes.
+	\item \alert{Names} of nodes allow use of references.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Raw data extraction output}
+%\begin{center}
+\centerline{\includegraphics[height=0.18\vsize]{img/OutputQueryMatches}}
+%\end{center}
+
+{\scriptsize
+\textbf{SELECT} \alert{action\_type}.t\_lemma, \alert{a-negation}.m\/tag, 
+\alert{injury\_manner}.t\_lemma, \alert{participant}.t\_lemma,
+\alert{quantity}.t\_lemma \textbf{FROM} \emph{***extraction rule***} 
+}
+\end{frame}
+
+\begin{frame}{Extraction rules -- Environment Protection Use Case}
+\begin{center}
+\includegraphics[height=0.6\vsize]{img/eenv_extr_rule}
+\end{center}
+%\begin{itemize}
+%	\item Tree patterns on \alert{shape} and \alert{nodes} (on node attributes).
+%	\item Evaluation gives \alert{actual matches} of particular nodes.
+%	\item \alert{Names} of nodes allow use of references.
+%\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{Matching Tree}
+%\begin{center}
+\centerline{\includegraphics[height=0.8\vsize]{img/eenv_tree}}
+%\end{center}
+%{\scriptsize
+%\textbf{SELECT} \alert{action\_type}.t\_lemma, \alert{a-negation}.m\/tag, 
+%\alert{injury\_manner}.t\_lemma, \alert{participant}.t\_lemma,
+%\alert{quantity}.t\_lemma \textbf{FROM} \emph{***extraction rule***} 
+%}
+\end{frame}
+
+
+\begin{frame}{Raw data extraction output}
+%\begin{center}
+\centerline{\includegraphics[height=0.77\vsize]{img/eenv_results}}
+%\end{center}
+{\scriptsize
+\textbf{SELECT} \alert{amount}.t\_lemma, \alert{unit}.t\_lemma, 
+\alert{material}.t\_lemma, \alert{where}.t\_lemma
+\\ \textbf{FROM} \emph{***extraction rule***} 
+}
+\end{frame}
+
+
+
+\begin{frame}{Design of extraction rules -- iterative process}
+\begin{center}
+\includegraphics[height=0.6\vsize]{img/coverge_tuning}
+\end{center}
+\begin{enumerate}
+	\item \alert{Frequency analysis} $\rightarrow$ representative key-words.
+	\item Investigating of matching trees $\rightarrow$ \alert{tuning} of tree query.
+	\item \alert{Complexity} of the query $\cong$ complexity of extracted data.
+\end{enumerate}
+\end{frame}
+
+
+
+\subsection{Induction of Extraction Rules}
+\themecolor{\colorLearning}
+\frame{\frametitle{Induction of Extraction Rules} \tableofcontents[currentsubsection]}
+
+\subsection{Shareable Extraction Ontologies}
+\themecolor{\colorShareable}
+\frame{\frametitle{Shareable Extraction Ontologies} \tableofcontents[currentsubsection]}
+
+\subsection{Fuzzy ILP Document Classification}
+\themecolor{\colorFuzzy}
+\frame{\frametitle{Fuzzy ILP Document Classification} \tableofcontents[currentsubsection]}
+
+
+\resetcolor
 \section[Questions \& Comments]{Questions and Comments from Reviews} 
 \frame{\tableofcontents[currentsection]}
 
@@ -209,7 +338,7 @@ Slides about the topic \emph{Fuzzy ILP Document Classification} will have \theme
 	\begin{tabular}{l|l}
 		Dědek & MUC-6 1995, Appelt \& Israel 1999\\
 		\hline
-		Entity Recognition & Named Entity Recognition\\
+		\emph{Entity Recognition} & Named Entity Recognition\\
 		Relation Extraction & Template Element Construction\\
 		Event Extraction & Template Relation Construction	\\
 		\textbf{Event Extr. Encoded as Ent. Rec.} & Template Unification\\
