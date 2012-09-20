@@ -95,8 +95,10 @@ Defence of Doctoral Thesis\\21\textsuperscript{st} September\\2012
 	%\begin{itemize}
 		%\item Of course not 100\% accurete...
 	%\end{itemize}
-	\medskip
+	\bigskip	
+	\begin{center}
 	\framebox{\includegraphics[width=0.85\hsize]{img/acquisitions_annotated.png}}
+	\end{center}	
 	%\item The tools can also interpret such information in terms of a \alert{Semantic Web Ontology}.
 \end{itemize}
 \end{frame}
@@ -107,13 +109,17 @@ Defence of Doctoral Thesis\\21\textsuperscript{st} September\\2012
 	%\begin{itemize}
 		%\item Of course not 100\% accurete...
 	%\end{itemize}
-	\medskip
-	\includegraphics[width=0.85\hsize]{img/fireman_annotated}
+	\bigskip	
+	\begin{center}
+	\includegraphics[width=0.75\hsize]{img/fireman_annotated}
+	\end{center}	
 	%\item The tools can also interpret such information in terms of a \alert{Semantic Web Ontology}.
 \end{itemize}
 \end{frame}
 
 \subsection{Deep Language Parsing} 
+\frame{\tableofcontents[currentsubsection]}
+
 \begin{frame}{Deep Language Parsing (Czech Example)}  
 \begin{itemize}
 	\item Linguistic tools perform automated linguistic analysis.
@@ -121,8 +127,10 @@ Defence of Doctoral Thesis\\21\textsuperscript{st} September\\2012
 	%\begin{itemize}
 		%\item Of course not 100\% accurete...
 	%\end{itemize}
-	\medskip
-	\framebox{\includegraphics[width=0.85\hsize]{img/tree}}
+	\medskip	
+	\begin{center}
+	\framebox{\includegraphics[width=0.63\hsize]{img/tree}}
+	\end{center}	
 	%\item The tools can also interpret such information in terms of a \alert{Semantic Web Ontology}.
 \end{itemize}
 \end{frame}
@@ -150,6 +158,7 @@ Defence of Doctoral Thesis\\21\textsuperscript{st} September\\2012
 
 
 \subsection{Inductive Logic Programming} 
+\frame{\tableofcontents[currentsubsection]}
 
 \begin{frame}{Inductive Logic Programming}
 \begin{itemize}
@@ -220,16 +229,24 @@ Slides about the topic \emph{Fuzzy ILP Document Classification} will have \theme
 
 \begin{frame}[plain]
 \begin{columns}
-\column{.67\textwidth}
+\column{.55\textwidth}
 %\centerline{\includegraphics[height=1.1\vsize,width=\hsize]{img/TectogramaticalTree}}
-\centerline{\includegraphics[height=1.1\vsize]{img/Two_Tree}}
-\column{.33\textwidth}
+\centerline{\includegraphics[height=0.95\vsize]{img/Two_Tree}}
+\column{.45\textwidth}
 \begin{itemize}
+	\item \emph{Sentence:}
+\medskip
+{\small
+\\Ve zdemolovaném trabantu na místě \alert{zemřeli dva muži} -- 82letý senior a další muž, jehož totožnost zjišťují policisté.
+\medskip
+\\\alert{Two men died} on the spot in demolished trabant -- \dots }
+\bigskip
 	\item How to extract the information about \alert{two dead} people?
 \end{itemize}
 \vspace{2cm}
 \end{columns}
 \end{frame}
+
 
 
 
@@ -247,7 +264,7 @@ Slides about the topic \emph{Fuzzy ILP Document Classification} will have \theme
 
 \begin{frame}{Raw data extraction output}
 %\begin{center}
-\centerline{\includegraphics[height=0.18\vsize]{img/OutputQueryMatches}}
+\centerline{\includegraphics[height=0.75\vsize]{img/OutputQueryMatches}}
 %\end{center}
 
 {\scriptsize
@@ -259,7 +276,7 @@ Slides about the topic \emph{Fuzzy ILP Document Classification} will have \theme
 
 \begin{frame}{Extraction rules -- Environment Protection Use Case}
 \begin{center}
-\includegraphics[height=0.6\vsize]{img/eenv_extr_rule}
+\includegraphics[height=0.5\vsize]{img/eenv_extr_rule}
 \end{center}
 %\begin{itemize}
 %	\item Tree patterns on \alert{shape} and \alert{nodes} (on node attributes).
@@ -272,7 +289,7 @@ Slides about the topic \emph{Fuzzy ILP Document Classification} will have \theme
 
 \begin{frame}{Matching Tree}
 %\begin{center}
-\centerline{\includegraphics[height=0.8\vsize]{img/eenv_tree}}
+\centerline{\includegraphics[height=1.15\vsize, angle=-90]{img/eenv_tree}}
 %\end{center}
 %{\scriptsize
 %\textbf{SELECT} \alert{action\_type}.t\_lemma, \alert{a-negation}.m\/tag, 
@@ -284,9 +301,10 @@ Slides about the topic \emph{Fuzzy ILP Document Classification} will have \theme
 
 \begin{frame}{Raw data extraction output}
 %\begin{center}
-\centerline{\includegraphics[height=0.77\vsize]{img/eenv_results}}
+\centerline{\includegraphics[height=1.25\vsize, angle=-90]{img/eenv_results}}
 %\end{center}
 {\scriptsize
+\medskip
 \textbf{SELECT} \alert{amount}.t\_lemma, \alert{unit}.t\_lemma, 
 \alert{material}.t\_lemma, \alert{where}.t\_lemma
 \\ \textbf{FROM} \emph{***extraction rule***} 
@@ -297,7 +315,7 @@ Slides about the topic \emph{Fuzzy ILP Document Classification} will have \theme
 
 \begin{frame}{Design of extraction rules -- iterative process}
 \begin{center}
-\includegraphics[height=0.6\vsize]{img/coverge_tuning}
+\includegraphics[height=0.8\vsize, angle=-90]{img/coverge_tuning}
 \end{center}
 \begin{enumerate}
 	\item \alert{Frequency analysis} $\rightarrow$ representative key-words.
@@ -371,51 +389,120 @@ Slides about the topic \emph{Fuzzy ILP Document Classification} will have \theme
 		\item But then, oops, the time was up! 
 	\end{itemize}
 
-	\item Let's look at this in more detail on the next slide...		
+	\item Let's look at this in more detail on the next slides...		
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Available Resources and Allocated Capabilities}
+\begin{frame}{Work Performed -- Implementation}
 \begin{itemize}
-	\item Full time Ph.D. Student (4 years)
+	\item Nontrivial extensive implementation	
+	\item Use and integration of following tools and technologies:
 	\begin{itemize}
-		\item In the beginning usually not yet skilled researcher in given topic
-	\end{itemize}	
-	\item Studying duties and activities
-	\begin{itemize}
-		\item There are so many interesting subjects not possible to attend because of lack of time 
-	\end{itemize}	
-	\item Teaching duties	
-	\begin{itemize}
-		\item Preparation of lecture materials
-		\item Student's homeworks, exams
-	\end{itemize}	
-	\item Writing papers 
-	\begin{itemize}
-		\item Not always completely relevant to the Ph.D. topic
+		\item Linguistics			
+		\begin{itemize}
+			\item PDT 2.0 analysis tools + TectoAnalysis by Václav Klimeš
+			\item TectoMT (Treex currently also supported)
+			\item Perl/brted programming of first \emph{procedural} extraction rules
+			\item Netgraph by Jiří Mírovský, \emph{declarative} extraction rules
+			\item GATE
+		\end{itemize}			
+		\item Semantic Web			
+		\begin{itemize}
+			\item OWL API + Pellet, HermiT and FaCT++
+			\item Jena (including Jena Rules)
+			\item SweetRules
+			\item PML $\rightarrow$ RDF (OWL) transformation (XSLT $\approx$ GRDDL)
+			\item ILP Extraction rules $\rightarrow$ SWRL transformation
+		\end{itemize}			
+		\item Data Mining			
+		\begin{itemize}
+			\item \textbf{ILP} (Progol, Prolog + Aleph):
+				\\Integration with GATE (IE Rules Induction) and 
+				\\Weka (Fuzzy ILP Classifier)
+			\item \textbf{Weka:}
+				Fuzzy ILP Classifier and Statistical significance of GATE experiments
+		\end{itemize}			
+		\item XML RPC (Perl server, Java client)
 	\end{itemize}
-	\item Presentations, conferences
-	\begin{itemize}
-		\item Preparations
-		\item Traveling
-	\end{itemize}
-	\item Writing reviews 
-	\begin{itemize}
-		\item Student's thesis
-		\item Research papers
-	\end{itemize}
-	\item Internship?
-	\medskip
-	\item Active research
-	\begin{itemize}
-		\item Optimistic balance: remaining 30\% of available resources (not only time)
-		%\item Searching for existing approaches and studying them
-		%\item Working with new technologies
-		%\item Software development
-	\end{itemize}
-	
 \end{itemize}
 \end{frame}
+
+
+\begin{frame}{Work Performed -- Other}
+\begin{itemize}
+	\item Construction (or contribution) of new datasets:	
+	\begin{itemize}
+		\item Czech Fireman Reports without Annotations
+		\item Czech Fireman Reports Manually Annotated
+		\item RDF Dataset Based on Czech Fireman Reports
+		\item RDF Dataset Based on Corporate Acquisition Events
+		\item Classification Dataset Based on Czech Fireman Reports	
+	\end{itemize}	
+\end{itemize}	
+	
+\begin{columns}
+\column{.65\textwidth}
+\begin{itemize}
+	\item Evaluation experiments 	
+	\begin{itemize}
+		\item \textbf{Direct} comparison with state-of-the-art		
+	\end{itemize}
+	\item Publications:		
+	\begin{itemize}
+		\item Including E-Environment and Economics (Crisis prediction)
+	\end{itemize}	
+	\item Development of the idea of \textbf{Web Semantization}	
+	\begin{itemize}
+		\item Finally not included in the thesis, but published in selected papers
+	\end{itemize}
+\end{itemize}
+\column{.35\textwidth}
+\includegraphics[height=0.5\vsize]{img/growing_semantization}
+\end{columns}	
+\end{frame}
+
+
+
+%\begin{frame}{Available Resources and Allocated Capabilities}
+%\begin{itemize}
+	%\item Full time Ph.D. Student (4 years)
+	%\begin{itemize}
+		%\item In the beginning usually not yet skilled researcher in given topic
+	%\end{itemize}	
+	%\item Studying duties and activities
+	%\begin{itemize}
+		%\item There are so many interesting subjects not possible to attend because of lack of time 
+	%\end{itemize}	
+	%\item Teaching duties	
+	%\begin{itemize}
+		%\item Preparation of lecture materials
+		%\item Student's homeworks, exams
+	%\end{itemize}	
+	%\item Writing papers 
+	%\begin{itemize}
+		%\item Not always completely relevant to the Ph.D. topic
+	%\end{itemize}
+	%\item Presentations, conferences
+	%\begin{itemize}
+		%\item Preparations
+		%\item Traveling
+	%\end{itemize}
+	%\item Writing reviews 
+	%\begin{itemize}
+		%\item Student's thesis
+		%\item Research papers
+	%\end{itemize}
+	%\item Internship?
+	%\medskip
+	%\item Active research
+	%\begin{itemize}
+		%\item Optimistic balance: remaining 30\% of available resources (not only time)
+		%%\item Searching for existing approaches and studying them
+		%%\item Working with new technologies
+		%%\item Software development
+	%\end{itemize}	
+%\end{itemize}
+%\end{frame}
 
 
 \end{document}
