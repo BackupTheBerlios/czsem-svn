@@ -95,7 +95,7 @@ Defence of Doctoral Thesis\\21\textsuperscript{st} September\\2012
 
 \begin{frame}{Information Extraction (Solution)}  
 \begin{itemize}
-	\item Information Extraction tools can identify and extract such information.
+	\item Information Extraction (IE) tools can identify and extract such information.
 	%\begin{itemize}
 		%\item Of course not 100\% accurete...
 	%\end{itemize}
@@ -793,14 +793,47 @@ F \dotfill{} 		& Weighted avg F measure\\
 	\item y-axis: percent of correctly classified instances
 	\item average values from 10 repetitions
 \end{itemize}
+\end{frame}
 
+\resetcolor
+
+\section{Conclusion} 
+\frame{\tableofcontents[currentsection]}
+
+\begin{frame}{Conclusion} 
+	\begin{itemize}
+		\item Transparent Data Mining
+		\begin{itemize}
+			\item Learned rules understandable \& adjustable by humans
+			\item Tool Independence (Shareable Extraction Ontologies)
+		\end{itemize}
+		
+		\item Software
+		\begin{itemize}
+		\item \alert{Nontrivial extensive implementation} (c.f. slide \pageref{implementation})
+		\item Netgraph based IE API (declarative extraction rules)
+		\item Framework for IE experiments (based on GATE+Weka)
+		\item TectoMT (+ Treex) module for GATE
+		\begin{itemize}
+			\item PML $\rightarrow$ GATE
+		\end{itemize}
+		\item Netgraph Tree Viewer for GATE
+		\item Shareable Extraction Ontologies Prototype
+		\begin{itemize}
+			\item PML $\rightarrow$ RDF (XSLT $\approx$ GRDDL)
+		\end{itemize}
+		\item Fuzzy ILP Classifier for Weka
+		\end{itemize}
+
+		\item Evaluation Experiments
+		\begin{itemize}
+			\item \alert{Repeatable} (software \& data freely available)
+			\item Direct comparison with the state-of-the-art
+		\end{itemize}
+	\end{itemize}
 \end{frame}
 
 
-
-
-
-\resetcolor
 \section[Questions \& Comments]{Questions and Comments from Reviews} 
 \frame{\tableofcontents[currentsection]}
 
@@ -833,11 +866,11 @@ F \dotfill{} 		& Weighted avg F measure\\
 \subsection{Review 2 (Diana Maynard)} 
 \frame{\tableofcontents[currentsection, currentsubsection]}
 
-\themecolor{\colorLearning}
+%\themecolor{\colorLearning}
 \begin{frame}{Topics / Questions / State-of-the-art}
 \begin{itemize}
 	\item The thesis consists of \alert{four equally important topics}
-	\item We cannot concentrate on a single one (\themetext[colorLearning]{Induction of Extraction Rules})
+	\item We cannot concentrate on a single one (e.g. \themetext[colorLearning]{Induction of Extraction Rules})
 	\bigskip
 	\item There are many questions in the review
 	\begin{itemize}
@@ -847,13 +880,13 @@ F \dotfill{} 		& Weighted avg F measure\\
 	\item It was really had work to prepare and evaluate the baseline method
 	\item And make it \alert{directly comparable} with the state-of-the-art solutions
 	\item The framework is now open to everybody
-	\item ``Infinite'' amount of experiments can be performed
+	\item Almost infinite amount of additional experiments can be performed
 	\begin{itemize}
 		\item See also the discussion slide (\pageref{future_experiments}) about future experimenting possibilities and their \alert{complexity}
 	\end{itemize}
 \end{itemize}
 \end{frame}
-\resetcolor
+%\resetcolor
 
 
 \begin{frame}{The Task of Information Extraction}
@@ -933,6 +966,7 @@ F \dotfill{} 		& Weighted avg F measure\\
 \end{frame}
 
 \begin{frame}{Work Performed -- Implementation}
+\label{implementation}
 \begin{itemize}
 	\item Nontrivial extensive implementation	
 	\item Use and integration of following tools and technologies:
