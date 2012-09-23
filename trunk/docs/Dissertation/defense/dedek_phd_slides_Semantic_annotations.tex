@@ -180,7 +180,10 @@ $$
 $$
 	\begin{itemize}
 		\item E.g. to find common pattern (in the linguistic structure) present around every relevant piece of text and none irrelevant.
-	\end{itemize}	
+	\end{itemize}
+	
+	\bigskip
+	\item Main advantage: multirelational character ($B$ can reside in several relational tables)
 \end{itemize}
 \end{frame}
 
@@ -363,15 +366,6 @@ Slides about the topic \emph{Fuzzy ILP Document Classification} will have \theme
 \end{columns}
 \end{frame}
 
-\begin{frame}{Root/Subtree Preprocessing/Postprocessing}
-\centerline{\includegraphics[width=\hsize]{img/tree-subtree}}
-\bigskip
-\begin{itemize}
-	\item Multi-word expressions
-\end{itemize}
-\end{frame}
-
-
 \begin{frame}[fragile]{Rules with largest coverage (Czech fireman dataset)}
 \begin{minted}[linenos,  fontsize=\tiny, tabsize=3]{prolog}
 % [cars - Rule 3] [Pos cover = 5 Neg cover = 0]
@@ -456,8 +450,16 @@ Total/Overall&  5001 					 &  \textbf{5457}	 &  41.1 					 &  n/a				 	  &  33.5
 	\bigskip
 	\item ``Baseline experiments'', see also the discussion slide (\pageref{future_experiments}) about future experimenting possibilities
 \end{itemize}
-
 \end{frame}
+
+\begin{frame}{Root/Subtree Preprocessing/Postprocessing}
+\centerline{\includegraphics[width=\hsize]{img/tree-subtree}}
+\bigskip
+\begin{itemize}
+	\item Multi-word expressions
+\end{itemize}
+\end{frame}
+
 
 
 \subsection{Shareable Extraction Ontologies}
@@ -665,6 +667,7 @@ serious_atl_3(id_47443). %negative
 \end{frame}
 
 \begin{frame}[fragile]{Monotonization of attributes}
+\label{monotonization}
 \definecolor{MyBrown}{rgb}{0.5,0.5,0}
 \setbeamercolor{block title}{bg=MyBrown}
 \begin{block}{damage\_atl $\leftarrow$ damage}
@@ -828,6 +831,7 @@ F \dotfill{} 		& Weighted avg F measure\\
 		\item Evaluation Experiments
 		\begin{itemize}
 			\item \alert{Repeatable} (software \& data freely available)
+			\item Difficult (c.f. slide \pageref{future_experiments})
 			\item Direct comparison with the state-of-the-art
 		\end{itemize}
 	\end{itemize}
@@ -862,6 +866,91 @@ F \dotfill{} 		& Weighted avg F measure\\
 
 \subsection{Review 1 (Filip Železný)} 
 \frame{\tableofcontents[currentsection, currentsubsection]}
+
+\themecolor{\colorFuzzy}
+\begin{frame}{ILP Definitions}
+\begin{quotation}
+In 4.7.1.,.2 : it is not clear what really is B, in particular whether it is a set of only ground facts or it
+allows more general clauses.	
+\end{quotation}
+\begin{itemize}
+	\item Answer: $B$ allows also more general clauses.
+	\medskip
+	\item Unfortunately Definition~3 counts only with ground facts, which is sufficient for our purpose, but it is not explained there.
+	\bigskip
+	\item More complex version of Definition~3 could probably be used for more general clauses.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{The Classification Problem}
+\begin{quotation}
+Is the problem of classification of accident severity really relational?
+\end{quotation}
+\begin{itemize}
+	\item Answer: No, it is not!
+	\medskip
+	\item All the attributes are saved in a single table.
+	\item And all evaluated classification algorithms (mainly propositional) were given the same data. 
+\end{itemize}
+\end{frame}
+
+\themecolor{\colorLearning}
+\begin{frame}{ILP Performance}
+\begin{quotation}
+I was not happy with the simple conclusion that ILP does not perform very well in the extraction rule
+learning task.
+\end{quotation}
+\begin{itemize}
+	\item Answer: not just ILP, but ILP with PDT trees
+\end{itemize}
+
+\begin{quotation}
+... a deeper investigation should be done ... The tDependency predicate is
+often employed in the learned rules in a chain-like manner. Would it help to define its transitive
+closure in the background knowledge?
+\end{quotation}
+\begin{itemize}
+	\item Answer: That is a reasonable comment, thank you for suggestions. 
+	\item We experimented only with ``optional edge'' predicates, but did not register much improvement.
+	\item For sure, additional experiments would be beneficial, but the experiments are demanding and there are other three topics in the thesis... 
+	\item C.f. slides \pageref{future_experiments} and \pageref{resources} about \emph{future experimenting possibilities} and \emph{available resources criterion} 
+\end{itemize}
+\end{frame}
+
+\themecolor{\colorFuzzy}
+\begin{frame}{ILP Performance}
+\begin{quotation}
+There are many possible sources of the low performance, for example the
+way numeric attributes are handled. For example the learned condition damage\_atl(A,1500000)
+does not seem to make too much sense since it clearly overfits to the one specific value.
+Were predicates such as greater\_than(X,Y) available to the learner at all?
+\end{quotation}
+\begin{itemize}
+	\item Answer: Yes, see slide \pageref{monotonization}.
+\end{itemize}
+\end{frame}
+\resetcolor
+
+\begin{frame}{ILP Performance}
+\begin{quotation}
+Finally, Aleph is a general purpose system with a
+large set of parameters (proof depth, clause length, search method, \dots), which influence the
+final performance.
+\end{quotation}
+\begin{itemize}
+	\item Question: Did you try to change them at all?.
+	\item Answer: Yes, see e.g. page 97: 
+	\begin{quotation}Learning settings are the same as before (Table 8.12) except for settings of both ILP classifiers, which performed a little bit better with modified settings.\end{quotation}
+	See the learning configuration files for extraction rules induction.
+	\bigskip
+	\item Question: Did you tune their best values through internal validation?
+	\item Answer: No, it would take quite a lot of additional work...
+\end{itemize}
+\end{frame}
+\resetcolor
+
+
+\resetcolor
 
 \subsection{Review 2 (Diana Maynard)} 
 \frame{\tableofcontents[currentsection, currentsubsection]}
@@ -929,9 +1018,31 @@ F \dotfill{} 		& Weighted avg F measure\\
 \begin{frame}{Experimenting Possibilities and Experiment Complexity}
 \label{future_experiments}
 \begin{itemize}
-	\item Cartesian product of many factors:
+	\item All the possibilities form one wide \alert{Cartesian product} of the factors:
 	\begin{itemize}
-		\item Doplnit!
+		\item Used evaluation measures
+		\item Number of datasets and extraction tasks
+		\item Chosen number of training instances
+		
+		\item Preprocessing / Postprocessing
+		\begin{itemize}
+			\item Linguistic representation (PDT-m/a/t, Stanford, CoNLL’X, trimming)
+			\item Used tagger, lemmatization, parser, POS generalization (of Czech tags)
+			\item Named entity recognition (Stanford, different settings of ANNIE)
+			\item Additional gazetteers, parsers for dates, money amounts, ...
+			\item Multi-word (root/subtree, merging, begging/end tokens)
+		\end{itemize}
+		
+		\item Learning settings
+		\begin{itemize}
+			\item ILP tool (Progol, Aleph, ReLF) or even Constraint Programming, ILP settings, 
+			\item ILP predicates: transitive closures, optional edges
+			\item Position based features (window size)
+		\end{itemize}
+		\bigskip
+		\item Additional resources (e.g. WordNet, domain ontology)
+		\item Coreference resolution
+		\item Propositionalization
 	\end{itemize}
 \end{itemize}
 \end{frame}
@@ -940,6 +1051,7 @@ F \dotfill{} 		& Weighted avg F measure\\
 
 
 \begin{frame}{Available Resources Criterion:\\Time, Effort, Allocated Capabilities}
+\label{resources}
 \begin{itemize}
 	\item One common answer to comments like:	
 	\begin{itemize}
@@ -1078,5 +1190,39 @@ F \dotfill{} 		& Weighted avg F measure\\
 %\end{itemize}
 %\end{frame}
 
+
+\subsection{PDT Annotations in GATE}
+\themecolor{\colorLearning}
+\frame{\tableofcontents[currentsection, currentsubsection]}
+
+\begin{frame}{Integration of PDT in GATE}
+\begin{itemize}
+	\item GATE: General Architecture for Text Engineering
+	\item The University of Sheffield
+	\item \url{http://gate.ac.uk/}
+	\medskip
+	\item Implemented \alert{TectoMT (+ Treex) modules for GATE}
+	\begin{itemize}
+		\item Transformation of PDT annotations to GATE
+	\end{itemize}
+	\medskip
+	\item \alert{Netgraph} used as a tree viewer
+	\begin{itemize}
+		\item Works also for Standford Dependencies 
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{PDT Annotations in GATE}
+\centerline{\includegraphics[width=\hsize]{img/PDT_GATE}}
+\end{frame}
+
+
+\begin{frame}{Netgraph Tree Viewer in GATE (for Stanford Dependencies)}
+\centerline{\includegraphics[width=\hsize]{img/netgraph_stanford}}
+Sentence: Users also said it is in the strongest financial position in its 24-year history.
+\end{frame}
+\resetcolor
 
 \end{document}
